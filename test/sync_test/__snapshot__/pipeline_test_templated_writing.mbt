@@ -1,5 +1,5 @@
 struct Writer (StringBuilder)
-fn[T : Debug] Writer::write(self : Self, x : T) -> Unit {
+fn[T : Debug] Writer::write_string_interpolation(self : Self, x : T) -> Unit {
   self.0.write_string(to_repr(x).to_string())
 }
 fn Writer::write_string(self : Self, s : String) -> Unit {
@@ -7,7 +7,7 @@ fn Writer::write_string(self : Self, s : String) -> Unit {
 }
 
 struct TraceWriter (StringBuilder)
-fn[T : Debug] TraceWriter::write(self : Self, x : T) -> Unit {
+fn[T : Debug] TraceWriter::write_string_interpolation(self : Self, x : T) -> Unit {
   self.0.write_string("[value:")
   self.0.write_string(to_repr(x).to_string())
   self.0.write_string("]")
@@ -18,6 +18,10 @@ fn TraceWriter::write_string(self : Self, s : String) -> Unit {
   self.0.write_string("]")
 }
 
+struct Holder {
+  builder : StringBuilder
+}
+
 struct Sql {
   builder : StringBuilder
 }
@@ -25,7 +29,7 @@ fn Sql::Sql() -> Sql {
   println("Sql::Sql() was called. It should only be called once.")
   { builder: StringBuilder::new() }
 }
-fn[T : Show] Sql::write(self : Self, x : T) -> Unit {
+fn[T : Show] Sql::write_string_interpolation(self : Self, x : T) -> Unit {
   self.builder.write_string(Show::to_string(x))
 }
 fn Sql::write_string(self : Self, s : String) -> Unit {
@@ -37,6 +41,10 @@ fn Sql::write_end(self : Self) -> String {
 
 fn consume_sql(sql : String) -> Unit {
   println(sql)
+}
+
+fn get_builder(builder : StringBuilder) -> StringBuilder {
+  builder
 }
 
 fn main {
@@ -67,9 +75,27 @@ fn main {
   trace <+ "asdf\{def}"
   println(trace.0.to_string())
 
-  consume_sql(Sql <+ "select \{def} from dual")
+  let sql = Sql::Sql()
+  sql <+ "select \{def} from dual"
+  consume_sql(sql.write_end())
 
   let builder = StringBuilder::new()
   builder <+ "abc\{to_repr(def)}ghi"
   println(builder.to_string())
+
+  let call_builder = StringBuilder::new()
+  get_builder(call_builder) <+ "call"
+  println(call_builder.to_string())
+
+  let holder : Holder = { builder: StringBuilder::new() }
+  holder.builder <+ "field"
+  println(holder.builder.to_string())
+
+  let builders = [StringBuilder::new()]
+  builders[0] <+ "index"
+  println(builders[0].to_string())
+
+  let paren_builder = StringBuilder::new()
+  (paren_builder) <+ "paren \{1}"
+  println(paren_builder.to_string())
 }

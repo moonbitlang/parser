@@ -19,5 +19,14 @@ fn g(x : Int, b : Bool) -> Int raise E {
 
 ///|
 fn main {
-  debug(try? g(-1, false))
+  debug(to_result(() => g(-1, false)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

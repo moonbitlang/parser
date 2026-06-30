@@ -38,7 +38,16 @@ fn test_unicode_support2() -> Unit raise {
 ///|
 fn main {
   println("test_unicode_support")
-  debug(try? test_unicode_support())
+  debug(to_result(() => test_unicode_support()))
   println("test_unicode_support2")
-  debug(try? test_unicode_support2())
+  debug(to_result(() => test_unicode_support2()))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

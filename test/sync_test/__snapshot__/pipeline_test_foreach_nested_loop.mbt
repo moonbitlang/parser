@@ -14,7 +14,16 @@ fn f(x : Int) -> String raise {
 }
 
 fn init {
-  debug(try? f(0))
-  debug(try? f(1))
-  debug(try? f(2))
+  debug(to_result(() => f(0)))
+  debug(to_result(() => f(1)))
+  debug(to_result(() => f(2)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

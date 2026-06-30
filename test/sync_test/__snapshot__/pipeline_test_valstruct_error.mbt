@@ -30,7 +30,16 @@ fn f(a : Int, b : Int64, c : Double) -> F raise X {
 
 ///|
 fn main {
-  debug(try? f(1, 2, 3.14))
-  debug(try? f(-1, 2, 3.14))
-  debug(try? f(0, 2, 3.14))
+  debug(to_result(() => f(1, 2, 3.14)))
+  debug(to_result(() => f(-1, 2, 3.14)))
+  debug(to_result(() => f(0, 2, 3.14)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

@@ -1,7 +1,8 @@
 /// for more information, see http://192.168.86.3:53000/compiler/ideas/pulls/6545
 fn div(x : Int,y : Int) -> Int raise {
   if y == 0 {
-    raise (Failure "x") // parse error
+    let str = "x"
+    raise (Failure str) // parse error
   }
   x / y 
 }

@@ -18,6 +18,15 @@ suberror E {
 
 ///|
 fn main {
-  debug(try? h(x => raise E(x)))
+  debug(to_result(() => h(x => raise E(x))))
   h(fn(x) { println(x) })
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

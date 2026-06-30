@@ -1,4 +1,4 @@
-//!build: -w -20-27
+//!build: -w -20-27-lexmatch_first_match
 
 ///|
 fn test_firstmatch() -> Unit raise {

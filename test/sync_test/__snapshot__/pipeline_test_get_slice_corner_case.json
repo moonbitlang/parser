@@ -187,7 +187,8 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "body": {
@@ -550,7 +551,8 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "body": {
@@ -644,7 +646,8 @@
                                                         "kind": "Expr::Array::ExprList",
                                                         "loc": null,
                                                         "children": []
-                                                      }
+                                                      },
+                                                      "is_iter": false
                                                     }
                                                   },
                                                   "augmented_by": null
@@ -889,7 +892,8 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "body": {
@@ -1413,7 +1417,8 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "body": {

@@ -11,5 +11,6 @@ fn init {
 }
 
 fn init {
-  raise (Failure "x")
+  let str = "x"
+  raise (Failure str)
 }

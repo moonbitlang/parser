@@ -150,7 +150,7 @@ enum EdgeCaseEnum {
 // Helper function to test roundtrip with detailed output
 fn[T : ToJson + FromJson + Eq + Debug] test_roundtrip(value : T, test_name : String) -> Unit {
   let json = value.to_json()
-  let result : Result[T, @json.JsonDecodeError] = try? @json.from_json(json)
+  let result : Result[T, @json.JsonDecodeError] = to_result(() => @json.from_json(json))
   match result {
     Ok(decoded) => {
       if decoded == value {
@@ -383,4 +383,13 @@ fn init {
   test_roundtrip(extreme_mixed, "Extremely nested mixed")
   
   println("JSON roundtrip tests completed")
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

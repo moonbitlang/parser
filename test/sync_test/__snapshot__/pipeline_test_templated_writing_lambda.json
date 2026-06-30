@@ -96,7 +96,7 @@
             "kind": "Binder",
             "loc": null,
             "children": {
-              "name": "write"
+              "name": "write_string_interpolation"
             }
           },
           "has_error": null,
@@ -1396,6 +1396,7 @@
                                   }
                                 }
                               },
+                              "is_conditional": false,
                               "loc": null
                             }
                           }

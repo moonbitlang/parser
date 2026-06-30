@@ -511,113 +511,113 @@
     "loc": "13:22-13:23"
   },
   {
-    "token": "LBRACKET",
-    "loc": "13:24-13:25"
+    "token": "LBRACKET_BAR",
+    "loc": "13:24-13:26"
   },
   {
     "token": "DOTDOT",
-    "loc": "13:25-13:27"
+    "loc": "13:27-13:29"
   },
   {
     "token": [
       "LIDENT",
       "tapped_range"
     ],
-    "loc": "13:27-13:39"
+    "loc": "13:29-13:41"
   },
   {
     "token": "LPAREN",
-    "loc": "13:39-13:40"
+    "loc": "13:41-13:42"
   },
   {
     "token": [
       "INT",
       "0"
     ],
-    "loc": "13:40-13:41"
+    "loc": "13:42-13:43"
   },
   {
     "token": "COMMA",
-    "loc": "13:41-13:42"
+    "loc": "13:43-13:44"
   },
   {
     "token": [
       "INT",
       "2"
     ],
-    "loc": "13:43-13:44"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "13:44-13:45"
-  },
-  {
-    "token": "COMMA",
     "loc": "13:45-13:46"
   },
   {
+    "token": "RPAREN",
+    "loc": "13:46-13:47"
+  },
+  {
+    "token": "COMMA",
+    "loc": "13:47-13:48"
+  },
+  {
     "token": "DOTDOT",
-    "loc": "13:47-13:49"
+    "loc": "13:49-13:51"
   },
   {
     "token": "LBRACKET",
-    "loc": "13:49-13:50"
+    "loc": "13:51-13:52"
   },
   {
     "token": "DOTDOT",
-    "loc": "13:50-13:52"
+    "loc": "13:52-13:54"
   },
   {
     "token": [
       "LIDENT",
       "tapped_range"
     ],
-    "loc": "13:52-13:64"
+    "loc": "13:54-13:66"
   },
   {
     "token": "LPAREN",
-    "loc": "13:64-13:65"
+    "loc": "13:66-13:67"
   },
   {
     "token": [
       "INT",
       "2"
     ],
-    "loc": "13:65-13:66"
+    "loc": "13:67-13:68"
   },
   {
     "token": "COMMA",
-    "loc": "13:66-13:67"
+    "loc": "13:68-13:69"
   },
   {
     "token": [
       "INT",
       "4"
     ],
-    "loc": "13:68-13:69"
-  },
-  {
-    "token": "RPAREN",
-    "loc": "13:69-13:70"
-  },
-  {
-    "token": "RBRACKET",
     "loc": "13:70-13:71"
   },
   {
-    "token": "RBRACKET",
+    "token": "RPAREN",
     "loc": "13:71-13:72"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "13:72-13:73"
+  },
+  {
+    "token": "BAR_RBRACKET",
+    "loc": "13:74-13:76"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "13:72-13:72"
+    "loc": "13:76-13:76"
   },
   {
     "token": "NEWLINE",
-    "loc": "13:72-13:73"
+    "loc": "13:76-13:77"
   },
   {
     "token": [

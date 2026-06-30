@@ -184,11 +184,11 @@ fn bytes_to_utf16(b : Bytes) -> Array[Char] raise {
 }
 
 fn init {
-  debug(try? bytes_to_utf16(@encoding/utf16.encode("abc")))
-  debug(try? bytes_to_utf16(@encoding/utf16.encode("中文")))
-  debug(try? bytes_to_utf16(@encoding/utf16.encode("🤣")))
-  debug(try? bytes_to_utf16([ 0x00, 0xD8, 0x00, 0x61 ]))
-  debug(try? bytes_to_utf16([ 0x00, 0xDC ]))
+  debug(to_result(() => bytes_to_utf16(@encoding/utf16.encode("abc"))))
+  debug(to_result(() => bytes_to_utf16(@encoding/utf16.encode("中文"))))
+  debug(to_result(() => bytes_to_utf16(@encoding/utf16.encode("🤣"))))
+  debug(to_result(() => bytes_to_utf16([ 0x00, 0xD8, 0x00, 0x61 ])))
+  debug(to_result(() => bytes_to_utf16([ 0x00, 0xDC ])))
 }
 
 fn bytes_arary_to_iter(
@@ -213,6 +213,15 @@ fn init {
     |> decode_utf16
     take(it, n) |> collect
   }
-  debug(try? run([ "一二", "三四", "五六", "七八", "九十" ].map(s => @encoding/utf16.encode(s)), 7))
-  debug(try? run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(s => @encoding/utf16.encode(s)), 10))
+  debug(to_result(() => run([ "一二", "三四", "五六", "七八", "九十" ].map(s => @encoding/utf16.encode(s)), 7)))
+  debug(to_result(() => run([ "abcdefghij", "klmnopqrst", "uvwxyz" ].map(s => @encoding/utf16.encode(s)), 10)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

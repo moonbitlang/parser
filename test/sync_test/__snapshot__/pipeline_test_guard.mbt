@@ -48,11 +48,11 @@ fn get_data(x : Json) -> String raise InvalidJson {
 }
 
 fn init {
-  debug(try? div(Some(10), Some(2)))
-  debug(try? div(Some(10), Some(0)))
-  debug(try? div(Some(10), None))
-  debug(try? div(None, Some(2)))
-  debug(try? div(None, None))
+  debug(to_result(() => div(Some(10), Some(2))))
+  debug(to_result(() => div(Some(10), Some(0))))
+  debug(to_result(() => div(Some(10), None)))
+  debug(to_result(() => div(None, Some(2))))
+  debug(to_result(() => div(None, None)))
 
   println(default_value(Some(10), 5))
   println(default_value(None, 5))
@@ -61,14 +61,22 @@ fn init {
   println(local_control_flow(1, 10, [0,0,20,20]))
   println(local_control_flow(1, 10, [7,7,7,7]))
 
-  debug(try? get_data({"data": "hello"}))
-  debug(try? get_data([1,2,3]))
-  debug(try? get_data(Json::null()))
-  debug(try? get_data(true))
-  debug(try? get_data(false))
-  debug(try? get_data(100))
-  debug(try? get_data("string"))
+  debug(to_result(() => get_data({"data": "hello"})))
+  debug(to_result(() => get_data([1,2,3])))
+  debug(to_result(() => get_data(Json::null())))
+  debug(to_result(() => get_data(true)))
+  debug(to_result(() => get_data(false)))
+  debug(to_result(() => get_data(100)))
+  debug(to_result(() => get_data("string")))
   
   
 }
 
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
+}

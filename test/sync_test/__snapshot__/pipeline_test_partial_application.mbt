@@ -95,9 +95,11 @@ fn main {
   hof(false, Foo::C(1, _, "hello", 3.14)) |> println
 
   // used as higher-order function in check mode, for error and async
-  (try? hof_err(1, f_err(_, false, "hello", 3.14))) |> ignore
+  to_result(() => hof_err(1, f_err(_, false, "hello", 3.14))) |> ignore
   let _ = async fn() noraise {
-    (try? hof_async(1, f_async(_, false, "hello", 3.14))) |> ignore
+    to_result_async(async fn () raise {
+      hof_async(1, f_async(_, false, "hello", 3.14))
+    }) |> ignore
   }
 
   // dot application
@@ -120,5 +122,25 @@ impl Show for Foo with output(self, logger) {
       Show::output(v3, logger)
       logger.write_string(")")
     }
+  }
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
+}
+
+async fn[T, E : Error] to_result_async(
+  f : async () -> T raise E
+) -> Result[T, E] noraise {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
   }
 }

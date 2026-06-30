@@ -745,7 +745,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": false
                         }
                       },
                       "init": {
@@ -1171,13 +1172,15 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               }
                             }
                           }
                         ]
-                      }
+                      },
+                      "is_iter": true
                     }
                   },
                   "body": {

@@ -22,10 +22,19 @@ fn string_view(str : String, coin : Bool) -> StringView raise Err {
 }
 
 fn main {
-  (try? array_view([1, 2, 3], true)) |> debug
-  (try? array_view([1, 2, 3], false)) |> debug
-  (try? bytes_view(b"abc", true)) |> debug
-  (try? bytes_view(b"abc", false)) |> debug
-  (try? string_view("abc", true)) |> debug
-  (try? string_view("abc", false)) |> debug
+  to_result(() => array_view([1, 2, 3], true)) |> debug
+  to_result(() => array_view([1, 2, 3], false)) |> debug
+  to_result(() => bytes_view(b"abc", true)) |> debug
+  to_result(() => bytes_view(b"abc", false)) |> debug
+  to_result(() => string_view("abc", true)) |> debug
+  to_result(() => string_view("abc", false)) |> debug
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

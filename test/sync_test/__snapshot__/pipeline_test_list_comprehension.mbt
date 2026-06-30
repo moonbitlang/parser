@@ -38,4 +38,79 @@ fn main {
       p1
   ]
   debug(fib_alt)
+
+  let _ = try [
+    for _ in 0..<10 => { raise MyErr }
+  ] catch {
+    err => debug(err)
+  } noraise {
+    _ => ()
+  }
+
+  let _ = try [
+    for _ in arr => { raise MyErr }
+  ] catch {
+    err => debug(err)
+  } noraise {
+    _ => ()
+  }
+
+  let _ = try [
+    for _ in map => { raise MyErr }
+  ] catch {
+    err => debug(err)
+  } noraise {
+    _ => ()
+  }
+
+  let _ = try [
+    for i = 0; i < 10; i = i + 1 => { raise MyErr }
+  ] catch {
+    err => debug(err)
+  } noraise {
+    _ => ()
+  }
+
+  println(label~: for _ in 0..<1 {
+    let _ = [
+      for _ in 0..<10 => {
+        break label~ 42
+      }
+    ]
+  } nobreak {
+    0
+  })
+
+  println(label~: for _ in 0..<1 {
+    let _ = [
+      for _ in arr => {
+        break label~ 42
+      }
+    ]
+  } nobreak {
+    0
+  })
+
+  println(label~: for _ in 0..<1 {
+    let _ = [
+      for _ in map => {
+        break label~ 42
+      }
+    ]
+  } nobreak {
+    0
+  })
+
+  println(label~: for _ in 0..<1 {
+    let _ = [
+      for i = 0; i < 10; i = i + 1 => {
+        break label~ 42
+      }
+    ]
+  } nobreak {
+    0
+  })
 }
+
+///|
+suberror MyErr derive(Debug)

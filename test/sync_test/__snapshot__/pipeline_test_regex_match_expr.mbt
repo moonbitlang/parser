@@ -124,23 +124,32 @@ fn test_alternation_and_no_match() -> Unit raise {
 ///|
 fn main {
   println("test_value_context")
-  debug(try? test_value_context())
+  debug(to_result(() => test_value_context()))
   println("test_hidden_capture_in_regex_constant")
-  debug(try? test_hidden_capture_in_regex_constant())
+  debug(to_result(() => test_hidden_capture_in_regex_constant()))
   println("test_hidden_capture_in_composed_regex_constant")
-  debug(try? test_hidden_capture_in_composed_regex_constant())
+  debug(to_result(() => test_hidden_capture_in_composed_regex_constant()))
   println("test_before_after_rest")
-  debug(try? test_before_after_rest())
+  debug(to_result(() => test_before_after_rest()))
   println("test_anchored_before_regression")
-  debug(try? test_anchored_before_regression())
+  debug(to_result(() => test_anchored_before_regression()))
   println("test_anchored_empty_regression")
-  debug(try? test_anchored_empty_regression())
+  debug(to_result(() => test_anchored_empty_regression()))
   println("test_multiple_captures")
-  debug(try? test_multiple_captures())
+  debug(to_result(() => test_multiple_captures()))
   println("test_char_capture")
-  debug(try? test_char_capture())
+  debug(to_result(() => test_char_capture()))
   println("test_short_circuit_scope")
-  debug(try? test_short_circuit_scope())
+  debug(to_result(() => test_short_circuit_scope()))
   println("test_alternation_and_no_match")
-  debug(try? test_alternation_and_no_match())
+  debug(to_result(() => test_alternation_and_no_match()))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

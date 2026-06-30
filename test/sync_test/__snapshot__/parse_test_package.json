@@ -53,19 +53,120 @@
             "children": []
           },
           "expr": {
-            "kind": "Expr::Ident",
+            "kind": "Expr::Sequence",
             "loc": null,
             "children": {
-              "id": {
-                "kind": "Var",
+              "exprs": {
+                "kind": "Expr::Sequence::ExprList",
                 "loc": null,
-                "children": {
-                  "name": {
-                    "kind": "LongIdent::Dot",
+                "children": [
+                  {
+                    "kind": "Expr::Ident",
                     "loc": null,
                     "children": {
-                      "pkg": "xx",
-                      "id": "v"
+                      "id": {
+                        "kind": "Var",
+                        "loc": null,
+                        "children": {
+                          "name": {
+                            "kind": "LongIdent::Dot",
+                            "loc": null,
+                            "children": {
+                              "pkg": "xx-y",
+                              "id": "v"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "kind": "Expr::Ident",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "Var",
+                        "loc": null,
+                        "children": {
+                          "name": {
+                            "kind": "LongIdent::Dot",
+                            "loc": null,
+                            "children": {
+                              "pkg": "pkg-one/pkg-two",
+                              "id": "value"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "last_expr": {
+                "kind": "Expr::Let",
+                "loc": null,
+                "children": {
+                  "pattern": {
+                    "kind": "Pattern::Constraint",
+                    "loc": null,
+                    "children": {
+                      "pat": {
+                        "kind": "Pattern::Any",
+                        "loc": null,
+                        "children": {}
+                      },
+                      "ty": {
+                        "kind": "Type::Name",
+                        "loc": null,
+                        "children": {
+                          "constr_id": {
+                            "kind": "ConstrId",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "LongIdent::Dot",
+                                "loc": null,
+                                "children": {
+                                  "pkg": "pkg-one/pkg-two",
+                                  "id": "Type"
+                                }
+                              }
+                            }
+                          },
+                          "tys": {
+                            "kind": "Type::Name::TypeList",
+                            "loc": null,
+                            "children": []
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "expr": {
+                    "kind": "Expr::Ident",
+                    "loc": null,
+                    "children": {
+                      "id": {
+                        "kind": "Var",
+                        "loc": null,
+                        "children": {
+                          "name": {
+                            "kind": "LongIdent::Dot",
+                            "loc": null,
+                            "children": {
+                              "pkg": "pkg-one/pkg-two",
+                              "id": "value"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "Expr::Unit",
+                    "loc": null,
+                    "children": {
+                      "faked": true
                     }
                   }
                 }

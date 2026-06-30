@@ -10,7 +10,7 @@ fn sync_with_err() -> Unit raise Err {
 }
 
 async fn async_to_result() -> Unit noraise {
-  debug(try? sync_with_err())
+  debug(to_result(() => sync_with_err()))
 }
 
 fn init {
@@ -125,5 +125,25 @@ async fn raise_to_async_handler_in_arg() -> Unit {
 }
 
 fn init {
-  run_async(() => debug(try? raise_to_async_handler_in_arg()))
+  run_async(() => debug(to_result_async(async fn () raise { raise_to_async_handler_in_arg() })))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
+}
+
+async fn[T, E : Error] to_result_async(
+  f : async () -> T raise E
+) -> Result[T, E] noraise {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

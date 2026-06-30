@@ -3365,6 +3365,11 @@
         "loc": null,
         "children": []
       },
+      "method_quantifiers": {
+        "kind": "Impl::TopImpl::MethodQuantifierList",
+        "loc": null,
+        "children": []
+      },
       "params": {
         "kind": "Impl::TopImpl::ParamList",
         "loc": null,
@@ -4591,6 +4596,11 @@
         "loc": null,
         "children": []
       },
+      "method_quantifiers": {
+        "kind": "Impl::TopImpl::MethodQuantifierList",
+        "loc": null,
+        "children": []
+      },
       "params": {
         "kind": "Impl::TopImpl::ParamList",
         "loc": null,
@@ -5274,6 +5284,11 @@
           }
         ]
       },
+      "method_quantifiers": {
+        "kind": "Impl::TopImpl::MethodQuantifierList",
+        "loc": null,
+        "children": []
+      },
       "params": {
         "kind": "Impl::TopImpl::ParamList",
         "loc": null,
@@ -5852,6 +5867,11 @@
       "has_error": null,
       "quantifiers": {
         "kind": "Impl::TopImpl::QuantifierList",
+        "loc": null,
+        "children": []
+      },
+      "method_quantifiers": {
+        "kind": "Impl::TopImpl::MethodQuantifierList",
         "loc": null,
         "children": []
       },

@@ -156,6 +156,11 @@ test "pipeline_test_array_copy2" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_bytes_interp_template_writing" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "parse_test_hello" (t : @test.Test) {
   t.run()
 }
@@ -172,6 +177,11 @@ test "pipeline_test_match_binding" (t : @test.Test) {
 
 ///|
 test "pipeline_test_constr_propagate_mut" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_locals_contify" (t : @test.Test) {
   t.run()
 }
 
@@ -257,6 +267,11 @@ test "pipeline_test_bind_ty_args" (t : @test.Test) {
 
 ///|
 test "pipeline_test_inline_raise" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_const_fold_integers" (t : @test.Test) {
   t.run()
 }
 
@@ -601,6 +616,11 @@ test "pipeline_test_typing_coverage_generic_methods" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_iter_string" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_view_intrinsics" (t : @test.Test) {
   t.run()
 }
@@ -662,6 +682,16 @@ test "parse_test_fn_arguments" (t : @test.Test) {
 
 ///|
 test "pipeline_test_tree_mutual_recursion" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_trait_poly_method" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_ignore_aggregate_param" (t : @test.Test) {
   t.run()
 }
 
@@ -977,6 +1007,11 @@ test "pipeline_test_range_pattern" (t : @test.Test) {
 
 ///|
 test "pipeline_test_derive_to_json" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bytes_make_nonzero" (t : @test.Test) {
   t.run()
 }
 
@@ -1671,6 +1706,11 @@ test "pipeline_test_rename_mono" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_layout_table_pressure" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "parse_test_local_attrs" (t : @test.Test) {
   t.run()
 }
@@ -1886,6 +1926,16 @@ test "pipeline_test_match_stringview2" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_conditional_template_writing_ambiguous" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "parse_test_brace_group_loc" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_augmented3" (t : @test.Test) {
   t.run()
 }
@@ -1997,6 +2047,11 @@ test "pipeline_test_disorder" (t : @test.Test) {
 
 ///|
 test "pipeline_test_tuple_struct_match" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_inline_nested_error_ctx" (t : @test.Test) {
   t.run()
 }
 
@@ -2232,6 +2287,11 @@ test "pipeline_test_constant_error_constructor" (t : @test.Test) {
 
 ///|
 test "pipeline_test_value_enum_array" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_lexscan_async" (t : @test.Test) {
   t.run()
 }
 
@@ -2636,6 +2696,11 @@ test "pipeline_test_array2" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_string_interp_lambda" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_array_bool" (t : @test.Test) {
   t.run()
 }
@@ -2672,6 +2737,11 @@ test "pipeline_test_empty_error" (t : @test.Test) {
 
 ///|
 test "pipeline_test_augmented" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "parse_test_iter_literal" (t : @test.Test) {
   t.run()
 }
 
@@ -3026,6 +3096,11 @@ test "pipeline_test_001" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_pattern_guard_binding" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_num_literal2" (t : @test.Test) {
   t.run()
 }
@@ -3096,6 +3171,11 @@ test "pipeline_test_match_bytesview2" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_v128" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_newtype_rec" (t : @test.Test) {
   t.run()
 }
@@ -3112,6 +3192,11 @@ test "pipeline_test_tuple_struct_inner" (t : @test.Test) {
 
 ///|
 test "pipeline_test_foreach_nested_loop" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_if_with_no_else_in_spread" (t : @test.Test) {
   t.run()
 }
 
@@ -3247,6 +3332,11 @@ test "pipeline_test_strings" (t : @test.Test) {
 
 ///|
 test "pipeline_test_int_of_error_test1" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_conditional_template_writing" (t : @test.Test) {
   t.run()
 }
 
@@ -3996,6 +4086,11 @@ test "pipeline_test_optional_arg3" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_constr_propagate_no_payload_mut_enum" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_const_bytes" (t : @test.Test) {
   t.run()
 }
@@ -4046,7 +4141,17 @@ test "pipeline_test_try_exclamation" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_lexscan" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "parse_test_get_slice" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "parse_test_extend_soft_keyword" (t : @test.Test) {
   t.run()
 }
 
@@ -4286,6 +4391,11 @@ test "pipeline_test_int16_compare" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_tuple_struct_pipe2" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "parse_test_struct_spread" (t : @test.Test) {
   t.run()
 }
@@ -4336,7 +4446,17 @@ test "pipeline_test_labeled_arg2" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_lexscan" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_stringview_literal" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bytes_interp_template_writing" (t : @test.Test) {
   t.run()
 }
 
@@ -4602,6 +4722,11 @@ test "pipeline_test_for_capture_loop_var" (t : @test.Test) {
 
 ///|
 test "pipeline_test_newtype" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "parse_test_bytes_interp_standalone" (t : @test.Test) {
   t.run()
 }
 

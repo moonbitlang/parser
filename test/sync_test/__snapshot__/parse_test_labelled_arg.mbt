@@ -49,3 +49,8 @@ fn init {
     B(x~=_) => ()
   }
 }
+
+///|
+fn init {
+  f(label~: for ;; {})
+}

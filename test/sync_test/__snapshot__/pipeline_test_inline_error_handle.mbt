@@ -29,8 +29,17 @@ pub fn g(x: Int) -> Int raise {
 }
 
 fn main {
-  let a = try? f(42)
+  let a = to_result(() => f(42))
   debug(a)
-  let b = try? g(0)
+  let b = to_result(() => g(0))
   debug(b)
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

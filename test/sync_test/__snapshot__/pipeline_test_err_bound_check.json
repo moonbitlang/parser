@@ -135,7 +135,8 @@
                                     }
                                   }
                                 ]
-                              }
+                              },
+                              "is_iter": false
                             }
                           },
                           "index": {

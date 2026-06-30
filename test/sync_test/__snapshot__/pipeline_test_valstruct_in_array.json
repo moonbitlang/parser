@@ -909,7 +909,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": false
                         }
                       },
                       "kind": {
@@ -1466,7 +1467,8 @@
                     "kind": "Expr::Array::ExprList",
                     "loc": null,
                     "children": []
-                  }
+                  },
+                  "is_iter": false
                 }
               },
               "body": {

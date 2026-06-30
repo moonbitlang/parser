@@ -29,7 +29,7 @@ fn has_error() -> Unit raise {
 
 fn init {
   println("===")
-  (try? has_error()) |> debug
+  to_result(() => has_error()) |> debug
 }
 
 fn rethrow(f : () -> Int raise?) -> Int raise? {
@@ -42,7 +42,7 @@ fn rethrow(f : () -> Int raise?) -> Int raise? {
 
 fn init {
   println("===")
-  debug(try? rethrow(() => raise MyErr(42)))
+  debug(to_result(() => rethrow(() => raise MyErr(42))))
   println(rethrow(fn () { 42 }))
 }
 
@@ -68,4 +68,13 @@ fn init {
   |> println
   no_error_in_array([ 1, 2, 3, 4 ], _x => ())
   |> println
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

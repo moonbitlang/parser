@@ -14,5 +14,14 @@ impl @json.FromJson for T with from_json(json, _path) {
 }
 
 fn init {
-  debug((try? @json.from_json(42) : Result[T, _]))
+  debug((to_result(() => @json.from_json(42)) : Result[T, _]))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

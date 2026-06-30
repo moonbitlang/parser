@@ -3,7 +3,7 @@
     "token": [
       "COMMENT",
       {
-        "content": "//!build: -w -20-27",
+        "content": "//!build: -w -20-27-lexmatch_first_match",
         "kind": [
           "Ownline",
           {
@@ -14,11 +14,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "1:1-1:20"
+    "loc": "1:1-1:41"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:20-1:21"
+    "loc": "1:41-1:42"
   },
   {
     "token": "NEWLINE",
