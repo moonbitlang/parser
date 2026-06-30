@@ -1,6 +1,6 @@
 struct Writer(StringBuilder)
 
-fn Writer::write(self : Self, value : String) -> Unit {
+fn Writer::write_string_interpolation(self : Self, value : String) -> Unit {
   self.0.write_string("[write:")
   self.0.write_string(value)
   self.0.write_string("]")

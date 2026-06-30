@@ -1216,7 +1216,8 @@
                                                                 "kind": "Expr::Array::ExprList",
                                                                 "loc": null,
                                                                 "children": []
-                                                              }
+                                                              },
+                                                              "is_iter": false
                                                             }
                                                           },
                                                           "is_pun": false
@@ -1689,7 +1690,8 @@
                                                                     "kind": "Expr::Array::ExprList",
                                                                     "loc": null,
                                                                     "children": []
-                                                                  }
+                                                                  },
+                                                                  "is_iter": false
                                                                 }
                                                               },
                                                               "is_pun": false
@@ -1939,7 +1941,8 @@
                                                             }
                                                           }
                                                         ]
-                                                      }
+                                                      },
+                                                      "is_iter": false
                                                     }
                                                   },
                                                   "kind": {

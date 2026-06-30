@@ -10,9 +10,9 @@ fn f(x: Int) -> Int raise StringError {
 }
 
 fn init {
-  let a = try? f(42)
+  let a = to_result(() => f(42))
   debug(a)
-  let b = try? f(-42)
+  let b = to_result(() => f(-42))
   debug(b)
 }
 
@@ -21,4 +21,13 @@ fn g(x: Int) -> Option[Int] raise StringError {
     raise StringError("error")
   }
   Some(x)
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

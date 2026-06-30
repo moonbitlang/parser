@@ -81,7 +81,8 @@
                         "kind": "Expr::Array::ExprList",
                         "loc": null,
                         "children": []
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "ty": {
@@ -178,7 +179,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": false
                         }
                       },
                       "ty": {
@@ -269,7 +271,8 @@
                                     }
                                   }
                                 ]
-                              }
+                              },
+                              "is_iter": false
                             }
                           },
                           "ty": {
@@ -373,7 +376,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "ty": {
@@ -490,7 +494,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "ty": {

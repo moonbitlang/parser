@@ -20,9 +20,9 @@ fn basic_err(coin : Bool) -> Unit raise {
 
 fn init {
   println("==== basic err, normal return ====")
-  ignore(try? basic_err(false))
+  ignore(to_result(() => basic_err(false)))
   println("==== basic err, raise error ====")
-  ignore(try? basic_err(true))
+  ignore(to_result(() => basic_err(true)))
 }
 
 fn basic_try(coin : Bool) -> Unit raise {
@@ -42,9 +42,9 @@ fn basic_try(coin : Bool) -> Unit raise {
 
 fn init {
   println("==== basic try, normal return ====")
-  ignore(try? basic_try(false))
+  ignore(to_result(() => basic_try(false)))
   println("==== basic try, raise error ====")
-  ignore(try? basic_try(true))
+  ignore(to_result(() => basic_try(true)))
 }
 
 fn lexical_scope(coin : Bool) -> Unit {
@@ -187,21 +187,30 @@ fn basic_for_in(cmd : String, it : Iter[Int]) -> Unit raise {
 fn init {
   let data = [ 42 ]
   println("==== `for .. in`: fallthrough ====")
-  ignore(try? basic_for_in("normal", data.iter()))
+  ignore(to_result(() => basic_for_in("normal", data.iter())))
   println("==== `for .. in`: continue ====")
-  ignore(try? basic_for_in("continue", data.iter()))
+  ignore(to_result(() => basic_for_in("continue", data.iter())))
   println("==== `for .. in`: break ====")
-  ignore(try? basic_for_in("break", data.iter()))
+  ignore(to_result(() => basic_for_in("break", data.iter())))
   println("==== `for .. in`: continue to outer loop ====")
-  ignore(try? basic_for_in("continue-outer", data.iter()))
+  ignore(to_result(() => basic_for_in("continue-outer", data.iter())))
   println("==== `for .. in`: break to outer loop ====")
-  ignore(try? basic_for_in("break-outer", data.iter()))
+  ignore(to_result(() => basic_for_in("break-outer", data.iter())))
   println("==== `for .. in`: error ====")
-  ignore(try? basic_for_in("raise", data.iter()))
+  ignore(to_result(() => basic_for_in("raise", data.iter())))
   println("==== `for .. in`: return ====")
-  ignore(try? basic_for_in("return", data.iter()))
+  ignore(to_result(() => basic_for_in("return", data.iter())))
 }
 
 impl Show for Err with output(self, logger) {
   logger.write_string("Err")
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

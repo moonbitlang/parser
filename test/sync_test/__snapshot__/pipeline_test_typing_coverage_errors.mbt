@@ -46,12 +46,12 @@ fn parse_or_default(s : String, default : Int) -> Int {
 }
 
 fn init {
-  let r1 : Result[Int, ParseError] = try? parse_two("42")
-  let r2 : Result[Int, ParseError] = try? parse_two("x3")
+  let r1 : Result[Int, ParseError] = to_result(() => parse_two("42"))
+  let r2 : Result[Int, ParseError] = to_result(() => parse_two("x3"))
   let _ = parse_or_default("7", -1)
   let _ = parse_or_default("", -1)
-  let _ : Result[Int, Error] = try? safe_div(10, 2)
-  let _ : Result[Int, Error] = try? safe_div(1, 0)
+  let _ : Result[Int, Error] = to_result(() => safe_div(10, 2))
+  let _ : Result[Int, Error] = to_result(() => safe_div(1, 0))
   let _ = r1
   let _ = r2
   ()
@@ -65,5 +65,14 @@ impl Show for ParseError with output(self, logger) {
       Show::output(v0, logger)
       logger.write_string(")")
     }
+  }
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
   }
 }

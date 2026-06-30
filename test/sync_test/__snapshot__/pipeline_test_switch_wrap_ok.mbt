@@ -6,5 +6,14 @@ pub fn f(x : Int?) -> Int raise {
 
 ///|
 fn main {
-  debug(try? f(Some(42)))
+  debug(to_result(() => f(Some(42))))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

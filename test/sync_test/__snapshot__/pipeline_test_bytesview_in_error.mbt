@@ -38,6 +38,15 @@ fn main {
   g2()
   let bs = Bytes::makei(10, i => i.to_byte())
   let v = bs[1:9]
-  (try? f(v[1:7], true)) |> debug
-  (try? f(v[3:5], false)) |> debug
+  to_result(() => f(v[1:7], true)) |> debug
+  to_result(() => f(v[3:5], false)) |> debug
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

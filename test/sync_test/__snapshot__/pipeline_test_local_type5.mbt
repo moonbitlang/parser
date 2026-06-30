@@ -14,8 +14,8 @@ fn main {
       raise LE(x)
     }
   }
-  println(to_repr(try? f1(42)))
-  println(to_repr(try? f1(-1)))
+  println(to_repr(to_result(() => f1(42))))
+  println(to_repr(to_result(() => f1(-1))))
 }
 
 // test recursive newtype
@@ -69,4 +69,13 @@ fn[X: Show, Y: Show] f(a: X, b: Y) -> Unit {
 ///|
 fn init {
   f("xxx", 42)
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

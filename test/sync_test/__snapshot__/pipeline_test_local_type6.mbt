@@ -24,7 +24,7 @@ fn[T : Debug + ToJson + Default + @json.FromJson] id(_x : T) -> Unit {
   debug(ToJson::to_json(v))
   println(to_repr(v.0))
   let u = fn(x) raise { @json.from_json(x) }
-  debug(try? u([1]))
+  debug(to_result(() => u([1])))
 }
 
 ///|
@@ -40,4 +40,13 @@ fn[T : Debug + ToJson + Default + @json.FromJson] id2(x : T) -> Unit {
 fn main {
   id(1)
   id2(1)
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

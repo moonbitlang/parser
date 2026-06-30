@@ -25,6 +25,15 @@ fn f4() -> Unit raise {
 }
 
 fn main {
-  debug(try? f3())
-  debug(try? f4())
+  debug(to_result(() => f3()))
+  debug(to_result(() => f4()))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

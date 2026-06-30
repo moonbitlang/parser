@@ -31,61 +31,61 @@ fn init {
   println("All fields set")
   let input : Json = { "a": 100, "b": 200 }
   let expected : Result[MyType, _] = Ok({ a: 100, b: 200 })
-  let actual : Result[MyType, _] = try? @json.from_json(input)
+  let actual : Result[MyType, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Struct default, only a set")
   let input : Json = { "a": 100 }
   let expected : Result[MyType, _] = Ok({ a: 100, b: 0 })
-  let actual : Result[MyType, _] = try? @json.from_json(input)
+  let actual : Result[MyType, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Struct default, only b set")
   let input : Json = { "b": 200 }
   let expected : Result[MyType, _] = Ok({ a: 0, b: 200 })
-  let actual : Result[MyType, _] = try? @json.from_json(input)
+  let actual : Result[MyType, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Struct default, both fields missing")
   let input : Json = {}
   let expected : Result[MyType, _] = Ok({ a: 0, b: 0 })
-  let actual : Result[MyType, _] = try? @json.from_json(input)
+  let actual : Result[MyType, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Field default, both fields set")
   let input : Json = { "a": 100, "b": 200 }
   let expected : Result[MyTypeOnlyADefault, _] = Ok({ a: 100, b: 200 })
-  let actual : Result[MyTypeOnlyADefault, _] = try? @json.from_json(input)
+  let actual : Result[MyTypeOnlyADefault, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Field default, only b set")
   let input : Json = { "b": 200 }
   let expected : Result[MyTypeOnlyADefault, _] = Ok({ a: 0, b: 200 })
-  let actual : Result[MyTypeOnlyADefault, _] = try? @json.from_json(input)
+  let actual : Result[MyTypeOnlyADefault, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Field default, only a set, should error")
   let input : Json = { "a": 100 }
-  let actual : Result[MyTypeOnlyADefault, _] = try? @json.from_json(input)
+  let actual : Result[MyTypeOnlyADefault, _] = to_result(() => @json.from_json(input))
   debug(actual)
   //
   println("Field default with value, both fields set")
   let input : Json = { "a": 100, "b": 200 }
   let expected : Result[MyTypeOnlyADefault2, _] = Ok({ a: 100, b: 200 })
-  let actual : Result[MyTypeOnlyADefault2, _] = try? @json.from_json(input)
+  let actual : Result[MyTypeOnlyADefault2, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Field default with value, only b set")
   let input : Json = { "b": 200 }
   let expected : Result[MyTypeOnlyADefault2, _] = Ok({ a: 65536, b: 200 })
-  let actual : Result[MyTypeOnlyADefault2, _] = try? @json.from_json(input)
+  let actual : Result[MyTypeOnlyADefault2, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Field default with function, both fields set")
   let input : Json = { "a": 100, "b": 200 }
   let before_calls = gen_func_calls.val
   let expected : Result[MyTypeOnlyADefault3, _] = Ok({ a: 100, b: 200 })
-  let actual : Result[MyTypeOnlyADefault3, _] = try? @json.from_json(input)
+  let actual : Result[MyTypeOnlyADefault3, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   let after_calls = gen_func_calls.val
   println(
@@ -96,7 +96,7 @@ fn init {
   let input : Json = { "b": 200 }
   let before_calls = gen_func_calls.val
   let expected : Result[MyTypeOnlyADefault3, _] = Ok({ a: 65536, b: 200 })
-  let actual : Result[MyTypeOnlyADefault3, _] = try? @json.from_json(input)
+  let actual : Result[MyTypeOnlyADefault3, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   let after_calls = gen_func_calls.val
   println(
@@ -120,18 +120,27 @@ fn init {
   println("Enum default, variant set")
   let input : Json = { "$tag": "A", "0": 100 }
   let expected : Result[MyEnumDefault, _] = Ok(MyEnumDefault::A(100))
-  let actual : Result[MyEnumDefault, _] = try? @json.from_json(input)
+  let actual : Result[MyEnumDefault, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Enum default, variant default")
   let input : Json = { "$tag": "A" }
   let expected : Result[MyEnumDefault, _] = Ok(MyEnumDefault::A(0))
-  let actual : Result[MyEnumDefault, _] = try? @json.from_json(input)
+  let actual : Result[MyEnumDefault, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   // println("Enum default, variant default with value")
   // let input : Json = { "$tag": "A" }
   // let expected : Result[MyEnumDefault2, _] = Ok(MyEnumDefault2::A(65536))
-  // let actual : Result[MyEnumDefault2, _] = try? @json.from_jsoninput)
+  // let actual : Result[MyEnumDefault2, _] = to_result(() => @json.from_jsoninput))
   // println("\{actual == expected}, \{actual}, \{expected}")
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

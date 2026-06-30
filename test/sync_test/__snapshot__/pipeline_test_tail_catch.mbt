@@ -17,8 +17,17 @@ fn f(b1 : Bool, b2 : Bool) -> Int raise {
 
 ///|
 fn main {
-  debug(try? f(true, true))
-  debug(try? f(false, false))
-  debug(try? f(true, false))
-  debug(try? f(false, true))
+  debug(to_result(() => f(true, true)))
+  debug(to_result(() => f(false, false)))
+  debug(to_result(() => f(true, false)))
+  debug(to_result(() => f(false, true)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

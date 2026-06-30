@@ -1,48 +1,16 @@
-///|
-const IntConst : Int = 42
-
-///|
-const ByteConst : Byte = 42
-
-///|
-const StringConst : String = "😆😆"
-
-///|
-const CharConst : Char = '→'
-
-///|
-const Int64Const : Int64 = 42
-
-///|
-const UIntConst : UInt = 42
-
-///|
-const UInt64Const : UInt64 = 42
-
-///|
-const Interp : String =
-  $|\{true},\{false} : Bool
-  $|\{IntConst} : Int
-  $|\{ByteConst} : Byte
-  $|\{Int64Const} : Int64
-  $|\{UIntConst} : UInt
-  $|\{UInt64Const} : UInt64
-  $|\{CharConst} : Char
-  $|\{StringConst} : String
-
-///|
-let interp : String =
-  $|\{true},\{false} : Bool
-  $|\{IntConst} : Int
-  $|\{ByteConst} : Byte
-  $|\{Int64Const} : Int64
-  $|\{UIntConst} : UInt
-  $|\{UInt64Const} : UInt64
-  $|\{CharConst} : Char
-  $|\{StringConst} : String
-
-///|
 fn main {
-  println(Interp)
-  println(interp is Interp)
+  let r1 : Ref[Int] = Ref(34)
+  let r2 : Ref[UInt] = Ref(34)
+  let r3 : Ref[Int64] = Ref(34)
+  let r4 : Ref[UInt64] = Ref(34)
+  let r5 : Ref[Char] = Ref('d')
+  let r6 : Ref[Byte] = Ref(b'd')
+  let r7 : Ref[String] = Ref("cd")
+  println(b"12\{r1.val}")
+  println(b"12\{r2.val}")
+  println(b"12\{r3.val}")
+  println(b"12\{r4.val}")
+  println(b"abc\{r5.val}")
+  println(b"abc\{r6.val}")
+  println(b"ab\{r7.val}")
 }

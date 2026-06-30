@@ -1295,7 +1295,8 @@
                 }
               }
             ]
-          }
+          },
+          "is_iter": false
         }
       },
       "vis": {
@@ -1528,7 +1529,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -1652,7 +1654,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -1714,7 +1717,8 @@
                                         "kind": "Expr::Array::ExprList",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "ty": {
@@ -1862,7 +1866,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -1920,7 +1925,8 @@
                                     "kind": "Expr::Array::ExprList",
                                     "loc": null,
                                     "children": []
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -2030,7 +2036,8 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "body": {

@@ -1,4 +1,4 @@
-//!build: -w -20-27-28
+//!build: -w -20-27-28-lexmatch_first_match
 
 ///|
 fn simple(input : BytesView) -> Unit {

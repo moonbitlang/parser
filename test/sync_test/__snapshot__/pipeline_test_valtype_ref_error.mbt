@@ -28,6 +28,15 @@ fn make_s(i : Int) -> S raise E {
 
 ///|
 fn main {
-  debug(try? make_s(-1))
-  debug(try? make_s(5))
+  debug(to_result(() => make_s(-1)))
+  debug(to_result(() => make_s(5)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

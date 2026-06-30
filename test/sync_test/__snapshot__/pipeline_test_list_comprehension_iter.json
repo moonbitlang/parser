@@ -107,7 +107,8 @@
                 }
               }
             ]
-          }
+          },
+          "is_iter": false
         }
       },
       "vis": {
@@ -1232,7 +1233,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -1426,7 +1428,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -1652,7 +1655,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -1846,7 +1850,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -2166,7 +2171,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": {
@@ -2497,7 +2503,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -2665,7 +2672,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": {
@@ -2968,7 +2976,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -3130,7 +3139,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": {
@@ -3336,7 +3346,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -3547,7 +3558,8 @@
                                         "kind": "Expr::ForEach::ContinueBlock",
                                         "loc": null,
                                         "children": []
-                                      }
+                                      },
+                                      "is_iter": true
                                     }
                                   },
                                   "guard": null,
@@ -3656,69 +3668,14 @@
                 "loc": null,
                 "children": {
                   "pattern": {
-                    "kind": "Pattern::Constraint",
+                    "kind": "Pattern::Var",
                     "loc": null,
                     "children": {
-                      "pat": {
-                        "kind": "Pattern::Var",
+                      "value": {
+                        "kind": "Binder",
                         "loc": null,
                         "children": {
-                          "value": {
-                            "kind": "Binder",
-                            "loc": null,
-                            "children": {
-                              "name": "nats"
-                            }
-                          }
-                        }
-                      },
-                      "ty": {
-                        "kind": "Type::Name",
-                        "loc": null,
-                        "children": {
-                          "constr_id": {
-                            "kind": "ConstrId",
-                            "loc": null,
-                            "children": {
-                              "id": {
-                                "kind": "LongIdent::Ident",
-                                "loc": null,
-                                "children": {
-                                  "value": "Iter"
-                                }
-                              }
-                            }
-                          },
-                          "tys": {
-                            "kind": "Type::Name::TypeList",
-                            "loc": null,
-                            "children": [
-                              {
-                                "kind": "Type::Name",
-                                "loc": null,
-                                "children": {
-                                  "constr_id": {
-                                    "kind": "ConstrId",
-                                    "loc": null,
-                                    "children": {
-                                      "id": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "Int"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "tys": {
-                                    "kind": "Type::Name::TypeList",
-                                    "loc": null,
-                                    "children": []
-                                  }
-                                }
-                              }
-                            ]
-                          }
+                          "name": "nats"
                         }
                       }
                     }
@@ -3833,7 +3790,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": true
                         }
                       },
                       "guard": null,
@@ -3910,69 +3868,14 @@
                     "loc": null,
                     "children": {
                       "pattern": {
-                        "kind": "Pattern::Constraint",
+                        "kind": "Pattern::Var",
                         "loc": null,
                         "children": {
-                          "pat": {
-                            "kind": "Pattern::Var",
+                          "value": {
+                            "kind": "Binder",
                             "loc": null,
                             "children": {
-                              "value": {
-                                "kind": "Binder",
-                                "loc": null,
-                                "children": {
-                                  "name": "evens"
-                                }
-                              }
-                            }
-                          },
-                          "ty": {
-                            "kind": "Type::Name",
-                            "loc": null,
-                            "children": {
-                              "constr_id": {
-                                "kind": "ConstrId",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "LongIdent::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "Iter"
-                                    }
-                                  }
-                                }
-                              },
-                              "tys": {
-                                "kind": "Type::Name::TypeList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "Type::Name",
-                                    "loc": null,
-                                    "children": {
-                                      "constr_id": {
-                                        "kind": "ConstrId",
-                                        "loc": null,
-                                        "children": {
-                                          "id": {
-                                            "kind": "LongIdent::Ident",
-                                            "loc": null,
-                                            "children": {
-                                              "value": "Int"
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "tys": {
-                                        "kind": "Type::Name::TypeList",
-                                        "loc": null,
-                                        "children": []
-                                      }
-                                    }
-                                  }
-                                ]
-                              }
+                              "name": "evens"
                             }
                           }
                         }
@@ -4026,7 +3929,8 @@
                                 "kind": "Expr::ForEach::ContinueBlock",
                                 "loc": null,
                                 "children": []
-                              }
+                              },
+                              "is_iter": true
                             }
                           },
                           "guard": {
@@ -4792,7 +4696,8 @@
                                                         }
                                                       }
                                                     ]
-                                                  }
+                                                  },
+                                                  "is_iter": true
                                                 }
                                               },
                                               "guard": null,
@@ -5187,7 +5092,8 @@
                                                         }
                                                       }
                                                     ]
-                                                  }
+                                                  },
+                                                  "is_iter": true
                                                 }
                                               },
                                               "guard": null,
@@ -5523,7 +5429,8 @@
                                                     }
                                                   }
                                                 ]
-                                              }
+                                              },
+                                              "is_iter": true
                                             }
                                           },
                                           "guard": null,

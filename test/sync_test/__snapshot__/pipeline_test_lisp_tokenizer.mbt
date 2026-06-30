@@ -41,6 +41,15 @@ fn lex_token(str : StringView) -> Array[Token] raise {
 
 
 fn main {
-  debug(try? lex_token("   (1 2 (a b) (2) 3)"))
-  debug(try? lex_token("   (1 2 左括号a 右括号b) (2) 3)"))
+  debug(to_result(() => lex_token("   (1 2 (a b) (2) 3)")))
+  debug(to_result(() => lex_token("   (1 2 左括号a 右括号b) (2) 3)")))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

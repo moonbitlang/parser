@@ -1,0 +1,268 @@
+[
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "///|",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": false,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "1:1-1:5"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "1:5-1:6"
+  },
+  {
+    "token": "PUB",
+    "loc": "2:1-2:4"
+  },
+  {
+    "token": "EXTERN",
+    "loc": "2:5-2:11"
+  },
+  {
+    "token": [
+      "STRING",
+      "wasm"
+    ],
+    "loc": "2:12-2:18"
+  },
+  {
+    "token": "FN",
+    "loc": "2:19-2:21"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "2:21-2:22"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "2:22-2:23"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "2:23-2:24"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "use_fixedarray_generic"
+    ],
+    "loc": "2:25-2:47"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "2:47-2:48"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "arr"
+    ],
+    "loc": "2:48-2:51"
+  },
+  {
+    "token": "COLON",
+    "loc": "2:52-2:53"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "FixedArray"
+    ],
+    "loc": "2:54-2:64"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "2:64-2:65"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "2:65-2:66"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "2:66-2:67"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "2:67-2:68"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "2:69-2:70"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "2:70-2:71"
+  },
+  {
+    "token": [
+      "STRING",
+      "(func (param $arr i32))"
+    ],
+    "loc": "3:3-3:28"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "3:28-3:28"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "3:28-3:29"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "4:1-4:2"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "///|",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "5:1-5:5"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "5:5-5:6"
+  },
+  {
+    "token": "EXTERN",
+    "loc": "6:1-6:7"
+  },
+  {
+    "token": [
+      "STRING",
+      "wasm"
+    ],
+    "loc": "6:8-6:14"
+  },
+  {
+    "token": "FN",
+    "loc": "6:15-6:17"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "legacy"
+    ],
+    "loc": "6:18-6:24"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "6:24-6:25"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "6:25-6:26"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "6:26-6:27"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "6:27-6:28"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "6:28-6:29"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "arr"
+    ],
+    "loc": "7:3-7:6"
+  },
+  {
+    "token": "COLON",
+    "loc": "7:7-7:8"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "FixedArray"
+    ],
+    "loc": "7:9-7:19"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "7:19-7:20"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "7:20-7:21"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "7:21-7:22"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "7:22-7:23"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "8:1-8:2"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "8:3-8:4"
+  },
+  {
+    "token": [
+      "STRING",
+      "(func (param $arr i32))"
+    ],
+    "loc": "8:5-8:30"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "8:30-8:30"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "8:30-8:31"
+  },
+  {
+    "token": "EOF",
+    "loc": "9:1-9:1"
+  }
+]

@@ -87,58 +87,58 @@ enum E0 {
 
 ///|
 fn testErrEnum(j : Json) -> Result[ConnectionError, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testE0(j : Json) -> Result[E0, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testT1(j : Json) -> Result[T1[Array[Int]], @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testNT(j : Json) -> Result[NT[T1[Array[Int]]], @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testEE(j : Json) -> Result[EE, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testS(j : Json) -> Result[S, @json.JsonDecodeError] {
   // let serialized : S = @json.from_json!(j)
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testEEE(j : Json) -> Result[EEE, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testA(j : Json) -> Result[A, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testE(j : Json) -> Result[E, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testEI(j : Json) -> Result[EI, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
 fn testNested(j : Json) -> Result[Nested3, @json.JsonDecodeError] {
-  try? @json.from_json(j)
+  to_result(() => @json.from_json(j))
 }
 
 ///|
@@ -218,7 +218,7 @@ fn init {
     "nested_optional_string": ["str"],
     "number2": 42,
   }
-  let s : Result[StructWithOptionalFields, _] = try? @json.from_json(input)
+  let s : Result[StructWithOptionalFields, _] = to_result(() => @json.from_json(input))
   println("\{s == expected}, struct:\{Debug::to_repr(s)}")
   //
   println("Optional fields missing")
@@ -232,7 +232,7 @@ fn init {
     number2: 42,
   })
   let input : Json = { "number": 42, "string": "str", "number2": 42 }
-  let s : Result[StructWithOptionalFields, _] = try? @json.from_json(input)
+  let s : Result[StructWithOptionalFields, _] = to_result(() => @json.from_json(input))
   println("\{s == expected}, struct:\{Debug::to_repr(s)}")
   //
   println("Some(None) for nested optional fields")
@@ -254,7 +254,7 @@ fn init {
     "nested_optional_string": Json::null(),
     "number2": 42,
   }
-  let s : Result[StructWithOptionalFields, _] = try? @json.from_json(input)
+  let s : Result[StructWithOptionalFields, _] = to_result(() => @json.from_json(input))
   println("\{s == expected}, struct:\{Debug::to_repr(s)}")
 }
 
@@ -291,19 +291,19 @@ fn init {
   println("")
   println("Field and variant renames")
   let input : Json = { "b": 42 }
-  let s : Result[FieldRename, _] = try? @json.from_json(input)
+  let s : Result[FieldRename, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = ["D1", 42]
-  let s : Result[VariantRename, _] = try? @json.from_json(input)
+  let s : Result[VariantRename, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = { "myField": 42 }
-  let s : Result[FieldRenameAllCamel, _] = try? @json.from_json(input)
+  let s : Result[FieldRenameAllCamel, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = { "MY_FIELD": 42 }
-  let s : Result[FieldRenameAllScreamingSnake, _] = try? @json.from_json(input)
+  let s : Result[FieldRenameAllScreamingSnake, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = ["my_variant", 42]
-  let s : Result[VariantRenameAllSnake, _] = try? @json.from_json(input)
+  let s : Result[VariantRenameAllSnake, _] = to_result(() => @json.from_json(input))
   debug(s)
 }
 
@@ -331,27 +331,27 @@ fn init {
   //
   println("Legacy style")
   let input : Json = { "$tag": "C1" }
-  let s : Result[NewStyleLegacy, _] = try? @json.from_json(input)
+  let s : Result[NewStyleLegacy, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = { "$tag": "C2", "0": "str" }
-  let s : Result[NewStyleLegacy, _] = try? @json.from_json(input)
+  let s : Result[NewStyleLegacy, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = { "$tag": "C3", "0": 42, "1": true }
-  let s : Result[NewStyleLegacy, _] = try? @json.from_json(input)
+  let s : Result[NewStyleLegacy, _] = to_result(() => @json.from_json(input))
   debug(s)
   //
   println("Flat style")
   let input : Json = "C1"
-  let s : Result[NewStyleFlat, _] = try? @json.from_json(input)
+  let s : Result[NewStyleFlat, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = ["C2", "str"]
-  let s : Result[NewStyleFlat, _] = try? @json.from_json(input)
+  let s : Result[NewStyleFlat, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = ["C3", 42, true]
-  let s : Result[NewStyleFlat, _] = try? @json.from_json(input)
+  let s : Result[NewStyleFlat, _] = to_result(() => @json.from_json(input))
   debug(s)
   let input : Json = ["C4", 42, 100, { "x": true, "y": "str" }]
-  let s : Result[NewStyleFlat, _] = try? @json.from_json(input)
+  let s : Result[NewStyleFlat, _] = to_result(() => @json.from_json(input))
   debug(s)
 }
 
@@ -431,7 +431,7 @@ fn init {
   let ts_json = ts.to_json()
   println("Original: \{Debug::to_repr(ts)}")
   println("JSON: \{ts_json.stringify()}")
-  let ts_parsed : Result[TupleStruct, _] = try? @json.from_json(ts_json)
+  let ts_parsed : Result[TupleStruct, _] = to_result(() => @json.from_json(ts_json))
   println("Round-trip: \{Debug::to_repr(ts_parsed)}")
   println("Equal: \{ts_parsed == Result::Ok(ts)}")
 
@@ -441,7 +441,16 @@ fn init {
   let es_json = es.to_json()
   println("Original: \{Debug::to_repr(es)}")
   println("JSON: \{es_json.stringify()}")
-  let es_parsed : Result[EmptyStruct, _] = try? @json.from_json(es_json)
+  let es_parsed : Result[EmptyStruct, _] = to_result(() => @json.from_json(es_json))
   println("Round-trip: \{Debug::to_repr(es_parsed)}")
   println("Equal: \{es_parsed == Result::Ok(es)}")
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

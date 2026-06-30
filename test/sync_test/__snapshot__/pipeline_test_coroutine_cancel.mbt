@@ -83,5 +83,14 @@ fn init {
   for _ in 0..<5 {
     ctx.spawn(worker)
   }
-  debug(try? ctx.run_all())
+  debug(to_result(() => ctx.run_all()))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

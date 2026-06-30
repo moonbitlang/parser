@@ -12,10 +12,19 @@ fn main {
   err_poly_tail_rec(100000, _ => x += 1)
   println(x)
 
-  let result = try? err_poly_tail_rec(1000000, x => {
+  let result = to_result(() => err_poly_tail_rec(1000000, x => {
     if x == 999999 {
       raise Failure::Failure("err")
     }
-  })
+  }))
   debug(result)
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

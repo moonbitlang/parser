@@ -67,7 +67,8 @@
             "kind": "Expr::Array::ExprList",
             "loc": null,
             "children": []
-          }
+          },
+          "is_iter": false
         }
       },
       "vis": {
@@ -153,7 +154,8 @@
             "kind": "Expr::Array::ExprList",
             "loc": null,
             "children": []
-          }
+          },
+          "is_iter": false
         }
       },
       "vis": {
@@ -239,7 +241,8 @@
             "kind": "Expr::Array::ExprList",
             "loc": null,
             "children": []
-          }
+          },
+          "is_iter": false
         }
       },
       "vis": {

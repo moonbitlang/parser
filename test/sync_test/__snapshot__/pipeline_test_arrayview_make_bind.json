@@ -1528,7 +1528,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": false
                         }
                       },
                       "method_name": {

@@ -546,7 +546,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "is_pun": false

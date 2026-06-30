@@ -310,6 +310,11 @@
           }
         ]
       },
+      "method_quantifiers": {
+        "kind": "Impl::TopImpl::MethodQuantifierList",
+        "loc": null,
+        "children": []
+      },
       "params": {
         "kind": "Impl::TopImpl::ParamList",
         "loc": null,
@@ -895,7 +900,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "ty": {

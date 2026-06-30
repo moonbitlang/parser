@@ -427,7 +427,8 @@
                     }
                   }
                 ]
-              }
+              },
+              "is_iter": false
             }
           }
         }
@@ -4144,7 +4145,8 @@
                         }
                       }
                     ]
-                  }
+                  },
+                  "is_iter": false
                 }
               },
               "body": {
@@ -4387,7 +4389,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": false
                         }
                       },
                       "body": {
@@ -4571,7 +4574,8 @@
                     "kind": "Expr::Array::ExprList",
                     "loc": null,
                     "children": []
-                  }
+                  },
+                  "is_iter": false
                 }
               },
               "body": {
@@ -5811,7 +5815,8 @@
                         }
                       }
                     ]
-                  }
+                  },
+                  "is_iter": false
                 }
               },
               "body": {
@@ -6701,7 +6706,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -6890,7 +6896,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -6948,7 +6955,8 @@
                                     "kind": "Expr::Array::ExprList",
                                     "loc": null,
                                     "children": []
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -7020,7 +7028,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -7418,7 +7427,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {
@@ -7576,7 +7586,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {

@@ -2003,7 +2003,8 @@
                     "kind": "Expr::Array::ExprList",
                     "loc": null,
                     "children": []
-                  }
+                  },
+                  "is_iter": false
                 }
               },
               "body": {
@@ -6018,7 +6019,8 @@
                                     }
                                   }
                                 ]
-                              }
+                              },
+                              "is_iter": false
                             }
                           },
                           "kind": {
@@ -6222,7 +6224,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "kind": {

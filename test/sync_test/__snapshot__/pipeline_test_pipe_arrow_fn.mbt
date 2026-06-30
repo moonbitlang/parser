@@ -113,13 +113,13 @@ suberror MyErr {
 } derive(Debug)
 
 fn pipe_failed() -> Unit {
-  debug(try? {
+  debug(to_result(() => {
     "msg" |> x => { raise MyErr(x) }
-  })
+  }))
 }
 
 fn pipe_failed2() -> Unit {
-  debug("msg" |> x => { try? (x + "2") |> fail })
+  debug("msg" |> x => { to_result(() => (x + "2") |> fail) })
   ("msg3" |> x => { fail(x) } |> println) catch { e => println(e.to_string()) }
   "msg4" |> x => { fail(x) catch { _ => x } } |> println
 }
@@ -127,4 +127,13 @@ fn pipe_failed2() -> Unit {
 fn pipe_early_return() -> Unit {
   "" |> x => { return }
   println("ok")
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

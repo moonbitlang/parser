@@ -33,6 +33,15 @@ fn main {
   let r = R::{ p: 1 }
   println(r |> m)
   debug(n(r))
-  debug(try? o(42))
-  debug(try? o(-1))
+  debug(to_result(() => o(42)))
+  debug(to_result(() => o(-1)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

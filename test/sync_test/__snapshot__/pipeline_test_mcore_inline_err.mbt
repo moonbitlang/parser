@@ -20,7 +20,7 @@ suberror Err {
 ///|
 fn main {
   let arr = [1, 2, 3, 4, 5]
-  debug(try? map_err(arr, x =>
+  debug(to_result(() => map_err(arr, x =>
       if x < 0 {
         raise E2
       } else {
@@ -29,8 +29,8 @@ fn main {
         }
         x + 1
       }
-  ))
-  debug(try? map_err([..arr, ..arr], x =>
+  )))
+  debug(to_result(() => map_err([..arr, ..arr], x =>
       if x < 0 {
         raise E2
       } else {
@@ -39,9 +39,9 @@ fn main {
         }
         x + 1
       }
-  ))
+  )))
   let arr1 = [-1, 2, 3, 4, 5]
-  debug(try? map_err(arr1, x =>
+  debug(to_result(() => map_err(arr1, x =>
       if x < 0 {
         raise E2
       } else {
@@ -50,5 +50,14 @@ fn main {
         }
         x + 1
       }
-  ))
+  )))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

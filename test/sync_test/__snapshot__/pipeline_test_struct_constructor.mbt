@@ -16,7 +16,16 @@ fn S::S(x~ : Int, y? : Int = x, loc~ : SourceLoc) -> S raise {
 
 ///|
 fn init {
-  debug(try? S(x=1))
-  debug(try? S::S(x=2, y=3))
-  debug(try? (S(x=4, y=42) : S))
+  debug(to_result(() => S(x=1)))
+  debug(to_result(() => S::S(x=2, y=3)))
+  debug(to_result(() => (S(x=4, y=42) : S)))
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

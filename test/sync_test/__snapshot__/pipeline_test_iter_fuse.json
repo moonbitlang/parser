@@ -617,7 +617,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "method_name": {
@@ -1662,7 +1663,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "method_name": {
@@ -2225,7 +2227,8 @@
                                                 }
                                               }
                                             ]
-                                          }
+                                          },
+                                          "is_iter": false
                                         }
                                       },
                                       "method_name": {
@@ -3240,7 +3243,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "method_name": {
@@ -3847,7 +3851,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "method_name": {
@@ -5136,7 +5141,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "kind": {
@@ -5498,7 +5504,8 @@
                                                     }
                                                   }
                                                 ]
-                                              }
+                                              },
+                                              "is_iter": false
                                             }
                                           },
                                           "method_name": {
@@ -5737,7 +5744,8 @@
                                                 }
                                               }
                                             ]
-                                          }
+                                          },
+                                          "is_iter": false
                                         }
                                       },
                                       "method_name": {
@@ -6286,7 +6294,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "method_name": {
@@ -6376,7 +6385,8 @@
                                                 }
                                               }
                                             ]
-                                          }
+                                          },
+                                          "is_iter": false
                                         }
                                       },
                                       "method_name": {
@@ -6841,7 +6851,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "method_name": {
@@ -6980,7 +6991,8 @@
                                                     }
                                                   }
                                                 ]
-                                              }
+                                              },
+                                              "is_iter": false
                                             }
                                           },
                                           "method_name": {
@@ -7219,7 +7231,8 @@
                                                 }
                                               }
                                             ]
-                                          }
+                                          },
+                                          "is_iter": false
                                         }
                                       },
                                       "method_name": {
@@ -7772,7 +7785,8 @@
                                             }
                                           }
                                         ]
-                                      }
+                                      },
+                                      "is_iter": false
                                     }
                                   },
                                   "method_name": {
@@ -7907,7 +7921,8 @@
                                                 }
                                               }
                                             ]
-                                          }
+                                          },
+                                          "is_iter": false
                                         }
                                       },
                                       "method_name": {
@@ -8432,7 +8447,8 @@
                                         }
                                       }
                                     ]
-                                  }
+                                  },
+                                  "is_iter": false
                                 }
                               },
                               "method_name": {

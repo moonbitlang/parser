@@ -1,3 +1,4 @@
+//!build: -w -20
 suberror MyErr derive(Debug)
 
 fn f(coin : Bool) -> Int raise MyErr {

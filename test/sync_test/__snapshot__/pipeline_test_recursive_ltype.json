@@ -183,7 +183,8 @@
                         "kind": "Expr::Array::ExprList",
                         "loc": null,
                         "children": []
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "is_pun": false

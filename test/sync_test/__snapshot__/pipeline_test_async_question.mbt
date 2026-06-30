@@ -13,6 +13,17 @@ async fn f(c : Bool) -> Int raise Err {
 }
 
 fn main {
-  run_async(() => debug(try? f(true)))
-  run_async(() => debug(try? f(false)))
+  run_async(() => debug(to_result_async(async fn () raise { f(true) })))
+  run_async(() => debug(to_result_async(async fn () raise { f(false) })))
+}
+
+async fn[T, E : Error] to_result_async(
+  f : async () -> T raise E
+) -> Result[T, E] noraise {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
 }

@@ -267,45 +267,68 @@
     "loc": "11:8-11:9"
   },
   {
-    "token": "TRY_QUESTION",
-    "loc": "11:9-11:13"
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "11:9-11:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "11:18-11:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "11:19-11:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "11:20-11:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "11:22-11:24"
   },
   {
     "token": [
       "LIDENT",
       "lex_suffix"
     ],
-    "loc": "11:14-11:24"
+    "loc": "11:25-11:35"
   },
   {
     "token": "LPAREN",
-    "loc": "11:24-11:25"
+    "loc": "11:35-11:36"
   },
   {
     "token": [
       "STRING",
       "test.txt"
     ],
-    "loc": "11:25-11:35"
+    "loc": "11:36-11:46"
   },
   {
     "token": "RPAREN",
-    "loc": "11:35-11:36"
+    "loc": "11:46-11:47"
   },
   {
     "token": "RPAREN",
-    "loc": "11:36-11:37"
+    "loc": "11:47-11:48"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "11:48-11:49"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "11:37-11:37"
+    "loc": "11:49-11:49"
   },
   {
     "token": "NEWLINE",
-    "loc": "11:37-11:38"
+    "loc": "11:49-11:50"
   },
   {
     "token": [
@@ -319,45 +342,68 @@
     "loc": "12:8-12:9"
   },
   {
-    "token": "TRY_QUESTION",
-    "loc": "12:9-12:13"
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "12:9-12:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "12:18-12:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "12:19-12:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "12:20-12:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "12:22-12:24"
   },
   {
     "token": [
       "LIDENT",
       "lex_suffix"
     ],
-    "loc": "12:14-12:24"
+    "loc": "12:25-12:35"
   },
   {
     "token": "LPAREN",
-    "loc": "12:24-12:25"
+    "loc": "12:35-12:36"
   },
   {
     "token": [
       "STRING",
       "test.txt.tar.gz"
     ],
-    "loc": "12:25-12:42"
+    "loc": "12:36-12:53"
   },
   {
     "token": "RPAREN",
-    "loc": "12:42-12:43"
+    "loc": "12:53-12:54"
   },
   {
     "token": "RPAREN",
-    "loc": "12:43-12:44"
+    "loc": "12:54-12:55"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "12:55-12:56"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "12:44-12:44"
+    "loc": "12:56-12:56"
   },
   {
     "token": "NEWLINE",
-    "loc": "12:44-12:45"
+    "loc": "12:56-12:57"
   },
   {
     "token": [
@@ -371,45 +417,68 @@
     "loc": "13:8-13:9"
   },
   {
-    "token": "TRY_QUESTION",
-    "loc": "13:9-13:13"
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "13:9-13:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "13:18-13:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "13:19-13:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "13:20-13:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "13:22-13:24"
   },
   {
     "token": [
       "LIDENT",
       "lex_suffix"
     ],
-    "loc": "13:14-13:24"
+    "loc": "13:25-13:35"
   },
   {
     "token": "LPAREN",
-    "loc": "13:24-13:25"
+    "loc": "13:35-13:36"
   },
   {
     "token": [
       "STRING",
       "test.txt.tar.gz.tar.gz"
     ],
-    "loc": "13:25-13:49"
+    "loc": "13:36-13:60"
   },
   {
     "token": "RPAREN",
-    "loc": "13:49-13:50"
+    "loc": "13:60-13:61"
   },
   {
     "token": "RPAREN",
-    "loc": "13:50-13:51"
+    "loc": "13:61-13:62"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "13:62-13:63"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "13:51-13:51"
+    "loc": "13:63-13:63"
   },
   {
     "token": "NEWLINE",
-    "loc": "13:51-13:52"
+    "loc": "13:63-13:64"
   },
   {
     "token": [
@@ -423,45 +492,68 @@
     "loc": "14:8-14:9"
   },
   {
-    "token": "TRY_QUESTION",
-    "loc": "14:9-14:13"
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "14:9-14:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "14:18-14:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "14:19-14:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "14:20-14:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "14:22-14:24"
   },
   {
     "token": [
       "LIDENT",
       "lex_suffix"
     ],
-    "loc": "14:14-14:24"
+    "loc": "14:25-14:35"
   },
   {
     "token": "LPAREN",
-    "loc": "14:24-14:25"
+    "loc": "14:35-14:36"
   },
   {
     "token": [
       "STRING",
       "test.txt.tar.gz.tar.gz.tar.gz"
     ],
-    "loc": "14:25-14:56"
+    "loc": "14:36-14:67"
   },
   {
     "token": "RPAREN",
-    "loc": "14:56-14:57"
+    "loc": "14:67-14:68"
   },
   {
     "token": "RPAREN",
-    "loc": "14:57-14:58"
+    "loc": "14:68-14:69"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "14:69-14:70"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "14:58-14:58"
+    "loc": "14:70-14:70"
   },
   {
     "token": "NEWLINE",
-    "loc": "14:58-14:59"
+    "loc": "14:70-14:71"
   },
   {
     "token": [
@@ -475,45 +567,68 @@
     "loc": "15:8-15:9"
   },
   {
-    "token": "TRY_QUESTION",
-    "loc": "15:9-15:13"
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "15:9-15:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "15:18-15:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "15:19-15:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "15:20-15:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "15:22-15:24"
   },
   {
     "token": [
       "LIDENT",
       "lex_suffix"
     ],
-    "loc": "15:14-15:24"
+    "loc": "15:25-15:35"
   },
   {
     "token": "LPAREN",
-    "loc": "15:24-15:25"
+    "loc": "15:35-15:36"
   },
   {
     "token": [
       "STRING",
       "test.txt.tar.gz.tar.gz.tar.gz.tar.gz"
     ],
-    "loc": "15:25-15:63"
+    "loc": "15:36-15:74"
   },
   {
     "token": "RPAREN",
-    "loc": "15:63-15:64"
+    "loc": "15:74-15:75"
   },
   {
     "token": "RPAREN",
-    "loc": "15:64-15:65"
+    "loc": "15:75-15:76"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "15:76-15:77"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "15:65-15:65"
+    "loc": "15:77-15:77"
   },
   {
     "token": "NEWLINE",
-    "loc": "15:65-15:66"
+    "loc": "15:77-15:78"
   },
   {
     "token": [
@@ -527,45 +642,68 @@
     "loc": "16:8-16:9"
   },
   {
-    "token": "TRY_QUESTION",
-    "loc": "16:9-16:13"
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "16:9-16:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "16:18-16:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "16:19-16:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "16:20-16:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "16:22-16:24"
   },
   {
     "token": [
       "LIDENT",
       "lex_suffix"
     ],
-    "loc": "16:14-16:24"
+    "loc": "16:25-16:35"
   },
   {
     "token": "LPAREN",
-    "loc": "16:24-16:25"
+    "loc": "16:35-16:36"
   },
   {
     "token": [
       "STRING",
       "test.txt.tar.gz.tar.gz.tar.gz.tar.gz.tar.gz"
     ],
-    "loc": "16:25-16:70"
+    "loc": "16:36-16:81"
   },
   {
     "token": "RPAREN",
-    "loc": "16:70-16:71"
+    "loc": "16:81-16:82"
   },
   {
     "token": "RPAREN",
-    "loc": "16:71-16:72"
+    "loc": "16:82-16:83"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "16:83-16:84"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "16:72-16:72"
+    "loc": "16:84-16:84"
   },
   {
     "token": "NEWLINE",
-    "loc": "16:72-16:73"
+    "loc": "16:84-16:85"
   },
   {
     "token": [
@@ -579,38 +717,61 @@
     "loc": "17:8-17:9"
   },
   {
-    "token": "TRY_QUESTION",
-    "loc": "17:9-17:13"
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "17:9-17:18"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "17:18-17:19"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "17:19-17:20"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "17:20-17:21"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "17:22-17:24"
   },
   {
     "token": [
       "LIDENT",
       "lex_suffix"
     ],
-    "loc": "17:14-17:24"
+    "loc": "17:25-17:35"
   },
   {
     "token": "LPAREN",
-    "loc": "17:24-17:25"
+    "loc": "17:35-17:36"
   },
   {
     "token": [
       "STRING",
       "test.txt.tar.gz.tar.gz.tar.gz.tar.gz.tar.gz"
     ],
-    "loc": "17:25-17:70"
+    "loc": "17:36-17:81"
   },
   {
     "token": "RPAREN",
-    "loc": "17:70-17:71"
+    "loc": "17:81-17:82"
   },
   {
     "token": "RPAREN",
-    "loc": "17:71-17:72"
+    "loc": "17:82-17:83"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "17:83-17:84"
   },
   {
     "token": "NEWLINE",
-    "loc": "17:72-17:73"
+    "loc": "17:84-17:85"
   },
   {
     "token": "RBRACE",
@@ -628,7 +789,323 @@
     "loc": "18:2-18:3"
   },
   {
+    "token": "NEWLINE",
+    "loc": "19:1-19:2"
+  },
+  {
+    "token": "FN",
+    "loc": "20:1-20:3"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "20:3-20:4"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "20:4-20:5"
+  },
+  {
+    "token": "COMMA",
+    "loc": "20:5-20:6"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "E"
+    ],
+    "loc": "20:7-20:8"
+  },
+  {
+    "token": "COLON",
+    "loc": "20:9-20:10"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Error"
+    ],
+    "loc": "20:11-20:16"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "20:16-20:17"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "to_result"
+    ],
+    "loc": "20:18-20:27"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "20:27-20:28"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "20:28-20:29"
+  },
+  {
+    "token": "COLON",
+    "loc": "20:30-20:31"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "20:32-20:33"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "20:33-20:34"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "20:35-20:37"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "20:38-20:39"
+  },
+  {
+    "token": "RAISE",
+    "loc": "20:40-20:45"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "E"
+    ],
+    "loc": "20:46-20:47"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "20:47-20:48"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "20:49-20:51"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Result"
+    ],
+    "loc": "20:52-20:58"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "20:58-20:59"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T"
+    ],
+    "loc": "20:59-20:60"
+  },
+  {
+    "token": "COMMA",
+    "loc": "20:60-20:61"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "E"
+    ],
+    "loc": "20:62-20:63"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "20:63-20:64"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "20:65-20:66"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "20:66-20:67"
+  },
+  {
+    "token": "TRY",
+    "loc": "21:3-21:6"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "f"
+    ],
+    "loc": "21:7-21:8"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "21:8-21:9"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "21:9-21:10"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "21:10-21:11"
+  },
+  {
+    "token": "CATCH",
+    "loc": "22:3-22:8"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "22:9-22:10"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "22:10-22:11"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "err"
+    ],
+    "loc": "23:5-23:8"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "23:9-23:11"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Result"
+    ],
+    "loc": "23:12-23:18"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "23:18-23:20"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Err"
+    ],
+    "loc": "23:20-23:23"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "23:23-23:24"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "err"
+    ],
+    "loc": "23:24-23:27"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "23:27-23:28"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "23:28-23:29"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "24:3-24:4"
+  },
+  {
+    "token": "NORAISE",
+    "loc": "24:5-24:12"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "24:13-24:14"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "24:14-24:15"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "value"
+    ],
+    "loc": "25:5-25:10"
+  },
+  {
+    "token": "FAT_ARROW",
+    "loc": "25:11-25:13"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Result"
+    ],
+    "loc": "25:14-25:20"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "25:20-25:22"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Ok"
+    ],
+    "loc": "25:22-25:24"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "25:24-25:25"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "value"
+    ],
+    "loc": "25:25-25:30"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "25:30-25:31"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "25:31-25:32"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "26:3-26:4"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "26:4-26:5"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "27:1-27:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "27:2-27:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "27:2-27:3"
+  },
+  {
     "token": "EOF",
-    "loc": "19:1-19:1"
+    "loc": "28:1-28:1"
   }
 ]

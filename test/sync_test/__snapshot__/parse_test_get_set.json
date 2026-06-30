@@ -112,7 +112,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": false
                         }
                       },
                       "index": {
@@ -182,7 +183,8 @@
                                 }
                               }
                             ]
-                          }
+                          },
+                          "is_iter": false
                         }
                       },
                       "method_name": {
@@ -297,7 +299,8 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "is_iter": false
                     }
                   },
                   "body": {
