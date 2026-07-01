@@ -1,0 +1,7 @@
+fn loop_nobreak(a : Int, b : Int, c : Bool, xs : Array[Int]) -> Unit {
+  while a>=b&&c { println("while") } nobreak { println("while nobreak") }
+
+  for i=0;i<xs.length();i=i+1 { println(i.to_string()) } nobreak { println("for nobreak") }
+
+  for x in xs;i=0;i=i+1 { println(x.to_string()) } nobreak { println(i.to_string()) }
+}

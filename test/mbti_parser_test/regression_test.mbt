@@ -10,7 +10,9 @@ let regression_sample_header =
 fn parse_ok(name : String, content : String) -> Mbti raise {
   let (mbti, reports) = @mbti_parser.parse_string(content, name~)
   if !reports.is_empty() {
-    fail("parsing \{name} failed with \{reports.length()} diagnostics")
+    fail(
+      "parsing \{name} failed with diagnostics: \{reports.to_json().stringify(indent=2)}",
+    )
   }
   mbti
 }
@@ -90,4 +92,30 @@ test "mbti package name rejects empty path component" {
   if reports.is_empty() {
     fail("expected invalid package alias to produce diagnostics")
   }
+}
+
+///|
+test "trait_method_type_params" {
+  let body =
+    #|pub trait T {
+    #|  fn[A : Show] map(Self, A) -> Unit
+    #|  fn extend(Self) -> Unit
+    #|}
+  guard first_sig("trait_method_type_params.mbti", body)
+    is Trait({ methods, .. }) else {
+    fail("expected trait signature")
+  }
+  guard methods.head().unwrap()
+    is { name: { name: "map", .. }, type_params, .. } else {
+    fail("expected generic method")
+  }
+  inspect(type_params.length().to_string(), content="1")
+  let type_param = type_params.head().unwrap()
+  inspect(type_param.name.name, content="A")
+  inspect(type_param.constraints.length().to_string(), content="1")
+  guard methods.nth(1)
+    is Some({ name: { name: "extend", .. }, type_params: extend_params, .. }) else {
+    fail("expected extend method")
+  }
+  inspect(extend_params.length().to_string(), content="0")
 }

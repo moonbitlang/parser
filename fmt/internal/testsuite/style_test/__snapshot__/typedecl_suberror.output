@@ -3,22 +3,10 @@
 suberror SubErr0
 
 ///|
-suberror SubErr1
-
-///|
-suberror SubErr2
-
-///|
 suberror SubErr3 {
   Constr1
   Constr2(Int, mut label~ : Int)
 }
-
-///|
-suberror PayloadLineWrap1
-
-///|
-suberror PayloadLineWrap2
 
 ///|
 suberror PayloadLineWrap2 {
