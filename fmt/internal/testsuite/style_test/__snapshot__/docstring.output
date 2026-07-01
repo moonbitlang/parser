@@ -59,7 +59,7 @@ fn with_block_line() -> Unit {
   ...
 }
 
-///| 
+///|
 /// doc
 fn with_doc() -> Unit {
   ...

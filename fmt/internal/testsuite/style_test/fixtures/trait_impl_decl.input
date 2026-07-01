@@ -27,11 +27,11 @@ impl Trait for Type with type_annotation(self : Self, label1~ : Int, label2~ : B
 
 impl Trait with f() {
   ...
-} 
+}
 
 pub impl Trait with f() {
   ...
-} 
+}
 
 pub impl[T1 : Trait1, T2 : Trait2] Trait for Type with f() {
   ...
@@ -45,5 +45,3 @@ pub impl[T1 : Trait1 + Trait2, T2 : Trait1 + Trait2 + Trait3] Trait for Type[T1_
 ) -> Unit raise Error {
   ...
 }
-
-

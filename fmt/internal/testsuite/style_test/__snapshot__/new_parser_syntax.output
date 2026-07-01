@@ -1,0 +1,10 @@
+// generated file, do not edit!
+///|
+fn f(writer : Writer, x : Int, xs : Array[Int]) -> Unit {
+  let iter_values = [| 1, 2, 3 |]
+  let ys = [| for x in xs if x > 0 => x |]
+  writer <? b"value \{x}"
+  ignore(iter_values)
+  ignore(ys)
+}
+

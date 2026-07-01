@@ -495,7 +495,11 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Expr::Array(exprs=@list.from_array([unit_expr]), loc=dummy_loc).json_repr(),
+    @syntax.Expr::Array(
+      exprs=@list.from_array([unit_expr]),
+      is_iter=false,
+      loc=dummy_loc,
+    ).json_repr(),
     content={
       "kind": "Expr::Array",
       "loc": null,
@@ -511,12 +515,17 @@ test "expr basic types to_json" {
             },
           ],
         },
+        "is_iter": false,
       },
     },
   )
   let spread_elem = @syntax.SpreadableElem::Regular(unit_expr)
   json_inspect(
-    @syntax.ArraySpread(elems=@list.from_array([spread_elem]), loc=dummy_loc).json_repr(),
+    @syntax.ArraySpread(
+      elems=@list.from_array([spread_elem]),
+      is_iter=false,
+      loc=dummy_loc,
+    ).json_repr(),
     content={
       "kind": "Expr::ArraySpread",
       "loc": null,
@@ -538,6 +547,7 @@ test "expr basic types to_json" {
             },
           ],
         },
+        "is_iter": false,
       },
     },
   )

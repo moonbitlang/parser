@@ -22,7 +22,7 @@ using @basic {type Location}
 using @list {type List}
 
 ///|
-using @syntax {trait MapVisitor}
+using @syntax {trait IterVisitor, trait MapVisitor}
 
 ///|
 using @attribute {type Attribute}
