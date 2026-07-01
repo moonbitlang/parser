@@ -2,6 +2,7 @@
 package "moonbitlang/parser/syntax"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/core/list",
   "moonbitlang/lexer/basic",
   "moonbitlang/lexer/tokens",
@@ -84,18 +85,18 @@ pub(all) enum Accessor {
   Label(Label)
   Index(tuple_index~ : Int, loc~ : @basic.Location)
   Newtype(loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
-}
+} derive(@debug.Debug)
 pub fn AliasTarget::loc(Self) -> @basic.Location
 
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
-}
+} derive(@debug.Debug)
 
 pub(all) enum ArgumentKind {
   Positional
@@ -103,35 +104,35 @@ pub(all) enum ArgumentKind {
   LabelledPun(Label)
   LabelledOption(label~ : Label, question_loc~ : @basic.Location)
   LabelledOptionPun(label~ : Label, question_loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
   StringSpread(str~ : String, loc~ : @basic.Location)
   BytesSpread(bytes~ : String, loc~ : @basic.Location)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) enum ArrayPatterns {
   Closed(@list.List[ArrayPattern])
   Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
-}
+} derive(@debug.Debug)
 
 pub(all) enum ArrowFnParam {
   Named(Binder)
   Unnamed(@basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) struct Binder {
   name : String
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
   body : Expr
-}
+} derive(@debug.Debug)
 
 pub(all) enum Constant {
   Bool(Bool)
@@ -147,7 +148,7 @@ pub(all) enum Constant {
   String(String)
   Regex(String)
   BigInt(String)
-}
+} derive(@debug.Debug)
 
 pub(all) struct ConstrDecl {
   name : ConstrName
@@ -156,58 +157,58 @@ pub(all) struct ConstrDecl {
   loc : @basic.Location
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
-}
+} derive(@debug.Debug)
 
 pub(all) struct ConstrId {
   id : LongIdent
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct ConstrName {
   name : String
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct ConstrParam {
   ty : Type
   mut_ : Bool
   label : Label?
-}
+} derive(@debug.Debug)
 
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
-}
+} derive(@debug.Debug)
 
 pub(all) struct Constructor {
   name : ConstrName
   extra_info : ConstructorExtraInfo
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
   TypeNameWithConstrPackage(type_name~ : TypeName, pkg~ : String)
   Package(String)
   NoExtraInfo
-}
+} derive(@debug.Debug)
 
 pub(all) enum DeclBody {
   DeclBody(expr~ : Expr)
   DeclStubs(FuncStubs)
   DeclNone
-}
+} derive(@debug.Debug)
 
 pub(all) struct DerivingDirective {
   type_name : TypeName
   args : @list.List[Argument]
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct DocString {
   content : @list.List[String]
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 pub fn DocString::empty() -> Self
 pub impl ToJson for DocString
 
@@ -216,12 +217,12 @@ pub(all) enum DotDotBinder {
   NoBinder
   BinderAs(Binder)
   Binder(Binder)
-}
+} derive(@debug.Debug)
 
 pub(all) enum EmbeddedCode {
   CodeString(String)
   CodeMultilineString(@list.List[String])
-}
+} derive(@debug.Debug)
 
 pub(all) enum ErrorType {
   ErrorType(ty~ : Type)
@@ -229,12 +230,12 @@ pub(all) enum ErrorType {
   NoErrorType
   Noraise(loc~ : @basic.Location)
   MaybeError(ty~ : Type)
-}
+} derive(@debug.Debug)
 
 pub(all) enum ExceptionDecl {
   NoPayload
   EnumPayload(@list.List[ConstrDecl])
-}
+} derive(@debug.Debug)
 
 pub(all) enum Expr {
   Apply(func~ : Expr, args~ : @list.List[Argument], loc~ : @basic.Location)
@@ -297,7 +298,7 @@ pub(all) enum Expr {
   Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location)
   TemplateWriting(expr~ : Expr, template~ : Expr, loc~ : @basic.Location)
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
-}
+} derive(@debug.Debug)
 pub fn Expr::json_repr(Self) -> Json
 pub fn Expr::loc(Self) -> @basic.Location
 pub impl ToJson for Expr
@@ -310,31 +311,31 @@ pub(all) struct FieldDecl {
   loc : @basic.Location
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
-}
+} derive(@debug.Debug)
 
 pub(all) struct FieldDef {
   label : Label
   expr : Expr
   is_pun : Bool
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct FieldName {
   label : String
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct FieldPat {
   label : Label
   pattern : Pattern
   is_pun : Bool
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum FnKind {
   Lambda
   Arrow
-}
+} derive(@debug.Debug)
 
 pub(all) struct FunDecl {
   type_name : TypeName?
@@ -349,7 +350,7 @@ pub(all) struct FunDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct Func {
   parameters : @list.List[Parameter]
@@ -360,23 +361,23 @@ pub(all) struct Func {
   kind : FnKind
   is_async : @basic.Location?
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum FuncStubs {
   Import(module_name~ : String, func_name~ : String, language~ : String?)
   Embedded(language~ : String?, code~ : EmbeddedCode)
-}
+} derive(@debug.Debug)
 
 pub(all) enum Group {
   Brace
   Paren
-}
+} derive(@debug.Debug)
 
 pub(all) enum Hole {
   Synthesized
   Incomplete
   Todo
-}
+} derive(@debug.Debug)
 
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, is_async~ : @basic.Location?, loc~ : @basic.Location)
@@ -389,7 +390,7 @@ pub(all) enum Impl {
   TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool)
   TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
-}
+} derive(@debug.Debug)
 pub fn Impl::json_repr(Self) -> Json
 pub fn Impl::loc(Self) -> @basic.Location
 pub impl ToJson for Impl
@@ -398,7 +399,7 @@ pub(all) enum InterpElem {
   Literal(repr~ : String, loc~ : @basic.Location)
   Expr(expr~ : Expr, loc~ : @basic.Location)
   Source(@tokens.InterpSource)
-}
+} derive(@debug.Debug)
 
 pub struct IterVisitorBase[T](T)
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
@@ -406,14 +407,14 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T]
 pub(all) struct Label {
   name : String
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct LexCase {
   pat : @list.List[LexTopPattern]
   pat_loc : @basic.Location
   guard_ : Expr?
   body : Expr
-}
+} derive(@debug.Debug)
 
 pub(all) enum LexPattern {
   Regex(lit~ : String, offset~ : Int, loc~ : @basic.Location)
@@ -421,23 +422,23 @@ pub(all) enum LexPattern {
   ConstantRef(lid~ : LongIdent, loc~ : @basic.Location)
   Alias(pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location)
   Sequence(pats~ : @list.List[LexPattern], loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) enum LexTopPattern {
   Pattern(LexPattern)
   Binder(Binder)
   Wildcard(loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) enum ListComprehensionKind {
   Foreach(binders~ : @list.List[Binder?], expr~ : Expr, init~ : @list.List[(Binder, Expr)], continue_block~ : @list.List[(Binder, Expr)])
   For(binders~ : @list.List[(Binder, Expr)], condition~ : Expr?, continue_block~ : @list.List[(Binder, Expr)], for_loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) enum LongIdent {
   Ident(name~ : String)
   Dot(pkg~ : String, id~ : String)
-}
+} derive(@debug.Debug)
 pub fn LongIdent::dummy() -> Self
 
 pub(all) struct MapExprElem {
@@ -445,7 +446,7 @@ pub(all) struct MapExprElem {
   expr : Expr
   key_loc : @basic.Location
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct MapPatElem {
   key : Constant
@@ -453,7 +454,7 @@ pub(all) struct MapPatElem {
   match_absent : Bool
   key_loc : @basic.Location
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct MapVisitorBase[T](T)
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
@@ -461,7 +462,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T]
 pub(all) enum MultilineStringElem {
   String(String)
   Interp(@list.List[InterpElem])
-}
+} derive(@debug.Debug)
 
 pub(all) enum Parameter {
   DiscardPositional(ty~ : Type?, loc~ : @basic.Location)
@@ -469,7 +470,7 @@ pub(all) enum Parameter {
   Labelled(binder~ : Binder, ty~ : Type?)
   Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
   QuestionOptional(binder~ : Binder, ty~ : Type?)
-}
+} derive(@debug.Debug)
 pub fn Parameter::loc(Self) -> @basic.Location
 
 pub(all) enum Pattern {
@@ -486,19 +487,19 @@ pub(all) enum Pattern {
   Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : @basic.Location)
   Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : @basic.Location)
   SpecialConstr(binder~ : Binder, args~ : @list.List[ConstrPatArg], loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 pub fn Pattern::loc(Self) -> @basic.Location
 
 pub(all) enum PredicateQuantifierKind {
   Forall
   Exists
-}
+} derive(@debug.Debug)
 
 pub(all) enum RangeKind {
   Inclusive
   Exclusive
   InclusiveMissingEqual
-}
+} derive(@debug.Debug)
 
 pub(all) enum RegexPattern {
   Literal(lit~ : String, loc~ : @basic.Location)
@@ -506,25 +507,25 @@ pub(all) enum RegexPattern {
   Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)
   Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)
   Alias(pat~ : RegexPattern, binder~ : Binder, loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) enum SpreadableElem {
   Regular(Expr)
   Spread(expr~ : Expr, loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) struct StaticAssertion {
   ty : Type
   trait_ : LongIdent
   loc : @basic.Location
   msg : String
-}
+} derive(@debug.Debug)
 
 pub(all) enum TrailingMark {
   Comma
   Semi
   None
-}
+} derive(@debug.Debug)
 
 pub(all) struct TraitDecl {
   name : Binder
@@ -535,7 +536,7 @@ pub(all) struct TraitDecl {
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
   is_declare : Bool
-}
+} derive(@debug.Debug)
 
 pub(all) struct TraitMethodDecl {
   name : Binder
@@ -547,12 +548,12 @@ pub(all) struct TraitMethodDecl {
   has_default : @basic.Location?
   attrs : @list.List[@attribute.Attribute]
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum TryOperatorKind {
   Question
   Exclamation
-}
+} derive(@debug.Debug)
 
 pub(all) enum Type {
   Any(loc~ : @basic.Location)
@@ -561,7 +562,7 @@ pub(all) enum Type {
   Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location)
   Option(ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location)
   Object(ConstrId)
-}
+} derive(@debug.Debug)
 pub fn Type::loc(Self) -> @basic.Location
 
 pub(all) struct TypeDecl {
@@ -575,12 +576,12 @@ pub(all) struct TypeDecl {
   deriving : @list.List[DerivingDirective]
   loc : @basic.Location
   is_declare : Bool
-}
+} derive(@debug.Debug)
 
 pub(all) struct TypeDeclBinder {
   name : String?
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum TypeDesc {
   Abstract
@@ -591,46 +592,46 @@ pub(all) enum TypeDesc {
   Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
   TupleStruct(@list.List[Type])
   Alias(Type)
-}
+} derive(@debug.Debug)
 
 pub(all) struct TypeName {
   name : LongIdent
   is_object : Bool
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct TypeVarBinder {
   name : String
   name_loc : @basic.Location
   constraints : @list.List[TypeVarConstraint]
-}
+} derive(@debug.Debug)
 
 pub(all) struct TypeVarConstraint {
   trait_ : LongIdent
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum UsingKind {
   Value
   Type
   Trait
-}
+} derive(@debug.Debug)
 
 pub(all) struct Var {
   name : LongIdent
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum Visibility {
   Default
   Pub(attr~ : String?, loc~ : @basic.Location)
   Priv(loc~ : @basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) struct WhereClause {
   fields : @list.List[FieldDef]
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 // Type aliases
 pub type Impls = @list.List[Impl]

@@ -390,7 +390,7 @@ pub fn make_float(f : String) -> Constant {
 pub(all) enum ArrowFnParam {
   Named(Binder)
   Unnamed(Location)
-}
+} derive(Debug)
 
 ///|
 /// Convert binder to expression
