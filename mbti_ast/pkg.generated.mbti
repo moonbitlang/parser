@@ -2,6 +2,7 @@
 package "moonbitlang/parser/mbti_ast"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/core/list",
   "moonbitlang/lexer/basic",
   "moonbitlang/parser/attribute",
@@ -17,14 +18,14 @@ pub(all) enum AliasSig {
   TypeAlias(name~ : Name, type_params~ : @list.List[TypeParamNoConstraints], type_~ : @syntax.Type, vis~ : @syntax.Visibility, attrs~ : @list.List[@attribute.Attribute])
   Using(pkg~ : Name, target~ : Name, name~ : Name?, kind~ : @syntax.UsingKind, attrs~ : @list.List[@attribute.Attribute])
   FuncAlias(name~ : Name, type_name~ : Name, attrs~ : @list.List[@attribute.Attribute])
-}
+} derive(@debug.Debug)
 
 pub(all) struct ConstSig {
   name : Name
   type_ : @syntax.Type
   value : @syntax.Constant
   attrs : @list.List[@attribute.Attribute]
-}
+} derive(@debug.Debug)
 
 pub(all) struct FuncSig {
   attrs : @list.List[@attribute.Attribute]
@@ -34,14 +35,14 @@ pub(all) struct FuncSig {
   return_ : (@syntax.Type, @syntax.ErrorType)
   type_params : @list.List[TypeParamWithConstraints]
   is_async : @basic.Location?
-}
+} derive(@debug.Debug)
 
 pub(all) struct ImplSig {
   type_params : @list.List[TypeParamWithConstraints]
   type_ : @syntax.Type
   trait_name : QualifiedName
   attrs : @list.List[@attribute.Attribute]
-}
+} derive(@debug.Debug)
 
 pub(all) struct Mbti {
   package_name : String
@@ -49,28 +50,28 @@ pub(all) struct Mbti {
   sigs : @list.List[(Sig, @basic.Location)]
   loc : @basic.Location
   base_pos : @basic.BasePos
-}
+} derive(@debug.Debug)
 
 pub(all) struct MethodSelfType {
   name : String
   is_object : Bool
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) struct Name {
   name : String
   loc : @basic.Location
-} derive(ToJson)
+} derive(ToJson, @debug.Debug)
 
 pub(all) struct PackageImport {
   name : String
   alias_ : String?
-}
+} derive(@debug.Debug)
 
 pub(all) struct QualifiedName {
   name : @syntax.LongIdent
   loc : @basic.Location
-}
+} derive(@debug.Debug)
 
 pub(all) enum Sig {
   Func(FuncSig)
@@ -80,7 +81,7 @@ pub(all) enum Sig {
   Impl(ImplSig)
   Const(ConstSig)
   Value(ValueSig)
-}
+} derive(@debug.Debug)
 pub fn Sig::attrs(Self) -> @list.List[@attribute.Attribute]
 
 pub(all) struct TraitMethodSig {
@@ -90,7 +91,7 @@ pub(all) struct TraitMethodSig {
   has_default : Bool
   return_ : (@syntax.Type, @syntax.ErrorType)
   attrs : @list.List[@attribute.Attribute]
-}
+} derive(@debug.Debug)
 
 pub(all) struct TraitSig {
   name : Name
@@ -98,7 +99,7 @@ pub(all) struct TraitSig {
   methods : @list.List[TraitMethodSig]
   vis : @syntax.Visibility
   attrs : @list.List[@attribute.Attribute]
-}
+} derive(@debug.Debug)
 
 pub(all) enum TypeDefinition {
   Abstract
@@ -110,17 +111,17 @@ pub(all) enum TypeDefinition {
   Variant(@list.List[@syntax.ConstrDecl])
   Record(fields~ : @list.List[@syntax.FieldDecl], constr~ : FuncSig?)
   Alias(@syntax.Type)
-}
+} derive(@debug.Debug)
 
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(@basic.Location)
-}
+} derive(@debug.Debug)
 
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
-}
+} derive(@debug.Debug)
 
 pub(all) struct TypeSig {
   name : Name
@@ -129,13 +130,13 @@ pub(all) struct TypeSig {
   vis : @syntax.Visibility
   attrs : @list.List[@attribute.Attribute]
   derives : @list.List[QualifiedName]
-}
+} derive(@debug.Debug)
 
 pub(all) struct ValueSig {
   name : Name
   type_ : @syntax.Type
   attrs : @list.List[@attribute.Attribute]
-}
+} derive(@debug.Debug)
 
 // Type aliases
 pub type Attributes = @list.List[@attribute.Attribute]

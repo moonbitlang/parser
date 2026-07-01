@@ -2,32 +2,32 @@
 pub(all) struct Name {
   name : String
   loc : Location
-} derive(ToJson)
+} derive(Debug, ToJson)
 
 ///|
 pub(all) struct QualifiedName {
   name : QualifiedIdent
   loc : Location
-}
+} derive(Debug)
 
 ///|
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
-}
+} derive(Debug)
 
 ///|
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(Location)
-}
+} derive(Debug)
 
 ///|
 pub(all) struct MethodSelfType {
   name : String
   is_object : Bool
   loc : Location
-}
+} derive(Debug)
 
 ///|
 pub(all) struct FuncSig {
@@ -38,7 +38,7 @@ pub(all) struct FuncSig {
   return_ : (Type, ErrorType)
   type_params : @list.List[TypeParamWithConstraints]
   is_async : Location?
-}
+} derive(Debug)
 
 ///|
 pub(all) enum TypeDefinition {
@@ -51,7 +51,7 @@ pub(all) enum TypeDefinition {
   Variant(@list.List[ConstrDecl])
   Record(fields~ : @list.List[FieldDecl], constr~ : FuncSig?)
   Alias(Type)
-}
+} derive(Debug)
 
 ///|
 pub(all) struct TypeSig {
@@ -61,7 +61,7 @@ pub(all) struct TypeSig {
   vis : Visibility
   attrs : Attributes
   derives : @list.List[QualifiedName]
-}
+} derive(Debug)
 
 ///|
 pub(all) enum AliasSig {
@@ -80,7 +80,7 @@ pub(all) enum AliasSig {
     attrs~ : Attributes
   )
   FuncAlias(name~ : Name, type_name~ : Name, attrs~ : Attributes)
-}
+} derive(Debug)
 
 ///|
 pub(all) struct TraitMethodSig {
@@ -90,7 +90,7 @@ pub(all) struct TraitMethodSig {
   has_default : Bool
   return_ : (Type, ErrorType)
   attrs : Attributes
-}
+} derive(Debug)
 
 ///|
 pub(all) struct TraitSig {
@@ -99,7 +99,7 @@ pub(all) struct TraitSig {
   methods : @list.List[TraitMethodSig]
   vis : Visibility
   attrs : Attributes
-}
+} derive(Debug)
 
 ///|
 pub(all) struct ImplSig {
@@ -107,7 +107,7 @@ pub(all) struct ImplSig {
   type_ : Type
   trait_name : QualifiedName
   attrs : Attributes
-}
+} derive(Debug)
 
 ///|
 pub(all) struct ConstSig {
@@ -115,20 +115,20 @@ pub(all) struct ConstSig {
   type_ : Type
   value : Constant
   attrs : Attributes
-}
+} derive(Debug)
 
 ///|
 pub(all) struct ValueSig {
   name : Name
   type_ : Type
   attrs : Attributes
-}
+} derive(Debug)
 
 ///|
 pub(all) struct PackageImport {
   name : String
   alias_ : String?
-}
+} derive(Debug)
 
 ///|
 pub(all) enum Sig {
@@ -139,7 +139,7 @@ pub(all) enum Sig {
   Impl(ImplSig)
   Const(ConstSig)
   Value(ValueSig)
-}
+} derive(Debug)
 
 ///|
 pub fn Sig::attrs(self : Sig) -> Attributes {
@@ -163,4 +163,4 @@ pub(all) struct Mbti {
   sigs : @list.List[(Sig, Location)]
   loc : Location
   base_pos : BasePos
-}
+} derive(Debug)
