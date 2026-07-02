@@ -60,6 +60,7 @@ pub impl ToJson for Token with fn to_json(self) {
     PIPE => "PIPE"
     PIPE_LEFT => "PIPE_LEFT"
     LT_PLUS => "LT_PLUS"
+    LT_QUESTION => "LT_QUESTION"
     AS => "AS"
     PACKAGE_NAME(str) => ["PACKAGE_NAME", str]
     BARBAR => "BARBAR"
@@ -70,8 +71,10 @@ pub impl ToJson for Token with fn to_json(self) {
     LBRACE => "LBRACE"
     BAR => "BAR"
     UNDERSCORE => "UNDERSCORE"
+    BAR_RBRACKET => "BAR_RBRACKET"
     RBRACKET => "RBRACKET"
     PLUS => "PLUS"
+    LBRACKET_BAR => "LBRACKET_BAR"
     LBRACKET => "LBRACKET"
     SEMI(boolean) => ["SEMI", boolean]
     COLON => "COLON"
@@ -129,6 +132,7 @@ pub impl ToJson for Token with fn to_json(self) {
         { "id": id, "dot_id": dot_id.unwrap_or(""), "raw_payload": raw_payload },
       ]
     INTERP(interp) => ["INTERP", interp.to_string_repr()]
+    BYTES_INTERP(interp) => ["BYTES_INTERP", interp.to_string_repr()]
     MULTILINE_INTERP(interp) => ["MULTILINE_INTERP", interp.to_string_repr()]
     MULTILINE_STRING(str) => ["MULTILINE_STRING", str]
     STRING(str) => ["STRING", str]
@@ -141,6 +145,8 @@ pub impl ToJson for Token with fn to_json(self) {
     TRY_EXCLAMATION => "TRY_EXCLAMATION"
     LEXMATCH => "LEXMATCH"
     LEXMATCH_QUESTION => "LEXMATCH_QUESTION"
+    LEXSCAN => "LEXSCAN"
+    EXTEND => "EXTEND"
     REGEX_LITERAL(str) => ["REGEX_LITERAL", str]
     REGEX_INTERP(interp) => ["REGEX_INTERP", interp.to_string_repr()]
     DECLARE => "DECLARE"

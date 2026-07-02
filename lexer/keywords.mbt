@@ -49,9 +49,11 @@ let keyword_table : @hashmap.HashMap[String, Token] = [
     ("and", AND),
     ("letrec", LETREC),
     ("enumview", ENUMVIEW),
+    ("extend", EXTEND),
     ("noraise", NORAISE),
     ("defer", DEFER),
     ("lexmatch", LEXMATCH),
+    ("lexscan", LEXSCAN),
     ("where", WHERE),
     ("declare", DECLARE),
     ("nobreak", NOBREAK),
@@ -61,8 +63,8 @@ let keyword_table : @hashmap.HashMap[String, Token] = [
 
 ///|
 let reserved_keyword_table : @hashset.HashSet[String] = [
-    "module", "move", "ref", "static", "super", "unsafe", "use", "where", "await",
-    "dyn", "abstract", "do", "final", "macro", "override", "typeof", "virtual", "yield",
+    "module", "move", "ref", "static", "super", "unsafe", "use", "await", "dyn",
+    "abstract", "do", "final", "macro", "override", "typeof", "virtual", "yield",
     "local", "method", "alias", "assert",
   ]
   |> @hashset.from_array()

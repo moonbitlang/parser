@@ -11,6 +11,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | INT(_)
     | BYTE(_)
     | BYTES(_)
+    | BYTES_INTERP(_)
     | TRUE
     | FALSE
     | STRING(_)
@@ -23,6 +24,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | RBRACE
     | RPAREN
     | RBRACKET
+    | BAR_RBRACKET
     | UNDERSCORE
     | BREAK
     | CONTINUE
@@ -39,6 +41,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | PIPE
     | ELLIPSIS
     | NORAISE
+    | EXTEND
     | POST_LABEL(_) => true
     // ---------------------------
     // | EXCEPT
@@ -65,6 +68,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | AND
     | CONST
     | LBRACKET
+    | LBRACKET_BAR
     | LBRACE
     | INFIX1(_)
     | INFIX4(_)
@@ -125,6 +129,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | USING
     | LEXMATCH
     | LEXMATCH_QUESTION
+    | LEXSCAN
+    | LT_QUESTION
     | WHERE
     | PIPE_LEFT
     | NOBREAK => false
@@ -141,6 +147,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | INT(_)
     | BYTE(_)
     | BYTES(_)
+    | BYTES_INTERP(_)
     | TRUE
     | FALSE
     | STRING(_)
@@ -153,6 +160,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | LBRACE
     | LPAREN
     | LBRACKET
+    | LBRACKET_BAR
     | UNDERSCORE
     | BREAK
     | CONTINUE
@@ -204,7 +212,9 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | POST_LABEL(_)
     | ATTRIBUTE(_)
     | USING
-    | LEXMATCH => true
+    | LEXMATCH
+    | LEXSCAN
+    | EXTEND => true
     // the lexer should skip these two tokens before trying to insert semi
     COMMENT(_) | NEWLINE => true
     // [MINUS] is both a binary operator and a unary operator.
@@ -261,6 +271,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | COLONCOLON
     | RPAREN
     | RBRACKET
+    | BAR_RBRACKET
     | SEMI(_)
     | FAT_ARROW
     | THIN_ARROW
@@ -280,6 +291,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | AS
     | IS
     | LT_PLUS
+    | LT_QUESTION
     | DOTDOT
     | DERIVE
     | WITH

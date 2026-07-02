@@ -45,6 +45,7 @@ pub(all) enum Token {
   MULTILINE_STRING(String)
   MULTILINE_INTERP(Array[InterpElem])
   INTERP(Array[InterpElem])
+  BYTES_INTERP(Array[InterpElem])
   REGEX_LITERAL(String)
   REGEX_INTERP(Array[InterpElem])
   ATTRIBUTE((String, String?, String))
@@ -99,8 +100,10 @@ pub(all) enum Token {
   COLON
   SEMI(Bool)
   LBRACKET
+  LBRACKET_BAR
   PLUS
   RBRACKET
+  BAR_RBRACKET
   UNDERSCORE
   BAR
   LBRACE
@@ -114,6 +117,7 @@ pub(all) enum Token {
   PIPE
   PIPE_LEFT
   LT_PLUS
+  LT_QUESTION
   ELSE
   FN
   IF
@@ -159,6 +163,8 @@ pub(all) enum Token {
   TRY_EXCLAMATION
   LEXMATCH
   LEXMATCH_QUESTION
+  LEXSCAN
+  EXTEND
   PACKAGE
 } derive(@debug.Debug)
 pub fn Token::kind(Self) -> TokenKind
@@ -176,6 +182,7 @@ pub(all) enum TokenKind {
   TK_MULTILINE_STRING
   TK_MULTILINE_INTERP
   TK_INTERP
+  TK_BYTES_INTERP
   TK_REGEX_LITERAL
   TK_REGEX_INTERP
   TK_ATTRIBUTE
@@ -230,8 +237,10 @@ pub(all) enum TokenKind {
   TK_COLON
   TK_SEMI
   TK_LBRACKET
+  TK_LBRACKET_BAR
   TK_PLUS
   TK_RBRACKET
+  TK_BAR_RBRACKET
   TK_UNDERSCORE
   TK_BAR
   TK_LBRACE
@@ -245,6 +254,7 @@ pub(all) enum TokenKind {
   TK_PIPE
   TK_PIPE_LEFT
   TK_LT_PLUS
+  TK_LT_QUESTION
   TK_ELSE
   TK_FN
   TK_IF
@@ -290,6 +300,8 @@ pub(all) enum TokenKind {
   TK_TRY_EXCLAMATION
   TK_LEXMATCH
   TK_LEXMATCH_QUESTION
+  TK_LEXSCAN
+  TK_EXTEND
   TK_PACKAGE
 } derive(Compare, Eq, Hash)
 pub fn TokenKind::to_expect_string(Self) -> String

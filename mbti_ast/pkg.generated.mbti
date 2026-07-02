@@ -86,6 +86,7 @@ pub fn Sig::attrs(Self) -> @list.List[@attribute.Attribute]
 
 pub(all) struct TraitMethodSig {
   name : Name
+  type_params : @list.List[TypeParamWithConstraints]
   params : @list.List[@syntax.Parameter]
   is_async : @basic.Location?
   has_default : Bool

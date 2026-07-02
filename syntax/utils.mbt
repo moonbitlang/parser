@@ -27,6 +27,7 @@ pub fn make_tuple_expr(loc~ : Location, exprs : @list.List[Expr]) -> Expr {
 /// Create array expression with possible spread elements
 pub fn make_array_expr(
   loc~ : Location,
+  is_iter~ : Bool,
   elems : @list.List[SpreadableElem],
 ) -> Expr {
   // Try to convert to regular array if no spread elements
@@ -34,12 +35,13 @@ pub fn make_array_expr(
   for elem in elems {
     match elem {
       Regular(e) => acc = acc.add(e)
-      Spread(_) => return ArraySpread(elems~, loc~)
+      Spread(_) => return ArraySpread(elems~, is_iter~, loc~)
     }
   } nobreak {
     return Array(
       // If we have only regular elements, create a simple array
       exprs=acc.rev(),
+      is_iter~,
       loc~,
     )
   }
@@ -62,6 +64,15 @@ pub fn make_interps(c : @tokens.InterpLiteral) -> @list.List[InterpElem] {
 pub fn make_interp_expr(loc~ : Location, c : @tokens.InterpLiteral) -> Expr {
   let elems = make_interps(c)
   Interp(elems~, loc~)
+}
+
+///|
+pub fn make_bytes_interp_expr(
+  loc~ : Location,
+  c : @tokens.InterpLiteral,
+) -> Expr {
+  let elems = make_interps(c)
+  BytesInterp(elems~, loc~)
 }
 
 ///|
@@ -459,9 +470,9 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     Apply(func=_, args=_, loc~) => loc
     Infix(op=_, lhs=_, rhs=_, loc~) => loc
     Unary(op=_, expr=_, loc~) => loc
-    Array(exprs=_, loc~) => loc
-    ArraySpread(elems=_, loc~) => loc
-    ListComprehension(kind=_, guard_=_, body=_, loc~) => loc
+    Array(exprs=_, is_iter=_, loc~) => loc
+    ArraySpread(elems=_, is_iter=_, loc~) => loc
+    ListComprehension(kind=_, guard_=_, body=_, is_iter=_, loc~) => loc
     ArrayGet(array=_, index=_, loc~) => loc
     ArrayGetSlice(array=_, start_index=_, end_index=_, index_loc=_, loc~) => loc
     ArraySet(array=_, index=_, value=_, loc~) => loc
@@ -469,6 +480,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     Constant(c=_, loc~) => loc
     MultilineString(elems=_, loc~) => loc
     Interp(elems=_, loc~) => loc
+    BytesInterp(elems=_, loc~) => loc
     Constraint(expr=_, ty=_, loc~) => loc
     Constr(constr=_, loc~) => loc
     While(loop_cond=_, loop_body=_, while_else=_, label=_, loc~) => loc
@@ -494,6 +506,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
     Match(expr=_, cases=_, match_loc=_, loc~) => loc
     LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~) => loc
+    LexScan(expr=_, match_loc=_, cases=_, loc~) => loc
     LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc
     RevPipe(lhs=_, rhs=_, loc~) => loc
@@ -542,7 +555,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     TryOperator(loc~, ..) => loc
     Map(elems=_, loc~) => loc
     Group(expr=_, group=_, loc~) => loc
-    TemplateWriting(expr=_, template=_, loc~) => loc
+    TemplateWriting(expr=_, template=_, is_conditional=_, loc~) => loc
     StaticAssert(asserts=_, body=_) => no_location
   }
 }

@@ -17,6 +17,7 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
+%token<InterpLiteral> BYTES_INTERP
 %token<String> REGEX_LITERAL
 %token<InterpLiteral> REGEX_INTERP
 %token<(String, String?, String)> ATTRIBUTE
@@ -71,8 +72,10 @@
 %token COLON ":"
 %token<Bool> SEMI
 %token LBRACKET "["
+%token LBRACKET_BAR "[|"
 %token PLUS "+"
 %token RBRACKET "]"
+%token BAR_RBRACKET "|]"
 %token UNDERSCORE "_"
 %token BAR "|"
 %token LBRACE "{"
@@ -86,6 +89,7 @@
 %token PIPE "|>"
 %token PIPE_LEFT "<|"
 %token LT_PLUS "<+"
+%token LT_QUESTION "<?"
 %token ELSE "else"
 %token FN "fn"
 %token IF "if"
@@ -131,6 +135,8 @@
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
 %token LEXMATCH_QUESTION "lexmatch?"
+%token LEXSCAN "lexscan"
+%token EXTEND "extend"
 %token PACKAGE         "package"
 
 
@@ -159,23 +165,27 @@
 
 %%
 
+lident_string -> String:
+  | LIDENT { $1 }
+  | "extend" { "extend" }
+
 payloads -> List[Prop]: 
   | EOF { @list.empty() }
   | properties { $1 }
 
 property -> Prop:
-  | name=LIDENT "=" expr   { Labeled(name, $3) }
+  | name=lident_string "=" expr   { Labeled(name, $3) }
   | expr                   { Expr($1) }
 
 expr -> Expr:
-  | name=LIDENT                                  { Ident({qual: None, name}) }
-  | name=UIDENT                                  { Ident({qual: None, name}) }
-  | qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
-  | name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
-  | qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
-  | STRING                                       { String($1) }
-  | TRUE                                         { Bool(true) }
-  | FALSE                                        { Bool(false) }
+  | name=lident_string                                  { Ident({qual: None, name}) }
+  | name=UIDENT                                         { Ident({qual: None, name}) }
+  | qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+  | name=lident_string props=properties                 { Apply({qual: None, name}, props) }
+  | qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+  | STRING                                              { String($1) }
+  | TRUE                                                { Bool(true) }
+  | FALSE                                               { Bool(false) }
 
 properties -> List[Prop]:
   | "(" ")"                      { @list.empty() }

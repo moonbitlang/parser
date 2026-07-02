@@ -1,8 +1,12 @@
 ///|
-let first_qual_lident : Array[TokenKind] = [TK_LIDENT, TK_PACKAGE_NAME]
+let first_qual_lident : Array[TokenKind] = [
+  TK_LIDENT,
+  TK_EXTEND,
+  TK_PACKAGE_NAME,
+]
 
 ///|
-let first_luident : Array[TokenKind] = [TK_LIDENT, TK_UIDENT]
+let first_luident : Array[TokenKind] = [TK_LIDENT, TK_EXTEND, TK_UIDENT]
 
 ///|
 let first_constr : Array[TokenKind] = first_luident
@@ -42,14 +46,17 @@ let first_simple_expr : Array[TokenKind] = [
   TK_MULTILINE_STRING,
   TK_MULTILINE_INTERP,
   TK_BYTE,
+  TK_BYTES_INTERP,
   TK_INTERP,
   TK_PACKAGE_NAME,
   TK_ASYNC,
   TK_FN,
   TK_LIDENT,
+  TK_EXTEND,
   TK_UIDENT,
   TK_LPAREN,
   TK_LBRACKET,
+  TK_LBRACKET_BAR,
   TK_LBRACE,
   TK_UNDERSCORE,
   TK_EXCLAMATION,
@@ -76,6 +83,8 @@ let first_expr : Array[TokenKind] = [
   TK_UNDERSCORE,
   TK_LPAREN,
   TK_LIDENT,
+  TK_EXTEND,
+  TK_LEXSCAN,
   TK_EXCLAMATION,
 ]
 
@@ -116,6 +125,7 @@ let first_simple_pattern : Array[TokenKind] = [
   TK_STRING,
   TK_UNDERSCORE,
   TK_LIDENT,
+  TK_EXTEND,
   TK_PACKAGE_NAME,
   TK_UIDENT,
   TK_LPAREN,

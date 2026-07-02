@@ -410,6 +410,7 @@ pub(open) trait IterVisitor {
     trait_~ : TypeName,
     method_name~ : Binder,
     quantifiers~ : @list.List[TypeVarBinder],
+    method_quantifiers~ : @list.List[TypeVarBinder],
     params~ : Parameters,
     ret_ty~ : Type?,
     err_ty~ : ErrorType,
@@ -475,10 +476,16 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : Location) -> Unit = _
-  fn visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Unit = _
+  fn visit_Expr_Array(
+    Self,
+    exprs~ : @list.List[Expr],
+    is_iter~ : Bool,
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_ArraySpread(
     Self,
     elems~ : @list.List[SpreadableElem],
+    is_iter~ : Bool,
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_ArrayGet(Self, array~ : Expr, index~ : Expr, loc~ : Location) -> Unit = _
@@ -512,6 +519,11 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : Location) -> Unit = _
+  fn visit_Expr_BytesInterp(
+    Self,
+    elems~ : @list.List[InterpElem],
+    loc~ : Location,
+  ) -> Unit = _
   fn visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : Location) -> Unit = _
   fn visit_Expr_Constr(Self, constr~ : Constructor, loc~ : Location) -> Unit = _
   fn visit_Expr_While(
@@ -633,6 +645,18 @@ pub(open) trait IterVisitor {
     cases~ : @list.List[LexCase],
     loc~ : Location,
   ) -> Unit = _
+  fn visit_Expr_LexScan(
+    Self,
+    expr~ : Expr,
+    match_loc~ : Location,
+    cases~ : @list.List[LexScanCase],
+    loc~ : Location,
+  ) -> Unit = _
+  fn visit_LexScanCase(Self, LexScanCase) -> Unit = _
+  fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> Unit = _
+  fn visit_LexScanCasePattern_Pattern(Self, RegexPattern) -> Unit = _
+  fn visit_LexScanCasePattern_Binder(Self, Binder) -> Unit = _
+  fn visit_LexScanCasePattern_Wildcard(Self, loc~ : Location) -> Unit = _
   fn visit_Expr_LetMut(
     Self,
     binder~ : Binder,
@@ -815,6 +839,7 @@ impl IterVisitor with fn visit_Impl_TopImpl(
   trait_~,
   method_name~,
   quantifiers~,
+  method_quantifiers~,
   params~,
   ret_ty~,
   err_ty~,
@@ -830,6 +855,7 @@ impl IterVisitor with fn visit_Impl_TopImpl(
     trait_~,
     method_name~,
     quantifiers~,
+    method_quantifiers~,
     params~,
     ret_ty~,
     err_ty~,
@@ -948,13 +974,13 @@ impl IterVisitor with fn visit_Expr_Unary(env, op~, expr~, loc~) {
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_Array(env, exprs~, loc~) {
-  IterVisitorBase::visit_Expr_Array(env, exprs~, loc~)
+impl IterVisitor with fn visit_Expr_Array(env, exprs~, is_iter~, loc~) {
+  IterVisitorBase::visit_Expr_Array(env, exprs~, is_iter~, loc~)
 }
 
 ///|
-impl IterVisitor with fn visit_Expr_ArraySpread(env, elems~, loc~) {
-  IterVisitorBase::visit_Expr_ArraySpread(env, elems~, loc~)
+impl IterVisitor with fn visit_Expr_ArraySpread(env, elems~, is_iter~, loc~) {
+  IterVisitorBase::visit_Expr_ArraySpread(env, elems~, is_iter~, loc~)
 }
 
 ///|
@@ -1018,6 +1044,11 @@ impl IterVisitor with fn visit_Expr_MultilineString(env, elems~, loc~) {
 ///|
 impl IterVisitor with fn visit_Expr_Interp(env, elems~, loc~) {
   IterVisitorBase::visit_Expr_Interp(env, elems~, loc~)
+}
+
+///|
+impl IterVisitor with fn visit_Expr_BytesInterp(env, elems~, loc~) {
+  IterVisitorBase::visit_Expr_BytesInterp(env, elems~, loc~)
 }
 
 ///|
@@ -2062,6 +2093,42 @@ impl IterVisitor with fn visit_Expr_LexMatch(
 }
 
 ///|
+impl IterVisitor with fn visit_Expr_LexScan(
+  env,
+  expr~,
+  match_loc~,
+  cases~,
+  loc~,
+) {
+  IterVisitorBase::visit_Expr_LexScan(env, expr~, match_loc~, cases~, loc~)
+}
+
+///|
+impl IterVisitor with fn visit_LexScanCase(env, lex_scan_case) {
+  IterVisitorBase::visit_LexScanCase(env, lex_scan_case)
+}
+
+///|
+impl IterVisitor with fn visit_LexScanCasePattern(env, lex_scan_case_pattern) {
+  IterVisitorBase::visit_LexScanCasePattern(env, lex_scan_case_pattern)
+}
+
+///|
+impl IterVisitor with fn visit_LexScanCasePattern_Pattern(env, regex_pattern) {
+  IterVisitorBase::visit_LexScanCasePattern_Pattern(env, regex_pattern)
+}
+
+///|
+impl IterVisitor with fn visit_LexScanCasePattern_Binder(env, binder) {
+  IterVisitorBase::visit_LexScanCasePattern_Binder(env, binder)
+}
+
+///|
+impl IterVisitor with fn visit_LexScanCasePattern_Wildcard(env, loc~) {
+  IterVisitorBase::visit_LexScanCasePattern_Wildcard(env, loc~)
+}
+
+///|
 impl IterVisitor with fn visit_LexCase(env, lex_case) {
   IterVisitorBase::visit_LexCase(env, lex_case)
 }
@@ -2160,6 +2227,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       trait_~,
       method_name~,
       quantifiers~,
+      method_quantifiers~,
       params~,
       ret_ty~,
       err_ty~,
@@ -2174,6 +2242,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
         trait_~,
         method_name~,
         quantifiers~,
+        method_quantifiers~,
         params~,
         ret_ty~,
         err_ty~,
@@ -3643,6 +3712,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   trait_~,
   method_name~,
   quantifiers~,
+  method_quantifiers~,
   params~,
   ret_ty~,
   err_ty~,
@@ -3659,6 +3729,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl_
   env.0.visit_TypeName(trait_)
   env.0.visit_Binder(method_name)
   quantifiers.each(x => env.0.visit_TypeVarBinder(x))
+  method_quantifiers.each(x => env.0.visit_TypeVarBinder(x))
   params.each(param => env.0.visit_Parameter(param))
   ret_ty.each(x => env.0.visit_Type(x))
   env.0.visit_ErrorType(err_ty)
@@ -3783,8 +3854,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_Array(
   env,
   exprs~,
+  is_iter~,
   loc~,
 ) {
+  ignore(is_iter)
   ignore(loc)
   exprs.each(expr => env.0.visit_Expr(expr))
 }
@@ -3793,8 +3866,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_ArraySpread(
   env,
   elems~,
+  is_iter~,
   loc~,
 ) {
+  ignore(is_iter)
   ignore(loc)
   elems.each(fn(elem) {
     match elem {
@@ -3887,6 +3962,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_Interp(
+  env,
+  elems~,
+  loc~,
+) {
+  ignore(loc)
+  elems.each(elem => env.0.visit_InterpElem(elem))
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_BytesInterp(
   env,
   elems~,
   loc~,
@@ -4487,9 +4572,12 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
     Infix(op~, lhs~, rhs~, loc~) =>
       env.0.visit_Expr_Infix(op~, lhs~, rhs~, loc~)
     Unary(op~, expr~, loc~) => env.0.visit_Expr_Unary(op~, expr~, loc~)
-    Array(exprs~, loc~) => env.0.visit_Expr_Array(exprs~, loc~)
-    ArraySpread(elems~, loc~) => env.0.visit_Expr_ArraySpread(elems~, loc~)
-    ListComprehension(kind~, guard_~, body~, loc~) => {
+    Array(exprs~, is_iter~, loc~) =>
+      env.0.visit_Expr_Array(exprs~, is_iter~, loc~)
+    ArraySpread(elems~, is_iter~, loc~) =>
+      env.0.visit_Expr_ArraySpread(elems~, is_iter~, loc~)
+    ListComprehension(kind~, guard_~, body~, is_iter~, loc~) => {
+      ignore(is_iter)
       ignore(loc)
       iter_list_comprehension_kind(env, kind)
       guard_.each(x => env.0.visit_Expr(x))
@@ -4513,6 +4601,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
     MultilineString(elems~, loc~) =>
       env.0.visit_Expr_MultilineString(elems~, loc~)
     Interp(elems~, loc~) => env.0.visit_Expr_Interp(elems~, loc~)
+    BytesInterp(elems~, loc~) => env.0.visit_Expr_BytesInterp(elems~, loc~)
     Constraint(expr~, ty~, loc~) =>
       env.0.visit_Expr_Constraint(expr~, ty~, loc~)
     Constr(constr~, loc~) => env.0.visit_Expr_Constr(constr~, loc~)
@@ -4564,6 +4653,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       env.0.visit_Expr_Match(expr~, cases~, match_loc~, loc~)
     LexMatch(strategy~, expr~, match_loc~, cases~, loc~) =>
       env.0.visit_Expr_LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
+    LexScan(expr~, match_loc~, cases~, loc~) =>
+      env.0.visit_Expr_LexScan(expr~, match_loc~, cases~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       env.0.visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
     Pipe(lhs~, rhs~, loc~) => env.0.visit_Expr_Pipe(lhs~, rhs~, loc~)
@@ -4668,7 +4759,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       env.0.visit_Expr_TryOperator(body~, kind~, try_loc~, loc~)
     Map(elems~, loc~) => env.0.visit_Expr_Map(elems~, loc~)
     Group(expr~, group~, loc~) => env.0.visit_Expr_Group(expr~, group~, loc~)
-    TemplateWriting(expr~, template~, loc~) => {
+    TemplateWriting(expr~, template~, is_conditional~, loc~) => {
+      ignore(is_conditional)
       ignore(loc)
       env.0.visit_Expr(expr)
       env.0.visit_Expr(template)
@@ -4708,6 +4800,68 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   strategy.each(strategy => env.0.visit_Label(strategy))
   env.0.visit_Expr(expr)
   cases.each(case => env.0.visit_LexCase(case))
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_LexScan(
+  env,
+  expr~,
+  match_loc~,
+  cases~,
+  loc~,
+) {
+  ignore(match_loc)
+  ignore(loc)
+  env.0.visit_Expr(expr)
+  cases.each(case => env.0.visit_LexScanCase(case))
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexScanCase(
+  env,
+  lex_scan_case,
+) {
+  env.0.visit_LexScanCasePattern(lex_scan_case.pat)
+  lex_scan_case.guard_.each(guard_ => env.0.visit_Expr(guard_))
+  env.0.visit_Expr(lex_scan_case.body)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexScanCasePattern(
+  env,
+  lex_scan_case_pattern,
+) {
+  match lex_scan_case_pattern {
+    Pattern(regex_pattern) =>
+      env.0.visit_LexScanCasePattern_Pattern(regex_pattern)
+    Binder(binder) => env.0.visit_LexScanCasePattern_Binder(binder)
+    Wildcard(loc~) => env.0.visit_LexScanCasePattern_Wildcard(loc~)
+  }
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexScanCasePattern_Pattern(
+  env,
+  regex_pattern,
+) {
+  iter_regex_pattern(env, regex_pattern)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexScanCasePattern_Binder(
+  env,
+  binder,
+) {
+  env.0.visit_Binder(binder)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_LexScanCasePattern_Wildcard(
+  env,
+  loc~,
+) {
+  ignore(env)
+  ignore(loc)
 }
 
 ///|

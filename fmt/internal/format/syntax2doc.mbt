@@ -209,6 +209,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       trait_~,
       method_name~,
       quantifiers~,
+      method_quantifiers~,
       params~,
       ret_ty~,
       err_ty~,
@@ -235,6 +236,19 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         Some(ty) => space + text("for") + space + fmt.ty(ty)
       }
       let with_ = space + text("with")
+      let method_quantifiers = if method_quantifiers.is_empty() {
+        empty
+      } else {
+        space +
+        text("fn") +
+        fmt.type_var_binders(
+          method_quantifiers,
+          lbracket=None,
+          commas=@comment.NodeArray::empty(),
+          tvar_tables=@comment.NodeTableArray::empty(),
+          rbracket=None,
+        )
+      }
       let method_name = space + text(method_name.name)
       let params = group(
         fmt.parameters(
@@ -276,6 +290,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       trait_ +
       for_part +
       with_ +
+      method_quantifiers +
       method_name +
       params +
       result +
@@ -683,7 +698,7 @@ fn Fmt::docstring(
       Empty => text("///|") + hardline
       More(first_line, tail~) =>
         if first_line.trim(char_set=" \t\n") == "" {
-          let first_line = text("///|") + text(first_line) + hardline
+          let first_line = text("///|") + hardline
           let remain_lines = concat_map(tail, x => {
             text("///") + text(x) + hardline
           })
@@ -1632,8 +1647,9 @@ fn Fmt::lex_pattern(fmt : Self, pat : @syntax.LexPattern) -> Doc {
       fn elem2doc(elem : @syntax.InterpElem) -> Doc {
         match elem {
           Literal(repr~, loc=_) => text(repr)
-          Expr(expr~, loc=_) => fmt.compose(expr, Expr)
-          Source({ source, loc: _ }) => text(source)
+          Expr(expr~, loc=_) =>
+            text("\\{") + fmt.compose(expr, Expr) + text("}")
+          Source({ source, loc: _ }) => text("\\{") + text(source) + text("}")
         }
       }
 
@@ -1688,6 +1704,30 @@ fn Fmt::lex_top_patterns(fmt : Self, pats : List[@syntax.LexTopPattern]) -> Doc 
 fn Fmt::lex_case(fmt : Self, case_ : @syntax.LexCase) -> Doc {
   let { pat, pat_loc: _, guard_, body } = case_
   let pattern = fmt.lex_top_patterns(pat)
+  let guard_ = match guard_ {
+    None => empty
+    Some(expr) => space + text("if") + space + fmt.compose(expr, Infix(Other))
+  }
+  let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt)
+  group(group(pattern) + guard_ + body)
+}
+
+///|
+fn Fmt::lex_scan_case_pattern(
+  fmt : Self,
+  pat : @syntax.LexScanCasePattern,
+) -> Doc {
+  match pat {
+    Pattern(p) => fmt.regex_pattern(p)
+    Binder(b) => fmt.binder(b)
+    Wildcard(loc=_) => text("_")
+  }
+}
+
+///|
+fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
+  let { pat, guard_, body } = case_
+  let pattern = fmt.lex_scan_case_pattern(pat)
   let guard_ = match guard_ {
     None => empty
     Some(expr) => space + text("if") + space + fmt.compose(expr, Infix(Other))
@@ -1974,13 +2014,22 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let layout = group(op + expr)
       Normal(layout)
     }
-    Array(exprs~, loc~) => {
+    Array(exprs~, is_iter~, loc~) => {
       let before_comment = fmt.before_comment(Some(Node(loc)))
-      let doc = group(brackets(series(exprs, comma, e => fmt.compose(e, Expr))))
+      let elems = series(exprs, comma, e => fmt.compose(e, Expr))
+      let doc = if is_iter {
+        if exprs.is_empty() {
+          text("[||]")
+        } else {
+          group(text("[|") + space + elems + space + text("|]"))
+        }
+      } else {
+        group(brackets(elems))
+      }
       let after_comment = fmt.after_comment(Some(Node(loc)))
       BlockLike(before_comment + doc + after_comment)
     }
-    ArraySpread(elems~, loc=_) => {
+    ArraySpread(elems~, is_iter~, loc=_) => {
       fn spreadable2doc(elem : @syntax.SpreadableElem) -> Doc {
         match elem {
           Regular(expr) => fmt.compose(expr, Expr)
@@ -1988,10 +2037,19 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         }
       }
 
-      let doc = group(brackets(series(elems, comma, spreadable2doc)))
+      let elems_doc = series(elems, comma, spreadable2doc)
+      let doc = if is_iter {
+        if elems.is_empty() {
+          text("[||]")
+        } else {
+          group(text("[|") + space + elems_doc + space + text("|]"))
+        }
+      } else {
+        group(brackets(elems_doc))
+      }
       Normal(doc)
     }
-    ListComprehension(kind~, guard_~, body~, loc=_) => {
+    ListComprehension(kind~, guard_~, body~, is_iter~, loc=_) => {
       let kind = fmt.list_comprehension_kind(kind)
       let guard_doc = match guard_ {
         None => empty
@@ -1999,7 +2057,13 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           space + text("if") + space + fmt.compose(expr, Infix(Other))
       }
       let body = space + text("=>") + space + fmt.compose(body, Expr)
-      Normal(group(brackets(kind + guard_doc + body)))
+      let inner = kind + guard_doc + body
+      let doc = if is_iter {
+        text("[|") + space + inner + space + text("|]")
+      } else {
+        brackets(inner)
+      }
+      Normal(group(doc))
     }
     ArrayGet(array~, index~, loc=_) => {
       let array = fmt.compose(array, Simple)
@@ -2046,13 +2110,28 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       fn elem2doc(elem : @syntax.InterpElem) -> Doc {
         match elem {
           Literal(repr~, loc=_) => text(repr)
-          Expr(expr~, loc=_) => fmt.compose(expr, Expr)
-          Source({ source, loc: _ }) => text(source)
+          Expr(expr~, loc=_) =>
+            text("\\{") + fmt.compose(expr, Expr) + text("}")
+          Source({ source, loc: _ }) => text("\\{") + text(source) + text("}")
         }
       }
 
       let elems = concat_map(elems, elem2doc)
       let doc = double_quoted(elems)
+      Normal(doc)
+    }
+    BytesInterp(elems~, loc=_) => {
+      fn elem2doc(elem : @syntax.InterpElem) -> Doc {
+        match elem {
+          Literal(repr~, loc=_) => text(repr)
+          Expr(expr~, loc=_) =>
+            text("\\{") + fmt.compose(expr, Expr) + text("}")
+          Source({ source, loc: _ }) => text("\\{") + text(source) + text("}")
+        }
+      }
+
+      let elems = concat_map(elems, elem2doc)
+      let doc = text("b") + double_quoted(elems)
       Normal(doc)
     }
     Constraint(expr~, ty~, loc=_) => {
@@ -2075,7 +2154,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let body = space + fmt.expr_block(loop_body)
       let else_ = match while_else {
         None => empty
-        Some(e) => space + fmt.expr_block(e)
+        Some(e) => space + text("nobreak") + space + fmt.expr_block(e)
       }
       let doc = while_ + label + cond + body + else_
       Normal(doc)
@@ -2462,7 +2541,6 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         Empty => None
         More(_) =>
           Some(
-            space +
             series(
               continue_block,
               comma,
@@ -2474,7 +2552,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let body = space + fmt.expr_block(body)
       let for_else = match for_else {
         None => empty
-        Some(e) => space + text("else") + space + fmt.expr_block(e)
+        Some(e) => space + text("nobreak") + space + fmt.expr_block(e)
       }
       let semi_or_newline = switch(semi + space, softline)
       let header = match (condition, continue_block) {
@@ -2503,8 +2581,8 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     ForEach(
       binders~,
       expr~,
-      init=_,
-      continue_block=_,
+      init~,
+      continue_block~,
       body~,
       else_block~,
       where_clause~,
@@ -2519,18 +2597,40 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           Some(x) => fmt.binder(x)
         }
       }
+      fn binder_expr2doc(pair : (@syntax.Binder, @syntax.Expr)) -> Doc {
+        let (binder, expr) = pair
+        fmt.binder(binder) +
+        space +
+        equal +
+        space +
+        fmt.compose(expr, Infix(Other))
+      }
 
       let binders = space +
         group(series(binders, comma, foreach_binder2doc, trailing=AlwaysHidden))
       let in_ = space + text("in")
       let expr = space + fmt.compose(expr, Infix(Other))
+      let semi_or_newline = switch(semi + space, softline)
+      let init = match init {
+        Empty => empty
+        More(_) =>
+          semi_or_newline +
+          series(init, comma, binder_expr2doc, trailing=AlwaysHidden)
+      }
+      let continue_block = match continue_block {
+        Empty => empty
+        More(_) =>
+          semi_or_newline +
+          series(continue_block, comma, binder_expr2doc, trailing=AlwaysHidden)
+      }
       let body = space + fmt.expr_block(body)
       let else_block = match else_block {
         None => empty
-        Some(e) => fmt.expr_block(e)
+        Some(e) => space + text("nobreak") + space + fmt.expr_block(e)
       }
       let where_ = fmt.where_clause(where_clause)
-      let doc = label + for_ + binders + in_ + expr + body + else_block + where_
+      let header = group(for_ + binders + in_ + expr + init + continue_block)
+      let doc = label + header + body + else_block + where_
       Normal(doc)
     }
     Try(
@@ -2571,10 +2671,11 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let doc = group(braces(series(elems, comma, map_expr_elem2doc)))
       Normal(doc)
     }
-    TemplateWriting(expr~, template~, loc=_) => {
+    TemplateWriting(expr~, template~, is_conditional~, loc=_) => {
       let expr = fmt.compose(expr, Infix(Other))
       let template = fmt.compose(template, Infix(Other))
-      Normal(group(expr + space + text("<+") + space + template))
+      let op = if is_conditional { "<?" } else { "<+" }
+      Normal(group(expr + space + text(op) + space + template))
     }
     IsLexMatch(expr~, strategy~, pat~, pat_loc=_, loc=_) => {
       let expr = fmt.compose(expr, Expr)
@@ -2596,6 +2697,18 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           ),
         )
       Collapsible(lexmatch_ + cond + strategy, cases)
+    }
+    LexScan(expr~, match_loc=_, cases~, loc=_) => {
+      let lexscan_ = text("lexscan")
+      let cond = space + fmt.compose(expr, Infix(Other))
+      let cases = space +
+        group(
+          braces(
+            series1(cases.map(x => fmt.lex_scan_case(x)), empty),
+            force_newline=true,
+          ),
+        )
+      Collapsible(lexscan_ + cond, cases)
     }
     Group(expr~, ..) => abort(expr.to_json().stringify(indent=2))
     StaticAssert(_) => panic()

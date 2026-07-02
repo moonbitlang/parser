@@ -7,3 +7,8 @@ import {
   "moonbitlang/core/sorted_map",
   "moonbitlang/core/debug",
 }
+
+import {
+  "moonbitlang/lexer",
+  "moonbitlang/parser/handrolled_parser",
+} for "wbtest"

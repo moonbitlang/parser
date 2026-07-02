@@ -9,6 +9,8 @@ import {
   "moonbitlang/parser/attribute",
   "moonbitlang/core/cmp",
   "moonbitlang/core/list",
+  "moonbitlang/moon_config",
+  "moonbitlang/core/json",
 }
 
 import {

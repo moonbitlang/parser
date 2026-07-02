@@ -300,6 +300,10 @@ fn State::expect_lident(state : Self, context~ : String) -> String {
           state.skip()
           name
         }
+        EXTEND => {
+          state.skip()
+          "extend"
+        }
         UIDENT(name) => {
           let loc = state.peek_location()
           state.skip()
@@ -311,7 +315,7 @@ fn State::expect_lident(state : Self, context~ : String) -> String {
         }
         other => {
           let loc = state.peek_location()
-          state.report_unexpected(other, [TK_LIDENT], loc)
+          state.report_unexpected(other, [TK_LIDENT, TK_EXTEND], loc)
           state.panic() |> ignore
           ""
         }
@@ -330,9 +334,13 @@ fn State::expect_luident(state : Self, context~ : String) -> String {
           state.skip()
           name
         }
+        EXTEND => {
+          state.skip()
+          "extend"
+        }
         other => {
           let loc = state.peek_location()
-          state.report_unexpected(other, [TK_LIDENT, TK_UIDENT], loc)
+          state.report_unexpected(other, [TK_LIDENT, TK_EXTEND, TK_UIDENT], loc)
           state.panic() |> ignore
           ""
         }

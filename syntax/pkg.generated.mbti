@@ -30,13 +30,15 @@ pub fn loc_of_expression(Expr) -> @basic.Location
 
 pub fn make_alias_pattern(loc~ : @basic.Location, Pattern, Binder) -> Pattern
 
-pub fn make_array_expr(loc~ : @basic.Location, @list.List[SpreadableElem]) -> Expr
+pub fn make_array_expr(loc~ : @basic.Location, is_iter~ : Bool, @list.List[SpreadableElem]) -> Expr
 
 pub fn make_arrow_fn(@list.List[(ArrowFnParam, Type?)], Expr, params_loc~ : @basic.Location, loc~ : @basic.Location) -> Func
 
 pub fn make_assign_opt(loc~ : @basic.Location, Expr, Expr) -> Expr?
 
 pub fn make_augmented_assign_opt(loc~ : @basic.Location, Var, Expr, Expr) -> Expr?
+
+pub fn make_bytes_interp_expr(loc~ : @basic.Location, Array[@tokens.InterpElem]) -> Expr
 
 pub fn make_constant_expr(loc~ : @basic.Location, Constant) -> Expr
 
@@ -241,9 +243,9 @@ pub(all) enum Expr {
   Apply(func~ : Expr, args~ : @list.List[Argument], loc~ : @basic.Location)
   Infix(op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   Unary(op~ : Var, expr~ : Expr, loc~ : @basic.Location)
-  Array(exprs~ : @list.List[Expr], loc~ : @basic.Location)
-  ArraySpread(elems~ : @list.List[SpreadableElem], loc~ : @basic.Location)
-  ListComprehension(kind~ : ListComprehensionKind, guard_~ : Expr?, body~ : Expr, loc~ : @basic.Location)
+  Array(exprs~ : @list.List[Expr], is_iter~ : Bool, loc~ : @basic.Location)
+  ArraySpread(elems~ : @list.List[SpreadableElem], is_iter~ : Bool, loc~ : @basic.Location)
+  ListComprehension(kind~ : ListComprehensionKind, guard_~ : Expr?, body~ : Expr, is_iter~ : Bool, loc~ : @basic.Location)
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : @basic.Location)
   ArrayGetSlice(array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @basic.Location, loc~ : @basic.Location)
   ArraySet(array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location)
@@ -251,6 +253,7 @@ pub(all) enum Expr {
   Constant(c~ : Constant, loc~ : @basic.Location)
   MultilineString(elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location)
   Interp(elems~ : @list.List[InterpElem], loc~ : @basic.Location)
+  BytesInterp(elems~ : @list.List[InterpElem], loc~ : @basic.Location)
   Constraint(expr~ : Expr, ty~ : Type, loc~ : @basic.Location)
   Constr(constr~ : Constructor, loc~ : @basic.Location)
   While(loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location)
@@ -276,6 +279,7 @@ pub(all) enum Expr {
   Mutate(record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
   Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location)
   LexMatch(strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location)
+  LexScan(expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location)
   LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   RevPipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
@@ -296,7 +300,7 @@ pub(all) enum Expr {
   TryOperator(body~ : Expr, kind~ : TryOperatorKind, try_loc~ : @basic.Location, loc~ : @basic.Location)
   Map(elems~ : @list.List[MapExprElem], loc~ : @basic.Location)
   Group(expr~ : Expr, group~ : Group, loc~ : @basic.Location)
-  TemplateWriting(expr~ : Expr, template~ : Expr, loc~ : @basic.Location)
+  TemplateWriting(expr~ : Expr, template~ : Expr, is_conditional~ : Bool, loc~ : @basic.Location)
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
 } derive(@debug.Debug)
 pub fn Expr::json_repr(Self) -> Json
@@ -386,7 +390,7 @@ pub(all) enum Impl {
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location)
   TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, is_declare~ : Bool)
   TopTrait(TraitDecl)
-  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
+  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool)
   TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
@@ -422,6 +426,18 @@ pub(all) enum LexPattern {
   ConstantRef(lid~ : LongIdent, loc~ : @basic.Location)
   Alias(pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location)
   Sequence(pats~ : @list.List[LexPattern], loc~ : @basic.Location)
+} derive(@debug.Debug)
+
+pub(all) struct LexScanCase {
+  pat : LexScanCasePattern
+  guard_ : Expr?
+  body : Expr
+} derive(@debug.Debug)
+
+pub(all) enum LexScanCasePattern {
+  Pattern(RegexPattern)
+  Binder(Binder)
+  Wildcard(loc~ : @basic.Location)
 } derive(@debug.Debug)
 
 pub(all) enum LexTopPattern {
@@ -786,7 +802,7 @@ pub(open) trait IterVisitor {
   fn visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location) -> Unit = _
   fn visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Unit = _
   fn visit_Impl_TopTrait(Self, TraitDecl) -> Unit = _
-  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
+  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   fn visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   fn visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Unit = _
   fn visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit = _
@@ -795,8 +811,8 @@ pub(open) trait IterVisitor {
   fn visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : @basic.Location) -> Unit = _
-  fn visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Unit = _
-  fn visit_Expr_ArraySpread(Self, elems~ : @list.List[SpreadableElem], loc~ : @basic.Location) -> Unit = _
+  fn visit_Expr_Array(Self, exprs~ : @list.List[Expr], is_iter~ : Bool, loc~ : @basic.Location) -> Unit = _
+  fn visit_Expr_ArraySpread(Self, elems~ : @list.List[SpreadableElem], is_iter~ : Bool, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_ArrayGet(Self, array~ : Expr, index~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_ArrayGetSlice(Self, array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_ArraySet(Self, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location) -> Unit = _
@@ -804,6 +820,7 @@ pub(open) trait IterVisitor {
   fn visit_Expr_Constant(Self, c~ : Constant, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_MultilineString(Self, elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Unit = _
+  fn visit_Expr_BytesInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Constr(Self, constr~ : Constructor, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_While(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Unit = _
@@ -828,6 +845,12 @@ pub(open) trait IterVisitor {
   fn visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Unit = _
+  fn visit_Expr_LexScan(Self, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Unit = _
+  fn visit_LexScanCase(Self, LexScanCase) -> Unit = _
+  fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> Unit = _
+  fn visit_LexScanCasePattern_Pattern(Self, RegexPattern) -> Unit = _
+  fn visit_LexScanCasePattern_Binder(Self, Binder) -> Unit = _
+  fn visit_LexScanCasePattern_Wildcard(Self, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
@@ -992,7 +1015,7 @@ pub(open) trait MapVisitor {
   fn visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location) -> Impl = _
   fn visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Impl = _
   fn visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
-  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
+  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   fn visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   fn visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Impl = _
   fn visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl = _
@@ -1000,8 +1023,8 @@ pub(open) trait MapVisitor {
   fn visit_Expr_Apply(Self, func~ : Expr, args~ : @list.List[Argument], loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Infix(Self, op~ : Var, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : @basic.Location) -> Expr = _
-  fn visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : @basic.Location) -> Expr = _
-  fn visit_Expr_ArraySpread(Self, elems~ : @list.List[SpreadableElem], loc~ : @basic.Location) -> Expr = _
+  fn visit_Expr_Array(Self, exprs~ : @list.List[Expr], is_iter~ : Bool, loc~ : @basic.Location) -> Expr = _
+  fn visit_Expr_ArraySpread(Self, elems~ : @list.List[SpreadableElem], is_iter~ : Bool, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_ArrayGet(Self, array~ : Expr, index~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_ArrayGetSlice(Self, array~ : Expr, start_index~ : Expr?, end_index~ : Expr?, index_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_ArraySet(Self, array~ : Expr, index~ : Expr, value~ : Expr, loc~ : @basic.Location) -> Expr = _
@@ -1009,6 +1032,7 @@ pub(open) trait MapVisitor {
   fn visit_Expr_Constant(Self, c~ : Constant, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_MultilineString(Self, elems~ : @list.List[MultilineStringElem], loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Expr = _
+  fn visit_Expr_BytesInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Constr(Self, constr~ : Constructor, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_While(Self, loop_cond~ : Expr, loop_body~ : Expr, while_else~ : Expr?, label~ : Label?, loc~ : @basic.Location) -> Expr = _
@@ -1033,6 +1057,12 @@ pub(open) trait MapVisitor {
   fn visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Expr = _
+  fn visit_Expr_LexScan(Self, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Expr = _
+  fn visit_LexScanCase(Self, LexScanCase) -> LexScanCase = _
+  fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> LexScanCasePattern = _
+  fn visit_LexScanCasePattern_Pattern(Self, RegexPattern) -> LexScanCasePattern = _
+  fn visit_LexScanCasePattern_Binder(Self, Binder) -> LexScanCasePattern = _
+  fn visit_LexScanCasePattern_Wildcard(Self, loc~ : @basic.Location) -> LexScanCasePattern = _
   fn visit_Expr_LetMut(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Pipe(Self, lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Assign(Self, var_~ : Var, expr~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _
