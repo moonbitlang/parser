@@ -45,7 +45,7 @@ test {
       #|///|
       #|/// Greet a person
       #|pub fn hello(name : String) -> Unit {
-      #|  let str = "hello, name!"
+      #|  let str = "hello, \{name}!"
       #|  println(str)
       #|}
       #|
