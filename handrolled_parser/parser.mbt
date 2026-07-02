@@ -69,6 +69,10 @@ fn State::parse_qual_lident(
       self.skip()
       Ident(name=id)
     }
+    EXTEND => {
+      self.skip()
+      Ident(name="extend")
+    }
     UIDENT(_) => {
       // error recovery
       self.skip()
@@ -196,6 +200,10 @@ fn State::parse_luident(self : Self) -> String {
       self.skip()
       id
     }
+    EXTEND => {
+      self.skip()
+      "extend"
+    }
     other => {
       let loc = self.peek_location()
       self.report_unexpected(other, first_luident, loc)
@@ -259,9 +267,9 @@ fn State::parse_fun_binder(self : Self) -> (@syntax.TypeName?, @syntax.Binder) {
 
   match self.peek_token() {
     PACKAGE_NAME(_) | UIDENT(_) | AMPER => parse_qual_with_coloncolon()
-    LIDENT(_) if self.peek_token(nth=1) is COLONCOLON =>
+    LIDENT(_) | EXTEND if self.peek_token(nth=1) is COLONCOLON =>
       parse_qual_with_coloncolon()
-    LIDENT(_) => {
+    LIDENT(_) | EXTEND => {
       let id = self.parse_binder(context="name of `fn`")
       (None, id)
     }
@@ -616,14 +624,16 @@ fn State::parse_visibility(self : Self) -> @syntax.Visibility {
               state.skip()
               "readonly"
             }
-            LIDENT(attr) => {
-              state.skip()
-              attr
-            }
+            LIDENT(_) | EXTEND =>
+              state.expect_lident(context="visibility attribute")
             tok => {
               let loc = state.peek_location()
               state.panic() |> ignore
-              state.report_unexpected(tok, [TK_READONLY, TK_LIDENT], loc)
+              state.report_unexpected(
+                tok,
+                [TK_READONLY, TK_LIDENT, TK_EXTEND],
+                loc,
+              )
               ""
             }
           }
@@ -1048,8 +1058,11 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           if self.peek_token() is WITH {
             self.skip()
             self.push_sync(TK_LBRACE)
-            if self.peek_token() is FN {
+            let method_quantifiers = if self.peek_token() is FN {
               self.skip()
+              self.parse_opt_typ_params()
+            } else {
+              @list.empty()
             }
             let method_name = self.parse_binder(context="name of method")
             let params = self.surround_series(
@@ -1074,6 +1087,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               trait_~,
               method_name~,
               quantifiers~,
+              method_quantifiers~,
               params~,
               ret_ty~,
               err_ty~,
@@ -1100,8 +1114,11 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           self.pop_sync(TK_WITH)
           self.skip()
           self.push_sync(TK_LBRACE)
-          if self.peek_token() is FN {
+          let method_quantifiers = if self.peek_token() is FN {
             self.skip()
+            self.parse_opt_typ_params()
+          } else {
+            @list.empty()
           }
           let method_name = self.parse_binder(context="name of method")
           let params = self.surround_series(
@@ -1126,6 +1143,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             trait_~,
             method_name~,
             quantifiers~,
+            method_quantifiers~,
             params~,
             ret_ty~,
             err_ty~,
@@ -1147,6 +1165,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             trait_~,
             method_name={ name: "", loc: @syntax.no_location },
             quantifiers=@list.new(),
+            method_quantifiers=@list.empty(),
             params=@list.new(),
             ret_ty=None,
             err_ty=NoErrorType,
@@ -1257,7 +1276,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           delim=TK_COMMA,
           fn(state) {
             match state.peek_token() {
-              LIDENT(_) => {
+              LIDENT(_) | EXTEND => {
                 let target = parse_alias_target(state, true, "value name")
                 (target, @syntax.UsingKind::Value)
               }
@@ -1279,7 +1298,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
                 let other_loc = state.peek_location()
                 state.report_unexpected(
                   other,
-                  [TK_LIDENT, TK_UIDENT, TK_TYPE, TK_TRAIT],
+                  [TK_LIDENT, TK_EXTEND, TK_UIDENT, TK_TYPE, TK_TRAIT],
                   other_loc,
                 )
                 let loc = state.panic()
@@ -1433,7 +1452,7 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
           let typ = state.parse_type()
           Labelled(binder~, ty=Some(typ))
         }
-        LIDENT(_) => {
+        LIDENT(_) | EXTEND => {
           let binder_loc = state.peek_location()
           let binder_name = state.expect_lident(context="parameter name")
           let binder : @syntax.Binder = { name: binder_name, loc: binder_loc }
@@ -1698,14 +1717,22 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
     // bitstring constr pattern `i32(args)`
     // To disambiguate with pattern variable, the args list must be present.
     LIDENT(name) if self.peek_token(nth=1) is LPAREN => {
-      self.skip() // skip lident
       let name_loc = self.peek_location()
+      self.skip() // skip lident
       let binder : @syntax.Binder = { name, loc: name_loc }
       let args = parse_constr_args_no_open()
       let loc = self.loc_start_with(spos)
       @syntax.Pattern::SpecialConstr(binder~, args~, loc~)
     }
-    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) => {
+    EXTEND if self.peek_token(nth=1) is LPAREN => {
+      let name_loc = self.peek_location()
+      self.skip() // skip extend
+      let binder : @syntax.Binder = { name: "extend", loc: name_loc }
+      let args = parse_constr_args_no_open()
+      let loc = self.loc_start_with(spos)
+      @syntax.Pattern::SpecialConstr(binder~, args~, loc~)
+    }
+    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | EXTEND => {
       let constr = self.parse_constr()
       let maybe_args = self.optional([TK_LPAREN], _ => parse_constr_args())
       let mut is_open = false
@@ -1822,11 +1849,12 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       self.expect_token(TK_UNDERSCORE)
       Any(loc~)
     }
-    LIDENT(_) if !(self.peek_token(nth=1) is (COLONCOLON | LPAREN)) => {
+    LIDENT(_) | EXTEND if !(self.peek_token(nth=1) is (COLONCOLON | LPAREN)) => {
       let binder = self.parse_binder(context="")
       Var(binder)
     }
-    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) => self.parse_constr_pattern()
+    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | EXTEND =>
+      self.parse_constr_pattern()
     LPAREN => {
       let spos = self.peek_spos()
       let result = self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(state) {
@@ -1928,7 +1956,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
                     })
                   NoDotDot =>
                     dotdot = match self.peek_token() {
-                      LIDENT(_) => {
+                      LIDENT(_) | EXTEND => {
                         let binder = self.parse_binder(context="")
                         WithBinder(binder)
                       }
@@ -2021,7 +2049,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             }
             BYTES(x) => parse_map_elem_pat(Bytes(x))
             STRING(x) => parse_map_elem_pat(String(x))
-            LIDENT(_) => {
+            LIDENT(_) | EXTEND => {
               if kind is Unknown {
                 kind = Record
               }
@@ -2029,9 +2057,9 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             }
             other => {
               let expected : Array[TokenKind] = match kind {
-                Unknown => [TK_LIDENT, ..first_map_pattern_key]
+                Unknown => [TK_LIDENT, TK_EXTEND, ..first_map_pattern_key]
                 Map => first_map_pattern_key
-                Record => [TK_LIDENT]
+                Record => [TK_LIDENT, TK_EXTEND]
               }
               self.report_unexpected(other, expected, self.peek_location())
               self.panic() |> ignore
@@ -2195,6 +2223,13 @@ fn State::parse_constr_pat_argument(self : Self) -> @syntax.ConstrPatArg {
     LIDENT(name) | UIDENT(name) if self.peek_token(nth=1) is EQUAL => {
       let label : @syntax.Label = { name, loc: self.peek_location() }
       self.skip() // luident
+      self.expect_token(TK_EQUAL)
+      let pat = self.parse_pattern()
+      { pat, kind: Labelled(label) }
+    }
+    EXTEND if self.peek_token(nth=1) is EQUAL => {
+      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
+      self.skip() // extend
       self.expect_token(TK_EQUAL)
       let pat = self.parse_pattern()
       { pat, kind: Labelled(label) }
@@ -2389,9 +2424,14 @@ fn State::parse_foreach_binder(self : State) -> @syntax.Binder? {
       self.skip()
       Some({ name, loc })
     }
+    EXTEND => {
+      let loc = self.peek_location()
+      self.skip()
+      Some({ name: "extend", loc })
+    }
     other => {
       let loc = self.peek_location()
-      self.report_unexpected(other, [TK_LIDENT, TK_UNDERSCORE], loc)
+      self.report_unexpected(other, [TK_LIDENT, TK_EXTEND, TK_UNDERSCORE], loc)
       self.panic() |> ignore
       None
     }
@@ -2462,7 +2502,7 @@ fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
       // but it is very likely a `for .. in` loop,
       // so we treat it as `for .. in` for better error message & recovery.
       self.parse_foreach_loop(spos~, label~)
-    LIDENT(_) =>
+    LIDENT(_) | EXTEND =>
       match self.peek_token(nth=1) {
         EQUAL => self.parse_for_loop(spos~, label~)
         COMMA | IN => self.parse_foreach_loop(spos~, label~)
@@ -2471,7 +2511,7 @@ fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
           handle_error([TK_EQUAL, TK_COMMA, TK_IN])
         }
       }
-    _ => handle_error([TK_LIDENT, TK_SEMI, TK_LBRACE])
+    _ => handle_error([TK_LIDENT, TK_EXTEND, TK_SEMI, TK_LBRACE])
   }
 }
 
@@ -2889,6 +2929,74 @@ fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
 }
 
 ///|
+fn State::parse_lexscan_expr(self : State) -> @syntax.Expr {
+  let spos = self.peek_spos()
+  self.expect_token(TK_LEXSCAN)
+  let expr = self.with_follow(follow_set=[TK_LBRACE], fn(state) {
+    state.try_parse_condition_expr()
+  })
+  let match_loc = @basic.Location::{ start: spos, end: self.peek_epos() }
+  fn parse_body(state : State) -> @list.List[@syntax.LexScanCase] {
+    let (cases, _) = state.series_with_follow(
+      invalid_delims=[TK_COMMA],
+      delim=TK_SEMI,
+      follow_set=[TK_RBRACE],
+      State::parse_lexscan_case,
+    )
+    @list.from_array(cases)
+  }
+
+  let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
+  let loc = self.loc_start_with(spos)
+  @syntax.Expr::LexScan(expr~, match_loc~, cases~, loc~)
+}
+
+///|
+fn State::parse_lexscan_case(self : State) -> @syntax.LexScanCase {
+  match self.peek_token() {
+    ELLIPSIS => {
+      let loc = self.peek_location()
+      self.skip()
+      @syntax.LexScanCase::{
+        pat: @syntax.LexScanCasePattern::Wildcard(loc~),
+        guard_: None,
+        body: Hole(loc~, kind=Todo),
+      }
+    }
+    _ => {
+      let pat = self.with_syncs(
+        [TK_FAT_ARROW, TK_IF],
+        State::parse_lexscan_case_pattern,
+      )
+      let guard_ = self.parse_lex_case_guard()
+      let body = self.parse_fat_arrow_action()
+      { pat, guard_, body }
+    }
+  }
+}
+
+///|
+fn State::parse_lexscan_case_pattern(
+  self : State,
+) -> @syntax.LexScanCasePattern {
+  match self.peek_token() {
+    UNDERSCORE => {
+      let loc = self.peek_location()
+      self.skip()
+      @syntax.LexScanCasePattern::Wildcard(loc~)
+    }
+    LIDENT(_) | EXTEND => {
+      let binder = self.parse_binder(context="lexscan binder")
+      @syntax.LexScanCasePattern::Binder(binder)
+    }
+    _ => {
+      let pat = self.parse_regex_as_pattern()
+      @syntax.LexScanCasePattern::Pattern(pat)
+    }
+  }
+}
+
+///|
 fn State::parse_lex_case_guard(self : State) -> @syntax.Expr? {
   match self.peek_token() {
     IF => {
@@ -2933,7 +3041,7 @@ fn State::parse_lex_pattern(
       let loc = self.loc_start_with(spos)
       (pats, loc)
     }
-    LIDENT(_) => {
+    LIDENT(_) | EXTEND => {
       let loc = self.peek_location()
       let name = self.expect_lident(context="lex rest binder")
       (@list.singleton(Binder({ name, loc })), loc)
@@ -2965,7 +3073,7 @@ fn State::parse_lex_pattern(
 ///|
 fn State::parse_lex_top_pattern(self : State) -> @syntax.LexTopPattern {
   match self.peek_token() {
-    LIDENT(_) => {
+    LIDENT(_) | EXTEND => {
       let loc = self.peek_location()
       let name = self.expect_lident(context="lex rest binder")
       Binder({ name, loc })
@@ -3308,6 +3416,7 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
       }
     }
     LEXMATCH => self.parse_lexmatch_expr()
+    LEXSCAN => self.parse_lexscan_expr()
     FOR => self.parse_for_expr(label=None)
     WHILE => self.parse_while_loop(label=None)
     TRY => self.parse_try_expr()
@@ -3317,10 +3426,10 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
     MATCH => self.parse_match_expr()
     FORALL | EXISTS => self.parse_quantifier_expr()
     LPAREN => self.handle_lparen()
-    LIDENT(_) | UNDERSCORE if self.peek_token(nth=1) is FAT_ARROW => {
+    LIDENT(_) | EXTEND | UNDERSCORE if self.peek_token(nth=1) is FAT_ARROW => {
       let spos = self.peek_spos()
       let p : @syntax.ArrowFnParam = match self.peek_token() {
-        LIDENT(_) => {
+        LIDENT(_) | EXTEND => {
           let binder = self.parse_binder(context="")
           Named(binder)
         }
@@ -3501,10 +3610,10 @@ fn State::try_parse_arrow_fn_expr(
         }
       }
     }
-    LIDENT(_) | UNDERSCORE if self.peek_token(nth=1) is FAT_ARROW => {
+    LIDENT(_) | EXTEND | UNDERSCORE if self.peek_token(nth=1) is FAT_ARROW => {
       let spos = self.peek_spos()
       let p : @syntax.ArrowFnParam = match self.peek_token() {
-        LIDENT(_) => Named(self.parse_binder(context=""))
+        LIDENT(_) | EXTEND => Named(self.parse_binder(context=""))
         UNDERSCORE => {
           self.expect_token(TK_UNDERSCORE)
           Unnamed(self.peek_location())
@@ -3542,11 +3651,13 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
     match self.peek_token() {
       PIPE => {
         self.skip()
-        let rhs = if self.peek_token() is LIDENT(binder) &&
+        let rhs = if (
+            self.peek_token() is LIDENT(_) || self.peek_token() is EXTEND
+          ) &&
           self.peek_token(nth=1) is FAT_ARROW {
           let binder_loc = self.peek_location()
           let spos = self.peek_spos()
-          self.skip()
+          let binder = self.expect_lident(context="pipe binder")
           self.skip()
           let body = if self.peek_token() is LBRACE {
             self.parse_block_expr()
@@ -3686,6 +3797,13 @@ fn State::parse_regex_match_binding(
   match self.peek_token() {
     LIDENT(name) if self.peek_token(nth=1) is EQUAL => {
       let label : @syntax.Label = { name, loc: self.peek_location() }
+      self.skip()
+      self.expect_token(TK_EQUAL)
+      let binder = self.parse_binder(context="regex match binding")
+      (label, Some(binder))
+    }
+    EXTEND if self.peek_token(nth=1) is EQUAL => {
+      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
       self.skip()
       self.expect_token(TK_EQUAL)
       let binder = self.parse_binder(context="regex match binding")
@@ -3845,7 +3963,13 @@ fn State::parse_postfix_expr(
       self.expect_token(TK_LT_PLUS)
       let template = self.parse_template_literal_expr()
       let loc = self.loc_start_with(spos)
-      TemplateWriting(expr~, template~, loc~)
+      TemplateWriting(expr~, template~, is_conditional=false, loc~)
+    }
+    LT_QUESTION => {
+      self.expect_token(TK_LT_QUESTION)
+      let template = self.parse_template_literal_expr()
+      let loc = self.loc_start_with(spos)
+      TemplateWriting(expr~, template~, is_conditional=true, loc~)
     }
     _ => expr
   }
@@ -4124,8 +4248,23 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
       let value = self.parse_expr()
       { value, kind }
     }
+    EXTEND if self.peek_token(nth=1) is EQUAL ||
+      (self.peek_token(nth=1) is QUESTION && self.peek_token(nth=2) is EQUAL) => {
+      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
+      self.skip() // extend
+      let kind : @syntax.ArgumentKind = if self.peek_token() is QUESTION {
+        let question_loc = self.peek_location()
+        self.skip()
+        LabelledOption(label~, question_loc~)
+      } else {
+        Labelled(label)
+      }
+      self.expect_token(TK_EQUAL) // `=`
+      let value = self.parse_expr()
+      { value, kind }
+    }
     // label~
-    POST_LABEL(label_name) => {
+    POST_LABEL(label_name) if !(self.peek_token(nth=1) is COLON) => {
       let spos = self.peek_spos()
       self.skip()
       let label : @syntax.Label = {
@@ -4158,6 +4297,16 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
         loc: self.peek_location(),
       }
       self.expect_token(TK_LIDENT) // lident
+      let question_loc = self.peek_location()
+      self.expect_token(TK_QUESTION) // `?`
+      let kind = @syntax.LabelledOptionPun(label~, question_loc~)
+      let value = @syntax.label_to_expr(loc=label.loc, label)
+      { value, kind }
+    }
+    EXTEND if self.peek_token(nth=1) is QUESTION &&
+      (self.peek_token(nth=2) is COMMA || self.peek_token(nth=2) is RPAREN) => {
+      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
+      self.skip() // extend
       let question_loc = self.peek_location()
       self.expect_token(TK_QUESTION) // `?`
       let kind = @syntax.LabelledOptionPun(label~, question_loc~)
@@ -4280,10 +4429,49 @@ fn State::parse_parameter(self : Self) -> @syntax.Parameter {
         _ => QuestionOptional(binder=param_binder, ty=param_annot)
       }
     }
+    EXTEND if self.peek_token(nth=1) is QUESTION => {
+      let param_binder : @syntax.Binder = {
+        name: "extend",
+        loc: self.peek_location(),
+      }
+      self.skip() // skip extend
+      self.skip() // skip QUESTION
+      let param_annot = self.parse_opt_annot()
+      match self.peek_token() {
+        // default value
+        EQUAL if self.mode is Normal => {
+          self.skip()
+          let default = self.parse_expr()
+          Optional(default~, binder=param_binder, ty=param_annot)
+        }
+        _ => QuestionOptional(binder=param_binder, ty=param_annot)
+      }
+    }
     // `param : Type`
     LIDENT(param_name) => {
       let param_binder : @syntax.Binder = {
         name: param_name,
+        loc: self.peek_location(),
+      }
+      self.skip()
+      let param_annot = self.parse_opt_annot()
+      if self.peek_token() is EQUAL && self.mode is Normal {
+        // error recovery for `param : Type = expr`
+        let eq_loc = self.peek_location()
+        self.skip()
+        let default = self.parse_expr()
+        self.report_error({
+          loc: eq_loc,
+          msg: "Only labeled argument can have default value",
+        })
+        Optional(default~, binder=param_binder, ty=param_annot)
+      } else {
+        Positional(binder=param_binder, ty=param_annot)
+      }
+    }
+    EXTEND => {
+      let param_binder : @syntax.Binder = {
+        name: "extend",
         loc: self.peek_location(),
       }
       self.skip()
@@ -4308,6 +4496,45 @@ fn State::parse_parameter(self : Self) -> @syntax.Parameter {
       self.panic() |> ignore
       Positional(binder={ name: "?binder", loc: @syntax.no_location }, ty=None)
     }
+  }
+}
+
+///|
+fn State::parse_array_expr(self : Self, is_iter~ : Bool) -> @syntax.Expr {
+  if self.peek_token(nth=1) is FOR {
+    return self.parse_list_comprehension(is_iter~)
+  }
+  let left : TokenKind = if is_iter { TK_LBRACKET_BAR } else { TK_LBRACKET }
+  let right : TokenKind = if is_iter { TK_BAR_RBRACKET } else { TK_RBRACKET }
+  let spos = self.peek_spos()
+  let mut to_spread = false
+  let elems = self.surround_series(left~, right~, delim=TK_COMMA, fn(
+      state,
+    ) -> @syntax.SpreadableElem {
+      match state.peek_token() {
+        DOTDOT => {
+          to_spread = true
+          let spread_spos = state.peek_spos()
+          state.expect_token(TK_DOTDOT)
+          let expr = state.parse_expr()
+          let loc = state.loc_start_with(spread_spos)
+          Spread(expr~, loc~)
+        }
+        _ => Regular(state.parse_expr())
+      }
+    })
+    |> @list.from_array
+  let loc = self.loc_start_with(spos)
+  if to_spread {
+    ArraySpread(elems~, is_iter~, loc~)
+  } else {
+    let exprs = elems.map(elem => {
+      match elem {
+        Regular(e) => e
+        Spread(_) => panic()
+      }
+    })
+    Array(exprs~, is_iter~, loc~)
   }
 }
 
@@ -4373,6 +4600,11 @@ fn State::parse_simple_expr(
       self.expect_token(TK_BYTES)
       Constant(c=Bytes(x), loc~)
     }
+    BYTES_INTERP(xs) => {
+      let loc = self.peek_location()
+      self.skip()
+      @syntax.make_bytes_interp_expr(loc~, xs)
+    }
     MULTILINE_STRING(_) | MULTILINE_INTERP(_) => {
       let spos = self.peek_spos()
       let elems : Array[@syntax.MultilineStringElem] = []
@@ -4423,10 +4655,10 @@ fn State::parse_simple_expr(
           Ident(id={ name, loc }, loc~)
         }
       }
-    LIDENT(_) | UIDENT(_) if self.peek_token(nth=1) is COLONCOLON =>
+    LIDENT(_) | EXTEND | UIDENT(_) if self.peek_token(nth=1) is COLONCOLON =>
       self.parse_coloncolon_expr()
     AMPER => self.parse_coloncolon_expr()
-    LIDENT(_) => {
+    LIDENT(_) | EXTEND => {
       let spos = self.peek_spos()
       let var_ = self.parse_var()
       let loc = self.loc_start_with(spos)
@@ -4455,51 +4687,15 @@ fn State::parse_simple_expr(
       Function(func~, loc~)
     }
     LPAREN => self.parse_tuple_or_constraint()
-    LBRACKET => {
-      if self.peek_token(nth=1) is FOR {
-        return self.parse_list_comprehension()
-      }
-      let spos = self.peek_spos()
-      let mut to_spread = false
-      let elems = self.surround_series(
-          left=TK_LBRACKET,
-          right=TK_RBRACKET,
-          delim=TK_COMMA,
-          fn(state) -> @syntax.SpreadableElem {
-            match state.peek_token() {
-              DOTDOT => {
-                to_spread = true
-                let spread_spos = state.peek_spos()
-                state.expect_token(TK_DOTDOT)
-                let expr = state.parse_expr()
-                let loc = state.loc_start_with(spread_spos)
-                Spread(expr~, loc~)
-              }
-              _ => Regular(state.parse_expr())
-            }
-          },
-        )
-        |> @list.from_array
-      let loc = self.loc_start_with(spos)
-      if to_spread {
-        ArraySpread(elems~, loc~)
-      } else {
-        let exprs = elems.map(elem => {
-          match elem {
-            Regular(e) => e
-            Spread(_) => panic()
-          }
-        })
-        Array(exprs~, loc~)
-      }
-    }
+    LBRACKET => self.parse_array_expr(is_iter=false)
+    LBRACKET_BAR => self.parse_array_expr(is_iter=true)
     LBRACE => {
       // to parse a block expr or a record expr ?
       // things got a little bit tricky here ...
       let spos = self.peek_spos()
       match self.peek_token(nth=1) {
         DOTDOT => self.parse_record_expr(type_name=None)
-        LIDENT(_) =>
+        LIDENT(_) | EXTEND =>
           match self.peek_token(nth=2) {
             // In cases `{ x: ... }` `{ x, }` `{ x; }` `{ x }` the result is a record expression.
             SEMI(_) if self.peek_token(nth=3) is RBRACE =>
@@ -4554,7 +4750,7 @@ fn State::parse_coloncolon_expr(self : Self) -> @syntax.Expr {
   let type_name = self.parse_type_name()
   self.expect_token(TK_COLONCOLON)
   match self.peek_token() {
-    LIDENT(_) => {
+    LIDENT(_) | EXTEND => {
       // TypeName::method
       let method_name = self.parse_label(context="")
       let loc = self.loc_start_with(spos)
@@ -4590,6 +4786,37 @@ fn State::parse_coloncolon_expr(self : Self) -> @syntax.Expr {
 }
 
 ///|
+fn State::parse_template_object_expr(self : Self) -> @syntax.Expr {
+  let spos = self.peek_spos()
+  let elems = self.surround_series(
+    left=TK_LBRACE,
+    right=TK_RBRACE,
+    delim=TK_COMMA,
+    fn(state) -> @syntax.MapExprElem {
+      let elem_spos = state.peek_spos()
+      let key_loc = state.peek_location()
+      let key = match state.peek_token() {
+        STRING(x) => {
+          state.expect_token(TK_STRING)
+          x
+        }
+        other => {
+          state.report_unexpected(other, [TK_STRING], key_loc)
+          state.panic() |> ignore
+          ""
+        }
+      }
+      state.expect_token(TK_COLON)
+      let expr = state.parse_expr()
+      let loc = state.loc_start_with(elem_spos)
+      { key: @syntax.Constant::String(key), expr, key_loc, loc }
+    },
+  )
+  let loc = self.loc_start_with(spos)
+  Map(elems=@list.from_array(elems), loc~)
+}
+
+///|
 fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
   match self.peek_token() {
     STRING(x) => {
@@ -4597,10 +4824,20 @@ fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
       self.expect_token(TK_STRING)
       Constant(c=String(x), loc~)
     }
+    BYTES(x) => {
+      let loc = self.peek_location()
+      self.expect_token(TK_BYTES)
+      Constant(c=Bytes(x), loc~)
+    }
     INTERP(xs) => {
       let loc = self.peek_location()
       self.skip()
       @syntax.make_interp_expr(loc~, xs)
+    }
+    BYTES_INTERP(xs) => {
+      let loc = self.peek_location()
+      self.skip()
+      @syntax.make_bytes_interp_expr(loc~, xs)
     }
     MULTILINE_STRING(_) | MULTILINE_INTERP(_) => {
       let spos = self.peek_spos()
@@ -4628,6 +4865,7 @@ fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
       let loc = self.loc_start_with(spos)
       MultilineString(elems=@list.from_array(elems), loc~)
     }
+    LBRACE => self.parse_template_object_expr()
     other => {
       let loc = self.peek_location()
       self.report_failed_to_parse(other, "template string", loc)
@@ -4641,7 +4879,7 @@ fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
 fn State::next_is_foreach_comprehension(self : Self) -> Bool {
   let mut nth = 0
   match self.peek_token(nth~) {
-    LIDENT(_) | UNDERSCORE => ()
+    LIDENT(_) | EXTEND | UNDERSCORE => ()
     _ => return false
   }
   while true {
@@ -4651,7 +4889,7 @@ fn State::next_is_foreach_comprehension(self : Self) -> Bool {
       COMMA => {
         nth = nth + 1
         match self.peek_token(nth~) {
-          LIDENT(_) | UNDERSCORE => continue
+          LIDENT(_) | EXTEND | UNDERSCORE => continue
           _ => return false
         }
       }
@@ -4662,9 +4900,14 @@ fn State::next_is_foreach_comprehension(self : Self) -> Bool {
 }
 
 ///|
-fn State::parse_list_comprehension(self : Self) -> @syntax.Expr {
+fn State::parse_list_comprehension(
+  self : Self,
+  is_iter~ : Bool,
+) -> @syntax.Expr {
+  let left : TokenKind = if is_iter { TK_LBRACKET_BAR } else { TK_LBRACKET }
+  let right : TokenKind = if is_iter { TK_BAR_RBRACKET } else { TK_RBRACKET }
   let spos = self.peek_spos()
-  self.expect_token(TK_LBRACKET)
+  self.expect_token(left)
   let for_spos = self.peek_spos()
   self.expect_token(TK_FOR)
   let kind : @syntax.ListComprehensionKind = if self.next_is_foreach_comprehension() {
@@ -4735,9 +4978,9 @@ fn State::parse_list_comprehension(self : Self) -> @syntax.Expr {
   }
   self.expect_token(TK_FAT_ARROW)
   let body = self.parse_expr()
-  self.expect_token(TK_RBRACKET)
+  self.expect_token(right)
   let loc = self.loc_start_with(spos)
-  ListComprehension(kind~, guard_~, body~, loc~)
+  ListComprehension(kind~, guard_~, body~, is_iter~, loc~)
 }
 
 ///|
@@ -4983,7 +5226,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
         loc~,
       )
     }
-    LIDENT(_) | UNDERSCORE => {
+    LIDENT(_) | EXTEND | UNDERSCORE => {
       let param = parse_arrow_fn_param()
       let params_loc = self.loc_start_with(spos)
       self.expect_token(TK_FAT_ARROW)
@@ -5053,7 +5296,8 @@ fn State::parse_stmt(self : Self) -> Statement {
       let loc = self.loc_start_with(spos)
       StmtLetand(bindings=@list.from_array(bindings), loc~)
     }
-    ASYNC if self.peek_token(nth=1) is FN && self.peek_token(nth=2) is LIDENT(_) => {
+    ASYNC if self.peek_token(nth=1) is FN &&
+      (self.peek_token(nth=2) is LIDENT(_) || self.peek_token(nth=2) is EXTEND) => {
       let is_async = Some(self.peek_location())
       let spos = self.peek_spos()
       self.skip() // async
@@ -5063,7 +5307,8 @@ fn State::parse_stmt(self : Self) -> Statement {
       let loc = self.loc_start_with(spos)
       StmtFunc(binder~, func~, loc~)
     }
-    FN if self.peek_token(nth=1) is LIDENT(_) => {
+    FN if self.peek_token(nth=1) is LIDENT(_) ||
+      self.peek_token(nth=1) is EXTEND => {
       let spos = self.peek_spos()
       self.expect_token(TK_FN)
       let binder = self.parse_binder(context="")

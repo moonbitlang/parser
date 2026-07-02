@@ -402,7 +402,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "op": op.json_repr(),
         "expr": expr.json_repr(),
       })
-    Array(exprs~, loc~) =>
+    Array(exprs~, is_iter~, loc~) =>
       tagged_node("Expr::Array", loc, {
         "exprs": list_json_repr(
           "Expr::Array::ExprList",
@@ -410,8 +410,9 @@ pub fn Expr::json_repr(self : Expr) -> Json {
           exprs,
           Expr::json_repr,
         ),
+        "is_iter": Json::boolean(is_iter),
       })
-    ArraySpread(elems~, loc~) =>
+    ArraySpread(elems~, is_iter~, loc~) =>
       tagged_node("Expr::ArraySpread", loc, {
         "elems": list_json_repr(
           "Expr::ArraySpread::ElemList",
@@ -419,10 +420,11 @@ pub fn Expr::json_repr(self : Expr) -> Json {
           elems,
           SpreadableElem::json_repr,
         ),
+        "is_iter": Json::boolean(is_iter),
       })
-    ListComprehension(kind~, guard_~, body~, loc~) =>
+    ListComprehension(kind~, guard_~, body~, is_iter~, loc~) =>
       tagged_node("Expr::ListComprehension", loc, {
-        "kind": kind.json_repr(loc),
+        "kind": kind.json_repr(loc, is_iter~),
         "guard": option_json_repr(guard_, Expr::json_repr),
         "body": body.json_repr(),
       })
@@ -466,6 +468,15 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       tagged_node("Expr::Interp", loc, {
         "elems": list_json_repr(
           "Expr::Interp::ElemList",
+          loc,
+          elems,
+          InterpElem::json_repr,
+        ),
+      })
+    BytesInterp(elems~, loc~) =>
+      tagged_node("Expr::BytesInterp", loc, {
+        "elems": list_json_repr(
+          "Expr::BytesInterp::ElemList",
           loc,
           elems,
           InterpElem::json_repr,
@@ -660,6 +671,17 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "strategy": option_json_repr(strategy, Label::json_repr),
         "expr": expr.json_repr(),
         "cases": list_json_repr("Expr::Lexmatch::CaseList", loc, cases, fn(
+          case,
+        ) {
+          case.json_repr(loc)
+        }),
+      })
+    }
+    LexScan(expr~, match_loc~, cases~, loc~) => {
+      ignore(match_loc)
+      tagged_node("Expr::Lexscan", loc, {
+        "expr": expr.json_repr(),
+        "cases": list_json_repr("Expr::Lexscan::CaseList", loc, cases, fn(
           case,
         ) {
           case.json_repr(loc)
@@ -868,10 +890,11 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "expr": expr.json_repr(),
         "group": group.json_repr(loc),
       })
-    TemplateWriting(expr~, template~, loc~) =>
+    TemplateWriting(expr~, template~, is_conditional~, loc~) =>
       tagged_node("Expr::TemplateWriting", loc, {
         "expr": expr.json_repr(),
         "template": template.json_repr(),
+        "is_conditional": Json::boolean(is_conditional),
         "loc": loc.to_json(),
       })
     StaticAssert(asserts~, body~) => {
@@ -1605,6 +1628,29 @@ fn LexCase::json_repr(self : LexCase, loc : Location) -> Json {
 }
 
 ///|
+fn LexScanCase::json_repr(self : LexScanCase, loc : Location) -> Json {
+  tagged_node("LexscanCase", loc, {
+    "pat": self.pat.json_repr(loc),
+    "guard": option_json_repr(self.guard_, Expr::json_repr),
+    "body": self.body.json_repr(),
+  })
+}
+
+///|
+fn LexScanCasePattern::json_repr(
+  self : LexScanCasePattern,
+  loc : Location,
+) -> Json {
+  match self {
+    Pattern(pat) =>
+      tagged_node1("LexscanCasePattern::Pattern", loc, pat.json_repr())
+    Binder(binder) =>
+      tagged_node1("LexscanCasePattern::Binder", loc, binder.json_repr())
+    Wildcard(loc~) => tagged_node0("LexscanCasePattern::Wildcard", loc)
+  }
+}
+
+///|
 fn LexTopPattern::json_repr(self : LexTopPattern, loc : Location) -> Json {
   match self {
     Pattern(pat) => tagged_node1("LexTopPattern::Pattern", loc, pat.json_repr())
@@ -1687,6 +1733,7 @@ fn PredicateQuantifierKind::json_repr(self : PredicateQuantifierKind) -> Json {
 fn ListComprehensionKind::json_repr(
   self : ListComprehensionKind,
   loc : Location,
+  is_iter~ : Bool,
 ) -> Json {
   match self {
     Foreach(binders~, expr~, init~, continue_block~) =>
@@ -1716,6 +1763,7 @@ fn ListComprehensionKind::json_repr(
             })
           },
         ),
+        "is_iter": Json::boolean(is_iter),
       })
     For(binders~, condition~, continue_block~, for_loc~) => {
       ignore(for_loc)
@@ -1742,6 +1790,7 @@ fn ListComprehensionKind::json_repr(
             })
           },
         ),
+        "is_iter": Json::boolean(is_iter),
       })
     }
   }
@@ -1850,6 +1899,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       trait_~,
       method_name~,
       quantifiers~,
+      method_quantifiers~,
       params~,
       ret_ty~,
       err_ty~,
@@ -1868,6 +1918,12 @@ pub fn Impl::json_repr(self : Impl) -> Json {
           "Impl::TopImpl::QuantifierList",
           loc,
           quantifiers,
+          TypeVarBinder::json_repr,
+        ),
+        "method_quantifiers": list_json_repr(
+          "Impl::TopImpl::MethodQuantifierList",
+          loc,
+          method_quantifiers,
           TypeVarBinder::json_repr,
         ),
         "params": list_json_repr(

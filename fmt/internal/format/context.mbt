@@ -18,7 +18,7 @@ fn precedence_of_operator(op : String) -> Int {
     "|" => 3
     "^" => 4
     "&" => 5
-    ">" | "<" | "==" | "!=" | "<=" | "=>" => 300
+    ">" | "<" | "==" | "!=" | "<=" | ">=" => 300
     "<<" | ">>" => 400
     "+" | "-" => 500
     "*" | "/" | "%" => 600
@@ -115,6 +115,7 @@ fn @syntax.Expr::classify(expr : Self) -> ExprKind {
     | Constant(_)
     | MultilineString(_)
     | Interp(_)
+    | BytesInterp(_)
     | Constraint(_)
     | Constr(_)
     | Ident(_)
@@ -139,11 +140,13 @@ fn @syntax.Expr::classify(expr : Self) -> ExprKind {
         _ => panic()
       }
     Pipe(_) | RevPipe(_) => PipeKind
-    TemplateWriting(_) => PostfixKind("<+")
+    TemplateWriting(is_conditional~, ..) =>
+      PostfixKind(if is_conditional { "<?" } else { "<+" })
     Quantifier(_) => PrefixKind
     Implies(_) => PostfixKind("→")
     Match(_)
     | LexMatch(_)
+    | LexScan(_)
     | If(_)
     | For(_)
     | ForEach(_)

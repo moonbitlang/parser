@@ -30,6 +30,7 @@ pub enum LexicalError {
   InterpInvalidAttribute
   InterpMissingExpression
   InvalidDotInt(String)
+  MissingIdentifierAfterDot
   InvalidByteLiteral(String)
   Reserved_keyword(String)
   InvalidMetavarSyntax(String)

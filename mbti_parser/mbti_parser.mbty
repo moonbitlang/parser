@@ -12,6 +12,7 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
+%token<InterpLiteral> BYTES_INTERP
 %token<String> REGEX_LITERAL
 %token<InterpLiteral> REGEX_INTERP
 %token<(String, Option[String], String)> ATTRIBUTE
@@ -66,8 +67,10 @@
 %token COLON ":"
 %token<Bool> SEMI ";"
 %token LBRACKET "["
+%token LBRACKET_BAR "[|"
 %token PLUS "+"
 %token RBRACKET "]"
+%token BAR_RBRACKET "|]"
 %token UNDERSCORE "_"
 %token BAR "|"
 %token LBRACE "{"
@@ -81,6 +84,7 @@
 %token PIPE "|>"
 %token PIPE_LEFT "<|"
 %token LT_PLUS "<+"
+%token LT_QUESTION "<?"
 %token ELSE "else"
 %token FN "fn"
 %token IF "if"
@@ -126,6 +130,8 @@
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
 %token LEXMATCH_QUESTION "lexmatch?"
+%token LEXSCAN "lexscan"
+%token EXTEND "extend"
 %token PACKAGE         "package"
 
 %%
@@ -210,8 +216,11 @@ func_sig -> FuncSig
   ;
 
 trait_method_sig -> TraitMethodSig
-  : attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) { 
-    TraitMethodSig::{ attrs : $1, is_async: $2, name: $3, params: $4, return_: $6, has_default: $7} 
+  : attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
+  }
+  | attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
   }
   ;
 
@@ -310,8 +319,8 @@ constructor_param -> ConstrParam
   ;
 
 record_decl_field -> FieldDecl
-  : attributes boption("mut") LIDENT ":" type_ { 
-    FieldDecl::{ name: FieldName::{ label: $3, loc : mk_loc($loc($3)) }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() } 
+  : attributes boption("mut") lident ":" type_ {
+    FieldDecl::{ name: FieldName::{ label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
   }
   ;
 
@@ -430,7 +439,7 @@ constant -> Constant
 pub_attr -> String?
   : { None }
   | "(" "readonly" ")" { Some("readonly") }
-  | "(" LIDENT ")" { Some($2) }
+  | "(" lident ")" { Some($2.name) }
   ;
 
 %inline is_async -> Location?
@@ -454,10 +463,11 @@ uident -> Name
 
 lident -> Name
   : LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+  | "extend" { Name::{name: "extend", loc: mk_loc($sloc)} }
   ;
 
 label -> Label
-  : LIDENT { Label::{name: $1, loc: mk_loc($sloc)} }
+  : lident { Label::{name: $1.name, loc: $1.loc} }
   ;
 
 post_label -> Label

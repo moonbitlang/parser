@@ -85,6 +85,7 @@ pub(all) enum AliasSig {
 ///|
 pub(all) struct TraitMethodSig {
   name : Name
+  type_params : @list.List[TypeParamWithConstraints]
   params : @list.List[Parameter]
   is_async : Location?
   has_default : Bool

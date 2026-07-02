@@ -100,6 +100,26 @@ let hardline : Doc = @pp.hardline
 let line : Doc = @pp.line
 
 ///|
+fn break_(n : Int) -> Doc {
+  switch(text(String::make(n, ' ')), hardline)
+}
+
+///|
+fn catifflat(left~ : Doc, right~ : Doc, flat : Doc, not_flat : Doc) -> Doc {
+  dynamic(fn(ctx) {
+    let lr_req = left.requirement() + right.requirement()
+    let mid = if ctx.current_remain() >= lr_req { flat } else { not_flat }
+    left + mid + right
+  })
+}
+
+///|
+fn init {
+  ignore(break_)
+  ignore(catifflat(left=empty, right=empty, empty, empty))
+}
+
+///|
 let comma : Doc = char(',')
 
 ///|

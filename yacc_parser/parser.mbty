@@ -18,6 +18,7 @@
 %token<String> MULTILINE_STRING
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
+%token<InterpLiteral> BYTES_INTERP
 %token<String> REGEX_LITERAL
 %token<InterpLiteral> REGEX_INTERP
 %token<(String, String?, String)> ATTRIBUTE
@@ -72,8 +73,10 @@
 %token COLON ":"
 %token<Bool> SEMI
 %token LBRACKET "["
+%token LBRACKET_BAR "[|"
 %token PLUS "+"
 %token RBRACKET "]"
+%token BAR_RBRACKET "|]"
 %token UNDERSCORE "_"
 %token BAR "|"
 %token LBRACE "{"
@@ -87,6 +90,7 @@
 %token PIPE "|>"
 %token PIPE_LEFT "<|"
 %token LT_PLUS "<+"
+%token LT_QUESTION "<?"
 %token ELSE "else"
 %token FN "fn"
 %token IF "if"
@@ -132,6 +136,8 @@
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
 %token LEXMATCH_QUESTION "lexmatch?"
+%token LEXSCAN "lexscan"
+%token EXTEND "extend"
 
 // Note: this token is only used by `.mbti` parser
 %token PACKAGE         "package"
@@ -274,11 +280,11 @@ parameter -> Parameter
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)).trim_last_char() }
       Optional(binder~, ty = $2, default = $4)
     }
-  | LIDENT "?" opt_annot "=" expr {
+  | lident_string "?" opt_annot "=" expr {
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
       Optional(binder~, ty = $3, default = $5)
     }
-  | LIDENT "?" opt_annot {
+  | lident_string "?" opt_annot {
       let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
       QuestionOptional(binder~, ty = $3)
     }
@@ -324,8 +330,13 @@ optional_type_parameters_no_constraints -> List[TypeDeclBinder]
   }
   ;
 
-luident -> String
+%inline lident_string -> String
   : LIDENT { $1 }
+  | "extend" { "extend" }
+  ;
+
+luident -> String
+  : lident_string { $1 }
   | UIDENT { $1 }
   ;
 
@@ -698,13 +709,14 @@ structure_item -> Impl
       doc = DocString::empty()
     )
   }
-  | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" option("fn") binder parameters func_return_type impl_body {
+  | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" impl_optional_fn binder parameters func_return_type impl_body {
     let (ret_ty, err_ty) = $12
     TopImpl(
       self_ty = Some($7),
       trait_ = $5,
       method_name = $10,
       quantifiers = $4,
+      method_quantifiers = $9,
       params = $11,
       ret_ty~,
       err_ty~,
@@ -715,13 +727,14 @@ structure_item -> Impl
       doc = DocString::empty()
     )
   }
-  | attributes visibility "impl" optional_type_parameters type_name "with" option("fn") binder parameters func_return_type impl_body {
+  | attributes visibility "impl" optional_type_parameters type_name "with" impl_optional_fn binder parameters func_return_type impl_body {
     let (ret_ty, err_ty) = $10
     TopImpl(
       self_ty = None,
       trait_ = $5,
       method_name = $8,
       quantifiers = $4,
+      method_quantifiers = $7,
       params = $9,
       ret_ty~,
       err_ty~,
@@ -776,6 +789,11 @@ structure_item -> Impl
   }
   ;
 
+impl_optional_fn -> List[TypeVarBinder]
+  : { @list.empty() }
+  | "fn" optional_type_parameters { $2 }
+  ;
+
 %inline attributes -> List[Attribute]
   :  { @list.empty() }
   | non_empty_list(attribute) { $1 }
@@ -794,7 +812,7 @@ structure_item -> Impl
 pub_attr -> String?
   :  { None }
   | "(" "readonly" ")" { Some("readonly") }
-  | "(" LIDENT ")" { Some($2) }
+  | "(" lident_string ")" { Some($2) }
   ;
 
 %inline is_declare -> Bool
@@ -861,25 +879,25 @@ batch_type_alias_target(UIDENT_MAYBE_DOT) -> AliasTarget
   ;
 
 func_alias_targets -> (Label?, Label?, Bool, List[AliasTarget])
-  : ioption(func_alias_type_name(LIDENT, UIDENT)) func_alias_target(LIDENT) { 
+  : ioption(func_alias_type_name(lident_string, UIDENT)) func_alias_target(lident_string) {
     (None, $1, false, @list.singleton($2))
   }
   | PACKAGE_NAME func_alias_target(DOT_LIDENT) { 
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), None, false, @list.singleton($2))
   }
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(LIDENT) { 
+  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(lident_string) {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), Some($2), false, @list.singleton($3))
   }
-  | option(func_alias_type_name(LIDENT, UIDENT)) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+  | option(func_alias_type_name(lident_string, UIDENT)) "(" non_empty_list_commas(func_alias_target(lident_string)) ")" {
     (None, $1, true, $3)
   }
-  | PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+  | PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(lident_string)) ")" {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), None, true, $3)
   }
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(LIDENT)) ")" { 
+  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(lident_string)) ")" {
     let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
     (Some(pkg), Some($2), true, $4)
   }
@@ -906,7 +924,13 @@ func_alias_target(LIDENT_MAYBE_DOT) -> AliasTarget
   ;
 
 using_binder -> (AliasTarget, UsingKind):
-  | LIDENT
+  | lident_string {
+    let binder = Binder::{
+      name : $1,
+      loc : mk_loc($loc($1))
+    }
+    ({ binder, target : None }, UsingKind::Value)
+  }
   | UIDENT {
     let binder = Binder::{
       name : $1,
@@ -914,7 +938,17 @@ using_binder -> (AliasTarget, UsingKind):
     }
     ({ binder, target : None }, UsingKind::Value)
   }
-  | LIDENT "as" LIDENT
+  | lident_string "as" lident_string {
+    let binder = Binder::{
+      name : $3,
+      loc : mk_loc($loc($3))
+    }
+    let target = Label::{
+      name : $1,
+      loc : mk_loc($loc($1))
+    }
+    ({ binder, target : Some(target) }, UsingKind::Value)
+  }
   | UIDENT "as" UIDENT {
     let binder = Binder::{
       name : $3,
@@ -1010,12 +1044,12 @@ trait_method_param -> Parameter
   ;
 
 qual_ident -> LongIdent
-  : LIDENT { Ident(name = $1) }
+  : lident_string { Ident(name = $1) }
   | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
   ;
 
 qual_ident_simple_expr -> LongIdent
-  : LIDENT %prec prec_apply_non_ident_fn { Ident(name = $1) }
+  : lident_string %prec prec_apply_non_ident_fn { Ident(name = $1) }
   | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
   ;
 
@@ -1121,11 +1155,31 @@ template_rhs -> Expr
   : INTERP {
     make_interp_expr(loc = mk_loc($sloc), $1)
   }
+  | BYTES {
+    Expr::Constant(c = @syntax.Constant::Bytes($1), loc = mk_loc($sloc))
+  }
+  | BYTES_INTERP {
+    make_bytes_interp_expr(loc = mk_loc($sloc), $1)
+  }
   | STRING {
     Expr::Constant(c = @syntax.Constant::String($1), loc = mk_loc($sloc))
   }
   | non_empty_list(multiline_string) {
     Expr::MultilineString(elems = $1, loc = mk_loc($sloc))
+  }
+  | "{" list_commas(template_object_elem) "}" {
+    Map(elems = $2, loc = mk_loc($sloc))
+  }
+  ;
+
+template_object_elem -> MapExprElem
+  : STRING ":" expr {
+    MapExprElem::{
+      key: @syntax.Constant::String($1),
+      expr: $3,
+      key_loc: mk_loc($loc($1)),
+      loc: mk_loc($sloc)
+    }
   }
   ;
 
@@ -1279,6 +1333,34 @@ lexmatch_header -> (Expr, Label?):
   | "lexmatch" infix_expr "with" label "{" {
     ($2, Some($4))
   }
+
+lexscan_expr -> Expr:
+  | lexscan_header list_semis(lexscan_case) "}" {
+    LexScan(expr=$1, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
+  }
+
+lexscan_header -> Expr:
+  | "lexscan" infix_expr "{" { $2 }
+
+lexscan_case -> LexScanCase:
+  | lexscan_case_pattern "=>" expr_statement {
+    LexScanCase::{ pat: $1, guard_: None, body: $3 }
+  }
+  | lexscan_case_pattern "if" infix_expr "=>" expr_statement {
+    LexScanCase::{ pat: $1, guard_: Some($3), body: $5 }
+  }
+  | "..." {
+    LexScanCase::{
+      pat: LexScanCasePattern::Wildcard(loc = mk_loc($loc($1))),
+      guard_: None,
+      body: Hole(loc = mk_loc($sloc), kind = Todo)
+    }
+  }
+
+lexscan_case_pattern -> LexScanCasePattern:
+  | regex_as_pattern { LexScanCasePattern::Pattern($1) }
+  | binder { LexScanCasePattern::Binder($1) }
+  | "_" { LexScanCasePattern::Wildcard(loc = mk_loc($sloc)) }
 
 lex_case -> LexCase :
   | lex_pattern "=>" expr_statement {
@@ -1466,6 +1548,7 @@ expr -> Expr
   | if_expr { $1 }
   | match_expr { $1 }
   | lexmatch_expr { $1 }
+  | lexscan_expr { $1 }
   | simple_try_expr { $1 }
   | quantifier_expr { $1 }
   | arrow_fn_expr { Function(func = $1, loc = mk_loc($sloc)) }
@@ -1618,7 +1701,10 @@ postfix_expr -> Expr
     RegexMatch(expr = $1, pat~, bindings~, loc = mk_loc($sloc))
   }
   | range_expr "<+" template_rhs {
-    TemplateWriting(expr = $1, template = $3, loc = mk_loc($sloc))
+    TemplateWriting(expr = $1, template = $3, is_conditional = false, loc = mk_loc($sloc))
+  }
+  | range_expr "<?" template_rhs {
+    TemplateWriting(expr = $1, template = $3, is_conditional = true, loc = mk_loc($sloc))
   }
   | range_expr { $1 }
   ;
@@ -1629,7 +1715,7 @@ regex_match_rhs -> (RegexPattern, List[(Label, Binder?)])
   ;
 
 regex_match_binding -> (Label, Binder?)
-  : LIDENT "=" binder {
+  : lident_string "=" binder {
     let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
     (label, Some($3))
   }
@@ -1879,7 +1965,7 @@ simple_expr -> Expr
       loc = mk_loc($sloc)
     )
   }
-  | simple_expr ".." LIDENT "(" list_commas(argument) ")" { 
+  | simple_expr ".." lident_string "(" list_commas(argument) ")" {
     let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
     DotApply(
       self = $1,
@@ -1889,10 +1975,10 @@ simple_expr -> Expr
       loc = mk_loc($sloc)
     )
   }
-  | simple_expr accessor %prec prec_field { 
+  | simple_expr accessor %prec prec_field {
     Field(record = $1, accessor = $2, loc = mk_loc($sloc))
   }
-  | type_name "::" LIDENT { 
+  | type_name "::" lident_string {
     let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
     Method(type_name = $1, method_name~, loc = mk_loc($sloc))
   }
@@ -1902,6 +1988,17 @@ simple_expr -> Expr
       kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
       guard_ = $7,
       body = $9,
+      is_iter = false,
+      loc = mk_loc($sloc)
+    )
+  }
+  | "[|" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "|]" {
+    let (init, continue_block) = $6
+    ListComprehension(
+      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
+      guard_ = $7,
+      body = $9,
+      is_iter = true,
       loc = mk_loc($sloc)
     )
   }
@@ -1911,15 +2008,27 @@ simple_expr -> Expr
       kind = For(binders~, condition~, continue_block~, for_loc~),
       guard_ = $4,
       body = $6,
+      is_iter = false,
       loc = mk_loc($sloc)
     )
   }
-  | "[" list_commas(spreadable_elem) "]" { @syntax.make_array_expr(loc = mk_loc($sloc), $2) }
+  | "[|" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "|]" {
+    let (binders, condition, continue_block, for_loc) = $3
+    ListComprehension(
+      kind = For(binders~, condition~, continue_block~, for_loc~),
+      guard_ = $4,
+      body = $6,
+      is_iter = true,
+      loc = mk_loc($sloc)
+    )
+  }
+  | "[" list_commas(spreadable_elem) "]" { @syntax.make_array_expr(loc = mk_loc($sloc), is_iter = false, $2) }
+  | "[|" list_commas(spreadable_elem) "|]" { @syntax.make_array_expr(loc = mk_loc($sloc), is_iter = true, $2) }
   | tuple_expr { $1 }
   ;
 
 %inline label -> Label
-  : LIDENT { Label::{ name: $1, loc: mk_loc($sloc) } }
+  : lident_string { Label::{ name: $1, loc: mk_loc($sloc) } }
   ;
 
 %inline accessor -> Accessor
@@ -1934,7 +2043,7 @@ simple_expr -> Expr
   ;
 
 %inline binder -> Binder
-  : LIDENT { Binder::{ name: $1, loc: mk_loc($sloc) } }
+  : lident_string { Binder::{ name: $1, loc: mk_loc($sloc) } }
   ;
 
 tvar_binder -> TypeVarBinder
@@ -1977,6 +2086,7 @@ atomic_expr -> Expr
     MultilineString(elems = $1, loc = mk_loc($sloc))
   }
   | INTERP { make_interp_expr(loc = mk_loc($sloc), $1) }
+  | BYTES_INTERP { make_bytes_interp_expr(loc = mk_loc($sloc), $1) }
   ;
 
 simple_constant -> Constant
@@ -2041,7 +2151,7 @@ argument -> Argument
     let arg_value = @syntax.make_ident_expr(loc = mk_loc($loc($1)), Var::{ name: Ident(name = $1), loc: mk_loc($loc($1)) })
     Argument::{ value: arg_value, kind: LabelledPun(label) }
   }
-  | LIDENT "?" { 
+  | lident_string "?" {
     let loc = mk_loc($loc($1))
     let label = Label::{ name: $1, loc }
     let arg_value = @syntax.make_ident_expr(loc~, Var::{ name: Ident(name = $1), loc })
@@ -2234,7 +2344,7 @@ type_ -> Type
   ;
 
 record_decl_field -> FieldDecl
-  : attributes visibility option("mut") LIDENT ":" type_ { 
+  : attributes visibility option("mut") lident_string ":" type_ {
     FieldDecl::{
       name: FieldName::{ label: $4, loc: mk_loc($loc($4)) },
       ty: $6,

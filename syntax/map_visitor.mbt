@@ -413,6 +413,7 @@ pub(open) trait MapVisitor {
     trait_~ : TypeName,
     method_name~ : Binder,
     quantifiers~ : @list.List[TypeVarBinder],
+    method_quantifiers~ : @list.List[TypeVarBinder],
     params~ : Parameters,
     ret_ty~ : Type?,
     err_ty~ : ErrorType,
@@ -475,10 +476,16 @@ pub(open) trait MapVisitor {
     loc~ : Location,
   ) -> Expr = _
   fn visit_Expr_Unary(Self, op~ : Var, expr~ : Expr, loc~ : Location) -> Expr = _
-  fn visit_Expr_Array(Self, exprs~ : @list.List[Expr], loc~ : Location) -> Expr = _
+  fn visit_Expr_Array(
+    Self,
+    exprs~ : @list.List[Expr],
+    is_iter~ : Bool,
+    loc~ : Location,
+  ) -> Expr = _
   fn visit_Expr_ArraySpread(
     Self,
     elems~ : @list.List[SpreadableElem],
+    is_iter~ : Bool,
     loc~ : Location,
   ) -> Expr = _
   fn visit_Expr_ArrayGet(Self, array~ : Expr, index~ : Expr, loc~ : Location) -> Expr = _
@@ -512,6 +519,11 @@ pub(open) trait MapVisitor {
     loc~ : Location,
   ) -> Expr = _
   fn visit_Expr_Interp(Self, elems~ : @list.List[InterpElem], loc~ : Location) -> Expr = _
+  fn visit_Expr_BytesInterp(
+    Self,
+    elems~ : @list.List[InterpElem],
+    loc~ : Location,
+  ) -> Expr = _
   fn visit_Expr_Constraint(Self, expr~ : Expr, ty~ : Type, loc~ : Location) -> Expr = _
   fn visit_Expr_Constr(Self, constr~ : Constructor, loc~ : Location) -> Expr = _
   fn visit_Expr_While(
@@ -633,6 +645,18 @@ pub(open) trait MapVisitor {
     cases~ : @list.List[LexCase],
     loc~ : Location,
   ) -> Expr = _
+  fn visit_Expr_LexScan(
+    Self,
+    expr~ : Expr,
+    match_loc~ : Location,
+    cases~ : @list.List[LexScanCase],
+    loc~ : Location,
+  ) -> Expr = _
+  fn visit_LexScanCase(Self, LexScanCase) -> LexScanCase = _
+  fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> LexScanCasePattern = _
+  fn visit_LexScanCasePattern_Pattern(Self, RegexPattern) -> LexScanCasePattern = _
+  fn visit_LexScanCasePattern_Binder(Self, Binder) -> LexScanCasePattern = _
+  fn visit_LexScanCasePattern_Wildcard(Self, loc~ : Location) -> LexScanCasePattern = _
   fn visit_Expr_LetMut(
     Self,
     binder~ : Binder,
@@ -815,6 +839,7 @@ impl MapVisitor with fn visit_Impl_TopImpl(
   trait_~,
   method_name~,
   quantifiers~,
+  method_quantifiers~,
   params~,
   ret_ty~,
   err_ty~,
@@ -830,6 +855,7 @@ impl MapVisitor with fn visit_Impl_TopImpl(
     trait_~,
     method_name~,
     quantifiers~,
+    method_quantifiers~,
     params~,
     ret_ty~,
     err_ty~,
@@ -948,13 +974,13 @@ impl MapVisitor with fn visit_Expr_Unary(env, op~, expr~, loc~) {
 }
 
 ///|
-impl MapVisitor with fn visit_Expr_Array(env, exprs~, loc~) {
-  MapVisitorBase::visit_Expr_Array(env, exprs~, loc~)
+impl MapVisitor with fn visit_Expr_Array(env, exprs~, is_iter~, loc~) {
+  MapVisitorBase::visit_Expr_Array(env, exprs~, is_iter~, loc~)
 }
 
 ///|
-impl MapVisitor with fn visit_Expr_ArraySpread(env, elems~, loc~) {
-  MapVisitorBase::visit_Expr_ArraySpread(env, elems~, loc~)
+impl MapVisitor with fn visit_Expr_ArraySpread(env, elems~, is_iter~, loc~) {
+  MapVisitorBase::visit_Expr_ArraySpread(env, elems~, is_iter~, loc~)
 }
 
 ///|
@@ -1018,6 +1044,11 @@ impl MapVisitor with fn visit_Expr_MultilineString(env, elems~, loc~) {
 ///|
 impl MapVisitor with fn visit_Expr_Interp(env, elems~, loc~) {
   MapVisitorBase::visit_Expr_Interp(env, elems~, loc~)
+}
+
+///|
+impl MapVisitor with fn visit_Expr_BytesInterp(env, elems~, loc~) {
+  MapVisitorBase::visit_Expr_BytesInterp(env, elems~, loc~)
 }
 
 ///|
@@ -2050,6 +2081,36 @@ impl MapVisitor with fn visit_Expr_LexMatch(
 }
 
 ///|
+impl MapVisitor with fn visit_Expr_LexScan(env, expr~, match_loc~, cases~, loc~) {
+  MapVisitorBase::visit_Expr_LexScan(env, expr~, match_loc~, cases~, loc~)
+}
+
+///|
+impl MapVisitor with fn visit_LexScanCase(env, lex_scan_case) {
+  MapVisitorBase::visit_LexScanCase(env, lex_scan_case)
+}
+
+///|
+impl MapVisitor with fn visit_LexScanCasePattern(env, lex_scan_case_pattern) {
+  MapVisitorBase::visit_LexScanCasePattern(env, lex_scan_case_pattern)
+}
+
+///|
+impl MapVisitor with fn visit_LexScanCasePattern_Pattern(env, regex_pattern) {
+  MapVisitorBase::visit_LexScanCasePattern_Pattern(env, regex_pattern)
+}
+
+///|
+impl MapVisitor with fn visit_LexScanCasePattern_Binder(env, binder) {
+  MapVisitorBase::visit_LexScanCasePattern_Binder(env, binder)
+}
+
+///|
+impl MapVisitor with fn visit_LexScanCasePattern_Wildcard(env, loc~) {
+  MapVisitorBase::visit_LexScanCasePattern_Wildcard(env, loc~)
+}
+
+///|
 impl MapVisitor with fn visit_LexCase(env, lex_case) {
   MapVisitorBase::visit_LexCase(env, lex_case)
 }
@@ -2148,6 +2209,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl(
       trait_~,
       method_name~,
       quantifiers~,
+      method_quantifiers~,
       params~,
       ret_ty~,
       err_ty~,
@@ -2162,6 +2224,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl(
         trait_~,
         method_name~,
         quantifiers~,
+        method_quantifiers~,
         params~,
         ret_ty~,
         err_ty~,
@@ -3747,6 +3810,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl_Top
   trait_~,
   method_name~,
   quantifiers~,
+  method_quantifiers~,
   params~,
   ret_ty~,
   err_ty~,
@@ -3760,6 +3824,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl_Top
   let trait_ = env.0.visit_TypeName(trait_)
   let method_name = env.0.visit_Binder(method_name)
   let quantifiers = quantifiers.map(x => env.0.visit_TypeVarBinder(x))
+  let method_quantifiers = method_quantifiers.map(x => {
+    env.0.visit_TypeVarBinder(x)
+  })
   let params = params.map(param => env.0.visit_Parameter(param))
   let ret_ty = ret_ty.map(x => env.0.visit_Type(x))
   let err_ty = env.0.visit_ErrorType(err_ty)
@@ -3770,6 +3837,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl_Top
     trait_~,
     method_name~,
     quantifiers~,
+    method_quantifiers~,
     params~,
     ret_ty~,
     err_ty~,
@@ -3911,16 +3979,18 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Una
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Array(
   env,
   exprs~,
+  is_iter~,
   loc~,
 ) {
   let exprs = exprs.map(expr => env.0.visit_Expr(expr))
-  Expr::Array(exprs~, loc~)
+  Expr::Array(exprs~, is_iter~, loc~)
 }
 
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_ArraySpread(
   env,
   elems~,
+  is_iter~,
   loc~,
 ) {
   let elems = elems.map(fn(elem) {
@@ -3929,7 +3999,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Arr
       Spread(expr~, loc~) => Spread(expr=env.0.visit_Expr(expr), loc~)
     }
   })
-  Expr::ArraySpread(elems~, loc~)
+  Expr::ArraySpread(elems~, is_iter~, loc~)
 }
 
 ///|
@@ -4017,6 +4087,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Int
 ) {
   let elems = elems.map(elem => env.0.visit_InterpElem(elem))
   Expr::Interp(elems~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_BytesInterp(
+  env,
+  elems~,
+  loc~,
+) {
+  let elems = elems.map(elem => env.0.visit_InterpElem(elem))
+  Expr::BytesInterp(elems~, loc~)
 }
 
 ///|
@@ -4629,13 +4709,15 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
     Infix(op~, lhs~, rhs~, loc~) =>
       env.0.visit_Expr_Infix(op~, lhs~, rhs~, loc~)
     Unary(op~, expr~, loc~) => env.0.visit_Expr_Unary(op~, expr~, loc~)
-    Array(exprs~, loc~) => env.0.visit_Expr_Array(exprs~, loc~)
-    ArraySpread(elems~, loc~) => env.0.visit_Expr_ArraySpread(elems~, loc~)
-    ListComprehension(kind~, guard_~, body~, loc~) => {
+    Array(exprs~, is_iter~, loc~) =>
+      env.0.visit_Expr_Array(exprs~, is_iter~, loc~)
+    ArraySpread(elems~, is_iter~, loc~) =>
+      env.0.visit_Expr_ArraySpread(elems~, is_iter~, loc~)
+    ListComprehension(kind~, guard_~, body~, is_iter~, loc~) => {
       let kind = map_list_comprehension_kind(env, kind)
       let guard_ = guard_.map(x => env.0.visit_Expr(x))
       let body = env.0.visit_Expr(body)
-      Expr::ListComprehension(kind~, guard_~, body~, loc~)
+      Expr::ListComprehension(kind~, guard_~, body~, is_iter~, loc~)
     }
     ArrayGet(array~, index~, loc~) =>
       env.0.visit_Expr_ArrayGet(array~, index~, loc~)
@@ -4655,6 +4737,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
     MultilineString(elems~, loc~) =>
       env.0.visit_Expr_MultilineString(elems~, loc~)
     Interp(elems~, loc~) => env.0.visit_Expr_Interp(elems~, loc~)
+    BytesInterp(elems~, loc~) => env.0.visit_Expr_BytesInterp(elems~, loc~)
     Constraint(expr~, ty~, loc~) =>
       env.0.visit_Expr_Constraint(expr~, ty~, loc~)
     Constr(constr~, loc~) => env.0.visit_Expr_Constr(constr~, loc~)
@@ -4705,6 +4788,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
       env.0.visit_Expr_Match(expr~, cases~, match_loc~, loc~)
     LexMatch(strategy~, expr~, match_loc~, cases~, loc~) =>
       env.0.visit_Expr_LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
+    LexScan(expr~, match_loc~, cases~, loc~) =>
+      env.0.visit_Expr_LexScan(expr~, match_loc~, cases~, loc~)
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       env.0.visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
     Pipe(lhs~, rhs~, loc~) => env.0.visit_Expr_Pipe(lhs~, rhs~, loc~)
@@ -4808,10 +4893,10 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
       env.0.visit_Expr_TryOperator(body~, kind~, try_loc~, loc~)
     Map(elems~, loc~) => env.0.visit_Expr_Map(elems~, loc~)
     Group(expr~, group~, loc~) => env.0.visit_Expr_Group(expr~, group~, loc~)
-    TemplateWriting(expr~, template~, loc~) => {
+    TemplateWriting(expr~, template~, is_conditional~, loc~) => {
       let expr = env.0.visit_Expr(expr)
       let template = env.0.visit_Expr(template)
-      Expr::TemplateWriting(expr~, template~, loc~)
+      Expr::TemplateWriting(expr~, template~, is_conditional~, loc~)
     }
     StaticAssert(asserts~, body~) =>
       env.0.visit_Expr_StaticAssert(asserts~, body~)
@@ -4855,6 +4940,70 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Lex
   let expr = env.0.visit_Expr(expr)
   let cases = cases.map(case => env.0.visit_LexCase(case))
   Expr::LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_LexScan(
+  env,
+  expr~,
+  match_loc~,
+  cases~,
+  loc~,
+) {
+  let expr = env.0.visit_Expr(expr)
+  let cases = cases.map(case => env.0.visit_LexScanCase(case))
+  Expr::LexScan(expr~, match_loc~, cases~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexScanCase(
+  env,
+  lex_scan_case,
+) {
+  let pat = env.0.visit_LexScanCasePattern(lex_scan_case.pat)
+  let guard_ = lex_scan_case.guard_.map(guard_ => env.0.visit_Expr(guard_))
+  let body = env.0.visit_Expr(lex_scan_case.body)
+  { pat, guard_, body }
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexScanCasePattern(
+  env,
+  lex_scan_case_pattern,
+) {
+  match lex_scan_case_pattern {
+    Pattern(regex_pattern) =>
+      env.0.visit_LexScanCasePattern_Pattern(regex_pattern)
+    Binder(binder) => env.0.visit_LexScanCasePattern_Binder(binder)
+    Wildcard(loc~) => env.0.visit_LexScanCasePattern_Wildcard(loc~)
+  }
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexScanCasePattern_Pattern(
+  env,
+  regex_pattern,
+) {
+  let regex_pattern = map_regex_pattern(env, regex_pattern)
+  LexScanCasePattern::Pattern(regex_pattern)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexScanCasePattern_Binder(
+  env,
+  binder,
+) {
+  let binder = env.0.visit_Binder(binder)
+  LexScanCasePattern::Binder(binder)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexScanCasePattern_Wildcard(
+  env,
+  loc~,
+) {
+  ignore(env)
+  LexScanCasePattern::Wildcard(loc~)
 }
 
 ///|

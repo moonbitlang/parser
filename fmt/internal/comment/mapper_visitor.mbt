@@ -19,10 +19,20 @@ impl IterVisitor for Mapper with fn visit_Impl(self, top) {
 }
 
 ///|
-impl IterVisitor for Mapper with fn visit_Expr_Array(self, exprs~, loc~) {
+impl IterVisitor for Mapper with fn visit_Expr_Array(
+  self,
+  exprs~,
+  is_iter~,
+  loc~,
+) {
   self.attach(Node(loc))
   self.cursor_advance(loc.start)
-  let lbracket = self.cursor_find(TK_LBRACKET)
+  let (lbracket_kind, rbracket_kind) : (TokenKind, TokenKind) = if is_iter {
+    (TK_LBRACKET_BAR, TK_BAR_RBRACKET)
+  } else {
+    (TK_LBRACKET, TK_RBRACKET)
+  }
+  let lbracket = self.cursor_find(lbracket_kind)
   let commas = []
   for elem in exprs {
     self.visit_Expr(elem)
@@ -30,7 +40,7 @@ impl IterVisitor for Mapper with fn visit_Expr_Array(self, exprs~, loc~) {
     let comma = self.cursor_find(TK_COMMA, before_pos=loc.end)
     commas.push(comma)
   }
-  let rbracket = self.cursor_find(TK_RBRACKET)
+  let rbracket = self.cursor_find(rbracket_kind)
   self.table[Node(loc)] = NodeTable::new({
     "lbracket": Token(lbracket),
     "comma": TokenArray(commas),

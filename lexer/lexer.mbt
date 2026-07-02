@@ -264,12 +264,12 @@ fn lex_tokens(
         base~,
         env~,
         end_with_newline=false,
-        allow_interp=false,
+        allow_interp=true,
         start_pos~,
       )
       let tok : @tokens.Token = match interps {
         [InterpLit(repr~, ..)] => BYTES(repr)
-        _interps => panic() // byte strings don't support interpolation
+        interps => BYTES_INTERP(interps)
       }
       env.add_token_with_loc(
         tok,
@@ -525,6 +525,14 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
+    ("\|\]", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::BAR_RBRACKET,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
     ("<\|", rest) => {
       env.add_token_with_loc(
         @tokens.Token::PIPE_LEFT,
@@ -536,6 +544,14 @@ fn lex_tokens(
     ("<\+", rest) => {
       env.add_token_with_loc(
         @tokens.Token::LT_PLUS,
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("<\?", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::LT_QUESTION,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -782,9 +798,17 @@ fn lex_tokens(
       rest
     ) => {
       let name = ident.to_owned()
+      let dot_start = env.calc_offset(input, base~)
       let start_pos = env.calc_offset(input, base~) + 1
       env.register_surrogate_pair(ident)
       let end_pos = env.calc_offset(rest, base~)
+      if name == "" {
+        env.add_lexing_error(
+          MissingIdentifierAfterDot,
+          start=dot_start,
+          end=end_pos,
+        )
+      }
       env.add_token_with_loc(
         @tokens.Token::DOT_LIDENT(name),
         start=start_pos,
@@ -933,6 +957,14 @@ fn lex_tokens(
     (">", rest) => {
       env.add_token_with_loc(
         @tokens.Token::INFIX1(">"),
+        start=env.calc_offset(input, base~),
+        end=env.calc_offset(rest, base~),
+      )
+      lex_tokens(rest, base~, env~, preserve_comment~)
+    }
+    ("\[\|", rest) => {
+      env.add_token_with_loc(
+        @tokens.Token::LBRACKET_BAR,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -1203,7 +1235,7 @@ fn lex_tokens(
     }
 
     // Package name @package/name
-    ("@[a-zA-Z_][a-zA-Z0-9_]*(/[a-zA-Z_][a-zA-Z0-9_]*)*" as raw, rest) => {
+    ("@[a-zA-Z_][a-zA-Z0-9_\-]*(/[a-zA-Z_][a-zA-Z0-9_\-]*)*" as raw, rest) => {
       let pkg_name_without_at = raw.sub(start=1, end=raw.length()).to_owned()
       env.add_token_with_loc(
         @tokens.Token::PACKAGE_NAME(pkg_name_without_at),
@@ -1348,7 +1380,7 @@ fn scan_interpolation_source(
         buf~,
         brace_depth~,
         preserve~,
-        allow_interp=false,
+        allow_interp=true,
         escaped=false,
       )
     }
@@ -1651,16 +1683,17 @@ fn lex_invalid_byte(
   start~ : Int,
 ) -> StringView {
   let invalid_byte_repr_buf = StringBuilder::new()
+  fn add_invalid_byte(rest : StringView) -> StringView {
+    let payload = invalid_byte_repr_buf.to_string()
+    let end_pos = env.calc_offset(base~, rest)
+    env.add_lexing_error(InvalidByteLiteral(payload), start~, end=end_pos)
+    env.add_token_with_loc(BYTE(payload), start~, end=end_pos)
+    rest
+  }
+
   fn process_invalid_byte(input : StringView) -> StringView {
     lexmatch input with longest {
-      ("'", rest) => {
-        env.add_lexing_error(
-          InvalidByteLiteral(invalid_byte_repr_buf.to_string()),
-          start~,
-          end=env.calc_offset(base~, rest),
-        )
-        rest
-      }
+      ("'", rest) => add_invalid_byte(rest)
       ("\r|\n", _) => {
         env.add_lexing_error(
           start=env.calc_offset(base~, input),
@@ -1669,14 +1702,7 @@ fn lex_invalid_byte(
         )
         input
       }
-      "" => {
-        env.add_lexing_error(
-          InvalidByteLiteral(invalid_byte_repr_buf.to_string()),
-          start~,
-          end=env.calc_offset(base~, input),
-        )
-        input
-      }
+      "" => add_invalid_byte(input)
       ("." as c, rest) => {
         env.register_surrogate_pair_for_char(c)
         invalid_byte_repr_buf.write_char(c)
