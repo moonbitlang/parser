@@ -1783,17 +1783,17 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
         INT(x) => {
           let loc = self.peek_location()
           self.expect_token(TK_INT)
-          Constant(c=@syntax.make_int("-" + x), loc~)
+          Constant(c=@syntax.make_int("-\{x}"), loc~)
         }
         FLOAT(x) => {
           let loc = self.peek_location()
           self.expect_token(TK_FLOAT)
-          Constant(c=@syntax.make_float("-" + x), loc~)
+          Constant(c=@syntax.make_float("-\{x}"), loc~)
         }
         DOUBLE(x) => {
           let loc = self.peek_location()
           self.expect_token(TK_DOUBLE)
-          Constant(c=@syntax.make_double("-" + x), loc~)
+          Constant(c=@syntax.make_double("-\{x}"), loc~)
         }
         other => {
           let other_loc = self.peek_location()
@@ -2006,9 +2006,9 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             MINUS => {
               self.expect_token(TK_MINUS)
               match self.peek_token() {
-                INT(x) => parse_map_elem_pat(@syntax.make_int("-" + x))
-                FLOAT(x) => parse_map_elem_pat(@syntax.make_float("-" + x))
-                DOUBLE(x) => parse_map_elem_pat(Double("-" + x))
+                INT(x) => parse_map_elem_pat(@syntax.make_int("-\{x}"))
+                FLOAT(x) => parse_map_elem_pat(@syntax.make_float("-\{x}"))
+                DOUBLE(x) => parse_map_elem_pat(Double("-\{x}"))
                 other => {
                   let other_loc = self.peek_location()
                   self.report_failed_to_parse(
@@ -4868,9 +4868,9 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
       MINUS => {
         state.skip()
         match state.peek_token() {
-          INT(x) => parse_map_expr_elem(@syntax.make_int("-" + x))
-          FLOAT(x) => parse_map_expr_elem(@syntax.make_float("-" + x))
-          DOUBLE(x) => parse_map_expr_elem(@syntax.make_double("-" + x))
+          INT(x) => parse_map_expr_elem(@syntax.make_int("-\{x}"))
+          FLOAT(x) => parse_map_expr_elem(@syntax.make_float("-\{x}"))
+          DOUBLE(x) => parse_map_expr_elem(@syntax.make_double("-\{x}"))
           other => {
             let other_loc = state.peek_location()
             state.report_failed_to_parse(

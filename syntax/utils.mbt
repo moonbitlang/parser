@@ -165,21 +165,21 @@ pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
     ("-", Constant(c=Constant::Int(x), loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
-        _ => "-" + x
+        _ => "-\{x}"
       }
       make_constant_expr(loc~, Constant::Int(new_val))
     }
     ("-", Constant(c=Constant::Int64(x), loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
-        _ => "-" + x
+        _ => "-\{x}"
       }
       make_constant_expr(loc~, Constant::Int64(new_val))
     }
     ("-", Constant(c=Constant::Double(x), loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
-        _ => "-" + x
+        _ => "-\{x}"
       }
       make_constant_expr(loc~, Constant::Double(new_val))
     }
@@ -257,12 +257,12 @@ pub fn desugar_array_augmented_set(
 
   // Generate unique variable names for array and index
   // Use a simple counter instead of random for reproducibility
-  let arr_name = "*array_" + counter.val.to_string()
+  let arr_name = "*array_\{counter.val}"
   counter.val = counter.val + 1
   let arr_loc = loc_of_expression(array)
   let arr_var = Var::{ name: Ident(name=arr_name), loc: arr_loc }
   let arr_ident = make_ident_expr(loc=arr_loc, arr_var)
-  let idx_name = "*index_" + counter.val.to_string()
+  let idx_name = "*index_\{counter.val}"
   counter.val = counter.val + 1
   let idx_loc = loc_of_expression(index)
   let idx_var = Var::{ name: Ident(name=idx_name), loc: idx_loc }

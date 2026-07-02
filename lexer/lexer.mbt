@@ -87,11 +87,11 @@ fn lex_tokens(
   }
 
   fn typed_metavar_payload(name : StringView, kind : StringView) -> String {
-    "$(" + name.to_owned() + ":" + kind.to_owned() + ")"
+    "$(\{name}:\{kind})"
   }
 
   fn inferred_metavar_payload(name : StringView) -> String {
-    "$" + name.to_owned()
+    "$\{name}"
   }
 
   lexmatch input with longest {
