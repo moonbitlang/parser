@@ -2,9 +2,11 @@ import {
   "moonbitlang/lexer/basic",
 }
 
+formatter(ignore: [ "tokens.mbt" ])
+
 rule(
   name: "moonyacc",
-  command: "cp ../yacc_parser/parser.mbty $input && moon runwasm moonbitlang/yacc@0.7.14 --mode only-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
+  command: "moon runwasm moonbitlang/yacc@0.7.17 --mode only-tokens $input -o $output",
 )
 
 dev_build(rule: "moonyacc", input: "parser.mbty", output: "tokens.mbt")

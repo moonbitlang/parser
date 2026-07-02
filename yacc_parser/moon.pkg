@@ -9,9 +9,11 @@ import {
 
 warnings = "-6"
 
+formatter(ignore: [ "parser.mbt" ])
+
 rule(
   name: "moonyacc",
-  command: "moon runwasm moonbitlang/yacc@0.7.14 --no-comments --external-tokens $input -o $output && moonfmt -w $output && moonfmt -w $output",
+  command: "moon runwasm moonbitlang/yacc@0.7.17 --no-comments --external-tokens $input -o $output",
 )
 
 dev_build(rule: "moonyacc", input: "parser.mbty", output: "parser.mbt")
