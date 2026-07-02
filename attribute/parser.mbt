@@ -75,6 +75,7 @@ priv enum YYSymbol {
   T_MULTILINE_STRING
   T_MULTILINE_INTERP
   T_INTERP
+  T_BYTES_INTERP
   T_REGEX_LITERAL
   T_REGEX_INTERP
   T_ATTRIBUTE
@@ -129,8 +130,10 @@ priv enum YYSymbol {
   T_COLON
   T_SEMI
   T_LBRACKET
+  T_LBRACKET_BAR
   T_PLUS
   T_RBRACKET
+  T_BAR_RBRACKET
   T_UNDERSCORE
   T_BAR
   T_LBRACE
@@ -144,6 +147,7 @@ priv enum YYSymbol {
   T_PIPE
   T_PIPE_LEFT
   T_LT_PLUS
+  T_LT_QUESTION
   T_ELSE
   T_FN
   T_IF
@@ -189,7 +193,10 @@ priv enum YYSymbol {
   T_TRY_EXCLAMATION
   T_LEXMATCH
   T_LEXMATCH_QUESTION
+  T_LEXSCAN
+  T_EXTEND
   T_PACKAGE
+  NT_lident_string
   NT_payloads
   NT_property
   NT_expr
@@ -207,42 +214,55 @@ fn init {
 }
 
 // file:///./parser.mbty
-// 163|    EOF { @list.empty() }
+// 173|    EOF { @list.empty() }
 fn yy_action_0(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_({();  @list.empty() })
 }
 
 // file:///./parser.mbty
-// 164|    properties { $1 }
+// 174|    properties { $1 }
 fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_List_Prop_(_dollar1)
   YYObj_List_Prop_({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 181|    "(" ")"                      { @list.empty() }
+// 191|    "(" ")"                      { @list.empty() }
 fn yy_action_2(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_({();  @list.empty() })
 }
 
 // file:///./parser.mbty
-// 182|    "(" non_empty_properties ")" { $2 }
+// 192|    "(" non_empty_properties ")" { $2 }
 fn yy_action_3(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[1].0 is YYObj_List_Prop_(_dollar2)
   YYObj_List_Prop_({();  _dollar2 })
 }
 
 // file:///./parser.mbty
-// 167|    name=LIDENT "=" expr   { Labeled(name, $3) }
+// 169|    LIDENT { $1 }
 fn yy_action_4(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_String(_dollar1)
+  YYObj_String({();  _dollar1 })
+}
+
+// file:///./parser.mbty
+// 170|    "extend" { "extend" }
+fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  YYObj_String({();  "extend" })
+}
+
+// file:///./parser.mbty
+// 177|    name=lident_string "=" expr   { Labeled(name, $3) }
+fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(name)
   guard _args[2].0 is YYObj_Expr(_dollar3)
   YYObj_Prop({();  Labeled(name, _dollar3) })
 }
 
 // file:///./parser.mbty
-// 175|    qual=LIDENT name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
-fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 185|    qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(qual)
   guard _args[1].0 is YYObj_String(name)
   guard _args[2].0 is YYObj_List_Prop_(props)
@@ -250,72 +270,72 @@ fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 }
 
 // file:///./parser.mbty
-// 173|    qual=LIDENT name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
-fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 183|    qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(qual)
   guard _args[1].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: Some(qual), name}) })
 }
 
 // file:///./parser.mbty
-// 174|    name=LIDENT props=properties                 { Apply({qual: None, name}, props) }
-fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 184|    name=lident_string props=properties                 { Apply({qual: None, name}, props) }
+fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(name)
   guard _args[1].0 is YYObj_List_Prop_(props)
   YYObj_Expr({();  Apply({qual: None, name}, props) })
 }
 
 // file:///./parser.mbty
-// 171|    name=LIDENT                                  { Ident({qual: None, name}) }
-fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(name)
-  YYObj_Expr({();  Ident({qual: None, name}) })
-}
-
-// file:///./parser.mbty
-// 168|    expr                   { Expr($1) }
-fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Expr(_dollar1)
-  YYObj_Prop({();  Expr(_dollar1) })
-}
-
-// file:///./parser.mbty
-// 172|    name=UIDENT                                  { Ident({qual: None, name}) }
+// 181|    name=lident_string                                  { Ident({qual: None, name}) }
 fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: None, name}) })
 }
 
 // file:///./parser.mbty
-// 176|    STRING                                       { String($1) }
+// 178|    expr                   { Expr($1) }
 fn yy_action_11(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_Expr(_dollar1)
+  YYObj_Prop({();  Expr(_dollar1) })
+}
+
+// file:///./parser.mbty
+// 182|    name=UIDENT                                         { Ident({qual: None, name}) }
+fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+  guard _args[0].0 is YYObj_String(name)
+  YYObj_Expr({();  Ident({qual: None, name}) })
+}
+
+// file:///./parser.mbty
+// 186|    STRING                                              { String($1) }
+fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Expr({();  String(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 177|    TRUE                                         { Bool(true) }
-fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 187|    TRUE                                                { Bool(true) }
+fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr({();  Bool(true) })
 }
 
 // file:///./parser.mbty
-// 178|    FALSE                                        { Bool(false) }
-fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 188|    FALSE                                               { Bool(false) }
+fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr({();  Bool(false) })
 }
 
 // file:///./parser.mbty
-// 186|    x=property "," xs=non_empty_properties{ xs.add(x) }
-fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 196|    x=property "," xs=non_empty_properties{ xs.add(x) }
+fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Prop(x)
   guard _args[2].0 is YYObj_List_Prop_(xs)
   YYObj_List_Prop_({();  xs.add(x) })
 }
 
 // file:///./parser.mbty
-// 185|    property { @list.from_array([$1]) }
-fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 195|    property { @list.from_array([$1]) }
+fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Prop(_dollar1)
   YYObj_List_Prop_({();  @list.from_array([_dollar1]) })
 }
@@ -332,6 +352,7 @@ fn yy_input(token : Token, _start_pos : Position, _end_pos : Position) -> (YYSym
     MULTILINE_STRING(data) => (T_MULTILINE_STRING, YYObj_String(data))
     MULTILINE_INTERP(data) => (T_MULTILINE_INTERP, YYObj_InterpLiteral(data))
     INTERP(data) => (T_INTERP, YYObj_InterpLiteral(data))
+    BYTES_INTERP(data) => (T_BYTES_INTERP, YYObj_InterpLiteral(data))
     REGEX_LITERAL(data) => (T_REGEX_LITERAL, YYObj_String(data))
     REGEX_INTERP(data) => (T_REGEX_INTERP, YYObj_InterpLiteral(data))
     ATTRIBUTE(data) => (T_ATTRIBUTE, YYObj__String__String___String_(data))
@@ -386,8 +407,10 @@ fn yy_input(token : Token, _start_pos : Position, _end_pos : Position) -> (YYSym
     COLON => (T_COLON, YYObj_Void)
     SEMI(data) => (T_SEMI, YYObj_Bool(data))
     LBRACKET => (T_LBRACKET, YYObj_Void)
+    LBRACKET_BAR => (T_LBRACKET_BAR, YYObj_Void)
     PLUS => (T_PLUS, YYObj_Void)
     RBRACKET => (T_RBRACKET, YYObj_Void)
+    BAR_RBRACKET => (T_BAR_RBRACKET, YYObj_Void)
     UNDERSCORE => (T_UNDERSCORE, YYObj_Void)
     BAR => (T_BAR, YYObj_Void)
     LBRACE => (T_LBRACE, YYObj_Void)
@@ -401,6 +424,7 @@ fn yy_input(token : Token, _start_pos : Position, _end_pos : Position) -> (YYSym
     PIPE => (T_PIPE, YYObj_Void)
     PIPE_LEFT => (T_PIPE_LEFT, YYObj_Void)
     LT_PLUS => (T_LT_PLUS, YYObj_Void)
+    LT_QUESTION => (T_LT_QUESTION, YYObj_Void)
     ELSE => (T_ELSE, YYObj_Void)
     FN => (T_FN, YYObj_Void)
     IF => (T_IF, YYObj_Void)
@@ -446,44 +470,48 @@ fn yy_input(token : Token, _start_pos : Position, _end_pos : Position) -> (YYSym
     TRY_EXCLAMATION => (T_TRY_EXCLAMATION, YYObj_Void)
     LEXMATCH => (T_LEXMATCH, YYObj_Void)
     LEXMATCH_QUESTION => (T_LEXMATCH_QUESTION, YYObj_Void)
+    LEXSCAN => (T_LEXSCAN, YYObj_Void)
+    EXTEND => (T_EXTEND, YYObj_Void)
     PACKAGE => (T_PACKAGE, YYObj_Void)
   }
 }
 
-// [0, payloads → • EOF, $]
-// [1, payloads → • properties, $]
-// [12, properties → • LPAREN RPAREN, $]
-// [13, properties → • LPAREN non_empty_properties RPAREN, $]
-// [16, payloads_prime → • payloads, $]
+// [2, payloads → • EOF, $]
+// [3, payloads → • properties, $]
+// [14, properties → • LPAREN RPAREN, $]
+// [15, properties → • LPAREN non_empty_properties RPAREN, $]
+// [18, payloads_prime → • payloads, $]
 fn yy_state_0(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     NT_payloads => Shift(yy_state_1)
     T_LPAREN => Shift(yy_state_2)
-    NT_properties => Shift(yy_state_21)
-    T_EOF => Shift(yy_state_22)
+    NT_properties => Shift(yy_state_23)
+    T_EOF => Shift(yy_state_24)
     _ => Error
   }
 }
 
-// [16, payloads_prime → payloads •, $]
+// [18, payloads_prime → payloads •, $]
 fn yy_state_1(_lookahead : YYSymbol) -> YYDecision {
   Accept
 }
 
-// [2, property → • LIDENT EQUAL expr, RPAREN / COMMA]
-// [3, property → • expr, RPAREN / COMMA]
-// [4, expr → • LIDENT, RPAREN / COMMA]
-// [5, expr → • UIDENT, RPAREN / COMMA]
-// [6, expr → • LIDENT DOT_LIDENT, RPAREN / COMMA]
-// [7, expr → • LIDENT properties, RPAREN / COMMA]
-// [8, expr → • LIDENT DOT_LIDENT properties, RPAREN / COMMA]
-// [9, expr → • STRING, RPAREN / COMMA]
-// [10, expr → • TRUE, RPAREN / COMMA]
-// [11, expr → • FALSE, RPAREN / COMMA]
-// [12, properties → LPAREN • RPAREN, $ / RPAREN / COMMA]
-// [13, properties → LPAREN • non_empty_properties RPAREN, $ / RPAREN / COMMA]
-// [14, non_empty_properties → • property, RPAREN]
-// [15, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
+// [0, lident_string → • LIDENT, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
+// [1, lident_string → • EXTEND, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
+// [4, property → • lident_string EQUAL expr, RPAREN / COMMA]
+// [5, property → • expr, RPAREN / COMMA]
+// [6, expr → • lident_string, RPAREN / COMMA]
+// [7, expr → • UIDENT, RPAREN / COMMA]
+// [8, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
+// [9, expr → • lident_string properties, RPAREN / COMMA]
+// [10, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
+// [11, expr → • STRING, RPAREN / COMMA]
+// [12, expr → • TRUE, RPAREN / COMMA]
+// [13, expr → • FALSE, RPAREN / COMMA]
+// [14, properties → LPAREN • RPAREN, $ / RPAREN / COMMA]
+// [15, properties → LPAREN • non_empty_properties RPAREN, $ / RPAREN / COMMA]
+// [16, non_empty_properties → • property, RPAREN]
+// [17, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
 fn yy_state_2(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     NT_property => Shift(yy_state_3)
@@ -492,36 +520,40 @@ fn yy_state_2(_lookahead : YYSymbol) -> YYDecision {
     T_STRING => Shift(yy_state_8)
     T_UIDENT => Shift(yy_state_9)
     NT_expr => Shift(yy_state_10)
-    T_LIDENT => Shift(yy_state_11)
-    NT_non_empty_properties => Shift(yy_state_18)
-    T_RPAREN => Shift(yy_state_20)
+    NT_lident_string => Shift(yy_state_11)
+    T_EXTEND => Shift(yy_state_18)
+    T_LIDENT => Shift(yy_state_19)
+    NT_non_empty_properties => Shift(yy_state_20)
+    T_RPAREN => Shift(yy_state_22)
     _ => Error
   }
 }
 
-// [14, non_empty_properties → property •, RPAREN]
-// [15, non_empty_properties → property • COMMA non_empty_properties, RPAREN]
+// [16, non_empty_properties → property •, RPAREN]
+// [17, non_empty_properties → property • COMMA non_empty_properties, RPAREN]
 fn yy_state_3(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COMMA => Shift(yy_state_4)
-    T_RPAREN => Reduce(1, NT_non_empty_properties, yy_action_15)
+    T_RPAREN => Reduce(1, NT_non_empty_properties, yy_action_17)
     _ => Error
   }
 }
 
-// [2, property → • LIDENT EQUAL expr, RPAREN / COMMA]
-// [3, property → • expr, RPAREN / COMMA]
-// [4, expr → • LIDENT, RPAREN / COMMA]
-// [5, expr → • UIDENT, RPAREN / COMMA]
-// [6, expr → • LIDENT DOT_LIDENT, RPAREN / COMMA]
-// [7, expr → • LIDENT properties, RPAREN / COMMA]
-// [8, expr → • LIDENT DOT_LIDENT properties, RPAREN / COMMA]
-// [9, expr → • STRING, RPAREN / COMMA]
-// [10, expr → • TRUE, RPAREN / COMMA]
-// [11, expr → • FALSE, RPAREN / COMMA]
-// [14, non_empty_properties → • property, RPAREN]
-// [15, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
-// [15, non_empty_properties → property COMMA • non_empty_properties, RPAREN]
+// [0, lident_string → • LIDENT, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
+// [1, lident_string → • EXTEND, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
+// [4, property → • lident_string EQUAL expr, RPAREN / COMMA]
+// [5, property → • expr, RPAREN / COMMA]
+// [6, expr → • lident_string, RPAREN / COMMA]
+// [7, expr → • UIDENT, RPAREN / COMMA]
+// [8, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
+// [9, expr → • lident_string properties, RPAREN / COMMA]
+// [10, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
+// [11, expr → • STRING, RPAREN / COMMA]
+// [12, expr → • TRUE, RPAREN / COMMA]
+// [13, expr → • FALSE, RPAREN / COMMA]
+// [16, non_empty_properties → • property, RPAREN]
+// [17, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
+// [17, non_empty_properties → property COMMA • non_empty_properties, RPAREN]
 fn yy_state_4(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     NT_property => Shift(yy_state_3)
@@ -531,149 +563,165 @@ fn yy_state_4(_lookahead : YYSymbol) -> YYDecision {
     T_STRING => Shift(yy_state_8)
     T_UIDENT => Shift(yy_state_9)
     NT_expr => Shift(yy_state_10)
-    T_LIDENT => Shift(yy_state_11)
+    NT_lident_string => Shift(yy_state_11)
+    T_EXTEND => Shift(yy_state_18)
+    T_LIDENT => Shift(yy_state_19)
     _ => Error
   }
 }
 
-// [15, non_empty_properties → property COMMA non_empty_properties •, RPAREN]
+// [17, non_empty_properties → property COMMA non_empty_properties •, RPAREN]
 fn yy_state_5(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_non_empty_properties, yy_action_14)
+  ReduceNoLookahead(3, NT_non_empty_properties, yy_action_16)
 }
 
-// [11, expr → FALSE •, RPAREN / COMMA]
+// [13, expr → FALSE •, RPAREN / COMMA]
 fn yy_state_6(_lookahead : YYSymbol) -> YYDecision {
+  ReduceNoLookahead(1, NT_expr, yy_action_15)
+}
+
+// [12, expr → TRUE •, RPAREN / COMMA]
+fn yy_state_7(_lookahead : YYSymbol) -> YYDecision {
+  ReduceNoLookahead(1, NT_expr, yy_action_14)
+}
+
+// [11, expr → STRING •, RPAREN / COMMA]
+fn yy_state_8(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_expr, yy_action_13)
 }
 
-// [10, expr → TRUE •, RPAREN / COMMA]
-fn yy_state_7(_lookahead : YYSymbol) -> YYDecision {
+// [7, expr → UIDENT •, RPAREN / COMMA]
+fn yy_state_9(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_expr, yy_action_12)
 }
 
-// [9, expr → STRING •, RPAREN / COMMA]
-fn yy_state_8(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_expr, yy_action_11)
-}
-
-// [5, expr → UIDENT •, RPAREN / COMMA]
-fn yy_state_9(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_expr, yy_action_10)
-}
-
-// [3, property → expr •, RPAREN / COMMA]
+// [5, property → expr •, RPAREN / COMMA]
 fn yy_state_10(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_property, yy_action_9)
+  ReduceNoLookahead(1, NT_property, yy_action_11)
 }
 
-// [2, property → LIDENT • EQUAL expr, RPAREN / COMMA]
-// [4, expr → LIDENT •, RPAREN / COMMA]
-// [6, expr → LIDENT • DOT_LIDENT, RPAREN / COMMA]
-// [7, expr → LIDENT • properties, RPAREN / COMMA]
-// [8, expr → LIDENT • DOT_LIDENT properties, RPAREN / COMMA]
-// [12, properties → • LPAREN RPAREN, RPAREN / COMMA]
-// [13, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
+// [4, property → lident_string • EQUAL expr, RPAREN / COMMA]
+// [6, expr → lident_string •, RPAREN / COMMA]
+// [8, expr → lident_string • DOT_LIDENT, RPAREN / COMMA]
+// [9, expr → lident_string • properties, RPAREN / COMMA]
+// [10, expr → lident_string • DOT_LIDENT properties, RPAREN / COMMA]
+// [14, properties → • LPAREN RPAREN, RPAREN / COMMA]
+// [15, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
 fn yy_state_11(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_2)
     NT_properties => Shift(yy_state_12)
     T_DOT_LIDENT => Shift(yy_state_13)
     T_EQUAL => Shift(yy_state_15)
-    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_8)
+    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_10)
     _ => Error
   }
 }
 
-// [7, expr → LIDENT properties •, RPAREN / COMMA]
+// [9, expr → lident_string properties •, RPAREN / COMMA]
 fn yy_state_12(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_expr, yy_action_7)
+  ReduceNoLookahead(2, NT_expr, yy_action_9)
 }
 
-// [6, expr → LIDENT DOT_LIDENT •, RPAREN / COMMA]
-// [8, expr → LIDENT DOT_LIDENT • properties, RPAREN / COMMA]
-// [12, properties → • LPAREN RPAREN, RPAREN / COMMA]
-// [13, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
+// [8, expr → lident_string DOT_LIDENT •, RPAREN / COMMA]
+// [10, expr → lident_string DOT_LIDENT • properties, RPAREN / COMMA]
+// [14, properties → • LPAREN RPAREN, RPAREN / COMMA]
+// [15, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
 fn yy_state_13(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_2)
     NT_properties => Shift(yy_state_14)
-    T_RPAREN | T_COMMA => Reduce(2, NT_expr, yy_action_6)
+    T_RPAREN | T_COMMA => Reduce(2, NT_expr, yy_action_8)
     _ => Error
   }
 }
 
-// [8, expr → LIDENT DOT_LIDENT properties •, RPAREN / COMMA]
+// [10, expr → lident_string DOT_LIDENT properties •, RPAREN / COMMA]
 fn yy_state_14(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_expr, yy_action_5)
+  ReduceNoLookahead(3, NT_expr, yy_action_7)
 }
 
-// [2, property → LIDENT EQUAL • expr, RPAREN / COMMA]
-// [4, expr → • LIDENT, RPAREN / COMMA]
-// [5, expr → • UIDENT, RPAREN / COMMA]
-// [6, expr → • LIDENT DOT_LIDENT, RPAREN / COMMA]
-// [7, expr → • LIDENT properties, RPAREN / COMMA]
-// [8, expr → • LIDENT DOT_LIDENT properties, RPAREN / COMMA]
-// [9, expr → • STRING, RPAREN / COMMA]
-// [10, expr → • TRUE, RPAREN / COMMA]
-// [11, expr → • FALSE, RPAREN / COMMA]
+// [0, lident_string → • LIDENT, LPAREN / RPAREN / COMMA / DOT_LIDENT]
+// [1, lident_string → • EXTEND, LPAREN / RPAREN / COMMA / DOT_LIDENT]
+// [4, property → lident_string EQUAL • expr, RPAREN / COMMA]
+// [6, expr → • lident_string, RPAREN / COMMA]
+// [7, expr → • UIDENT, RPAREN / COMMA]
+// [8, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
+// [9, expr → • lident_string properties, RPAREN / COMMA]
+// [10, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
+// [11, expr → • STRING, RPAREN / COMMA]
+// [12, expr → • TRUE, RPAREN / COMMA]
+// [13, expr → • FALSE, RPAREN / COMMA]
 fn yy_state_15(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_FALSE => Shift(yy_state_6)
     T_TRUE => Shift(yy_state_7)
     T_STRING => Shift(yy_state_8)
     T_UIDENT => Shift(yy_state_9)
-    T_LIDENT => Shift(yy_state_16)
+    NT_lident_string => Shift(yy_state_16)
     NT_expr => Shift(yy_state_17)
+    T_EXTEND => Shift(yy_state_18)
+    T_LIDENT => Shift(yy_state_19)
     _ => Error
   }
 }
 
-// [4, expr → LIDENT •, RPAREN / COMMA]
-// [6, expr → LIDENT • DOT_LIDENT, RPAREN / COMMA]
-// [7, expr → LIDENT • properties, RPAREN / COMMA]
-// [8, expr → LIDENT • DOT_LIDENT properties, RPAREN / COMMA]
-// [12, properties → • LPAREN RPAREN, RPAREN / COMMA]
-// [13, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
+// [6, expr → lident_string •, RPAREN / COMMA]
+// [8, expr → lident_string • DOT_LIDENT, RPAREN / COMMA]
+// [9, expr → lident_string • properties, RPAREN / COMMA]
+// [10, expr → lident_string • DOT_LIDENT properties, RPAREN / COMMA]
+// [14, properties → • LPAREN RPAREN, RPAREN / COMMA]
+// [15, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
 fn yy_state_16(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_2)
     NT_properties => Shift(yy_state_12)
     T_DOT_LIDENT => Shift(yy_state_13)
-    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_8)
+    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_10)
     _ => Error
   }
 }
 
-// [2, property → LIDENT EQUAL expr •, RPAREN / COMMA]
+// [4, property → lident_string EQUAL expr •, RPAREN / COMMA]
 fn yy_state_17(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_property, yy_action_4)
+  ReduceNoLookahead(3, NT_property, yy_action_6)
 }
 
-// [13, properties → LPAREN non_empty_properties • RPAREN, $ / RPAREN / COMMA]
+// [1, lident_string → EXTEND •, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
 fn yy_state_18(_lookahead : YYSymbol) -> YYDecision {
+  ReduceNoLookahead(1, NT_lident_string, yy_action_5)
+}
+
+// [0, lident_string → LIDENT •, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
+fn yy_state_19(_lookahead : YYSymbol) -> YYDecision {
+  ReduceNoLookahead(1, NT_lident_string, yy_action_4)
+}
+
+// [15, properties → LPAREN non_empty_properties • RPAREN, $ / RPAREN / COMMA]
+fn yy_state_20(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    T_RPAREN => Shift(yy_state_19)
+    T_RPAREN => Shift(yy_state_21)
     _ => Error
   }
 }
 
-// [13, properties → LPAREN non_empty_properties RPAREN •, $ / RPAREN / COMMA]
-fn yy_state_19(_lookahead : YYSymbol) -> YYDecision {
+// [15, properties → LPAREN non_empty_properties RPAREN •, $ / RPAREN / COMMA]
+fn yy_state_21(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(3, NT_properties, yy_action_3)
 }
 
-// [12, properties → LPAREN RPAREN •, $ / RPAREN / COMMA]
-fn yy_state_20(_lookahead : YYSymbol) -> YYDecision {
+// [14, properties → LPAREN RPAREN •, $ / RPAREN / COMMA]
+fn yy_state_22(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(2, NT_properties, yy_action_2)
 }
 
-// [1, payloads → properties •, $]
-fn yy_state_21(_lookahead : YYSymbol) -> YYDecision {
+// [3, payloads → properties •, $]
+fn yy_state_23(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_payloads, yy_action_1)
 }
 
-// [0, payloads → EOF •, $]
-fn yy_state_22(_lookahead : YYSymbol) -> YYDecision {
+// [2, payloads → EOF •, $]
+fn yy_state_24(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_payloads, yy_action_0)
 }
 
@@ -788,7 +836,7 @@ fn error(stack : @list.List[YYState], token : Token?, loc : (Position, Position)
     }
     go(stack)
   }
-  for term in ([(T_CHAR, TK_CHAR), (T_INT, TK_INT), (T_BYTE, TK_BYTE), (T_BYTES, TK_BYTES), (T_FLOAT, TK_FLOAT), (T_DOUBLE, TK_DOUBLE), (T_STRING, TK_STRING), (T_MULTILINE_STRING, TK_MULTILINE_STRING), (T_MULTILINE_INTERP, TK_MULTILINE_INTERP), (T_INTERP, TK_INTERP), (T_REGEX_LITERAL, TK_REGEX_LITERAL), (T_REGEX_INTERP, TK_REGEX_INTERP), (T_ATTRIBUTE, TK_ATTRIBUTE), (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT), (T_POST_LABEL, TK_POST_LABEL), (T_COMMENT, TK_COMMENT), (T_NEWLINE, TK_NEWLINE), (T_INFIX1, TK_INFIX1), (T_INFIX2, TK_INFIX2), (T_INFIX3, TK_INFIX3), (T_INFIX4, TK_INFIX4), (T_AUGMENTED_ASSIGNMENT, TK_AUGMENTED_ASSIGNMENT), (T_PLUS_EQUAL, TK_PLUS_EQUAL), (T_EOF, TK_EOF), (T_FALSE, TK_FALSE), (T_TRUE, TK_TRUE), (T_PUB, TK_PUB), (T_PRIV, TK_PRIV), (T_READONLY, TK_READONLY), (T_IMPORT, TK_IMPORT), (T_EXTERN, TK_EXTERN), (T_BREAK, TK_BREAK), (T_CONTINUE, TK_CONTINUE), (T_STRUCT, TK_STRUCT), (T_ENUM, TK_ENUM), (T_TRAIT, TK_TRAIT), (T_DERIVE, TK_DERIVE), (T_IMPL, TK_IMPL), (T_WITH, TK_WITH), (T_RAISE, TK_RAISE), (T_THROW, TK_THROW), (T_TRY, TK_TRY), (T_CATCH, TK_CATCH), (T_ASYNC, TK_ASYNC), (T_TYPEALIAS, TK_TYPEALIAS), (T_TRAITALIAS, TK_TRAITALIAS), (T_FNALIAS, TK_FNALIAS), (T_EQUAL, TK_EQUAL), (T_EQ_TILDE, TK_EQ_TILDE), (T_LPAREN, TK_LPAREN), (T_RPAREN, TK_RPAREN), (T_COMMA, TK_COMMA), (T_MINUS, TK_MINUS), (T_QUESTION, TK_QUESTION), (T_EXCLAMATION, TK_EXCLAMATION), (T_DOT_LIDENT, TK_DOT_LIDENT), (T_DOT_UIDENT, TK_DOT_UIDENT), (T_DOT_INT, TK_DOT_INT), (T_DOT_LPAREN, TK_DOT_LPAREN), (T_COLONCOLON, TK_COLONCOLON), (T_COLON, TK_COLON), (T_SEMI, TK_SEMI), (T_LBRACKET, TK_LBRACKET), (T_PLUS, TK_PLUS), (T_RBRACKET, TK_RBRACKET), (T_UNDERSCORE, TK_UNDERSCORE), (T_BAR, TK_BAR), (T_LBRACE, TK_LBRACE), (T_RBRACE, TK_RBRACE), (T_AMPERAMPER, TK_AMPERAMPER), (T_AMPER, TK_AMPER), (T_CARET, TK_CARET), (T_BARBAR, TK_BARBAR), (T_PACKAGE_NAME, TK_PACKAGE_NAME), (T_AS, TK_AS), (T_PIPE, TK_PIPE), (T_PIPE_LEFT, TK_PIPE_LEFT), (T_LT_PLUS, TK_LT_PLUS), (T_ELSE, TK_ELSE), (T_FN, TK_FN), (T_IF, TK_IF), (T_LET, TK_LET), (T_PROOF_ASSERT, TK_PROOF_ASSERT), (T_PROOF_LET, TK_PROOF_LET), (T_CONST, TK_CONST), (T_MATCH, TK_MATCH), (T_USING, TK_USING), (T_MUTABLE, TK_MUTABLE), (T_TYPE, TK_TYPE), (T_FAT_ARROW, TK_FAT_ARROW), (T_THIN_ARROW, TK_THIN_ARROW), (T_WHILE, TK_WHILE), (T_RETURN, TK_RETURN), (T_DOTDOT, TK_DOTDOT), (T_RANGE_INCLUSIVE, TK_RANGE_INCLUSIVE), (T_RANGE_LT_INCLUSIVE, TK_RANGE_LT_INCLUSIVE), (T_RANGE_EXCLUSIVE, TK_RANGE_EXCLUSIVE), (T_RANGE_INCLUSIVE_REV, TK_RANGE_INCLUSIVE_REV), (T_RANGE_EXCLUSIVE_REV, TK_RANGE_EXCLUSIVE_REV), (T_ELLIPSIS, TK_ELLIPSIS), (T_TEST, TK_TEST), (T_LOOP, TK_LOOP), (T_GUARD, TK_GUARD), (T_DEFER, TK_DEFER), (T_FOR, TK_FOR), (T_IN, TK_IN), (T_IS, TK_IS), (T_SUBERROR, TK_SUBERROR), (T_AND, TK_AND), (T_FORALL, TK_FORALL), (T_EXISTS, TK_EXISTS), (T_IMPLIES, TK_IMPLIES), (T_LETREC, TK_LETREC), (T_ENUMVIEW, TK_ENUMVIEW), (T_EXTENUM, TK_EXTENUM), (T_DECLARE, TK_DECLARE), (T_NORAISE, TK_NORAISE), (T_NOBREAK, TK_NOBREAK), (T_WHERE, TK_WHERE), (T_TRY_QUESTION, TK_TRY_QUESTION), (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION), (T_LEXMATCH, TK_LEXMATCH), (T_LEXMATCH_QUESTION, TK_LEXMATCH_QUESTION), (T_PACKAGE, TK_PACKAGE)] : Array[(YYSymbol, TokenKind)]) {
+  for term in ([(T_CHAR, TK_CHAR), (T_INT, TK_INT), (T_BYTE, TK_BYTE), (T_BYTES, TK_BYTES), (T_FLOAT, TK_FLOAT), (T_DOUBLE, TK_DOUBLE), (T_STRING, TK_STRING), (T_MULTILINE_STRING, TK_MULTILINE_STRING), (T_MULTILINE_INTERP, TK_MULTILINE_INTERP), (T_INTERP, TK_INTERP), (T_BYTES_INTERP, TK_BYTES_INTERP), (T_REGEX_LITERAL, TK_REGEX_LITERAL), (T_REGEX_INTERP, TK_REGEX_INTERP), (T_ATTRIBUTE, TK_ATTRIBUTE), (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT), (T_POST_LABEL, TK_POST_LABEL), (T_COMMENT, TK_COMMENT), (T_NEWLINE, TK_NEWLINE), (T_INFIX1, TK_INFIX1), (T_INFIX2, TK_INFIX2), (T_INFIX3, TK_INFIX3), (T_INFIX4, TK_INFIX4), (T_AUGMENTED_ASSIGNMENT, TK_AUGMENTED_ASSIGNMENT), (T_PLUS_EQUAL, TK_PLUS_EQUAL), (T_EOF, TK_EOF), (T_FALSE, TK_FALSE), (T_TRUE, TK_TRUE), (T_PUB, TK_PUB), (T_PRIV, TK_PRIV), (T_READONLY, TK_READONLY), (T_IMPORT, TK_IMPORT), (T_EXTERN, TK_EXTERN), (T_BREAK, TK_BREAK), (T_CONTINUE, TK_CONTINUE), (T_STRUCT, TK_STRUCT), (T_ENUM, TK_ENUM), (T_TRAIT, TK_TRAIT), (T_DERIVE, TK_DERIVE), (T_IMPL, TK_IMPL), (T_WITH, TK_WITH), (T_RAISE, TK_RAISE), (T_THROW, TK_THROW), (T_TRY, TK_TRY), (T_CATCH, TK_CATCH), (T_ASYNC, TK_ASYNC), (T_TYPEALIAS, TK_TYPEALIAS), (T_TRAITALIAS, TK_TRAITALIAS), (T_FNALIAS, TK_FNALIAS), (T_EQUAL, TK_EQUAL), (T_EQ_TILDE, TK_EQ_TILDE), (T_LPAREN, TK_LPAREN), (T_RPAREN, TK_RPAREN), (T_COMMA, TK_COMMA), (T_MINUS, TK_MINUS), (T_QUESTION, TK_QUESTION), (T_EXCLAMATION, TK_EXCLAMATION), (T_DOT_LIDENT, TK_DOT_LIDENT), (T_DOT_UIDENT, TK_DOT_UIDENT), (T_DOT_INT, TK_DOT_INT), (T_DOT_LPAREN, TK_DOT_LPAREN), (T_COLONCOLON, TK_COLONCOLON), (T_COLON, TK_COLON), (T_SEMI, TK_SEMI), (T_LBRACKET, TK_LBRACKET), (T_LBRACKET_BAR, TK_LBRACKET_BAR), (T_PLUS, TK_PLUS), (T_RBRACKET, TK_RBRACKET), (T_BAR_RBRACKET, TK_BAR_RBRACKET), (T_UNDERSCORE, TK_UNDERSCORE), (T_BAR, TK_BAR), (T_LBRACE, TK_LBRACE), (T_RBRACE, TK_RBRACE), (T_AMPERAMPER, TK_AMPERAMPER), (T_AMPER, TK_AMPER), (T_CARET, TK_CARET), (T_BARBAR, TK_BARBAR), (T_PACKAGE_NAME, TK_PACKAGE_NAME), (T_AS, TK_AS), (T_PIPE, TK_PIPE), (T_PIPE_LEFT, TK_PIPE_LEFT), (T_LT_PLUS, TK_LT_PLUS), (T_LT_QUESTION, TK_LT_QUESTION), (T_ELSE, TK_ELSE), (T_FN, TK_FN), (T_IF, TK_IF), (T_LET, TK_LET), (T_PROOF_ASSERT, TK_PROOF_ASSERT), (T_PROOF_LET, TK_PROOF_LET), (T_CONST, TK_CONST), (T_MATCH, TK_MATCH), (T_USING, TK_USING), (T_MUTABLE, TK_MUTABLE), (T_TYPE, TK_TYPE), (T_FAT_ARROW, TK_FAT_ARROW), (T_THIN_ARROW, TK_THIN_ARROW), (T_WHILE, TK_WHILE), (T_RETURN, TK_RETURN), (T_DOTDOT, TK_DOTDOT), (T_RANGE_INCLUSIVE, TK_RANGE_INCLUSIVE), (T_RANGE_LT_INCLUSIVE, TK_RANGE_LT_INCLUSIVE), (T_RANGE_EXCLUSIVE, TK_RANGE_EXCLUSIVE), (T_RANGE_INCLUSIVE_REV, TK_RANGE_INCLUSIVE_REV), (T_RANGE_EXCLUSIVE_REV, TK_RANGE_EXCLUSIVE_REV), (T_ELLIPSIS, TK_ELLIPSIS), (T_TEST, TK_TEST), (T_LOOP, TK_LOOP), (T_GUARD, TK_GUARD), (T_DEFER, TK_DEFER), (T_FOR, TK_FOR), (T_IN, TK_IN), (T_IS, TK_IS), (T_SUBERROR, TK_SUBERROR), (T_AND, TK_AND), (T_FORALL, TK_FORALL), (T_EXISTS, TK_EXISTS), (T_IMPLIES, TK_IMPLIES), (T_LETREC, TK_LETREC), (T_ENUMVIEW, TK_ENUMVIEW), (T_EXTENUM, TK_EXTENUM), (T_DECLARE, TK_DECLARE), (T_NORAISE, TK_NORAISE), (T_NOBREAK, TK_NOBREAK), (T_WHERE, TK_WHERE), (T_TRY_QUESTION, TK_TRY_QUESTION), (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION), (T_LEXMATCH, TK_LEXMATCH), (T_LEXMATCH_QUESTION, TK_LEXMATCH_QUESTION), (T_LEXSCAN, TK_LEXSCAN), (T_EXTEND, TK_EXTEND), (T_PACKAGE, TK_PACKAGE)] : Array[(YYSymbol, TokenKind)]) {
     try_add(term.0, term.1)
   }
   match token {
