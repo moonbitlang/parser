@@ -2954,8 +2954,7 @@
                                   }
                                 }
                               },
-                              "is_conditional": true,
-                              "loc": null
+                              "is_conditional": true
                             }
                           },
                           {
@@ -3014,8 +3013,7 @@
                                   }
                                 }
                               },
-                              "is_conditional": true,
-                              "loc": null
+                              "is_conditional": true
                             }
                           },
                           {
@@ -3124,8 +3122,7 @@
                                   }
                                 }
                               },
-                              "is_conditional": true,
-                              "loc": null
+                              "is_conditional": true
                             }
                           },
                           {
@@ -3215,8 +3212,7 @@
                                   }
                                 }
                               },
-                              "is_conditional": true,
-                              "loc": null
+                              "is_conditional": true
                             }
                           },
                           {
@@ -3253,8 +3249,7 @@
                                   }
                                 }
                               },
-                              "is_conditional": true,
-                              "loc": null
+                              "is_conditional": true
                             }
                           }
                         ]
@@ -3380,8 +3375,7 @@
                                           }
                                         }
                                       },
-                                      "is_conditional": true,
-                                      "loc": null
+                                      "is_conditional": true
                                     }
                                   },
                                   {
@@ -3445,8 +3439,7 @@
                                           }
                                         }
                                       },
-                                      "is_conditional": true,
-                                      "loc": null
+                                      "is_conditional": true
                                     }
                                   },
                                   {
@@ -3516,8 +3509,7 @@
                                                       }
                                                     }
                                                   },
-                                                  "is_conditional": true,
-                                                  "loc": null
+                                                  "is_conditional": true
                                                 }
                                               },
                                               "kind": {
@@ -3583,8 +3575,7 @@
                                           }
                                         }
                                       },
-                                      "is_conditional": true,
-                                      "loc": null
+                                      "is_conditional": true
                                     }
                                   },
                                   "body": {
@@ -3816,8 +3807,7 @@
                                                           }
                                                         }
                                                       },
-                                                      "is_conditional": false,
-                                                      "loc": null
+                                                      "is_conditional": false
                                                     }
                                                   },
                                                   {
@@ -4079,8 +4069,7 @@
                                                                   }
                                                                 }
                                                               },
-                                                              "is_conditional": true,
-                                                              "loc": null
+                                                              "is_conditional": true
                                                             }
                                                           },
                                                           {
@@ -4378,8 +4367,7 @@
                                                                           }
                                                                         }
                                                                       },
-                                                                      "is_conditional": true,
-                                                                      "loc": null
+                                                                      "is_conditional": true
                                                                     }
                                                                   },
                                                                   {
@@ -4681,8 +4669,7 @@
                                                                                   }
                                                                                 }
                                                                               },
-                                                                              "is_conditional": true,
-                                                                              "loc": null
+                                                                              "is_conditional": true
                                                                             }
                                                                           },
                                                                           {
@@ -4960,8 +4947,7 @@
                                                                                           }
                                                                                         }
                                                                                       },
-                                                                                      "is_conditional": true,
-                                                                                      "loc": null
+                                                                                      "is_conditional": true
                                                                                     }
                                                                                   }
                                                                                 ]

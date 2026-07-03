@@ -117,8 +117,7 @@
                       }
                     }
                   },
-                  "is_conditional": false,
-                  "loc": null
+                  "is_conditional": false
                 }
               },
               "body": {
@@ -186,8 +185,7 @@
                           }
                         }
                       },
-                      "is_conditional": true,
-                      "loc": null
+                      "is_conditional": true
                     }
                   },
                   "body": {
@@ -235,8 +233,7 @@
                               }
                             }
                           },
-                          "is_conditional": false,
-                          "loc": null
+                          "is_conditional": false
                         }
                       },
                       "body": {
@@ -303,8 +300,7 @@
                                       }
                                     }
                                   },
-                                  "is_conditional": false,
-                                  "loc": null
+                                  "is_conditional": false
                                 }
                               }
                             ]
@@ -365,8 +361,7 @@
                                   }
                                 }
                               },
-                              "is_conditional": false,
-                              "loc": null
+                              "is_conditional": false
                             }
                           }
                         }
