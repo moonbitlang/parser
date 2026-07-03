@@ -895,7 +895,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "expr": expr.json_repr(),
         "template": template.json_repr(),
         "is_conditional": Json::boolean(is_conditional),
-        "loc": loc.to_json(),
       })
     StaticAssert(asserts~, body~) => {
       let loc = body.loc()

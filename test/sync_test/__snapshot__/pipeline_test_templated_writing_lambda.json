@@ -1396,8 +1396,7 @@
                                   }
                                 }
                               },
-                              "is_conditional": false,
-                              "loc": null
+                              "is_conditional": false
                             }
                           }
                         ]
