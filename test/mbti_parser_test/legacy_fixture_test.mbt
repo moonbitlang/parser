@@ -103,7 +103,7 @@ fn expect_constructor_name(
 test "parse legacy mbti simple fixture" {
   let mbti = parse_fixture("simple")
   inspect(mbti.package_name, content="username/hello/lib")
-  inspect(mbti.imports.length().to_string(), content="2")
+  assert_eq(mbti.imports.length(), 2)
   expect_sig_count(mbti, 11)
   expect_sig_name(mbti, 0, "g")
   expect_sig_name(mbti, 1, "h")
@@ -187,7 +187,7 @@ test "parse legacy mbti trait fixture" {
   guard methods.head().unwrap() is { name: { name: "g", .. }, params, .. } else {
     fail("expected I2.g method")
   }
-  inspect(params.length().to_string(), content="2")
+  assert_eq(params.length(), 2)
   guard sig_at(mbti, 2) is Trait({ name: { name: "I3", .. }, vis, methods, .. }) else {
     fail("expected pub(open) I3 trait")
   }
@@ -227,7 +227,7 @@ test "parse legacy mbti attributes fixture" {
   expect_one_attr(
     attrs, "#callsite(migration(a, allow_positional=true), migration(d, allow_positional=true))",
   )
-  inspect(params.length().to_string(), content="4")
+  assert_eq(params.length(), 4)
   guard params.nth(0) is Some(Labelled(..)) else {
     fail("expected labelled first parameter")
   }

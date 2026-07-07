@@ -32,7 +32,7 @@ test "mbti float constants strip F suffix" {
     is Const({ value: Float(value), .. }) else {
     fail("expected float const")
   }
-  inspect(value, content="1.5")
+  assert_eq(value, "1.5")
   let negative_float_const =
     #|pub const X : Float = -2.5F
     #|
@@ -40,7 +40,7 @@ test "mbti float constants strip F suffix" {
     is Const({ value: Float(value), .. }) else {
     fail("expected negative float const")
   }
-  inspect(value, content="-2.5")
+  assert_eq(value, "-2.5")
 }
 
 ///|
@@ -76,7 +76,7 @@ test "mbti parse string records base position" {
     #|
   let mbti = parse_ok("base_pos.mbti", content)
   inspect(mbti.base_pos.base_fname, content="base_pos.mbti")
-  inspect(mbti.base_pos.base_lnum, content="0")
+  assert_eq(mbti.base_pos.base_lnum, 0)
 }
 
 ///|
@@ -109,13 +109,13 @@ test "trait_method_type_params" {
     is { name: { name: "map", .. }, type_params, .. } else {
     fail("expected generic method")
   }
-  inspect(type_params.length().to_string(), content="1")
+  assert_eq(type_params.length(), 1)
   let type_param = type_params.head().unwrap()
   inspect(type_param.name.name, content="A")
-  inspect(type_param.constraints.length().to_string(), content="1")
+  assert_eq(type_param.constraints.length(), 1)
   guard methods.nth(1)
     is Some({ name: { name: "extend", .. }, type_params: extend_params, .. }) else {
     fail("expected extend method")
   }
-  inspect(extend_params.length().to_string(), content="0")
+  assert_eq(extend_params.length(), 0)
 }
