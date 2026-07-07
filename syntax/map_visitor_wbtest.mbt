@@ -13,7 +13,7 @@ test "Pattern" {
   let constant_pattern = Pattern::Constant(c=int_constant, loc=dummy_loc)
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
@@ -40,9 +40,9 @@ test "Pattern" {
     pat: any_pattern,
     kind: ArgumentKind::Positional,
   }
-  let array_patterns = ArrayPatterns::Closed(@list.from_array([]))
+  let array_patterns = ArrayPatterns::Closed(@list.List([]))
   let tuple_pattern = Pattern::Tuple(
-    pats=@list.from_array([any_pattern, constant_pattern]),
+    pats=@list.List([any_pattern, constant_pattern]),
     loc=dummy_loc,
   )
   let any_with_alias = Pattern::Alias(
@@ -66,17 +66,17 @@ test "Pattern" {
   )
   let constr_pattern = Pattern::Constr(
     constr~,
-    args=Some(@list.from_array([constr_pat_arg])),
+    args=Some(@list.List([constr_pat_arg])),
     is_open=false,
     loc=dummy_loc,
   )
   let record_pattern = Pattern::Record(
-    fields=@list.from_array([field_pat]),
+    fields=@list.List([field_pat]),
     is_closed=true,
     loc=dummy_loc,
   )
   let map_pattern = Pattern::Map(
-    elems=@list.from_array([map_elem]),
+    elems=@list.List([map_elem]),
     is_closed=false,
     loc=dummy_loc,
   )

@@ -56,7 +56,7 @@ pub fn make_interps(c : @tokens.InterpLiteral) -> @list.List[InterpElem] {
       InterpSource(s) => InterpElem::Source(s)
     }
   })
-  @list.from_array(result)
+  @list.List(result)
 }
 
 ///|
@@ -225,9 +225,7 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
       name: operators_table.get("_[_]").unwrap(),
       loc: bracket_loc(index),
     },
-    args=@list.from_array([
-      Argument::{ value: index, kind: ArgumentKind::Positional },
-    ]),
+    args=@list.List([Argument::{ value: index, kind: ArgumentKind::Positional }]),
     return_self=false,
     loc~,
   )
@@ -247,7 +245,7 @@ pub fn desugar_array_set(
       name: operators_table.get("_[_]=_").unwrap(),
       loc: bracket_loc(index),
     },
-    args=@list.from_array([
+    args=@list.List([
       Argument::{ value: index, kind: ArgumentKind::Positional },
       Argument::{ value, kind: ArgumentKind::Positional },
     ]),

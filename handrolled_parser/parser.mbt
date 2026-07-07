@@ -23,7 +23,7 @@ fn State::parse_attributes(self : Self) -> List[Attribute] {
     result.push(Attribute::new(loc~, content))
     self.skip()
   }
-  @list.from_array(result)
+  @list.List(result)
 }
 
 ///|
@@ -53,7 +53,7 @@ fn State::parse_toplevel(self : Self) -> Impls {
     self.pop_syncs(first_impl_)
   }
   self.pop_sync(TK_EOF)
-  @list.from_array(result)
+  @list.List(result)
 }
 
 ///|
@@ -295,11 +295,7 @@ fn State::parse_var(self : Self) -> @syntax.Var {
 ///|
 fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
   if self.mode is Panic(loc~, ..) {
-    return {
-      name: "?tvar_name",
-      name_loc: loc,
-      constraints: @list.from_array([]),
-    }
+    return { name: "?tvar_name", name_loc: loc, constraints: @list.List([]) }
   }
   let spos = self.peek_spos()
   let name = self.expect_uident(context="type variable name")
@@ -313,7 +309,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
         let trait_ = state.parse_qual_type_ident(context="trait name")
         { trait_, loc }
       })
-      |> @list.from_array
+      |> @list.List
     },
   )
   let constraints = match constraints {
@@ -421,7 +417,7 @@ fn State::parse_opt_type_params_no_constraints(
     )
   })
   .unwrap_or([])
-  |> @list.from_array
+  |> @list.List
 }
 
 ///|
@@ -464,7 +460,7 @@ fn State::parse_fun_decl(
       delim=TK_COMMA,
       State::parse_parameter,
     )
-    |> @list.from_array
+    |> @list.List
   })
   let params_loc = match decl_params {
     Some(_) => self.loc_start_with(param_loc_start)
@@ -577,7 +573,7 @@ fn State::parse_trait_decl(
         let trait_ = state.parse_qual_type_ident(context="trait name")
         @syntax.TypeVarConstraint::{ trait_, loc }
       })
-      |> @list.from_array
+      |> @list.List
     })
   } else {
     @list.new()
@@ -588,7 +584,7 @@ fn State::parse_trait_decl(
     follow_set=[TK_RBRACE],
     State::parse_trait_method_decl,
   )
-  let methods = @list.from_array(methods)
+  let methods = @list.List(methods)
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
   {
@@ -668,7 +664,7 @@ fn State::parse_test_block(
       delim=TK_COMMA,
       State::parse_parameter,
     )
-    Some(@list.from_array(params))
+    Some(@list.List(params))
   } else {
     None
   }
@@ -707,7 +703,7 @@ fn State::parse_top_func(
         self.skip()
       }
       DeclStubs(
-        Embedded(language=None, code=CodeMultilineString(@list.from_array(xs))),
+        Embedded(language=None, code=CodeMultilineString(@list.List(xs))),
       )
     } else {
       let name1 = self.expect_string()
@@ -760,7 +756,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               delim=TK_SEMI,
               State::parse_constr_decl,
             )
-            |> @list.from_array
+            |> @list.List
           Error(EnumPayload(cs))
         }
         _ => {
@@ -846,7 +842,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             State::parse_type,
           )
           self.expect_token(TK_RPAREN)
-          TupleStruct(@list.from_array(ts))
+          TupleStruct(@list.List(ts))
         }
         _ => self.parse_struct_body(allow_constr=true)
       }
@@ -877,7 +873,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           delim=TK_SEMI,
           State::parse_constr_decl,
         )
-        |> @list.from_array
+        |> @list.List
       let deriving = self.parse_deriving_directive_list()
       let loc = self.loc_start_with(spos)
       TopTypeDef({
@@ -910,7 +906,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             delim=TK_SEMI,
             State::parse_constr_decl,
           )
-          |> @list.from_array
+          |> @list.List
         ExtendEnum(target~, constructors~)
       } else {
         let constrs = self.surround_series(
@@ -920,7 +916,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             delim=TK_SEMI,
             State::parse_constr_decl,
           )
-          |> @list.from_array
+          |> @list.List
         ExtensibleEnum(constrs)
       }
       let deriving = self.parse_deriving_directive_list()
@@ -986,7 +982,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           decl_body=DeclStubs(
             Embedded(
               language=Some(language),
-              code=CodeMultilineString(@list.from_array(xs)),
+              code=CodeMultilineString(@list.List(xs)),
             ),
           ),
           where_clause=None,
@@ -1071,7 +1067,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
                 delim=TK_COMMA,
                 State::parse_parameter,
               )
-              |> @list.from_array
+              |> @list.List
             let (ret_ty, err_ty) = self.parse_func_return_type()
             self.pop_sync(TK_LBRACE)
             let body : @syntax.DeclBody = if self.peek_token() is EQUAL {
@@ -1127,7 +1123,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               delim=TK_COMMA,
               State::parse_parameter,
             )
-            |> @list.from_array
+            |> @list.List
           let (ret_ty, err_ty) = self.parse_func_return_type()
           self.pop_sync(TK_LBRACE)
           let body : @syntax.DeclBody = if self.peek_token() is EQUAL {
@@ -1190,7 +1186,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           delim=TK_SEMI,
           State::parse_constr_decl,
         )
-        |> @list.from_array
+        |> @list.List
       self.expect_token(TK_FOR)
       let source_ty = self.parse_type()
       self.expect_token(TK_WITH)
@@ -1202,7 +1198,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           delim=TK_COMMA,
           State::parse_parameter,
         )
-        |> @list.from_array
+        |> @list.List
       let params_loc = self.loc_start_with(params_spos)
       let body = self.parse_block_expr()
       let loc = self.loc_start_with(spos)
@@ -1310,7 +1306,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             }
           },
         )
-        |> @list.from_array()
+        |> @list.List()
       let loc = self.loc_start_with(spos)
       @syntax.Impl::TopUsing(
         pkg~,
@@ -1397,7 +1393,7 @@ fn State::parse_deriving_directive_list(
       delim=TK_COMMA,
       State::parse_deriving_directive,
     )
-    @list.from_array(directives)
+    @list.List(directives)
   } else {
     @list.new()
   }
@@ -1421,7 +1417,7 @@ fn State::parse_deriving_directive(self : Self) -> @syntax.DerivingDirective {
       delim=TK_COMMA,
       State::parse_argument,
     )
-    |> @list.from_array
+    |> @list.List
   } else {
     @list.new()
   }
@@ -1486,7 +1482,7 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
       }
     },
   )
-  params |> @list.from_array
+  params |> @list.List
 }
 
 ///|
@@ -1612,7 +1608,7 @@ fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
         }
       },
     )
-    Some(@list.from_array(xs))
+    Some(@list.List(xs))
   } else {
     None
   }
@@ -1703,14 +1699,14 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
         ConstrArgRelatedness::Arg(args)
       }
     })
-    |> @list.from_array
+    |> @list.List
   }
 
   fn parse_constr_args_no_open() {
     self.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, _ => {
       self.parse_constr_pat_argument()
     })
-    |> @list.from_array
+    |> @list.List
   }
 
   match self.peek_token() {
@@ -1871,7 +1867,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               first
             } else {
               Tuple(
-                pats=@list.from_array([first, ..pats]),
+                pats=@list.List([first, ..pats]),
                 loc=state.loc_start_with(spos),
               )
             }
@@ -1978,8 +1974,8 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
           }
         },
       )
-      let pats1 = @list.from_array(pats1)
-      let pats2 = @list.from_array(pats2)
+      let pats1 = @list.List(pats1)
+      let pats2 = @list.List(pats2)
       let pats : @syntax.ArrayPatterns = match dotdot {
         NoDotDot => Closed(pats1)
         NoBinder => Open(pats1, pats2, NoBinder)
@@ -2449,7 +2445,7 @@ fn State::parse_where_clause(self : State) -> @syntax.WhereClause? {
       follow_set=[TK_RBRACE],
       State::parse_field_def,
     )
-    let fields = @list.from_array(fields)
+    let fields = @list.List(fields)
     self.expect_token(TK_RBRACE)
     let loc = self.loc_start_with(spos)
     Some({ fields, loc })
@@ -2525,8 +2521,7 @@ fn State::parse_foreach_loop(
     return Hole(loc~, kind=Synthesized)
   }
   let binders = self.with_follow(follow_set=[TK_IN], fn(state) {
-    state.sepby1(delim=TK_COMMA, State::parse_foreach_binder)
-    |> @list.from_array
+    state.sepby1(delim=TK_COMMA, State::parse_foreach_binder) |> @list.List
   })
   self.expect_token(TK_IN)
   let expr = self.parse_expr()
@@ -2537,7 +2532,7 @@ fn State::parse_foreach_loop(
       follow_set=[TK_SEMI, TK_LBRACE],
       State::parse_loop_binder_with_value,
     )
-    let init = @list.from_array(init)
+    let init = @list.List(init)
     let continue_block = if self.peek_token() is SEMI(_) {
       self.skip()
       let (continue_block, _) = self.series_with_follow(
@@ -2545,7 +2540,7 @@ fn State::parse_foreach_loop(
         follow_set=[TK_LBRACE],
         State::parse_loop_binder_with_value,
       )
-      @list.from_array(continue_block)
+      @list.List(continue_block)
     } else {
       @list.empty()
     }
@@ -2589,7 +2584,7 @@ fn State::parse_for_loop(
     follow_set=[TK_SEMI, TK_LBRACE],
     State::parse_loop_binder_with_value,
   )
-  let binders = @list.from_array(binders)
+  let binders = @list.List(binders)
   let (condition, continue_block) = match self.peek_token() {
     LBRACE => (None, @list.new())
     SEMI(_) => {
@@ -2606,7 +2601,7 @@ fn State::parse_for_loop(
           follow_set=[TK_LBRACE],
           State::parse_loop_binder_with_value,
         )
-        @list.from_array(continue_block)
+        @list.List(continue_block)
       }
       self.pop_sync(TK_LBRACE)
       (condition, continue_block)
@@ -2701,7 +2696,7 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
       delim=TK_SEMI,
       State::parse_case,
     )
-    |> @list.from_array
+    |> @list.List
   let (try_else, else_loc) = if self.peek_token() is NORAISE {
     let else_spos = self.peek_spos()
     self.skip()
@@ -2715,7 +2710,7 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
         delim=TK_SEMI,
         State::parse_case,
       )
-      |> @list.from_array
+      |> @list.List
     (Some(try_else_cases), else_loc)
   } else {
     (None, @syntax.no_location)
@@ -2807,7 +2802,7 @@ fn State::parse_match_expr(self : Self) -> @syntax.Expr {
       delim=TK_SEMI,
       State::parse_case,
     )
-    |> @list.from_array
+    |> @list.List
   let loc = self.loc_start_with(spos)
   Match(expr~, cases~, match_loc~, loc~)
 }
@@ -2895,7 +2890,7 @@ fn State::parse_lexmatch_expr(self : State) -> @syntax.Expr {
       follow_set=[TK_RBRACE],
       State::parse_lexmatch_case,
     )
-    @list.from_array(cases)
+    @list.List(cases)
   }
 
   let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
@@ -2943,7 +2938,7 @@ fn State::parse_lexscan_expr(self : State) -> @syntax.Expr {
       follow_set=[TK_RBRACE],
       State::parse_lexscan_case,
     )
-    @list.from_array(cases)
+    @list.List(cases)
   }
 
   let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
@@ -3036,7 +3031,7 @@ fn State::parse_lex_pattern(
       let pats = self.with_follow(follow_set=[TK_RPAREN], state => {
           state.sepby1(delim=TK_COMMA, State::parse_lex_top_pattern)
         })
-        |> @list.from_array
+        |> @list.List
       self.expect_token(TK_RPAREN)
       let loc = self.loc_start_with(spos)
       (pats, loc)
@@ -3135,7 +3130,7 @@ fn State::parse_lex_pattern_sequence(
       _ => break ()
     }
   }
-  @list.from_array(pats)
+  @list.List(pats)
 }
 
 ///|
@@ -3256,7 +3251,7 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
           if rest.length() == 0 {
             Group(expr=first, group=Paren, loc~)
           } else {
-            let rest = @list.from_array(rest)
+            let rest = @list.List(rest)
             Tuple(exprs=rest.add(first), loc~)
           }
         }
@@ -3309,7 +3304,7 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
             Expr(expr) => (as_binder(expr), None)
           }
         })
-        |> @list.from_array
+        |> @list.List
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
       Function(
@@ -3339,7 +3334,7 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
             Expr(expr) => expr
           }
         })
-        |> @list.from_array
+        |> @list.List
       let loc = self.loc_start_with(spos)
       handle_expr(Tuple(exprs~, loc~))
     }
@@ -3445,7 +3440,7 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
       let func = @syntax.make_arrow_fn(
-        @list.from_array([(p, None)]),
+        @list.List([(p, None)]),
         body,
         params_loc~,
         loc~,
@@ -3481,7 +3476,7 @@ fn State::parse_simple_try_expr(
           delim=TK_SEMI,
           State::parse_case,
         )
-        |> @list.from_array
+        |> @list.List
       let (try_else, else_loc) = if self.peek_token() is NORAISE {
         let else_spos = self.peek_spos()
         self.skip()
@@ -3495,7 +3490,7 @@ fn State::parse_simple_try_expr(
             delim=TK_SEMI,
             State::parse_case,
           )
-          |> @list.from_array
+          |> @list.List
         (Some(try_else_cases), else_loc)
       } else {
         (None, @syntax.no_location)
@@ -3576,7 +3571,7 @@ fn State::try_parse_arrow_fn_expr(
               func=@syntax.make_arrow_fn(
                 params_loc~,
                 loc~,
-                @list.from_array(parameters),
+                @list.List(parameters),
                 body,
               ),
               loc~,
@@ -3606,7 +3601,7 @@ fn State::try_parse_arrow_fn_expr(
             }
           })
           let loc = self.loc_start_with(spos)
-          Err(Some(@syntax.Expr::Tuple(exprs=@list.from_array(exprs), loc~)))
+          Err(Some(@syntax.Expr::Tuple(exprs=@list.List(exprs), loc~)))
         }
       }
     }
@@ -3786,7 +3781,7 @@ fn State::parse_infix_expr(
 
   let first_spos = self.peek_spos_with_parsed(parsed~)
   let first_expr = self.parse_postfix_expr(parsed~)
-  let (_, expr) = go(@list.from_array([(first_spos, first_expr)]), @list.new())
+  let (_, expr) = go(@list.List([(first_spos, first_expr)]), @list.new())
   expr
 }
 
@@ -3907,7 +3902,7 @@ fn State::parse_regex_match_rhs(
           follow_set=[TK_RPAREN],
           State::parse_regex_match_binding,
         )
-        @list.from_array(bindings)
+        @list.List(bindings)
       } else {
         @list.empty()
       }
@@ -4069,7 +4064,7 @@ fn State::parse_prefix_expr(
                 delim=TK_COMMA,
                 State::parse_argument,
               )
-              |> @list.from_array
+              |> @list.List
             let loc = self.loc_start_with(spos)
             go(Apply(func=left, args~, loc~))
           }
@@ -4129,7 +4124,7 @@ fn State::parse_prefix_expr(
                     delim=TK_COMMA,
                     State::parse_argument,
                   )
-                  |> @list.from_array
+                  |> @list.List
                 let loc = self.loc_start_with(spos)
                 let expr : @syntax.Expr = DotApply(
                   self=left,
@@ -4160,7 +4155,7 @@ fn State::parse_prefix_expr(
                 delim=TK_COMMA,
                 State::parse_argument,
               )
-              |> @list.from_array
+              |> @list.List
             let loc = self.loc_start_with(spos)
             let expr : @syntax.Expr = DotApply(
               self=left,
@@ -4350,7 +4345,7 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
       let block = self.parse_block_expr()
       let func_loc = @syntax.no_location
       @syntax.Func::{ // Will be set by caller
-        parameters: @list.from_array(params),
+        parameters: @list.List(params),
         params_loc,
         body: block,
         return_type,
@@ -4523,7 +4518,7 @@ fn State::parse_array_expr(self : Self, is_iter~ : Bool) -> @syntax.Expr {
         _ => Regular(state.parse_expr())
       }
     })
-    |> @list.from_array
+    |> @list.List
   let loc = self.loc_start_with(spos)
   if to_spread {
     ArraySpread(elems~, is_iter~, loc~)
@@ -4623,13 +4618,13 @@ fn State::parse_simple_expr(
                 InterpSource(source) => @syntax.InterpElem::Source(source)
               }
             })
-            elems.push(Interp(@list.from_array(converted)))
+            elems.push(Interp(@list.List(converted)))
           }
           _ => break
         }
       }
       let loc = self.loc_start_with(spos)
-      MultilineString(elems=@list.from_array(elems), loc~)
+      MultilineString(elems=@list.List(elems), loc~)
     }
     INTERP(xs) => {
       let loc = self.peek_location()
@@ -4813,7 +4808,7 @@ fn State::parse_template_object_expr(self : Self) -> @syntax.Expr {
     },
   )
   let loc = self.loc_start_with(spos)
-  Map(elems=@list.from_array(elems), loc~)
+  Map(elems=@list.List(elems), loc~)
 }
 
 ///|
@@ -4857,13 +4852,13 @@ fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
                 InterpSource(source) => @syntax.InterpElem::Source(source)
               }
             })
-            elems.push(Interp(@list.from_array(converted)))
+            elems.push(Interp(@list.List(converted)))
           }
           _ => break
         }
       }
       let loc = self.loc_start_with(spos)
-      MultilineString(elems=@list.from_array(elems), loc~)
+      MultilineString(elems=@list.List(elems), loc~)
     }
     LBRACE => self.parse_template_object_expr()
     other => {
@@ -4912,7 +4907,7 @@ fn State::parse_list_comprehension(
   self.expect_token(TK_FOR)
   let kind : @syntax.ListComprehensionKind = if self.next_is_foreach_comprehension() {
     let binders = self.sepby1(delim=TK_COMMA, State::parse_foreach_binder)
-      |> @list.from_array
+      |> @list.List
     self.expect_token(TK_IN)
     let expr = self.parse_infix_expr(parsed=None)
     let (init, continue_block) = if self.peek_token() is SEMI(_) {
@@ -4922,7 +4917,7 @@ fn State::parse_list_comprehension(
         follow_set=[TK_SEMI, TK_IF, TK_FAT_ARROW],
         State::parse_loop_binder_with_infix_value,
       )
-      let init = @list.from_array(init)
+      let init = @list.List(init)
       let continue_block = if self.peek_token() is SEMI(_) {
         self.skip()
         let (continue_block, _) = self.series_with_follow(
@@ -4930,7 +4925,7 @@ fn State::parse_list_comprehension(
           follow_set=[TK_IF, TK_FAT_ARROW],
           State::parse_loop_binder_with_infix_value,
         )
-        @list.from_array(continue_block)
+        @list.List(continue_block)
       } else {
         @list.empty()
       }
@@ -4945,7 +4940,7 @@ fn State::parse_list_comprehension(
       follow_set=[TK_SEMI, TK_IF, TK_FAT_ARROW],
       State::parse_loop_binder_with_infix_value,
     )
-    let binders = @list.from_array(binders)
+    let binders = @list.List(binders)
     let (condition, continue_block) = if self.peek_token() is SEMI(_) {
       self.skip()
       let condition = match self.peek_token() {
@@ -4959,7 +4954,7 @@ fn State::parse_list_comprehension(
           follow_set=[TK_IF, TK_FAT_ARROW],
           State::parse_loop_binder_with_infix_value,
         )
-        @list.from_array(continue_block)
+        @list.List(continue_block)
       } else {
         @list.empty()
       }
@@ -5033,7 +5028,7 @@ fn State::parse_semi_trailing_record(self : Self) -> @syntax.Expr {
   self.expect_token(TK_SEMI)
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
-  Record(type_name=None, fields=@list.from_array([field]), trailing=Semi, loc~)
+  Record(type_name=None, fields=@list.List([field]), trailing=Semi, loc~)
 }
 
 ///|
@@ -5056,7 +5051,7 @@ fn State::parse_record_expr(
         follow_set=[TK_RBRACE],
         State::parse_field_def,
       )
-      (@list.from_array(fields), trailing)
+      (@list.List(fields), trailing)
     } else {
       (@list.new(), false)
     }
@@ -5067,7 +5062,7 @@ fn State::parse_record_expr(
       follow_set=[TK_RBRACE],
       State::parse_field_def,
     )
-    (None, @list.from_array(fields), trailing_semi)
+    (None, @list.List(fields), trailing_semi)
   }
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
@@ -5145,7 +5140,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
   )
   let elems = elems.filter_map(elem => elem) // TODO: add catMaybes to core?
   let loc = self.loc_start_with(spos)
-  Map(elems=@list.from_array(elems), loc~)
+  Map(elems=@list.List(elems), loc~)
 }
 
 ///|
@@ -5174,7 +5169,7 @@ fn State::parse_block_expr(self : Self) -> @syntax.Expr {
     fn(s) -> Statement { s.parse_stmt() },
   )
   let loc = self.loc_start_with(loc_start)
-  Statement::compact_rev(@list.from_array(stmts).rev(), loc~)
+  Statement::compact_rev(@list.List(stmts).rev(), loc~)
 }
 
 ///|
@@ -5219,12 +5214,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      @syntax.make_arrow_fn(
-        @list.from_array(parameters),
-        body,
-        params_loc~,
-        loc~,
-      )
+      @syntax.make_arrow_fn(@list.List(parameters), body, params_loc~, loc~)
     }
     LIDENT(_) | EXTEND | UNDERSCORE => {
       let param = parse_arrow_fn_param()
@@ -5233,7 +5223,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
       @syntax.make_arrow_fn(
-        @list.from_array([(param, None)]),
+        @list.List([(param, None)]),
         body,
         params_loc~,
         loc~,
@@ -5294,7 +5284,7 @@ fn State::parse_stmt(self : Self) -> Statement {
         (binder, ty_opt, func)
       })
       let loc = self.loc_start_with(spos)
-      StmtLetand(bindings=@list.from_array(bindings), loc~)
+      StmtLetand(bindings=@list.List(bindings), loc~)
     }
     ASYNC if self.peek_token(nth=1) is FN &&
       (self.peek_token(nth=2) is LIDENT(_) || self.peek_token(nth=2) is EXTEND) => {
@@ -5374,7 +5364,7 @@ fn State::handle_unexpected_expr_or_statement(
       | StmtDefer(loc~, ..)
       | StmtGuard(loc~, ..) => loc
     }
-    Statement::compact_rev(@list.from_array([stmt]), loc~)
+    Statement::compact_rev(@list.List([stmt]), loc~)
   }
 
   let (actual, expr) = match token {
@@ -5536,7 +5526,7 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
           first_set=first_expr,
           State::parse_expr,
         )
-        |> @list.from_array
+        |> @list.List
       Continue(args~, loc=self.loc_start_with(spos), label~)
     }
     RETURN => {
@@ -5699,7 +5689,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
           delim=TK_COMMA,
           State::parse_type,
         )
-        |> @list.from_array
+        |> @list.List
       })
       let loc = self.loc_start_with(spos)
       let ty = @syntax.Type::Name(
@@ -5718,7 +5708,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
           delim=TK_COMMA,
           State::parse_type,
         )
-        |> @list.from_array
+        |> @list.List
       self.expect_token(TK_THIN_ARROW)
       let (ty_res, ty_err) = self.parse_return_type()
       let loc = self.loc_start_with(spos)
@@ -5731,7 +5721,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
           delim=TK_COMMA,
           State::parse_type,
         )
-        |> @list.from_array
+        |> @list.List
       if tys is Empty {
         self.expect_token(TK_THIN_ARROW)
         let (ty_res, ty_err) = self.parse_return_type()
@@ -5806,7 +5796,7 @@ fn State::parse_opt_typ_params(
     )
   })
   .unwrap_or([])
-  |> @list.from_array
+  |> @list.List
 }
 
 ///|
@@ -5840,6 +5830,6 @@ pub fn parse_expr(tokens : Array[Triple]) -> (@syntax.Expr, Array[Report]) {
     s.parse_stmt()
   })
   let loc = self.loc_start_with(loc_start)
-  let expr = Statement::compact_rev(@list.from_array(stmts).rev(), loc~)
+  let expr = Statement::compact_rev(@list.List(stmts).rev(), loc~)
   (expr, self.diagnostics)
 }

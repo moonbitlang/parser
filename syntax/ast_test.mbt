@@ -9,7 +9,7 @@ let null : Json = Json::null()
 
 ///|
 let dummy_docstring : @syntax.DocString = {
-  content: @list.from_array(["Test documentation"]),
+  content: @list.List(["Test documentation"]),
   loc: dummy_loc,
 }
 
@@ -22,12 +22,12 @@ test "impl variants to_json" {
   let type_decl = @syntax.TypeDecl::{
     tycon: "TestType",
     tycon_loc: dummy_loc,
-    params: @list.from_array([]),
+    params: @list.List([]),
     components: @syntax.Abstract,
-    attrs: @list.from_array([]),
+    attrs: @list.List([]),
     doc: dummy_docstring,
     type_vis: @syntax.Default,
-    deriving: @list.from_array([]),
+    deriving: @list.List([]),
     loc: dummy_loc,
     is_declare: false,
   }
@@ -37,7 +37,7 @@ test "impl variants to_json" {
       id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   json_inspect(
@@ -68,7 +68,7 @@ test "impl variants to_json" {
       params=None,
       is_async=None,
       loc=dummy_loc,
-      attrs=@list.from_array([]),
+      attrs=@list.List([]),
       doc=dummy_docstring,
     ).json_repr(),
     content={
@@ -143,11 +143,11 @@ test "impl variants to_json" {
     is_async: None,
     decl_params: None,
     params_loc: dummy_loc,
-    quantifiers: @list.from_array([]),
+    quantifiers: @list.List([]),
     return_type: None,
     error_type: @syntax.NoErrorType,
     vis: @syntax.Default,
-    attrs: @list.from_array([]),
+    attrs: @list.List([]),
     doc: dummy_docstring,
     loc: dummy_loc,
   }
@@ -223,7 +223,7 @@ test "impl variants to_json" {
       vis=@syntax.Default,
       is_constant=true,
       loc=dummy_loc,
-      attrs=@list.from_array([]),
+      attrs=@list.List([]),
       doc=dummy_docstring,
       is_declare=false,
     ).json_repr(),
@@ -401,7 +401,7 @@ test "expr basic types to_json" {
   json_inspect(
     @syntax.Expr::Apply(
       func=unit_expr,
-      args=@list.from_array([argument]),
+      args=@list.List([argument]),
       loc=dummy_loc,
     ).json_repr(),
     content={
@@ -496,7 +496,7 @@ test "expr basic types to_json" {
   )
   json_inspect(
     @syntax.Expr::Array(
-      exprs=@list.from_array([unit_expr]),
+      exprs=@list.List([unit_expr]),
       is_iter=false,
       loc=dummy_loc,
     ).json_repr(),
@@ -522,7 +522,7 @@ test "expr basic types to_json" {
   let spread_elem = @syntax.SpreadableElem::Regular(unit_expr)
   json_inspect(
     @syntax.ArraySpread(
-      elems=@list.from_array([spread_elem]),
+      elems=@list.List([spread_elem]),
       is_iter=false,
       loc=dummy_loc,
     ).json_repr(),
@@ -571,10 +571,7 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Expr::Tuple(
-      exprs=@list.from_array([unit_expr, unit_expr]),
-      loc=dummy_loc,
-    ).json_repr(),
+    @syntax.Expr::Tuple(exprs=@list.List([unit_expr, unit_expr]), loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::Tuple",
       "loc": null,
@@ -658,11 +655,7 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Continue(
-      args=@list.from_array([unit_expr]),
-      label=None,
-      loc=dummy_loc,
-    ).json_repr(),
+    @syntax.Continue(args=@list.List([unit_expr]), label=None, loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::Continue",
       "loc": null,
@@ -692,7 +685,7 @@ test "expr complex types to_json" {
       id: @syntax.LongIdent::Ident(name="Int"),
       loc: dummy_loc,
     },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
@@ -889,7 +882,7 @@ test "expr complex types to_json" {
   )
   json_inspect(
     @syntax.Expr::Sequence(
-      exprs=@list.from_array([unit_expr]),
+      exprs=@list.List([unit_expr]),
       last_expr=unit_expr,
       loc=dummy_loc,
     ).json_repr(),
@@ -919,7 +912,7 @@ test "expr complex types to_json" {
   json_inspect(
     @syntax.Expr::Record(
       type_name=Some(type_name),
-      fields=@list.from_array([field_def]),
+      fields=@list.List([field_def]),
       trailing=@syntax.TrailingMark::Comma,
       loc=dummy_loc,
     ).json_repr(),
@@ -998,7 +991,7 @@ test "expr complex types to_json" {
   json_inspect(
     @syntax.Expr::Match(
       expr=unit_expr,
-      cases=@list.from_array([case]),
+      cases=@list.List([case]),
       match_loc=dummy_loc,
       loc=dummy_loc,
     ).json_repr(),
@@ -1104,10 +1097,10 @@ test "foreach json includes empty continue block" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   json_inspect(
     @syntax.ForEach(
-      binders=@list.from_array([]),
+      binders=@list.List([]),
       expr=unit_expr,
-      init=@list.from_array([]),
-      continue_block=@list.from_array([]),
+      init=@list.List([]),
+      continue_block=@list.List([]),
       body=unit_expr,
       else_block=None,
       where_clause=None,

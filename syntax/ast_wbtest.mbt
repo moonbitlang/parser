@@ -21,7 +21,7 @@ let dummy_char_literal : @tokens.CharLiteral = "'A'"
 
 ///|
 let dummy_docstring : DocString = {
-  content: @list.from_array(["Test documentation"]),
+  content: @list.List(["Test documentation"]),
   loc: dummy_loc,
 }
 
@@ -214,7 +214,7 @@ test "error_type to_json" {
   )
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   json_inspect(ErrorType(ty=int_type).json_repr(dummy_loc), content={
@@ -271,7 +271,7 @@ test "error_type to_json" {
 test "type to_json" {
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   json_inspect(Type::Any(loc=dummy_loc).json_repr(), content={
@@ -281,7 +281,7 @@ test "type to_json" {
   })
   json_inspect(
     Type::Arrow(
-      args=@list.from_array([int_type]),
+      args=@list.List([int_type]),
       res=int_type,
       err=NoErrorType,
       is_async=None,
@@ -347,7 +347,7 @@ test "type to_json" {
     },
   )
   json_inspect(
-    Type::Tuple(tys=@list.from_array([int_type]), loc=dummy_loc).json_repr(),
+    Type::Tuple(tys=@list.List([int_type]), loc=dummy_loc).json_repr(),
     content={
       "kind": "Type::Tuple",
       "loc": null,
@@ -726,40 +726,37 @@ test "exception_decl to_json" {
     attrs: @list.empty(),
     doc: dummy_docstring,
   }
-  json_inspect(
-    EnumPayload(@list.from_array([constr_decl])).json_repr(dummy_loc),
-    content={
-      "kind": "ExceptionDecl::EnumPayload",
-      "loc": null,
-      "children": {
-        "value": {
-          "kind": "ExceptionDecl::EnumPayload::ConstrList",
-          "loc": null,
-          "children": [
-            {
-              "kind": "ConstrDecl",
-              "loc": null,
-              "children": {
-                "name": {
-                  "kind": "ConstrName",
-                  "loc": null,
-                  "children": { "name": "TestConstr" },
-                },
-                "args": null,
-                "tag": null,
-                "attrs": {
-                  "kind": "ConstrDecl::AttrList",
-                  "loc": null,
-                  "children": [],
-                },
-                "doc": "Test documentation",
+  json_inspect(EnumPayload(@list.List([constr_decl])).json_repr(dummy_loc), content={
+    "kind": "ExceptionDecl::EnumPayload",
+    "loc": null,
+    "children": {
+      "value": {
+        "kind": "ExceptionDecl::EnumPayload::ConstrList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "ConstrDecl",
+            "loc": null,
+            "children": {
+              "name": {
+                "kind": "ConstrName",
+                "loc": null,
+                "children": { "name": "TestConstr" },
               },
+              "args": null,
+              "tag": null,
+              "attrs": {
+                "kind": "ConstrDecl::AttrList",
+                "loc": null,
+                "children": [],
+              },
+              "doc": "Test documentation",
             },
-          ],
-        },
+          },
+        ],
       },
     },
-  )
+  })
 }
 
 ///|
@@ -771,7 +768,7 @@ test "type_desc to_json" {
   })
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   json_inspect(Error(NoPayload).json_repr(dummy_loc), content={
@@ -907,7 +904,7 @@ test "array_pattern to_json" {
 ///|
 test "array_patterns to_json" {
   let any_pattern = ArrayPattern::Pattern(Pattern::Any(loc=dummy_loc))
-  json_inspect(Closed(@list.from_array([any_pattern])).json_repr(dummy_loc), content={
+  json_inspect(Closed(@list.List([any_pattern])).json_repr(dummy_loc), content={
     "kind": "ArrayPatterns::Closed",
     "loc": null,
     "children": {
@@ -927,11 +924,9 @@ test "array_patterns to_json" {
     },
   })
   json_inspect(
-    Open(
-      @list.from_array([any_pattern]),
-      @list.from_array([any_pattern]),
-      Underscore,
-    ).json_repr(dummy_loc),
+    Open(@list.List([any_pattern]), @list.List([any_pattern]), Underscore).json_repr(
+      dummy_loc,
+    ),
     content={
       "kind": "ArrayPatterns::Open",
       "loc": null,
@@ -976,7 +971,7 @@ test "embedded_code to_json" {
     "children": { "value": "test_string" },
   })
   json_inspect(
-    CodeMultilineString(@list.from_array(["line1", "line2", "line3"])).json_repr(
+    CodeMultilineString(@list.List(["line1", "line2", "line3"])).json_repr(
       dummy_loc,
     ),
     content={
@@ -1053,7 +1048,7 @@ test "parameter to_json" {
   let binder = Binder::{ name: "param", loc: dummy_loc }
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
@@ -1284,9 +1279,7 @@ test "multiline_string_elem to_json" {
     },
   )
   json_inspect(
-    MultilineStringElem::Interp(@list.from_array([interp_elem])).json_repr(
-      dummy_loc,
-    ),
+    MultilineStringElem::Interp(@list.List([interp_elem])).json_repr(dummy_loc),
     content={
       "kind": "MultilineString::Interp",
       "loc": null,
@@ -1466,7 +1459,7 @@ test "case to_json" {
 test "static_assertion to_json" {
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let assertion = StaticAssertion::{
@@ -1513,14 +1506,14 @@ test "func to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let param = Parameter::Positional(binder~, ty=Some(int_type))
   // let any_pattern = Pattern::Any(loc=dummy_loc)
   json_inspect(
     Func::{
-      parameters: @list.from_array([param]),
+      parameters: @list.List([param]),
       params_loc: dummy_loc,
       body: unit_expr,
       return_type: Some(int_type),
@@ -1620,7 +1613,7 @@ test "pattern to_json" {
   let constant_pattern = Pattern::Constant(c=int_constant, loc=dummy_loc)
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
@@ -1647,7 +1640,7 @@ test "pattern to_json" {
     pat: any_pattern,
     kind: ArgumentKind::Positional,
   }
-  let array_patterns = ArrayPatterns::Closed(@list.from_array([]))
+  let array_patterns = ArrayPatterns::Closed(@list.List([]))
   json_inspect(
     Pattern::Alias(pat=any_pattern, alias_=binder, loc=dummy_loc).json_repr(),
     content={
@@ -1726,7 +1719,7 @@ test "pattern to_json" {
   json_inspect(
     Pattern::Constr(
       constr~,
-      args=Some(@list.from_array([constr_pat_arg])),
+      args=Some(@list.List([constr_pat_arg])),
       is_open=false,
       loc=dummy_loc,
     ).json_repr(),
@@ -1822,7 +1815,7 @@ test "pattern to_json" {
   )
   json_inspect(
     Pattern::Tuple(
-      pats=@list.from_array([any_pattern, constant_pattern]),
+      pats=@list.List([any_pattern, constant_pattern]),
       loc=dummy_loc,
     ).json_repr(),
     content={
@@ -1852,7 +1845,7 @@ test "pattern to_json" {
   )
   json_inspect(
     Pattern::Record(
-      fields=@list.from_array([field_pat]),
+      fields=@list.List([field_pat]),
       is_closed=true,
       loc=dummy_loc,
     ).json_repr(),
@@ -1888,11 +1881,7 @@ test "pattern to_json" {
     },
   )
   json_inspect(
-    Pattern::Map(
-      elems=@list.from_array([map_elem]),
-      is_closed=false,
-      loc=dummy_loc,
-    ).json_repr(),
+    Pattern::Map(elems=@list.List([map_elem]), is_closed=false, loc=dummy_loc).json_repr(),
     content={
       "kind": "Pattern::Map",
       "loc": null,
@@ -1959,7 +1948,7 @@ test "field_decl to_json" {
   let field_name = FieldName::{ label: "test_field", loc: dummy_loc }
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let field_decl = FieldDecl::{
@@ -2010,7 +1999,7 @@ test "field_decl to_json" {
 test "constr_param to_json" {
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let label = Label::{ name: "test_label", loc: dummy_loc }
@@ -2087,14 +2076,14 @@ test "constr_decl to_json" {
   let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let label = Label::{ name: "test_label", loc: dummy_loc }
   let param = ConstrParam::{ ty: int_type, mut_: false, label: Some(label) }
   let constr_with_args = ConstrDecl::{
     name: constr_name,
-    args: Some(@list.from_array([param])),
+    args: Some(@list.List([param])),
     tag: Some(("tag_value", dummy_loc)),
     loc: dummy_loc,
     attrs: @list.empty(),
@@ -2210,7 +2199,7 @@ test "type_var_binder to_json" {
   }
   let type_var_binder = TypeVarBinder::{
     name: "T",
-    constraints: @list.from_array([constraint]),
+    constraints: @list.List([constraint]),
     name_loc: dummy_loc,
   }
   json_inspect(type_var_binder.json_repr(), content={
@@ -2383,7 +2372,7 @@ test "deriving_directive to_json" {
       is_object: true,
       loc: dummy_loc,
     },
-    args: @list.from_array([argument]),
+    args: @list.List([argument]),
     loc: dummy_loc,
   }
   json_inspect(deriving_directive.json_repr(), content={
@@ -2434,12 +2423,12 @@ test "type_decl to_json" {
   let type_decl = TypeDecl::{
     tycon: "TestType",
     tycon_loc: dummy_loc,
-    params: @list.from_array([type_decl_binder]),
+    params: @list.List([type_decl_binder]),
     components: Abstract,
-    attrs: @list.from_array([dummy_attribute]),
+    attrs: @list.List([dummy_attribute]),
     doc: dummy_docstring,
     type_vis: Default,
-    deriving: @list.from_array([]),
+    deriving: @list.List([]),
     loc: dummy_loc,
     is_declare: false,
   }
@@ -2538,7 +2527,7 @@ test "fun_decl to_json" {
   }
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let param = Parameter::Positional(binder~, ty=Some(int_type))
@@ -2548,20 +2537,20 @@ test "fun_decl to_json" {
   }
   let type_var_binder = TypeVarBinder::{
     name: "T",
-    constraints: @list.from_array([type_var_constraint]),
+    constraints: @list.List([type_var_constraint]),
     name_loc: dummy_loc,
   }
   let fun_decl = FunDecl::{
     type_name: Some(type_name),
     name: binder,
     is_async: Some(dummy_loc),
-    decl_params: Some(@list.from_array([param])),
+    decl_params: Some(@list.List([param])),
     params_loc: dummy_loc,
-    quantifiers: @list.from_array([type_var_binder]),
+    quantifiers: @list.List([type_var_binder]),
     return_type: Some(int_type),
     error_type: NoErrorType,
     vis: Priv(loc=dummy_loc),
-    attrs: @list.from_array([dummy_attribute]),
+    attrs: @list.List([dummy_attribute]),
     doc: dummy_docstring,
     loc: dummy_loc,
   }
@@ -2702,20 +2691,20 @@ test "trait_method_decl to_json" {
   let binder = Binder::{ name: "trait_method", loc: dummy_loc }
   let int_type = Name(
     constr_id=ConstrId::{ id: LongIdent::Ident(name="Int"), loc: dummy_loc },
-    tys=@list.from_array([]),
+    tys=@list.List([]),
     loc=dummy_loc,
   )
   let param = Parameter::Positional(binder~, ty=Some(int_type))
   let type_var_binder = TypeVarBinder::{
     name: "T",
-    constraints: @list.from_array([]),
+    constraints: @list.List([]),
     name_loc: dummy_loc,
   }
   let trait_method = TraitMethodDecl::{
     name: binder,
     is_async: None,
-    quantifiers: @list.from_array([type_var_binder]),
-    params: @list.from_array([param]),
+    quantifiers: @list.List([type_var_binder]),
+    params: @list.List([param]),
     return_type: Some(int_type),
     error_type: ErrorType::DefaultErrorType(loc=dummy_loc),
     has_default: Some(dummy_loc),
@@ -2838,8 +2827,8 @@ test "trait_decl to_json" {
   let trait_method = TraitMethodDecl::{
     name: method_binder,
     is_async: None,
-    quantifiers: @list.from_array([]),
-    params: @list.from_array([]),
+    quantifiers: @list.List([]),
+    params: @list.List([]),
     return_type: None,
     error_type: NoErrorType,
     has_default: None,
@@ -2848,11 +2837,11 @@ test "trait_decl to_json" {
   }
   let trait_decl = TraitDecl::{
     name: trait_binder,
-    supers: @list.from_array([super_constraint]),
-    methods: @list.from_array([trait_method]),
+    supers: @list.List([super_constraint]),
+    methods: @list.List([trait_method]),
     vis: Pub(attr=None, loc=dummy_loc),
     loc: dummy_loc,
-    attrs: @list.from_array([dummy_attribute]),
+    attrs: @list.List([dummy_attribute]),
     doc: dummy_docstring,
     is_declare: false,
   }
