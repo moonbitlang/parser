@@ -1108,7 +1108,7 @@ fn Fmt::arguments(fmt : Fmt, args : List[@syntax.Argument]) -> Doc {
       let leading_args = arr.map(x => fmt.argument(x))
       fn trailing_block_style() {
         let leading_doc = series1(
-          @list.from_array(leading_args),
+          @list.List(leading_args),
           comma,
           trailing=AlwaysPresent,
         )
@@ -1119,7 +1119,7 @@ fn Fmt::arguments(fmt : Fmt, args : List[@syntax.Argument]) -> Doc {
 
       fn fallback_style() {
         leading_args.push(fmt.argument(trailing_arg))
-        group(parens(series1(@list.from_array(leading_args), comma)))
+        group(parens(series1(@list.List(leading_args), comma)))
       }
 
       fn switch_trailing_block(leading_req, total_req) {
@@ -1214,7 +1214,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
           let args = args.map(constr_pat_arg2doc)
           let args = if is_open {
             // Replace deprecated @list.of usage with from_array
-            args.concat(@list.from_array([text("..")]))
+            args.concat(@list.List([text("..")]))
           } else {
             args
           }
@@ -1253,7 +1253,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
             Underscore => elems.push(text(".._"))
           }
           elems.push_iter(right.map(array_pattern2doc).iter())
-          let elems = @list.from_array(elems)
+          let elems = @list.List(elems)
           group(brackets(series(elems, comma, x => x)))
         }
       }
@@ -1283,7 +1283,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       if is_closed {
         elems.push(text(".."))
       }
-      let elems = @list.from_array(elems)
+      let elems = @list.List(elems)
       group(braces(series(elems, comma, x => x)))
     }
     Map(elems~, is_closed~, loc=_) => {
@@ -1299,7 +1299,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       if is_closed {
         elems.push(text(".."))
       }
-      let elems = @list.from_array(elems)
+      let elems = @list.List(elems)
       group(braces(series(elems, comma, x => x)))
     }
     Constraint(pat~, ty~, loc=_) => {
@@ -1316,7 +1316,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
     }
     Or(pat1~, pat2~, loc=_) => {
       let sep = line + char('|') + space
-      let pats = for acc = @list.from_array([pat1]), cur = pat2 {
+      let pats = for acc = @list.List([pat1]), cur = pat2 {
         match cur {
           Or(pat1~, pat2~, loc=_) => continue acc.add(pat1), pat2
           pat => break acc.add(pat).rev()

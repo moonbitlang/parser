@@ -334,10 +334,10 @@ fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 }
 
 // file:///./parser.mbty
-// 195|    property { @list.from_array([$1]) }
+// 195|    property { @list.List([$1]) }
 fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Prop(_dollar1)
-  YYObj_List_Prop_({();  @list.from_array([_dollar1]) })
+  YYObj_List_Prop_({();  @list.List([_dollar1]) })
 }
 
 fn yy_input(token : Token, _start_pos : Position, _end_pos : Position) -> (YYSymbol, YYObj) {

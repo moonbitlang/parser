@@ -1,7 +1,7 @@
 ///|
 test "series" {
   let integer = fn(x : Int) { text(x.to_string()) }
-  let r1 = series(@list.from_array([1, 2, 3, 4]), comma, integer)
+  let r1 = series(@list.List([1, 2, 3, 4]), comma, integer)
   inspect(
     r1,
     content=(
@@ -12,7 +12,7 @@ test "series" {
     ),
   )
   let r2 = series(
-    @list.from_array([1, 2, 3, 4]),
+    @list.List([1, 2, 3, 4]),
     comma,
     integer,
     trailing=AlwaysHidden,
@@ -26,7 +26,7 @@ test "series" {
       #|4
     ),
   )
-  let r3 = group(series(@list.from_array([1, 2, 3, 4]), comma, integer))
+  let r3 = group(series(@list.List([1, 2, 3, 4]), comma, integer))
   inspect(r3, content="1, 2, 3, 4")
 }
 
