@@ -192,19 +192,19 @@ fn insert_header_comment(formatted : String, comment : String) -> String {
 ///|
 fn source_header_comment(source : String, line_number : Int) -> String? {
   let lines = split_lines(source)
-  match lines.get(line_number - 1) {
-    None => None
-    Some(line) =>
-      match (line.find("{"), line.find("//")) {
-        (Some(brace), Some(comment_start)) if comment_start > brace =>
-          Some(
-            line
-            .unsafe_substring(start=comment_start, end=line.length())
-            .trim()
-            .to_owned(),
-          )
-        _ => None
-      }
+  if lines.get(line_number - 1) is Some(line) {
+    match (line.find("{"), line.find("//")) {
+      (Some(brace), Some(comment_start)) if comment_start > brace =>
+        Some(
+          line
+          .unsafe_substring(start=comment_start, end=line.length())
+          .trim()
+          .to_owned(),
+        )
+      _ => None
+    }
+  } else {
+    None
   }
 }
 
@@ -214,9 +214,10 @@ fn restore_source_header_comment(
   source : String,
   line_number : Int,
 ) -> String {
-  match source_header_comment(source, line_number) {
-    Some(comment) => insert_header_comment(formatted, comment)
-    None => formatted
+  if source_header_comment(source, line_number) is Some(comment) {
+    insert_header_comment(formatted, comment)
+  } else {
+    formatted
   }
 }
 
@@ -257,15 +258,14 @@ fn format_nth_plain_impl(source : String, index : Int) -> (Int, Int, String)? {
     return None
   }
   let items = impls.to_array()
-  match items.get(index) {
-    None => None
-    Some(item) => {
-      let loc = item.loc()
-      let line_start = impl_start_line(item)
-      let raw = format_single_impl(item, impls, tokens, block_line=true)
-      let formatted = restore_source_header_comment(raw, source, loc.start.lnum)
-      Some((line_start, loc.end.lnum, formatted))
-    }
+  if items.get(index) is Some(item) {
+    let loc = item.loc()
+    let line_start = impl_start_line(item)
+    let raw = format_single_impl(item, impls, tokens, block_line=true)
+    let formatted = restore_source_header_comment(raw, source, loc.start.lnum)
+    Some((line_start, loc.end.lnum, formatted))
+  } else {
+    None
   }
 }
 

@@ -219,14 +219,11 @@ impl IterVisitor for Mapper with fn visit_Impl_TopFuncDef(
     }
     NoErrorType => (None, None)
   }
-  match where_clause {
-    None => ()
-    Some(where_clause) => {
-      ignore(s.cursor_find(TK_WHERE, before_pos=where_clause.loc.end))
-      ignore(s.cursor_find(TK_LBRACE, before_pos=where_clause.loc.end))
-      s.visit_WhereClause(where_clause)
-      ignore(s.cursor_find(TK_RBRACE, before_pos=where_clause.loc.end))
-    }
+  if where_clause is Some(where_clause) {
+    ignore(s.cursor_find(TK_WHERE, before_pos=where_clause.loc.end))
+    ignore(s.cursor_find(TK_LBRACE, before_pos=where_clause.loc.end))
+    s.visit_WhereClause(where_clause)
+    ignore(s.cursor_find(TK_RBRACE, before_pos=where_clause.loc.end))
   }
   let (lbrace, rbrace) = match decl_body {
     DeclBody(expr~) => {
