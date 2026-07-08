@@ -33,9 +33,10 @@ fn parse_impls(source : String) -> (@syntax.Impls, @tokens.Triples) raise {
 fn find_iter_array_loc(impls : @syntax.Impls) -> Location raise {
   let finder = { loc: None }
   impls.map(item => finder.visit_Impl(item)) |> ignore
-  match finder.loc {
-    Some(loc) => loc
-    None => fail("expected fixture to contain iter array")
+  if finder.loc is Some(loc) {
+    loc
+  } else {
+    fail("expected fixture to contain iter array")
   }
 }
 
@@ -60,14 +61,14 @@ fn assert_token_kind(
   expected : TokenKind,
   name : String,
 ) -> Unit raise {
-  match key {
-    Some(key) =>
-      match token_kind_at(tokens, key) {
-        Some(kind) if kind == expected => ()
-        Some(kind) => fail("expected \{name} to be \{expected}, got \{kind}")
-        None => fail("expected \{name} to point at a source token")
-      }
-    None => fail("expected \{name} token to be recorded")
+  if key is Some(key) {
+    match token_kind_at(tokens, key) {
+      Some(kind) if kind == expected => ()
+      Some(kind) => fail("expected \{name} to be \{expected}, got \{kind}")
+      None => fail("expected \{name} to point at a source token")
+    }
+  } else {
+    fail("expected \{name} token to be recorded")
   }
 }
 

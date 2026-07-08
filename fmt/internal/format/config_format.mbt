@@ -185,45 +185,38 @@ fn render_moon_mod_json(json : Json) -> String {
         Some(value) => sections.push(render_assignment("version", value))
         None => ()
       }
-      match first_field(fields, ["deps", "import"]) {
-        Some(value) =>
-          match render_import_block(value) {
-            Some(imports) => sections.push(imports)
-            None => ()
-          }
-        None => ()
+      if first_field(fields, ["deps", "import"]) is Some(value) {
+        match render_import_block(value) {
+          Some(imports) => sections.push(imports)
+          None => ()
+        }
       }
-      match first_field(fields, ["warn-list", "warnings"]) {
-        Some(value) => sections.push(render_assignment("warnings", value))
-        None => ()
+      if first_field(fields, ["warn-list", "warnings"]) is Some(value) {
+        sections.push(render_assignment("warnings", value))
       }
       for
         key in [
           "readme", "repository", "license", "keywords", "description", "source",
         ] {
-        match object_get(fields, key) {
-          Some(value) => sections.push(render_assignment(key, value))
-          None => ()
+        if object_get(fields, key) is Some(value) {
+          sections.push(render_assignment(key, value))
         }
       }
-      match first_field(fields, ["supported-targets", "supported_targets"]) {
-        Some(value) =>
-          sections.push(render_assignment("supported_targets", value))
-        None => ()
+      if first_field(fields, ["supported-targets", "supported_targets"])
+        is Some(value) {
+        sections.push(render_assignment("supported_targets", value))
       }
-      match first_field(fields, ["preferred-target", "preferred_target"]) {
-        Some(value) =>
-          sections.push(render_assignment("preferred_target", value))
-        None => ()
+      if first_field(fields, ["preferred-target", "preferred_target"])
+        is Some(value) {
+        sections.push(render_assignment("preferred_target", value))
       }
       let known = [
         "name", "version", "deps", "import", "warn-list", "warnings", "readme", "repository",
         "license", "keywords", "description", "source", "supported-targets", "supported_targets",
         "preferred-target", "preferred_target", "rule",
       ]
-      match render_options(fields, known) {
-        Some(options) => sections.push(options)
-        None => ()
+      if render_options(fields, known) is Some(options) {
+        sections.push(options)
       }
       sections[:].join("\n\n")
     }
