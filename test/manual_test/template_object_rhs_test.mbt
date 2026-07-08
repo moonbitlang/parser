@@ -27,9 +27,10 @@ test "parse template object rhs" {
   }
   let yacc_json = yacc_impls.map(impl_ => impl_.json_repr()).to_json()
   let hand_json = hand_impls.map(impl_ => impl_.json_repr()).to_json()
-  if yacc_json != hand_json {
+  let cst_json = cst_impls_json(source, "template_object_rhs.mbt")
+  if yacc_json != hand_json || hand_json != cst_json {
     fail(
-      "template object rhs produced different ASTs between moonyacc and handrolled parsers",
+      "template object rhs produced different ASTs between moonyacc, handrolled, and CST parsers",
     )
   }
 }

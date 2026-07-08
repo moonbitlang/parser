@@ -17,4 +17,5 @@ test "loop expression is rejected" {
   if yacc_reports.is_empty() {
     fail("moonyacc parser unexpectedly accepted loop expression")
   }
+  expect_cst_rejected(source, "loop_removed.mbt")
 }

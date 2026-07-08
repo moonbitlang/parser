@@ -30,9 +30,10 @@ test "parse impl method quantifiers" {
   }
   let hand_json = hand_impls.map(impl_ => impl_.json_repr()).to_json()
   let yacc_json = yacc_impls.map(impl_ => impl_.json_repr()).to_json()
-  if hand_json != yacc_json {
+  let cst_json = cst_impls_json(source, "impl_method_quantifiers.mbt")
+  if hand_json != yacc_json || hand_json != cst_json {
     fail(
-      "impl method quantifiers produced different ASTs between moonyacc and handrolled parsers",
+      "impl method quantifiers produced different ASTs between moonyacc, handrolled, and CST parsers",
     )
   }
 }

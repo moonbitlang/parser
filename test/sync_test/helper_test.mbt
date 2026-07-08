@@ -1,4 +1,13 @@
 ///|
+fn reports_from_view(view : ArrayView[@basic.Report]) -> Array[@basic.Report] {
+  let reports : Array[@basic.Report] = []
+  for report in view {
+    reports.push(report)
+  }
+  reports
+}
+
+///|
 /// Verifies that both the hand-rolled parser and the moonyacc parser produce identical ASTs,
 /// and that no diagnostics are generated for all test cases in `__snapshot__`.
 fn @test.Test::run(t : Self) -> Unit raise Error {
@@ -9,7 +18,11 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
   }
   let hand_result = @parser.parse_string(source, name~, parser=Handrolled)
   let yacc_result = @parser.parse_string(source, name~, parser=MoonYacc)
-  if !(hand_result.1.is_empty() && yacc_result.1.is_empty()) {
+  let cst_result = @untyped_cst.parse_structure(source, name~)
+  let cst_diagnostics = reports_from_view(cst_result.diagnostics_view())
+  if !(hand_result.1.is_empty() &&
+    yacc_result.1.is_empty() &&
+    cst_diagnostics.is_empty()) {
     let buf = StringBuilder::new()
     let _ : Unit = @basic.show_loc.protect(String, fn() {
       buf
@@ -18,13 +31,26 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
       ..write_string(hand_result.1.to_json().stringify(indent=2))
       ..write_string("\nYacc parser diagnostics: ")
       ..write_string(yacc_result.1.to_json().stringify(indent=2))
+      ..write_string("\nCST parser diagnostics: ")
+      ..write_string(cst_diagnostics.to_json().stringify(indent=2))
       .write_string("\n")
     })
     fail(buf.to_string())
   }
   let hand_json = hand_result.0.map(impl_ => impl_.json_repr()).to_json()
   let yacc_json = yacc_result.0.map(impl_ => impl_.json_repr()).to_json()
-  if hand_json != yacc_json {
+  let (cst_impls, cst_reports) = cst_result.to_impls()
+  if !cst_reports.is_empty() {
+    let rendered = @basic.show_loc.protect(String, fn() {
+      cst_reports.to_json().stringify(indent=2)
+    })
+    @fs.create_dir(debug_dir)
+    @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
+    @fs.write_string_to_file("\{debug_dir}/\{name}_cst_reports.json", rendered)
+    fail("converting CST for \{name}.mbt produced diagnostics.")
+  }
+  let cst_json = cst_impls.map(impl_ => impl_.json_repr()).to_json()
+  if hand_json != yacc_json || hand_json != cst_json {
     @fs.create_dir(debug_dir)
     @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
     @fs.write_string_to_file(
@@ -35,8 +61,33 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
       "\{debug_dir}/\{name}_yacc.json",
       yacc_json.stringify(indent=2),
     )
+    @fs.write_string_to_file(
+      "\{debug_dir}/\{name}_cst.json",
+      cst_json.stringify(indent=2),
+    )
     fail(
-      "parsing \{name}.mbt produced different ASTs between moonyacc and handrolled parsers.",
+      "parsing \{name}.mbt produced different ASTs between moonyacc, handrolled, and CST parsers.",
+    )
+  }
+  let (hand_loc_json, cst_loc_json) = @basic.show_loc.protect(String, fn() {
+    (
+      hand_result.0.map(impl_ => impl_.json_repr()).to_json(),
+      cst_impls.map(impl_ => impl_.json_repr()).to_json(),
+    )
+  })
+  if hand_loc_json != cst_loc_json {
+    @fs.create_dir(debug_dir)
+    @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
+    @fs.write_string_to_file(
+      "\{debug_dir}/\{name}_hand_loc.json",
+      hand_loc_json.stringify(indent=2),
+    )
+    @fs.write_string_to_file(
+      "\{debug_dir}/\{name}_cst_loc.json",
+      cst_loc_json.stringify(indent=2),
+    )
+    fail(
+      "parsing \{name}.mbt produced location-sensitive AST differences between handrolled and CST parsers.",
     )
   }
   let json : Json = hand_json
