@@ -26,9 +26,10 @@ test "extend soft keyword in remaining lower identifier positions" {
   }
   let hand_json = hand_impls.map(impl_ => impl_.json_repr()).to_json()
   let yacc_json = yacc_impls.map(impl_ => impl_.json_repr()).to_json()
-  if hand_json != yacc_json {
+  let cst_json = cst_impls_json(source, "extend_soft_keyword_regression.mbt")
+  if hand_json != yacc_json || hand_json != cst_json {
     fail(
-      "soft keyword extend produced different ASTs between moonyacc and handrolled parsers",
+      "soft keyword extend produced different ASTs between moonyacc, handrolled, and CST parsers",
     )
   }
 }
@@ -62,9 +63,12 @@ test "extend special constructor pattern location matches yacc" {
   let yacc_json = @basic.show_loc.protect(String, fn() {
     yacc_impls.map(impl_ => impl_.json_repr()).to_json()
   })
-  if hand_json != yacc_json {
+  let cst_json = @basic.show_loc.protect(String, () => {
+    cst_impls_json(source, "extend_special_constructor_pattern_loc.mbt")
+  })
+  if hand_json != yacc_json || hand_json != cst_json {
     fail(
-      "extend special constructor pattern location differs between moonyacc and handrolled parsers:\nhand=\{hand_json.stringify(indent=2)}\nyacc=\{yacc_json.stringify(indent=2)}",
+      "extend special constructor pattern location differs between moonyacc, handrolled, and CST parsers:\nhand=\{hand_json.stringify(indent=2)}\nyacc=\{yacc_json.stringify(indent=2)}\ncst=\{cst_json.stringify(indent=2)}",
     )
   }
 }

@@ -4,6 +4,7 @@ import {
   "moonbitlang/lexer/basic",
   "moonbitlang/lexer",
   "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/untyped_cst",
   "moonbitlang/x/fs",
   "moonbitlang/core/test",
 } for "test"

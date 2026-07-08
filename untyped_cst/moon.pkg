@@ -1,0 +1,23 @@
+import {
+  "moonbitlang/lexer",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/attribute",
+  "moonbitlang/core/list",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+import {
+  "moonbitlang/parser",
+  "moonbitlang/parser/handrolled_parser",
+  "moonbitlang/core/test",
+  "moonbitlang/x/fs",
+} for "test"
+
+import {
+  "moonbitlang/core/test",
+} for "wbtest"
+
+warnings = "-1-3-7-29"
