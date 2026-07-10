@@ -326,7 +326,7 @@ record_decl_field -> FieldDecl
 
 record_decl_body -> TypeDefinition
   : separated_list(";", record_decl_field) {
-    Record(fields = $1, constr = None)
+    Record(fields = $1)
   }
   ;
 

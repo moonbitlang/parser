@@ -1,9 +1,0 @@
-// generated file, do not edit!
-///|
-struct S {
-  x : Int
-  y : Int
-  
-  fn new(x~ : Int, y~ : Int) -> S
-}
-

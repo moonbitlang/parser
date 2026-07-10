@@ -53,7 +53,7 @@ fn attach_docstrings(
                 .unwrap_or(@syntax.DocString::empty())
               constr.doc = previous
             })
-          Record(fields~, ..) =>
+          Record(fields~) =>
             fields.each(field => {
               let previous = skip_docstrings_before(field.loc.start)
                 .map(make_doc)

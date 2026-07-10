@@ -859,66 +859,15 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       rbrace +
       deriving
     }
-    Record(fields~, constr_decl~) => {
+    Record(fields~) => {
       let struct_ = text("struct")
       let tycon = space + text(tycon)
       let params = fmt.type_decl_binders(params)
       let lbrace = space + char('{')
       let semi = switch(char(';'), empty)
-      let constr = match constr_decl {
-        None => empty
-        Some(decl) => {
-          let constr_doc = fmt.docstring(decl.doc, is_toplevel=false)
-          let constr_attrs = fmt.attributes(decl.attrs)
-          let constr_async = if decl.is_async is Some(_) {
-            text("async") + space
-          } else {
-            empty
-          }
-          let fn_ = text("fn")
-          let constr_quantifiers = fmt.type_var_binders(
-            decl.quantifiers,
-            lbracket=None,
-            commas=@comment.NodeArray::empty(),
-            tvar_tables=@comment.NodeTableArray::empty(),
-            rbracket=None,
-          )
-          let constr_name = space + fmt.binder(decl.name)
-          let constr_params = match decl.decl_params {
-            None => empty
-            Some(xs) =>
-              group(
-                fmt.parameters(
-                  xs,
-                  lparen=None,
-                  param_tables=@comment.NodeTableArray::empty(),
-                  commas=@comment.NodeArray::empty(),
-                  rparen=None,
-                ),
-              )
-          }
-          let constr_result = fmt.return_and_error_type_annotation(
-            decl.return_type,
-            decl.error_type,
-          )
-          hardline +
-          hardline +
-          constr_doc +
-          constr_attrs +
-          constr_async +
-          fn_ +
-          constr_quantifiers +
-          constr_name +
-          constr_params +
-          constr_result
-        }
-      }
-      let fields_doc = if fields.is_empty() && constr_decl is Some(_) {
-        nest(constr)
-      } else {
-        nest(hardline + series1(fields.map(x => fmt.field_decl(x)), semi)) +
-        nest(constr)
-      }
+      let fields_doc = nest(
+        hardline + series1(fields.map(x => fmt.field_decl(x)), semi),
+      )
       let rbrace = hardline + char('}')
       let deriving = fmt.deriving_directives(deriving)
       doc +
@@ -2676,14 +2625,6 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let template = fmt.compose(template, Infix(Other))
       let op = if is_conditional { "<?" } else { "<+" }
       Normal(group(expr + space + text(op) + space + template))
-    }
-    IsLexMatch(expr~, strategy~, pat~, pat_loc=_, loc=_) => {
-      let expr = fmt.compose(expr, Expr)
-      let lexmatch_ = space + text("lexmatch?")
-      let pat = space + fmt.lex_top_patterns(pat)
-      let strategy = fmt.lex_strategy(strategy)
-      let doc = group(expr + lexmatch_ + pat + strategy)
-      Normal(doc)
     }
     LexMatch(strategy~, expr~, match_loc=_, cases~, loc=_) => {
       let lexmatch_ = text("lexmatch")

@@ -2525,12 +2525,12 @@ fn yy_action_145(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 328|    separated_list(";", record_decl_field) {
-// 329|    Record(fields = $1, constr = None)
+// 329|    Record(fields = $1)
 // 330|  }
 fn yy_action_146(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj__list_List_FieldDecl_(_dollar1)
   YYObj_TypeDefinition({(); 
-    Record(fields = _dollar1, constr = None)
+    Record(fields = _dollar1)
   })
 }
 

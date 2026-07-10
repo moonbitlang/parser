@@ -844,7 +844,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           self.expect_token(TK_RPAREN)
           TupleStruct(@list.List(ts))
         }
-        _ => self.parse_struct_body(allow_constr=true)
+        _ => self.parse_struct_body()
       }
       let deriving = self.parse_deriving_directive_list()
       let loc = self.loc_start_with(spos)
@@ -1332,50 +1332,15 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
 }
 
 ///|
-fn State::parse_struct_body(
-  self : State,
-  allow_constr~ : Bool,
-) -> @syntax.TypeDesc {
-  let foc_list = self.surround_series(
+fn State::parse_struct_body(self : State) -> @syntax.TypeDesc {
+  let fields = self.surround_series(
     invalid_delims=[TK_COMMA],
     left=TK_LBRACE,
     right=TK_RBRACE,
     delim=TK_SEMI,
-    State::parse_field_decl_or_constr_decl,
+    State::parse_field_decl,
   )
-  let mut fields = @list.empty()
-  fn check_fields(field_or_constr_list : ArrayView[FieldOrConstr]) -> Unit {
-    match field_or_constr_list {
-      [] => ()
-      [.. rest, Constr(constr_decl)] => {
-        self.report_error({
-          loc: constr_decl.loc,
-          msg: "Constructor function declaration can only occur at the end of `struct` declaration.",
-        })
-        check_fields(rest)
-      }
-      [.. rest, Field(field)] => {
-        fields = fields.add(field)
-        check_fields(rest)
-      }
-    }
-  }
-  let constr_decl = if foc_list is [.. fields, Constr(constr_decl)] {
-    check_fields(fields)
-    if allow_constr {
-      Some(constr_decl)
-    } else {
-      self.report_error({
-        loc: constr_decl.loc,
-        msg: "Constructor function declaration is not allowed in local type declaration.",
-      })
-      None
-    }
-  } else {
-    check_fields(foc_list)
-    None
-  }
-  Record(fields~, constr_decl~)
+  Record(fields=List(fields))
 }
 
 ///|
@@ -1423,12 +1388,6 @@ fn State::parse_deriving_directive(self : Self) -> @syntax.DerivingDirective {
   }
   let loc = self.loc_start_with(spos)
   { type_name, args, loc }
-}
-
-///|
-priv enum FieldOrConstr {
-  Field(@syntax.FieldDecl)
-  Constr(@syntax.FunDecl)
 }
 
 ///|
@@ -1486,9 +1445,9 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
 }
 
 ///|
-fn State::parse_field_decl_or_constr_decl(self : Self) -> FieldOrConstr {
+fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
   if self.mode is Panic(loc~, ..) {
-    return Field({
+    return {
       name: { label: "?field_name", loc },
       ty: Any(loc~),
       mut_: false,
@@ -1496,64 +1455,30 @@ fn State::parse_field_decl_or_constr_decl(self : Self) -> FieldOrConstr {
       doc: DocString::empty(),
       attrs: @list.empty(),
       loc,
-    })
+    }
   }
   let spos = self.peek_spos()
   let attrs = self.parse_attributes()
-  match self.peek_token() {
-    ASYNC | FN => {
-      let is_async = if self.peek_token() is ASYNC {
-        let loc = self.peek_location()
-        self.skip()
-        Some(loc)
-      } else {
-        None
-      }
-      self.expect_token(TK_FN)
-      let quantifiers = self.parse_opt_typ_params()
-      let name = self.parse_binder(context="name of `fn`")
-      let param_loc_start = self.peek_spos()
-      let params = self.parse_trait_method_params()
-      let params_loc = self.loc_start_with(param_loc_start)
-      let (return_type, error_type) = self.parse_func_return_type()
-      Constr({
-        name,
-        is_async,
-        type_name: None,
-        quantifiers,
-        params_loc,
-        decl_params: Some(params),
-        return_type,
-        error_type,
-        vis: Default,
-        doc: DocString::empty(),
-        attrs,
-        loc: self.loc_start_with(spos),
-      })
-    }
-    _ => {
-      let vis = self.parse_visibility()
-      let mut_ = if self.peek_token() is MUTABLE {
-        self.expect_token(TK_MUTABLE)
-        true
-      } else {
-        false
-      }
-      let name_loc = self.peek_location()
-      let name = self.expect_lident(context="struct field name")
-      self.expect_token(TK_COLON)
-      let ty = self.parse_type()
-      let loc = self.loc_start_with(spos)
-      Field({
-        name: { label: name, loc: name_loc },
-        ty,
-        mut_,
-        vis,
-        loc,
-        attrs,
-        doc: DocString::empty(),
-      })
-    }
+  let vis = self.parse_visibility()
+  let mut_ = if self.peek_token() is MUTABLE {
+    self.expect_token(TK_MUTABLE)
+    true
+  } else {
+    false
+  }
+  let name_loc = self.peek_location()
+  let name = self.expect_lident(context="struct field name")
+  self.expect_token(TK_COLON)
+  let ty = self.parse_type()
+  let loc = self.loc_start_with(spos)
+  {
+    name: { label: name, loc: name_loc },
+    ty,
+    mut_,
+    vis,
+    loc,
+    attrs,
+    doc: DocString::empty(),
   }
 }
 
@@ -3935,18 +3860,6 @@ fn State::parse_postfix_expr(
       let pat = self.parse_range_pattern()
       let loc = self.loc_start_with(spos)
       Is(expr~, pat~, loc~)
-    }
-    LEXMATCH_QUESTION => {
-      self.skip()
-      let (pat, pat_loc) = self.parse_lex_pattern()
-      let strategy = self.parse_opt_with_strategy()
-      IsLexMatch(
-        expr~,
-        pat~,
-        pat_loc~,
-        strategy~,
-        loc=self.loc_start_with(spos),
-      )
     }
     EQ_TILDE => {
       self.skip()

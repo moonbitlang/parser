@@ -215,8 +215,7 @@ test "parse legacy mbti attributes fixture" {
     fail("expected enum E")
   }
   expect_one_attr(constructors.head().unwrap().attrs, "#attribute")
-  guard sig_at(mbti, 2)
-    is Type({ attrs, components: Record(fields~, constr=None), .. }) else {
+  guard sig_at(mbti, 2) is Type({ attrs, components: Record(fields~), .. }) else {
     fail("expected attributed struct S")
   }
   expect_one_attr(attrs, "#deprecated")

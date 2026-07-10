@@ -132,7 +132,7 @@ fn @syntax.Expr::classify(expr : Self) -> ExprKind {
     | DotApply(_) => SimpleKind
     Unary(_) => PrefixKind
     As(_) => PostfixKind("as")
-    Is(_) | IsLexMatch(_) => PostfixKind("is")
+    Is(_) => PostfixKind("is")
     RegexMatch(_) => PostfixKind("=~")
     Infix(op~, ..) =>
       match op.name {

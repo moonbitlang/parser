@@ -496,11 +496,6 @@ test "loop_nobreak" (t : @test.Test) {
 }
 
 ///|
-test "struct_constructor" (t : @test.Test) {
-  t.run(enable_ast_check=false)
-}
-
-///|
 test "declare_keyword" (t : @test.Test) {
   t.run(enable_ast_check=false)
 }
