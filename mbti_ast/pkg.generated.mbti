@@ -110,7 +110,7 @@ pub(all) enum TypeDefinition {
   ExtensibleEnum(@list.List[@syntax.ConstrDecl])
   ExtendEnum(target~ : QualifiedName, constructors~ : @list.List[@syntax.ConstrDecl])
   Variant(@list.List[@syntax.ConstrDecl])
-  Record(fields~ : @list.List[@syntax.FieldDecl], constr~ : FuncSig?)
+  Record(fields~ : @list.List[@syntax.FieldDecl])
   Alias(@syntax.Type)
 } derive(@debug.Debug)
 
