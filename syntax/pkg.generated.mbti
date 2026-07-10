@@ -262,7 +262,6 @@ pub(all) enum Expr {
   If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location)
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location)
   Is(expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location)
-  IsLexMatch(expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location)
   RegexMatch(expr~ : Expr, pat~ : RegexPattern, bindings~ : @list.List[(Label, Binder?)], loc~ : @basic.Location)
   Defer(expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location)
@@ -605,7 +604,7 @@ pub(all) enum TypeDesc {
   Error(ExceptionDecl)
   Variant(@list.List[ConstrDecl])
   ExtendEnum(target~ : TypeName, constructors~ : @list.List[ConstrDecl])
-  Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
+  Record(fields~ : @list.List[FieldDecl])
   TupleStruct(@list.List[Type])
   Alias(Type)
 } derive(@debug.Debug)
@@ -691,7 +690,7 @@ pub(open) trait IterVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> Unit = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> Unit = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> Unit = _
-  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?) -> Unit = _
+  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> Unit = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> Unit = _
   fn visit_TypeDesc_Alias(Self, Type) -> Unit = _
   fn visit_Hole(Self, Hole) -> Unit = _
@@ -829,7 +828,6 @@ pub(open) trait IterVisitor {
   fn visit_Expr_If(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Unit = _
-  fn visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit = _
@@ -903,7 +901,7 @@ pub(open) trait MapVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> TypeDesc = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> TypeDesc = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> TypeDesc = _
-  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?) -> TypeDesc = _
+  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> TypeDesc = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> TypeDesc = _
   fn visit_TypeDesc_Alias(Self, Type) -> TypeDesc = _
   fn visit_Hole(Self, Hole) -> Hole = _
@@ -1041,7 +1039,6 @@ pub(open) trait MapVisitor {
   fn visit_Expr_If(Self, cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Expr = _
-  fn visit_Expr_IsLexMatch(Self, expr~ : Expr, strategy~ : Label?, pat~ : @list.List[LexTopPattern], pat_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr = _
