@@ -487,7 +487,6 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     If(cond=_, ifso=_, ifnot=_, loc~) => loc
     Guard(cond=_, otherwise=_, body=_, loc~) => loc
     Is(expr=_, pat=_, loc~) => loc
-    IsLexMatch(expr=_, strategy=_, pat=_, pat_loc=_, loc~) => loc
     RegexMatch(expr=_, pat=_, bindings=_, loc~) => loc
     Defer(loc~, ..) => loc
     LetFn(name=_, func=_, body=_, loc~) => loc

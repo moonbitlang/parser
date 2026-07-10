@@ -217,32 +217,15 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
         ),
       })
     }
-    Record(fields~, constr_decl~) =>
-      tagged_node(
-        "TypeDesc::Record",
-        loc,
-        match constr_decl {
-          None =>
-            {
-              "value": list_json_repr(
-                "TypeDesc::Record::FieldList",
-                loc,
-                fields,
-                FieldDecl::json_repr,
-              ),
-            }
-          Some(constr_decl) =>
-            {
-              "value": list_json_repr(
-                "TypeDesc::Record::FieldList",
-                loc,
-                fields,
-                FieldDecl::json_repr,
-              ),
-              "constr_decl": constr_decl.json_repr(),
-            }
-        },
-      )
+    Record(fields~) =>
+      tagged_node("TypeDesc::Record", loc, {
+        "value": list_json_repr(
+          "TypeDesc::Record::FieldList",
+          loc,
+          fields,
+          FieldDecl::json_repr,
+        ),
+      })
     TupleStruct(tys) => {
       let tys_loc = match tys {
         @list.Empty => loc
@@ -516,16 +499,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       tagged_node("Expr::Is", loc, {
         "expr": expr.json_repr(),
         "pat": pat.json_repr(),
-      })
-    IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~) =>
-      tagged_node("Expr::IsLexmatch", loc, {
-        "expr": expr.json_repr(),
-        "strategy": option_json_repr(strategy, Label::json_repr),
-        "pat": list_json_repr("Expr::IsLexmatch::PatternList", pat_loc, pat, fn(
-          p,
-        ) {
-          p.json_repr(pat_loc)
-        }),
       })
     RegexMatch(expr~, pat~, bindings~, loc~) =>
       tagged_node("Expr::RegexMatch", loc, {

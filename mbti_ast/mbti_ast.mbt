@@ -49,7 +49,7 @@ pub(all) enum TypeDefinition {
   ExtensibleEnum(@list.List[ConstrDecl])
   ExtendEnum(target~ : QualifiedName, constructors~ : @list.List[ConstrDecl])
   Variant(@list.List[ConstrDecl])
-  Record(fields~ : @list.List[FieldDecl], constr~ : FuncSig?)
+  Record(fields~ : @list.List[FieldDecl])
   Alias(Type)
 } derive(Debug)
 

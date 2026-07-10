@@ -145,7 +145,7 @@ pub(all) enum TypeDesc {
   /// `extenum T += { C1; C2 }`
   ExtendEnum(target~ : TypeName, constructors~ : @list.List[ConstrDecl])
   /// `struct T { field1: T1; field2: T2 }`
-  Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
+  Record(fields~ : @list.List[FieldDecl])
   /// `struct T (T1,T2)`
   TupleStruct(@list.List[Type])
   Alias(Type)
@@ -488,14 +488,6 @@ pub(all) enum Expr {
   Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : Location)
   /// `expr is pattern`
   Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
-  /// `expr lexmatch? pattern with strategy`
-  IsLexMatch(
-    expr~ : Expr,
-    strategy~ : Label?,
-    pat~ : @list.List[LexTopPattern],
-    pat_loc~ : Location,
-    loc~ : Location
-  )
   RegexMatch(
     expr~ : Expr,
     pat~ : RegexPattern,

@@ -173,9 +173,6 @@
 %nonassoc ")"
 %nonassoc ":"
 
-// to resolve ambiguities with the "with" keyword.
-// E.g. `lexmatch a lexmatch? "" with longest {}` 
-%nonassoc prec_LEXMATCH_QUESTION
 %nonassoc WITH 
 
 %%
@@ -494,15 +491,14 @@ structure_item -> Impl
       }
     )
   }
-  | struct_header "{" record_decl_body "}" deriving_directive_list {
+  | struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {
     let (attrs, type_vis, tycon, tycon_loc, params) = $1
-    let (fields, constr_decl) = $3
     TopTypeDef(
       TypeDecl::{
         tycon,
         tycon_loc,
         params,
-        components: Record(fields~, constr_decl~),
+        components: Record(fields=$3),
         type_vis,
         doc : DocString::empty(),
         deriving: $5,
@@ -1690,12 +1686,6 @@ postfix_expr -> Expr
   | range_expr "is" range_pattern { 
     Is(expr = $1, pat = $3, loc = mk_loc($sloc))
   }
-  | range_expr "lexmatch?" lex_pattern %prec prec_LEXMATCH_QUESTION {
-    IsLexMatch(expr=$1, pat=$3, pat_loc=mk_loc($loc($3)), strategy = None, loc=mk_loc($sloc))
-  }
-  | range_expr "lexmatch?" lex_pattern "with" label {
-    IsLexMatch(expr=$1, pat=$3, pat_loc=mk_loc($loc($3)), strategy = Some($5), loc=mk_loc($sloc))
-  }
   | range_expr "=~" regex_match_rhs {
     let (pat, bindings) = $3
     RegexMatch(expr = $1, pat~, bindings~, loc = mk_loc($sloc))
@@ -2356,39 +2346,6 @@ record_decl_field -> FieldDecl
     }
   }
   ;
-
-record_constr_decl -> FunDecl
-  : attributes is_async "fn" optional_type_parameters binder "(" list_commas(trait_method_param) ")" func_return_type {
-    let (return_type, error_type) = $9
-    FunDecl::{
-      type_name : None,
-      name : $5,
-      is_async : $2,
-      quantifiers: $4,
-      decl_params: Some($7),
-      params_loc: mk_loc($loc($7)),
-      return_type,
-      error_type,
-      vis: Default,
-      doc: DocString::empty(),
-      attrs: $1,
-      loc : mk_loc($loc)
-    }
-  }
-
-record_decl_body -> (List[FieldDecl], FunDecl?)
-  : record_constr_decl option(SEMI) {
-    (@list.empty(), Some($1))
-  }
-  | {
-    (@list.empty(), None)
-  }
-  | non_empty_list_semi_rev_aux(record_decl_field) SEMI record_constr_decl option(SEMI) {
-    ($1.rev(), Some($3))
-  }
-  | non_empty_list_semi_rev_aux(record_decl_field) option(SEMI) {
-    ($1.rev(), None)
-  }
 
 constructor_param -> ConstrParam
   : option("mut") type_ { 

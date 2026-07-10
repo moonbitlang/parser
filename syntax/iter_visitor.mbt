@@ -80,11 +80,7 @@ pub(open) trait IterVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> Unit = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> Unit = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> Unit = _
-  fn visit_TypeDesc_Record(
-    Self,
-    fields~ : @list.List[FieldDecl],
-    constr_decl~ : FunDecl?,
-  ) -> Unit = _
+  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> Unit = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> Unit = _
   fn visit_TypeDesc_Alias(Self, Type) -> Unit = _
 
@@ -551,14 +547,6 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Unit = _
-  fn visit_Expr_IsLexMatch(
-    Self,
-    expr~ : Expr,
-    strategy~ : Label?,
-    pat~ : @list.List[LexTopPattern],
-    pat_loc~ : Location,
-    loc~ : Location,
-  ) -> Unit = _
   fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Unit = _
   fn visit_Expr_LetFn(
     Self,
@@ -1550,8 +1538,8 @@ impl IterVisitor with fn visit_TypeDesc_Variant(env, constr_decls) {
 }
 
 ///|
-impl IterVisitor with fn visit_TypeDesc_Record(env, fields~, constr_decl~) {
-  IterVisitorBase::visit_TypeDesc_Record(env, fields~, constr_decl~)
+impl IterVisitor with fn visit_TypeDesc_Record(env, fields~) {
+  IterVisitorBase::visit_TypeDesc_Record(env, fields~)
 }
 
 ///|
@@ -2052,25 +2040,6 @@ impl IterVisitor with fn visit_TraitMethodDecl(env, trait_method_decl) {
 ///|
 impl IterVisitor with fn visit_TraitDecl(env, trait_decl) {
   IterVisitorBase::visit_TraitDecl(env, trait_decl)
-}
-
-///|
-impl IterVisitor with fn visit_Expr_IsLexMatch(
-  env,
-  expr~ : Expr,
-  strategy~,
-  pat~,
-  pat_loc~,
-  loc~,
-) {
-  IterVisitorBase::visit_Expr_IsLexMatch(
-    env,
-    expr~,
-    strategy~,
-    pat~,
-    pat_loc~,
-    loc~,
-  )
 }
 
 ///|
@@ -2615,8 +2584,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
       env.0.visit_TypeName(target)
       constructors.each(x => env.0.visit_ConstrDecl(x))
     }
-    Record(fields~, constr_decl~) =>
-      env.0.visit_TypeDesc_Record(fields~, constr_decl~)
+    Record(fields~) => env.0.visit_TypeDesc_Record(fields~)
     TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
     Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
   }
@@ -2642,10 +2610,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeDesc_Record(
   env,
   fields~,
-  constr_decl~,
 ) {
   fields.each(x => env.0.visit_FieldDecl(x))
-  constr_decl.each(x => env.0.visit_FunDecl(x))
 }
 
 ///|
@@ -4614,8 +4580,6 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
     Guard(cond~, otherwise~, body~, loc~) =>
       env.0.visit_Expr_Guard(cond~, otherwise~, body~, loc~)
     Is(expr~, pat~, loc~) => env.0.visit_Expr_Is(expr~, pat~, loc~)
-    IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~) =>
-      env.0.visit_Expr_IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~)
     RegexMatch(expr~, pat~, bindings~, loc~) => {
       ignore(loc)
       env.0.visit_Expr(expr)
@@ -4768,22 +4732,6 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
     StaticAssert(asserts~, body~) =>
       env.0.visit_Expr_StaticAssert(asserts~, body~)
   }
-}
-
-///|
-pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_IsLexMatch(
-  env,
-  expr~,
-  strategy~,
-  pat~,
-  pat_loc~,
-  loc~,
-) {
-  ignore(pat_loc)
-  ignore(loc)
-  strategy.each(strategy => env.0.visit_Label(strategy))
-  pat.each(pat => env.0.visit_LexTopPattern(pat))
-  env.0.visit_Expr(expr)
 }
 
 ///|

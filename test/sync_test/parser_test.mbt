@@ -876,11 +876,6 @@ test "pipeline_test_float_match" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_lexmatch_question" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_labelled_constr" (t : @test.Test) {
   t.run()
 }
@@ -1761,11 +1756,6 @@ test "pipeline_test_uint_bitwise" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_regex_constant_ref" (t : @test.Test) {
-  t.run()
-}
-
-///|
 test "pipeline_test_bytes_read_uint64" (t : @test.Test) {
   t.run()
 }
@@ -2527,11 +2517,6 @@ test "pipeline_test_match_bytes_constant" (t : @test.Test) {
 
 ///|
 test "pipeline_test_option5" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_lexmatch_question_interpolated_patterns" (t : @test.Test) {
   t.run()
 }
 
@@ -3377,11 +3362,6 @@ test "pipeline_test_arith" (t : @test.Test) {
 
 ///|
 test "pipeline_test_first_class_unit" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_lexmatch_question_regex_literal" (t : @test.Test) {
   t.run()
 }
 

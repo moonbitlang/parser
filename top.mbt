@@ -90,7 +90,7 @@ fn attach_docstrings(
               constr.doc = previous
               last_pos = constr.loc.end
             })
-          Record(fields~, constr_decl~) => {
+          Record(fields~) =>
             fields.each(field => {
               let previous = search_docstrings(last_pos, field.loc)
                 .map(make_doc)
@@ -98,14 +98,6 @@ fn attach_docstrings(
               field.doc = previous
               last_pos = field.loc.end
             })
-            if constr_decl is Some(constr_decl) {
-              let previous = search_docstrings(last_pos, constr_decl.loc)
-                .map(make_doc)
-                .unwrap_or(@syntax.DocString::empty())
-              constr_decl.doc = previous
-              last_pos = constr_decl.loc.end
-            }
-          }
         }
       }
       TopFuncDef(fun_decl~, ..) => fun_decl.doc = doc

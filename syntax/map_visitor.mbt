@@ -80,11 +80,7 @@ pub(open) trait MapVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> TypeDesc = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> TypeDesc = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> TypeDesc = _
-  fn visit_TypeDesc_Record(
-    Self,
-    fields~ : @list.List[FieldDecl],
-    constr_decl~ : FunDecl?,
-  ) -> TypeDesc = _
+  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> TypeDesc = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> TypeDesc = _
   fn visit_TypeDesc_Alias(Self, Type) -> TypeDesc = _
 
@@ -551,14 +547,6 @@ pub(open) trait MapVisitor {
     loc~ : Location,
   ) -> Expr = _
   fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Expr = _
-  fn visit_Expr_IsLexMatch(
-    Self,
-    expr~ : Expr,
-    strategy~ : Label?,
-    pat~ : @list.List[LexTopPattern],
-    pat_loc~ : Location,
-    loc~ : Location,
-  ) -> Expr = _
   fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Expr = _
   fn visit_Expr_LetFn(
     Self,
@@ -1543,8 +1531,8 @@ impl MapVisitor with fn visit_TypeDesc_Variant(env, constr_decls) {
 }
 
 ///|
-impl MapVisitor with fn visit_TypeDesc_Record(env, fields~, constr_decl~) {
-  MapVisitorBase::visit_TypeDesc_Record(env, fields~, constr_decl~)
+impl MapVisitor with fn visit_TypeDesc_Record(env, fields~) {
+  MapVisitorBase::visit_TypeDesc_Record(env, fields~)
 }
 
 ///|
@@ -2040,25 +2028,6 @@ impl MapVisitor with fn visit_TraitMethodDecl(env, trait_method_decl) {
 ///|
 impl MapVisitor with fn visit_TraitDecl(env, trait_decl) {
   MapVisitorBase::visit_TraitDecl(env, trait_decl)
-}
-
-///|
-impl MapVisitor with fn visit_Expr_IsLexMatch(
-  env,
-  expr~ : Expr,
-  strategy~,
-  pat~,
-  pat_loc~,
-  loc~,
-) {
-  MapVisitorBase::visit_Expr_IsLexMatch(
-    env,
-    expr~,
-    strategy~,
-    pat~,
-    pat_loc~,
-    loc~,
-  )
 }
 
 ///|
@@ -2617,8 +2586,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc
       let constructors = constructors.map(x => env.0.visit_ConstrDecl(x))
       ExtendEnum(target~, constructors~)
     }
-    Record(fields~, constr_decl~) =>
-      env.0.visit_TypeDesc_Record(fields~, constr_decl~)
+    Record(fields~) => env.0.visit_TypeDesc_Record(fields~)
     TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
     Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
   }
@@ -2646,11 +2614,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc_Record(
   env,
   fields~,
-  constr_decl~,
 ) {
   let fields = fields.map(x => env.0.visit_FieldDecl(x))
-  let constr_decl = constr_decl.map(x => env.0.visit_FunDecl(x))
-  Record(fields~, constr_decl~)
+  Record(fields~)
 }
 
 ///|
@@ -4750,8 +4716,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
     Guard(cond~, otherwise~, body~, loc~) =>
       env.0.visit_Expr_Guard(cond~, otherwise~, body~, loc~)
     Is(expr~, pat~, loc~) => env.0.visit_Expr_Is(expr~, pat~, loc~)
-    IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~) =>
-      env.0.visit_Expr_IsLexMatch(expr~, strategy~, pat~, pat_loc~, loc~)
     RegexMatch(expr~, pat~, bindings~, loc~) => {
       let expr = env.0.visit_Expr(expr)
       let pat = map_regex_pattern(env, pat)
@@ -4910,21 +4874,6 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_UsingKin
 ) {
   ignore(env)
   return using_kind
-}
-
-///|
-pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_IsLexMatch(
-  env,
-  expr~,
-  strategy~,
-  pat~,
-  pat_loc~,
-  loc~,
-) {
-  let strategy = strategy.map(strategy => env.0.visit_Label(strategy))
-  let pat = pat.map(pat => env.0.visit_LexTopPattern(pat))
-  let expr = env.0.visit_Expr(expr)
-  IsLexMatch(strategy~, expr~, pat~, pat_loc~, loc~)
 }
 
 ///|
