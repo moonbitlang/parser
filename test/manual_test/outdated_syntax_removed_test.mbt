@@ -60,7 +60,72 @@ test "outdated syntax is rejected" {
   expect_rejected(
     "extenum @pkg.lower += { A }", "lowercase_extenum_extension_target_removed.mbt",
   )
+  expect_rejected(
+    (
+      #|fn f(s : String) {
+      #|  let _ = s lexmatch? "a"
+      #|}
+    ),
+    "lexmatch_question_removed.mbt",
+  )
+  expect_rejected(
+    (
+      #|fn f(s : String) {
+      #|  let _ = s lexmatch? "a" with longest
+      #|}
+    ),
+    "lexmatch_question_with_strategy_removed.mbt",
+  )
+  expect_rejected(
+    (
+      #|fn f(s : String, x : String) {
+      #|  let _ = s lexmatch? re"a\{x}"
+      #|}
+    ),
+    "lexmatch_question_interpolation_removed.mbt",
+  )
+  expect_rejected(
+    "struct S { fn new() -> S }", "struct_constructor_removed.mbt",
+  )
+  expect_rejected(
+    "struct S { value : Int; fn new(value : Int) -> S }", "struct_constructor_after_field_removed.mbt",
+  )
   expect_accepted(
     "fn f(x : @pkg.lower) { () }", "qualified_lowercase_type_reference_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|fn f(s : String) {
+      #|  lexmatch s { _ => () }
+      #|}
+    ),
+    "lexmatch_expression_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|const DIGIT = re"[0-9]"
+      #|fn f(s : String) {
+      #|  lexmatch s {
+      #|    DIGIT => ()
+      #|    _ => ()
+      #|  }
+      #|}
+    ),
+    "lexmatch_constant_reference_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|fn f(s : String) {
+      #|  let _ = s =~ re"a"
+      #|}
+    ),
+    "regex_match_expression_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|struct S {}
+      #|fn S::new() -> S { ... }
+    ),
+    "out_of_type_new_retained.mbt",
   )
 }
