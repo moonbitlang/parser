@@ -7,7 +7,7 @@ import {
   "moonbitlang/core/list",
 }
 
-warnings = "-6"
+warnings = "-6-text_segment_excceed"
 
 formatter(ignore: [ "parser.mbt" ])
 
