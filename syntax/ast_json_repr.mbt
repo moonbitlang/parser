@@ -39,7 +39,7 @@ fn tagged_node1(kind : String, loc : Location, value : Json) -> Json {
 
 ///|
 fn tagged_node0(kind : String, loc : Location) -> Json {
-  tagged_node(kind, loc, {})
+  tagged_node(kind, loc, Map([]))
 }
 
 ///|
@@ -167,9 +167,9 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
     Abstract => tagged_node0("TypeDesc::Abstract", loc)
     ExtensibleEnum(constrs) => {
       let constrs_loc = match constrs {
-        @list.Empty => loc
-        @list.More(constr, tail=@list.Empty) => constr.loc
-        @list.More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
+        Empty => loc
+        More(constr, tail=Empty) => constr.loc
+        More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
       }
       tagged_node1(
         "TypeDesc::ExtensibleEnum",
@@ -186,9 +186,9 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
       tagged_node1("TypeDesc::Error", loc, exception_decl.json_repr(loc))
     Variant(constrs) => {
       let constrs_loc = match constrs {
-        @list.Empty => loc
-        @list.More(constr, tail=@list.Empty) => constr.loc
-        @list.More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
+        Empty => loc
+        More(constr, tail=Empty) => constr.loc
+        More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
       }
       tagged_node1(
         "TypeDesc::Variant",
@@ -203,9 +203,9 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
     }
     ExtendEnum(target~, constructors~) => {
       let constrs_loc = match constructors {
-        @list.Empty => loc
-        @list.More(constr, tail=@list.Empty) => constr.loc
-        @list.More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
+        Empty => loc
+        More(constr, tail=Empty) => constr.loc
+        More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
       }
       tagged_node("TypeDesc::ExtendEnum", loc, {
         "target": target.json_repr(),
@@ -228,10 +228,9 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
       })
     TupleStruct(tys) => {
       let tys_loc = match tys {
-        @list.Empty => loc
-        @list.More(ty, tail=@list.Empty) => ty.loc()
-        @list.More(first, tail~) =>
-          first.loc().merge(tail.last().unwrap().loc())
+        Empty => loc
+        More(ty, tail=Empty) => ty.loc()
+        More(first, tail~) => first.loc().merge(tail.last().unwrap().loc())
       }
       tagged_node1(
         "TypeDesc::TupleStruct",
@@ -1132,9 +1131,9 @@ fn TypeName::json_repr(self : TypeName) -> Json {
 ///|
 fn TypeVarBinder::json_repr(self : TypeVarBinder) -> Json {
   let constraints_loc = match self.constraints {
-    @list.Empty => self.name_loc
-    @list.More(constraint_, tail=@list.Empty) => constraint_.loc
-    @list.More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
+    Empty => self.name_loc
+    More(constraint_, tail=Empty) => constraint_.loc
+    More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
   }
   let loc = self.name_loc.merge(constraints_loc)
   tagged_node("TypeVarBinder", loc, {

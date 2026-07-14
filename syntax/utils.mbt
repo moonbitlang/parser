@@ -53,10 +53,10 @@ pub fn make_interps(c : @tokens.InterpLiteral) -> @list.List[InterpElem] {
   let result = c.map(fn(lit) {
     match lit {
       InterpLit(repr~, loc~) => InterpElem::Literal(repr~, loc~)
-      InterpSource(s) => InterpElem::Source(s)
+      InterpSource(s) => Source(s)
     }
   })
-  @list.List(result)
+  List(result)
 }
 
 ///|
@@ -146,23 +146,20 @@ pub fn make_field_pat(
   pattern : Pattern,
   is_pun : Bool,
 ) -> FieldPat {
-  FieldPat::{ label, pattern, is_pun, loc }
+  { label, pattern, is_pun, loc }
 }
 
 ///|
 /// Create unary plus expression
 pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
-    ("+", Constant(c=Constant::Int(_), loc=_)) => arg
-    ("+", Constant(c=Constant::Double(_), loc=_)) => arg
+    ("+", Constant(c=Int(_), loc=_)) => arg
+    ("+", Constant(c=Double(_), loc=_)) => arg
     _ => {
       let op = Var::{ name: Ident(name="~+"), loc }
       Apply(
         func=make_ident_expr(loc~, op),
-        args=@list.singleton(Argument::{
-          value: arg,
-          kind: ArgumentKind::Positional,
-        }),
+        args=@list.singleton({ value: arg, kind: Positional }),
         loc~,
       )
     }
@@ -173,26 +170,26 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
 /// Create unary minus expression
 pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
   match (name, arg) {
-    ("-", Constant(c=Constant::Int(x), loc=_)) => {
+    ("-", Constant(c=Int(x), loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
         _ => "-\{x}"
       }
-      make_constant_expr(loc~, Constant::Int(new_val))
+      make_constant_expr(loc~, Int(new_val))
     }
-    ("-", Constant(c=Constant::Int64(x), loc=_)) => {
+    ("-", Constant(c=Int64(x), loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
         _ => "-\{x}"
       }
-      make_constant_expr(loc~, Constant::Int64(new_val))
+      make_constant_expr(loc~, Int64(new_val))
     }
-    ("-", Constant(c=Constant::Double(x), loc=_)) => {
+    ("-", Constant(c=Double(x), loc=_)) => {
       let new_val = match x {
         ['-', .. num] => num.to_owned()
         _ => "-\{x}"
       }
-      make_constant_expr(loc~, Constant::Double(new_val))
+      make_constant_expr(loc~, Double(new_val))
     }
     _ => {
       let op = Var::{ name: Ident(name~), loc }
@@ -213,7 +210,7 @@ pub fn bracket_loc(index : Expr) -> Location {
   let loc = loc_of_expression(index)
   let start = shift_col(loc.start, -1)
   let end = shift_col(loc.end, 1)
-  Location::{ start, end }
+  { start, end }
 }
 
 ///|
@@ -221,11 +218,11 @@ pub fn bracket_loc(index : Expr) -> Location {
 pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
   DotApply(
     self=obj,
-    method_name=Label::{
+    method_name={
       name: operators_table.get("_[_]").unwrap(),
       loc: bracket_loc(index),
     },
-    args=@list.List([Argument::{ value: index, kind: ArgumentKind::Positional }]),
+    args=List([{ value: index, kind: Positional }]),
     return_self=false,
     loc~,
   )
@@ -241,14 +238,11 @@ pub fn desugar_array_set(
 ) -> Expr {
   DotApply(
     self=obj,
-    method_name=Label::{
+    method_name={
       name: operators_table.get("_[_]=_").unwrap(),
       loc: bracket_loc(index),
     },
-    args=@list.List([
-      Argument::{ value: index, kind: ArgumentKind::Positional },
-      Argument::{ value, kind: ArgumentKind::Positional },
-    ]),
+    args=List([{ value: index, kind: Positional }, { value, kind: Positional }]),
     return_self=false,
     loc~,
   )
@@ -277,10 +271,10 @@ pub fn desugar_array_augmented_set(
   let idx_var = Var::{ name: Ident(name=idx_name), loc: idx_loc }
   let idx_ident = make_ident_expr(loc=idx_loc, idx_var)
   Let(
-    pattern=Pattern::Var(Binder::{ name: arr_name, loc: no_location }),
+    pattern=Var({ name: arr_name, loc: no_location }),
     expr=array,
     body=Let(
-      pattern=Pattern::Var(Binder::{ name: idx_name, loc: no_location }),
+      pattern=Var({ name: idx_name, loc: no_location }),
       expr=index,
       body=desugar_array_set(
         loc~,
@@ -340,19 +334,19 @@ pub fn make_field_def(
   expr : Expr,
   is_pun : Bool,
 ) -> FieldDef {
-  FieldDef::{ label, expr, is_pun, loc }
+  { label, expr, is_pun, loc }
 }
 
 ///|
 /// Convert label to expression
 pub fn label_to_expr(loc~ : Location, label : Label) -> Expr {
-  make_ident_expr(loc~, Var::{ name: Ident(name=label.name), loc })
+  make_ident_expr(loc~, { name: Ident(name=label.name), loc })
 }
 
 ///|
 /// Convert label to pattern
 pub fn label_to_pat(loc~ : Location, label : Label) -> Pattern {
-  Pattern::Var(Binder::{ name: label.name, loc })
+  Var({ name: label.name, loc })
 }
 
 ///|
@@ -380,7 +374,7 @@ pub fn make_int(i : String) -> Constant {
 ///|
 /// Create double constant
 pub fn make_double(f : String) -> Constant {
-  Constant::Double(f)
+  Double(f)
 }
 
 ///|
@@ -404,7 +398,7 @@ pub(all) enum ArrowFnParam {
 ///|
 /// Convert binder to expression
 pub fn binder_to_expr(p : Binder) -> Expr {
-  make_ident_expr(loc=p.loc, Var::{ name: Ident(name=p.name), loc: p.loc })
+  make_ident_expr(loc=p.loc, { name: Ident(name=p.name), loc: p.loc })
 }
 
 ///|
@@ -412,7 +406,7 @@ pub fn binder_to_expr(p : Binder) -> Expr {
 pub fn arrow_fn_param_to_expr(p : ArrowFnParam) -> Expr {
   match p {
     Named(b) => binder_to_expr(b)
-    Unnamed(loc) => Hole(loc~, kind=Hole::Incomplete)
+    Unnamed(loc) => Hole(loc~, kind=Incomplete)
   }
 }
 
@@ -428,16 +422,16 @@ pub fn make_arrow_fn(
     let (param, ty) = p
     match param {
       Named(binder) => Parameter::Positional(binder~, ty~)
-      Unnamed(loc) => Parameter::DiscardPositional(ty~, loc~)
+      Unnamed(loc) => DiscardPositional(ty~, loc~)
     }
   })
-  Func::{
+  {
     parameters,
     params_loc,
     body,
     return_type: None,
-    error_type: ErrorType::NoErrorType,
-    kind: FnKind::Arrow,
+    error_type: NoErrorType,
+    kind: Arrow,
     is_async: None,
     loc,
   }
@@ -617,7 +611,7 @@ pub fn AliasTarget::loc(self : AliasTarget) -> Location {
 
 ///|
 fn shift_col(pos : Position, offset : Int) -> Position {
-  Position::{
+  {
     lnum: pos.lnum,
     fname: pos.fname,
     bol: pos.bol + offset,

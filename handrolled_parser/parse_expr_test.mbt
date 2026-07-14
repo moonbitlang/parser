@@ -11,7 +11,7 @@ fn simple_parse_expr(source : String) -> @syntax.Expr raise {
 
 ///|
 test {
-  @basic.show_loc.val = @basic.LocStyle::Json
+  @basic.show_loc.val = Json
   let add : String =
     #| 1 + 2
   json_inspect(simple_parse_expr(add).json_repr(), content={
@@ -174,7 +174,7 @@ test {
                       "start": { "line": 1, "column": 10 },
                       "end": { "line": 1, "column": 11 },
                     },
-                    "children": {},
+                    "children": Json::empty_object(),
                   },
                 },
               },
@@ -260,7 +260,7 @@ test {
                       "start": { "line": 1, "column": 13 },
                       "end": { "line": 1, "column": 18 },
                     },
-                    "children": {},
+                    "children": Json::empty_object(),
                   },
                 },
               },
@@ -273,7 +273,7 @@ test {
               "start": { "line": 1, "column": 6 },
               "end": { "line": 1, "column": 19 },
             },
-            "children": {},
+            "children": Json::empty_object(),
           },
         },
       },
@@ -410,7 +410,7 @@ test {
                                   "start": { "line": 3, "column": 12 },
                                   "end": { "line": 3, "column": 13 },
                                 },
-                                "children": {},
+                                "children": Json::empty_object(),
                               },
                             },
                           },
@@ -423,7 +423,7 @@ test {
                           "start": { "line": 3, "column": 6 },
                           "end": { "line": 3, "column": 14 },
                         },
-                        "children": {},
+                        "children": Json::empty_object(),
                       },
                     },
                   },
@@ -434,7 +434,7 @@ test {
                       "start": { "line": 2, "column": 9 },
                       "end": { "line": 4, "column": 5 },
                     },
-                    "children": {},
+                    "children": Json::empty_object(),
                   },
                 },
               },

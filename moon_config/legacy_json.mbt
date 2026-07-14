@@ -10,7 +10,7 @@ pub impl ToJson for Ast with fn to_json(self) {
         Json::array(content.to_array().map(item => convert(item, false)))
       Obj(fields, ..) => {
         if fold_duplicates {
-          let groups : Map[String, Array[Json]] = {}
+          let groups : Map[String, Array[Json]] = Map([])
           for field in fields {
             let (key, value) = field
             let item = convert(value, false)
@@ -22,7 +22,7 @@ pub impl ToJson for Ast with fn to_json(self) {
               None => groups[key] = [item]
             }
           }
-          let object : Map[String, Json] = {}
+          let object : Map[String, Json] = Map([])
           groups.each(fn(key, items) {
             object[key] = if items.length() == 1 {
               items[0]

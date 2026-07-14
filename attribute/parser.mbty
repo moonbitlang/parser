@@ -192,5 +192,5 @@ properties -> List[Prop]:
   | "(" non_empty_properties ")" { $2 }
 
 non_empty_properties -> List[Prop]:
-  | property { @list.List([$1]) }
+  | property { List([$1]) }
   | x=property "," xs=non_empty_properties{ xs.add(x) }

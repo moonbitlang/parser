@@ -75,7 +75,11 @@ test {
             },
           },
         },
-        "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+        "vis": {
+          "kind": "Visibility::Default",
+          "loc": null,
+          "children": Json::empty_object(),
+        },
         "is_constant": false,
         "is_declare": false,
         "attrs": {
@@ -204,12 +208,12 @@ test {
             "error_type": {
               "kind": "ErrorType::NoErrorType",
               "loc": null,
-              "children": {},
+              "children": Json::empty_object(),
             },
             "vis": {
               "kind": "Visibility::Default",
               "loc": null,
-              "children": {},
+              "children": Json::empty_object(),
             },
             "attrs": {
               "kind": "FunDecl::AttrList",
@@ -376,7 +380,7 @@ test {
             "type_vis": {
               "kind": "Visibility::Default",
               "loc": null,
-              "children": {},
+              "children": Json::empty_object(),
             },
             "is_declare": false,
             "deriving": {
@@ -445,7 +449,7 @@ test {
                         "vis": {
                           "kind": "Visibility::Default",
                           "loc": null,
-                          "children": {},
+                          "children": Json::empty_object(),
                         },
                         "attrs": {
                           "kind": "FieldDecl::AttrList",
@@ -490,7 +494,7 @@ test {
                         "vis": {
                           "kind": "Visibility::Default",
                           "loc": null,
-                          "children": {},
+                          "children": Json::empty_object(),
                         },
                         "attrs": {
                           "kind": "FieldDecl::AttrList",
@@ -513,7 +517,7 @@ test {
             "type_vis": {
               "kind": "Visibility::Default",
               "loc": null,
-              "children": {},
+              "children": Json::empty_object(),
             },
             "is_declare": false,
             "deriving": {

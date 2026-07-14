@@ -483,7 +483,7 @@ fn init {
 }
 
 // file:///./mbti_parser.mbty
-// 149|    PACKAGE STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
+// 149|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
 fn yy_action_0(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_1(_args[1].2, _args[2:2])
   guard _args[1].0 is YYObj_StringLiteral(_dollar2)
@@ -493,7 +493,7 @@ fn yy_action_0(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Pos
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj_Mbti({();  Mbti::{package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} })
+  YYObj_Mbti({();  {package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} })
 }
 
 // file:///./stdlib.mbty
@@ -503,7 +503,7 @@ fn yy_action_1(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Pos
 }
 
 // file:///./mbti_parser.mbty
-// 149|    PACKAGE STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
+// 149|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
 fn yy_action_2(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_3(_args[1].2, _args[2:3])
   guard _args[1].0 is YYObj_StringLiteral(_dollar2)
@@ -513,7 +513,7 @@ fn yy_action_2(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Pos
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj_Mbti({();  Mbti::{package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} })
+  YYObj_Mbti({();  {package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} })
 }
 
 // file:///./stdlib.mbty
@@ -592,7 +592,7 @@ fn yy_action_12(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 }
 
 // file:///./mbti_parser.mbty
-// 179|    attributes vis "const" uident ":" type_ "=" constant { ConstSig::{name: $4, type_: $6, value: $8, attrs: $1} }
+// 179|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_13(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
@@ -600,11 +600,11 @@ fn yy_action_13(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj_Type(_dollar6)
   guard _args[5].0 is YYObj_Constant(_dollar8)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  ConstSig::{name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
 }
 
 // file:///./mbti_parser.mbty
-// 179|    attributes vis "const" uident ":" type_ "=" constant { ConstSig::{name: $4, type_: $6, value: $8, attrs: $1} }
+// 179|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_16(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
@@ -612,24 +612,24 @@ fn yy_action_16(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj_Type(_dollar6)
   guard _args[6].0 is YYObj_Constant(_dollar8)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  ConstSig::{name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
 }
 
 // file:///./mbti_parser.mbty
-// 183|    attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
+// 183|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_18(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard _args[2].0 is YYObj_Name(_dollar4)
   guard _args[4].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  ValueSig::{ attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_19(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -644,14 +644,14 @@ fn yy_action_19(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[9].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_22(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -666,13 +666,13 @@ fn yy_action_22(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[8].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 232|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 233|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+// 233|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 234|  }
 fn yy_action_24(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -682,13 +682,13 @@ fn yy_action_24(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5} 
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 290|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 292|  }
 fn yy_action_25(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -698,13 +698,13 @@ fn yy_action_25(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[4].0 is YYObj_Type(_dollar6)
   YYObj_AliasSig({(); 
-    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6) 
+    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
   })
 }
 
 // file:///./mbti_parser.mbty
 // 235|    attributes vis "suberror" uident optional_derive {
-// 236|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 236|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
 // 237|  }
 fn yy_action_26(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -714,13 +714,13 @@ fn yy_action_26(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[2].0 is YYObj_Name(_dollar4)
   guard _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 238|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 239|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
 // 240|  }
 fn yy_action_27(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -731,13 +731,13 @@ fn yy_action_27(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 241|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 242|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 242|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 243|  }
 fn yy_action_28(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -748,13 +748,13 @@ fn yy_action_28(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj_TypeDefinition(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
   })
 }
 
 // file:///./mbti_parser.mbty
 // 244|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 245|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 246|  }
 fn yy_action_29(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -765,13 +765,13 @@ fn yy_action_29(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj__list_List_Type_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 247|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 248|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 249|  }
 fn yy_action_30(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -782,13 +782,13 @@ fn yy_action_30(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 250|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 251|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 252|  }
 fn yy_action_31(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -799,14 +799,14 @@ fn yy_action_31(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 253|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 254|    let (name, type_params, target) = $4
-// 255|    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 255|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 256|  }
 fn yy_action_32(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -818,13 +818,13 @@ fn yy_action_32(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar9)
   YYObj_TypeSig({(); 
     let (name, type_params, target) = _dollar4
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
+    {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 265|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 266|    ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 266|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 267|  }
 fn yy_action_33(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -834,13 +834,13 @@ fn yy_action_33(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj_Type(_dollar7)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    ImplSig::{type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
+    {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 268|    attributes vis "impl" qualified_uident "for" type_ { 
-// 269|    ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 268|    attributes vis "impl" qualified_uident "for" type_ {
+// 269|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
 // 270|  }
 fn yy_action_34(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -848,14 +848,14 @@ fn yy_action_34(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[2].0 is YYObj_QualifiedName(_dollar4)
   guard _args[4].0 is YYObj_Type(_dollar6)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({();  
-    ImplSig::{type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+  YYObj_ImplSig({(); 
+    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-// 275|    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 275|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 276|  }
 fn yy_action_35(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -865,8 +865,8 @@ fn yy_action_35(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[2].0 is YYObj_Name(_dollar4)
   guard _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard _args[4].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({();  
-    TraitSig::{ attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6} 
+  YYObj_TraitSig({(); 
+    { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
   })
 }
 
@@ -926,7 +926,7 @@ fn yy_action_38(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 }
 
 // file:///./mbti_parser.mbty
-// 179|    attributes vis "const" uident ":" type_ "=" constant { ConstSig::{name: $4, type_: $6, value: $8, attrs: $1} }
+// 179|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_39(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
@@ -934,24 +934,24 @@ fn yy_action_39(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj_Type(_dollar6)
   guard _args[7].0 is YYObj_Constant(_dollar8)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  ConstSig::{name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
 }
 
 // file:///./mbti_parser.mbty
-// 183|    attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
+// 183|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_41(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard _args[3].0 is YYObj_Name(_dollar4)
   guard _args[5].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  ValueSig::{ attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_42(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -966,14 +966,14 @@ fn yy_action_42(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[10].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_43(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -988,13 +988,13 @@ fn yy_action_43(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[9].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 232|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 233|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+// 233|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 234|  }
 fn yy_action_44(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1004,13 +1004,13 @@ fn yy_action_44(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5} 
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 290|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 292|  }
 fn yy_action_45(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1020,13 +1020,13 @@ fn yy_action_45(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[5].0 is YYObj_Type(_dollar6)
   YYObj_AliasSig({(); 
-    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6) 
+    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
   })
 }
 
 // file:///./mbti_parser.mbty
 // 235|    attributes vis "suberror" uident optional_derive {
-// 236|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 236|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
 // 237|  }
 fn yy_action_46(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1036,13 +1036,13 @@ fn yy_action_46(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj_Name(_dollar4)
   guard _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 238|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 239|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
 // 240|  }
 fn yy_action_47(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1053,13 +1053,13 @@ fn yy_action_47(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 241|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 242|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 242|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 243|  }
 fn yy_action_48(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1070,13 +1070,13 @@ fn yy_action_48(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj_TypeDefinition(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
   })
 }
 
 // file:///./mbti_parser.mbty
 // 244|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 245|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 246|  }
 fn yy_action_49(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1087,13 +1087,13 @@ fn yy_action_49(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_Type_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 247|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 248|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 249|  }
 fn yy_action_50(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1104,13 +1104,13 @@ fn yy_action_50(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 250|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 251|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 252|  }
 fn yy_action_51(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1121,14 +1121,14 @@ fn yy_action_51(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 253|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 254|    let (name, type_params, target) = $4
-// 255|    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 255|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 256|  }
 fn yy_action_52(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1140,13 +1140,13 @@ fn yy_action_52(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[8].0 is YYObj__list_List_QualifiedName_(_dollar9)
   YYObj_TypeSig({(); 
     let (name, type_params, target) = _dollar4
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
+    {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 265|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 266|    ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 266|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 267|  }
 fn yy_action_53(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1156,13 +1156,13 @@ fn yy_action_53(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[6].0 is YYObj_Type(_dollar7)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    ImplSig::{type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
+    {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 268|    attributes vis "impl" qualified_uident "for" type_ { 
-// 269|    ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 268|    attributes vis "impl" qualified_uident "for" type_ {
+// 269|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
 // 270|  }
 fn yy_action_54(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1170,14 +1170,14 @@ fn yy_action_54(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj_QualifiedName(_dollar4)
   guard _args[5].0 is YYObj_Type(_dollar6)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({();  
-    ImplSig::{type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+  YYObj_ImplSig({(); 
+    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-// 275|    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 275|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 276|  }
 fn yy_action_55(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1187,8 +1187,8 @@ fn yy_action_55(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj_Name(_dollar4)
   guard _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard _args[5].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({();  
-    TraitSig::{ attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6} 
+  YYObj_TraitSig({(); 
+    { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
   })
 }
 
@@ -1248,7 +1248,7 @@ fn yy_action_58(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 }
 
 // file:///./mbti_parser.mbty
-// 179|    attributes vis "const" uident ":" type_ "=" constant { ConstSig::{name: $4, type_: $6, value: $8, attrs: $1} }
+// 179|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_59(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
@@ -1256,11 +1256,11 @@ fn yy_action_59(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj_Type(_dollar6)
   guard _args[6].0 is YYObj_Constant(_dollar8)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  ConstSig::{name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
 }
 
 // file:///./mbti_parser.mbty
-// 179|    attributes vis "const" uident ":" type_ "=" constant { ConstSig::{name: $4, type_: $6, value: $8, attrs: $1} }
+// 179|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_61(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
@@ -1268,24 +1268,24 @@ fn yy_action_61(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj_Type(_dollar6)
   guard _args[7].0 is YYObj_Constant(_dollar8)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  ConstSig::{name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
 }
 
 // file:///./mbti_parser.mbty
-// 183|    attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
+// 183|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_62(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard _args[3].0 is YYObj_Name(_dollar4)
   guard _args[5].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  ValueSig::{ attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_63(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1300,14 +1300,14 @@ fn yy_action_63(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[10].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_64(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1322,13 +1322,13 @@ fn yy_action_64(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[9].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 232|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 233|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+// 233|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 234|  }
 fn yy_action_65(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1338,13 +1338,13 @@ fn yy_action_65(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5} 
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 290|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 292|  }
 fn yy_action_66(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1354,13 +1354,13 @@ fn yy_action_66(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[5].0 is YYObj_Type(_dollar6)
   YYObj_AliasSig({(); 
-    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6) 
+    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
   })
 }
 
 // file:///./mbti_parser.mbty
 // 235|    attributes vis "suberror" uident optional_derive {
-// 236|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 236|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
 // 237|  }
 fn yy_action_67(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1370,13 +1370,13 @@ fn yy_action_67(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj_Name(_dollar4)
   guard _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 238|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 239|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
 // 240|  }
 fn yy_action_68(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1387,13 +1387,13 @@ fn yy_action_68(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 241|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 242|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 242|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 243|  }
 fn yy_action_69(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1404,13 +1404,13 @@ fn yy_action_69(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj_TypeDefinition(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
   })
 }
 
 // file:///./mbti_parser.mbty
 // 244|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 245|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 246|  }
 fn yy_action_70(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1421,13 +1421,13 @@ fn yy_action_70(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_Type_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 247|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 248|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 249|  }
 fn yy_action_71(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1438,13 +1438,13 @@ fn yy_action_71(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 250|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 251|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 252|  }
 fn yy_action_72(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1455,14 +1455,14 @@ fn yy_action_72(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 253|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 254|    let (name, type_params, target) = $4
-// 255|    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 255|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 256|  }
 fn yy_action_73(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1474,13 +1474,13 @@ fn yy_action_73(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[8].0 is YYObj__list_List_QualifiedName_(_dollar9)
   YYObj_TypeSig({(); 
     let (name, type_params, target) = _dollar4
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
+    {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 265|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 266|    ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 266|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 267|  }
 fn yy_action_74(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1490,13 +1490,13 @@ fn yy_action_74(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[6].0 is YYObj_Type(_dollar7)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    ImplSig::{type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
+    {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 268|    attributes vis "impl" qualified_uident "for" type_ { 
-// 269|    ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 268|    attributes vis "impl" qualified_uident "for" type_ {
+// 269|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
 // 270|  }
 fn yy_action_75(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1504,14 +1504,14 @@ fn yy_action_75(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj_QualifiedName(_dollar4)
   guard _args[5].0 is YYObj_Type(_dollar6)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({();  
-    ImplSig::{type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+  YYObj_ImplSig({(); 
+    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-// 275|    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 275|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 276|  }
 fn yy_action_76(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1521,8 +1521,8 @@ fn yy_action_76(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[3].0 is YYObj_Name(_dollar4)
   guard _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard _args[5].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({();  
-    TraitSig::{ attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6} 
+  YYObj_TraitSig({(); 
+    { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
   })
 }
 
@@ -1590,7 +1590,7 @@ fn yy_action_17(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 }
 
 // file:///./mbti_parser.mbty
-// 179|    attributes vis "const" uident ":" type_ "=" constant { ConstSig::{name: $4, type_: $6, value: $8, attrs: $1} }
+// 179|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_80(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
@@ -1598,7 +1598,7 @@ fn yy_action_80(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[6].0 is YYObj_Type(_dollar6)
   guard _args[8].0 is YYObj_Constant(_dollar8)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  ConstSig::{name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
 }
 
 // file:///./mbti_parser.mbty
@@ -1684,20 +1684,20 @@ fn yy_action_92(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 }
 
 // file:///./mbti_parser.mbty
-// 183|    attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
+// 183|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_93(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard _args[4].0 is YYObj_Name(_dollar4)
   guard _args[6].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  ValueSig::{ attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_94(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1712,14 +1712,14 @@ fn yy_action_94(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[11].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_95(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1734,13 +1734,13 @@ fn yy_action_95(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[10].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 232|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 233|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+// 233|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 234|  }
 fn yy_action_96(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1750,13 +1750,13 @@ fn yy_action_96(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5} 
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 290|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 292|  }
 fn yy_action_97(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1766,13 +1766,13 @@ fn yy_action_97(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[6].0 is YYObj_Type(_dollar6)
   YYObj_AliasSig({(); 
-    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6) 
+    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
   })
 }
 
 // file:///./mbti_parser.mbty
 // 235|    attributes vis "suberror" uident optional_derive {
-// 236|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 236|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
 // 237|  }
 fn yy_action_98(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1782,13 +1782,13 @@ fn yy_action_98(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[4].0 is YYObj_Name(_dollar4)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 238|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 239|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
 // 240|  }
 fn yy_action_99(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1799,13 +1799,13 @@ fn yy_action_99(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 241|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 242|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 242|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 243|  }
 fn yy_action_100(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1816,13 +1816,13 @@ fn yy_action_100(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[6].0 is YYObj_TypeDefinition(_dollar6)
   guard _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
   })
 }
 
 // file:///./mbti_parser.mbty
 // 244|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 245|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 246|  }
 fn yy_action_101(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1833,13 +1833,13 @@ fn yy_action_101(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[6].0 is YYObj__list_List_Type_(_dollar6)
   guard _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 247|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 248|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 249|  }
 fn yy_action_102(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1850,13 +1850,13 @@ fn yy_action_102(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 250|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 251|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 252|  }
 fn yy_action_103(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1867,14 +1867,14 @@ fn yy_action_103(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 253|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 254|    let (name, type_params, target) = $4
-// 255|    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 255|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 256|  }
 fn yy_action_104(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1886,13 +1886,13 @@ fn yy_action_104(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[9].0 is YYObj__list_List_QualifiedName_(_dollar9)
   YYObj_TypeSig({(); 
     let (name, type_params, target) = _dollar4
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
+    {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 265|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 266|    ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 266|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 267|  }
 fn yy_action_105(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1902,13 +1902,13 @@ fn yy_action_105(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[7].0 is YYObj_Type(_dollar7)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    ImplSig::{type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
+    {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 268|    attributes vis "impl" qualified_uident "for" type_ { 
-// 269|    ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 268|    attributes vis "impl" qualified_uident "for" type_ {
+// 269|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
 // 270|  }
 fn yy_action_106(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1916,14 +1916,14 @@ fn yy_action_106(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj_QualifiedName(_dollar4)
   guard _args[6].0 is YYObj_Type(_dollar6)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({();  
-    ImplSig::{type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+  YYObj_ImplSig({(); 
+    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-// 275|    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 275|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 276|  }
 fn yy_action_107(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1933,8 +1933,8 @@ fn yy_action_107(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj_Name(_dollar4)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard _args[6].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({();  
-    TraitSig::{ attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6} 
+  YYObj_TraitSig({(); 
+    { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
   })
 }
 
@@ -2022,20 +2022,20 @@ fn yy_action_113(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 183|    attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
+// 183|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_114(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard _args[2].0 is YYObj_Name(_dollar4)
   guard _args[4].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  ValueSig::{ attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_115(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2050,14 +2050,14 @@ fn yy_action_115(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[9].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_116(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2072,13 +2072,13 @@ fn yy_action_116(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[8].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 232|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 233|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+// 233|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 234|  }
 fn yy_action_117(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2088,13 +2088,13 @@ fn yy_action_117(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5} 
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 290|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 292|  }
 fn yy_action_118(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2104,13 +2104,13 @@ fn yy_action_118(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[4].0 is YYObj_Type(_dollar6)
   YYObj_AliasSig({(); 
-    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6) 
+    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
   })
 }
 
 // file:///./mbti_parser.mbty
 // 235|    attributes vis "suberror" uident optional_derive {
-// 236|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 236|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
 // 237|  }
 fn yy_action_119(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2120,13 +2120,13 @@ fn yy_action_119(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[2].0 is YYObj_Name(_dollar4)
   guard _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 238|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 239|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
 // 240|  }
 fn yy_action_120(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2137,13 +2137,13 @@ fn yy_action_120(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 241|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 242|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 242|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 243|  }
 fn yy_action_121(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2154,13 +2154,13 @@ fn yy_action_121(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj_TypeDefinition(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
   })
 }
 
 // file:///./mbti_parser.mbty
 // 244|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 245|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 246|  }
 fn yy_action_122(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2171,13 +2171,13 @@ fn yy_action_122(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj__list_List_Type_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 247|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 248|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 249|  }
 fn yy_action_123(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2188,13 +2188,13 @@ fn yy_action_123(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 250|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 251|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 252|  }
 fn yy_action_124(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2205,14 +2205,14 @@ fn yy_action_124(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 253|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 254|    let (name, type_params, target) = $4
-// 255|    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 255|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 256|  }
 fn yy_action_125(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2224,13 +2224,13 @@ fn yy_action_125(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[7].0 is YYObj__list_List_QualifiedName_(_dollar9)
   YYObj_TypeSig({(); 
     let (name, type_params, target) = _dollar4
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
+    {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 265|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 266|    ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 266|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 267|  }
 fn yy_action_126(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2240,13 +2240,13 @@ fn yy_action_126(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[5].0 is YYObj_Type(_dollar7)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    ImplSig::{type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
+    {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 268|    attributes vis "impl" qualified_uident "for" type_ { 
-// 269|    ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 268|    attributes vis "impl" qualified_uident "for" type_ {
+// 269|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
 // 270|  }
 fn yy_action_127(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2254,14 +2254,14 @@ fn yy_action_127(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[2].0 is YYObj_QualifiedName(_dollar4)
   guard _args[4].0 is YYObj_Type(_dollar6)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({();  
-    ImplSig::{type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+  YYObj_ImplSig({(); 
+    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-// 275|    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 275|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 276|  }
 fn yy_action_128(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2271,8 +2271,8 @@ fn yy_action_128(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[2].0 is YYObj_Name(_dollar4)
   guard _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard _args[4].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({();  
-    TraitSig::{ attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6} 
+  YYObj_TraitSig({(); 
+    { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
   })
 }
 
@@ -2332,20 +2332,20 @@ fn yy_action_131(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 183|    attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
+// 183|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_132(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard _args[1].0 is YYObj_Name(_dollar4)
   guard _args[3].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  ValueSig::{ attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
 }
 
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_133(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2360,33 +2360,33 @@ fn yy_action_133(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[8].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 187|   UIDENT "::" {
-// 188|  MethodSelfType::{ name : $1, is_object : false, loc : mk_loc($loc($1)) }
+// 188|  { name : $1, is_object : false, loc : mk_loc($loc($1)) }
 // 189| }
 fn yy_action_134(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
   YYObj_MethodSelfType({(); 
-  MethodSelfType::{ name : _dollar1, is_object : false, loc : mk_loc((_start_pos_of_item0, _end_pos_of_item0)) }
+  { name : _dollar1, is_object : false, loc : mk_loc((_start_pos_of_item0, _end_pos_of_item0)) }
  })
 }
 
 // file:///./mbti_parser.mbty
 // 190|   "&" UIDENT "::" {
-// 191|  MethodSelfType::{ name : $2, is_object : true, loc : mk_loc($loc($2)) }
+// 191|  { name : $2, is_object : true, loc : mk_loc($loc($2)) }
 // 192| }
 fn yy_action_135(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
   YYObj_MethodSelfType({(); 
-  MethodSelfType::{ name : _dollar2, is_object : true, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }
+  { name : _dollar2, is_object : true, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }
  })
 }
 
@@ -2422,7 +2422,7 @@ fn yy_action_139(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // file:///./mbti_parser.mbty
 // 212|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
 // 213|    let (type_name, name) = $6
-// 214|    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+// 214|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
 // 215|  }
 fn yy_action_140(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2437,13 +2437,13 @@ fn yy_action_140(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[7].0 is YYObj__Type__ErrorType_(_dollar9)
   YYObj_FuncSig({(); 
     let (type_name, name) = _dollar6
-    FuncSig::{ attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
+    { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 232|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 233|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+// 233|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 234|  }
 fn yy_action_141(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2453,13 +2453,13 @@ fn yy_action_141(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5} 
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 290|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+// 291|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 292|  }
 fn yy_action_142(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2469,13 +2469,13 @@ fn yy_action_142(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard _args[3].0 is YYObj_Type(_dollar6)
   YYObj_AliasSig({(); 
-    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6) 
+    TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
   })
 }
 
 // file:///./mbti_parser.mbty
 // 235|    attributes vis "suberror" uident optional_derive {
-// 236|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 236|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
 // 237|  }
 fn yy_action_143(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2485,13 +2485,13 @@ fn yy_action_143(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[1].0 is YYObj_Name(_dollar4)
   guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 238|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 239|    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
 // 240|  }
 fn yy_action_144(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2502,13 +2502,13 @@ fn yy_action_144(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 241|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 242|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 242|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 243|  }
 fn yy_action_145(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2519,7 +2519,7 @@ fn yy_action_145(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[3].0 is YYObj_TypeDefinition(_dollar6)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
   })
 }
 
@@ -2543,7 +2543,7 @@ fn yy_action_147(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 322|    attributes boption("mut") lident ":" type_ {
-// 323|    FieldDecl::{ name: FieldName::{ label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
+// 323|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
 // 324|  }
 fn yy_action_148(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2554,13 +2554,13 @@ fn yy_action_148(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_FieldDecl({(); 
-    FieldDecl::{ name: FieldName::{ label: _dollar3.name, loc : _dollar3.loc }, vis: Default, mut_: _dollar2, ty: _dollar5, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty() }
+    { name: { label: _dollar3.name, loc : _dollar3.loc }, vis: Default, mut_: _dollar2, ty: _dollar5, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty() }
   })
 }
 
 // file:///./mbti_parser.mbty
 // 322|    attributes boption("mut") lident ":" type_ {
-// 323|    FieldDecl::{ name: FieldName::{ label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
+// 323|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
 // 324|  }
 fn yy_action_149(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2571,7 +2571,7 @@ fn yy_action_149(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_FieldDecl({(); 
-    FieldDecl::{ name: FieldName::{ label: _dollar3.name, loc : _dollar3.loc }, vis: Default, mut_: _dollar2, ty: _dollar5, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty() }
+    { name: { label: _dollar3.name, loc : _dollar3.loc }, vis: Default, mut_: _dollar2, ty: _dollar5, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty() }
   })
 }
 
@@ -2598,7 +2598,7 @@ fn yy_action_152(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 244|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 245|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 246|  }
 fn yy_action_153(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2609,7 +2609,7 @@ fn yy_action_153(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[3].0 is YYObj__list_List_Type_(_dollar6)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
   })
 }
 
@@ -2628,7 +2628,7 @@ fn yy_action_155(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 247|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 248|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 249|  }
 fn yy_action_156(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2639,13 +2639,13 @@ fn yy_action_156(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 250|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 251|    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 252|  }
 fn yy_action_157(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2656,14 +2656,14 @@ fn yy_action_157(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 253|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 254|    let (name, type_params, target) = $4
-// 255|    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 255|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 256|  }
 fn yy_action_158(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2675,7 +2675,7 @@ fn yy_action_158(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[6].0 is YYObj__list_List_QualifiedName_(_dollar9)
   YYObj_TypeSig({(); 
     let (name, type_params, target) = _dollar4
-    TypeSig::{attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
+    {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
   })
 }
 
@@ -2722,8 +2722,8 @@ fn yy_action_164(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 307|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { 
-// 308|    ConstrDecl::{name: ConstrName::{ name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()} 
+// 307|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
+// 308|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
 // 309|  }
 fn yy_action_165(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2735,14 +2735,14 @@ fn yy_action_165(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstrDecl({();  
-    ConstrDecl::{name: ConstrName::{ name : _dollar2, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }, args: _dollar3, tag: _dollar4, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty()} 
+  YYObj_ConstrDecl({(); 
+    {name: { name : _dollar2, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }, args: _dollar3, tag: _dollar4, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty()}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 307|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { 
-// 308|    ConstrDecl::{name: ConstrName::{ name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()} 
+// 307|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
+// 308|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
 // 309|  }
 fn yy_action_166(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2754,8 +2754,8 @@ fn yy_action_166(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstrDecl({();  
-    ConstrDecl::{name: ConstrName::{ name : _dollar2, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }, args: _dollar3, tag: _dollar4, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty()} 
+  YYObj_ConstrDecl({(); 
+    {name: { name : _dollar2, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }, args: _dollar3, tag: _dollar4, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty()}
   })
 }
 
@@ -2783,29 +2783,29 @@ fn yy_action_169(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 317|    boption("mut") type_ { ConstrParam::{mut_: $1, ty: $2, label: None} }
+// 317|    boption("mut") type_ { {mut_: $1, ty: $2, label: None} }
 fn yy_action_170(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Bool(_dollar1)
   guard _args[1].0 is YYObj_Type(_dollar2)
-  YYObj_ConstrParam({();  ConstrParam::{mut_: _dollar1, ty: _dollar2, label: None} })
+  YYObj_ConstrParam({();  {mut_: _dollar1, ty: _dollar2, label: None} })
 }
 
 // file:///./mbti_parser.mbty
-// 318|    boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, ty: $4, label: Some($2)} }
+// 318|    boption("mut") post_label ":" type_ { {mut_: $1, ty: $4, label: Some($2)} }
 fn yy_action_171(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Bool(_dollar1)
   guard _args[3].0 is YYObj_Type(_dollar4)
   guard _args[1].0 is YYObj_Label(_dollar2)
-  YYObj_ConstrParam({();  ConstrParam::{mut_: _dollar1, ty: _dollar4, label: Some(_dollar2)} })
+  YYObj_ConstrParam({();  {mut_: _dollar1, ty: _dollar4, label: Some(_dollar2)} })
 }
 
 // file:///./mbti_parser.mbty
-// 474|    POST_LABEL { Label::{name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
+// 474|    POST_LABEL { {name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
 fn yy_action_172(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Label({();  Label::{name: _dollar1, loc: Location::trim_last_char(mk_loc((_symbol_start_pos, _end_pos)))} })
+  YYObj_Label({();  {name: _dollar1, loc: Location::trim_last_char(mk_loc((_symbol_start_pos, _end_pos)))} })
 }
 
 // file:///./stdlib.mbty
@@ -2985,7 +2985,7 @@ fn yy_action_194(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 265|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 266|    ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 266|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 267|  }
 fn yy_action_195(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2995,13 +2995,13 @@ fn yy_action_195(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[4].0 is YYObj_Type(_dollar7)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    ImplSig::{type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
+    {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 268|    attributes vis "impl" qualified_uident "for" type_ { 
-// 269|    ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 268|    attributes vis "impl" qualified_uident "for" type_ {
+// 269|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
 // 270|  }
 fn yy_action_196(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3009,14 +3009,14 @@ fn yy_action_196(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[1].0 is YYObj_QualifiedName(_dollar4)
   guard _args[3].0 is YYObj_Type(_dollar6)
   guard _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({();  
-    ImplSig::{type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+  YYObj_ImplSig({(); 
+    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
 // file:///./mbti_parser.mbty
-// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-// 275|    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+// 274|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 275|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 276|  }
 fn yy_action_197(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3026,8 +3026,8 @@ fn yy_action_197(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[1].0 is YYObj_Name(_dollar4)
   guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard _args[3].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({();  
-    TraitSig::{ attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6} 
+  YYObj_TraitSig({(); 
+    { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
   })
 }
 
@@ -3047,7 +3047,7 @@ fn yy_action_199(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 219|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 220|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
+// 220|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
 // 221|  }
 fn yy_action_200(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3061,13 +3061,13 @@ fn yy_action_200(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[8].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _args[9].0 is YYObj_Bool(_dollar9)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
+    { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 222|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 223|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
+// 223|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
 // 224|  }
 fn yy_action_201(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3080,13 +3080,13 @@ fn yy_action_201(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar6)
   guard _args[7].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 219|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 220|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
+// 220|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
 // 221|  }
 fn yy_action_202(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3100,13 +3100,13 @@ fn yy_action_202(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[7].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _args[8].0 is YYObj_Bool(_dollar9)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
+    { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 219|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 220|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
+// 220|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
 // 221|  }
 fn yy_action_203(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -3120,13 +3120,13 @@ fn yy_action_203(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[9].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _args[10].0 is YYObj_Bool(_dollar9)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
+    { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 222|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 223|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
+// 223|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
 // 224|  }
 fn yy_action_204(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -3139,13 +3139,13 @@ fn yy_action_204(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[7].0 is YYObj__Type__ErrorType_(_dollar6)
   guard _args[8].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
   })
 }
 
 // file:///./mbti_parser.mbty
 // 219|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 220|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
+// 220|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
 // 221|  }
 fn yy_action_205(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -3159,7 +3159,7 @@ fn yy_action_205(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[8].0 is YYObj__Type__ErrorType_(_dollar8)
   guard _args[9].0 is YYObj_Bool(_dollar9)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
+    { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: _dollar8, has_default: _dollar9}
   })
 }
 
@@ -3178,11 +3178,11 @@ fn yy_action_207(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 335|    uident ":" separated_nonempty_list("+", type_constraint) { TypeParamWithConstraints::{name: $1, constraints: $3} }
+// 335|    uident ":" separated_nonempty_list("+", type_constraint) { {name: $1, constraints: $3} }
 fn yy_action_208(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Name(_dollar1)
   guard _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
-  YYObj_TypeParamWithConstraints({();  TypeParamWithConstraints::{name: _dollar1, constraints: _dollar3} })
+  YYObj_TypeParamWithConstraints({();  {name: _dollar1, constraints: _dollar3} })
 }
 
 // file:///./mbti_parser.mbty
@@ -3208,10 +3208,10 @@ fn yy_action_211(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 334|    uident { TypeParamWithConstraints::{name: $1, constraints: @list.empty()} }
+// 334|    uident { {name: $1, constraints: @list.empty()} }
 fn yy_action_212(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_TypeParamWithConstraints({();  TypeParamWithConstraints::{name: _dollar1, constraints: @list.empty()} })
+  YYObj_TypeParamWithConstraints({();  {name: _dollar1, constraints: @list.empty()} })
 }
 
 // file:///./stdlib.mbty
@@ -3250,7 +3250,7 @@ fn yy_action_217(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 222|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 223|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
+// 223|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
 // 224|  }
 fn yy_action_218(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -3263,7 +3263,7 @@ fn yy_action_218(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[6].0 is YYObj__Type__ErrorType_(_dollar6)
   guard _args[7].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
   })
 }
 
@@ -3276,7 +3276,7 @@ fn yy_action_60(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 
 // file:///./mbti_parser.mbty
 // 222|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 223|    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
+// 223|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
 // 224|  }
 fn yy_action_219(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3289,7 +3289,7 @@ fn yy_action_219(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard _args[5].0 is YYObj__Type__ErrorType_(_dollar6)
   guard _args[6].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    TraitMethodSig::{ attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: _dollar6, has_default: _dollar7}
   })
 }
 
@@ -3508,14 +3508,14 @@ fn yy_action_241(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 // file:///./mbti_parser.mbty
 // 397|    simple_type "raise" "?" {
-// 398|    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
-// 399|    ($1, MaybeError(ty=fake_error)) 
+// 398|    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
+// 399|    ($1, MaybeError(ty=fake_error))
 // 400|  }
 fn yy_action_242(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Type(_dollar1)
   YYObj__Type__ErrorType_({(); 
-    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
-    (_dollar1, MaybeError(ty=fake_error)) 
+    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
+    (_dollar1, MaybeError(ty=fake_error))
   })
 }
 
@@ -3632,29 +3632,29 @@ fn yy_action_254(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 456|    UIDENT { ConstrId::{ id: Ident(name=$1), loc: mk_loc($sloc)} }
+// 456|    UIDENT { { id: Ident(name=$1), loc: mk_loc($sloc)} }
 fn yy_action_255(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_ConstrId({();  ConstrId::{ id: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  YYObj_ConstrId({();  { id: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} })
 }
 
 // file:///./mbti_parser.mbty
-// 457|    PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+// 457|    PACKAGE_NAME DOT_UIDENT { { id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
 fn yy_action_256(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[1].0 is YYObj_String(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_ConstrId({();  ConstrId::{ id: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  YYObj_ConstrId({();  { id: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} })
 }
 
 // file:///./mbti_parser.mbty
-// 470|    lident { Label::{name: $1.name, loc: $1.loc} }
+// 470|    lident { {name: $1.name, loc: $1.loc} }
 fn yy_action_257(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_Label({();  Label::{name: _dollar1.name, loc: _dollar1.loc} })
+  YYObj_Label({();  {name: _dollar1.name, loc: _dollar1.loc} })
 }
 
 // file:///./stdlib.mbty
@@ -3706,22 +3706,22 @@ fn yy_action_264(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 451|    UIDENT { QualifiedName::{ name: Ident(name=$1), loc: mk_loc($sloc)} }
+// 451|    UIDENT { { name: Ident(name=$1), loc: mk_loc($sloc)} }
 fn yy_action_265(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_QualifiedName({();  QualifiedName::{ name: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  YYObj_QualifiedName({();  { name: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} })
 }
 
 // file:///./mbti_parser.mbty
-// 452|    PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+// 452|    PACKAGE_NAME DOT_UIDENT { { name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
 fn yy_action_266(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   guard _args[1].0 is YYObj_String(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_QualifiedName({();  QualifiedName::{ name: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  YYObj_QualifiedName({();  { name: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} })
 }
 
 // file:///./stdlib.mbty
@@ -3776,20 +3776,20 @@ fn yy_action_272(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 465|    LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+// 465|    LIDENT { {name: $1, loc: mk_loc($sloc)} }
 fn yy_action_273(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Name({();  Name::{name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  YYObj_Name({();  {name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} })
 }
 
 // file:///./mbti_parser.mbty
-// 466|    "extend" { Name::{name: "extend", loc: mk_loc($sloc)} }
+// 466|    "extend" { {name: "extend", loc: mk_loc($sloc)} }
 fn yy_action_274(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Name({();  Name::{name: "extend", loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  YYObj_Name({();  {name: "extend", loc: mk_loc((_symbol_start_pos, _end_pos))} })
 }
 
 // file:///./mbti_parser.mbty
@@ -3858,12 +3858,12 @@ fn yy_action_278(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 461|    UIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+// 461|    UIDENT { {name: $1, loc: mk_loc($sloc)} }
 fn yy_action_279(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Name({();  Name::{name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  YYObj_Name({();  {name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} })
 }
 
 // file:///./stdlib.mbty
@@ -3913,18 +3913,18 @@ fn yy_action_285(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 }
 
 // file:///./mbti_parser.mbty
-// 159|    STRING "as" PACKAGE_NAME { PackageImport::{name: $1, alias_: Some($3)} }
+// 159|    STRING "as" PACKAGE_NAME { {name: $1, alias_: Some($3)} }
 fn yy_action_286(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_StringLiteral(_dollar1)
   guard _args[2].0 is YYObj_String(_dollar3)
-  YYObj_PackageImport({();  PackageImport::{name: _dollar1, alias_: Some(_dollar3)} })
+  YYObj_PackageImport({();  {name: _dollar1, alias_: Some(_dollar3)} })
 }
 
 // file:///./mbti_parser.mbty
-// 158|    STRING { PackageImport::{name: $1, alias_: None} }
+// 158|    STRING { {name: $1, alias_: None} }
 fn yy_action_287(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard _args[0].0 is YYObj_StringLiteral(_dollar1)
-  YYObj_PackageImport({();  PackageImport::{name: _dollar1, alias_: None} })
+  YYObj_PackageImport({();  {name: _dollar1, alias_: None} })
 }
 
 // file:///./mbti_parser.mbty

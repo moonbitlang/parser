@@ -20,7 +20,6 @@ using @attribute {type Attribute}
 
 ///|
 using @mbti_ast {
-  type QualifiedIdent,
   type Name,
   type QualifiedName,
   type Label,
@@ -32,10 +31,8 @@ using @mbti_ast {
   type TypeParamNoConstraints,
   type TypeParamWithConstraints,
   type FieldDecl,
-  type FieldName,
   type ConstrDecl,
   type ConstrId,
-  type ConstrName,
   type ConstrParam,
   type AliasSig,
   type TraitSig,

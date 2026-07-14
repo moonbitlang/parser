@@ -24,11 +24,7 @@ fn lex_tokens(
 
   fn resume_disabled_dot_metavar() -> Unit {
     let dot_pos = env.calc_offset(input, base~) + 1
-    env.add_token_with_loc(
-      @tokens.Token::DOT_LIDENT(""),
-      start=dot_pos,
-      end=dot_pos,
-    )
+    env.add_token_with_loc(DOT_LIDENT(""), start=dot_pos, end=dot_pos)
     lex_tokens(input[1:], base~, env~, preserve_comment~)
   }
 
@@ -101,11 +97,11 @@ fn lex_tokens(
     "\{prefix}\{name}"
   }
 
-  lexmatch input with longest {
+  lexscan input with longest {
     (
-      "\n|\r|\r\n|\u2028|\u2029",
+      re"^(?:\n|\r|\r\n|\u2028|\u2029)",
       // Handle newlines
-      rest
+      after=rest,
     ) => {
       let start_pos = env.calc_offset(input, base~)
       let end_pos = env.calc_offset(rest, base~)
@@ -118,12 +114,12 @@ fn lex_tokens(
     // Handle whitespace (Unicode spaces)
 
     (
-      "[\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]+",
-      rest
+      re"^(?:[\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]+)",
+      after=rest,
     ) => lex_tokens(rest, base~, env~, preserve_comment~)
 
     // Fat arrow
-    ("=>", rest) => {
+    (re"^(?:=>)", after=rest) => {
       env.add_token_with_loc(
         FAT_ARROW,
         start=env.calc_offset(input, base~),
@@ -133,7 +129,7 @@ fn lex_tokens(
     }
 
     // Thin arrow
-    ("->", rest) => {
+    (re"^(?:->)", after=rest) => {
       env.add_token_with_loc(
         THIN_ARROW,
         start=env.calc_offset(input, base~),
@@ -143,7 +139,7 @@ fn lex_tokens(
     }
 
     // Comments
-    ("//[^\r\n]*" as raw, rest) => {
+    (re"^(?://[^\r\n]*)" as raw, after=rest) => {
       let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair(raw)
       let end_pos = env.calc_offset(rest, base~)
@@ -164,7 +160,7 @@ fn lex_tokens(
     }
 
     // Character literals - basic cases
-    ("'" ("[^\\\n\r']" as raw) "'", rest) => {
+    (re"^(?:')" + (re"(?:[^\\\n\r'])" as raw) + re"(?:')", after=rest) => {
       let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair_for_char(raw)
       let end_pos = env.calc_offset(rest, base~)
@@ -173,7 +169,7 @@ fn lex_tokens(
     }
 
     // Character literals - escape sequences
-    ("'" ("\\[\\'\"ntbrf/ ]" as raw) "'", rest) => {
+    (re"^(?:')" + (re"(?:\\[\\'\"ntbrf/ ])" as raw) + re"(?:')", after=rest) => {
       env.add_token_with_loc(
         CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
@@ -183,7 +179,7 @@ fn lex_tokens(
     }
 
     // Character literals - hex escape
-    ("'" ("\\x[0-9a-fA-F]{2}" as raw) "'", rest) => {
+    (re"^(?:')" + (re"(?:\\x[0-9a-fA-F]{2})" as raw) + re"(?:')", after=rest) => {
       env.add_token_with_loc(
         CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
@@ -193,7 +189,7 @@ fn lex_tokens(
     }
 
     // Character literals - octal escape
-    ("'" ("\\o[0-3][0-7]{2}" as raw) "'", rest) => {
+    (re"^(?:')" + (re"(?:\\o[0-3][0-7]{2})" as raw) + re"(?:')", after=rest) => {
       env.add_token_with_loc(
         CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
@@ -203,7 +199,7 @@ fn lex_tokens(
     }
 
     // Character literals - unicode escape
-    ("'" ("\\u[0-9a-fA-F]{4}" as raw) "'", rest) => {
+    (re"^(?:')" + (re"(?:\\u[0-9a-fA-F]{4})" as raw) + re"(?:')", after=rest) => {
       env.add_token_with_loc(
         CHAR(raw.to_owned()),
         start=env.calc_offset(input, base~),
@@ -213,7 +209,12 @@ fn lex_tokens(
     }
 
     // Character literals - unicode escape with braces
-    ("'" ("\\u[{][0-9a-fA-F]+[}]" as raw) "'", rest) => {
+    (
+      re"^(?:')" +
+      (re"(?:\\u[{][0-9a-fA-F]+[}])" as raw) +
+      re"(?:')",
+      after=rest,
+    ) => {
       let char_text = raw.to_owned()
       env.add_token_with_loc(
         CHAR(char_text),
@@ -224,7 +225,7 @@ fn lex_tokens(
     }
 
     // Regex literals - re"..."
-    ("re\"", rest) => {
+    (re"^(?:re\")", after=rest) => {
       let start_pos = env.calc_offset(input, base~)
       let (rest, interps) = lex_string(
         rest,
@@ -244,7 +245,7 @@ fn lex_tokens(
     }
 
     // String literals - basic double-quoted string
-    ("\"", rest) => {
+    (re"^(?:\")", after=rest) => {
       let start_pos = env.calc_offset(input, base~)
       let (rest, interps) = lex_string(
         rest,
@@ -264,7 +265,7 @@ fn lex_tokens(
     }
 
     // Byte string literal
-    ("b\"", rest) => {
+    (re"^(?:b\")", after=rest) => {
       let start_pos = env.calc_offset(input, base~)
       let (rest, interps) = lex_string(
         rest,
@@ -287,7 +288,7 @@ fn lex_tokens(
     }
 
     // Byte literals - hex escape
-    ("b'\\x[0-9a-fA-F]{2}'" as raw, rest) => {
+    (re"^(?:b'\\x[0-9a-fA-F]{2}')" as raw, after=rest) => {
       let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
@@ -298,7 +299,7 @@ fn lex_tokens(
     }
 
     // Byte literals - octal escape
-    ("b'\\o[0-3][0-7]{2}'" as raw, rest) => {
+    (re"^(?:b'\\o[0-3][0-7]{2}')" as raw, after=rest) => {
       let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
@@ -309,7 +310,7 @@ fn lex_tokens(
     }
 
     // Byte literals - ASCII character
-    ("b'[\x00-\x7F]'" as raw, rest) => {
+    (re"^(?:b'[\x00-\x7F]')" as raw, after=rest) => {
       let ascii_char = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(ascii_char),
@@ -320,7 +321,7 @@ fn lex_tokens(
     }
 
     // Byte literals - escape sequences
-    ("b'\\[\\'\"`ntbrf/ ]'" as raw, rest) => {
+    (re"^(?:b'\\[\\'\"`ntbrf/ ]')" as raw, after=rest) => {
       let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
       env.add_token_with_loc(
         BYTE(literal),
@@ -331,14 +332,17 @@ fn lex_tokens(
     }
 
     // Invalid byte literal
-    ("b'", rest) => {
+    (re"^(?:b')", after=rest) => {
       let start = env.calc_offset(base~, input)
       let rest = lex_invalid_byte(rest, base~, env~, start~)
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
     // Float literals
-    ("[0-9](_|[0-9])*\.[0-9_]*([eE][+\-]?[0-9](_|[0-9])*)?F" as float, rest) => {
+    (
+      re"^(?:[0-9](_|[0-9])*\.[0-9_]*([eE][+\-]?[0-9](_|[0-9])*)?F)" as float,
+      after=rest,
+    ) => {
       env.add_token_with_loc(
         FLOAT(float.to_owned()),
         start=env.calc_offset(input, base~),
@@ -347,8 +351,8 @@ fn lex_tokens(
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     (
-      "0[xX][0-9a-fA-F](_|[0-9a-fA-F])*\.[0-9a-fA-F_]*([pP][+\-]?[0-9](_|[0-9])*)?F" as float,
-      rest
+      re"^(?:0[xX][0-9a-fA-F](_|[0-9a-fA-F])*\.[0-9a-fA-F_]*([pP][+\-]?[0-9](_|[0-9])*)?F)" as float,
+      after=rest,
     ) => {
       env.add_token_with_loc(
         FLOAT(float.to_owned()),
@@ -359,7 +363,10 @@ fn lex_tokens(
     }
 
     // Double literals
-    ("[0-9](_|[0-9])*\.[0-9_]*([eE][+\-]?[0-9](_|[0-9])*)?" as double, rest) => {
+    (
+      re"^(?:[0-9](_|[0-9])*\.[0-9_]*([eE][+\-]?[0-9](_|[0-9])*)?)" as double,
+      after=rest,
+    ) => {
       env.add_token_with_loc(
         DOUBLE(double.to_owned()),
         start=env.calc_offset(input, base~),
@@ -368,8 +375,8 @@ fn lex_tokens(
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     (
-      "0[xX][0-9a-fA-F](_|[0-9a-fA-F])*\.[0-9a-fA-F_]*([pP][+\-]?[0-9](_|[0-9])*)?" as double,
-      rest
+      re"^(?:0[xX][0-9a-fA-F](_|[0-9a-fA-F])*\.[0-9a-fA-F_]*([pP][+\-]?[0-9](_|[0-9])*)?)" as double,
+      after=rest,
     ) => {
       env.add_token_with_loc(
         DOUBLE(double.to_owned()),
@@ -382,8 +389,8 @@ fn lex_tokens(
     // Integer literals with range operator handling
 
     (
-      "([0-9](_|[0-9])*|0[xX][0-9a-fA-F](_|[0-9a-fA-F])*|0[Oo][0-7](_|[0-7])*|0[Bb][01](_|[01])*)((UL|U|L|N)?)\.\." as integer_with_range,
-      _rest
+      re"^(?:([0-9](_|[0-9])*|0[xX][0-9a-fA-F](_|[0-9a-fA-F])*|0[Oo][0-7](_|[0-7])*|0[Bb][01](_|[01])*)((UL|U|L|N)?)\.\.)" as integer_with_range,
+      after=_rest,
     ) => {
       // Need to handle integer..range specially
       let integer_end = integer_with_range.length() - 2 // Remove ".."
@@ -399,7 +406,7 @@ fn lex_tokens(
     }
 
     // Regular integer literals
-    ("[0-9](_|[0-9])*(UL|U|L|N)?" as integer, rest) => {
+    (re"^(?:[0-9](_|[0-9])*(UL|U|L|N)?)" as integer, after=rest) => {
       env.add_token_with_loc(
         INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
@@ -407,7 +414,10 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("0[xX][0-9a-fA-F](_|[0-9a-fA-F])*(UL|U|L|N)?" as integer, rest) => {
+    (
+      re"^(?:0[xX][0-9a-fA-F](_|[0-9a-fA-F])*(UL|U|L|N)?)" as integer,
+      after=rest,
+    ) => {
       env.add_token_with_loc(
         INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
@@ -415,7 +425,7 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("0[Oo][0-7](_|[0-7])*(UL|U|L|N)?" as integer, rest) => {
+    (re"^(?:0[Oo][0-7](_|[0-7])*(UL|U|L|N)?)" as integer, after=rest) => {
       env.add_token_with_loc(
         INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
@@ -423,7 +433,7 @@ fn lex_tokens(
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("0[Bb][01](_|[01])*(UL|U|L|N)?" as integer, rest) => {
+    (re"^(?:0[Bb][01](_|[01])*(UL|U|L|N)?)" as integer, after=rest) => {
       env.add_token_with_loc(
         INT(integer.to_owned()),
         start=env.calc_offset(input, base~),
@@ -435,14 +445,14 @@ fn lex_tokens(
     // Upper case identifiers (types) - simplified pattern for ASCII and basic Unicode
 
     (
-      "[A-Z][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*" as raw,
-      rest
+      re"^(?:[A-Z][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*)" as raw,
+      after=rest,
     ) => {
       let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair(raw)
       let end_pos = env.calc_offset(rest, base~)
       env.add_token_with_loc(
-        @tokens.Token::UIDENT(raw.to_owned()),
+        UIDENT(raw.to_owned()),
         start=start_pos,
         end=end_pos,
       )
@@ -450,10 +460,10 @@ fn lex_tokens(
     }
 
     // Post label identifiers (name~) - simplified pattern
-    ("[a-z_][a-zA-Z0-9_]*~" as raw, rest) => {
+    (re"^(?:[a-z_][a-zA-Z0-9_]*~)" as raw, after=rest) => {
       let ident = raw.sub(start=0, end=raw.length() - 1).to_owned() // Remove ~
       env.add_token_with_loc(
-        @tokens.Token::POST_LABEL(ident),
+        POST_LABEL(ident),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -463,8 +473,8 @@ fn lex_tokens(
     // Lower case identifiers and keywords
 
     (
-      "[\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*" as raw,
-      rest
+      re"^(?:[\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*)" as raw,
+      after=rest,
     ) => {
       let raw_str = raw.to_owned()
       let start_pos = env.calc_offset(input, base~)
@@ -487,9 +497,9 @@ fn lex_tokens(
 
     // Operators and punctuation - order matters for longer operators first
 
-    ("\+=", rest) => {
+    (re"^(?:\+=)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::PLUS_EQUAL,
+        PLUS_EQUAL,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -497,10 +507,10 @@ fn lex_tokens(
     }
 
     // Augmented assignment operators
-    ("[+\-*/%]=" as op, rest) => {
+    (re"^(?:[+\-*/%]=)" as op, after=rest) => {
       let op_char = op.sub(start=0, end=1).to_owned()
       env.add_token_with_loc(
-        @tokens.Token::AUGMENTED_ASSIGNMENT(op_char),
+        AUGMENTED_ASSIGNMENT(op_char),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -508,185 +518,185 @@ fn lex_tokens(
     }
 
     // Multiple character operators
-    ("&&", rest) => {
+    (re"^(?:&&)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::AMPERAMPER,
+        AMPERAMPER,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\|\|", rest) => {
+    (re"^(?:\|\|)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::BARBAR,
+        BARBAR,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\|>", rest) => {
+    (re"^(?:\|>)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::PIPE,
+        PIPE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\|\]", rest) => {
+    (re"^(?:\|\])", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::BAR_RBRACKET,
+        BAR_RBRACKET,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("<\|", rest) => {
+    (re"^(?:<\|)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::PIPE_LEFT,
+        PIPE_LEFT,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("<\+", rest) => {
+    (re"^(?:<\+)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::LT_PLUS,
+        LT_PLUS,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("<\?", rest) => {
+    (re"^(?:<\?)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::LT_QUESTION,
+        LT_QUESTION,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("try\?", rest) => {
+    (re"^(?:try\?)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::TRY_QUESTION,
+        TRY_QUESTION,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("try!", rest) => {
+    (re"^(?:try!)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::TRY_EXCLAMATION,
+        TRY_EXCLAMATION,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("lexmatch\?", rest) => {
+    (re"^(?:lexmatch\?)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::LEXMATCH_QUESTION,
+        LEXMATCH_QUESTION,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("==", rest) => {
+    (re"^(?:==)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX1("=="),
+        INFIX1("=="),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("=~", rest) => {
+    (re"^(?:=~)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::EQ_TILDE,
+        EQ_TILDE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("!=", rest) => {
+    (re"^(?:!=)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX1("!="),
+        INFIX1("!="),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("<=", rest) => {
+    (re"^(?:<=)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX1("<="),
+        INFIX1("<="),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (">\.\.", rest) => {
+    (re"^(?:>\.\.)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RANGE_EXCLUSIVE_REV,
+        RANGE_EXCLUSIVE_REV,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (">=\.\.", rest) => {
+    (re"^(?:>=\.\.)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RANGE_INCLUSIVE_REV,
+        RANGE_INCLUSIVE_REV,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (">=", rest) => {
+    (re"^(?:>=)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX1(">="),
+        INFIX1(">="),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("<<", rest) => {
+    (re"^(?:<<)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX2("<<"),
+        INFIX2("<<"),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (">>", rest) => {
+    (re"^(?:>>)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX2(">>"),
+        INFIX2(">>"),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\u{2200}", rest) => {
+    (re"^(?:\u{2200})", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::FORALL,
+        FORALL,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\u{2203}", rest) => {
+    (re"^(?:\u{2203})", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::EXISTS,
+        EXISTS,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\u{2192}", rest) => {
+    (re"^(?:\u{2192})", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::IMPLIES,
+        IMPLIES,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("::", rest) => {
+    (re"^(?:::)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::COLONCOLON,
+        COLONCOLON,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -694,41 +704,41 @@ fn lex_tokens(
     }
 
     // Dots and ranges
-    ("\.\.\.", rest) => {
+    (re"^(?:\.\.\.)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::ELLIPSIS,
+        ELLIPSIS,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\.\.<=", rest) => {
+    (re"^(?:\.\.<=)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RANGE_LT_INCLUSIVE,
+        RANGE_LT_INCLUSIVE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\.\.=", rest) => {
+    (re"^(?:\.\.=)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RANGE_INCLUSIVE,
+        RANGE_INCLUSIVE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\.\.<", rest) => {
+    (re"^(?:\.\.<)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RANGE_EXCLUSIVE,
+        RANGE_EXCLUSIVE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\.\.", rest) => {
+    (re"^(?:\.\.)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::DOTDOT,
+        DOTDOT,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -738,87 +748,89 @@ fn lex_tokens(
     // Dot with identifier
 
     // Dot metavariable labels, only enabled for pattern parsing.
-    ("\.\$\$\([^\)\r\n]*\)" as raw, rest) =>
+    (re"^(?:\.\$\$\([^\)\r\n]*\))" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 1)
-    ("\.\$\$[A-Za-z_][A-Za-z0-9_]*" as raw, rest) =>
+    (re"^(?:\.\$\$[A-Za-z_][A-Za-z0-9_]*)" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 1)
-    ("\.\$\$" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
+    (re"^(?:\.\$\$)" as raw, after=rest) => add_metavar_error(raw, rest, '$', 1)
     (
-      "\."
-      ("\$(\$\$)?" as prefix)
-      "\("
-      "[ ]*"
-      ("[A-Za-z_][A-Za-z0-9_]*" as name)
-      "[ ]*"
-      ":"
-      "[ ]*"
-      ("[a-z][a-z]*" as kind)
-      "[ ]*"
-      "\)",
-      rest
+      re"^(?:\.)" +
+      (re"(?:\$(\$\$)?)" as prefix) +
+      re"(?:\()" +
+      re"(?:[ ]*)" +
+      (re"(?:[A-Za-z_][A-Za-z0-9_]*)" as name) +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      (re"(?:[a-z][a-z]*)" as kind) +
+      re"(?:[ ]*)" +
+      re"(?:\))",
+      after=rest,
     ) =>
       add_metavar_token(
-        @tokens.Token::DOT_LIDENT(typed_metavar_payload(prefix, name, kind)),
+        DOT_LIDENT(typed_metavar_payload(prefix, name, kind)),
         rest,
         '$',
         1,
       )
-    ("\." ("\$(\$\$)?" as prefix) ("[A-Za-z_][A-Za-z0-9_]*" as name), rest) =>
+    (
+      re"^(?:\.)" +
+      (re"(?:\$(\$\$)?)" as prefix) +
+      (re"(?:[A-Za-z_][A-Za-z0-9_]*)" as name),
+      after=rest,
+    ) =>
       add_metavar_token(
-        @tokens.Token::DOT_LIDENT(inferred_metavar_payload(prefix, name)),
+        DOT_LIDENT(inferred_metavar_payload(prefix, name)),
         rest,
         '$',
         1,
       )
-    ("\.\$(\$\$)?\([ ]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 1)
-    ("\.\$(\$\$)?\([^\)\r\n]*\)" as raw, rest) =>
+    (re"^(?:\.\$(\$\$)?\([ ]*:)" as raw, after=rest) =>
+      add_metavar_error(raw, rest, '$', 1)
+    (re"^(?:\.\$(\$\$)?\([^\)\r\n]*\))" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 1)
     (
-      "\.\$(\$\$)?\("
-      "[ ]*"
-      "[A-Za-z_][A-Za-z0-9_]*"
-      "[ ]*"
-      ":"
-      "[ ]*"
-      "\)",
-      rest
+      re"^(?:\.\$(\$\$)?\()" +
+      re"(?:[ ]*)" +
+      re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      re"(?:\))",
+      after=rest,
     ) => add_metavar_error_to_rest(rest, '$', 1)
     (
-      "\.\$(\$\$)?\("
-      "[ ]*"
-      "[A-Za-z_][A-Za-z0-9_]*"
-      "[ ]*"
-      ":"
-      "[ ]*"
-      "[a-z][a-z]*",
-      rest
+      re"^(?:\.\$(\$\$)?\()" +
+      re"(?:[ ]*)" +
+      re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      re"(?:[a-z][a-z]*)",
+      after=rest,
     ) => add_metavar_error_to_rest(rest, '$', 1)
-    ("\.\$(\$\$)?[a-z][a-z]*:[a-z_][A-Za-z0-9_]*" as raw, rest) =>
+    (re"^(?:\.\$(\$\$)?[a-z][a-z]*:[a-z_][A-Za-z0-9_]*)" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 1)
     (
-      "\."
+      re"^(?:\.)" +
       (
-        "[A-Z][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*" as ident
+        re"(?:[A-Z][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*)" as ident
       ),
-      rest
+      after=rest,
     ) => {
       let name = ident.to_owned()
       let start_pos = env.calc_offset(input, base~) + 1
       env.register_surrogate_pair(ident)
       let end_pos = env.calc_offset(rest, base~)
-      env.add_token_with_loc(
-        @tokens.Token::DOT_UIDENT(name),
-        start=start_pos,
-        end=end_pos,
-      )
+      env.add_token_with_loc(DOT_UIDENT(name), start=start_pos, end=end_pos)
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
     (
-      "\."
+      re"^(?:\.)" +
       (
-        "([\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*)?" as ident
+        re"(?:([\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}][\u{30}-\u{39}\u{41}-\u{5a}\u{5f}-\u{5f}\u{61}-\u{7a}\u{a1}-\u{ac}\u{ae}-\u{2af}\u{1100}-\u{11ff}\u{1e00}-\u{1eff}\u{2070}-\u{209f}\u{2150}-\u{218f}\u{2e80}-\u{2eff}\u{2ff0}-\u{2fff}\u{3001}-\u{30ff}\u{31c0}-\u{9fff}\u{ac00}-\u{d7ff}\u{f900}-\u{faff}\u{fe00}-\u{fe0f}\u{fe30}-\u{fe4f}\u{1f000}-\u{1fbff}\u{20000}-\u{2a6df}\u{2a700}-\u{2ebef}\u{2f800}-\u{2fa1f}\u{30000}-\u{323af}\u{e0100}-\u{e01ef}]*)?)" as ident
       ),
-      rest
+      after=rest,
     ) => {
       let name = ident.to_owned()
       let dot_start = env.calc_offset(input, base~)
@@ -832,16 +844,12 @@ fn lex_tokens(
           end=end_pos,
         )
       }
-      env.add_token_with_loc(
-        @tokens.Token::DOT_LIDENT(name),
-        start=start_pos,
-        end=end_pos,
-      )
+      env.add_token_with_loc(DOT_LIDENT(name), start=start_pos, end=end_pos)
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
 
     // Dot with number
-    ("\.[0-9]+" as dot_int, rest) => {
+    (re"^(?:\.[0-9]+)" as dot_int, after=rest) => {
       let digits_str = dot_int.sub(start=1, end=dot_int.length()) // Remove the '.'
       let idx = @string.parse_int(digits_str) catch {
         _ => {
@@ -855,7 +863,7 @@ fn lex_tokens(
         }
       }
       env.add_token_with_loc(
-        @tokens.Token::DOT_INT(idx),
+        DOT_INT(idx),
         start=env.calc_offset(input, base~) + 1,
         end=env.calc_offset(rest, base~),
       )
@@ -863,9 +871,9 @@ fn lex_tokens(
     }
 
     // Dot with parenthesis
-    ("\.\(", rest) => {
+    (re"^(?:\.\()", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::DOT_LPAREN,
+        DOT_LPAREN,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -873,185 +881,185 @@ fn lex_tokens(
     }
 
     // Single character operators and punctuation
-    ("&", rest) => {
+    (re"^(?:&)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::AMPER,
+        AMPER,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\|", rest) => {
+    (re"^(?:\|)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::BAR,
+        BAR,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\^", rest) => {
+    (re"^(?:\^)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::CARET,
+        CARET,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\(", rest) => {
+    (re"^(?:\()", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::LPAREN,
+        LPAREN,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\)", rest) => {
+    (re"^(?:\))", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RPAREN,
+        RPAREN,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\*", rest) => {
+    (re"^(?:\*)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX3("*"),
+        INFIX3("*"),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("/", rest) => {
+    (re"^(?:/)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX3("/"),
+        INFIX3("/"),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("%", rest) => {
+    (re"^(?:%)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX3("%"),
+        INFIX3("%"),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (",", rest) => {
+    (re"^(?:,)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::COMMA,
+        COMMA,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (":", rest) => {
+    (re"^(?::)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::COLON,
+        COLON,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (";", rest) => {
+    (re"^(?:;)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::SEMI(true),
+        SEMI(true),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("=", rest) => {
+    (re"^(?:=)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::EQUAL,
+        EQUAL,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("<", rest) => {
+    (re"^(?:<)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX1("<"),
+        INFIX1("<"),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    (">", rest) => {
+    (re"^(?:>)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::INFIX1(">"),
+        INFIX1(">"),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\[\|", rest) => {
+    (re"^(?:\[\|)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::LBRACKET_BAR,
+        LBRACKET_BAR,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\[", rest) => {
+    (re"^(?:\[)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::LBRACKET,
+        LBRACKET,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\]", rest) => {
+    (re"^(?:\])", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RBRACKET,
+        RBRACKET,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("[{]", rest) => {
+    (re"^(?:[{])", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::LBRACE,
+        LBRACE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("[}]", rest) => {
+    (re"^(?:[}])", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::RBRACE,
+        RBRACE,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\+", rest) => {
+    (re"^(?:\+)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::PLUS,
+        PLUS,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("-", rest) => {
+    (re"^(?:-)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::MINUS,
+        MINUS,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("\?", rest) => {
+    (re"^(?:\?)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::QUESTION,
+        QUESTION,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
       lex_tokens(rest, base~, env~, preserve_comment~)
     }
-    ("!", rest) => {
+    (re"^(?:!)", after=rest) => {
       env.add_token_with_loc(
-        @tokens.Token::EXCLAMATION,
+        EXCLAMATION,
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -1063,12 +1071,12 @@ fn lex_tokens(
     // #ident.dot_ident with payload
 
     (
-      "#"
-      ("[a-zA-Z_][a-zA-Z0-9_]*" as ident)
-      "\."
-      ("[a-zA-Z_][a-zA-Z0-9_]*" as dot_ident)
-      ("[^\r\n]*" as raw_payload),
-      rest
+      re"^(?:#)" +
+      (re"(?:[a-zA-Z_][a-zA-Z0-9_]*)" as ident) +
+      re"(?:\.)" +
+      (re"(?:[a-zA-Z_][a-zA-Z0-9_]*)" as dot_ident) +
+      (re"(?:[^\r\n]*)" as raw_payload),
+      after=rest,
     ) => {
       if env.is_interpolation {
         env.add_lexing_error(
@@ -1081,7 +1089,7 @@ fn lex_tokens(
         let dot_ident = dot_ident.to_owned()
         let raw_payload = raw_payload.to_owned()
         env.add_token_with_loc(
-          @tokens.Token::ATTRIBUTE((ident, Some(dot_ident), raw_payload)),
+          ATTRIBUTE((ident, Some(dot_ident), raw_payload)),
           start=env.calc_offset(input, base~),
           end=env.calc_offset(rest, base~),
         )
@@ -1091,7 +1099,12 @@ fn lex_tokens(
 
     // #ident with payload
 
-    ("#" ("[a-zA-Z_][a-zA-Z0-9_]*" as ident) ("[^\r\n]*" as raw_payload), rest) => {
+    (
+      re"^(?:#)" +
+      (re"(?:[a-zA-Z_][a-zA-Z0-9_]*)" as ident) +
+      (re"(?:[^\r\n]*)" as raw_payload),
+      after=rest,
+    ) => {
       if env.is_interpolation {
         env.add_lexing_error(
           start=env.calc_offset(input, base~),
@@ -1102,7 +1115,7 @@ fn lex_tokens(
         let ident = ident.to_owned()
         let raw_payload = raw_payload.to_owned()
         env.add_token_with_loc(
-          @tokens.Token::ATTRIBUTE((ident, None, raw_payload)),
+          ATTRIBUTE((ident, None, raw_payload)),
           start=env.calc_offset(input, base~),
           end=env.calc_offset(rest, base~),
         )
@@ -1111,7 +1124,7 @@ fn lex_tokens(
     }
 
     // Multiline string interpolation $|
-    ("\$\|", rest) => {
+    (re"^(?:\$\|)", after=rest) => {
       if env.is_interpolation {
         env.add_lexing_error(
           start=env.calc_offset(input, base~),
@@ -1138,114 +1151,143 @@ fn lex_tokens(
     }
 
     // Pattern metavariables, only enabled for pattern parsing.
-    ("\$\$\([^\)\r\n]*\)~?" as raw, rest) =>
+    (re"^(?:\$\$\([^\)\r\n]*\)~?)" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 0)
-    ("\$\$[A-Za-z_][A-Za-z0-9_]*~?" as raw, rest) =>
+    (re"^(?:\$\$[A-Za-z_][A-Za-z0-9_]*~?)" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 0)
-    ("\$\$" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
+    (re"^(?:\$\$)" as raw, after=rest) => add_metavar_error(raw, rest, '$', 0)
     (
-      ("\$(\$\$)?" as prefix)
-      "\("
-      "[ ]*"
-      ("[A-Za-z_][A-Za-z0-9_]*" as name)
-      "[ ]*"
-      ":"
-      "[ ]*"
-      ("[a-z][a-z]*" as kind)
-      "[ ]*"
-      "\)~",
-      rest
+      (re"^(?:\$(\$\$)?)" as prefix) +
+      re"(?:\()" +
+      re"(?:[ ]*)" +
+      (re"(?:[A-Za-z_][A-Za-z0-9_]*)" as name) +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      (re"(?:[a-z][a-z]*)" as kind) +
+      re"(?:[ ]*)" +
+      re"(?:\)~)",
+      after=rest,
     ) =>
       add_metavar_token(
-        @tokens.Token::POST_LABEL(typed_metavar_payload(prefix, name, kind)),
-        rest,
-        '$',
-        0,
-      )
-    (("\$(\$\$)?" as prefix) ("[A-Za-z_][A-Za-z0-9_]*" as name) "~", rest) =>
-      add_metavar_token(
-        @tokens.Token::POST_LABEL(inferred_metavar_payload(prefix, name)),
+        POST_LABEL(typed_metavar_payload(prefix, name, kind)),
         rest,
         '$',
         0,
       )
     (
-      ("\$(\$\$)?" as prefix)
-      "\("
-      "[ ]*"
-      ("[A-Z][A-Za-z0-9_]*" as name)
-      "[ ]*"
-      ":"
-      "[ ]*"
-      ("[a-z][a-z]*" as kind)
-      "[ ]*"
-      "\)",
-      rest
+      (re"^(?:\$(\$\$)?)" as prefix) +
+      (re"(?:[A-Za-z_][A-Za-z0-9_]*)" as name) +
+      re"(?:~)",
+      after=rest,
     ) =>
       add_metavar_token(
-        @tokens.Token::UIDENT(typed_metavar_payload(prefix, name, kind)),
+        POST_LABEL(inferred_metavar_payload(prefix, name)),
         rest,
         '$',
         0,
       )
     (
-      ("\$(\$\$)?" as prefix)
-      "\("
-      "[ ]*"
-      ("[a-z_][A-Za-z0-9_]*" as name)
-      "[ ]*"
-      ":"
-      "[ ]*"
-      ("[a-z][a-z]*" as kind)
-      "[ ]*"
-      "\)",
-      rest
+      (re"^(?:\$(\$\$)?)" as prefix) +
+      re"(?:\()" +
+      re"(?:[ ]*)" +
+      (re"(?:[A-Z][A-Za-z0-9_]*)" as name) +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      (re"(?:[a-z][a-z]*)" as kind) +
+      re"(?:[ ]*)" +
+      re"(?:\))",
+      after=rest,
     ) =>
       add_metavar_token(
-        @tokens.Token::LIDENT(typed_metavar_payload(prefix, name, kind)),
+        UIDENT(typed_metavar_payload(prefix, name, kind)),
         rest,
         '$',
         0,
       )
-    (("\$(\$\$)?" as prefix) ("[A-Z][A-Za-z0-9_]*" as name), rest) =>
+    (
+      (re"^(?:\$(\$\$)?)" as prefix) +
+      re"(?:\()" +
+      re"(?:[ ]*)" +
+      (re"(?:[a-z_][A-Za-z0-9_]*)" as name) +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      (re"(?:[a-z][a-z]*)" as kind) +
+      re"(?:[ ]*)" +
+      re"(?:\))",
+      after=rest,
+    ) =>
       add_metavar_token(
-        @tokens.Token::UIDENT(inferred_metavar_payload(prefix, name)),
+        LIDENT(typed_metavar_payload(prefix, name, kind)),
         rest,
         '$',
         0,
       )
-    (("\$(\$\$)?" as prefix) ("[a-z_][A-Za-z0-9_]*" as name), rest) =>
+    (
+      (re"^(?:\$(\$\$)?)" as prefix) +
+      (re"(?:[A-Z][A-Za-z0-9_]*)" as name),
+      after=rest,
+    ) =>
       add_metavar_token(
-        @tokens.Token::LIDENT(inferred_metavar_payload(prefix, name)),
+        UIDENT(inferred_metavar_payload(prefix, name)),
         rest,
         '$',
         0,
       )
-    ("\$(\$\$)?\([ ]*:" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
-    ("\$(\$\$)?\([^\)\r\n]*\)" as raw, rest) =>
+    (
+      (re"^(?:\$(\$\$)?)" as prefix) +
+      (re"(?:[a-z_][A-Za-z0-9_]*)" as name),
+      after=rest,
+    ) =>
+      add_metavar_token(
+        LIDENT(inferred_metavar_payload(prefix, name)),
+        rest,
+        '$',
+        0,
+      )
+    (re"^(?:\$(\$\$)?\([ ]*:)" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 0)
-    ("\$(\$\$)?\(" "[ ]*" "[A-Za-z_][A-Za-z0-9_]*" "[ ]*" ":" "[ ]*" "\)", rest) =>
-      add_metavar_error_to_rest(rest, '$', 0)
+    (re"^(?:\$(\$\$)?\([^\)\r\n]*\))" as raw, after=rest) =>
+      add_metavar_error(raw, rest, '$', 0)
     (
-      "\$(\$\$)?\("
-      "[ ]*"
-      "[A-Za-z_][A-Za-z0-9_]*"
-      "[ ]*"
-      ":"
-      "[ ]*"
-      "[a-z][a-z]*",
-      rest
+      re"^(?:\$(\$\$)?\()" +
+      re"(?:[ ]*)" +
+      re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      re"(?:\))",
+      after=rest,
     ) => add_metavar_error_to_rest(rest, '$', 0)
-    ("\$(\$\$)?\(" "[ ]*" "[A-Za-z_][A-Za-z0-9_]*" "[ ]*" "\)", rest) =>
-      add_metavar_error_to_rest(rest, '$', 0)
-    ("\$(\$\$)?\([ ]*\)" as raw, rest) => add_metavar_error(raw, rest, '$', 0)
-    ("\$(\$\$)?[a-z][a-z]*:[A-Za-z_][A-Za-z0-9_]*~" as raw, rest) =>
+    (
+      re"^(?:\$(\$\$)?\()" +
+      re"(?:[ ]*)" +
+      re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
+      re"(?:[ ]*)" +
+      re"(?::)" +
+      re"(?:[ ]*)" +
+      re"(?:[a-z][a-z]*)",
+      after=rest,
+    ) => add_metavar_error_to_rest(rest, '$', 0)
+    (
+      re"^(?:\$(\$\$)?\()" +
+      re"(?:[ ]*)" +
+      re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
+      re"(?:[ ]*)" +
+      re"(?:\))",
+      after=rest,
+    ) => add_metavar_error_to_rest(rest, '$', 0)
+    (re"^(?:\$(\$\$)?\([ ]*\))" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 0)
-    ("\$(\$\$)?[a-z][a-z]*:[a-z_][A-Za-z0-9_]*" as raw, rest) =>
+    (re"^(?:\$(\$\$)?[a-z][a-z]*:[A-Za-z_][A-Za-z0-9_]*~)" as raw, after=rest) =>
+      add_metavar_error(raw, rest, '$', 0)
+    (re"^(?:\$(\$\$)?[a-z][a-z]*:[a-z_][A-Za-z0-9_]*)" as raw, after=rest) =>
       add_metavar_error(raw, rest, '$', 0)
 
     // Multiline string #|
-    ("#\|[^\r\n]*" as multiline_str, rest) => {
+    (re"^(?:#\|[^\r\n]*)" as multiline_str, after=rest) => {
       let start_pos = env.calc_offset(input, base~)
       env.register_surrogate_pair(multiline_str)
       let end_pos = env.calc_offset(rest, base~)
@@ -1259,7 +1301,7 @@ fn lex_tokens(
       let content_str = multiline_str.to_owned()
       let content = content_str.sub(start=2, end=content_str.length()) // Remove #|
       env.add_token_with_loc(
-        @tokens.Token::MULTILINE_STRING(content.to_owned()),
+        MULTILINE_STRING(content.to_owned()),
         start=start_pos,
         end=end_pos,
       )
@@ -1267,10 +1309,13 @@ fn lex_tokens(
     }
 
     // Package name @package/name
-    ("@[a-zA-Z_][a-zA-Z0-9_\-]*(/[a-zA-Z_][a-zA-Z0-9_\-]*)*" as raw, rest) => {
+    (
+      re"^(?:@[a-zA-Z_][a-zA-Z0-9_\-]*(/[a-zA-Z_][a-zA-Z0-9_\-]*)*)" as raw,
+      after=rest,
+    ) => {
       let pkg_name_without_at = raw.sub(start=1, end=raw.length()).to_owned()
       env.add_token_with_loc(
-        @tokens.Token::PACKAGE_NAME(pkg_name_without_at),
+        PACKAGE_NAME(pkg_name_without_at),
         start=env.calc_offset(input, base~),
         end=env.calc_offset(rest, base~),
       )
@@ -1278,13 +1323,13 @@ fn lex_tokens(
     }
 
     // EOF case
-    ("$", _) => {
+    (re"^(?:$)", after=_) => {
       let end_pos = env.calc_offset(input, base~)
       env.add_token_with_loc(EOF, start=end_pos, end=end_pos)
     }
 
     // Error case - any remaining character
-    ("." as c, rest) => {
+    (re"^(?:.)" as c, after=rest) => {
       env.add_lexing_error(
         IllegalCharacter(c),
         start=env.calc_offset(input, base~),
@@ -1340,10 +1385,10 @@ fn scan_interpolation_source(
   brace_depth~ : Int,
   preserve~ : Bool,
 ) -> (StringView, Int) {
-  lexmatch input with longest {
+  lexscan input with longest {
     (
-      "[\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]*\}" as raw,
-      rest
+      re"^(?:[\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]*\})" as raw,
+      after=rest,
     ) =>
       if brace_depth == 0 {
         if preserve {
@@ -1363,7 +1408,7 @@ fn scan_interpolation_source(
           preserve~,
         )
       }
-    "" => {
+    re"^$" => {
       env.add_lexing_error(
         start=env.calc_offset(base~, input),
         end=env.calc_offset(base~, input),
@@ -1371,7 +1416,7 @@ fn scan_interpolation_source(
       )
       (input, env.calc_offset(base~, input))
     }
-    ("\r|\n", _) => {
+    (re"^(?:\r|\n)", after=_) => {
       env.add_lexing_error(
         start=env.calc_offset(base~, input),
         end=env.calc_offset(base~, input),
@@ -1379,7 +1424,7 @@ fn scan_interpolation_source(
       )
       (input, env.calc_offset(base~, input))
     }
-    ("b'" as raw, rest) => {
+    (re"^(?:b')" as raw, after=rest) => {
       interpolation_write_view(env, buf, raw)
       scan_interpolation_char_atom(
         rest,
@@ -1391,7 +1436,7 @@ fn scan_interpolation_source(
         escaped=false,
       )
     }
-    ("'" as raw, rest) => {
+    (re"^(?:')" as raw, after=rest) => {
       interpolation_write_char(env, buf, raw)
       scan_interpolation_char_atom(
         rest,
@@ -1403,7 +1448,7 @@ fn scan_interpolation_source(
         escaped=false,
       )
     }
-    ("b\"" as raw, rest) => {
+    (re"^(?:b\")" as raw, after=rest) => {
       interpolation_write_view(env, buf, raw)
       scan_interpolation_string_atom(
         rest,
@@ -1416,7 +1461,7 @@ fn scan_interpolation_source(
         escaped=false,
       )
     }
-    ("re\"" as raw, rest) => {
+    (re"^(?:re\")" as raw, after=rest) => {
       interpolation_write_view(env, buf, raw)
       scan_interpolation_string_atom(
         rest,
@@ -1429,7 +1474,7 @@ fn scan_interpolation_source(
         escaped=false,
       )
     }
-    ("\"" as raw, rest) => {
+    (re"^(?:\")" as raw, after=rest) => {
       interpolation_write_char(env, buf, raw)
       scan_interpolation_string_atom(
         rest,
@@ -1442,7 +1487,7 @@ fn scan_interpolation_source(
         escaped=false,
       )
     }
-    ("//[^\r\n]*" as raw, rest) => {
+    (re"^(?://[^\r\n]*)" as raw, after=rest) => {
       add_interpolation_lexing_error(
         env,
         base,
@@ -1460,7 +1505,7 @@ fn scan_interpolation_source(
         preserve~,
       )
     }
-    ("\$\|[^\r\n]*" as raw, rest) => {
+    (re"^(?:\$\|[^\r\n]*)" as raw, after=rest) => {
       add_interpolation_lexing_error(
         env,
         base,
@@ -1478,7 +1523,7 @@ fn scan_interpolation_source(
         preserve~,
       )
     }
-    ("#\|[^\r\n]*" as raw, rest) => {
+    (re"^(?:#\|[^\r\n]*)" as raw, after=rest) => {
       add_interpolation_lexing_error(
         env,
         base,
@@ -1496,7 +1541,7 @@ fn scan_interpolation_source(
         preserve~,
       )
     }
-    ("#[a-zA-Z_][a-zA-Z0-9_]*[^\r\n]*" as raw, rest) => {
+    (re"^(?:#[a-zA-Z_][a-zA-Z0-9_]*[^\r\n]*)" as raw, after=rest) => {
       add_interpolation_lexing_error(
         env,
         base,
@@ -1514,7 +1559,7 @@ fn scan_interpolation_source(
         preserve~,
       )
     }
-    ("[{]" as raw, rest) => {
+    (re"^(?:[{])" as raw, after=rest) => {
       interpolation_write_char(env, buf, raw)
       scan_interpolation_source(
         rest,
@@ -1525,7 +1570,7 @@ fn scan_interpolation_source(
         preserve~,
       )
     }
-    ("." as c, rest) => {
+    (re"^(?:.)" as c, after=rest) => {
       interpolation_write_char(env, buf, c)
       scan_interpolation_source(
         rest,
@@ -1551,8 +1596,8 @@ fn scan_interpolation_string_atom(
   allow_interp~ : Bool,
   escaped~ : Bool,
 ) -> (StringView, Int) {
-  lexmatch input with longest {
-    "" => {
+  lexscan input with longest {
+    re"^$" => {
       env.add_lexing_error(
         start=env.calc_offset(base~, input),
         end=env.calc_offset(base~, input),
@@ -1560,7 +1605,7 @@ fn scan_interpolation_string_atom(
       )
       (input, env.calc_offset(base~, input))
     }
-    ("\r|\n", _) => {
+    (re"^(?:\r|\n)", after=_) => {
       env.add_lexing_error(
         start=env.calc_offset(base~, input),
         end=env.calc_offset(base~, input),
@@ -1568,7 +1613,7 @@ fn scan_interpolation_string_atom(
       )
       (input, env.calc_offset(base~, input))
     }
-    ("\\[{]" as raw, rest) => {
+    (re"^(?:\\[{])" as raw, after=rest) => {
       interpolation_write_view(env, buf, raw)
       if allow_interp && !escaped {
         let (rest, _) = scan_interpolation_source(
@@ -1602,7 +1647,7 @@ fn scan_interpolation_string_atom(
         )
       }
     }
-    ("." as c, rest) => {
+    (re"^(?:.)" as c, after=rest) => {
       interpolation_write_char(env, buf, c)
       match (c.to_int(), escaped) {
         (34, false) =>
@@ -1652,8 +1697,8 @@ fn scan_interpolation_char_atom(
   preserve~ : Bool,
   escaped~ : Bool,
 ) -> (StringView, Int) {
-  lexmatch input with longest {
-    "" => {
+  lexscan input with longest {
+    re"^$" => {
       env.add_lexing_error(
         start=env.calc_offset(base~, input),
         end=env.calc_offset(base~, input),
@@ -1661,7 +1706,7 @@ fn scan_interpolation_char_atom(
       )
       (input, env.calc_offset(base~, input))
     }
-    ("\r|\n", _) => {
+    (re"^(?:\r|\n)", after=_) => {
       env.add_lexing_error(
         start=env.calc_offset(base~, input),
         end=env.calc_offset(base~, input),
@@ -1669,7 +1714,7 @@ fn scan_interpolation_char_atom(
       )
       (input, env.calc_offset(base~, input))
     }
-    ("." as c, rest) => {
+    (re"^(?:.)" as c, after=rest) => {
       interpolation_write_char(env, buf, c)
       match (c.to_int(), escaped) {
         (39, false) =>
@@ -1724,9 +1769,9 @@ fn lex_invalid_byte(
   }
 
   fn process_invalid_byte(input : StringView) -> StringView {
-    lexmatch input with longest {
-      ("'", rest) => add_invalid_byte(rest)
-      ("\r|\n", _) => {
+    lexscan input with longest {
+      (re"^(?:')", after=rest) => add_invalid_byte(rest)
+      (re"^(?:\r|\n)", after=_) => {
         env.add_lexing_error(
           start=env.calc_offset(base~, input),
           end=env.calc_offset(base~, input),
@@ -1734,8 +1779,8 @@ fn lex_invalid_byte(
         )
         input
       }
-      "" => add_invalid_byte(input)
-      ("." as c, rest) => {
+      re"^$" => add_invalid_byte(input)
+      (re"^(?:.)" as c, after=rest) => {
         env.register_surrogate_pair_for_char(c)
         invalid_byte_repr_buf.write_char(c)
         process_invalid_byte(rest)
@@ -1760,7 +1805,7 @@ fn lex_string(
   let interps = []
   fn add_literal(repr : String, start : Int, end : Int) -> Unit {
     interps.push(
-      @tokens.InterpElem::InterpLit(repr~, loc=Location::{
+      @tokens.InterpElem::InterpLit(repr~, loc={
         start: env.make_pos(start),
         end: env.make_pos(end),
       }),
@@ -1768,11 +1813,11 @@ fn lex_string(
   }
 
   fn process_string(input : StringView, start_pos : Int) -> StringView {
-    lexmatch input with longest {
+    lexscan input with longest {
       (
-        "\"",
+        re"^(?:\")",
         // End of string
-        rest
+        after=rest,
       ) =>
         if end_with_newline {
           string_repr_buf.write_char('"')
@@ -1789,31 +1834,31 @@ fn lex_string(
         }
 
       // Escape sequences
-      ("\\[\\'\"`ntbrf/ ]" as raw, rest) => {
+      (re"^(?:\\[\\'\"`ntbrf/ ])" as raw, after=rest) => {
         string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Hex escape
-      ("\\x[0-9a-fA-F]{2}" as raw, rest) => {
+      (re"^(?:\\x[0-9a-fA-F]{2})" as raw, after=rest) => {
         string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Octal escape
-      ("\\o[0-3][0-7]{2}" as raw, rest) => {
+      (re"^(?:\\o[0-3][0-7]{2})" as raw, after=rest) => {
         string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Unicode escape
-      ("\\u[0-9a-fA-F]{4}" as raw, rest) => {
+      (re"^(?:\\u[0-9a-fA-F]{4})" as raw, after=rest) => {
         string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
 
       // Unicode escape with braces
-      ("\\u[{][0-9a-fA-F]+[}]" as raw, rest) => {
+      (re"^(?:\\u[{][0-9a-fA-F]+[}])" as raw, after=rest) => {
         string_repr_buf.write_string(raw.to_owned())
         process_string(rest, start_pos)
       }
@@ -1821,8 +1866,8 @@ fn lex_string(
       // String interpolation
 
       (
-        "\\[{][\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]*" as raw,
-        rest
+        re"^(?:\\[{][\u0009\u000B\u000C\u0020\u00A0\uFEFF\u1680\u2000-\u200A\u202F\u205F\u3000]*)" as raw,
+        after=rest,
       ) =>
         if allow_interp {
           if !string_repr_buf.is_empty() {
@@ -1854,9 +1899,7 @@ fn lex_string(
             )
           } else {
             let source = string_repr_buf.to_string()
-            interps.push(
-              @tokens.InterpElem::InterpSource(InterpSource::{ source, loc }),
-            )
+            interps.push(InterpSource({ source, loc }))
           }
           string_repr_buf.reset()
           process_string(rest, env.calc_offset(base~, rest))
@@ -1866,7 +1909,7 @@ fn lex_string(
         }
 
       // EOF
-      "" => {
+      re"^$" => {
         env.add_lexing_error(
           start=start_pos,
           end=env.calc_offset(base~, input),
@@ -1883,7 +1926,7 @@ fn lex_string(
       }
 
       // CRLF
-      ("[\r\n]", rest) => {
+      (re"^(?:[\r\n])", after=rest) => {
         let end_pos = env.calc_offset(base~, rest)
         if !end_with_newline {
           env.add_lexing_error(start=start_pos, end=end_pos, UnterminatedString)
@@ -1896,7 +1939,7 @@ fn lex_string(
       }
 
       // Any other character
-      ("." as c, rest) => {
+      (re"^(?:.)" as c, after=rest) => {
         env.register_surrogate_pair_for_char(c)
         string_repr_buf.write_char(c)
         process_string(rest, start_pos)
@@ -1908,7 +1951,7 @@ fn lex_string(
   let rest = process_string(input, start_pos)
   if interps.length() == 0 {
     let interps : Array[InterpElem] = [
-      @tokens.InterpElem::InterpLit(repr="", loc=Location::{
+      InterpLit(repr="", loc={
         start: env.make_pos(start_pos),
         end: env.make_pos(env.calc_offset(base~, rest)),
       }),

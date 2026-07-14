@@ -1,6 +1,6 @@
 ///|
 fn dummy_mbti() -> Mbti {
-  Mbti::{
+  {
     package_name: "",
     imports: @list.empty(),
     sigs: @list.empty(),
@@ -22,7 +22,7 @@ fn lex_reports(
 ) -> Array[Report] {
   errors.map(fn(error) {
     let (start, end, err) = error
-    Report::{ loc: Location::{ start, end }, msg: err.to_string() }
+    { loc: { start, end }, msg: err.to_string() }
   })
 }
 
@@ -41,19 +41,14 @@ pub fn parse_string(
       UnexpectedEndOfInput(pos, _) =>
         (
           dummy_mbti(),
-          [
-            Report::{
-              loc: Location::{ start: pos, end: pos },
-              msg: "Unexpected end of file.",
-            },
-          ],
+          [{ loc: { start: pos, end: pos }, msg: "Unexpected end of file." }],
         )
       UnexpectedToken(token, (start, end), _) =>
         (
           dummy_mbti(),
           [
-            Report::{
-              loc: Location::{ start, end },
+            {
+              loc: { start, end },
               msg: "unexpected \{token.to_expect_string()} here",
             },
           ],

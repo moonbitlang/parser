@@ -30,7 +30,7 @@ fn parse_loc_regression(
       _ => ()
     }
   }
-  let json = @basic.show_loc.protect(@basic.String, fn() {
+  let json = @basic.show_loc.protect(String, fn() {
     impls.map(impl_ => impl_.json_repr()).to_json()
   })
   match (brace_group_loc, params_loc) {
@@ -43,10 +43,10 @@ fn parse_loc_regression(
 ///|
 test "loc parity for brace group and empty fn params" {
   let (_, hand_group_loc, hand_params_loc, hand_json) = parse_loc_regression(
-    @parser.Handrolled,
+    Handrolled,
   )
   let (_, yacc_group_loc, yacc_params_loc, yacc_json) = parse_loc_regression(
-    @parser.MoonYacc,
+    MoonYacc,
   )
   inspect(hand_group_loc, content="loc_regression.mbt-1:20-3:3")
   inspect(hand_params_loc, content="loc_regression.mbt-5:9-5:9")

@@ -54,13 +54,7 @@ async fn write_result(output : String?, content : String) -> Unit {
   let content = "\{content}\n"
   match output {
     Some(path) =>
-      try
-        @fs.write_file(
-          path,
-          content,
-          create_mode=@fs.CreateMode::CreateOrTruncate,
-        )
-      catch {
+      try @fs.write_file(path, content, create_mode=CreateOrTruncate) catch {
         err => die("error: failed to write \{path}: \{err}")
       } noraise {
         _ => ()

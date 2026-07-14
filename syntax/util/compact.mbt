@@ -67,7 +67,7 @@ pub fn Statement::compact_rev(
         ) => loc
         More(StmtExpr(_), ..) => panic()
       }
-      Statement::collect_rev(rest, Expr::Unit(loc~, faked=true))
+      Statement::collect_rev(rest, Unit(loc~, faked=true))
     }
   }
 }
@@ -83,10 +83,7 @@ pub fn Statement::collect_rev(
       match x {
         StmtFunc(binder~, func~, loc~) => {
           let loc = loc.merge(loc_of_expression(cont))
-          Statement::collect_rev(
-            xs,
-            Expr::LetFn(name=binder, func~, loc~, body=cont),
-          )
+          Statement::collect_rev(xs, LetFn(name=binder, func~, loc~, body=cont))
         }
         StmtExpr(_) =>
           Statement::collect_sequence(
@@ -103,19 +100,19 @@ pub fn Statement::collect_rev(
             }
             StmtGuard(cond~, otherwise~, loc~) => {
               let loc = loc.merge(cont.loc())
-              Expr::Guard(cond~, otherwise~, loc~, body=cont)
+              Guard(cond~, otherwise~, loc~, body=cont)
             }
             StmtLetmut(binder~, ty_opt~, expr~, loc~) => {
               let loc = loc.merge(cont.loc())
-              Expr::LetMut(binder~, ty=ty_opt, expr~, loc~, body=cont)
+              LetMut(binder~, ty=ty_opt, expr~, loc~, body=cont)
             }
             StmtLetand(bindings~, loc~) => {
               let loc = loc.merge(loc_of_expression(cont))
-              Expr::LetAnd(bindings~, loc~, body=cont)
+              LetAnd(bindings~, loc~, body=cont)
             }
             StmtDefer(expr~, loc~) => {
               let loc = loc.merge(loc_of_expression(cont))
-              Expr::Defer(expr~, loc~, body=cont)
+              Defer(expr~, loc~, body=cont)
             }
             StmtExpr(_) | StmtFunc(..) => panic()
           }
@@ -137,10 +134,6 @@ fn Statement::collect_sequence(
       let loc = loc.merge(expr.loc())
       Statement::collect_sequence(loc~, acc.add(expr), rest, cont)
     }
-    _ =>
-      Statement::collect_rev(
-        todo,
-        Expr::Sequence(exprs=acc, last_expr=cont, loc~),
-      )
+    _ => Statement::collect_rev(todo, Sequence(exprs=acc, last_expr=cont, loc~))
   }
 }

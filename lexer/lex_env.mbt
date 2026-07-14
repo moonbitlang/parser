@@ -29,7 +29,7 @@ fn LexEnv::add_lexing_error(
 
 ///|
 fn LexEnv::make_pos(self : LexEnv, cnum : Int) -> Position {
-  Position::{
+  {
     fname: self.file,
     lnum: self.current_line,
     cnum: self.start_cnum + cnum,

@@ -8,7 +8,7 @@ pub struct LexResult {
 ///|
 pub fn tokens_from_string(
   name? : String = "",
-  start_pos? : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
+  start_pos? : Position = { fname: "", lnum: 1, bol: 0, cnum: 0 },
   is_interpolation? : Bool = false,
   enable_metavar? : Bool = false,
   comment~ : Bool,
@@ -42,13 +42,13 @@ pub fn tokens_from_string(
     docstrings[last_idx] = docstrings[last_idx].rev()
   }
   docstrings.rev_in_place()
-  LexResult::{ tokens: env.tokens, errors: env.errors, docstrings }
+  { tokens: env.tokens, errors: env.errors, docstrings }
 }
 
 ///|
 pub fn tokens_from_string_with_utf16_location(
   name? : String = "",
-  start_pos? : Position = Position::{ fname: "", lnum: 1, bol: 0, cnum: 0 },
+  start_pos? : Position = { fname: "", lnum: 1, bol: 0, cnum: 0 },
   is_interpolation? : Bool = false,
   enable_metavar? : Bool = false,
   comment~ : Bool,
