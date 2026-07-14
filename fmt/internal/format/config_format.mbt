@@ -232,7 +232,7 @@ fn apply_dependency_edits(
 ) -> Json {
   match json {
     Object(fields) => {
-      let result : Map[String, Json] = {}
+      let result : Map[String, Json] = Map([])
       for item in fields.to_array() {
         let (key, value) = item
         if key != "deps" {
@@ -241,14 +241,14 @@ fn apply_dependency_edits(
       }
       let deps : Map[String, Json] = match object_get(fields, "deps") {
         Some(Object(existing)) => {
-          let copy : Map[String, Json] = {}
+          let copy : Map[String, Json] = Map([])
           for item in existing.to_array() {
             let (key, value) = item
             copy[key] = value
           }
           copy
         }
-        _ => {}
+        _ => Map([])
       }
       for spec in remove_dependencies {
         let (name, _) = split_dep_spec(spec)

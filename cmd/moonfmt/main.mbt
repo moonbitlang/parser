@@ -6,11 +6,11 @@ priv struct MoonfmtOptions {
 
 ///|
 fn moonfmt_command() -> @argparse.Command {
-  @argparse.Command(
+  Command(
     "moonfmt",
     about="Format a MoonBit source file.",
     flags=[
-      @argparse.FlagArg(
+      FlagArg(
         "overwrite",
         short='w',
         long="overwrite",
@@ -18,7 +18,7 @@ fn moonfmt_command() -> @argparse.Command {
       ),
     ],
     positionals=[
-      @argparse.PositionArg(
+      PositionArg(
         "path",
         about="MoonBit source file to format.",
         num_args=@argparse.ValueRange::single(),
@@ -29,7 +29,7 @@ fn moonfmt_command() -> @argparse.Command {
 
 ///|
 fn parse_moonfmt_args(args : ArrayView[String]) -> MoonfmtOptions raise {
-  let matches = moonfmt_command().parse(argv=args, env={})
+  let matches = moonfmt_command().parse(argv=args, env=Map([]))
   let path = match matches.values.get("path") {
     Some([path]) => path
     _ => panic()

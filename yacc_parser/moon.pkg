@@ -7,6 +7,8 @@ import {
   "moonbitlang/core/list",
 }
 
+// Warning 73 is emitted by moonyacc's generated semantic-value wrappers.
+
 warnings = "-6-text_segment_excceed"
 
 formatter(ignore: [ "parser.mbt" ])

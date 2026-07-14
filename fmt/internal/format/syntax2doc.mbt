@@ -1057,7 +1057,7 @@ fn Fmt::arguments(fmt : Fmt, args : List[@syntax.Argument]) -> Doc {
       let leading_args = arr.map(x => fmt.argument(x))
       fn trailing_block_style() {
         let leading_doc = series1(
-          @list.List(leading_args),
+          List(leading_args),
           comma,
           trailing=AlwaysPresent,
         )
@@ -1068,7 +1068,7 @@ fn Fmt::arguments(fmt : Fmt, args : List[@syntax.Argument]) -> Doc {
 
       fn fallback_style() {
         leading_args.push(fmt.argument(trailing_arg))
-        group(parens(series1(@list.List(leading_args), comma)))
+        group(parens(series1(List(leading_args), comma)))
       }
 
       fn switch_trailing_block(leading_req, total_req) {
@@ -1163,7 +1163,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
           let args = args.map(constr_pat_arg2doc)
           let args = if is_open {
             // Replace deprecated @list.of usage with from_array
-            args.concat(@list.List([text("..")]))
+            args.concat(List([text("..")]))
           } else {
             args
           }

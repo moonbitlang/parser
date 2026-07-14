@@ -125,9 +125,9 @@ pub fn Mapper::new(tokens : Array[Triple], impls : @syntax.Impls) -> Self {
   let self = {
     queue,
     comments: queue.iter().collect(),
-    map: {},
+    map: Map([]),
     stack: [],
-    table: {},
+    table: Map([]),
     tokens,
     cursor: 0,
   }

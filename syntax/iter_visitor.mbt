@@ -724,7 +724,7 @@ pub(open) trait IterVisitor {
 
 ///|
 impl IterVisitor with fn base(self) -> IterVisitorBase[Self] {
-  IterVisitorBase::IterVisitorBase(self)
+  IterVisitorBase(self)
 }
 
 ///|

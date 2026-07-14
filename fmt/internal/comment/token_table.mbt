@@ -11,7 +11,7 @@ pub impl Pretty for NodeTable with fn pretty(node) {
 
 ///|
 pub fn NodeTable::empty() -> NodeTable {
-  {}
+  NodeTable(Map([]))
 }
 
 ///|

@@ -62,11 +62,7 @@ fn write_result(output : String?, content : String) -> Unit {
   match output {
     Some(path) =>
       try
-        @miniio.write_text_file(
-          path,
-          content,
-          create_mode=@miniio.CreateMode::CreateOrTruncate,
-        )
+        @miniio.write_text_file(path, content, create_mode=CreateOrTruncate)
       catch {
         err => die("error: failed to write \{path}: \{err}")
       } noraise {

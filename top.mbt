@@ -127,8 +127,7 @@ pub fn parse_string(
   )
   fn parse_by_moonyacc(tokens : @tokens.Triples) {
     let tokens = tokens.filter(fn(triple) {
-      !(triple.0 is @tokens.Token::NEWLINE ||
-      triple.0 is @tokens.Token::COMMENT(_))
+      !(triple.0 is NEWLINE || triple.0 is COMMENT(_))
     })
     (@yacc_parser.structure(tokens), []) catch {
       UnexpectedEndOfInput(pos, _) =>
@@ -145,7 +144,7 @@ pub fn parse_string(
         (
           @list.empty(),
           [
-            Report::{
+            {
               loc: { start, end },
               msg: "Unexpected `\{@debug.render(token.to_repr())}`.",
             },

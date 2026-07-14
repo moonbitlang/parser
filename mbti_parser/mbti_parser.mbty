@@ -146,7 +146,7 @@ non_empty_list_commas[T](X : T) -> @list.List[T]
   ;
 
 mbti -> Mbti
-  : PACKAGE STRING ioption(";") imports sigs EOF { Mbti::{package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
+  : PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
   ;
 
 imports -> @list.List[PackageImport]
@@ -155,8 +155,8 @@ imports -> @list.List[PackageImport]
   ;
 
 package_import -> PackageImport
-  : STRING { PackageImport::{name: $1, alias_: None} }
-  | STRING "as" PACKAGE_NAME { PackageImport::{name: $1, alias_: Some($3)} }
+  : STRING { {name: $1, alias_: None} }
+  | STRING "as" PACKAGE_NAME { {name: $1, alias_: Some($3)} }
   ;
 
 sigs -> @list.List[(Sig, Location)]
@@ -176,19 +176,19 @@ sig_ -> Sig
   ;
 
 const_sig -> ConstSig
-  : attributes vis "const" uident ":" type_ "=" constant { ConstSig::{name: $4, type_: $6, value: $8, attrs: $1} }
+  : attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
   ;
 
 value_sig -> ValueSig
-  : attributes vis "let" lident ":" type_ { ValueSig::{ attrs: $1, name: $4, type_: $6 } }
+  : attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
   ;
 
-method_self_type_coloncolon -> MethodSelfType 
+method_self_type_coloncolon -> MethodSelfType
  : UIDENT "::" {
-  MethodSelfType::{ name : $1, is_object : false, loc : mk_loc($loc($1)) }
+  { name : $1, is_object : false, loc : mk_loc($loc($1)) }
  }
  | "&" UIDENT "::" {
-  MethodSelfType::{ name : $2, is_object : true, loc : mk_loc($loc($2)) }
+  { name : $2, is_object : true, loc : mk_loc($loc($2)) }
  }
  ;
 
@@ -211,16 +211,16 @@ method_prefix -> Option[Name]
 func_sig -> FuncSig
   : attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
     let (type_name, name) = $6
-    FuncSig::{ attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
   }
   ;
 
 trait_method_sig -> TraitMethodSig
   : attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
+    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
   }
   | attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-    TraitMethodSig::{ attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
+    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
   }
   ;
 
@@ -230,29 +230,29 @@ trait_method_sig -> TraitMethodSig
 
 type_sig -> TypeSig
   : attributes vis "type" type_decl_name_with_params optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5} 
+    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
   }
   | attributes vis "suberror" uident optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
   }
   | attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
   }
   | attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
   }
   | attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
   }
   | attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
   }
   | attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-    TypeSig::{attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
   }
   | attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
     let (name, type_params, target) = $4
-    TypeSig::{attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
   }
   ;
 
@@ -263,16 +263,16 @@ optional_derive -> @list.List[QualifiedName]
 
 impl_sig -> ImplSig
   : attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-    ImplSig::{type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
   }
-  | attributes vis "impl" qualified_uident "for" type_ { 
-    ImplSig::{type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+  | attributes vis "impl" qualified_uident "for" type_ {
+    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
   }
   ;
 
 trait_sig -> TraitSig
-  : attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body { 
-    TraitSig::{ attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6} 
+  : attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
   }
   ;
 
@@ -288,7 +288,7 @@ using_binder -> Name?
 
 alias_sig -> AliasSig
   : attributes vis "type"  type_decl_name_with_params "=" type_ {
-    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6) 
+    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
   }
   | attributes vis "fnalias" uident "::" lident {
     FuncAlias(attrs = $1,name=$6, type_name=$4)
@@ -304,8 +304,8 @@ alias_sig -> AliasSig
   ;
 
 enum_constructor -> ConstrDecl
-  : attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) { 
-    ConstrDecl::{name: ConstrName::{ name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()} 
+  : attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
+    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
   }
   ;
 
@@ -314,13 +314,13 @@ enum_constructor -> ConstrDecl
   ;
 
 constructor_param -> ConstrParam
-  : boption("mut") type_ { ConstrParam::{mut_: $1, ty: $2, label: None} }
-  | boption("mut") post_label ":" type_ { ConstrParam::{mut_: $1, ty: $4, label: Some($2)} }
+  : boption("mut") type_ { {mut_: $1, ty: $2, label: None} }
+  | boption("mut") post_label ":" type_ { {mut_: $1, ty: $4, label: Some($2)} }
   ;
 
 record_decl_field -> FieldDecl
   : attributes boption("mut") lident ":" type_ {
-    FieldDecl::{ name: FieldName::{ label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
+    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
   }
   ;
 
@@ -331,8 +331,8 @@ record_decl_body -> TypeDefinition
   ;
 
 type_param_with_constraints -> TypeParamWithConstraints
-  : uident { TypeParamWithConstraints::{name: $1, constraints: @list.empty()} }
-  | uident ":" separated_nonempty_list("+", type_constraint) { TypeParamWithConstraints::{name: $1, constraints: $3} }
+  : uident { {name: $1, constraints: @list.empty()} }
+  | uident ":" separated_nonempty_list("+", type_constraint) { {name: $1, constraints: $3} }
   ;
 
 type_params_with_constraints -> @list.List[TypeParamWithConstraints]
@@ -380,7 +380,7 @@ simple_type -> Type
   | qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
   | "&" qualified_uident_ { Object($2) }
   | "_" { Any(loc=mk_loc($sloc)) }
-  
+
 
 type_ -> Type
   : simple_type { $1 }
@@ -395,8 +395,8 @@ return_type -> (Type, ErrorType)
   | simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
   | simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
   | simple_type "raise" "?" {
-    let fake_error : Type = Name(constr_id={ id : QualifiedIdent::Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
-    ($1, MaybeError(ty=fake_error)) 
+    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
+    ($1, MaybeError(ty=fake_error))
   }
   ;
 
@@ -448,30 +448,30 @@ pub_attr -> String?
   ;
 
 qualified_uident -> QualifiedName
-  : UIDENT { QualifiedName::{ name: Ident(name=$1), loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { QualifiedName::{ name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+  : UIDENT { { name: Ident(name=$1), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { { name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
   ;
 
 qualified_uident_ -> ConstrId
-  : UIDENT { ConstrId::{ id: Ident(name=$1), loc: mk_loc($sloc)} }
-  | PACKAGE_NAME DOT_UIDENT { ConstrId::{ id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+  : UIDENT { { id: Ident(name=$1), loc: mk_loc($sloc)} }
+  | PACKAGE_NAME DOT_UIDENT { { id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
   ;
 
 uident -> Name
-  : UIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
+  : UIDENT { {name: $1, loc: mk_loc($sloc)} }
   ;
 
 lident -> Name
-  : LIDENT { Name::{name: $1, loc: mk_loc($sloc)} }
-  | "extend" { Name::{name: "extend", loc: mk_loc($sloc)} }
+  : LIDENT { {name: $1, loc: mk_loc($sloc)} }
+  | "extend" { {name: "extend", loc: mk_loc($sloc)} }
   ;
 
 label -> Label
-  : lident { Label::{name: $1.name, loc: $1.loc} }
+  : lident { {name: $1.name, loc: $1.loc} }
   ;
 
 post_label -> Label
-  : POST_LABEL { Label::{name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
+  : POST_LABEL { {name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
   ;
 
 %inline attributes -> @list.List[Attribute]

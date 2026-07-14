@@ -56,10 +56,10 @@ test "extend special constructor pattern location matches yacc" {
       "extend special constructor pattern should parse; hand=\{hand_reports.to_json().stringify(indent=2)}, yacc=\{yacc_reports.to_json().stringify(indent=2)}",
     )
   }
-  let hand_json = @basic.show_loc.protect(@basic.String, fn() {
+  let hand_json = @basic.show_loc.protect(String, fn() {
     hand_impls.map(impl_ => impl_.json_repr()).to_json()
   })
-  let yacc_json = @basic.show_loc.protect(@basic.String, fn() {
+  let yacc_json = @basic.show_loc.protect(String, fn() {
     yacc_impls.map(impl_ => impl_.json_repr()).to_json()
   })
   if hand_json != yacc_json {

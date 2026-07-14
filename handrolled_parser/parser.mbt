@@ -23,7 +23,7 @@ fn State::parse_attributes(self : Self) -> List[Attribute] {
     result.push(Attribute::new(loc~, content))
     self.skip()
   }
-  @list.List(result)
+  List(result)
 }
 
 ///|
@@ -53,7 +53,7 @@ fn State::parse_toplevel(self : Self) -> Impls {
     self.pop_syncs(first_impl_)
   }
   self.pop_sync(TK_EOF)
-  @list.List(result)
+  List(result)
 }
 
 ///|
@@ -295,7 +295,7 @@ fn State::parse_var(self : Self) -> @syntax.Var {
 ///|
 fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
   if self.mode is Panic(loc~, ..) {
-    return { name: "?tvar_name", name_loc: loc, constraints: @list.List([]) }
+    return { name: "?tvar_name", name_loc: loc, constraints: List([]) }
   }
   let spos = self.peek_spos()
   let name = self.expect_uident(context="type variable name")
@@ -309,7 +309,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
         let trait_ = state.parse_qual_type_ident(context="trait name")
         { trait_, loc }
       })
-      |> @list.List
+      |> List
     },
   )
   let constraints = match constraints {
@@ -386,7 +386,7 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
       } else {
         let right_loc = self.peek_location()
         let right = self.expect_uident(context="constructor name")
-        (@syntax.ConstructorExtraInfo::TypeName(type_name), right_loc, right)
+        (TypeName(type_name), right_loc, right)
       }
       let loc = self.loc_start_with(spos)
       { name: { name: right, loc: right_loc }, extra_info, loc }
@@ -417,7 +417,7 @@ fn State::parse_opt_type_params_no_constraints(
     )
   })
   .unwrap_or([])
-  |> @list.List
+  |> List
 }
 
 ///|
@@ -427,7 +427,7 @@ fn State::parse_fun_decl(
 ) -> @syntax.FunDecl {
   if self.mode is Panic(loc~, ..) {
     return {
-      name: @syntax.Binder::{ name: "", loc },
+      name: { name: "", loc },
       is_async: None,
       type_name: None,
       decl_params: Some(@list.new()),
@@ -702,9 +702,7 @@ fn State::parse_top_func(
         xs.push(x)
         self.skip()
       }
-      DeclStubs(
-        Embedded(language=None, code=CodeMultilineString(@list.List(xs))),
-      )
+      DeclStubs(Embedded(language=None, code=CodeMultilineString(List(xs))))
     } else {
       let name1 = self.expect_string()
       if self.peek_token() is STRING(name2) {
@@ -726,8 +724,8 @@ fn State::parse_top_func(
 ///|
 fn State::parse_top(self : Self) -> @syntax.Impl {
   if self.mode is Panic(loc~, ..) {
-    return @syntax.TopExpr(
-      expr=@syntax.Hole(loc~, kind=Synthesized),
+    return TopExpr(
+      expr=Hole(loc~, kind=Synthesized),
       is_main=false,
       is_async=None,
       loc~,
@@ -842,7 +840,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             State::parse_type,
           )
           self.expect_token(TK_RPAREN)
-          TupleStruct(@list.List(ts))
+          TupleStruct(List(ts))
         }
         _ => self.parse_struct_body()
       }
@@ -982,7 +980,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           decl_body=DeclStubs(
             Embedded(
               language=Some(language),
-              code=CodeMultilineString(@list.List(xs)),
+              code=CodeMultilineString(List(xs)),
             ),
           ),
           where_clause=None,
@@ -1027,7 +1025,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     TRAIT => {
       let trait_decl = self.parse_trait_decl(attrs~, vis~, is_declare~)
       let trait_decl = { ..trait_decl, vis, }
-      @syntax.TopTrait(trait_decl)
+      TopTrait(trait_decl)
     }
     TEST => self.parse_test_block(attrs~, spos~, is_async=None)
     IMPL => {
@@ -1253,16 +1251,12 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             } else {
               state.expect_uident(context~)
             }
-            @syntax.AliasTarget::{
+            {
               binder: { name: binder_name, loc: binder_loc },
               target: Some({ name: target, loc: target_loc }),
             }
           }
-          _ =>
-            @syntax.AliasTarget::{
-              binder: { name: target, loc: target_loc },
-              target: None,
-            }
+          _ => { binder: { name: target, loc: target_loc }, target: None }
         }
       }
 
@@ -1278,17 +1272,17 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               }
               UIDENT(_) => {
                 let target = parse_alias_target(state, false, "constant name")
-                (target, @syntax.UsingKind::Value)
+                (target, Value)
               }
               TYPE => {
                 state.skip()
                 let target = parse_alias_target(state, false, "type name")
-                (target, @syntax.UsingKind::Type)
+                (target, Type)
               }
               TRAIT => {
                 state.skip()
                 let target = parse_alias_target(state, false, "trait name")
-                (target, @syntax.UsingKind::Trait)
+                (target, Trait)
               }
               other => {
                 let other_loc = state.peek_location()
@@ -1298,24 +1292,14 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
                   other_loc,
                 )
                 let loc = state.panic()
-                (
-                  { binder: { name: "", loc }, target: None },
-                  @syntax.UsingKind::Value,
-                )
+                ({ binder: { name: "", loc }, target: None }, Value)
               }
             }
           },
         )
         |> @list.List()
       let loc = self.loc_start_with(spos)
-      @syntax.Impl::TopUsing(
-        pkg~,
-        names~,
-        vis~,
-        attrs~,
-        loc~,
-        doc=DocString::empty(),
-      )
+      TopUsing(pkg~, names~, vis~, attrs~, loc~, doc=DocString::empty())
     }
     other => {
       let other_loc = self.peek_location()
@@ -1358,7 +1342,7 @@ fn State::parse_deriving_directive_list(
       delim=TK_COMMA,
       State::parse_deriving_directive,
     )
-    @list.List(directives)
+    List(directives)
   } else {
     @list.new()
   }
@@ -1368,7 +1352,7 @@ fn State::parse_deriving_directive_list(
 fn State::parse_deriving_directive(self : Self) -> @syntax.DerivingDirective {
   if self.mode is Panic(loc~, ..) {
     return {
-      type_name: { name: @syntax.Ident(name=""), is_object: false, loc },
+      type_name: { name: Ident(name=""), is_object: false, loc },
       args: @list.new(),
       loc,
     }
@@ -1441,7 +1425,7 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
       }
     },
   )
-  params |> @list.List
+  params |> List
 }
 
 ///|
@@ -1621,7 +1605,7 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
         ConstrArgRelatedness::Dotdot(loc)
       } else {
         let args = self.parse_constr_pat_argument()
-        ConstrArgRelatedness::Arg(args)
+        Arg(args)
       }
     })
     |> @list.List
@@ -1643,7 +1627,7 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
       let binder : @syntax.Binder = { name, loc: name_loc }
       let args = parse_constr_args_no_open()
       let loc = self.loc_start_with(spos)
-      @syntax.Pattern::SpecialConstr(binder~, args~, loc~)
+      SpecialConstr(binder~, args~, loc~)
     }
     EXTEND if self.peek_token(nth=1) is LPAREN => {
       let name_loc = self.peek_location()
@@ -1651,7 +1635,7 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
       let binder : @syntax.Binder = { name: "extend", loc: name_loc }
       let args = parse_constr_args_no_open()
       let loc = self.loc_start_with(spos)
-      @syntax.Pattern::SpecialConstr(binder~, args~, loc~)
+      SpecialConstr(binder~, args~, loc~)
     }
     PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | EXTEND => {
       let constr = self.parse_constr()
@@ -1791,20 +1775,13 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             if pats is [] {
               first
             } else {
-              Tuple(
-                pats=@list.List([first, ..pats]),
-                loc=state.loc_start_with(spos),
-              )
+              Tuple(pats=List([first, ..pats]), loc=state.loc_start_with(spos))
             }
           }
           COLON => {
             state.skip()
             let ty = state.parse_type()
-            @syntax.Pattern::Constraint(
-              pat=first,
-              ty~,
-              loc=state.loc_start_with(spos),
-            )
+            Constraint(pat=first, ty~, loc=state.loc_start_with(spos))
           }
           RPAREN => first
           other => {
@@ -1964,7 +1941,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
                     other, "`-Int` or `-Float` in key of map pattern", other_loc,
                   )
                   self.panic() |> ignore
-                  MapPatternFragment::Error
+                  Error
                 }
               }
             }
@@ -1974,7 +1951,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               if kind is Unknown {
                 kind = Record
               }
-              MapPatternFragment::Field(self.parse_field_pat())
+              Field(self.parse_field_pat())
             }
             other => {
               let expected : Array[TokenKind] = match kind {
@@ -1984,7 +1961,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               }
               self.report_unexpected(other, expected, self.peek_location())
               self.panic() |> ignore
-              MapPatternFragment::Error
+              Error
             }
           }
         },
@@ -2526,7 +2503,7 @@ fn State::parse_for_loop(
           follow_set=[TK_LBRACE],
           State::parse_loop_binder_with_value,
         )
-        @list.List(continue_block)
+        List(continue_block)
       }
       self.pop_sync(TK_LBRACE)
       (condition, continue_block)
@@ -2815,12 +2792,12 @@ fn State::parse_lexmatch_expr(self : State) -> @syntax.Expr {
       follow_set=[TK_RBRACE],
       State::parse_lexmatch_case,
     )
-    @list.List(cases)
+    List(cases)
   }
 
   let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
   let loc = self.loc_start_with(spos)
-  @syntax.Expr::LexMatch(strategy~, expr~, cases~, match_loc~, loc~)
+  LexMatch(strategy~, expr~, cases~, match_loc~, loc~)
 }
 
 ///|
@@ -2829,7 +2806,7 @@ fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
     ELLIPSIS => {
       let loc = self.peek_location()
       self.skip()
-      @syntax.LexCase::{
+      {
         pat: @list.singleton(Wildcard(loc~)),
         pat_loc: loc,
         guard_: None,
@@ -2863,12 +2840,12 @@ fn State::parse_lexscan_expr(self : State) -> @syntax.Expr {
       follow_set=[TK_RBRACE],
       State::parse_lexscan_case,
     )
-    @list.List(cases)
+    List(cases)
   }
 
   let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
   let loc = self.loc_start_with(spos)
-  @syntax.Expr::LexScan(expr~, match_loc~, cases~, loc~)
+  LexScan(expr~, match_loc~, cases~, loc~)
 }
 
 ///|
@@ -2877,11 +2854,7 @@ fn State::parse_lexscan_case(self : State) -> @syntax.LexScanCase {
     ELLIPSIS => {
       let loc = self.peek_location()
       self.skip()
-      @syntax.LexScanCase::{
-        pat: @syntax.LexScanCasePattern::Wildcard(loc~),
-        guard_: None,
-        body: Hole(loc~, kind=Todo),
-      }
+      { pat: Wildcard(loc~), guard_: None, body: Hole(loc~, kind=Todo) }
     }
     _ => {
       let pat = self.with_syncs(
@@ -2903,15 +2876,15 @@ fn State::parse_lexscan_case_pattern(
     UNDERSCORE => {
       let loc = self.peek_location()
       self.skip()
-      @syntax.LexScanCasePattern::Wildcard(loc~)
+      Wildcard(loc~)
     }
     LIDENT(_) | EXTEND => {
       let binder = self.parse_binder(context="lexscan binder")
-      @syntax.LexScanCasePattern::Binder(binder)
+      Binder(binder)
     }
     _ => {
       let pat = self.parse_regex_as_pattern()
-      @syntax.LexScanCasePattern::Pattern(pat)
+      Pattern(pat)
     }
   }
 }
@@ -3055,7 +3028,7 @@ fn State::parse_lex_pattern_sequence(
       _ => break ()
     }
   }
-  @list.List(pats)
+  List(pats)
 }
 
 ///|
@@ -3151,7 +3124,7 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
       self.expect_token(TK_RPAREN)
       self.pop_sync(TK_RPAREN)
       let loc = state.loc_start_with(spos)
-      @syntax.Expr::Unit(loc~, faked=false)
+      Unit(loc~, faked=false)
     }
     Some(first) =>
       match state.peek_token() {
@@ -3365,7 +3338,7 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
       let func = @syntax.make_arrow_fn(
-        @list.List([(p, None)]),
+        List([(p, None)]),
         body,
         params_loc~,
         loc~,
@@ -3492,11 +3465,11 @@ fn State::try_parse_arrow_fn_expr(
           let body = self.parse_arrow_fn_body(explicit_brace_body~)
           let loc = self.loc_start_with(spos)
           Ok(
-            @syntax.Expr::Function(
+            Function(
               func=@syntax.make_arrow_fn(
                 params_loc~,
                 loc~,
-                @list.List(parameters),
+                List(parameters),
                 body,
               ),
               loc~,
@@ -3505,15 +3478,15 @@ fn State::try_parse_arrow_fn_expr(
         }
         (_, []) => {
           let loc = self.loc_start_with(spos)
-          Err(Some(@syntax.Expr::Unit(loc~, faked=false)))
+          Err(Some(Unit(loc~, faked=false)))
         }
         (_, [Binder(expr, ty~, colon_loc=_)]) if !has_trailing => {
           let loc = self.loc_start_with(spos)
-          Err(Some(@syntax.Expr::Constraint(expr~, ty~, loc~)))
+          Err(Some(Constraint(expr~, ty~, loc~)))
         }
         (_, [Expr(expr)]) => {
           let loc = self.loc_start_with(spos)
-          Err(Some(@syntax.Group(expr~, group=Paren, loc~)))
+          Err(Some(Group(expr~, group=Paren, loc~)))
         }
         (_, _) => {
           let exprs = expr_or_binders.map(fn(expr_or_binder) {
@@ -3526,7 +3499,7 @@ fn State::try_parse_arrow_fn_expr(
             }
           })
           let loc = self.loc_start_with(spos)
-          Err(Some(@syntax.Expr::Tuple(exprs=@list.List(exprs), loc~)))
+          Err(Some(Tuple(exprs=List(exprs), loc~)))
         }
       }
     }
@@ -3545,7 +3518,7 @@ fn State::try_parse_arrow_fn_expr(
       let body = self.parse_arrow_fn_body(explicit_brace_body~)
       let loc = self.loc_start_with(spos)
       Ok(
-        @syntax.Expr::Function(
+        Function(
           loc~,
           func=@syntax.make_arrow_fn(
             params_loc~,
@@ -3643,8 +3616,8 @@ fn State::parse_infix_expr(
   ) -> (Position, @syntax.Expr) {
     let loc = self.loc_start_with(lpos)
     let expr : @syntax.Expr = match op.name {
-      Ident(name="→") => @syntax.Expr::Implies(lhs~, rhs~, loc~)
-      _ => @syntax.Expr::Infix(lhs~, op~, rhs~, loc~)
+      Ident(name="→") => Implies(lhs~, rhs~, loc~)
+      _ => Infix(lhs~, op~, rhs~, loc~)
     }
     (lpos, expr)
   }
@@ -3706,7 +3679,7 @@ fn State::parse_infix_expr(
 
   let first_spos = self.peek_spos_with_parsed(parsed~)
   let first_expr = self.parse_postfix_expr(parsed~)
-  let (_, expr) = go(@list.List([(first_spos, first_expr)]), @list.new())
+  let (_, expr) = go(List([(first_spos, first_expr)]), @list.new())
   expr
 }
 
@@ -3750,12 +3723,12 @@ fn State::parse_regex_atom_pattern(self : Self) -> @syntax.RegexPattern {
     REGEX_LITERAL(lit) => {
       let loc = self.peek_location()
       self.skip()
-      @syntax.RegexPattern::Literal(lit~, loc~)
+      Literal(lit~, loc~)
     }
     UIDENT(_) | PACKAGE_NAME(_) => {
       let lid = self.parse_qual_uident()
       let loc = self.loc_start_with(spos)
-      @syntax.RegexPattern::Reference(lid~, loc~)
+      Reference(lid~, loc~)
     }
     LPAREN => {
       self.skip()
@@ -3767,7 +3740,7 @@ fn State::parse_regex_atom_pattern(self : Self) -> @syntax.RegexPattern {
       let loc = self.peek_location()
       self.report_failed_to_parse(other, "regex pattern", loc)
       self.panic() |> ignore
-      @syntax.RegexPattern::Literal(lit="", loc~)
+      Literal(lit="", loc~)
     }
   }
 }
@@ -3780,7 +3753,7 @@ fn State::parse_regex_sequence_pattern(self : Self) -> @syntax.RegexPattern {
     self.skip()
     let rhs = self.parse_regex_atom_pattern()
     let loc = self.loc_start_with(spos)
-    pat = @syntax.RegexPattern::Sequence(pat1=pat, pat2=rhs, loc~)
+    pat = Sequence(pat1=pat, pat2=rhs, loc~)
   }
   pat
 }
@@ -3793,7 +3766,7 @@ fn State::parse_regex_or_pattern(self : Self) -> @syntax.RegexPattern {
     self.skip()
     let rhs = self.parse_regex_sequence_pattern()
     let loc = self.loc_start_with(spos)
-    pat = @syntax.RegexPattern::Alternation(pat1=pat, pat2=rhs, loc~)
+    pat = Alternation(pat1=pat, pat2=rhs, loc~)
   }
   pat
 }
@@ -3806,7 +3779,7 @@ fn State::parse_regex_as_pattern(self : Self) -> @syntax.RegexPattern {
     self.skip()
     let binder = self.parse_binder(context="regex alias")
     let loc = self.loc_start_with(spos)
-    @syntax.RegexPattern::Alias(pat~, binder~, loc~)
+    Alias(pat~, binder~, loc~)
   } else {
     pat
   }
@@ -3909,7 +3882,7 @@ fn State::parse_range_expr(
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
       let op : @syntax.Var = { name: Ident(name="..<="), loc: op_loc }
-      @syntax.Expr::Infix(op~, lhs~, rhs~, loc~)
+      Infix(op~, lhs~, rhs~, loc~)
     }
     RANGE_EXCLUSIVE => {
       self.skip()
@@ -3925,7 +3898,7 @@ fn State::parse_range_expr(
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
       let op : @syntax.Var = { name: Ident(name=">=.."), loc: op_loc }
-      @syntax.Expr::Infix(op~, lhs~, rhs~, loc~)
+      Infix(op~, lhs~, rhs~, loc~)
     }
     RANGE_EXCLUSIVE_REV => {
       self.skip()
@@ -3933,7 +3906,7 @@ fn State::parse_range_expr(
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
       let op : @syntax.Var = { name: Ident(name=">.."), loc: op_loc }
-      @syntax.Expr::Infix(op~, lhs~, rhs~, loc~)
+      Infix(op~, lhs~, rhs~, loc~)
     }
     _ => lhs
   }
@@ -4134,7 +4107,7 @@ priv enum IndexingSyntaxFragment {
 ///|
 fn State::parse_argument(self : Self) -> @syntax.Argument {
   if self.mode is Panic(loc~, ..) {
-    return { value: Hole(loc~, kind=Synthesized), kind: @syntax.Positional }
+    return { value: Hole(loc~, kind=Synthesized), kind: Positional }
   }
   match self.peek_token() {
     // `label=expr` or `label?=expr`
@@ -4231,12 +4204,12 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
 ///|
 fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
   if self.mode is Panic(loc~, ..) {
-    return @syntax.Func::{
+    return {
       parameters: @list.new(),
       params_loc: loc,
-      body: @syntax.Hole(loc~, kind=Synthesized),
+      body: Hole(loc~, kind=Synthesized),
       return_type: None,
-      error_type: @syntax.NoErrorType,
+      error_type: NoErrorType,
       kind: Lambda,
       is_async,
       loc,
@@ -4257,8 +4230,8 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
       self.pop_sync(TK_LBRACE)
       let block = self.parse_block_expr()
       let func_loc = @syntax.no_location
-      @syntax.Func::{ // Will be set by caller
-        parameters: @list.List(params),
+      { // Will be set by caller
+        parameters: List(params),
         params_loc,
         body: block,
         return_type,
@@ -4274,12 +4247,12 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
         msg: "Failed to parse func: expected '(' or '{', got \{@debug.render(other.to_repr())}",
       })
       let loc = self.panic()
-      @syntax.Func::{
+      {
         parameters: @list.new(),
         params_loc: loc,
-        body: @syntax.Hole(loc~, kind=Synthesized),
+        body: Hole(loc~, kind=Synthesized),
         return_type: None,
-        error_type: @syntax.NoErrorType,
+        error_type: NoErrorType,
         kind: Lambda,
         is_async,
         loc,
@@ -4291,14 +4264,14 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
 ///|
 fn State::parse_parameter(self : Self) -> @syntax.Parameter {
   if self.mode is Panic(loc~, ..) {
-    return @syntax.Positional(binder={ name: "?binder", loc }, ty=None)
+    return Positional(binder={ name: "?binder", loc }, ty=None)
   }
   match self.peek_token() {
     UNDERSCORE => {
       let loc = self.peek_location()
       self.skip()
       let param_annot = self.parse_opt_annot()
-      @syntax.DiscardPositional(ty=param_annot, loc~)
+      DiscardPositional(ty=param_annot, loc~)
     }
     // `label~ : Type` 
     // or `label~ : Type = expr` (same as `label? : Type = expr`, deprecated syntax)
@@ -4526,18 +4499,17 @@ fn State::parse_simple_expr(
             self.expect_token(TK_MULTILINE_INTERP)
             let converted : Array[@syntax.InterpElem] = xs.map(fn(elem) {
               match elem {
-                InterpLit(repr~, loc~) =>
-                  @syntax.InterpElem::Literal(repr~, loc~)
-                InterpSource(source) => @syntax.InterpElem::Source(source)
+                InterpLit(repr~, loc~) => Literal(repr~, loc~)
+                InterpSource(source) => Source(source)
               }
             })
-            elems.push(Interp(@list.List(converted)))
+            elems.push(Interp(List(converted)))
           }
           _ => break
         }
       }
       let loc = self.loc_start_with(spos)
-      MultilineString(elems=@list.List(elems), loc~)
+      MultilineString(elems=List(elems), loc~)
     }
     INTERP(xs) => {
       let loc = self.peek_location()
@@ -4681,7 +4653,7 @@ fn State::parse_coloncolon_expr(self : Self) -> @syntax.Expr {
       )
       let skipped_loc = self.panic()
       let loc : Location = { start: spos, end: skipped_loc.end }
-      @syntax.Constr(
+      Constr(
         constr={
           extra_info: TypeName(type_name),
           name: { name: "?constr", loc: @syntax.no_location },
@@ -4717,11 +4689,11 @@ fn State::parse_template_object_expr(self : Self) -> @syntax.Expr {
       state.expect_token(TK_COLON)
       let expr = state.parse_expr()
       let loc = state.loc_start_with(elem_spos)
-      { key: @syntax.Constant::String(key), expr, key_loc, loc }
+      { key: String(key), expr, key_loc, loc }
     },
   )
   let loc = self.loc_start_with(spos)
-  Map(elems=@list.List(elems), loc~)
+  Map(elems=List(elems), loc~)
 }
 
 ///|
@@ -4760,18 +4732,17 @@ fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
             self.expect_token(TK_MULTILINE_INTERP)
             let converted : Array[@syntax.InterpElem] = xs.map(fn(elem) {
               match elem {
-                InterpLit(repr~, loc~) =>
-                  @syntax.InterpElem::Literal(repr~, loc~)
-                InterpSource(source) => @syntax.InterpElem::Source(source)
+                InterpLit(repr~, loc~) => Literal(repr~, loc~)
+                InterpSource(source) => Source(source)
               }
             })
-            elems.push(Interp(@list.List(converted)))
+            elems.push(Interp(List(converted)))
           }
           _ => break
         }
       }
       let loc = self.loc_start_with(spos)
-      MultilineString(elems=@list.List(elems), loc~)
+      MultilineString(elems=List(elems), loc~)
     }
     LBRACE => self.parse_template_object_expr()
     other => {
@@ -4941,7 +4912,7 @@ fn State::parse_semi_trailing_record(self : Self) -> @syntax.Expr {
   self.expect_token(TK_SEMI)
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
-  Record(type_name=None, fields=@list.List([field]), trailing=Semi, loc~)
+  Record(type_name=None, fields=List([field]), trailing=Semi, loc~)
 }
 
 ///|
@@ -4975,7 +4946,7 @@ fn State::parse_record_expr(
       follow_set=[TK_RBRACE],
       State::parse_field_def,
     )
-    (None, @list.List(fields), trailing_semi)
+    (None, List(fields), trailing_semi)
   }
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
@@ -5053,7 +5024,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
   )
   let elems = elems.filter_map(elem => elem) // TODO: add catMaybes to core?
   let loc = self.loc_start_with(spos)
-  Map(elems=@list.List(elems), loc~)
+  Map(elems=List(elems), loc~)
 }
 
 ///|
@@ -5072,7 +5043,7 @@ fn State::parse_opt_annot(self : Self) -> @syntax.Type? {
 ///|
 fn State::parse_block_expr(self : Self) -> @syntax.Expr {
   if self.mode is Panic(loc~, ..) {
-    return @syntax.Hole(loc~, kind=Synthesized)
+    return Hole(loc~, kind=Synthesized)
   }
   let loc_start = self.peek_spos()
   let stmts = self.surround_series(
@@ -5088,7 +5059,7 @@ fn State::parse_block_expr(self : Self) -> @syntax.Expr {
 ///|
 fn State::parse_letand_func(self : Self) -> @syntax.Func {
   if self.mode is Panic(loc~, ..) {
-    return @syntax.Func::{
+    return {
       parameters: @list.new(),
       params_loc: loc,
       body: Hole(loc~, kind=Synthesized),
@@ -5127,7 +5098,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      @syntax.make_arrow_fn(@list.List(parameters), body, params_loc~, loc~)
+      @syntax.make_arrow_fn(List(parameters), body, params_loc~, loc~)
     }
     LIDENT(_) | EXTEND | UNDERSCORE => {
       let param = parse_arrow_fn_param()
@@ -5135,12 +5106,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       self.expect_token(TK_FAT_ARROW)
       let body = self.parse_expr_stmt_no_break_continue_return()
       let loc = self.loc_start_with(spos)
-      @syntax.make_arrow_fn(
-        @list.List([(param, None)]),
-        body,
-        params_loc~,
-        loc~,
-      )
+      @syntax.make_arrow_fn(List([(param, None)]), body, params_loc~, loc~)
     }
     _ => {
       let is_async = if self.peek_token() is ASYNC {
@@ -5159,7 +5125,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
 ///|
 fn State::parse_stmt(self : Self) -> Statement {
   if self.mode is Panic(loc~, ..) {
-    return Statement::StmtExpr(Hole(loc~, kind=Synthesized))
+    return StmtExpr(Hole(loc~, kind=Synthesized))
   }
   match self.peek_token() {
     LET => {
@@ -5197,7 +5163,7 @@ fn State::parse_stmt(self : Self) -> Statement {
         (binder, ty_opt, func)
       })
       let loc = self.loc_start_with(spos)
-      StmtLetand(bindings=@list.List(bindings), loc~)
+      StmtLetand(bindings=List(bindings), loc~)
     }
     ASYNC if self.peek_token(nth=1) is FN &&
       (self.peek_token(nth=2) is LIDENT(_) || self.peek_token(nth=2) is EXTEND) => {
@@ -5277,7 +5243,7 @@ fn State::handle_unexpected_expr_or_statement(
       | StmtDefer(loc~, ..)
       | StmtGuard(loc~, ..) => loc
     }
-    Statement::compact_rev(@list.List([stmt]), loc~)
+    Statement::compact_rev(List([stmt]), loc~)
   }
 
   let (actual, expr) = match token {
@@ -5393,12 +5359,12 @@ fn State::parse_expr_stmt_no_break_continue_return(self : Self) -> @syntax.Expr 
       self.expect_token(TK_RAISE)
       let expr = self.parse_expr()
       let loc_ = self.loc_start_with(loc_start)
-      @syntax.Raise(err_value=expr, loc=loc_)
+      Raise(err_value=expr, loc=loc_)
     }
     ELLIPSIS => {
       let loc_ = self.peek_location()
       self.skip()
-      @syntax.Hole(kind=Todo, loc=loc_)
+      Hole(kind=Todo, loc=loc_)
     }
     _ => self.parse_assign_or_simple_expr()
   }
@@ -5575,7 +5541,7 @@ fn State::parse_type(self : Self) -> @syntax.Type {
 /// The bool indicates whether the type is a simple type.
 fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
   if self.mode is Panic(loc~, ..) {
-    return (false, @syntax.Type::Any(loc~))
+    return (false, Any(loc~))
   }
   fn parse_question_mark(spos, ty) -> (Bool, @syntax.Type) {
     if self.peek_token() is QUESTION &&
@@ -5687,7 +5653,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       let other_loc = self.peek_location()
       self.report_failed_to_parse(other, "type", other_loc)
       let loc = self.panic()
-      (false, @syntax.Type::Any(loc~))
+      (false, Any(loc~))
     }
   }
 }
@@ -5709,7 +5675,7 @@ fn State::parse_opt_typ_params(
     )
   })
   .unwrap_or([])
-  |> @list.List
+  |> List
 }
 
 ///|

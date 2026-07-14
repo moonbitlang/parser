@@ -9,7 +9,7 @@ let null : Json = Json::null()
 
 ///|
 let dummy_docstring : @syntax.DocString = {
-  content: @list.List(["Test documentation"]),
+  content: List(["Test documentation"]),
   loc: dummy_loc,
 }
 
@@ -22,22 +22,19 @@ test "impl variants to_json" {
   let type_decl = @syntax.TypeDecl::{
     tycon: "TestType",
     tycon_loc: dummy_loc,
-    params: @list.List([]),
-    components: @syntax.Abstract,
-    attrs: @list.List([]),
+    params: List([]),
+    components: Abstract,
+    attrs: List([]),
     doc: dummy_docstring,
-    type_vis: @syntax.Default,
-    deriving: @list.List([]),
+    type_vis: Default,
+    deriving: List([]),
     loc: dummy_loc,
     is_declare: false,
   }
   let binder = @syntax.Binder::{ name: "test", loc: dummy_loc }
   let int_type = @syntax.Name(
-    constr_id=@syntax.ConstrId::{
-      id: @syntax.LongIdent::Ident(name="Int"),
-      loc: dummy_loc,
-    },
-    tys=@list.List([]),
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    tys=List([]),
     loc=dummy_loc,
   )
   json_inspect(
@@ -68,7 +65,7 @@ test "impl variants to_json" {
       params=None,
       is_async=None,
       loc=dummy_loc,
-      attrs=@list.List([]),
+      attrs=List([]),
       doc=dummy_docstring,
     ).json_repr(),
     content={
@@ -118,14 +115,14 @@ test "impl variants to_json" {
           "components": {
             "kind": "TypeDesc::Abstract",
             "loc": null,
-            "children": {},
+            "children": Json::empty_object(),
           },
           "attrs": { "kind": "TypeDecl::AttrList", "loc": null, "children": [] },
           "doc": "Test documentation",
           "type_vis": {
             "kind": "Visibility::Default",
             "loc": null,
-            "children": {},
+            "children": Json::empty_object(),
           },
           "is_declare": false,
           "deriving": {
@@ -143,11 +140,11 @@ test "impl variants to_json" {
     is_async: None,
     decl_params: None,
     params_loc: dummy_loc,
-    quantifiers: @list.List([]),
+    quantifiers: List([]),
     return_type: None,
-    error_type: @syntax.NoErrorType,
-    vis: @syntax.Default,
-    attrs: @list.List([]),
+    error_type: NoErrorType,
+    vis: Default,
+    attrs: List([]),
     doc: dummy_docstring,
     loc: dummy_loc,
   }
@@ -180,12 +177,12 @@ test "impl variants to_json" {
             "error_type": {
               "kind": "ErrorType::NoErrorType",
               "loc": null,
-              "children": {},
+              "children": Json::empty_object(),
             },
             "vis": {
               "kind": "Visibility::Default",
               "loc": null,
-              "children": {},
+              "children": Json::empty_object(),
             },
             "attrs": {
               "kind": "FunDecl::AttrList",
@@ -220,10 +217,10 @@ test "impl variants to_json" {
       binder~,
       ty=Some(int_type),
       expr=unit_expr,
-      vis=@syntax.Default,
+      vis=Default,
       is_constant=true,
       loc=dummy_loc,
-      attrs=@list.List([]),
+      attrs=List([]),
       doc=dummy_docstring,
       is_declare=false,
     ).json_repr(),
@@ -263,7 +260,11 @@ test "impl variants to_json" {
           "loc": null,
           "children": { "faked": false },
         },
-        "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+        "vis": {
+          "kind": "Visibility::Default",
+          "loc": null,
+          "children": Json::empty_object(),
+        },
         "is_constant": true,
         "is_declare": false,
         "attrs": {
@@ -285,7 +286,7 @@ test "impl variants to_json" {
     view_constrs=@list.empty(),
     parameters=@list.empty(),
     body=unit_expr,
-    vis=@syntax.Default,
+    vis=Default,
     attrs=@list.empty(),
     doc=dummy_docstring,
     loc=dummy_loc,
@@ -338,7 +339,11 @@ test "impl variants to_json" {
         "loc": null,
         "children": { "name": "test" },
       },
-      "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": Json::empty_object(),
+      },
       "attrs": {
         "kind": "Impl::TopView::AttrList",
         "loc": null,
@@ -353,15 +358,9 @@ test "impl variants to_json" {
 test "expr basic types to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   let int_constant = @syntax.Int("42")
-  let variable = @syntax.Var::{
-    name: @syntax.LongIdent::Ident(name="test_var"),
-    loc: dummy_loc,
-  }
+  let variable = @syntax.Var::{ name: Ident(name="test_var"), loc: dummy_loc }
   let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
-  let argument = @syntax.Argument::{
-    value: unit_expr,
-    kind: @syntax.Positional,
-  }
+  let argument = @syntax.Argument::{ value: unit_expr, kind: Positional }
   json_inspect(@syntax.Expr::Unit(loc=dummy_loc, faked=false).json_repr(), content={
     "kind": "Expr::Unit",
     "loc": null,
@@ -399,11 +398,7 @@ test "expr basic types to_json" {
     },
   })
   json_inspect(
-    @syntax.Expr::Apply(
-      func=unit_expr,
-      args=@list.List([argument]),
-      loc=dummy_loc,
-    ).json_repr(),
+    @syntax.Expr::Apply(func=unit_expr, args=List([argument]), loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::Apply",
       "loc": null,
@@ -429,13 +424,17 @@ test "expr basic types to_json" {
                 "kind": {
                   "kind": "ArgumentKind::Positional",
                   "loc": null,
-                  "children": {},
+                  "children": Json::empty_object(),
                 },
               },
             },
           ],
         },
-        "attr": { "kind": "ApplyAttr::NoAttr", "loc": null, "children": {} },
+        "attr": {
+          "kind": "ApplyAttr::NoAttr",
+          "loc": null,
+          "children": Json::empty_object(),
+        },
       },
     },
   )
@@ -495,11 +494,7 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Expr::Array(
-      exprs=@list.List([unit_expr]),
-      is_iter=false,
-      loc=dummy_loc,
-    ).json_repr(),
+    @syntax.Expr::Array(exprs=List([unit_expr]), is_iter=false, loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::Array",
       "loc": null,
@@ -521,11 +516,7 @@ test "expr basic types to_json" {
   )
   let spread_elem = @syntax.SpreadableElem::Regular(unit_expr)
   json_inspect(
-    @syntax.ArraySpread(
-      elems=@list.List([spread_elem]),
-      is_iter=false,
-      loc=dummy_loc,
-    ).json_repr(),
+    @syntax.ArraySpread(elems=List([spread_elem]), is_iter=false, loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::ArraySpread",
       "loc": null,
@@ -571,7 +562,7 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Expr::Tuple(exprs=@list.List([unit_expr, unit_expr]), loc=dummy_loc).json_repr(),
+    @syntax.Expr::Tuple(exprs=List([unit_expr, unit_expr]), loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::Tuple",
       "loc": null,
@@ -595,16 +586,17 @@ test "expr basic types to_json" {
       },
     },
   )
-  json_inspect(
-    @syntax.Expr::Hole(loc=dummy_loc, kind=@syntax.Todo).json_repr(),
-    content={
-      "kind": "Expr::Hole",
-      "loc": null,
-      "children": {
-        "kind": { "kind": "Hole::Todo", "loc": null, "children": {} },
+  json_inspect(@syntax.Expr::Hole(loc=dummy_loc, kind=Todo).json_repr(), content={
+    "kind": "Expr::Hole",
+    "loc": null,
+    "children": {
+      "kind": {
+        "kind": "Hole::Todo",
+        "loc": null,
+        "children": Json::empty_object(),
       },
     },
-  )
+  })
   json_inspect(
     @syntax.Return(return_value=Some(unit_expr), loc=dummy_loc).json_repr(),
     content={
@@ -655,7 +647,7 @@ test "expr basic types to_json" {
     },
   )
   json_inspect(
-    @syntax.Continue(args=@list.List([unit_expr]), label=None, loc=dummy_loc).json_repr(),
+    @syntax.Continue(args=List([unit_expr]), label=None, loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::Continue",
       "loc": null,
@@ -681,11 +673,8 @@ test "expr basic types to_json" {
 test "expr complex types to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   let int_type = @syntax.Name(
-    constr_id=@syntax.ConstrId::{
-      id: @syntax.LongIdent::Ident(name="Int"),
-      loc: dummy_loc,
-    },
-    tys=@list.List([]),
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    tys=List([]),
     loc=dummy_loc,
   )
   let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
@@ -697,7 +686,7 @@ test "expr complex types to_json" {
     body: unit_expr,
   }
   let type_name = @syntax.TypeName::{
-    name: @syntax.LongIdent::Ident(name="TestType"),
+    name: Ident(name="TestType"),
     is_object: false,
     loc: dummy_loc,
   }
@@ -707,10 +696,7 @@ test "expr complex types to_json" {
     is_pun: false,
     loc: dummy_loc,
   }
-  let variable = @syntax.Var::{
-    name: @syntax.LongIdent::Ident(name="test_var"),
-    loc: dummy_loc,
-  }
+  let variable = @syntax.Var::{ name: Ident(name="test_var"), loc: dummy_loc }
   json_inspect(
     @syntax.If(
       cond=unit_expr,
@@ -799,7 +785,11 @@ test "expr complex types to_json" {
           "loc": null,
           "children": { "faked": false },
         },
-        "pat": { "kind": "Pattern::Any", "loc": null, "children": {} },
+        "pat": {
+          "kind": "Pattern::Any",
+          "loc": null,
+          "children": Json::empty_object(),
+        },
       },
     },
   )
@@ -814,7 +804,11 @@ test "expr complex types to_json" {
       "kind": "Expr::Let",
       "loc": null,
       "children": {
-        "pattern": { "kind": "Pattern::Any", "loc": null, "children": {} },
+        "pattern": {
+          "kind": "Pattern::Any",
+          "loc": null,
+          "children": Json::empty_object(),
+        },
         "expr": {
           "kind": "Expr::Unit",
           "loc": null,
@@ -882,7 +876,7 @@ test "expr complex types to_json" {
   )
   json_inspect(
     @syntax.Expr::Sequence(
-      exprs=@list.List([unit_expr]),
+      exprs=List([unit_expr]),
       last_expr=unit_expr,
       loc=dummy_loc,
     ).json_repr(),
@@ -912,8 +906,8 @@ test "expr complex types to_json" {
   json_inspect(
     @syntax.Expr::Record(
       type_name=Some(type_name),
-      fields=@list.List([field_def]),
-      trailing=@syntax.TrailingMark::Comma,
+      fields=List([field_def]),
+      trailing=Comma,
       loc=dummy_loc,
     ).json_repr(),
     content={
@@ -955,16 +949,16 @@ test "expr complex types to_json" {
             },
           ],
         },
-        "trailing": { "kind": "Trailing::Comma", "loc": null, "children": {} },
+        "trailing": {
+          "kind": "Trailing::Comma",
+          "loc": null,
+          "children": Json::empty_object(),
+        },
       },
     },
   )
   json_inspect(
-    @syntax.Field(
-      record=unit_expr,
-      accessor=@syntax.Accessor::Label(label),
-      loc=dummy_loc,
-    ).json_repr(),
+    @syntax.Field(record=unit_expr, accessor=Label(label), loc=dummy_loc).json_repr(),
     content={
       "kind": "Expr::Field",
       "loc": null,
@@ -991,7 +985,7 @@ test "expr complex types to_json" {
   json_inspect(
     @syntax.Expr::Match(
       expr=unit_expr,
-      cases=@list.List([case]),
+      cases=List([case]),
       match_loc=dummy_loc,
       loc=dummy_loc,
     ).json_repr(),
@@ -1015,7 +1009,7 @@ test "expr complex types to_json" {
                 "pattern": {
                   "kind": "Pattern::Any",
                   "loc": null,
-                  "children": {},
+                  "children": Json::empty_object(),
                 },
                 "guard": null,
                 "body": {
@@ -1097,10 +1091,10 @@ test "foreach json includes empty continue block" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   json_inspect(
     @syntax.ForEach(
-      binders=@list.List([]),
+      binders=List([]),
       expr=unit_expr,
-      init=@list.List([]),
-      continue_block=@list.List([]),
+      init=List([]),
+      continue_block=List([]),
       body=unit_expr,
       else_block=None,
       where_clause=None,

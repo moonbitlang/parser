@@ -84,8 +84,8 @@ pub fn BasePos::from_position(pkg~ : String, pos : Position) -> BasePos {
 
 ///|
 pub fn Location::trim_first_char(self : Location) -> Location {
-  Location::{
-    start: Position::{
+  {
+    start: {
       fname: self.start.fname,
       lnum: self.start.lnum,
       bol: self.start.bol,
@@ -97,9 +97,9 @@ pub fn Location::trim_first_char(self : Location) -> Location {
 
 ///|
 pub fn Location::trim_last_char(self : Location) -> Location {
-  Location::{
+  {
     start: self.start,
-    end: Position::{
+    end: {
       fname: self.end.fname,
       lnum: self.end.lnum,
       bol: self.end.bol,
@@ -144,5 +144,5 @@ pub fn Location::merge(self : Location, other : Location) -> Location {
   guard self.start.fname == other.start.fname
   let start = if self.start < other.start { self.start } else { other.start }
   let end = if self.end > other.end { self.end } else { other.end }
-  Location::{ start, end }
+  { start, end }
 }

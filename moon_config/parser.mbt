@@ -104,7 +104,7 @@ fn State::report_failed_to_parse(
     _ =>
       "Unexpected token \{found.to_expect_string()}, you may expect \{expected}."
   }
-  state.diagnostics.push(Report::{ loc, msg })
+  state.diagnostics.push({ loc, msg })
 }
 
 ///|
@@ -138,7 +138,7 @@ fn State::expect_lident(state : Self, context~ : String) -> String {
     UIDENT(name) => {
       let loc = state.peek_location()
       state.skip()
-      state.diagnostics.push(Report::{
+      state.diagnostics.push({
         loc,
         msg: "Unexpected uppercase identifier \{name}, expected lowercase identifier in \{context}.",
       })
@@ -407,7 +407,7 @@ fn parse_import_item(state : State) -> Ast {
     AS => {
       let alias_loc = state.peek_location()
       state.skip()
-      state.diagnostics.push(Report::{
+      state.diagnostics.push({
         loc: alias_loc,
         msg: "Old import alias syntax is no longer supported; use `\"...\" @alias` instead of `\"...\" as @alias`.",
       })
@@ -472,7 +472,7 @@ fn parse_import_statement(state : State) -> (String, Ast) {
   if state.peek_token() is STRING(_) {
     let legacy_loc = state.peek_location()
     state.skip()
-    state.diagnostics.push(Report::{
+    state.diagnostics.push({
       loc: legacy_loc,
       msg: "Old import syntax is no longer supported; use `import { ... }`, `import { ... } for \"test\"`, or `import { ... } for \"wbtest\"`.",
     })
