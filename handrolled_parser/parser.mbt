@@ -4111,28 +4111,11 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
   }
   match self.peek_token() {
     // `label=expr` or `label?=expr`
-    LIDENT(label_name) | UIDENT(label_name) if self.peek_token(nth=1) is EQUAL ||
+    LIDENT(_) | EXTEND | UIDENT(_) if self.peek_token(nth=1) is EQUAL ||
       (self.peek_token(nth=1) is QUESTION && self.peek_token(nth=2) is EQUAL) => {
-      let label : @syntax.Label = {
-        name: label_name,
-        loc: self.peek_location(),
-      }
-      self.skip() // luident
-      let kind : @syntax.ArgumentKind = if self.peek_token() is QUESTION {
-        let question_loc = self.peek_location()
-        self.skip()
-        LabelledOption(label~, question_loc~)
-      } else {
-        Labelled(label)
-      }
-      self.expect_token(TK_EQUAL) // `=`
-      let value = self.parse_expr()
-      { value, kind }
-    }
-    EXTEND if self.peek_token(nth=1) is EQUAL ||
-      (self.peek_token(nth=1) is QUESTION && self.peek_token(nth=2) is EQUAL) => {
-      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
-      self.skip() // extend
+      let label_loc = self.peek_location()
+      let label_name = self.expect_lident(context="")
+      let label : @syntax.Label = { name: label_name, loc: label_loc }
       let kind : @syntax.ArgumentKind = if self.peek_token() is QUESTION {
         let question_loc = self.peek_location()
         self.skip()
