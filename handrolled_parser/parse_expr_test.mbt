@@ -448,3 +448,28 @@ test {
     },
   })
 }
+
+///|
+test "f(X=1)" {
+  @basic.show_loc.val = Json
+  let tokens = @lexer.tokens_from_string("f(X=1)", comment=true).tokens
+  let (expr, reports) = parse_expr(tokens)
+  json_inspect(reports, content=[
+    {
+      "type": "Error",
+      "loc": {
+        "file": "",
+        "start": { "line": 1, "column": 3 },
+        "end": { "line": 1, "column": 4 },
+      },
+      "msg": "Unexpected uppercase identifier X, expected lowercase identifier in .",
+    },
+  ])
+  guard expr is Apply(args~, ..) else {
+    fail("expected an application expression")
+  }
+  guard args.head() is Some({ kind: Labelled(label), .. }) else {
+    fail("expected a labelled argument")
+  }
+  assert_eq(label.name, "")
+}
