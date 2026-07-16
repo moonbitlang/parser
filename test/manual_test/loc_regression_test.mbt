@@ -58,3 +58,40 @@ test "loc parity for brace group and empty fn params" {
     )
   }
 }
+
+///|
+let grouped_pattern_loc_regression_source =
+  #| fn grouped_patterns {
+  #|   let (a, b) = (1, 2)
+  #|   let ((a, b)) = (1, 2)
+  #|   let (x : Int) = 1
+  #|   let ((x : Int)) = 1
+  #| }
+
+///|
+fn parse_grouped_pattern_loc_regression(
+  parser : @parser.Parser,
+) -> Json raise Error {
+  let (impls, diagnostics) = @parser.parse_string(
+    grouped_pattern_loc_regression_source,
+    name="grouped_pattern_loc_regression.mbt",
+    parser~,
+  )
+  if !diagnostics.is_empty() {
+    fail("\{to_repr(diagnostics)}")
+  }
+  @basic.show_loc.protect(String, fn() {
+    impls.map(impl_ => impl_.json_repr()).to_json()
+  })
+}
+
+///|
+test "loc parity for grouped tuple and constraint patterns" {
+  let hand_json = parse_grouped_pattern_loc_regression(Handrolled)
+  let yacc_json = parse_grouped_pattern_loc_regression(MoonYacc)
+  if hand_json != yacc_json {
+    fail(
+      "loc-sensitive AST mismatch between handrolled and yacc parsers.\nhandrolled:\n\{hand_json.stringify(indent=2)}\n\nyacc:\n\{yacc_json.stringify(indent=2)}",
+    )
+  }
+}
