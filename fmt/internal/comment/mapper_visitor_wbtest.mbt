@@ -4,6 +4,9 @@ priv struct IterArrayFinder {
 }
 
 ///|
+extend IterArrayFinder with IterVisitor::{base, visit_Impl}
+
+///|
 impl IterVisitor for IterArrayFinder with fn visit_Expr_Array(
   self,
   exprs~,
