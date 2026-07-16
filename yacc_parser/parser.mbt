@@ -1503,7 +1503,7 @@ fn yy_action_25(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -1526,8 +1526,8 @@ fn yy_action_26(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
   let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_2_result = yy_action_10(_last_pos, _args[0:1])
   guard _args[2].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[1].1
-  let _end_pos_of_item3 = _args[1].2
+  let _start_pos_of_item4 = _args[2].1
+  let _end_pos_of_item4 = _args[2].2
   guard _args[3].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[5].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -1536,7 +1536,7 @@ fn yy_action_26(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -2398,7 +2398,7 @@ fn yy_action_50(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -2421,8 +2421,8 @@ fn yy_action_51(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
   let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_2_result = yy_action_40(_last_pos, _args[0:2])
   guard _args[3].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[2].1
-  let _end_pos_of_item3 = _args[2].2
+  let _start_pos_of_item4 = _args[3].1
+  let _end_pos_of_item4 = _args[3].2
   guard _args[4].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[6].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -2431,7 +2431,7 @@ fn yy_action_51(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -3434,7 +3434,7 @@ fn yy_action_78(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -3457,8 +3457,8 @@ fn yy_action_79(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
   let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   let _sub_action_2_result = yy_action_10(_args[0].2, _args[1:2])
   guard _args[3].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[2].1
-  let _end_pos_of_item3 = _args[2].2
+  let _start_pos_of_item4 = _args[3].1
+  let _end_pos_of_item4 = _args[3].2
   guard _args[4].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[6].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -3467,7 +3467,7 @@ fn yy_action_79(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -4329,7 +4329,7 @@ fn yy_action_102(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -4352,8 +4352,8 @@ fn yy_action_103(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   let _sub_action_2_result = yy_action_40(_args[0].2, _args[1:3])
   guard _args[4].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[3].1
-  let _end_pos_of_item3 = _args[3].2
+  let _start_pos_of_item4 = _args[4].1
+  let _end_pos_of_item4 = _args[4].2
   guard _args[5].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[7].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -4362,7 +4362,7 @@ fn yy_action_103(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -5275,7 +5275,7 @@ fn yy_action_128(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -5298,8 +5298,8 @@ fn yy_action_129(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_121(_args[0].2, _args[1:2])
   let _sub_action_2_result = yy_action_10(_args[1].2, _args[2:3])
   guard _args[4].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[3].1
-  let _end_pos_of_item3 = _args[3].2
+  let _start_pos_of_item4 = _args[4].1
+  let _end_pos_of_item4 = _args[4].2
   guard _args[5].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[7].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -5308,7 +5308,7 @@ fn yy_action_129(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -5709,7 +5709,7 @@ fn yy_action_142(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -5732,8 +5732,8 @@ fn yy_action_143(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_121(_args[0].2, _args[1:2])
   let _sub_action_2_result = yy_action_40(_args[1].2, _args[2:4])
   guard _args[5].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[4].1
-  let _end_pos_of_item3 = _args[4].2
+  let _start_pos_of_item4 = _args[5].1
+  let _end_pos_of_item4 = _args[5].2
   guard _args[6].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[8].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -5742,7 +5742,7 @@ fn yy_action_143(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -6037,7 +6037,7 @@ fn yy_action_154(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -6060,8 +6060,8 @@ fn yy_action_155(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_121(_args[0].2, _args[1:2])
   let _sub_action_2_result = yy_action_4(_args[1].2, _args[2:2])
   guard _args[3].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[2].1
-  let _end_pos_of_item3 = _args[2].2
+  let _start_pos_of_item4 = _args[3].1
+  let _end_pos_of_item4 = _args[3].2
   guard _args[4].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[6].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -6070,7 +6070,7 @@ fn yy_action_155(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -6420,7 +6420,7 @@ fn yy_action_167(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -6443,8 +6443,8 @@ fn yy_action_168(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   let _sub_action_2_result = yy_action_4(_args[0].2, _args[1:1])
   guard _args[2].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[1].1
-  let _end_pos_of_item3 = _args[1].2
+  let _start_pos_of_item4 = _args[2].1
+  let _end_pos_of_item4 = _args[2].2
   guard _args[3].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[5].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -6453,7 +6453,7 @@ fn yy_action_168(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -7401,7 +7401,7 @@ fn yy_action_193(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -7424,8 +7424,8 @@ fn yy_action_194(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_121(_last_pos, _args[0:1])
   let _sub_action_2_result = yy_action_10(_args[0].2, _args[1:2])
   guard _args[3].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[2].1
-  let _end_pos_of_item3 = _args[2].2
+  let _start_pos_of_item4 = _args[3].1
+  let _end_pos_of_item4 = _args[3].2
   guard _args[4].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[6].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -7434,7 +7434,7 @@ fn yy_action_194(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -7835,7 +7835,7 @@ fn yy_action_207(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -7858,8 +7858,8 @@ fn yy_action_208(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_121(_last_pos, _args[0:1])
   let _sub_action_2_result = yy_action_40(_args[0].2, _args[1:3])
   guard _args[4].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[3].1
-  let _end_pos_of_item3 = _args[3].2
+  let _start_pos_of_item4 = _args[4].1
+  let _end_pos_of_item4 = _args[4].2
   guard _args[5].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[7].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -7868,7 +7868,7 @@ fn yy_action_208(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -8163,7 +8163,7 @@ fn yy_action_219(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -8186,8 +8186,8 @@ fn yy_action_220(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_121(_last_pos, _args[0:1])
   let _sub_action_2_result = yy_action_4(_args[0].2, _args[1:1])
   guard _args[2].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[1].1
-  let _end_pos_of_item3 = _args[1].2
+  let _start_pos_of_item4 = _args[2].1
+  let _end_pos_of_item4 = _args[2].2
   guard _args[3].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[5].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -8196,7 +8196,7 @@ fn yy_action_220(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -9806,7 +9806,7 @@ fn yy_action_290(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 661|    attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+// 662|    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
 // 663|    let supers = match $6 {
 // 664|      None => @list.empty()
 // 665|      Some(supers) => supers
@@ -9829,8 +9829,8 @@ fn yy_action_291(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   let _sub_action_2_result = yy_action_4(_last_pos, _args[0:0])
   guard _args[1].0 is YYObj_String(_dollar5)
-  let _start_pos_of_item3 = _args[0].1
-  let _end_pos_of_item3 = _args[0].2
+  let _start_pos_of_item4 = _args[1].1
+  let _end_pos_of_item4 = _args[1].2
   guard _args[2].0 is YYObj_Option__list_List_TypeVarConstraint__(_dollar6)
   guard _args[4].0 is YYObj_List_TraitMethodDecl_(_dollar8)
   guard _sub_action_2_result is YYObj_Visibility(_dollar3)
@@ -9839,7 +9839,7 @@ fn yy_action_291(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   guard _sub_action_0_result is YYObj_List_Attribute_(_dollar1)
   guard _sub_action_1_result is YYObj_Bool(_dollar2)
   YYObj_Impl({(); 
-    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
+    let name = Binder::{ name: _dollar5, loc: mk_loc((_start_pos_of_item4, _end_pos_of_item4)) }
     let supers = match _dollar6 {
       None => @list.empty()
       Some(supers) => supers
@@ -13679,7 +13679,7 @@ fn yy_action_547(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 // 1084|    "let" pattern opt_annot "=" expr {
 // 1085|    let pat = match $3 {
 // 1086|      None => $2
-// 1087|      Some(ty) => Constraint(pat = $2, ty~, loc = mk_loc($sloc))
+// 1087|      Some(ty) => Constraint(pat = $2, ty~, loc = $2.loc().merge(ty.loc()))
 // 1088|    }
 // 1089|    StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
 // 1090|  }
@@ -13687,13 +13687,13 @@ fn yy_action_548(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_0_result = yy_action_18(_args[1].2, _args[2:2])
   guard _sub_action_0_result is YYObj_Type_(_dollar3)
   guard _args[1].0 is YYObj_Pattern(_dollar2)
+  guard _args[3].0 is YYObj_Expr(_dollar5)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  guard _args[3].0 is YYObj_Expr(_dollar5)
   YYObj_Statement({(); 
     let pat = match _dollar3 {
       None => _dollar2
-      Some(ty) => Constraint(pat = _dollar2, ty~, loc = mk_loc((_symbol_start_pos, _end_pos)))
+      Some(ty) => Constraint(pat = _dollar2, ty~, loc = _dollar2.loc().merge(ty.loc()))
     }
     StmtLet(pat~, expr = _dollar5, loc = mk_loc((_symbol_start_pos, _end_pos)))
   })
@@ -13703,7 +13703,7 @@ fn yy_action_548(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 // 1084|    "let" pattern opt_annot "=" expr {
 // 1085|    let pat = match $3 {
 // 1086|      None => $2
-// 1087|      Some(ty) => Constraint(pat = $2, ty~, loc = mk_loc($sloc))
+// 1087|      Some(ty) => Constraint(pat = $2, ty~, loc = $2.loc().merge(ty.loc()))
 // 1088|    }
 // 1089|    StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
 // 1090|  }
@@ -13711,13 +13711,13 @@ fn yy_action_549(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
   let _sub_action_0_result = yy_action_16(_args[1].2, _args[2:4])
   guard _sub_action_0_result is YYObj_Type_(_dollar3)
   guard _args[1].0 is YYObj_Pattern(_dollar2)
+  guard _args[5].0 is YYObj_Expr(_dollar5)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  guard _args[5].0 is YYObj_Expr(_dollar5)
   YYObj_Statement({(); 
     let pat = match _dollar3 {
       None => _dollar2
-      Some(ty) => Constraint(pat = _dollar2, ty~, loc = mk_loc((_symbol_start_pos, _end_pos)))
+      Some(ty) => Constraint(pat = _dollar2, ty~, loc = _dollar2.loc().merge(ty.loc()))
     }
     StmtLet(pat~, expr = _dollar5, loc = mk_loc((_symbol_start_pos, _end_pos)))
   })
