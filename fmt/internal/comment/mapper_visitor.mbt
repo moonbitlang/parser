@@ -1,4 +1,16 @@
 ///|
+extend Mapper with IterVisitor::{
+  base,
+  visit_Binder,
+  visit_Expr,
+  visit_Impl,
+  visit_Type,
+  visit_TypeName,
+  visit_Visibility,
+  visit_WhereClause,
+}
+
+///|
 impl IterVisitor for Mapper with fn visit_Expr(self, expr) {
   self..attach(Node(expr.loc())).base().visit_Expr(expr)
 }

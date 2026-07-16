@@ -2,6 +2,9 @@
 priv struct RemoveGroup {}
 
 ///|
+extend RemoveGroup with MapVisitor::{visit_Expr, visit_Impl}
+
+///|
 impl MapVisitor for RemoveGroup with fn visit_Expr_Group(
   self,
   expr~,

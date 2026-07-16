@@ -12,6 +12,9 @@ priv struct RecoveredHoleDetector {
 }
 
 ///|
+extend RecoveredHoleDetector with IterVisitor::{visit_Impl}
+
+///|
 impl IterVisitor for RecoveredHoleDetector with fn visit_Expr_Hole(
   self,
   loc~,
