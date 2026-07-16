@@ -1764,7 +1764,9 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       self.parse_constr_pattern()
     LPAREN => {
       let spos = self.peek_spos()
-      let result = self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(state) {
+      let make_pattern = self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(
+        state,
+      ) -> (Location) -> @syntax.Pattern {
         let first = state.parse_pattern()
         match state.peek_token() {
           COMMA => {
@@ -1775,17 +1777,17 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               State::parse_pattern,
             )
             if pats is [] {
-              first
+              fn(_loc) { first }
             } else {
-              Tuple(pats=List([first, ..pats]), loc=state.loc_start_with(spos))
+              fn(loc) { Tuple(pats=List([first, ..pats]), loc~) }
             }
           }
           COLON => {
             state.skip()
             let ty = state.parse_type()
-            Constraint(pat=first, ty~, loc=state.loc_start_with(spos))
+            fn(loc) { Constraint(pat=first, ty~, loc~) }
           }
-          RPAREN => first
+          RPAREN => fn(_loc) { first }
           other => {
             let other_loc = state.peek_location()
             state.report_unexpected(
@@ -1794,16 +1796,11 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               other_loc,
             )
             state.panic() |> ignore
-            first
+            fn(_loc) { first }
           }
         }
       })
-      let loc = self.loc_start_with(spos)
-      match result {
-        Tuple(pats~, ..) => Tuple(pats~, loc~)
-        Constraint(pat~, ty~, ..) => Constraint(pat~, ty~, loc~)
-        _ => result
-      }
+      make_pattern(self.loc_start_with(spos))
     }
     LBRACKET => {
       let spos = self.peek_spos()
