@@ -690,7 +690,8 @@ fn State::parse_top_func(
   is_declare~ : Bool,
 ) -> @syntax.Impl {
   let fun_decl = self.parse_fun_decl(attrs~)
-  let fun_decl = { ..fun_decl, vis, }
+  let fun_decl_loc : Location = { start: spos, end: fun_decl.loc.end }
+  let fun_decl = { ..fun_decl, vis, loc: fun_decl_loc }
   let mut where_clause : @syntax.WhereClause? = None
   let decl_body : @syntax.DeclBody = if is_declare {
     DeclNone
@@ -966,7 +967,8 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       self.expect_token(TK_EXTERN)
       let language = self.expect_string()
       let fun_decl = self.parse_fun_decl(attrs~)
-      let fun_decl = { ..fun_decl, vis, }
+      let fun_decl_loc : Location = { start: spos, end: fun_decl.loc.end }
+      let fun_decl = { ..fun_decl, vis, loc: fun_decl_loc }
       self.expect_token(TK_EQUAL)
       if self.peek_token() is MULTILINE_STRING(_) {
         let xs = []
@@ -1796,7 +1798,12 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
           }
         }
       })
-      result
+      let loc = self.loc_start_with(spos)
+      match result {
+        Tuple(pats~, ..) => Tuple(pats~, loc~)
+        Constraint(pat~, ty~, ..) => Constraint(pat~, ty~, loc~)
+        _ => result
+      }
     }
     LBRACKET => {
       let spos = self.peek_spos()
@@ -3920,7 +3927,7 @@ fn State::parse_prefix_expr(
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  let spos = self.peek_spos()
+  let spos = self.peek_spos_with_parsed(parsed~)
   match self.peek_token() {
     PLUS if parsed is None => {
       self.expect_token(TK_PLUS)
@@ -3934,7 +3941,7 @@ fn State::parse_prefix_expr(
       let loc = self.loc_start_with(spos)
       @syntax.make_uminus(loc~, "-", expr)
     }
-    EXCLAMATION => {
+    EXCLAMATION if parsed is None => {
       self.expect_token(TK_EXCLAMATION)
       let expr = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
@@ -3983,7 +3990,7 @@ fn State::parse_prefix_expr(
             let index = self.surround(left=TK_LBRACKET, right=TK_RBRACKET, _ => {
               parse_index()
             })
-            let loc = self.loc_start_with(index_spos)
+            let loc = self.loc_start_with(spos)
             let index_loc = self.loc_start_with(index_spos)
             let array_get_expr : @syntax.Expr = match index {
               ArrayIndex(index) => ArrayGet(loc~, array=left, index~)
@@ -4091,7 +4098,7 @@ fn State::parse_constr_expr(
   let constr : @syntax.Constructor = {
     extra_info,
     name: { name: constr_name, loc: name_loc },
-    loc: name_loc,
+    loc,
   }
   // constructor with arguments is handled by [Apply],
   // and desugared during ast linting
@@ -4540,6 +4547,7 @@ fn State::parse_simple_expr(
       self.with_syncs([TK_LPAREN, TK_LBRACE], self => self.expect_token(TK_FN)) // fn
       let func = self.parse_func(is_async~)
       let loc = self.loc_start_with(spos)
+      let func = { ..func, loc, }
       Function(func~, loc~)
     }
     FN => {
@@ -4547,6 +4555,7 @@ fn State::parse_simple_expr(
       self.expect_token(TK_FN)
       let func = self.parse_func(is_async=None)
       let loc = self.loc_start_with(spos)
+      let func = { ..func, loc, }
       Function(func~, loc~)
     }
     LPAREN => self.parse_tuple_or_constraint()
@@ -4627,7 +4636,17 @@ fn State::parse_coloncolon_expr(self : Self) -> @syntax.Expr {
         extra_info=TypeNameWithConstrPackage(type_name~, pkg~),
       )
     }
-    LBRACE => self.parse_record_expr(type_name=Some(type_name))
+    LBRACE => {
+      let expr = self.parse_record_expr(type_name=Some(type_name))
+      let loc = self.loc_start_with(spos)
+      match expr {
+        Record(type_name~, fields~, trailing~, ..) =>
+          Record(type_name~, fields~, trailing~, loc~)
+        RecordUpdate(type_name~, record~, fields~, ..) =>
+          RecordUpdate(type_name~, record~, fields~, loc~)
+        _ => expr
+      }
+    }
     other => {
       self.report_failed_to_parse(
         other,
@@ -5100,7 +5119,9 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
         None
       }
       self.with_syncs([TK_LPAREN, TK_LBRACE], self => self.expect_token(TK_FN)) // fn
-      self.parse_func(is_async~)
+      let func = self.parse_func(is_async~)
+      let loc = self.loc_start_with(spos)
+      { ..func, loc, }
     }
   }
 }
@@ -5157,6 +5178,7 @@ fn State::parse_stmt(self : Self) -> Statement {
       let binder = self.parse_binder(context="")
       let func = self.parse_func(is_async~)
       let loc = self.loc_start_with(spos)
+      let func = { ..func, loc, }
       StmtFunc(binder~, func~, loc~)
     }
     FN if self.peek_token(nth=1) is LIDENT(_) ||
@@ -5166,6 +5188,7 @@ fn State::parse_stmt(self : Self) -> Statement {
       let binder = self.parse_binder(context="")
       let func = self.parse_func(is_async=None)
       let loc = self.loc_start_with(spos)
+      let func = { ..func, loc, }
       StmtFunc(binder~, func~, loc~)
     }
     GUARD => {

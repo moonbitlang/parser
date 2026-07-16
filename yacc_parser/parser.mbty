@@ -659,7 +659,7 @@ structure_item -> Impl
     )
   }
   | attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
-    let name = Binder::{ name: $5, loc: mk_loc($loc($4)) }
+    let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
     let supers = match $6 {
       None => @list.empty()
       Some(supers) => supers
@@ -1084,7 +1084,7 @@ statement -> Statement
   : "let" pattern opt_annot "=" expr {
     let pat = match $3 {
       None => $2
-      Some(ty) => Constraint(pat = $2, ty~, loc = mk_loc($sloc))
+      Some(ty) => Constraint(pat = $2, ty~, loc = $2.loc().merge(ty.loc()))
     }
     StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
   }
