@@ -650,9 +650,10 @@ fn[A] State::series1_with_follow(
           }
         } else if invalid_delims.contains(self.peek_kind()) {
           // error recovery: consume the wrong delimiter and element
+          let tok = self.peek_token()
           self.report_error({
             loc: self.peek_location(),
-            msg: "Expecting a newline or `;` here, but encountered \{delim.to_expect_string()}.",
+            msg: "Expecting a newline or `;` here, but encountered \{tok.to_expect_string()}.",
           })
           self.skip()
           // if the next token is not in the follow set, consume an element
@@ -727,10 +728,11 @@ fn[A] State::series_with_follow(
                 continue
               }
               Normal if invalid_delims.contains(self.peek_kind()) => {
+                let tok = self.peek_token()
                 self
                 ..report_error({
                   loc: self.peek_location(),
-                  msg: "Expecting a newline or `;` here, but encountered \{delim.to_expect_string()}.",
+                  msg: "Expecting a newline or `;` here, but encountered \{tok.to_expect_string()}.",
                 })
                 .skip()
                 continue
