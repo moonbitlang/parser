@@ -12,7 +12,7 @@ pub fn tokens_from_string(
   is_interpolation? : Bool = false,
   enable_metavar? : Bool = false,
   comment~ : Bool,
-  str : String,
+  str : StringView,
 ) -> LexResult {
   let arr = Array::new(capacity=100)
   let (start_lnum, start_bol, start_cnum) = (
@@ -52,7 +52,7 @@ pub fn tokens_from_string_with_utf16_location(
   is_interpolation? : Bool = false,
   enable_metavar? : Bool = false,
   comment~ : Bool,
-  str : String,
+  str : StringView,
 ) -> LexResult {
   use_utf16_location.val = true
   let result = tokens_from_string(
