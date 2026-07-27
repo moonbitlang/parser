@@ -33,9 +33,9 @@ fn count_nodes(
 ///|
 fn first_node(
   node : @untyped_cst.CstNode,
-  pred : (@untyped_cst.NodeKind) -> Bool,
+  pred : (@untyped_cst.CstNode) -> Bool,
 ) -> @untyped_cst.CstNode? {
-  if pred(node.kind) {
+  if pred(node) {
     return Some(node)
   }
   for i in 0..<node.children.length() {
@@ -54,59 +54,44 @@ fn first_node(
 
 ///|
 fn is_comment(kind : @untyped_cst.NodeKind) -> Bool {
-  match kind {
-    @untyped_cst.Token(@tokens.COMMENT(_)) => true
-    _ => false
-  }
+  kind is @untyped_cst.Comment_Content
 }
 
 ///|
-fn is_newline(kind : @untyped_cst.NodeKind) -> Bool {
-  match kind {
-    @untyped_cst.Token(@tokens.NEWLINE) => true
-    _ => false
-  }
-}
-
-///|
-fn is_asi_semi(kind : @untyped_cst.NodeKind) -> Bool {
-  match kind {
-    @untyped_cst.Token(@tokens.SEMI(false)) => true
-    _ => false
-  }
-}
-
-///|
-fn is_any_semi(kind : @untyped_cst.NodeKind) -> Bool {
-  match kind {
-    @untyped_cst.Token(@tokens.SEMI(_)) => true
-    _ => false
-  }
-}
-
-///|
-fn is_eof(kind : @untyped_cst.NodeKind) -> Bool {
-  match kind {
-    @untyped_cst.Token(@tokens.EOF) => true
-    _ => false
-  }
-}
-
-///|
-fn is_missing_eof(kind : @untyped_cst.NodeKind) -> Bool {
-  match kind {
-    @untyped_cst.Missing(@tokens.TokenKind::TK_EOF) => true
-    _ => false
-  }
-}
-
-///|
-fn is_lident(name : String) -> (@untyped_cst.NodeKind) -> Bool {
-  fn(kind) {
-    match kind {
-      @untyped_cst.Token(@tokens.LIDENT(id)) => id == name
-      _ => false
+fn state_leaf_payload(node : @untyped_cst.CstNode) -> @untyped_cst.NodePayload? {
+  for entry in node.children {
+    let (label, child) = entry
+    if label is Some("payload") {
+      match child.kind {
+        @untyped_cst.Leaf(payload) => return Some(payload)
+        _ => ()
+      }
     }
+  }
+  None
+}
+
+///|
+fn is_asi_semi(node : @untyped_cst.CstNode) -> Bool {
+  if node.kind is @untyped_cst.Syntax_Separator {
+    state_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(false))
+  } else {
+    false
+  }
+}
+
+///|
+fn is_any_semi(node : @untyped_cst.CstNode) -> Bool {
+  node.kind is @untyped_cst.Syntax_Separator &&
+  state_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
+}
+
+///|
+fn is_lident(name : String) -> (@untyped_cst.CstNode) -> Bool {
+  fn(node) {
+    node.kind is @untyped_cst.Syntax_Identifier &&
+    state_leaf_payload(node) is Some(@untyped_cst.NodePayload::String(id)) &&
+    id == name
   }
 }
 
@@ -118,7 +103,10 @@ test "comments are retained and newline tokens are skipped" {
   @test.assert_eq(result.diagnostics_view().length(), 0)
   @test.assert_eq(root.text(source), source[:])
   @test.assert_eq(any_node(root, is_comment), true)
-  @test.assert_eq(any_node(root, is_newline), false)
+  @test.assert_eq(
+    first_node(root, fn(node) { node.text(source) == "\n"[:] }) is None,
+    true,
+  )
 }
 
 ///|

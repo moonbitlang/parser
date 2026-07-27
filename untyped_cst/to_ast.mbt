@@ -13,6 +13,13 @@ fn conversion_report(root : CstNode, msg : String) -> Report {
 }
 
 ///|
+/// Lowers a successful structure parse result to the syntax AST.
+///
+/// When this result was produced by `parse_structure` and contains no parse
+/// diagnostics, the returned implementation list has its collected docstrings
+/// attached and the returned diagnostics are empty. Otherwise, this returns an
+/// empty implementation list together with the existing parse diagnostics or
+/// a diagnostic reporting that the root has the wrong kind.
 pub fn ParseResult::to_impls(
   self : ParseResult,
 ) -> (@syntax.Impls, Array[Report]) {
@@ -21,7 +28,7 @@ pub fn ParseResult::to_impls(
     return (@list.empty(), diagnostics)
   }
   match self.root().kind {
-    SourceFile => ()
+    Impls => ()
     _ =>
       return (
         @list.empty(),
@@ -34,6 +41,12 @@ pub fn ParseResult::to_impls(
 }
 
 ///|
+/// Lowers a successful expression parse result to the syntax AST.
+///
+/// When this result was produced by `parse_expression` and contains no parse
+/// diagnostics, this returns `Some(expr)` and an empty diagnostics array.
+/// Otherwise, it returns `None` together with the existing parse diagnostics or
+/// a diagnostic reporting that the root has the wrong kind.
 pub fn ParseResult::to_expr(
   self : ParseResult,
 ) -> (@syntax.Expr?, Array[Report]) {
@@ -42,7 +55,7 @@ pub fn ParseResult::to_expr(
     return (None, diagnostics)
   }
   match self.root().kind {
-    ExpressionFragment => ()
+    Expression => ()
     _ =>
       return (
         None,

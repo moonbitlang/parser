@@ -16,15 +16,8 @@ fn recovery_any_node(
 }
 
 ///|
-fn recovery_is_missing(
-  kind : @tokens.TokenKind,
-) -> (@untyped_cst.CstNode) -> Bool {
-  fn(node) {
-    match node.kind {
-      @untyped_cst.Missing(found) => found == kind
-      _ => false
-    }
-  }
+fn recovery_is_missing() -> (@untyped_cst.CstNode) -> Bool {
+  fn(node) { node.kind is @untyped_cst.Missing }
 }
 
 ///|
@@ -36,22 +29,40 @@ fn recovery_is_error(node : @untyped_cst.CstNode) -> Bool {
 }
 
 ///|
-fn recovery_is_lident(name : String) -> (@untyped_cst.CstNode) -> Bool {
-  fn(node) {
-    match node.kind {
-      @untyped_cst.Token(@tokens.LIDENT(found)) => found == name
-      _ => false
+fn recovery_leaf_payload(
+  node : @untyped_cst.CstNode,
+) -> @untyped_cst.NodePayload? {
+  for entry in node.children {
+    let (label, child) = entry
+    if label is Some("payload") {
+      match child.kind {
+        @untyped_cst.Leaf(payload) => return Some(payload)
+        _ => ()
+      }
     }
   }
+  None
 }
 
 ///|
-fn recovery_is_int(value : String) -> (@untyped_cst.CstNode) -> Bool {
+fn recovery_is_syntax_string(value : String) -> (@untyped_cst.CstNode) -> Bool {
   fn(node) {
-    match node.kind {
-      @untyped_cst.Token(@tokens.INT(found)) => found == value
-      _ => false
-    }
+    node.kind
+    is (@untyped_cst.Syntax_Keyword
+    | @untyped_cst.Syntax_Delimiter
+    | @untyped_cst.Syntax_Separator
+    | @untyped_cst.Syntax_Operator
+    | @untyped_cst.Syntax_Identifier
+    | @untyped_cst.Syntax_Label
+    | @untyped_cst.Syntax_Accessor
+    | @untyped_cst.Syntax_Literal
+    | @untyped_cst.Syntax_Interpolation
+    | @untyped_cst.Syntax_Attribute
+    | @untyped_cst.Syntax_Comment
+    | @untyped_cst.Syntax_Eof
+    | @untyped_cst.Syntax_Unexpected) &&
+    recovery_leaf_payload(node) is Some(@untyped_cst.NodePayload::String(found)) &&
+    found == value
   }
 }
 
@@ -61,13 +72,7 @@ test "missing function parameter close recovers" {
   assert_structure_acceptance("missing function parameter close", source, false)
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
-  @test.assert_eq(
-    recovery_any_node(
-      result.root(),
-      recovery_is_missing(@tokens.TokenKind::TK_RPAREN),
-    ),
-    true,
-  )
+  @test.assert_eq(recovery_any_node(result.root(), recovery_is_missing()), true)
 }
 
 ///|
@@ -77,7 +82,7 @@ test "bad leading parameter separator keeps following parameter" {
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(
-    recovery_any_node(result.root(), recovery_is_lident("x")),
+    recovery_any_node(result.root(), recovery_is_syntax_string("x")),
     true,
   )
 }
@@ -88,13 +93,7 @@ test "missing let pattern is represented" {
   assert_structure_acceptance("missing let pattern", source, false)
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
-  @test.assert_eq(
-    recovery_any_node(
-      result.root(),
-      recovery_is_missing(@tokens.TokenKind::TK_LIDENT),
-    ),
-    true,
-  )
+  @test.assert_eq(recovery_any_node(result.root(), recovery_is_missing()), true)
 }
 
 ///|
@@ -104,6 +103,12 @@ test "invalid question token in block becomes error node" {
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(recovery_any_node(result.root(), recovery_is_error), true)
+  @test.assert_eq(
+    recovery_any_node(result.root(), fn(node) {
+      node.kind is @untyped_cst.Syntax_Unexpected
+    }),
+    true,
+  )
 }
 
 ///|
@@ -115,7 +120,10 @@ test "statement recovery continues after semicolon" {
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(recovery_any_node(result.root(), recovery_is_error), true)
-  @test.assert_eq(recovery_any_node(result.root(), recovery_is_int("1")), true)
+  @test.assert_eq(
+    recovery_any_node(result.root(), recovery_is_syntax_string("1")),
+    true,
+  )
 }
 
 ///|
@@ -132,7 +140,7 @@ test "top-level recovery keeps following declaration" {
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(
-    recovery_any_node(result.root(), recovery_is_lident("y")),
+    recovery_any_node(result.root(), recovery_is_syntax_string("y")),
     true,
   )
 }
@@ -146,7 +154,7 @@ test "function literal does not split top-level declaration" {
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    recovery_any_node(result.root(), recovery_is_lident("y")),
+    recovery_any_node(result.root(), recovery_is_syntax_string("y")),
     true,
   )
 }
@@ -156,12 +164,19 @@ test "declare prefix survives recovery" {
   let source = "declare fn f()\n?;\ndeclare type T"
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(
-    recovery_any_node(result.root(), recovery_is_lident("f")),
+    recovery_any_node(result.root(), recovery_is_syntax_string("f")),
     true,
   )
   @test.assert_eq(
-    recovery_any_node(result.root(), recovery_is_lident("T")),
-    false,
+    recovery_any_node(result.root(), recovery_is_syntax_string("T")),
+    true,
+  )
+  @test.assert_eq(
+    recovery_any_node(result.root(), fn(node) {
+      node.kind is @untyped_cst.Syntax_Unexpected &&
+      node.text(source) == "\n"[:]
+    }),
+    true,
   )
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
 }

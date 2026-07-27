@@ -23,17 +23,48 @@ pub struct CstNode {
   source_span : (Int, Int)
   children : ReadOnlyArray[(String?, CstNode)]
 } derive(@debug.Debug)
-pub fn CstNode::text(Self, String) -> StringView
 
 pub enum NodeKind {
-  SourceFile
-  ExpressionFragment
-  Token(@tokens.Token)
-  Missing(@tokens.TokenKind)
+  Impls
+  Expression
+  Missing
   Error
+  Leaf(NodePayload)
+  Syntax_Keyword
+  Syntax_Delimiter
+  Syntax_Separator
+  Syntax_Operator
+  Syntax_Identifier
+  Syntax_Label
+  Syntax_Accessor
+  Syntax_Literal
+  Syntax_Interpolation
+  Syntax_Attribute
+  Syntax_Comment
+  Syntax_Eof
+  Syntax_Unexpected
   Impl_Using
-  Expr_Identifier
-  Expr_Literal
+  Impl_Function
+  Impl_Let
+  Impl_Const
+  Impl_TypeAbstract
+  Impl_TypeAlias
+  Impl_RecordStruct
+  Impl_TupleStruct
+  Impl_EnumVariant
+  Impl_ExtensibleEnum
+  Impl_ExtendEnum
+  Impl_Suberror
+  Impl_SuberrorEnum
+  Impl_EnumView
+  Impl_Trait
+  Impl_ImplMethod
+  Impl_ImplRelation
+  Impl_Test
+  Expr_Ident
+  Expr_Constant
+  Expr_Interp
+  Expr_BytesInterp
   Expr_Block
   Expr_Apply
   Expr_DotApply
@@ -41,16 +72,25 @@ pub enum NodeKind {
   Expr_ArrayGet
   Expr_ArrayGetSlice
   Expr_Array
+  Expr_ArraySpread
+  Expr_ArraySet
+  Expr_ArrayAugmentedSet
   Expr_ListComprehension
+  Expr_Unit
+  Expr_Group
   Expr_Tuple
+  Expr_Sequence
   Expr_Constraint
   Expr_Record
+  Expr_RecordUpdate
   Expr_Map
   Expr_Infix
-  Expr_Prefix
-  Expr_Range
+  Expr_Pipe
+  Expr_RevPipe
+  Expr_Implies
+  Expr_Unary
   Expr_Assign
-  Expr_AugmentedAssign
+  Expr_Mutate
   Expr_If
   Expr_Match
   Expr_Try
@@ -68,7 +108,7 @@ pub enum NodeKind {
   Expr_TemplateWriting
   Expr_Let
   Expr_LetMut
-  Expr_LetRec
+  Expr_LetAnd
   Expr_LetFn
   Expr_Return
   Expr_Raise
@@ -78,34 +118,55 @@ pub enum NodeKind {
   Expr_Guard
   Expr_Quantifier
   Expr_Hole
-  Expr_Group
-  Expr_Constructor
+  Expr_Constr
   Expr_MultilineString
   Expr_MissingExpr
-  Pattern_Binder
-  Pattern_Underscore
-  Pattern_Literal
+  Expr_ProofAssert
+  Expr_ProofLet
+  Pattern_Var
+  Pattern_Any
+  Pattern_Constant
   Pattern_Tuple
   Pattern_Array
   Pattern_Rest
   Pattern_Record
   Pattern_Map
-  Pattern_Constructor
-  Pattern_SpecialConstructor
+  Pattern_Constr
+  Pattern_SpecialConstr
   Pattern_Or
   Pattern_Alias
   Pattern_Range
   Pattern_Constraint
   Pattern_MissingPattern
+  Pattern_Group
+  ArrayPattern_Pattern
+  ArrayPattern_StringSpread
+  ArrayPattern_BytesSpread
+  ArrayPattern_ConstSpread
+  ArrayPatterns_Closed
+  ArrayPatterns_Open
   Type_Name
   Type_Tuple
-  Type_Function
+  Type_Arrow
   Type_Application
   Type_Option
   Type_Object
-  Type_Hole
+  Type_Any
   Type_Group
   Type_MissingType
+  ErrorType_Error
+  ErrorType_Default
+  ErrorType_Noraise
+  ErrorType_Maybe
+  TypeDesc_Abstract
+  TypeDesc_ExtensibleEnum
+  TypeDesc_ErrorNoPayload
+  TypeDesc_ErrorEnumPayload
+  TypeDesc_Variant
+  TypeDesc_ExtendEnum
+  TypeDesc_Record
+  TypeDesc_TupleStruct
+  TypeDesc_Alias
   LexPattern_Literal
   LexPattern_RegexInterp
   LexPattern_Sequence
@@ -119,55 +180,203 @@ pub enum NodeKind {
   RegexPattern_Alias
   Case_MatchCase
   Case_LexCase
+  Case_LexScanCase
   Argument_Positional
   Argument_Labelled
   Argument_LabelledPun
   Argument_LabelledOption
   Argument_LabelledOptionPun
-  Stmt_ProofAssert
-  Stmt_ProofLet
-  Decl_BalancedDecl
-  Decl_Function
-  Decl_Let
-  Decl_Const
-  Decl_Type
-  Decl_Struct
-  Decl_Enum
-  Decl_EnumView
-  Decl_Trait
-  Decl_Impl
-  Decl_Test
-  Clause_Visibility
-  Clause_Parameter
-  Clause_ReturnType
-  Clause_ErrorAnnotation
-  Clause_Where
+  ArrayElement_Regular
+  ArrayElement_Spread
+  Parameter_DiscardPositional
+  Parameter_Positional
+  Parameter_Labelled
+  Parameter_Optional
+  Parameter_QuestionOptional
+  Parameter_TypeDecl
+  Parameter_TypeVar
+  Parameter_ConstructorPositional
+  Parameter_ConstructorLabelled
+  Field_Declaration
+  Field_Definition
+  Field_Pattern
+  Field_MapExpression
+  Field_MapPattern
+  Field_Where
+  Field_RecordSpread
+  Binding_LetRec
+  Binding_For
+  Binding_ForEach
+  Binding_Regex
+  TraitMethod_Declaration
   Name_Identifier
+  Name_Package
+  LongIdent_Ident
+  LongIdent_Dot
+  Name_Binder
+  Name_Label
+  Name_Type
+  Name_Constr
+  Name_ConstrId
+  Name_Var
   Name_Constructor
+  Name_Field
+  Name_AliasTarget
+  Accessor_Label
+  Accessor_Index
+  Accessor_Newtype
+  Name_Test
+  Constant_Bool
+  Constant_Byte
+  Constant_Bytes
+  Constant_Char
+  Constant_Int
+  Constant_Int64
+  Constant_UInt
+  Constant_UInt64
+  Constant_Float
+  Constant_Double
+  Constant_String
+  Constant_Regex
+  Constant_BigInt
+  Operator_Infix
+  Operator_Augmented
+  Operator_UnaryPlus
+  Operator_UnaryMinus
+  Operator_UnaryNot
+  ListComprehensionKind_For
+  ListComprehensionKind_ForEach
+  DotDotBinder_None
+  DotDotBinder_Underscore
+  DotDotBinder_Binder
+  DotDotBinder_BinderAs
+  ConstructorExtraInfo_None
+  ConstructorExtraInfo_Package
+  ConstructorExtraInfo_TypeName
+  ConstructorExtraInfo_TypeNameWithConstrPackage
+  MultilineStringElement_String
+  MultilineStringElement_Interp
+  LexLiteral_String
+  LexLiteral_Regex
+  LexTopPattern_Pattern
+  LexTopPattern_Binder
+  LexTopPattern_Wildcard
+  LexScanCasePattern_Pattern
+  LexScanCasePattern_Binder
+  LexScanCasePattern_Wildcard
+  ConstructorTag_Value
+  Language_Value
+  Stub_ModuleName
+  Stub_FunctionName
+  Stub_Code
+  Aggregate_Span
+  DeclBody_Expr
+  DeclBody_Import
+  DeclBody_EmbeddedString
+  DeclBody_EmbeddedMultilineString
+  DeclBody_None
+  Visibility_Default
+  Visibility_Pub
+  Visibility_Priv
+  RangeKind_Inclusive
+  RangeKind_Exclusive
+  HoleKind_Incomplete
+  HoleKind_Todo
+  FnKind_Lambda
+  FnKind_Arrow
+  Group_Brace
+  Group_Paren
+  TrailingMark_Comma
+  TrailingMark_Semi
+  TrailingMark_None
+  TryOperatorKind_Question
+  TryOperatorKind_Exclamation
+  QuantifierKind_Forall
+  QuantifierKind_Exists
+  UsingKind_Value
+  UsingKind_Type
+  UsingKind_Trait
+  Openness_Open
+  Openness_Closed
+  ArrayKind_Array
+  ArrayKind_Iter
+  Flag_Async
+  Flag_Declare
+  Flag_Mutable
+  Flag_Pun
+  Flag_ReturnSelf
+  Flag_Conditional
+  Flag_HasTry
+  Flag_MatchAbsent
+  Flag_Faked
+  Flag_Augmented
+  Flag_Object
+  Attribute_Simple
+  Attribute_Qualified
+  Attribute_Name
+  Attribute_Qualifier
+  Attribute_RawPayload
+  Comment_InlineTrailing
+  Comment_Ownline
+  Comment_Content
+  Comment_LeadingBlankLine
+  Comment_TrailingBlankLine
+  Comment_ConsumedByDocstring
+  InterpSegment_Literal
+  InterpSegment_Source
+  Clause_ReturnType
+  Clause_Where
+  Clause_ConstructorDecl
+  Clause_UsingItem
+  Clause_DerivingDirective
   List_ArgumentList
   List_ParameterList
-  List_FieldList
-  List_StatementList
+  List_TraitMethodParameterList
+  List_TypeDeclParameterList
+  List_TypeVarBinderList
+  List_ConstructorParameterList
+  List_TupleStructTypeList
+  List_StructFieldList
+  List_TraitMethodList
+  List_RecordFieldList
+  List_MapFieldList
+  List_BlockStatementList
+  List_ContinueArgumentList
+  List_TupleElementList
+  List_TupleTypeList
+  List_ArrayElementList
   List_TypeArgumentList
-  List_PatternList
+  List_TuplePatternList
+  List_ConstructorPatternArgumentList
+  List_LexTopPatternList
+  List_ArrayPatternList
+  List_RecordPatternFieldList
+  List_MapPatternFieldList
+  List_WhereFieldList
+  List_ObjectFieldList
   List_ConstructorList
-  InterpSegment_InterpLiteralSegment
-  InterpSegment_InterpSourceSegment
-} derive(@debug.Debug)
+  List_UsingItemList
+  List_DerivingList
+  List_MatchCaseList
+  List_LexCaseList
+  List_LexScanCaseList
+  List_RegexBindingList
+  List_LexPatternList
+  List_ForBindingList
+  List_ForEachBindingList
+} derive(Eq, @debug.Debug)
 pub fn NodeKind::is_argument(Self) -> Bool
-pub fn NodeKind::is_case(Self) -> Bool
-pub fn NodeKind::is_clause(Self) -> Bool
-pub fn NodeKind::is_decl(Self) -> Bool
+pub fn NodeKind::is_constant(Self) -> Bool
 pub fn NodeKind::is_expr(Self) -> Bool
 pub fn NodeKind::is_impl(Self) -> Bool
-pub fn NodeKind::is_interp_segment(Self) -> Bool
-pub fn NodeKind::is_lex_pattern(Self) -> Bool
-pub fn NodeKind::is_list(Self) -> Bool
-pub fn NodeKind::is_name(Self) -> Bool
 pub fn NodeKind::is_pattern(Self) -> Bool
-pub fn NodeKind::is_regex_pattern(Self) -> Bool
-pub fn NodeKind::is_stmt(Self) -> Bool
 pub fn NodeKind::is_type(Self) -> Bool
+
+pub enum NodePayload {
+  String(String)
+  Int(Int)
+  Bool(Bool)
+} derive(Eq, @debug.Debug)
 
 pub struct ParseResult {
   root : CstNode
