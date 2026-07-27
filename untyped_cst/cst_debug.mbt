@@ -20,26 +20,9 @@ fn label_to_test_json(label : String?) -> Json {
 ///|
 fn NodeKind::test_name(self : NodeKind) -> String {
   match self {
-    SourceFile => "SourceFile"
-    ExpressionFragment => "ExpressionFragment"
-    Token(_) => "Token"
-    Missing(_) => "Missing"
-    Error => "Error"
-    kind if kind.is_impl() => "Impl"
-    kind if kind.is_expr() => "Expr"
-    kind if kind.is_pattern() => "Pattern"
-    kind if kind.is_type() => "Type"
-    kind if kind.is_lex_pattern() => "LexPattern"
-    kind if kind.is_regex_pattern() => "RegexPattern"
-    kind if kind.is_case() => "Case"
-    kind if kind.is_argument() => "Argument"
-    kind if kind.is_stmt() => "Stmt"
-    kind if kind.is_decl() => "Decl"
-    kind if kind.is_clause() => "Clause"
-    kind if kind.is_name() => "Name"
-    kind if kind.is_list() => "List"
-    kind if kind.is_interp_segment() => "InterpSegment"
-    _ => "Error"
+    Missing => "Missing"
+    Leaf(_) => "Leaf"
+    _ => "\{Repr(self)}"
   }
 }
 
@@ -57,18 +40,10 @@ fn CstNode::to_test_json(self : CstNode, source? : String = "") -> Json {
     )
   }
   match self.kind {
-    Missing(expected) =>
+    Leaf(payload) =>
       Json::object({
         "kind": Json::string(self.kind.test_name()),
-        "expected": Json::string(expected.to_string()),
-        "loc": loc_to_test_json(self.loc),
-        "source_span": span_to_test_json(self.source_span),
-        "children": Json::array(children),
-      })
-    Token(token) =>
-      Json::object({
-        "kind": Json::string(self.kind.test_name()),
-        "token": token.to_json(),
+        "payload": Json::string("\{Repr(payload)}"),
         "loc": loc_to_test_json(self.loc),
         "source_span": span_to_test_json(self.source_span),
         "children": Json::array(children),

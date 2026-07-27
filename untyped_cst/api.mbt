@@ -30,7 +30,7 @@ fn parse_source(
 ///|
 /// Parses a MoonBit source file into a concrete syntax tree.
 ///
-/// The returned root node has kind `SourceFile`. Its source spans use UTF-16
+/// The returned root node has kind `Impls`. Its source spans use UTF-16
 /// code-unit offsets suitable for slicing the original `source` string.
 pub fn parse_structure(source : String, name? : String = "") -> ParseResult {
   parse_source(source, name, parse_source_file)
@@ -39,7 +39,7 @@ pub fn parse_structure(source : String, name? : String = "") -> ParseResult {
 ///|
 /// Parses a MoonBit expression into a concrete syntax tree.
 ///
-/// The returned root node has kind `ExpressionFragment`. Its source spans use
+/// The returned root node has kind `Expression`. Its source spans use
 /// UTF-16 code-unit offsets suitable for slicing the original `source` string.
 pub fn parse_expression(source : String, name? : String = "") -> ParseResult {
   parse_source(source, name, parse_expr_fragment)

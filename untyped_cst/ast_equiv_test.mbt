@@ -71,11 +71,18 @@ fn assert_ast_equiv(
   if conversion_reports.length() != 0 {
     fail("conversion diagnostics for \{label}: \{conversion_reports.length()}")
   }
-  if impls_json(cst_impls) != impls_json(hand_impls) {
-    fail("handrolled AST mismatch for \{label}")
+  let cst_json = impls_json(cst_impls)
+  let hand_json = impls_json(hand_impls)
+  if cst_json != hand_json {
+    fail(
+      "handrolled AST mismatch for \{label}\nCST:\n\{cst_json.stringify(indent=2)}\nHandrolled:\n\{hand_json.stringify(indent=2)}",
+    )
   }
-  if impls_json(cst_impls) != impls_json(yacc_impls) {
-    fail("yacc AST mismatch for \{label}")
+  let yacc_json = impls_json(yacc_impls)
+  if cst_json != yacc_json {
+    fail(
+      "yacc AST mismatch for \{label}\nCST:\n\{cst_json.stringify(indent=2)}\nMoonYacc:\n\{yacc_json.stringify(indent=2)}",
+    )
   }
 }
 
@@ -99,8 +106,12 @@ fn assert_handrolled_cst_ast_equiv(source : String) -> Unit raise {
   if conversion_reports.length() != 0 {
     fail("conversion diagnostics for focused handrolled equivalence case")
   }
-  if impls_json(cst_impls) != impls_json(hand_impls) {
-    fail("handrolled AST mismatch for focused CST equivalence case")
+  let cst_json = impls_json(cst_impls)
+  let hand_json = impls_json(hand_impls)
+  if cst_json != hand_json {
+    fail(
+      "handrolled AST mismatch\nCST:\n\{cst_json.stringify(indent=2)}\nHandrolled:\n\{hand_json.stringify(indent=2)}",
+    )
   }
 }
 
@@ -320,6 +331,24 @@ test "owner, labelled binder, and negative pattern locations match handrolled" {
   ]
   for source in cases {
     assert_handrolled_cst_ast_equiv(source)
+  }
+}
+
+///|
+test "location metadata lowering remains handrolled-equivalent" {
+  assert_handrolled_cst_ast_equiv("async fn &T::f() {}")
+  let expressions = [
+    "value |> x => { x }", "try f() catch { _ => 0 } noraise { value => value }",
+    "(f)() catch { _ => 0 }", "array[1:2]", "[ for i = 0; i < 1; i = i + 1 => i ]",
+    "f(label~, optional?)", "#| one\n#| two", "label~: while true {}", "lexmatch source { (\"a\", (\"b\" \"c\")) => 1 }",
+  ]
+  for source in expressions {
+    let lex = @lexer.tokens_from_string(source, comment=true)
+    let (_, reports) = @handrolled_parser.parse_expr(lex.tokens)
+    if !reports.is_empty() {
+      fail("handrolled diagnostics for location metadata case: \{source}")
+    }
+    assert_expr_ast_equiv(source)
   }
 }
 
@@ -660,8 +689,12 @@ fn assert_handrolled_cst_structure_equiv(
     if !conversion_reports.is_empty() {
       fail("conversion diagnostics for \{label}")
     }
-    if impls_json(hand_impls) != impls_json(cst_impls) {
-      fail("AST mismatch for \{label}")
+    let hand_ast = impls_json(hand_impls)
+    let cst_ast = impls_json(cst_impls)
+    if hand_ast != cst_ast {
+      fail(
+        "AST mismatch for \{label}\nCST:\n\{cst_ast.stringify(indent=2)}\nHandrolled:\n\{hand_ast.stringify(indent=2)}",
+      )
     }
   }
 }
@@ -763,5 +796,38 @@ test "handrolled/CST equivalence across all parser snapshots" {
     fail(
       "handrolled/CST equivalence failed for \{issues.length()} of \{checked} checked snapshots (handrolled accepted \{hand_accepted}):\n\{details}",
     )
+  }
+}
+
+///|
+test "semantic CST migration regression snapshots" {
+  let snapshots = [
+    "parse_test_uminus.mbt", "pipeline_test_defer.mbt", "pipeline_test_dlist.mbt",
+    "parse_test_postfix_label.mbt", "parse_test_regex_match_expr.mbt", "parse_test_ffi_multiline_stub.mbt",
+    "pipeline_test_labelled_constr.mbt", "pipeline_test_match_multi_arg.mbt", "parse_test_brace_grouped_ident.mbt",
+    "parse_test_extend_soft_keyword.mbt", "parse_test_labelled_while_expr.mbt", "pipeline_test_constr_mut_field.mbt",
+    "pipeline_test_match_using_regex.mbt", "pipeline_test_list_comprehension.mbt",
+    "pipeline_test_foreach_break_label.mbt", "pipeline_test_label_loop_foreach2.mbt",
+    "pipeline_test_label_loop_foreach3.mbt", "parse_test_no_trailing_newline_extern.mbt",
+    "parse_test_lexmatch_pattern_sequence_semicolon_and_regex.mbt", "parse_test_map_pattern.mbt",
+    "parse_test_pattern_tuple.mbt", "parse_test_map_pattern_more_coverage.mbt", "parse_test_array_pattern_dotdot_variants.mbt",
+    "parse_test_brace_pattern_record_kind_unexpected.mbt", "parse_test_brace_pattern_unknown_kind_unexpected.mbt",
+    "pipeline_test_valstruct_in_array.mbt", "parse_test_trait.mbt", "pipeline_test_async_join2.mbt",
+    "pipeline_test_guard.mbt", "pipeline_test_guard_is.mbt", "pipeline_test_empty_json.mbt",
+    "pipeline_test_nested_map.mbt", "pipeline_test_map_pattern.mbt", "pipeline_test_json_pattern.mbt",
+    "pipeline_test_map_pattern2.mbt", "parse_test_map_literal_with_bytes.mbt",
+  ]
+  for snapshot in snapshots {
+    assert_handrolled_cst_structure_equiv(snapshot, read_snapshot(snapshot))
+  }
+}
+
+///|
+test "signed constant boundary matrix matches handrolled AST" {
+  for
+    source in [
+      "+1L", "+1U", "-1L", "-1U", "-1N", "+1.0F", "-1.0F", "+1.0", "-1.0",
+    ] {
+    assert_expr_ast_equiv(source)
   }
 }

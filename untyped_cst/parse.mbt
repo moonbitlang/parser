@@ -89,6 +89,22 @@ fn top_level_decl_expected_tokens() -> Array[TokenKind] {
 }
 
 ///|
+priv enum TopItemKind {
+  Invalid
+  Using
+  Function
+  Let
+  Const
+  Type
+  Struct
+  Enum
+  EnumView
+  Trait
+  Impl
+  Test
+}
+
+///|
 priv enum DeclPhase {
   Start
   AwaitingName
@@ -118,11 +134,11 @@ priv enum DeclExpectation {
 }
 
 ///|
-fn decl_name_expectation(kind : NodeKind) -> Array[TokenKind] {
+fn decl_name_expectation(kind : TopItemKind) -> Array[TokenKind] {
   match kind {
-    Decl_Function =>
+    TopItemKind::Function =>
       [TokenKind::TK_LIDENT, TokenKind::TK_EXTEND, TokenKind::TK_PACKAGE_NAME]
-    Decl_Impl => [TokenKind::TK_UIDENT, TokenKind::TK_PACKAGE_NAME]
+    TopItemKind::Impl => [TokenKind::TK_UIDENT, TokenKind::TK_PACKAGE_NAME]
     _ => [TokenKind::TK_LIDENT]
   }
 }
@@ -130,7 +146,7 @@ fn decl_name_expectation(kind : NodeKind) -> Array[TokenKind] {
 ///|
 fn decl_phase_expectation(
   phase : DeclPhase,
-  kind : NodeKind,
+  kind : TopItemKind,
 ) -> DeclExpectation {
   match phase {
     AwaitingName => ExpectedTokens(decl_name_expectation(kind))
@@ -157,16 +173,16 @@ fn decl_phase_expectation(
 }
 
 ///|
-fn decl_phase_after_name(kind : NodeKind, is_suberror : Bool) -> DeclPhase {
+fn decl_phase_after_name(kind : TopItemKind, is_suberror : Bool) -> DeclPhase {
   match kind {
-    Decl_Function => AwaitingBody
-    Decl_Const => AwaitingEqual
-    Decl_Type => Complete
-    Decl_Struct => AwaitingBody
-    Decl_Enum => if is_suberror { Complete } else { AwaitingBody }
-    Decl_Trait => AwaitingBody
-    Decl_Impl => AwaitingImplRelation
-    Decl_EnumView => AwaitingEnumViewConstructors
+    TopItemKind::Function => AwaitingBody
+    TopItemKind::Const => AwaitingEqual
+    TopItemKind::Type => Complete
+    TopItemKind::Struct => AwaitingBody
+    TopItemKind::Enum => if is_suberror { Complete } else { AwaitingBody }
+    TopItemKind::Trait => AwaitingBody
+    TopItemKind::Impl => AwaitingImplRelation
+    TopItemKind::EnumView => AwaitingEnumViewConstructors
     _ => Complete
   }
 }
@@ -175,7 +191,7 @@ fn decl_phase_after_name(kind : NodeKind, is_suberror : Bool) -> DeclPhase {
 fn ParserState::report_decl_phase(
   self : ParserState,
   phase : DeclPhase,
-  kind : NodeKind,
+  kind : TopItemKind,
 ) -> Unit {
   match decl_phase_expectation(phase, kind) {
     ExpectedTokens(tokens) => self.report_expected_tokens(tokens)
@@ -189,7 +205,7 @@ fn ParserState::report_decl_phase(
 fn ParserState::report_decl_phase_at(
   self : ParserState,
   phase : DeclPhase,
-  kind : NodeKind,
+  kind : TopItemKind,
   found : Token,
   loc : Location,
 ) -> Unit {
@@ -219,17 +235,17 @@ fn decl_keyword_expects_name(tok : Token) -> Bool {
 }
 
 ///|
-fn decl_keyword_kind(tok : Token) -> NodeKind {
+fn decl_keyword_kind(tok : Token) -> TopItemKind {
   match tok {
-    FN => Decl_Function
-    CONST => Decl_Const
-    TYPE => Decl_Type
-    STRUCT => Decl_Struct
-    ENUM | SUBERROR | EXTENUM => Decl_Enum
-    ENUMVIEW => Decl_EnumView
-    TRAIT => Decl_Trait
-    IMPL => Decl_Impl
-    _ => Decl_BalancedDecl
+    FN => TopItemKind::Function
+    CONST => TopItemKind::Const
+    TYPE => TopItemKind::Type
+    STRUCT => TopItemKind::Struct
+    ENUM | SUBERROR | EXTENUM => TopItemKind::Enum
+    ENUMVIEW => TopItemKind::EnumView
+    TRAIT => TopItemKind::Trait
+    IMPL => TopItemKind::Impl
+    _ => TopItemKind::Invalid
   }
 }
 
@@ -272,21 +288,25 @@ fn decl_prefix_token(tok : Token) -> Bool {
 fn parse_visibility_clause(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut is_pub = false
+  let mut visibility_kind = Visibility_Default
   match state.peek() {
     Some((PUB, _, _)) => {
       is_pub = true
+      visibility_kind = Visibility_Pub
       if state.consume_any() is Some(kw) {
         push_child(children, Some("kw"), kw)
       } else {
         ()
       }
     }
-    Some((PRIV, _, _)) =>
+    Some((PRIV, _, _)) => {
+      visibility_kind = Visibility_Priv
       if state.consume_any() is Some(kw) {
         push_child(children, Some("kw"), kw)
       } else {
         ()
       }
+    }
     _ =>
       push_child(
         children,
@@ -341,27 +361,15 @@ fn parse_visibility_clause(state : ParserState) -> CstNode {
       state.expect_token(TokenKind::TK_RPAREN),
     )
   }
-  state.node_from_children(Clause_Visibility, children)
+  state.node_from_children(visibility_kind, children)
 }
 
 ///|
-fn decl_allows_kind_update(kind : NodeKind) -> Bool {
-  match kind {
-    Impl_Using => false
-    _ => true
-  }
-}
-
-///|
-fn node_has_missing_token(node : CstNode, kind : TokenKind) -> Bool {
-  for entry in node.children {
-    let (_, child) = entry
-    match child.kind {
-      Missing(missing) if missing == kind => return true
-      _ => ()
-    }
-  }
-  false
+fn child_label_is_missing(node : CstNode, label : String) -> Bool {
+  node
+  .first_child_with_label(label)
+  .map(child => child.kind is Missing)
+  .unwrap_or(false)
 }
 
 ///|
@@ -373,15 +381,16 @@ fn is_name_token(tok : Token) -> Bool {
 }
 
 ///|
-fn decl_name_token_is_valid(tok : Token, kind : NodeKind) -> Bool {
+fn decl_name_token_is_valid(tok : Token, kind : TopItemKind) -> Bool {
   match kind {
-    Decl_Function => tok is (LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | EXTEND)
-    Decl_Type
-    | Decl_Struct
-    | Decl_Enum
-    | Decl_EnumView
-    | Decl_Trait
-    | Decl_Impl => tok is (UIDENT(_) | PACKAGE_NAME(_))
+    TopItemKind::Function =>
+      tok is (LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | EXTEND)
+    TopItemKind::Type
+    | TopItemKind::Struct
+    | TopItemKind::Enum
+    | TopItemKind::EnumView
+    | TopItemKind::Trait
+    | TopItemKind::Impl => tok is (UIDENT(_) | PACKAGE_NAME(_))
     _ => is_name_token(tok)
   }
 }
@@ -391,6 +400,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut is_labelled = false
   let mut has_question = false
+  let mut has_default = false
   let pat = match state.peek() {
     Some((EOF, _, _)) => {
       state.report_expected_description("parameter name or label")
@@ -404,12 +414,11 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
     }
     Some((POST_LABEL(_), _, _)) => {
       is_labelled = true
-      parse_single_token_pattern(state, Pattern_Binder)
+      parse_single_token_pattern(state, Pattern_Var)
     }
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
-      parse_single_token_pattern(state, Pattern_Binder)
-    Some((UNDERSCORE, _, _)) =>
-      parse_single_token_pattern(state, Pattern_Underscore)
+      parse_single_token_pattern(state, Pattern_Var)
+    Some((UNDERSCORE, _, _)) => parse_single_token_pattern(state, Pattern_Any)
     Some((found, start, end)) => {
       state.report_expected_description_at(
         found,
@@ -463,6 +472,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
     push_children(children, state.consume_trivia())
   }
   if state.current_is(TokenKind::TK_EQUAL) {
+    has_default = true
     if !is_labelled && !has_question {
       match state.peek() {
         Some((_, start, end)) =>
@@ -487,7 +497,22 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       push_child(children, Some("default"), default)
     }
   }
-  state.node_from_children(Clause_Parameter, children)
+  let kind = if pat.kind is Pattern_Any {
+    Parameter_DiscardPositional
+  } else if is_labelled {
+    if has_default {
+      Parameter_Optional
+    } else {
+      Parameter_Labelled
+    }
+  } else if has_default {
+    Parameter_Optional
+  } else if has_question {
+    Parameter_QuestionOptional
+  } else {
+    Parameter_Positional
+  }
+  state.node_from_children(kind, children)
 }
 
 ///|
@@ -509,30 +534,103 @@ fn parse_function_stub_tokens(
   children : Array[(String?, CstNode)],
 ) -> Unit {
   match state.peek() {
-    Some((STRING(_), _, _)) => {
+    Some((STRING(first_value), _, _)) => {
+      let mut first : CstNode? = None
       if state.consume_any() is Some(stub) {
-        push_child(children, Some("stub"), stub)
+        first = Some(stub)
+        push_child(children, Some("stub_token"), stub)
       } else {
         ()
       }
       push_children(children, state.consume_trivia())
       match state.peek() {
-        Some((STRING(_), _, _)) =>
+        Some((STRING(second_value), _, _)) =>
           if state.consume_any() is Some(stub) {
-            push_child(children, Some("stub"), stub)
+            push_child(children, Some("stub_token"), stub)
+            if first is Some(first) {
+              push_child(
+                children,
+                Some("stub"),
+                scalar_node(
+                  Stub_ModuleName,
+                  first.loc,
+                  first.source_span,
+                  String(first_value),
+                ),
+              )
+            }
+            push_child(
+              children,
+              Some("stub"),
+              scalar_node(
+                Stub_FunctionName,
+                stub.loc,
+                stub.source_span,
+                String(second_value),
+              ),
+            )
+            push_child(
+              children,
+              Some("decl_body_kind"),
+              marker_node(DeclBody_Import, stub.loc.end, stub.source_span.1),
+            )
           } else {
             ()
           }
-        _ => ()
+        _ =>
+          if first is Some(first) {
+            push_child(
+              children,
+              Some("stub"),
+              scalar_node(
+                Stub_Code,
+                first.loc,
+                first.source_span,
+                String(first_value),
+              ),
+            )
+            push_child(
+              children,
+              Some("decl_body_kind"),
+              marker_node(
+                DeclBody_EmbeddedString,
+                first.loc.end,
+                first.source_span.1,
+              ),
+            )
+          }
       }
     }
     Some((MULTILINE_STRING(_), _, _)) => {
       let mut done = false
+      let mut marked_kind = false
       while !done {
         match state.peek() {
-          Some((MULTILINE_STRING(_), _, _)) => {
+          Some((MULTILINE_STRING(value), _, _)) => {
             if state.consume_any() is Some(stub) {
-              push_child(children, Some("stub"), stub)
+              push_child(children, Some("stub_token"), stub)
+              push_child(
+                children,
+                Some("stub"),
+                scalar_node(
+                  Stub_Code,
+                  stub.loc,
+                  stub.source_span,
+                  String(value),
+                ),
+              )
+              if !marked_kind {
+                marked_kind = true
+                push_child(
+                  children,
+                  Some("decl_body_kind"),
+                  marker_node(
+                    DeclBody_EmbeddedMultilineString,
+                    stub.loc.end,
+                    stub.source_span.1,
+                  ),
+                )
+              }
             } else {
               done = true
             }
@@ -549,9 +647,9 @@ fn parse_function_stub_tokens(
 }
 
 ///|
-fn decl_accepts_type_params(kind : NodeKind) -> Bool {
+fn decl_accepts_type_params(kind : TopItemKind) -> Bool {
   match kind {
-    Decl_Type | Decl_Struct | Decl_Enum => true
+    TopItemKind::Type | TopItemKind::Struct | TopItemKind::Enum => true
     _ => false
   }
 }
@@ -611,7 +709,14 @@ fn parse_type_parameter_item(
       }
     }
   }
-  state.node_from_children(Clause_Parameter, children)
+  state.node_from_children(
+    if allow_constraints {
+      Parameter_TypeVar
+    } else {
+      Parameter_TypeDecl
+    },
+    children,
+  )
 }
 
 ///|
@@ -631,7 +736,7 @@ fn parse_type_decl_parameter_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACKET,
     TokenKind::TK_RBRACKET,
     parse_type_decl_param_item,
-    List_TypeArgumentList,
+    List_TypeDeclParameterList,
     sep_kind=TokenKind::TK_COMMA,
     require_nonempty=true,
   )
@@ -644,7 +749,7 @@ fn parse_fun_type_parameter_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACKET,
     TokenKind::TK_RBRACKET,
     parse_fun_type_param_item,
-    List_TypeArgumentList,
+    List_TypeVarBinderList,
     sep_kind=TokenKind::TK_COMMA,
     require_nonempty=true,
   )
@@ -666,7 +771,7 @@ fn parse_tuple_struct_type_list(state : ParserState) -> CstNode {
     TokenKind::TK_LPAREN,
     TokenKind::TK_RPAREN,
     parse_tuple_struct_type_item,
-    List_TypeArgumentList,
+    List_TupleStructTypeList,
     sep_kind=TokenKind::TK_COMMA,
     require_nonempty=true,
     nonempty_expected="type",
@@ -674,19 +779,20 @@ fn parse_tuple_struct_type_list(state : ParserState) -> CstNode {
 }
 
 ///|
-fn decl_body_uses_balanced_group(kind : NodeKind) -> Bool {
+fn decl_body_uses_balanced_group(kind : TopItemKind) -> Bool {
   match kind {
-    Decl_Struct | Decl_Enum | Decl_Trait => true
+    TopItemKind::Struct | TopItemKind::Enum | TopItemKind::Trait => true
     _ => false
   }
 }
 
 ///|
-fn decl_body_list_kind(kind : NodeKind) -> NodeKind {
+fn decl_body_list_kind(kind : TopItemKind) -> NodeKind {
   match kind {
-    Decl_Enum => List_ConstructorList
-    Decl_Struct | Decl_Trait => List_FieldList
-    _ => List_StatementList
+    TopItemKind::Enum => List_ConstructorList
+    TopItemKind::Struct => List_StructFieldList
+    TopItemKind::Trait => List_TraitMethodList
+    _ => List_BlockStatementList
   }
 }
 
@@ -744,7 +850,7 @@ fn parse_struct_member_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
     parse_struct_member_item,
-    List_FieldList,
+    List_StructFieldList,
     sep_kind=TokenKind::TK_SEMI,
     invalid_delims=[TokenKind::TK_COMMA],
   )
@@ -770,7 +876,7 @@ fn parse_trait_member_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
     parse_trait_member_item,
-    List_FieldList,
+    List_TraitMethodList,
     sep_kind=TokenKind::TK_SEMI,
   )
 }
@@ -879,7 +985,20 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
   if state.reports.length() == diagnostics_before && !saw_params {
     state.report_expected_tokens([TokenKind::TK_LPAREN])
   }
-  state.node_from_children(Decl_Function, children)
+  state
+  .node_from_children(TraitMethod_Declaration, children)
+  .with_structured_name("semantic_name", Name_Binder, ["name"])
+  .with_bool_marker(
+    "async",
+    Flag_Async,
+    children
+    .iter()
+    .any(fn(entry) {
+      entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+    }),
+  )
+  .with_async_location_anchor()
+  .with_decl_like_function_location_anchor()
 }
 
 ///|
@@ -889,7 +1008,7 @@ fn parse_trait_method_param_list(state : ParserState) -> CstNode {
     TokenKind::TK_LPAREN,
     TokenKind::TK_RPAREN,
     parse_trait_method_param_item,
-    List_ParameterList,
+    List_TraitMethodParameterList,
     sep_kind=TokenKind::TK_COMMA,
   )
 }
@@ -897,14 +1016,18 @@ fn parse_trait_method_param_list(state : ParserState) -> CstNode {
 ///|
 fn parse_trait_method_param_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut parameter_kind = Parameter_DiscardPositional
   match state.peek() {
-    Some((LIDENT(_), _, _))
-    | Some((POST_LABEL(_), _, _))
-    | Some((EXTEND, _, _)) =>
+    Some((tok, _, _)) if tok is (LIDENT(_) | POST_LABEL(_) | EXTEND) =>
       match state.peek(offset=1) {
         Some((QUESTION, _, _)) | Some((COLON, _, _)) =>
           if state.consume_any() is Some(name) {
             push_child(children, Some("pattern"), name)
+            parameter_kind = if tok is POST_LABEL(_) {
+              Parameter_Labelled
+            } else {
+              Parameter_Positional
+            }
           } else {
             ()
           }
@@ -913,6 +1036,9 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
     _ => ()
   }
   if state.current_is(TokenKind::TK_QUESTION) {
+    if parameter_kind is Parameter_Positional {
+      parameter_kind = Parameter_QuestionOptional
+    }
     if state.consume_any() is Some(question) {
       push_child(children, Some("op"), question)
     } else {
@@ -971,7 +1097,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
     Some("type"),
     state.required_type_node(ty, reports_before_type),
   )
-  state.node_from_children(Clause_Parameter, children)
+  state.node_from_children(parameter_kind, children)
 }
 
 ///|
@@ -1038,9 +1164,19 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
       ()
     }
     match state.peek() {
-      Some((INT(_), _, _)) =>
+      Some((INT(value), _, _)) =>
         if state.consume_any() is Some(tag) {
           push_child(children, Some("tag"), tag)
+          push_child(
+            children,
+            Some("constructor_tag"),
+            scalar_node(
+              ConstructorTag_Value,
+              tag.loc,
+              tag.source_span,
+              String(value),
+            ),
+          )
         } else {
           ()
         }
@@ -1052,7 +1188,9 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
         )
     }
   }
-  state.node_from_children(Name_Constructor, children)
+  state
+  .node_from_children(Clause_ConstructorDecl, children)
+  .with_structured_name("semantic_name", Name_Constr, ["name"])
 }
 
 ///|
@@ -1062,7 +1200,7 @@ fn parse_constructor_param_list(state : ParserState) -> CstNode {
     TokenKind::TK_LPAREN,
     TokenKind::TK_RPAREN,
     parse_constructor_param_item,
-    List_ParameterList,
+    List_ConstructorParameterList,
     sep_kind=TokenKind::TK_COMMA,
     post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
     report_post_item_after_error=true,
@@ -1090,7 +1228,13 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
       } else {
         ()
       }
-      return state.node_from_children(Clause_Parameter, children)
+      return state
+        .node_from_children(Parameter_ConstructorPositional, children)
+        .with_bool_marker(
+          "mutable",
+          Flag_Mutable,
+          children.iter().any(fn(entry) { entry.0 is Some("mut") }),
+        )
     }
     _ => ()
   }
@@ -1127,7 +1271,20 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
     Some("type"),
     state.required_type_node(ty, reports_before_type),
   )
-  state.node_from_children(Clause_Parameter, children)
+  state
+  .node_from_children(
+    if children.iter().any(fn(entry) { entry.0 is Some("name") }) {
+      Parameter_ConstructorLabelled
+    } else {
+      Parameter_ConstructorPositional
+    },
+    children,
+  )
+  .with_bool_marker(
+    "mutable",
+    Flag_Mutable,
+    children.iter().any(fn(entry) { entry.0 is Some("mut") }),
+  )
 }
 
 ///|
@@ -1227,7 +1384,19 @@ fn parse_struct_field_item(state : ParserState) -> CstNode {
       state.required_type_node(ty, reports_before_type),
     )
   }
-  state.node_from_children(Clause_Parameter, children)
+  let field = state
+    .node_from_children(Field_Declaration, children)
+    .with_structured_name("semantic_name", Name_Field, ["name"])
+    .with_bool_marker(
+      "mutable",
+      Flag_Mutable,
+      children.iter().any(fn(entry) { entry.0 is Some("mut") }),
+    )
+  if field.first_child_with_label("vis") is None {
+    with_marker_child(field, "vis", Visibility_Default)
+  } else {
+    field
+  }
 }
 
 ///|
@@ -1293,7 +1462,27 @@ fn parse_invalid_struct_constructor(
       ]),
     )
   }
-  state.node_from_children(Decl_Function, children)
+  state
+  .node_from_children(Impl_Function, children)
+  .with_structured_name("semantic_name", Name_Binder, ["name"])
+  .with_bool_marker(
+    "async",
+    Flag_Async,
+    children
+    .iter()
+    .any(fn(entry) {
+      entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+    }),
+  )
+  .with_bool_marker(
+    "declare",
+    Flag_Declare,
+    children
+    .iter()
+    .any(fn(entry) {
+      entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Declare)
+    }),
+  )
 }
 
 ///|
@@ -1386,7 +1575,27 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
       state.report_expected_tokens([TokenKind::TK_LBRACE])
     }
   }
-  state.node_from_children(Decl_Function, children)
+  state
+  .node_from_children(Impl_Function, children)
+  .with_structured_name("semantic_name", Name_Binder, ["name"])
+  .with_bool_marker(
+    "async",
+    Flag_Async,
+    children
+    .iter()
+    .any(fn(entry) {
+      entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+    }),
+  )
+  .with_bool_marker(
+    "declare",
+    Flag_Declare,
+    children
+    .iter()
+    .any(fn(entry) {
+      entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Declare)
+    }),
+  )
 }
 
 ///|
@@ -1396,7 +1605,7 @@ fn parse_using_name_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
     parse_using_name_item,
-    List_FieldList,
+    List_UsingItemList,
     sep_kind=TokenKind::TK_COMMA,
   )
 }
@@ -1501,7 +1710,18 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
       _ => ()
     }
   }
-  state.node_from_children(Name_Identifier, children)
+  let using_kind = match name_kind {
+    2 => UsingKind_Type
+    3 => UsingKind_Trait
+    _ => UsingKind_Value
+  }
+  with_marker_child(
+    state
+    .node_from_children(Clause_UsingItem, children)
+    .with_structured_name("semantic_name", Name_AliasTarget, ["target", "name"]),
+    "using_kind",
+    using_kind,
+  )
 }
 
 ///|
@@ -1511,7 +1731,7 @@ fn parse_deriving_list(state : ParserState) -> CstNode {
     TokenKind::TK_LPAREN,
     TokenKind::TK_RPAREN,
     parse_deriving_item,
-    List_TypeArgumentList,
+    List_DerivingList,
     sep_kind=TokenKind::TK_COMMA,
   )
 }
@@ -1552,14 +1772,178 @@ fn parse_deriving_item(state : ParserState) -> CstNode {
   if state.current_is(TokenKind::TK_LPAREN) {
     push_child(children, Some("arg"), parse_argument_list(state))
   }
-  state.node_from_children(Name_Identifier, children)
+  state
+  .node_from_children(Clause_DerivingDirective, children)
+  .with_structured_name("semantic_name", Name_Type, ["name"])
 }
 
 ///|
-fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
+fn top_item_children_have_label(
+  children : Array[(String?, CstNode)],
+  expected : String,
+) -> Bool {
+  for i in 0..<children.length() {
+    match children.get(i) {
+      Some((Some(label), _)) if label == expected => return true
+      _ => ()
+    }
+  }
+  false
+}
+
+///|
+fn top_item_child_with_label_has_kind(
+  children : Array[(String?, CstNode)],
+  expected_label : String,
+  expected_kind : NodeKind,
+) -> Bool {
+  for i in 0..<children.length() {
+    match children.get(i) {
+      Some((Some(label), child)) if label == expected_label =>
+        return child.kind == expected_kind
+      _ => ()
+    }
+  }
+  false
+}
+
+///|
+fn top_item_children_have_child_or_grandchild_kind(
+  children : Array[(String?, CstNode)],
+  expected : NodeKind,
+) -> Bool {
+  for entry in children {
+    let (_, child) = entry
+    if child.kind == expected || child.has_child_kind(expected) {
+      return true
+    }
+  }
+  false
+}
+
+///|
+fn classify_top_item_node_kind(
+  children : Array[(String?, CstNode)],
+  parsed_kind : TopItemKind,
+  is_suberror : Bool,
+  is_extenum : Bool,
+  saw_body : Bool,
+) -> NodeKind {
+  match parsed_kind {
+    TopItemKind::Invalid => Error
+    TopItemKind::Using => Impl_Using
+    TopItemKind::Function => Impl_Function
+    TopItemKind::Let => Impl_Let
+    TopItemKind::Const => Impl_Const
+    TopItemKind::Type =>
+      if top_item_children_have_label(children, "type") {
+        Impl_TypeAlias
+      } else {
+        Impl_TypeAbstract
+      }
+    TopItemKind::Struct =>
+      if top_item_child_with_label_has_kind(
+          children,
+          "body",
+          List_TupleStructTypeList,
+        ) {
+        Impl_TupleStruct
+      } else {
+        Impl_RecordStruct
+      }
+    TopItemKind::Enum =>
+      if is_suberror {
+        if saw_body {
+          Impl_SuberrorEnum
+        } else {
+          Impl_Suberror
+        }
+      } else if is_extenum {
+        if top_item_children_have_child_or_grandchild_kind(
+            children,
+            Operator_Augmented,
+          ) {
+          Impl_ExtendEnum
+        } else {
+          Impl_ExtensibleEnum
+        }
+      } else {
+        Impl_EnumVariant
+      }
+    TopItemKind::EnumView => Impl_EnumView
+    TopItemKind::Trait => Impl_Trait
+    TopItemKind::Impl =>
+      if top_item_children_have_label(children, "method") {
+        Impl_ImplMethod
+      } else {
+        Impl_ImplRelation
+      }
+    TopItemKind::Test => Impl_Test
+  }
+}
+
+///|
+fn type_desc_kind_for_impl(kind : NodeKind) -> NodeKind? {
+  match kind {
+    Impl_TypeAbstract => Some(TypeDesc_Abstract)
+    Impl_TypeAlias => Some(TypeDesc_Alias)
+    Impl_RecordStruct => Some(TypeDesc_Record)
+    Impl_TupleStruct => Some(TypeDesc_TupleStruct)
+    Impl_EnumVariant => Some(TypeDesc_Variant)
+    Impl_ExtensibleEnum => Some(TypeDesc_ExtensibleEnum)
+    Impl_ExtendEnum => Some(TypeDesc_ExtendEnum)
+    Impl_Suberror => Some(TypeDesc_ErrorNoPayload)
+    Impl_SuberrorEnum => Some(TypeDesc_ErrorEnumPayload)
+    _ => None
+  }
+}
+
+///|
+fn decl_body_kind(node : CstNode, is_declare : Bool) -> NodeKind {
+  if is_declare {
+    return DeclBody_None
+  }
+  if node.first_child_of_kind(NodeKind::is_decl_body) is Some(marker) {
+    return marker.kind
+  }
+  let stubs = node.children_with_label("stub")
+  match stubs.get(0) {
+    Some(first) =>
+      if first.kind is Stub_ModuleName {
+        DeclBody_Import
+      } else if stubs.length() > 1 {
+        DeclBody_EmbeddedMultilineString
+      } else if first.kind is Stub_Code {
+        DeclBody_EmbeddedString
+      } else {
+        DeclBody_Expr
+      }
+    None => DeclBody_Expr
+  }
+}
+
+///|
+fn annotate_decl_body(source : CstNode, is_declare : Bool) -> CstNode {
+  let kind = decl_body_kind(source, is_declare)
+  let children : Array[(String?, CstNode)] = []
+  for entry in source.children {
+    let (_, child) = entry
+    if !child.kind.is_decl_body() {
+      children.push(entry)
+    }
+  }
+  push_child(
+    children,
+    Some("decl_body_kind"),
+    marker_node(kind, source.loc.end, source.source_span.1),
+  )
+  node(source.kind, source.loc, source.source_span, children)
+}
+
+///|
+fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode {
   let diagnostics_before = state.reports.length()
   let children : Array[(String?, CstNode)] = []
-  let mut effective_kind = kind
   let mut depth = 0
   let mut paren_depth = 0
   let mut done = false
@@ -1598,16 +1982,11 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
             missing_return_before_impl
           ) &&
           !recovered_body_without_close {
-          match decl_phase_expectation(phase, effective_kind) {
+          match decl_phase_expectation(phase, kind) {
             NoExpectation =>
               state.report(mk_loc(start, end), "Missing newline here.")
             _ =>
-              state.report_decl_phase_at(
-                phase,
-                effective_kind,
-                tok,
-                mk_loc(start, end),
-              )
+              state.report_decl_phase_at(phase, kind, tok, mk_loc(start, end))
           }
           if phase is AwaitingBody {
             reported_missing_body = true
@@ -1616,7 +1995,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         done = true
       }
       Some((tok, start, end)) if phase is AwaitingName && is_name_token(tok) => {
-        if effective_kind is Decl_Function &&
+        if kind is TopItemKind::Function &&
           tok is LIDENT(name) &&
           state.peek_nth_significant(1).map(item => item.0) is Some(COLONCOLON) {
           state.report(
@@ -1624,9 +2003,9 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
             "Unexpected lowercase identifier \{name}, expected uppercase identifier in type name.",
           )
         }
-        if !decl_name_token_is_valid(tok, effective_kind) {
-          match (effective_kind, tok) {
-            (Decl_Struct, LIDENT(name)) =>
+        if !decl_name_token_is_valid(tok, kind) {
+          match (kind, tok) {
+            (TopItemKind::Struct, LIDENT(name)) =>
               state.report(
                 mk_loc(start, end),
                 "Unexpected lowercase identifier \{name}, expected uppercase identifier in struct name.",
@@ -1640,39 +2019,49 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         } else {
           ()
         }
-        phase = decl_phase_after_name(effective_kind, is_suberror)
+        phase = decl_phase_after_name(kind, is_suberror)
         accepts_params = true
       }
       Some((LBRACKET, _, _)) if phase is AwaitingName &&
-        effective_kind is Decl_Function =>
+        kind is TopItemKind::Function =>
         push_child(
           children,
           Some("quantifier"),
           parse_fun_type_parameter_list(state),
         )
       Some((LBRACKET, _, _)) if phase is AwaitingName &&
-        (effective_kind is Decl_Impl || effective_kind is Decl_EnumView) =>
+        (kind is TopItemKind::Impl || kind is TopItemKind::EnumView) =>
         push_child(
           children,
           Some("quantifier"),
           parse_fun_type_parameter_list(state),
         )
       Some((AMPER, _, _)) if phase is AwaitingName &&
-        effective_kind is Decl_Function =>
+        kind is TopItemKind::Function =>
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
+          push_child(
+            children,
+            Some("object"),
+            bool_marker_node(Flag_Object, op.loc.start, op.source_span.0, true),
+          )
+          push_child(
+            children,
+            Some("object_loc"),
+            token_location_node(op.kind, op.loc, op.source_span),
+          )
         } else {
           ()
         }
-      Some((LPAREN, _, _)) if effective_kind is Decl_Struct => {
+      Some((LPAREN, _, _)) if kind is TopItemKind::Struct => {
         push_child(children, Some("body"), parse_tuple_struct_type_list(state))
         saw_body = true
         accepts_params = false
         phase = Complete
       }
-      Some((LPAREN, _, _)) if accepts_params && effective_kind is Decl_Function => {
+      Some((LPAREN, _, _)) if accepts_params && kind is TopItemKind::Function => {
         let params = parse_parameter_list(state)
-        params_complete = !node_has_missing_token(params, TokenKind::TK_RPAREN)
+        params_complete = !child_label_is_missing(params, "close")
         push_child(children, Some("params"), params)
         accepts_params = false
         phase = if is_extern {
@@ -1685,11 +2074,11 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
       }
       Some((DOT_UIDENT(_), _, _)) | Some((DOT_LIDENT(_), _, _)) if accepts_params &&
         (
-          effective_kind is Decl_Type ||
-          effective_kind is Decl_Struct ||
-          effective_kind is Decl_Enum ||
-          effective_kind is Decl_EnumView ||
-          effective_kind is Decl_Impl
+          kind is TopItemKind::Type ||
+          kind is TopItemKind::Struct ||
+          kind is TopItemKind::Enum ||
+          kind is TopItemKind::EnumView ||
+          kind is TopItemKind::Impl
         ) => {
         match state.peek() {
           Some((DOT_LIDENT(_), start, end)) =>
@@ -1703,14 +2092,14 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         }
       }
       Some((DOT_UIDENT(_), _, _)) | Some((DOT_LIDENT(_), _, _)) if accepts_params &&
-        effective_kind is Decl_Function =>
+        kind is TopItemKind::Function =>
         if state.consume_any() is Some(name) {
           push_child(children, Some("name"), name)
         } else {
           ()
         }
       Some((COLONCOLON, _, _)) if accepts_params &&
-        effective_kind is Decl_Function => {
+        kind is TopItemKind::Function => {
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
         } else {
@@ -1733,8 +2122,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
             )
         }
       }
-      Some((LBRACKET, _, _)) if accepts_params &&
-        decl_accepts_type_params(effective_kind) => {
+      Some((LBRACKET, _, _)) if accepts_params && decl_accepts_type_params(kind) => {
         if is_suberror {
           suberror_had_type_params = true
         }
@@ -1772,7 +2160,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           mk_loc(start, end),
           "Unexpected uppercase identifier \{name}, expected lowercase identifier in name of `let`.",
         )
-        let pat = parse_single_token_pattern(state, Pattern_Binder)
+        let pat = parse_single_token_pattern(state, Pattern_Var)
         push_child(children, Some("pattern"), pat)
         phase = AwaitingEqual
         match state.peek() {
@@ -1844,26 +2232,29 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         } else {
           ()
         }
-        if decl_allows_kind_update(kind) {
-          effective_kind = Decl_Let
-        }
         phase = AwaitingLetPattern
       }
-      Some((TEST, _, _)) if effective_kind is Decl_Test ||
-        kind is Decl_BalancedDecl => {
+      Some((TEST, _, _)) if kind is TopItemKind::Test => {
         saw_core_keyword = true
         if state.consume_any() is Some(test_token) {
           push_child(children, decl_token_label(TEST), test_token)
         } else {
           ()
         }
-        if decl_allows_kind_update(kind) {
-          effective_kind = Decl_Test
-        }
         match state.peek_significant() {
-          Some((STRING(_), _, _)) =>
+          Some((STRING(value), _, _)) =>
             if state.consume_any() is Some(name) {
               push_child(children, Some("name"), name)
+              push_child(
+                children,
+                Some("test_name"),
+                scalar_node(
+                  Name_Test,
+                  name.loc,
+                  name.source_span,
+                  String(value),
+                ),
+              )
             } else {
               ()
             }
@@ -1886,11 +2277,21 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         }
         push_children(children, state.consume_trivia())
         match state.peek() {
-          Some((STRING(_), _, _)) =>
+          Some((STRING(value), _, _)) =>
             if state.consume_any() is Some(language) {
               saw_language = true
               phase = AwaitingExternFunction
-              push_child(children, Some("language"), language)
+              push_child(children, Some("language_token"), language)
+              push_child(
+                children,
+                Some("language"),
+                scalar_node(
+                  Language_Value,
+                  language.loc,
+                  language.source_span,
+                  String(value),
+                ),
+              )
             } else {
               ()
             }
@@ -1941,13 +2342,9 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         } else {
           ()
         }
-        if decl_allows_kind_update(kind) {
-          effective_kind = decl_keyword_kind(tok)
-        }
         phase = AwaitingName
       }
-      Some((USING, _, _)) if effective_kind is Impl_Using ||
-        kind is Decl_BalancedDecl => {
+      Some((USING, _, _)) if kind is TopItemKind::Using => {
         if is_declare {
           match state.peek() {
             Some((found, start, end)) =>
@@ -1990,7 +2387,6 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         } else {
           ()
         }
-        effective_kind = Impl_Using
         match state.peek() {
           Some((PACKAGE_NAME(_), _, _))
           | Some((LIDENT(_), _, _))
@@ -2017,7 +2413,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           push_child(children, Some("pattern"), pat)
         }
       }
-      Some((COLON, _, _)) if effective_kind is Decl_Trait && depth == 0 => {
+      Some((COLON, _, _)) if kind is TopItemKind::Trait && depth == 0 => {
         if state.consume_any() is Some(colon) {
           push_child(children, Some("op"), colon)
         } else {
@@ -2062,7 +2458,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           push_child(children, Some("type"), ty)
         }
       }
-      Some((COLON, start, end)) if effective_kind is Decl_Function && depth == 0 => {
+      Some((COLON, start, end)) if kind is TopItemKind::Function && depth == 0 => {
         state.report_expected_tokens_at(COLON, mk_loc(start, end), [
           TokenKind::TK_LBRACE,
         ])
@@ -2115,7 +2511,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         push_child(children, Some("clause"), parse_func_return_type(state))
         phase = if is_declare { Complete } else { AwaitingBody }
       }
-      Some((EQUAL, _, _)) if effective_kind is Decl_Type => {
+      Some((EQUAL, _, _)) if kind is TopItemKind::Type => {
         phase = AwaitingType
         if state.consume_any() is Some(equal) {
           push_child(children, Some("op"), equal)
@@ -2130,8 +2526,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           phase = Complete
         }
       }
-      Some((EQUAL, _, _)) if effective_kind is Decl_Let ||
-        effective_kind is Decl_Const => {
+      Some((EQUAL, _, _)) if kind is TopItemKind::Let ||
+        kind is TopItemKind::Const => {
         phase = AwaitingValue
         if state.consume_any() is Some(equal) {
           push_child(children, Some("op"), equal)
@@ -2159,7 +2555,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           state.suppress_next_top_level_recovery_report = true
         }
       }
-      Some((EQUAL, _, _)) if effective_kind is Decl_Function => {
+      Some((EQUAL, _, _)) if kind is TopItemKind::Function => {
         phase = AwaitingStub
         if state.consume_any() is Some(equal) {
           push_child(children, Some("op"), equal)
@@ -2177,7 +2573,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         }
         done = true
       }
-      Some((FOR, _, _)) if effective_kind is Decl_Impl => {
+      Some((FOR, _, _)) if kind is TopItemKind::Impl => {
         phase = AwaitingType
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
@@ -2197,7 +2593,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           phase = Complete
         }
       }
-      Some((FOR, _, _)) if effective_kind is Decl_EnumView => {
+      Some((FOR, _, _)) if kind is TopItemKind::EnumView => {
         phase = AwaitingType
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
@@ -2216,7 +2612,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           phase = AwaitingEnumViewWith
         }
       }
-      Some((WITH, _, _)) if effective_kind is Decl_Impl => {
+      Some((WITH, _, _)) if kind is TopItemKind::Impl => {
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
         } else {
@@ -2229,7 +2625,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           done = true
         }
       }
-      Some((WITH, _, _)) if effective_kind is Decl_EnumView => {
+      Some((WITH, _, _)) if kind is TopItemKind::EnumView => {
         phase = AwaitingMethodName
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
@@ -2283,7 +2679,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           )
         }
       }
-      Some((found, start, end)) if effective_kind is Decl_Function &&
+      Some((found, start, end)) if kind is TopItemKind::Function &&
         phase is AwaitingBody &&
         found is (EXCLAMATION | QUESTION) => {
         state.report_expected_tokens_at(found, mk_loc(start, end), [
@@ -2304,9 +2700,9 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           }
         }
       }
-      Some((WHERE, _, _)) if effective_kind is Decl_Function =>
+      Some((WHERE, _, _)) if kind is TopItemKind::Function =>
         push_child(children, Some("where"), parse_where_clause(state))
-      Some((EXCLAMATION, _, _)) if effective_kind is Decl_Function &&
+      Some((EXCLAMATION, _, _)) if kind is TopItemKind::Function &&
         !(phase is AwaitingName) =>
         if state.consume_error_for_progress() is Some(error) {
           push_child(children, Some("error"), error)
@@ -2314,7 +2710,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           done = true
         }
       Some((LBRACKET, _, _)) if accepts_params &&
-        effective_kind is Decl_Function &&
+        kind is TopItemKind::Function &&
         !saw_body =>
         match state.peek() {
           Some((found, start, end)) => {
@@ -2346,13 +2742,13 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           None => done = true
         }
       Some((QUESTION, _, _)) if depth == 0 &&
-        (kind is Error || kind is Decl_BalancedDecl) =>
+        (!saw_core_keyword || kind is TopItemKind::Invalid) =>
         if state.consume_error_for_progress() is Some(error) {
           push_child(children, Some("error"), error)
         } else {
           done = true
         }
-      Some((RBRACE, start, end)) if effective_kind is Decl_Function && !saw_body => {
+      Some((RBRACE, start, end)) if kind is TopItemKind::Function && !saw_body => {
         state.report_expected_tokens_at(RBRACE, mk_loc(start, end), [
           TokenKind::TK_LBRACE,
         ])
@@ -2365,7 +2761,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         phase = Complete
         done = true
       }
-      Some((found, start, end)) if effective_kind is Error ||
+      Some((found, start, end)) if kind is TopItemKind::Invalid ||
         (!saw_core_keyword && phase is Start) => {
         if state.suppress_next_top_level_recovery_report {
           state.suppress_next_top_level_recovery_report = false
@@ -2400,7 +2796,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         }
         done = true
       }
-      Some((LBRACE, start, end)) if effective_kind is Decl_Function &&
+      Some((LBRACE, start, end)) if kind is TopItemKind::Function &&
         phase is AwaitingName => {
         let mut recovery_end = end
         while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
@@ -2419,17 +2815,17 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
         state.report_expected_tokens_at(
           LBRACE,
           mk_loc(start, recovery_end),
-          decl_name_expectation(effective_kind),
+          decl_name_expectation(kind),
         )
         phase = Complete
         done = true
       }
       Some((LBRACE, _, _)) =>
-        if effective_kind is Impl_Using {
+        if kind is TopItemKind::Using {
           saw_body = true
           push_child(children, Some("body"), parse_using_name_list(state))
           phase = Complete
-        } else if effective_kind is Decl_Impl {
+        } else if kind is TopItemKind::Impl {
           if phase is AwaitingImplRelation {
             match state.peek() {
               Some((found, start, end)) =>
@@ -2451,10 +2847,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           push_child(
             children,
             Some("body"),
-            parse_balanced_brace_group(
-              state,
-              decl_body_list_kind(effective_kind),
-            ),
+            parse_balanced_brace_group(state, decl_body_list_kind(kind)),
           )
           if invalid_grouped_impl {
             let mut offset = 0
@@ -2474,41 +2867,35 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
             invalid_grouped_impl = false
           }
           phase = Complete
-        } else if effective_kind is Decl_Struct {
+        } else if kind is TopItemKind::Struct {
           saw_body = true
           let body = parse_struct_member_list(state)
-          recovered_body_without_close = node_has_missing_token(
-            body,
-            TokenKind::TK_RBRACE,
-          )
+          recovered_body_without_close = child_label_is_missing(body, "close")
           push_child(children, Some("body"), body)
           phase = Complete
-        } else if effective_kind is Decl_Enum {
+        } else if kind is TopItemKind::Enum {
           saw_body = true
           push_child(children, Some("body"), parse_enum_constructor_list(state))
           phase = Complete
-        } else if effective_kind is Decl_EnumView && !enumview_has_constructors {
+        } else if kind is TopItemKind::EnumView && !enumview_has_constructors {
           saw_body = true
           push_child(children, Some("body"), parse_enum_constructor_list(state))
           enumview_has_constructors = true
           phase = AwaitingEnumViewFor
-        } else if effective_kind is Decl_EnumView {
+        } else if kind is TopItemKind::EnumView {
           saw_body = true
           push_child(children, Some("expr"), parse_block_expr(state))
           phase = Complete
-        } else if effective_kind is Decl_Trait {
+        } else if kind is TopItemKind::Trait {
           saw_body = true
           push_child(children, Some("body"), parse_trait_member_list(state))
           phase = Complete
-        } else if decl_body_uses_balanced_group(effective_kind) {
+        } else if decl_body_uses_balanced_group(kind) {
           saw_body = true
           push_child(
             children,
             Some("body"),
-            parse_balanced_brace_group(
-              state,
-              decl_body_list_kind(effective_kind),
-            ),
+            parse_balanced_brace_group(state, decl_body_list_kind(kind)),
           )
           phase = Complete
         } else {
@@ -2525,8 +2912,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           }
         }
       Some((found, start, end)) if phase is AwaitingName => {
-        let expected = decl_name_expectation(effective_kind)
-        if effective_kind is Decl_Function {
+        let expected = decl_name_expectation(kind)
+        if kind is TopItemKind::Function {
           let mut recovery_end = end
           while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
             match state.peek() {
@@ -2548,7 +2935,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
           )
           phase = Complete
           done = true
-        } else if effective_kind is Decl_Type {
+        } else if kind is TopItemKind::Type {
           state.report_expected_tokens_at(found, mk_loc(start, end), expected)
           let mut recovering = true
           while recovering {
@@ -2613,7 +3000,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
       }
       Some((_, _, _)) if phase is Complete => {
         let completed_type_bad_token = match state.peek() {
-          Some((found, start, end)) if effective_kind is Decl_Type =>
+          Some((found, start, end)) if kind is TopItemKind::Type =>
             Some((found, mk_loc(start, end)))
           _ => None
         }
@@ -2648,7 +3035,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
               ])
             None =>
               match state.peek() {
-                Some((found, start, end)) if effective_kind is Decl_Type =>
+                Some((found, start, end)) if kind is TopItemKind::Type =>
                   state.report_expected_tokens_at(found, mk_loc(start, end), [
                     TokenKind::TK_SEMI,
                     TokenKind::TK_EOF,
@@ -2683,7 +3070,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
     (
       state.reports.length() == diagnostics_before ||
       (
-        effective_kind is Decl_Function &&
+        kind is TopItemKind::Function &&
         !is_extern &&
         phase is AwaitingBody &&
         params_complete &&
@@ -2695,21 +3082,82 @@ fn parse_balanced_decl_body(state : ParserState, kind : NodeKind) -> CstNode {
       )
     )
   if should_report_completion {
-    if effective_kind is Decl_Function && is_declare && (saw_body || saw_stub) {
+    if kind is TopItemKind::Function && is_declare && (saw_body || saw_stub) {
       state.report(
         empty_loc(state.current_position()),
         "declare function cannot have a body",
       )
-    } else if effective_kind is Decl_Enum && suberror_had_type_params {
+    } else if kind is TopItemKind::Enum && suberror_had_type_params {
       state.report(
         empty_loc(state.current_position()),
         "Unexpected token here.",
       )
     } else {
-      state.report_decl_phase(phase, effective_kind)
+      state.report_decl_phase(phase, kind)
     }
   }
-  state.node_from_children(effective_kind, children)
+  let final_kind = classify_top_item_node_kind(
+    children, kind, is_suberror, is_extenum, saw_body,
+  )
+  let mut result = state.node_from_children(final_kind, children)
+  result = match final_kind {
+    Impl_Function =>
+      if result.first_child_with_label("method") is Some(_) {
+        result
+        .with_structured_name("semantic_type_name", Name_Type, ["name"])
+        .with_structured_name("semantic_name", Name_Binder, ["method"])
+      } else {
+        result.with_structured_name("semantic_name", Name_Binder, ["name"])
+      }
+    Impl_TypeAbstract
+    | Impl_TypeAlias
+    | Impl_RecordStruct
+    | Impl_TupleStruct
+    | Impl_EnumVariant
+    | Impl_ExtensibleEnum
+    | Impl_ExtendEnum
+    | Impl_Suberror
+    | Impl_SuberrorEnum
+    | Impl_EnumView =>
+      result.with_structured_name("semantic_name", Name_Type, ["name"])
+    Impl_Trait =>
+      result.with_structured_name("semantic_name", Name_Binder, ["name"])
+    Impl_ImplMethod | Impl_ImplRelation =>
+      result.with_structured_name("semantic_name", Name_Type, ["name"])
+    Impl_Using =>
+      result.with_structured_name("semantic_name", Name_Label, ["name"])
+    _ => result
+  }
+  if type_desc_kind_for_impl(final_kind) is Some(type_desc_kind) {
+    result = with_marker_child(result, "type_desc", type_desc_kind)
+  }
+  if result.first_child_with_label("vis") is None {
+    result = with_marker_child(result, "vis", Visibility_Default)
+  }
+  if result.bool_marker_value(Flag_Declare) is None {
+    result = result.with_bool_marker("declare", Flag_Declare, is_declare)
+  }
+  if result.bool_marker_value(Flag_Async) is None {
+    result = result.with_bool_marker("async", Flag_Async, saw_async_prefix)
+  }
+  match final_kind {
+    Impl_Function => result = annotate_decl_body(result, is_declare)
+    Impl_ImplMethod =>
+      if result.first_child_with_label("method") is Some(method_node) {
+        let annotated_method = annotate_decl_body(method_node, false)
+        let replaced : Array[(String?, CstNode)] = []
+        for entry in result.children {
+          match entry {
+            (Some("method"), _) =>
+              push_child(replaced, Some("method"), annotated_method)
+            _ => replaced.push(entry)
+          }
+        }
+        result = node(result.kind, result.loc, result.source_span, replaced)
+      }
+    _ => ()
+  }
+  result
 }
 
 ///|
@@ -2814,21 +3262,85 @@ fn token_disallowed_in_match_action(tok : Token) -> Bool {
 ///|
 fn assignment_lhs_is_valid(node : CstNode) -> Bool {
   match node.kind {
-    Expr_Identifier | Expr_Field | Expr_ArrayGet => true
-    Expr_Group =>
-      if node.first_child_with_label("expr") is Some(inner) {
-        assignment_lhs_is_valid(inner)
-      } else {
-        false
-      }
+    Expr_Ident | Expr_Field | Expr_ArrayGet => true
     _ => false
   }
 }
 
 ///|
+fn assignment_lhs_kind(node : CstNode) -> NodeKind? {
+  match node.kind {
+    Expr_Ident | Expr_Field | Expr_ArrayGet => Some(node.kind)
+    _ => None
+  }
+}
+
+///|
+fn assignment_node_kind(lhs : CstNode, is_augmented : Bool) -> NodeKind {
+  match assignment_lhs_kind(lhs) {
+    Some(Expr_ArrayGet) =>
+      if is_augmented {
+        Expr_ArrayAugmentedSet
+      } else {
+        Expr_ArraySet
+      }
+    Some(Expr_Field) => Expr_Mutate
+    _ => Expr_Assign
+  }
+}
+
+///|
+fn function_node_from_children(
+  state : ParserState,
+  children : Array[(String?, CstNode)],
+  fn_kind : NodeKind,
+) -> CstNode {
+  let result = with_marker_child(
+    state
+    .node_from_children(Expr_Function, children)
+    .with_bool_marker(
+      "async",
+      Flag_Async,
+      children
+      .iter()
+      .any(fn(entry) {
+        entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+      }),
+    ),
+    "fn_kind",
+    fn_kind,
+  ).with_async_location_anchor()
+  if result.first_child_with_label("pipe") is Some(_) &&
+    result.first_child_with_label("params") is Some(params) &&
+    params.children_with_label("item").length() == 1 &&
+    params.children_with_label("item").get(0) is Some(item) &&
+    params.loc.start == item.loc.start &&
+    params.loc.end == item.loc.end &&
+    result.first_child_with_label("op") is Some(op) {
+    result.with_token_location("params_loc", op.kind, op.loc, op.source_span)
+  } else {
+    result
+  }
+}
+
+///|
+fn hole_node_from_children(
+  state : ParserState,
+  children : Array[(String?, CstNode)],
+  todo? : Bool = false,
+) -> CstNode {
+  let kind = if todo { HoleKind_Todo } else { HoleKind_Incomplete }
+  with_marker_child(
+    state.node_from_children(Expr_Hole, children),
+    "hole_kind",
+    kind,
+  )
+}
+
+///|
 fn invalid_arrow_parameter_expr(node : CstNode) -> CstNode? {
   match node.kind {
-    Expr_Identifier | Expr_Hole | Expr_MissingExpr => None
+    Expr_Ident | Expr_Hole | Expr_MissingExpr => None
     kind if kind.is_argument() => None
     Expr_Constraint =>
       if node.first_child_with_label("expr") is Some(inner) {
@@ -2842,7 +3354,10 @@ fn invalid_arrow_parameter_expr(node : CstNode) -> CstNode? {
 
 ///|
 fn arrow_lhs_can_start_function(node : CstNode) -> Bool {
-  node.kind is Expr_Tuple || invalid_arrow_parameter_expr(node) is None
+  match node.kind {
+    Expr_Unit | Expr_Group | Expr_Tuple => true
+    _ => invalid_arrow_parameter_expr(node) is None
+  }
 }
 
 ///|
@@ -2851,6 +3366,14 @@ fn parse_arrow_fn_body_expr(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   match state.peek_significant() {
+    Some((LBRACE, _, _)) =>
+      if brace_starts_record_expr(state) {
+        parse_record_expr(state)
+      } else if brace_starts_map_expr(state) {
+        parse_map_expr(state)
+      } else {
+        parse_block_expr(state)
+      }
     Some((CONTINUE, _, _)) if state.peek_nth_significant(1).map(item => item.0)
       is Some(POST_LABEL(_)) &&
       state.peek_nth_significant(2).map(item => item.0) is Some(COLON) =>
@@ -3001,7 +3524,7 @@ fn parse_expr_fragment(state : ParserState) -> CstNode {
     None => push_child(children, Some("eof"), state.missing_eof_node())
     _ => ()
   }
-  node(ExpressionFragment, state.root_loc(), state.root_span(), children)
+  node(Expression, state.root_loc(), state.root_span(), children)
 }
 
 ///|
@@ -3016,6 +3539,104 @@ fn parse_expr_until(
 }
 
 ///|
+fn parser_leading_parenthesized_end(node : CstNode) -> Position? {
+  match node.kind {
+    Expr_Unit | Expr_Group | Expr_Tuple | Expr_Constraint =>
+      return Some(node.loc.end)
+    _ => ()
+  }
+  for i in 0..<node.children.length() {
+    match node.children.get(i) {
+      Some((Some("trivia"), _)) => continue
+      Some((_, child)) => return parser_leading_parenthesized_end(child)
+      None => ()
+    }
+  }
+  None
+}
+
+///|
+fn parser_first_significant_token_at_or_after(
+  node : CstNode,
+  pos : Position,
+) -> CstNode? {
+  match node.kind {
+    _ if node.kind.is_syntax_token() &&
+      (
+        node.has_child_or_grandchild_kind(Comment_InlineTrailing) ||
+        node.has_child_or_grandchild_kind(Comment_Ownline)
+      ) => ()
+    _ if node.kind.is_syntax_token() && node.loc.start.cnum >= pos.cnum =>
+      return Some(node)
+    _ => ()
+  }
+  for i in 0..<node.children.length() {
+    match node.children.get(i) {
+      Some((label, _)) if is_location_metadata_label(label) => continue
+      Some((_, child)) =>
+        if parser_first_significant_token_at_or_after(child, pos) is Some(found) {
+          return Some(found)
+        }
+      None => ()
+    }
+  }
+  None
+}
+
+///|
+fn with_try_location_anchors(
+  source : CstNode,
+  has_try : Bool,
+  suffix_anchor_source? : CstNode,
+) -> CstNode {
+  let mut result = source
+  let keywords = source.children_with_label("kw")
+  let try_keyword = keywords.get(0)
+  let catch_keyword = if has_try { keywords.get(1) } else { keywords.get(0) }
+  if try_keyword is Some(keyword) {
+    result = result.with_token_location(
+      "try_loc",
+      keyword.kind,
+      keyword.loc,
+      keyword.source_span,
+    )
+  }
+  if catch_keyword is Some(keyword) {
+    let mut catch_end = keyword
+    if has_try &&
+      source.children_with_label("case").get(0) is Some(case_list) &&
+      case_list.first_child_with_label("open") is Some(open) {
+      catch_end = open
+    }
+    result = result.with_aggregate_span(
+      "catch_loc",
+      keyword.loc.merge(catch_end.loc),
+      mk_span(keyword.source_span.0, catch_end.source_span.1),
+    )
+  }
+  if source.first_child_with_label("else_kw") is Some(keyword) {
+    let mut else_end = keyword
+    if source.children_with_label("else").get(0) is Some(case_list) &&
+      case_list.first_child_with_label("open") is Some(open) {
+      else_end = open
+    }
+    result = result.with_aggregate_span(
+      "else_loc",
+      keyword.loc.merge(else_end.loc),
+      mk_span(keyword.source_span.0, else_end.source_span.1),
+    )
+  }
+  if suffix_anchor_source is Some(anchor_source) {
+    result = result.with_aggregate_span(
+      "expr_loc",
+      Location::{ start: anchor_source.loc.start, end: source.loc.end },
+      mk_span(anchor_source.source_span.0, source.source_span.1),
+    )
+  }
+  result
+}
+
+///|
 fn parse_expr_catch_suffix(
   state : ParserState,
   stop_kinds : Array[TokenKind],
@@ -3026,8 +3647,11 @@ fn parse_expr_catch_suffix(
     !state.current_is(TokenKind::TK_CATCH) {
     return lhs
   }
+  let leading_parenthesized_end = parser_leading_parenthesized_end(lhs)
   let children : Array[(String?, CstNode)] = [(Some("body"), lhs)]
+  let mut catch_keyword : CstNode? = None
   if state.consume_any() is Some(catch_kw) {
+    catch_keyword = Some(catch_kw)
     push_child(children, Some("kw"), catch_kw)
   } else {
     ()
@@ -3053,7 +3677,19 @@ fn parse_expr_catch_suffix(
       push_child(children, Some("else"), parse_case_block(state))
     }
   }
-  state.node_from_children(Expr_Try, children)
+  let result = state
+    .node_from_children(Expr_Try, children)
+    .with_bool_marker("has_try", Flag_HasTry, false)
+  let suffix_anchor_source = match (leading_parenthesized_end, catch_keyword) {
+    (Some(paren_end), Some(catch_kw)) =>
+      Some(
+        parser_first_significant_token_at_or_after(lhs, paren_end).unwrap_or(
+          catch_kw,
+        ),
+      )
+    _ => None
+  }
+  with_try_location_anchors(result, false, suffix_anchor_source?)
 }
 
 ///|
@@ -3072,17 +3708,16 @@ fn parse_expr_pipe(
       Some((EQUAL, _, _))
       | Some((PLUS_EQUAL, _, _))
       | Some((AUGMENTED_ASSIGNMENT(_), _, _)) => {
-        let kind = match state.peek() {
-          Some((EQUAL, _, _)) => Expr_Assign
-          _ => Expr_AugmentedAssign
-        }
         if state.reports.length() == reports_before_lhs &&
           !assignment_lhs_is_valid(lhs) {
           state.report(lhs.loc, "Invalid left value in assignment")
         }
+        let is_augmented = !state.current_is(TokenKind::TK_EQUAL)
+        let kind = assignment_node_kind(lhs, is_augmented)
         let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
+          push_direct_operator(children, op)
         } else {
           ()
         }
@@ -3093,7 +3728,9 @@ fn parse_expr_pipe(
           Some("rhs"),
           state.required_expr_node(rhs, reports_before_rhs),
         )
-        lhs = state.node_from_children(kind, children)
+        lhs = state
+          .node_from_children(kind, children)
+          .with_bool_marker("augmented", Flag_Augmented, is_augmented)
       }
       Some((PIPE, _, _)) | Some((PIPE_LEFT, _, _)) => {
         let pipe_kind = if state.current_is(TokenKind::TK_PIPE_LEFT) {
@@ -3114,7 +3751,14 @@ fn parse_expr_pipe(
           Some("rhs"),
           state.required_expr_node(rhs, reports_before_rhs),
         )
-        lhs = state.node_from_children(Expr_Infix, children)
+        lhs = state.node_from_children(
+          if pipe_kind is TokenKind::TK_PIPE_LEFT {
+            Expr_RevPipe
+          } else {
+            Expr_Pipe
+          },
+          children,
+        )
       }
       Some((FAT_ARROW, _, _)) if arrow_lhs_can_start_function(lhs) => {
         if lhs.kind is Expr_Constraint &&
@@ -3140,24 +3784,12 @@ fn parse_expr_pipe(
         if !body.children.is_empty() {
           push_child(children, Some("body"), body)
         }
-        lhs = state.node_from_children(Expr_Function, children)
+        lhs = function_node_from_children(state, children, FnKind_Arrow)
       }
       _ => done = true
     }
   }
   lhs
-}
-
-///|
-fn expr_constraint_type_stops(
-  stop_kinds : Array[TokenKind],
-) -> Array[TokenKind] {
-  let stops = stop_kinds.copy()
-  stops.push(TokenKind::TK_FAT_ARROW)
-  stops.push(TokenKind::TK_EQUAL)
-  stops.push(TokenKind::TK_SEMI)
-  stops.push(TokenKind::TK_RBRACE)
-  stops
 }
 
 ///|
@@ -3210,7 +3842,7 @@ fn parse_pipe_rhs(
         Some("body"),
         state.required_expr_node(body, reports_before_body),
       )
-      state.node_from_children(Expr_Function, children)
+      function_node_from_children(state, children, FnKind_Arrow)
     }
     _ => head
   }
@@ -3219,7 +3851,7 @@ fn parse_pipe_rhs(
 ///|
 fn parse_arrow_params_from_expr(expr : CstNode) -> CstNode {
   match expr.kind {
-    Expr_Tuple =>
+    Expr_Unit | Expr_Group | Expr_Tuple =>
       if expr.first_child_with_label("body") is Some(body) {
         let children : Array[(String?, CstNode)] = []
         for item in lower_item_children(body) {
@@ -3242,6 +3874,25 @@ fn parse_single_arrow_param_list(expr : CstNode) -> CstNode {
 
 ///|
 fn parse_arrow_param_from_expr(expr : CstNode) -> CstNode {
+  let parameter_kind = match expr.kind {
+    Expr_Constraint =>
+      match expr.first_child_with_label("expr") {
+        Some(inner) =>
+          match inner.kind {
+            Expr_Hole => Parameter_DiscardPositional
+            Argument_Labelled | Argument_LabelledPun => Parameter_Labelled
+            Argument_LabelledOption | Argument_LabelledOptionPun =>
+              Parameter_QuestionOptional
+            _ => Parameter_Positional
+          }
+        None => Parameter_DiscardPositional
+      }
+    Expr_Hole => Parameter_DiscardPositional
+    Argument_Labelled | Argument_LabelledPun => Parameter_Labelled
+    Argument_LabelledOption | Argument_LabelledOptionPun =>
+      Parameter_QuestionOptional
+    _ => Parameter_Positional
+  }
   match expr.kind {
     Expr_Constraint => {
       let children : Array[(String?, CstNode)] = []
@@ -3255,12 +3906,10 @@ fn parse_arrow_param_from_expr(expr : CstNode) -> CstNode {
       } else {
         ()
       }
-      node(Clause_Parameter, expr.loc, expr.source_span, children)
+      node(parameter_kind, expr.loc, expr.source_span, children)
     }
     _ =>
-      node(Clause_Parameter, expr.loc, expr.source_span, [
-        (Some("pattern"), expr),
-      ])
+      node(parameter_kind, expr.loc, expr.source_span, [(Some("pattern"), expr)])
   }
 }
 
@@ -3330,7 +3979,7 @@ fn expr_stops_infix_chain(expr : CstNode) -> Bool {
     | Expr_LexScan
     | Expr_Let
     | Expr_LetMut
-    | Expr_LetRec
+    | Expr_LetAnd
     | Expr_LetFn
     | Expr_Return
     | Expr_Raise
@@ -3358,9 +4007,15 @@ fn parse_expr_binary_prec(
       Some((tok, _, _)) =>
         match infix_precedence(tok) {
           Some((prec, right_assoc)) if prec >= min_prec => {
+            let expr_kind = if tok is IMPLIES {
+              Expr_Implies
+            } else {
+              Expr_Infix
+            }
             let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
             if state.consume_any() is Some(op) {
               push_child(children, Some("op"), op)
+              push_direct_operator(children, op)
             } else {
               ()
             }
@@ -3378,7 +4033,7 @@ fn parse_expr_binary_prec(
               Some("rhs"),
               state.required_expr_node(rhs, reports_before_rhs),
             )
-            lhs = state.node_from_children(Expr_Infix, children)
+            lhs = state.node_from_children(expr_kind, children)
             if state.abort_infix_chain {
               done = true
             }
@@ -3464,7 +4119,17 @@ fn parse_expr_postfix(
         Some("template"),
         state.required_expr_node(template, reports_before_template),
       )
-      state.node_from_children(Expr_TemplateWriting, children)
+      state
+      .node_from_children(Expr_TemplateWriting, children)
+      .with_bool_marker(
+        "conditional",
+        Flag_Conditional,
+        children
+        .iter()
+        .any(fn(entry) {
+          entry.0 is Some("op") && entry.1.has_child_kind(Flag_Conditional)
+        }),
+      )
     }
     _ => lhs
   }
@@ -3561,13 +4226,18 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
     Some((DOT_LIDENT(_), _, _)) | Some((DOT_INT(_), _, _)) => {
       let children : Array[(String?, CstNode)] = [(Some("self"), lhs)]
       if state.consume_any() is Some(field) {
-        push_child(children, Some("field"), field)
+        push_child(children, Some("token"), field)
+        push_child(children, Some("field"), accessor_node_from_token(field))
       } else {
         ()
       }
       if state.current_is(TokenKind::TK_LPAREN) {
         push_child(children, Some("arg"), parse_argument_list(state))
-        Some(state.node_from_children(Expr_DotApply, children))
+        Some(
+          state
+          .node_from_children(Expr_DotApply, children)
+          .with_bool_marker("return_self", Flag_ReturnSelf, false),
+        )
       } else {
         Some(state.node_from_children(Expr_Field, children))
       }
@@ -3584,7 +4254,8 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
       match state.peek() {
         Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
           if state.consume_any() is Some(field) {
-            push_child(children, Some("field"), field)
+            push_child(children, Some("token"), field)
+            push_child(children, Some("field"), accessor_node_from_token(field))
           } else {
             ()
           }
@@ -3616,7 +4287,11 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
           state.missing_token_node(TokenKind::TK_LPAREN),
         )
       }
-      Some(state.node_from_children(Expr_DotApply, children))
+      Some(
+        state
+        .node_from_children(Expr_DotApply, children)
+        .with_bool_marker("return_self", Flag_ReturnSelf, true),
+      )
     }
     _ => None
   }
@@ -3632,9 +4307,16 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
   }
   push_children(children, state.consume_trivia())
   if state.current_is(TokenKind::TK_LBRACE) {
-    push_child(children, Some("body"), parse_record_field_list(state))
-    state.node_from_children(Expr_Record, children)
+    let body = parse_record_field_list(state)
+    let kind = if list_has_item_kind(body, Field_RecordSpread) {
+      Expr_RecordUpdate
+    } else {
+      Expr_Record
+    }
+    push_child(children, Some("body"), body)
+    state.node_from_children(kind, children)
   } else {
+    let mut field_is_constructor = false
     match state.peek() {
       Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
         if state.consume_any() is Some(name) {
@@ -3644,6 +4326,7 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
         }
       Some((UIDENT(_), _, _)) =>
         if state.consume_any() is Some(name) {
+          field_is_constructor = true
           push_child(children, Some("field"), name)
         } else {
           ()
@@ -3657,6 +4340,7 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
         match state.peek() {
           Some((DOT_UIDENT(_), _, _)) =>
             if state.consume_any() is Some(name) {
+              field_is_constructor = true
               push_child(children, Some("field"), name)
             } else {
               ()
@@ -3691,14 +4375,15 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
           state.missing_token_node_silent(TokenKind::TK_LIDENT),
         )
     }
-    match children.last() {
-      Some((Some("field"), field)) =>
-        match field.first_token() {
-          Some(UIDENT(_)) | Some(DOT_UIDENT(_)) =>
-            state.node_from_children(Expr_Constructor, children)
-          _ => state.node_from_children(Expr_Method, children)
-        }
-      _ => state.node_from_children(Expr_Method, children)
+    if field_is_constructor {
+      state
+      .node_from_children(Expr_Constr, children)
+      .with_structured_name("semantic_name", Name_Constructor, [
+        "pkg", "type", "name", "field",
+      ])
+      .with_constructor_extra_info()
+    } else {
+      state.node_from_children(Expr_Method, children)
     }
   }
 }
@@ -3820,9 +4505,15 @@ fn brace_expr_is_followed_by_range_operator(state : ParserState) -> Bool {
 
 ///|
 fn parse_record_expr(state : ParserState) -> CstNode {
-  state.node_from_children(Expr_Record, [
-    (Some("body"), parse_record_field_list(state)),
-  ])
+  let body = parse_record_field_list(state)
+  state.node_from_children(
+    if list_has_item_kind(body, Field_RecordSpread) {
+      Expr_RecordUpdate
+    } else {
+      Expr_Record
+    },
+    [(Some("body"), body)],
+  )
 }
 
 ///|
@@ -3839,19 +4530,21 @@ fn parse_record_field_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
     parse_record_field_item,
-    List_FieldList,
+    List_RecordFieldList,
     sep_kind=TokenKind::TK_COMMA,
   )
   let mut item_index = 0
   for i in 0..<list.children.length() {
     match list.children.get(i) {
       Some((Some("item"), item)) => {
-        match item.first_child_with_label("op") {
-          Some(op) if op.first_token() is Some(DOTDOT) && item_index > 0 =>
-            state.report_expected_tokens_at(DOTDOT, op.loc, [
-              TokenKind::TK_LIDENT,
-              TokenKind::TK_EXTEND,
-            ])
+        match item.kind {
+          Field_RecordSpread if item_index > 0 =>
+            if item.first_child_with_label("op") is Some(op) {
+              state.report_expected_tokens_at(DOTDOT, op.loc, [
+                TokenKind::TK_LIDENT,
+                TokenKind::TK_EXTEND,
+              ])
+            }
           _ => ()
         }
         item_index += 1
@@ -3859,7 +4552,7 @@ fn parse_record_field_list(state : ParserState) -> CstNode {
       _ => ()
     }
   }
-  list
+  with_marker_child(list, "trailing", list_trailing_mark_kind(list))
 }
 
 ///|
@@ -3869,50 +4562,58 @@ fn parse_map_field_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
     parse_map_field_item,
-    List_FieldList,
+    List_MapFieldList,
     sep_kind=TokenKind::TK_COMMA,
   )
   for i in 0..<list.children.length() {
     match list.children.get(i) {
       Some((Some("item"), item)) => {
-        match item.first_child_with_label("op") {
-          Some(op) if op.first_token() is Some(MINUS) =>
-            for entry in item.children {
-              let (_, child) = entry
-              if child.first_token() is Some(COLON) {
-                state.report_expected_tokens_at(COLON, child.loc, [
-                  TokenKind::TK_SEMI,
-                  TokenKind::TK_RBRACE,
-                ])
-                break
-              }
-            }
-          _ => ()
+        if item.has_child_or_grandchild_kind(Operator_UnaryMinus) {
+          let operators = item.children_with_label("op")
+          if operators.length() > 1 {
+            let colon = operators[operators.length() - 1]
+            state.report_expected_tokens_at(COLON, colon.loc, [
+              TokenKind::TK_SEMI,
+              TokenKind::TK_RBRACE,
+            ])
+          }
         }
         break
       }
       _ => ()
     }
   }
-  list
+  with_marker_child(list, "trailing", list_trailing_mark_kind(list))
 }
 
 ///|
 fn parse_map_field_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut constant : CstNode? = None
+  let mut negative = false
   match state.peek() {
     Some((MINUS, _, _)) => {
+      negative = true
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
+        push_child(
+          children,
+          Some("operator"),
+          operator_node_from_token(
+            Operator_UnaryMinus,
+            MINUS,
+            op.loc,
+            op.source_span,
+          ),
+        )
       } else {
         ()
       }
       match state.peek() {
-        Some((INT(_), _, _))
-        | Some((DOUBLE(_), _, _))
-        | Some((FLOAT(_), _, _)) =>
+        Some((raw, _, _)) if raw is (INT(_) | DOUBLE(_) | FLOAT(_)) =>
           if state.consume_any() is Some(key) {
             push_child(children, Some("key"), key)
+            constant = constant_node_from_token(raw, key.loc, key.source_span)
           } else {
             ()
           }
@@ -3931,18 +4632,20 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
         None => ()
       }
     }
-    Some((STRING(_), _, _))
-    | Some((BYTES(_), _, _))
-    | Some((REGEX_LITERAL(_), _, _))
-    | Some((CHAR(_), _, _))
-    | Some((INT(_), _, _))
-    | Some((BYTE(_), _, _))
-    | Some((DOUBLE(_), _, _))
-    | Some((FLOAT(_), _, _))
-    | Some((TRUE, _, _))
-    | Some((FALSE, _, _)) =>
+    Some((raw, _, _)) if raw
+      is (STRING(_)
+      | BYTES(_)
+      | REGEX_LITERAL(_)
+      | CHAR(_)
+      | INT(_)
+      | BYTE(_)
+      | DOUBLE(_)
+      | FLOAT(_)
+      | TRUE
+      | FALSE) =>
       if state.consume_any() is Some(key) {
         push_child(children, Some("key"), key)
+        constant = constant_node_from_token(raw, key.loc, key.source_span)
       } else {
         ()
       }
@@ -3970,6 +4673,13 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
     }
     None => ()
   }
+  if constant is Some(value) {
+    push_child(
+      children,
+      Some("constant"),
+      signed_constant_node(value, negative),
+    )
+  }
   if state.current_is(TokenKind::TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
@@ -3985,13 +4695,15 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  state.node_from_children(Argument_Labelled, children)
+  state.node_from_children(Field_MapExpression, children)
 }
 
 ///|
 fn parse_record_field_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut kind = Field_Definition
   if state.current_is(TokenKind::TK_DOTDOT) {
+    kind = Field_RecordSpread
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
     } else {
@@ -4043,13 +4755,25 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
       }
     }
   }
-  state.node_from_children(Argument_Labelled, children)
+  let field = state.node_from_children(kind, children)
+  if kind is Field_Definition {
+    field
+    .with_structured_name("semantic_name", Name_Field, ["name"])
+    .with_bool_marker(
+      "pun",
+      Flag_Pun,
+      children.iter().all(fn(entry) { !(entry.0 is Some("expr")) }),
+    )
+  } else {
+    field
+  }
 }
 
 ///|
 fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
   let children : Array[(String?, CstNode)] = [(Some("self"), lhs)]
-  push_child(children, Some("open"), state.expect_token(TokenKind::TK_LBRACKET))
+  let open = state.expect_token(TokenKind::TK_LBRACKET)
+  push_child(children, Some("open"), open)
   let mut start_index : CstNode? = None
   let reports_before_index = state.reports.length()
   if !state.current_is(TokenKind::TK_COLON) {
@@ -4081,12 +4805,15 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
         push_child(children, Some("end"), end_index)
       }
     }
-    push_child(
-      children,
-      Some("close"),
-      state.expect_token(TokenKind::TK_RBRACKET),
+    let close = state.expect_token(TokenKind::TK_RBRACKET)
+    push_child(children, Some("close"), close)
+    state
+    .node_from_children(Expr_ArrayGetSlice, children)
+    .with_aggregate_span(
+      "index_loc",
+      open.loc.merge(close.loc),
+      mk_span(open.source_span.0, close.source_span.1),
     )
-    state.node_from_children(Expr_ArrayGetSlice, children)
   } else {
     if start_index is Some(index) {
       push_child(children, Some("index"), index)
@@ -4100,7 +4827,13 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
       state.expect_token(TokenKind::TK_RBRACKET)
     }
     push_child(children, Some("close"), close)
-    state.node_from_children(Expr_ArrayGet, children)
+    state
+    .node_from_children(Expr_ArrayGet, children)
+    .with_aggregate_span(
+      "index_loc",
+      open.loc.merge(close.loc),
+      mk_span(open.source_span.0, close.source_span.1),
+    )
   }
 }
 
@@ -4127,6 +4860,7 @@ fn parse_expr_range(
       let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
+        push_direct_operator(children, op)
       } else {
         ()
       }
@@ -4137,7 +4871,7 @@ fn parse_expr_range(
         Some("rhs"),
         state.required_expr_node(rhs, reports_before_rhs),
       )
-      lhs = state.node_from_children(Expr_Range, children)
+      lhs = state.node_from_children(Expr_Infix, children)
     }
     _ => ()
   }
@@ -4151,10 +4885,24 @@ fn parse_expr_prefix(
 ) -> CstNode {
   discard_expr_trivia(state)
   match state.peek() {
-    Some((PLUS, _, _)) | Some((MINUS, _, _)) | Some((EXCLAMATION, _, _)) => {
+    Some((operator, _, _)) if operator is (PLUS | MINUS | EXCLAMATION) => {
       let children : Array[(String?, CstNode)] = []
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
+        push_child(
+          children,
+          Some("operator"),
+          operator_node_from_token(
+            match operator {
+              PLUS => Operator_UnaryPlus
+              MINUS => Operator_UnaryMinus
+              _ => Operator_UnaryNot
+            },
+            operator,
+            op.loc,
+            op.source_span,
+          ),
+        )
       } else {
         ()
       }
@@ -4165,7 +4913,18 @@ fn parse_expr_prefix(
         Some("expr"),
         state.required_expr_node(expr, reports_before_expr),
       )
-      state.node_from_children(Expr_Prefix, children)
+      let kind = match expr.first_child_of_kind(NodeKind::is_constant) {
+        Some(constant) if constant_can_fold_prefix(constant, operator) => {
+          push_child(
+            children,
+            Some("constant"),
+            signed_constant_node(constant, operator is MINUS),
+          )
+          Expr_Constant
+        }
+        _ => Expr_Unary
+      }
+      state.node_from_children(kind, children)
     }
     _ => parse_expr_simple_postfix(state, stop_kinds)
   }
@@ -4200,28 +4959,30 @@ fn parse_invalid_simple_expr(
   while !state.current_in(stop_kinds) &&
         !state.current_is(TokenKind::TK_EOF) &&
         !(state.peek() is None) {
-    if state.consume_any() is Some(bad) {
-      match bad.first_token() {
-        Some(FN) => {
-          pending_function_body = true
-          if invalid_continue_start &&
-            !reported_promoted_function &&
-            state.peek_significant().map(item => item.0) is Some(LPAREN) {
-            report_promoted_anonymous_function(state)
-            reported_promoted_function = true
+    match state.peek() {
+      Some((found, _, _)) =>
+        if state.consume_any() is Some(bad) {
+          match found {
+            FN => {
+              pending_function_body = true
+              if invalid_continue_start &&
+                !reported_promoted_function &&
+                state.peek_significant().map(item => item.0) is Some(LPAREN) {
+                report_promoted_anonymous_function(state)
+                reported_promoted_function = true
+              }
+            }
+            LET | LETREC => saw_local_let = true
+            LBRACE => pending_function_body = false
+            _ => ()
           }
+          push_child(
+            children,
+            Some("error"),
+            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
+          )
         }
-        Some(LET | LETREC) => saw_local_let = true
-        Some(LBRACE) => pending_function_body = false
-        _ => ()
-      }
-      push_child(
-        children,
-        Some("error"),
-        error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-      )
-    } else {
-      ()
+      None => ()
     }
   }
   if invalid_top_level_start &&
@@ -4290,14 +5051,6 @@ fn parse_expr_simple(
   match state.peek() {
     Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) =>
       state.node_from_children(Expr_MissingExpr, [])
-    Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => {
-      let children = state.consume_trivia()
-      let expr = parse_expr_simple(state, stop_kinds)
-      if !expr.children.is_empty() {
-        push_child(children, Some("expr"), expr)
-      }
-      state.node_from_children(Expr_Group, children)
-    }
     Some((LOOP, _, _)) | Some((THROW, _, _)) | Some((QUESTION, _, _)) =>
       parse_invalid_simple_expr(state, stop_kinds)
     Some((IF, _, _)) => parse_if_expr(state)
@@ -4333,7 +5086,7 @@ fn parse_expr_simple(
       } else if brace_starts_map_expr(state) {
         parse_map_expr(state)
       } else {
-        parse_block_expr(state)
+        parse_block_expr(state, classify_record_pun=true)
       }
     Some((LPAREN, _, _)) => parse_paren_expr(state, stop_kinds)
     Some((LBRACKET, _, _)) | Some((LBRACKET_BAR, _, _)) =>
@@ -4344,15 +5097,23 @@ fn parse_expr_simple(
           parse_type_name_node(state)
         _ =>
           if state.consume_any() is Some(token) {
-            state.node_from_children(Expr_Identifier, [
-              (token_label_from_node(token), token),
-            ])
+            state
+            .node_from_children(Expr_Ident, [(Some("op"), token)])
+            .with_structured_name("semantic_name", Name_Var, ["name"])
           } else {
             state.node_from_children(Expr_MissingExpr, [])
           }
       }
-    Some((ELLIPSIS, _, _)) | Some((UNDERSCORE, _, _)) =>
-      parse_single_token_expr(state, Expr_Hole, "token")
+    Some((tok, _, _)) if tok is (ELLIPSIS | UNDERSCORE) =>
+      if state.consume_any() is Some(token) {
+        hole_node_from_children(
+          state,
+          [(Some("token"), token)],
+          todo=tok is ELLIPSIS,
+        )
+      } else {
+        hole_node_from_children(state, [])
+      }
     Some((STRING(_), _, _))
     | Some((BYTES(_), _, _))
     | Some((REGEX_LITERAL(_), _, _))
@@ -4368,12 +5129,12 @@ fn parse_expr_simple(
     | Some((BYTE(_), _, _))
     | Some((DOUBLE(_), _, _))
     | Some((FLOAT(_), _, _)) =>
-      parse_single_token_expr(state, Expr_Literal, "token")
+      parse_single_token_expr(state, Expr_Constant, "token")
     Some((LIDENT(_), _, _))
     | Some((EXTEND, _, _))
     | Some((PACKAGE_NAME(_), _, _)) => parse_ident_or_qualified_expr(state)
     Some((UIDENT(_), _, _)) =>
-      parse_single_token_expr(state, Expr_Constructor, "name")
+      parse_single_token_expr(state, Expr_Constr, "name")
     Some(_) => parse_invalid_simple_expr(state, stop_kinds)
     None => state.node_from_children(Expr_MissingExpr, [])
   }
@@ -4528,6 +5289,11 @@ fn parse_labelled_loop_expr(
   let children : Array[(String?, CstNode)] = []
   if state.consume_any() is Some(label) {
     push_child(children, Some("label"), label)
+    push_child(
+      children,
+      Some("label_loc"),
+      token_location_node(label.kind, label.loc, label.source_span),
+    )
   } else {
     ()
   }
@@ -4562,6 +5328,11 @@ fn parse_labelled_loop_expr(
     }
     None => state.node_from_children(Expr_MissingExpr, [])
   }
+  push_child(
+    children,
+    Some("loop_loc"),
+    aggregate_span_node(loop_node.loc, loop_node.source_span),
+  )
   for i in 0..<loop_node.children.length() {
     if loop_node.children.get(i) is Some(child) {
       children.push(child)
@@ -4609,7 +5380,7 @@ fn parse_continue_argument_list(
       }
     }
   }
-  state.node_from_children(List_StatementList, children)
+  state.node_from_children(List_ContinueArgumentList, children)
 }
 
 ///|
@@ -4628,10 +5399,31 @@ fn parse_single_token_expr(
   kind : NodeKind,
   label : String,
 ) -> CstNode {
-  if state.consume_any() is Some(token) {
-    state.node_from_children(kind, [(Some(label), token)])
-  } else {
-    state.node_from_children(Expr_MissingExpr, [])
+  match state.peek() {
+    Some((raw, _, _)) =>
+      if state.consume_any() is Some(token) {
+        let children : Array[(String?, CstNode)] = [(Some(label), token)]
+        if kind is Expr_Constant &&
+          constant_node_from_token(raw, token.loc, token.source_span)
+          is Some(constant) {
+          push_child(children, Some("constant"), constant)
+        }
+        let expr = state.node_from_children(kind, children)
+        match kind {
+          Expr_Constr =>
+            expr
+            .with_structured_name("semantic_name", Name_Constructor, [
+              "pkg", "type", "name", "field",
+            ])
+            .with_constructor_extra_info()
+          Expr_Ident =>
+            expr.with_structured_name("semantic_name", Name_Var, ["name"])
+          _ => expr
+        }
+      } else {
+        state.node_from_children(Expr_MissingExpr, [])
+      }
+    None => state.node_from_children(Expr_MissingExpr, [])
   }
 }
 
@@ -4654,7 +5446,9 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
       } else {
         ()
       }
-      state.node_from_children(Expr_Identifier, children)
+      state
+      .node_from_children(Expr_Ident, children)
+      .with_structured_name("semantic_name", Name_Var, ["name"])
     }
     Some((DOT_UIDENT(_), _, _)) if allow_qualified => {
       if state.consume_any() is Some(name) {
@@ -4662,16 +5456,26 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
       } else {
         ()
       }
-      state.node_from_children(Expr_Constructor, children)
+      state
+      .node_from_children(Expr_Constr, children)
+      .with_structured_name("semantic_name", Name_Constructor, [
+        "pkg", "type", "name", "field",
+      ])
+      .with_constructor_extra_info()
     }
-    _ => state.node_from_children(Expr_Identifier, children)
+    _ =>
+      state
+      .node_from_children(Expr_Ident, children)
+      .with_structured_name("semantic_name", Name_Var, ["name"])
   }
 }
 
 ///|
 fn parse_type_name_node(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut is_object = false
   if state.current_is(TokenKind::TK_AMPER) {
+    is_object = true
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
     } else {
@@ -4734,7 +5538,10 @@ fn parse_type_name_node(state : ParserState) -> CstNode {
         ]),
       )
   }
-  state.node_from_children(Type_Name, children)
+  state
+  .node_from_children(Type_Name, children)
+  .with_structured_name("semantic_name", Name_ConstrId, ["name"])
+  .with_bool_marker("object", Flag_Object, is_object)
 }
 
 ///|
@@ -4753,7 +5560,7 @@ fn parse_paren_expr(
       TokenKind::TK_LPAREN,
       TokenKind::TK_RPAREN,
       parse_arrow_parameter_expr_item,
-      List_ArgumentList,
+      List_TupleElementList,
       sep_kind=TokenKind::TK_COMMA,
       item_expected="simple expression",
     )
@@ -4763,7 +5570,7 @@ fn parse_paren_expr(
       TokenKind::TK_LPAREN,
       TokenKind::TK_RPAREN,
       parse_tuple_expr_item,
-      List_ArgumentList,
+      List_TupleElementList,
       sep_kind=TokenKind::TK_COMMA,
     )
   }
@@ -4783,7 +5590,29 @@ fn parse_paren_expr(
       }
     }
   }
-  state.node_from_children(Expr_Tuple, [(Some("body"), list)])
+  let item_count = list.children_with_label("item").length()
+  let kind = if item_count == 0 {
+    Expr_Unit
+  } else if item_count == 1 {
+    Expr_Group
+  } else {
+    Expr_Tuple
+  }
+  let children : Array[(String?, CstNode)] = [(Some("body"), list)]
+  if kind is Expr_Unit {
+    push_child(
+      children,
+      Some("faked"),
+      bool_marker_node(Flag_Faked, list.loc.end, list.source_span.1, false),
+    )
+  } else if kind is Expr_Group {
+    push_child(
+      children,
+      Some("group"),
+      marker_node(Group_Paren, list.loc.start, list.source_span.0),
+    )
+  }
+  node(kind, list.loc, list.source_span, children)
 }
 
 ///|
@@ -4975,10 +5804,29 @@ fn parse_array_expr(state : ParserState) -> CstNode {
     open_kind,
     close_kind,
     parse_array_expr_item,
-    List_ArgumentList,
+    List_ArrayElementList,
     sep_kind=TokenKind::TK_COMMA,
   )
-  state.node_from_children(Expr_Array, [(Some("body"), list)])
+  let kind = if list_has_item_kind(list, ArrayElement_Spread) {
+    Expr_ArraySpread
+  } else {
+    Expr_Array
+  }
+  let children : Array[(String?, CstNode)] = [(Some("body"), list)]
+  push_child(
+    children,
+    Some("array_kind"),
+    marker_node(
+      if open_kind is TK_LBRACKET_BAR {
+        ArrayKind_Iter
+      } else {
+        ArrayKind_Array
+      },
+      list.loc.start,
+      list.source_span.0,
+    ),
+  )
+  node(kind, list.loc, list.source_span, children)
 }
 
 ///|
@@ -5007,10 +5855,16 @@ fn parse_list_comprehension_expr(
   push_children(children, state.consume_trivia())
   if state.consume_any() is Some(kw) {
     push_child(children, Some("kw"), kw)
+    push_child(
+      children,
+      Some("for_loc"),
+      token_location_node(kw.kind, kw.loc, kw.source_span),
+    )
   } else {
     ()
   }
-  if list_comprehension_is_foreach(state) {
+  let is_foreach = list_comprehension_is_foreach(state)
+  if is_foreach {
     parse_list_comprehension_foreach_header(state, children, close_kind)
   } else {
     parse_list_comprehension_for_header(state, children, close_kind)
@@ -5043,7 +5897,24 @@ fn parse_list_comprehension_expr(
   }
   push_children(children, state.consume_trivia())
   push_child(children, Some("close"), state.expect_token(close_kind))
-  state.node_from_children(Expr_ListComprehension, children)
+  let result = with_marker_child(
+    state.node_from_children(Expr_ListComprehension, children),
+    "list_comprehension_kind",
+    if is_foreach {
+      ListComprehensionKind_ForEach
+    } else {
+      ListComprehensionKind_For
+    },
+  )
+  with_marker_child(
+    result,
+    "array_kind",
+    if open_kind is TokenKind::TK_LBRACKET_BAR {
+      ArrayKind_Iter
+    } else {
+      ArrayKind_Array
+    },
+  )
 }
 
 ///|
@@ -5278,7 +6149,7 @@ fn parse_list_comprehension_binding_list(
       None => done = true
     }
   }
-  state.node_from_children(List_StatementList, children)
+  state.node_from_children(List_ForEachBindingList, children)
 }
 
 ///|
@@ -5315,7 +6186,9 @@ fn parse_list_comprehension_binding(
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  state.node_from_children(Clause_Parameter, children)
+  state
+  .node_from_children(Binding_ForEach, children)
+  .with_structured_name("semantic_name", Name_Binder, ["name"])
 }
 
 ///|
@@ -5342,15 +6215,16 @@ fn parse_array_expr_item(state : ParserState) -> CstNode {
         Some("expr"),
         state.required_expr_node(expr, reports_before_expr),
       )
-      state.node_from_children(Argument_Positional, children)
+      state.node_from_children(ArrayElement_Spread, children)
     }
     _ => {
       report_statement_only_expression(state, "array element")
       let reports_before_expr = state.reports.length()
-      state.required_expr_node(
+      let expr = state.required_expr_node(
         parse_expr_until(state, stops),
         reports_before_expr,
       )
+      state.node_from_children(ArrayElement_Regular, [(Some("expr"), expr)])
     }
   }
 }
@@ -5528,9 +6402,13 @@ fn parse_if_expr(state : ParserState) -> CstNode {
 fn parse_try_expr(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut kind = Expr_Try
+  let mut try_operator_kind = TryOperatorKind_Question
   match state.peek() {
-    Some((TRY_QUESTION, _, _)) | Some((TRY_EXCLAMATION, _, _)) =>
+    Some((TRY_QUESTION, _, _)) => kind = Expr_TryOperator
+    Some((TRY_EXCLAMATION, _, _)) => {
       kind = Expr_TryOperator
+      try_operator_kind = TryOperatorKind_Exclamation
+    }
     _ => ()
   }
   if state.consume_any() is Some(kw) {
@@ -5592,7 +6470,27 @@ fn parse_try_expr(state : ParserState) -> CstNode {
     state.reports.length() == reports_before_body {
     state.report_expected_tokens([TokenKind::TK_CATCH])
   }
-  state.node_from_children(kind, children)
+  let result = state.node_from_children(kind, children)
+  if kind is Expr_TryOperator {
+    let result = with_marker_child(
+      result, "try_operator_kind", try_operator_kind,
+    )
+    if result.children_with_label("kw").get(0) is Some(keyword) {
+      result.with_token_location(
+        "try_loc",
+        keyword.kind,
+        keyword.loc,
+        keyword.source_span,
+      )
+    } else {
+      result
+    }
+  } else {
+    with_try_location_anchors(
+      result.with_bool_marker("has_try", Flag_HasTry, true),
+      true,
+    )
+  }
 }
 
 ///|
@@ -5806,7 +6704,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
     }
   } else {
     state.node_from_children(Pattern_Tuple, [
-      (Some("body"), state.node_from_children(List_PatternList, children)),
+      (Some("body"), state.node_from_children(List_TuplePatternList, children)),
     ])
   }
 }
@@ -5960,7 +6858,9 @@ fn parse_for_binding(state : ParserState) -> CstNode {
         state.report(mk_loc(start, end), "Unexpected token here.")
       _ => ()
     }
-    return state.node_from_children(Clause_Parameter, children)
+    return state
+      .node_from_children(Binding_For, children)
+      .with_structured_name("semantic_name", Name_Binder, ["name"])
   }
   if state.current_is(TokenKind::TK_EQUAL) {
     if state.consume_any() is Some(equal) {
@@ -5981,13 +6881,17 @@ fn parse_for_binding(state : ParserState) -> CstNode {
         ()
       }
     }
-    return state.node_from_children(Clause_Parameter, children)
+    return state
+      .node_from_children(Binding_For, children)
+      .with_structured_name("semantic_name", Name_Binder, ["name"])
   }
   let expr = parse_expr_until(state, for_clause_stops())
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  state.node_from_children(Clause_Parameter, children)
+  state
+  .node_from_children(Binding_For, children)
+  .with_structured_name("semantic_name", Name_Binder, ["name"])
 }
 
 ///|
@@ -6049,7 +6953,7 @@ fn parse_for_binding_list(state : ParserState) -> CstNode {
       None => done = true
     }
   }
-  state.node_from_children(List_StatementList, children)
+  state.node_from_children(List_ForBindingList, children)
 }
 
 ///|
@@ -6063,22 +6967,6 @@ fn consume_for_header_separator(state : ParserState) -> Unit {
       let _ = state.consume_trivia()
     }
     _ => ()
-  }
-}
-
-///|
-fn consume_for_header_separators(state : ParserState) -> Unit {
-  let mut done = false
-  while !done {
-    match state.peek() {
-      Some((SEMI(_), _, _)) => {
-        let _ = state.consume_any()
-      }
-      Some((NEWLINE, _, _)) => {
-        let _ = state.consume_trivia()
-      }
-      _ => done = true
-    }
   }
 }
 
@@ -6255,7 +7143,7 @@ fn parse_where_clause(state : ParserState) -> CstNode {
         TokenKind::TK_LBRACE,
         TokenKind::TK_RBRACE,
         parse_where_field_item,
-        List_FieldList,
+        List_WhereFieldList,
         sep_kind=TokenKind::TK_COMMA,
       ),
     )
@@ -6290,7 +7178,9 @@ fn parse_where_field_item(state : ParserState) -> CstNode {
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  state.node_from_children(Clause_Parameter, children)
+  state
+  .node_from_children(Field_Where, children)
+  .with_structured_name("semantic_name", Name_Field, ["name"])
 }
 
 ///|
@@ -6299,6 +7189,11 @@ fn parse_quantifier_expr(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let quantifier_kind = if state.current_is(TokenKind::TK_EXISTS) {
+    QuantifierKind_Exists
+  } else {
+    QuantifierKind_Forall
+  }
   if state.consume_any() is Some(kw) {
     push_child(children, Some("kw"), kw)
   } else {
@@ -6335,7 +7230,11 @@ fn parse_quantifier_expr(
   if !body.children.is_empty() {
     push_child(children, Some("body"), body)
   }
-  state.node_from_children(Expr_Quantifier, children)
+  with_marker_child(
+    state.node_from_children(Expr_Quantifier, children),
+    "quantifier_kind",
+    quantifier_kind,
+  )
 }
 
 ///|
@@ -6415,23 +7314,47 @@ fn parse_lexmatch_case_block(state : ParserState) -> CstNode {
       _ => push_child(children, Some("case"), parse_lexmatch_case(state))
     }
   }
-  state.node_from_children(List_StatementList, children)
+  state.node_from_children(List_LexCaseList, children)
+}
+
+///|
+fn lex_top_pattern_marker_kind(node : CstNode) -> NodeKind {
+  match node.kind {
+    Pattern_Tuple if node.has_child_kind(Pattern_Group) =>
+      match node.first_child_with_label("body") {
+        Some(body) =>
+          match body.children_with_label("item").get(0) {
+            Some(item) => lex_top_pattern_marker_kind(item)
+            None => LexTopPattern_Wildcard
+          }
+        None => LexTopPattern_Wildcard
+      }
+    Pattern_Var => LexTopPattern_Binder
+    Pattern_Any | Pattern_MissingPattern => LexTopPattern_Wildcard
+    _ => LexTopPattern_Pattern
+  }
+}
+
+///|
+fn with_lex_top_pattern_marker(node : CstNode) -> CstNode {
+  with_marker_child(node, "lex_top_pattern", lex_top_pattern_marker_kind(node))
 }
 
 ///|
 fn parse_lex_top_pattern_item(state : ParserState) -> CstNode {
-  match state.peek() {
-    Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
-      parse_single_token_pattern(state, Pattern_Binder)
-    Some((UNDERSCORE, _, _)) =>
-      parse_single_token_pattern(state, Pattern_Underscore)
-    _ =>
-      parse_lex_pattern_until(state, [
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RPAREN,
-        TokenKind::TK_EOF,
-      ])
-  }
+  with_lex_top_pattern_marker(
+    match state.peek() {
+      Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
+        parse_single_token_pattern(state, Pattern_Var)
+      Some((UNDERSCORE, _, _)) => parse_single_token_pattern(state, Pattern_Any)
+      _ =>
+        parse_lex_pattern_until(state, [
+          TokenKind::TK_COMMA,
+          TokenKind::TK_RPAREN,
+          TokenKind::TK_EOF,
+        ])
+    },
+  )
 }
 
 ///|
@@ -6450,16 +7373,20 @@ fn parse_lexmatch_case_pattern(state : ParserState) -> CstNode {
         TokenKind::TK_LPAREN,
         TokenKind::TK_RPAREN,
         parse_lex_top_pattern_item,
-        List_PatternList,
+        List_LexTopPatternList,
         sep_kind=TokenKind::TK_COMMA,
         require_nonempty=true,
       )
-      state.node_from_children(Pattern_Tuple, [(Some("body"), list)])
+      let tuple = state.node_from_children(Pattern_Tuple, [(Some("body"), list)])
+      if list.has_child_label("sep") {
+        tuple
+      } else {
+        with_marker_child(tuple, "pattern_group", Pattern_Group)
+      }
     }
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
-      parse_single_token_pattern(state, Pattern_Binder)
-    Some((UNDERSCORE, _, _)) =>
-      parse_single_token_pattern(state, Pattern_Underscore)
+      parse_single_token_pattern(state, Pattern_Var)
+    Some((UNDERSCORE, _, _)) => parse_single_token_pattern(state, Pattern_Any)
     Some((tok, _, _)) if lex_pattern_atom_can_start(tok) =>
       parse_lex_pattern_until(state, stop_kinds, allow_alias=false)
     Some((tok, _, _)) => {
@@ -6489,22 +7416,24 @@ fn parse_lexmatch_case(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   if state.current_is(TokenKind::TK_ELLIPSIS) {
     if state.consume_any() is Some(todo) {
-      push_child(
-        children,
-        Some("pattern"),
+      let wildcard = with_marker_child(
         state.node_from_children(Pattern_MissingPattern, [(Some("token"), todo)]),
+        "lex_top_pattern",
+        LexTopPattern_Wildcard,
       )
+      push_child(children, Some("pattern"), wildcard)
       push_child(
         children,
         Some("body"),
-        state.node_from_children(Expr_Hole, [(Some("token"), todo)]),
+        hole_node_from_children(state, [(Some("token"), todo)], todo=true),
       )
     } else {
       ()
     }
     return state.node_from_children(Case_LexCase, children)
   }
-  let pat = parse_lexmatch_case_pattern(state)
+  let parsed_pat = parse_lexmatch_case_pattern(state)
+  let pat = with_lex_top_pattern_marker(parsed_pat)
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
@@ -6586,7 +7515,7 @@ fn parse_lexscan_case_block(state : ParserState) -> CstNode {
         push_child(children, Some("case"), parse_lexscan_case(state))
     }
   }
-  state.node_from_children(List_StatementList, children)
+  state.node_from_children(List_LexScanCaseList, children)
 }
 
 ///|
@@ -6611,26 +7540,36 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   match state.peek() {
     Some((ELLIPSIS, _, _)) => {
       if state.consume_any() is Some(todo) {
-        push_child(
-          children,
-          Some("pattern"),
+        let wildcard = with_marker_child(
           state.node_from_children(Pattern_MissingPattern, [
             (Some("token"), todo),
           ]),
+          "lex_scan_case_pattern",
+          LexScanCasePattern_Wildcard,
         )
+        push_child(children, Some("pattern"), wildcard)
         push_child(
           children,
           Some("body"),
-          state.node_from_children(Expr_Hole, [(Some("token"), todo)]),
+          hole_node_from_children(state, [(Some("token"), todo)], todo=true),
         )
       } else {
         ()
       }
-      return state.node_from_children(Case_MatchCase, children)
+      return state.node_from_children(Case_LexScanCase, children)
     }
     _ => ()
   }
-  let pat = parse_lexscan_case_pattern(state)
+  let parsed_pat = parse_lexscan_case_pattern(state)
+  let pat = with_marker_child(
+    parsed_pat,
+    "lex_scan_case_pattern",
+    match parsed_pat.kind {
+      Pattern_Var => LexScanCasePattern_Binder
+      Pattern_Any | Pattern_MissingPattern => LexScanCasePattern_Wildcard
+      _ => LexScanCasePattern_Pattern
+    },
+  )
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
@@ -6664,7 +7603,7 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   if !body.children.is_empty() {
     push_child(children, Some("body"), body)
   }
-  state.node_from_children(Case_MatchCase, children)
+  state.node_from_children(Case_LexScanCase, children)
 }
 
 ///|
@@ -6713,7 +7652,7 @@ fn parse_function_expr(
           ()
         }
       }
-      return state.node_from_children(Expr_Function, children)
+      return function_node_from_children(state, children, FnKind_Lambda)
     }
     _ => ()
   }
@@ -6738,7 +7677,7 @@ fn parse_function_expr(
     }
     push_child(children, Some("body"), body)
   }
-  state.node_from_children(Expr_Function, children)
+  function_node_from_children(state, children, FnKind_Lambda)
 }
 
 ///|
@@ -6781,7 +7720,7 @@ fn parse_case_block(state : ParserState) -> CstNode {
         push_child(children, Some("case"), parse_match_case(state))
     }
   }
-  state.node_from_children(List_StatementList, children)
+  state.node_from_children(List_MatchCaseList, children)
 }
 
 ///|
@@ -6800,7 +7739,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
         push_child(
           children,
           Some("body"),
-          state.node_from_children(Expr_Hole, [(Some("token"), todo)]),
+          hole_node_from_children(state, [(Some("token"), todo)], todo=true),
         )
       } else {
         ()
@@ -6821,13 +7760,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     if pat.kind is Pattern_Constraint {
       if pat.first_child_with_label("op") is Some(op) {
-        if op.first_token() is Some(found) {
-          state.report_expected_tokens_at(found, op.loc, [
-            TokenKind::TK_FAT_ARROW,
-          ])
-        } else {
-          ()
-        }
+        state.report_expected_tokens_at(COLON, op.loc, [TokenKind::TK_FAT_ARROW])
       } else {
         ()
       }
@@ -6995,115 +7928,74 @@ fn parse_match_expr(state : ParserState) -> CstNode {
 }
 
 ///|
-fn argument_label_question_can_follow_token(tok : Token) -> Bool {
-  match tok {
-    LIDENT(_) | EXTEND => true
-    _ => false
+fn token_label_from_token(token : Token) -> String? {
+  if token is SEMI(_) {
+    Some("sep")
+  } else {
+    expr_token_kind_label(token.kind())
   }
 }
 
 ///|
-fn argument_label_question_has_valid_prefix(state : ParserState) -> Bool {
-  let mut offset = -1
-  while state.pos + offset >= 0 {
-    match state.peek(offset~) {
-      Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset -= 1
-      Some((tok, _, _)) => return argument_label_question_can_follow_token(tok)
-      None => return false
-    }
-  }
-  false
-}
-
-///|
-fn argument_label_question_has_valid_suffix(state : ParserState) -> Bool {
-  let mut offset = 1
-  while true {
-    match state.peek(offset~) {
-      Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
-      Some((COMMA, _, _)) | Some((RPAREN, _, _)) | Some((EQUAL, _, _)) =>
-        return true
-      Some(_) | None => return false
-    }
-  }
-  false
-}
-
-///|
-fn argument_label_question_has_valid_context(state : ParserState) -> Bool {
-  argument_label_question_has_valid_prefix(state) &&
-  argument_label_question_has_valid_suffix(state)
-}
-
-///|
-fn token_label_from_node(node : CstNode) -> String? {
-  match node.kind {
-    Token(SEMI(_)) => Some("sep")
-    Token(tok) => expr_token_label(tok)
-    _ => Some("item")
-  }
-}
-
-///|
-fn expr_token_label(tok : Token) -> String? {
-  match tok {
-    TRY_QUESTION
-    | TRY_EXCLAMATION
-    | NORAISE
-    | IS
-    | IN
-    | FOR
-    | DEFER
-    | GUARD
-    | RETURN
-    | WHILE
-    | THIN_ARROW
-    | FAT_ARROW
-    | PROOF_ASSERT
-    | PROOF_LET
-    | IF
-    | ELSE
-    | PIPE
-    | PIPE_LEFT
-    | LT_PLUS
-    | LT_QUESTION
-    | AS
-    | BARBAR
-    | CARET
-    | AMPER
-    | AMPERAMPER
-    | BAR
-    | PLUS
-    | EXCLAMATION
-    | QUESTION
-    | MINUS
-    | EQUAL
-    | EQ_TILDE
-    | CATCH
-    | TRY
-    | RAISE
-    | WITH
-    | CONTINUE
-    | BREAK
-    | AUGMENTED_ASSIGNMENT(_)
-    | PLUS_EQUAL
-    | INFIX4(_)
-    | INFIX3(_)
-    | INFIX2(_)
-    | INFIX1(_)
-    | LEXMATCH
-    | LEXMATCH_QUESTION
-    | LEXSCAN
-    | RANGE_EXCLUSIVE
-    | RANGE_INCLUSIVE
-    | RANGE_EXCLUSIVE_REV
-    | RANGE_INCLUSIVE_REV
-    | RANGE_LT_INCLUSIVE
-    | WHERE
-    | NOBREAK
-    | FORALL
-    | EXISTS
-    | IMPLIES => Some("op")
+fn expr_token_kind_label(kind : TokenKind) -> String? {
+  match kind {
+    TK_TRY_QUESTION
+    | TK_TRY_EXCLAMATION
+    | TK_NORAISE
+    | TK_IS
+    | TK_IN
+    | TK_FOR
+    | TK_DEFER
+    | TK_GUARD
+    | TK_RETURN
+    | TK_WHILE
+    | TK_THIN_ARROW
+    | TK_FAT_ARROW
+    | TK_PROOF_ASSERT
+    | TK_PROOF_LET
+    | TK_IF
+    | TK_ELSE
+    | TK_PIPE
+    | TK_PIPE_LEFT
+    | TK_LT_PLUS
+    | TK_LT_QUESTION
+    | TK_AS
+    | TK_BARBAR
+    | TK_CARET
+    | TK_AMPER
+    | TK_AMPERAMPER
+    | TK_BAR
+    | TK_PLUS
+    | TK_EXCLAMATION
+    | TK_QUESTION
+    | TK_MINUS
+    | TK_EQUAL
+    | TK_EQ_TILDE
+    | TK_CATCH
+    | TK_TRY
+    | TK_RAISE
+    | TK_WITH
+    | TK_CONTINUE
+    | TK_BREAK
+    | TK_AUGMENTED_ASSIGNMENT
+    | TK_PLUS_EQUAL
+    | TK_INFIX4
+    | TK_INFIX3
+    | TK_INFIX2
+    | TK_INFIX1
+    | TK_LEXMATCH
+    | TK_LEXMATCH_QUESTION
+    | TK_LEXSCAN
+    | TK_RANGE_EXCLUSIVE
+    | TK_RANGE_INCLUSIVE
+    | TK_RANGE_EXCLUSIVE_REV
+    | TK_RANGE_INCLUSIVE_REV
+    | TK_RANGE_LT_INCLUSIVE
+    | TK_WHERE
+    | TK_NOBREAK
+    | TK_FORALL
+    | TK_EXISTS
+    | TK_IMPLIES => Some("op")
     _ => Some("token")
   }
 }
@@ -7125,7 +8017,7 @@ fn parse_argument_item(state : ParserState) -> CstNode {
         parse_invalid_simple_expr(state, item_stops)
       _ => {
         let reports_before_expr = state.reports.length()
-        state.required_expr_node(
+        let expr = state.required_expr_node(
           parse_expr_until(
             state,
             item_stops,
@@ -7133,6 +8025,7 @@ fn parse_argument_item(state : ParserState) -> CstNode {
           ),
           reports_before_expr,
         )
+        state.node_from_children(Argument_Positional, [(Some("expr"), expr)])
       }
     }
   }
@@ -7218,12 +8111,16 @@ fn parse_labelled_argument(state : ParserState) -> CstNode {
       )
     }
   }
-  state.node_from_children(kind, children)
+  state
+  .node_from_children(kind, children)
+  .with_structured_name("semantic_name", Name_Label, ["name"])
+  .with_bool_marker("pun", Flag_Pun, kind is Argument_LabelledPun)
 }
 
 ///|
 fn parse_optional_forwarding_argument(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut question_node : CstNode? = None
   match state.peek() {
     Some((UIDENT(name), start, end)) =>
       state.report(
@@ -7238,6 +8135,7 @@ fn parse_optional_forwarding_argument(state : ParserState) -> CstNode {
     ()
   }
   if state.consume_any() is Some(question) {
+    question_node = Some(question)
     push_child(children, Some("op"), question)
   } else {
     ()
@@ -7263,7 +8161,20 @@ fn parse_optional_forwarding_argument(state : ParserState) -> CstNode {
       state.required_expr_node(expr, reports_before_expr),
     )
   }
-  state.node_from_children(kind, children)
+  let result = state
+    .node_from_children(kind, children)
+    .with_structured_name("semantic_name", Name_Label, ["name"])
+    .with_bool_marker("pun", Flag_Pun, kind is Argument_LabelledOptionPun)
+  match question_node {
+    Some(question) =>
+      result.with_token_location(
+        "question_loc",
+        question.kind,
+        question.loc,
+        question.source_span,
+      )
+    None => result
+  }
 }
 
 ///|
@@ -7563,7 +8474,7 @@ fn parse_proof_assert_statement(state : ParserState) -> CstNode {
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  state.node_from_children(Stmt_ProofAssert, children)
+  state.node_from_children(Expr_ProofAssert, children)
 }
 
 ///|
@@ -7598,7 +8509,9 @@ fn parse_proof_let_statement(state : ParserState) -> CstNode {
       push_child(children, Some("expr"), expr)
     }
   }
-  state.node_from_children(Stmt_ProofLet, children)
+  state
+  .node_from_children(Expr_ProofLet, children)
+  .with_structured_name("semantic_name", Name_Binder, ["name"])
 }
 
 ///|
@@ -7625,7 +8538,7 @@ fn parse_letrec_statement(state : ParserState) -> CstNode {
       _ => done = true
     }
   }
-  state.node_from_children(Expr_LetRec, children)
+  state.node_from_children(Expr_LetAnd, children)
 }
 
 ///|
@@ -7686,7 +8599,10 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
         ()
       }
     }
-    return state.node_from_children(Expr_LetFn, children)
+    return state
+      .node_from_children(Binding_LetRec, children)
+      .with_structured_name("semantic_name", Name_Binder, ["name"])
+      .with_bool_marker("async", Flag_Async, false)
   }
   let mut saw_fn = false
   if state.current_is(TokenKind::TK_ASYNC) {
@@ -7732,7 +8648,20 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
       push_child(children, Some("expr"), expr)
     }
   }
-  state.node_from_children(Expr_LetFn, children)
+  state
+  .node_from_children(Binding_LetRec, children)
+  .with_structured_name("semantic_name", Name_Binder, ["name"])
+  .with_bool_marker(
+    "async",
+    Flag_Async,
+    children
+    .iter()
+    .any(fn(entry) {
+      entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+    }),
+  )
+  .with_async_location_anchor()
+  .with_decl_like_function_location_anchor()
 }
 
 ///|
@@ -7783,7 +8712,19 @@ fn parse_local_function_statement(state : ParserState) -> CstNode {
         ()
       }
     }
-    return state.node_from_children(Expr_LetFn, children)
+    return state
+      .node_from_children(Expr_LetFn, children)
+      .with_bool_marker(
+        "async",
+        Flag_Async,
+        children
+        .iter()
+        .any(fn(entry) {
+          entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+        }),
+      )
+      .with_async_location_anchor()
+      .with_decl_like_function_location_anchor()
   }
   if state.current_is(TokenKind::TK_LPAREN) {
     push_child(children, Some("params"), parse_parameter_list(state))
@@ -7796,21 +8737,83 @@ fn parse_local_function_statement(state : ParserState) -> CstNode {
   if state.current_is(TokenKind::TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   }
-  state.node_from_children(Expr_LetFn, children)
+  state
+  .node_from_children(Expr_LetFn, children)
+  .with_bool_marker(
+    "async",
+    Flag_Async,
+    children
+    .iter()
+    .any(fn(entry) {
+      entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+    }),
+  )
+  .with_async_location_anchor()
+  .with_decl_like_function_location_anchor()
 }
 
 ///|
 fn parse_argument_list(state : ParserState) -> CstNode {
-  parse_delimited(
-    state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
-    parse_argument_item,
-    List_ArgumentList,
-    sep_kind=TokenKind::TK_COMMA,
-    follow_set=[TokenKind::TK_SEMI, TokenKind::TK_RBRACE],
-    post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
+  annotate_argument_list_locations(
+    parse_delimited(
+      state,
+      TokenKind::TK_LPAREN,
+      TokenKind::TK_RPAREN,
+      parse_argument_item,
+      List_ArgumentList,
+      sep_kind=TokenKind::TK_COMMA,
+      follow_set=[TokenKind::TK_SEMI, TokenKind::TK_RBRACE],
+      post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
+    ),
   )
+}
+
+///|
+fn annotate_argument_list_locations(source : CstNode) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  for i in 0..<source.children.length() {
+    match source.children.get(i) {
+      Some((Some("item"), item)) if item.kind is Argument_LabelledPun => {
+        let mut following : CstNode? = None
+        for j in (i + 1)..<source.children.length() {
+          match source.children.get(j) {
+            Some((Some("sep" | "close"), child)) => {
+              following = Some(child)
+              break
+            }
+            _ => ()
+          }
+        }
+        let annotated = match following {
+          Some(child) => {
+            let token_kind = if child.kind.is_syntax_token() {
+              child.kind
+            } else {
+              Syntax_Delimiter
+            }
+            item
+            .with_token_location(
+              "label_loc",
+              token_kind,
+              child.loc,
+              child.source_span,
+            )
+            .with_token_location(
+              "value_loc",
+              token_kind,
+              child.loc.trim_last_char(),
+              empty_span(child.source_span.0),
+            )
+          }
+          None => item
+        }
+        push_child(children, Some("item"), annotated)
+      }
+      Some(entry) => children.push(entry)
+      None => ()
+    }
+  }
+  node(source.kind, source.loc, source.source_span, children)
 }
 
 ///|
@@ -7820,14 +8823,17 @@ fn parse_statement_list(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
     parse_statement_item,
-    List_StatementList,
+    List_BlockStatementList,
     sep_kind=TokenKind::TK_SEMI,
     item_expected="simple expression",
   )
 }
 
 ///|
-fn parse_block_expr(state : ParserState) -> CstNode {
+fn parse_block_expr(
+  state : ParserState,
+  classify_record_pun? : Bool = false,
+) -> CstNode {
   match state.peek_nth_significant(1) {
     Some((EOF, start, end)) =>
       state.report_expected_description_at(
@@ -7838,7 +8844,47 @@ fn parse_block_expr(state : ParserState) -> CstNode {
     _ => ()
   }
   let list = parse_statement_list(state)
-  node(Expr_Block, list.loc, list.source_span, [(Some("body"), list)])
+  let items = list.children_with_label("item")
+  if classify_record_pun && items.length() == 1 && items[0].kind is Expr_Ident {
+    if items[0].first_child_with_label("name") is Some(name) {
+      let field = state
+        .node_from_children(Field_Definition, [(Some("name"), name)])
+        .with_structured_name("semantic_name", Name_Field, ["name"])
+        .with_bool_marker("pun", Flag_Pun, true)
+      let record_children : Array[(String?, CstNode)] = []
+      for entry in list.children {
+        let (label, child) = entry
+        if label == Some("item") {
+          push_child(record_children, label, field)
+        } else {
+          push_child(record_children, label, child)
+        }
+      }
+      let record_body = with_marker_child(
+        node(List_RecordFieldList, list.loc, list.source_span, record_children),
+        "trailing",
+        list_trailing_mark_kind(list),
+      )
+      return state.node_from_children(Expr_Record, [(Some("body"), record_body)])
+    }
+  }
+  let body = if items.length() >= 2 &&
+    !(items[0].kind
+    is (Expr_Let
+    | Expr_LetMut
+    | Expr_LetFn
+    | Expr_LetAnd
+    | Expr_Guard
+    | Expr_Defer)) {
+    state.node_from_children(Expr_Sequence, [(Some("body"), list)])
+  } else {
+    list
+  }
+  with_marker_child(
+    state.node_from_children(Expr_Block, [(Some("body"), body)]),
+    "group",
+    Group_Brace,
+  )
 }
 
 ///|
@@ -7998,7 +9044,7 @@ fn parse_delimited(
   let mut suppress_missing_close = false
   while !done {
     push_children(children, state.consume_trivia())
-    if list_kind is List_StatementList && state.abort_current_decl {
+    if list_kind is List_BlockStatementList && state.abort_current_decl {
       if state.current_is(close_kind) {
         push_child(children, Some("close"), state.expect_token(close_kind))
       } else {
@@ -8022,7 +9068,7 @@ fn parse_delimited(
     } else if state.current_is(TokenKind::TK_EOF) ||
       state.current_in(follow_set) ||
       state.peek() is None {
-      if expect_item && list_kind is List_StatementList {
+      if expect_item && list_kind is List_BlockStatementList {
         push_child(
           children,
           Some("close"),
@@ -8097,7 +9143,10 @@ fn parse_delimited(
           false
         }
         if state.reports.length() > reports_before_item &&
-          (!(list_kind is List_StatementList) || latest_report_is_at_current) &&
+          (
+            !(list_kind is List_BlockStatementList) ||
+            latest_report_is_at_current
+          ) &&
           !state.current_is(sep_kind) &&
           !state.current_is(close_kind) &&
           !state.current_is(TokenKind::TK_EOF) &&
@@ -8188,9 +9237,10 @@ fn parse_delimited(
           recovering = false
         }
       }
-      if list_kind is List_ArgumentList && recovery_token is Some(ELSE) {
+      if (list_kind is List_ArgumentList || list_kind is List_TupleElementList) &&
+        recovery_token is Some(ELSE) {
         report_next_top_level_recovery_point(state)
-      } else if list_kind is List_StatementList &&
+      } else if list_kind is List_BlockStatementList &&
         recovery_token is Some(EXCLAMATION) &&
         recovery_crosses_argument_boundary(state) {
         report_next_top_level_recovery_point(state)
@@ -8277,13 +9327,12 @@ fn parse_pattern_atom(
       }
       state.node_from_children(Pattern_Constraint, children)
     }
-    Some((UNDERSCORE, _, _)) =>
-      parse_single_token_pattern(state, Pattern_Underscore)
+    Some((UNDERSCORE, _, _)) => parse_single_token_pattern(state, Pattern_Any)
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) => {
-      let mut node = parse_single_token_pattern(state, Pattern_Binder)
+      let mut node = parse_single_token_pattern(state, Pattern_Var)
       if state.current_is(TokenKind::TK_LPAREN) {
         let args = parse_constructor_pattern_args(state)
-        node = state.node_from_children(Pattern_SpecialConstructor, [
+        node = state.node_from_children(Pattern_SpecialConstr, [
           (Some("name"), node),
           (Some("params"), args),
         ])
@@ -8348,11 +9397,34 @@ fn parse_pattern_atom(
           parse_constructor_pattern_args(state),
         )
       }
-      state.node_from_children(Pattern_Constructor, children)
+      let pattern = state
+        .node_from_children(Pattern_Constr, children)
+        .with_structured_name("semantic_name", Name_Constructor, [
+          "pkg", "type", "name", "field",
+        ])
+        .with_constructor_extra_info()
+      let is_open = pattern
+        .first_child_with_label("params")
+        .map(list => list_has_item_kind(list, Pattern_Rest))
+        .unwrap_or(false)
+      with_marker_child(
+        pattern,
+        "openness",
+        if is_open {
+          Openness_Open
+        } else {
+          Openness_Closed
+        },
+      )
     }
     Some((LPAREN, _, _)) => {
       let list = parse_constructor_pattern_args(state, tuple_pattern=true)
-      state.node_from_children(Pattern_Tuple, [(Some("body"), list)])
+      let tuple = state.node_from_children(Pattern_Tuple, [(Some("body"), list)])
+      if list.children_with_label("item").length() == 1 {
+        with_marker_child(tuple, "pattern_group", Pattern_Group)
+      } else {
+        tuple
+      }
     }
     Some((LBRACKET, _, _)) => {
       let list = parse_array_pattern_list(state)
@@ -8361,12 +9433,26 @@ fn parse_pattern_atom(
     Some((LBRACE, _, _)) =>
       if brace_starts_map_pattern(state) {
         let list = parse_map_pattern_list(state)
-        validate_brace_pattern_list(state, list, true)
-        state.node_from_children(Pattern_Map, [(Some("body"), list)])
+        with_marker_child(
+          state.node_from_children(Pattern_Map, [(Some("body"), list)]),
+          "openness",
+          if list_has_item_kind(list, Pattern_Rest) {
+            Openness_Open
+          } else {
+            Openness_Closed
+          },
+        )
       } else {
         let list = parse_record_pattern_list(state)
-        validate_brace_pattern_list(state, list, false)
-        state.node_from_children(Pattern_Record, [(Some("body"), list)])
+        with_marker_child(
+          state.node_from_children(Pattern_Record, [(Some("body"), list)]),
+          "openness",
+          if list_has_item_kind(list, Pattern_Rest) {
+            Openness_Open
+          } else {
+            Openness_Closed
+          },
+        )
       }
     Some((found, start, end)) if found is (REGEX_INTERP(_) | INTERP(_)) => {
       let pat = parse_regex_interp_lex_pattern_node(state)
@@ -8479,7 +9565,12 @@ fn brace_starts_map_pattern(state : ParserState) -> Bool {
 ///|
 fn parse_single_token_pattern(state : ParserState, kind : NodeKind) -> CstNode {
   if state.consume_any() is Some(token) {
-    state.node_from_children(kind, [(Some("name"), token)])
+    let pattern = state.node_from_children(kind, [(Some("name"), token)])
+    if kind is Pattern_Var {
+      pattern.with_structured_name("semantic_name", Name_Binder, ["name"])
+    } else {
+      pattern
+    }
   } else {
     state.node_from_children(Pattern_MissingPattern, [])
   }
@@ -8492,35 +9583,54 @@ fn parse_literal_pattern(
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let _ = stop_kinds
+  let first_token = state.peek().map(item => item.0)
+  let first_is_minus = first_token is Some(MINUS)
+  let mut constant : CstNode? = None
   if state.consume_any() is Some(token) {
-    push_child(children, token_label_from_node(token), token)
-  } else {
-    ()
-  }
-  let first_is_minus = match children.get(0) {
-    Some((_, child)) =>
-      match child.kind {
-        Token(MINUS) => true
-        _ => false
-      }
-    None => false
+    push_child(
+      children,
+      if first_is_minus {
+        Some("op")
+      } else {
+        Some("token")
+      },
+      token,
+    )
+    if first_is_minus {
+      push_child(
+        children,
+        Some("operator"),
+        operator_node_from_token(
+          Operator_UnaryMinus,
+          MINUS,
+          token.loc,
+          token.source_span,
+        ),
+      )
+    }
+    if !first_is_minus && first_token is Some(raw) {
+      constant = constant_node_from_token(raw, token.loc, token.source_span)
+    }
   }
   match state.peek() {
-    Some((INT(_), _, _)) if first_is_minus =>
+    Some((raw, _, _)) if first_is_minus && raw is INT(_) =>
       if state.consume_any() is Some(token) {
         push_child(children, Some("token"), token)
+        constant = constant_node_from_token(raw, token.loc, token.source_span)
       } else {
         ()
       }
-    Some((DOUBLE(_), _, _)) if first_is_minus =>
+    Some((raw, _, _)) if first_is_minus && raw is DOUBLE(_) =>
       if state.consume_any() is Some(token) {
         push_child(children, Some("token"), token)
+        constant = constant_node_from_token(raw, token.loc, token.source_span)
       } else {
         ()
       }
-    Some((FLOAT(_), _, _)) if first_is_minus =>
+    Some((raw, _, _)) if first_is_minus && raw is FLOAT(_) =>
       if state.consume_any() is Some(token) {
         push_child(children, Some("token"), token)
+        constant = constant_node_from_token(raw, token.loc, token.source_span)
       } else {
         ()
       }
@@ -8542,7 +9652,14 @@ fn parse_literal_pattern(
     }
     _ => ()
   }
-  state.node_from_children(Pattern_Literal, children)
+  if constant is Some(value) {
+    push_child(
+      children,
+      Some("constant"),
+      signed_constant_node(value, first_is_minus),
+    )
+  }
+  state.node_from_children(Pattern_Constant, children)
 }
 
 ///|
@@ -8555,7 +9672,11 @@ fn parse_constructor_pattern_args(
     TokenKind::TK_LPAREN,
     TokenKind::TK_RPAREN,
     parse_constructor_pattern_arg,
-    List_PatternList,
+    if tuple_pattern {
+      List_TuplePatternList
+    } else {
+      List_ConstructorPatternArgumentList
+    },
     sep_kind=TokenKind::TK_COMMA,
     post_item_expected=if tuple_pattern {
       [TokenKind::TK_COMMA, TokenKind::TK_COLON, TokenKind::TK_RPAREN]
@@ -8594,7 +9715,9 @@ fn parse_constructor_pattern_args(
     let mut close : CstNode? = None
     for entry in list.children {
       match entry {
-        (Some("error"), item) if item.first_token() is Some(SEMI(_)) =>
+        (Some("error"), item) if item.first_trailing_mark_descendant()
+          is Some(mark) &&
+          mark.kind is TrailingMark_Semi =>
           saw_invalid_statement_separator = true
         (Some("close"), item) => close = Some(item)
         _ => ()
@@ -8602,13 +9725,11 @@ fn parse_constructor_pattern_args(
     }
     if saw_invalid_statement_separator {
       if close is Some(item) {
-        if item.first_token() is Some(found) {
-          state.report_expected_tokens_at(found, item.loc, [
-            TokenKind::TK_SEMI,
-            TokenKind::TK_RBRACE,
-          ])
+        let expected = [TokenKind::TK_SEMI, TokenKind::TK_RBRACE]
+        if item.kind is Missing {
+          state.report_expected_tokens(expected)
         } else {
-          ()
+          state.report_expected_tokens_at(RPAREN, item.loc, expected)
         }
       } else {
         ()
@@ -8670,7 +9791,10 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
       push_child(children, Some("pattern"), pat)
     }
   }
-  state.node_from_children(kind, children)
+  state
+  .node_from_children(kind, children)
+  .with_structured_name("semantic_name", Name_Label, ["name"])
+  .with_bool_marker("pun", Flag_Pun, kind is Argument_LabelledPun)
 }
 
 ///|
@@ -8696,20 +9820,25 @@ fn parse_labelled_constructor_pattern_arg(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
-  state.node_from_children(Argument_Labelled, children)
+  state
+  .node_from_children(Argument_Labelled, children)
+  .with_structured_name("semantic_name", Name_Label, ["name"])
+  .with_bool_marker("pun", Flag_Pun, false)
 }
 
 ///|
 fn parse_array_pattern_list(state : ParserState) -> CstNode {
+  let rest_offenders : Array[(Token, Location)] = []
   let list = parse_delimited(
     state,
     TokenKind::TK_LBRACKET,
     TokenKind::TK_RBRACKET,
-    parse_array_pattern_item,
-    List_PatternList,
+    fn(state) { parse_array_pattern_item(state, rest_offenders) },
+    List_ArrayPatternList,
     sep_kind=TokenKind::TK_COMMA,
   )
   let mut saw_ordinary_rest = false
+  let mut rest_offender_index = 0
   for i in 0..<list.children.length() {
     match list.children.get(i) {
       Some((Some("item"), item)) if item.kind is Pattern_Rest => {
@@ -8718,49 +9847,64 @@ fn parse_array_pattern_list(state : ParserState) -> CstNode {
           item.first_child_with_label("const") is Some(_)
         if !is_constant_spread {
           if saw_ordinary_rest {
-            let offender = if item.first_child_with_label("name") is Some(name) {
-              Some(name)
-            } else if item.first_child_with_label("as") is Some(as_token) {
-              Some(as_token)
-            } else {
-              item.first_child_with_label("op")
-            }
-            if offender is Some(node) {
-              state.report(
-                node.loc,
-                "At most one `..` is allowed in array pattern.",
-              )
-              if node.first_token() is Some(found) {
-                state.report_expected_tokens_at(found, node.loc, [
-                  TokenKind::TK_COMMA,
-                  TokenKind::TK_RBRACKET,
-                ])
-              } else {
-                ()
-              }
+            if rest_offenders.get(rest_offender_index) is Some((found, loc)) {
+              state.report(loc, "At most one `..` is allowed in array pattern.")
+              state.report_expected_tokens_at(found, loc, [
+                TokenKind::TK_COMMA,
+                TokenKind::TK_RBRACKET,
+              ])
             } else {
               ()
             }
           } else {
             saw_ordinary_rest = true
           }
+          rest_offender_index += 1
         }
       }
       _ => ()
     }
   }
-  list
+  node(
+    if saw_ordinary_rest {
+      ArrayPatterns_Open
+    } else {
+      ArrayPatterns_Closed
+    },
+    list.loc,
+    list.source_span,
+    [(Some("body"), list)],
+  )
 }
 
 ///|
-fn parse_array_pattern_item(state : ParserState) -> CstNode {
-  match state.peek() {
-    Some((DOTDOT, _, _)) => parse_dotdot_pattern_rest(state)
+fn parse_array_pattern_item(
+  state : ParserState,
+  rest_offenders : Array[(Token, Location)],
+) -> CstNode {
+  let item = match state.peek() {
+    Some((DOTDOT, _, _)) =>
+      parse_dotdot_pattern_rest_recording(state, rest_offenders)
     _ =>
       parse_pattern_until(state, [
         TokenKind::TK_COMMA,
         TokenKind::TK_RBRACKET,
         TokenKind::TK_EOF,
+      ])
+  }
+  match item.kind {
+    Pattern_Rest if item.first_child_with_label("str") is Some(_) =>
+      item.with_kind(ArrayPattern_StringSpread)
+    Pattern_Rest if item.first_child_with_label("bytes") is Some(_) =>
+      item.with_kind(ArrayPattern_BytesSpread)
+    Pattern_Rest if item.first_child_with_label("const") is Some(_) =>
+      item
+      .with_kind(ArrayPattern_ConstSpread)
+      .with_structured_name("semantic_name", Name_Binder, ["const"])
+    Pattern_Rest => item
+    _ =>
+      node(ArrayPattern_Pattern, item.loc, item.source_span, [
+        (Some("pattern"), item),
       ])
   }
 }
@@ -8785,6 +9929,7 @@ fn validate_brace_pattern_list(
   state : ParserState,
   list : CstNode,
   starts_as_map : Bool,
+  item_starts : Array[(Token, Location)?],
 ) -> Unit {
   let mut map_kind = starts_as_map
   let mut kind_known = starts_as_map
@@ -8792,26 +9937,14 @@ fn validate_brace_pattern_list(
     for i in 0..<list.children.length() {
       match list.children.get(i) {
         Some((Some("item"), item)) =>
-          match item.first_token() {
-            Some(DOTDOT) => ()
-            Some(LIDENT(_)) | Some(EXTEND) => {
+          match item.kind {
+            Pattern_Rest => ()
+            Field_Pattern => {
               kind_known = true
               map_kind = false
               break
             }
-            Some(
-              TRUE
-              | FALSE
-              | CHAR(_)
-              | BYTE(_)
-              | INT(_)
-              | DOUBLE(_)
-              | FLOAT(_)
-              | STRING(_)
-              | BYTES(_)
-              | REGEX_LITERAL(_)
-              | MINUS
-            ) => {
+            Field_MapPattern => {
               kind_known = true
               map_kind = true
               break
@@ -8833,8 +9966,8 @@ fn validate_brace_pattern_list(
   for i in 0..<list.children.length() {
     match list.children.get(i) {
       Some((Some("item"), item)) => {
-        match item.first_token() {
-          Some(DOTDOT) =>
+        match item.kind {
+          Pattern_Rest =>
             if item_index + 1 < item_count {
               if item.first_child_with_label("op") is Some(op) {
                 state.report(
@@ -8849,25 +9982,13 @@ fn validate_brace_pattern_list(
                 ()
               }
             }
-          Some(LIDENT(_)) | Some(EXTEND) =>
+          Field_Pattern =>
             if map_kind {
               state.report(item.loc, "Unexpected `..` here")
             } else {
               kind_known = true
             }
-          Some(
-            TRUE
-            | FALSE
-            | CHAR(_)
-            | BYTE(_)
-            | INT(_)
-            | DOUBLE(_)
-            | FLOAT(_)
-            | STRING(_)
-            | BYTES(_)
-            | REGEX_LITERAL(_)
-            | MINUS
-          ) =>
+          Field_MapPattern =>
             if kind_known && !map_kind {
               state.report(
                 item.loc,
@@ -8877,7 +9998,7 @@ fn validate_brace_pattern_list(
               kind_known = true
               map_kind = true
             }
-          Some(found) => {
+          _ => {
             let expected = if !kind_known {
               [
                 TokenKind::TK_LIDENT,
@@ -8889,9 +10010,12 @@ fn validate_brace_pattern_list(
             } else {
               [TokenKind::TK_LIDENT, TokenKind::TK_EXTEND]
             }
-            state.report_expected_tokens_at(found, item.loc, expected)
+            match item_starts.get(item_index) {
+              Some(Some((found, loc))) =>
+                state.report_expected_tokens_at(found, loc, expected)
+              _ => ()
+            }
           }
-          None => ()
         }
         item_index += 1
       }
@@ -8902,8 +10026,20 @@ fn validate_brace_pattern_list(
 
 ///|
 fn parse_dotdot_pattern_rest(state : ParserState) -> CstNode {
+  parse_dotdot_pattern_rest_recording(state, [])
+}
+
+///|
+fn parse_dotdot_pattern_rest_recording(
+  state : ParserState,
+  rest_offenders : Array[(Token, Location)],
+) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut binder_kind = DotDotBinder_None
+  let mut offender : (Token, Location)? = None
+  let mut is_constant_spread = false
   if state.consume_any() is Some(op) {
+    offender = Some((DOTDOT, op.loc))
     push_child(children, Some("op"), op)
   } else {
     ()
@@ -8911,23 +10047,27 @@ fn parse_dotdot_pattern_rest(state : ParserState) -> CstNode {
   match state.peek() {
     Some((STRING(_), _, _)) =>
       if state.consume_any() is Some(str) {
+        is_constant_spread = true
         push_child(children, Some("str"), str)
       } else {
         ()
       }
     Some((BYTES(_), _, _)) =>
       if state.consume_any() is Some(bytes) {
+        is_constant_spread = true
         push_child(children, Some("bytes"), bytes)
       } else {
         ()
       }
     Some((UIDENT(_), _, _)) =>
       if state.consume_any() is Some(name) {
+        is_constant_spread = true
         push_child(children, Some("const"), name)
       } else {
         ()
       }
     Some((PACKAGE_NAME(_), _, _)) => {
+      is_constant_spread = true
       if state.consume_any() is Some(pkg) {
         push_child(children, Some("pkg"), pkg)
       } else {
@@ -8944,14 +10084,17 @@ fn parse_dotdot_pattern_rest(state : ParserState) -> CstNode {
       }
     }
     Some((AS, _, _)) => {
+      binder_kind = DotDotBinder_BinderAs
       if state.consume_any() is Some(as_tok) {
+        offender = Some((AS, as_tok.loc))
         push_child(children, Some("as"), as_tok)
       } else {
         ()
       }
       match state.peek() {
-        Some((LIDENT(_), _, _)) =>
+        Some((LIDENT(value), _, _)) =>
           if state.consume_any() is Some(name) {
+            offender = Some((LIDENT(value), name.loc))
             push_child(children, Some("name"), name)
           } else {
             ()
@@ -8959,32 +10102,90 @@ fn parse_dotdot_pattern_rest(state : ParserState) -> CstNode {
         _ => ()
       }
     }
-    Some((UNDERSCORE, _, _)) | Some((LIDENT(_), _, _)) =>
+    Some((UNDERSCORE, _, _)) => {
+      binder_kind = DotDotBinder_Underscore
       if state.consume_any() is Some(name) {
+        offender = Some((UNDERSCORE, name.loc))
         push_child(children, Some("name"), name)
       } else {
         ()
       }
+    }
+    Some((LIDENT(value), _, _)) => {
+      binder_kind = DotDotBinder_Binder
+      if state.consume_any() is Some(name) {
+        offender = Some((LIDENT(value), name.loc))
+        push_child(children, Some("name"), name)
+      } else {
+        ()
+      }
+    }
     _ => ()
   }
-  state.node_from_children(Pattern_Rest, children)
+  if !is_constant_spread && offender is Some(value) {
+    rest_offenders.push(value)
+  }
+  with_marker_child(
+    state.node_from_children(Pattern_Rest, children),
+    "dot_dot_binder",
+    binder_kind,
+  )
 }
 
 ///|
 fn parse_record_pattern_list(state : ParserState) -> CstNode {
-  parse_delimited(
+  let item_starts : Array[(Token, Location)?] = []
+  let list = parse_delimited(
     state,
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
-    parse_record_pattern_item,
-    List_PatternList,
+    fn(state) {
+      item_starts.push(
+        state
+        .peek()
+        .map(fn(item) {
+          let (token, start, end) = item
+          (token, mk_loc(start, end))
+        }),
+      )
+      parse_brace_pattern_item(state)
+    },
+    List_RecordPatternFieldList,
     sep_kind=TokenKind::TK_COMMA,
   )
+  validate_brace_pattern_list(state, list, false, item_starts)
+  list
+}
+
+///|
+fn token_starts_map_pattern_item(token : Token) -> Bool {
+  token
+  is (MINUS
+  | STRING(_)
+  | BYTES(_)
+  | REGEX_LITERAL(_)
+  | INT(_)
+  | BYTE(_)
+  | CHAR(_)
+  | DOUBLE(_)
+  | FLOAT(_)
+  | TRUE
+  | FALSE)
+}
+
+///|
+fn parse_brace_pattern_item(state : ParserState) -> CstNode {
+  match state.peek() {
+    Some((token, _, _)) if token_starts_map_pattern_item(token) =>
+      parse_map_pattern_item(state)
+    _ => parse_record_pattern_item(state)
+  }
 }
 
 ///|
 fn parse_record_pattern_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut kind = Pattern_MissingPattern
   match state.peek() {
     Some((DOTDOT, _, _)) => {
       if state.consume_any() is Some(op) {
@@ -8994,11 +10195,17 @@ fn parse_record_pattern_item(state : ParserState) -> CstNode {
       }
       return state.node_from_children(Pattern_Rest, children)
     }
-    Some((LIDENT(_), _, _))
-    | Some((UIDENT(_), _, _))
-    | Some((STRING(_), _, _)) =>
+    Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) => {
+      kind = Field_Pattern
       if state.consume_any() is Some(name) {
         push_child(children, Some("name"), name)
+      } else {
+        ()
+      }
+    }
+    Some((UIDENT(_), _, _)) =>
+      if state.consume_any() is Some(name) {
+        push_child(children, Some("error"), name)
       } else {
         ()
       }
@@ -9028,24 +10235,50 @@ fn parse_record_pattern_item(state : ParserState) -> CstNode {
       push_child(children, Some("pattern"), pat)
     }
   }
-  state.node_from_children(Clause_Parameter, children)
+  let field = state.node_from_children(kind, children)
+  if kind is Field_Pattern {
+    field
+    .with_structured_name("semantic_name", Name_Field, ["name"])
+    .with_bool_marker(
+      "pun",
+      Flag_Pun,
+      children.iter().all(fn(entry) { !(entry.0 is Some("pattern")) }),
+    )
+  } else {
+    field
+  }
 }
 
 ///|
 fn parse_map_pattern_list(state : ParserState) -> CstNode {
-  parse_delimited(
+  let item_starts : Array[(Token, Location)?] = []
+  let list = parse_delimited(
     state,
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
-    parse_map_pattern_item,
-    List_PatternList,
+    fn(state) {
+      item_starts.push(
+        state
+        .peek()
+        .map(fn(item) {
+          let (token, start, end) = item
+          (token, mk_loc(start, end))
+        }),
+      )
+      parse_brace_pattern_item(state)
+    },
+    List_MapPatternFieldList,
     sep_kind=TokenKind::TK_COMMA,
   )
+  validate_brace_pattern_list(state, list, true, item_starts)
+  list
 }
 
 ///|
 fn parse_map_pattern_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut constant : CstNode? = None
+  let mut negative = false
   match state.peek() {
     Some((found, start, end)) if found is REGEX_LITERAL(_) =>
       state.report_expected_tokens_at(found, mk_loc(start, end), [
@@ -9073,17 +10306,27 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
       return state.node_from_children(Pattern_Rest, children)
     }
     Some((MINUS, _, _)) => {
+      negative = true
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
+        push_child(
+          children,
+          Some("operator"),
+          operator_node_from_token(
+            Operator_UnaryMinus,
+            MINUS,
+            op.loc,
+            op.source_span,
+          ),
+        )
       } else {
         ()
       }
       match state.peek() {
-        Some((INT(_), _, _))
-        | Some((DOUBLE(_), _, _))
-        | Some((FLOAT(_), _, _)) =>
+        Some((raw, _, _)) if raw is (INT(_) | DOUBLE(_) | FLOAT(_)) =>
           if state.consume_any() is Some(key) {
             push_child(children, Some("key"), key)
+            constant = constant_node_from_token(raw, key.loc, key.source_span)
           } else {
             ()
           }
@@ -9111,27 +10354,38 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
               ()
             }
           }
-          return state.node_from_children(Clause_Parameter, children)
+          return state
+            .node_from_children(Field_MapPattern, children)
+            .with_bool_marker("match_absent", Flag_MatchAbsent, false)
         }
         None => ()
       }
     }
-    Some((STRING(_), _, _))
-    | Some((BYTES(_), _, _))
-    | Some((REGEX_LITERAL(_), _, _))
-    | Some((INT(_), _, _))
-    | Some((BYTE(_), _, _))
-    | Some((CHAR(_), _, _))
-    | Some((DOUBLE(_), _, _))
-    | Some((FLOAT(_), _, _))
-    | Some((TRUE, _, _))
-    | Some((FALSE, _, _)) =>
+    Some((raw, _, _)) if raw
+      is (STRING(_)
+      | BYTES(_)
+      | REGEX_LITERAL(_)
+      | INT(_)
+      | BYTE(_)
+      | CHAR(_)
+      | DOUBLE(_)
+      | FLOAT(_)
+      | TRUE
+      | FALSE) =>
       if state.consume_any() is Some(key) {
         push_child(children, Some("key"), key)
+        constant = constant_node_from_token(raw, key.loc, key.source_span)
       } else {
         ()
       }
     _ => ()
+  }
+  if constant is Some(value) {
+    push_child(
+      children,
+      Some("constant"),
+      signed_constant_node(value, negative),
+    )
   }
   if state.current_is(TokenKind::TK_QUESTION) {
     if state.consume_any() is Some(question) {
@@ -9155,23 +10409,13 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
-  state.node_from_children(Clause_Parameter, children)
-}
-
-///|
-fn parse_array_pattern_rest(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
-  parse_pattern_atom(state, stop_kinds)
-}
-
-///|
-fn parse_map_pattern_entry(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
-  parse_pattern_atom(state, stop_kinds)
+  state
+  .node_from_children(Field_MapPattern, children)
+  .with_bool_marker(
+    "match_absent",
+    Flag_MatchAbsent,
+    children.iter().any(fn(entry) { entry.0 is Some("question") }),
+  )
 }
 
 ///|
@@ -9191,7 +10435,7 @@ fn parse_pattern_postfix(
         } else {
           ()
         }
-        pat = state.node_from_children(Pattern_Binder, children)
+        pat = state.node_from_children(Pattern_Var, children)
       }
       Some((COLON, _, _)) => {
         let children : Array[(String?, CstNode)] = [(Some("pattern"), pat)]
@@ -9244,6 +10488,11 @@ fn parse_pattern_range(
   let mut lhs = parse_pattern_postfix(state, stop_kinds)
   match state.peek() {
     Some((RANGE_EXCLUSIVE, _, _)) | Some((RANGE_INCLUSIVE, _, _)) => {
+      let range_kind = if state.current_is(TokenKind::TK_RANGE_EXCLUSIVE) {
+        RangeKind_Exclusive
+      } else {
+        RangeKind_Inclusive
+      }
       let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
@@ -9254,7 +10503,11 @@ fn parse_pattern_range(
       if !rhs.children.is_empty() {
         push_child(children, Some("rhs"), rhs)
       }
-      lhs = state.node_from_children(Pattern_Range, children)
+      lhs = with_marker_child(
+        state.node_from_children(Pattern_Range, children),
+        "range_kind",
+        range_kind,
+      )
     }
     _ => ()
   }
@@ -9365,7 +10618,7 @@ fn parse_lex_sequence_pattern(
       }
     }
   }
-  let body = state.node_from_children(List_PatternList, items)
+  let body = state.node_from_children(List_LexPatternList, items)
   state.node_from_children(LexPattern_Sequence, [(Some("body"), body)])
 }
 
@@ -9450,11 +10703,16 @@ fn parse_lex_atom_pattern(
     }
     Some((REGEX_INTERP(_), _, _)) | Some((INTERP(_), _, _)) =>
       parse_regex_interp_lex_pattern_node(state)
-    Some((REGEX_LITERAL(_), _, _)) | Some((STRING(_), _, _)) =>
+    Some((tok, _, _)) if tok is (REGEX_LITERAL(_) | STRING(_)) =>
       if state.consume_any() is Some(token) {
-        state.node_from_children(LexPattern_Literal, [
-          (token_label_from_node(token), token),
-        ])
+        let children : Array[(String?, CstNode)] = [
+          (token_label_from_token(tok), token),
+        ]
+        if lex_literal_node_from_token(tok, token.loc, token.source_span)
+          is Some(literal) {
+          push_child(children, Some("lex_literal"), literal)
+        }
+        state.node_from_children(LexPattern_Literal, children)
       } else {
         state.node_from_children(LexPattern_Literal, [])
       }
@@ -9473,42 +10731,20 @@ fn parse_lex_atom_pattern(
           }
         _ => ()
       }
-      state.node_from_children(LexPattern_ConstantRef, children)
+      state
+      .node_from_children(LexPattern_ConstantRef, children)
+      .with_structured_long_ident("semantic_name", ["name"])
     }
     Some((tok, _, _)) if !kind_in(tok.kind(), stop_kinds) =>
       if state.consume_any() is Some(token) {
         state.node_from_children(LexPattern_Literal, [
-          (token_label_from_node(token), token),
+          (token_label_from_token(tok), token),
         ])
       } else {
         state.node_from_children(LexPattern_Literal, [])
       }
     _ => state.node_from_children(LexPattern_Literal, [])
   }
-}
-
-///|
-fn parse_legacy_lex_literal_pattern_until(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  let mut done = false
-  while !done {
-    match state.peek() {
-      Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) => done = true
-      Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) =>
-        push_children(children, state.consume_trivia())
-      Some((_, _, _)) =>
-        if state.consume_any() is Some(token) {
-          push_child(children, token_label_from_node(token), token)
-        } else {
-          done = true
-        }
-      None => done = true
-    }
-  }
-  state.node_from_children(LexPattern_Literal, children)
 }
 
 ///|
@@ -9725,11 +10961,14 @@ fn parse_regex_atom_pattern(
       }
       state.node_from_children(RegexPattern_Placeholder, children)
     }
-    Some((REGEX_LITERAL(_), _, _)) =>
+    Some((raw, _, _)) if raw is REGEX_LITERAL(_) =>
       if state.consume_any() is Some(token) {
-        state.node_from_children(RegexPattern_Literal, [
-          (token_label_from_node(token), token),
-        ])
+        let children : Array[(String?, CstNode)] = [(Some("token"), token)]
+        if lex_literal_node_from_token(raw, token.loc, token.source_span)
+          is Some(literal) {
+          push_child(children, Some("lex_literal"), literal)
+        }
+        state.node_from_children(RegexPattern_Literal, children)
       } else {
         state.node_from_children(RegexPattern_Literal, [])
       }
@@ -9739,7 +10978,9 @@ fn parse_regex_atom_pattern(
       } else {
         ()
       }
-      state.node_from_children(RegexPattern_Reference, children)
+      state
+      .node_from_children(RegexPattern_Reference, children)
+      .with_structured_long_ident("semantic_name", ["name"])
     }
     Some((PACKAGE_NAME(_), _, _)) => {
       if state.consume_any() is Some(name) {
@@ -9774,7 +11015,9 @@ fn parse_regex_atom_pattern(
           )
         }
       }
-      state.node_from_children(RegexPattern_Reference, children)
+      state
+      .node_from_children(RegexPattern_Reference, children)
+      .with_structured_long_ident("semantic_name", ["name"])
     }
     Some((tok, start, end)) => {
       state.report_expected_description_at(
@@ -9819,7 +11062,7 @@ fn parse_regex_match_binding_list(state : ParserState) -> CstNode {
     push_child(children, Some("item"), parse_regex_match_binding(state))
     push_children(children, state.consume_trivia())
   }
-  state.node_from_children(List_PatternList, children)
+  state.node_from_children(List_RegexBindingList, children)
 }
 
 ///|
@@ -9899,7 +11142,10 @@ fn parse_regex_match_binding(state : ParserState) -> CstNode {
       )
     }
   }
-  state.node_from_children(Argument_Labelled, children)
+  state
+  .node_from_children(Binding_Regex, children)
+  .with_structured_name("semantic_label", Name_Label, ["name"])
+  .with_structured_name("semantic_binder", Name_Binder, ["binder"])
 }
 
 ///|
@@ -9918,8 +11164,16 @@ fn parse_string_literal_node(state : ParserState) -> CstNode {
     Some((tok, _, _)) =>
       if state.consume_any() is Some(token_node) {
         let children : Array[(String?, CstNode)] = [(Some("token"), token_node)]
-        push_interp_segments_for_token(state, tok, children)
-        node(Expr_Literal, token_node.loc, token_node.source_span, children)
+        if constant_node_from_token(tok, token_node.loc, token_node.source_span)
+          is Some(constant) {
+          push_child(children, Some("constant"), constant)
+        }
+        let kind = match tok {
+          INTERP(_) => Expr_Interp
+          BYTES_INTERP(_) => Expr_BytesInterp
+          _ => Expr_Constant
+        }
+        state.node_from_children(kind, children)
       } else {
         state.node_from_children(Expr_MissingExpr, [])
       }
@@ -9930,6 +11184,8 @@ fn parse_string_literal_node(state : ParserState) -> CstNode {
 ///|
 fn parse_multiline_string_literal(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut first_token : CstNode? = None
+  let mut last_token : CstNode? = None
   let mut done = false
   while !done {
     match state.peek() {
@@ -9937,8 +11193,40 @@ fn parse_multiline_string_literal(state : ParserState) -> CstNode {
         match tok {
           MULTILINE_STRING(_) | MULTILINE_INTERP(_) =>
             if state.consume_any() is Some(token_node) {
+              if first_token is None {
+                first_token = Some(token_node)
+              }
+              last_token = Some(token_node)
               push_child(children, Some("token"), token_node)
-              push_interp_segments_for_token(state, tok, children)
+              let element = match tok {
+                MULTILINE_STRING(value) =>
+                  scalar_node(
+                    MultilineStringElement_String,
+                    token_node.loc,
+                    token_node.source_span,
+                    String(value),
+                  )
+                MULTILINE_INTERP(_) => {
+                  let segments : Array[(String?, CstNode)] = []
+                  for segment in token_node.children_with_label("segment") {
+                    push_child(segments, Some("segment"), segment)
+                  }
+                  node(
+                    MultilineStringElement_Interp,
+                    token_node.loc,
+                    token_node.source_span,
+                    segments,
+                  )
+                }
+                _ =>
+                  node(
+                    MultilineStringElement_Interp,
+                    token_node.loc,
+                    token_node.source_span,
+                    [],
+                  )
+              }
+              push_child(children, Some("element"), element)
               if state.next_significant_is_multiline_string() {
                 push_children(children, state.consume_trivia())
               }
@@ -9950,7 +11238,16 @@ fn parse_multiline_string_literal(state : ParserState) -> CstNode {
       None => done = true
     }
   }
-  state.node_from_children(Expr_MultilineString, children)
+  let result = state.node_from_children(Expr_MultilineString, children)
+  match (first_token, last_token) {
+    (Some(first), Some(last)) =>
+      result.with_aggregate_span(
+        "literal_loc",
+        first.loc.merge(last.loc),
+        mk_span(first.source_span.0, last.source_span.1),
+      )
+    _ => result
+  }
 }
 
 ///|
@@ -9974,7 +11271,6 @@ fn parse_regex_interp_lex_pattern_node(state : ParserState) -> CstNode {
             let children : Array[(String?, CstNode)] = [
               (Some("token"), token_node),
             ]
-            push_interp_segments_for_token(state, tok, children)
             node(
               LexPattern_RegexInterp,
               token_node.loc,
@@ -9991,33 +11287,19 @@ fn parse_regex_interp_lex_pattern_node(state : ParserState) -> CstNode {
 }
 
 ///|
-fn push_interp_segments_for_token(
-  state : ParserState,
-  tok : Token,
-  children : Array[(String?, CstNode)],
-) -> Unit {
-  match tok {
-    INTERP(elems)
-    | BYTES_INTERP(elems)
-    | MULTILINE_INTERP(elems)
-    | REGEX_INTERP(elems) =>
-      for elem in elems {
-        push_child(children, Some("segment"), parse_interp_segment(state, elem))
-      }
-    _ => ()
-  }
-}
-
-///|
 fn parse_interp_segment(
   state : ParserState,
   elem : @tokens.InterpElem,
 ) -> CstNode {
   match elem {
     InterpLit(repr~, loc~) =>
-      node(InterpSegment_InterpLiteralSegment, loc, loc_span(state, loc), [
-        (Some("repr"), node(Token(STRING(repr)), loc, loc_span(state, loc), [])),
-      ])
+      node_with_payload(
+        InterpSegment_Literal,
+        loc,
+        loc_span(state, loc),
+        [],
+        String(repr),
+      )
     InterpSource(interp_source) =>
       parse_interp_source_segment(state, interp_source)
   }
@@ -10033,21 +11315,12 @@ fn parse_interp_source_segment(
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  push_child(
-    children,
-    Some("source"),
-    node(
-      Token(STRING(interp_source.source)),
-      interp_source.loc,
-      loc_span(state, interp_source.loc),
-      [],
-    ),
-  )
-  node(
-    InterpSegment_InterpSourceSegment,
+  node_with_payload(
+    InterpSegment_Source,
     interp_source.loc,
     loc_span(state, interp_source.loc),
     children,
+    String(interp_source.source),
   )
 }
 
@@ -10079,23 +11352,178 @@ fn token_label(tok : Token) -> String? {
 }
 
 ///|
-fn top_item_kind(tok : Token) -> NodeKind {
-  match tok {
-    TEST => Decl_Test
-    USING => Impl_Using
-    EXTERN => Decl_BalancedDecl
-    FN | ASYNC => Decl_Function
-    LET => Decl_Let
-    CONST => Decl_Const
-    TYPE => Decl_Type
-    STRUCT => Decl_Struct
-    ENUM | SUBERROR | EXTENUM => Decl_Enum
-    ENUMVIEW => Decl_EnumView
-    TRAIT => Decl_Trait
-    IMPL => Decl_Impl
-    DECLARE | PUB | PRIV | ATTRIBUTE(_) => Decl_BalancedDecl
-    _ => Error
+// Keep this lookahead aligned with parse_visibility_clause, including its
+// recovery behavior for invalid and missing `pub(...)` modifiers.
+fn top_item_lookahead_after_visibility(
+  state : ParserState,
+  offset : Int,
+  is_pub : Bool,
+) -> Int {
+  let mut offset = offset + 1
+  if !is_pub {
+    return offset
   }
+  match state.peek(offset~) {
+    Some((LPAREN, _, _)) => offset += 1
+    _ => return offset
+  }
+  match state.peek(offset~) {
+    Some((LIDENT(_), _, _)) | Some((READONLY, _, _)) | Some((EXTEND, _, _)) => {
+      offset += 1
+      match state.peek(offset~) {
+        Some((RPAREN, _, _)) => offset += 1
+        _ => ()
+      }
+    }
+    _ => {
+      let mut done = false
+      while !done {
+        match state.peek(offset~) {
+          Some((RPAREN, _, _)) => {
+            offset += 1
+            done = true
+          }
+          Some((EOF, _, _)) | None => done = true
+          Some(_) => offset += 1
+        }
+      }
+    }
+  }
+  offset
+}
+
+///|
+fn peek_top_item_kind(state : ParserState) -> TopItemKind {
+  let mut offset = 0
+  let mut result = TopItemKind::Invalid
+  let mut saw_async = false
+  let mut done = false
+  while !done {
+    match state.peek(offset~) {
+      Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
+      Some((ATTRIBUTE(_), _, _)) | Some((DECLARE, _, _)) => offset += 1
+      Some((PUB, _, _)) =>
+        offset = top_item_lookahead_after_visibility(state, offset, true)
+      Some((PRIV, _, _)) =>
+        offset = top_item_lookahead_after_visibility(state, offset, false)
+      Some((ASYNC, _, _)) => {
+        saw_async = true
+        offset += 1
+      }
+      Some((EXTERN, _, _)) => {
+        result = TopItemKind::Function
+        done = true
+      }
+      Some((TEST, _, _)) => {
+        result = TopItemKind::Test
+        done = true
+      }
+      Some((USING, _, _)) => {
+        result = TopItemKind::Using
+        done = true
+      }
+      Some((LET, _, _)) => {
+        result = TopItemKind::Let
+        done = true
+      }
+      Some((tok, _, _)) if decl_keyword_expects_name(tok) => {
+        result = decl_keyword_kind(tok)
+        done = true
+      }
+      Some((QUESTION, _, _)) => offset += 1
+      _ => {
+        result = if saw_async {
+          TopItemKind::Function
+        } else {
+          TopItemKind::Invalid
+        }
+        done = true
+      }
+    }
+  }
+  result
+}
+
+///|
+fn parser_decl_loc_without_trailing_trivia(node : CstNode) -> Location {
+  let mut end = node.loc.start
+  let mut found = false
+  for i in 0..<node.children.length() {
+    match node.children.get(i) {
+      Some((Some("trivia"), _)) => ()
+      Some((_, child)) if child.kind.is_syntax_flag() ||
+        child.kind.is_type_desc() ||
+        child.kind.is_decl_body() ||
+        child.kind.is_name() ||
+        child.kind.is_accessor() => ()
+      Some((_, child)) => {
+        end = child.loc.end
+        found = true
+      }
+      None => ()
+    }
+  }
+  if found {
+    Location::{ start: node.loc.start, end }
+  } else {
+    node.loc
+  }
+}
+
+///|
+fn parser_function_header_loc(node : CstNode) -> Location {
+  let start = node.loc.start
+  let mut end = start
+  for i in 0..<node.children.length() {
+    match node.children.get(i) {
+      Some((Some("body" | "where" | "stub" | "stub_token" | "trivia"), _)) => ()
+      Some((Some("op"), child)) if child.first_operator_descendant()
+        is Some(operator) &&
+        operator.string_payload() is Some("=") => ()
+      Some((_, child)) if child.kind.is_syntax_flag() ||
+        child.kind.is_type_desc() ||
+        child.kind.is_decl_body() ||
+        child.kind.is_name() ||
+        child.kind.is_accessor() => ()
+      Some((_, child)) => end = child.loc.end
+      None => ()
+    }
+  }
+  Location::{ start, end }
+}
+
+///|
+fn parser_trait_decl_loc(node : CstNode) -> Location {
+  let semantic_loc = parser_decl_loc_without_trailing_trivia(node)
+  if node.children_with_label("kw").get(0) is Some(keyword) {
+    Location::{ start: keyword.loc.start, end: semantic_loc.end }
+  } else {
+    semantic_loc
+  }
+}
+
+///|
+fn with_top_level_location_anchors(
+  state : ParserState,
+  source : CstNode,
+) -> CstNode {
+  let decl_loc = if source.kind is Impl_Trait {
+    parser_trait_decl_loc(source)
+  } else {
+    parser_decl_loc_without_trailing_trivia(source)
+  }
+  let mut result = source
+    .with_async_location_anchor()
+    .with_aggregate_span("decl_loc", decl_loc, loc_span(state, decl_loc))
+  if source.kind is Impl_Function {
+    let header_loc = parser_function_header_loc(source)
+    result = result.with_aggregate_span(
+      "header_loc",
+      header_loc,
+      loc_span(state, header_loc),
+    )
+  }
+  result
 }
 
 ///|
@@ -10104,7 +11532,7 @@ fn ParserState::node_from_children(
   kind : NodeKind,
   children : Array[(String?, CstNode)],
 ) -> CstNode {
-  if children.length() == 0 {
+  let result = if children.length() == 0 {
     self.missing_syntax_node(kind)
   } else {
     let (_, first) = children[0]
@@ -10116,55 +11544,20 @@ fn ParserState::node_from_children(
       children,
     )
   }
-}
-
-///|
-fn parse_token_list(state : ParserState, kind : NodeKind) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  let mut saw_eof = false
-  let mut done = false
-  while !done {
-    match state.peek() {
-      Some((EOF, _, _)) => {
-        if state.consume_any() is Some(eof) {
-          children.push((Some("eof"), eof))
-        } else {
-          ()
-        }
-        saw_eof = true
-        done = true
-      }
-      Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) =>
-        for child in state.consume_trivia() {
-          children.push(child)
-        }
-      Some((tok, _, _)) =>
-        if state.consume_any() is Some(consumed) {
-          children.push((token_label(tok), consumed))
-        } else {
-          ()
-        }
-      None => done = true
-    }
+  match kind {
+    Expr_Constant | Pattern_Constant | Field_MapExpression | Field_MapPattern =>
+      result.with_direct_semantic_constant()
+    _ => result
   }
-  if !saw_eof {
-    children.push((Some("eof"), state.missing_eof_node()))
-  }
-  node(kind, state.root_loc(), state.root_span(), children)
 }
 
 ///|
 fn parse_top_level_item(state : ParserState) -> CstNode {
-  let first_kind = match state.peek_significant() {
-    Some((ASYNC, _, _)) =>
-      match state.peek_nth_significant(1) {
-        Some((TEST, _, _)) => Decl_Test
-        _ => Decl_Function
-      }
-    Some((tok, _, _)) => top_item_kind(tok)
-    None => Error
-  }
-  parse_balanced_decl_body(state, first_kind)
+  let first_kind = peek_top_item_kind(state)
+  with_top_level_location_anchors(
+    state,
+    parse_balanced_decl_body(state, first_kind),
+  )
 }
 
 ///|
@@ -10200,7 +11593,7 @@ fn parse_source_file(state : ParserState) -> CstNode {
   if !saw_eof {
     children.push((Some("eof"), state.missing_eof_node()))
   }
-  node(SourceFile, state.root_loc(), state.root_span(), children)
+  node(Impls, state.root_loc(), state.root_span(), children)
 }
 
 ///|
@@ -10230,7 +11623,7 @@ fn parse_type_atom(
     Some((AMPER, _, _)) => parse_object_type_atom(state)
     Some((UIDENT(_), _, _)) | Some((PACKAGE_NAME(_), _, _)) =>
       parse_type_name_atom(state)
-    Some((UNDERSCORE, _, _)) => parse_single_token_type(state, Type_Hole)
+    Some((UNDERSCORE, _, _)) => parse_single_token_type(state, Type_Any)
     Some((LPAREN, _, _)) => parse_paren_type(state, stop_kinds)
     Some((LBRACE, start, end)) => {
       state.report_expected_description_at(LBRACE, mk_loc(start, end), "type")
@@ -10286,7 +11679,9 @@ fn parse_type_name_atom(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  state.node_from_children(Type_Name, children)
+  state
+  .node_from_children(Type_Name, children)
+  .with_structured_name("semantic_name", Name_ConstrId, ["name"])
 }
 
 ///|
@@ -10333,7 +11728,10 @@ fn parse_async_type_atom(
       ])
       if top_level_decl_can_start(found) {
         push_children(children, state.consume_trivia())
-        return state.node_from_children(Type_Function, children)
+        return state
+          .node_from_children(Type_Arrow, children)
+          .with_bool_marker("async", Flag_Async, true)
+          .with_async_location_anchor()
       }
       while !state.current_in(stop_kinds) &&
             !state.current_is(TokenKind::TK_EOF) &&
@@ -10344,7 +11742,10 @@ fn parse_async_type_atom(
           ()
         }
       }
-      return state.node_from_children(Type_Function, children)
+      return state
+        .node_from_children(Type_Arrow, children)
+        .with_bool_marker("async", Flag_Async, true)
+        .with_async_location_anchor()
     }
     None => state.report_expected_tokens([TokenKind::TK_LPAREN])
   }
@@ -10352,7 +11753,10 @@ fn parse_async_type_atom(
   if !ty.children.is_empty() {
     push_child(children, Some("type"), ty)
   }
-  state.node_from_children(Type_Function, children)
+  state
+  .node_from_children(Type_Arrow, children)
+  .with_bool_marker("async", Flag_Async, true)
+  .with_async_location_anchor()
 }
 
 ///|
@@ -10374,23 +11778,17 @@ fn parse_paren_type(
     TokenKind::TK_LPAREN,
     TokenKind::TK_RPAREN,
     parse_paren_type_item,
-    List_TypeArgumentList,
+    List_TupleTypeList,
     sep_kind=TokenKind::TK_COMMA,
   )
   let mut item_count = 0
-  let mut sep_count = 0
   for i in 0..<list.children.length() {
     match list.children.get(i) {
       Some((Some("item"), _)) => item_count += 1
-      Some((Some("sep"), _)) => sep_count += 1
       _ => ()
     }
   }
-  let kind = if sep_count > 0 || item_count != 1 {
-    Type_Tuple
-  } else {
-    Type_Group
-  }
+  let kind = if item_count == 1 { Type_Group } else { Type_Tuple }
   if item_count == 0 && !state.current_is(TokenKind::TK_THIN_ARROW) {
     state.report_expected_tokens([TokenKind::TK_THIN_ARROW])
   }
@@ -10424,7 +11822,14 @@ fn parse_object_field_type_item(state : ParserState) -> CstNode {
       push_child(children, Some("type"), ty)
     }
   }
-  state.node_from_children(Clause_Parameter, children)
+  with_marker_child(
+    state
+    .node_from_children(Field_Declaration, children)
+    .with_structured_name("semantic_name", Name_Field, ["name"])
+    .with_bool_marker("mutable", Flag_Mutable, false),
+    "vis",
+    Visibility_Default,
+  )
 }
 
 ///|
@@ -10434,7 +11839,7 @@ fn parse_object_type_literal(state : ParserState) -> CstNode {
     TokenKind::TK_LBRACE,
     TokenKind::TK_RBRACE,
     parse_object_field_type_item,
-    List_FieldList,
+    List_ObjectFieldList,
     sep_kind=TokenKind::TK_COMMA,
   )
   state.node_from_children(Type_Object, [(Some("body"), list)])
@@ -10519,6 +11924,7 @@ fn parse_type_postfix(
         let children : Array[(String?, CstNode)] = [(Some("type"), ty)]
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
+          push_direct_operator(children, op)
         } else {
           ()
         }
@@ -10577,7 +11983,7 @@ fn parse_type_arrow(
           "Unexpected token here.",
         )
       }
-      state.node_from_children(Type_Function, children)
+      state.node_from_children(Type_Arrow, children)
     }
     _ => lhs
   }
@@ -10687,13 +12093,22 @@ fn parse_func_return_type(state : ParserState) -> CstNode {
 ///|
 fn parse_error_annotation(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let mut error_kind = ErrorType_Default
   match state.peek() {
-    Some((RAISE, _, _)) | Some((NORAISE, _, _)) =>
+    Some((RAISE, _, _)) =>
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
       } else {
         ()
       }
+    Some((NORAISE, _, _)) => {
+      error_kind = ErrorType_Noraise
+      if state.consume_any() is Some(op) {
+        push_child(children, Some("op"), op)
+      } else {
+        ()
+      }
+    }
     _ => ()
   }
   match (state.peek(), state.peek(offset=1)) {
@@ -10712,8 +12127,11 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
       push_child(
         children,
         Some("type"),
-        state.node_from_children(Type_Name, type_children),
+        state
+        .node_from_children(Type_Name, type_children)
+        .with_structured_name("semantic_name", Name_ConstrId, ["name"]),
       )
+      error_kind = ErrorType_Error
     }
     (Some((UIDENT(_), _, _)), Some((LBRACKET, start, end))) => {
       let type_children : Array[(String?, CstNode)] = []
@@ -10737,8 +12155,11 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
       push_child(
         children,
         Some("type"),
-        state.node_from_children(Type_Name, type_children),
+        state
+        .node_from_children(Type_Name, type_children)
+        .with_structured_name("semantic_name", Name_ConstrId, ["name"]),
       )
+      error_kind = ErrorType_Error
     }
     (Some((LIDENT(name), start, end)), _) => {
       state.report(
@@ -10758,8 +12179,11 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
       push_child(
         children,
         Some("type"),
-        state.node_from_children(Type_Name, type_children),
+        state
+        .node_from_children(Type_Name, type_children)
+        .with_structured_name("semantic_name", Name_ConstrId, ["name"]),
       )
+      error_kind = ErrorType_Error
     }
     (Some((AMPER, start, end)), _) => {
       state.report_expected_tokens_at(AMPER, mk_loc(start, end), [
@@ -10780,12 +12204,14 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
         Some("type"),
         state.node_from_children(Type_MissingType, type_children),
       )
+      error_kind = ErrorType_Error
     }
     _ =>
       match state.peek() {
         Some((QUESTION, _, _)) =>
           if state.consume_any() is Some(question) {
             push_child(children, Some("type"), question)
+            error_kind = ErrorType_Maybe
           } else {
             ()
           }
@@ -10813,14 +12239,15 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
           ])
           if !err_ty.children.is_empty() {
             match err_ty.kind {
-              Type_Name | Type_Hole => ()
+              Type_Name | Type_Any => ()
               _ => state.report(err_ty.loc, "invalid error type")
             }
             push_child(children, Some("type"), err_ty)
+            error_kind = ErrorType_Error
           }
         }
         _ => ()
       }
   }
-  state.node_from_children(Clause_ErrorAnnotation, children)
+  state.node_from_children(error_kind, children)
 }

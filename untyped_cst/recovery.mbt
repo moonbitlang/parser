@@ -32,18 +32,22 @@ fn ParserState::current_position(self : ParserState) -> Position {
 
 ///|
 /// Captures the handrolled parser's next-token location without adding source
-/// text to the enclosing CST node. This is lowering-only compatibility data.
+/// text to the enclosing CST node.
 fn ParserState::current_significant_anchor(self : ParserState) -> CstNode {
   match self.peek_significant() {
-    Some((_, start, end)) =>
-      error_node(
+    Some((token, start, end)) =>
+      token_location_node(
+        syntax_kind_from_token_kind(token.kind()),
         mk_loc(start, end),
         empty_span(self.offset_for_position(start)),
-        [],
       )
     None => {
       let pos = self.previous_end()
-      error_node(empty_loc(pos), empty_span(self.offset_for_position(pos)), [])
+      token_location_node(
+        Syntax_Eof,
+        empty_loc(pos),
+        empty_span(self.offset_for_position(pos)),
+      )
     }
   }
 }

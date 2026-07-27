@@ -106,11 +106,218 @@ fn ParserState::token_source_span(
 }
 
 ///|
+fn advance_position(pos : Position, text : String) -> Position {
+  let mut lnum = pos.lnum
+  let mut bol = pos.bol
+  let mut cnum = pos.cnum
+  for ch in text {
+    cnum += 1
+    if ch == '\n' {
+      lnum += 1
+      bol = cnum
+    }
+  }
+  Position::{ fname: pos.fname, lnum, bol, cnum }
+}
+
+///|
+fn scalar_subtoken_node(
+  kind : NodeKind,
+  token_start : Position,
+  token_span : (Int, Int),
+  prefix : String,
+  value : String,
+) -> CstNode {
+  let start = advance_position(token_start, prefix)
+  let end = advance_position(start, value)
+  let span_start = token_span.0 + prefix.length()
+  scalar_node(
+    kind,
+    mk_loc(start, end),
+    mk_span(span_start, span_start + value.length()),
+    String(value),
+  )
+}
+
+///|
+fn attribute_metadata_node(
+  content : (String, String?, String),
+  start : Position,
+  end : Position,
+  source_span : (Int, Int),
+) -> CstNode {
+  let (first, qualified_name, raw_payload) = content
+  let children : Array[(String?, CstNode)] = []
+  let kind = match qualified_name {
+    Some(name) => {
+      push_child(
+        children,
+        Some("qualifier"),
+        scalar_subtoken_node(
+          Attribute_Qualifier,
+          start,
+          source_span,
+          "#",
+          first,
+        ),
+      )
+      push_child(
+        children,
+        Some("name"),
+        scalar_subtoken_node(
+          Attribute_Name,
+          start,
+          source_span,
+          "#\{first}.",
+          name,
+        ),
+      )
+      push_child(
+        children,
+        Some("raw_payload"),
+        scalar_subtoken_node(
+          Attribute_RawPayload,
+          start,
+          source_span,
+          "#\{first}.\{name}",
+          raw_payload,
+        ),
+      )
+      Attribute_Qualified
+    }
+    None => {
+      push_child(
+        children,
+        Some("name"),
+        scalar_subtoken_node(Attribute_Name, start, source_span, "#", first),
+      )
+      push_child(
+        children,
+        Some("raw_payload"),
+        scalar_subtoken_node(
+          Attribute_RawPayload,
+          start,
+          source_span,
+          "#\{first}",
+          raw_payload,
+        ),
+      )
+      Attribute_Simple
+    }
+  }
+  node(kind, mk_loc(start, end), source_span, children)
+}
+
+///|
+fn comment_metadata_node(
+  comment : Comment,
+  start : Position,
+  end : Position,
+  source_span : (Int, Int),
+) -> CstNode {
+  let children : Array[(String?, CstNode)] = [
+    (
+      Some("content"),
+      scalar_node(
+        Comment_Content,
+        mk_loc(start, end),
+        source_span,
+        String(comment.content),
+      ),
+    ),
+  ]
+  let kind = match comment.kind {
+    @tokens.InlineTrailing => Comment_InlineTrailing
+    @tokens.Ownline(leading_blank_line~, trailing_blank_line~) => {
+      push_child(
+        children,
+        Some("leading_blank_line"),
+        bool_marker_node(
+          Comment_LeadingBlankLine,
+          start,
+          source_span.0,
+          leading_blank_line,
+        ),
+      )
+      push_child(
+        children,
+        Some("trailing_blank_line"),
+        bool_marker_node(
+          Comment_TrailingBlankLine,
+          start,
+          source_span.0,
+          trailing_blank_line,
+        ),
+      )
+      Comment_Ownline
+    }
+  }
+  push_child(
+    children,
+    Some("consumed_by_docstring"),
+    bool_marker_node(
+      Comment_ConsumedByDocstring,
+      start,
+      source_span.0,
+      comment.consumed_by_docstring,
+    ),
+  )
+  node(kind, mk_loc(start, end), source_span, children)
+}
+
+///|
+fn ParserState::token_metadata_children(
+  self : ParserState,
+  token : Token,
+  start : Position,
+  end : Position,
+  source_span : (Int, Int),
+) -> Array[(String?, CstNode)] {
+  let children : Array[(String?, CstNode)] = []
+  match token {
+    ATTRIBUTE(content) =>
+      push_child(
+        children,
+        Some("attribute"),
+        attribute_metadata_node(content, start, end, source_span),
+      )
+    COMMENT(comment) =>
+      push_child(
+        children,
+        Some("comment"),
+        comment_metadata_node(comment, start, end, source_span),
+      )
+    INTERP(elems)
+    | BYTES_INTERP(elems)
+    | MULTILINE_INTERP(elems)
+    | REGEX_INTERP(elems) =>
+      for elem in elems {
+        push_child(children, Some("segment"), parse_interp_segment(self, elem))
+      }
+    _ => ()
+  }
+  push_children(
+    children,
+    raw_token_semantic_children(token, mk_loc(start, end), source_span),
+  )
+  children
+}
+
+///|
 fn ParserState::consume_any(self : ParserState) -> CstNode? {
   match self.peek() {
     Some((tok, start, end)) => {
       self.pos += 1
-      Some(token_node(tok, start, end, self.token_source_span(start, end)))
+      let source_span = self.token_source_span(start, end)
+      Some(
+        token_node_with_children(
+          tok,
+          start,
+          end,
+          source_span,
+          self.token_metadata_children(tok, start, end, source_span),
+        ),
+      )
     }
     None => None
   }
