@@ -14,7 +14,7 @@ formatter(ignore: [ "mbti_parser.mbt" ])
 
 rule(
   name: "moonyacc",
-  command: "moon runwasm moonbitlang/yacc@0.7.17 --input-mode array --external-tokens $input -o $output",
+  command: "moon runwasm moonbitlang/yacc@0.7.18 --input-mode array --external-tokens $input -o $output",
 )
 
 dev_build(

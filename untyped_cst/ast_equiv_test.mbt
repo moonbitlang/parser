@@ -603,7 +603,7 @@ fn assert_handrolled_cst_node_source_invariants(
   if loc.start.fname != loc.end.fname ||
     (loc.start.fname != "" && loc.start.fname != name) {
     fail(
-      "inconsistent CST location filename for \{label} at \{path} (\{to_repr(node.kind)}): expected empty or \{name}, got \{loc.start.fname}..\{loc.end.fname}",
+      "inconsistent CST location filename for \{label} at \{path} (\{Repr(node.kind)}): expected empty or \{name}, got \{loc.start.fname}..\{loc.end.fname}",
     )
   }
   let span = node.source_span
