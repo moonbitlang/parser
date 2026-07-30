@@ -11,11 +11,9 @@ impl @debug.Debug for AstNoLoc with fn to_repr(self) {
   fn go(ast : Ast) -> @debug.Repr {
     match ast {
       Null(_) => @debug.Repr::ctor("Null", [])
-      Bool(value, ..) =>
-        @debug.Repr::ctor("Bool", [(None, @debug.to_repr(value))])
-      Str(str, ..) => @debug.Repr::ctor("Str", [(None, @debug.to_repr(str))])
-      Float(float, ..) =>
-        @debug.Repr::ctor("Float", [(None, @debug.to_repr(float))])
+      Bool(value, ..) => @debug.Repr::ctor("Bool", [(None, Repr(value))])
+      Str(str, ..) => @debug.Repr::ctor("Str", [(None, Repr(str))])
+      Float(float, ..) => @debug.Repr::ctor("Float", [(None, Repr(float))])
       Arr(content, ..) =>
         @debug.Repr::ctor("Arr", [
           (None, @debug.Repr::array(content.to_array().map(item => go(item)))),
@@ -29,7 +27,7 @@ impl @debug.Debug for AstNoLoc with fn to_repr(self) {
               .to_array()
               .map(field => {
                 let (key, value) = field
-                @debug.Repr::tuple([@debug.to_repr(key), go(value)])
+                @debug.Repr::tuple([Repr(key), go(value)])
               }),
             ),
           ),

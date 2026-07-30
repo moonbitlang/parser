@@ -18,7 +18,7 @@ fn parse_loc_regression(
     parser~,
   )
   if !diagnostics.is_empty() {
-    fail("\{to_repr(diagnostics)}")
+    fail("\{Repr(diagnostics)}")
   }
   let mut brace_group_loc = None
   let mut params_loc = None
@@ -78,7 +78,7 @@ fn parse_grouped_pattern_loc_regression(
     parser~,
   )
   if !diagnostics.is_empty() {
-    fail("\{to_repr(diagnostics)}")
+    fail("\{Repr(diagnostics)}")
   }
   @basic.show_loc.protect(String, fn() {
     impls.map(impl_ => impl_.json_repr()).to_json()
