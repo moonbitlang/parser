@@ -21,50 +21,50 @@ pub fn Mapper::consume_comments(
   key : Key?,
   filter : (Comment) -> Bool,
 ) -> Array[Comment] {
-  match key {
-    None => []
-    Some(k) => {
-      let arr = self.map.get(k).unwrap_or([])
-      let keep_arr = []
-      let move_arr = []
-      for e in arr {
-        if filter(e) {
-          move_arr.push(e)
-        } else {
-          keep_arr.push(e)
-        }
+  if key is Some(k) {
+    let arr = self.map.get(k).unwrap_or([])
+    let keep_arr = []
+    let move_arr = []
+    for e in arr {
+      if filter(e) {
+        move_arr.push(e)
+      } else {
+        keep_arr.push(e)
       }
-      self.map.set(k, keep_arr)
-      move_arr
     }
+    self.map.set(k, keep_arr)
+    move_arr
+  } else {
+    []
   }
 }
 
 ///|
 pub fn Mapper::has_comment(self : Self, key : Key?) -> Bool {
-  match key {
-    None => false
-    Some(k) => self.map.contains(k)
+  if key is Some(k) {
+    self.map.contains(k)
+  } else {
+    false
   }
 }
 
 ///|
 pub fn Mapper::has_leading_comment(self : Self, key : Key?) -> Bool {
   // TODO: optimize this
-  match key {
-    None => false
-    Some(k) =>
-      self.map.get(k).unwrap_or([]).iter().any(x => x.end < k.loc().start)
+  if key is Some(k) {
+    self.map.get(k).unwrap_or([]).iter().any(x => x.end < k.loc().start)
+  } else {
+    false
   }
 }
 
 ///|
 pub fn Mapper::has_trailing_comment(self : Self, key : Key?) -> Bool {
   // TODO: optimize this
-  match key {
-    None => false
-    Some(k) =>
-      self.map.get(k).unwrap_or([]).iter().any(x => x.start > k.loc().start)
+  if key is Some(k) {
+    self.map.get(k).unwrap_or([]).iter().any(x => x.start > k.loc().start)
+  } else {
+    false
   }
 }
 
@@ -216,9 +216,10 @@ fn Mapper::attach(self : Self, n : Key) -> Unit {
       // The previous sibling may not exsit, attach `c` to `n` in this case.
       _ => n
     }
-    match self.map.get(assoc) {
-      None => self.map[assoc] = [c]
-      Some(arr) => arr.push(c)
+    if self.map.get(assoc) is Some(arr) {
+      arr.push(c)
+    } else {
+      self.map[assoc] = [c]
     }
     log("attached comment \{@pp.render(c.kind)} to \{@pp.render(assoc)}")
   }

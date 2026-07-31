@@ -101,9 +101,10 @@ fn Fmt::comments(fmt : Self, key : @comment.Key?) -> (Doc, Doc) {
 ///|
 /// Gets the token table for the node.
 fn Fmt::get_table(fmt : Self, node : Location) -> @comment.NodeTable {
-  match fmt.mapper {
-    Some(tbl) => tbl.get_table(node)
-    None => @comment.NodeTable::empty()
+  if fmt.mapper is Some(tbl) {
+    tbl.get_table(node)
+  } else {
+    @comment.NodeTable::empty()
   }
 }
 
@@ -128,9 +129,10 @@ fn Fmt::return_and_error_type_annotation(
   } else {
     space + text("->")
   }
-  let return_type = match return_ty {
-    None => empty
-    Some(ty) => space + fmt.ty(ty)
+  let return_type = if return_ty is Some(ty) {
+    space + fmt.ty(ty)
+  } else {
+    empty
   }
   let error_type = fmt.error_type(err_ty)
   arrow + return_type + error_type
@@ -231,9 +233,10 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         rbracket=None,
       )
       let trait_ = fmt.type_name(trait_)
-      let for_part = match self_ty {
-        None => empty
-        Some(ty) => space + text("for") + space + fmt.ty(ty)
+      let for_part = if self_ty is Some(ty) {
+        space + text("for") + space + fmt.ty(ty)
+      } else {
+        empty
       }
       let with_ = space + text("with")
       let method_quantifiers = if method_quantifiers.is_empty() {
@@ -343,10 +346,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       let vis = fmt.visibility(vis)
       let let_ = text(if is_constant { "const" } else { "let" })
       let binder = space + fmt.binder(binder)
-      let ty = match ty {
-        None => empty
-        Some(ty) => space + colon + fmt.ty(ty)
-      }
+      let ty = if ty is Some(ty) { space + colon + fmt.ty(ty) } else { empty }
       let rhs = space + char('=') + fmt.compose(expr, Expr) // TODO: compose_rhs
       doc + attrs + declare_ + vis + let_ + binder + ty + rhs
     }
@@ -382,22 +382,23 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         tvar_tables=table.get_table_array("type_var_binders"),
         rbracket=table.get_token("rbracket"),
       )
-      let type_name_and_binder = match type_name {
-        None => space + fmt.binder(name)
-        Some(n) => space + fmt.type_name(n) + text("::") + fmt.binder(name)
+      let type_name_and_binder = if type_name is Some(n) {
+        space + fmt.type_name(n) + text("::") + fmt.binder(name)
+      } else {
+        space + fmt.binder(name)
       }
-      let params = match decl_params {
-        None => empty
-        Some(xs) =>
-          group(
-            fmt.parameters(
-              xs,
-              lparen=table.get_token("lparen"),
-              param_tables=table.get_table_array("parameters"),
-              commas=table.get_array("commas1"),
-              rparen=table.get_token("rparen"),
-            ),
-          )
+      let params = if decl_params is Some(xs) {
+        group(
+          fmt.parameters(
+            xs,
+            lparen=table.get_token("lparen"),
+            param_tables=table.get_table_array("parameters"),
+            commas=table.get_array("commas1"),
+            rparen=table.get_token("rparen"),
+          ),
+        )
+      } else {
+        empty
       }
       let result = fmt.return_and_error_type_annotation(return_type, error_type)
       let (extern_, body) = match decl_body {
@@ -410,9 +411,10 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
           (empty, equal + module_name + func_name)
         }
         DeclStubs(Embedded(language~, code~)) => {
-          let extern_ = match language {
-            None => empty
-            Some(s) => text("extern") + space + double_quoted(text(s)) + space
+          let extern_ = if language is Some(s) {
+            text("extern") + space + double_quoted(text(s)) + space
+          } else {
+            empty
           }
           let equal = space + char('=')
           let code = group(nest(line + fmt.embedded_code(code)))
@@ -445,19 +447,19 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         None => empty
         Some((s, _)) => space + double_quoted(text(s))
       }
-      let params = match params {
-        None => empty
-        Some(xs) =>
-          space +
-          group(
-            fmt.parameters(
-              xs,
-              lparen=None,
-              param_tables=@comment.NodeTableArray::empty(),
-              commas=@comment.NodeArray::empty(),
-              rparen=None,
-            ),
-          )
+      let params = if params is Some(xs) {
+        space +
+        group(
+          fmt.parameters(
+            xs,
+            lparen=None,
+            param_tables=@comment.NodeTableArray::empty(),
+            commas=@comment.NodeArray::empty(),
+            rparen=None,
+          ),
+        )
+      } else {
+        empty
       }
       let body = space + fmt.expr_block(expr)
       doc + attrs + test_ + name + params + body
@@ -531,9 +533,10 @@ fn Fmt::embedded_code(fmt : Fmt, code : @syntax.EmbeddedCode) -> Doc {
 fn Fmt::alias_target(fmt : Fmt, target : @syntax.AliasTarget) -> Doc {
   let { binder, target } = target
   let binder = fmt.binder(binder)
-  match target {
-    None => binder
-    Some(target) => fmt.label(target) + space + text("as") + space + binder
+  if target is Some(target) {
+    fmt.label(target) + space + text("as") + space + binder
+  } else {
+    binder
   }
 }
 
@@ -649,14 +652,16 @@ fn Fmt::trait_method(fmt : Fmt, meth : @syntax.TraitMethodDecl) -> Doc {
     kind=TraitMethod,
   )
   let arrow = space + text("->")
-  let return_type = match return_type {
-    None => empty
-    Some(ty) => space + fmt.ty(ty)
+  let return_type = if return_type is Some(ty) {
+    space + fmt.ty(ty)
+  } else {
+    empty
   }
   let error_type = fmt.error_type(error_type)
-  let has_default = match has_default {
-    None => empty
-    Some(_) => space + char('=') + space + text("_")
+  let has_default = if has_default is Some(_) {
+    space + char('=') + space + text("_")
+  } else {
+    empty
   }
   group(async_ + name + params + arrow + return_type + error_type + has_default)
 }
@@ -667,14 +672,13 @@ fn Fmt::visibility(fmt : Fmt, vis : @syntax.Visibility) -> Doc {
     Pub(attr=modifier, loc~) => {
       let table = fmt.get_table(loc)
       let pub_ = fmt.wrap_comment(table.get_token("pub"), text("pub"))
-      let modifier = match modifier {
-        None => empty
-        Some(s) => {
-          let lparen = fmt.wrap_comment(table.get_token("lparen"), text("("))
-          let id = fmt.wrap_comment(table.get_token("lident"), text(s))
-          let rparen = fmt.wrap_comment(table.get_token("rparen"), text(")"))
-          lparen + id + rparen
-        }
+      let modifier = if modifier is Some(s) {
+        let lparen = fmt.wrap_comment(table.get_token("lparen"), text("("))
+        let id = fmt.wrap_comment(table.get_token("lident"), text(s))
+        let rparen = fmt.wrap_comment(table.get_token("rparen"), text(")"))
+        lparen + id + rparen
+      } else {
+        empty
       }
       fmt.wrap_comment(Some(Node(loc)), pub_ + modifier) + space
     }
@@ -720,9 +724,10 @@ fn Fmt::docstring(
 ///|
 fn Fmt::type_decl_binder(_ : Self, binder : @syntax.TypeDeclBinder) -> Doc {
   let { name, loc: _ } = binder
-  match name {
-    None => text("_")
-    Some(n) => text(n)
+  if name is Some(n) {
+    text(n)
+  } else {
+    text("_")
   }
 }
 
@@ -742,9 +747,10 @@ fn Fmt::type_decl_binders(
 fn Fmt::constr_param(fmt : Self, constr_param : @syntax.ConstrParam) -> Doc {
   let { mut_, label, ty } = constr_param
   let mut_ = if mut_ { text("mut") + space } else { empty }
-  let label = match label {
-    None => empty
-    Some(label) => fmt.label(label) + char('~') + space + char(':') + space
+  let label = if label is Some(label) {
+    fmt.label(label) + char('~') + space + char(':') + space
+  } else {
+    empty
   }
   let ty = fmt.ty(ty)
   mut_ + label + ty
@@ -756,9 +762,10 @@ fn Fmt::constr_decl(fmt : Self, constr_decl : @syntax.ConstrDecl) -> Doc {
   let doc = fmt.docstring(doc, is_toplevel=false)
   let attrs = fmt.attributes(attrs)
   let name = text(name.name)
-  let args = match args {
-    None => empty
-    Some(xs) => group(parens(series1(xs.map(x => fmt.constr_param(x)), comma)))
+  let args = if args is Some(xs) {
+    group(parens(series1(xs.map(x => fmt.constr_param(x)), comma)))
+  } else {
+    empty
   }
   let tag = match tag {
     None => empty
@@ -1157,18 +1164,17 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       }
 
       let constr = fmt.constr(constr)
-      let payload = match payload {
-        None => empty
-        Some(args) => {
-          let args = args.map(constr_pat_arg2doc)
-          let args = if is_open {
-            // Replace deprecated @list.of usage with from_array
-            args.concat(List([text("..")]))
-          } else {
-            args
-          }
-          group(parens(series(args, comma, x => x)))
+      let payload = if payload is Some(args) {
+        let args = args.map(constr_pat_arg2doc)
+        let args = if is_open {
+          // Replace deprecated @list.of usage with from_array
+          args.concat(List([text("..")]))
+        } else {
+          args
         }
+        group(parens(series(args, comma, x => x)))
+      } else {
+        empty
       }
       group(constr + payload)
     }
@@ -1181,10 +1187,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
           BytesSpread(bytes~, ..) =>
             text("..") + char('b') + double_quoted(text(bytes))
           ConstSpread(binder~, pkg~, loc=_) => {
-            let pkg = match pkg {
-              Some(x) => text("@\{x}.")
-              None => empty
-            }
+            let pkg = if pkg is Some(x) { text("@\{x}.") } else { empty }
             let binder = fmt.binder(binder)
             text("..") + pkg + binder
           }
@@ -1371,9 +1374,10 @@ fn Fmt::parameter(
   match parameter {
     Optional(binder~, default~, ty~) => {
       let binder = fmt.binder(binder) + char('?')
-      let ty = match ty {
-        None => empty
-        Some(ty) => space + colon + space + fmt.ty(ty)
+      let ty = if ty is Some(ty) {
+        space + colon + space + fmt.ty(ty)
+      } else {
+        empty
       }
       let equal = space + equal
       let default = space + fmt.compose(default, Expr)
@@ -1381,17 +1385,19 @@ fn Fmt::parameter(
     }
     Labelled(binder~, ty~) => {
       let binder = fmt.binder(binder) + char('~')
-      let ty = match ty {
-        None => empty
-        Some(ty) => space + colon + space + fmt.ty(ty)
+      let ty = if ty is Some(ty) {
+        space + colon + space + fmt.ty(ty)
+      } else {
+        empty
       }
       binder + ty
     }
     Positional(binder~, ty~) => {
       let binder = fmt.binder(binder)
-      let ty = match ty {
-        None => empty
-        Some(ty) => space + colon + space + fmt.ty(ty)
+      let ty = if ty is Some(ty) {
+        space + colon + space + fmt.ty(ty)
+      } else {
+        empty
       }
       binder + ty
     }
@@ -1403,17 +1409,19 @@ fn Fmt::parameter(
         fmt.ty(ty)
       } else {
         let binder = char('_')
-        let ty = match ty {
-          None => empty
-          Some(ty) => space + colon + space + fmt.ty(ty)
+        let ty = if ty is Some(ty) {
+          space + colon + space + fmt.ty(ty)
+        } else {
+          empty
         }
         binder + ty
       }
     QuestionOptional(binder~, ty~) => {
       let binder = fmt.binder(binder) + char('?')
-      let ty = match ty {
-        None => empty
-        Some(ty) => space + colon + space + fmt.ty(ty)
+      let ty = if ty is Some(ty) {
+        space + colon + space + fmt.ty(ty)
+      } else {
+        empty
       }
       binder + ty
     }
@@ -1505,10 +1513,7 @@ fn Fmt::func(
     Arrow => empty
     Lambda => text("fn")
   }
-  let binder = match binder {
-    None => empty
-    Some(b) => space + fmt.binder(b)
-  }
+  let binder = if binder is Some(b) { space + fmt.binder(b) } else { empty }
   let params = group(
     fmt.parameters(
       parameters,
@@ -1532,10 +1537,7 @@ fn Fmt::func(
       }
   }
   let ety = fmt.error_type(error_type)
-  let rty = match return_type {
-    None => empty
-    Some(ty) => space + fmt.ty(ty)
-  }
+  let rty = if return_type is Some(ty) { space + fmt.ty(ty) } else { empty }
   let body = space + fmt.expr_block(body, force_newline=!is_annomyous)
   Collapsible(async_ + fn_ + binder + params + arrow + rty + ety, body)
 }
@@ -1577,13 +1579,13 @@ fn Fmt::loop_label(
   label : @syntax.Label?,
   trailing_colon~ : Bool,
 ) -> Doc {
-  match label {
-    None => empty
-    Some(label) =>
-      space +
-      self.label(label) +
-      tilde +
-      (if trailing_colon { colon } else { empty })
+  if label is Some(label) {
+    space +
+    self.label(label) +
+    tilde +
+    (if trailing_colon { colon } else { empty })
+  } else {
+    empty
   }
 }
 
@@ -1653,9 +1655,10 @@ fn Fmt::lex_top_patterns(fmt : Self, pats : List[@syntax.LexTopPattern]) -> Doc 
 fn Fmt::lex_case(fmt : Self, case_ : @syntax.LexCase) -> Doc {
   let { pat, pat_loc: _, guard_, body } = case_
   let pattern = fmt.lex_top_patterns(pat)
-  let guard_ = match guard_ {
-    None => empty
-    Some(expr) => space + text("if") + space + fmt.compose(expr, Infix(Other))
+  let guard_ = if guard_ is Some(expr) {
+    space + text("if") + space + fmt.compose(expr, Infix(Other))
+  } else {
+    empty
   }
   let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt)
   group(group(pattern) + guard_ + body)
@@ -1677,9 +1680,10 @@ fn Fmt::lex_scan_case_pattern(
 fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
   let { pat, guard_, body } = case_
   let pattern = fmt.lex_scan_case_pattern(pat)
-  let guard_ = match guard_ {
-    None => empty
-    Some(expr) => space + text("if") + space + fmt.compose(expr, Infix(Other))
+  let guard_ = if guard_ is Some(expr) {
+    space + text("if") + space + fmt.compose(expr, Infix(Other))
+  } else {
+    empty
   }
   let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt)
   group(group(pattern) + guard_ + body)
@@ -1687,9 +1691,10 @@ fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
 
 ///|
 fn Fmt::lex_strategy(fmt : Self, strategy : @syntax.Label?) -> Doc {
-  match strategy {
-    None => empty
-    Some(label) => space + text("with") + space + fmt.label(label)
+  if strategy is Some(label) {
+    space + text("with") + space + fmt.label(label)
+  } else {
+    empty
   }
 }
 
@@ -1697,9 +1702,10 @@ fn Fmt::lex_strategy(fmt : Self, strategy : @syntax.Label?) -> Doc {
 fn Fmt::case(fmt : Self, case_ : @syntax.Case) -> Doc {
   let { pattern, guard_, body } = case_
   let pattern = fmt.pattern(pattern)
-  let guard_ = match guard_ {
-    None => empty
-    Some(expr) => space + text("if") + space + fmt.compose(expr, Infix(Other))
+  let guard_ = if guard_ is Some(expr) {
+    space + text("if") + space + fmt.compose(expr, Infix(Other))
+  } else {
+    empty
   }
   let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt) //TODO: compose_rhs
   group(group(pattern) + guard_ + body)
@@ -1743,9 +1749,10 @@ fn Fmt::list_comprehension_kind(
   }
 
   fn foreach_binder2doc(binder : @syntax.Binder?) -> Doc {
-    match binder {
-      None => empty
-      Some(x) => fmt.binder(x)
+    if binder is Some(x) {
+      fmt.binder(x)
+    } else {
+      empty
     }
   }
 
@@ -2000,10 +2007,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     }
     ListComprehension(kind~, guard_~, body~, is_iter~, loc=_) => {
       let kind = fmt.list_comprehension_kind(kind)
-      let guard_doc = match guard_ {
-        None => empty
-        Some(expr) =>
-          space + text("if") + space + fmt.compose(expr, Infix(Other))
+      let guard_doc = if guard_ is Some(expr) {
+        space + text("if") + space + fmt.compose(expr, Infix(Other))
+      } else {
+        empty
       }
       let body = space + text("=>") + space + fmt.compose(body, Expr)
       let inner = kind + guard_doc + body
@@ -2094,16 +2101,14 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Normal(doc)
     }
     While(loop_cond~, loop_body~, while_else~, label~, loc=_) => {
-      let label = match label {
-        None => empty
-        Some(x) => fmt.label(x) + colon
-      }
+      let label = if label is Some(x) { fmt.label(x) + colon } else { empty }
       let while_ = text("while")
       let cond = space + fmt.compose(loop_cond, Infix(Other))
       let body = space + fmt.expr_block(loop_body)
-      let else_ = match while_else {
-        None => empty
-        Some(e) => space + text("nobreak") + space + fmt.expr_block(e)
+      let else_ = if while_else is Some(e) {
+        space + text("nobreak") + space + fmt.expr_block(e)
+      } else {
+        empty
       }
       let doc = while_ + label + cond + body + else_
       Normal(doc)
@@ -2138,9 +2143,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     Guard(cond~, otherwise~, body~, loc=_) => {
       let guard_ = text("guard")
       let cond = space + fmt.compose(cond, Infix(Other))
-      let otherwise = match otherwise {
-        None => empty
-        Some(e) => space + text("else") + space + fmt.expr_block(e)
+      let otherwise = if otherwise is Some(e) {
+        space + text("else") + space + fmt.expr_block(e)
+      } else {
+        empty
       }
       let body = hardline + fmt.compose(body, Stmt)
       let doc = guard_ + cond + otherwise + body
@@ -2171,9 +2177,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     RegexMatch(expr~, pat~, bindings~, loc=_) => {
       fn binding2doc(pair : (@syntax.Label, @syntax.Binder?)) -> Doc {
         let (label, binder) = pair
-        match binder {
-          None => fmt.label(label)
-          Some(binder) => fmt.label(label) + equal + fmt.binder(binder)
+        if binder is Some(binder) {
+          fmt.label(label) + equal + fmt.binder(binder)
+        } else {
+          fmt.label(label)
         }
       }
 
@@ -2205,9 +2212,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       ) {
         let (binder, ty, func) = triple
         let binder = fmt.binder(binder)
-        let ty = match ty {
-          None => empty
-          Some(ty) => space + colon + space + fmt.ty(ty)
+        let ty = if ty is Some(ty) {
+          space + colon + space + fmt.ty(ty)
+        } else {
+          empty
         }
         let { parameters, body, .. } = func
         let params = space +
@@ -2282,9 +2290,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         )
         BlockLike(record)
       } else {
-        let type_name = match type_name {
-          None => empty
-          Some(type_name) => fmt.type_name(type_name) + text("::")
+        let type_name = if type_name is Some(type_name) {
+          fmt.type_name(type_name) + text("::")
+        } else {
+          empty
         }
         let record = group(
           braces(series1(fields.map(x => fmt.field(x)), comma)),
@@ -2292,9 +2301,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         Collapsible(type_name, record)
       }
     RecordUpdate(type_name~, record~, fields~, loc=_) => {
-      let type_name = match type_name {
-        None => empty
-        Some(x) => fmt.type_name(x)
+      let type_name = if type_name is Some(x) {
+        fmt.type_name(x)
+      } else {
+        empty
       }
       let dotdot_record = text("..") + fmt.compose(record, Simple)
       let fields = fields.map(x => fmt.field(x))
@@ -2323,9 +2333,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     Mutate(record~, accessor~, field~, augmented_by~, loc=_) => {
       let record = fmt.expr_before_dot(record)
       let accessor = fmt.accessor(accessor)
-      let op = match augmented_by {
-        None => space + text("=")
-        Some(op) => space + fmt.var_(op)
+      let op = if augmented_by is Some(op) {
+        space + fmt.var_(op)
+      } else {
+        space + text("=")
       }
       let field = space + fmt.compose(field, Expr) //TODO: compose_rhs
       let doc = record + accessor + op + field
@@ -2346,10 +2357,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     LetMut(binder~, ty~, expr~, body~, loc=_) => {
       let let_ = text("let")
       let binder = space + fmt.binder(binder)
-      let ty = match ty {
-        None => empty
-        Some(ty) => space + fmt.ty(ty)
-      }
+      let ty = if ty is Some(ty) { space + fmt.ty(ty) } else { empty }
       let assign = space + equal
       // TODO: handle multiline string
       let expr = space + fmt.compose(expr, Expr) // TODO: compose_rhs
@@ -2377,9 +2385,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     }
     Assign(var_~, expr~, augmented_by~, loc=_) => {
       let var_ = fmt.var_(var_)
-      let op = match augmented_by {
-        None => space + text("=")
-        Some(op) => space + fmt.var_(op)
+      let op = if augmented_by is Some(op) {
+        space + fmt.var_(op)
+      } else {
+        space + text("=")
       }
       let expr = fmt.compose_assign_rhs(expr, Expr) //TODO: compose_rhs
       let doc = var_ + op + expr
@@ -2482,9 +2491,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let for_ = text("for")
       let binders_doc = space +
         series(binders, comma, binder_expr2doc, trailing=AlwaysHidden)
-      let condition = match condition {
-        None => None
-        Some(e) => Some(fmt.compose(e, Infix(Other)))
+      let condition = if condition is Some(e) {
+        Some(fmt.compose(e, Infix(Other)))
+      } else {
+        None
       }
       let continue_block = match continue_block {
         Empty => None
@@ -2499,9 +2509,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           )
       }
       let body = space + fmt.expr_block(body)
-      let for_else = match for_else {
-        None => empty
-        Some(e) => space + text("nobreak") + space + fmt.expr_block(e)
+      let for_else = if for_else is Some(e) {
+        space + text("nobreak") + space + fmt.expr_block(e)
+      } else {
+        empty
       }
       let semi_or_newline = switch(semi + space, softline)
       let header = match (condition, continue_block) {
@@ -2541,9 +2552,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let label = fmt.loop_label(label, trailing_colon=true)
       let for_ = text("for")
       fn foreach_binder2doc(binder : @syntax.Binder?) -> Doc {
-        match binder {
-          None => empty
-          Some(x) => fmt.binder(x)
+        if binder is Some(x) {
+          fmt.binder(x)
+        } else {
+          empty
         }
       }
       fn binder_expr2doc(pair : (@syntax.Binder, @syntax.Expr)) -> Doc {
@@ -2573,9 +2585,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           series(continue_block, comma, binder_expr2doc, trailing=AlwaysHidden)
       }
       let body = space + fmt.expr_block(body)
-      let else_block = match else_block {
-        None => empty
-        Some(e) => space + text("nobreak") + space + fmt.expr_block(e)
+      let else_block = if else_block is Some(e) {
+        space + text("nobreak") + space + fmt.expr_block(e)
+      } else {
+        empty
       }
       let where_ = fmt.where_clause(where_clause)
       let header = group(for_ + binders + in_ + expr + init + continue_block)
@@ -2595,9 +2608,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let try_ = text("try")
       let body = space + fmt.expr_block(body)
       let catch_ = space + text("catch") + fmt.case_block(catch_cases)
-      let noraise_ = match try_else {
-        None => empty
-        Some(cases) => space + text("noraise") + space + fmt.case_block(cases)
+      let noraise_ = if try_else is Some(cases) {
+        space + text("noraise") + space + fmt.case_block(cases)
+      } else {
+        empty
       }
       let doc = try_ + body + catch_ + noraise_
       Normal(doc)

@@ -72,9 +72,8 @@ fn object_get(fields : Map[String, Json], key : String) -> Json? {
 ///|
 fn first_field(fields : Map[String, Json], keys : Array[String]) -> Json? {
   for key in keys {
-    match object_get(fields, key) {
-      Some(value) => return Some(value)
-      None => ()
+    if object_get(fields, key) is Some(value) {
+      return Some(value)
     }
   }
   None
@@ -149,22 +148,19 @@ fn render_moon_pkg_json(json : Json) -> String {
   match json {
     Object(fields) => {
       let sections : Array[String] = []
-      match first_field(fields, ["warn-list", "warnings"]) {
-        Some(value) => sections.push(render_assignment("warnings", value))
-        None => ()
+      if first_field(fields, ["warn-list", "warnings"]) is Some(value) {
+        sections.push(render_assignment("warnings", value))
       }
-      match first_field(fields, ["supported-targets", "supported_targets"]) {
-        Some(value) =>
-          sections.push(render_assignment("supported_targets", value))
-        None => ()
+      if first_field(fields, ["supported-targets", "supported_targets"])
+        is Some(value) {
+        sections.push(render_assignment("supported_targets", value))
       }
       let known = [
         "import", "test-import", "wbtest-import", "warn-list", "warnings", "supported-targets",
         "supported_targets", "dev_build", "formatter", "rule",
       ]
-      match render_options(fields, known) {
-        Some(options) => sections.push(options)
-        None => ()
+      if render_options(fields, known) is Some(options) {
+        sections.push(options)
       }
       sections[:].join("\n\n")
     }
@@ -177,18 +173,15 @@ fn render_moon_mod_json(json : Json) -> String {
   match json {
     Object(fields) => {
       let sections : Array[String] = []
-      match object_get(fields, "name") {
-        Some(value) => sections.push(render_assignment("name", value))
-        None => ()
+      if object_get(fields, "name") is Some(value) {
+        sections.push(render_assignment("name", value))
       }
-      match object_get(fields, "version") {
-        Some(value) => sections.push(render_assignment("version", value))
-        None => ()
+      if object_get(fields, "version") is Some(value) {
+        sections.push(render_assignment("version", value))
       }
       if first_field(fields, ["deps", "import"]) is Some(value) {
-        match render_import_block(value) {
-          Some(imports) => sections.push(imports)
-          None => ()
+        if render_import_block(value) is Some(imports) {
+          sections.push(imports)
         }
       }
       if first_field(fields, ["warn-list", "warnings"]) is Some(value) {

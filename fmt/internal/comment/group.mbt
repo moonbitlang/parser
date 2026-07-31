@@ -9,12 +9,12 @@ pub(all) struct Comment {
 
 ///|
 fn pretty_triple(x : Triple?) -> @pp.Document {
-  match x {
-    None => text("None")
-    Some(x) =>
-      text(x.0.to_expect_string()) +
-      space +
-      @pp.parens(text(Location::{ start: x.1, end: x.2 }.to_string()))
+  if x is Some(x) {
+    text(x.0.to_expect_string()) +
+    space +
+    @pp.parens(text(Location::{ start: x.1, end: x.2 }.to_string()))
+  } else {
+    text("None")
   }
 }
 

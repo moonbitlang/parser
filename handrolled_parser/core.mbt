@@ -159,21 +159,18 @@ fn State::panic(state : Self) -> Location {
       for ;; {
         let last_end = state.previous_triple().2
         let (next_token, next_start, _) = state.peek()
-        match inidex_of_token_kind(state.syncs, next_token.kind()) {
-          Some(index) => {
-            let loc : Location = if skipped > 0 {
-              { start: first_start, end: last_end }
-            } else {
-              state.parsed_position = next_start
-              { start: prev_end, end: next_start }
-            }
-            state.mode = Panic(fail_at=failed_at.kind(), sync_at=index, loc~)
-            return loc
+        if inidex_of_token_kind(state.syncs, next_token.kind()) is Some(index) {
+          let loc : Location = if skipped > 0 {
+            { start: first_start, end: last_end }
+          } else {
+            state.parsed_position = next_start
+            { start: prev_end, end: next_start }
           }
-          None => {
-            state.skip()
-            skipped += 1
-          }
+          state.mode = Panic(fail_at=failed_at.kind(), sync_at=index, loc~)
+          return loc
+        } else {
+          state.skip()
+          skipped += 1
         }
       }
       panic()
@@ -239,16 +236,14 @@ fn State::push_sync(state : Self, sync : TokenKind) -> Unit {
 
 ///|
 fn State::pop_sync(state : Self, sync : TokenKind) -> Unit {
-  match state.syncs.pop() {
-    Some(x) => {
-      guard x == sync
-      match state.mode {
-        Panic(sync_at~, ..) if sync_at == state.syncs.length() =>
-          state.recover()
-        _ => ()
-      }
+  if state.syncs.pop() is Some(x) {
+    guard x == sync
+    match state.mode {
+      Panic(sync_at~, ..) if sync_at == state.syncs.length() => state.recover()
+      _ => ()
     }
-    None => abort("Cannot pop sync token, no sync token is available.")
+  } else {
+    abort("Cannot pop sync token, no sync token is available.")
   }
 }
 
@@ -388,16 +383,13 @@ fn[A] State::expect(
     Panic(_) => default
     Normal => {
       let (tok, start, end) = self.peek()
-      match f(tok) {
-        Some(result) => {
-          self.skip()
-          result
-        }
-        None => {
-          self.panic() |> ignore
-          self.report_unexpected(tok, [expected], { start, end })
-          default
-        }
+      if f(tok) is Some(result) {
+        self.skip()
+        result
+      } else {
+        self.panic() |> ignore
+        self.report_unexpected(tok, [expected], { start, end })
+        default
       }
     }
   }
