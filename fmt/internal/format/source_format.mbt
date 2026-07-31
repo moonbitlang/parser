@@ -28,19 +28,18 @@ fn strip_prefix_or_self(line : String, prefix : String) -> String {
 
 ///|
 fn check_fence_indent(line : String) -> String? {
-  match line.find("```") {
-    None => None
-    Some(index) => {
-      let info = line
-        .unsafe_substring(start=index + 3, end=line.length())
-        .trim()
-        .to_owned()
-      if info == "mbt check" {
-        Some(line.unsafe_substring(start=0, end=index))
-      } else {
-        None
-      }
+  if line.find("```") is Some(index) {
+    let info = line
+      .unsafe_substring(start=index + 3, end=line.length())
+      .trim()
+      .to_owned()
+    if info == "mbt check" {
+      Some(line.unsafe_substring(start=0, end=index))
+    } else {
+      None
     }
+  } else {
+    None
   }
 }
 
@@ -62,30 +61,29 @@ fn markdown_blocks(source : String) -> Array[MarkdownBlock] {
   let blocks : Array[MarkdownBlock] = []
   let mut i = 0
   while i < lines.length() {
-    match check_fence_indent(lines[i]) {
-      None => i += 1
-      Some(indent) => {
-        let mut j = i + 1
-        while j < lines.length() && !is_closing_fence(lines[j], indent) {
-          j += 1
-        }
-        if j < lines.length() {
-          let content_lines : Array[String] = []
-          for k in (i + 1)..<j {
-            content_lines.push(strip_prefix_or_self(lines[k], indent))
-          }
-          blocks.push({
-            open_line: i + 1,
-            content_start: i + 2,
-            close_line: j + 1,
-            indent,
-            content: line_join(content_lines),
-          })
-          i = j + 1
-        } else {
-          i += 1
-        }
+    if check_fence_indent(lines[i]) is Some(indent) {
+      let mut j = i + 1
+      while j < lines.length() && !is_closing_fence(lines[j], indent) {
+        j += 1
       }
+      if j < lines.length() {
+        let content_lines : Array[String] = []
+        for k in (i + 1)..<j {
+          content_lines.push(strip_prefix_or_self(lines[k], indent))
+        }
+        blocks.push({
+          open_line: i + 1,
+          content_start: i + 2,
+          close_line: j + 1,
+          indent,
+          content: line_join(content_lines),
+        })
+        i = j + 1
+      } else {
+        i += 1
+      }
+    } else {
+      i += 1
     }
   }
   blocks
@@ -153,24 +151,24 @@ fn restore_header_line_comment(
   item : @syntax.Impl,
   tokens : @tokens.Triples,
 ) -> String {
-  match header_line_comment(item, tokens) {
-    None => formatted
-    Some(comment) =>
-      if formatted.contains(comment) {
-        formatted
-      } else {
-        match formatted.split_once("\n") {
-          Some((head, tail)) => {
-            let head = head.to_owned()
-            if head.contains("{") {
-              head + " " + comment + "\n" + tail.to_owned()
-            } else {
-              formatted
-            }
+  if header_line_comment(item, tokens) is Some(comment) {
+    if formatted.contains(comment) {
+      formatted
+    } else {
+      match formatted.split_once("\n") {
+        Some((head, tail)) => {
+          let head = head.to_owned()
+          if head.contains("{") {
+            head + " " + comment + "\n" + tail.to_owned()
+          } else {
+            formatted
           }
-          None => formatted
         }
+        None => formatted
       }
+    }
+  } else {
+    formatted
   }
 }
 

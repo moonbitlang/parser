@@ -9,9 +9,10 @@ fn State::peek_spos_with_parsed(
   self : Self,
   parsed~ : @syntax.Expr?,
 ) -> Position {
-  match parsed {
-    None => self.peek_spos()
-    Some(e) => e.loc().start
+  if parsed is Some(e) {
+    e.loc().start
+  } else {
+    self.peek_spos()
   }
 }
 
@@ -312,10 +313,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
       |> List
     },
   )
-  let constraints = match constraints {
-    None => @list.new()
-    Some(xs) => xs
-  }
+  let constraints = if constraints is Some(xs) { xs } else { @list.new() }
   { name, name_loc: loc, constraints }
 }
 
@@ -462,9 +460,10 @@ fn State::parse_fun_decl(
     )
     |> @list.List
   })
-  let params_loc = match decl_params {
-    Some(_) => self.loc_start_with(param_loc_start)
-    None => self.empty_loc()
+  let params_loc = if decl_params is Some(_) {
+    self.loc_start_with(param_loc_start)
+  } else {
+    self.empty_loc()
   }
   let (return_type, error_type) = self.parse_func_return_type()
   let loc = self.loc_start_with(spos)
@@ -3123,48 +3122,46 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
   self.push_sync(TK_RPAREN)
   let state = self
   let first = state.optional(first_expr, State::parse_expr)
-  match first {
-    None => {
-      self.expect_token(TK_RPAREN)
-      self.pop_sync(TK_RPAREN)
-      let loc = state.loc_start_with(spos)
-      Unit(loc~, faked=false)
-    }
-    Some(first) =>
-      match state.peek_token() {
-        COLON => {
-          state.expect_token(TK_COLON)
-          let ty = state.parse_type()
-          self.expect_token(TK_RPAREN)
-          self.pop_sync(TK_RPAREN)
-          let loc = state.loc_start_with(spos)
-          Constraint(expr=first, ty~, loc~)
-        }
-        COMMA => {
-          state.expect_token(TK_COMMA)
-          let (rest, _) = state.series_with_follow(
-            delim=TK_COMMA,
-            follow_set=[TK_RPAREN],
-            State::parse_expr,
-          )
-          self.expect_token(TK_RPAREN)
-          self.pop_sync(TK_RPAREN)
-          let loc = state.loc_start_with(spos)
-          if rest.length() == 0 {
-            Group(expr=first, group=Paren, loc~)
-          } else {
-            let rest = @list.List(rest)
-            Tuple(exprs=rest.add(first), loc~)
-          }
-        }
-        RPAREN => {
-          self.expect_token(TK_RPAREN)
-          self.pop_sync(TK_RPAREN)
-          let loc = state.loc_start_with(spos)
-          Group(expr=first, group=Paren, loc~)
-        }
-        _ => first //TODO: error recovery and add group node
+  if first is Some(first) {
+    match state.peek_token() {
+      COLON => {
+        state.expect_token(TK_COLON)
+        let ty = state.parse_type()
+        self.expect_token(TK_RPAREN)
+        self.pop_sync(TK_RPAREN)
+        let loc = state.loc_start_with(spos)
+        Constraint(expr=first, ty~, loc~)
       }
+      COMMA => {
+        state.expect_token(TK_COMMA)
+        let (rest, _) = state.series_with_follow(
+          delim=TK_COMMA,
+          follow_set=[TK_RPAREN],
+          State::parse_expr,
+        )
+        self.expect_token(TK_RPAREN)
+        self.pop_sync(TK_RPAREN)
+        let loc = state.loc_start_with(spos)
+        if rest.length() == 0 {
+          Group(expr=first, group=Paren, loc~)
+        } else {
+          let rest = @list.List(rest)
+          Tuple(exprs=rest.add(first), loc~)
+        }
+      }
+      RPAREN => {
+        self.expect_token(TK_RPAREN)
+        self.pop_sync(TK_RPAREN)
+        let loc = state.loc_start_with(spos)
+        Group(expr=first, group=Paren, loc~)
+      }
+      _ => first //TODO: error recovery and add group node
+    }
+  } else {
+    self.expect_token(TK_RPAREN)
+    self.pop_sync(TK_RPAREN)
+    let loc = state.loc_start_with(spos)
+    Unit(loc~, faked=false)
   }
 }
 
@@ -4761,11 +4758,11 @@ fn State::next_is_foreach_comprehension(self : Self) -> Bool {
     _ => return false
   }
   while true {
-    nth = nth + 1
+    nth += 1
     match self.peek_token(nth~) {
       IN => return true
       COMMA => {
-        nth = nth + 1
+        nth += 1
         match self.peek_token(nth~) {
           LIDENT(_) | EXTEND | UNDERSCORE => continue
           _ => return false
@@ -4891,12 +4888,11 @@ fn State::parse_field_def(self : Self) -> @syntax.FieldDef {
     _ => None
   }
   let loc = self.loc_start_with(spos)
-  match expr_opt {
-    Some(expr) => { label, expr, is_pun: false, loc }
-    None => {
-      let expr = @syntax.label_to_expr(loc=label.loc, label)
-      { label, expr, is_pun: true, loc }
-    }
+  if expr_opt is Some(expr) {
+    { label, expr, is_pun: false, loc }
+  } else {
+    let expr = @syntax.label_to_expr(loc=label.loc, label)
+    { label, expr, is_pun: true, loc }
   }
 }
 
@@ -4949,16 +4945,15 @@ fn State::parse_record_expr(
   }
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
-  match spread_record {
-    Some(record) => RecordUpdate(type_name~, record~, fields~, loc~)
-    None => {
-      let trailing : @syntax.TrailingMark = if trailing_comma {
-        Comma
-      } else {
-        None
-      }
-      Record(type_name~, fields~, trailing~, loc~)
+  if spread_record is Some(record) {
+    RecordUpdate(type_name~, record~, fields~, loc~)
+  } else {
+    let trailing : @syntax.TrailingMark = if trailing_comma {
+      Comma
+    } else {
+      None
     }
+    Record(type_name~, fields~, trailing~, loc~)
   }
 }
 
@@ -5143,9 +5138,10 @@ fn State::parse_stmt(self : Self) -> Statement {
       } else {
         let pat = self.parse_pattern()
         let ty_opt = self.parse_opt_annot()
-        let pat : @syntax.Pattern = match ty_opt {
-          Some(ty) => Constraint(pat~, ty~, loc=pat.loc().merge(ty.loc()))
-          None => pat
+        let pat : @syntax.Pattern = if ty_opt is Some(ty) {
+          Constraint(pat~, ty~, loc=pat.loc().merge(ty.loc()))
+        } else {
+          pat
         }
         self.expect_token(TK_EQUAL)
         let expr = self.parse_expr()
@@ -5302,15 +5298,14 @@ fn State::parse_assign_or_simple_expr(self : Self) -> @syntax.Expr {
       self.expect_token(TK_EQUAL)
       let rhs = self.parse_expr()
       let loc = self.loc_start_with(spos)
-      match @syntax.make_assign_opt(loc~, lhs, rhs) {
-        Some(res) => res
-        None => {
-          self.report_error({
-            loc: lhs.loc(),
-            msg: "Invalid left value in assignment",
-          })
-          lhs
-        }
+      if @syntax.make_assign_opt(loc~, lhs, rhs) is Some(res) {
+        res
+      } else {
+        self.report_error({
+          loc: lhs.loc(),
+          msg: "Invalid left value in assignment",
+        })
+        lhs
       }
     }
     AUGMENTED_ASSIGNMENT(op) => {
@@ -5319,15 +5314,14 @@ fn State::parse_assign_or_simple_expr(self : Self) -> @syntax.Expr {
       self.expect_token(TK_AUGMENTED_ASSIGNMENT)
       let rhs = self.parse_expr()
       let loc = self.loc_start_with(spos)
-      match @syntax.make_augmented_assign_opt(loc~, op, lhs, rhs) {
-        Some(res) => res
-        None => {
-          self.report_error({
-            loc: lhs.loc(),
-            msg: "Invalid left value in assignment",
-          })
-          lhs
-        }
+      if @syntax.make_augmented_assign_opt(loc~, op, lhs, rhs) is Some(res) {
+        res
+      } else {
+        self.report_error({
+          loc: lhs.loc(),
+          msg: "Invalid left value in assignment",
+        })
+        lhs
       }
     }
     PLUS_EQUAL => {
@@ -5336,15 +5330,14 @@ fn State::parse_assign_or_simple_expr(self : Self) -> @syntax.Expr {
       self.expect_token(TK_PLUS_EQUAL)
       let rhs = self.parse_expr()
       let loc = self.loc_start_with(spos)
-      match @syntax.make_augmented_assign_opt(loc~, op, lhs, rhs) {
-        Some(res) => res
-        None => {
-          self.report_error({
-            loc: lhs.loc(),
-            msg: "Invalid left value in assignment",
-          })
-          lhs
-        }
+      if @syntax.make_augmented_assign_opt(loc~, op, lhs, rhs) is Some(res) {
+        res
+      } else {
+        self.report_error({
+          loc: lhs.loc(),
+          msg: "Invalid left value in assignment",
+        })
+        lhs
       }
     }
     _ => lhs
