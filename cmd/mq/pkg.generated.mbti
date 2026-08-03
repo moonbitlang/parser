@@ -6,6 +6,11 @@ package "moonbitlang/parser/cmd/mq"
 // Errors
 
 // Types and methods
+type CliAction
+
+type InputSource
+
+type LegacyOptions
 
 // Type aliases
 

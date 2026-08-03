@@ -1,9 +1,18 @@
 ///|
-async fn die(message : String) -> Unit {
+#cfg(target="native")
+extern "C" fn exit(code : Int) = "exit"
+
+///|
+#cfg(target="wasm")
+fn exit(code : UInt) = "wasi_snapshot_preview1" "proc_exit"
+
+///|
+async fn[T] die(message : String) -> T {
   @stdio.stderr.write("\{message}\n") catch {
     _ => ()
   }
-  @sys.exit(1)
+  exit(1)
+  panic()
 }
 
 ///|
@@ -17,7 +26,7 @@ async fn write_stdout(message : String) -> Unit {
 
 ///|
 fn program_args() -> ArrayView[String] {
-  let args = @sys.get_cli_args()
+  let args = @env.args()
   if args.length() > 1 {
     args[1:]
   } else {
@@ -84,10 +93,7 @@ async fn run_legacy(options : LegacyOptions) -> Unit {
 ///|
 async fn main {
   match parse_cli(program_args()) {
-    Help(text) => {
-      write_stdout("\{text}\n")
-      @sys.exit(0)
-    }
+    Help(text) => write_stdout("\{text}\n")
     Error(message) => die(message)
     RunLegacy(options) => run_legacy(options)
   }

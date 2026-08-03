@@ -5,6 +5,30 @@ priv struct MoonfmtOptions {
 }
 
 ///|
+#cfg(target="native")
+extern "C" fn exit(code : Int) = "exit"
+
+///|
+#cfg(target="wasm")
+fn exit(code : UInt) = "wasi_snapshot_preview1" "proc_exit"
+
+///|
+async fn[T] die(message : String) -> T {
+  @stdio.stderr.write("\{message}\n") catch {
+    _ => ()
+  }
+  exit(1)
+  panic()
+}
+
+///|
+async fn write_stdout(message : String) -> Unit {
+  @stdio.stdout.write(message) catch {
+    err => die("error: failed to write stdout: \{err}")
+  }
+}
+
+///|
 fn moonfmt_command() -> @argparse.Command {
   Command(
     "moonfmt",
@@ -38,29 +62,16 @@ fn parse_moonfmt_args(args : ArrayView[String]) -> MoonfmtOptions raise {
 }
 
 ///|
-fn moonfmt(args : ArrayView[String]) -> Unit {
-  let options = parse_moonfmt_args(args) catch {
-    e => {
-      println(e)
-      panic()
-    }
-  }
-  let source = @fs.read_file_to_string(options.path) catch {
-    e => {
-      println(e)
-      panic()
-    }
-  }
+async fn moonfmt(args : ArrayView[String]) -> Unit {
+  let options = parse_moonfmt_args(args) catch { err => die("\{err}") }
+  let source = @fs.read_file(options.path).text() catch { err => die("\{err}") }
   let result = @fmt.format(source)
   if options.overwrite {
-    @fs.write_string_to_file(options.path, result) catch {
-      e => {
-        println(e)
-        panic()
-      }
+    @fs.write_file(options.path, result, create_mode=CreateOrTruncate) catch {
+      err => die("\{err}")
     }
   } else {
-    println(result)
+    write_stdout("\{result}\n")
   }
 }
 
@@ -75,7 +86,7 @@ fn program_args() -> ArrayView[String] {
 }
 
 ///|
-fn main {
+async fn main {
   moonfmt(program_args())
 }
 
