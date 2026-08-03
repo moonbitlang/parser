@@ -1,8 +1,13 @@
 import {
   "moonbitlang/core/argparse",
-  "moonbitlang/x/fs",
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/stdio",
+  "moonbitlang/async/io",
   "moonbitlang/parser/fmt",
   "moonbitlang/core/env",
 }
+
+supported_targets = "+native+wasm"
 
 pkgtype(kind: "executable")

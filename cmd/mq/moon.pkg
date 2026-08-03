@@ -4,10 +4,10 @@ import {
   "moonbitlang/async/fs",
   "moonbitlang/async/stdio",
   "moonbitlang/async/io",
-  "moonbitlang/x/sys",
+  "moonbitlang/core/env",
   "moonbitlang/core/json",
 }
 
-supported_targets = "+native"
+supported_targets = "+native+wasm"
 
 pkgtype(kind: "executable")
