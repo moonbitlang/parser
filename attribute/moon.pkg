@@ -6,7 +6,7 @@ import {
   "moonbitlang/core/debug",
 }
 
-warnings = "-6-3"
+warnings = "-6-3-87"
 
 formatter(ignore: [ "parser.mbt" ])
 

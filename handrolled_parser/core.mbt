@@ -75,7 +75,7 @@ fn State::peek(state : Self, nth? : Int = 0) -> Triple {
         }
     }
   }
-  guard state.tokens.last() is Some((_, last_spos, last_epos))
+  guard! state.tokens.last() is Some((_, last_spos, last_epos))
   return (EOF, last_spos, last_epos)
 }
 
@@ -237,7 +237,7 @@ fn State::push_sync(state : Self, sync : TokenKind) -> Unit {
 ///|
 fn State::pop_sync(state : Self, sync : TokenKind) -> Unit {
   if state.syncs.pop() is Some(x) {
-    guard x == sync
+    guard! x == sync
     match state.mode {
       Panic(sync_at~, ..) if sync_at == state.syncs.length() => state.recover()
       _ => ()

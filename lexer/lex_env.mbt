@@ -141,7 +141,7 @@ fn LexEnv::preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
         if docstrings.is_empty() {
           docstrings.push(@list.singleton((loc, comment)))
         } else {
-          guard docstrings.last() is Some(More(head, ..) as last)
+          guard! docstrings.last() is Some(More(head, ..) as last)
           let last_idx = docstrings.length() - 1
           if loc.start.lnum - head.0.start.lnum > 1 {
             docstrings[last_idx] = last.rev()
