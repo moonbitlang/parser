@@ -1097,13 +1097,13 @@ fn Fmt::arguments(fmt : Fmt, args : List[@syntax.Argument]) -> Doc {
       })
       match trailing_arg_value {
         Record(_) | Array(_) => {
-          guard fmt.expr(trailing_arg_value) is BlockLike(doc)
+          guard! fmt.expr(trailing_arg_value) is BlockLike(doc)
           let leading_req = leading_args_req
           let total_req = leading_args_req + doc.requirement()
           switch_trailing_block(leading_req, total_req)
         }
         Function(_) => {
-          guard fmt.expr(trailing_arg_value) is Collapsible(head, body)
+          guard! fmt.expr(trailing_arg_value) is Collapsible(head, body)
           let leading_req = leading_args_req + head.requirement()
           let total_req = leading_args_req +
             head.requirement() +
@@ -1868,7 +1868,7 @@ fn Fmt::chained_dot_expr(fmt : Self, e : @syntax.Expr) -> RawExprDoc {
       expr => break acc.add(expr)
     }
   }
-  guard xs is More(s, tail=chained_exprs)
+  guard! xs is More(s, tail=chained_exprs)
   let lhs = fmt.expr_before_dot(s)
   let chained = separate_map(chained_exprs, softline, fn(expr) {
     match expr {
@@ -2201,7 +2201,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Normal(doc)
     }
     LetFn(name=_, func~, body~, loc=_) => { //TODO: fixme
-      guard fmt.func(func) is Collapsible(a, b)
+      guard! fmt.func(func) is Collapsible(a, b)
       let func = a + b
       let body = hardline + fmt.compose(body, Stmt)
       Normal(func + body)
