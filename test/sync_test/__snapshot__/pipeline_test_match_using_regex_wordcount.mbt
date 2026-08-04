@@ -1,3 +1,5 @@
+//!build: -w -lexmatch_longest_match
+
 ///|
 fn count(
   input : BytesView,

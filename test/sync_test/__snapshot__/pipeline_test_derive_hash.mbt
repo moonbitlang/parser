@@ -1,5 +1,5 @@
 fn[T : Hash] stable_hash(value : T) -> Int {
-  let hasher = Hasher::new(seed = 42)
+  let hasher = Hasher(seed = 42)
   hasher.combine(value)
   hasher.finalize()
 }

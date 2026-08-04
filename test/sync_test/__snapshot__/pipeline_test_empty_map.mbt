@@ -1,3 +1,4 @@
+//!build: -w -ambiguous_braces
 fn init {
   let m1 = { }
   m1.set("x", 1)

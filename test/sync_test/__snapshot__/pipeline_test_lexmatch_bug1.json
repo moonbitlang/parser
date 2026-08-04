@@ -62,7 +62,7 @@
                 "children": {}
               },
               "expr": {
-                "kind": "Expr::Lexmatch",
+                "kind": "Expr::Lexscan",
                 "loc": null,
                 "children": {
                   "strategy": {
@@ -86,86 +86,82 @@
                     }
                   },
                   "cases": {
-                    "kind": "Expr::Lexmatch::CaseList",
+                    "kind": "Expr::Lexscan::CaseList",
                     "loc": null,
                     "children": [
                       {
-                        "kind": "LexCase",
+                        "kind": "LexscanCase",
                         "loc": null,
                         "children": {
                           "pat": {
-                            "kind": "LexCase::PatternList",
+                            "kind": "LexscanCasePattern::Pattern",
                             "loc": null,
-                            "children": [
-                              {
-                                "kind": "LexTopPattern::Pattern",
+                            "children": {
+                              "value": {
+                                "kind": "RegexPattern::Sequence",
                                 "loc": null,
                                 "children": {
-                                  "value": {
-                                    "kind": "LexPattern::Sequence",
+                                  "pat1": {
+                                    "kind": "RegexPattern::Sequence",
                                     "loc": null,
                                     "children": {
-                                      "pats": {
-                                        "kind": "LexPattern::Sequence::PatternList",
+                                      "pat1": {
+                                        "kind": "RegexPattern::Alias",
                                         "loc": null,
-                                        "children": [
-                                          {
-                                            "kind": "LexPattern::Alias",
+                                        "children": {
+                                          "pat": {
+                                            "kind": "RegexPattern::Literal",
                                             "loc": null,
                                             "children": {
-                                              "pat": {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              "binder": {
-                                                "kind": "Binder",
-                                                "loc": null,
-                                                "children": {
-                                                  "name": "_hour_str"
-                                                }
-                                              }
+                                              "lit": "^[0-9]{2}"
                                             }
                                           },
-                                          {
-                                            "kind": "LexPattern::Regex",
+                                          "binder": {
+                                            "kind": "Binder",
                                             "loc": null,
                                             "children": {
-                                              "lit": ":",
-                                              "offset": 1
-                                            }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Alias",
-                                            "loc": null,
-                                            "children": {
-                                              "pat": {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              "binder": {
-                                                "kind": "Binder",
-                                                "loc": null,
-                                                "children": {
-                                                  "name": "_minute_str"
-                                                }
-                                              }
+                                              "name": "_hour_str"
                                             }
                                           }
-                                        ]
+                                        }
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": ":"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "pat2": {
+                                    "kind": "RegexPattern::Alias",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "[0-9]{2}$"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_minute_str"
+                                        }
                                       }
                                     }
                                   }
                                 }
                               }
-                            ]
+                            }
+                          },
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": []
                           },
                           "guard": null,
                           "body": {
@@ -184,64 +180,67 @@
                         }
                       },
                       {
-                        "kind": "LexCase",
+                        "kind": "LexscanCase",
                         "loc": null,
                         "children": {
                           "pat": {
-                            "kind": "LexCase::PatternList",
+                            "kind": "LexscanCasePattern::Pattern",
                             "loc": null,
-                            "children": [
-                              {
-                                "kind": "LexTopPattern::Pattern",
+                            "children": {
+                              "value": {
+                                "kind": "RegexPattern::Sequence",
                                 "loc": null,
                                 "children": {
-                                  "value": {
-                                    "kind": "LexPattern::Sequence",
+                                  "pat1": {
+                                    "kind": "RegexPattern::Sequence",
                                     "loc": null,
                                     "children": {
-                                      "pats": {
-                                        "kind": "LexPattern::Sequence::PatternList",
+                                      "pat1": {
+                                        "kind": "RegexPattern::Sequence",
                                         "loc": null,
-                                        "children": [
-                                          {
-                                            "kind": "LexPattern::Alias",
+                                        "children": {
+                                          "pat1": {
+                                            "kind": "RegexPattern::Sequence",
                                             "loc": null,
                                             "children": {
-                                              "pat": {
-                                                "kind": "LexPattern::Regex",
+                                              "pat1": {
+                                                "kind": "RegexPattern::Alias",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
+                                                  "pat": {
+                                                    "kind": "RegexPattern::Literal",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "lit": "^[0-9]{2}"
+                                                    }
+                                                  },
+                                                  "binder": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "_hour_str"
+                                                    }
+                                                  }
                                                 }
                                               },
-                                              "binder": {
-                                                "kind": "Binder",
+                                              "pat2": {
+                                                "kind": "RegexPattern::Literal",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "_hour_str"
+                                                  "lit": ":"
                                                 }
                                               }
                                             }
                                           },
-                                          {
-                                            "kind": "LexPattern::Regex",
-                                            "loc": null,
-                                            "children": {
-                                              "lit": ":",
-                                              "offset": 1
-                                            }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Alias",
+                                          "pat2": {
+                                            "kind": "RegexPattern::Alias",
                                             "loc": null,
                                             "children": {
                                               "pat": {
-                                                "kind": "LexPattern::Regex",
+                                                "kind": "RegexPattern::Literal",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
+                                                  "lit": "[0-9]{2}"
                                                 }
                                               },
                                               "binder": {
@@ -252,43 +251,46 @@
                                                 }
                                               }
                                             }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Regex",
-                                            "loc": null,
-                                            "children": {
-                                              "lit": ":",
-                                              "offset": 1
-                                            }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Alias",
-                                            "loc": null,
-                                            "children": {
-                                              "pat": {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              "binder": {
-                                                "kind": "Binder",
-                                                "loc": null,
-                                                "children": {
-                                                  "name": "_second_str"
-                                                }
-                                              }
-                                            }
                                           }
-                                        ]
+                                        }
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": ":"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "pat2": {
+                                    "kind": "RegexPattern::Alias",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "[0-9]{2}$"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_second_str"
+                                        }
                                       }
                                     }
                                   }
                                 }
                               }
-                            ]
+                            }
+                          },
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": []
                           },
                           "guard": null,
                           "body": {
@@ -307,93 +309,106 @@
                         }
                       },
                       {
-                        "kind": "LexCase",
+                        "kind": "LexscanCase",
                         "loc": null,
                         "children": {
                           "pat": {
-                            "kind": "LexCase::PatternList",
+                            "kind": "LexscanCasePattern::Pattern",
                             "loc": null,
-                            "children": [
-                              {
-                                "kind": "LexTopPattern::Pattern",
+                            "children": {
+                              "value": {
+                                "kind": "RegexPattern::Sequence",
                                 "loc": null,
                                 "children": {
-                                  "value": {
-                                    "kind": "LexPattern::Sequence",
+                                  "pat1": {
+                                    "kind": "RegexPattern::Sequence",
                                     "loc": null,
                                     "children": {
-                                      "pats": {
-                                        "kind": "LexPattern::Sequence::PatternList",
+                                      "pat1": {
+                                        "kind": "RegexPattern::Sequence",
                                         "loc": null,
-                                        "children": [
-                                          {
-                                            "kind": "LexPattern::Alias",
+                                        "children": {
+                                          "pat1": {
+                                            "kind": "RegexPattern::Sequence",
                                             "loc": null,
                                             "children": {
-                                              "pat": {
-                                                "kind": "LexPattern::Regex",
+                                              "pat1": {
+                                                "kind": "RegexPattern::Sequence",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
+                                                  "pat1": {
+                                                    "kind": "RegexPattern::Sequence",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "pat1": {
+                                                        "kind": "RegexPattern::Alias",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "pat": {
+                                                            "kind": "RegexPattern::Literal",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "lit": "^[0-9]{2}"
+                                                            }
+                                                          },
+                                                          "binder": {
+                                                            "kind": "Binder",
+                                                            "loc": null,
+                                                            "children": {
+                                                              "name": "_hour_str"
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      "pat2": {
+                                                        "kind": "RegexPattern::Literal",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "lit": ":"
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "pat2": {
+                                                    "kind": "RegexPattern::Alias",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "pat": {
+                                                        "kind": "RegexPattern::Literal",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "lit": "[0-9]{2}"
+                                                        }
+                                                      },
+                                                      "binder": {
+                                                        "kind": "Binder",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "name": "_minute_str"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
                                                 }
                                               },
-                                              "binder": {
-                                                "kind": "Binder",
+                                              "pat2": {
+                                                "kind": "RegexPattern::Literal",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "_hour_str"
+                                                  "lit": ":"
                                                 }
                                               }
                                             }
                                           },
-                                          {
-                                            "kind": "LexPattern::Regex",
-                                            "loc": null,
-                                            "children": {
-                                              "lit": ":",
-                                              "offset": 1
-                                            }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Alias",
+                                          "pat2": {
+                                            "kind": "RegexPattern::Alias",
                                             "loc": null,
                                             "children": {
                                               "pat": {
-                                                "kind": "LexPattern::Regex",
+                                                "kind": "RegexPattern::Literal",
                                                 "loc": null,
                                                 "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              "binder": {
-                                                "kind": "Binder",
-                                                "loc": null,
-                                                "children": {
-                                                  "name": "_minute_str"
-                                                }
-                                              }
-                                            }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Regex",
-                                            "loc": null,
-                                            "children": {
-                                              "lit": ":",
-                                              "offset": 1
-                                            }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Alias",
-                                            "loc": null,
-                                            "children": {
-                                              "pat": {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "[0-9]{2}",
-                                                  "offset": 1
+                                                  "lit": "[0-9]{2}"
                                                 }
                                               },
                                               "binder": {
@@ -404,43 +419,46 @@
                                                 }
                                               }
                                             }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Regex",
-                                            "loc": null,
-                                            "children": {
-                                              "lit": ".",
-                                              "offset": 1
-                                            }
-                                          },
-                                          {
-                                            "kind": "LexPattern::Alias",
-                                            "loc": null,
-                                            "children": {
-                                              "pat": {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "[0-9]{1,9}",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              "binder": {
-                                                "kind": "Binder",
-                                                "loc": null,
-                                                "children": {
-                                                  "name": "_nanosecond_str"
-                                                }
-                                              }
-                                            }
                                           }
-                                        ]
+                                        }
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "\\."
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "pat2": {
+                                    "kind": "RegexPattern::Alias",
+                                    "loc": null,
+                                    "children": {
+                                      "pat": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "[0-9]{1,9}$"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_nanosecond_str"
+                                        }
                                       }
                                     }
                                   }
                                 }
                               }
-                            ]
+                            }
+                          },
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": []
                           },
                           "guard": null,
                           "body": {
@@ -459,19 +477,18 @@
                         }
                       },
                       {
-                        "kind": "LexCase",
+                        "kind": "LexscanCase",
                         "loc": null,
                         "children": {
                           "pat": {
-                            "kind": "LexCase::PatternList",
+                            "kind": "LexscanCasePattern::Wildcard",
                             "loc": null,
-                            "children": [
-                              {
-                                "kind": "LexTopPattern::Wildcard",
-                                "loc": null,
-                                "children": {}
-                              }
-                            ]
+                            "children": {}
+                          },
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": []
                           },
                           "guard": null,
                           "body": {

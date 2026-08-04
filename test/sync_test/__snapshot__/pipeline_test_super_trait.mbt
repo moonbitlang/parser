@@ -15,7 +15,6 @@ trait Derived: Super {
 fn[X: Derived] useDerived(x: X) -> Unit {
   useSuper(x)
   Super::f(x)
-  x.f()
   x.g()
 }
 
@@ -67,9 +66,9 @@ trait Diamond_bottom: Diamond_left + Diamond_right { fn bottom(Self) -> Unit }
 
 // [Diamond_top] should appear only once in the super-trait closure of [Diamond_bottom]
 pub fn[X: Diamond_bottom] useBottom(x: X) -> Unit {
-  x.top()
-  x.left()
-  x.right()
+  Diamond_top::top(x)
+  Diamond_left::left(x)
+  Diamond_right::right(x)
   x.bottom()
 }
 
@@ -88,3 +87,5 @@ fn init {
   println("===")
   useDerivedObject(t1)
 }
+
+extend &Derived with Super::{f}

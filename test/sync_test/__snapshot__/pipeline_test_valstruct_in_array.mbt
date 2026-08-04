@@ -27,7 +27,7 @@ fn g(e1 : E, e2 : E) -> Unit {
 ///|
 fn h(es : FixedArray[E]) -> Unit {
   match es {
-    [a, .., b, c] => println("h: \{to_repr(a)}, \{to_repr(b)}, \{to_repr(c)}")
+    [a, .., b, c] => println("h: \{Repr(a)}, \{Repr(b)}, \{Repr(c)}")
     _ => ()
   }
 }
@@ -42,8 +42,8 @@ fn k(e : E) -> Unit {
     let _ = arr.pop()
 
   }
-  println("k: \{to_repr(arr[0])}")
-  println("k: \{to_repr(arr.unsafe_get(1))}")
+  println("k: \{Repr(arr[0])}")
+  println("k: \{Repr(arr.unsafe_get(1))}")
 }
 
 ///|

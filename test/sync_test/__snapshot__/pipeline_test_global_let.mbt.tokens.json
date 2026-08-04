@@ -116,16 +116,15 @@
     "loc": "6:10-6:11"
   },
   {
-    "token": "LET",
-    "loc": "7:3-7:6"
+    "token": [
+      "LIDENT",
+      "println"
+    ],
+    "loc": "7:3-7:10"
   },
   {
-    "token": "UNDERSCORE",
-    "loc": "7:7-7:8"
-  },
-  {
-    "token": "EQUAL",
-    "loc": "7:9-7:10"
+    "token": "LPAREN",
+    "loc": "7:10-7:11"
   },
   {
     "token": [
@@ -135,8 +134,12 @@
     "loc": "7:11-7:17"
   },
   {
-    "token": "NEWLINE",
+    "token": "RPAREN",
     "loc": "7:17-7:18"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "7:18-7:19"
   },
   {
     "token": "RBRACE",

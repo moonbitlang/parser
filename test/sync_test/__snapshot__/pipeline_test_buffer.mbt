@@ -2,10 +2,10 @@
 
 
 fn concat_string(ls : FixedArray[String]) -> String {
-  let buffer = @buffer.new(size_hint=0)
+  let buffer = Buffer(size_hint=0)
   let mut i = 0
   while i < ls.length() {
-    buffer.write_string(ls[i])
+    buffer.write_string_utf16le(ls[i])
     i = i + 1
   }
   buffer.contents().to_unchecked_string()
@@ -13,10 +13,10 @@ fn concat_string(ls : FixedArray[String]) -> String {
 
 
 fn concat_char(ls : FixedArray[Char]) -> String {
-  let buffer = @buffer.new(size_hint=0)
+  let buffer = Buffer(size_hint=0)
   let mut i = 0
   while i < ls.length() {
-    buffer.write_char(ls[i])
+    buffer.write_char_utf16le(ls[i])
     i = i + 1
   }
   buffer.contents().to_unchecked_string()

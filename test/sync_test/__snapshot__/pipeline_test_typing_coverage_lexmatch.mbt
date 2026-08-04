@@ -1,3 +1,5 @@
+//!build: -w -lexmatch_longest_match
+
 fn tokenize(input : BytesView) -> Array[BytesView] {
   lexmatch input with longest {
     ("[a-z]+" as word, rest) => [word, ..tokenize(rest)]

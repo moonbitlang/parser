@@ -2943,7 +2943,161 @@
     "loc": "94:2-94:3"
   },
   {
+    "token": "NEWLINE",
+    "loc": "95:1-95:2"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "///|",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "96:1-96:5"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "96:5-96:6"
+  },
+  {
+    "token": "EXTEND",
+    "loc": "97:1-97:7"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "T1"
+    ],
+    "loc": "97:8-97:10"
+  },
+  {
+    "token": "WITH",
+    "loc": "97:11-97:15"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "PolyWithDefault"
+    ],
+    "loc": "97:16-97:31"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "97:31-97:33"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "97:33-97:34"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "with_default"
+    ],
+    "loc": "97:34-97:46"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "97:46-97:47"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "97:47-97:47"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "97:47-97:48"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "98:1-98:2"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "///|",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "99:1-99:5"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "99:5-99:6"
+  },
+  {
+    "token": "EXTEND",
+    "loc": "100:1-100:7"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "P"
+    ],
+    "loc": "100:8-100:9"
+  },
+  {
+    "token": "WITH",
+    "loc": "100:10-100:14"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "PolyWithDefault"
+    ],
+    "loc": "100:15-100:30"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "100:30-100:32"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "100:32-100:33"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "with_default"
+    ],
+    "loc": "100:33-100:45"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "100:45-100:46"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "100:46-100:46"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "100:46-100:47"
+  },
+  {
     "token": "EOF",
-    "loc": "95:1-95:1"
+    "loc": "101:1-101:1"
   }
 ]

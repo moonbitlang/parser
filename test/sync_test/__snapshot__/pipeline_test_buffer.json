@@ -164,20 +164,24 @@
                 "loc": null,
                 "children": {
                   "func": {
-                    "kind": "Expr::Ident",
+                    "kind": "Expr::Constr",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "constr": {
+                        "kind": "Constructor",
                         "loc": null,
                         "children": {
                           "name": {
-                            "kind": "LongIdent::Dot",
+                            "kind": "ConstrName",
                             "loc": null,
                             "children": {
-                              "pkg": "buffer",
-                              "id": "new"
+                              "name": "Buffer"
                             }
+                          },
+                          "extra_info": {
+                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                            "loc": null,
+                            "children": {}
                           }
                         }
                       }
@@ -381,7 +385,7 @@
                                             "kind": "Label",
                                             "loc": null,
                                             "children": {
-                                              "name": "write_string"
+                                              "name": "write_string_utf16le"
                                             }
                                           },
                                           "args": {
@@ -776,20 +780,24 @@
                 "loc": null,
                 "children": {
                   "func": {
-                    "kind": "Expr::Ident",
+                    "kind": "Expr::Constr",
                     "loc": null,
                     "children": {
-                      "id": {
-                        "kind": "Var",
+                      "constr": {
+                        "kind": "Constructor",
                         "loc": null,
                         "children": {
                           "name": {
-                            "kind": "LongIdent::Dot",
+                            "kind": "ConstrName",
                             "loc": null,
                             "children": {
-                              "pkg": "buffer",
-                              "id": "new"
+                              "name": "Buffer"
                             }
+                          },
+                          "extra_info": {
+                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                            "loc": null,
+                            "children": {}
                           }
                         }
                       }
@@ -993,7 +1001,7 @@
                                             "kind": "Label",
                                             "loc": null,
                                             "children": {
-                                              "name": "write_char"
+                                              "name": "write_char_utf16le"
                                             }
                                           },
                                           "args": {

@@ -14,7 +14,7 @@ fn init {
 
 
 impl Default for T with default() -> T {
-  { x: Int::default() }
+  { x: Default::default() }
 }
 
 fn[X: Default] two_default() -> (X, X) {
@@ -51,3 +51,7 @@ impl Show for T with output(self, logger) {
   Show::output(self.x, logger)
   logger.write_string("}")
 }
+
+extend T with Add::{add}
+extend T with Mul::{mul}
+extend T with Compare::{compare}

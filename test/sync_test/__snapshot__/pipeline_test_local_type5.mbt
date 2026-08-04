@@ -14,8 +14,8 @@ fn main {
       raise LE(x)
     }
   }
-  println(to_repr(to_result(() => f1(42))))
-  println(to_repr(to_result(() => f1(-1))))
+  println(Repr(to_result(() => f1(42))))
+  println(Repr(to_result(() => f1(-1))))
 }
 
 // test recursive newtype
@@ -58,12 +58,12 @@ fn[X: Show, Y: Show] f(a: X, b: Y) -> Unit {
   
   println(a)
   println(b)
-  println(to_repr(a1))
-  println(to_repr(a2))
-  println(to_repr(b1))
-  println(to_repr(b2))
-  println(to_repr(c1))
-  println(to_repr(c2))
+  println(Repr(a1))
+  println(Repr(a2))
+  println(Repr(b1))
+  println(Repr(b2))
+  println(Repr(c1))
+  println(Repr(c2))
 }
 
 ///|

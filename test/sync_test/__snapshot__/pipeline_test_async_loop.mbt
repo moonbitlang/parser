@@ -114,7 +114,7 @@ async fn f9(x : Int, y : Int) -> Unit noraise {
         _ => ()
       }
     }
-    break
+    break outer~
   }
 }
 

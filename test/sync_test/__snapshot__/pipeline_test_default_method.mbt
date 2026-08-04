@@ -53,7 +53,7 @@ trait Sub: I {
 
 impl Sub with h(self) {
   println("Sub::h(): calling ")
-  self.g()
+  I::g(self)
 }
 
 fn[X: Sub] use_Sub(x: X) -> Unit {

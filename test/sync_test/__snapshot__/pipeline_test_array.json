@@ -633,45 +633,81 @@
                         "loc": null,
                         "children": {
                           "value": {
-                            "kind": "Expr::Apply",
+                            "kind": "Expr::Constraint",
                             "loc": null,
                             "children": {
-                              "func": {
-                                "kind": "Expr::Method",
+                              "expr": {
+                                "kind": "Expr::Apply",
                                 "loc": null,
                                 "children": {
-                                  "type_name": {
-                                    "kind": "TypeName",
+                                  "func": {
+                                    "kind": "Expr::Method",
                                     "loc": null,
                                     "children": {
-                                      "name": {
+                                      "type_name": {
+                                        "kind": "TypeName",
+                                        "loc": null,
+                                        "children": {
+                                          "name": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "Default"
+                                            }
+                                          },
+                                          "is_object": false
+                                        }
+                                      },
+                                      "method_name": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "default"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "args": {
+                                    "kind": "Expr::Apply::ArgumentList",
+                                    "loc": null,
+                                    "children": []
+                                  },
+                                  "attr": {
+                                    "kind": "ApplyAttr::NoAttr",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              },
+                              "ty": {
+                                "kind": "Type::Name",
+                                "loc": null,
+                                "children": {
+                                  "constr_id": {
+                                    "kind": "ConstrId",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
                                         "kind": "LongIdent::Ident",
                                         "loc": null,
                                         "children": {
                                           "value": "FixedArray"
                                         }
-                                      },
-                                      "is_object": false
+                                      }
                                     }
                                   },
-                                  "method_name": {
-                                    "kind": "Label",
+                                  "tys": {
+                                    "kind": "Type::Name::TypeList",
                                     "loc": null,
-                                    "children": {
-                                      "name": "default"
-                                    }
+                                    "children": [
+                                      {
+                                        "kind": "Type::Any",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    ]
                                   }
                                 }
-                              },
-                              "args": {
-                                "kind": "Expr::Apply::ArgumentList",
-                                "loc": null,
-                                "children": []
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           },

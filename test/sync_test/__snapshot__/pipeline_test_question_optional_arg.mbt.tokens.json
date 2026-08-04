@@ -114,17 +114,17 @@
   {
     "token": [
       "INTERP",
-      "\"f1(\\{to_repr(x)}, \\{to_repr(y)})\""
+      "\"f1(\\{Repr(x)}, \\{Repr(y)})\""
     ],
-    "loc": "2:11-2:45"
+    "loc": "2:11-2:39"
   },
   {
     "token": "RPAREN",
-    "loc": "2:45-2:46"
+    "loc": "2:39-2:40"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:46-2:47"
+    "loc": "2:40-2:41"
   },
   {
     "token": "RBRACE",

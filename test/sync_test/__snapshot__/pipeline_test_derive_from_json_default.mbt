@@ -47,7 +47,7 @@ fn init {
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")
   //
   println("Struct default, both fields missing")
-  let input : Json = {}
+  let input : Json = Json::empty_object()
   let expected : Result[MyType, _] = Ok({ a: 0, b: 0 })
   let actual : Result[MyType, _] = to_result(() => @json.from_json(input))
   println("\{actual == expected}, \{Debug::to_repr(actual)}, \{Debug::to_repr(expected)}")

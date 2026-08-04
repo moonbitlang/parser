@@ -64,6 +64,7 @@
                     "kind": "Expr::Lexscan",
                     "loc": null,
                     "children": {
+                      "strategy": null,
                       "expr": {
                         "kind": "Expr::Ident",
                         "loc": null,
@@ -104,6 +105,11 @@
                                   }
                                 }
                               },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
@@ -130,6 +136,11 @@
                                     }
                                   }
                                 }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
                               },
                               "guard": {
                                 "kind": "Expr::Ident",
@@ -182,6 +193,11 @@
                                   }
                                 }
                               },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
@@ -208,6 +224,11 @@
                                     }
                                   }
                                 }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
                               },
                               "guard": null,
                               "body": {
@@ -240,6 +261,11 @@
                                 "loc": null,
                                 "children": {}
                               },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
@@ -260,6 +286,13 @@
                 "kind": "Expr::Lexscan",
                 "loc": null,
                 "children": {
+                  "strategy": {
+                    "kind": "Label",
+                    "loc": null,
+                    "children": {
+                      "name": "longest"
+                    }
+                  },
                   "expr": {
                     "kind": "Expr::Ident",
                     "loc": null,
@@ -326,6 +359,46 @@
                               }
                             }
                           },
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "LexscanCase::Binding",
+                                "loc": null,
+                                "children": {
+                                  "label": {
+                                    "kind": "Label",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "before"
+                                    }
+                                  },
+                                  "binder": {
+                                    "kind": "Binder",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "prefix"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "LexscanCase::Binding",
+                                "loc": null,
+                                "children": {
+                                  "label": {
+                                    "kind": "Label",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "after"
+                                    }
+                                  },
+                                  "binder": null
+                                }
+                              }
+                            ]
+                          },
                           "guard": null,
                           "body": {
                             "kind": "Expr::Ident",
@@ -339,7 +412,7 @@
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "keyword"
+                                      "value": "prefix"
                                     }
                                   }
                                 }
@@ -371,6 +444,11 @@
                                 }
                               }
                             }
+                          },
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": []
                           },
                           "guard": null,
                           "body": {

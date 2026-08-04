@@ -199,15 +199,10 @@
             "children": []
           },
           "expr": {
-            "kind": "Expr::Let",
+            "kind": "Expr::Apply",
             "loc": null,
             "children": {
-              "pattern": {
-                "kind": "Pattern::Any",
-                "loc": null,
-                "children": {}
-              },
-              "expr": {
+              "func": {
                 "kind": "Expr::Ident",
                 "loc": null,
                 "children": {
@@ -219,19 +214,53 @@
                         "kind": "LongIdent::Ident",
                         "loc": null,
                         "children": {
-                          "value": "global"
+                          "value": "println"
                         }
                       }
                     }
                   }
                 }
               },
-              "body": {
-                "kind": "Expr::Unit",
+              "args": {
+                "kind": "Expr::Apply::ArgumentList",
                 "loc": null,
-                "children": {
-                  "faked": true
-                }
+                "children": [
+                  {
+                    "kind": "Argument",
+                    "loc": null,
+                    "children": {
+                      "value": {
+                        "kind": "Expr::Ident",
+                        "loc": null,
+                        "children": {
+                          "id": {
+                            "kind": "Var",
+                            "loc": null,
+                            "children": {
+                              "name": {
+                                "kind": "LongIdent::Ident",
+                                "loc": null,
+                                "children": {
+                                  "value": "global"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "kind": {
+                        "kind": "ArgumentKind::Positional",
+                        "loc": null,
+                        "children": {}
+                      }
+                    }
+                  }
+                ]
+              },
+              "attr": {
+                "kind": "ApplyAttr::NoAttr",
+                "loc": null,
+                "children": {}
               }
             }
           }

@@ -6,7 +6,7 @@ fn[A : Show + Debug, B : Show] f(a : A, b : B) -> String {
     f2 : String
   } derive(Debug)
   let b1 = { f1: [a], f2: "b1" }
-  "\{a} \{b} \{to_repr(b1)}"
+  "\{a} \{b} \{Repr(b1)}"
 }
 
 ///|

@@ -4,5 +4,5 @@ let global: Int = {
 }
 
 fn init {
-  let _ = global
+  println(global)
 }

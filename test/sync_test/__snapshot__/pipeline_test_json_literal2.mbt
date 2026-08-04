@@ -36,5 +36,4 @@ impl ToJson for H with to_json(self) {
   }
 }
 
-
-
+extend H with ToJson::{to_json}

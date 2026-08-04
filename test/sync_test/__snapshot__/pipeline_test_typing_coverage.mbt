@@ -10,7 +10,7 @@ struct TBox[A] {
 }
 
 fn[T : Debug] render_tree(t : Tree[T]) -> String {
-  to_repr(t).to_string()
+  Repr(t).to_string()
 }
 
 fn[T] flatten(t : Tree[T]) -> Array[T] {

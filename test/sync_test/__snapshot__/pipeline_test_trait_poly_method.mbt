@@ -92,3 +92,9 @@ fn init {
   pt.with_default(42)
   PolyWithDefault::with_default(pt, "fourty-two")
 }
+
+///|
+extend T1 with PolyWithDefault::{with_default}
+
+///|
+extend P with PolyWithDefault::{with_default}

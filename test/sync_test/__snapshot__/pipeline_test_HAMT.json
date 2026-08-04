@@ -9729,41 +9729,72 @@
                     "loc": null,
                     "children": {
                       "value": {
-                        "kind": "Expr::DotApply",
+                        "kind": "Expr::Apply",
                         "loc": null,
                         "children": {
-                          "self": {
-                            "kind": "Expr::Ident",
+                          "func": {
+                            "kind": "Expr::Method",
                             "loc": null,
                             "children": {
-                              "id": {
-                                "kind": "Var",
+                              "type_name": {
+                                "kind": "TypeName",
                                 "loc": null,
                                 "children": {
                                   "name": {
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "key"
+                                      "value": "Hash"
                                     }
-                                  }
+                                  },
+                                  "is_object": false
+                                }
+                              },
+                              "method_name": {
+                                "kind": "Label",
+                                "loc": null,
+                                "children": {
+                                  "name": "hash"
                                 }
                               }
                             }
                           },
-                          "method_name": {
-                            "kind": "Label",
-                            "loc": null,
-                            "children": {
-                              "name": "hash"
-                            }
-                          },
                           "args": {
-                            "kind": "Expr::DotApply::ArgList",
+                            "kind": "Expr::Apply::ArgumentList",
                             "loc": null,
-                            "children": []
+                            "children": [
+                              {
+                                "kind": "Argument",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "Expr::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
+                                        "kind": "Var",
+                                        "loc": null,
+                                        "children": {
+                                          "name": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "key"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "kind": {
+                                    "kind": "ArgumentKind::Positional",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              }
+                            ]
                           },
-                          "return_self": false,
                           "attr": {
                             "kind": "ApplyAttr::NoAttr",
                             "loc": null,
@@ -14000,41 +14031,72 @@
                     "loc": null,
                     "children": {
                       "value": {
-                        "kind": "Expr::DotApply",
+                        "kind": "Expr::Apply",
                         "loc": null,
                         "children": {
-                          "self": {
-                            "kind": "Expr::Ident",
+                          "func": {
+                            "kind": "Expr::Method",
                             "loc": null,
                             "children": {
-                              "id": {
-                                "kind": "Var",
+                              "type_name": {
+                                "kind": "TypeName",
                                 "loc": null,
                                 "children": {
                                   "name": {
                                     "kind": "LongIdent::Ident",
                                     "loc": null,
                                     "children": {
-                                      "value": "key"
+                                      "value": "Hash"
                                     }
-                                  }
+                                  },
+                                  "is_object": false
+                                }
+                              },
+                              "method_name": {
+                                "kind": "Label",
+                                "loc": null,
+                                "children": {
+                                  "name": "hash"
                                 }
                               }
                             }
                           },
-                          "method_name": {
-                            "kind": "Label",
-                            "loc": null,
-                            "children": {
-                              "name": "hash"
-                            }
-                          },
                           "args": {
-                            "kind": "Expr::DotApply::ArgList",
+                            "kind": "Expr::Apply::ArgumentList",
                             "loc": null,
-                            "children": []
+                            "children": [
+                              {
+                                "kind": "Argument",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "Expr::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "id": {
+                                        "kind": "Var",
+                                        "loc": null,
+                                        "children": {
+                                          "name": {
+                                            "kind": "LongIdent::Ident",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "key"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "kind": {
+                                    "kind": "ArgumentKind::Positional",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              }
+                            ]
                           },
-                          "return_self": false,
                           "attr": {
                             "kind": "ApplyAttr::NoAttr",
                             "loc": null,

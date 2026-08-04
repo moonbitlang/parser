@@ -1244,7 +1244,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "to_repr(a)"
+                                              "source": "Repr(a)"
                                             }
                                           },
                                           {
@@ -1258,7 +1258,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "to_repr(b)"
+                                              "source": "Repr(b)"
                                             }
                                           },
                                           {
@@ -1272,7 +1272,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "to_repr(c)"
+                                              "source": "Repr(c)"
                                             }
                                           }
                                         ]
@@ -1864,7 +1864,7 @@
                                             "kind": "InterpElem::Source",
                                             "loc": null,
                                             "children": {
-                                              "source": "to_repr(arr[0])"
+                                              "source": "Repr(arr[0])"
                                             }
                                           }
                                         ]
@@ -1939,7 +1939,7 @@
                                         "kind": "InterpElem::Source",
                                         "loc": null,
                                         "children": {
-                                          "source": "to_repr(arr.unsafe_get(1))"
+                                          "source": "Repr(arr.unsafe_get(1))"
                                         }
                                       }
                                     ]

@@ -356,38 +356,69 @@
     "loc": "8:8-8:9"
   },
   {
+    "token": "LPAREN",
+    "loc": "8:9-8:10"
+  },
+  {
     "token": [
       "UIDENT",
-      "FixedArray"
+      "Default"
     ],
-    "loc": "8:9-8:19"
+    "loc": "8:10-8:17"
   },
   {
     "token": "COLONCOLON",
-    "loc": "8:19-8:21"
+    "loc": "8:17-8:19"
   },
   {
     "token": [
       "LIDENT",
       "default"
     ],
-    "loc": "8:21-8:28"
+    "loc": "8:19-8:26"
   },
   {
     "token": "LPAREN",
-    "loc": "8:28-8:29"
+    "loc": "8:26-8:27"
   },
   {
     "token": "RPAREN",
+    "loc": "8:27-8:28"
+  },
+  {
+    "token": "COLON",
     "loc": "8:29-8:30"
   },
   {
+    "token": [
+      "UIDENT",
+      "FixedArray"
+    ],
+    "loc": "8:31-8:41"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "8:41-8:42"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "8:42-8:43"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "8:43-8:44"
+  },
+  {
     "token": "RPAREN",
-    "loc": "8:30-8:31"
+    "loc": "8:44-8:45"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "8:45-8:46"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:31-8:32"
+    "loc": "8:46-8:47"
   },
   {
     "token": "RBRACE",

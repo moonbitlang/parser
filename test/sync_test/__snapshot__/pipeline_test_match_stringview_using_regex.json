@@ -138,7 +138,7 @@
                     ]
                   },
                   "body": {
-                    "kind": "Expr::Lexmatch",
+                    "kind": "Expr::Lexscan",
                     "loc": null,
                     "children": {
                       "strategy": {
@@ -168,32 +168,30 @@
                         }
                       },
                       "cases": {
-                        "kind": "Expr::Lexmatch::CaseList",
+                        "kind": "Expr::Lexscan::CaseList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Literal",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Regex",
-                                        "loc": null,
-                                        "children": {
-                                          "lit": "(我❤️中国|𠮷)",
-                                          "offset": 1
-                                        }
-                                      }
+                                      "lit": "^(我❤️中国|𠮷)$"
                                     }
                                   }
-                                ]
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
                               },
                               "guard": null,
                               "body": {
@@ -212,44 +210,58 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Alias",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Alias",
+                                      "pat": {
+                                        "kind": "RegexPattern::Literal",
                                         "loc": null,
                                         "children": {
-                                          "pat": {
-                                            "kind": "LexPattern::Regex",
-                                            "loc": null,
-                                            "children": {
-                                              "lit": "[\\u3041-\\u3096\\u3099-\\u309f]{3}",
-                                              "offset": 1
-                                            }
-                                          },
-                                          "binder": {
-                                            "kind": "Binder",
-                                            "loc": null,
-                                            "children": {
-                                              "name": "s"
-                                            }
-                                          }
+                                          "lit": "^[\\u3041-\\u3096\\u3099-\\u309f]{3}"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "s"
                                         }
                                       }
                                     }
-                                  },
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": [
                                   {
-                                    "kind": "LexTopPattern::Wildcard",
+                                    "kind": "LexscanCase::Binding",
                                     "loc": null,
-                                    "children": {}
+                                    "children": {
+                                      "label": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "after"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_"
+                                        }
+                                      }
+                                    }
                                   }
                                 ]
                               },
@@ -359,19 +371,18 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Wildcard",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Wildcard",
-                                    "loc": null,
-                                    "children": {}
-                                  }
-                                ]
+                                "children": {}
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
                               },
                               "guard": null,
                               "body": {
@@ -831,6 +842,137 @@
                             "children": {}
                           }
                         }
+                      },
+                      {
+                        "kind": "Expr::Apply",
+                        "loc": null,
+                        "children": {
+                          "func": {
+                            "kind": "Expr::Ident",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "Var",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "assert_eq"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "args": {
+                            "kind": "Expr::Apply::ArgumentList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "Argument",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "Expr::Apply",
+                                    "loc": null,
+                                    "children": {
+                                      "func": {
+                                        "kind": "Expr::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "id": {
+                                            "kind": "Var",
+                                            "loc": null,
+                                            "children": {
+                                              "name": {
+                                                "kind": "LongIdent::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "f"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "args": {
+                                        "kind": "Expr::Apply::ArgumentList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "Argument",
+                                            "loc": null,
+                                            "children": {
+                                              "value": {
+                                                "kind": "Expr::Constant",
+                                                "loc": null,
+                                                "children": {
+                                                  "constant": {
+                                                    "kind": "Constant::String",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "abc"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "kind": {
+                                                "kind": "ArgumentKind::Positional",
+                                                "loc": null,
+                                                "children": {}
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "attr": {
+                                        "kind": "ApplyAttr::NoAttr",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    }
+                                  },
+                                  "kind": {
+                                    "kind": "ArgumentKind::Positional",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "Argument",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "Expr::Constant",
+                                    "loc": null,
+                                    "children": {
+                                      "constant": {
+                                        "kind": "Constant::Int",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "3"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "kind": {
+                                    "kind": "ArgumentKind::Positional",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "attr": {
+                            "kind": "ApplyAttr::NoAttr",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
                       }
                     ]
                   },
@@ -904,7 +1046,7 @@
                                                 "kind": "Constant::String",
                                                 "loc": null,
                                                 "children": {
-                                                  "value": "abc"
+                                                  "value": "x我❤️中国"
                                                 }
                                               }
                                             }
@@ -1112,7 +1254,7 @@
                     ]
                   },
                   "body": {
-                    "kind": "Expr::Lexmatch",
+                    "kind": "Expr::Lexscan",
                     "loc": null,
                     "children": {
                       "strategy": {
@@ -1142,48 +1284,62 @@
                         }
                       },
                       "cases": {
-                        "kind": "Expr::Lexmatch::CaseList",
+                        "kind": "Expr::Lexscan::CaseList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Alias",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Alias",
+                                      "pat": {
+                                        "kind": "RegexPattern::Literal",
                                         "loc": null,
                                         "children": {
-                                          "pat": {
-                                            "kind": "LexPattern::Regex",
-                                            "loc": null,
-                                            "children": {
-                                              "lit": ".",
-                                              "offset": 1
-                                            }
-                                          },
-                                          "binder": {
-                                            "kind": "Binder",
-                                            "loc": null,
-                                            "children": {
-                                              "name": "c"
-                                            }
-                                          }
+                                          "lit": "^."
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "c"
                                         }
                                       }
                                     }
-                                  },
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": [
                                   {
-                                    "kind": "LexTopPattern::Wildcard",
+                                    "kind": "LexscanCase::Binding",
                                     "loc": null,
-                                    "children": {}
+                                    "children": {
+                                      "label": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "after"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_"
+                                        }
+                                      }
+                                    }
                                   }
                                 ]
                               },
@@ -1210,19 +1366,18 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Wildcard",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Wildcard",
-                                    "loc": null,
-                                    "children": {}
-                                  }
-                                ]
+                                "children": {}
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
                               },
                               "guard": null,
                               "body": {
@@ -1886,6 +2041,137 @@
                             "children": {}
                           }
                         }
+                      },
+                      {
+                        "kind": "Expr::Apply",
+                        "loc": null,
+                        "children": {
+                          "func": {
+                            "kind": "Expr::Ident",
+                            "loc": null,
+                            "children": {
+                              "id": {
+                                "kind": "Var",
+                                "loc": null,
+                                "children": {
+                                  "name": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "assert_eq"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "args": {
+                            "kind": "Expr::Apply::ArgumentList",
+                            "loc": null,
+                            "children": [
+                              {
+                                "kind": "Argument",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "Expr::Apply",
+                                    "loc": null,
+                                    "children": {
+                                      "func": {
+                                        "kind": "Expr::Ident",
+                                        "loc": null,
+                                        "children": {
+                                          "id": {
+                                            "kind": "Var",
+                                            "loc": null,
+                                            "children": {
+                                              "name": {
+                                                "kind": "LongIdent::Ident",
+                                                "loc": null,
+                                                "children": {
+                                                  "value": "f"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "args": {
+                                        "kind": "Expr::Apply::ArgumentList",
+                                        "loc": null,
+                                        "children": [
+                                          {
+                                            "kind": "Argument",
+                                            "loc": null,
+                                            "children": {
+                                              "value": {
+                                                "kind": "Expr::Constant",
+                                                "loc": null,
+                                                "children": {
+                                                  "constant": {
+                                                    "kind": "Constant::String",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "value": "abc"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "kind": {
+                                                "kind": "ArgumentKind::Positional",
+                                                "loc": null,
+                                                "children": {}
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "attr": {
+                                        "kind": "ApplyAttr::NoAttr",
+                                        "loc": null,
+                                        "children": {}
+                                      }
+                                    }
+                                  },
+                                  "kind": {
+                                    "kind": "ArgumentKind::Positional",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              },
+                              {
+                                "kind": "Argument",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "Expr::Constant",
+                                    "loc": null,
+                                    "children": {
+                                      "constant": {
+                                        "kind": "Constant::Char",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "a"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "kind": {
+                                    "kind": "ArgumentKind::Positional",
+                                    "loc": null,
+                                    "children": {}
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "attr": {
+                            "kind": "ApplyAttr::NoAttr",
+                            "loc": null,
+                            "children": {}
+                          }
+                        }
                       }
                     ]
                   },
@@ -1959,7 +2245,7 @@
                                                 "kind": "Constant::String",
                                                 "loc": null,
                                                 "children": {
-                                                  "value": "abc"
+                                                  "value": "x我❤️中国"
                                                 }
                                               }
                                             }
@@ -1999,7 +2285,7 @@
                                     "kind": "Constant::Char",
                                     "loc": null,
                                     "children": {
-                                      "value": "a"
+                                      "value": "x"
                                     }
                                   }
                                 }

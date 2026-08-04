@@ -1,5 +1,5 @@
 fn f1(x? : Int, y? : Option[Int]) -> Unit {
-  println("f1(\{to_repr(x)}, \{to_repr(y)})")
+  println("f1(\{Repr(x)}, \{Repr(y)})")
 }
 
 fn init {

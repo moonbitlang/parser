@@ -1,3 +1,5 @@
+//!build: -w -lexmatch_longest_match
+
 ///|
 fn main {
   let bytes: Bytes = b"\xE0\xA1\x80" // "\u{0840}"

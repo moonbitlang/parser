@@ -1,5 +1,5 @@
 fn use_debug(x: &Debug) -> String {
-  to_repr(x).to_string()
+  Repr(x).to_string()
 }
 
 fn init {

@@ -1169,16 +1169,34 @@
     "loc": "37:40-37:41"
   },
   {
-    "token": "RBRACE",
-    "loc": "37:41-37:42"
-  },
-  {
-    "token": "RPAREN",
+    "token": [
+      "INT",
+      "0"
+    ],
     "loc": "37:42-37:43"
   },
   {
-    "token": "NEWLINE",
+    "token": "COLON",
     "loc": "37:43-37:44"
+  },
+  {
+    "token": [
+      "INT",
+      "1"
+    ],
+    "loc": "37:45-37:46"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "37:47-37:48"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "37:48-37:49"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "37:49-37:50"
   },
   {
     "token": "RBRACE",

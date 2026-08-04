@@ -1,0 +1,229 @@
+[
+  {
+    "kind": "Impl::TopExtend",
+    "loc": null,
+    "children": {
+      "type_name": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
+            "loc": null,
+            "children": {
+              "value": "Type"
+            }
+          },
+          "is_object": false
+        }
+      },
+      "trait": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
+            "loc": null,
+            "children": {
+              "value": "Trait"
+            }
+          },
+          "is_object": false
+        }
+      },
+      "names": {
+        "kind": "Impl::TopExtend::NameList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "AliasTarget",
+            "loc": null,
+            "children": {
+              "binder": {
+                "kind": "Binder",
+                "loc": null,
+                "children": {
+                  "name": "f"
+                }
+              },
+              "target": null
+            }
+          },
+          {
+            "kind": "AliasTarget",
+            "loc": null,
+            "children": {
+              "binder": {
+                "kind": "Binder",
+                "loc": null,
+                "children": {
+                  "name": "g"
+                }
+              },
+              "target": null
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Pub",
+        "loc": null,
+        "children": {
+          "attr": null
+        }
+      },
+      "attrs": {
+        "kind": "Impl::TopExtend::AttrList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "Attribute",
+            "loc": null,
+            "children": {
+              "raw": "#deprecated"
+            }
+          }
+        ]
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopExtend",
+    "loc": null,
+    "children": {
+      "type_name": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Dot",
+            "loc": null,
+            "children": {
+              "pkg": "pkg",
+              "id": "Type"
+            }
+          },
+          "is_object": false
+        }
+      },
+      "trait": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Dot",
+            "loc": null,
+            "children": {
+              "pkg": "pkg",
+              "id": "Trait"
+            }
+          },
+          "is_object": false
+        }
+      },
+      "names": {
+        "kind": "Impl::TopExtend::NameList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "AliasTarget",
+            "loc": null,
+            "children": {
+              "binder": {
+                "kind": "Binder",
+                "loc": null,
+                "children": {
+                  "name": "g"
+                }
+              },
+              "target": {
+                "kind": "Label",
+                "loc": null,
+                "children": {
+                  "name": "f"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopExtend::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  },
+  {
+    "kind": "Impl::TopExtend",
+    "loc": null,
+    "children": {
+      "type_name": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
+            "loc": null,
+            "children": {
+              "value": "Obj"
+            }
+          },
+          "is_object": true
+        }
+      },
+      "trait": {
+        "kind": "TypeName",
+        "loc": null,
+        "children": {
+          "name": {
+            "kind": "LongIdent::Ident",
+            "loc": null,
+            "children": {
+              "value": "Trait"
+            }
+          },
+          "is_object": false
+        }
+      },
+      "names": {
+        "kind": "Impl::TopExtend::NameList",
+        "loc": null,
+        "children": [
+          {
+            "kind": "AliasTarget",
+            "loc": null,
+            "children": {
+              "binder": {
+                "kind": "Binder",
+                "loc": null,
+                "children": {
+                  "name": "m"
+                }
+              },
+              "target": null
+            }
+          }
+        ]
+      },
+      "vis": {
+        "kind": "Visibility::Default",
+        "loc": null,
+        "children": {}
+      },
+      "attrs": {
+        "kind": "Impl::TopExtend::AttrList",
+        "loc": null,
+        "children": []
+      },
+      "doc": ""
+    }
+  }
+]
