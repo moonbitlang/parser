@@ -5,5 +5,5 @@ fn main {
     y : Int
   } derive(Debug)
   let s = { y: 1, flag: true }
-  println(to_repr(s))
+  println(Repr(s))
 }

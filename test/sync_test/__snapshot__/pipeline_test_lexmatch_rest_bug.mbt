@@ -1,7 +1,14 @@
 fn init {
   let s = "abc"
-  lexmatch (try! s[0:1]) with longest {
-    ("a", rest) => println(rest)
+  lexscan (try! s[0:1]) with longest {
+    (re"^a", after=rest) => println(rest)
     _ => ()
+  }
+  let no_match = lexscan "ba" with longest {
+    (re"^a", after=_) => true
+    _ => false
+  }
+  if no_match {
+    panic()
   }
 }

@@ -59,11 +59,11 @@ fn[T : Eq] use_eq(x : T, y : T) -> Bool {
 }
 
 fn[T: Debug] use_debug(x: T) -> Unit {
-  println(to_repr(x))
+  println(Repr(x))
 }
 
 fn use_debug_obj(x: &Debug) -> Unit {
-  println(to_repr(x))
+  println(Repr(x))
 }
 
 fn main {

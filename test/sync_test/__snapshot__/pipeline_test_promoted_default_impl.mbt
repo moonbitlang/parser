@@ -20,7 +20,7 @@ struct More_param[X, Y] {
 }
 
 impl[X : Show, Y : Show + Eq + Default] I for More_param[X, Y] with f(self) {
-  let is_default = if self.y == Y::default() {
+  let is_default = if self.y == Default::default() {
     "is default"
   } else {
     "is not default"
@@ -48,3 +48,6 @@ impl[X : Show, Y : Show] Show for More_param[X, Y] with output(self, logger) {
   Show::output(self.y, logger)
   logger.write_string("}")
 }
+
+extend No_param with I::{g}
+extend More_param with I::{g}

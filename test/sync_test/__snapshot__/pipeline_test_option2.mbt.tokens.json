@@ -61,44 +61,44 @@
   },
   {
     "token": [
-      "LIDENT",
-      "to_repr"
+      "UIDENT",
+      "Repr"
     ],
-    "loc": "2:3-2:10"
+    "loc": "2:3-2:7"
   },
   {
     "token": "LPAREN",
-    "loc": "2:10-2:11"
+    "loc": "2:7-2:8"
   },
   {
     "token": [
       "LIDENT",
       "x"
     ],
-    "loc": "2:11-2:12"
+    "loc": "2:8-2:9"
   },
   {
     "token": "RPAREN",
-    "loc": "2:12-2:13"
+    "loc": "2:9-2:10"
   },
   {
     "token": [
       "DOT_LIDENT",
       "to_string"
     ],
-    "loc": "2:14-2:23"
+    "loc": "2:11-2:20"
   },
   {
     "token": "LPAREN",
-    "loc": "2:23-2:24"
+    "loc": "2:20-2:21"
   },
   {
     "token": "RPAREN",
-    "loc": "2:24-2:25"
+    "loc": "2:21-2:22"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:25-2:26"
+    "loc": "2:22-2:23"
   },
   {
     "token": "RBRACE",

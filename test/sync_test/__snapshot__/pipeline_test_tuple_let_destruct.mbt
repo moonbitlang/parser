@@ -197,7 +197,7 @@ fn outer_loop(xss : Array[Array[Int]]) -> Unit {
     } nobreak {
       (0, 0)
     }
-    continue isum + i, vsum + x
+    continue outer~ isum + i, vsum + x
   } nobreak {
     println("\{isum}, \{vsum}")
   }

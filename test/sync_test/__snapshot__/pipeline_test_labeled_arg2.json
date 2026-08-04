@@ -110,7 +110,7 @@
                                 "kind": "LongIdent::Ident",
                                 "loc": null,
                                 "children": {
-                                  "value": "T"
+                                  "value": "Default"
                                 }
                               },
                               "is_object": false

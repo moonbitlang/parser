@@ -1515,29 +1515,40 @@
   },
   {
     "token": [
-      "LIDENT",
-      "self"
+      "UIDENT",
+      "I"
     ],
-    "loc": "56:3-56:7"
+    "loc": "56:3-56:4"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "56:4-56:6"
   },
   {
     "token": [
-      "DOT_LIDENT",
+      "LIDENT",
       "g"
     ],
-    "loc": "56:8-56:9"
+    "loc": "56:6-56:7"
   },
   {
     "token": "LPAREN",
-    "loc": "56:9-56:10"
+    "loc": "56:7-56:8"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "self"
+    ],
+    "loc": "56:8-56:12"
   },
   {
     "token": "RPAREN",
-    "loc": "56:10-56:11"
+    "loc": "56:12-56:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "56:11-56:12"
+    "loc": "56:13-56:14"
   },
   {
     "token": "RBRACE",

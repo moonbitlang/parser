@@ -13,26 +13,26 @@ enum Token {
 fn lex_token(str : StringView) -> Array[Token] raise {
   let tokens : Array[Token] = []
   for str = str {
-    lexmatch str with longest {
-      ("\(|左括号", rest) => {
+    lexscan str with longest {
+      (re"^(\(|左括号)", after=rest) => {
         tokens.push(LParen)
         continue rest
       }
-      ("\)|右括号", rest) => {
+      (re"^(\)|右括号)", after=rest) => {
         tokens.push(RParen)
         continue rest
       }
-      ("[0-9]+" as s, rest) => {
+      (re"^[0-9]+" as s, after=rest) => {
         tokens.push(Token::Number(@string.parse_int(s)))
         continue rest
       }
-      ("[a-zA-Z0-9_]+" as s, rest) => {
+      (re"^[a-zA-Z0-9_]+" as s, after=rest) => {
         tokens.push(Token::String(s.to_owned()))
         continue rest
       }
       // skip whitespace
-      ("[ \t\n\r]+", rest) => continue rest
-      "" => break
+      (re"^[ \t\n\r]+", after=rest) => continue rest
+      re"^$" => break
       _ => fail("Invalid token \{str}")
     }
   }
@@ -43,6 +43,9 @@ fn lex_token(str : StringView) -> Array[Token] raise {
 fn main {
   debug(to_result(() => lex_token("   (1 2 (a b) (2) 3)")))
   debug(to_result(() => lex_token("   (1 2 左括号a 右括号b) (2) 3)")))
+  if to_result(() => lex_token("?1")) is Ok(_) {
+    panic()
+  }
 }
 
 fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {

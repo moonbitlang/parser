@@ -151,7 +151,7 @@ fn[K: Eq, V] HAMT::find_with_hash(self: HAMT[K, V], key: K, hash: Int) -> V? {
 }
 
 fn[K: Eq + Hash, V] HAMT::find(self: HAMT[K, V], key: K) -> V? {
-  self.find_with_hash(key, key.hash())
+  self.find_with_hash(key, Hash::hash(key))
 }
 
 fn[K: Eq, V] HAMT::add_with_hash(
@@ -199,7 +199,7 @@ fn[K: Eq, V] HAMT::add_with_hash(
 }
 
 fn[K: Eq + Hash, V] HAMT::add(self: HAMT[K, V], key: K, value: V) -> HAMT[K, V] {
-  self.add_with_hash(key, 0, key.hash(), value)
+  self.add_with_hash(key, 0, Hash::hash(key), value)
 }
 
 

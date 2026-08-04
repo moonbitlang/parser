@@ -39,10 +39,10 @@ fn parse_unix_relative_path(
   let components : Array[StringView] = []
   let mut start = start
   for ;; {
-    lexmatch rest with longest {
+    lexscan rest with longest {
       // pattern: <path_component><slashes>
       // slashes elimination
-      ((("[^/]+" as s) "(/)+") as all, r) => {
+      (((re"^[^/]+" as s) + re"(/)+") as all, after=r) => {
         match s {
           "." => ()
           ".." =>
@@ -61,7 +61,7 @@ fn parse_unix_relative_path(
         rest = r
       }
       // pattern: <dot-dot>
-      "\.\." => {
+      re"^\.\.$" => {
         match (components.pop(), root_eliminate) {
           (Some(".."), _) => {
             components.push("..")
@@ -74,12 +74,12 @@ fn parse_unix_relative_path(
         break
       }
       // pattern: <dot>
-      "\." => break
-      ("[^/]+" as filename) => {
+      re"^\.$" => break
+      (re"^[^/]+$" as filename) => {
         components.push(filename)
         break
       }
-      "$" => break
+      re"^$" => break
       _ => raise PathError(start~, message="Invalid Unix path")
     }
   }
@@ -88,11 +88,11 @@ fn parse_unix_relative_path(
 
 ///|
 fn UnixPath::parse(path : StringView) -> UnixPath raise PathError {
-  lexmatch path with longest {
+  lexscan path with longest {
     // current path
     // syntax: `./<rest_of_path>`
     // slashes elimination 
-    ("\./+" as prefix, rest) => {
+    (re"^\./+" as prefix, after=rest) => {
       let directory = parse_unix_relative_path(
         rest,
         start=prefix.char_length(),
@@ -102,7 +102,7 @@ fn UnixPath::parse(path : StringView) -> UnixPath raise PathError {
     }
     // syntax: `<path_component>/<rest_of_path>`
     // slashes elimination
-    ("[^/]+/+", _) => {
+    (re"^[^/]+/+", after=_) => {
       let directory = parse_unix_relative_path(
         path,
         start=0,
@@ -114,7 +114,7 @@ fn UnixPath::parse(path : StringView) -> UnixPath raise PathError {
     // syntax: `/<rest_of_path>` or `/{3,}<rest_of_path>`
     //
     // slashes elimination
-    ("/|/{3,}", rest) => {
+    (re"^(/|/{3,})", after=rest) => {
       let directory = parse_unix_relative_path(
         rest,
         start=1,
@@ -124,7 +124,7 @@ fn UnixPath::parse(path : StringView) -> UnixPath raise PathError {
     }
     // syntax: `//<rest_of_path>
     // 
-    ("//", rest) => {
+    (re"^//", after=rest) => {
       let directory = parse_unix_relative_path(
         rest,
         start=1,

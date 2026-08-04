@@ -54,5 +54,5 @@ fn init{
 
 
 fn init {
-  println(Int64::default())
+  println((Default::default() : Int64))
 }

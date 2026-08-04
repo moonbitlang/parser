@@ -1,3 +1,5 @@
+//!build: -w -lexmatch_longest_match
+
 ///|
 fn parse_integer(input : BytesView) -> Int {
   for acc = 0, rest = input {

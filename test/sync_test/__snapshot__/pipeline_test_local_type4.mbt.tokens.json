@@ -227,33 +227,33 @@
   },
   {
     "token": [
-      "LIDENT",
-      "to_repr"
+      "UIDENT",
+      "Repr"
     ],
-    "loc": "8:11-8:18"
+    "loc": "8:11-8:15"
   },
   {
     "token": "LPAREN",
-    "loc": "8:18-8:19"
+    "loc": "8:15-8:16"
   },
   {
     "token": [
       "LIDENT",
       "s"
     ],
-    "loc": "8:19-8:20"
+    "loc": "8:16-8:17"
   },
   {
     "token": "RPAREN",
-    "loc": "8:20-8:21"
+    "loc": "8:17-8:18"
   },
   {
     "token": "RPAREN",
-    "loc": "8:21-8:22"
+    "loc": "8:18-8:19"
   },
   {
     "token": "NEWLINE",
-    "loc": "8:22-8:23"
+    "loc": "8:19-8:20"
   },
   {
     "token": "RBRACE",

@@ -12,14 +12,14 @@ pub fn T::g(self : T) -> Int {
   enum E {
     A(Int)
   } derive(Debug)
-  println(to_repr(A(self.0)))
+  println(Repr(A(self.0)))
   self.0
 }
 
 ///|
 pub impl I for T with f(self) {
   struct N(Int) derive(Debug)
-  println(to_repr(N(self.0)))
+  println(Repr(N(self.0)))
   self.0
 }
 

@@ -123,19 +123,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -230,19 +235,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -337,19 +347,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -444,19 +459,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -551,19 +571,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -658,19 +683,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -765,19 +795,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -872,19 +907,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -979,19 +1019,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -1088,19 +1133,24 @@
                             "loc": null,
                             "children": {
                               "func": {
-                                "kind": "Expr::Ident",
+                                "kind": "Expr::Constr",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
+                                  "constr": {
+                                    "kind": "Constructor",
                                     "loc": null,
                                     "children": {
                                       "name": {
-                                        "kind": "LongIdent::Ident",
+                                        "kind": "ConstrName",
                                         "loc": null,
                                         "children": {
-                                          "value": "to_repr"
+                                          "name": "Repr"
                                         }
+                                      },
+                                      "extra_info": {
+                                        "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                        "loc": null,
+                                        "children": {}
                                       }
                                     }
                                   }
@@ -1289,19 +1339,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -1396,19 +1451,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -1503,19 +1563,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -1610,19 +1675,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -1717,19 +1787,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -1824,19 +1899,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -1931,19 +2011,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -2038,19 +2123,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -2145,19 +2235,24 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Ident",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "value": "to_repr"
+                                              "name": "Repr"
                                             }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                            "loc": null,
+                                            "children": {}
                                           }
                                         }
                                       }
@@ -2254,19 +2349,24 @@
                             "loc": null,
                             "children": {
                               "func": {
-                                "kind": "Expr::Ident",
+                                "kind": "Expr::Constr",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
+                                  "constr": {
+                                    "kind": "Constructor",
                                     "loc": null,
                                     "children": {
                                       "name": {
-                                        "kind": "LongIdent::Ident",
+                                        "kind": "ConstrName",
                                         "loc": null,
                                         "children": {
-                                          "value": "to_repr"
+                                          "name": "Repr"
                                         }
+                                      },
+                                      "extra_info": {
+                                        "kind": "ConstructorExtraInfo::NoExtraInfo",
+                                        "loc": null,
+                                        "children": {}
                                       }
                                     }
                                   }

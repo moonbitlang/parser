@@ -214,71 +214,123 @@
     "loc": "9:11-9:17"
   },
   {
+    "token": "WITH",
+    "loc": "9:18-9:22"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "longest"
+    ],
+    "loc": "9:23-9:30"
+  },
+  {
     "token": "LBRACE",
-    "loc": "9:18-9:19"
+    "loc": "9:31-9:32"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:19-9:20"
+    "loc": "9:32-9:33"
   },
   {
     "token": "LPAREN",
     "loc": "10:5-10:6"
   },
   {
+    "token": "LPAREN",
+    "loc": "10:6-10:7"
+  },
+  {
     "token": [
       "REGEX_LITERAL",
       "if"
     ],
-    "loc": "10:6-10:12"
+    "loc": "10:7-10:13"
   },
   {
     "token": "BAR",
-    "loc": "10:13-10:14"
+    "loc": "10:14-10:15"
   },
   {
     "token": [
       "REGEX_LITERAL",
       "else"
     ],
-    "loc": "10:15-10:23"
+    "loc": "10:16-10:24"
   },
   {
     "token": "RPAREN",
-    "loc": "10:23-10:24"
+    "loc": "10:24-10:25"
   },
   {
     "token": "AS",
-    "loc": "10:25-10:27"
+    "loc": "10:26-10:28"
   },
   {
     "token": [
       "LIDENT",
       "keyword"
     ],
-    "loc": "10:28-10:35"
+    "loc": "10:29-10:36"
+  },
+  {
+    "token": "COMMA",
+    "loc": "10:36-10:37"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "before"
+    ],
+    "loc": "10:38-10:44"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "10:44-10:45"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "prefix"
+    ],
+    "loc": "10:45-10:51"
+  },
+  {
+    "token": "COMMA",
+    "loc": "10:51-10:52"
+  },
+  {
+    "token": [
+      "POST_LABEL",
+      "after"
+    ],
+    "loc": "10:53-10:59"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "10:59-10:60"
   },
   {
     "token": "FAT_ARROW",
-    "loc": "10:36-10:38"
+    "loc": "10:61-10:63"
   },
   {
     "token": [
       "LIDENT",
-      "keyword"
+      "prefix"
     ],
-    "loc": "10:39-10:46"
+    "loc": "10:64-10:70"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "10:46-10:46"
+    "loc": "10:70-10:70"
   },
   {
     "token": "NEWLINE",
-    "loc": "10:46-10:47"
+    "loc": "10:70-10:71"
   },
   {
     "token": [

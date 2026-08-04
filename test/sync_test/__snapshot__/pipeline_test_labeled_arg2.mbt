@@ -1,4 +1,4 @@
-fn[T : Add + Default] sum(xs : FixedArray[T], init~ : T = T::default()) -> T {
+fn[T : Add + Default] sum(xs : FixedArray[T], init~ : T = Default::default()) -> T {
   for i = 0, sum = init; i < xs.length(); {
     continue i + 1,
       sum + xs[i]

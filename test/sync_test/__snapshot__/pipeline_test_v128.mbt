@@ -297,6 +297,59 @@ fn make_box(i : Int) -> V128Box {
   { v: make_by_index(i), tag: i }
 }
 
+// Shuffle with lane indices supplied at runtime (a [FixedArray] parameter),
+// so they are not compile-time constants. wasm must encode shuffle lanes as
+// immediates and falls back to the default implementation; the C backend
+// keeps the intrinsic and lowers to a runtime byte permute.
+fn shuffle_runtime(value : V128, other : V128, idx : FixedArray[Int]) -> V128 {
+  i8x16_shuffle(
+    value, other, idx[0], idx[1], idx[2], idx[3], idx[4], idx[5], idx[6], idx[7],
+    idx[8], idx[9], idx[10], idx[11], idx[12], idx[13], idx[14], idx[15],
+  )
+}
+
+fn bitstring_v128_from_bytes(bytes : Bytes) -> V128 {
+  match bytes {
+    [v128le(value), ..] => value
+    _ => abort("expected Bytes v128 bitstring")
+  }
+}
+
+fn bitstring_v128_from_bytesview(bytes : BytesView) -> V128 {
+  match bytes {
+    [u32le(_), v128le(value), ..] => value
+    _ => abort("expected BytesView v128 bitstring")
+  }
+}
+
+fn bitstring_v128_from_array(bytes : Array[Byte]) -> V128 {
+  match bytes {
+    [u32le(_), v128le(value), ..] => value
+    _ => abort("expected Array v128 bitstring")
+  }
+}
+
+fn bitstring_v128_from_arrayview(bytes : ArrayView[Byte]) -> V128 {
+  match bytes {
+    [u32le(_), v128le(value), ..] => value
+    _ => abort("expected ArrayView v128 bitstring")
+  }
+}
+
+fn bitstring_v128_from_fixedarray(bytes : FixedArray[Byte]) -> V128 {
+  match bytes {
+    [u32le(_), v128le(value), ..] => value
+    _ => abort("expected FixedArray v128 bitstring")
+  }
+}
+
+fn bitstring_v128_from_readonlyarray(bytes : ReadOnlyArray[Byte]) -> V128 {
+  match bytes {
+    [u32le(_), v128le(value), ..] => value
+    _ => abort("expected ReadOnlyArray v128 bitstring")
+  }
+}
+
 fn init {
   let a = v128_make(0x0123456789abcdefUL, 0xfedcba9876543210UL)
   let b = v128_make(0x1111111122222222UL, 0x3333333344444444UL)
@@ -451,6 +504,19 @@ fn init {
     0x228922ab22cd22efUL,
     0x1101112311451167UL,
   )
+  // same [0, 16, 1, 17, ...] cross-vector permutation, but with lane indices
+  // built at runtime so the shuffle cannot be specialized to immediates
+  let idx : FixedArray[Int] = FixedArray::make(16, 0)
+  for i in 0..<8 {
+    idx[i * 2] = i
+    idx[i * 2 + 1] = i + 16
+  }
+  check(
+    "i8x16 shuffle runtime lanes",
+    shuffle_runtime(a, b, idx),
+    0x228922ab22cd22efUL,
+    0x1101112311451167UL,
+  )
   check("rebuild from bits", pass_through(a), 0x0123456789abcdefUL, 0xfedcba9876543210UL)
   check("if true", choose(true, a, b), 0x0123456789abcdefUL, 0xfedcba9876543210UL)
   check("if false", choose(false, a, b), 0x1111111122222222UL, 0x3333333344444444UL)
@@ -499,8 +565,8 @@ fn init {
   let zero_zs : FixedArray[V128] = FixedArray::make(0, a)
   check_bool("fixedarray make zero length", zero_zs.length() == 0)
 
-  let ok_result : Result[V128, V128Error] = try? maybe_v128(true)
-  let err_result : Result[V128, V128Error] = try? maybe_v128(false)
+  let ok_result : Result[V128, V128Error] = to_result(() => maybe_v128(true))
+  let err_result : Result[V128, V128Error] = to_result(() => maybe_v128(false))
   check_v128_result(
     "result v128 ok",
     ok_result,
@@ -542,6 +608,50 @@ fn init {
   )
   check_bool("v128 store preserves prefix", mem[3] == 3)
   check_bool("v128 store preserves suffix", mem[20] == 20)
+  let bitstring_bytes = Bytes::makei(24, i => i.to_byte())
+  let bitstring_array : Array[Byte] = Array::makei(24, i => i.to_byte())
+  let bitstring_fixed : FixedArray[Byte] = FixedArray::makei(24, i => i.to_byte())
+  let bitstring_readonly : ReadOnlyArray[Byte] =
+    ReadOnlyArray::from_array(bitstring_array)
+  let padded_bytes = Bytes::makei(28, i => if i < 2 { 0 } else { (i - 2).to_byte() })
+  let padded_array : Array[Byte] =
+    Array::makei(28, i => if i < 2 { 0 } else { (i - 2).to_byte() })
+  check(
+    "bitstring v128 Bytes",
+    bitstring_v128_from_bytes(bitstring_bytes),
+    0x0706050403020100UL,
+    0x0f0e0d0c0b0a0908UL,
+  )
+  check(
+    "bitstring v128 BytesView",
+    bitstring_v128_from_bytesview(padded_bytes[2:26]),
+    0x0b0a090807060504UL,
+    0x131211100f0e0d0cUL,
+  )
+  check(
+    "bitstring v128 Array",
+    bitstring_v128_from_array(bitstring_array),
+    0x0b0a090807060504UL,
+    0x131211100f0e0d0cUL,
+  )
+  check(
+    "bitstring v128 ArrayView",
+    bitstring_v128_from_arrayview(padded_array[2:26]),
+    0x0b0a090807060504UL,
+    0x131211100f0e0d0cUL,
+  )
+  check(
+    "bitstring v128 FixedArray",
+    bitstring_v128_from_fixedarray(bitstring_fixed),
+    0x0b0a090807060504UL,
+    0x131211100f0e0d0cUL,
+  )
+  check(
+    "bitstring v128 ReadOnlyArray",
+    bitstring_v128_from_readonlyarray(bitstring_readonly),
+    0x0b0a090807060504UL,
+    0x131211100f0e0d0cUL,
+  )
   check(
     "v128 load8 splat intrinsic",
     v128_load8_splat(mem, 21),
@@ -582,6 +692,34 @@ fn init {
   let sink : FixedArray[Byte] = FixedArray::make(16, 0)
   v128_store(sink, 0, v128_make(0x4242424242424242UL, 0x4343434343434343UL))
   println("v128 store last use: ok")
+  // read 8 consecutive UInt16 lanes from a FixedArray[UInt16] at an element
+  // offset; exercises the C (uint16_t*) and wasm-linear (base + offset<<1) fast
+  // paths and the u16 fallback body on the remaining backends
+  let mem16 : FixedArray[UInt16] = FixedArray::make(16, 0)
+  for i in 0..<16 {
+    mem16[i] = (i + 1).to_uint16()
+  }
+  check(
+    "v128 load i16x8 intrinsic",
+    v128_load_i16x8(mem16, 0),
+    0x0004000300020001UL,
+    0x0008000700060005UL,
+  )
+  check(
+    "v128 load i16x8 offset",
+    v128_load_i16x8(mem16, 2),
+    0x0006000500040003UL,
+    0x000a000900080007UL,
+  )
+  // buffer whose last use is the specialized load: exercises the ref-count drop
+  // inserted at the intrinsic call site for the borrowed FixedArray[UInt16]
+  let scratch16 : FixedArray[UInt16] = FixedArray::make(8, 0x0707)
+  check(
+    "v128 load i16x8 last use",
+    v128_load_i16x8(scratch16, 0),
+    0x0707070707070707UL,
+    0x0707070707070707UL,
+  )
   check(
     "v128 const i16x8 intrinsic",
     i16x8_const(1, 2, 3, 4, 5, 6, 7, -1),
@@ -612,6 +750,31 @@ fn init {
     0x3ff8000000000000UL,
     0x8000000000000000UL,
   )
+  // write 8 consecutive UInt16 lanes into a FixedArray[UInt16] at an element
+  // offset; exercises the C (uint16_t*) and wasm-linear (base + offset<<1) fast
+  // paths and the u16 fallback body on the remaining backends
+  v128_store_i16x8(
+    mem16,
+    2,
+    v128_make(0x4444333322221111UL, 0x8888777766665555UL),
+  )
+  check(
+    "v128 store i16x8 intrinsic",
+    v128_load_i16x8(mem16, 2),
+    0x4444333322221111UL,
+    0x8888777766665555UL,
+  )
+  check_bool("v128 store i16x8 preserves prefix", mem16[1].to_int() == 2)
+  check_bool("v128 store i16x8 preserves suffix", mem16[10].to_int() == 11)
+  // buffer whose last use is the specialized store: exercises the ref-count
+  // drop inserted at the intrinsic call site for the borrowed FixedArray[UInt16]
+  let sink16 : FixedArray[UInt16] = FixedArray::make(8, 0)
+  v128_store_i16x8(
+    sink16,
+    0,
+    v128_make(0x4242424242424242UL, 0x4343434343434343UL),
+  )
+  println("v128 store i16x8 last use: ok")
 }
 
 fn load_u64_le(bytes : FixedArray[Byte], offset : Int) -> UInt64 {
@@ -699,6 +862,20 @@ fn v128_load(bytes : FixedArray[Byte], offset : Int) -> V128 {
   v128_make(load_u64_le(bytes, offset), load_u64_le(bytes, offset + 8))
 }
 
+#intrinsic("%v128.v128_load_i16x8")
+#borrow(bytes)
+fn v128_load_i16x8(bytes : FixedArray[UInt16], offset : Int) -> V128 {
+  let mut lo = 0UL
+  for i in 0..=3 {
+    lo = lo.lor(bytes[offset + i].to_uint64() << (16 * i))
+  }
+  let mut hi = 0UL
+  for i in 0..=3 {
+    hi = hi.lor(bytes[offset + 4 + i].to_uint64() << (16 * i))
+  }
+  v128_make(lo, hi)
+}
+
 #intrinsic("%v128.v128_store")
 #borrow(bytes)
 fn v128_store(bytes : FixedArray[Byte], offset : Int, value : V128) -> Unit {
@@ -757,5 +934,29 @@ fn v128_store64_lane(
     store_u64_le(bytes, offset, v128_lo(value))
   } else {
     store_u64_le(bytes, offset, v128_hi(value))
+  }
+}
+
+fn[T, E : Error] to_result(f : () -> T raise E) -> Result[T, E] {
+  try f()
+  catch {
+    err => Result::Err(err)
+  } noraise {
+    value => Result::Ok(value)
+  }
+}
+
+#intrinsic("%v128.v128_store_i16x8")
+#borrow(bytes)
+fn v128_store_i16x8(
+  bytes : FixedArray[UInt16],
+  offset : Int,
+  value : V128
+) -> Unit {
+  for i in 0..=3 {
+    bytes[offset + i] = (v128_lo(value) >> (16 * i)).to_uint16()
+  }
+  for i in 0..=3 {
+    bytes[offset + 4 + i] = (v128_hi(value) >> (16 * i)).to_uint16()
   }
 }

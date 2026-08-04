@@ -79,11 +79,11 @@ impl MyCompare for CustomType with compare(x, y) {
 }
 
 fn[A : MyCompare + Show] test_compare(x : A, y : A) -> Unit {
-  println("\{x}.compare(\{y}) => \{x.compare(y)}")
-  println("\{x} < \{y} => \{x.lt(y)}")
-  println("\{x} <= \{y} => \{x.le(y)}")
-  println("\{x} > \{y} => \{x.gt(y)}")
-  println("\{x} >= \{y} => \{x.ge(y)}")
+  println("\{x}.compare(\{y}) => \{MyCompare::compare(x, y)}")
+  println("\{x} < \{y} => \{MyCompare::lt(x, y)}")
+  println("\{x} <= \{y} => \{MyCompare::le(x, y)}")
+  println("\{x} > \{y} => \{MyCompare::gt(x, y)}")
+  println("\{x} >= \{y} => \{MyCompare::ge(x, y)}")
 }
 
 fn main {

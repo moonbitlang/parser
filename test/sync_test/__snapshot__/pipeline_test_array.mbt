@@ -5,6 +5,6 @@ let b:FixedArray[Int] = [1, 2, 3, 4]
 fn init {
   println(b.length())
   println(b[3] + a[1])
-  debug(FixedArray::default())
+  debug((Default::default() : FixedArray[_]))
 }
 

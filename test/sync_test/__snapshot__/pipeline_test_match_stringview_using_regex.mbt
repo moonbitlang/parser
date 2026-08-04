@@ -2,9 +2,9 @@
 fn test_unicode_support() -> Unit raise {
   // Test Unicode character matching
   fn f(str : String) -> Int {
-    lexmatch str with longest {
-      "(我❤️中国|𠮷)" => 1
-      ("[\u3041-\u3096\u3099-\u309f]{3}" as s, _) => {
+    lexscan str with longest {
+      re"^(我❤️中国|𠮷)$" => 1
+      (re"^[\u3041-\u3096\u3099-\u309f]{3}" as s, after=_) => {
         println(s)
         2
       }
@@ -16,14 +16,15 @@ fn test_unicode_support() -> Unit raise {
   assert_eq(f("𠮷"), 1)
   assert_eq(f("あいうえお"), 2)
   assert_eq(f("abc"), 3)
+  assert_eq(f("x我❤️中国"), 3)
 }
 
 ///|
 fn test_unicode_support2() -> Unit raise {
   // Test Unicode character matching
   fn f(str : String) -> Char raise {
-    lexmatch str with longest {
-      ("." as c, _) => c
+    lexscan str with longest {
+      (re"^." as c, after=_) => c
       _ => raise Failure::Failure("No match")
     }
   }
@@ -33,6 +34,7 @@ fn test_unicode_support2() -> Unit raise {
   assert_eq(f("𠮷"), '𠮷')
   assert_eq(f("あいうえお"), 'あ')
   assert_eq(f("abc"), 'a')
+  assert_eq(f("x我❤️中国"), 'x')
 }
 
 ///|

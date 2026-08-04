@@ -149,7 +149,7 @@ enum EdgeCaseEnum {
 ///|
 // Helper function to test roundtrip with detailed output
 fn[T : ToJson + FromJson + Eq + Debug] test_roundtrip(value : T, test_name : String) -> Unit {
-  let json = value.to_json()
+  let json = ToJson::to_json(value)
   let result : Result[T, @json.JsonDecodeError] = to_result(() => @json.from_json(json))
   match result {
     Ok(decoded) => {
@@ -158,19 +158,19 @@ fn[T : ToJson + FromJson + Eq + Debug] test_roundtrip(value : T, test_name : Str
       } else {
         println("FAILED: " + test_name)
         println("MISMATCH in " + test_name + ":")
-        println("  Original value: " + to_repr(value).to_string())
-        println("  Serialized JSON: " + to_repr(json).to_string())
-        let decoded_json = decoded.to_json()
-        println("  Deserialized value: " + to_repr(decoded).to_string())
-        println("  Re-serialized JSON: " + to_repr(decoded_json).to_string())
+        println("  Original value: " + Repr(value).to_string())
+        println("  Serialized JSON: " + Repr(json).to_string())
+        let decoded_json = ToJson::to_json(decoded)
+        println("  Deserialized value: " + Repr(decoded).to_string())
+        println("  Re-serialized JSON: " + Repr(decoded_json).to_string())
         println("")
       }
     }
     Err(error) => {
       println("FAILED: " + test_name)
       println("ERROR in " + test_name + ":")
-      println("  Original value: " + to_repr(value).to_string())
-      println("  Serialized JSON: " + to_repr(json).to_string())
+      println("  Original value: " + Repr(value).to_string())
+      println("  Serialized JSON: " + Repr(json).to_string())
       println("  Decode error: " + error.to_string())
       println("")
     }

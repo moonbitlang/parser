@@ -509,19 +509,25 @@
                                 "loc": null,
                                 "children": {
                                   "func": {
-                                    "kind": "Expr::Ident",
+                                    "kind": "Expr::Constr",
                                     "loc": null,
                                     "children": {
-                                      "id": {
-                                        "kind": "Var",
+                                      "constr": {
+                                        "kind": "Constructor",
                                         "loc": null,
                                         "children": {
                                           "name": {
-                                            "kind": "LongIdent::Dot",
+                                            "kind": "ConstrName",
                                             "loc": null,
                                             "children": {
-                                              "pkg": "list",
-                                              "id": "from_array"
+                                              "name": "List"
+                                            }
+                                          },
+                                          "extra_info": {
+                                            "kind": "ConstructorExtraInfo::Package",
+                                            "loc": null,
+                                            "children": {
+                                              "value": "list"
                                             }
                                           }
                                         }
@@ -658,19 +664,25 @@
                             "loc": null,
                             "children": {
                               "func": {
-                                "kind": "Expr::Ident",
+                                "kind": "Expr::Constr",
                                 "loc": null,
                                 "children": {
-                                  "id": {
-                                    "kind": "Var",
+                                  "constr": {
+                                    "kind": "Constructor",
                                     "loc": null,
                                     "children": {
                                       "name": {
-                                        "kind": "LongIdent::Dot",
+                                        "kind": "ConstrName",
                                         "loc": null,
                                         "children": {
-                                          "pkg": "list",
-                                          "id": "from_array"
+                                          "name": "List"
+                                        }
+                                      },
+                                      "extra_info": {
+                                        "kind": "ConstructorExtraInfo::Package",
+                                        "loc": null,
+                                        "children": {
+                                          "value": "list"
                                         }
                                       }
                                     }

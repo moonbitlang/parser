@@ -6301,7 +6301,7 @@
                                         "kind": "InterpElem::Source",
                                         "loc": null,
                                         "children": {
-                                          "source": "x.compare(y)"
+                                          "source": "MyCompare::compare(x, y)"
                                         }
                                       }
                                     ]
@@ -6395,7 +6395,7 @@
                                         "kind": "InterpElem::Source",
                                         "loc": null,
                                         "children": {
-                                          "source": "x.lt(y)"
+                                          "source": "MyCompare::lt(x, y)"
                                         }
                                       }
                                     ]
@@ -6489,7 +6489,7 @@
                                         "kind": "InterpElem::Source",
                                         "loc": null,
                                         "children": {
-                                          "source": "x.le(y)"
+                                          "source": "MyCompare::le(x, y)"
                                         }
                                       }
                                     ]
@@ -6583,7 +6583,7 @@
                                         "kind": "InterpElem::Source",
                                         "loc": null,
                                         "children": {
-                                          "source": "x.gt(y)"
+                                          "source": "MyCompare::gt(x, y)"
                                         }
                                       }
                                     ]
@@ -6679,7 +6679,7 @@
                                     "kind": "InterpElem::Source",
                                     "loc": null,
                                     "children": {
-                                      "source": "x.ge(y)"
+                                      "source": "MyCompare::ge(x, y)"
                                     }
                                   }
                                 ]

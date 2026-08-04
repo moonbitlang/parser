@@ -13,7 +13,7 @@ fn[A] f(xs : ArrayView[A], ys : Array[Int]) -> @list.List[(Int, A)] {
           break l1~ acc
         }
       } nobreak {
-        continue (i - 1, rest, acc)
+        continue l1~ (i - 1, rest, acc)
       }
   }
 }
@@ -31,7 +31,7 @@ fn[A] g(xs : ArrayView[A], ys : Array[Int]) -> @list.List[(Int, A)] {
           break acc
         }
       } nobreak {
-        continue (i - 1, rest, acc)
+        continue l1~ (i - 1, rest, acc)
       }
   }
 }

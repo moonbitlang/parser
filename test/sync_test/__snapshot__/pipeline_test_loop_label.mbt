@@ -17,7 +17,7 @@ fn f(xs : Array[Array[Int]], target : Int) -> (Int, Int) {
 ///|
 fn g(x : Int?, y : Int?) -> (Int, Int) {
   l1~: loop (x, y) {
-    (None, None) => continue (Some(10), Some(10))
+    (None, None) => continue l1~ (Some(10), Some(10))
     (Some(x), None) =>
       l2~:for i = 0, acc = 0; i < x; i = i + 1 {
         if i == 10 {

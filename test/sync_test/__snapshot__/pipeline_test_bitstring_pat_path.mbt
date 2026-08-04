@@ -17,7 +17,17 @@ pub fn f(x : Bytes) -> Unit {
 }
 
 ///|
+pub fn v128_guard_fallback(x : Bytes) -> Int {
+  match x {
+    [v128le(_), ..] if false => -1
+    [bytes(16, view), ..] => view.length()
+    _ => -2
+  }
+}
+
+///|
 fn main {
   f([0])
   g([0, 0])
+  println(v128_guard_fallback([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))
 }

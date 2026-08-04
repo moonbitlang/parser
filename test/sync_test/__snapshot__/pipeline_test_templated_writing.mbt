@@ -1,6 +1,7 @@
+//!build: -w -syntax_lint
 struct Writer (StringBuilder)
 fn[T : Debug] Writer::write_string_interpolation(self : Self, x : T) -> Unit {
-  self.0.write_string(to_repr(x).to_string())
+  self.0.write_string(Repr(x).to_string())
 }
 fn Writer::write_string(self : Self, s : String) -> Unit {
   self.0.write_string(s)
@@ -9,7 +10,7 @@ fn Writer::write_string(self : Self, s : String) -> Unit {
 struct TraceWriter (StringBuilder)
 fn[T : Debug] TraceWriter::write_string_interpolation(self : Self, x : T) -> Unit {
   self.0.write_string("[value:")
-  self.0.write_string(to_repr(x).to_string())
+  self.0.write_string(Repr(x).to_string())
   self.0.write_string("]")
 }
 fn TraceWriter::write_string(self : Self, s : String) -> Unit {
@@ -51,9 +52,9 @@ fn main {
   let writer : Writer = StringBuilder::new()
   let def = Some("text")
 
-  writer <+ "abc\{def}ghi\u{1F430}\n"
+  writer <+ "abc\{Repr(def)}ghi\u{1F430}\n"
   writer <+ #|\n\t\{def}
-            $|\t\{def}jkl
+            $|\t\{Repr(def)}jkl
             #|mn
             #|
 
@@ -72,15 +73,15 @@ fn main {
 
   let trace : TraceWriter = StringBuilder::new()
   trace <+ ""
-  trace <+ "asdf\{def}"
+  trace <+ "asdf\{Repr(def)}"
   println(trace.0.to_string())
 
   let sql = Sql::Sql()
-  sql <+ "select \{def} from dual"
+  sql <+ "select \{Repr(def)} from dual"
   consume_sql(sql.write_end())
 
   let builder = StringBuilder::new()
-  builder <+ "abc\{to_repr(def)}ghi"
+  builder <+ "abc\{Repr(def)}ghi"
   println(builder.to_string())
 
   let call_builder = StringBuilder::new()

@@ -2216,23 +2216,41 @@
     "loc": "50:20-50:21"
   },
   {
-    "token": "LBRACE",
-    "loc": "50:22-50:23"
+    "token": [
+      "UIDENT",
+      "Json"
+    ],
+    "loc": "50:22-50:26"
   },
   {
-    "token": "RBRACE",
-    "loc": "50:23-50:24"
+    "token": "COLONCOLON",
+    "loc": "50:26-50:28"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "empty_object"
+    ],
+    "loc": "50:28-50:40"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "50:40-50:41"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "50:41-50:42"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "50:24-50:24"
+    "loc": "50:42-50:42"
   },
   {
     "token": "NEWLINE",
-    "loc": "50:24-50:25"
+    "loc": "50:42-50:43"
   },
   {
     "token": "LET",

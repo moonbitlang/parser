@@ -1792,15 +1792,59 @@
     "loc": "38:1-38:2"
   },
   {
-    "token": "NEWLINE",
-    "loc": "39:1-39:2"
+    "token": "EXTEND",
+    "loc": "39:1-39:7"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "H"
+    ],
+    "loc": "39:8-39:9"
+  },
+  {
+    "token": "WITH",
+    "loc": "39:10-39:14"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "ToJson"
+    ],
+    "loc": "39:15-39:21"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "39:21-39:23"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "39:23-39:24"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "to_json"
+    ],
+    "loc": "39:24-39:31"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "39:31-39:32"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "39:32-39:32"
   },
   {
     "token": "NEWLINE",
-    "loc": "40:1-40:2"
+    "loc": "39:32-39:33"
   },
   {
     "token": "EOF",
-    "loc": "41:1-41:1"
+    "loc": "40:1-40:1"
   }
 ]

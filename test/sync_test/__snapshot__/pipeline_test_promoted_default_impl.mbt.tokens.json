@@ -680,36 +680,36 @@
   {
     "token": [
       "UIDENT",
-      "Y"
+      "Default"
     ],
-    "loc": "23:33-23:34"
+    "loc": "23:33-23:40"
   },
   {
     "token": "COLONCOLON",
-    "loc": "23:34-23:36"
+    "loc": "23:40-23:42"
   },
   {
     "token": [
       "LIDENT",
       "default"
     ],
-    "loc": "23:36-23:43"
+    "loc": "23:42-23:49"
   },
   {
     "token": "LPAREN",
-    "loc": "23:43-23:44"
+    "loc": "23:49-23:50"
   },
   {
     "token": "RPAREN",
-    "loc": "23:44-23:45"
+    "loc": "23:50-23:51"
   },
   {
     "token": "LBRACE",
-    "loc": "23:46-23:47"
+    "loc": "23:52-23:53"
   },
   {
     "token": "NEWLINE",
-    "loc": "23:47-23:48"
+    "loc": "23:53-23:54"
   },
   {
     "token": [
@@ -1702,7 +1702,115 @@
     "loc": "50:2-50:3"
   },
   {
+    "token": "NEWLINE",
+    "loc": "51:1-51:2"
+  },
+  {
+    "token": "EXTEND",
+    "loc": "52:1-52:7"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "No_param"
+    ],
+    "loc": "52:8-52:16"
+  },
+  {
+    "token": "WITH",
+    "loc": "52:17-52:21"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "I"
+    ],
+    "loc": "52:22-52:23"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "52:23-52:25"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "52:25-52:26"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "g"
+    ],
+    "loc": "52:26-52:27"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "52:27-52:28"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "52:28-52:28"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "52:28-52:29"
+  },
+  {
+    "token": "EXTEND",
+    "loc": "53:1-53:7"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "More_param"
+    ],
+    "loc": "53:8-53:18"
+  },
+  {
+    "token": "WITH",
+    "loc": "53:19-53:23"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "I"
+    ],
+    "loc": "53:24-53:25"
+  },
+  {
+    "token": "COLONCOLON",
+    "loc": "53:25-53:27"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "53:27-53:28"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "g"
+    ],
+    "loc": "53:28-53:29"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "53:29-53:30"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "53:30-53:30"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "53:30-53:31"
+  },
+  {
     "token": "EOF",
-    "loc": "51:1-51:1"
+    "loc": "54:1-54:1"
   }
 ]

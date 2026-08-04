@@ -822,24 +822,24 @@
   {
     "token": [
       "INTERP",
-      "\"h: \\{to_repr(a)}, \\{to_repr(b)}, \\{to_repr(c)}\""
+      "\"h: \\{Repr(a)}, \\{Repr(b)}, \\{Repr(c)}\""
     ],
-    "loc": "30:30-30:78"
+    "loc": "30:30-30:69"
   },
   {
     "token": "RPAREN",
-    "loc": "30:78-30:79"
+    "loc": "30:69-30:70"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "30:79-30:79"
+    "loc": "30:70-30:70"
   },
   {
     "token": "NEWLINE",
-    "loc": "30:79-30:80"
+    "loc": "30:70-30:71"
   },
   {
     "token": "UNDERSCORE",
@@ -1234,24 +1234,24 @@
   {
     "token": [
       "INTERP",
-      "\"k: \\{to_repr(arr[0])}\""
+      "\"k: \\{Repr(arr[0])}\""
     ],
-    "loc": "45:11-45:34"
+    "loc": "45:11-45:31"
   },
   {
     "token": "RPAREN",
-    "loc": "45:34-45:35"
+    "loc": "45:31-45:32"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "45:35-45:35"
+    "loc": "45:32-45:32"
   },
   {
     "token": "NEWLINE",
-    "loc": "45:35-45:36"
+    "loc": "45:32-45:33"
   },
   {
     "token": [
@@ -1267,17 +1267,17 @@
   {
     "token": [
       "INTERP",
-      "\"k: \\{to_repr(arr.unsafe_get(1))}\""
+      "\"k: \\{Repr(arr.unsafe_get(1))}\""
     ],
-    "loc": "46:11-46:45"
+    "loc": "46:11-46:42"
   },
   {
     "token": "RPAREN",
-    "loc": "46:45-46:46"
+    "loc": "46:42-46:43"
   },
   {
     "token": "NEWLINE",
-    "loc": "46:46-46:47"
+    "loc": "46:43-46:44"
   },
   {
     "token": "RBRACE",

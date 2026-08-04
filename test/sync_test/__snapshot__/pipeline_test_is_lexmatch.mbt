@@ -2,98 +2,102 @@
 
 fn init {
   // Basic exact match tests
-  println("abc" lexmatch? "abc")
-  println("abcd" lexmatch? "abc")
-  println("abc" lexmatch? ("abc", x) && x == "")
-  println("abcd" lexmatch? ("abc", x) && x == "d")
+  println(lexscan "abc" { re"^abc$" => true; _ => false })
+  println(lexscan "abcd" { re"^abc$" => true; _ => false })
+  println(lexscan "abc" { (re"^abc", after=x) => x == ""; _ => false })
+  println(lexscan "abcd" { (re"^abc", after=x) => x == "d"; _ => false })
   
   // Longest match tests
-  println("abc" lexmatch? "abc" with longest)
-  println("abcd" lexmatch? "abc" with longest)
-  println("abc" lexmatch? ("abc", x) with longest && x == "")
-  println("abcd" lexmatch? ("abc", x) with longest && x == "d")
+  println(lexscan "abc" with longest { re"^abc$" => true; _ => false })
+  println(lexscan "abcd" with longest { re"^abc$" => true; _ => false })
+  println(lexscan "abc" with longest { (re"^abc", after=x) => x == ""; _ => false })
+  println(lexscan "abcd" with longest { (re"^abc", after=x) => x == "d"; _ => false })
   
   // Empty string tests
-  println("" lexmatch? "")
-  println("" lexmatch? ("", x) && x == "")
-  println("abc" lexmatch? "")
-  println("" lexmatch? "abc")
+  println(lexscan "" { re"^$" => true; _ => false })
+  println(lexscan "" { (re"^", after=x) => x == ""; _ => false })
+  println(lexscan "abc" { re"^$" => true; _ => false })
+  println(lexscan "" { re"^abc$" => true; _ => false })
   
   // Partial match tests
-  println("xyz" lexmatch? "abc")
-  println("axyz" lexmatch? "a")
-  println("axyz" lexmatch? ("a", rest) && rest == "xyz")
+  println(lexscan "xyz" { re"^abc$" => true; _ => false })
+  println(lexscan "axyz" { re"^a$" => true; _ => false })
+  println(lexscan "axyz" { (re"^a", after=rest) => rest == "xyz"; _ => false })
   
   // Multiple character matches
-  println("hello world" lexmatch? "hello")
-  println("hello world" lexmatch? ("hello", x) && x == " world")
-  println("hello" lexmatch? "hello world")
+  println(lexscan "hello world" { re"^hello$" => true; _ => false })
+  println(lexscan "hello world" { (re"^hello", after=x) => x == " world"; _ => false })
+  println(lexscan "hello" { re"^hello world$" => true; _ => false })
   
   // Special characters and patterns
-  println("123abc" lexmatch? "123")
-  println("123abc" lexmatch? ("123", x) && x == "abc")
-  println("!@#$%" lexmatch? "!@#")
-  println("!@#$%" lexmatch? ("!@#", x) && x == "$%")
+  println(lexscan "123abc" { re"^123$" => true; _ => false })
+  println(lexscan "123abc" { (re"^123", after=x) => x == "abc"; _ => false })
+  println(lexscan "!@#$%" { re"^!@#$" => true; _ => false })
+  println(lexscan "!@#$%" { (re"^!@#", after=x) => x == "$%"; _ => false })
   
   // Unicode and international characters
-  println("你好世界" lexmatch? "你好")
-  println("你好世界" lexmatch? ("你好", x) && x == "世界")
-  println("café" lexmatch? "caf")
-  println("café" lexmatch? ("caf", x) && x == "é")
+  println(lexscan "你好世界" { re"^你好$" => true; _ => false })
+  println(lexscan "你好世界" { (re"^你好", after=x) => x == "世界"; _ => false })
+  println(lexscan "café" { re"^caf$" => true; _ => false })
+  println(lexscan "café" { (re"^caf", after=x) => x == "é"; _ => false })
   
   // Longer strings
-  println("abcdefghij" lexmatch? "abcde")
-  println("abcdefghij" lexmatch? ("abcde", x) && x == "fghij")
+  println(lexscan "abcdefghij" { re"^abcde$" => true; _ => false })
+  println(lexscan "abcdefghij" { (re"^abcde", after=x) => x == "fghij"; _ => false })
   
   // Single character tests
-  println("a" lexmatch? "a")
-  println("a" lexmatch? ("a", x) && x == "")
-  println("ab" lexmatch? ("a", x) && x == "b")
+  println(lexscan "a" { re"^a$" => true; _ => false })
+  println(lexscan "a" { (re"^a", after=x) => x == ""; _ => false })
+  println(lexscan "ab" { (re"^a", after=x) => x == "b"; _ => false })
   
   // Whitespace tests
-  println(" abc" lexmatch? " ")
-  println(" abc" lexmatch? (" ", x) && x == "abc")
-  println("abc " lexmatch? "abc")
-  println("abc " lexmatch? ("abc", x) && x == " ")
-  println("\tabc" lexmatch? "\t")
-  println("\nabc" lexmatch? "\n")
+  println(lexscan " abc" { re"^ $" => true; _ => false })
+  println(lexscan " abc" { (re"^ ", after=x) => x == "abc"; _ => false })
+  println(lexscan "abc " { re"^abc$" => true; _ => false })
+  println(lexscan "abc " { (re"^abc", after=x) => x == " "; _ => false })
+  println(lexscan "\tabc" { re"^\t$" => true; _ => false })
+  println(lexscan "\nabc" { re"^\n$" => true; _ => false })
   
   // Numbers and digits
-  println("0123456789" lexmatch? "012345")
-  println("0123456789" lexmatch? ("012345", x) && x == "6789")
+  println(lexscan "0123456789" { re"^012345$" => true; _ => false })
+  println(lexscan "0123456789" { (re"^012345", after=x) => x == "6789"; _ => false })
   
   // Mixed alphanumeric
-  println("abc123def456" lexmatch? "abc123")
-  println("abc123def456" lexmatch? ("abc123", x) && x == "def456")
+  println(lexscan "abc123def456" { re"^abc123$" => true; _ => false })
+  println(lexscan "abc123def456" { (re"^abc123", after=x) => x == "def456"; _ => false })
   
   // Case sensitivity
-  println("ABC" lexmatch? "ABC")
-  println("ABC" lexmatch? "abc")
-  println("abc" lexmatch? "ABC")
+  println(lexscan "ABC" { re"^ABC$" => true; _ => false })
+  println(lexscan "ABC" { re"^abc$" => true; _ => false })
+  println(lexscan "abc" { re"^ABC$" => true; _ => false })
   
   // Repeated characters
-  println("aaa" lexmatch? "aa")
-  println("aaa" lexmatch? ("aa", x) && x == "a")
-  println("aaabbb" lexmatch? "aaa")
-  println("aaabbb" lexmatch? ("aaa", x) && x == "bbb")
+  println(lexscan "aaa" { re"^aa$" => true; _ => false })
+  println(lexscan "aaa" { (re"^aa", after=x) => x == "a"; _ => false })
+  println(lexscan "aaabbb" { re"^aaa$" => true; _ => false })
+  println(lexscan "aaabbb" { (re"^aaa", after=x) => x == "bbb"; _ => false })
   
   // Longest match with multiple options
-  println("test" lexmatch? "test" with longest)
-  println("testing" lexmatch? "test" with longest)
-  println("testing" lexmatch? ("test", x) with longest && x == "ing")
+  println(lexscan "test" with longest { re"^test$" => true; _ => false })
+  println(lexscan "testing" with longest { re"^test$" => true; _ => false })
+  println(lexscan "testing" with longest { (re"^test", after=x) => x == "ing"; _ => false })
   
   // Edge cases with rest being empty vs non-empty
-  println("match" lexmatch? ("match", x) && x == "")
-  println("matched" lexmatch? ("match", x) && x == "ed")
-  println("m" lexmatch? ("m", x) && x == "")
+  println(lexscan "match" { (re"^match", after=x) => x == ""; _ => false })
+  println(lexscan "matched" { (re"^match", after=x) => x == "ed"; _ => false })
+  println(lexscan "m" { (re"^m", after=x) => x == ""; _ => false })
 
   // Case insensitive
-  println("Abc" lexmatch? "(?i:ABC)")
-  println("AbCdEf" lexmatch? "(?i:[a-f]+)")
-  println("Abc" lexmatch? "(?i:ABC)" with longest)
-  println("AbCdEf" lexmatch? "(?i:[a-f]+)" with longest)
+  println(lexscan "Abc" { re"^(?i:ABC)$" => true; _ => false })
+  println(lexscan "AbCdEf" { re"^(?i:[a-f]+)$" => true; _ => false })
+  println(lexscan "Abc" with longest { re"^(?i:ABC)$" => true; _ => false })
+  println(lexscan "AbCdEf" with longest { re"^(?i:[a-f]+)$" => true; _ => false })
 
-  if "hello1234abc" lexmatch? ("hello" "[0-9]+", rest) {
+  let rest = lexscan "hello1234abc" {
+    (re"^hello[0-9]+", after=rest) => Some(rest)
+    _ => None
+  }
+  if rest is Some(rest) {
     println(rest)
   }
 }

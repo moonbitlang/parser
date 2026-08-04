@@ -2,7 +2,11 @@
 
 fn main {
   let f = "helo" 
-  if f lexmatch? ("el",r) {
-    println(r)
+  let rest = lexscan f {
+    (re"^el", after=rest) => Some(rest)
+    _ => None
+  }
+  if rest is Some(rest) {
+    println(rest)
   }
 }

@@ -16,7 +16,7 @@ fn[T] drop_alternates(lst : List[T]) -> List[T] {
 
 fn main {
   // @list.of([0, 2, 4, 6])
-  debug(keep_alternates(@list.from_array([0, 1, 2, 3, 4, 5, 6])))
+  debug(keep_alternates(@list.List([0, 1, 2, 3, 4, 5, 6])))
   // @list.of(['a', 'c'])
-  debug(keep_alternates(@list.from_array(['a', 'b', 'c', 'd'])))
+  debug(keep_alternates(@list.List(['a', 'b', 'c', 'd'])))
 }

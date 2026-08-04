@@ -6,8 +6,8 @@ fn init {
     x => x
     _ => ()
   }
-  lexscan source {
-    (re"if" | re"else") as keyword => keyword
+  lexscan source with longest {
+    ((re"if" | re"else") as keyword, before=prefix, after~) => prefix
     @pkg.Token => ()
   }
 }

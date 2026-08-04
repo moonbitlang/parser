@@ -166,28 +166,25 @@
                 "loc": null,
                 "children": {
                   "func": {
-                    "kind": "Expr::Method",
+                    "kind": "Expr::Constr",
                     "loc": null,
                     "children": {
-                      "type_name": {
-                        "kind": "TypeName",
+                      "constr": {
+                        "kind": "Constructor",
                         "loc": null,
                         "children": {
                           "name": {
-                            "kind": "LongIdent::Ident",
+                            "kind": "ConstrName",
                             "loc": null,
                             "children": {
-                              "value": "Hasher"
+                              "name": "Hasher"
                             }
                           },
-                          "is_object": false
-                        }
-                      },
-                      "method_name": {
-                        "kind": "Label",
-                        "loc": null,
-                        "children": {
-                          "name": "new"
+                          "extra_info": {
+                            "kind": "ConstructorExtraInfo::NoExtraInfo",
+                            "loc": null,
+                            "children": {}
+                          }
                         }
                       }
                     }

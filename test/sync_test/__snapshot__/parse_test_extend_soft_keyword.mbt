@@ -13,3 +13,17 @@ fn extend(
   let _ = extend => ...
   let _ = (extend, extend : Int) => ...
 }
+
+struct S {
+  extend : Int
+}
+
+enum E {
+  C(extend~ : Int)
+}
+
+trait I {
+  extend(extend : Int, extend~ : Int) -> Unit
+}
+
+pub using @pkg {extend, f as extend}
