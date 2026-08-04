@@ -27,4 +27,3 @@ pub fn Statement::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @synt
 // Type aliases
 
 // Traits
-

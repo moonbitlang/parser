@@ -1077,4 +1077,3 @@ pub(open) trait MapVisitor {
   fn visit_Expr_Group(Self, expr~ : Expr, group~ : Group, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_StaticAssert(Self, asserts~ : @list.List[StaticAssertion], body~ : Expr) -> Expr = _
 }
-

@@ -24,4 +24,3 @@ pub(all) enum Parser {
 // Type aliases
 
 // Traits
-
