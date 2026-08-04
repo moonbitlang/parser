@@ -18,4 +18,3 @@ pub fn impls_to_string(@list.List[@syntax.Impl]) -> String
 // Type aliases
 
 // Traits
-

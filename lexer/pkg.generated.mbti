@@ -40,4 +40,3 @@ pub impl Show for LexicalError
 // Type aliases
 
 // Traits
-

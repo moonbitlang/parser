@@ -171,4 +171,3 @@ pub using @syntax {type TypeDesc}
 pub using @syntax {type Visibility}
 
 // Traits
-

@@ -391,4 +391,3 @@ pub fn ParseResult::to_impls(Self) -> (@list.List[@syntax.Impl], Array[@basic.Re
 // Type aliases
 
 // Traits
-

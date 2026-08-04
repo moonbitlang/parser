@@ -49,4 +49,3 @@ pub(all) enum Prop {
 // Type aliases
 
 // Traits
-

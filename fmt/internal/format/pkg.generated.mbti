@@ -36,4 +36,3 @@ pub fn parse(String) -> (@list.List[@syntax.Impl], Array[@basic.Report], Array[(
 // Type aliases
 
 // Traits
-
