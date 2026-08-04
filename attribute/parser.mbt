@@ -222,7 +222,7 @@ fn yy_action_0(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 // file:///./parser.mbty
 // 174|    properties { $1 }
 fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_List_Prop_(_dollar1)
+  guard! _args[0].0 is YYObj_List_Prop_(_dollar1)
   YYObj_List_Prop_({();  _dollar1 })
 }
 
@@ -235,14 +235,14 @@ fn yy_action_2(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 // file:///./parser.mbty
 // 192|    "(" non_empty_properties ")" { $2 }
 fn yy_action_3(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[1].0 is YYObj_List_Prop_(_dollar2)
+  guard! _args[1].0 is YYObj_List_Prop_(_dollar2)
   YYObj_List_Prop_({();  _dollar2 })
 }
 
 // file:///./parser.mbty
 // 169|    LIDENT { $1 }
 fn yy_action_4(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(_dollar1)
+  guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_String({();  _dollar1 })
 }
 
@@ -255,61 +255,61 @@ fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 // file:///./parser.mbty
 // 177|    name=lident_string "=" expr   { Labeled(name, $3) }
 fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(name)
-  guard _args[2].0 is YYObj_Expr(_dollar3)
+  guard! _args[0].0 is YYObj_String(name)
+  guard! _args[2].0 is YYObj_Expr(_dollar3)
   YYObj_Prop({();  Labeled(name, _dollar3) })
 }
 
 // file:///./parser.mbty
 // 185|    qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
 fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(qual)
-  guard _args[1].0 is YYObj_String(name)
-  guard _args[2].0 is YYObj_List_Prop_(props)
+  guard! _args[0].0 is YYObj_String(qual)
+  guard! _args[1].0 is YYObj_String(name)
+  guard! _args[2].0 is YYObj_List_Prop_(props)
   YYObj_Expr({();  Apply({qual: Some(qual), name}, props) })
 }
 
 // file:///./parser.mbty
 // 183|    qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
 fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(qual)
-  guard _args[1].0 is YYObj_String(name)
+  guard! _args[0].0 is YYObj_String(qual)
+  guard! _args[1].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: Some(qual), name}) })
 }
 
 // file:///./parser.mbty
 // 184|    name=lident_string props=properties                 { Apply({qual: None, name}, props) }
 fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(name)
-  guard _args[1].0 is YYObj_List_Prop_(props)
+  guard! _args[0].0 is YYObj_String(name)
+  guard! _args[1].0 is YYObj_List_Prop_(props)
   YYObj_Expr({();  Apply({qual: None, name}, props) })
 }
 
 // file:///./parser.mbty
 // 181|    name=lident_string                                  { Ident({qual: None, name}) }
 fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(name)
+  guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: None, name}) })
 }
 
 // file:///./parser.mbty
 // 178|    expr                   { Expr($1) }
 fn yy_action_11(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Expr(_dollar1)
+  guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Prop({();  Expr(_dollar1) })
 }
 
 // file:///./parser.mbty
 // 182|    name=UIDENT                                         { Ident({qual: None, name}) }
 fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_String(name)
+  guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: None, name}) })
 }
 
 // file:///./parser.mbty
 // 186|    STRING                                              { String($1) }
 fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_StringLiteral(_dollar1)
+  guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Expr({();  String(_dollar1) })
 }
 
@@ -328,15 +328,15 @@ fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 // file:///./parser.mbty
 // 196|    x=property "," xs=non_empty_properties{ xs.add(x) }
 fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Prop(x)
-  guard _args[2].0 is YYObj_List_Prop_(xs)
+  guard! _args[0].0 is YYObj_Prop(x)
+  guard! _args[2].0 is YYObj_List_Prop_(xs)
   YYObj_List_Prop_({();  xs.add(x) })
 }
 
 // file:///./parser.mbty
 // 195|    property { List([$1]) }
 fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  guard _args[0].0 is YYObj_Prop(_dollar1)
+  guard! _args[0].0 is YYObj_Prop(_dollar1)
   YYObj_List_Prop_({();  List([_dollar1]) })
 }
 
@@ -762,7 +762,7 @@ fn[T] yy_parse(
     match decision {
       Accept => return return_(data_stack.unsafe_pop().0)
       Shift(next_state) => {
-        guard lookahead is Some(la)
+        guard! lookahead is Some(la)
         data_stack.push(la.1)
         state_stack = @list.cons(next_state, state_stack)
         last_shifted_state_stack = state_stack
@@ -820,7 +820,7 @@ fn error(stack : @list.List[YYState], token : Token?, loc : (Position, Position)
             Reduce(count, symbol, _) | ReduceNoLookahead(count, symbol, _) => {
               fn inner_go(stack : @list.List[YYState], count, symbol) {
                 let stack = stack.drop(count)
-                guard stack is More(state, ..)
+                guard! stack is More(state, ..)
                 match state(symbol) {
                   Shift(state) => go(@list.cons(state, stack))
                   Reduce(count, symbol, _) | ReduceNoLookahead(count, symbol, _) => inner_go(stack, count, symbol)
@@ -850,7 +850,7 @@ pub fn payloads(tokens : Array[(Token, Position, Position)], initial_pos? : Posi
     tokens,
     yy_state_0,
     (it) => {
-      guard it is YYObj_List_Prop_(result)
+      guard! it is YYObj_List_Prop_(result)
       result
     },
     initial_pos?,
