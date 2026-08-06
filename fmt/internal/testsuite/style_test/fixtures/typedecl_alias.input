@@ -1,1 +1,1 @@
-typealias (Int, Bool) as IntBoolPair
+type IntBoolPair = (Int, Bool)

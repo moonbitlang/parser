@@ -6,6 +6,7 @@ import {
   "moonbitlang/core/queue",
   "moonbitlang/core/sorted_map",
   "moonbitlang/core/debug",
+  "moonbitlang/core/cmp",
 }
 
 import {

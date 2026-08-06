@@ -18,4 +18,3 @@ fn wasm1(x : Int) -> Int = "xxxx" "xxxxxx"
 
 ///|
 fn intrinsics(x : Int) -> Int = "%xxxx"
-

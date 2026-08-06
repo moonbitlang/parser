@@ -29,6 +29,19 @@ async fn write_stdout(message : String) -> Unit {
 }
 
 ///|
+async fn overwrite_if_changed(
+  path : String,
+  source : String,
+  result : String,
+) -> Bool {
+  if source == result {
+    return false
+  }
+  @fs.write_file(path, result, create_mode=CreateOrTruncate, sync=Full)
+  true
+}
+
+///|
 fn moonfmt_command() -> @argparse.Command {
   Command(
     "moonfmt",
@@ -67,11 +80,17 @@ async fn moonfmt(args : ArrayView[String]) -> Unit {
   let source = @fs.read_file(options.path).text() catch { err => die("\{err}") }
   let result = @fmt.format(source)
   if options.overwrite {
-    @fs.write_file(options.path, result, create_mode=CreateOrTruncate) catch {
-      err => die("\{err}")
+    let second = @fmt.format(result)
+    if second != result {
+      die(
+        "error: formatter output is not stable; left `\{options.path}` unchanged",
+      )
+    }
+    ignore(overwrite_if_changed(options.path, source, result)) catch {
+      err => die("error: failed to overwrite `\{options.path}`: \{err}")
     }
   } else {
-    write_stdout("\{result}\n")
+    write_stdout(result)
   }
 }
 

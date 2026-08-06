@@ -13,8 +13,13 @@ fn post_process_moon_pkg(ast : Ast, diagnostics : Array[Report]) -> Ast {
           seen, diagnostics, "moon.pkg", allowed_duplicate, key, value,
         )
         match key {
-          "import" | "wbtest-import" | "test-import" | "dev_build" | "rule" =>
-            results.push(field)
+          "import"
+          | "wbtest-import"
+          | "test-import"
+          | "pkgtype"
+          | "dev_build"
+          | "formatter"
+          | "rule" => results.push(field)
           "warnings" =>
             match value {
               Str(_, ..) => results.push(("warn-list", value))
@@ -89,6 +94,7 @@ fn post_process_moon_mod(ast : Ast, diagnostics : Array[Report]) -> Ast {
           | "license"
           | "keywords"
           | "description"
+          | "source"
           | "rule" => results.push(field)
           "preferred_target" => results.push(("preferred-target", value))
           "warnings" =>

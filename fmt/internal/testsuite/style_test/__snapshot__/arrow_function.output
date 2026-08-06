@@ -33,4 +33,3 @@ fn arrow_function_with_long_parameters() -> Unit {
     param1_________________ + param2_________________ + param3_________________ + param4_________________
   }
 }
-

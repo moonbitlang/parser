@@ -17,4 +17,3 @@ fn loop_nobreak(a : Int, b : Int, c : Bool, xs : Array[Int]) -> Unit {
     println(i.to_string())
   }
 }
-

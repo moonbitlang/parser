@@ -6,4 +6,3 @@ fn f(s : String) -> Unit {
     _ => ()
   }
 }
-

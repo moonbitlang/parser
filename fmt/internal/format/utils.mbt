@@ -13,17 +13,29 @@ fn[T] series(
   sep : Doc,
   f : (T) -> Doc,
   trailing? : TrailingSeparatorMode = PresentInNormalStyle,
+  separator? : () -> Doc = fn() { empty },
 ) -> Doc {
+  let docs : Array[Doc] = []
+  let length = xs.length()
+  for index, item in xs {
+    docs.push(f(item))
+    if index + 1 < length {
+      docs.push(sep + separator() + line)
+    }
+  }
+  // Build the trailing separator only after all elements. Comment
+  // placeholders are stateful during the attach pass, so construction order
+  // must match source order as well as final document order.
   let trailing = match xs {
     Empty => empty
     More(_, ..) =>
       match trailing {
         AlwaysHidden => empty
-        AlwaysPresent => sep
-        PresentInNormalStyle => switch(empty, sep)
+        AlwaysPresent => sep + separator()
+        PresentInNormalStyle => switch(empty, sep) + separator()
       }
   }
-  separate_map(xs, sep + line, f) + trailing
+  docs.fold(init=empty, Doc::add) + trailing
 }
 
 ///|
@@ -31,8 +43,9 @@ fn series1(
   xs : List[Doc],
   sep : Doc,
   trailing? : TrailingSeparatorMode = PresentInNormalStyle,
+  separator? : () -> Doc = fn() { empty },
 ) -> Doc {
-  series(xs, sep, x => x, trailing~)
+  series(xs, sep, x => x, trailing~, separator~)
 }
 
 ///|
@@ -71,18 +84,6 @@ fn braces_if_not_flatten(x : Doc) -> Doc {
   let lb = switch(empty, char('{'))
   let rb = switch(empty, char('}'))
   lb + nest(softline + x) + softline + rb
-}
-
-///|
-/// ```skip
-/// [x]
-/// [
-///   x
-/// ]
-/// ```
-fn brackets(x : Doc, force_newline? : Bool = false) -> Doc {
-  let l = if force_newline { hardline } else { softline }
-  char('[') + nest(l + x) + l + char(']')
 }
 
 ///|

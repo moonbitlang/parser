@@ -37,4 +37,3 @@ trait Foo3 {
 impl Foo4 for Int with f() {
   
 }
-

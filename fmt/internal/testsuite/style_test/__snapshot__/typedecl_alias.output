@@ -1,2 +1,3 @@
 // generated file, do not edit!
-typealias (Int, Bool) as IntBoolPair
+///|
+type IntBoolPair = (Int, Bool)
