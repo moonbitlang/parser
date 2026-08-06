@@ -16,6 +16,7 @@ pub(all) enum Token {
   LIDENT(String)
   UIDENT(String)
   POST_LABEL(String)
+  POST_LABEL_TRANSPARENT(String)
   COMMENT(Comment)
   NEWLINE
   INFIX1(String)
@@ -107,6 +108,7 @@ pub(all) enum Token {
   TEST
   LOOP
   GUARD
+  GUARD_EXCLAMATION
   DEFER
   FOR
   IN
@@ -151,6 +153,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     LIDENT(_) => TK_LIDENT
     UIDENT(_) => TK_UIDENT
     POST_LABEL(_) => TK_POST_LABEL
+    POST_LABEL_TRANSPARENT(_) => TK_POST_LABEL_TRANSPARENT
     COMMENT(_) => TK_COMMENT
     NEWLINE => TK_NEWLINE
     INFIX1(_) => TK_INFIX1
@@ -242,6 +245,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     TEST => TK_TEST
     LOOP => TK_LOOP
     GUARD => TK_GUARD
+    GUARD_EXCLAMATION => TK_GUARD_EXCLAMATION
     DEFER => TK_DEFER
     FOR => TK_FOR
     IN => TK_IN
@@ -286,6 +290,7 @@ pub(all) enum TokenKind {
   TK_LIDENT
   TK_UIDENT
   TK_POST_LABEL
+  TK_POST_LABEL_TRANSPARENT
   TK_COMMENT
   TK_NEWLINE
   TK_INFIX1
@@ -377,6 +382,7 @@ pub(all) enum TokenKind {
   TK_TEST
   TK_LOOP
   TK_GUARD
+  TK_GUARD_EXCLAMATION
   TK_DEFER
   TK_FOR
   TK_IN
@@ -422,6 +428,7 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_LIDENT => "LIDENT"
       TK_UIDENT => "UIDENT"
       TK_POST_LABEL => "POST_LABEL"
+      TK_POST_LABEL_TRANSPARENT => "POST_LABEL_TRANSPARENT"
       TK_COMMENT => "COMMENT"
       TK_NEWLINE => "NEWLINE"
       TK_INFIX1 => "INFIX1"
@@ -513,6 +520,7 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_TEST => "\"test\""
       TK_LOOP => "\"loop\""
       TK_GUARD => "\"guard\""
+      TK_GUARD_EXCLAMATION => "\"guard!\""
       TK_DEFER => "\"defer\""
       TK_FOR => "\"for\""
       TK_IN => "\"in\""
@@ -559,6 +567,7 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_LIDENT => Repr("LIDENT")
       TK_UIDENT => Repr("UIDENT")
       TK_POST_LABEL => Repr("POST_LABEL")
+      TK_POST_LABEL_TRANSPARENT => Repr("POST_LABEL_TRANSPARENT")
       TK_COMMENT => Repr("COMMENT")
       TK_NEWLINE => Repr("NEWLINE")
       TK_INFIX1 => Repr("INFIX1")
@@ -650,6 +659,7 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_TEST => Repr("test")
       TK_LOOP => Repr("loop")
       TK_GUARD => Repr("guard")
+      TK_GUARD_EXCLAMATION => Repr("guard!")
       TK_DEFER => Repr("defer")
       TK_FOR => Repr("for")
       TK_IN => Repr("in")

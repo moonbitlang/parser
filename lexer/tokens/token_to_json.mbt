@@ -36,6 +36,7 @@ pub impl ToJson for Token with fn to_json(self) {
     FOR => "FOR"
     DEFER => "DEFER"
     GUARD => "GUARD"
+    GUARD_EXCLAMATION => "GUARD_EXCLAMATION"
     LOOP => "LOOP"
     TEST => "TEST"
     ELLIPSIS => "ELLIPSIS"
@@ -124,6 +125,7 @@ pub impl ToJson for Token with fn to_json(self) {
     NEWLINE => "NEWLINE"
     COMMENT(comment) => ["COMMENT", comment]
     POST_LABEL(str) => ["POST_LABEL", str]
+    POST_LABEL_TRANSPARENT(str) => ["POST_LABEL_TRANSPARENT", str]
     UIDENT(str) => ["UIDENT", str]
     LIDENT(str) => ["LIDENT", str]
     ATTRIBUTE((id, dot_id, raw_payload)) =>
