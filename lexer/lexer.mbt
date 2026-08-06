@@ -1764,60 +1764,106 @@ fn lex_string(
   }
 
   fn process_string(input : StringView, start_pos : Int) -> StringView {
-    lexscan input with longest {
-      (
-        re"^(?:\")",
-        // End of string
-        after=rest,
-      ) =>
-        if end_with_newline {
-          string_repr_buf.write_char('"')
-          process_string(rest, start_pos)
-        } else {
-          if !string_repr_buf.is_empty() {
-            add_literal(
-              string_repr_buf.to_string(),
-              start_pos,
-              env.calc_offset(base~, rest),
-            )
+    for input = input, start_pos = start_pos {
+      lexscan input with longest {
+        (
+          re"^(?:\")",
+          // End of string
+          after=rest,
+        ) =>
+          if end_with_newline {
+            string_repr_buf.write_char('"')
+            continue rest, start_pos
+          } else {
+            if !string_repr_buf.is_empty() {
+              add_literal(
+                string_repr_buf.to_string(),
+                start_pos,
+                env.calc_offset(base~, rest),
+              )
+            }
+            break rest
           }
-          rest
+
+        // Escape sequences
+        (re"^" + (RE_STRING_ESCAPE as raw), after=rest) => {
+          string_repr_buf.write_string(raw.to_owned())
+          continue rest, start_pos
         }
 
-      // Escape sequences
-      (re"^" + (RE_STRING_ESCAPE as raw), after=rest) => {
-        string_repr_buf.write_string(raw.to_owned())
-        process_string(rest, start_pos)
-      }
+        // Hex escape
+        (re"^" + (RE_HEX_ESCAPE as raw), after=rest) => {
+          string_repr_buf.write_string(raw.to_owned())
+          continue rest, start_pos
+        }
 
-      // Hex escape
-      (re"^" + (RE_HEX_ESCAPE as raw), after=rest) => {
-        string_repr_buf.write_string(raw.to_owned())
-        process_string(rest, start_pos)
-      }
+        // Octal escape
+        (re"^" + (RE_OCTAL_ESCAPE as raw), after=rest) => {
+          string_repr_buf.write_string(raw.to_owned())
+          continue rest, start_pos
+        }
 
-      // Octal escape
-      (re"^" + (RE_OCTAL_ESCAPE as raw), after=rest) => {
-        string_repr_buf.write_string(raw.to_owned())
-        process_string(rest, start_pos)
-      }
+        // Unicode escape
+        (re"^" + (RE_SHORT_UNICODE_ESCAPE as raw), after=rest) => {
+          string_repr_buf.write_string(raw.to_owned())
+          continue rest, start_pos
+        }
 
-      // Unicode escape
-      (re"^" + (RE_SHORT_UNICODE_ESCAPE as raw), after=rest) => {
-        string_repr_buf.write_string(raw.to_owned())
-        process_string(rest, start_pos)
-      }
+        // Unicode escape with braces
+        (re"^" + (RE_BRACED_UNICODE_ESCAPE as raw), after=rest) => {
+          string_repr_buf.write_string(raw.to_owned())
+          continue rest, start_pos
+        }
 
-      // Unicode escape with braces
-      (re"^" + (RE_BRACED_UNICODE_ESCAPE as raw), after=rest) => {
-        string_repr_buf.write_string(raw.to_owned())
-        process_string(rest, start_pos)
-      }
+        // String interpolation
 
-      // String interpolation
+        (re"^" + ((re"\\[{]" + RE_UNICODE_SPACES) as raw), after=rest) =>
+          if allow_interp {
+            if !string_repr_buf.is_empty() {
+              add_literal(
+                string_repr_buf.to_string(),
+                start_pos,
+                env.calc_offset(base~, input),
+              )
+            }
+            string_repr_buf.reset()
+            let interp_start_pos = env.make_pos(env.calc_offset(base~, rest))
+            let (rest, interp_end) = scan_interpolation_source(
+              rest,
+              base~,
+              env~,
+              buf=string_repr_buf,
+              brace_depth=0,
+              preserve=false,
+            )
+            let loc = Location::{
+              start: interp_start_pos,
+              end: env.make_pos(interp_end),
+            }
+            if string_repr_buf.is_empty() {
+              env.add_lexing_error(
+                start=env.calc_offset(base~, input),
+                end=env.calc_offset(base~, rest),
+                InterpMissingExpression,
+              )
+            } else {
+              let source = string_repr_buf.to_string()
+              interps.push(InterpSource({ source, loc }))
+            }
+            string_repr_buf.reset()
+            continue rest, env.calc_offset(base~, rest)
+          } else {
+            string_repr_buf.write_string(raw.to_owned())
+            continue rest, env.calc_offset(base~, rest)
+          }
 
-      (re"^" + ((re"\\[{]" + RE_UNICODE_SPACES) as raw), after=rest) =>
-        if allow_interp {
+        // EOF
+        re"^$" => {
+          env.add_lexing_error(
+            start=start_pos,
+            end=env.calc_offset(base~, input),
+            UnterminatedString,
+          )
           if !string_repr_buf.is_empty() {
             add_literal(
               string_repr_buf.to_string(),
@@ -1825,74 +1871,34 @@ fn lex_string(
               env.calc_offset(base~, input),
             )
           }
-          string_repr_buf.reset()
-          let interp_start_pos = env.make_pos(env.calc_offset(base~, rest))
-          let (rest, interp_end) = scan_interpolation_source(
-            rest,
-            base~,
-            env~,
-            buf=string_repr_buf,
-            brace_depth=0,
-            preserve=false,
-          )
-          let loc = Location::{
-            start: interp_start_pos,
-            end: env.make_pos(interp_end),
-          }
-          if string_repr_buf.is_empty() {
+          break input
+        }
+
+        // CRLF
+        (re"^" + RE_ASCII_LINE_BREAK, after=rest) => {
+          let end_pos = env.calc_offset(base~, rest)
+          if !end_with_newline {
             env.add_lexing_error(
-              start=env.calc_offset(base~, input),
-              end=env.calc_offset(base~, rest),
-              InterpMissingExpression,
+              start=start_pos,
+              end=end_pos,
+              UnterminatedString,
             )
-          } else {
-            let source = string_repr_buf.to_string()
-            interps.push(InterpSource({ source, loc }))
           }
-          string_repr_buf.reset()
-          process_string(rest, env.calc_offset(base~, rest))
-        } else {
-          string_repr_buf.write_string(raw.to_owned())
-          process_string(rest, env.calc_offset(base~, rest))
+          if !string_repr_buf.is_empty() {
+            add_literal(string_repr_buf.to_string(), start_pos, end_pos)
+          }
+          // Need to back off to handle NEWLINE token
+          break input
         }
 
-      // EOF
-      re"^$" => {
-        env.add_lexing_error(
-          start=start_pos,
-          end=env.calc_offset(base~, input),
-          UnterminatedString,
-        )
-        if !string_repr_buf.is_empty() {
-          add_literal(
-            string_repr_buf.to_string(),
-            start_pos,
-            env.calc_offset(base~, input),
-          )
+        // Any other character
+        (re"^(?:.)" as c, after=rest) => {
+          env.register_surrogate_pair_for_char(c)
+          string_repr_buf.write_char(c)
+          continue rest, start_pos
         }
-        input
+        _ => panic()
       }
-
-      // CRLF
-      (re"^" + RE_ASCII_LINE_BREAK, after=rest) => {
-        let end_pos = env.calc_offset(base~, rest)
-        if !end_with_newline {
-          env.add_lexing_error(start=start_pos, end=end_pos, UnterminatedString)
-        }
-        if !string_repr_buf.is_empty() {
-          add_literal(string_repr_buf.to_string(), start_pos, end_pos)
-        }
-        // Need to back off to handle NEWLINE token
-        input
-      }
-
-      // Any other character
-      (re"^(?:.)" as c, after=rest) => {
-        env.register_surrogate_pair_for_char(c)
-        string_repr_buf.write_char(c)
-        process_string(rest, start_pos)
-      }
-      _ => panic()
     }
   }
 
