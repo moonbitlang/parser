@@ -475,11 +475,12 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     BytesInterp(elems=_, loc~) => loc
     Constraint(expr=_, ty=_, loc~) => loc
     Constr(constr=_, loc~) => loc
+    LabelledBlock(label=_, body=_, loc~) => loc
     While(loop_cond=_, loop_body=_, while_else=_, label=_, loc~) => loc
     Function(func=_, loc~) => loc
     Ident(id=_, loc~) => loc
     If(cond=_, ifso=_, ifnot=_, loc~) => loc
-    Guard(cond=_, otherwise=_, body=_, loc~) => loc
+    Guard(loc~, ..) => loc
     Is(expr=_, pat=_, loc~) => loc
     RegexMatch(expr=_, pat=_, bindings=_, loc~) => loc
     Defer(loc~, ..) => loc
@@ -497,7 +498,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
     Match(expr=_, cases=_, match_loc=_, loc~) => loc
     LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~) => loc
-    LexScan(expr=_, match_loc=_, cases=_, loc~) => loc
+    LexScan(loc~, ..) => loc
     LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc
     RevPipe(lhs=_, rhs=_, loc~) => loc
@@ -566,6 +567,7 @@ pub fn Pattern::loc(self : Self) -> Location {
     | Any(loc~)
     | Alias(loc~, ..)
     | Range(loc~, ..)
+    | With(loc~, ..)
     | SpecialConstr(loc~, ..) => loc
   }
 }
@@ -582,7 +584,9 @@ pub fn Impl::loc(self : Self) -> Location {
     | TopTrait({ loc, .. })
     | TopView(loc~, ..)
     | TopImpl(loc~, ..)
-    | TopUsing(loc~, ..) => loc
+    | TopUsing(loc~, ..)
+    | TopExtend(loc~, ..)
+    | TopImport(loc~, ..) => loc
   }
 }
 

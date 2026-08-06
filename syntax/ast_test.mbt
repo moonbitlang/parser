@@ -731,6 +731,8 @@ test "expr complex types to_json" {
       cond=unit_expr,
       otherwise=Some(unit_expr),
       body=unit_expr,
+      exclamation=false,
+      guard_loc=dummy_loc,
       loc=dummy_loc,
     ).json_repr(),
     content={

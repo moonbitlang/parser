@@ -471,6 +471,11 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       })
     Constr(constr~, loc~) =>
       tagged_node("Expr::Constr", loc, { "constr": constr.json_repr() })
+    LabelledBlock(label~, body~, loc~) =>
+      tagged_node("Expr::LabelledBlock", loc, {
+        "label": label.json_repr(),
+        "body": body.json_repr(),
+      })
     While(loop_cond~, loop_body~, while_else~, label~, loc~) =>
       tagged_node("Expr::While", loc, {
         "loop_cond": loop_cond.json_repr(),
@@ -488,7 +493,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "ifso": ifso.json_repr(),
         "ifnot": option_json_repr(ifnot, Expr::json_repr),
       })
-    Guard(cond~, otherwise~, body~, loc~) =>
+    Guard(cond~, otherwise~, body~, loc~, ..) =>
       tagged_node("Expr::Guard", loc, {
         "cond": cond.json_repr(),
         "otherwise": option_json_repr(otherwise, Expr::json_repr),
@@ -649,9 +654,10 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         }),
       })
     }
-    LexScan(expr~, match_loc~, cases~, loc~) => {
+    LexScan(strategy~, expr~, match_loc~, cases~, loc~) => {
       ignore(match_loc)
       tagged_node("Expr::Lexscan", loc, {
+        "strategy": option_json_repr(strategy, Label::json_repr),
         "expr": expr.json_repr(),
         "cases": list_json_repr("Expr::Lexscan::CaseList", loc, cases, fn(
           case,
@@ -1454,6 +1460,23 @@ fn Pattern::json_repr(self : Pattern) -> Json {
         "rhs": rhs.json_repr(),
         "kind": kind.json_repr(loc),
       })
+    With(pat~, bindings~, loc~) =>
+      tagged_node("Pattern::With", loc, {
+        "pat": pat.json_repr(),
+        "bindings": list_json_repr(
+          "Pattern::With::BindingList",
+          loc,
+          bindings,
+          fn(binding) {
+            let (binder, expr) = binding
+            tagged_node(
+              "Pattern::With::Binding",
+              binder.loc.merge(expr.loc()),
+              { "binder": binder.json_repr(), "expr": expr.json_repr() },
+            )
+          },
+        ),
+      })
     SpecialConstr(binder~, args~, loc~) =>
       tagged_node("Pattern::SpecialConstr", loc, {
         "binder": binder.json_repr(),
@@ -1602,6 +1625,15 @@ fn LexCase::json_repr(self : LexCase, loc : Location) -> Json {
 fn LexScanCase::json_repr(self : LexScanCase, loc : Location) -> Json {
   tagged_node("LexscanCase", loc, {
     "pat": self.pat.json_repr(loc),
+    "bindings": list_json_repr("LexscanCase::BindingList", loc, self.bindings, fn(
+      binding,
+    ) {
+      let (label, binder) = binding
+      tagged_node("LexscanCase::Binding", label.loc, {
+        "label": label.json_repr(),
+        "binder": option_json_repr(binder, Binder::json_repr),
+      })
+    }),
     "guard": option_json_repr(self.guard_, Expr::json_repr),
     "body": self.body.json_repr(),
   })
@@ -1770,7 +1802,6 @@ fn ListComprehensionKind::json_repr(
 ///|
 fn TryOperatorKind::json_repr(self : TryOperatorKind, loc : Location) -> Json {
   match self {
-    Question => tagged_node0("TryOperatorKind::Question", loc)
     Exclamation => tagged_node0("TryOperatorKind::Exclamation", loc)
   }
 }
@@ -2008,5 +2039,43 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         ),
         "doc": doc,
       })
+    TopExtend(type_name~, trait_~, names~, vis~, attrs~, loc~, doc~) =>
+      tagged_node("Impl::TopExtend", loc, {
+        "type_name": type_name.json_repr(),
+        "trait": trait_.json_repr(),
+        "names": list_json_repr(
+          "Impl::TopExtend::NameList",
+          loc,
+          names,
+          AliasTarget::json_repr,
+        ),
+        "vis": vis.json_repr(loc),
+        "attrs": list_json_repr(
+          "Impl::TopExtend::AttrList",
+          loc,
+          attrs,
+          Attribute::json_repr,
+        ),
+        "doc": doc,
+      })
+    TopImport(kind~, packages~, loc~, doc~) =>
+      tagged_node("Impl::TopImport", loc, {
+        "kind": option_json_repr(kind, Json::string),
+        "packages": list_json_repr(
+          "Impl::TopImport::PackageList",
+          loc,
+          packages,
+          ImportPackage::json_repr,
+        ),
+        "doc": doc,
+      })
   }
+}
+
+///|
+fn ImportPackage::json_repr(self : ImportPackage) -> Json {
+  tagged_node("ImportPackage", self.loc, {
+    "path": Json::string(self.path),
+    "alias": option_json_repr(self.alias_, Json::string),
+  })
 }

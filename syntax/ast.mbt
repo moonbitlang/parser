@@ -370,6 +370,7 @@ pub(all) struct LexCase {
 ///|
 pub(all) struct LexScanCase {
   pat : LexScanCasePattern
+  bindings : @list.List[(Label, Binder?)]
   guard_ : Expr?
   body : Expr
 } derive(Debug)
@@ -470,6 +471,8 @@ pub(all) enum Expr {
   Constraint(expr~ : Expr, ty~ : Type, loc~ : Location)
   /// `Constructor(e1, e2, e3)`
   Constr(constr~ : Constructor, loc~ : Location)
+  /// `label~: { body }` or transparent `label~~: { body }`
+  LabelledBlock(label~ : Label, body~ : Expr, loc~ : Location)
   /// `while e1 { e2 } else { e3 }`
   While(
     loop_cond~ : Expr,
@@ -484,8 +487,15 @@ pub(all) enum Expr {
   Ident(id~ : Var, loc~ : Location)
   /// `if e1 { e2 } else { e3 }`
   If(cond~ : Expr, ifso~ : Expr, ifnot~ : Expr?, loc~ : Location)
-  /// `guard e1 else {e2}; e3`
-  Guard(cond~ : Expr, otherwise~ : Expr?, body~ : Expr, loc~ : Location)
+  /// `guard e1 else {e2}; e3` or `guard! e1; e3`
+  Guard(
+    cond~ : Expr,
+    otherwise~ : Expr?,
+    body~ : Expr,
+    exclamation~ : Bool,
+    guard_loc~ : Location,
+    loc~ : Location
+  )
   /// `expr is pattern`
   Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
   RegexMatch(
@@ -563,6 +573,7 @@ pub(all) enum Expr {
     loc~ : Location
   )
   LexScan(
+    strategy~ : Label?,
     expr~ : Expr,
     match_loc~ : Location,
     cases~ : @list.List[LexScanCase],
@@ -641,7 +652,7 @@ pub(all) enum Expr {
     else_loc~ : Location,
     loc~ : Location
   )
-  /// `try! expr` or `try? expr`
+  /// `try! expr`
   TryOperator(
     body~ : Expr,
     kind~ : TryOperatorKind,
@@ -665,7 +676,6 @@ pub(all) enum Expr {
 
 ///|
 pub(all) enum TryOperatorKind {
-  Question
   Exclamation
 } derive(Debug)
 
@@ -750,6 +760,8 @@ pub(all) enum Pattern {
   Map(elems~ : @list.List[MapPatElem], is_closed~ : Bool, loc~ : Location)
   /// `p1..=p2` or `p1..<p2` 
   Range(lhs~ : Pattern, rhs~ : Pattern, kind~ : RangeKind, loc~ : Location)
+  /// `(pattern with name = expr, ...)`
+  With(pat~ : Pattern, bindings~ : @list.List[(Binder, Expr)], loc~ : Location)
   SpecialConstr(
     binder~ : Binder,
     args~ : @list.List[ConstrPatArg],
@@ -854,6 +866,13 @@ pub(all) enum UsingKind {
 } derive(Debug)
 
 ///|
+pub(all) struct ImportPackage {
+  path : StringLiteral
+  alias_ : String?
+  loc : Location
+} derive(Debug)
+
+///|
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, is_async~ : Location?, loc~ : Location)
   TopTest(
@@ -929,6 +948,21 @@ pub(all) enum Impl {
     names~ : @list.List[(AliasTarget, UsingKind)],
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
+    loc~ : Location,
+    mut doc~ : DocString
+  )
+  TopExtend(
+    type_name~ : TypeName,
+    trait_~ : TypeName,
+    names~ : @list.List[AliasTarget],
+    vis~ : Visibility,
+    attrs~ : @list.List[Attribute],
+    loc~ : Location,
+    mut doc~ : DocString
+  )
+  TopImport(
+    kind~ : StringLiteral?,
+    packages~ : @list.List[ImportPackage],
     loc~ : Location,
     mut doc~ : DocString
   )

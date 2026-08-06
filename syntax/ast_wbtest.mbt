@@ -578,11 +578,6 @@ test "apply_attr to_json" {
 
 ///|
 test "TryOperatorKind to_json" {
-  json_inspect(TryOperatorKind::Question.json_repr(dummy_loc), content={
-    "kind": "TryOperatorKind::Question",
-    "loc": null,
-    "children": Json::empty_object(),
-  })
   json_inspect(TryOperatorKind::Exclamation.json_repr(dummy_loc), content={
     "kind": "TryOperatorKind::Exclamation",
     "loc": null,
