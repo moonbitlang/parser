@@ -705,8 +705,8 @@ test "expression cases preserve source text" {
   let cases = [
     "42", "name", "f(1, 2)", "object.method(1)", "object.field", "array[0]", "(a, b)",
     "[1, 2]", "{ \"x\": 1 }", "T::{ x: 1 }", "x => x + 1", "if ok { yes } else { no }",
-    "match value { Some(x) => x; _ => y }", "try f() catch { _ => g }", "try? f()",
-    "try! f()", "raise err", "return value", "break value", "continue", "while ok { work() } nobreak { done }",
+    "match value { Some(x) => x; _ => y }", "try f() catch { _ => g }", "try! f()",
+    "raise err", "return value", "break value", "continue", "while ok { work() } nobreak { done }",
     "for i in xs { i }", "defer cleanup()", "guard ok else { return }", "a |> b + c",
     "a <| b + c", "-x", "a + b * c", "x = y", "x += y", "0..<n", "x as T", "x is Some(_)",
     "{ let x = 1; x }", "lexmatch s { re\"a\" => 1 }", "lexscan s { re\"a\" => 1 }",
@@ -771,7 +771,7 @@ test "valid expressions expose AST-aligned semantic kinds" {
 test "unsupported expression tokens produce recovery diagnostics" {
   let cases = [
     "loop 0 { break }", "throw err", "s lexmatch? \"a\"", "s lexmatch? \"a\" with longest",
-    "pub", "else", "catch", "with",
+    "pub", "else", "catch", "with", "try? f()",
   ]
   for source in cases {
     assert_expression_acceptance(source, source, false)
@@ -813,7 +813,7 @@ test "string literal cases preserve source text" {
 ///|
 test "interpolation segments include parsed expression children" {
   let cases = [
-    "\"hello \\{name}\"", "b\"hello \\{name}\"", "$| hello \\{name}\n#| tail",
+    "\"hello \\{name}\"", "b\"hello \\{name}\"", "(\n$| hello \\{name}\n#| tail\n)",
   ]
   for source in cases {
     let result = @untyped_cst.parse_expression(source)
@@ -834,7 +834,7 @@ test "interpolation segments include parsed expression children" {
 
 ///|
 test "consecutive multiline string tokens form one multiline expression" {
-  let source = "#| Hello\n#| World"
+  let source = "(\n#| Hello\n#| World\n)"
   let result = @untyped_cst.parse_expression(source)
   if result.diagnostics_view().length() != 0 {
     fail(source)

@@ -344,7 +344,9 @@ test "helper enum semantics are explicit CST children" {
     @test.assert_eq(api_has_kind(parsed.root(), pred), true)
   }
 
-  let multiline = @untyped_cst.parse_expression("$| hello \\{name}\n#| tail")
+  let multiline = @untyped_cst.parse_expression(
+    "(\n$| hello \\{name}\n#| tail\n)",
+  )
   @test.assert_eq(multiline.diagnostics_view().is_empty(), true)
   @test.assert_eq(
     api_has_kind(multiline.root(), fn(kind) {
@@ -542,7 +544,7 @@ test "location metadata kinds and scalar helpers are explicit" {
   for label in ["label_loc", "value_loc"] {
     @test.assert_eq(
       api_has_labeled_kind(separated_pun.root(), label, fn(kind) {
-        kind is @untyped_cst.Syntax_Separator
+        kind is @untyped_cst.Syntax_Label
       }),
       true,
     )
@@ -552,7 +554,7 @@ test "location metadata kinds and scalar helpers are explicit" {
   for label in ["label_loc", "value_loc"] {
     @test.assert_eq(
       api_has_labeled_kind(closed_pun.root(), label, fn(kind) {
-        kind is @untyped_cst.Syntax_Delimiter
+        kind is @untyped_cst.Syntax_Label
       }),
       true,
     )
@@ -562,13 +564,13 @@ test "location metadata kinds and scalar helpers are explicit" {
   for label in ["label_loc", "value_loc"] {
     @test.assert_eq(
       api_has_labeled_kind(missing_close.root(), label, fn(kind) {
-        kind is @untyped_cst.Syntax_Delimiter
+        kind is @untyped_cst.Syntax_Label
       }),
       true,
     )
   }
 
-  let multiline = @untyped_cst.parse_expression("#| one\n#| two")
+  let multiline = @untyped_cst.parse_expression("(\n#| one\n#| two\n)")
   @test.assert_eq(multiline.diagnostics_view().is_empty(), true)
   @test.assert_eq(
     api_has_labeled_kind(multiline.root(), "literal_loc", fn(kind) {
@@ -581,7 +583,7 @@ test "location metadata kinds and scalar helpers are explicit" {
   @test.assert_eq(labelled_loop.diagnostics_view().is_empty(), true)
   @test.assert_eq(
     api_has_labeled_kind(labelled_loop.root(), "label_loc", fn(kind) {
-      kind is @untyped_cst.Syntax_Label
+      kind is Syntax_Label
     }),
     true,
   )
@@ -595,7 +597,7 @@ test "location metadata kinds and scalar helpers are explicit" {
   @test.assert_eq(eof_label.diagnostics_view().is_empty(), true)
   @test.assert_eq(
     api_has_labeled_kind(eof_label.root(), "label_loc", fn(kind) {
-      kind is @untyped_cst.Syntax_Eof
+      kind is Syntax_Label
     }),
     true,
   )

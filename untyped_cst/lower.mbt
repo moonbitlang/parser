@@ -317,6 +317,8 @@ fn lower_impls_from_cst(root : CstNode) -> @syntax.Impls {
 ///|
 fn lower_top_item(node : CstNode) -> @syntax.Impl {
   match node.kind {
+    Impl_Import => lower_import_decl(node)
+    Impl_Extend => lower_extend_decl(node)
     Impl_Function => lower_function_decl(node)
     Impl_Let => lower_value_decl(node, is_constant=false)
     Impl_Const => lower_value_decl(node, is_constant=true)
@@ -1203,6 +1205,90 @@ fn lower_using_decl(node : CstNode) -> @syntax.Impl {
 }
 
 ///|
+fn lower_string_literal_node(node : CstNode) -> String {
+  match node.string_payload() {
+    Some(value) => value
+    None =>
+      match lower_constant_from_node(node) {
+        Some(String(value)) => value
+        _ => ""
+      }
+  }
+}
+
+///|
+fn lower_import_decl(node : CstNode) -> @syntax.Impl {
+  let packages : Array[@syntax.ImportPackage] = []
+  if node.first_child_with_label("body") is Some(body) {
+    for item in lower_item_children(body) {
+      let path_node = item.first_child_with_label("path").unwrap_or(item)
+      let alias_node = item.first_child_with_label("alias")
+      let alias_ = alias_node.map(lower_semantic_string).bind(value => value)
+      packages.push({
+        path: lower_string_literal_node(path_node),
+        alias_,
+        loc: alias_node
+        .map(alias_ => path_node.loc.merge(alias_.loc))
+        .unwrap_or(path_node.loc),
+      })
+    }
+  }
+  let kind = node.first_child_with_label("kind").map(lower_string_literal_node)
+  TopImport(
+    kind~,
+    packages=lower_array_to_list(packages),
+    loc=lower_decl_loc_without_trailing_trivia(node),
+    doc=lower_empty_doc(),
+  )
+}
+
+///|
+fn lower_extend_decl(node : CstNode) -> @syntax.Impl {
+  let type_name = node
+    .first_child_with_label("type_name")
+    .map(lower_type_name_from_type_node)
+    .unwrap_or({
+      name: @syntax.LongIdent::dummy(),
+      is_object: false,
+      loc: node.loc,
+    })
+  let trait_ = node
+    .first_child_with_label("trait")
+    .map(lower_type_name_from_type_node)
+    .unwrap_or({
+      name: @syntax.LongIdent::dummy(),
+      is_object: false,
+      loc: node.loc,
+    })
+  let names : Array[@syntax.AliasTarget] = []
+  if node.first_child_with_label("body") is Some(body) {
+    for item in lower_item_children(body) {
+      let target_node = item.first_child_with_label("target").unwrap_or(item)
+      let binder_node = item
+        .first_child_with_label("name")
+        .unwrap_or(target_node)
+      names.push({
+        binder: lower_binder_from_node(binder_node),
+        target: if item.first_child_with_label("name") is Some(_) {
+          Some(lower_label_from_node(target_node))
+        } else {
+          None
+        },
+      })
+    }
+  }
+  TopExtend(
+    type_name~,
+    trait_~,
+    names=lower_array_to_list(names),
+    vis=lower_visibility(node),
+    attrs=lower_attrs(node),
+    loc=lower_decl_loc_without_trailing_trivia(node),
+    doc=lower_empty_doc(),
+  )
+}
+
+///|
 fn lower_using_names(
   node : CstNode,
 ) -> List[(@syntax.AliasTarget, @syntax.UsingKind)] {
@@ -1317,6 +1403,7 @@ fn lower_expr(node : CstNode) -> @syntax.Expr {
     Expr_Raise => lower_raise_expr(node)
     Expr_Break => lower_break_expr(node)
     Expr_Continue => lower_continue_expr(node)
+    Expr_LabelledBlock => lower_labelled_block_expr(node)
     Expr_As => lower_as_expr(node)
     Expr_Is => lower_is_expr(node)
     Expr_RegexMatch => lower_regex_match_expr(node)
@@ -1935,7 +2022,7 @@ fn lower_while_expr(node : CstNode) -> @syntax.Expr {
       .unwrap_or(lower_unit_expr(node.loc)),
     while_else=node.first_child_with_label("else").map(lower_function_body_expr),
     label=lower_loop_label(node),
-    loc=lower_loop_loc(node),
+    loc=node.loc,
   )
 }
 
@@ -2049,7 +2136,7 @@ fn lower_for_expr(node : CstNode) -> @syntax.Expr {
     for_else=node.first_child_with_label("else").map(lower_function_body_expr),
     where_clause=node.first_child_with_label("where").map(lower_where_clause),
     label=lower_loop_label(node),
-    loc=lower_loop_loc(node),
+    loc=node.loc,
   )
 }
 
@@ -2093,16 +2180,8 @@ fn lower_foreach_expr(node : CstNode) -> @syntax.Expr {
     else_block=node.first_child_with_label("else").map(lower_function_body_expr),
     where_clause=node.first_child_with_label("where").map(lower_where_clause),
     label=lower_loop_label(node),
-    loc=lower_loop_loc(node),
+    loc=node.loc,
   )
-}
-
-///|
-fn lower_loop_loc(node : CstNode) -> Location {
-  if node.first_child_with_label("loop_loc") is Some(anchor) {
-    return anchor.loc
-  }
-  node.loc
 }
 
 ///|
@@ -2361,17 +2440,12 @@ fn lower_try_expr(node : CstNode) -> @syntax.Expr {
 
 ///|
 fn lower_try_operator_expr(node : CstNode) -> @syntax.Expr {
-  let kind = if node.has_child_kind(TryOperatorKind_Exclamation) {
-    @syntax.TryOperatorKind::Exclamation
-  } else {
-    @syntax.TryOperatorKind::Question
-  }
   @syntax.Expr::TryOperator(
     body=node
       .first_child_with_label("body")
       .map(lower_expr)
       .unwrap_or(lower_hole_expr(node.loc)),
-    kind~,
+    kind=Exclamation,
     try_loc=node
       .first_child_with_label("try_loc")
       .map(fn(anchor) { anchor.loc })
@@ -2421,6 +2495,7 @@ fn lower_lexscan_expr(node : CstNode) -> @syntax.Expr {
     cases.push(lower_lex_scan_case(case_node))
   }
   @syntax.Expr::LexScan(
+    strategy=node.first_child_with_label("name").map(lower_label_from_node),
     expr~,
     match_loc=node.loc,
     cases=lower_array_to_list(cases),
@@ -2451,11 +2526,12 @@ fn lower_lex_case(node : CstNode) -> @syntax.LexCase {
 
 ///|
 fn lower_lex_scan_case(node : CstNode) -> @syntax.LexScanCase {
+  let pattern_node = node.first_child_with_label("pattern")
   @syntax.LexScanCase::{
-    pat: node
-    .first_child_with_label("pattern")
+    pat: pattern_node
     .map(lower_lex_scan_case_pattern)
     .unwrap_or(@syntax.LexScanCasePattern::Wildcard(loc=node.loc)),
+    bindings: lower_regex_match_bindings(pattern_node),
     guard_: node.first_child_with_label("cond").map(lower_expr),
     body: node
     .first_child_with_label("body")
@@ -3172,6 +3248,11 @@ fn lower_guard_expr_with_body(
       .unwrap_or(lower_hole_expr(node.loc)),
     otherwise=node.first_child_with_label("else").map(lower_function_body_expr),
     body~,
+    exclamation=node.bool_marker_value(Flag_Exclamation).unwrap_or(false),
+    guard_loc=node
+      .first_child_with_label("kw")
+      .map(anchor => anchor.loc)
+      .unwrap_or(node.loc),
     loc=node.loc.merge(body.loc()),
   )
 }
@@ -3422,6 +3503,21 @@ fn lower_continue_expr(node : CstNode) -> @syntax.Expr {
 }
 
 ///|
+fn lower_labelled_block_expr(node : CstNode) -> @syntax.Expr {
+  LabelledBlock(
+    label=node
+      .first_child_with_label("label")
+      .map(lower_label_from_node)
+      .unwrap_or({ name: "", loc: node.loc }),
+    body=node
+      .first_child_with_label("body")
+      .map(lower_function_body_expr)
+      .unwrap_or(lower_unit_expr(node.loc)),
+    loc=node.loc,
+  )
+}
+
+///|
 fn lower_control_label(node : CstNode) -> @syntax.Label? {
   if node.first_child_with_label("label") is Some(label_node) {
     let label = lower_label_from_node(label_node)
@@ -3512,11 +3608,11 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
       let lhs = node
         .first_child_with_label("lhs")
         .map(lower_pattern)
-        .unwrap_or(@syntax.Pattern::Any(loc=node.loc))
+        .unwrap_or(Any(loc=node.loc))
       let rhs = node
         .first_child_with_label("rhs")
         .map(lower_pattern)
-        .unwrap_or(@syntax.Pattern::Any(loc=node.loc))
+        .unwrap_or(Any(loc=node.loc))
       @syntax.Pattern::Or(pat1=lhs, pat2=rhs, loc=node.loc)
     }
     Pattern_Range => {
@@ -3556,6 +3652,30 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
         .map(lower_type)
         .unwrap_or(@syntax.Type::Any(loc=node.loc))
       @syntax.Pattern::Constraint(pat~, ty~, loc=node.loc)
+    }
+    Pattern_With => {
+      let pat = node
+        .first_child_with_label("pattern")
+        .map(lower_pattern)
+        .unwrap_or(Any(loc=node.loc))
+      let bindings : Array[(@syntax.Binder, @syntax.Expr)] = []
+      if node.first_child_with_label("body") is Some(body) {
+        for binding in lower_item_children(body) {
+          bindings.push(
+            (
+              binding
+              .first_child_with_label("name")
+              .map(lower_binder_from_node)
+              .unwrap_or(lower_dummy_binder(binding.loc)),
+              binding
+              .first_child_with_label("expr")
+              .map(lower_expr)
+              .unwrap_or(lower_hole_expr(binding.loc)),
+            ),
+          )
+        }
+      }
+      With(pat~, bindings=lower_array_to_list(bindings), loc=node.loc)
     }
     _ => @syntax.Pattern::Any(loc=node.loc)
   }
