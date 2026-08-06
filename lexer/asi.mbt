@@ -42,7 +42,8 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | ELLIPSIS
     | NORAISE
     | EXTEND
-    | POST_LABEL(_) => true
+    | POST_LABEL(_)
+    | POST_LABEL_TRANSPARENT(_) => true
     // ---------------------------
     // | EXCEPT
     TYPE
@@ -79,6 +80,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | IMPORT
     | IF
     | GUARD
+    | GUARD_EXCLAMATION
     | DECLARE
     | DEFER
     | WHILE
@@ -191,6 +193,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | EXTERN
     | IF
     | GUARD
+    | GUARD_EXCLAMATION
     | DEFER
     | DECLARE
     | WHILE
@@ -210,6 +213,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | FOR
     | ELLIPSIS
     | POST_LABEL(_)
+    | POST_LABEL_TRANSPARENT(_)
     | ATTRIBUTE(_)
     | USING
     | LEXMATCH

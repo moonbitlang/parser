@@ -435,6 +435,18 @@ fn lex_tokens(
         continue rest
       }
 
+      // Transparent post label identifiers (name~~) must be recognized before
+      // ordinary post labels so the second `~` is part of the token.
+      (re"^(?:[a-z_][a-zA-Z0-9_]*~~)" as raw, after=rest) => {
+        let ident = raw.sub(start=0, end=raw.length() - 2).to_owned()
+        env.add_token_with_loc(
+          POST_LABEL_TRANSPARENT(ident),
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
+        )
+        continue rest
+      }
+
       // Post label identifiers (name~) - simplified pattern
       (re"^(?:[a-z_][a-zA-Z0-9_]*~)" as raw, after=rest) => {
         let ident = raw.sub(start=0, end=raw.length() - 1).to_owned() // Remove ~
@@ -558,6 +570,14 @@ fn lex_tokens(
       (re"^(?:try!)", after=rest) => {
         env.add_token_with_loc(
           TRY_EXCLAMATION,
+          start=env.calc_offset(input, base~),
+          end=env.calc_offset(rest, base~),
+        )
+        continue rest
+      }
+      (re"^(?:guard!)", after=rest) => {
+        env.add_token_with_loc(
+          GUARD_EXCLAMATION,
           start=env.calc_offset(input, base~),
           end=env.calc_offset(rest, base~),
         )
