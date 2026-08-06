@@ -15,7 +15,7 @@ import {
 pub(all) enum Statement {
   StmtExpr(@syntax.Expr)
   StmtLet(pat~ : @syntax.Pattern, expr~ : @syntax.Expr, loc~ : @basic.Location)
-  StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, loc~ : @basic.Location)
+  StmtGuard(cond~ : @syntax.Expr, otherwise~ : @syntax.Expr?, exclamation~ : Bool, guard_loc~ : @basic.Location, loc~ : @basic.Location)
   StmtLetmut(binder~ : @syntax.Binder, ty_opt~ : @syntax.Type?, expr~ : @syntax.Expr, loc~ : @basic.Location)
   StmtFunc(binder~ : @syntax.Binder, func~ : @syntax.Func, loc~ : @basic.Location)
   StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @basic.Location)

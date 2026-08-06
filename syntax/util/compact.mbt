@@ -27,7 +27,13 @@ pub(all) enum Statement {
   /// ```skip
   /// guard cond else { otherwise }
   /// ```
-  StmtGuard(cond~ : Expr, otherwise~ : Expr?, loc~ : Location)
+  StmtGuard(
+    cond~ : Expr,
+    otherwise~ : Expr?,
+    exclamation~ : Bool,
+    guard_loc~ : Location,
+    loc~ : Location
+  )
   /// let mut statement
   ///
   /// ```skip
@@ -98,9 +104,16 @@ pub fn Statement::collect_rev(
               let loc = loc.merge(cont.loc())
               Expr::Let(pattern=pat, expr~, loc~, body=cont)
             }
-            StmtGuard(cond~, otherwise~, loc~) => {
+            StmtGuard(cond~, otherwise~, exclamation~, guard_loc~, loc~) => {
               let loc = loc.merge(cont.loc())
-              Guard(cond~, otherwise~, loc~, body=cont)
+              Guard(
+                cond~,
+                otherwise~,
+                exclamation~,
+                guard_loc~,
+                loc~,
+                body=cont,
+              )
             }
             StmtLetmut(binder~, ty_opt~, expr~, loc~) => {
               let loc = loc.merge(cont.loc())
