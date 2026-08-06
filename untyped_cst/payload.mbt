@@ -53,6 +53,7 @@ fn token_string_payload(token : Token) -> String? {
     | UIDENT(value)
     | PACKAGE_NAME(value)
     | POST_LABEL(value)
+    | POST_LABEL_TRANSPARENT(value)
     | INFIX1(value)
     | INFIX2(value)
     | INFIX3(value)

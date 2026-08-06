@@ -134,6 +134,8 @@ test "source syntax token kinds are classified exhaustively" {
 test "implementation node kinds are classified exhaustively" {
   assert_category(
     [
+      Impl_Import,
+      Impl_Extend,
       Impl_Using,
       Impl_Function,
       Impl_Let,
@@ -214,6 +216,7 @@ test "expression node kinds are classified exhaustively" {
       Expr_Raise,
       Expr_Break,
       Expr_Continue,
+      Expr_LabelledBlock,
       Expr_Defer,
       Expr_Guard,
       Expr_Quantifier,
@@ -246,6 +249,7 @@ test "pattern node kinds are classified exhaustively" {
       Pattern_Alias,
       Pattern_Range,
       Pattern_Constraint,
+      Pattern_With,
       Pattern_MissingPattern,
     ],
     fn(kind) { kind.is_pattern() },
@@ -431,7 +435,6 @@ test "syntax flag kinds are classified exhaustively" {
       TrailingMark_Comma,
       TrailingMark_Semi,
       TrailingMark_None,
-      TryOperatorKind_Question,
       TryOperatorKind_Exclamation,
       QuantifierKind_Forall,
       QuantifierKind_Exists,
@@ -453,6 +456,7 @@ test "syntax flag kinds are classified exhaustively" {
       Flag_Faked,
       Flag_Augmented,
       Flag_Object,
+      Flag_Exclamation,
     ],
     fn(kind) { kind.is_syntax_flag() },
   )

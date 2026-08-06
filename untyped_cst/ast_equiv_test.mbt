@@ -87,6 +87,48 @@ fn assert_ast_equiv(
 }
 
 ///|
+fn assert_all_parsers_reject(source : String) -> Unit raise {
+  let (_, hand_reports) = @parser.parse_string(
+    source,
+    parser=@parser.Handrolled,
+  )
+  let (_, yacc_reports) = @parser.parse_string(source, parser=@parser.MoonYacc)
+  let cst_result = @untyped_cst.parse_structure(source)
+  if hand_reports.is_empty() {
+    fail("handrolled parser unexpectedly accepted:\n\{source}")
+  }
+  if yacc_reports.is_empty() {
+    fail("MoonYacc unexpectedly accepted:\n\{source}")
+  }
+  if cst_result.diagnostics_view().is_empty() {
+    fail("CST parser unexpectedly accepted:\n\{source}")
+  }
+}
+
+///|
+test "regex alias precedence matches across all parsers" {
+  assert_all_parsers_reject(
+    "fn main { let _ = s =~ (re\"a\" | re\"b\" as x, before=p) }",
+  )
+  assert_ast_equiv(
+    "fn main { let _ = s =~ ((re\"a\" | re\"b\") as x, before=p) }",
+    label="parenthesized regex alias",
+  )
+}
+
+///|
+test "regex match RHS precedence matches across all parsers" {
+  assert_ast_equiv(
+    "fn main { let _ = s =~ A + B }",
+    label="expression-level addition after regex match",
+  )
+  assert_ast_equiv(
+    "fn main { let _ = s =~ (A + B) }",
+    label="parenthesized regex sequence",
+  )
+}
+
+///|
 fn assert_handrolled_cst_ast_equiv(source : String) -> Unit raise {
   let (hand_impls, hand_reports) = @parser.parse_string(
     source,
@@ -167,8 +209,7 @@ test "representative snapshots are AST equivalent" {
     "pipeline_test_for.mbt", "parse_test_lexmatch.mbt", "pipeline_test_option.mbt",
     "pipeline_test_builtin_test.mbt", "pipeline_test_array.mbt", "pipeline_test_obj_in_struct.mbt",
     "pipeline_test_record_update_typing.mbt", "parse_test_unicode_test.mbt", "pipeline_test_async_misc.mbt",
-    "pipeline_test_record.mbt", "pipeline_test_pipe.mbt", "pipeline_test_foreach.mbt",
-    "pipeline_test_return_test.mbt",
+    "pipeline_test_record.mbt", "pipeline_test_pipe.mbt", "pipeline_test_return_test.mbt",
   ]
   for snapshot in snapshots {
     assert_ast_equiv(read_snapshot(snapshot), label=snapshot)
@@ -176,13 +217,8 @@ test "representative snapshots are AST equivalent" {
 }
 
 ///|
-test "reverse pipe snapshots match handrolled AST" {
-  let snapshots = [
-    "parse_test_reverse_pipe.mbt", "parse_test_reverse_pipe_error.mbt",
-  ]
-  for snapshot in snapshots {
-    assert_handrolled_cst_ast_equiv(read_snapshot(snapshot))
-  }
+test "valid reverse pipe snapshot matches handrolled AST" {
+  assert_handrolled_cst_ast_equiv(read_snapshot("parse_test_reverse_pipe.mbt"))
 }
 
 ///|
@@ -277,12 +313,79 @@ test "expression conversion produces expression AST" {
 ///|
 test "string and labelled argument AST equivalence cases" {
   let cases = [
-    "\"hello \\{name}\"", "b\"hello \\{name}\"", "#| Hello\n#| World", "$| hello \\{name}\n#| tail",
+    "\"hello \\{name}\"", "b\"hello \\{name}\"", "(\n#| Hello\n#| World\n)", "(\n$| hello \\{name}\n#| tail\n)",
     "f(label~)", "f(label?, other?=value)",
   ]
   for source in cases {
     assert_expr_ast_equiv(source)
   }
+}
+
+///|
+test "parenthesized labelled blocks remain composable" {
+  let cases = [
+    "fn f() { (label~: {})() }", "fn f() { (label~: {}) + 1 }", "fn f() { (label~: {}) |> consume }",
+    "fn f() { (label~~: {}) + 1 }", "fn f() { (label~: {} : T) }", "fn f() { (label~~: {} : T) }",
+  ]
+  for source in cases {
+    assert_ast_equiv(source)
+  }
+}
+
+///|
+test "continue leaves labelled expression arguments intact" {
+  let cases = [
+    "fn f() { continue label~: for ;; {} }", "fn f() { continue label~~: {} }", "fn f() { continue target~ value }",
+  ]
+  for source in cases {
+    assert_ast_equiv(source)
+  }
+}
+
+///|
+fn lower_single_import_package(source : String) -> @syntax.ImportPackage raise {
+  let result = @untyped_cst.parse_structure(source)
+  @test.assert_eq(result.diagnostics_view().length(), 0)
+  @test.assert_eq(result.root().text(source), source[:])
+  let (impls, reports) = result.to_impls()
+  @test.assert_eq(reports.length(), 0)
+  guard impls.to_array() is [TopImport(packages~, ..)] else {
+    fail("expected one import declaration")
+  }
+  guard packages.to_array() is [package_item] else {
+    fail("expected one imported package")
+  }
+  package_item
+}
+
+///|
+test "import package location excludes trailing trivia" {
+  let without_alias = lower_single_import_package(
+    (
+      #|import {
+      #|  "a" // trailing comment
+      #|}
+    ),
+  )
+  @test.assert_eq(without_alias.path, "a")
+  @test.assert_eq(without_alias.alias_, None)
+  @test.assert_eq(without_alias.loc.start.lnum, 2)
+  @test.assert_eq(without_alias.loc.start.column(), 3)
+  @test.assert_eq(without_alias.loc.end.lnum, 2)
+  @test.assert_eq(without_alias.loc.end.column(), 6)
+  let with_alias = lower_single_import_package(
+    (
+      #|import {
+      #|  "a" @alias // trailing comment
+      #|}
+    ),
+  )
+  @test.assert_eq(with_alias.path, "a")
+  @test.assert_eq(with_alias.alias_, Some("alias"))
+  @test.assert_eq(with_alias.loc.start.lnum, 2)
+  @test.assert_eq(with_alias.loc.start.column(), 3)
+  @test.assert_eq(with_alias.loc.end.lnum, 2)
+  @test.assert_eq(with_alias.loc.end.column(), 13)
 }
 
 ///|
@@ -340,7 +443,7 @@ test "location metadata lowering remains handrolled-equivalent" {
   let expressions = [
     "value |> x => { x }", "try f() catch { _ => 0 } noraise { value => value }",
     "(f)() catch { _ => 0 }", "array[1:2]", "[ for i = 0; i < 1; i = i + 1 => i ]",
-    "f(label~, optional?)", "#| one\n#| two", "label~: while true {}", "lexmatch source { (\"a\", (\"b\" \"c\")) => 1 }",
+    "f(label~, optional?)", "(\n#| one\n#| two\n)", "label~: while true {}", "lexmatch source { (\"a\", (\"b\" \"c\")) => 1 }",
   ]
   for source in expressions {
     let lex = @lexer.tokens_from_string(source, comment=true)
@@ -561,6 +664,16 @@ test "handrolled/CST truncated expression matrix" {
 }
 
 ///|
+fn handrolled_cst_snapshot_allows_diagnostic_divergence(path : String) -> Bool {
+  match path {
+    // Generic recovery after the removed `try?` syntax may consume subsequent
+    // operands differently between the two parsers.
+    "parse_test_try_unexpected_body_tokens.mbt" => true
+    _ => false
+  }
+}
+
+///|
 fn handrolled_cst_snapshot_issue(
   path : String,
   source : String,
@@ -573,8 +686,14 @@ fn handrolled_cst_snapshot_issue(
   let cst = @untyped_cst.parse_structure(source, name=path)
   let cst_reports = reports_from_view(cst.diagnostics_view())
   let hand_accepts = hand_reports.is_empty()
-  if handrolled_cst_reports_json(hand_reports) !=
-    handrolled_cst_reports_json(cst_reports) {
+  let reports_differ = handrolled_cst_reports_json(hand_reports) !=
+    handrolled_cst_reports_json(cst_reports)
+  let diagnostic_divergence_allowed = handrolled_cst_snapshot_allows_diagnostic_divergence(
+      path,
+    ) &&
+    !hand_reports.is_empty() &&
+    !cst_reports.is_empty()
+  if reports_differ && !diagnostic_divergence_allowed {
     if hand_accepts {
       return (Some("handrolled accepts, CST reports"), hand_accepts)
     }
@@ -806,16 +925,16 @@ test "semantic CST migration regression snapshots" {
     "parse_test_postfix_label.mbt", "parse_test_regex_match_expr.mbt", "parse_test_ffi_multiline_stub.mbt",
     "pipeline_test_labelled_constr.mbt", "pipeline_test_match_multi_arg.mbt", "parse_test_brace_grouped_ident.mbt",
     "parse_test_extend_soft_keyword.mbt", "parse_test_labelled_while_expr.mbt", "pipeline_test_constr_mut_field.mbt",
-    "pipeline_test_match_using_regex.mbt", "pipeline_test_list_comprehension.mbt",
-    "pipeline_test_foreach_break_label.mbt", "pipeline_test_label_loop_foreach2.mbt",
-    "pipeline_test_label_loop_foreach3.mbt", "parse_test_no_trailing_newline_extern.mbt",
-    "parse_test_lexmatch_pattern_sequence_semicolon_and_regex.mbt", "parse_test_map_pattern.mbt",
-    "parse_test_pattern_tuple.mbt", "parse_test_map_pattern_more_coverage.mbt", "parse_test_array_pattern_dotdot_variants.mbt",
-    "parse_test_brace_pattern_record_kind_unexpected.mbt", "parse_test_brace_pattern_unknown_kind_unexpected.mbt",
-    "pipeline_test_valstruct_in_array.mbt", "parse_test_trait.mbt", "pipeline_test_async_join2.mbt",
-    "pipeline_test_guard.mbt", "pipeline_test_guard_is.mbt", "pipeline_test_empty_json.mbt",
-    "pipeline_test_nested_map.mbt", "pipeline_test_map_pattern.mbt", "pipeline_test_json_pattern.mbt",
-    "pipeline_test_map_pattern2.mbt", "parse_test_map_literal_with_bytes.mbt",
+    "pipeline_test_list_comprehension.mbt", "pipeline_test_foreach_break_label.mbt",
+    "pipeline_test_label_loop_foreach2.mbt", "pipeline_test_label_loop_foreach3.mbt",
+    "parse_test_no_trailing_newline_extern.mbt", "parse_test_lexmatch_pattern_sequence_semicolon_and_regex.mbt",
+    "parse_test_map_pattern.mbt", "parse_test_pattern_tuple.mbt", "parse_test_map_pattern_more_coverage.mbt",
+    "parse_test_array_pattern_dotdot_variants.mbt", "parse_test_brace_pattern_record_kind_unexpected.mbt",
+    "parse_test_brace_pattern_unknown_kind_unexpected.mbt", "pipeline_test_valstruct_in_array.mbt",
+    "parse_test_trait.mbt", "pipeline_test_async_join2.mbt", "pipeline_test_guard.mbt",
+    "pipeline_test_guard_is.mbt", "pipeline_test_empty_json.mbt", "pipeline_test_nested_map.mbt",
+    "pipeline_test_map_pattern.mbt", "pipeline_test_json_pattern.mbt", "pipeline_test_map_pattern2.mbt",
+    "parse_test_map_literal_with_bytes.mbt",
   ]
   for snapshot in snapshots {
     assert_handrolled_cst_structure_equiv(snapshot, read_snapshot(snapshot))

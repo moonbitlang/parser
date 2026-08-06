@@ -43,6 +43,8 @@ pub enum NodeKind {
   Syntax_Comment
   Syntax_Eof
   Syntax_Unexpected
+  Impl_Import
+  Impl_Extend
   Impl_Using
   Impl_Function
   Impl_Let
@@ -114,6 +116,7 @@ pub enum NodeKind {
   Expr_Raise
   Expr_Break
   Expr_Continue
+  Expr_LabelledBlock
   Expr_Defer
   Expr_Guard
   Expr_Quantifier
@@ -137,6 +140,7 @@ pub enum NodeKind {
   Pattern_Alias
   Pattern_Range
   Pattern_Constraint
+  Pattern_With
   Pattern_MissingPattern
   Pattern_Group
   ArrayPattern_Pattern
@@ -289,7 +293,6 @@ pub enum NodeKind {
   TrailingMark_Comma
   TrailingMark_Semi
   TrailingMark_None
-  TryOperatorKind_Question
   TryOperatorKind_Exclamation
   QuantifierKind_Forall
   QuantifierKind_Exists
@@ -311,6 +314,7 @@ pub enum NodeKind {
   Flag_Faked
   Flag_Augmented
   Flag_Object
+  Flag_Exclamation
   Attribute_Simple
   Attribute_Qualified
   Attribute_Name
@@ -328,6 +332,9 @@ pub enum NodeKind {
   Clause_Where
   Clause_ConstructorDecl
   Clause_UsingItem
+  Clause_ImportPackage
+  Clause_ExtendItem
+  Clause_WithBinding
   Clause_DerivingDirective
   List_ArgumentList
   List_ParameterList
@@ -356,6 +363,8 @@ pub enum NodeKind {
   List_ObjectFieldList
   List_ConstructorList
   List_UsingItemList
+  List_ImportPackageList
+  List_ExtendItemList
   List_DerivingList
   List_MatchCaseList
   List_LexCaseList
@@ -364,6 +373,7 @@ pub enum NodeKind {
   List_LexPatternList
   List_ForBindingList
   List_ForEachBindingList
+  List_WithBindingList
 } derive(Eq, @debug.Debug)
 pub fn NodeKind::is_argument(Self) -> Bool
 pub fn NodeKind::is_constant(Self) -> Bool

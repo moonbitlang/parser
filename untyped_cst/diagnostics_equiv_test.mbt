@@ -103,6 +103,58 @@ test "structure diagnostics come from CST parser recovery" {
 }
 
 ///|
+test "labelled blocks require parentheses before composition" {
+  let cases = [
+    ("labelled block call", "fn f() { label~: {}() }"),
+    ("labelled block infix lhs", "fn f() { label~: {} + 1 }"),
+    ("labelled block pipe lhs", "fn f() { label~: {} |> consume }"),
+    ("labelled block infix rhs", "fn f() { 1 + label~: {} }"),
+    ("transparent labelled block infix", "fn f() { label~~: {} + 1 }"),
+  ]
+  for case in cases {
+    let (label, source) = case
+    assert_structure_acceptance(label, source, false)
+  }
+}
+
+///|
+fn assert_cst_structure_diagnostic(
+  label : String,
+  source : String,
+  expected : String,
+) -> Unit raise {
+  let cst = @untyped_cst.parse_structure(source)
+  let reports = diagnostics_equiv_reports_from_view(cst.diagnostics_view())
+  if cst.root().text(source) != source[:] {
+    fail("source text mismatch for \{label}")
+  }
+  @test.assert_eq(reports.length(), 1)
+  @test.assert_eq(reports[0].msg, expected)
+}
+
+///|
+test "extend modifiers follow attributes then optional visibility" {
+  let valid =
+    #|#deprecated
+    #|pub extend T with Trait::{f}
+  let accepted = @untyped_cst.parse_structure(valid)
+  @test.assert_eq(accepted.diagnostics_view().length(), 0)
+  @test.assert_eq(accepted.root().text(valid), valid[:])
+  assert_cst_structure_diagnostic(
+    "attribute after visibility",
+    (
+      #|pub
+      #|#deprecated
+      #|extend T with Trait::{f}
+    ),
+    "Attributes must appear before a visibility modifier.",
+  )
+  assert_cst_structure_diagnostic(
+    "duplicate visibility", "pub priv extend T with Trait::{f}", "Only one visibility modifier is allowed.",
+  )
+}
+
+///|
 test "expression diagnostics come from CST parser recovery" {
   let cases = [
     ("missing call close", "f(1, 2"),

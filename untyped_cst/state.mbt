@@ -5,6 +5,7 @@ priv struct ParserState {
   reports : Array[Report]
   mut abort_current_decl : Bool
   mut abort_infix_chain : Bool
+  mut report_next_top_level_start : Bool
   mut suppress_next_top_level_recovery_report : Bool
   source : String
   cnum_to_source_offset : (Int) -> Int
@@ -398,6 +399,7 @@ fn new_state(
     reports,
     abort_current_decl: false,
     abort_infix_chain: false,
+    report_next_top_level_start: false,
     suppress_next_top_level_recovery_report: false,
     source,
     cnum_to_source_offset: mapper,

@@ -29,6 +29,26 @@ fn recovery_is_error(node : @untyped_cst.CstNode) -> Bool {
 }
 
 ///|
+fn recovery_root_item_at(
+  root : @untyped_cst.CstNode,
+  index : Int,
+) -> @untyped_cst.CstNode? {
+  let mut item_index = 0
+  for entry in root.children {
+    match entry {
+      (Some("item"), child) if child.kind.is_impl() => {
+        if item_index == index {
+          return Some(child)
+        }
+        item_index += 1
+      }
+      _ => ()
+    }
+  }
+  None
+}
+
+///|
 fn recovery_leaf_payload(
   node : @untyped_cst.CstNode,
 ) -> @untyped_cst.NodePayload? {
@@ -141,6 +161,27 @@ test "top-level recovery keeps following declaration" {
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(
     recovery_any_node(result.root(), recovery_is_syntax_string("y")),
+    true,
+  )
+}
+
+///|
+test "removed try question recovery keeps following top-level declaration" {
+  let source =
+    #|fn broken() {
+    #|  let _ = try try? 1 catch { _ => 0 }
+    #|}
+    #|fn kept() { 42 }
+  let result = @untyped_cst.parse_structure(source)
+  @test.assert_eq(result.diagnostics_view().length() > 0, true)
+  @test.assert_eq(result.root().text(source), source[:])
+  @test.assert_eq(count_root_items(result.root()), 2)
+  guard recovery_root_item_at(result.root(), 1) is Some(following) else {
+    fail("expected a following top-level declaration")
+  }
+  @test.assert_eq(following.kind is @untyped_cst.Impl_Function, true)
+  @test.assert_eq(
+    recovery_any_node(following, recovery_is_syntax_string("kept")),
     true,
   )
 }

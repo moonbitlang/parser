@@ -84,6 +84,20 @@ fn lexical_name_node_from_token(
         scalar_node(Name_Identifier, trimmed_loc, trimmed_span, String(value)),
       )
     }
+    POST_LABEL_TRANSPARENT(value) => {
+      let trimmed_loc = loc.trim_last_char().trim_last_char()
+      let trimmed_span = mk_span(
+        source_span.0,
+        if source_span.1 - source_span.0 >= 2 {
+          source_span.1 - 2
+        } else {
+          source_span.0
+        },
+      )
+      Some(
+        scalar_node(Name_Identifier, trimmed_loc, trimmed_span, String(value)),
+      )
+    }
     EXTEND =>
       Some(scalar_node(Name_Identifier, loc, source_span, String("extend")))
     UNDERSCORE =>

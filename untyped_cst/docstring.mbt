@@ -97,6 +97,8 @@ fn attach_docstrings_to_impls(
       @syntax.TopView(..) as view => view.doc = doc
       @syntax.TopImpl(..) as imp => imp.doc = doc
       @syntax.TopUsing(..) as using_stmt => using_stmt.doc = doc
+      TopExtend(..) as extend_stmt => extend_stmt.doc = doc
+      TopImport(..) as import_stmt => import_stmt.doc = doc
     }
     last_pos = loc.end
   }

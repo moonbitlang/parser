@@ -45,6 +45,10 @@ pub enum NodeKind {
   Syntax_Unexpected
 
   // Top-level implementation items.
+  /// Corresponds to `@syntax.Impl::TopImport`.
+  Impl_Import
+  /// Corresponds to `@syntax.Impl::TopExtend`.
+  Impl_Extend
   /// Corresponds to `@syntax.Impl::TopUsing`.
   Impl_Using
   /// Corresponds to `@syntax.Impl::TopFuncDef`.
@@ -189,6 +193,8 @@ pub enum NodeKind {
   Expr_Break
   /// Corresponds to `@syntax.Expr::Continue`.
   Expr_Continue
+  /// Corresponds to `@syntax.Expr::LabelledBlock`.
+  Expr_LabelledBlock
   /// Corresponds to `@syntax.Expr::Defer`; following statements become its `body`.
   Expr_Defer
   /// Corresponds to `@syntax.Expr::Guard`; following statements become its `body`.
@@ -237,6 +243,8 @@ pub enum NodeKind {
   Pattern_Range
   /// Corresponds to `@syntax.Pattern::Constraint`.
   Pattern_Constraint
+  /// Corresponds to `@syntax.Pattern::With`.
+  Pattern_With
   /// Missing-pattern recovery node lowered to `@syntax.Pattern::Any`.
   Pattern_MissingPattern
   /// Parenthesized-single-pattern marker; grouping is removed during lowering.
@@ -562,8 +570,6 @@ pub enum NodeKind {
   TrailingMark_Semi
   /// Corresponds to `@syntax.TrailingMark::None`.
   TrailingMark_None
-  /// Corresponds to `@syntax.TryOperatorKind::Question`.
-  TryOperatorKind_Question
   /// Corresponds to `@syntax.TryOperatorKind::Exclamation`.
   TryOperatorKind_Exclamation
   /// Corresponds to `@syntax.PredicateQuantifierKind::Forall`.
@@ -606,6 +612,8 @@ pub enum NodeKind {
   Flag_Augmented
   /// Boolean marker for `@syntax.TypeName::is_object`.
   Flag_Object
+  /// Boolean marker for `guard!`.
+  Flag_Exclamation
 
   // Attributes, comments, and interpolation token metadata.
   /// Unqualified attribute metadata used to build an `@attribute.Attribute`.
@@ -644,6 +652,12 @@ pub enum NodeKind {
   Clause_ConstructorDecl
   /// Using entry lowered to an `(AliasTarget, UsingKind)` pair in `Impl::TopUsing`.
   Clause_UsingItem
+  /// Import package entry lowered to `@syntax.ImportPackage`.
+  Clause_ImportPackage
+  /// Method entry lowered to `@syntax.AliasTarget` in `Impl::TopExtend`.
+  Clause_ExtendItem
+  /// Binder/expression entry in a `Pattern_With` binding list.
+  Clause_WithBinding
   /// Corresponds to `@syntax.DerivingDirective`.
   Clause_DerivingDirective
 
@@ -702,6 +716,10 @@ pub enum NodeKind {
   List_ConstructorList
   /// CST container lowered to `Impl::TopUsing::names`.
   List_UsingItemList
+  /// CST container lowered to `Impl::TopImport::packages`.
+  List_ImportPackageList
+  /// CST container lowered to `Impl::TopExtend::names`.
+  List_ExtendItemList
   /// CST container lowered to `TypeDecl::deriving`.
   List_DerivingList
   /// CST container lowered to `Expr::Match` or `Expr::Try` cases.
@@ -718,6 +736,8 @@ pub enum NodeKind {
   List_ForBindingList
   /// CST container lowered to list-comprehension `(Binder, Expr)` state bindings.
   List_ForEachBindingList
+  /// CST container lowered to `Pattern::With::bindings`.
+  List_WithBindingList
 } derive(@debug.Debug, Eq)
 
 ///|
@@ -749,7 +769,9 @@ fn NodeKind::is_syntax_token(self : NodeKind) -> Bool {
 /// Returns whether this kind represents a top-level implementation item.
 pub fn NodeKind::is_impl(self : NodeKind) -> Bool {
   match self {
-    Impl_Using
+    Impl_Import
+    | Impl_Extend
+    | Impl_Using
     | Impl_Function
     | Impl_Let
     | Impl_Const
@@ -828,6 +850,7 @@ pub fn NodeKind::is_expr(self : NodeKind) -> Bool {
     | Expr_Raise
     | Expr_Break
     | Expr_Continue
+    | Expr_LabelledBlock
     | Expr_Defer
     | Expr_Guard
     | Expr_Quantifier
@@ -859,6 +882,7 @@ pub fn NodeKind::is_pattern(self : NodeKind) -> Bool {
     | Pattern_Alias
     | Pattern_Range
     | Pattern_Constraint
+    | Pattern_With
     | Pattern_MissingPattern => true
     _ => false
   }
@@ -1075,7 +1099,6 @@ fn NodeKind::is_syntax_flag(self : NodeKind) -> Bool {
     | TrailingMark_Comma
     | TrailingMark_Semi
     | TrailingMark_None
-    | TryOperatorKind_Question
     | TryOperatorKind_Exclamation
     | QuantifierKind_Forall
     | QuantifierKind_Exists
@@ -1096,7 +1119,8 @@ fn NodeKind::is_syntax_flag(self : NodeKind) -> Bool {
     | Flag_MatchAbsent
     | Flag_Faked
     | Flag_Augmented
-    | Flag_Object => true
+    | Flag_Object
+    | Flag_Exclamation => true
     _ => false
   }
 }

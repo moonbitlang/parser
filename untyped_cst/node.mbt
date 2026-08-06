@@ -127,7 +127,7 @@ fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
     | TokenKind::TK_UIDENT
     | TokenKind::TK_PACKAGE_NAME
     | TokenKind::TK_UNDERSCORE => Syntax_Identifier
-    TokenKind::TK_POST_LABEL => Syntax_Label
+    TK_POST_LABEL | TK_POST_LABEL_TRANSPARENT => Syntax_Label
     TokenKind::TK_DOT_LIDENT
     | TokenKind::TK_DOT_UIDENT
     | TokenKind::TK_DOT_INT => Syntax_Accessor
@@ -217,6 +217,7 @@ fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
     | TokenKind::TK_TEST
     | TokenKind::TK_LOOP
     | TokenKind::TK_GUARD
+    | TK_GUARD_EXCLAMATION
     | TokenKind::TK_DEFER
     | TokenKind::TK_FOR
     | TokenKind::TK_IN
