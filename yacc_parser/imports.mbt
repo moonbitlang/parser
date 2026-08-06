@@ -67,6 +67,7 @@ using @syntax {
   type LexScanCase,
   type LexScanCasePattern,
   type UsingKind,
+  type ImportPackage,
   type LexCase,
   type WhereClause,
 }
