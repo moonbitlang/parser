@@ -722,6 +722,50 @@ fn State::parse_top_func(
 }
 
 ///|
+fn State::parse_alias_target(
+  self : Self,
+  lower : Bool,
+  context : String,
+) -> @syntax.AliasTarget {
+  let target_loc = self.peek_location()
+  let target = if lower {
+    self.expect_lident(context~)
+  } else {
+    self.expect_uident(context~)
+  }
+  match self.peek_token() {
+    AS => {
+      self.skip()
+      let binder_loc = self.peek_location()
+      let binder_name = if lower {
+        self.expect_lident(context~)
+      } else {
+        self.expect_uident(context~)
+      }
+      {
+        binder: { name: binder_name, loc: binder_loc },
+        target: Some({ name: target, loc: target_loc }),
+      }
+    }
+    _ => { binder: { name: target, loc: target_loc }, target: None }
+  }
+}
+
+///|
+fn State::parse_import_package(self : Self) -> @syntax.ImportPackage {
+  let path_loc = self.peek_location()
+  let path = self.expect_string()
+  match self.peek_token() {
+    PACKAGE_NAME(alias_name) => {
+      let alias_loc = self.peek_location()
+      self.skip()
+      { path, alias_: Some(alias_name), loc: path_loc.merge(alias_loc) }
+    }
+    _ => { path, alias_: None, loc: path_loc }
+  }
+}
+
+///|
 fn State::parse_top(self : Self) -> @syntax.Impl {
   if self.mode is Panic(loc~, ..) {
     return TopExpr(
@@ -741,6 +785,49 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
   }
   let vis = self.parse_visibility()
   match self.peek_token() {
+    IMPORT => {
+      if !attrs.is_empty() || is_declare || !(vis is Default) {
+        self.report_error({
+          loc: self.loc_start_with(spos),
+          msg: "Import declarations cannot have attributes, visibility, or `declare` modifiers.",
+        })
+      }
+      self.skip()
+      if self.peek_token() is STRING(_) {
+        let old_loc = self.peek_location()
+        self.skip()
+        self.report_error({
+          loc: old_loc,
+          msg: "Deprecated import syntax; use `import { \"path\" }`.",
+        })
+        TopImport(
+          kind=None,
+          packages=@list.empty(),
+          loc=self.loc_start_with(spos),
+          doc=DocString::empty(),
+        )
+      } else {
+        let packages = self.surround_series(
+            left=TK_LBRACE,
+            right=TK_RBRACE,
+            delim=TK_COMMA,
+            State::parse_import_package,
+          )
+          |> @list.List
+        let kind = if self.peek_token() is FOR {
+          self.skip()
+          Some(self.expect_string())
+        } else {
+          None
+        }
+        TopImport(
+          kind~,
+          packages~,
+          loc=self.loc_start_with(spos),
+          doc=DocString::empty(),
+        )
+      }
+    }
     SUBERROR => {
       self.expect_token(TK_SUBERROR)
       let tycon_loc = self.peek_location()
@@ -1232,35 +1319,6 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           { name: "", loc }
         }
       }
-      fn parse_alias_target(
-        state : State,
-        lower : Bool,
-        context : String,
-      ) -> @syntax.AliasTarget {
-        let target_loc = state.peek_location()
-        let target = if lower {
-          state.expect_lident(context~)
-        } else {
-          state.expect_uident(context~)
-        }
-        match self.peek_token() {
-          AS => {
-            state.skip()
-            let binder_loc = state.peek_location()
-            let binder_name = if lower {
-              state.expect_lident(context~)
-            } else {
-              state.expect_uident(context~)
-            }
-            {
-              binder: { name: binder_name, loc: binder_loc },
-              target: Some({ name: target, loc: target_loc }),
-            }
-          }
-          _ => { binder: { name: target, loc: target_loc }, target: None }
-        }
-      }
-
       let names = self.surround_series(
           left=TK_LBRACE,
           right=TK_RBRACE,
@@ -1268,21 +1326,21 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           fn(state) {
             match state.peek_token() {
               LIDENT(_) | EXTEND => {
-                let target = parse_alias_target(state, true, "value name")
+                let target = state.parse_alias_target(true, "value name")
                 (target, @syntax.UsingKind::Value)
               }
               UIDENT(_) => {
-                let target = parse_alias_target(state, false, "constant name")
+                let target = state.parse_alias_target(false, "constant name")
                 (target, Value)
               }
               TYPE => {
                 state.skip()
-                let target = parse_alias_target(state, false, "type name")
+                let target = state.parse_alias_target(false, "type name")
                 (target, Type)
               }
               TRAIT => {
                 state.skip()
-                let target = parse_alias_target(state, false, "trait name")
+                let target = state.parse_alias_target(false, "trait name")
                 (target, Trait)
               }
               other => {
@@ -1301,6 +1359,35 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         |> @list.List()
       let loc = self.loc_start_with(spos)
       TopUsing(pkg~, names~, vis~, attrs~, loc~, doc=DocString::empty())
+    }
+    EXTEND => {
+      if is_declare {
+        self.report_error({
+          loc: self.loc_start_with(spos),
+          msg: "An `extend` declaration cannot use the `declare` modifier.",
+        })
+      }
+      self.skip()
+      let type_name = self.parse_type_name()
+      self.expect_token(TK_WITH)
+      let trait_ = self.parse_type_name()
+      self.expect_token(TK_COLONCOLON)
+      let names = self.surround_series(
+          left=TK_LBRACE,
+          right=TK_RBRACE,
+          delim=TK_COMMA,
+          fn(state) { state.parse_alias_target(true, "method name") },
+        )
+        |> @list.List
+      TopExtend(
+        type_name~,
+        trait_~,
+        names~,
+        vis~,
+        attrs~,
+        loc=self.loc_start_with(spos),
+        doc=DocString::empty(),
+      )
     }
     other => {
       let other_loc = self.peek_location()
@@ -1552,6 +1639,16 @@ fn State::parse_pattern(self : Self) -> @syntax.Pattern {
 }
 
 ///|
+fn State::parse_with_pattern_binding(
+  self : Self,
+) -> (@syntax.Binder, @syntax.Expr) {
+  let binder = self.parse_binder(context="variable name")
+  self.expect_token(TK_EQUAL)
+  let expr = self.parse_prefix_expr(parsed=None)
+  (binder, expr)
+}
+
+///|
 fn State::parse_or_pattern(self : Self) -> @syntax.Pattern {
   if self.mode is Panic(loc~, ..) {
     return Any(loc~)
@@ -1768,6 +1865,21 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       ) -> (Location) -> @syntax.Pattern {
         let first = state.parse_pattern()
         match state.peek_token() {
+          WITH => {
+            state.skip()
+            let (bindings, _) = state.series_with_follow(
+              delim=TK_COMMA,
+              follow_set=[TK_RPAREN],
+              State::parse_with_pattern_binding,
+            )
+            if bindings is [] {
+              state.report_error({
+                loc: state.peek_location(),
+                msg: "Expected a pattern binding after `with`.",
+              })
+            }
+            fn(loc) { With(pat=first, bindings=List(bindings), loc~) }
+          }
           COMMA => {
             state.skip()
             let (pats, _) = state.series_with_follow(
@@ -1791,7 +1903,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             let other_loc = state.peek_location()
             state.report_unexpected(
               other,
-              [TK_COMMA, TK_COLON, TK_RPAREN],
+              [TK_WITH, TK_COMMA, TK_COLON, TK_RPAREN],
               other_loc,
             )
             state.panic() |> ignore
@@ -2364,7 +2476,10 @@ fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  let spos = self.peek_spos()
+  let spos = match label {
+    Some(label) => label.loc.start
+    None => self.peek_spos()
+  }
   self.skip() // skip FOR token
   fn handle_error(expected : Array[TokenKind]) -> @syntax.Expr {
     let loc = self.peek_location()
@@ -2397,7 +2512,14 @@ fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
   }
 
   match self.peek_token() {
-    SEMI(_) | LBRACE => self.parse_for_loop(spos~, label~)
+    SEMI(_) => self.parse_for_loop(spos~, label~)
+    LBRACE => {
+      self.report_error({
+        loc: self.peek_location(),
+        msg: "Deprecated `for { ... }` syntax is not supported; use `for ;; { ... }`.",
+      })
+      self.parse_for_loop(spos~, label~)
+    }
     UNDERSCORE | IN =>
       // The case of `in` is actually syntax-incorrect,
       // but it is very likely a `for .. in` loop,
@@ -2548,7 +2670,10 @@ fn State::parse_while_loop(
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  let spos = self.peek_spos()
+  let spos = match label {
+    Some(label) => label.loc.start
+    None => self.peek_spos()
+  }
   self.expect_token(TK_WHILE)
   let loop_cond = self.with_follow(
     follow_set=[TK_LBRACE],
@@ -2631,19 +2756,6 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
     else_loc~,
     loc~,
   )
-}
-
-///|
-fn State::parse_try_question(self : Self) -> @syntax.Expr {
-  if self.mode is Panic(loc~, ..) {
-    return Hole(loc~, kind=Synthesized)
-  }
-  let spos = self.peek_spos()
-  let try_loc = self.peek_location()
-  self.skip()
-  let body = self.parse_pipe_expr(parsed=None)
-  let loc = self.loc_start_with(spos)
-  TryOperator(body~, kind=Question, try_loc~, loc~)
 }
 
 ///|
@@ -2779,6 +2891,18 @@ fn State::parse_opt_with_strategy(self : State) -> @syntax.Label? {
 }
 
 ///|
+fn State::parse_opt_lexscan_strategy(self : State) -> @syntax.Label? {
+  match self.peek_token() {
+    WITH => {
+      self.skip()
+      let label = self.parse_label(context="strategy of `lexscan`")
+      Some(label)
+    }
+    _ => None
+  }
+}
+
+///|
 fn State::parse_lexmatch_expr(self : State) -> @syntax.Expr {
   let spos = self.peek_spos()
   self.expect_token(TK_LEXMATCH)
@@ -2832,8 +2956,10 @@ fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
 fn State::parse_lexscan_expr(self : State) -> @syntax.Expr {
   let spos = self.peek_spos()
   self.expect_token(TK_LEXSCAN)
-  let expr = self.with_follow(follow_set=[TK_LBRACE], fn(state) {
-    state.try_parse_condition_expr()
+  let (expr, strategy) = self.with_follow(follow_set=[TK_LBRACE], fn(state) {
+    let expr = state.try_parse_condition_expr()
+    let strategy = state.parse_opt_lexscan_strategy()
+    (expr, strategy)
   })
   let match_loc = @basic.Location::{ start: spos, end: self.peek_epos() }
   fn parse_body(state : State) -> @list.List[@syntax.LexScanCase] {
@@ -2848,7 +2974,7 @@ fn State::parse_lexscan_expr(self : State) -> @syntax.Expr {
 
   let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
   let loc = self.loc_start_with(spos)
-  LexScan(expr~, match_loc~, cases~, loc~)
+  LexScan(strategy~, expr~, match_loc~, cases~, loc~)
 }
 
 ///|
@@ -2857,18 +2983,61 @@ fn State::parse_lexscan_case(self : State) -> @syntax.LexScanCase {
     ELLIPSIS => {
       let loc = self.peek_location()
       self.skip()
-      { pat: Wildcard(loc~), guard_: None, body: Hole(loc~, kind=Todo) }
+      {
+        pat: Wildcard(loc~),
+        bindings: @list.empty(),
+        guard_: None,
+        body: Hole(loc~, kind=Todo),
+      }
     }
     _ => {
-      let pat = self.with_syncs(
+      let (pat, bindings) = self.with_syncs(
         [TK_FAT_ARROW, TK_IF],
-        State::parse_lexscan_case_pattern,
+        State::parse_lexscan_case_pattern_with_bindings,
       )
       let guard_ = self.parse_lex_case_guard()
       let body = self.parse_fat_arrow_action()
-      { pat, guard_, body }
+      { pat, bindings, guard_, body }
     }
   }
+}
+
+///|
+fn State::parse_lexscan_case_pattern_with_bindings(
+  self : State,
+) -> (@syntax.LexScanCasePattern, @list.List[(@syntax.Label, @syntax.Binder?)]) {
+  match self.peek_token() {
+    LPAREN if self.lexscan_paren_starts_bindings() => {
+      let (pat, bindings) = self.parse_regex_match_rhs()
+      (Pattern(pat), bindings)
+    }
+    _ => (self.parse_lexscan_case_pattern(), @list.empty())
+  }
+}
+
+///|
+fn State::lexscan_paren_starts_bindings(self : State) -> Bool {
+  let mut depth = 0
+  let mut nth = 0
+  while true {
+    match self.peek_token(nth~) {
+      LPAREN => {
+        depth += 1
+        nth += 1
+      }
+      RPAREN => {
+        if depth <= 1 {
+          return false
+        }
+        depth -= 1
+        nth += 1
+      }
+      COMMA if depth == 1 => return true
+      EOF => return false
+      _ => nth += 1
+    }
+  }
+  false
 }
 
 ///|
@@ -2904,7 +3073,6 @@ fn State::parse_lex_case_guard(self : State) -> @syntax.Expr? {
         | WHILE
         | FOR
         | TRY
-        | TRY_QUESTION
         | TRY_EXCLAMATION
         | LET
         | LETREC
@@ -3292,6 +3460,7 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
   }
   match self.peek_token() {
     POST_LABEL(label_name) => {
+      let spos = self.peek_spos()
       let label : @syntax.Label = {
         name: label_name,
         loc: self.peek_location(),
@@ -3299,11 +3468,36 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
       self.skip()
       self.expect_token(TK_COLON)
       match self.peek_token() {
+        LBRACE => {
+          let body = self.parse_block_expr()
+          LabelledBlock(label~, body~, loc=self.loc_start_with(spos))
+        }
         FOR => self.parse_for_expr(label=Some(label))
         WHILE => self.parse_while_loop(label=Some(label))
         other => {
           let loc = self.peek_location()
-          self.report_unexpected(other, [TK_FOR, TK_WHILE], loc)
+          self.report_unexpected(other, [TK_LBRACE, TK_FOR, TK_WHILE], loc)
+          self.panic() |> ignore
+          Hole(loc~, kind=Synthesized)
+        }
+      }
+    }
+    POST_LABEL_TRANSPARENT(label_name) => {
+      let spos = self.peek_spos()
+      let label : @syntax.Label = {
+        name: "\{label_name}~",
+        loc: self.peek_location(),
+      }
+      self.skip()
+      self.expect_token(TK_COLON)
+      match self.peek_token() {
+        LBRACE => {
+          let body = self.parse_block_expr()
+          LabelledBlock(label~, body~, loc=self.loc_start_with(spos))
+        }
+        other => {
+          let loc = self.peek_location()
+          self.report_unexpected(other, [TK_LBRACE], loc)
           self.panic() |> ignore
           Hole(loc~, kind=Synthesized)
         }
@@ -3314,7 +3508,6 @@ fn State::parse_expr(self : Self) -> @syntax.Expr {
     FOR => self.parse_for_expr(label=None)
     WHILE => self.parse_while_loop(label=None)
     TRY => self.parse_try_expr()
-    TRY_QUESTION => self.parse_try_question()
     TRY_EXCLAMATION => self.parse_try_exclamation()
     IF => self.parse_if_expr()
     MATCH => self.parse_match_expr()
@@ -3693,14 +3886,26 @@ fn State::parse_regex_match_binding(
       let label : @syntax.Label = { name, loc: self.peek_location() }
       self.skip()
       self.expect_token(TK_EQUAL)
-      let binder = self.parse_binder(context="regex match binding")
+      let binder = if self.peek_token() is UNDERSCORE {
+        let loc = self.peek_location()
+        self.skip()
+        @syntax.Binder::{ name: "_", loc }
+      } else {
+        self.parse_binder(context="regex match binding")
+      }
       (label, Some(binder))
     }
     EXTEND if self.peek_token(nth=1) is EQUAL => {
       let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
       self.skip()
       self.expect_token(TK_EQUAL)
-      let binder = self.parse_binder(context="regex match binding")
+      let binder = if self.peek_token() is UNDERSCORE {
+        let loc = self.peek_location()
+        self.skip()
+        @syntax.Binder::{ name: "_", loc }
+      } else {
+        self.parse_binder(context="regex match binding")
+      }
       (label, Some(binder))
     }
     POST_LABEL(name) => {
@@ -3749,7 +3954,17 @@ fn State::parse_regex_atom_pattern(self : Self) -> @syntax.RegexPattern {
 ///|
 fn State::parse_regex_sequence_pattern(self : Self) -> @syntax.RegexPattern {
   let spos = self.peek_spos()
-  let mut pat = self.parse_regex_atom_pattern()
+  let pat = self.parse_regex_atom_pattern()
+  self.parse_regex_sequence_pattern_tail(spos, pat)
+}
+
+///|
+fn State::parse_regex_sequence_pattern_tail(
+  self : Self,
+  spos : Position,
+  first : @syntax.RegexPattern,
+) -> @syntax.RegexPattern {
+  let mut pat = first
   while self.peek_token() is PLUS {
     self.skip()
     let rhs = self.parse_regex_atom_pattern()
@@ -3760,9 +3975,12 @@ fn State::parse_regex_sequence_pattern(self : Self) -> @syntax.RegexPattern {
 }
 
 ///|
-fn State::parse_regex_or_pattern(self : Self) -> @syntax.RegexPattern {
-  let spos = self.peek_spos()
-  let mut pat = self.parse_regex_sequence_pattern()
+fn State::parse_regex_or_pattern_tail(
+  self : Self,
+  spos : Position,
+  first : @syntax.RegexPattern,
+) -> @syntax.RegexPattern {
+  let mut pat = first
   while self.peek_token() is BAR {
     self.skip()
     let rhs = self.parse_regex_sequence_pattern()
@@ -3775,14 +3993,15 @@ fn State::parse_regex_or_pattern(self : Self) -> @syntax.RegexPattern {
 ///|
 fn State::parse_regex_as_pattern(self : Self) -> @syntax.RegexPattern {
   let spos = self.peek_spos()
-  let pat = self.parse_regex_or_pattern()
+  let pat = self.parse_regex_atom_pattern()
   if self.peek_token() is AS {
     self.skip()
     let binder = self.parse_binder(context="regex alias")
     let loc = self.loc_start_with(spos)
     Alias(pat~, binder~, loc~)
   } else {
-    pat
+    let pat = self.parse_regex_sequence_pattern_tail(spos, pat)
+    self.parse_regex_or_pattern_tail(spos, pat)
   }
 }
 
@@ -4131,11 +4350,9 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
     // label~
     POST_LABEL(label_name) if !(self.peek_token(nth=1) is COLON) => {
       let spos = self.peek_spos()
+      let label_loc = self.peek_location()
       self.skip()
-      let label : @syntax.Label = {
-        name: label_name,
-        loc: self.peek_location(),
-      }
+      let label : @syntax.Label = { name: label_name, loc: label_loc }
       // error recovery for `label~=value`
       if self.peek_token() is EQUAL {
         self.skip()
@@ -4821,6 +5038,12 @@ fn State::parse_list_comprehension(
       State::parse_loop_binder_with_infix_value,
     )
     let binders = @list.List(binders)
+    if binders is Empty && self.peek_token() is (IF | FAT_ARROW) {
+      self.report_error({
+        loc: self.loc_start_with(for_spos),
+        msg: "A list-comprehension `for` header cannot be empty; use `for ;;` for an infinite header.",
+      })
+    }
     let (condition, continue_block) = if self.peek_token() is SEMI(_) {
       self.skip()
       let condition = match self.peek_token() {
@@ -5184,8 +5407,10 @@ fn State::parse_stmt(self : Self) -> Statement {
       let func = { ..func, loc, }
       StmtFunc(binder~, func~, loc~)
     }
-    GUARD => {
+    GUARD | GUARD_EXCLAMATION => {
       let spos = self.peek_spos()
+      let guard_loc = self.peek_location()
+      let exclamation = self.peek_token() is GUARD_EXCLAMATION
       self.skip()
       let cond = self.with_syncs([TK_ELSE], State::try_parse_condition_expr)
       let otherwise = if self.peek_token() is ELSE {
@@ -5195,7 +5420,7 @@ fn State::parse_stmt(self : Self) -> Statement {
         None
       }
       let loc = self.loc_start_with(spos)
-      StmtGuard(cond~, otherwise~, loc~)
+      StmtGuard(cond~, otherwise~, exclamation~, guard_loc~, loc~)
     }
     DEFER => {
       let spos = self.peek_spos()
@@ -5252,7 +5477,6 @@ fn State::handle_unexpected_expr_or_statement(
     FOR => ("for expression", self.parse_for_expr(label=None))
     TRY => ("try expression", self.parse_try_expr())
     TRY_EXCLAMATION => ("`try!` expression", self.parse_try_exclamation())
-    TRY_QUESTION => ("`try?` expression", self.parse_try_question())
     LET | LETREC => ("let statement", handle_stmt(self))
     GUARD => ("guard statement", handle_stmt(self))
     DEFER => ("defer statement", handle_stmt(self))
@@ -5276,7 +5500,6 @@ fn State::try_parse_condition_expr(self : Self) -> @syntax.Expr {
     | WHILE
     | FOR
     | TRY
-    | TRY_QUESTION
     | TRY_EXCLAMATION
     | LET
     | LETREC
@@ -5372,11 +5595,18 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
     BREAK => {
       let spos = self.peek_spos()
       self.expect_token(TK_BREAK)
-      let label = if self.peek_token() is POST_LABEL(label_name) {
-        self.skip()
-        Some(@syntax.Label::{ name: label_name, loc: self.peek_location() })
-      } else {
-        None
+      let label = match self.peek_token() {
+        POST_LABEL(label_name) => {
+          let loc = self.peek_location()
+          self.skip()
+          Some(@syntax.Label::{ name: label_name, loc })
+        }
+        POST_LABEL_TRANSPARENT(label_name) => {
+          let loc = self.peek_location()
+          self.skip()
+          Some({ name: "\{label_name}~", loc })
+        }
+        _ => None
       }
       let arg = self.optional(first_expr, State::parse_expr)
       Break(arg~, loc=self.loc_start_with(spos), label~)
@@ -5391,8 +5621,14 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
         // ```
         //  Here the label l~ is for the following for expression instead of the continue statement.
         POST_LABEL(label_name) if !(self.peek_token(nth=1) is COLON) => {
+          let loc = self.peek_location()
           self.skip()
-          Some({ name: label_name, loc: self.peek_location() })
+          Some({ name: label_name, loc })
+        }
+        POST_LABEL_TRANSPARENT(label_name) if !(self.peek_token(nth=1) is COLON) => {
+          let loc = self.peek_location()
+          self.skip()
+          Some({ name: "\{label_name}~", loc })
         }
         _ => None
       }
