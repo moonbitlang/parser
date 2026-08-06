@@ -11,6 +11,7 @@ import {
   "moonbitlang/core/list",
   "moonbitlang/moon_config",
   "moonbitlang/core/json",
+  "moonbitlang/core/immut/vector",
 }
 
 import {

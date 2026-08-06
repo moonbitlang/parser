@@ -15,6 +15,32 @@ import {
 // Errors
 
 // Types and methods
+pub struct CheckpointMapper {
+  tokens : Array[(@tokens.Token, @basic.Position, @basic.Position)]
+  start : Int
+  limit : Int
+  slots : Array[CommentSlot]
+  dangling : Array[@tokens.Comment]
+  mut mode : CheckpointMode
+  mut cursor : Int
+  mut current_slot : Int?
+  mut pretty_slot : Int
+  mut failed : Bool
+}
+pub fn CheckpointMapper::begin_pretty(Self) -> Unit
+pub fn CheckpointMapper::checkpoint(Self, @basic.Position) -> Unit
+pub fn CheckpointMapper::eof(Self) -> Unit
+pub fn CheckpointMapper::is_complete(Self) -> Bool
+pub fn CheckpointMapper::new(Array[(@tokens.Token, @basic.Position, @basic.Position)], start? : Int, len? : Int) -> Self
+pub fn CheckpointMapper::placeholder(Self, ignore_blank? : Bool) -> @prettyprinter.Document
+pub fn CheckpointMapper::placeholder_or_space(Self, ignore_blank? : Bool) -> @prettyprinter.Document
+pub fn CheckpointMapper::token(Self, @tokens.TokenKind) -> Unit
+
+pub enum CheckpointMode {
+  Attach
+  Pretty
+}
+
 pub(all) struct Comment {
   start : @basic.Position
   end : @basic.Position
@@ -30,6 +56,11 @@ pub(all) enum CommentKind {
   Line(String)
 } derive(@debug.Debug)
 pub impl @prettyprinter.Pretty for CommentKind
+
+pub struct CommentSlot {
+  comments : Array[@tokens.Comment]
+  ignore_blank : Bool
+}
 
 pub(all) enum Key {
   Token(@basic.Location)

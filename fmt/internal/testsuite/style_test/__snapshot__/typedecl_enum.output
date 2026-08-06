@@ -55,4 +55,3 @@ enum ConstrLineWrap {
     mut label~ : Ty4_______________,
   )
 }
-

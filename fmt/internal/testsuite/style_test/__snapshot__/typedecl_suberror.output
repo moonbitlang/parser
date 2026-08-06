@@ -22,4 +22,3 @@ suberror PayloadLineWrap2 {
     mut label~ : Ty8______,
   )
 }
-

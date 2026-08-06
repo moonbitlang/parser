@@ -16,10 +16,16 @@ using @pp {
 type Doc = Document
 
 ///|
-using @basic {type Location}
+using @basic {type Location, type Position}
+
+///|
+using @tokens {type TokenKind}
 
 ///|
 using @list {type List}
+
+///|
+using @vector {type Vector}
 
 ///|
 using @syntax {trait IterVisitor, trait MapVisitor}

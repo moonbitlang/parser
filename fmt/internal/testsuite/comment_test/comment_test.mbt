@@ -198,3 +198,26 @@ test "expr_sequence_array3" (t : @test.Test) {
 test "top_func" (t : @test.Test) {
   t.run()
 }
+
+///|
+test "checkpoint formatter is safe and idempotent on comment fixtures" {
+  for
+    name in [
+      "expr_sequence", "expr_sequence_array", "expr_sequence_array2", "expr_sequence_array3",
+      "top_func",
+    ] {
+    let source = read_fixture(
+      "./fmt/internal/testsuite/comment_test/__snapshot__/\{name}.input",
+    )
+    let first = @format.format(source)
+    let second = @format.format(first)
+    if first != second {
+      fail(
+        "comment fixture `\{name}` is not idempotent:\n===== first =====\n\{first}===== second =====\n\{second}",
+      )
+    }
+    if source != first && !@format.semantically_equivalent(source, first) {
+      fail("comment fixture `\{name}` changed AST or comments")
+    }
+  }
+}

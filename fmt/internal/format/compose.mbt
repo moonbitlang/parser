@@ -32,6 +32,15 @@ fn RawExprDoc::to_doc(self : Self) -> Doc {
 }
 
 ///|
+fn RawExprDoc::with_comments(self : Self, before : Doc, after : Doc) -> Self {
+  match self {
+    Normal(doc) => Normal(before + doc + after)
+    BlockLike(doc) => BlockLike(before + doc + after)
+    Collapsible(head, body) => Collapsible(before + head, body + after)
+  }
+}
+
+///|
 fn Fmt::compose(fmt : Self, expr : @syntax.Expr, ctx : Context) -> Doc {
   let kind = expr.classify()
   let doc = fmt.expr(expr).to_doc()
@@ -345,7 +354,8 @@ fn Fmt::compose_arrow_rhs(fmt : Self, expr : @syntax.Expr) -> Doc {
         BlockLike(doc) => composed_style(doc)
       }
     NeedBraces => braces(raw.to_doc())
-    NeedParens | GroupedParens => panic()
+    NeedParens => parens(raw.to_doc())
+    GroupedParens => group(parens(raw.to_doc()))
   }
   space + rhs
 }

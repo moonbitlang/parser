@@ -23,7 +23,10 @@ fn precedence_of_operator(op : String) -> Int {
     "+" | "-" => 500
     "*" | "/" | "%" => 600
     "..<" | "..=" => 900
-    _ => panic()
+    // Unknown/custom operators are formatted conservatively between additive
+    // and range precedence. The candidate parse/AST guard remains the final
+    // authority if a future lexer assigns different binding power.
+    _ => 700
   }
 }
 
@@ -43,7 +46,7 @@ fn assoc_of_operator(op : String) -> Assoc {
     "+" | "-" => Left
     "*" | "/" | "%" => Left
     "..=" | "..<" => Left
-    _ => panic()
+    _ => Left
   }
 }
 
@@ -106,7 +109,7 @@ priv enum ExprKind {
 ///|
 fn @syntax.Expr::classify(expr : Self) -> ExprKind {
   match expr {
-    Group(_) => panic()
+    Group(expr~, ..) => expr.classify()
     Apply(_)
     | Array(_)
     | ArraySpread(_)
@@ -137,7 +140,7 @@ fn @syntax.Expr::classify(expr : Self) -> ExprKind {
     Infix(op~, ..) =>
       match op.name {
         Ident(name~) => InfixKind(name)
-        _ => panic()
+        Dot(pkg~, id~) => InfixKind("@" + pkg + "." + id)
       }
     Pipe(_) | RevPipe(_) => PipeKind
     TemplateWriting(is_conditional~, ..) =>
@@ -147,6 +150,7 @@ fn @syntax.Expr::classify(expr : Self) -> ExprKind {
     Match(_)
     | LexMatch(_)
     | LexScan(_)
+    | LabelledBlock(_)
     | If(_)
     | For(_)
     | ForEach(_)

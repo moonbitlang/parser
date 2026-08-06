@@ -8,3 +8,38 @@ fn f(writer : Writer, x : Int, xs : Array[Int]) -> Unit {
   ignore(ys)
 }
 
+///|
+import {
+  "pkg/core",
+  "pkg/other" @other,
+} for "native"
+
+///|
+#deprecated
+pub extend @pkg.Type with @traits.Trait::{ f, old as renamed }
+
+///|
+fn modern(value : Int?, lexbuf : @lexbuf.Lexbuf) -> Int {
+  let normal = done~: {
+    if false {
+      continue done~
+    }
+    break done~ 1
+  }
+  let transparent = inserted~~: {
+    if false {
+      continue inserted~~
+    }
+    break inserted~~ 2
+  }
+  guard! value is Some(inner)
+  guard !false
+  let matched = match value {
+    Some(n) | (None with n = 0) => n
+  }
+  let scanned = lexscan lexbuf with longest {
+    ((re"if" | re"else") as keyword, before=prefix, after~) => prefix
+    @tokens.Token => 0
+  }
+  normal + transparent + inner + matched + scanned
+}

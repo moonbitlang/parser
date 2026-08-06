@@ -2,7 +2,18 @@
 fn attach_docstrings(
   docstrings : Array[List[(Location, @tokens.Comment)]],
   toplevels : @syntax.Impls,
+  tokens : @tokens.Triples,
 ) -> Unit {
+  fn mark_consumed(loc : Location, comment : @tokens.Comment) -> Unit {
+    comment.consumed_by_docstring = true
+    for triple in tokens {
+      match triple {
+        (COMMENT(token_comment), start, end) if start == loc.start &&
+          end == loc.end => token_comment.consumed_by_docstring = true
+        _ => ()
+      }
+    }
+  }
 
   // skip the docstring before the posisiton, return the last skipped docstring.
   fn skip_docstrings_before(
@@ -20,10 +31,22 @@ fn attach_docstrings(
     comments : List[(@basic.Location, @tokens.Comment)],
   ) -> @syntax.DocString {
     {
-      content: comments.map(p => {
-        match p.1.content {
-          [.. "///|", .. remain] | [.. "///", .. remain] => remain.to_owned()
-          _ => panic()
+      content: comments.filter_map(p => {
+        mark_consumed(p.0, p.1)
+        let content = p.1.content
+        if content.trim_end() == "///|" {
+          // A bare `///|` is a formatting delimiter, not part of the
+          // documentation payload. Keeping it out of the AST makes adding the
+          // canonical block marker semantics-preserving.
+          None
+        } else {
+          match content {
+            [.. "///|", .. remain] | [.. "///", .. remain] =>
+              Some(remain.to_owned())
+            // The lexer normally routes only doc comments here. Preserve an
+            // unexpected payload instead of crashing the formatter.
+            _ => Some(content)
+          }
         }
       }),
       loc: {
@@ -69,6 +92,8 @@ fn attach_docstrings(
       TopTest(..) as test_ => test_.doc = doc
       TopTrait(decl) => decl.doc = doc
       TopUsing(..) as decl => decl.doc = doc
+      TopExtend(..) as decl => decl.doc = doc
+      TopImport(..) as decl => decl.doc = doc
       TopView(..) as view => view.doc = doc
       TopImpl(..) as imp => imp.doc = doc
     }

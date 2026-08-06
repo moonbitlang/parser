@@ -49,7 +49,6 @@ test {
       #|  println(str)
       #|}
       #|
-      #|
     ),
   )
 }

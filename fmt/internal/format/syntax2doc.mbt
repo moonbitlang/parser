@@ -19,14 +19,134 @@
 ///|
 priv struct Fmt {
   mapper : @comment.Mapper?
+  checkpoint_mapper : @comment.CheckpointMapper?
   block_line : Bool
+}
+
+///|
+fn Fmt::checkpoint(fmt : Self, pos : Position) -> Doc {
+  if fmt.checkpoint_mapper is Some(mapper) {
+    mapper.checkpoint(pos)
+  }
+  empty
+}
+
+///|
+fn Fmt::token(fmt : Self, kind : TokenKind) -> Doc {
+  if fmt.checkpoint_mapper is Some(mapper) {
+    mapper.token(kind)
+  }
+  empty
+}
+
+///|
+fn Fmt::comma_placeholder(fmt : Self) -> Doc {
+  let token = fmt.token(TK_COMMA)
+  let slot = fmt.placeholder(ignore_blank=true)
+  token + slot
+}
+
+///|
+fn Fmt::semi_placeholder(fmt : Self) -> Doc {
+  let token = fmt.token(TK_SEMI)
+  let slot = fmt.placeholder(ignore_blank=true)
+  token + slot
+}
+
+///|
+fn Fmt::commented_parens(fmt : Self, content : () -> Doc) -> Doc {
+  let left = fmt.token(TK_LPAREN)
+  let before = fmt.placeholder()
+  let inner = content()
+  let after = fmt.placeholder()
+  let right = fmt.token(TK_RPAREN)
+  left +
+  char('(') +
+  nest(before + softline + inner + after) +
+  softline +
+  char(')') +
+  right
+}
+
+///|
+fn Fmt::commented_braces(
+  fmt : Self,
+  content : () -> Doc,
+  force_newline? : Bool = false,
+) -> Doc {
+  let left = fmt.token(TK_LBRACE)
+  let before = fmt.placeholder()
+  let inner = content()
+  let after = fmt.placeholder()
+  let right = fmt.token(TK_RBRACE)
+  let l = if force_newline { hardline } else { line }
+  left + char('{') + nest(before + l + inner + after) + l + char('}') + right
+}
+
+///|
+fn Fmt::commented_brackets(fmt : Self, content : () -> Doc) -> Doc {
+  let left = fmt.token(TK_LBRACKET)
+  let before = fmt.placeholder()
+  let inner = content()
+  let after = fmt.placeholder()
+  let right = fmt.token(TK_RBRACKET)
+  left +
+  char('[') +
+  nest(before + softline + inner + after) +
+  softline +
+  char(']') +
+  right
+}
+
+///|
+fn Fmt::commented_iter_brackets(
+  fmt : Self,
+  content : () -> Doc,
+  is_empty? : Bool = false,
+) -> Doc {
+  let left = fmt.token(TK_LBRACKET_BAR)
+  let before = fmt.placeholder()
+  let inner = content()
+  let after = fmt.placeholder()
+  let right = fmt.token(TK_BAR_RBRACKET)
+  let break_ = if is_empty { softline } else { line }
+  left +
+  text("[|") +
+  nest(before + break_ + inner + after) +
+  break_ +
+  text("|]") +
+  right
+}
+
+///|
+fn Fmt::placeholder(fmt : Self, ignore_blank? : Bool = false) -> Doc {
+  match fmt.checkpoint_mapper {
+    Some(mapper) => mapper.placeholder(ignore_blank~)
+    None => empty
+  }
+}
+
+///|
+fn Fmt::comment_or_space(fmt : Self, ignore_blank? : Bool = false) -> Doc {
+  match fmt.checkpoint_mapper {
+    Some(mapper) => mapper.placeholder_or_space(ignore_blank~)
+    None => space
+  }
+}
+
+///|
+fn Fmt::eof(fmt : Self) -> Doc {
+  if fmt.checkpoint_mapper is Some(mapper) {
+    mapper.eof()
+  }
+  empty
 }
 
 ///|
 fn fmt_comment(comment : @comment.Comment) -> Doc {
   match comment.kind {
     Blank => @pp.mandatory_line
-    Block(_) => panic()
+    Block(content) => @pp.mandatory_space + text(content) + @pp.mandatory_line
     Line(l) => @pp.mandatory_space + text(l) + @pp.mandatory_line
   }
 }
@@ -109,13 +229,25 @@ fn Fmt::get_table(fmt : Self, node : Location) -> @comment.NodeTable {
 }
 
 ///|
-fn Fmt::new(mapper? : @comment.Mapper, block_line? : Bool = true) -> Self {
-  { mapper, block_line }
+fn Fmt::new(
+  mapper? : @comment.Mapper,
+  checkpoint_mapper? : @comment.CheckpointMapper,
+  block_line? : Bool = true,
+) -> Self {
+  { mapper, checkpoint_mapper, block_line }
 }
 
 ///|
 fn Fmt::impls(fmt : Self, impls : List[@syntax.Impl]) -> Doc {
-  concat_map(impls, x => fmt.impl_(x) + hardline + hardline) //TODO: handle comments between impls
+  concat_map(impls, item => {
+    let loc = item.loc()
+    ignore(fmt.checkpoint(loc.start))
+    let before = fmt.placeholder()
+    let doc = fmt.impl_(item)
+    let after = fmt.placeholder()
+    ignore(fmt.checkpoint(loc.end))
+    before + doc + after + hardline + hardline
+  })
 }
 
 ///|
@@ -274,9 +406,9 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
               space + module_name + space + func_name
             }
             Embedded(language~, code~) => {
-              guard language is None else {
-                abort("language must be None in impl stub.")
-              }
+              // The strict source parser only produces `None` here. Ignore a
+              // synthetic language tag defensively instead of aborting.
+              ignore(language)
               let code = fmt.embedded_code(code)
               space + code
             }
@@ -323,8 +455,12 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
           )
       }
       let methods = space +
-        braces(
-          series1(methods.map(x => fmt.trait_method(x)), empty),
+        fmt.commented_braces(
+          fn() {
+            series(methods, empty, x => fmt.trait_method(x), separator=fn() {
+              fmt.semi_placeholder()
+            })
+          },
           force_newline=true,
         )
       doc + attrs + declare_ + vis + trait_ + name + supers + methods
@@ -513,8 +649,77 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         kind_prefix + fmt.alias_target(target)
       }
 
-      let targets = space + group(braces(series1(names.map(using_item), comma)))
+      let targets = space +
+        group(
+          fmt.commented_braces(fn() {
+            series(names, comma, using_item, separator=fn() {
+              fmt.comma_placeholder()
+            })
+          }),
+        )
       doc + attrs + vis + using_ + pkg + targets
+    }
+    TopExtend(type_name~, trait_~, names~, vis~, attrs~, doc~, loc=_) => {
+      let doc = fmt.docstring(doc, is_toplevel=true)
+      let attrs = fmt.attributes(attrs)
+      let vis = fmt.visibility(vis)
+      let names = group(
+        fmt.commented_braces(fn() {
+          series(names, comma, name => fmt.alias_target(name), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
+      doc +
+      attrs +
+      group(
+        vis +
+        text("extend") +
+        space +
+        fmt.type_name(type_name) +
+        space +
+        text("with") +
+        space +
+        fmt.type_name(trait_) +
+        text("::") +
+        names,
+      )
+    }
+    TopImport(kind~, packages~, doc~, loc=_) => {
+      fn import_package(pkg_item : @syntax.ImportPackage) -> Doc {
+        let { path, alias_, loc } = pkg_item
+        ignore(fmt.checkpoint(loc.start))
+        let before = fmt.placeholder()
+        ignore(fmt.token(TK_STRING))
+        let alias_ = if alias_ is Some(name) {
+          space + char('@') + text(name)
+        } else {
+          empty
+        }
+        let result = double_quoted(text(path)) + alias_
+        let after = fmt.placeholder()
+        ignore(fmt.checkpoint(loc.end))
+        before + result + after
+      }
+
+      let doc = fmt.docstring(doc, is_toplevel=true)
+      ignore(fmt.token(TK_IMPORT))
+      let packages = group(
+        fmt.commented_braces(
+          fn() {
+            series(packages, comma, import_package, separator=fn() {
+              fmt.comma_placeholder()
+            })
+          },
+          force_newline=true,
+        ),
+      )
+      let kind = if kind is Some(kind) {
+        space + text("for") + space + double_quoted(text(kind))
+      } else {
+        empty
+      }
+      doc + text("import") + space + packages + kind
     }
   }
 }
@@ -531,13 +736,19 @@ fn Fmt::embedded_code(fmt : Fmt, code : @syntax.EmbeddedCode) -> Doc {
 
 ///|
 fn Fmt::alias_target(fmt : Fmt, target : @syntax.AliasTarget) -> Doc {
+  let loc = target.loc()
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
   let { binder, target } = target
   let binder = fmt.binder(binder)
-  if target is Some(target) {
+  let result = if target is Some(target) {
     fmt.label(target) + space + text("as") + space + binder
   } else {
     binder
   }
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before + result + after
 }
 
 ///|
@@ -637,10 +848,12 @@ fn Fmt::trait_method(fmt : Fmt, meth : @syntax.TraitMethodDecl) -> Doc {
     params,
     return_type,
     error_type,
-    loc: _,
+    loc,
     has_default,
     attrs: _,
   } = meth
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
   let async_ = if is_async is Some(_) { text("async") + space } else { empty }
   let name = text(name.name)
   let params = fmt.parameters(
@@ -663,7 +876,12 @@ fn Fmt::trait_method(fmt : Fmt, meth : @syntax.TraitMethodDecl) -> Doc {
   } else {
     empty
   }
-  group(async_ + name + params + arrow + return_type + error_type + has_default)
+  let doc = group(
+    async_ + name + params + arrow + return_type + error_type + has_default,
+  )
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before + doc + after
 }
 
 ///|
@@ -698,24 +916,9 @@ fn Fmt::docstring(
   is_toplevel~ : Bool,
 ) -> Doc {
   if fmt.block_line && is_toplevel {
-    match doc.content {
-      Empty => text("///|") + hardline
-      More(first_line, tail~) =>
-        if first_line.trim(char_set=" \t\n") == "" {
-          let first_line = text("///|") + hardline
-          let remain_lines = concat_map(tail, x => {
-            text("///") + text(x) + hardline
-          })
-          first_line + remain_lines
-        } else {
-          let new_first_line = text("///|") + hardline
-          let old_first_line = text("///") + text(first_line) + hardline
-          let remain_lines = concat_map(tail, x => {
-            text("///") + text(x) + hardline
-          })
-          new_first_line + old_first_line + remain_lines
-        }
-    }
+    text("///|") +
+    hardline +
+    concat_map(doc.content, x => text("///") + text(x) + hardline)
   } else {
     concat_map(doc.content, x => text("///") + text(x) + hardline)
   }
@@ -739,7 +942,13 @@ fn Fmt::type_decl_binders(
   match binders {
     Empty => empty
     More(_) =>
-      group(brackets(series1(binders.map(x => fmt.type_decl_binder(x)), comma)))
+      group(
+        fmt.commented_brackets(fn() {
+          series(binders, comma, x => fmt.type_decl_binder(x), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
   }
 }
 
@@ -758,12 +967,20 @@ fn Fmt::constr_param(fmt : Self, constr_param : @syntax.ConstrParam) -> Doc {
 
 ///|
 fn Fmt::constr_decl(fmt : Self, constr_decl : @syntax.ConstrDecl) -> Doc {
-  let { name, args, tag, loc: _, attrs, doc } = constr_decl
+  let { name, args, tag, loc, attrs, doc } = constr_decl
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
   let doc = fmt.docstring(doc, is_toplevel=false)
   let attrs = fmt.attributes(attrs)
   let name = text(name.name)
   let args = if args is Some(xs) {
-    group(parens(series1(xs.map(x => fmt.constr_param(x)), comma)))
+    group(
+      fmt.commented_parens(fn() {
+        series(xs, comma, x => fmt.constr_param(x), separator=fn() {
+          fmt.comma_placeholder()
+        })
+      }),
+    )
   } else {
     empty
   }
@@ -771,7 +988,9 @@ fn Fmt::constr_decl(fmt : Self, constr_decl : @syntax.ConstrDecl) -> Doc {
     None => empty
     Some((tag, _)) => space + char('=') + space + text(tag)
   }
-  doc + attrs + name + args + tag
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before + doc + attrs + name + args + tag + after
 }
 
 ///|
@@ -779,13 +998,22 @@ fn Fmt::deriving_directive(
   fmt : Self,
   deriving : @syntax.DerivingDirective,
 ) -> Doc {
-  let { type_name, args, loc: _ } = deriving
+  let { type_name, args, loc } = deriving
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
   let type_name = fmt.type_name(type_name)
   let args = match args {
     Empty => empty
-    More(_) => parens(series1(args.map(x => fmt.argument(x)), comma))
+    More(_) =>
+      fmt.commented_parens(fn() {
+        series(args, comma, x => fmt.argument(x), separator=fn() {
+          fmt.comma_placeholder()
+        })
+      })
   }
-  type_name + args
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before + type_name + args + after
 }
 
 ///|
@@ -796,9 +1024,14 @@ fn Fmt::deriving_directives(
   match deriving {
     Empty => empty
     More(_) => {
+      ignore(fmt.token(TK_DERIVE))
       let derive_ = text("derive")
       let xs = group(
-        parens(series1(deriving.map(x => fmt.deriving_directive(x)), comma)),
+        fmt.commented_parens(fn() {
+          series(deriving, comma, x => fmt.deriving_directive(x), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
       )
       space + derive_ + xs
     }
@@ -807,14 +1040,28 @@ fn Fmt::deriving_directives(
 
 ///|
 fn Fmt::field_decl(fmt : Self, field_decl : @syntax.FieldDecl) -> Doc {
-  let { name, ty, mut_, vis, attrs, doc, loc: _ } = field_decl
+  let { name, ty, mut_, vis, attrs, doc, loc } = field_decl
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
   let doc = fmt.docstring(doc, is_toplevel=false)
   let attrs = fmt.attributes(attrs)
   let vis = fmt.visibility(vis)
   let mut_ = if mut_ { text("mut") + space } else { empty }
   let name = text(name.label)
   let ty = fmt.ty(ty)
-  doc + attrs + vis + mut_ + name + space + char(':') + space + ty
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before +
+  doc +
+  attrs +
+  vis +
+  mut_ +
+  name +
+  space +
+  char(':') +
+  space +
+  ty +
+  after
 }
 
 ///|
@@ -848,34 +1095,32 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       )
       let tycon = space + text(tycon)
       let params = fmt.type_decl_binders(params)
-      let lbrace = space + char('{')
-      let constrs = nest(
-        hardline + series1(constr_decls.map(x => fmt.constr_decl(x)), semi),
-      )
-      let rbrace = hardline + char('}')
+      let constrs = space +
+        fmt.commented_braces(
+          fn() {
+            series(constr_decls, semi, x => fmt.constr_decl(x), separator=fn() {
+              fmt.semi_placeholder()
+            })
+          },
+          force_newline=true,
+        )
       let deriving = fmt.deriving_directives(deriving)
-      doc +
-      attrs +
-      declare_ +
-      vis +
-      enum_ +
-      tycon +
-      params +
-      lbrace +
-      constrs +
-      rbrace +
-      deriving
+      doc + attrs + declare_ + vis + enum_ + tycon + params + constrs + deriving
     }
     Record(fields~) => {
       let struct_ = text("struct")
       let tycon = space + text(tycon)
       let params = fmt.type_decl_binders(params)
-      let lbrace = space + char('{')
       let semi = switch(char(';'), empty)
-      let fields_doc = nest(
-        hardline + series1(fields.map(x => fmt.field_decl(x)), semi),
-      )
-      let rbrace = hardline + char('}')
+      let fields_doc = space +
+        fmt.commented_braces(
+          fn() {
+            series(fields, semi, x => fmt.field_decl(x), separator=fn() {
+              fmt.semi_placeholder()
+            })
+          },
+          force_newline=true,
+        )
       let deriving = fmt.deriving_directives(deriving)
       doc +
       attrs +
@@ -884,9 +1129,7 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       struct_ +
       tycon +
       params +
-      lbrace +
       fields_doc +
-      rbrace +
       deriving
     }
     Error(exception_decl) => {
@@ -897,8 +1140,12 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
         NoPayload => empty
         EnumPayload(constr_decls) =>
           space +
-          braces(
-            series1(constr_decls.map(x => fmt.constr_decl(x)), semi),
+          fmt.commented_braces(
+            fn() {
+              series(constr_decls, semi, x => fmt.constr_decl(x), separator=fn() {
+                fmt.semi_placeholder()
+              })
+            },
             force_newline=true,
           )
       }
@@ -909,8 +1156,12 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       let target = space + fmt.type_name(target)
       let plus_equal = space + text("+=")
       let constrs = space +
-        braces(
-          series1(constructors.map(x => fmt.constr_decl(x)), semi),
+        fmt.commented_braces(
+          fn() {
+            series(constructors, semi, x => fmt.constr_decl(x), separator=fn() {
+              fmt.semi_placeholder()
+            })
+          },
           force_newline=true,
         )
       doc + attrs + declare_ + vis + enum_ + target + plus_equal + constrs
@@ -923,16 +1174,22 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
     TupleStruct(tys) => {
       let type_ = text("struct")
       let tycon = space + text(tycon)
-      let tys = group(parens(series1(tys.map(x => fmt.ty(x)), comma)))
+      let tys = group(
+        fmt.commented_parens(fn() {
+          series(tys, comma, x => fmt.ty(x), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
       let params = fmt.type_decl_binders(params)
       doc + attrs + declare_ + vis + type_ + tycon + params + tys
     }
     Alias(ty) => {
-      let type_ = text("typealias")
-      let ty = space + fmt.ty(ty)
-      let as_ = space + text("as")
+      let type_ = text("type")
       let tycon = space + text(tycon)
-      doc + attrs + declare_ + vis + type_ + ty + as_ + tycon
+      let params = fmt.type_decl_binders(params)
+      let ty = space + equal + space + fmt.ty(ty)
+      doc + attrs + declare_ + vis + type_ + tycon + params + ty
     }
   }
 }
@@ -1034,87 +1291,76 @@ fn Fmt::argument(fmt : Fmt, arg : @syntax.Argument) -> Doc {
 
 ///|
 fn Fmt::arguments(fmt : Fmt, args : List[@syntax.Argument]) -> Doc {
-  // TODO: optimize list <-> array conversion and readability
-  let arr = args.to_array()
-  // Bad case:
-  //
-  // Before applying the trailing block rules, we should ensure the remaining space 
-  // is enough for leading arguments and the head of the trailing function.
-  //
-  // ```
-  // f(arg1, arg2, ..., argN, [ elems ])
-  //   ^^^^^^^^^^^^^^^^^^^^^^
-  // f(arg1, arg2, ..., argN, (x,y) => e)
-  //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // f(arg1, arg2, ..., argN, fn(x,y){ e })
-  //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~~~~ is this part fits in current remaining space?
-  // ```
-  // 
-  // Consider this bad result:
-  // ```
-  // long_function(argument1, argument2, argument3, argument4, argument5, fn(
-  //   param1, 
-  //   param2,
-  // ) {
-  //   expr
-  // })
-  // ```
-  match arr.pop() {
-    Some({ value: trailing_arg_value, kind: Positional } as trailing_arg) => {
-      let leading_args = arr.map(x => fmt.argument(x))
-      fn trailing_block_style() {
-        let leading_doc = series1(
-          List(leading_args),
-          comma,
-          trailing=AlwaysPresent,
-        )
-        let trailing_doc = fmt.argument(trailing_arg)
-        let sep = if leading_args.is_empty() { empty } else { space }
-        group(char('(') + (group(leading_doc) + sep + trailing_doc) + char(')'))
+  let all_args = args.to_array()
+  let trailing_block = match all_args.last() {
+    Some(
+      {
+        value: Record(_)
+        | Array(_)
+        | Map(_)
+        | RecordUpdate(_)
+        | Function(_),
+        kind: Positional,
+      }
+    ) => true
+    _ => false
+  }
+  group(
+    fmt.commented_parens(fn() {
+      // Argument documents and separator placeholders are constructed exactly
+      // once, in source order. Layout alternatives below only rearrange these
+      // already-built documents.
+      let docs : Array[Doc] = []
+      let separators : Array[Doc] = []
+      for arg in all_args {
+        docs.push(fmt.argument(arg))
+        separators.push(fmt.comma_placeholder())
       }
 
-      fn fallback_style() {
-        leading_args.push(fmt.argument(trailing_arg))
-        group(parens(series1(List(leading_args), comma)))
+      fn fallback_style() -> Doc {
+        let mut result = empty
+        for i, doc in docs {
+          result += doc
+          if i + 1 < docs.length() {
+            result += comma + separators[i] + line
+          } else {
+            result += switch(empty, comma) + separators[i]
+          }
+        }
+        result
       }
 
-      fn switch_trailing_block(leading_req, total_req) {
-        ignore(total_req) //TODO: use total_req to decide the layout
+      if trailing_block && docs.length() > 0 {
+        let last = docs.length() - 1
+        let mut leading = empty
+        for i = 0; i < last; i = i + 1 {
+          leading += docs[i] + comma + separators[i]
+          if i + 1 < last {
+            leading += line
+          }
+        }
+        let sep = if last == 0 { empty } else { space }
+        let trailing = docs[last] + switch(empty, comma) + separators[last]
+        let trailing_style = group(group(leading) + sep + trailing)
+        let fallback = fallback_style()
+        let leading_req = docs[0:last].fold(init=Requirement::Space(0), fn(
+          acc,
+          doc,
+        ) {
+          acc + doc.requirement() + Space(2)
+        })
         dynamic(fn(ctx) {
           if ctx.current_remain() >= leading_req {
-            trailing_block_style()
+            trailing_style
           } else {
-            fallback_style()
+            fallback
           }
         })
+      } else {
+        fallback_style()
       }
-
-      let leading_args_req = leading_args.fold(init=Requirement::Space(0), fn(
-        acc,
-        x,
-      ) {
-        acc + x.requirement() + Space(2)
-      })
-      match trailing_arg_value {
-        Record(_) | Array(_) => {
-          guard! fmt.expr(trailing_arg_value) is BlockLike(doc)
-          let leading_req = leading_args_req
-          let total_req = leading_args_req + doc.requirement()
-          switch_trailing_block(leading_req, total_req)
-        }
-        Function(_) => {
-          guard! fmt.expr(trailing_arg_value) is Collapsible(head, body)
-          let leading_req = leading_args_req + head.requirement()
-          let total_req = leading_args_req +
-            head.requirement() +
-            body.requirement()
-          switch_trailing_block(leading_req, total_req)
-        }
-        _ => fallback_style()
-      }
-    }
-    _ => group(parens(series1(args.map(x => fmt.argument(x)), comma)))
-  }
+    }),
+  )
 }
 
 ///|
@@ -1140,44 +1386,75 @@ fn Fmt::binder(fmt : Self, binder : @syntax.Binder) -> Doc {
 
 ///|
 fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
-  match pat {
-    SpecialConstr(_) => abort("unsupported special constr")
+  let loc = pat.loc()
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
+  fn constr_pat_arg2doc(arg : @syntax.ConstrPatArg) -> Doc {
+    let { pat, kind } = arg
+    let pat_doc = fmt.pattern(pat)
+    match kind {
+      Positional => pat_doc
+      Labelled(label) =>
+        if is_pun_eligible_for_pat(label, pat) {
+          fmt.label(label) + tilde
+        } else {
+          fmt.label(label) + equal + pat_doc
+        }
+      LabelledOption(label~, question_loc=_) =>
+        if is_pun_eligible_for_pat(label, pat) {
+          fmt.label(label) + char('?')
+        } else {
+          fmt.label(label) + text("?=") + pat_doc
+        }
+      LabelledPun(label) => fmt.label(label) + tilde
+      LabelledOptionPun(label~, question_loc=_) => fmt.label(label) + char('?')
+    }
+  }
+
+  fn constr_pattern2doc(
+    head : Doc,
+    args : List[@syntax.ConstrPatArg]?,
+    is_open : Bool,
+  ) -> Doc {
+    let payload = if args is Some(args) {
+      group(
+        fmt.commented_parens(fn() {
+          let args_doc = series(
+            args,
+            comma,
+            constr_pat_arg2doc,
+            trailing=if is_open { AlwaysPresent } else { PresentInNormalStyle },
+            separator=fn() { fmt.comma_placeholder() },
+          )
+          if is_open {
+            let dotdot = fmt.token(TK_DOTDOT)
+            args_doc + line + dotdot + text("..")
+          } else {
+            args_doc
+          }
+        }),
+      )
+    } else {
+      empty
+    }
+    group(head + payload)
+  }
+
+  let doc = match pat {
+    SpecialConstr(binder~, args~, loc=_) =>
+      constr_pattern2doc(fmt.binder(binder), Some(args), false)
     Var(binder) => fmt.binder(binder)
     Any(loc=_) => char('_')
     Tuple(pats~, loc=_) =>
-      group(parens(series1(pats.map(x => fmt.pattern(x)), comma)))
-    Constr(constr~, args=payload, is_open~, loc=_) => {
-      fn constr_pat_arg2doc(arg : @syntax.ConstrPatArg) -> Doc {
-        let { pat, kind } = arg
-        let pat_doc = fmt.pattern(pat)
-        match kind {
-          Positional => pat_doc
-          Labelled(label) =>
-            if is_pun_eligible_for_pat(label, pat) {
-              fmt.label(label) + equal + pat_doc
-            } else {
-              fmt.label(label) + tilde
-            }
-          LabelledPun(label) => fmt.label(label) + tilde
-          LabelledOption(_) | LabelledOptionPun(_) => panic()
-        }
-      }
-
-      let constr = fmt.constr(constr)
-      let payload = if payload is Some(args) {
-        let args = args.map(constr_pat_arg2doc)
-        let args = if is_open {
-          // Replace deprecated @list.of usage with from_array
-          args.concat(List([text("..")]))
-        } else {
-          args
-        }
-        group(parens(series(args, comma, x => x)))
-      } else {
-        empty
-      }
-      group(constr + payload)
-    }
+      group(
+        fmt.commented_parens(fn() {
+          series(pats, comma, x => fmt.pattern(x), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
+    Constr(constr~, args~, is_open~, loc=_) =>
+      constr_pattern2doc(fmt.constr(constr), args, is_open)
     Constant(c~, loc=_) => fmt.constant(c)
     Array(pats~, loc=_) => {
       fn array_pattern2doc(pat : @syntax.ArrayPattern) -> Doc {
@@ -1196,18 +1473,42 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
 
       match pats {
         Closed(elems) =>
-          group(brackets(series(elems, comma, array_pattern2doc)))
-        Open(left, right, remain) => {
-          let elems = left.to_array().map(array_pattern2doc)
-          match remain {
-            NoBinder => ()
-            Binder(b) | BinderAs(b) => elems.push(text("..") + fmt.binder(b))
-            Underscore => elems.push(text(".._"))
-          }
-          elems.push_iter(right.map(array_pattern2doc).iter())
-          let elems = @list.List(elems)
-          group(brackets(series(elems, comma, x => x)))
-        }
+          group(
+            fmt.commented_brackets(fn() {
+              series(elems, comma, array_pattern2doc, separator=fn() {
+                fmt.comma_placeholder()
+              })
+            }),
+          )
+        Open(left, right, remain) =>
+          group(
+            fmt.commented_brackets(fn() {
+              let left = series(
+                left,
+                comma,
+                array_pattern2doc,
+                trailing=AlwaysPresent,
+                separator=fn() { fmt.comma_placeholder() },
+              )
+              let dotdot = fmt.token(TK_DOTDOT)
+              let remain = match remain {
+                NoBinder => dotdot + text("..")
+                Binder(b) | BinderAs(b) => dotdot + text("..") + fmt.binder(b)
+                Underscore => dotdot + text(".._")
+              }
+              let right = match right {
+                Empty => empty
+                More(_) =>
+                  comma +
+                  fmt.comma_placeholder() +
+                  line +
+                  series(right, comma, array_pattern2doc, separator=fn() {
+                    fmt.comma_placeholder()
+                  })
+              }
+              left + remain + right
+            }),
+          )
       }
     }
     Range(lhs~, rhs~, kind~, loc=_) => {
@@ -1231,12 +1532,27 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
         }
       }
 
-      let elems = fields.to_array().map(field_pat2doc)
-      if is_closed {
-        elems.push(text(".."))
-      }
-      let elems = @list.List(elems)
-      group(braces(series(elems, comma, x => x)))
+      group(
+        fmt.commented_braces(fn() {
+          let fields_doc = series(
+            fields,
+            comma,
+            field_pat2doc,
+            trailing=if is_closed {
+              PresentInNormalStyle
+            } else {
+              AlwaysPresent
+            },
+            separator=fn() { fmt.comma_placeholder() },
+          )
+          if is_closed {
+            fields_doc
+          } else {
+            let dotdot = fmt.token(TK_DOTDOT)
+            fields_doc + line + dotdot + text("..")
+          }
+        }),
+      )
     }
     Map(elems~, is_closed~, loc=_) => {
       fn map_pat2doc(elem : @syntax.MapPatElem) -> Doc {
@@ -1247,24 +1563,62 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
         key + absent + colon + pat
       }
 
-      let elems = elems.to_array().map(map_pat2doc)
-      if is_closed {
-        elems.push(text(".."))
-      }
-      let elems = @list.List(elems)
-      group(braces(series(elems, comma, x => x)))
+      group(
+        fmt.commented_braces(fn() {
+          let elems_doc = series(
+            elems,
+            comma,
+            map_pat2doc,
+            trailing=if is_closed {
+              PresentInNormalStyle
+            } else {
+              AlwaysPresent
+            },
+            separator=fn() { fmt.comma_placeholder() },
+          )
+          if is_closed {
+            elems_doc
+          } else {
+            let dotdot = fmt.token(TK_DOTDOT)
+            elems_doc + line + dotdot + text("..")
+          }
+        }),
+      )
     }
-    Constraint(pat~, ty~, loc=_) => {
-      let pat = fmt.pattern(pat)
-      let colon = space + char(':')
-      let ty = space + fmt.ty(ty)
-      group(parens(pat + colon + ty))
-    }
+    Constraint(pat~, ty~, loc=_) =>
+      group(
+        fmt.commented_parens(fn() {
+          let pat = fmt.pattern(pat)
+          let colon_token = fmt.token(TK_COLON)
+          let after_colon = fmt.placeholder(ignore_blank=true)
+          let ty = fmt.ty(ty)
+          pat + space + colon_token + char(':') + after_colon + space + ty
+        }),
+      )
     Alias(pat~, alias_~, loc=_) => {
       let pat = fmt.pattern(pat)
       let as_ = space + text("as")
       let alias_ = space + fmt.binder(alias_)
       group(pat + as_ + alias_)
+    }
+    With(pat~, bindings~, loc=_) => {
+      fn binding2doc(binding : (@syntax.Binder, @syntax.Expr)) -> Doc {
+        let (binder, expr) = binding
+        group(
+          fmt.binder(binder) + space + equal + space + fmt.compose(expr, Prefix),
+        )
+      }
+
+      group(
+        fmt.commented_parens(fn() {
+          let pat = fmt.pattern(pat)
+          let with_token = fmt.token(TK_WITH)
+          let bindings = series(bindings, comma, binding2doc, separator=fn() {
+            fmt.comma_placeholder()
+          })
+          pat + space + with_token + text("with") + space + bindings
+        }),
+      )
     }
     Or(pat1~, pat2~, loc=_) => {
       let sep = line + char('|') + space
@@ -1280,6 +1634,9 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       lparen + pats + rparen
     }
   }
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before + doc + after
 }
 
 ///|
@@ -1302,25 +1659,48 @@ fn Fmt::error_type(fmt : Self, err : @syntax.ErrorType) -> Doc {
 
 ///|
 fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
-  match ty {
+  let loc = ty.loc()
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
+  let doc = match ty {
     Any(loc=_) => char('_')
     Name(constr_id={ id: constr, loc: _ }, tys~, loc=_) => {
       // If the user writes `Option[Int]`, keep it as is.
       let constr = longident(constr)
       let tys = match tys {
         Empty => empty
-        More(_) => group(brackets(series1(tys.map(x => fmt.ty(x)), comma)))
+        More(_) =>
+          group(
+            fmt.commented_brackets(fn() {
+              series(tys, comma, x => fmt.ty(x), separator=fn() {
+                fmt.comma_placeholder()
+              })
+            }),
+          )
       }
       constr + tys
     }
-    Tuple(tys~, loc=_) => group(parens(series1(tys.map(x => fmt.ty(x)), comma)))
+    Tuple(tys~, loc=_) =>
+      group(
+        fmt.commented_parens(fn() {
+          series(tys, comma, x => fmt.ty(x), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
     Arrow(args~, res~, err~, is_async~, loc=_) => {
       let async_ = if is_async is Some(_) {
         text("async") + space
       } else {
         empty
       }
-      let args = group(parens(series1(args.map(x => fmt.ty(x)), comma)))
+      let args = group(
+        fmt.commented_parens(fn() {
+          series(args, comma, x => fmt.ty(x), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
       let arrow = space + text("->")
       let res = space + fmt.ty(res)
       let err = fmt.error_type(err)
@@ -1338,6 +1718,9 @@ fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
       char('&') + constr
     }
   }
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before + doc + after
 }
 
 ///|
@@ -1403,10 +1786,10 @@ fn Fmt::parameter(
     }
     DiscardPositional(ty~, loc=_) =>
       if kind is TraitMethod {
-        guard ty is Some(ty) else {
-          abort("Trait method parameter must have type annotation.")
+        match ty {
+          Some(ty) => fmt.ty(ty)
+          None => char('_')
         }
-        fmt.ty(ty)
       } else {
         let binder = char('_')
         let ty = if ty is Some(ty) {
@@ -1456,25 +1839,51 @@ fn Fmt::parameters(
   ignore(rparen) //TODO: use rparen comment
   let sep = comma
   let trailing = switch(empty, sep)
-  let mut acc = empty
-  for i, param in parameters {
-    acc += fmt.parameter(param, param_tables[i], kind~)
-    if i == parameters.length() - 1 {
-      let trailing_comment = fmt.after_comment(Some(Node(param.loc())))
-      let around_comments = fmt.wrap_comment(commas[i], empty)
-      acc += trailing + trailing_comment + around_comments
-    } else {
-      let sep = fmt.wrap_comment(commas[i], sep)
-      acc += sep + line
+  fn build_parameters() -> Doc {
+    let mut acc = empty
+    for i, param in parameters {
+      let loc = param.loc()
+      ignore(fmt.checkpoint(loc.start))
+      acc += fmt.placeholder()
+      acc += fmt.parameter(param, param_tables[i], kind~)
+      acc += fmt.placeholder()
+      ignore(fmt.checkpoint(loc.end))
+      if i == parameters.length() - 1 {
+        let trailing_comment = fmt.after_comment(Some(Node(param.loc())))
+        let around_comments = fmt.wrap_comment(commas[i], empty)
+        acc += trailing +
+          fmt.comma_placeholder() +
+          trailing_comment +
+          around_comments
+      } else {
+        let sep = fmt.wrap_comment(commas[i], sep)
+        acc += sep + fmt.comma_placeholder() + line
+      }
     }
+    acc
   }
   let l = softline
   match kind {
-    ArrowFunction if parameters is More(_, tail=Empty) => acc
+    ArrowFunction if parameters is More(_, tail=Empty) => {
+      // Parentheses are optional for a single arrow parameter. Consume them
+      // when present in the source, while keeping the established compact
+      // output style.
+      let left = fmt.token(TK_LPAREN)
+      let before = fmt.placeholder()
+      let params = build_parameters()
+      let after = fmt.placeholder()
+      let right = fmt.token(TK_RPAREN)
+      left + before + params + after + right
+    }
     _ => {
+      let left = fmt.token(TK_LPAREN)
+      let before = fmt.placeholder()
+      let acc = build_parameters()
+      let after = fmt.placeholder()
+      let right = fmt.token(TK_RPAREN)
       let lp = fmt.wrap_comment(lparen, char('('))
       let rp = fmt.wrap_comment(lparen, char(')'))
-      lp + nest(l + acc) + l + rp
+      left + lp + nest(l + before + acc + after) + l + rp + right
     }
   }
 }
@@ -1544,12 +1953,17 @@ fn Fmt::func(
 
 ///|
 fn Fmt::field(fmt : Self, field : @syntax.FieldDef) -> Doc {
-  let { label, expr, is_pun, loc: _ } = field
-  if is_pun || is_pun_eligible_for_expr(label, expr) {
+  let { label, expr, is_pun, loc } = field
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
+  let doc = if is_pun || is_pun_eligible_for_expr(label, expr) {
     fmt.label(label)
   } else {
     fmt.label(label) + colon + space + fmt.compose(expr, Expr)
   }
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before + doc + after
 }
 
 ///|
@@ -1614,23 +2028,60 @@ fn Fmt::lex_pattern(fmt : Self, pat : @syntax.LexPattern) -> Doc {
 
 ///|
 fn Fmt::regex_pattern(fmt : Self, pat : @syntax.RegexPattern) -> Doc {
+  fn need_parens_in_alias(pat : @syntax.RegexPattern) -> Bool {
+    match pat {
+      Literal(_) | Reference(_) => false
+      Sequence(_) | Alternation(_) | Alias(_) => true
+    }
+  }
+
+  fn need_parens_in_sequence(pat : @syntax.RegexPattern) -> Bool {
+    match pat {
+      Literal(_) | Reference(_) | Sequence(_) => false
+      Alternation(_) | Alias(_) => true
+    }
+  }
+
+  fn need_parens_in_alternation(pat : @syntax.RegexPattern) -> Bool {
+    match pat {
+      Alias(_) => true
+      Literal(_) | Reference(_) | Sequence(_) | Alternation(_) => false
+    }
+  }
+
+  fn inner(
+    pat : @syntax.RegexPattern,
+    need_parens : (@syntax.RegexPattern) -> Bool,
+  ) -> Doc {
+    let doc = fmt.regex_pattern(pat)
+    if need_parens(pat) {
+      group(parens(doc))
+    } else {
+      doc
+    }
+  }
+
   match pat {
     Literal(lit~, loc=_) => text("re") + double_quoted(text(lit))
     Reference(lid~, loc=_) => longident(lid)
     Sequence(pat1~, pat2~, loc=_) =>
-      fmt.regex_pattern(pat1) +
+      inner(pat1, need_parens_in_sequence) +
       space +
       char('+') +
       space +
-      fmt.regex_pattern(pat2)
+      inner(pat2, need_parens_in_sequence)
     Alternation(pat1~, pat2~, loc=_) =>
-      fmt.regex_pattern(pat1) +
+      inner(pat1, need_parens_in_alternation) +
       space +
       char('|') +
       space +
-      fmt.regex_pattern(pat2)
+      inner(pat2, need_parens_in_alternation)
     Alias(pat~, binder~, loc=_) =>
-      fmt.regex_pattern(pat) + space + text("as") + space + fmt.binder(binder)
+      inner(pat, need_parens_in_alias) +
+      space +
+      text("as") +
+      space +
+      fmt.binder(binder)
   }
 }
 
@@ -1647,13 +2098,22 @@ fn Fmt::lex_top_pattern(fmt : Self, pat : @syntax.LexTopPattern) -> Doc {
 fn Fmt::lex_top_patterns(fmt : Self, pats : List[@syntax.LexTopPattern]) -> Doc {
   match pats {
     More(x, tail=Empty) => fmt.lex_top_pattern(x)
-    _ => group(parens(series1(pats.map(p => fmt.lex_top_pattern(p)), comma)))
+    _ =>
+      group(
+        fmt.commented_parens(fn() {
+          series(pats, comma, p => fmt.lex_top_pattern(p), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
   }
 }
 
 ///|
 fn Fmt::lex_case(fmt : Self, case_ : @syntax.LexCase) -> Doc {
-  let { pat, pat_loc: _, guard_, body } = case_
+  let { pat, pat_loc, guard_, body } = case_
+  let before = fmt.placeholder()
+  ignore(fmt.checkpoint(pat_loc.start))
   let pattern = fmt.lex_top_patterns(pat)
   let guard_ = if guard_ is Some(expr) {
     space + text("if") + space + fmt.compose(expr, Infix(Other))
@@ -1661,7 +2121,10 @@ fn Fmt::lex_case(fmt : Self, case_ : @syntax.LexCase) -> Doc {
     empty
   }
   let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt)
-  group(group(pattern) + guard_ + body)
+  let doc = group(group(pattern) + guard_ + body)
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(case_.body.loc().end))
+  before + doc + after
 }
 
 ///|
@@ -1678,15 +2141,41 @@ fn Fmt::lex_scan_case_pattern(
 
 ///|
 fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
-  let { pat, guard_, body } = case_
-  let pattern = fmt.lex_scan_case_pattern(pat)
+  let { pat, bindings, guard_, body } = case_
+  let before = fmt.placeholder()
+  ignore(fmt.checkpoint(body.loc().start))
+  fn binding2doc(binding : (@syntax.Label, @syntax.Binder?)) -> Doc {
+    let (label, binder) = binding
+    if binder is Some(binder) {
+      fmt.label(label) + equal + fmt.binder(binder)
+    } else {
+      fmt.label(label) + tilde
+    }
+  }
+
+  let pattern = if bindings.is_empty() {
+    fmt.lex_scan_case_pattern(pat)
+  } else {
+    group(
+      fmt.commented_parens(fn() {
+        let pattern = fmt.lex_scan_case_pattern(pat)
+        let bindings = series(bindings, comma, binding2doc, separator=fn() {
+          fmt.comma_placeholder()
+        })
+        pattern + comma + fmt.comma_placeholder() + line + bindings
+      }),
+    )
+  }
   let guard_ = if guard_ is Some(expr) {
     space + text("if") + space + fmt.compose(expr, Infix(Other))
   } else {
     empty
   }
   let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt)
-  group(group(pattern) + guard_ + body)
+  let doc = group(group(pattern) + guard_ + body)
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(case_.body.loc().end))
+  before + doc + after
 }
 
 ///|
@@ -1701,6 +2190,8 @@ fn Fmt::lex_strategy(fmt : Self, strategy : @syntax.Label?) -> Doc {
 ///|
 fn Fmt::case(fmt : Self, case_ : @syntax.Case) -> Doc {
   let { pattern, guard_, body } = case_
+  let before = fmt.placeholder()
+  ignore(fmt.checkpoint(pattern.loc().start))
   let pattern = fmt.pattern(pattern)
   let guard_ = if guard_ is Some(expr) {
     space + text("if") + space + fmt.compose(expr, Infix(Other))
@@ -1708,7 +2199,10 @@ fn Fmt::case(fmt : Self, case_ : @syntax.Case) -> Doc {
     empty
   }
   let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt) //TODO: compose_rhs
-  group(group(pattern) + guard_ + body)
+  let doc = group(group(pattern) + guard_ + body)
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(case_.body.loc().end))
+  before + doc + after
 }
 
 ///|
@@ -1718,7 +2212,10 @@ fn Fmt::expr_block(
   force_newline? : Bool = true,
   grouped? : Bool = true,
 ) -> Doc {
-  let doc = braces(fmt.compose(expr, Stmt), force_newline~)
+  let doc = fmt.commented_braces(
+    fn() { fmt.compose(expr, Stmt) },
+    force_newline~,
+  )
   if grouped {
     group(doc)
   } else {
@@ -1730,11 +2227,21 @@ fn Fmt::expr_block(
 fn Fmt::where_clause(fmt : Self, where_clause : @syntax.WhereClause?) -> Doc {
   match where_clause {
     None => empty
-    Some({ fields, loc: _ }) =>
-      space +
-      text("where") +
-      space +
-      group(braces(series1(fields.map(x => fmt.field(x)), comma)))
+    Some({ fields, loc }) => {
+      ignore(fmt.checkpoint(loc.start))
+      let before = fmt.placeholder()
+      ignore(fmt.token(TK_WHERE))
+      let fields = group(
+        fmt.commented_braces(fn() {
+          series(fields, comma, x => fmt.field(x), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
+      let after = fmt.placeholder()
+      ignore(fmt.checkpoint(loc.end))
+      before + space + text("where") + space + fields + after
+    }
   }
 }
 
@@ -1818,7 +2325,12 @@ fn Fmt::case_block(
   cases : List[@syntax.Case],
   force_newline? : Bool = true,
 ) -> Doc {
-  group(braces(series1(cases.map(x => self.case(x)), empty), force_newline~))
+  group(
+    self.commented_braces(
+      fn() { series1(cases.map(x => self.case(x)), empty) },
+      force_newline~,
+    ),
+  )
 }
 
 ///|
@@ -1868,7 +2380,10 @@ fn Fmt::chained_dot_expr(fmt : Self, e : @syntax.Expr) -> RawExprDoc {
       expr => break acc.add(expr)
     }
   }
-  guard! xs is More(s, tail=chained_exprs)
+  let (s, chained_exprs) = match xs {
+    More(s, tail=chained_exprs) => (s, chained_exprs)
+    Empty => return Normal(empty)
+  }
   let lhs = fmt.expr_before_dot(s)
   let chained = separate_map(chained_exprs, softline, fn(expr) {
     match expr {
@@ -1879,7 +2394,7 @@ fn Fmt::chained_dot_expr(fmt : Self, e : @syntax.Expr) -> RawExprDoc {
         dot + method_name + args
       }
       Field(record=_, accessor~, loc=_) => fmt.accessor(accessor)
-      _ => panic() // unreachable
+      other => fmt.compose(other, Simple)
     }
   })
   let apps = if chained_exprs is More(_, tail=Empty) {
@@ -1922,7 +2437,10 @@ fn Fmt::chained_dot_expr(fmt : Self, e : @syntax.Expr) -> RawExprDoc {
 
 ///|
 fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
-  match expr {
+  let loc = expr.loc()
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
+  let raw = match expr {
     Apply(func~, args~, loc~) => {
       let func = match func {
         // (self.label)(args) 
@@ -1937,26 +2455,42 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Collapsible(before_comment + func, args + after_comment)
     }
     Infix(op~, lhs~, rhs~, loc=_) => {
+      let op_loc = op.loc
       let op_str = match op.name {
         Ident(name~) => name
-        _ => panic()
+        Dot(pkg~, id~) => "@" + pkg + "." + id
       }
-      let op = longident(op.name)
-      let layout = if op_str is ("..<" | "..=") {
-        let lhs = fmt.compose(lhs, Range)
-        let rhs = fmt.compose(rhs, Range)
-        group(lhs + op + rhs)
+      let op_doc = longident(op.name)
+      let lhs_context = if op_str is ("..<" | "..=") {
+        Range
       } else {
-        let lhs = fmt.compose(
-          lhs,
-          Infix(InfixOperand(op=op_str, pos=LeftOperand)),
-        )
-        let rhs = fmt.compose(
-          rhs,
-          Infix(InfixOperand(op=op_str, pos=RightOperand)),
-        )
+        Infix(InfixOperand(op=op_str, pos=LeftOperand))
+      }
+      let rhs_context = if op_str is ("..<" | "..=") {
+        Range
+      } else {
+        Infix(InfixOperand(op=op_str, pos=RightOperand))
+      }
+      let lhs = fmt.compose(lhs, lhs_context)
+      let is_range = op_str is ("..<" | "..=")
+      let before_op = if is_range {
+        fmt.placeholder(ignore_blank=true)
+      } else {
+        fmt.comment_or_space(ignore_blank=true)
+      }
+      ignore(fmt.checkpoint(op_loc.start))
+      ignore(fmt.checkpoint(op_loc.end))
+      let after_op = if is_range {
+        fmt.placeholder(ignore_blank=true)
+      } else {
+        fmt.comment_or_space(ignore_blank=true)
+      }
+      let rhs = fmt.compose(rhs, rhs_context)
+      let layout = if op_str is ("..<" | "..=") {
+        group(lhs + before_op + op_doc + after_op + rhs)
+      } else {
         // TODO: improve the style for long, nested infix expressions
-        lhs + space + op + space + rhs
+        lhs + before_op + op_doc + after_op + rhs
       }
       Normal(layout)
     }
@@ -1972,15 +2506,25 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     }
     Array(exprs~, is_iter~, loc~) => {
       let before_comment = fmt.before_comment(Some(Node(loc)))
-      let elems = series(exprs, comma, e => fmt.compose(e, Expr))
       let doc = if is_iter {
-        if exprs.is_empty() {
-          text("[||]")
-        } else {
-          group(text("[|") + space + elems + space + text("|]"))
-        }
+        group(
+          fmt.commented_iter_brackets(
+            fn() {
+              series(exprs, comma, e => fmt.compose(e, Expr), separator=fn() {
+                fmt.comma_placeholder()
+              })
+            },
+            is_empty=exprs.is_empty(),
+          ),
+        )
       } else {
-        group(brackets(elems))
+        group(
+          fmt.commented_brackets(fn() {
+            series(exprs, comma, e => fmt.compose(e, Expr), separator=fn() {
+              fmt.comma_placeholder()
+            })
+          }),
+        )
       }
       let after_comment = fmt.after_comment(Some(Node(loc)))
       BlockLike(before_comment + doc + after_comment)
@@ -1993,65 +2537,96 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         }
       }
 
-      let elems_doc = series(elems, comma, spreadable2doc)
       let doc = if is_iter {
-        if elems.is_empty() {
-          text("[||]")
-        } else {
-          group(text("[|") + space + elems_doc + space + text("|]"))
-        }
+        group(
+          fmt.commented_iter_brackets(
+            fn() {
+              series(elems, comma, spreadable2doc, separator=fn() {
+                fmt.comma_placeholder()
+              })
+            },
+            is_empty=elems.is_empty(),
+          ),
+        )
       } else {
-        group(brackets(elems_doc))
+        group(
+          fmt.commented_brackets(fn() {
+            series(elems, comma, spreadable2doc, separator=fn() {
+              fmt.comma_placeholder()
+            })
+          }),
+        )
       }
       Normal(doc)
     }
     ListComprehension(kind~, guard_~, body~, is_iter~, loc=_) => {
-      let kind = fmt.list_comprehension_kind(kind)
-      let guard_doc = if guard_ is Some(expr) {
-        space + text("if") + space + fmt.compose(expr, Infix(Other))
-      } else {
-        empty
-      }
-      let body = space + text("=>") + space + fmt.compose(body, Expr)
-      let inner = kind + guard_doc + body
       let doc = if is_iter {
-        text("[|") + space + inner + space + text("|]")
+        fmt.commented_iter_brackets(fn() {
+          let kind = fmt.list_comprehension_kind(kind)
+          let guard_doc = if guard_ is Some(expr) {
+            space + text("if") + space + fmt.compose(expr, Infix(Other))
+          } else {
+            empty
+          }
+          let body = space + text("=>") + space + fmt.compose(body, Expr)
+          kind + guard_doc + body
+        })
       } else {
-        brackets(inner)
+        fmt.commented_brackets(fn() {
+          let kind = fmt.list_comprehension_kind(kind)
+          let guard_doc = if guard_ is Some(expr) {
+            space + text("if") + space + fmt.compose(expr, Infix(Other))
+          } else {
+            empty
+          }
+          let body = space + text("=>") + space + fmt.compose(body, Expr)
+          kind + guard_doc + body
+        })
       }
       Normal(group(doc))
     }
     ArrayGet(array~, index~, loc=_) => {
       let array = fmt.compose(array, Simple)
-      let index = fmt.compose(index, Expr)
-      let doc = group(array + group(brackets(index)))
+      let index = group(
+        fmt.commented_brackets(fn() { fmt.compose(index, Expr) }),
+      )
+      let doc = group(array + index)
       Normal(doc)
     }
     ArrayGetSlice(array~, start_index~, end_index~, loc=_, index_loc=_) => {
       let array = fmt.compose(array, Simple)
-      let start_index = optional(start_index, empty, e => fmt.compose(e, Expr))
-      let end_index = optional(end_index, empty, e => fmt.compose(e, Expr))
-      let doc = group(array + group(brackets(start_index + colon + end_index)))
+      let index = group(
+        fmt.commented_brackets(fn() {
+          let start_index = optional(start_index, empty, e => {
+            fmt.compose(e, Expr)
+          })
+          let colon_token = fmt.token(TK_COLON)
+          let after_colon = fmt.placeholder(ignore_blank=true)
+          let end_index = optional(end_index, empty, e => fmt.compose(e, Expr))
+          start_index + colon_token + colon + after_colon + end_index
+        }),
+      )
+      let doc = group(array + index)
       Normal(doc)
     }
     ArraySet(array~, index~, value~, loc=_) => {
       let op = equal
       let array = fmt.compose(array, Simple)
-      let index = fmt.compose(index, Expr)
-      let value = fmt.compose_assign_rhs(value, Expr) // TODO: compose_rhs
-      let doc = group(
-        array + group(brackets(index)) + space + op + space + value,
+      let index = group(
+        fmt.commented_brackets(fn() { fmt.compose(index, Expr) }),
       )
+      let value = fmt.compose_assign_rhs(value, Expr) // TODO: compose_rhs
+      let doc = group(array + index + space + op + space + value)
       Normal(doc)
     }
     ArrayAugmentedSet(op~, array~, index~, value~, loc=_) => {
       let op = fmt.var_(op)
       let array = fmt.compose(array, Simple)
-      let index = fmt.compose(index, Expr)
-      let value = fmt.compose_assign_rhs(value, Expr) // TODO: compose_rhs
-      let doc = group(
-        array + group(brackets(index)) + space + op + space + value,
+      let index = group(
+        fmt.commented_brackets(fn() { fmt.compose(index, Expr) }),
       )
+      let value = fmt.compose_assign_rhs(value, Expr) // TODO: compose_rhs
+      let doc = group(array + index + space + op + space + value)
       Normal(doc)
     }
     Constant(c~, loc=_) => {
@@ -2091,14 +2666,25 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Normal(doc)
     }
     Constraint(expr~, ty~, loc=_) => {
-      let expr = fmt.compose(expr, Expr)
-      let ty = fmt.ty(ty)
-      let doc = group(parens(expr + line + colon + space + ty))
+      let doc = group(
+        fmt.commented_parens(fn() {
+          let expr = fmt.compose(expr, Expr)
+          let colon_token = fmt.token(TK_COLON)
+          let after_colon = fmt.placeholder(ignore_blank=true)
+          let ty = fmt.ty(ty)
+          expr + line + colon_token + colon + after_colon + space + ty
+        }),
+      )
       BlockLike(doc)
     }
     Constr(constr~, loc=_) => {
       let doc = fmt.constr(constr)
       Normal(doc)
+    }
+    LabelledBlock(label~, body~, loc=_) => {
+      let label = fmt.label(label) + tilde + colon
+      let body = space + fmt.expr_block(body)
+      Collapsible(label, body)
     }
     While(loop_cond~, loop_body~, while_else~, label~, loc=_) => {
       let label = if label is Some(x) { fmt.label(x) + colon } else { empty }
@@ -2140,8 +2726,8 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       }
       Collapsible(if_ + cond, ifso + ifnot)
     }
-    Guard(cond~, otherwise~, body~, loc=_) => {
-      let guard_ = text("guard")
+    Guard(cond~, otherwise~, body~, exclamation~, loc=_, ..) => {
+      let guard_ = text(if exclamation { "guard!" } else { "guard" })
       let cond = space + fmt.compose(cond, Infix(Other))
       let otherwise = if otherwise is Some(e) {
         space + text("else") + space + fmt.expr_block(e)
@@ -2168,7 +2754,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         | Array(_)
         | Record(_)
         | Map(_) => fmt.pattern(pat)
-        Range(_) | Or(_) | Alias(_) => parens(fmt.pattern(pat))
+        Range(_) | Or(_) | Alias(_) | With(_) => parens(fmt.pattern(pat))
       }
       let pat = space + pat
       let doc = group(expr + is_ + pat)
@@ -2180,16 +2766,28 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         if binder is Some(binder) {
           fmt.label(label) + equal + fmt.binder(binder)
         } else {
-          fmt.label(label)
+          fmt.label(label) + tilde
         }
       }
 
       let expr = fmt.compose(expr, Infix(Other))
-      let pat = fmt.regex_pattern(pat)
+      let pat_doc = fmt.regex_pattern(pat)
       let pat = if bindings.is_empty() {
-        pat
+        match pat {
+          Literal(_) | Reference(_) => pat_doc
+          Sequence(_) | Alternation(_) | Alias(_) =>
+            group(fmt.commented_parens(fn() { fmt.regex_pattern(pat) }))
+        }
       } else {
-        group(parens(pat + comma + line + series(bindings, comma, binding2doc)))
+        group(
+          fmt.commented_parens(fn() {
+            let pat_doc = fmt.regex_pattern(pat)
+            let bindings = series(bindings, comma, binding2doc, separator=fn() {
+              fmt.comma_placeholder()
+            })
+            pat_doc + comma + fmt.comma_placeholder() + line + bindings
+          }),
+        )
       }
       Normal(group(expr + space + text("=~") + space + pat))
     }
@@ -2201,8 +2799,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Normal(doc)
     }
     LetFn(name=_, func~, body~, loc=_) => { //TODO: fixme
-      guard! fmt.func(func) is Collapsible(a, b)
-      let func = a + b
+      let func = fmt.func(func).to_doc()
       let body = hardline + fmt.compose(body, Stmt)
       Normal(func + body)
     }
@@ -2262,7 +2859,13 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Normal(doc)
     }
     Tuple(exprs~, loc=_) => {
-      let doc = group(parens(series(exprs, comma, e => fmt.compose(e, Expr))))
+      let doc = group(
+        fmt.commented_parens(fn() {
+          series(exprs, comma, e => fmt.compose(e, Expr), separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
       Normal(doc)
     }
     Record(type_name~, fields~, trailing=_, loc=_) =>
@@ -2277,15 +2880,17 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       if type_name is None {
         let record = group(
           if fields is More(_, tail=Empty) {
-            braces(
-              series1(
-                fields.map(x => fmt.field(x)),
-                comma,
-                trailing=AlwaysPresent,
-              ),
-            )
+            fmt.commented_braces(fn() {
+              series(fields, comma, x => fmt.field(x), trailing=AlwaysPresent, separator=fn() {
+                fmt.comma_placeholder()
+              })
+            })
           } else {
-            braces(series1(fields.map(x => fmt.field(x)), comma))
+            fmt.commented_braces(fn() {
+              series(fields, comma, x => fmt.field(x), separator=fn() {
+                fmt.comma_placeholder()
+              })
+            })
           },
         )
         BlockLike(record)
@@ -2296,7 +2901,11 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           empty
         }
         let record = group(
-          braces(series1(fields.map(x => fmt.field(x)), comma)),
+          fmt.commented_braces(fn() {
+            series(fields, comma, x => fmt.field(x), separator=fn() {
+              fmt.comma_placeholder()
+            })
+          }),
         )
         Collapsible(type_name, record)
       }
@@ -2306,10 +2915,24 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       } else {
         empty
       }
-      let dotdot_record = text("..") + fmt.compose(record, Simple)
-      let fields = fields.map(x => fmt.field(x))
       let record = group(
-        braces(series(fields.add(dotdot_record), comma, x => x)),
+        fmt.commented_braces(fn() {
+          let dotdot = fmt.token(TK_DOTDOT) +
+            text("..") +
+            fmt.placeholder(ignore_blank=true) +
+            fmt.compose(record, Simple)
+          match fields {
+            Empty => dotdot
+            More(_) =>
+              dotdot +
+              comma +
+              fmt.comma_placeholder() +
+              line +
+              series(fields, comma, x => fmt.field(x), separator=fn() {
+                fmt.comma_placeholder()
+              })
+          }
+        }),
       )
       let doc = group(type_name + text("::") + record)
       Normal(doc)
@@ -2347,8 +2970,8 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let cond = space + fmt.compose(expr, Infix(Other))
       let cases = space +
         group(
-          braces(
-            series1(cases.map(x => fmt.case(x)), empty),
+          fmt.commented_braces(
+            fn() { series1(cases.map(x => fmt.case(x)), empty) },
             force_newline=true,
           ),
         )
@@ -2404,10 +3027,9 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     }
     Return(return_value~, loc=_) => {
       let return_ = text("return")
-      let value = space +
-        optional(return_value, empty, e => {
-          fmt.compose_return_break_continue_rhs(e, Expr)
-        }) //TODO: compose_rhs
+      let value = optional(return_value, empty, e => {
+        space + fmt.compose_return_break_continue_rhs(e, Expr)
+      }) //TODO: compose_rhs
       let doc = return_ + value
       Normal(doc)
     }
@@ -2454,7 +3076,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     Break(arg~, label~, loc=_) => {
       let break_ = text("break")
       let label = fmt.loop_label(label, trailing_colon=false)
-      let arg = space + optional(arg, empty, e => fmt.compose(e, Expr)) //TODO: compose_rhs
+      let arg = optional(arg, empty, e => space + fmt.compose(e, Expr)) //TODO: compose_rhs
       let doc = break_ + label + arg
       Normal(doc)
     }
@@ -2618,7 +3240,6 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     }
     TryOperator(body~, kind=op, try_loc=_, loc=_) => {
       let try_ = match op {
-        Question => text("try?")
         Exclamation => text("try!")
       }
       let body = space + fmt.compose(body, Simple)
@@ -2631,7 +3252,13 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         fmt.constant(key) + colon + space + fmt.compose(expr, Expr)
       }
 
-      let doc = group(braces(series(elems, comma, map_expr_elem2doc)))
+      let doc = group(
+        fmt.commented_braces(fn() {
+          series(elems, comma, map_expr_elem2doc, separator=fn() {
+            fmt.comma_placeholder()
+          })
+        }),
+      )
       Normal(doc)
     }
     TemplateWriting(expr~, template~, is_conditional~, loc=_) => {
@@ -2646,26 +3273,61 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let strategy = fmt.lex_strategy(strategy)
       let cases = space +
         group(
-          braces(
-            series1(cases.map(x => fmt.lex_case(x)), empty),
+          fmt.commented_braces(
+            fn() { series1(cases.map(x => fmt.lex_case(x)), empty) },
             force_newline=true,
           ),
         )
       Collapsible(lexmatch_ + cond + strategy, cases)
     }
-    LexScan(expr~, match_loc=_, cases~, loc=_) => {
+    LexScan(strategy~, expr~, match_loc=_, cases~, loc=_) => {
       let lexscan_ = text("lexscan")
       let cond = space + fmt.compose(expr, Infix(Other))
+      let strategy = fmt.lex_strategy(strategy)
       let cases = space +
         group(
-          braces(
-            series1(cases.map(x => fmt.lex_scan_case(x)), empty),
+          fmt.commented_braces(
+            fn() { series1(cases.map(x => fmt.lex_scan_case(x)), empty) },
             force_newline=true,
           ),
         )
-      Collapsible(lexscan_ + cond, cases)
+      Collapsible(lexscan_ + cond + strategy, cases)
     }
-    Group(expr~, ..) => abort(expr.to_json().stringify(indent=2))
-    StaticAssert(_) => panic()
+    Group(expr~, ..) => Normal(fmt.compose(expr, Expr))
+    StaticAssert(asserts~, body~) => {
+      fn assertion2doc(assertion : @syntax.StaticAssertion) -> Doc {
+        let loc = assertion.loc
+        let loc_text = "\{loc.start.lnum}:\{loc.start.column()}-\{loc.end.lnum}:\{loc.end.column()}"
+        group(
+          text("@static_assert(") +
+          nest(
+            line +
+            group(
+              fmt.ty(assertion.ty) +
+              line +
+              colon +
+              space +
+              longident(assertion.trait_),
+            ) +
+            comma +
+            line +
+            text("loc=") +
+            text(loc_text) +
+            comma +
+            line +
+            text("msg=") +
+            text(Json::string(assertion.msg).stringify()),
+          ) +
+          line +
+          char(')'),
+        )
+      }
+
+      let docs = asserts.map(assertion2doc).add(fmt.compose(body, Stmt))
+      Normal(separate(docs, hardline))
+    }
   }
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  raw.with_comments(before, after)
 }

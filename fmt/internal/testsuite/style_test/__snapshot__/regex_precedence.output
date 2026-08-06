@@ -1,0 +1,10 @@
+// generated file, do not edit!
+///|
+fn main {
+  let review = s =~ ((re"if" | re"else") as keyword, before=prefix, after~)
+  let left_sequence = s =~ ((re"a" | re"b") + re"c")
+  let right_sequence = s =~ (re"a" + (re"b" | re"c"))
+  let aliases = s =~ ((re"a" as left) | (re"b" as right))
+  let compound = s =~ (A + B)
+  compound
+}

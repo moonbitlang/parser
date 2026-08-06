@@ -115,14 +115,16 @@ fn impl_docstring(item : @syntax.Impl) -> @syntax.DocString {
     | TopImpl(doc~, ..)
     | TopView(doc~, ..)
     | TopImplRelation(doc~, ..)
-    | TopUsing(doc~, ..) => doc
+    | TopUsing(doc~, ..)
+    | TopExtend(doc~, ..)
+    | TopImport(doc~, ..) => doc
   }
 }
 
 ///|
 fn impl_start_line(item : @syntax.Impl) -> Int {
   let doc = impl_docstring(item)
-  if doc.content.length() == 0 {
+  if doc.loc.start.lnum <= 0 {
     item.loc().start.lnum
   } else {
     doc.loc.start.lnum
@@ -130,137 +132,58 @@ fn impl_start_line(item : @syntax.Impl) -> Int {
 }
 
 ///|
-fn header_line_comment(
+fn impl_source_range(
+  source : String,
   item : @syntax.Impl,
   tokens : @tokens.Triples,
 ) -> String? {
-  let loc = item.loc()
+  let doc = impl_docstring(item)
+  let start = if doc.loc.start.lnum > 0 {
+    doc.loc.start.cnum
+  } else {
+    item.loc().start.cnum
+  }
+  let item_end = item.loc().end
+  let mut end = item_end.cnum
   for triple in tokens {
     match triple {
-      (COMMENT(comment), start, _) if start.lnum == loc.start.lnum &&
-        start > loc.start => return Some(comment.content)
+      (COMMENT(comment), start, comment_end) if comment.kind is InlineTrailing &&
+        start.lnum == item_end.lnum &&
+        start >= item_end => end = @cmp.maximum(end, comment_end.cnum)
       _ => ()
     }
   }
-  None
-}
-
-///|
-fn restore_header_line_comment(
-  formatted : String,
-  item : @syntax.Impl,
-  tokens : @tokens.Triples,
-) -> String {
-  if header_line_comment(item, tokens) is Some(comment) {
-    if formatted.contains(comment) {
-      formatted
-    } else {
-      match formatted.split_once("\n") {
-        Some((head, tail)) => {
-          let head = head.to_owned()
-          if head.contains("{") {
-            head + " " + comment + "\n" + tail.to_owned()
-          } else {
-            formatted
-          }
-        }
-        None => formatted
-      }
-    }
-  } else {
-    formatted
+  guard start >= 0 && start <= end && end <= source.length() else {
+    return None
   }
-}
-
-///|
-fn insert_header_comment(formatted : String, comment : String) -> String {
-  if formatted.contains(comment) {
-    return formatted
-  }
-  let lines = split_lines(formatted)
-  for i, line in lines {
-    if line.contains("{") {
-      lines[i] = line + " " + comment
-      return line_join(lines)
-    }
-  }
-  formatted
-}
-
-///|
-fn source_header_comment(source : String, line_number : Int) -> String? {
-  let lines = split_lines(source)
-  if lines.get(line_number - 1) is Some(line) {
-    match (line.find("{"), line.find("//")) {
-      (Some(brace), Some(comment_start)) if comment_start > brace =>
-        Some(
-          line
-          .unsafe_substring(start=comment_start, end=line.length())
-          .trim()
-          .to_owned(),
-        )
-      _ => None
-    }
-  } else {
-    None
-  }
-}
-
-///|
-fn restore_source_header_comment(
-  formatted : String,
-  source : String,
-  line_number : Int,
-) -> String {
-  if source_header_comment(source, line_number) is Some(comment) {
-    insert_header_comment(formatted, comment)
-  } else {
-    formatted
-  }
+  Some(source.unsafe_substring(start~, end~))
 }
 
 ///|
 fn format_single_impl(
+  source : String,
   item : @syntax.Impl,
-  impls : @syntax.Impls,
   tokens : @tokens.Triples,
-  block_line? : Bool = true,
-) -> String {
-  let mapper = @comment.Mapper::new(tokens, impls)
-  let doc = impl_docstring(item)
-  if doc.content.length() != 0 {
-    let overlaps_doc = fn(c : @comment.Comment) {
-      c.start >= doc.loc.start && c.end <= doc.loc.end
-    }
-    mapper.consume_comments(Some(Node(item.loc())), overlaps_doc) |> ignore
-    let table = mapper.get_table(item.loc())
-    for
-      name in [
-        "async", "const", "declare", "enum", "enumview", "extern", "fn", "impl",
-        "let", "priv", "pub", "struct", "suberror", "test", "trait", "typealias",
-        "using",
-      ] {
-      mapper.consume_comments(table.get_token(name), overlaps_doc) |> ignore
-    }
+) -> String? {
+  guard impl_source_range(source, item, tokens) is Some(fragment) else {
+    return None
   }
-  let formatted = Fmt::new(mapper~, block_line~).impl_(item)
-    |> @pp.render(width=80)
-    |> s => { s.trim().to_owned() }
-  restore_header_line_comment(formatted, item, tokens)
+  // Re-lexing the exact implementation/docstring range reuses the full
+  // checkpoint mapper and all safety checks. It also avoids interpreting
+  // `//` inside strings as comments.
+  Some(format(fragment, block_line=true).trim().to_owned())
 }
 
 ///|
 fn format_nth_plain_impl(source : String, index : Int) -> (Int, Int, String)? {
-  let (impls, reports, tokens) = parse(source)
-  if reports.length() != 0 {
-    return None
-  }
-  let items = impls.to_array()
+  guard strict_parse(source) is Some(parsed) else { return None }
+  let items = parsed.impls.to_array()
   if items.get(index) is Some(item) {
     let loc = item.loc()
     let line_start = impl_start_line(item)
-    let raw = format_single_impl(item, impls, tokens, block_line=true)
-    let formatted = restore_source_header_comment(raw, source, loc.start.lnum)
+    guard format_single_impl(source, item, parsed.tokens) is Some(formatted) else {
+      return None
+    }
     Some((line_start, loc.end.lnum, formatted))
   } else {
     None
@@ -275,26 +198,22 @@ fn format_nth_markdown_impl(
   let blocks = markdown_blocks(source)
   let mut remaining = index
   for block in blocks {
-    let (impls, reports, tokens) = parse(block.content)
-    if reports.length() == 0 {
-      let items = impls.to_array()
-      if remaining < items.length() {
-        let item = items[remaining]
-        let loc = item.loc()
-        let line_start = block.content_start + impl_start_line(item) - 1
-        let line_end = block.content_start + loc.end.lnum - 1
-        let raw = format_single_impl(item, impls, tokens, block_line=true)
-        let formatted = restore_source_header_comment(
-          raw,
-          block.content,
-          loc.start.lnum,
-        )
-        return Some(
-          (line_start, line_end, reindent_formatted(formatted, block.indent)),
-        )
+    guard strict_parse(block.content) is Some(parsed) else { return None }
+    let items = parsed.impls.to_array()
+    if remaining < items.length() {
+      let item = items[remaining]
+      let loc = item.loc()
+      let line_start = block.content_start + impl_start_line(item) - 1
+      let line_end = block.content_start + loc.end.lnum - 1
+      guard format_single_impl(block.content, item, parsed.tokens)
+        is Some(formatted) else {
+        return None
       }
-      remaining -= items.length()
+      return Some(
+        (line_start, line_end, reindent_formatted(formatted, block.indent)),
+      )
     }
+    remaining -= items.length()
   }
   None
 }

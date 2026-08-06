@@ -17,26 +17,29 @@ fn inspect_nth(
 }
 
 ///|
-fn @test.Test::run(
-  t : Self,
-  enable_ast_check? : Bool = true,
-  enable_idempotent_check? : Bool = true,
-) -> Unit raise {
+fn @test.Test::run(t : Self) -> Unit raise {
   let name = t.name()
   let source = read_fixture(
     "./fmt/internal/testsuite/style_test/fixtures/\{name}.input",
   )
   let round1 = @format.format(source)
-  if enable_ast_check {
-    ast_check(name~, source~, round1~)
-  }
+  ast_check(name~, source~, round1~)
   let round2 = @format.format(round1)
-  if enable_idempotent_check {
-    idempotent_check(name~, round1~, round2~)
-  }
+  idempotent_check(name~, round1~, round2~)
   t.writeln("// generated file, do not edit!")
   t.write(round1)
   t.snapshot(filename="\{name}.output")
+}
+
+///|
+fn @test.Test::run_expect_change(t : Self) -> Unit raise {
+  let source = read_fixture(
+    "./fmt/internal/testsuite/style_test/fixtures/\{t.name()}.input",
+  )
+  if @format.format(source) == source {
+    fail("\{t.name()} was returned without being formatted")
+  }
+  t.run()
 }
 
 ///|
@@ -61,6 +64,9 @@ fn idempotent_check(
 ///|
 fn ast_check(name~ : String, source~ : String, round1~ : String) -> Unit raise {
   @basic.show_loc.val = String
+  defer {
+    @basic.show_loc.val = Hidden
+  }
   let (source_ast, report1, _) = @format.parse(source)
   let (round1_ast, report2, _) = @format.parse(round1)
   if report1.length() != 0 {
@@ -81,8 +87,10 @@ fn ast_check(name~ : String, source~ : String, round1~ : String) -> Unit raise {
       ),
     )
   }
-  @basic.show_loc.val = Hidden
-  if source_ast.to_json() != round1_ast.to_json() {
+  if source == round1 {
+    return
+  }
+  if !@format.semantically_equivalent(source, round1) {
     fail(
       (
         $| format(\{name}.mbt) changed the AST.
@@ -155,6 +163,20 @@ test "format nth impl rejects any full-file parse diagnostic" {
     #|fn f(x: Int*syntax error!!!*) -> Unit { println(x) }
   inspect(inspect_nth(source, 0), content="none")
   inspect(inspect_nth(source, 1), content="none")
+}
+
+///|
+test "format nth impl does not treat URL text as a comment" {
+  let source =
+    #|fn url( )->String { "https://example.com/a//b" } // real comment
+  match @format.format_nth_impl_from_source(source, 0) {
+    Some((_, _, formatted)) =>
+      if !formatted.contains("\"https://example.com/a//b\"") ||
+        !formatted.contains("// real comment") {
+        fail("nth formatting corrupted URL/comment boundaries: \{formatted}")
+      }
+    None => fail("valid URL implementation was rejected")
+  }
 }
 
 ///|
@@ -301,9 +323,9 @@ test "format json moon.mod migrates deps and metadata" {
       #|version = "0.1.0"
       #|
       #|import {
-      #|  "module/name",
       #|  "path/to/dependency1@1.2.3",
       #|  "path/to/dependency2@4.5.6",
+      #|  "module/name",
       #|}
       #|
       #|warnings = "+w1-w2@w3"
@@ -370,40 +392,39 @@ test "format current moon.pkg normalizes DSL config" {
   )
 }
 
-// ///|
-// test "compose_case_rhs" (t : @test.T) {
-//   t.run()
-// }
+///|
+test "compose_case_rhs" (t : @test.Test) {
+  t.run_expect_change()
+}
 
-// ///|
-// test "compose_let_rhs" (t : @test.T) {
-//   t.run()
-// }
+///|
+test "compose_let_rhs" (t : @test.Test) {
+  t.run_expect_change()
+}
 
-// ///|
-// test "chained_dot" (t : @test.T) {
-//   t.run()
-// }
+///|
+test "chained_dot" (t : @test.Test) {
+  t.run_expect_change()
+}
 
-// ///|
-// test "mixed_infix" (t : @test.T) {
-//   t.run()
-// }
+///|
+test "mixed_infix" (t : @test.Test) {
+  t.run_expect_change()
+}
 
-// ///|
-// test "compose_arrow_rhs" (t : @test.T) {
-//   t.run()
-// }
+///|
+test "compose_arrow_rhs" (t : @test.Test) {
+  t.run_expect_change()
+}
 
-// ///|
-// test "trailing_block" (t : @test.T) {
-//   t.run()
-// }
+///|
+test "trailing_block" (t : @test.Test) {
+  t.run_expect_change()
+}
 
 ///|
 test "cases" (t : @test.Test) {
-  // TODO: avoid printing trailing marks in the json
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
@@ -423,8 +444,7 @@ test "typedecl_derive" (t : @test.Test) {
 
 ///|
 test "typedecl_suberror" (t : @test.Test) {
-  // suberror syntax changed in parser 0.2.5
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
@@ -439,8 +459,7 @@ test "typedecl_tuplestruct" (t : @test.Test) {
 
 ///|
 test "typedecl_alias" (t : @test.Test) {
-  // typealias ... as ... syntax changed in parser 0.2.5
-  t.run(enable_ast_check=false, enable_idempotent_check=false)
+  t.run()
 }
 
 ///|
@@ -450,14 +469,12 @@ test "trait_impl_decl" (t : @test.Test) {
 
 ///|
 test "top_function" (t : @test.Test) {
-  // TODO: adapt new parameter syntax in parser
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
 test "attribute" (t : @test.Test) {
-  // TODO: avoid printing attributes raw in the json
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
@@ -472,7 +489,7 @@ test "arrow_function" (t : @test.Test) {
 
 ///|
 test "docstring" (t : @test.Test) {
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
@@ -482,12 +499,12 @@ test "constant_literals" (t : @test.Test) {
 
 ///|
 test "using_decl" (t : @test.Test) {
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
 test "for_where" (t : @test.Test) {
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
@@ -497,20 +514,31 @@ test "loop_nobreak" (t : @test.Test) {
 
 ///|
 test "declare_keyword" (t : @test.Test) {
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
 test "lexmatch" (t : @test.Test) {
-  t.run(enable_ast_check=false)
+  t.run()
+}
+
+///|
+test "regex_precedence" (t : @test.Test) {
+  t.run()
 }
 
 ///|
 test "async_toplevel" (t : @test.Test) {
-  t.run(enable_ast_check=false)
+  t.run()
 }
 
 ///|
 test "new_parser_syntax" (t : @test.Test) {
+  let source = read_fixture(
+    "./fmt/internal/testsuite/style_test/fixtures/new_parser_syntax.input",
+  )
+  if @format.format(source) == source {
+    fail("new parser syntax fixture was returned without being formatted")
+  }
   t.run()
 }

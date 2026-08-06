@@ -7,6 +7,25 @@ pub fn impls_to_string(impls : @syntax.Impls) -> String {
 }
 
 ///|
+fn format_once(
+  impls : @syntax.Impls,
+  tokens : @tokens.Triples,
+  block_line~ : Bool,
+) -> String? {
+  let impls = RemoveGroup::process(impls)
+  let mapper = @comment.CheckpointMapper::new(tokens)
+  let attach_fmt = Fmt::new(checkpoint_mapper=mapper, block_line~)
+  ignore(attach_fmt.placeholder() + attach_fmt.impls(impls) + attach_fmt.eof())
+  mapper.begin_pretty()
+  let pretty_fmt = Fmt::new(checkpoint_mapper=mapper, block_line~)
+  let doc = pretty_fmt.placeholder() +
+    pretty_fmt.impls(impls) +
+    pretty_fmt.eof()
+  guard mapper.is_complete() else { return None }
+  Some(@pp.render(doc, width=80) |> with_final_newline)
+}
+
+///|
 priv struct RecoveredHoleDetector {
   mut found : Bool
 }
@@ -36,27 +55,21 @@ fn has_recovered_hole(impls : @syntax.Impls) -> Bool {
 
 ///|
 pub fn format(source : String, block_line? : Bool = true) -> String {
-  let { tokens, docstrings, errors } = @lexer.tokens_from_string(
-    comment=true,
-    source,
-  )
-  if errors.length() != 0 {
+  guard strict_parse(source) is Some(parsed) else { return source }
+  guard format_once(parsed.impls, parsed.tokens, block_line~) is Some(candidate) else {
     return source
   }
-  let (impls, diag) = @handrolled_parser.parse(tokens)
-  // Recovered parser output can omit invalid source text, so diagnostics make
-  // formatting unsafe even when an AST is returned.
-  if diag.length() != 0 {
+  guard strict_parse(candidate) is Some(reparsed) else { return source }
+  guard same_semantics(parsed, reparsed) else { return source }
+  // A formatter result is only useful if it is already a fixed point. This
+  // also makes pathological comment layouts fail closed instead of exposing
+  // a first-pass intermediate form to API and CLI callers.
+  guard format_once(reparsed.impls, reparsed.tokens, block_line~)
+    is Some(second) &&
+    second == candidate else {
     return source
   }
-  if has_recovered_hole(impls) {
-    return source
-  }
-  attach_docstrings(docstrings, impls)
-  impls
-  |> RemoveGroup::process
-  |> x => { Fmt::new(block_line~).impls(x) }
-  |> @pp.render(width=80)
+  candidate
 }
 
 ///|
@@ -69,7 +82,7 @@ pub fn parse(
     source,
   )
   let (impls, diag) = @handrolled_parser.parse(tokens)
-  attach_docstrings(docstrings, impls)
+  attach_docstrings(docstrings, impls, tokens)
   let impls = impls |> RemoveGroup::process
   (impls, diag, tokens)
 }
