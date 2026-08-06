@@ -13,6 +13,7 @@ let first_constr : Array[TokenKind] = first_luident
 
 ///|
 let first_impl_ : Array[TokenKind] = [
+  TK_IMPORT,
   TK_PUB,
   TK_PRIV,
   TK_TYPE,
@@ -31,6 +32,7 @@ let first_impl_ : Array[TokenKind] = [
   TK_ENUMVIEW,
   TK_ATTRIBUTE,
   TK_USING,
+  TK_EXTEND,
 ]
 
 ///|
@@ -73,10 +75,10 @@ let first_expr : Array[TokenKind] = [
   TK_WHILE,
   TK_FOR,
   TK_POST_LABEL,
+  TK_POST_LABEL_TRANSPARENT,
   TK_GUARD,
   TK_TRY,
   TK_DEFER,
-  TK_TRY_QUESTION,
   TK_TRY_EXCLAMATION,
   TK_FORALL,
   TK_EXISTS,
