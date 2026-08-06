@@ -1348,6 +1348,22 @@ fn add_interpolation_lexing_error(
 }
 
 ///|
+// These interpolation scanners currently form a mutually recursive state
+// machine. The `break scan_interpolation_*` transitions below are ordinary
+// cross-function calls: the callee must return before the caller can break out
+// of its loop, so every caller frame remains live.
+//
+// Consequently, sequential atoms grow the call stack even when the source is
+// not deeply nested. For example, `\{["", "", ...]}` alternates between
+// `scan_interpolation_source` and `scan_interpolation_string_atom` twice per
+// string atom. A sufficiently long sequence overflows the JS/Wasm call stack
+// and can crash the native backend with a stack-overflow SIGSEGV.
+//
+// The local `for` loops only remove each scanner's direct self-recursion; they
+// do not make these cross-scanner transitions stack-safe. A complete fix should
+// drive the scanner modes from one loop, a trampoline, or an explicit state
+// stack, so sequential atom count cannot consume call stack space; genuinely
+// nested interpolation should be represented explicitly by that state machine.
 fn scan_interpolation_source(
   input : StringView,
   base~ : StringView,
@@ -1438,6 +1454,8 @@ fn scan_interpolation_source(
       }
       (re"^(?:\")" as raw, after=rest) => {
         interpolation_write_char(env, buf, raw)
+        // This mode switch retains the current source-scanner stack frame; see
+        // the stack-safety note above `scan_interpolation_source`.
         break scan_interpolation_string_atom(
           rest,
           base~,
@@ -1555,6 +1573,8 @@ fn scan_interpolation_string_atom(
         interpolation_write_char(env, buf, c)
         match (c.to_int(), escaped) {
           (34, false) =>
+            // This switches back by calling, rather than continuing a shared
+            // loop, so repeated string atoms accumulate mutual-recursion frames.
             break scan_interpolation_source(
               rest,
               base~,
