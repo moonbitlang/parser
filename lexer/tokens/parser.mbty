@@ -25,6 +25,7 @@
 %token<String> LIDENT
 %token<String> UIDENT
 %token<String> POST_LABEL
+%token<String> POST_LABEL_TRANSPARENT
 %token<Comment> COMMENT
 %token NEWLINE
 %token<String> INFIX1
@@ -116,6 +117,7 @@
 %token TEST "test"
 %token LOOP "loop"
 %token GUARD "guard"
+%token GUARD_EXCLAMATION "guard!"
 %token DEFER "defer"
 %token FOR "for"
 %token IN "in"
@@ -437,7 +439,15 @@ structure -> List[Impl]
   ;
 
 structure_item -> Impl
-  : type_header deriving_directive_list {
+  : "import" "{" list_commas(import_package) "}" for_import_kind {
+    TopImport(
+      kind=$5,
+      packages=$3,
+      loc=mk_loc($sloc),
+      doc=DocString::empty(),
+    )
+  }
+  | type_header deriving_directive_list {
     let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       TypeDecl::{
@@ -783,6 +793,43 @@ structure_item -> Impl
       doc = DocString::empty()
     )
   }
+  | attributes visibility "extend" type_name "with" type_name "::" "{" list_commas(extend_alias_target) "}" {
+    TopExtend(
+      type_name=$4,
+      trait_=$6,
+      names=$9,
+      vis=$2,
+      attrs=$1,
+      loc=mk_loc($sloc),
+      doc=DocString::empty(),
+    )
+  }
+  ;
+
+import_package -> ImportPackage
+  : STRING PACKAGE_NAME {
+    { path: $1, alias_: Some($2), loc: mk_loc($sloc) }
+  }
+  | STRING {
+    { path: $1, alias_: None, loc: mk_loc($sloc) }
+  }
+  ;
+
+for_import_kind -> StringLiteral?
+  : "for" STRING { Some($2) }
+  | { None }
+  ;
+
+extend_alias_target -> AliasTarget
+  : lident_string {
+    { binder: { name: $1, loc: mk_loc($loc($1)) }, target: None }
+  }
+  | lident_string "as" lident_string {
+    {
+      binder: { name: $3, loc: mk_loc($loc($3)) },
+      target: Some({ name: $1, loc: mk_loc($loc($1)) }),
+    }
+  }
   ;
 
 impl_optional_fn -> List[TypeVarBinder]
@@ -1120,9 +1167,30 @@ statement -> Statement
   | expr_statement { StmtExpr($1) }
   ;
 
+%inline guard_keyword -> Bool
+  : "guard" { false }
+  | "guard!" { true }
+  ;
+
 guard_statement -> Statement
-  : "guard" infix_expr { StmtGuard(cond = $2, otherwise = None, loc = mk_loc($sloc)) }
-  | "guard" infix_expr "else" block_expr { StmtGuard(cond = $2, otherwise = Some($4), loc = mk_loc($sloc)) }
+  : guard_keyword infix_expr {
+    StmtGuard(
+      cond = $2,
+      otherwise = None,
+      exclamation = $1,
+      guard_loc = mk_loc($loc($1)),
+      loc = mk_loc($sloc),
+    )
+  }
+  | guard_keyword infix_expr "else" block_expr {
+    StmtGuard(
+      cond = $2,
+      otherwise = Some($4),
+      exclamation = $1,
+      guard_loc = mk_loc($loc($1)),
+      loc = mk_loc($sloc),
+    )
+  }
   ;
 
 %inline assignment_expr -> Expr
@@ -1188,13 +1256,21 @@ expr_statement_no_break_continue_return -> Expr
   ;
 
 expr_statement -> Expr
-  : "break" POST_LABEL option(expr) { 
+  : "break" POST_LABEL option(expr) {
     let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
+    Break(arg = $3, label = Some(label), loc = mk_loc($sloc))
+  }
+  | "break" POST_LABEL_TRANSPARENT option(expr) {
+    let label : Label = { name: $2 + "~", loc: mk_loc($loc($2)) }
     Break(arg = $3, label = Some(label), loc = mk_loc($sloc))
   }
   | "break" option(expr) { Break(arg = $2, label = None, loc = mk_loc($sloc)) }
   | "continue" POST_LABEL list_commas_no_trailing(expr) { 
     let label = Label::{ name: $2, loc: mk_loc($loc($2)) }
+    Continue(args = $3, label = Some(label), loc = mk_loc($sloc))
+  }
+  | "continue" POST_LABEL_TRANSPARENT list_commas_no_trailing(expr) {
+    let label : Label = { name: $2 + "~", loc: mk_loc($loc($2)) }
     Continue(args = $3, label = Some(label), loc = mk_loc($sloc))
   }
   | "continue" list_commas_no_trailing(expr) { Continue(args = $2, label = None, loc = mk_loc($sloc)) }
@@ -1332,31 +1408,39 @@ lexmatch_header -> (Expr, Label?):
 
 lexscan_expr -> Expr:
   | lexscan_header list_semis(lexscan_case) "}" {
-    LexScan(expr=$1, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
+    LexScan(strategy=$1.1, expr=$1.0, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
   }
 
-lexscan_header -> Expr:
-  | "lexscan" infix_expr "{" { $2 }
+lexscan_header -> (Expr, Label?):
+  | "lexscan" infix_expr "{" { ($2, None) }
+  | "lexscan" infix_expr "with" label "{" { ($2, Some($4)) }
 
 lexscan_case -> LexScanCase:
-  | lexscan_case_pattern "=>" expr_statement {
-    LexScanCase::{ pat: $1, guard_: None, body: $3 }
+  | lexscan_case_pattern_with_bindings "=>" expr_statement {
+    LexScanCase::{ pat: $1.0, bindings: $1.1, guard_: None, body: $3 }
   }
-  | lexscan_case_pattern "if" infix_expr "=>" expr_statement {
-    LexScanCase::{ pat: $1, guard_: Some($3), body: $5 }
+  | lexscan_case_pattern_with_bindings "if" infix_expr "=>" expr_statement {
+    { pat: $1.0, bindings: $1.1, guard_: Some($3), body: $5 }
   }
   | "..." {
-    LexScanCase::{
-      pat: LexScanCasePattern::Wildcard(loc = mk_loc($loc($1))),
+    {
+      pat: Wildcard(loc = mk_loc($loc($1))),
+      bindings: @list.empty(),
       guard_: None,
       body: Hole(loc = mk_loc($sloc), kind = Todo)
     }
   }
 
+lexscan_case_pattern_with_bindings -> (LexScanCasePattern, List[(Label, Binder?)]):
+  | lexscan_case_pattern { ($1, @list.empty()) }
+  | "(" regex_as_pattern "," list_commas(regex_match_binding) ")" {
+    (Pattern($2), $4)
+  }
+
 lexscan_case_pattern -> LexScanCasePattern:
-  | regex_as_pattern { LexScanCasePattern::Pattern($1) }
-  | binder { LexScanCasePattern::Binder($1) }
-  | "_" { LexScanCasePattern::Wildcard(loc = mk_loc($sloc)) }
+  | regex_as_pattern { Pattern($1) }
+  | binder { Binder($1) }
+  | "_" { Wildcard(loc = mk_loc($sloc)) }
 
 lex_case -> LexCase :
   | lex_pattern "=>" expr_statement {
@@ -1536,8 +1620,20 @@ foreach_binder -> Binder?
   | "_" { None }
   ;
 
+labelled_block_expr -> Expr
+  : POST_LABEL ":" block_expr {
+    let label : Label = { name: $1, loc: mk_loc($loc($1)) }
+    LabelledBlock(label~, body=$3, loc=mk_loc($sloc))
+  }
+  | POST_LABEL_TRANSPARENT ":" block_expr {
+    let label : Label = { name: $1 + "~", loc: mk_loc($loc($1)) }
+    LabelledBlock(label~, body=$3, loc=mk_loc($sloc))
+  }
+  ;
+
 expr -> Expr
-  : for_expr { $1 }
+  : labelled_block_expr { $1 }
+  | for_expr { $1 }
   | foreach_expr { $1 }
   | while_expr { $1 }
   | try_expr { $1 }
@@ -1708,6 +1804,11 @@ regex_match_binding -> (Label, Binder?)
   : lident_string "=" binder {
     let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
     (label, Some($3))
+  }
+  | lident_string "=" "_" {
+    let label : Label = { name : $1, loc : mk_loc($loc($1)) }
+    let binder : Binder = { name: "_", loc: mk_loc($loc($3)) }
+    (label, Some(binder))
   }
   | POST_LABEL {
     let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
@@ -2170,6 +2271,10 @@ pattern -> Pattern
   | or_pattern { $1 }
   ;
 
+with_pattern_binding -> (Binder, Expr)
+  : binder "=" prefix_expr { ($1, $3) }
+  ;
+
 or_pattern -> Pattern
   : range_pattern "|" or_pattern { Or(pat1 = $1, pat2 = $3, loc = mk_loc($sloc)) }
   | range_pattern { $1 }
@@ -2207,6 +2312,9 @@ simple_pattern -> Pattern
   // To disambiguate with pattern variable, the args list must be present.
   | binder delimited("(", constr_pat_arguments_no_open, ")") {
     Pattern::SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
+  }
+  | "(" pattern "with" non_empty_list_commas(with_pattern_binding) ")" {
+    With(pat = $2, bindings = $4, loc = mk_loc($sloc))
   }
   | "(" pattern ")" { $2 }
   | "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }

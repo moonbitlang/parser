@@ -52,6 +52,7 @@ pub(all) enum Token {
   LIDENT(String)
   UIDENT(String)
   POST_LABEL(String)
+  POST_LABEL_TRANSPARENT(String)
   COMMENT(Comment)
   NEWLINE
   INFIX1(String)
@@ -143,6 +144,7 @@ pub(all) enum Token {
   TEST
   LOOP
   GUARD
+  GUARD_EXCLAMATION
   DEFER
   FOR
   IN
@@ -189,6 +191,7 @@ pub(all) enum TokenKind {
   TK_LIDENT
   TK_UIDENT
   TK_POST_LABEL
+  TK_POST_LABEL_TRANSPARENT
   TK_COMMENT
   TK_NEWLINE
   TK_INFIX1
@@ -280,6 +283,7 @@ pub(all) enum TokenKind {
   TK_TEST
   TK_LOOP
   TK_GUARD
+  TK_GUARD_EXCLAMATION
   TK_DEFER
   TK_FOR
   TK_IN
