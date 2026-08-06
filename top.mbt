@@ -109,6 +109,8 @@ fn attach_docstrings(
       TopView(..) as view => view.doc = doc
       TopImpl(..) as imp => imp.doc = doc
       TopUsing(..) as using_stmt => using_stmt.doc = doc
+      TopExtend(..) as extend_stmt => extend_stmt.doc = doc
+      TopImport(..) as import_stmt => import_stmt.doc = doc
     }
     last_pos = loc.end
   }
