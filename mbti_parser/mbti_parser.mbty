@@ -19,6 +19,7 @@
 %token<String> LIDENT
 %token<String> UIDENT
 %token<String> POST_LABEL
+%token<String> POST_LABEL_TRANSPARENT
 %token<Comment> COMMENT
 %token NEWLINE
 %token<String> INFIX1
@@ -109,6 +110,7 @@
 %token TEST "test"
 %token LOOP "loop"
 %token GUARD "guard"
+%token GUARD_EXCLAMATION "guard!"
 %token DEFER "defer"
 %token FOR "for"
 %token IN "in"
