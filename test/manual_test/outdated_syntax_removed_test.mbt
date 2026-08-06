@@ -40,6 +40,37 @@ fn expect_accepted(source : String, name : String) -> Unit raise Error {
 }
 
 ///|
+fn expect_rejected_cases(cases : Array[(String, String)]) -> Unit raise Error {
+  let failures = StringBuilder::new()
+  let mut failed = false
+  for case in cases {
+    let (source, name) = case
+    let (_, hand_reports) = @parser.parse_string(
+      source,
+      name~,
+      parser=Handrolled,
+    )
+    if hand_reports.is_empty() {
+      failed = true
+      failures.write_string("handrolled accepted \{name}\n") |> ignore
+    }
+    let (_, yacc_reports) = @parser.parse_string(source, name~, parser=MoonYacc)
+    if yacc_reports.is_empty() {
+      failed = true
+      failures.write_string("moonyacc accepted \{name}\n") |> ignore
+    }
+    let cst_result = @untyped_cst.parse_structure(source, name~)
+    if cst_result.diagnostics_view().is_empty() {
+      failed = true
+      failures.write_string("CST accepted \{name}\n") |> ignore
+    }
+  }
+  if failed {
+    fail(failures.to_string())
+  }
+}
+
+///|
 test "outdated syntax is rejected" {
   let local_type_source =
     #|fn main {
@@ -145,4 +176,136 @@ test "outdated syntax is rejected" {
     ),
     "out_of_type_new_retained.mbt",
   )
+}
+
+///|
+test "deprecated syntax rejection matrix" {
+  expect_rejected_cases([
+    ("fn f() { try? g() }", "try_question_removed.mbt"),
+    ("fn f() { for { break } }", "dead_for_removed.mbt"),
+    ("fn f() { let _ = [for => 1] }", "dead_list_comprehension_removed.mbt"),
+    ("fn f() { loop 0 { value => value } }", "functional_loop_removed.mbt"),
+    ("fn f() { loop 0 { value => value } else { 0 } }", "loop_else_removed.mbt"),
+    ("fn f() { g!() }", "call_bang_removed.mbt"),
+    ("fn f(x : X) { x.g!() }", "method_call_bang_removed.mbt"),
+    ("fn f() { 1 catch! { _ => 0 } }", "postfix_catch_bang_removed.mbt"),
+    ("fn f() { try 1 catch! { _ => 0 } }", "try_catch_bang_removed.mbt"),
+    ("fn f() -> Int! { 0 }", "old_default_error_annotation_removed.mbt"),
+    ("fn f() -> Int!E { 0 }", "old_error_annotation_removed.mbt"),
+    ("fn f() -> Int?Error { 0 }", "old_maybe_error_annotation_removed.mbt"),
+    ("trait T { fn f!(Self) -> Unit }", "trait_method_bang_removed.mbt"),
+    (
+      "trait T { fn f(Self) -> Unit } impl T for Int with fn f!(self : Int) -> Unit {}",
+      "impl_method_bang_removed.mbt",
+    ),
+    ("fnalias @pkg.f", "fnalias_removed.mbt"),
+    ("typealias @pkg.T", "typealias_removed.mbt"),
+    ("traitalias @pkg.T", "traitalias_removed.mbt"),
+    ("type! E", "type_bang_removed.mbt"),
+    ("extern type T", "extern_type_removed.mbt"),
+    ("suberror E Int", "single_payload_suberror_removed.mbt"),
+    ("fn f() { enum Local { A } }", "local_enum_removed.mbt"),
+  ])
+  let source = "fn f() { try? g() }"
+  let removed_hint = "Deprecated `try?` syntax is not supported; use `try!` or `try ... catch` instead."
+  let (_, hand_reports) = @parser.parse_string(
+    source,
+    name="try_question_removed.mbt",
+    parser=Handrolled,
+  )
+  if hand_reports.is_empty() {
+    fail("handrolled parser unexpectedly accepted try_question_removed.mbt")
+  }
+  for report in hand_reports {
+    if report.msg == removed_hint {
+      fail("handrolled parser emitted the removed `try?` diagnostic")
+    }
+  }
+  let cst_reports = @untyped_cst.parse_structure(
+    source,
+    name="try_question_removed.mbt",
+  ).diagnostics_view()
+  if cst_reports.is_empty() {
+    fail("CST parser unexpectedly accepted try_question_removed.mbt")
+  }
+  for report in cst_reports {
+    if report.msg == removed_hint {
+      fail("CST parser emitted the removed `try?` diagnostic")
+    }
+  }
+}
+
+///|
+test "modern replacements and retained underscore contexts are accepted" {
+  expect_accepted("fn f() { try! g() }", "try_exclamation_retained.mbt")
+  expect_accepted(
+    "fn f() { for ;; { break } }", "explicit_dead_for_retained.mbt",
+  )
+  expect_accepted(
+    "fn f() { let values = [for ;; => 1] }", "explicit_dead_list_comprehension_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|trait T {
+      #|  fn default(Self) -> Unit = _
+      #|}
+      #|fn f(_ : _, value : Int) {
+      #|  let _ = value
+      #|  let arrow = _ => value
+      #|  match value { _ => arrow(()) }
+      #|}
+    ),
+    "retained_underscore_contexts.mbt",
+  )
+  expect_accepted(
+    (
+      #|fn f() {
+      #|  for i = 0; i < 1; i = i + 1 {} where {
+      #|    proof_reasoning: "done"
+      #|  }
+      #|}
+    ),
+    "proof_reasoning_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|#callsite(autofill(args_loc))
+      #|fn f(args_loc~ : ArgsLoc) {}
+    ),
+    "callsite_autofill_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|fn f() {
+      #|  for i = 0; i < 1; i = (if true { 1 } else { 2 }) {}
+      #|  for i = 0; i < 1; i = (x => x) {}
+      #|  for x in (if true { [1] } else { [2] }) {}
+      #|  for x in (y => y) {}
+      #|}
+    ),
+    "parenthesized_loop_header_exprs_retained.mbt",
+  )
+  expect_accepted(
+    (
+      #|let top =
+      #|  #|top
+      #|fn f(writer : Writer) {
+      #|  let local =
+      #|    #|local
+      #|  let mut mutable =
+      #|    #|mutable
+      #|  let grouped = (
+      #|    #|grouped
+      #|  )
+      #|  writer <+
+      #|    #|template
+      #|  for ;; {} where {
+      #|    proof_reasoning:
+      #|      #|reasoning
+      #|  }
+      #|}
+    ),
+    "allowed_multiline_contexts.mbt",
+  )
+  expect_accepted("#deprecated\nfn f() {}", "deprecated_attribute_retained.mbt")
 }
