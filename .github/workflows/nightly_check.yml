@@ -1,0 +1,54 @@
+name: nightly check
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: install
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | MOONBIT_INSTALL_VERSION=nightly bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+
+      - name: moon version
+        run: |
+          moon version --all
+
+      - name: moon update
+        run: |
+          moon update
+
+      # No --deny-warn: nightly surfaces deprecation warnings (e.g. `lexscan`)
+      # ahead of stable, and those are tracked separately from CI health.
+      - name: moon check
+        run: |
+          moon -C lexer check
+          moon check
+
+      - name: moon info
+        run: |
+          moon info --target all
+          git diff --exit-code
+
+      - name: format diff
+        run: |
+          moon fmt
+          git diff --exit-code
+
+      - name: moon test
+        run: |
+          moon test --target all
