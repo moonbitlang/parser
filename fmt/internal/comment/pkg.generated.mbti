@@ -49,8 +49,9 @@ pub fn Mapper::to_debug_info(Self) -> String
 
 type NodeArray
 pub fn NodeArray::empty() -> Self
+#alias("_[_]")
+pub fn NodeArray::get(Self, Int) -> Key?
 pub fn NodeArray::last(Self) -> Key?
-pub fn NodeArray::op_get(Self, Int) -> Key?
 pub impl @prettyprinter.Pretty for NodeArray
 
 type NodeTable
@@ -64,7 +65,8 @@ pub impl @prettyprinter.Pretty for NodeTable
 
 type NodeTableArray
 pub fn NodeTableArray::empty() -> Self
-pub fn NodeTableArray::op_get(Self, Int) -> NodeTable
+#alias("_[_]")
+pub fn NodeTableArray::get(Self, Int) -> NodeTable
 pub impl @prettyprinter.Pretty for NodeTableArray
 
 type TokenGroup

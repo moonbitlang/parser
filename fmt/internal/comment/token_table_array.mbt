@@ -10,7 +10,8 @@ pub fn NodeTableArray::empty() -> NodeTableArray {
 }
 
 ///|
-pub fn NodeTableArray::op_get(self : Self, idx : Int) -> NodeTable {
+#alias("_[_]")
+pub fn NodeTableArray::get(self : Self, idx : Int) -> NodeTable {
   self.0.get(idx).unwrap_or_else(fn() { NodeTable::empty() })
 }
 

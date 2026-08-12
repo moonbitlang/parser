@@ -10,7 +10,8 @@ pub fn NodeArray::empty() -> NodeArray {
 }
 
 ///|
-pub fn NodeArray::op_get(self : Self, idx : Int) -> Key? {
+#alias("_[_]")
+pub fn NodeArray::get(self : Self, idx : Int) -> Key? {
   self.0.get(idx).unwrap_or(None)
 }
 

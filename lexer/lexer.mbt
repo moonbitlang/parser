@@ -99,7 +99,7 @@ fn lex_tokens(
       )
     }
 
-    lexscan input with longest {
+    lexmatch input with longest {
       (
         re"^" +
         RE_LINE_BREAK,
@@ -770,16 +770,6 @@ fn lex_tokens(
         re"(?:[ ]*)" +
         re"(?::)" +
         re"(?:[ ]*)" +
-        re"(?:\))",
-        after=rest,
-      ) => continue add_metavar_error_to_rest(rest, '$', 1)
-      (
-        re"^(?:\.\$(\$\$)?\()" +
-        re"(?:[ ]*)" +
-        re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
-        re"(?:[ ]*)" +
-        re"(?::)" +
-        re"(?:[ ]*)" +
         re"(?:[a-z][a-z]*)",
         after=rest,
       ) => continue add_metavar_error_to_rest(rest, '$', 1)
@@ -1227,29 +1217,9 @@ fn lex_tokens(
         re"(?:[ ]*)" +
         re"(?::)" +
         re"(?:[ ]*)" +
-        re"(?:\))",
-        after=rest,
-      ) => continue add_metavar_error_to_rest(rest, '$', 0)
-      (
-        re"^(?:\$(\$\$)?\()" +
-        re"(?:[ ]*)" +
-        re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
-        re"(?:[ ]*)" +
-        re"(?::)" +
-        re"(?:[ ]*)" +
         re"(?:[a-z][a-z]*)",
         after=rest,
       ) => continue add_metavar_error_to_rest(rest, '$', 0)
-      (
-        re"^(?:\$(\$\$)?\()" +
-        re"(?:[ ]*)" +
-        re"(?:[A-Za-z_][A-Za-z0-9_]*)" +
-        re"(?:[ ]*)" +
-        re"(?:\))",
-        after=rest,
-      ) => continue add_metavar_error_to_rest(rest, '$', 0)
-      (re"^(?:\$(\$\$)?\([ ]*\))" as raw, after=rest) =>
-        continue add_metavar_error(raw, rest, '$', 0)
       (re"^(?:\$(\$\$)?[a-z][a-z]*:[A-Za-z_][A-Za-z0-9_]*~)" as raw, after=rest) =>
         continue add_metavar_error(raw, rest, '$', 0)
       (re"^(?:\$(\$\$)?[a-z][a-z]*:[a-z_][A-Za-z0-9_]*)" as raw, after=rest) =>
@@ -1307,7 +1277,6 @@ fn lex_tokens(
         )
         continue rest
       }
-      _ => panic()
     }
   }
 }
@@ -1373,7 +1342,7 @@ fn scan_interpolation_source(
   preserve~ : Bool,
 ) -> (StringView, Int) {
   for input = input, brace_depth = brace_depth {
-    lexscan input with longest {
+    lexmatch input with longest {
       (re"^" + ((RE_UNICODE_SPACES + re"\}") as raw), after=rest) =>
         if brace_depth == 0 {
           if preserve {
@@ -1519,7 +1488,6 @@ fn scan_interpolation_source(
         interpolation_write_char(env, buf, c)
         continue rest, brace_depth
       }
-      _ => panic()
     }
   }
 }
@@ -1536,7 +1504,7 @@ fn scan_interpolation_string_atom(
   escaped~ : Bool,
 ) -> (StringView, Int) {
   for input = input, escaped = escaped {
-    lexscan input with longest {
+    lexmatch input with longest {
       re"^$" => {
         env.add_lexing_error(
           start=env.calc_offset(base~, input),
@@ -1587,7 +1555,6 @@ fn scan_interpolation_string_atom(
           _ => continue rest, false
         }
       }
-      _ => panic()
     }
   }
 }
@@ -1603,7 +1570,7 @@ fn scan_interpolation_char_atom(
   escaped~ : Bool,
 ) -> (StringView, Int) {
   for input = input, escaped = escaped {
-    lexscan input with longest {
+    lexmatch input with longest {
       re"^$" => {
         env.add_lexing_error(
           start=env.calc_offset(base~, input),
@@ -1636,7 +1603,6 @@ fn scan_interpolation_char_atom(
           _ => continue rest, false
         }
       }
-      _ => panic()
     }
   }
 }
@@ -1659,7 +1625,7 @@ fn lex_invalid_byte(
 
   fn process_invalid_byte(input : StringView) -> StringView {
     for input = input {
-      lexscan input with longest {
+      lexmatch input with longest {
         (re"^(?:')", after=rest) => break add_invalid_byte(rest)
         (re"^" + RE_ASCII_LINE_BREAK, after=_) => {
           env.add_lexing_error(
@@ -1675,7 +1641,6 @@ fn lex_invalid_byte(
           invalid_byte_repr_buf.write_char(c)
           continue rest
         }
-        _ => panic()
       }
     }
   }
@@ -1705,7 +1670,7 @@ fn lex_string(
 
   fn process_string(input : StringView, start_pos : Int) -> StringView {
     for input = input, start_pos = start_pos {
-      lexscan input with longest {
+      lexmatch input with longest {
         (
           re"^(?:\")",
           // End of string
@@ -1837,7 +1802,6 @@ fn lex_string(
           string_repr_buf.write_char(c)
           continue rest, start_pos
         }
-        _ => panic()
       }
     }
   }
