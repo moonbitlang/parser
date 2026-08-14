@@ -87,12 +87,54 @@ fn recovery_is_syntax_string(value : String) -> (@untyped_cst.CstNode) -> Bool {
 }
 
 ///|
+fn recovery_has_direct_child(
+  node : @untyped_cst.CstNode,
+  label : String,
+  pred : (@untyped_cst.NodeKind) -> Bool,
+) -> Bool {
+  for entry in node.children {
+    let (child_label, child) = entry
+    if child_label is Some(found) && found == label && pred(child.kind) {
+      return true
+    }
+  }
+  false
+}
+
+///|
 test "missing function parameter close recovers" {
   let source = "fn f("
   assert_structure_acceptance("missing function parameter close", source, false)
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(recovery_any_node(result.root(), recovery_is_missing()), true)
+}
+
+///|
+test "invalid normalized forms retain their diagnostic source subtrees" {
+  let assignment = @untyped_cst.parse_expression("(x + y) = z")
+  @test.assert_eq(assignment.diagnostics_view().is_empty(), false)
+  @test.assert_eq(
+    recovery_any_node(assignment.root(), fn(node) {
+      node.kind is @untyped_cst.Expr_Assign &&
+      recovery_has_direct_child(node, "lhs", fn(kind) {
+        kind is @untyped_cst.Expr_Group
+      })
+    }),
+    true,
+  )
+
+  let arrow = @untyped_cst.parse_expression("(x + y) => x")
+  @test.assert_eq(arrow.diagnostics_view().is_empty(), false)
+  @test.assert_eq(
+    recovery_any_node(arrow.root(), fn(node) {
+      node.kind is @untyped_cst.Parameter_Positional &&
+      recovery_has_direct_child(node, "error", fn(kind) {
+        kind is @untyped_cst.Expr_Infix
+      })
+    }),
+    true,
+  )
 }
 
 ///|

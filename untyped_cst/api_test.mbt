@@ -42,6 +42,33 @@ fn api_has_labeled_kind(
 }
 
 ///|
+fn api_direct_labeled_kind(
+  node : @untyped_cst.CstNode,
+  label : String,
+  pred : (@untyped_cst.NodeKind) -> Bool,
+) -> Bool {
+  for entry in node.children {
+    let (child_label, child) = entry
+    if child_label is Some(found) && found == label && pred(child.kind) {
+      return true
+    }
+  }
+  false
+}
+
+///|
+fn api_count_direct_label(node : @untyped_cst.CstNode, label : String) -> Int {
+  let mut count = 0
+  for entry in node.children {
+    match entry {
+      (Some(found), _) if found == label => count += 1
+      _ => ()
+    }
+  }
+  count
+}
+
+///|
 fn api_payload_leaf(node : @untyped_cst.CstNode) -> @untyped_cst.CstNode? {
   for entry in node.children {
     let (label, child) = entry
@@ -187,6 +214,86 @@ test "constant kinds and normalized payloads are parser semantics" {
       true,
     )
   }
+}
+
+///|
+test "public CST children expose parse-time normalized expression trees" {
+  let assignment = @untyped_cst.parse_expression("array[i] = value")
+  @test.assert_eq(assignment.diagnostics_view().is_empty(), true)
+  guard api_find_node(assignment.root(), fn(node) {
+      node.kind is @untyped_cst.Expr_ArraySet
+    })
+    is Some(array_set) else {
+    fail("expected array set")
+  }
+  @test.assert_eq(api_count_direct_label(array_set, "lhs"), 0)
+  @test.assert_eq(
+    api_direct_labeled_kind(array_set, "self", fn(kind) {
+      kind is @untyped_cst.Expr_Ident
+    }),
+    true,
+  )
+  @test.assert_eq(
+    api_direct_labeled_kind(array_set, "index", fn(kind) {
+      kind is @untyped_cst.Expr_Ident
+    }),
+    true,
+  )
+
+  let unary_plus = @untyped_cst.parse_expression("+value")
+  @test.assert_eq(unary_plus.diagnostics_view().is_empty(), true)
+  guard api_find_node(unary_plus.root(), fn(node) {
+      node.kind is @untyped_cst.Expr_Apply
+    })
+    is Some(apply) else {
+    fail("expected normalized unary-plus apply")
+  }
+  @test.assert_eq(
+    api_direct_labeled_kind(apply, "func", fn(kind) {
+      kind is @untyped_cst.Expr_Ident
+    }),
+    true,
+  )
+  @test.assert_eq(
+    api_direct_labeled_kind(apply, "arg", fn(kind) {
+      kind is @untyped_cst.List_ArgumentList
+    }),
+    true,
+  )
+
+  let pun = @untyped_cst.parse_expression("f(label~)")
+  @test.assert_eq(pun.diagnostics_view().is_empty(), true)
+  guard api_find_node(pun.root(), fn(node) {
+      node.kind is @untyped_cst.Argument_LabelledPun
+    })
+    is Some(argument) else {
+    fail("expected labelled pun")
+  }
+  @test.assert_eq(
+    api_direct_labeled_kind(argument, "expr", fn(kind) {
+      kind is @untyped_cst.Expr_Ident
+    }),
+    true,
+  )
+
+  let arrow = @untyped_cst.parse_expression("(x : Int) => x")
+  @test.assert_eq(arrow.diagnostics_view().is_empty(), true)
+  guard api_find_node(arrow.root(), fn(node) {
+      node.kind is @untyped_cst.Parameter_Positional
+    })
+    is Some(parameter) else {
+    fail("expected arrow parameter")
+  }
+  @test.assert_eq(
+    api_direct_labeled_kind(parameter, "pattern", fn(kind) {
+      kind is @untyped_cst.Pattern_Var
+    }),
+    true,
+  )
+  @test.assert_eq(
+    api_direct_labeled_kind(parameter, "type", fn(kind) { kind.is_type() }),
+    true,
+  )
 }
 
 ///|
@@ -539,6 +646,14 @@ test "location metadata kinds and scalar helpers are explicit" {
     }),
     true,
   )
+  for label in ["label_loc", "value_loc"] {
+    @test.assert_eq(
+      api_has_labeled_kind(optional.root(), label, fn(kind) {
+        kind is @untyped_cst.Syntax_Identifier
+      }),
+      true,
+    )
+  }
   let separated_pun = @untyped_cst.parse_expression("f(label~, value)")
   @test.assert_eq(separated_pun.diagnostics_view().is_empty(), true)
   for label in ["label_loc", "value_loc"] {

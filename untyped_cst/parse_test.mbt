@@ -244,6 +244,42 @@ fn count_label(node : @untyped_cst.CstNode, label : String) -> Int {
 }
 
 ///|
+fn direct_child(
+  node : @untyped_cst.CstNode,
+  label : String,
+) -> @untyped_cst.CstNode? {
+  for entry in node.children {
+    match entry {
+      (Some(child_label), child) if child_label == label => return Some(child)
+      _ => ()
+    }
+  }
+  None
+}
+
+///|
+fn direct_has_kind(
+  node : @untyped_cst.CstNode,
+  label : String,
+  pred : (@untyped_cst.NodeKind) -> Bool,
+) -> Bool {
+  direct_child(node, label).map(child => pred(child.kind)).unwrap_or(false)
+}
+
+///|
+fn count_node_kind(
+  node : @untyped_cst.CstNode,
+  pred : (@untyped_cst.NodeKind) -> Bool,
+) -> Int {
+  let mut count = if pred(node.kind) { 1 } else { 0 }
+  for entry in node.children {
+    let (_, child) = entry
+    count += count_node_kind(child, pred)
+  }
+  count
+}
+
+///|
 fn has_label_recursive(node : @untyped_cst.CstNode, label : String) -> Bool {
   for i in 0..<node.children.length() {
     match node.children.get(i) {
@@ -765,6 +801,320 @@ test "valid expressions expose AST-aligned semantic kinds" {
     }
     @test.assert_eq(find_node(result.root(), pred) is Some(_), true)
   }
+}
+
+///|
+test "assignment nodes directly own normalized lhs components" {
+  let plain = @untyped_cst.parse_expression("x = y")
+  @test.assert_eq(plain.diagnostics_view().is_empty(), true)
+  guard find_node(plain.root(), fn(node) {
+      node.kind is @untyped_cst.Expr_Assign
+    })
+    is Some(assign) else {
+    fail("expected assignment")
+  }
+  @test.assert_eq(count_label(assign, "lhs"), 0)
+  @test.assert_eq(
+    direct_has_kind(assign, "semantic_name", fn(kind) {
+      kind is @untyped_cst.Name_Var
+    }),
+    true,
+  )
+  @test.assert_eq(
+    direct_has_kind(assign, "rhs", fn(kind) { kind is @untyped_cst.Expr_Ident }),
+    true,
+  )
+
+  let mutate = @untyped_cst.parse_expression("obj.field += y")
+  @test.assert_eq(mutate.diagnostics_view().is_empty(), true)
+  guard find_node(mutate.root(), fn(node) {
+      node.kind is @untyped_cst.Expr_Mutate
+    })
+    is Some(mutation) else {
+    fail("expected mutation")
+  }
+  @test.assert_eq(count_label(mutation, "lhs"), 0)
+  @test.assert_eq(
+    direct_has_kind(mutation, "self", fn(kind) {
+      kind is @untyped_cst.Expr_Ident
+    }),
+    true,
+  )
+  @test.assert_eq(
+    direct_has_kind(mutation, "field", fn(kind) {
+      kind is @untyped_cst.Accessor_Label
+    }),
+    true,
+  )
+
+  let array = @untyped_cst.parse_expression("foo[i] = x")
+  @test.assert_eq(array.diagnostics_view().is_empty(), true)
+  guard find_node(array.root(), fn(node) {
+      node.kind is @untyped_cst.Expr_ArraySet
+    })
+    is Some(array_set) else {
+    fail("expected array set")
+  }
+  @test.assert_eq(count_label(array_set, "lhs"), 0)
+  @test.assert_eq(
+    direct_has_kind(array_set, "self", fn(kind) {
+      kind is @untyped_cst.Expr_Ident
+    }),
+    true,
+  )
+  @test.assert_eq(
+    direct_has_kind(array_set, "index", fn(kind) {
+      kind is @untyped_cst.Expr_Ident
+    }),
+    true,
+  )
+  @test.assert_eq(
+    count_node_kind(array_set, fn(kind) { kind is @untyped_cst.Expr_ArrayGet }),
+    0,
+  )
+
+  let nested = @untyped_cst.parse_expression("foo[i][j] = x")
+  @test.assert_eq(nested.diagnostics_view().is_empty(), true)
+  guard find_node(nested.root(), fn(node) {
+      node.kind is @untyped_cst.Expr_ArraySet
+    })
+    is Some(nested_set) else {
+    fail("expected nested array set")
+  }
+  @test.assert_eq(
+    count_node_kind(nested_set, fn(kind) { kind is @untyped_cst.Expr_ArrayGet }),
+    1,
+  )
+  @test.assert_eq(
+    direct_has_kind(nested_set, "self", fn(kind) {
+      kind is @untyped_cst.Expr_ArrayGet
+    }),
+    true,
+  )
+}
+
+///|
+test "prefix expressions are normalized to final CST constructors" {
+  for source in ["+1", "-1L"] {
+    let result = @untyped_cst.parse_expression(source)
+    @test.assert_eq(result.diagnostics_view().is_empty(), true)
+    guard find_node(result.root(), fn(node) {
+        node.kind is @untyped_cst.Expr_Constant
+      })
+      is Some(constant) else {
+      fail("expected folded constant for \{source}")
+    }
+    @test.assert_eq(count_label(constant, "expr"), 0)
+  }
+  for source in ["+1.0F", "+x"] {
+    let result = @untyped_cst.parse_expression(source)
+    @test.assert_eq(result.diagnostics_view().is_empty(), true)
+    guard find_node(result.root(), fn(node) {
+        node.kind is @untyped_cst.Expr_Apply
+      })
+      is Some(apply) else {
+      fail("expected unary-plus apply for \{source}")
+    }
+    @test.assert_eq(
+      direct_has_kind(apply, "func", fn(kind) {
+        kind is @untyped_cst.Expr_Ident
+      }),
+      true,
+    )
+    @test.assert_eq(
+      direct_has_kind(apply, "arg", fn(kind) {
+        kind is @untyped_cst.List_ArgumentList
+      }),
+      true,
+    )
+    @test.assert_eq(
+      direct_has_kind(apply, "operator", fn(kind) {
+        kind is @untyped_cst.Operator_UnaryPlus
+      }),
+      true,
+    )
+  }
+  for source in ["-x", "!x"] {
+    let result = @untyped_cst.parse_expression(source)
+    @test.assert_eq(result.diagnostics_view().is_empty(), true)
+    @test.assert_eq(
+      find_node(result.root(), fn(node) { node.kind is @untyped_cst.Expr_Unary })
+      is Some(_),
+      true,
+    )
+  }
+  let repeated : Array[(String, String, Int, Int)] = [
+    ("++1", "1", 2, 3),
+    ("+-1", "-1", 1, 3),
+    ("-+1", "-1", 0, 3),
+    ("--1", "1", 0, 3),
+  ]
+  for case in repeated {
+    let (source, value, start, end) = case
+    let result = @untyped_cst.parse_expression(source)
+    @test.assert_eq(result.diagnostics_view().is_empty(), true)
+    guard find_node(result.root(), fn(node) {
+        node.kind is @untyped_cst.Expr_Constant
+      })
+      is Some(expr) &&
+      direct_child(expr, "semantic_constant") is Some(constant) else {
+      fail("expected semantic constant for \{source}")
+    }
+    guard parse_leaf_payload(constant)
+      is Some(@untyped_cst.NodePayload::String(found)) else {
+      fail("expected string constant payload for \{source}")
+    }
+    @test.assert_eq(found, value)
+    @test.assert_eq(constant.loc.start.cnum, start)
+    @test.assert_eq(constant.loc.end.cnum, end)
+  }
+}
+
+///|
+test "pun nodes directly own synthesized values and patterns" {
+  let call = @untyped_cst.parse_expression("f(label~, optional?)")
+  @test.assert_eq(call.diagnostics_view().is_empty(), true)
+  for
+    is_pun in [
+      fn(kind) { kind is @untyped_cst.Argument_LabelledPun },
+      fn(kind) { kind is @untyped_cst.Argument_LabelledOptionPun },
+    ] {
+    guard find_node(call.root(), fn(node) { is_pun(node.kind) }) is Some(pun) else {
+      fail("expected call pun")
+    }
+    @test.assert_eq(
+      direct_has_kind(pun, "expr", fn(kind) { kind is @untyped_cst.Expr_Ident }),
+      true,
+    )
+  }
+
+  let record = @untyped_cst.parse_expression("{ field }")
+  @test.assert_eq(record.diagnostics_view().is_empty(), true)
+  guard find_node(record.root(), fn(node) {
+      node.kind is @untyped_cst.Field_Definition
+    })
+    is Some(field) else {
+    fail("expected record field pun")
+  }
+  @test.assert_eq(
+    direct_has_kind(field, "expr", fn(kind) { kind is @untyped_cst.Expr_Ident }),
+    true,
+  )
+
+  let constructor_pattern = @untyped_cst.parse_expression(
+    "match value { Some(field~) => field }",
+  )
+  @test.assert_eq(constructor_pattern.diagnostics_view().is_empty(), true)
+  guard find_node(constructor_pattern.root(), fn(node) {
+      node.kind is @untyped_cst.Argument_LabelledPun &&
+      direct_has_kind(node, "pattern", fn(kind) {
+        kind is @untyped_cst.Pattern_Var
+      })
+    })
+    is Some(_) else {
+    fail("expected constructor-pattern pun")
+  }
+
+  let record_pattern = @untyped_cst.parse_expression(
+    "match value { { field } => field }",
+  )
+  @test.assert_eq(record_pattern.diagnostics_view().is_empty(), true)
+  guard find_node(record_pattern.root(), fn(node) {
+      node.kind is @untyped_cst.Field_Pattern
+    })
+    is Some(pattern_field) else {
+    fail("expected record-pattern pun")
+  }
+  @test.assert_eq(
+    direct_has_kind(pattern_field, "pattern", fn(kind) {
+      kind is @untyped_cst.Pattern_Var
+    }),
+    true,
+  )
+}
+
+///|
+test "arrow parameter lists contain final patterns and preserve delimiters" {
+  let multi = @untyped_cst.parse_expression("(x, y) => x")
+  @test.assert_eq(multi.diagnostics_view().is_empty(), true)
+  guard find_node(multi.root(), fn(node) {
+      node.kind is @untyped_cst.List_ParameterList
+    })
+    is Some(params) else {
+    fail("expected arrow parameter list")
+  }
+  @test.assert_eq(count_label(params, "open"), 1)
+  @test.assert_eq(count_label(params, "item"), 2)
+  @test.assert_eq(count_label(params, "sep"), 1)
+  @test.assert_eq(count_label(params, "close"), 1)
+  @test.assert_eq(
+    count_node_kind(params, fn(kind) {
+      kind
+      is (@untyped_cst.Expr_Ident
+      | @untyped_cst.Expr_Hole
+      | @untyped_cst.Expr_Constraint)
+    }),
+    0,
+  )
+  @test.assert_eq(
+    count_node_kind(params, fn(kind) { kind is @untyped_cst.Pattern_Var }),
+    2,
+  )
+
+  let typed = @untyped_cst.parse_expression("(x : Int) => x")
+  @test.assert_eq(typed.diagnostics_view().is_empty(), true)
+  guard find_node(typed.root(), fn(node) {
+      node.kind is @untyped_cst.Parameter_Positional
+    })
+    is Some(typed_param) else {
+    fail("expected typed arrow parameter")
+  }
+  @test.assert_eq(
+    direct_has_kind(typed_param, "pattern", fn(kind) {
+      kind is @untyped_cst.Pattern_Var
+    }),
+    true,
+  )
+  @test.assert_eq(
+    direct_has_kind(typed_param, "type", fn(kind) { kind.is_type() }),
+    true,
+  )
+  @test.assert_eq(
+    count_node_kind(typed_param, fn(kind) {
+      kind is @untyped_cst.Expr_Constraint
+    }),
+    0,
+  )
+
+  let discard = @untyped_cst.parse_expression("_ => 0")
+  @test.assert_eq(discard.diagnostics_view().is_empty(), true)
+  guard find_node(discard.root(), fn(node) {
+      node.kind is @untyped_cst.Parameter_DiscardPositional
+    })
+    is Some(discard_param) else {
+    fail("expected discard arrow parameter")
+  }
+  @test.assert_eq(
+    direct_has_kind(discard_param, "pattern", fn(kind) {
+      kind is @untyped_cst.Pattern_Any
+    }),
+    true,
+  )
+
+  let pipeline = @untyped_cst.parse_expression("value |> x => { x }")
+  @test.assert_eq(pipeline.diagnostics_view().is_empty(), true)
+  guard find_node(pipeline.root(), fn(node) {
+      node.kind is @untyped_cst.Parameter_Positional
+    })
+    is Some(pipe_param) else {
+    fail("expected pipeline arrow parameter")
+  }
+  @test.assert_eq(
+    direct_has_kind(pipe_param, "pattern", fn(kind) {
+      kind is @untyped_cst.Pattern_Var
+    }),
+    true,
+  )
 }
 
 ///|
