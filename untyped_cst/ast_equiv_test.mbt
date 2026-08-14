@@ -254,6 +254,29 @@ test "float unary plus matches handrolled AST" {
 }
 
 ///|
+test "parse-time normalized assignments and prefixes match handrolled AST" {
+  let cases = [
+    "x = y", "obj.field += y", "foo[i] = x", "foo[i][j] = x", "+1", "-1L", "+1.0F",
+    "+x", "-x", "!x", "++1", "+-1", "-+1", "--1",
+  ]
+  for source in cases {
+    assert_expr_ast_equiv(source)
+  }
+}
+
+///|
+test "parse-time normalized puns and arrow parameters match handrolled AST" {
+  let cases = [
+    "f(label~, optional?)", "{ field }", "match value { Some(field~) => field }",
+    "match value { { field } => field }", "x => x", "_ => 0", "(x, y) => x", "(x : Int) => x",
+    "value |> x => { x }",
+  ]
+  for source in cases {
+    assert_expr_ast_equiv(source)
+  }
+}
+
+///|
 test "qualified trait impl matches handrolled AST" {
   let cases = [
     "impl @debug.Debug for T", "impl @debug.Debug for T with to_repr(self) { self }",

@@ -306,6 +306,118 @@ test "labelled-pun value and label locations agree across all parsers" {
 }
 
 ///|
+fn find_top_let_constant_loc(
+  impls : @syntax.Impls,
+) -> @basic.Location raise Error {
+  for impl_ in impls {
+    match impl_ {
+      TopLetDef(expr=Constant(loc~, ..), ..) => return loc
+      _ => ()
+    }
+  }
+  fail("expected a top-level constant definition")
+}
+
+///|
+fn parse_prefix_constant_loc_regression(
+  source_expr : String,
+  parser : @parser.Parser,
+) -> @basic.Location raise Error {
+  let source = "let result = \{source_expr}"
+  let (impls, diagnostics) = @parser.parse_string(
+    source,
+    name="prefix_constant_loc_regression.mbt",
+    parser~,
+  )
+  if !diagnostics.is_empty() {
+    fail("prefix-constant fixture was rejected: \{Repr(diagnostics)}")
+  }
+  find_top_let_constant_loc(impls)
+}
+
+///|
+fn parse_prefix_constant_cst_loc_regression(
+  source_expr : String,
+) -> @basic.Location raise Error {
+  let source = "let result = \{source_expr}"
+  let result = @untyped_cst.parse_structure(
+    source,
+    name="prefix_constant_loc_regression.mbt",
+  )
+  if !result.diagnostics_view().is_empty() {
+    fail("prefix-constant fixture was rejected by CST parser")
+  }
+  let (impls, diagnostics) = result.to_impls()
+  if !diagnostics.is_empty() {
+    fail(
+      "prefix-constant CST lowering produced diagnostics: \{Repr(diagnostics)}",
+    )
+  }
+  find_top_let_constant_loc(impls)
+}
+
+///|
+test "folded prefix constant locations agree across all parsers" {
+  let base = "let result = ".length()
+  let cases : Array[(String, Int, Int)] = [
+    ("+1", 1, 2),
+    ("++1", 2, 3),
+    ("+-1", 1, 3),
+    ("-+1", 0, 3),
+    ("--1", 0, 3),
+  ]
+  for case in cases {
+    let (source, start, end) = case
+    let hand = parse_prefix_constant_loc_regression(source, Handrolled)
+    let yacc = parse_prefix_constant_loc_regression(source, MoonYacc)
+    let cst = parse_prefix_constant_cst_loc_regression(source)
+    for loc in [hand, yacc, cst] {
+      @test.assert_eq(loc.start.cnum, base + start)
+      @test.assert_eq(loc.end.cnum, base + end)
+    }
+  }
+}
+
+///|
+test "nested array-set locations agree across all parsers" {
+  let source =
+    #|fn nested(
+    #|  foo : Array[Array[Int]],
+    #|  i : Int,
+    #|  j : Int,
+    #|  x : Int,
+    #|) {
+    #|  foo[i][j] = x
+    #|}
+  let name = "nested_array_set_loc_regression.mbt"
+  let (hand_impls, hand_diagnostics) = @parser.parse_string(
+    source,
+    name~,
+    parser=Handrolled,
+  )
+  let (yacc_impls, yacc_diagnostics) = @parser.parse_string(
+    source,
+    name~,
+    parser=MoonYacc,
+  )
+  if !hand_diagnostics.is_empty() || !yacc_diagnostics.is_empty() {
+    fail("nested array-set fixture was rejected")
+  }
+  let hand_json = @basic.show_loc.protect(String, fn() {
+    hand_impls.map(impl_ => impl_.json_repr()).to_json()
+  })
+  let yacc_json = @basic.show_loc.protect(String, fn() {
+    yacc_impls.map(impl_ => impl_.json_repr()).to_json()
+  })
+  let cst_json = @basic.show_loc.protect(String, fn() raise {
+    cst_impls_json(source, name)
+  })
+  if hand_json != yacc_json || hand_json != cst_json {
+    fail("nested array-set loc-sensitive AST mismatch between parsers")
+  }
+}
+
+///|
 fn parse_loop_label_loc_regression(
   parser : @parser.Parser,
 ) -> @basic.Location raise Error {
