@@ -303,6 +303,182 @@ fn constant_can_fold_prefix(constant : CstNode, operator : Token) -> Bool {
 }
 
 ///|
+fn semantic_ident_expr(
+  name : String,
+  loc : Location,
+  source_span : (Int, Int),
+) -> CstNode {
+  let name_node = scalar_node(Name_Identifier, loc, source_span, String(name))
+  node(Expr_Ident, loc, source_span, [(Some("name"), name_node)]).with_structured_name(
+    "semantic_name",
+    Name_Var,
+    ["name"],
+  )
+}
+
+///|
+fn semantic_var_pattern(
+  name : String,
+  loc : Location,
+  source_span : (Int, Int),
+) -> CstNode {
+  let name_node = scalar_node(Name_Identifier, loc, source_span, String(name))
+  node(Pattern_Var, loc, source_span, [(Some("name"), name_node)]).with_structured_name(
+    "semantic_name",
+    Name_Binder,
+    ["name"],
+  )
+}
+
+///|
+fn semantic_ident_expr_from_name(source : CstNode) -> CstNode? {
+  source
+  .lexical_name_value()
+  .map(name => {
+    semantic_ident_expr(
+      name.string_payload().unwrap_or(""),
+      name.loc,
+      name.source_span,
+    )
+  })
+}
+
+///|
+fn semantic_var_pattern_from_name(source : CstNode) -> CstNode? {
+  source
+  .lexical_name_value()
+  .map(name => {
+    semantic_var_pattern(
+      name.string_payload().unwrap_or(""),
+      name.loc,
+      name.source_span,
+    )
+  })
+}
+
+///|
+fn CstNode::with_pun_expr(self : CstNode) -> CstNode {
+  if self.first_child_with_label("expr") is Some(_) {
+    return self
+  }
+  guard self.first_child_with_label("name") is Some(name) &&
+    semantic_ident_expr_from_name(name) is Some(expr) else {
+    return self
+  }
+  let children : Array[(String?, CstNode)] = []
+  for entry in self.children {
+    children.push(entry)
+  }
+  push_child(children, Some("expr"), expr)
+  node(self.kind, self.loc, self.source_span, children)
+}
+
+///|
+fn CstNode::with_pun_pattern(self : CstNode) -> CstNode {
+  if self.first_child_with_label("pattern") is Some(_) {
+    return self
+  }
+  guard self.first_child_with_label("name") is Some(name) &&
+    semantic_var_pattern_from_name(name) is Some(pattern) else {
+    return self
+  }
+  let children : Array[(String?, CstNode)] = []
+  for entry in self.children {
+    children.push(entry)
+  }
+  push_child(children, Some("pattern"), pattern)
+  node(self.kind, self.loc, self.source_span, children)
+}
+
+///|
+fn CstNode::with_pun_locations(self : CstNode) -> CstNode {
+  guard self.first_child_with_label("name") is Some(name) &&
+    name.lexical_name_value() is Some(value) else {
+    return self
+  }
+  let token_kind = if name.kind.is_syntax_token() {
+    name.kind
+  } else {
+    Syntax_Delimiter
+  }
+  let with_label_loc = if self.first_child_with_label("label_loc") is None {
+    self.with_token_location(
+      "label_loc",
+      token_kind,
+      name.loc,
+      name.source_span,
+    )
+  } else {
+    self
+  }
+  if with_label_loc.first_child_with_label("value_loc") is None {
+    with_label_loc.with_token_location(
+      "value_loc",
+      token_kind,
+      value.loc,
+      value.source_span,
+    )
+  } else {
+    with_label_loc
+  }
+}
+
+///|
+fn folded_prefix_constant_node(
+  op : CstNode,
+  operator : CstNode,
+  operand : CstNode,
+  constant : CstNode,
+  negative : Bool,
+) -> CstNode {
+  let loc = op.loc.merge(operand.loc)
+  let source_span = mk_span(op.source_span.0, operand.source_span.1)
+  let semantic_loc = if negative { loc } else { constant.loc }
+  let semantic_span = if negative { source_span } else { constant.source_span }
+  let signed = signed_constant_node(constant, negative)
+  let semantic_constant = scalar_node(
+    signed.kind,
+    semantic_loc,
+    semantic_span,
+    String(signed.string_payload().unwrap_or("")),
+  )
+  let children : Array[(String?, CstNode)] = [
+    (Some("op"), op),
+    (Some("operator"), operator),
+  ]
+  for entry in operand.children {
+    if !(entry.0 is Some("semantic_constant")) {
+      children.push(entry)
+    }
+  }
+  push_child(children, Some("semantic_constant"), semantic_constant)
+  node(Expr_Constant, loc, source_span, children)
+}
+
+///|
+fn unary_plus_apply_node(
+  op : CstNode,
+  operator : CstNode,
+  operand : CstNode,
+) -> CstNode {
+  let loc = op.loc.merge(operand.loc)
+  let source_span = mk_span(op.source_span.0, operand.source_span.1)
+  let func = semantic_ident_expr("~+", loc, source_span)
+  let argument = node(Argument_Positional, operand.loc, operand.source_span, [
+    (Some("expr"), operand),
+  ])
+  let arguments = node(List_ArgumentList, operand.loc, operand.source_span, [
+    (Some("item"), argument),
+  ])
+  node(Expr_Apply, loc, source_span, [
+    (Some("op"), op),
+    (Some("operator"), operator),
+    (Some("func"), func),
+    (Some("arg"), arguments),
+  ])
+}
+
+///|
 fn token_location_node(
   kind : NodeKind,
   loc : Location,

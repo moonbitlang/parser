@@ -1447,14 +1447,10 @@ fn lower_literal_expr(node : CstNode) -> @syntax.Expr {
       @syntax.Expr::BytesInterp(elems=lower_interp_elems(node), loc=node.loc)
     _ =>
       if lower_constant_from_node(node) is Some(c) {
-        let loc = if node.has_child_kind(Operator_UnaryPlus) {
-          node
-          .first_child_with_label("expr")
-          .map(expr => expr.loc)
+        let loc = node
+          .first_child_with_label("semantic_constant")
+          .map(constant => constant.loc)
           .unwrap_or(node.loc)
-        } else {
-          node.loc
-        }
         @syntax.Expr::Constant(c~, loc~)
       } else {
         lower_hole_expr(node.loc)
@@ -1661,48 +1657,17 @@ fn lower_arguments(list : CstNode) -> List[@syntax.Argument] {
   let args : Array[@syntax.Argument] = []
   for i in 0..<list.children.length() {
     guard list.children.get(i) is Some((Some("item"), item)) else { continue }
-    let value = match item.kind {
-      Argument_LabelledPun =>
-        item
-        .first_child_with_label("name")
-        .map(name => {
-          lower_argument_pun_value(
-            name,
-            item
-            .first_child_with_label("value_loc")
-            .map(fn(anchor) { anchor.loc })
-            .unwrap_or(item.loc),
-          )
-        })
-        .unwrap_or(lower_hole_expr(item.loc))
-      Argument_LabelledOptionPun =>
-        item
-        .first_child_with_label("name")
-        .map(name => lower_argument_pun_value(name, name.loc))
-        .unwrap_or(lower_hole_expr(item.loc))
-      kind if kind.is_argument() =>
-        item
-        .first_child_with_label("expr")
-        .map(lower_expr)
-        .unwrap_or(lower_hole_expr(item.loc))
-      _ => lower_expr(item)
+    let value = if item.kind.is_argument() {
+      item
+      .first_child_with_label("expr")
+      .map(lower_expr)
+      .unwrap_or(lower_hole_expr(item.loc))
+    } else {
+      lower_expr(item)
     }
     args.push(@syntax.Argument::{ value, kind: lower_argument_kind(item) })
   }
   lower_array_to_list(args)
-}
-
-///|
-fn lower_argument_pun_value(node : CstNode, loc : Location) -> @syntax.Expr {
-  @syntax.Expr::Ident(
-    id=@syntax.Var::{
-      name: @syntax.LongIdent::Ident(
-        name=lower_semantic_string(node).unwrap_or(""),
-      ),
-      loc,
-    },
-    loc~,
-  )
 }
 
 ///|
@@ -1866,15 +1831,7 @@ fn lower_record_field_def(node : CstNode) -> @syntax.FieldDef {
   let expr = node
     .first_child_with_label("expr")
     .map(lower_expr)
-    .unwrap_or(
-      @syntax.Expr::Ident(
-        id=@syntax.Var::{
-          name: @syntax.LongIdent::Ident(name=label.name),
-          loc: label.loc,
-        },
-        loc=label.loc,
-      ),
-    )
+    .unwrap_or(lower_hole_expr(node.loc))
   @syntax.FieldDef::{
     label,
     expr,
@@ -1995,16 +1952,9 @@ fn lower_prefix_expr(node : CstNode) -> @syntax.Expr {
     .unwrap_or(lower_hole_expr(node.loc))
   let operator = node.first_child_of_kind(NodeKind::is_operator).unwrap_or(node)
   let op_name = operator.string_payload().unwrap_or("")
-  match operator.kind {
-    Operator_UnaryPlus => return @syntax.make_uplus(loc=node.loc, op_name, expr)
-    Operator_UnaryMinus =>
-      return @syntax.make_uminus(loc=node.loc, op_name, expr)
-    Operator_UnaryNot => return @syntax.make_unot(loc=node.loc, expr)
-    _ => ()
-  }
   let op = @syntax.Var::{
     name: @syntax.LongIdent::Ident(name=op_name),
-    loc: operator.loc,
+    loc: node.loc,
   }
   @syntax.Expr::Unary(op~, expr~, loc=node.loc)
 }
@@ -2028,10 +1978,19 @@ fn lower_while_expr(node : CstNode) -> @syntax.Expr {
 
 ///|
 fn lower_assign_expr(node : CstNode) -> @syntax.Expr {
-  let lhs = node.first_child_with_label("lhs")
+  if node.first_child_with_label("lhs") is Some(_) {
+    return lower_hole_expr(node.loc)
+  }
   let augmented = node.bool_marker_value(Flag_Augmented).unwrap_or(false)
-  match (node.kind, lhs.map(lower_expr)) {
-    (Expr_Assign, Some(@syntax.Expr::Ident(id~, ..))) => {
+  match node.kind {
+    Expr_Assign => {
+      guard node.first_child_with_label("semantic_name") is Some(name) else {
+        return lower_hole_expr(node.loc)
+      }
+      let id = @syntax.Var::{
+        name: lower_long_ident_from_child(node, "semantic_name", "name"),
+        loc: name.loc,
+      }
       let expr = node
         .first_child_with_label("rhs")
         .map(lower_expr)
@@ -2043,11 +2002,13 @@ fn lower_assign_expr(node : CstNode) -> @syntax.Expr {
       }
       @syntax.Expr::Assign(var_=id, expr~, augmented_by~, loc=node.loc)
     }
-    (
-      Expr_ArraySet
-      | Expr_ArrayAugmentedSet,
-      Some(@syntax.Expr::ArrayGet(array~, index~, ..)),
-    ) => {
+    Expr_ArraySet | Expr_ArrayAugmentedSet => {
+      guard node.first_child_with_label("self") is Some(array_node) &&
+        node.first_child_with_label("index") is Some(index_node) else {
+        return lower_hole_expr(node.loc)
+      }
+      let array = lower_expr(array_node)
+      let index = lower_expr(index_node)
       let value = node
         .first_child_with_label("rhs")
         .map(lower_expr)
@@ -2071,7 +2032,13 @@ fn lower_assign_expr(node : CstNode) -> @syntax.Expr {
         @syntax.Expr::ArraySet(array~, index~, value~, loc=node.loc)
       }
     }
-    (Expr_Mutate, Some(@syntax.Expr::Field(record~, accessor~, ..))) => {
+    Expr_Mutate => {
+      guard node.first_child_with_label("self") is Some(record_node) &&
+        node.first_child_with_label("field") is Some(_) else {
+        return lower_hole_expr(node.loc)
+      }
+      let record = lower_expr(record_node)
+      let accessor = lower_accessor_child(node)
       let field = node
         .first_child_with_label("rhs")
         .map(lower_expr)
@@ -2273,12 +2240,8 @@ fn lower_method_expr(node : CstNode) -> @syntax.Expr {
 }
 
 ///|
-fn lower_field_expr(node : CstNode) -> @syntax.Expr {
-  let record = node
-    .first_child_with_label("self")
-    .map(lower_expr)
-    .unwrap_or(lower_hole_expr(node.loc))
-  let accessor = if node.first_child_with_label("field") is Some(field) {
+fn lower_accessor_child(node : CstNode) -> @syntax.Accessor {
+  if node.first_child_with_label("field") is Some(field) {
     match field.kind {
       Accessor_Index =>
         @syntax.Accessor::Index(
@@ -2291,6 +2254,15 @@ fn lower_field_expr(node : CstNode) -> @syntax.Expr {
   } else {
     @syntax.Accessor::Label(@syntax.Label::{ name: "", loc: node.loc })
   }
+}
+
+///|
+fn lower_field_expr(node : CstNode) -> @syntax.Expr {
+  let record = node
+    .first_child_with_label("self")
+    .map(lower_expr)
+    .unwrap_or(lower_hole_expr(node.loc))
+  let accessor = lower_accessor_child(node)
   @syntax.Expr::Field(record~, accessor~, loc=node.loc)
 }
 
@@ -3840,9 +3812,7 @@ fn lower_record_pattern_field(node : CstNode) -> @syntax.FieldPat {
   let pattern = node
     .first_child_with_label("pattern")
     .map(lower_pattern)
-    .unwrap_or(
-      @syntax.Pattern::Var(@syntax.Binder::{ name: label.name, loc: label.loc }),
-    )
+    .unwrap_or(@syntax.Pattern::Any(loc=node.loc))
   @syntax.FieldPat::{
     label,
     pattern,
@@ -4012,16 +3982,14 @@ fn constructor_pattern_is_open(node : CstNode) -> Bool {
 ///|
 fn lower_constructor_pattern_arg(item : CstNode) -> @syntax.ConstrPatArg {
   match item.kind {
-    Argument_LabelledPun => {
-      let label_node = item.first_child_with_label("name").unwrap_or(item)
-      let binder = lower_post_label_binder_from_node(label_node)
+    Argument_LabelledPun =>
       @syntax.ConstrPatArg::{
-        pat: @syntax.Pattern::Var(binder),
-        kind: @syntax.ArgumentKind::LabelledPun(
-          lower_label_from_node(label_node),
-        ),
+        pat: item
+        .first_child_with_label("pattern")
+        .map(lower_pattern)
+        .unwrap_or(@syntax.Pattern::Any(loc=item.loc)),
+        kind: lower_argument_kind(item),
       }
-    }
     Argument_Labelled =>
       @syntax.ConstrPatArg::{
         pat: item

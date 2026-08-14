@@ -89,7 +89,8 @@ pub enum NodeKind {
   // Expressions.
   /// Corresponds to `@syntax.Expr::Ident`.
   Expr_Ident
-  /// Corresponds to `@syntax.Expr::Constant`.
+  /// Corresponds to `@syntax.Expr::Constant`; folded prefix operators and the
+  /// final semantic constant are direct children (there is no operand wrapper).
   Expr_Constant
   /// Corresponds to `@syntax.Expr::Interp`.
   Expr_Interp
@@ -97,7 +98,8 @@ pub enum NodeKind {
   Expr_BytesInterp
   /// Usually lowers to `Expr::Group` with `Group::Brace`; function bodies unwrap it.
   Expr_Block
-  /// Corresponds to `@syntax.Expr::Apply`.
+  /// Corresponds to `@syntax.Expr::Apply`, including non-folding unary `+`
+  /// with a synthesized `~+` function and one positional argument.
   Expr_Apply
   /// Corresponds to `@syntax.Expr::DotApply`.
   Expr_DotApply
@@ -111,9 +113,11 @@ pub enum NodeKind {
   Expr_Array
   /// Corresponds to `@syntax.Expr::ArraySpread`.
   Expr_ArraySpread
-  /// Corresponds to `@syntax.Expr::ArraySet`.
+  /// Corresponds to `@syntax.Expr::ArraySet`; directly owns `self`, `index`,
+  /// bracket syntax, `index_loc`, the assignment operator, and `rhs`.
   Expr_ArraySet
-  /// Corresponds to `@syntax.Expr::ArrayAugmentedSet`.
+  /// Corresponds to `@syntax.Expr::ArrayAugmentedSet` with the same direct
+  /// array/index children as `Expr_ArraySet` plus its augmented operator.
   Expr_ArrayAugmentedSet
   /// Corresponds to `@syntax.Expr::ListComprehension`.
   Expr_ListComprehension
@@ -141,11 +145,13 @@ pub enum NodeKind {
   Expr_RevPipe
   /// Corresponds to `@syntax.Expr::Implies`.
   Expr_Implies
-  /// Corresponds to `@syntax.Expr::Unary`.
+  /// Corresponds to `@syntax.Expr::Unary` for non-folding `-` and `!`.
   Expr_Unary
-  /// Corresponds to `@syntax.Expr::Assign`.
+  /// Corresponds to `@syntax.Expr::Assign`; directly owns the variable name,
+  /// assignment operator, and `rhs`. Only recovery nodes retain an `lhs` child.
   Expr_Assign
-  /// Corresponds to `@syntax.Expr::Mutate`.
+  /// Corresponds to `@syntax.Expr::Mutate`; directly owns `self`, `field`, the
+  /// assignment operator, and `rhs`.
   Expr_Mutate
   /// Corresponds to `@syntax.Expr::If`.
   Expr_If
@@ -343,21 +349,25 @@ pub enum NodeKind {
   Argument_Positional
   /// Corresponds to `@syntax.ArgumentKind::Labelled`.
   Argument_Labelled
-  /// Corresponds to `@syntax.ArgumentKind::LabelledPun`.
+  /// Corresponds to `@syntax.ArgumentKind::LabelledPun` and directly owns its
+  /// synthesized `Expr_Ident` value plus `label_loc` and `value_loc` anchors.
   Argument_LabelledPun
   /// Corresponds to `@syntax.ArgumentKind::LabelledOption`.
   Argument_LabelledOption
-  /// Corresponds to `@syntax.ArgumentKind::LabelledOptionPun`.
+  /// Corresponds to `@syntax.ArgumentKind::LabelledOptionPun` and directly
+  /// owns its synthesized `Expr_Ident` value and location anchors.
   Argument_LabelledOptionPun
   /// Corresponds to `@syntax.SpreadableElem::Regular`.
   ArrayElement_Regular
   /// Corresponds to `@syntax.SpreadableElem::Spread`.
   ArrayElement_Spread
-  /// Corresponds to `@syntax.Parameter::DiscardPositional`.
+  /// Corresponds to `@syntax.Parameter::DiscardPositional` and directly owns a
+  /// `Pattern_Any` plus any type and source tokens.
   Parameter_DiscardPositional
-  /// Corresponds to `@syntax.Parameter::Positional`.
+  /// Corresponds to `@syntax.Parameter::Positional` and directly owns a
+  /// `Pattern_Var` plus any type and source tokens.
   Parameter_Positional
-  /// Corresponds to `@syntax.Parameter::Labelled`.
+  /// Corresponds to `@syntax.Parameter::Labelled` with a direct pattern child.
   Parameter_Labelled
   /// Corresponds to `@syntax.Parameter::Optional`.
   Parameter_Optional
@@ -373,9 +383,11 @@ pub enum NodeKind {
   Parameter_ConstructorLabelled
   /// Corresponds to `@syntax.FieldDecl`.
   Field_Declaration
-  /// Corresponds to `@syntax.FieldDef`.
+  /// Corresponds to `@syntax.FieldDef`; a pun directly owns its synthesized
+  /// `Expr_Ident` value and retains `Flag_Pun`.
   Field_Definition
-  /// Corresponds to `@syntax.FieldPat`.
+  /// Corresponds to `@syntax.FieldPat`; a pun directly owns its synthesized
+  /// `Pattern_Var` and retains `Flag_Pun`.
   Field_Pattern
   /// Corresponds to `@syntax.MapExprElem`.
   Field_MapExpression
@@ -465,7 +477,7 @@ pub enum NodeKind {
   Operator_Infix
   /// Augmented-assignment spelling stored in `Assign`, `Mutate`, or `ArrayAugmentedSet`.
   Operator_Augmented
-  /// Unary `+` spelling used to build or fold `@syntax.Expr::Unary`.
+  /// Unary `+` source spelling on a normalized `Expr_Apply` or `Expr_Constant`.
   Operator_UnaryPlus
   /// Unary `-` spelling used to build or fold `@syntax.Expr::Unary`.
   Operator_UnaryMinus

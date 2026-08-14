@@ -3303,6 +3303,21 @@ fn assignment_node_kind(lhs : CstNode, is_augmented : Bool) -> NodeKind {
 }
 
 ///|
+fn push_assignment_lhs_children(
+  children : Array[(String?, CstNode)],
+  lhs : CstNode,
+  normalize : Bool,
+) -> Unit {
+  if normalize {
+    for entry in lhs.children {
+      children.push(entry)
+    }
+  } else {
+    push_child(children, Some("lhs"), lhs)
+  }
+}
+
+///|
 fn function_node_from_children(
   state : ParserState,
   children : Array[(String?, CstNode)],
@@ -3730,13 +3745,15 @@ fn parse_expr_pipe(
       Some((EQUAL, _, _))
       | Some((PLUS_EQUAL, _, _))
       | Some((AUGMENTED_ASSIGNMENT(_), _, _)) => {
-        if state.reports.length() == reports_before_lhs &&
-          !assignment_lhs_is_valid(lhs) {
+        let normalize_lhs = state.reports.length() == reports_before_lhs &&
+          assignment_lhs_is_valid(lhs)
+        if state.reports.length() == reports_before_lhs && !normalize_lhs {
           state.report(lhs.loc, "Invalid left value in assignment")
         }
         let is_augmented = !state.current_is(TokenKind::TK_EQUAL)
         let kind = assignment_node_kind(lhs, is_augmented)
-        let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
+        let children : Array[(String?, CstNode)] = []
+        push_assignment_lhs_children(children, lhs, normalize_lhs)
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
           push_direct_operator(children, op)
@@ -3876,8 +3893,17 @@ fn parse_arrow_params_from_expr(expr : CstNode) -> CstNode {
     Expr_Unit | Expr_Group | Expr_Tuple =>
       if expr.first_child_with_label("body") is Some(body) {
         let children : Array[(String?, CstNode)] = []
-        for item in lower_item_children(body) {
-          push_child(children, Some("item"), parse_arrow_param_from_expr(item))
+        for entry in body.children {
+          let (label, child) = entry
+          if label is Some("item") {
+            push_child(
+              children,
+              Some("item"),
+              parse_arrow_param_from_expr(child),
+            )
+          } else {
+            children.push(entry)
+          }
         }
         node(List_ParameterList, body.loc, body.source_span, children)
       } else {
@@ -3895,44 +3921,130 @@ fn parse_single_arrow_param_list(expr : CstNode) -> CstNode {
 }
 
 ///|
-fn parse_arrow_param_from_expr(expr : CstNode) -> CstNode {
-  let parameter_kind = match expr.kind {
-    Expr_Constraint =>
-      match expr.first_child_with_label("expr") {
-        Some(inner) =>
-          match inner.kind {
-            Expr_Hole => Parameter_DiscardPositional
-            Argument_Labelled | Argument_LabelledPun => Parameter_Labelled
-            Argument_LabelledOption | Argument_LabelledOptionPun =>
-              Parameter_QuestionOptional
-            _ => Parameter_Positional
-          }
-        None => Parameter_DiscardPositional
-      }
-    Expr_Hole => Parameter_DiscardPositional
+fn arrow_parameter_kind(expr : CstNode) -> NodeKind {
+  match expr.kind {
+    Expr_Hole | Expr_MissingExpr => Parameter_DiscardPositional
     Argument_Labelled | Argument_LabelledPun => Parameter_Labelled
     Argument_LabelledOption | Argument_LabelledOptionPun =>
       Parameter_QuestionOptional
     _ => Parameter_Positional
   }
-  match expr.kind {
-    Expr_Constraint => {
-      let children : Array[(String?, CstNode)] = []
-      if expr.first_child_with_label("expr") is Some(pattern) {
-        push_child(children, Some("pattern"), pattern)
-      } else {
-        ()
-      }
-      if expr.first_child_with_label("type") is Some(ty) {
-        push_child(children, Some("type"), ty)
-      } else {
-        ()
-      }
-      node(parameter_kind, expr.loc, expr.source_span, children)
+}
+
+///|
+fn arrow_var_pattern_from_ident(expr : CstNode) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  for entry in expr.children {
+    if !(entry.0 is Some("semantic_name")) {
+      children.push(entry)
     }
-    _ =>
-      node(parameter_kind, expr.loc, expr.source_span, [(Some("pattern"), expr)])
   }
+  node(Pattern_Var, expr.loc, expr.source_span, children).with_structured_name(
+    "semantic_name",
+    Name_Binder,
+    ["name"],
+  )
+}
+
+///|
+fn arrow_any_pattern_from_hole(expr : CstNode) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  for entry in expr.children {
+    let (label, child) = entry
+    if child.kind.is_syntax_token() || child.kind is (Error | Missing) {
+      children.push(
+        (if label is Some("token") { Some("name") } else { label }, child),
+      )
+    }
+  }
+  node(Pattern_Any, expr.loc, expr.source_span, children)
+}
+
+///|
+fn arrow_var_pattern_from_argument(expr : CstNode) -> CstNode? {
+  guard expr.first_child_with_label("name") is Some(name) else { return None }
+  if expr.kind is (Argument_LabelledPun | Argument_LabelledOptionPun) {
+    let children : Array[(String?, CstNode)] = [(Some("name"), name)]
+    Some(
+      node(Pattern_Var, name.loc, name.source_span, children).with_structured_name(
+        "semantic_name",
+        Name_Binder,
+        ["name"],
+      ),
+    )
+  } else {
+    semantic_var_pattern_from_name(name)
+  }
+}
+
+///|
+fn arrow_pattern_from_expr(expr : CstNode) -> CstNode? {
+  match expr.kind {
+    Expr_Ident => Some(arrow_var_pattern_from_ident(expr))
+    Expr_Hole => Some(arrow_any_pattern_from_hole(expr))
+    Expr_MissingExpr => {
+      let children : Array[(String?, CstNode)] = []
+      for entry in expr.children {
+        children.push(entry)
+      }
+      Some(node(Pattern_MissingPattern, expr.loc, expr.source_span, children))
+    }
+    kind if kind.is_argument() => arrow_var_pattern_from_argument(expr)
+    _ => None
+  }
+}
+
+///|
+fn append_arrow_argument_syntax(
+  children : Array[(String?, CstNode)],
+  argument : CstNode,
+) -> Unit {
+  if argument.kind is (Argument_LabelledOption | Argument_LabelledOptionPun) {
+    for entry in argument.children {
+      let (label, child) = entry
+      if label is Some("op") &&
+        child
+        .first_operator_descendant()
+        .map(operator => operator.string_payload().unwrap_or("") == "?")
+        .unwrap_or(false) {
+        push_child(children, Some("question"), child)
+      }
+    }
+  }
+  if argument.kind is (Argument_Labelled | Argument_LabelledOption) {
+    push_child(children, Some("error"), argument)
+  }
+}
+
+///|
+fn parse_arrow_param_from_expr(expr : CstNode) -> CstNode {
+  let source = if expr.kind is Expr_Constraint {
+    expr
+    .first_child_with_label("expr")
+    .unwrap_or(node(Expr_MissingExpr, expr.loc, expr.source_span, []))
+  } else {
+    expr
+  }
+  let parameter_kind = arrow_parameter_kind(source)
+  let children : Array[(String?, CstNode)] = []
+  match arrow_pattern_from_expr(source) {
+    Some(pattern) => push_child(children, Some("pattern"), pattern)
+    None => push_child(children, Some("error"), source)
+  }
+  if source.kind.is_argument() {
+    append_arrow_argument_syntax(children, source)
+  }
+  if expr.kind is Expr_Constraint {
+    for entry in expr.children {
+      let (label, _) = entry
+      if !(label is Some("expr")) {
+        children.push(entry)
+      } else {
+        ()
+      }
+    }
+  }
+  node(parameter_kind, expr.loc, expr.source_span, children)
 }
 
 ///|
@@ -4803,13 +4915,15 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
   }
   let field = state.node_from_children(kind, children)
   if kind is Field_Definition {
-    field
-    .with_structured_name("semantic_name", Name_Field, ["name"])
-    .with_bool_marker(
-      "pun",
-      Flag_Pun,
-      children.iter().all(fn(entry) { !(entry.0 is Some("expr")) }),
-    )
+    let is_pun = children.iter().all(fn(entry) { !(entry.0 is Some("expr")) })
+    let field = field
+      .with_structured_name("semantic_name", Name_Field, ["name"])
+      .with_bool_marker("pun", Flag_Pun, is_pun)
+    if is_pun {
+      field.with_pun_expr()
+    } else {
+      field
+    }
   } else {
     field
   }
@@ -4932,45 +5046,46 @@ fn parse_expr_prefix(
   discard_expr_trivia(state)
   match state.peek() {
     Some((operator, _, _)) if operator is (PLUS | MINUS | EXCLAMATION) => {
-      let children : Array[(String?, CstNode)] = []
-      if state.consume_any() is Some(op) {
-        push_child(children, Some("op"), op)
-        push_child(
-          children,
-          Some("operator"),
-          operator_node_from_token(
-            match operator {
-              PLUS => Operator_UnaryPlus
-              MINUS => Operator_UnaryMinus
-              _ => Operator_UnaryNot
-            },
-            operator,
-            op.loc,
-            op.source_span,
-          ),
-        )
-      } else {
-        ()
-      }
-      let reports_before_expr = state.reports.length()
-      let expr = parse_expr_prefix(state, stop_kinds)
-      push_child(
-        children,
-        Some("expr"),
-        state.required_expr_node(expr, reports_before_expr),
+      let op = state
+        .consume_any()
+        .unwrap_or(state.missing_token_node_silent(operator.kind()))
+      let semantic_operator = operator_node_from_token(
+        match operator {
+          PLUS => Operator_UnaryPlus
+          MINUS => Operator_UnaryMinus
+          _ => Operator_UnaryNot
+        },
+        operator,
+        op.loc,
+        op.source_span,
       )
-      let kind = match expr.first_child_of_kind(NodeKind::is_constant) {
-        Some(constant) if constant_can_fold_prefix(constant, operator) => {
-          push_child(
-            children,
-            Some("constant"),
-            signed_constant_node(constant, operator is MINUS),
-          )
-          Expr_Constant
-        }
-        _ => Expr_Unary
+      let reports_before_expr = state.reports.length()
+      let operand = state.required_expr_node(
+        parse_expr_prefix(state, stop_kinds),
+        reports_before_expr,
+      )
+      let constant = match operand.first_child_with_label("semantic_constant") {
+        Some(constant) => Some(constant)
+        None => operand.first_child_of_kind(NodeKind::is_constant)
       }
-      state.node_from_children(kind, children)
+      match constant {
+        Some(constant) if constant_can_fold_prefix(constant, operator) =>
+          folded_prefix_constant_node(
+            op,
+            semantic_operator,
+            operand,
+            constant,
+            operator is MINUS,
+          )
+        _ if operator is PLUS =>
+          unary_plus_apply_node(op, semantic_operator, operand)
+        _ =>
+          state.node_from_children(Expr_Unary, [
+            (Some("op"), op),
+            (Some("operator"), semantic_operator),
+            (Some("expr"), operand),
+          ])
+      }
     }
     _ => parse_expr_simple_postfix(state, stop_kinds)
   }
@@ -9044,37 +9159,13 @@ fn annotate_argument_list_locations(source : CstNode) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   for i in 0..<source.children.length() {
     match source.children.get(i) {
-      Some((Some("item"), item)) if item.kind is Argument_LabelledPun => {
-        let annotated = match item.first_child_with_label("name") {
-          Some(name) => {
-            let token_kind = if name.kind.is_syntax_token() {
-              name.kind
-            } else {
-              Syntax_Delimiter
-            }
-            let value_span = if name.source_span.1 > name.source_span.0 {
-              (name.source_span.0, name.source_span.1 - 1)
-            } else {
-              name.source_span
-            }
-            item
-            .with_token_location(
-              "label_loc",
-              token_kind,
-              name.loc,
-              name.source_span,
-            )
-            .with_token_location(
-              "value_loc",
-              token_kind,
-              name.loc.trim_last_char(),
-              value_span,
-            )
-          }
-          None => item
-        }
-        push_child(children, Some("item"), annotated)
-      }
+      Some((Some("item"), item)) if item.kind
+        is (Argument_LabelledPun | Argument_LabelledOptionPun) =>
+        push_child(
+          children,
+          Some("item"),
+          item.with_pun_locations().with_pun_expr(),
+        )
       Some(entry) => children.push(entry)
       None => ()
     }
@@ -9117,6 +9208,7 @@ fn parse_block_expr(
         .node_from_children(Field_Definition, [(Some("name"), name)])
         .with_structured_name("semantic_name", Name_Field, ["name"])
         .with_bool_marker("pun", Flag_Pun, true)
+        .with_pun_expr()
       let record_children : Array[(String?, CstNode)] = []
       for entry in list.children {
         let (label, child) = entry
@@ -10230,10 +10322,15 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
       push_child(children, Some("pattern"), pat)
     }
   }
-  state
-  .node_from_children(kind, children)
-  .with_structured_name("semantic_name", Name_Label, ["name"])
-  .with_bool_marker("pun", Flag_Pun, kind is Argument_LabelledPun)
+  let result = state
+    .node_from_children(kind, children)
+    .with_structured_name("semantic_name", Name_Label, ["name"])
+    .with_bool_marker("pun", Flag_Pun, kind is Argument_LabelledPun)
+  if kind is Argument_LabelledPun {
+    result.with_pun_locations().with_pun_pattern()
+  } else {
+    result
+  }
 }
 
 ///|
@@ -10676,13 +10773,17 @@ fn parse_record_pattern_item(state : ParserState) -> CstNode {
   }
   let field = state.node_from_children(kind, children)
   if kind is Field_Pattern {
-    field
-    .with_structured_name("semantic_name", Name_Field, ["name"])
-    .with_bool_marker(
-      "pun",
-      Flag_Pun,
-      children.iter().all(fn(entry) { !(entry.0 is Some("pattern")) }),
-    )
+    let is_pun = children
+      .iter()
+      .all(fn(entry) { !(entry.0 is Some("pattern")) })
+    let field = field
+      .with_structured_name("semantic_name", Name_Field, ["name"])
+      .with_bool_marker("pun", Flag_Pun, is_pun)
+    if is_pun {
+      field.with_pun_pattern()
+    } else {
+      field
+    }
   } else {
     field
   }
