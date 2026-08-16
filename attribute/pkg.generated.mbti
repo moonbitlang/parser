@@ -16,6 +16,7 @@ pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
 } derive(@debug.Debug)
+pub fn ParseError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
 pub(all) struct Attribute {
@@ -25,6 +26,8 @@ pub(all) struct Attribute {
 } derive(@debug.Debug)
 pub fn Attribute::name(Self) -> String?
 pub fn Attribute::new(loc~ : @basic.Location, (String, String?, String)) -> Self
+pub fn Attribute::to_json(Self) -> Json
+pub fn Attribute::to_repr(Self) -> @debug.Repr
 pub impl ToJson for Attribute
 
 pub(all) enum Expr {
@@ -33,11 +36,15 @@ pub(all) enum Expr {
   Apply(Id, @list.List[Prop])
   Bool(Bool)
 } derive(@debug.Debug)
+pub fn Expr::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Id {
   qual : String?
   name : String
 }
+pub fn Id::output(Self, &Logger) -> Unit
+pub fn Id::to_repr(Self) -> @debug.Repr
+pub fn Id::to_string(Self) -> String
 pub impl Show for Id
 pub impl @debug.Debug for Id
 
@@ -45,6 +52,7 @@ pub(all) enum Prop {
   Labeled(String, Expr)
   Expr(Expr)
 } derive(@debug.Debug)
+pub fn Prop::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

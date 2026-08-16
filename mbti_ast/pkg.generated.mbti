@@ -19,6 +19,7 @@ pub(all) enum AliasSig {
   Using(pkg~ : Name, target~ : Name, name~ : Name?, kind~ : @syntax.UsingKind, attrs~ : @list.List[@attribute.Attribute])
   FuncAlias(name~ : Name, type_name~ : Name, attrs~ : @list.List[@attribute.Attribute])
 } derive(@debug.Debug)
+pub fn AliasSig::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ConstSig {
   name : Name
@@ -26,6 +27,7 @@ pub(all) struct ConstSig {
   value : @syntax.Constant
   attrs : @list.List[@attribute.Attribute]
 } derive(@debug.Debug)
+pub fn ConstSig::to_repr(Self) -> @debug.Repr
 
 pub(all) struct FuncSig {
   attrs : @list.List[@attribute.Attribute]
@@ -36,6 +38,7 @@ pub(all) struct FuncSig {
   type_params : @list.List[TypeParamWithConstraints]
   is_async : @basic.Location?
 } derive(@debug.Debug)
+pub fn FuncSig::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ImplSig {
   type_params : @list.List[TypeParamWithConstraints]
@@ -43,6 +46,7 @@ pub(all) struct ImplSig {
   trait_name : QualifiedName
   attrs : @list.List[@attribute.Attribute]
 } derive(@debug.Debug)
+pub fn ImplSig::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Mbti {
   package_name : String
@@ -51,27 +55,33 @@ pub(all) struct Mbti {
   loc : @basic.Location
   base_pos : @basic.BasePos
 } derive(@debug.Debug)
+pub fn Mbti::to_repr(Self) -> @debug.Repr
 
 pub(all) struct MethodSelfType {
   name : String
   is_object : Bool
   loc : @basic.Location
 } derive(@debug.Debug)
+pub fn MethodSelfType::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Name {
   name : String
   loc : @basic.Location
 } derive(ToJson, @debug.Debug)
+pub fn Name::to_json(Self) -> Json
+pub fn Name::to_repr(Self) -> @debug.Repr
 
 pub(all) struct PackageImport {
   name : String
   alias_ : String?
 } derive(@debug.Debug)
+pub fn PackageImport::to_repr(Self) -> @debug.Repr
 
 pub(all) struct QualifiedName {
   name : @syntax.LongIdent
   loc : @basic.Location
 } derive(@debug.Debug)
+pub fn QualifiedName::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Sig {
   Func(FuncSig)
@@ -83,6 +93,7 @@ pub(all) enum Sig {
   Value(ValueSig)
 } derive(@debug.Debug)
 pub fn Sig::attrs(Self) -> @list.List[@attribute.Attribute]
+pub fn Sig::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TraitMethodSig {
   name : Name
@@ -93,6 +104,7 @@ pub(all) struct TraitMethodSig {
   return_ : (@syntax.Type, @syntax.ErrorType)
   attrs : @list.List[@attribute.Attribute]
 } derive(@debug.Debug)
+pub fn TraitMethodSig::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TraitSig {
   name : Name
@@ -101,6 +113,7 @@ pub(all) struct TraitSig {
   vis : @syntax.Visibility
   attrs : @list.List[@attribute.Attribute]
 } derive(@debug.Debug)
+pub fn TraitSig::to_repr(Self) -> @debug.Repr
 
 pub(all) enum TypeDefinition {
   Abstract
@@ -113,16 +126,19 @@ pub(all) enum TypeDefinition {
   Record(fields~ : @list.List[@syntax.FieldDecl])
   Alias(@syntax.Type)
 } derive(@debug.Debug)
+pub fn TypeDefinition::to_repr(Self) -> @debug.Repr
 
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(@basic.Location)
 } derive(@debug.Debug)
+pub fn TypeParamNoConstraints::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
 } derive(@debug.Debug)
+pub fn TypeParamWithConstraints::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TypeSig {
   name : Name
@@ -132,12 +148,14 @@ pub(all) struct TypeSig {
   attrs : @list.List[@attribute.Attribute]
   derives : @list.List[QualifiedName]
 } derive(@debug.Debug)
+pub fn TypeSig::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ValueSig {
   name : Name
   type_ : @syntax.Type
   attrs : @list.List[@attribute.Attribute]
 } derive(@debug.Debug)
+pub fn ValueSig::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 pub type Attributes = @list.List[@attribute.Attribute]
