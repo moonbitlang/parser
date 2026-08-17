@@ -280,6 +280,22 @@ test "double-dollar metavariable prefix remains unsupported" {
 }
 
 ///|
+test "metavariable syntax remains enabled in interpolation sublexing" {
+  let result = tokens_from_string(
+    "$x",
+    comment=false,
+    is_interpolation=true,
+    enable_metavar=true,
+  )
+  guard result.errors.is_empty() else {
+    fail("expected metavariable syntax in interpolation sublexing")
+  }
+  guard result.tokens[0].0 is LIDENT("$x") else {
+    fail("expected interpolation sublexer to preserve metavariable tokens")
+  }
+}
+
+///|
 test "multiline interpolation keeps precedence over metavariable syntax" {
   let result = tokens_from_string("$|hello", comment=false, enable_metavar=true)
   guard result.tokens[0].0 is MULTILINE_INTERP(_) else {
