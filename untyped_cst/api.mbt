@@ -9,9 +9,10 @@ fn parse_with_state(
   source : String,
   diagnostics : Array[Report],
   docstrings : Array[List[(Location, Comment)]],
+  enable_metavar : Bool,
   parse_root : (ParserState) -> CstNode,
 ) -> ParseResult {
-  let state = new_state(tokens, source, diagnostics)
+  let state = new_state(tokens, source, diagnostics, enable_metavar)
   let root = parse_root(state)
   parse_result(root, state.reports, docstrings)
 }
@@ -30,7 +31,14 @@ fn parse_source(
     comment=true,
   )
   let diagnostics = reports_from_lex_errors(lex.errors)
-  parse_with_state(lex.tokens, source, diagnostics, lex.docstrings, parse_root)
+  parse_with_state(
+    lex.tokens,
+    source,
+    diagnostics,
+    lex.docstrings,
+    enable_metavar,
+    parse_root,
+  )
 }
 
 ///|
