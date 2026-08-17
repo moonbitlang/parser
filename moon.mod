@@ -4,8 +4,8 @@ version = "0.3.17"
 
 import {
   "moonbitlang/x@0.4.39",
-  "moonbitlang/lexer@0.3.14",
-  "moonbitlang/moon_config@0.3.13",
+  "moonbitlang/lexer@0.3.15",
+  "moonbitlang/moon_config@0.3.14",
   "moonbitlang/async@0.20.3",
   "moonbit-community/prettyprinter@0.4.10",
 }
