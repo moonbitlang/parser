@@ -5,9 +5,10 @@ syntax tree that preserves tokens, comments, delimiters, separators, and source
 spans. It is intended for tooling that needs source-faithful structure before
 or alongside the existing typed syntax AST.
 
-Use `parse_structure(source, name?)` for a MoonBit source file and
-`parse_expression(source, name?)` for a standalone expression. Both return a
-`ParseResult`.
+Use `parse_structure(source, name?, enable_metavar?)` for a MoonBit source file
+and `parse_expression(source, name?, enable_metavar?)` for a standalone
+expression. Both return a `ParseResult`. Metavariable syntax is disabled by
+default; pass `enable_metavar=true` to enable it.
 
 - `parse_structure` returns a root whose kind is `Impls`.
 - `parse_expression` returns a root whose kind is `Expression`.
