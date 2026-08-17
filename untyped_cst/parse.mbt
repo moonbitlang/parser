@@ -11887,12 +11887,18 @@ fn parse_interp_source_expr(
     interp_source.source,
     start_pos=interp_source.loc.start,
     is_interpolation=true,
+    enable_metavar=state.enable_metavar,
     comment=true,
   )
   for report in reports_from_lex_errors(lex.errors) {
     state.reports.push(report)
   }
-  let inner_state = new_state(lex.tokens, state.source, state.reports)
+  let inner_state = new_state(
+    lex.tokens,
+    state.source,
+    state.reports,
+    state.enable_metavar,
+  )
   parse_expr_until(inner_state, [TokenKind::TK_EOF])
 }
 

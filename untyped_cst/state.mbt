@@ -3,6 +3,7 @@ priv struct ParserState {
   tokens : Triples
   mut pos : Int
   reports : Array[Report]
+  enable_metavar : Bool
   mut abort_current_decl : Bool
   mut abort_infix_chain : Bool
   mut report_next_top_level_start : Bool
@@ -391,12 +392,14 @@ fn new_state(
   tokens : Triples,
   source : String,
   reports : Array[Report],
+  enable_metavar : Bool,
 ) -> ParserState {
   let mapper = default_location_mapper(source)
   ParserState::{
     tokens,
     pos: 0,
     reports,
+    enable_metavar,
     abort_current_decl: false,
     abort_infix_chain: false,
     report_next_top_level_start: false,
