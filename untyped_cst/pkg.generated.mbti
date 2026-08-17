@@ -10,9 +10,9 @@ import {
 }
 
 // Values
-pub fn parse_expression(String, name? : String) -> ParseResult
+pub fn parse_expression(String, name? : String, enable_metavar? : Bool) -> ParseResult
 
-pub fn parse_structure(String, name? : String) -> ParseResult
+pub fn parse_structure(String, name? : String, enable_metavar? : Bool) -> ParseResult
 
 // Errors
 

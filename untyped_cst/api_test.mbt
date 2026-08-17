@@ -187,6 +187,49 @@ test "parse entry points expose distinct roots and propagate names" {
 }
 
 ///|
+test "parse entry points gate metavariable syntax" {
+  let expression_source = "$(value:exp)"
+  @test.assert_eq(
+    @untyped_cst.parse_expression(expression_source)
+    .diagnostics_view()
+    .is_empty(),
+    false,
+  )
+  let expression = @untyped_cst.parse_expression(
+    expression_source,
+    enable_metavar=true,
+  )
+  @test.assert_eq(expression.diagnostics_view().is_empty(), true)
+  @test.assert_eq(
+    api_has_string_value(
+      expression.root(),
+      fn(kind) { kind is Syntax_Identifier },
+      expression_source,
+    ),
+    true,
+  )
+
+  let structure_source = "let $(value:pat) = 1"
+  @test.assert_eq(
+    @untyped_cst.parse_structure(structure_source).diagnostics_view().is_empty(),
+    false,
+  )
+  let structure = @untyped_cst.parse_structure(
+    structure_source,
+    enable_metavar=true,
+  )
+  @test.assert_eq(structure.diagnostics_view().is_empty(), true)
+  @test.assert_eq(
+    api_has_string_value(
+      structure.root(),
+      fn(kind) { kind is Syntax_Identifier },
+      "$(value:pat)",
+    ),
+    true,
+  )
+}
+
+///|
 test "constant kinds and normalized payloads are parser semantics" {
   let cases : Array[(String, String, String)] = [
     ("true", "bool", "true"),
