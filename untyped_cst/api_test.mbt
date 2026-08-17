@@ -230,6 +230,26 @@ test "parse entry points gate metavariable syntax" {
 }
 
 ///|
+test "metavariable option propagates into interpolation expressions" {
+  for source in ["\"\\{$x}\"", "\"\\{\"\\{$x}\"}\""] {
+    @test.assert_eq(
+      @untyped_cst.parse_expression(source).diagnostics_view().is_empty(),
+      false,
+    )
+    let expression = @untyped_cst.parse_expression(source, enable_metavar=true)
+    @test.assert_eq(expression.diagnostics_view().is_empty(), true)
+    @test.assert_eq(
+      api_has_string_value(
+        expression.root(),
+        fn(kind) { kind is Syntax_Identifier },
+        "$x",
+      ),
+      true,
+    )
+  }
+}
+
+///|
 test "constant kinds and normalized payloads are parser semantics" {
   let cases : Array[(String, String, String)] = [
     ("true", "bool", "true"),

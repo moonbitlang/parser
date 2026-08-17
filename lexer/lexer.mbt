@@ -9,7 +9,7 @@ fn lex_tokens(
   preserve_comment~ : (Comment, Int, Int) -> Unit,
 ) -> Unit {
   fn metavar_enabled() -> Bool {
-    env.enable_metavar && !env.is_interpolation
+    env.enable_metavar
   }
 
   fn typed_metavar_payload(
