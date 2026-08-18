@@ -23,6 +23,7 @@ pub struct CstNode {
   source_span : (Int, Int)
   children : ReadOnlyArray[(String?, CstNode)]
 } derive(@debug.Debug)
+pub fn CstNode::to_repr(Self) -> @debug.Repr
 
 pub enum NodeKind {
   Impls
@@ -375,18 +376,24 @@ pub enum NodeKind {
   List_ForEachBindingList
   List_WithBindingList
 } derive(Eq, @debug.Debug)
+pub fn NodeKind::equal(Self, Self) -> Bool
 pub fn NodeKind::is_argument(Self) -> Bool
 pub fn NodeKind::is_constant(Self) -> Bool
 pub fn NodeKind::is_expr(Self) -> Bool
 pub fn NodeKind::is_impl(Self) -> Bool
 pub fn NodeKind::is_pattern(Self) -> Bool
 pub fn NodeKind::is_type(Self) -> Bool
+pub fn NodeKind::not_equal(Self, Self) -> Bool
+pub fn NodeKind::to_repr(Self) -> @debug.Repr
 
 pub enum NodePayload {
   String(String)
   Int(Int)
   Bool(Bool)
 } derive(Eq, @debug.Debug)
+pub fn NodePayload::equal(Self, Self) -> Bool
+pub fn NodePayload::not_equal(Self, Self) -> Bool
+pub fn NodePayload::to_repr(Self) -> @debug.Repr
 
 pub struct ParseResult {
   root : CstNode
@@ -397,6 +404,7 @@ pub fn ParseResult::diagnostics_view(Self) -> ArrayView[@basic.Report]
 pub fn ParseResult::root(Self) -> CstNode
 pub fn ParseResult::to_expr(Self) -> (@syntax.Expr?, Array[@basic.Report])
 pub fn ParseResult::to_impls(Self) -> (@list.List[@syntax.Impl], Array[@basic.Report])
+pub fn ParseResult::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 
