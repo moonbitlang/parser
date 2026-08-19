@@ -79,45 +79,42 @@ test "Pattern" {
   )
   @test.assert_eq(
     any_with_alias.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), any_with_alias).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), any_with_alias).json_repr(),
   )
   @test.assert_eq(
     array_patterns.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), array_patterns).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), array_patterns).json_repr(),
   )
   @test.assert_eq(
     constant_pattern.json_repr(),
-    MapVisitorBase::visit_Expr(MapVisitorBase(Identity(())), constant_pattern).json_repr(),
+    MapVisitor::visit_Expr(MapVisitorBase(Identity(())), constant_pattern).json_repr(),
   )
   @test.assert_eq(
     constraint_pattern.json_repr(),
-    MapVisitorBase::visit_Pattern(
-      MapVisitorBase(Identity(())),
-      constraint_pattern,
-    ).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), constraint_pattern).json_repr(),
   )
   @test.assert_eq(
     constr_pattern.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), constr_pattern).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), constr_pattern).json_repr(),
   )
   @test.assert_eq(
     or_pattern.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), or_pattern).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), or_pattern).json_repr(),
   )
   @test.assert_eq(
     tuple_pattern.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), tuple_pattern).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), tuple_pattern).json_repr(),
   )
   @test.assert_eq(
     record_pattern.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), record_pattern).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), record_pattern).json_repr(),
   )
   @test.assert_eq(
     map_pattern.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), map_pattern).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), map_pattern).json_repr(),
   )
   @test.assert_eq(
     range_pattern.json_repr(),
-    MapVisitorBase::visit_Pattern(MapVisitorBase(Identity(())), range_pattern).json_repr(),
+    MapVisitor::visit_Pattern(MapVisitorBase(Identity(())), range_pattern).json_repr(),
   )
 }

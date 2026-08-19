@@ -764,7 +764,7 @@ impl MapVisitor with fn base(self) -> MapVisitorBase[Self] {
 
 ///|
 impl MapVisitor with fn visit_Impl(env, impl_) {
-  MapVisitorBase::visit_Impl(env, impl_)
+  MapVisitor::visit_Impl(env.base(), impl_)
 }
 
 ///|
@@ -775,7 +775,7 @@ impl MapVisitor with fn visit_Impl_TopExpr(
   is_async~,
   loc~,
 ) {
-  MapVisitorBase::visit_Impl_TopExpr(env, expr~, is_main~, is_async~, loc~)
+  MapVisitor::visit_Impl_TopExpr(env.base(), expr~, is_main~, is_async~, loc~)
 }
 
 ///|
@@ -789,8 +789,8 @@ impl MapVisitor with fn visit_Impl_TopTest(
   attrs~,
   doc~,
 ) {
-  MapVisitorBase::visit_Impl_TopTest(
-    env,
+  MapVisitor::visit_Impl_TopTest(
+    env.base(),
     expr~,
     name~,
     params~,
@@ -803,7 +803,7 @@ impl MapVisitor with fn visit_Impl_TopTest(
 
 ///|
 impl MapVisitor with fn visit_Impl_TopTypeDef(env, type_decl) {
-  MapVisitorBase::visit_Impl_TopTypeDef(env, type_decl)
+  MapVisitor::visit_Impl_TopTypeDef(env.base(), type_decl)
 }
 
 ///|
@@ -814,8 +814,8 @@ impl MapVisitor with fn visit_Impl_TopFuncDef(
   where_clause~,
   loc~,
 ) {
-  MapVisitorBase::visit_Impl_TopFuncDef(
-    env,
+  MapVisitor::visit_Impl_TopFuncDef(
+    env.base(),
     fun_decl~,
     decl_body~,
     where_clause~,
@@ -836,8 +836,8 @@ impl MapVisitor with fn visit_Impl_TopLetDef(
   doc~,
   is_declare~,
 ) {
-  MapVisitorBase::visit_Impl_TopLetDef(
-    env,
+  MapVisitor::visit_Impl_TopLetDef(
+    env.base(),
     binder~,
     ty~,
     expr~,
@@ -852,7 +852,7 @@ impl MapVisitor with fn visit_Impl_TopLetDef(
 
 ///|
 impl MapVisitor with fn visit_Impl_TopTrait(env, trait_decl) {
-  MapVisitorBase::visit_Impl_TopTrait(env, trait_decl)
+  MapVisitor::visit_Impl_TopTrait(env.base(), trait_decl)
 }
 
 ///|
@@ -872,8 +872,8 @@ impl MapVisitor with fn visit_Impl_TopImpl(
   attrs~,
   doc~,
 ) {
-  MapVisitorBase::visit_Impl_TopImpl(
-    env,
+  MapVisitor::visit_Impl_TopImpl(
+    env.base(),
     self_ty~,
     trait_~,
     method_name~,
@@ -907,8 +907,8 @@ impl MapVisitor with fn visit_Impl_TopView(
   attrs~,
   doc~,
 ) {
-  MapVisitorBase::visit_Impl_TopView(
-    env,
+  MapVisitor::visit_Impl_TopView(
+    env.base(),
     quantifiers~,
     source_ty~,
     view_type_name~,
@@ -937,8 +937,8 @@ impl MapVisitor with fn visit_Impl_TopImplRelation(
   doc~,
   is_declare~,
 ) {
-  MapVisitorBase::visit_Impl_TopImplRelation(
-    env,
+  MapVisitor::visit_Impl_TopImplRelation(
+    env.base(),
     self_ty~,
     trait_~,
     quantifiers~,
@@ -960,8 +960,8 @@ impl MapVisitor with fn visit_Impl_TopUsing(
   loc~,
   doc~,
 ) {
-  MapVisitorBase::visit_Impl_TopUsing(
-    env,
+  MapVisitor::visit_Impl_TopUsing(
+    env.base(),
     pkg~,
     names~,
     vis~,
@@ -982,8 +982,8 @@ impl MapVisitor with fn visit_Impl_TopExtend(
   loc~,
   doc~,
 ) {
-  MapVisitorBase::visit_Impl_TopExtend(
-    env,
+  MapVisitor::visit_Impl_TopExtend(
+    env.base(),
     type_name~,
     trait_~,
     names~,
@@ -996,52 +996,52 @@ impl MapVisitor with fn visit_Impl_TopExtend(
 
 ///|
 impl MapVisitor with fn visit_Impl_TopImport(env, kind~, packages~, loc~, doc~) {
-  MapVisitorBase::visit_Impl_TopImport(env, kind~, packages~, loc~, doc~)
+  MapVisitor::visit_Impl_TopImport(env.base(), kind~, packages~, loc~, doc~)
 }
 
 ///|
 impl MapVisitor with fn visit_UsingKind(env, using_kind) {
-  MapVisitorBase::visit_UsingKind(env, using_kind)
+  MapVisitor::visit_UsingKind(env.base(), using_kind)
 }
 
 ///|
 impl MapVisitor with fn visit_ImportPackage(env, import_package) {
-  MapVisitorBase::visit_ImportPackage(env, import_package)
+  MapVisitor::visit_ImportPackage(env.base(), import_package)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr(env, expr) {
-  MapVisitorBase::visit_Expr(env, expr)
+  MapVisitor::visit_Expr(env.base(), expr)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Apply(env, func~, args~, loc~) {
-  MapVisitorBase::visit_Expr_Apply(env, func~, args~, loc~)
+  MapVisitor::visit_Expr_Apply(env.base(), func~, args~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Infix(env, op~, lhs~, rhs~, loc~) {
-  MapVisitorBase::visit_Expr_Infix(env, op~, lhs~, rhs~, loc~)
+  MapVisitor::visit_Expr_Infix(env.base(), op~, lhs~, rhs~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Unary(env, op~, expr~, loc~) {
-  MapVisitorBase::visit_Expr_Unary(env, op~, expr~, loc~)
+  MapVisitor::visit_Expr_Unary(env.base(), op~, expr~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Array(env, exprs~, is_iter~, loc~) {
-  MapVisitorBase::visit_Expr_Array(env, exprs~, is_iter~, loc~)
+  MapVisitor::visit_Expr_Array(env.base(), exprs~, is_iter~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_ArraySpread(env, elems~, is_iter~, loc~) {
-  MapVisitorBase::visit_Expr_ArraySpread(env, elems~, is_iter~, loc~)
+  MapVisitor::visit_Expr_ArraySpread(env.base(), elems~, is_iter~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_ArrayGet(env, array~, index~, loc~) {
-  MapVisitorBase::visit_Expr_ArrayGet(env, array~, index~, loc~)
+  MapVisitor::visit_Expr_ArrayGet(env.base(), array~, index~, loc~)
 }
 
 ///|
@@ -1053,8 +1053,8 @@ impl MapVisitor with fn visit_Expr_ArrayGetSlice(
   index_loc~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_ArrayGetSlice(
-    env,
+  MapVisitor::visit_Expr_ArrayGetSlice(
+    env.base(),
     array~,
     start_index~,
     end_index~,
@@ -1065,7 +1065,7 @@ impl MapVisitor with fn visit_Expr_ArrayGetSlice(
 
 ///|
 impl MapVisitor with fn visit_Expr_ArraySet(env, array~, index~, value~, loc~) {
-  MapVisitorBase::visit_Expr_ArraySet(env, array~, index~, value~, loc~)
+  MapVisitor::visit_Expr_ArraySet(env.base(), array~, index~, value~, loc~)
 }
 
 ///|
@@ -1077,8 +1077,8 @@ impl MapVisitor with fn visit_Expr_ArrayAugmentedSet(
   value~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_ArrayAugmentedSet(
-    env,
+  MapVisitor::visit_Expr_ArrayAugmentedSet(
+    env.base(),
     op~,
     array~,
     index~,
@@ -1089,37 +1089,37 @@ impl MapVisitor with fn visit_Expr_ArrayAugmentedSet(
 
 ///|
 impl MapVisitor with fn visit_Expr_Constant(env, c~, loc~) {
-  MapVisitorBase::visit_Expr_Constant(env, c~, loc~)
+  MapVisitor::visit_Expr_Constant(env.base(), c~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_MultilineString(env, elems~, loc~) {
-  MapVisitorBase::visit_Expr_MultilineString(env, elems~, loc~)
+  MapVisitor::visit_Expr_MultilineString(env.base(), elems~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Interp(env, elems~, loc~) {
-  MapVisitorBase::visit_Expr_Interp(env, elems~, loc~)
+  MapVisitor::visit_Expr_Interp(env.base(), elems~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_BytesInterp(env, elems~, loc~) {
-  MapVisitorBase::visit_Expr_BytesInterp(env, elems~, loc~)
+  MapVisitor::visit_Expr_BytesInterp(env.base(), elems~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Constraint(env, expr~, ty~, loc~) {
-  MapVisitorBase::visit_Expr_Constraint(env, expr~, ty~, loc~)
+  MapVisitor::visit_Expr_Constraint(env.base(), expr~, ty~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Constr(env, constr~, loc~) {
-  MapVisitorBase::visit_Expr_Constr(env, constr~, loc~)
+  MapVisitor::visit_Expr_Constr(env.base(), constr~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_LabelledBlock(env, label~, body~, loc~) {
-  MapVisitorBase::visit_Expr_LabelledBlock(env, label~, body~, loc~)
+  MapVisitor::visit_Expr_LabelledBlock(env.base(), label~, body~, loc~)
 }
 
 ///|
@@ -1131,8 +1131,8 @@ impl MapVisitor with fn visit_Expr_While(
   label~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_While(
-    env,
+  MapVisitor::visit_Expr_While(
+    env.base(),
     loop_cond~,
     loop_body~,
     while_else~,
@@ -1143,17 +1143,17 @@ impl MapVisitor with fn visit_Expr_While(
 
 ///|
 impl MapVisitor with fn visit_Expr_Function(env, func~, loc~) {
-  MapVisitorBase::visit_Expr_Function(env, func~, loc~)
+  MapVisitor::visit_Expr_Function(env.base(), func~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Ident(env, id~, loc~) {
-  MapVisitorBase::visit_Expr_Ident(env, id~, loc~)
+  MapVisitor::visit_Expr_Ident(env.base(), id~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_If(env, cond~, ifso~, ifnot~, loc~) {
-  MapVisitorBase::visit_Expr_If(env, cond~, ifso~, ifnot~, loc~)
+  MapVisitor::visit_Expr_If(env.base(), cond~, ifso~, ifnot~, loc~)
 }
 
 ///|
@@ -1166,8 +1166,8 @@ impl MapVisitor with fn visit_Expr_Guard(
   guard_loc~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_Guard(
-    env,
+  MapVisitor::visit_Expr_Guard(
+    env.base(),
     cond~,
     otherwise~,
     body~,
@@ -1179,37 +1179,37 @@ impl MapVisitor with fn visit_Expr_Guard(
 
 ///|
 impl MapVisitor with fn visit_Expr_Is(env, expr~, pat~, loc~) {
-  MapVisitorBase::visit_Expr_Is(env, expr~, pat~, loc~)
+  MapVisitor::visit_Expr_Is(env.base(), expr~, pat~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Defer(env, expr~, body~, loc~) {
-  MapVisitorBase::visit_Expr_Defer(env, expr~, body~, loc~)
+  MapVisitor::visit_Expr_Defer(env.base(), expr~, body~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_LetFn(env, name~, func~, body~, loc~) {
-  MapVisitorBase::visit_Expr_LetFn(env, name~, func~, body~, loc~)
+  MapVisitor::visit_Expr_LetFn(env.base(), name~, func~, body~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_LetAnd(env, bindings~, body~, loc~) {
-  MapVisitorBase::visit_Expr_LetAnd(env, bindings~, body~, loc~)
+  MapVisitor::visit_Expr_LetAnd(env.base(), bindings~, body~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Let(env, pattern~, expr~, body~, loc~) {
-  MapVisitorBase::visit_Expr_Let(env, pattern~, expr~, body~, loc~)
+  MapVisitor::visit_Expr_Let(env.base(), pattern~, expr~, body~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Sequence(env, exprs~, last_expr~, loc~) {
-  MapVisitorBase::visit_Expr_Sequence(env, exprs~, last_expr~, loc~)
+  MapVisitor::visit_Expr_Sequence(env.base(), exprs~, last_expr~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Tuple(env, exprs~, loc~) {
-  MapVisitorBase::visit_Expr_Tuple(env, exprs~, loc~)
+  MapVisitor::visit_Expr_Tuple(env.base(), exprs~, loc~)
 }
 
 ///|
@@ -1220,7 +1220,13 @@ impl MapVisitor with fn visit_Expr_Record(
   trailing~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_Record(env, type_name~, fields~, trailing~, loc~)
+  MapVisitor::visit_Expr_Record(
+    env.base(),
+    type_name~,
+    fields~,
+    trailing~,
+    loc~,
+  )
 }
 
 ///|
@@ -1231,8 +1237,8 @@ impl MapVisitor with fn visit_Expr_RecordUpdate(
   fields~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_RecordUpdate(
-    env,
+  MapVisitor::visit_Expr_RecordUpdate(
+    env.base(),
     type_name~,
     record~,
     fields~,
@@ -1242,12 +1248,12 @@ impl MapVisitor with fn visit_Expr_RecordUpdate(
 
 ///|
 impl MapVisitor with fn visit_Expr_Field(env, record~, accessor~, loc~) {
-  MapVisitorBase::visit_Expr_Field(env, record~, accessor~, loc~)
+  MapVisitor::visit_Expr_Field(env.base(), record~, accessor~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Method(env, type_name~, method_name~, loc~) {
-  MapVisitorBase::visit_Expr_Method(env, type_name~, method_name~, loc~)
+  MapVisitor::visit_Expr_Method(env.base(), type_name~, method_name~, loc~)
 }
 
 ///|
@@ -1259,8 +1265,8 @@ impl MapVisitor with fn visit_Expr_DotApply(
   return_self~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_DotApply(
-    env,
+  MapVisitor::visit_Expr_DotApply(
+    env.base(),
     self~,
     method_name~,
     args~,
@@ -1271,7 +1277,7 @@ impl MapVisitor with fn visit_Expr_DotApply(
 
 ///|
 impl MapVisitor with fn visit_Expr_As(env, expr~, trait_~, loc~) {
-  MapVisitorBase::visit_Expr_As(env, expr~, trait_~, loc~)
+  MapVisitor::visit_Expr_As(env.base(), expr~, trait_~, loc~)
 }
 
 ///|
@@ -1283,8 +1289,8 @@ impl MapVisitor with fn visit_Expr_Mutate(
   augmented_by~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_Mutate(
-    env,
+  MapVisitor::visit_Expr_Mutate(
+    env.base(),
     record~,
     accessor~,
     field~,
@@ -1295,17 +1301,17 @@ impl MapVisitor with fn visit_Expr_Mutate(
 
 ///|
 impl MapVisitor with fn visit_Expr_Match(env, expr~, cases~, match_loc~, loc~) {
-  MapVisitorBase::visit_Expr_Match(env, expr~, cases~, match_loc~, loc~)
+  MapVisitor::visit_Expr_Match(env.base(), expr~, cases~, match_loc~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_LetMut(env, binder~, ty~, expr~, body~, loc~) {
-  MapVisitorBase::visit_Expr_LetMut(env, binder~, ty~, expr~, body~, loc~)
+  MapVisitor::visit_Expr_LetMut(env.base(), binder~, ty~, expr~, body~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Pipe(env, lhs~, rhs~, loc~) {
-  MapVisitorBase::visit_Expr_Pipe(env, lhs~, rhs~, loc~)
+  MapVisitor::visit_Expr_Pipe(env.base(), lhs~, rhs~, loc~)
 }
 
 ///|
@@ -1316,37 +1322,37 @@ impl MapVisitor with fn visit_Expr_Assign(
   augmented_by~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_Assign(env, var_~, expr~, augmented_by~, loc~)
+  MapVisitor::visit_Expr_Assign(env.base(), var_~, expr~, augmented_by~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Hole(env, loc~, kind~) {
-  MapVisitorBase::visit_Expr_Hole(env, loc~, kind~)
+  MapVisitor::visit_Expr_Hole(env.base(), loc~, kind~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Return(env, return_value~, loc~) {
-  MapVisitorBase::visit_Expr_Return(env, return_value~, loc~)
+  MapVisitor::visit_Expr_Return(env.base(), return_value~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Raise(env, err_value~, loc~) {
-  MapVisitorBase::visit_Expr_Raise(env, err_value~, loc~)
+  MapVisitor::visit_Expr_Raise(env.base(), err_value~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Unit(env, loc~, faked~) {
-  MapVisitorBase::visit_Expr_Unit(env, loc~, faked~)
+  MapVisitor::visit_Expr_Unit(env.base(), loc~, faked~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Break(env, arg~, label~, loc~) {
-  MapVisitorBase::visit_Expr_Break(env, arg~, label~, loc~)
+  MapVisitor::visit_Expr_Break(env.base(), arg~, label~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Continue(env, args~, label~, loc~) {
-  MapVisitorBase::visit_Expr_Continue(env, args~, label~, loc~)
+  MapVisitor::visit_Expr_Continue(env.base(), args~, label~, loc~)
 }
 
 ///|
@@ -1361,8 +1367,8 @@ impl MapVisitor with fn visit_Expr_For(
   loc~,
   where_clause~,
 ) {
-  MapVisitorBase::visit_Expr_For(
-    env,
+  MapVisitor::visit_Expr_For(
+    env.base(),
     binders~,
     condition~,
     continue_block~,
@@ -1387,8 +1393,8 @@ impl MapVisitor with fn visit_Expr_ForEach(
   label~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_ForEach(
-    env,
+  MapVisitor::visit_Expr_ForEach(
+    env.base(),
     binders~,
     expr~,
     init~,
@@ -1413,8 +1419,8 @@ impl MapVisitor with fn visit_Expr_Try(
   else_loc~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_Try(
-    env,
+  MapVisitor::visit_Expr_Try(
+    env.base(),
     body~,
     catch_~,
     try_else~,
@@ -1434,87 +1440,87 @@ impl MapVisitor with fn visit_Expr_TryOperator(
   try_loc~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_TryOperator(env, body~, kind~, try_loc~, loc~)
+  MapVisitor::visit_Expr_TryOperator(env.base(), body~, kind~, try_loc~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Map(env, elems~, loc~) {
-  MapVisitorBase::visit_Expr_Map(env, elems~, loc~)
+  MapVisitor::visit_Expr_Map(env.base(), elems~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_Group(env, expr~, group~, loc~) {
-  MapVisitorBase::visit_Expr_Group(env, expr~, group~, loc~)
+  MapVisitor::visit_Expr_Group(env.base(), expr~, group~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Expr_StaticAssert(env, asserts~, body~) {
-  MapVisitorBase::visit_Expr_StaticAssert(env, asserts~, body~)
+  MapVisitor::visit_Expr_StaticAssert(env.base(), asserts~, body~)
 }
 
 ///|
 impl MapVisitor with fn visit_Visibility(env, visibility) {
-  MapVisitorBase::visit_Visibility(env, visibility)
+  MapVisitor::visit_Visibility(env.base(), visibility)
 }
 
 ///|
 impl MapVisitor with fn visit_Visibility_Pub(env, attr~, loc~) {
-  MapVisitorBase::visit_Visibility_Pub(env, attr~, loc~)
+  MapVisitor::visit_Visibility_Pub(env.base(), attr~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Visibility_Priv(env, loc~) {
-  MapVisitorBase::visit_Visibility_Priv(env, loc~)
+  MapVisitor::visit_Visibility_Priv(env.base(), loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Constant(env, constant) {
-  MapVisitorBase::visit_Constant(env, constant)
+  MapVisitor::visit_Constant(env.base(), constant)
 }
 
 ///|
 impl MapVisitor with fn visit_Label(env, label) {
-  MapVisitorBase::visit_Label(env, label)
+  MapVisitor::visit_Label(env.base(), label)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstrName(env, constr_name) {
-  MapVisitorBase::visit_ConstrName(env, constr_name)
+  MapVisitor::visit_ConstrName(env.base(), constr_name)
 }
 
 ///|
 impl MapVisitor with fn visit_LongIdent(env, long_ident) {
-  MapVisitorBase::visit_LongIdent(env, long_ident)
+  MapVisitor::visit_LongIdent(env.base(), long_ident)
 }
 
 ///|
 impl MapVisitor with fn visit_LongIdent_Ident(env, name~) {
-  MapVisitorBase::visit_LongIdent_Ident(env, name~)
+  MapVisitor::visit_LongIdent_Ident(env.base(), name~)
 }
 
 ///|
 impl MapVisitor with fn visit_LongIdent_Dot(env, pkg~, id~) {
-  MapVisitorBase::visit_LongIdent_Dot(env, pkg~, id~)
+  MapVisitor::visit_LongIdent_Dot(env.base(), pkg~, id~)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeName(env, type_name) {
-  MapVisitorBase::visit_TypeName(env, type_name)
+  MapVisitor::visit_TypeName(env.base(), type_name)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstrId(env, constr_id) {
-  MapVisitorBase::visit_ConstrId(env, constr_id)
+  MapVisitor::visit_ConstrId(env.base(), constr_id)
 }
 
 ///|
 impl MapVisitor with fn visit_Type(env, type_) {
-  MapVisitorBase::visit_Type(env, type_)
+  MapVisitor::visit_Type(env.base(), type_)
 }
 
 ///|
 impl MapVisitor with fn visit_Type_Any(env, loc~) {
-  MapVisitorBase::visit_Type_Any(env, loc~)
+  MapVisitor::visit_Type_Any(env.base(), loc~)
 }
 
 ///|
@@ -1526,132 +1532,132 @@ impl MapVisitor with fn visit_Type_Arrow(
   is_async~,
   loc~,
 ) {
-  MapVisitorBase::visit_Type_Arrow(env, args~, res~, err~, is_async~, loc~)
+  MapVisitor::visit_Type_Arrow(env.base(), args~, res~, err~, is_async~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Type_Tuple(env, tys~, loc~) {
-  MapVisitorBase::visit_Type_Tuple(env, tys~, loc~)
+  MapVisitor::visit_Type_Tuple(env.base(), tys~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Type_Name(env, constr_id~, tys~, loc~) {
-  MapVisitorBase::visit_Type_Name(env, constr_id~, tys~, loc~)
+  MapVisitor::visit_Type_Name(env.base(), constr_id~, tys~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Type_Option(env, ty~, loc~, question_loc~) {
-  MapVisitorBase::visit_Type_Option(env, ty~, loc~, question_loc~)
+  MapVisitor::visit_Type_Option(env.base(), ty~, loc~, question_loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Type_Object(env, constr_id) {
-  MapVisitorBase::visit_Type_Object(env, constr_id)
+  MapVisitor::visit_Type_Object(env.base(), constr_id)
 }
 
 ///|
 impl MapVisitor with fn visit_ErrorType(env, error_type) {
-  MapVisitorBase::visit_ErrorType(env, error_type)
+  MapVisitor::visit_ErrorType(env.base(), error_type)
 }
 
 ///|
 impl MapVisitor with fn visit_ErrorType_ErrorType(env, ty~) {
-  MapVisitorBase::visit_ErrorType_ErrorType(env, ty~)
+  MapVisitor::visit_ErrorType_ErrorType(env.base(), ty~)
 }
 
 ///|
 impl MapVisitor with fn visit_ErrorType_DefaultErrorType(env, loc~) {
-  MapVisitorBase::visit_ErrorType_DefaultErrorType(env, loc~)
+  MapVisitor::visit_ErrorType_DefaultErrorType(env.base(), loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_ErrorType_Noraise(env, loc~) {
-  MapVisitorBase::visit_ErrorType_Noraise(env, loc~)
+  MapVisitor::visit_ErrorType_Noraise(env.base(), loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_ErrorType_MaybeError(env, ty~) {
-  MapVisitorBase::visit_ErrorType_MaybeError(env, ty~)
+  MapVisitor::visit_ErrorType_MaybeError(env.base(), ty~)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstrParam(env, constr_param) {
-  MapVisitorBase::visit_ConstrParam(env, constr_param)
+  MapVisitor::visit_ConstrParam(env.base(), constr_param)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstrDecl(env, constr_decl) {
-  MapVisitorBase::visit_ConstrDecl(env, constr_decl)
+  MapVisitor::visit_ConstrDecl(env.base(), constr_decl)
 }
 
 ///|
 impl MapVisitor with fn visit_ExceptionDecl(env, exception_decl) {
-  MapVisitorBase::visit_ExceptionDecl(env, exception_decl)
+  MapVisitor::visit_ExceptionDecl(env.base(), exception_decl)
 }
 
 ///|
 impl MapVisitor with fn visit_ExceptionDecl_EnumPayload(env, constr_decls) {
-  MapVisitorBase::visit_ExceptionDecl_EnumPayload(env, constr_decls)
+  MapVisitor::visit_ExceptionDecl_EnumPayload(env.base(), constr_decls)
 }
 
 ///|
 impl MapVisitor with fn visit_FieldName(env, field_name) {
-  MapVisitorBase::visit_FieldName(env, field_name)
+  MapVisitor::visit_FieldName(env.base(), field_name)
 }
 
 ///|
 impl MapVisitor with fn visit_FieldDecl(env, field_decl) {
-  MapVisitorBase::visit_FieldDecl(env, field_decl)
+  MapVisitor::visit_FieldDecl(env.base(), field_decl)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDesc(env, type_desc) {
-  MapVisitorBase::visit_TypeDesc(env, type_desc)
+  MapVisitor::visit_TypeDesc(env.base(), type_desc)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDesc_Error(env, exception_decl) {
-  MapVisitorBase::visit_TypeDesc_Error(env, exception_decl)
+  MapVisitor::visit_TypeDesc_Error(env.base(), exception_decl)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDesc_Variant(env, constr_decls) {
-  MapVisitorBase::visit_TypeDesc_Variant(env, constr_decls)
+  MapVisitor::visit_TypeDesc_Variant(env.base(), constr_decls)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDesc_Record(env, fields~) {
-  MapVisitorBase::visit_TypeDesc_Record(env, fields~)
+  MapVisitor::visit_TypeDesc_Record(env.base(), fields~)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDesc_TupleStruct(env, types) {
-  MapVisitorBase::visit_TypeDesc_TupleStruct(env, types)
+  MapVisitor::visit_TypeDesc_TupleStruct(env.base(), types)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDesc_Alias(env, type_) {
-  MapVisitorBase::visit_TypeDesc_Alias(env, type_)
+  MapVisitor::visit_TypeDesc_Alias(env.base(), type_)
 }
 
 ///|
 impl MapVisitor with fn visit_Hole(env, hole) {
-  MapVisitorBase::visit_Hole(env, hole)
+  MapVisitor::visit_Hole(env.base(), hole)
 }
 
 ///|
 impl MapVisitor with fn visit_ArgumentKind(env, argument_kind) {
-  MapVisitorBase::visit_ArgumentKind(env, argument_kind)
+  MapVisitor::visit_ArgumentKind(env.base(), argument_kind)
 }
 
 ///|
 impl MapVisitor with fn visit_ArgumentKind_Labelled(env, label) {
-  MapVisitorBase::visit_ArgumentKind_Labelled(env, label)
+  MapVisitor::visit_ArgumentKind_Labelled(env.base(), label)
 }
 
 ///|
 impl MapVisitor with fn visit_ArgumentKind_LabelledPun(env, label) {
-  MapVisitorBase::visit_ArgumentKind_LabelledPun(env, label)
+  MapVisitor::visit_ArgumentKind_LabelledPun(env.base(), label)
 }
 
 ///|
@@ -1660,7 +1666,11 @@ impl MapVisitor with fn visit_ArgumentKind_LabelledOption(
   label~,
   question_loc~,
 ) {
-  MapVisitorBase::visit_ArgumentKind_LabelledOption(env, label~, question_loc~)
+  MapVisitor::visit_ArgumentKind_LabelledOption(
+    env.base(),
+    label~,
+    question_loc~,
+  )
 }
 
 ///|
@@ -1669,8 +1679,8 @@ impl MapVisitor with fn visit_ArgumentKind_LabelledOptionPun(
   label~,
   question_loc~,
 ) {
-  MapVisitorBase::visit_ArgumentKind_LabelledOptionPun(
-    env,
+  MapVisitor::visit_ArgumentKind_LabelledOptionPun(
+    env.base(),
     label~,
     question_loc~,
   )
@@ -1678,252 +1688,252 @@ impl MapVisitor with fn visit_ArgumentKind_LabelledOptionPun(
 
 ///|
 impl MapVisitor with fn visit_FnKind(env, fn_kind) {
-  MapVisitorBase::visit_FnKind(env, fn_kind)
+  MapVisitor::visit_FnKind(env.base(), fn_kind)
 }
 
 ///|
 impl MapVisitor with fn visit_Group(env, group) {
-  MapVisitorBase::visit_Group(env, group)
+  MapVisitor::visit_Group(env.base(), group)
 }
 
 ///|
 impl MapVisitor with fn visit_TrailingMark(env, trailing_mark) {
-  MapVisitorBase::visit_TrailingMark(env, trailing_mark)
+  MapVisitor::visit_TrailingMark(env.base(), trailing_mark)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeVarConstraint(env, type_var_constraint) {
-  MapVisitorBase::visit_TypeVarConstraint(env, type_var_constraint)
+  MapVisitor::visit_TypeVarConstraint(env.base(), type_var_constraint)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeVarBinder(env, type_var_binder) {
-  MapVisitorBase::visit_TypeVarBinder(env, type_var_binder)
+  MapVisitor::visit_TypeVarBinder(env.base(), type_var_binder)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDeclBinder(env, type_decl_binder) {
-  MapVisitorBase::visit_TypeDeclBinder(env, type_decl_binder)
+  MapVisitor::visit_TypeDeclBinder(env.base(), type_decl_binder)
 }
 
 ///|
 impl MapVisitor with fn visit_Binder(env, binder) {
-  MapVisitorBase::visit_Binder(env, binder)
+  MapVisitor::visit_Binder(env.base(), binder)
 }
 
 ///|
 impl MapVisitor with fn visit_Var(env, var_) {
-  MapVisitorBase::visit_Var(env, var_)
+  MapVisitor::visit_Var(env.base(), var_)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstructorExtraInfo(env, constructor_extra_info) {
-  MapVisitorBase::visit_ConstructorExtraInfo(env, constructor_extra_info)
+  MapVisitor::visit_ConstructorExtraInfo(env.base(), constructor_extra_info)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstructorExtraInfo_TypeName(env, type_name) {
-  MapVisitorBase::visit_ConstructorExtraInfo_TypeName(env, type_name)
+  MapVisitor::visit_ConstructorExtraInfo_TypeName(env.base(), type_name)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstructorExtraInfo_Package(env, package_) {
-  MapVisitorBase::visit_ConstructorExtraInfo_Package(env, package_)
+  MapVisitor::visit_ConstructorExtraInfo_Package(env.base(), package_)
 }
 
 ///|
 impl MapVisitor with fn visit_Constructor(env, constructor_) {
-  MapVisitorBase::visit_Constructor(env, constructor_)
+  MapVisitor::visit_Constructor(env.base(), constructor_)
 }
 
 ///|
 impl MapVisitor with fn visit_Accessor(env, accessor) {
-  MapVisitorBase::visit_Accessor(env, accessor)
+  MapVisitor::visit_Accessor(env.base(), accessor)
 }
 
 ///|
 impl MapVisitor with fn visit_Accessor_Label(env, label) {
-  MapVisitorBase::visit_Accessor_Label(env, label)
+  MapVisitor::visit_Accessor_Label(env.base(), label)
 }
 
 ///|
 impl MapVisitor with fn visit_Accessor_Index(env, tuple_index~, loc~) {
-  MapVisitorBase::visit_Accessor_Index(env, tuple_index~, loc~)
+  MapVisitor::visit_Accessor_Index(env.base(), tuple_index~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Accessor_Newtype(env, loc~) {
-  MapVisitorBase::visit_Accessor_Newtype(env, loc~)
+  MapVisitor::visit_Accessor_Newtype(env.base(), loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_AliasTarget(env, alias_target) {
-  MapVisitorBase::visit_AliasTarget(env, alias_target)
+  MapVisitor::visit_AliasTarget(env.base(), alias_target)
 }
 
 ///|
 impl MapVisitor with fn visit_Argument(env, argument) {
-  MapVisitorBase::visit_Argument(env, argument)
+  MapVisitor::visit_Argument(env.base(), argument)
 }
 
 ///|
 impl MapVisitor with fn visit_Parameter(env, parameter) {
-  MapVisitorBase::visit_Parameter(env, parameter)
+  MapVisitor::visit_Parameter(env.base(), parameter)
 }
 
 ///|
 impl MapVisitor with fn visit_Parameter_DiscardPositional(env, ty~, loc~) {
-  MapVisitorBase::visit_Parameter_DiscardPositional(env, ty~, loc~)
+  MapVisitor::visit_Parameter_DiscardPositional(env.base(), ty~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Parameter_Positional(env, binder~, ty~) {
-  MapVisitorBase::visit_Parameter_Positional(env, binder~, ty~)
+  MapVisitor::visit_Parameter_Positional(env.base(), binder~, ty~)
 }
 
 ///|
 impl MapVisitor with fn visit_Parameter_Labelled(env, binder~, ty~) {
-  MapVisitorBase::visit_Parameter_Labelled(env, binder~, ty~)
+  MapVisitor::visit_Parameter_Labelled(env.base(), binder~, ty~)
 }
 
 ///|
 impl MapVisitor with fn visit_Parameter_Optional(env, binder~, default~, ty~) {
-  MapVisitorBase::visit_Parameter_Optional(env, binder~, default~, ty~)
+  MapVisitor::visit_Parameter_Optional(env.base(), binder~, default~, ty~)
 }
 
 ///|
 impl MapVisitor with fn visit_Parameter_QuestionOptional(env, binder~, ty~) {
-  MapVisitorBase::visit_Parameter_QuestionOptional(env, binder~, ty~)
+  MapVisitor::visit_Parameter_QuestionOptional(env.base(), binder~, ty~)
 }
 
 ///|
 impl MapVisitor with fn visit_Case(env, case) {
-  MapVisitorBase::visit_Case(env, case)
+  MapVisitor::visit_Case(env.base(), case)
 }
 
 ///|
 impl MapVisitor with fn visit_SpreadableElem(env, spreadable_elem) {
-  MapVisitorBase::visit_SpreadableElem(env, spreadable_elem)
+  MapVisitor::visit_SpreadableElem(env.base(), spreadable_elem)
 }
 
 ///|
 impl MapVisitor with fn visit_SpreadableElem_Regular(env, expr) {
-  MapVisitorBase::visit_SpreadableElem_Regular(env, expr)
+  MapVisitor::visit_SpreadableElem_Regular(env.base(), expr)
 }
 
 ///|
 impl MapVisitor with fn visit_SpreadableElem_Spread(env, expr~, loc~) {
-  MapVisitorBase::visit_SpreadableElem_Spread(env, expr~, loc~)
+  MapVisitor::visit_SpreadableElem_Spread(env.base(), expr~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_MapExprElem(env, map_expr_elem) {
-  MapVisitorBase::visit_MapExprElem(env, map_expr_elem)
+  MapVisitor::visit_MapExprElem(env.base(), map_expr_elem)
 }
 
 ///|
 impl MapVisitor with fn visit_StaticAssertion(env, static_assertion) {
-  MapVisitorBase::visit_StaticAssertion(env, static_assertion)
+  MapVisitor::visit_StaticAssertion(env.base(), static_assertion)
 }
 
 ///|
 impl MapVisitor with fn visit_Func(env, func) {
-  MapVisitorBase::visit_Func(env, func)
+  MapVisitor::visit_Func(env.base(), func)
 }
 
 ///|
 impl MapVisitor with fn visit_FieldDef(env, field_def) {
-  MapVisitorBase::visit_FieldDef(env, field_def)
+  MapVisitor::visit_FieldDef(env.base(), field_def)
 }
 
 ///|
 impl MapVisitor with fn visit_InterpElem(env, interp_elem) {
-  MapVisitorBase::visit_InterpElem(env, interp_elem)
+  MapVisitor::visit_InterpElem(env.base(), interp_elem)
 }
 
 ///|
 impl MapVisitor with fn visit_InterpElem_Literal(env, repr~, loc~) {
-  MapVisitorBase::visit_InterpElem_Literal(env, repr~, loc~)
+  MapVisitor::visit_InterpElem_Literal(env.base(), repr~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_InterpElem_Expr(env, expr~, loc~) {
-  MapVisitorBase::visit_InterpElem_Expr(env, expr~, loc~)
+  MapVisitor::visit_InterpElem_Expr(env.base(), expr~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_InterpElem_Source(env, interp_source) {
-  MapVisitorBase::visit_InterpElem_Source(env, interp_source)
+  MapVisitor::visit_InterpElem_Source(env.base(), interp_source)
 }
 
 ///|
 impl MapVisitor with fn visit_MultilineStringElem(env, multiline_string_elem) {
-  MapVisitorBase::visit_MultilineStringElem(env, multiline_string_elem)
+  MapVisitor::visit_MultilineStringElem(env.base(), multiline_string_elem)
 }
 
 ///|
 impl MapVisitor with fn visit_MultilineStringElem_String(env, string_val) {
-  MapVisitorBase::visit_MultilineStringElem_String(env, string_val)
+  MapVisitor::visit_MultilineStringElem_String(env.base(), string_val)
 }
 
 ///|
 impl MapVisitor with fn visit_MultilineStringElem_Interp(env, interp_elems) {
-  MapVisitorBase::visit_MultilineStringElem_Interp(env, interp_elems)
+  MapVisitor::visit_MultilineStringElem_Interp(env.base(), interp_elems)
 }
 
 ///|
 impl MapVisitor with fn visit_TryOperatorKind(env, try_operator_kind) {
-  MapVisitorBase::visit_TryOperatorKind(env, try_operator_kind)
+  MapVisitor::visit_TryOperatorKind(env.base(), try_operator_kind)
 }
 
 ///|
 impl MapVisitor with fn visit_DotDotBinder(env, dot_dot_binder) {
-  MapVisitorBase::visit_DotDotBinder(env, dot_dot_binder)
+  MapVisitor::visit_DotDotBinder(env.base(), dot_dot_binder)
 }
 
 ///|
 impl MapVisitor with fn visit_DotDotBinder_BinderAs(env, binder) {
-  MapVisitorBase::visit_DotDotBinder_BinderAs(env, binder)
+  MapVisitor::visit_DotDotBinder_BinderAs(env.base(), binder)
 }
 
 ///|
 impl MapVisitor with fn visit_DotDotBinder_Binder(env, binder) {
-  MapVisitorBase::visit_DotDotBinder_Binder(env, binder)
+  MapVisitor::visit_DotDotBinder_Binder(env.base(), binder)
 }
 
 ///|
 impl MapVisitor with fn visit_ArrayPattern(env, array_pattern) {
-  MapVisitorBase::visit_ArrayPattern(env, array_pattern)
+  MapVisitor::visit_ArrayPattern(env.base(), array_pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_ArrayPattern_Pattern(env, pattern) {
-  MapVisitorBase::visit_ArrayPattern_Pattern(env, pattern)
+  MapVisitor::visit_ArrayPattern_Pattern(env.base(), pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_ArrayPattern_StringSpread(env, str~, loc~) {
-  MapVisitorBase::visit_ArrayPattern_StringSpread(env, str~, loc~)
+  MapVisitor::visit_ArrayPattern_StringSpread(env.base(), str~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_ArrayPattern_BytesSpread(env, bytes~, loc~) {
-  MapVisitorBase::visit_ArrayPattern_BytesSpread(env, bytes~, loc~)
+  MapVisitor::visit_ArrayPattern_BytesSpread(env.base(), bytes~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_ArrayPattern_ConstSpread(env, binder~, pkg~, loc~) {
-  MapVisitorBase::visit_ArrayPattern_ConstSpread(env, binder~, pkg~, loc~)
+  MapVisitor::visit_ArrayPattern_ConstSpread(env.base(), binder~, pkg~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_ArrayPatterns(env, array_patterns) {
-  MapVisitorBase::visit_ArrayPatterns(env, array_patterns)
+  MapVisitor::visit_ArrayPatterns(env.base(), array_patterns)
 }
 
 ///|
 impl MapVisitor with fn visit_ArrayPatterns_Closed(env, array_patterns) {
-  MapVisitorBase::visit_ArrayPatterns_Closed(env, array_patterns)
+  MapVisitor::visit_ArrayPatterns_Closed(env.base(), array_patterns)
 }
 
 ///|
@@ -1933,64 +1943,67 @@ impl MapVisitor with fn visit_ArrayPatterns_Open(
   suffix_patterns,
   dot_dot_binder,
 ) {
-  MapVisitorBase::visit_ArrayPatterns_Open(
-    env, prefix_patterns, suffix_patterns, dot_dot_binder,
+  MapVisitor::visit_ArrayPatterns_Open(
+    env.base(),
+    prefix_patterns,
+    suffix_patterns,
+    dot_dot_binder,
   )
 }
 
 ///|
 impl MapVisitor with fn visit_WhereClause(env, where_clause) {
-  MapVisitorBase::visit_WhereClause(env, where_clause)
+  MapVisitor::visit_WhereClause(env.base(), where_clause)
 }
 
 ///|
 impl MapVisitor with fn visit_FieldPat(env, field_pat) {
-  MapVisitorBase::visit_FieldPat(env, field_pat)
+  MapVisitor::visit_FieldPat(env.base(), field_pat)
 }
 
 ///|
 impl MapVisitor with fn visit_ConstrPatArg(env, const_pat_arg) {
-  MapVisitorBase::visit_ConstrPatArg(env, const_pat_arg)
+  MapVisitor::visit_ConstrPatArg(env.base(), const_pat_arg)
 }
 
 ///|
 impl MapVisitor with fn visit_MapPatElem(env, map_pat_elem) {
-  MapVisitorBase::visit_MapPatElem(env, map_pat_elem)
+  MapVisitor::visit_MapPatElem(env.base(), map_pat_elem)
 }
 
 ///|
 impl MapVisitor with fn visit_RangeKind(env, kind) {
-  MapVisitorBase::visit_RangeKind(env, kind)
+  MapVisitor::visit_RangeKind(env.base(), kind)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern(env, pattern) {
-  MapVisitorBase::visit_Pattern(env, pattern)
+  MapVisitor::visit_Pattern(env.base(), pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Alias(env, pat~, alias_~, loc~) {
-  MapVisitorBase::visit_Pattern_Alias(env, pat~, alias_~, loc~)
+  MapVisitor::visit_Pattern_Alias(env.base(), pat~, alias_~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Any(env, loc~) {
-  MapVisitorBase::visit_Pattern_Any(env, loc~)
+  MapVisitor::visit_Pattern_Any(env.base(), loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Array(env, pats~, loc~) {
-  MapVisitorBase::visit_Pattern_Array(env, pats~, loc~)
+  MapVisitor::visit_Pattern_Array(env.base(), pats~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Constant(env, c~, loc~) {
-  MapVisitorBase::visit_Pattern_Constant(env, c~, loc~)
+  MapVisitor::visit_Pattern_Constant(env.base(), c~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Constraint(env, pat~, ty~, loc~) {
-  MapVisitorBase::visit_Pattern_Constraint(env, pat~, ty~, loc~)
+  MapVisitor::visit_Pattern_Constraint(env.base(), pat~, ty~, loc~)
 }
 
 ///|
@@ -2001,62 +2014,62 @@ impl MapVisitor with fn visit_Pattern_Constr(
   is_open~,
   loc~,
 ) {
-  MapVisitorBase::visit_Pattern_Constr(env, constr~, args~, is_open~, loc~)
+  MapVisitor::visit_Pattern_Constr(env.base(), constr~, args~, is_open~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Or(env, pat1~, pat2~, loc~) {
-  MapVisitorBase::visit_Pattern_Or(env, pat1~, pat2~, loc~)
+  MapVisitor::visit_Pattern_Or(env.base(), pat1~, pat2~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Tuple(env, pats~, loc~) {
-  MapVisitorBase::visit_Pattern_Tuple(env, pats~, loc~)
+  MapVisitor::visit_Pattern_Tuple(env.base(), pats~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Var(env, binder) {
-  MapVisitorBase::visit_Pattern_Var(env, binder)
+  MapVisitor::visit_Pattern_Var(env.base(), binder)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Record(env, fields~, is_closed~, loc~) {
-  MapVisitorBase::visit_Pattern_Record(env, fields~, is_closed~, loc~)
+  MapVisitor::visit_Pattern_Record(env.base(), fields~, is_closed~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Map(env, elems~, is_closed~, loc~) {
-  MapVisitorBase::visit_Pattern_Map(env, elems~, is_closed~, loc~)
+  MapVisitor::visit_Pattern_Map(env.base(), elems~, is_closed~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~) {
-  MapVisitorBase::visit_Pattern_Range(env, lhs~, rhs~, kind~, loc~)
+  MapVisitor::visit_Pattern_Range(env.base(), lhs~, rhs~, kind~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_With(env, pat~, bindings~, loc~) {
-  MapVisitorBase::visit_Pattern_With(env, pat~, bindings~, loc~)
+  MapVisitor::visit_Pattern_With(env.base(), pat~, bindings~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_Pattern_SpecialConstr(env, binder~, args~, loc~) {
-  MapVisitorBase::visit_Pattern_SpecialConstr(env, binder~, args~, loc~)
+  MapVisitor::visit_Pattern_SpecialConstr(env.base(), binder~, args~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_DerivingDirective(env, deriving_directive) {
-  MapVisitorBase::visit_DerivingDirective(env, deriving_directive)
+  MapVisitor::visit_DerivingDirective(env.base(), deriving_directive)
 }
 
 ///|
 impl MapVisitor with fn visit_TypeDecl(env, type_decl) {
-  MapVisitorBase::visit_TypeDecl(env, type_decl)
+  MapVisitor::visit_TypeDecl(env.base(), type_decl)
 }
 
 ///|
 impl MapVisitor with fn visit_FuncStubs(env, func_stubs) {
-  MapVisitorBase::visit_FuncStubs(env, func_stubs)
+  MapVisitor::visit_FuncStubs(env.base(), func_stubs)
 }
 
 ///|
@@ -2066,8 +2079,8 @@ impl MapVisitor with fn visit_FuncStubs_Import(
   func_name~,
   language~,
 ) {
-  MapVisitorBase::visit_FuncStubs_Import(
-    env,
+  MapVisitor::visit_FuncStubs_Import(
+    env.base(),
     module_name~,
     func_name~,
     language~,
@@ -2076,52 +2089,52 @@ impl MapVisitor with fn visit_FuncStubs_Import(
 
 ///|
 impl MapVisitor with fn visit_FuncStubs_Embedded(env, language~, code~) {
-  MapVisitorBase::visit_FuncStubs_Embedded(env, language~, code~)
+  MapVisitor::visit_FuncStubs_Embedded(env.base(), language~, code~)
 }
 
 ///|
 impl MapVisitor with fn visit_EmbeddedCode(env, embedded_code) {
-  MapVisitorBase::visit_EmbeddedCode(env, embedded_code)
+  MapVisitor::visit_EmbeddedCode(env.base(), embedded_code)
 }
 
 ///|
 impl MapVisitor with fn visit_EmbeddedCode_CodeString(env, string_literal) {
-  MapVisitorBase::visit_EmbeddedCode_CodeString(env, string_literal)
+  MapVisitor::visit_EmbeddedCode_CodeString(env.base(), string_literal)
 }
 
 ///|
 impl MapVisitor with fn visit_EmbeddedCode_CodeMultilineString(env, strings) {
-  MapVisitorBase::visit_EmbeddedCode_CodeMultilineString(env, strings)
+  MapVisitor::visit_EmbeddedCode_CodeMultilineString(env.base(), strings)
 }
 
 ///|
 impl MapVisitor with fn visit_DeclBody(env, decl_body) {
-  MapVisitorBase::visit_DeclBody(env, decl_body)
+  MapVisitor::visit_DeclBody(env.base(), decl_body)
 }
 
 ///|
 impl MapVisitor with fn visit_DeclBody_DeclBody(env, expr~) {
-  MapVisitorBase::visit_DeclBody_DeclBody(env, expr~)
+  MapVisitor::visit_DeclBody_DeclBody(env.base(), expr~)
 }
 
 ///|
 impl MapVisitor with fn visit_DeclBody_DeclStubs(env, func_stubs) {
-  MapVisitorBase::visit_DeclBody_DeclStubs(env, func_stubs)
+  MapVisitor::visit_DeclBody_DeclStubs(env.base(), func_stubs)
 }
 
 ///|
 impl MapVisitor with fn visit_FunDecl(env, fun_decl) {
-  MapVisitorBase::visit_FunDecl(env, fun_decl)
+  MapVisitor::visit_FunDecl(env.base(), fun_decl)
 }
 
 ///|
 impl MapVisitor with fn visit_TraitMethodDecl(env, trait_method_decl) {
-  MapVisitorBase::visit_TraitMethodDecl(env, trait_method_decl)
+  MapVisitor::visit_TraitMethodDecl(env.base(), trait_method_decl)
 }
 
 ///|
 impl MapVisitor with fn visit_TraitDecl(env, trait_decl) {
-  MapVisitorBase::visit_TraitDecl(env, trait_decl)
+  MapVisitor::visit_TraitDecl(env.base(), trait_decl)
 }
 
 ///|
@@ -2133,8 +2146,8 @@ impl MapVisitor with fn visit_Expr_LexMatch(
   cases~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_LexMatch(
-    env,
+  MapVisitor::visit_Expr_LexMatch(
+    env.base(),
     strategy~,
     expr~,
     match_loc~,
@@ -2152,8 +2165,8 @@ impl MapVisitor with fn visit_Expr_LexScan(
   cases~,
   loc~,
 ) {
-  MapVisitorBase::visit_Expr_LexScan(
-    env,
+  MapVisitor::visit_Expr_LexScan(
+    env.base(),
     strategy~,
     expr~,
     match_loc~,
@@ -2164,82 +2177,82 @@ impl MapVisitor with fn visit_Expr_LexScan(
 
 ///|
 impl MapVisitor with fn visit_LexScanCase(env, lex_scan_case) {
-  MapVisitorBase::visit_LexScanCase(env, lex_scan_case)
+  MapVisitor::visit_LexScanCase(env.base(), lex_scan_case)
 }
 
 ///|
 impl MapVisitor with fn visit_LexScanCasePattern(env, lex_scan_case_pattern) {
-  MapVisitorBase::visit_LexScanCasePattern(env, lex_scan_case_pattern)
+  MapVisitor::visit_LexScanCasePattern(env.base(), lex_scan_case_pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_LexScanCasePattern_Pattern(env, regex_pattern) {
-  MapVisitorBase::visit_LexScanCasePattern_Pattern(env, regex_pattern)
+  MapVisitor::visit_LexScanCasePattern_Pattern(env.base(), regex_pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_LexScanCasePattern_Binder(env, binder) {
-  MapVisitorBase::visit_LexScanCasePattern_Binder(env, binder)
+  MapVisitor::visit_LexScanCasePattern_Binder(env.base(), binder)
 }
 
 ///|
 impl MapVisitor with fn visit_LexScanCasePattern_Wildcard(env, loc~) {
-  MapVisitorBase::visit_LexScanCasePattern_Wildcard(env, loc~)
+  MapVisitor::visit_LexScanCasePattern_Wildcard(env.base(), loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_LexCase(env, lex_case) {
-  MapVisitorBase::visit_LexCase(env, lex_case)
+  MapVisitor::visit_LexCase(env.base(), lex_case)
 }
 
 ///|
 impl MapVisitor with fn visit_LexTopPattern(env, lex_top_pattern) {
-  MapVisitorBase::visit_LexTopPattern(env, lex_top_pattern)
+  MapVisitor::visit_LexTopPattern(env.base(), lex_top_pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_LexTopPattern_Pattern(env, lex_pattern) {
-  MapVisitorBase::visit_LexTopPattern_Pattern(env, lex_pattern)
+  MapVisitor::visit_LexTopPattern_Pattern(env.base(), lex_pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_LexTopPattern_Binder(env, binder) {
-  MapVisitorBase::visit_LexTopPattern_Binder(env, binder)
+  MapVisitor::visit_LexTopPattern_Binder(env.base(), binder)
 }
 
 ///|
 impl MapVisitor with fn visit_LexTopPattern_Wildcard(env, loc~) {
-  MapVisitorBase::visit_LexTopPattern_Wildcard(env, loc~)
+  MapVisitor::visit_LexTopPattern_Wildcard(env.base(), loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_LexPattern(env, lex_pattern) {
-  MapVisitorBase::visit_LexPattern(env, lex_pattern)
+  MapVisitor::visit_LexPattern(env.base(), lex_pattern)
 }
 
 ///|
 impl MapVisitor with fn visit_LexPattern_Regex(env, lit~, offset~, loc~) {
-  MapVisitorBase::visit_LexPattern_Regex(env, lit~, offset~, loc~)
+  MapVisitor::visit_LexPattern_Regex(env.base(), lit~, offset~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_LexPattern_RegexInterp(env, elems~, loc~) {
-  MapVisitorBase::visit_LexPattern_RegexInterp(env, elems~, loc~)
+  MapVisitor::visit_LexPattern_RegexInterp(env.base(), elems~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_LexPattern_ConstantRef(env, lid~, loc~) {
-  MapVisitorBase::visit_LexPattern_ConstantRef(env, lid~, loc~)
+  MapVisitor::visit_LexPattern_ConstantRef(env.base(), lid~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_LexPattern_Alias(env, pat~, binder~, loc~) {
-  MapVisitorBase::visit_LexPattern_Alias(env, pat~, binder~, loc~)
+  MapVisitor::visit_LexPattern_Alias(env.base(), pat~, binder~, loc~)
 }
 
 ///|
 impl MapVisitor with fn visit_LexPattern_Sequence(env, pats~, loc~) {
-  MapVisitorBase::visit_LexPattern_Sequence(env, pats~, loc~)
+  MapVisitor::visit_LexPattern_Sequence(env.base(), pats~, loc~)
 }
 
 ///|
