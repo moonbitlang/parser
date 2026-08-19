@@ -69,7 +69,7 @@ test "legacy JSON converts Ast values" {
         ("object", legacy_obj([("nested", legacy_bool(false, loc))], loc)),
       ],
       loc,
-    ).to_json(),
+    ),
     content={
       "null": null,
       "bool": true,
@@ -119,7 +119,7 @@ test "legacy JSON folds repeated top-level entries only" {
     ],
     loc,
   )
-  json_inspect(ast.to_json(), content={
+  json_inspect(ast, content={
     "rule": [
       { "name": "rule1", "command": "exe", "env": { "k": "second" } },
       { "name": "rule2", "command": "exe" },
@@ -131,7 +131,7 @@ test "legacy JSON folds repeated top-level entries only" {
 test "legacy JSON preserves numeric repr" {
   let loc = legacy_loc()
   json_inspect(
-    legacy_obj([("big", legacy_float("1N", loc))], loc).to_json(),
+    legacy_obj([("big", legacy_float("1N", loc))], loc),
     content=Json::object(
       Map::from_array([("big", Json::number(0.0, repr="1N"))]),
     ),
@@ -151,7 +151,7 @@ test "legacy JSON postprocesses moon.pkg output" {
     #|dev_build(rule: "rule1", input: "a", output: "b")
     #|dev_build(rule: "rule2", input: "c", output: "d")
     #|
-  json_inspect(legacy_parse_pkg(source).to_json(), content={
+  json_inspect(legacy_parse_pkg(source), content={
     "warn-list": "+w1",
     "supported-targets": "+wasm",
     "is-main": true,
@@ -190,7 +190,7 @@ test "legacy JSON handles package imports aliases and targets" {
     #|  },
     #|)
     #|
-  json_inspect(legacy_parse_pkg(source).to_json(), content={
+  json_inspect(legacy_parse_pkg(source), content={
     "import": [
       {
         "path": "moonbit-community/fullstack-one-project-doc/shared",
@@ -221,7 +221,7 @@ test "legacy JSON handles link options" {
     #|  },
     #|)
     #|
-  json_inspect(legacy_parse_pkg(source).to_json(), content={
+  json_inspect(legacy_parse_pkg(source), content={
     "link": {
       "wasm-gc": {
         "use-js-builtin-string": true,
@@ -248,7 +248,7 @@ test "legacy JSON postprocesses moon.mod output" {
     #|rule(name: "rule1", command: "exe")
     #|rule(name: "rule2", command: "exe")
     #|
-  json_inspect(legacy_parse_mod(source).to_json(), content={
+  json_inspect(legacy_parse_mod(source), content={
     "name": "user/mod",
     "version": "0.1.0",
     "deps": { "dep/a": "1.2.3", "dep/b": "" },
@@ -287,7 +287,7 @@ test "legacy JSON handles moon.mod metadata options" {
     #|  source: "src",
     #|)
     #|
-  json_inspect(legacy_parse_mod(source).to_json(), content={
+  json_inspect(legacy_parse_mod(source), content={
     "name": "example/dsl_only",
     "version": "0.1.0",
     "deps": { "moonbitlang/x": "0.4.6", "../dep": "" },
@@ -313,7 +313,7 @@ test "legacy JSON parses moon.work output" {
     #|members = ["./app", "./shared"]
     #|preferred_target = "wasm-gc"
     #|
-  json_inspect(legacy_parse_work(source).to_json(), content={
+  json_inspect(legacy_parse_work(source), content={
     "members": ["./app", "./shared"],
     "preferred_target": "wasm-gc",
   })
@@ -325,7 +325,7 @@ test "legacy JSON folds duplicate moon.mod keys" {
     #|name = "user/first"
     #|name = "user/second"
     #|
-  json_inspect(legacy_parse_mod(source).to_json(), content={
+  json_inspect(legacy_parse_mod(source), content={
     "name": ["user/first", "user/second"],
   })
 }
