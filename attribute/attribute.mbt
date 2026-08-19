@@ -15,7 +15,7 @@ pub impl Show for Id with fn output(self, logger) {
 
 ///|
 pub impl Debug for Id with fn to_repr(self) {
-  @debug.Repr::literal(self.to_string())
+  @debug.Repr::literal(Show::to_string(self))
 }
 
 ///|
