@@ -77,6 +77,20 @@ fn root_contains_expr(root : @untyped_cst.CstNode) -> Bool {
 }
 
 ///|
+fn root_expr_children(
+  root : @untyped_cst.CstNode,
+) -> Array[@untyped_cst.CstNode] {
+  let exprs : Array[@untyped_cst.CstNode] = []
+  for entry in root.children {
+    match entry {
+      (Some("expr"), child) => exprs.push(child)
+      _ => ()
+    }
+  }
+  exprs
+}
+
+///|
 fn find_node(
   root : @untyped_cst.CstNode,
   pred : (@untyped_cst.CstNode) -> Bool,
@@ -395,6 +409,42 @@ test "expression entry returns expression" {
   @test.assert_eq(root_is_expression(result.root()), true)
   @test.assert_eq(root_contains_expr(result.root()), true)
   @test.assert_eq(result.root().text(source), source[:])
+}
+
+///|
+test "expression fragments recognize top-level local functions" {
+  let single_cases = [
+    "fn helper(x) { x }", "async fn helper(x) { x }", "// leading trivia\nfn helper(x) { x }",
+    "fn\nhelper(x) { x }", "fn // between fn and name\nhelper(x) { x }", "async\nfn helper(x) { x }",
+    "async // between async and fn\nfn helper(x) { x }", "async fn\nhelper(x) { x }",
+  ]
+  for source in single_cases {
+    let result = @untyped_cst.parse_expression(source)
+    @test.assert_eq(result.diagnostics_view().length(), 0)
+    let exprs = root_expr_children(result.root())
+    @test.assert_eq(exprs.length(), 1)
+    @test.assert_eq(exprs[0].kind is @untyped_cst.Expr_LetFn, true)
+    @test.assert_eq(result.root().text(source), source[:])
+  }
+  let sequence_cases = [
+    "fn helper(x) { x }; helper(1)", "fn helper(x) { x }\nhelper(1)",
+  ]
+  for source in sequence_cases {
+    let result = @untyped_cst.parse_expression(source)
+    @test.assert_eq(result.diagnostics_view().length(), 0)
+    let exprs = root_expr_children(result.root())
+    @test.assert_eq(exprs.length(), 2)
+    @test.assert_eq(exprs[0].kind is @untyped_cst.Expr_LetFn, true)
+    @test.assert_eq(count_root_label(result.root(), "sep"), 1)
+    @test.assert_eq(result.root().text(source), source[:])
+  }
+  let anonymous = @untyped_cst.parse_expression("fn(x) { x }")
+  @test.assert_eq(anonymous.diagnostics_view().length(), 0)
+  let anonymous_exprs = root_expr_children(anonymous.root())
+  @test.assert_eq(anonymous_exprs.length(), 1)
+  @test.assert_eq(anonymous_exprs[0].kind is @untyped_cst.Expr_Function, true)
+  let nested = @untyped_cst.parse_expression("consume(fn helper(x) { x })")
+  @test.assert_eq(nested.diagnostics_view().is_empty(), false)
 }
 
 ///|

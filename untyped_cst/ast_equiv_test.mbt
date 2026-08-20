@@ -334,6 +334,29 @@ test "expression conversion produces expression AST" {
 }
 
 ///|
+test "expression fragments lower complete statement sequences" {
+  let cases = [
+    "fn helper(x) { x }", "fn helper(x) { x }; helper(1)", "fn helper(x) { x };",
+    "1; 2", "let x = 1; x", "async fn helper(x) { x }; helper(1)",
+  ]
+  for source in cases {
+    assert_expr_ast_equiv(source)
+  }
+  let (local_expr, local_reports) = @untyped_cst.parse_expression(
+    "fn helper(x) { x }",
+  ).to_expr()
+  @test.assert_eq(local_reports.length(), 0)
+  guard local_expr is Some(@syntax.Expr::LetFn(..)) else {
+    fail("expected local function expression root")
+  }
+  let (sequence, sequence_reports) = @untyped_cst.parse_expression("1; 2").to_expr()
+  @test.assert_eq(sequence_reports.length(), 0)
+  guard sequence is Some(@syntax.Expr::Sequence(..)) else {
+    fail("expected sequence expression root")
+  }
+}
+
+///|
 test "string and labelled argument AST equivalence cases" {
   let cases = [
     "\"hello \\{name}\"", "b\"hello \\{name}\"", "(\n#| Hello\n#| World\n)", "(\n$| hello \\{name}\n#| tail\n)",

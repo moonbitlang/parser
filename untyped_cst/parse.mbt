@@ -531,7 +531,9 @@ fn parse_parameter_list(state : ParserState) -> CstNode {
     parse_parameter_item,
     List_ParameterList,
     sep_kind=TokenKind::TK_COMMA,
+    follow_set=[TokenKind::TK_LBRACE],
     item_expected="parameter name or label",
+    post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
   )
 }
 
@@ -3506,7 +3508,7 @@ fn parse_invalid_guard_letrec(
 fn parse_expr_fragment(state : ParserState) -> CstNode {
   let reports_before_expr = state.reports.length()
   let expr = state.required_expr_node(
-    parse_expr_until(state, [TokenKind::TK_EOF]),
+    parse_expr_fragment_item(state),
     reports_before_expr,
   )
   let children : Array[(String?, CstNode)] = []
@@ -3520,7 +3522,7 @@ fn parse_expr_fragment(state : ParserState) -> CstNode {
     }
     push_children(children, state.consume_trivia())
     if !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
-      let next = parse_expr_until(state, [TokenKind::TK_EOF])
+      let next = parse_expr_fragment_item(state)
       if !next.children.is_empty() {
         push_child(children, Some("expr"), next)
       }
@@ -3554,6 +3556,19 @@ fn parse_expr_fragment(state : ParserState) -> CstNode {
   }
   let root = node(Expression, state.root_loc(), state.root_span(), children)
   root
+}
+
+///|
+fn parse_expr_fragment_item(state : ParserState) -> CstNode {
+  if local_function_statement_can_start(state) {
+    discard_expr_trivia(state)
+    parse_local_function_statement(state, [
+      TokenKind::TK_SEMI,
+      TokenKind::TK_EOF,
+    ])
+  } else {
+    parse_expr_until(state, [TokenKind::TK_EOF])
+  }
 }
 
 ///|
@@ -8685,7 +8700,12 @@ fn parse_statement(state : ParserState) -> CstNode {
     Some((LETREC, _, _)) => parse_letrec_statement(state)
     Some((FN, _, _)) | Some((ASYNC, _, _)) if local_function_statement_can_start(
         state,
-      ) => parse_local_function_statement(state)
+      ) =>
+      parse_local_function_statement(state, [
+        TokenKind::TK_SEMI,
+        TokenKind::TK_RBRACE,
+        TokenKind::TK_EOF,
+      ])
     Some((GUARD, _, _)) | Some((GUARD_EXCLAMATION, _, _)) =>
       parse_guard_statement(state)
     Some((DEFER, _, _)) => parse_defer_statement(state)
@@ -9051,7 +9071,10 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
 }
 
 ///|
-fn parse_local_function_statement(state : ParserState) -> CstNode {
+fn parse_local_function_statement(
+  state : ParserState,
+  stop_kinds : Array[TokenKind],
+) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   if state.current_is(TokenKind::TK_ASYNC) {
     if state.consume_any() is Some(kw) {
@@ -9059,6 +9082,7 @@ fn parse_local_function_statement(state : ParserState) -> CstNode {
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
   }
   if state.current_is(TokenKind::TK_FN) {
     if state.consume_any() is Some(kw) {
@@ -9066,6 +9090,7 @@ fn parse_local_function_statement(state : ParserState) -> CstNode {
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
   }
   match state.peek() {
     Some((LIDENT(_), _, _)) | Some((UIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
@@ -9076,42 +9101,42 @@ fn parse_local_function_statement(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_EXCLAMATION) {
-    match state.peek() {
-      Some((_, start, end)) =>
-        state.report(
-          mk_loc(start, end),
-          "Failed to parse func: expected '(' or '{', got EXCLAMATION",
-        )
-      None => ()
-    }
-    while !state.current_is(TokenKind::TK_RBRACE) &&
-          !state.current_is(TokenKind::TK_EOF) &&
-          !(state.peek() is None) {
-      if state.consume_any() is Some(bad) {
-        push_child(
-          children,
-          Some("error"),
-          error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-        )
-      } else {
-        ()
-      }
-    }
-    return state
-      .node_from_children(Expr_LetFn, children)
-      .with_bool_marker(
-        "async",
-        Flag_Async,
-        children
-        .iter()
-        .any(fn(entry) {
-          entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
-        }),
+  match state.peek() {
+    Some((tok, start, end)) if !(tok is LPAREN) => {
+      state.report(
+        mk_loc(start, end),
+        "Failed to parse func: expected '(' or '{', got \{@debug.render(tok.to_repr())}",
       )
-      .with_async_location_anchor()
-      .with_decl_like_function_location_anchor()
+      while !state.current_in(stop_kinds) &&
+            !state.current_is(TokenKind::TK_EOF) &&
+            !(state.peek() is None) {
+        if state.consume_any() is Some(bad) {
+          push_child(
+            children,
+            Some("error"),
+            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
+          )
+        } else {
+          ()
+        }
+      }
+      return state
+        .node_from_children(Expr_LetFn, children)
+        .with_bool_marker(
+          "async",
+          Flag_Async,
+          children
+          .iter()
+          .any(fn(entry) {
+            entry.0 is Some("kw") && entry.1.has_child_kind(Flag_Async)
+          }),
+        )
+        .with_async_location_anchor()
+        .with_decl_like_function_location_anchor()
+    }
+    _ => ()
   }
+  let reports_before_signature = state.reports.length()
   if state.current_is(TokenKind::TK_LPAREN) {
     push_child(children, Some("params"), parse_parameter_list(state))
   }
@@ -9122,6 +9147,15 @@ fn parse_local_function_statement(state : ParserState) -> CstNode {
   }
   if state.current_is(TokenKind::TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
+  } else {
+    let body = if state.reports.length() > reports_before_signature {
+      state.missing_token_node_silent(TokenKind::TK_LBRACE)
+    } else {
+      state.missing_token_node_with_expected(TokenKind::TK_LBRACE, [
+        TokenKind::TK_LBRACE,
+      ])
+    }
+    push_child(children, Some("body"), body)
   }
   state
   .node_from_children(Expr_LetFn, children)
