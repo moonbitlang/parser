@@ -171,6 +171,36 @@ test "expression diagnostics come from CST parser recovery" {
 }
 
 ///|
+test "local function expression fragment diagnostics match handrolled" {
+  let valid = [
+    ("local function", "fn helper(x) { x }"),
+    ("local function sequence", "fn helper(x) { x }; helper(1)"),
+    ("async local function", "async fn helper(x) { x }"),
+    ("newline after fn", "fn\nhelper(x) { x }"),
+    ("comment after fn", "fn // between fn and name\nhelper(x) { x }"),
+    ("newline after async", "async\nfn helper(x) { x }"),
+    ("comment after async", "async // between async and fn\nfn helper(x) { x }"),
+    ("newline after async fn", "async fn\nhelper(x) { x }"),
+    ("anonymous function", "fn(x) { x }"),
+  ]
+  for case in valid {
+    let (label, source) = case
+    assert_expression_acceptance(label, source, true)
+  }
+  let invalid = [
+    ("local function missing parameters", "fn helper { x }"),
+    ("local function missing parameter close", "fn helper(x"),
+    ("local function malformed parameter close", "fn helper(x { x }"),
+    ("local function missing body", "fn helper(x)"),
+    ("nested named function", "consume(fn helper(x) { x })"),
+  ]
+  for case in invalid {
+    let (label, source) = case
+    assert_expression_acceptance(label, source, false)
+  }
+}
+
+///|
 test "acceptance equivalence: labelled arguments" {
   let invalid = [
     ("uppercase label", "f(X=1)"),

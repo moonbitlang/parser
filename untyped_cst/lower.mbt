@@ -1335,11 +1335,14 @@ fn lower_using_names(
 ///|
 fn lower_expr(node : CstNode) -> @syntax.Expr {
   match node.kind {
-    Expression =>
-      node
-      .first_child_with_label("expr")
-      .map(lower_expr)
-      .unwrap_or(lower_hole_expr(node.loc))
+    Expression => {
+      let items = node.children_with_label("expr")
+      if items.is_empty() {
+        lower_hole_expr(node.loc)
+      } else {
+        lower_statement_sequence(items, 0, node.loc)
+      }
+    }
     Expr_Ident =>
       @syntax.Expr::Ident(
         id=@syntax.Var::{
