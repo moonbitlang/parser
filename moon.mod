@@ -1,6 +1,6 @@
 name = "moonbitlang/parser"
 
-version = "0.3.17"
+version = "0.3.18"
 
 import {
   "moonbitlang/x@0.4.39",
