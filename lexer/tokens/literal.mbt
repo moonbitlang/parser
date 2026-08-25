@@ -27,7 +27,7 @@ pub type InterpLiteral = Array[InterpElem]
 
 ///|
 fn InterpLiteral::to_string_repr(self : InterpLiteral) -> String {
-  let buf = StringBuilder::new()
+  let buf = StringBuilder()
   buf.write_char('"')
   for elem in self {
     match elem {

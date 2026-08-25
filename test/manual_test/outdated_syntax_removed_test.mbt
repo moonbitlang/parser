@@ -41,7 +41,7 @@ fn expect_accepted(source : String, name : String) -> Unit raise Error {
 
 ///|
 fn expect_rejected_cases(cases : Array[(String, String)]) -> Unit raise Error {
-  let failures = StringBuilder::new()
+  let failures = StringBuilder()
   let mut failed = false
   for case in cases {
     let (source, name) = case

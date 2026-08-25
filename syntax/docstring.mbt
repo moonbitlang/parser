@@ -16,7 +16,7 @@ pub impl ToJson for DocString with fn to_json(self) {
       head
     }
   }
-  let buf = StringBuilder::new()
+  let buf = StringBuilder()
   buf.write_string(init_str)
   for doc in docs {
     buf.write_string("\n")

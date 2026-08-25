@@ -40,18 +40,18 @@ pub impl Compare for Position with fn compare(self, other) {
 test "compre position" {
   let a = { fname: "", lnum: 10, bol: 0, cnum: 0 }
   let b = { fname: "", lnum: 10, bol: 0, cnum: 0 }
-  assert_eq(a.compare(b), 0)
+  assert_eq(Compare::compare(a, b), 0)
   let a = { fname: "", lnum: 10, bol: 0, cnum: 0 }
   let b = { fname: "", lnum: 1, bol: 0, cnum: 0 }
-  assert_eq(a.compare(b), 1)
-  assert_eq(b.compare(a), -1)
+  assert_eq(Compare::compare(a, b), 1)
+  assert_eq(Compare::compare(b, a), -1)
   let a = { fname: "", lnum: 10, bol: 2, cnum: 5 }
   let b = { fname: "", lnum: 10, bol: 2, cnum: 5 }
-  assert_eq(a.compare(b), 0)
+  assert_eq(Compare::compare(a, b), 0)
   let a = { fname: "", lnum: 10, bol: 2, cnum: 5 }
   let b = { fname: "", lnum: 10, bol: 2, cnum: 10 }
-  assert_eq(a.compare(b), -1)
-  assert_eq(b.compare(a), 1)
+  assert_eq(Compare::compare(a, b), -1)
+  assert_eq(Compare::compare(b, a), 1)
 }
 
 ///|

@@ -25,7 +25,7 @@ fn fail_parser_reports(
   hand_reports : Array[@basic.Report],
   yacc_reports : Array[@basic.Report],
 ) -> Unit raise {
-  let buf = StringBuilder::new()
+  let buf = StringBuilder()
   let _ : Unit = @basic.show_loc.protect(String, fn() {
     buf
     ..write_string("parsing focused AST equivalence case failed.\n")

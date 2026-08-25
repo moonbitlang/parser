@@ -7,7 +7,7 @@ pub(all) struct Report {
 ///|
 pub impl Show for Report with fn output(self, logger) {
   logger.write_string("error (")
-  logger.write_string(self.loc.to_string())
+  logger.write_string(Show::to_string(self.loc))
   logger.write_char(':')
   logger.write_char(' ')
   logger.write_string(self.msg.to_string())
