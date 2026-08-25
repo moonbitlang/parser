@@ -1634,7 +1634,7 @@ fn lex_invalid_byte(
   env~ : LexEnv,
   start~ : Int,
 ) -> StringView {
-  let invalid_byte_repr_buf = StringBuilder::new()
+  let invalid_byte_repr_buf = StringBuilder()
   fn add_invalid_byte(rest : StringView) -> StringView {
     let payload = invalid_byte_repr_buf.to_string()
     let end_pos = env.calc_offset(base~, rest)
@@ -1677,7 +1677,7 @@ fn lex_string(
   allow_interp~ : Bool,
   start_pos~ : Int,
 ) -> (StringView, Array[InterpElem]) {
-  let string_repr_buf = StringBuilder::new()
+  let string_repr_buf = StringBuilder()
   let interps = []
   fn add_literal(repr : String, start : Int, end : Int) -> Unit {
     interps.push(

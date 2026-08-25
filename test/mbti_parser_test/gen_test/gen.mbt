@@ -28,7 +28,7 @@ fn main {
     let tests = @fs.read_dir(fixtures_path).filter(name => {
       name.has_suffix(".mbti")
     })
-    let buf = StringBuilder::new()
+    let buf = StringBuilder()
     for name in tests {
       buf
       ..write_string(gen_test(name.split(".").head().unwrap().to_owned()))

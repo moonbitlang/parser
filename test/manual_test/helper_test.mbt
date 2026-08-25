@@ -47,7 +47,7 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
   let yacc_result = @parser.parse_string(source, name~, parser=MoonYacc)
   let cst_json = cst_impls_json(source, name)
   if !(hand_result.1.is_empty() && yacc_result.1.is_empty()) {
-    let buf = StringBuilder::new()
+    let buf = StringBuilder()
     let _ : Unit = @basic.show_loc.protect(String, fn() {
       buf
       ..write_string("parsing \{name}.mbt failed due to diagnostics.\n")

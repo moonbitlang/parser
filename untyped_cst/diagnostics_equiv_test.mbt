@@ -27,7 +27,7 @@ fn diagnostics_equiv_assert_reports(
   let actual_accepted = actual.is_empty()
   if hand_json != actual_json || actual_accepted != accepted {
     fail(
-      StringBuilder::new()
+      StringBuilder()
       ..write_string("diagnostics mismatch for ")
       ..write_string(label)
       ..write_string(": expected accepted=")

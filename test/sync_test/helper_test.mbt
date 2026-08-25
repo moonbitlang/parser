@@ -23,7 +23,7 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
   if !(hand_result.1.is_empty() &&
     yacc_result.1.is_empty() &&
     cst_diagnostics.is_empty()) {
-    let buf = StringBuilder::new()
+    let buf = StringBuilder()
     let _ : Unit = @basic.show_loc.protect(String, fn() {
       buf
       ..write_string("parsing \{name}.mbt failed due to diagnostics.\n")

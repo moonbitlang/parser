@@ -46,7 +46,7 @@ fn canonical_ast_kind(kind : String) -> String {
 
 ///|
 fn normalize_attribute_raw(raw : String) -> String {
-  let buf = StringBuilder::new(size_hint=raw.length())
+  let buf = StringBuilder(size_hint=raw.length())
   let mut quoted = false
   let mut escaped = false
   for ch in raw {
