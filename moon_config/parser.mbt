@@ -7,7 +7,7 @@ priv struct State {
 }
 
 ///|
-let dummy_pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0 }
+let dummy_pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0, }
 
 ///|
 fn is_layout(token : Token) -> Bool {
@@ -74,12 +74,12 @@ fn State::peek_spos(state : Self, nth? : Int = 0) -> Position {
 ///|
 fn State::peek_location(state : Self) -> Location {
   let (_, start, end) = state.peek()
-  { start, end }
+  { start, end, }
 }
 
 ///|
 fn State::loc_start_with(state : Self, start : Position) -> Location {
-  { start, end: state.parsed_position }
+  { start, end: state.parsed_position, }
 }
 
 ///|
@@ -104,7 +104,7 @@ fn State::report_failed_to_parse(
     _ =>
       "Unexpected token \{found.to_expect_string()}, you may expect \{expected}."
   }
-  state.diagnostics.push({ loc, msg })
+  state.diagnostics.push({ loc, msg, })
 }
 
 ///|
@@ -345,7 +345,7 @@ fn parse_apply(state : State) -> (String, Ast) {
   if !state.consume_if(TK_LPAREN) {
     state.report_expected_here("\"(\"")
     state.skip_until_statement_end()
-    let loc = Location::{ start: args_start, end: args_start }
+    let loc = Location::{ start: args_start, end: args_start, }
     return (name, Obj(Vector([]), loc~))
   }
   let args = parse_comma_separated(state, right=TK_RPAREN, parse_argument)
@@ -611,7 +611,7 @@ fn parse_statements(state : State) -> Array[(String, Ast)] {
 ///|
 fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
   if tokens.is_empty() {
-    let loc = Location::{ start: dummy_pos, end: dummy_pos }
+    let loc = Location::{ start: dummy_pos, end: dummy_pos, }
     return (Obj(Vector([]), loc~), [])
   }
   let start = tokens[0].1
@@ -635,7 +635,7 @@ fn parse_string(source : String, name? : String = "") -> (Ast, Array[Report]) {
   let diagnostics = []
   lex_result.errors.each(fn(err_triple) {
     let (start, end, err) = err_triple
-    diagnostics.push(Report::{ loc: { start, end }, msg: err.to_string() })
+    diagnostics.push(Report::{ loc: { start, end, }, msg: err.to_string(), })
   })
   reports.each(report => diagnostics.push(report))
   (ast, diagnostics)

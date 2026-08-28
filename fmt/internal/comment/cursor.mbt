@@ -45,7 +45,7 @@ fn Mapper::cursor_find_aux(
       } else {
         log("consume tok: \{triple.0.kind()} \{triple.1} \{triple.2}")
         self.cursor += 1
-        return Some(Token({ start: triple.1, end: triple.2 }))
+        return Some(Token({ start: triple.1, end: triple.2, }))
       }
     }
     None
@@ -60,7 +60,7 @@ fn Mapper::cursor_find_aux(
       } else {
         log("consume tok: \{triple.0.kind()} \{triple.1} \{triple.2}")
         self.cursor += 1
-        return Some(Token({ start: triple.1, end: triple.2 }))
+        return Some(Token({ start: triple.1, end: triple.2, }))
       }
     }
     None
@@ -73,7 +73,7 @@ fn Mapper::cursor_find_aux(
       } else {
         log("consume tok: \{triple.0.kind()} \{triple.1} \{triple.2}")
         self.cursor += 1
-        return Some(Token({ start: triple.1, end: triple.2 }))
+        return Some(Token({ start: triple.1, end: triple.2, }))
       }
     }
     None

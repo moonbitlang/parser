@@ -346,7 +346,7 @@ fn FieldName::json_repr(self : FieldName) -> Json {
 
 ///|
 fn WhereClause::json_repr(self : WhereClause) -> Json {
-  let { fields, loc } = self
+  let { fields, loc, } = self
   tagged_node("WhereClause", loc, {
     "fields": list_json_repr(
       "WhereClause::FieldList",
@@ -1283,7 +1283,7 @@ fn InterpElem::json_repr(self : InterpElem) -> Json {
       })
     Expr(expr~, loc~) =>
       tagged_node("InterpElem::Expr", loc, { "expr": expr.json_repr() })
-    Source({ source, loc }) =>
+    Source({ source, loc, }) =>
       tagged_node("InterpElem::Source", loc, { "source": source })
   }
 }

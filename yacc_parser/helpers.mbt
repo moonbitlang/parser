@@ -7,5 +7,5 @@ priv enum LeftValue {
 
 ///|
 fn mk_loc(loc : (Position, Position)) -> Location {
-  { start: loc.0, end: loc.1 }
+  { start: loc.0, end: loc.1, }
 }

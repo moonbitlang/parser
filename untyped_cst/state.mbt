@@ -119,7 +119,7 @@ fn advance_position(pos : Position, text : String) -> Position {
       bol = cnum
     }
   }
-  Position::{ fname: pos.fname, lnum, bol, cnum }
+  Position::{ fname: pos.fname, lnum, bol, cnum, }
 }
 
 ///|
@@ -367,7 +367,7 @@ fn ParserState::missing_eof_node(self : ParserState) -> CstNode {
   let pos = self.previous_end()
   let offset = self.missing_eof_offset()
   let missing = missing_node(TokenKind::TK_EOF, pos, offset)
-  self.reports.push(Report::{ loc: empty_loc(pos), msg: "expected EOF" })
+  self.reports.push(Report::{ loc: empty_loc(pos), msg: "expected EOF", })
   missing
 }
 

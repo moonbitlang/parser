@@ -40,12 +40,12 @@ fn ParseResult::docstrings_view(
 
 ///|
 fn mk_loc(start : Position, end : Position) -> Location {
-  Location::{ start, end }
+  Location::{ start, end, }
 }
 
 ///|
 fn empty_loc(pos : Position) -> Location {
-  Location::{ start: pos, end: pos }
+  Location::{ start: pos, end: pos, }
 }
 
 ///|

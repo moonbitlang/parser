@@ -9,7 +9,7 @@ fn ParseResult::diagnostics_array(self : ParseResult) -> Array[Report] {
 
 ///|
 fn conversion_report(root : CstNode, msg : String) -> Report {
-  Report::{ loc: root.loc, msg }
+  Report::{ loc: root.loc, msg, }
 }
 
 ///|

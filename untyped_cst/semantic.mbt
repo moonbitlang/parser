@@ -568,7 +568,7 @@ fn CstNode::with_decl_like_function_location_anchor(self : CstNode) -> CstNode {
     Some(keyword) =>
       self.with_aggregate_span(
         "header_loc",
-        Location::{ start: keyword.loc.start, end: self.loc.end },
+        Location::{ start: keyword.loc.start, end: self.loc.end, },
         mk_span(keyword.source_span.0, self.source_span.1),
       )
     None => self

@@ -17,6 +17,6 @@ impl MapVisitor for RemoveGroup with fn visit_Expr_Group(
 
 ///|
 fn RemoveGroup::process(impls : @syntax.Impls) -> @syntax.Impls {
-  let self = RemoveGroup::{  }
+  let self = RemoveGroup::{ }
   impls.map(x => self.visit_Impl(x))
 }

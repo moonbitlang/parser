@@ -234,7 +234,7 @@ fn Fmt::new(
   checkpoint_mapper? : @comment.CheckpointMapper,
   block_line? : Bool = true,
 ) -> Self {
-  { mapper, checkpoint_mapper, block_line }
+  { mapper, checkpoint_mapper, block_line, }
 }
 
 ///|
@@ -431,7 +431,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       result +
       body
     }
-    TopTrait({ name, supers, methods, vis, attrs, doc, loc: _, is_declare }) => {
+    TopTrait({ name, supers, methods, vis, attrs, doc, loc: _, is_declare, }) => {
       let doc = fmt.docstring(doc, is_toplevel=true)
       let attrs = fmt.attributes(attrs)
       let declare_ = if is_declare { text("declare") + space } else { empty }
@@ -500,7 +500,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         vis,
         attrs,
         doc,
-        ..,
+        ..
       } = fun_decl
       let doc = fmt.docstring(doc, is_toplevel=true)
       let attrs = fmt.attributes(attrs)
@@ -687,7 +687,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
     }
     TopImport(kind~, packages~, doc~, loc=_) => {
       fn import_package(pkg_item : @syntax.ImportPackage) -> Doc {
-        let { path, alias_, loc } = pkg_item
+        let { path, alias_, loc, } = pkg_item
         ignore(fmt.checkpoint(loc.start))
         let before = fmt.placeholder()
         ignore(fmt.token(TK_STRING))
@@ -739,7 +739,7 @@ fn Fmt::alias_target(fmt : Fmt, target : @syntax.AliasTarget) -> Doc {
   let loc = target.loc()
   ignore(fmt.checkpoint(loc.start))
   let before = fmt.placeholder()
-  let { binder, target } = target
+  let { binder, target, } = target
   let binder = fmt.binder(binder)
   let result = if target is Some(target) {
     fmt.label(target) + space + text("as") + space + binder
@@ -757,7 +757,7 @@ fn Fmt::type_var_constraint(
   constraint : @syntax.TypeVarConstraint,
 ) -> Doc {
   ignore(fmt) //TODO: use fmt to access comments
-  let { trait_, loc: _ } = constraint
+  let { trait_, loc: _, } = constraint
   longident(trait_)
 }
 
@@ -769,7 +769,7 @@ fn Fmt::type_var_binder(
 ) -> Doc {
   let colon = tvar_table.get_token("colon")
   let pluses = tvar_table.get_array("pluses")
-  let { name, constraints, name_loc: loc } = binder
+  let { name, constraints, name_loc: loc, } = binder
   let name = env.wrap_comment(Some(Node(loc)), text(name))
   let constraints = match constraints {
     Empty => empty
@@ -926,7 +926,7 @@ fn Fmt::docstring(
 
 ///|
 fn Fmt::type_decl_binder(_ : Self, binder : @syntax.TypeDeclBinder) -> Doc {
-  let { name, loc: _ } = binder
+  let { name, loc: _, } = binder
   if name is Some(n) {
     text(n)
   } else {
@@ -954,7 +954,7 @@ fn Fmt::type_decl_binders(
 
 ///|
 fn Fmt::constr_param(fmt : Self, constr_param : @syntax.ConstrParam) -> Doc {
-  let { mut_, label, ty } = constr_param
+  let { mut_, label, ty, } = constr_param
   let mut_ = if mut_ { text("mut") + space } else { empty }
   let label = if label is Some(label) {
     fmt.label(label) + char('~') + space + char(':') + space
@@ -967,7 +967,7 @@ fn Fmt::constr_param(fmt : Self, constr_param : @syntax.ConstrParam) -> Doc {
 
 ///|
 fn Fmt::constr_decl(fmt : Self, constr_decl : @syntax.ConstrDecl) -> Doc {
-  let { name, args, tag, loc, attrs, doc } = constr_decl
+  let { name, args, tag, loc, attrs, doc, } = constr_decl
   ignore(fmt.checkpoint(loc.start))
   let before = fmt.placeholder()
   let doc = fmt.docstring(doc, is_toplevel=false)
@@ -998,7 +998,7 @@ fn Fmt::deriving_directive(
   fmt : Self,
   deriving : @syntax.DerivingDirective,
 ) -> Doc {
-  let { type_name, args, loc } = deriving
+  let { type_name, args, loc, } = deriving
   ignore(fmt.checkpoint(loc.start))
   let before = fmt.placeholder()
   let type_name = fmt.type_name(type_name)
@@ -1040,7 +1040,7 @@ fn Fmt::deriving_directives(
 
 ///|
 fn Fmt::field_decl(fmt : Self, field_decl : @syntax.FieldDecl) -> Doc {
-  let { name, ty, mut_, vis, attrs, doc, loc } = field_decl
+  let { name, ty, mut_, vis, attrs, doc, loc, } = field_decl
   ignore(fmt.checkpoint(loc.start))
   let before = fmt.placeholder()
   let doc = fmt.docstring(doc, is_toplevel=false)
@@ -1245,7 +1245,7 @@ fn Fmt::multiline_string(
 ///|
 fn Fmt::label(fmt : Fmt, label : @syntax.Label) -> Doc {
   ignore(fmt) //TODO: use fmt to access comments
-  let { name, loc: _ } = label
+  let { name, loc: _, } = label
   text(name)
 }
 
@@ -1269,7 +1269,7 @@ fn is_pun_eligible_for_pat(
 fn Fmt::argument(fmt : Fmt, arg : @syntax.Argument) -> Doc {
   //TODO: print in compact style for short expr 
 
-  let { value, kind } = arg
+  let { value, kind, } = arg
   match kind {
     Positional => fmt.compose(value, Expr)
     Labelled(label) =>
@@ -1380,7 +1380,7 @@ fn Fmt::var_(fmt : Self, variable : @syntax.Var) -> Doc {
 ///|
 fn Fmt::binder(fmt : Self, binder : @syntax.Binder) -> Doc {
   ignore(fmt) //TODO: use fmt to access comments
-  let { name, loc: _ } = binder
+  let { name, loc: _, } = binder
   text(name)
 }
 
@@ -1390,7 +1390,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
   ignore(fmt.checkpoint(loc.start))
   let before = fmt.placeholder()
   fn constr_pat_arg2doc(arg : @syntax.ConstrPatArg) -> Doc {
-    let { pat, kind } = arg
+    let { pat, kind, } = arg
     let pat_doc = fmt.pattern(pat)
     match kind {
       Positional => pat_doc
@@ -1524,7 +1524,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
     }
     Record(fields~, is_closed~, loc=_) => {
       fn field_pat2doc(field : @syntax.FieldPat) -> Doc {
-        let { label, pattern, is_pun, loc: _ } = field
+        let { label, pattern, is_pun, loc: _, } = field
         if is_pun || is_pun_eligible_for_pat(label, pattern) {
           fmt.label(label)
         } else {
@@ -1556,7 +1556,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
     }
     Map(elems~, is_closed~, loc=_) => {
       fn map_pat2doc(elem : @syntax.MapPatElem) -> Doc {
-        let { key, pat, match_absent, key_loc: _, loc: _ } = elem
+        let { key, pat, match_absent, key_loc: _, loc: _, } = elem
         let key = fmt.constant(key)
         let absent = if match_absent { char('?') } else { empty }
         let pat = space + fmt.pattern(pat)
@@ -1664,7 +1664,7 @@ fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
   let before = fmt.placeholder()
   let doc = match ty {
     Any(loc=_) => char('_')
-    Name(constr_id={ id: constr, loc: _ }, tys~, loc=_) => {
+    Name(constr_id={ id: constr, loc: _, }, tys~, loc=_) => {
       // If the user writes `Option[Int]`, keep it as is.
       let constr = longident(constr)
       let tys = match tys {
@@ -1713,7 +1713,7 @@ fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
       }
       ty + char('?')
     }
-    Object({ id: constr, loc: _ }) => {
+    Object({ id: constr, loc: _, }) => {
       let constr = longident(constr)
       char('&') + constr
     }
@@ -1726,7 +1726,7 @@ fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
 ///|
 fn Fmt::type_name(fmt : Self, typename : @syntax.TypeName) -> Doc {
   ignore(fmt) // TODO: use fmt to get comments
-  let { name, is_object, loc: _ } = typename
+  let { name, is_object, loc: _, } = typename
   let object_mark = if is_object { char('&') } else { empty }
   let name = longident(name)
   object_mark + name
@@ -1734,7 +1734,7 @@ fn Fmt::type_name(fmt : Self, typename : @syntax.TypeName) -> Doc {
 
 ///|
 fn Fmt::constr(fmt : Self, constr : @syntax.Constructor) -> Doc {
-  let { extra_info, name: { name, loc: _ }, loc: _ } = constr
+  let { extra_info, name: { name, loc: _, }, loc: _, } = constr
   let extra_info = match extra_info {
     NoExtraInfo => empty
     TypeName(n) => fmt.type_name(n) + text("::")
@@ -1953,7 +1953,7 @@ fn Fmt::func(
 
 ///|
 fn Fmt::field(fmt : Self, field : @syntax.FieldDef) -> Doc {
-  let { label, expr, is_pun, loc } = field
+  let { label, expr, is_pun, loc, } = field
   ignore(fmt.checkpoint(loc.start))
   let before = fmt.placeholder()
   let doc = if is_pun || is_pun_eligible_for_expr(label, expr) {
@@ -2014,7 +2014,7 @@ fn Fmt::lex_pattern(fmt : Self, pat : @syntax.LexPattern) -> Doc {
           Literal(repr~, loc=_) => text(repr)
           Expr(expr~, loc=_) =>
             text("\\{") + fmt.compose(expr, Expr) + text("}")
-          Source({ source, loc: _ }) => text("\\{") + text(source) + text("}")
+          Source({ source, loc: _, }) => text("\\{") + text(source) + text("}")
         }
       }
 
@@ -2111,7 +2111,7 @@ fn Fmt::lex_top_patterns(fmt : Self, pats : List[@syntax.LexTopPattern]) -> Doc 
 
 ///|
 fn Fmt::lex_case(fmt : Self, case_ : @syntax.LexCase) -> Doc {
-  let { pat, pat_loc, guard_, body } = case_
+  let { pat, pat_loc, guard_, body, } = case_
   let before = fmt.placeholder()
   ignore(fmt.checkpoint(pat_loc.start))
   let pattern = fmt.lex_top_patterns(pat)
@@ -2141,7 +2141,7 @@ fn Fmt::lex_scan_case_pattern(
 
 ///|
 fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
-  let { pat, bindings, guard_, body } = case_
+  let { pat, bindings, guard_, body, } = case_
   let before = fmt.placeholder()
   ignore(fmt.checkpoint(body.loc().start))
   fn binding2doc(binding : (@syntax.Label, @syntax.Binder?)) -> Doc {
@@ -2189,7 +2189,7 @@ fn Fmt::lex_strategy(fmt : Self, strategy : @syntax.Label?) -> Doc {
 
 ///|
 fn Fmt::case(fmt : Self, case_ : @syntax.Case) -> Doc {
-  let { pattern, guard_, body } = case_
+  let { pattern, guard_, body, } = case_
   let before = fmt.placeholder()
   ignore(fmt.checkpoint(pattern.loc().start))
   let pattern = fmt.pattern(pattern)
@@ -2227,7 +2227,7 @@ fn Fmt::expr_block(
 fn Fmt::where_clause(fmt : Self, where_clause : @syntax.WhereClause?) -> Doc {
   match where_clause {
     None => empty
-    Some({ fields, loc }) => {
+    Some({ fields, loc, }) => {
       ignore(fmt.checkpoint(loc.start))
       let before = fmt.placeholder()
       ignore(fmt.token(TK_WHERE))
@@ -2643,7 +2643,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           Literal(repr~, loc=_) => text(repr)
           Expr(expr~, loc=_) =>
             text("\\{") + fmt.compose(expr, Expr) + text("}")
-          Source({ source, loc: _ }) => text("\\{") + text(source) + text("}")
+          Source({ source, loc: _, }) => text("\\{") + text(source) + text("}")
         }
       }
 
@@ -2657,7 +2657,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
           Literal(repr~, loc=_) => text(repr)
           Expr(expr~, loc=_) =>
             text("\\{") + fmt.compose(expr, Expr) + text("}")
-          Source({ source, loc: _ }) => text("\\{") + text(source) + text("}")
+          Source({ source, loc: _, }) => text("\\{") + text(source) + text("}")
         }
       }
 
@@ -3248,7 +3248,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     }
     Map(elems~, loc=_) => {
       fn map_expr_elem2doc(elem : @syntax.MapExprElem) -> Doc {
-        let { key, expr, key_loc: _, loc: _ } = elem
+        let { key, expr, key_loc: _, loc: _, } = elem
         fmt.constant(key) + colon + space + fmt.compose(expr, Expr)
       }
 

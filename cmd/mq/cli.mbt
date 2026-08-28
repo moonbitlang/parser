@@ -200,14 +200,14 @@ fn parse_legacy(args : ArrayView[String]) -> CliAction {
         legacy_usage(),
       )
     }
-    return RunLegacy({ source: Code(source), file_type, output })
+    return RunLegacy({ source: Code(source), file_type, output, })
   }
   let source = match input {
     Some("-") => Stdin
     Some(path) => File(path)
     None => return cli_error("missing input", legacy_usage())
   }
-  RunLegacy({ source, file_type, output })
+  RunLegacy({ source, file_type, output, })
 }
 
 ///|

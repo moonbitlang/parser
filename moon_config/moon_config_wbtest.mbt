@@ -43,7 +43,7 @@ impl @debug.Debug for AstNoLoc with fn to_repr(self) {
 ///|
 test "Ast::to_json folds repeated top-level rule entries into arrays" {
   fn loc() -> Location {
-    { start: dummy_pos, end: dummy_pos }
+    { start: dummy_pos, end: dummy_pos, }
   }
 
   let loc = loc()

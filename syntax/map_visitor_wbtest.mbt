@@ -7,22 +7,22 @@ impl MapVisitor for Identity
 ///|
 test "Pattern" {
   let Identity(_) = Identity(())
-  let binder = Binder::{ name: "test_binder", loc: dummy_loc }
+  let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
   let any_pattern = Pattern::Any(loc=dummy_loc)
   let int_constant = Int("42")
   let constant_pattern = Pattern::Constant(c=int_constant, loc=dummy_loc)
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
-  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
+  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc, }
   let constr = Constructor::{
     name: constr_name,
     extra_info: NoExtraInfo,
     loc: dummy_loc,
   }
-  let label = Label::{ name: "test_field", loc: dummy_loc }
+  let label = Label::{ name: "test_field", loc: dummy_loc, }
   let field_pat = FieldPat::{
     label,
     pattern: any_pattern,
@@ -36,7 +36,7 @@ test "Pattern" {
     key_loc: dummy_loc,
     loc: dummy_loc,
   }
-  let constr_pat_arg = ConstrPatArg::{ pat: any_pattern, kind: Positional }
+  let constr_pat_arg = ConstrPatArg::{ pat: any_pattern, kind: Positional, }
   let array_patterns = ArrayPatterns::Closed(List([]))
   let tuple_pattern = Pattern::Tuple(
     pats=List([any_pattern, constant_pattern]),

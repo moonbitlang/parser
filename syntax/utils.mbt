@@ -146,7 +146,7 @@ pub fn make_field_pat(
   pattern : Pattern,
   is_pun : Bool,
 ) -> FieldPat {
-  { label, pattern, is_pun, loc }
+  { label, pattern, is_pun, loc, }
 }
 
 ///|
@@ -156,10 +156,10 @@ pub fn make_uplus(loc~ : Location, name : String, arg : Expr) -> Expr {
     ("+", Constant(c=Int(_), loc=_)) => arg
     ("+", Constant(c=Double(_), loc=_)) => arg
     _ => {
-      let op = Var::{ name: Ident(name="~+"), loc }
+      let op = Var::{ name: Ident(name="~+"), loc, }
       Apply(
         func=make_ident_expr(loc~, op),
-        args=@list.singleton({ value: arg, kind: Positional }),
+        args=@list.singleton({ value: arg, kind: Positional, }),
         loc~,
       )
     }
@@ -192,7 +192,7 @@ pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
       make_constant_expr(loc~, Double(new_val))
     }
     _ => {
-      let op = Var::{ name: Ident(name~), loc }
+      let op = Var::{ name: Ident(name~), loc, }
       Unary(op~, expr=arg, loc~)
     }
   }
@@ -201,7 +201,7 @@ pub fn make_uminus(loc~ : Location, name : String, arg : Expr) -> Expr {
 ///|
 /// Create logical not expression
 pub fn make_unot(loc~ : Location, arg : Expr) -> Expr {
-  let op = Var::{ name: Ident(name="!"), loc }
+  let op = Var::{ name: Ident(name="!"), loc, }
   Unary(op~, expr=arg, loc~)
 }
 
@@ -210,7 +210,7 @@ pub fn bracket_loc(index : Expr) -> Location {
   let loc = loc_of_expression(index)
   let start = shift_col(loc.start, -1)
   let end = shift_col(loc.end, 1)
-  { start, end }
+  { start, end, }
 }
 
 ///|
@@ -222,7 +222,7 @@ pub fn desugar_array_get(loc~ : Location, obj : Expr, index : Expr) -> Expr {
       name: operators_table.get("_[_]").unwrap(),
       loc: bracket_loc(index),
     },
-    args=List([{ value: index, kind: Positional }]),
+    args=List([{ value: index, kind: Positional, }]),
     return_self=false,
     loc~,
   )
@@ -242,7 +242,10 @@ pub fn desugar_array_set(
       name: operators_table.get("_[_]=_").unwrap(),
       loc: bracket_loc(index),
     },
-    args=List([{ value: index, kind: Positional }, { value, kind: Positional }]),
+    args=List([
+      { value: index, kind: Positional, },
+      { value, kind: Positional, },
+    ]),
     return_self=false,
     loc~,
   )
@@ -263,18 +266,18 @@ pub fn desugar_array_augmented_set(
   let arr_name = "*array_\{counter.val}"
   counter.val = counter.val + 1
   let arr_loc = loc_of_expression(array)
-  let arr_var = Var::{ name: Ident(name=arr_name), loc: arr_loc }
+  let arr_var = Var::{ name: Ident(name=arr_name), loc: arr_loc, }
   let arr_ident = make_ident_expr(loc=arr_loc, arr_var)
   let idx_name = "*index_\{counter.val}"
   counter.val = counter.val + 1
   let idx_loc = loc_of_expression(index)
-  let idx_var = Var::{ name: Ident(name=idx_name), loc: idx_loc }
+  let idx_var = Var::{ name: Ident(name=idx_name), loc: idx_loc, }
   let idx_ident = make_ident_expr(loc=idx_loc, idx_var)
   Let(
-    pattern=Var({ name: arr_name, loc: no_location }),
+    pattern=Var({ name: arr_name, loc: no_location, }),
     expr=array,
     body=Let(
-      pattern=Var({ name: idx_name, loc: no_location }),
+      pattern=Var({ name: idx_name, loc: no_location, }),
       expr=index,
       body=desugar_array_set(
         loc~,
@@ -334,19 +337,19 @@ pub fn make_field_def(
   expr : Expr,
   is_pun : Bool,
 ) -> FieldDef {
-  { label, expr, is_pun, loc }
+  { label, expr, is_pun, loc, }
 }
 
 ///|
 /// Convert label to expression
 pub fn label_to_expr(loc~ : Location, label : Label) -> Expr {
-  make_ident_expr(loc~, { name: Ident(name=label.name), loc })
+  make_ident_expr(loc~, { name: Ident(name=label.name), loc, })
 }
 
 ///|
 /// Convert label to pattern
 pub fn label_to_pat(loc~ : Location, label : Label) -> Pattern {
-  Var({ name: label.name, loc })
+  Var({ name: label.name, loc, })
 }
 
 ///|
@@ -398,7 +401,7 @@ pub(all) enum ArrowFnParam {
 ///|
 /// Convert binder to expression
 pub fn binder_to_expr(p : Binder) -> Expr {
-  make_ident_expr(loc=p.loc, { name: Ident(name=p.name), loc: p.loc })
+  make_ident_expr(loc=p.loc, { name: Ident(name=p.name), loc: p.loc, })
 }
 
 ///|

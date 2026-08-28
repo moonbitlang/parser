@@ -150,7 +150,7 @@ pub fn CheckpointMapper::placeholder(
 ) -> @pp.Document {
   match self.mode {
     Attach => {
-      self.slots.push({ comments: [], ignore_blank })
+      self.slots.push({ comments: [], ignore_blank, })
       self.current_slot = Some(self.slots.length() - 1)
       @pp.empty
     }
@@ -175,7 +175,7 @@ pub fn CheckpointMapper::placeholder_or_space(
 ) -> @pp.Document {
   match self.mode {
     Attach => {
-      self.slots.push({ comments: [], ignore_blank })
+      self.slots.push({ comments: [], ignore_blank, })
       self.current_slot = Some(self.slots.length() - 1)
       @pp.space
     }

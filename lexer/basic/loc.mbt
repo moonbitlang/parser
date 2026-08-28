@@ -38,18 +38,18 @@ pub impl Compare for Position with fn compare(self, other) {
 
 ///|
 test "compre position" {
-  let a = { fname: "", lnum: 10, bol: 0, cnum: 0 }
-  let b = { fname: "", lnum: 10, bol: 0, cnum: 0 }
+  let a = { fname: "", lnum: 10, bol: 0, cnum: 0, }
+  let b = { fname: "", lnum: 10, bol: 0, cnum: 0, }
   assert_eq(Compare::compare(a, b), 0)
-  let a = { fname: "", lnum: 10, bol: 0, cnum: 0 }
-  let b = { fname: "", lnum: 1, bol: 0, cnum: 0 }
+  let a = { fname: "", lnum: 10, bol: 0, cnum: 0, }
+  let b = { fname: "", lnum: 1, bol: 0, cnum: 0, }
   assert_eq(Compare::compare(a, b), 1)
   assert_eq(Compare::compare(b, a), -1)
-  let a = { fname: "", lnum: 10, bol: 2, cnum: 5 }
-  let b = { fname: "", lnum: 10, bol: 2, cnum: 5 }
+  let a = { fname: "", lnum: 10, bol: 2, cnum: 5, }
+  let b = { fname: "", lnum: 10, bol: 2, cnum: 5, }
   assert_eq(Compare::compare(a, b), 0)
-  let a = { fname: "", lnum: 10, bol: 2, cnum: 5 }
-  let b = { fname: "", lnum: 10, bol: 2, cnum: 10 }
+  let a = { fname: "", lnum: 10, bol: 2, cnum: 5, }
+  let b = { fname: "", lnum: 10, bol: 2, cnum: 10, }
   assert_eq(Compare::compare(a, b), -1)
   assert_eq(Compare::compare(b, a), 1)
 }
@@ -74,12 +74,12 @@ pub(all) struct BasePos {
 
 ///|
 pub fn BasePos::none() -> BasePos {
-  { base_pkg: "", base_fname: "", base_lnum: -1 }
+  { base_pkg: "", base_fname: "", base_lnum: -1, }
 }
 
 ///|
 pub fn BasePos::from_position(pkg~ : String, pos : Position) -> BasePos {
-  { base_pkg: pkg, base_fname: pos.fname, base_lnum: pos.lnum }
+  { base_pkg: pkg, base_fname: pos.fname, base_lnum: pos.lnum, }
 }
 
 ///|
@@ -144,5 +144,5 @@ pub fn Location::merge(self : Location, other : Location) -> Location {
   guard! self.start.fname == other.start.fname
   let start = if self.start < other.start { self.start } else { other.start }
   let end = if self.end > other.end { self.end } else { other.end }
-  { start, end }
+  { start, end, }
 }

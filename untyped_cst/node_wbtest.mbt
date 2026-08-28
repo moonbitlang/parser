@@ -1,7 +1,7 @@
 ///|
 test "node getters expose immutable shape" {
-  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0 }
-  let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 3 }
+  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
+  let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 3, }
   let child = token_node(Token::LIDENT("x"), start, end, mk_span(0, 1))
   let root = node(NodeKind::Impls, mk_loc(start, end), mk_span(0, 3), [
     (Some("item"), child),
@@ -216,7 +216,7 @@ test "recovered newline token kind falls back to unexpected syntax" {
 
 ///|
 test "node test json is stable" {
-  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0 }
+  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
   let root = node(NodeKind::Impls, empty_loc(pos), empty_span(0), [
     (Some("missing"), missing_node(TokenKind::TK_EOF, pos, 0)),
   ])
@@ -240,7 +240,7 @@ test "node test json is stable" {
 
 ///|
 test "leaf node test json exposes its payload" {
-  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0 }
+  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
   let leaf = leaf_node(NodePayload::String("x"), empty_loc(pos), empty_span(0))
   json_inspect(leaf.to_test_json(), content={
     "kind": "Leaf",
@@ -253,7 +253,7 @@ test "leaf node test json exposes its payload" {
 
 ///|
 test "implementation node test json uses concrete kind" {
-  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0 }
+  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
   let root = node(NodeKind::Impl_Function, empty_loc(pos), empty_span(0), [])
   json_inspect(root.to_test_json(), content={
     "kind": "Impl_Function",
@@ -266,7 +266,7 @@ test "implementation node test json uses concrete kind" {
 ///|
 test "node text returns source span" {
   let source = "let x = 1"
-  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0 }
+  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
   let end = Position::{
     fname: "test.mbt",
     lnum: 1,
@@ -285,8 +285,8 @@ test "node text returns source span" {
 ///|
 test "token text returns token span" {
   let source = "let x = 1"
-  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4 }
-  let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 5 }
+  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4, }
+  let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 5, }
   let token = token_node(Token::LIDENT("x"), start, end, mk_span(4, 5))
   @test.assert_eq(token.text(source), "x"[:])
 }
@@ -294,15 +294,15 @@ test "token text returns token span" {
 ///|
 test "missing text is empty" {
   let source = "let x = 1"
-  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4 }
+  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4, }
   let missing = missing_node(TokenKind::TK_LIDENT, pos, 4)
   @test.assert_eq(missing.text(source), ""[:])
 }
 
 ///|
 test "error recovery preserves token-shaped location metadata" {
-  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0 }
-  let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 1 }
+  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
+  let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 1, }
   let loc = mk_loc(start, end)
   let span = mk_span(0, 1)
   let recovered = error_node(loc, span, [
@@ -321,10 +321,15 @@ test "error recovery preserves token-shaped location metadata" {
 
 ///|
 test "significant token search skips token-shaped location metadata" {
-  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0 }
-  let metadata_start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 1 }
-  let token_start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 2 }
-  let token_end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 3 }
+  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
+  let metadata_start = Position::{
+    fname: "test.mbt",
+    lnum: 1,
+    bol: 0,
+    cnum: 1,
+  }
+  let token_start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 2, }
+  let token_end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 3, }
   let root = node(Expr_Ident, mk_loc(start, token_end), mk_span(0, 3), [
     (
       Some("async_loc"),

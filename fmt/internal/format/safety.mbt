@@ -20,7 +20,7 @@ fn ordinary_comment_contents(tokens : @tokens.Triples) -> Array[String] {
 
 ///|
 fn strict_parse(source : String) -> StrictParseResult? {
-  let { tokens, docstrings, errors } = @lexer.tokens_from_string(
+  let { tokens, docstrings, errors, } = @lexer.tokens_from_string(
     comment=true,
     source,
   )
@@ -32,7 +32,7 @@ fn strict_parse(source : String) -> StrictParseResult? {
     return None
   }
   attach_docstrings(docstrings, impls, tokens)
-  Some({ impls, tokens, ordinary_comments: ordinary_comment_contents(tokens) })
+  Some({ impls, tokens, ordinary_comments: ordinary_comment_contents(tokens), })
 }
 
 ///|

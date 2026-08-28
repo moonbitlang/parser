@@ -326,7 +326,7 @@ priv struct ASIContext {
 
 ///|
 fn ASIContext::new() -> ASIContext {
-  { last_unhandled_newline: -1 }
+  { last_unhandled_newline: -1, }
 }
 
 //  [add_token] informs the presence of a new token,

@@ -5,13 +5,13 @@ priv enum Mode {
 }
 
 ///|
-let dummy_pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0 }
+let dummy_pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0, }
 
 ///|
 /// suppress the `fail_at is unused` warning
 test {
   match
-    Panic(fail_at=TK_AMPER, sync_at=1, loc={ start: dummy_pos, end: dummy_pos }) {
+    Panic(fail_at=TK_AMPER, sync_at=1, loc={ start: dummy_pos, end: dummy_pos, }) {
     Normal => ()
     Panic(fail_at~, ..) => fail_at |> ignore
   }
@@ -118,18 +118,18 @@ fn State::peek_epos(state : Self, nth? : Int = 0) -> Position {
 
 ///|
 fn State::loc_start_with(state : Self, start : Position) -> Location {
-  { start, end: state.parsed_position }
+  { start, end: state.parsed_position, }
 }
 
 ///|
 fn State::empty_loc(state : Self) -> Location {
-  { start: state.parsed_position, end: state.parsed_position }
+  { start: state.parsed_position, end: state.parsed_position, }
 }
 
 ///|
 fn State::peek_location(state : Self) -> Location {
   let (_, start, end) = state.peek()
-  { start, end }
+  { start, end, }
 }
 
 ///|
@@ -161,10 +161,10 @@ fn State::panic(state : Self) -> Location {
         let (next_token, next_start, _) = state.peek()
         if inidex_of_token_kind(state.syncs, next_token.kind()) is Some(index) {
           let loc : Location = if skipped > 0 {
-            { start: first_start, end: last_end }
+            { start: first_start, end: last_end, }
           } else {
             state.parsed_position = next_start
-            { start: prev_end, end: next_start }
+            { start: prev_end, end: next_start, }
           }
           state.mode = Panic(fail_at=failed_at.kind(), sync_at=index, loc~)
           return loc
@@ -202,7 +202,7 @@ fn State::report_failed_to_parse(
     _ =>
       "Unexpected token \{found.to_expect_string()}, you may expect \{expected}."
   }
-  state.diagnostics.push({ loc, msg })
+  state.diagnostics.push({ loc, msg, })
 }
 
 ///|
@@ -278,7 +278,7 @@ fn State::expect_token(state : Self, expected : TokenKind) -> Unit {
         state.skip()
       } else {
         state.panic() |> ignore
-        state.report_unexpected(tok, [expected], { start, end })
+        state.report_unexpected(tok, [expected], { start, end, })
       }
     }
     Panic(_) => ()
@@ -388,7 +388,7 @@ fn[A] State::expect(
         result
       } else {
         self.panic() |> ignore
-        self.report_unexpected(tok, [expected], { start, end })
+        self.report_unexpected(tok, [expected], { start, end, })
         default
       }
     }

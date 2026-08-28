@@ -58,7 +58,7 @@ fn attach_docstrings(
     }
   }
 
-  let mut last_pos = Position::{ fname: "", lnum: -1, bol: 0, cnum: 0 }
+  let mut last_pos = Position::{ fname: "", lnum: -1, bol: 0, cnum: 0, }
   for toplevel in toplevels {
     let loc = toplevel.loc()
     let doc = search_docstrings(last_pos, loc)
@@ -137,7 +137,7 @@ pub fn parse_string(
           @list.empty(),
           [
             Report::{
-              loc: { start: pos, end: pos },
+              loc: { start: pos, end: pos, },
               msg: "Unexpected end of file.",
             },
           ],
@@ -147,7 +147,7 @@ pub fn parse_string(
           @list.empty(),
           [
             {
-              loc: { start, end },
+              loc: { start, end, },
               msg: "Unexpected `\{@debug.render(token.to_repr())}`.",
             },
           ],

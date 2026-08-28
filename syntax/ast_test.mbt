@@ -1,7 +1,7 @@
 ///|
 let dummy_loc : @basic.Location = {
-  let pos = @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }
-  { start: pos, end: pos }
+  let pos = @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0, }
+  { start: pos, end: pos, }
 }
 
 ///|
@@ -31,9 +31,9 @@ test "impl variants to_json" {
     loc: dummy_loc,
     is_declare: false,
   }
-  let binder = @syntax.Binder::{ name: "test", loc: dummy_loc }
+  let binder = @syntax.Binder::{ name: "test", loc: dummy_loc, }
   let int_type = @syntax.Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -358,9 +358,9 @@ test "impl variants to_json" {
 test "expr basic types to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   let int_constant = @syntax.Int("42")
-  let variable = @syntax.Var::{ name: Ident(name="test_var"), loc: dummy_loc }
-  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
-  let argument = @syntax.Argument::{ value: unit_expr, kind: Positional }
+  let variable = @syntax.Var::{ name: Ident(name="test_var"), loc: dummy_loc, }
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc, }
+  let argument = @syntax.Argument::{ value: unit_expr, kind: Positional, }
   json_inspect(@syntax.Expr::Unit(loc=dummy_loc, faked=false).json_repr(), content={
     "kind": "Expr::Unit",
     "loc": null,
@@ -673,12 +673,12 @@ test "expr basic types to_json" {
 test "expr complex types to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   let int_type = @syntax.Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
-  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc }
-  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc }
+  let binder = @syntax.Binder::{ name: "test_binder", loc: dummy_loc, }
+  let label = @syntax.Label::{ name: "test_label", loc: dummy_loc, }
   let any_pattern = @syntax.Pattern::Any(loc=dummy_loc)
   let case = @syntax.Case::{
     pattern: any_pattern,
@@ -696,7 +696,7 @@ test "expr complex types to_json" {
     is_pun: false,
     loc: dummy_loc,
   }
-  let variable = @syntax.Var::{ name: Ident(name="test_var"), loc: dummy_loc }
+  let variable = @syntax.Var::{ name: Ident(name="test_var"), loc: dummy_loc, }
   json_inspect(
     @syntax.If(
       cond=unit_expr,

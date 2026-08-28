@@ -225,7 +225,7 @@ impl IterVisitor for LabelledPunLocationCollector with fn visit_Label(
 fn find_labelled_pun_locations(
   impls : @syntax.Impls,
 ) -> (@basic.Location, @basic.Location) raise Error {
-  let collector : LabelledPunLocationCollector = { locations: [], labels: [] }
+  let collector : LabelledPunLocationCollector = { locations: [], labels: [], }
   impls.each(impl_ => collector.visit_Impl(impl_))
   match collector.locations.get(0) {
     Some(locations) if collector.locations.length() == 1 => locations
@@ -237,7 +237,7 @@ fn find_labelled_pun_locations(
 fn find_single_label_location(
   impls : @syntax.Impls,
 ) -> @basic.Location raise Error {
-  let collector : LabelledPunLocationCollector = { locations: [], labels: [] }
+  let collector : LabelledPunLocationCollector = { locations: [], labels: [], }
   impls.each(impl_ => collector.visit_Impl(impl_))
   match collector.labels.get(0) {
     Some(loc) if collector.labels.length() == 1 => loc

@@ -37,8 +37,13 @@ impl @debug.Debug for AstNoLoc with fn to_repr(self) {
 
 ///|
 fn test_loc() -> @basic.Location {
-  let pos : @basic.Position = { fname: "moon.config", lnum: 1, bol: 0, cnum: 0 }
-  { start: pos, end: pos }
+  let pos : @basic.Position = {
+    fname: "moon.config",
+    lnum: 1,
+    bol: 0,
+    cnum: 0,
+  }
+  { start: pos, end: pos, }
 }
 
 ///|
