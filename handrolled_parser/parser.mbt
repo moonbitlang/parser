@@ -43,9 +43,9 @@ fn State::parse_toplevel(self : Self) -> Impls {
           self.panic() |> ignore
           let loc = self.peek_location()
           let report : Report = if first_impl_.contains(other.kind()) {
-            { loc, msg: "Missing newline here." }
+            { loc, msg: "Missing newline here.", }
           } else {
-            { loc, msg: "Unexpected token here." }
+            { loc, msg: "Unexpected token here.", }
           }
           self.report_error(report)
         }
@@ -217,17 +217,17 @@ fn State::parse_luident(self : Self) -> String {
 ///|
 fn State::parse_binder(self : Self, context~ : String) -> @syntax.Binder {
   if self.mode is Panic(loc~, ..) {
-    return { name: "", loc }
+    return { name: "", loc, }
   }
   let loc = self.peek_location()
   let name = self.expect_lident(context~)
-  { name, loc }
+  { name, loc, }
 }
 
 ///|
 fn State::parse_type_name(self : Self) -> @syntax.TypeName {
   if self.mode is Panic(loc~, ..) {
-    return { name: @syntax.LongIdent::dummy(), is_object: false, loc }
+    return { name: @syntax.LongIdent::dummy(), is_object: false, loc, }
   }
   let spos = self.peek_spos()
   let is_object = match self.peek_token() {
@@ -239,31 +239,31 @@ fn State::parse_type_name(self : Self) -> @syntax.TypeName {
   }
   let name = self.parse_qual_type_ident(context="type name")
   let loc = self.loc_start_with(spos)
-  { name, is_object, loc }
+  { name, is_object, loc, }
 }
 
 ///|
 fn State::parse_extenum_target(self : Self) -> @syntax.TypeName {
   if self.mode is Panic(loc~, ..) {
-    return { name: @syntax.LongIdent::dummy(), is_object: false, loc }
+    return { name: @syntax.LongIdent::dummy(), is_object: false, loc, }
   }
   let spos = self.peek_spos()
   let name = self.parse_qual_extenum_target(context="extenum target")
   let loc = self.loc_start_with(spos)
-  { name, is_object: false, loc }
+  { name, is_object: false, loc, }
 }
 
 ///|
 fn State::parse_fun_binder(self : Self) -> (@syntax.TypeName?, @syntax.Binder) {
   if self.mode is Panic(loc~, ..) {
-    return (None, { name: "", loc })
+    return (None, { name: "", loc, })
   }
   fn parse_qual_with_coloncolon() {
     let type_name = self.parse_type_name()
     self.expect_token(TK_COLONCOLON)
     let loc_func_name = self.peek_location()
     let func_name = self.expect_luident(context="name of `fn`")
-    (Some(type_name), @syntax.Binder::{ name: func_name, loc: loc_func_name })
+    (Some(type_name), @syntax.Binder::{ name: func_name, loc: loc_func_name, })
   }
 
   match self.peek_token() {
@@ -277,7 +277,7 @@ fn State::parse_fun_binder(self : Self) -> (@syntax.TypeName?, @syntax.Binder) {
     other => {
       let loc = self.panic()
       self.report_unexpected(other, first_qual_lident, loc)
-      (None, { name: "", loc })
+      (None, { name: "", loc, })
     }
   }
 }
@@ -285,18 +285,18 @@ fn State::parse_fun_binder(self : Self) -> (@syntax.TypeName?, @syntax.Binder) {
 ///|
 fn State::parse_var(self : Self) -> @syntax.Var {
   if self.mode is Panic(loc~, ..) {
-    return { name: @syntax.LongIdent::dummy(), loc }
+    return { name: @syntax.LongIdent::dummy(), loc, }
   }
   let spos = self.peek_spos()
   let name = self.parse_qual_lident(context="")
   let loc = self.loc_start_with(spos)
-  { name, loc }
+  { name, loc, }
 }
 
 ///|
 fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
   if self.mode is Panic(loc~, ..) {
-    return { name: "?tvar_name", name_loc: loc, constraints: List([]) }
+    return { name: "?tvar_name", name_loc: loc, constraints: List([]), }
   }
   let spos = self.peek_spos()
   let name = self.expect_uident(context="type variable name")
@@ -308,19 +308,19 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
       state.sepby1(delim=TK_PLUS, fn(state) {
         let loc = state.peek_location()
         let trait_ = state.parse_qual_type_ident(context="trait name")
-        { trait_, loc }
+        { trait_, loc, }
       })
       |> List
     },
   )
   let constraints = if constraints is Some(xs) { xs } else { @list.new() }
-  { name, name_loc: loc, constraints }
+  { name, name_loc: loc, constraints, }
 }
 
 ///|
 fn State::parse_type_decl_binder(self : Self) -> @syntax.TypeDeclBinder {
   if self.mode is Panic(loc~, ..) {
-    return { name: None, loc }
+    return { name: None, loc, }
   }
   let spos = self.peek_spos()
   let name = match self.peek_token() {
@@ -331,13 +331,13 @@ fn State::parse_type_decl_binder(self : Self) -> @syntax.TypeDeclBinder {
     _ => Some(self.expect_uident(context="type parameter name"))
   }
   let loc = self.loc_start_with(spos)
-  { name, loc }
+  { name, loc, }
 }
 
 ///|
 fn State::parse_constr(self : Self) -> @syntax.Constructor {
   if self.mode is Panic(loc~, ..) {
-    return { name: { name: "", loc }, extra_info: NoExtraInfo, loc }
+    return { name: { name: "", loc, }, extra_info: NoExtraInfo, loc, }
   }
   let spos = self.peek_spos()
   match self.peek_token() {
@@ -346,7 +346,7 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
       let loc = self.peek_location()
       let name = self.parse_luident()
       let loc_constr = self.loc_start_with(spos)
-      { name: { name, loc }, extra_info: NoExtraInfo, loc: loc_constr }
+      { name: { name, loc, }, extra_info: NoExtraInfo, loc: loc_constr, }
     }
     PACKAGE_NAME(pkg) if self.peek_token(nth=1) is DOT_UIDENT(_) &&
       !(self.peek_token(nth=2) is COLONCOLON) => {
@@ -355,10 +355,10 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
       let name : @syntax.ConstrName = {
         let spos = self.peek_spos()
         let name = self.expect_dot_uident(context="")
-        { name, loc: self.loc_start_with(spos) }
+        { name, loc: self.loc_start_with(spos), }
       }
       let loc = self.loc_start_with(spos)
-      { name, extra_info: Package(pkg), loc }
+      { name, extra_info: Package(pkg), loc, }
     }
     LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | AMPER(_) => {
       // @pkg.TypeName::Constr
@@ -387,13 +387,13 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
         (TypeName(type_name), right_loc, right)
       }
       let loc = self.loc_start_with(spos)
-      { name: { name: right, loc: right_loc }, extra_info, loc }
+      { name: { name: right, loc: right_loc, }, extra_info, loc, }
     }
     other => {
       let loc = self.peek_location()
       self.report_unexpected(other, first_constr, loc)
       self.panic() |> ignore
-      { name: { name: "", loc }, extra_info: NoExtraInfo, loc }
+      { name: { name: "", loc, }, extra_info: NoExtraInfo, loc, }
     }
   }
 }
@@ -425,7 +425,7 @@ fn State::parse_fun_decl(
 ) -> @syntax.FunDecl {
   if self.mode is Panic(loc~, ..) {
     return {
-      name: { name: "", loc },
+      name: { name: "", loc, },
       is_async: None,
       type_name: None,
       decl_params: Some(@list.new()),
@@ -487,7 +487,7 @@ fn State::parse_fun_decl(
 fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
   if self.mode is Panic(loc~, ..) {
     return {
-      name: { name: "", loc },
+      name: { name: "", loc, },
       is_async: None,
       quantifiers: @list.new(),
       params: @list.new(),
@@ -549,7 +549,7 @@ fn State::parse_trait_decl(
 ) -> @syntax.TraitDecl {
   if self.mode is Panic(loc~, ..) {
     return {
-      name: { name: "", loc },
+      name: { name: "", loc, },
       supers: @list.new(),
       methods: @list.new(),
       vis: Default,
@@ -563,14 +563,14 @@ fn State::parse_trait_decl(
   self.expect_token(TK_TRAIT)
   let name_loc = self.peek_location()
   let name = self.expect_uident(context="trait name")
-  let trait_name : @syntax.Binder = { name, loc: name_loc }
+  let trait_name : @syntax.Binder = { name, loc: name_loc, }
   let supers = if self.peek_token() is COLON {
     self.skip()
     self.with_follow(follow_set=[TK_LBRACE], fn(state) {
       state.sepby1(delim=TK_PLUS, fn(state) {
         let loc = state.peek_location()
         let trait_ = state.parse_qual_type_ident(context="trait name")
-        @syntax.TypeVarConstraint::{ trait_, loc }
+        @syntax.TypeVarConstraint::{ trait_, loc, }
       })
       |> @list.List
     })
@@ -689,8 +689,8 @@ fn State::parse_top_func(
   is_declare~ : Bool,
 ) -> @syntax.Impl {
   let fun_decl = self.parse_fun_decl(attrs~)
-  let fun_decl_loc : Location = { start: spos, end: fun_decl.loc.end }
-  let fun_decl = { ..fun_decl, vis, loc: fun_decl_loc }
+  let fun_decl_loc : Location = { start: spos, end: fun_decl.loc.end, }
+  let fun_decl = { ..fun_decl, vis, loc: fun_decl_loc, }
   let mut where_clause : @syntax.WhereClause? = None
   let decl_body : @syntax.DeclBody = if is_declare {
     DeclNone
@@ -743,11 +743,11 @@ fn State::parse_alias_target(
         self.expect_uident(context~)
       }
       {
-        binder: { name: binder_name, loc: binder_loc },
-        target: Some({ name: target, loc: target_loc }),
+        binder: { name: binder_name, loc: binder_loc, },
+        target: Some({ name: target, loc: target_loc, }),
       }
     }
-    _ => { binder: { name: target, loc: target_loc }, target: None }
+    _ => { binder: { name: target, loc: target_loc, }, target: None, }
   }
 }
 
@@ -759,9 +759,9 @@ fn State::parse_import_package(self : Self) -> @syntax.ImportPackage {
     PACKAGE_NAME(alias_name) => {
       let alias_loc = self.peek_location()
       self.skip()
-      { path, alias_: Some(alias_name), loc: path_loc.merge(alias_loc) }
+      { path, alias_: Some(alias_name), loc: path_loc.merge(alias_loc), }
     }
-    _ => { path, alias_: None, loc: path_loc }
+    _ => { path, alias_: None, loc: path_loc, }
   }
 }
 
@@ -1029,7 +1029,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           self.skip()
           let loc = self.peek_location()
           let name = self.expect_uident(context="name of `const`")
-          (true, { name, loc })
+          (true, { name, loc, })
         }
         _ => panic()
       }
@@ -1053,8 +1053,8 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
       self.expect_token(TK_EXTERN)
       let language = self.expect_string()
       let fun_decl = self.parse_fun_decl(attrs~)
-      let fun_decl_loc : Location = { start: spos, end: fun_decl.loc.end }
-      let fun_decl = { ..fun_decl, vis, loc: fun_decl_loc }
+      let fun_decl_loc : Location = { start: spos, end: fun_decl.loc.end, }
+      let fun_decl = { ..fun_decl, vis, loc: fun_decl_loc, }
       self.expect_token(TK_EQUAL)
       if self.peek_token() is MULTILINE_STRING(_) {
         let xs = []
@@ -1245,7 +1245,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           TopImpl(
             self_ty=None,
             trait_~,
-            method_name={ name: "", loc: @syntax.no_location },
+            method_name={ name: "", loc: @syntax.no_location, },
             quantifiers=@list.new(),
             method_quantifiers=@list.empty(),
             params=@list.new(),
@@ -1310,13 +1310,13 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         PACKAGE_NAME(name) => {
           let loc = self.peek_location()
           self.skip()
-          { name, loc }
+          { name, loc, }
         }
         otherwise => {
           let loc = self.peek_location()
           self.report_unexpected(otherwise, [TK_PACKAGE_NAME], loc)
           self.panic() |> ignore
-          { name: "", loc }
+          { name: "", loc, }
         }
       }
       let names = self.surround_series(
@@ -1351,7 +1351,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
                   other_loc,
                 )
                 let loc = state.panic()
-                ({ binder: { name: "", loc }, target: None }, Value)
+                ({ binder: { name: "", loc, }, target: None, }, Value)
               }
             }
           },
@@ -1440,7 +1440,7 @@ fn State::parse_deriving_directive_list(
 fn State::parse_deriving_directive(self : Self) -> @syntax.DerivingDirective {
   if self.mode is Panic(loc~, ..) {
     return {
-      type_name: { name: Ident(name=""), is_object: false, loc },
+      type_name: { name: Ident(name=""), is_object: false, loc, },
       args: @list.new(),
       loc,
     }
@@ -1459,7 +1459,7 @@ fn State::parse_deriving_directive(self : Self) -> @syntax.DerivingDirective {
     @list.new()
   }
   let loc = self.loc_start_with(spos)
-  { type_name, args, loc }
+  { type_name, args, loc, }
 }
 
 ///|
@@ -1474,7 +1474,7 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
         POST_LABEL(binder_name) => {
           let binder_loc = Location::trim_last_char(state.peek_location())
           state.skip()
-          let binder : @syntax.Binder = { name: binder_name, loc: binder_loc }
+          let binder : @syntax.Binder = { name: binder_name, loc: binder_loc, }
           state.expect_token(TK_COLON)
           let typ = state.parse_type()
           Labelled(binder~, ty=Some(typ))
@@ -1482,7 +1482,7 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
         LIDENT(_) | EXTEND => {
           let binder_loc = state.peek_location()
           let binder_name = state.expect_lident(context="parameter name")
-          let binder : @syntax.Binder = { name: binder_name, loc: binder_loc }
+          let binder : @syntax.Binder = { name: binder_name, loc: binder_loc, }
           let has_question = state.peek_token() is QUESTION
           if has_question {
             state.skip()
@@ -1520,7 +1520,7 @@ fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
 fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
   if self.mode is Panic(loc~, ..) {
     return {
-      name: { label: "?field_name", loc },
+      name: { label: "?field_name", loc, },
       ty: Any(loc~),
       mut_: false,
       vis: Default,
@@ -1544,7 +1544,7 @@ fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
   let ty = self.parse_type()
   let loc = self.loc_start_with(spos)
   {
-    name: { label: name, loc: name_loc },
+    name: { label: name, loc: name_loc, },
     ty,
     mut_,
     vis,
@@ -1558,7 +1558,7 @@ fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
 fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
   if self.mode is Panic(loc~, ..) {
     return {
-      name: { name: "?constr-name", loc },
+      name: { name: "?constr-name", loc, },
       args: None,
       tag: None,
       loc,
@@ -1578,7 +1578,7 @@ fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
   }
   let constr_name_loc = self.peek_location()
   let name = self.expect_uident(context="constructor name")
-  let constr_name : @syntax.ConstrName = { name, loc: constr_name_loc }
+  let constr_name : @syntax.ConstrName = { name, loc: constr_name_loc, }
   let args = if self.peek_token() is LPAREN {
     let xs = self.surround_series(
       left=TK_LPAREN,
@@ -1594,14 +1594,14 @@ fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
         // `label~ : Type`
         if state.peek_token() is POST_LABEL(name) {
           let label_loc = Location::trim_last_char(state.peek_location())
-          let label : @syntax.Label = { name, loc: label_loc }
+          let label : @syntax.Label = { name, loc: label_loc, }
           state.skip()
           state.expect_token(TK_COLON)
           let ty = state.parse_type()
-          { ty, mut_, label: Some(label) }
+          { ty, mut_, label: Some(label), }
         } else {
           let ty = state.parse_type()
-          { ty, mut_, label: None }
+          { ty, mut_, label: None, }
         }
       },
     )
@@ -1618,7 +1618,7 @@ fn State::parse_constr_decl(self : Self) -> @syntax.ConstrDecl {
     None
   }
   let loc = self.loc_start_with(spos)
-  { name: constr_name, args, tag, loc, attrs, doc: DocString::empty() }
+  { name: constr_name, args, tag, loc, attrs, doc: DocString::empty(), }
 }
 
 ///|
@@ -1722,7 +1722,7 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
     LIDENT(name) if self.peek_token(nth=1) is LPAREN => {
       let name_loc = self.peek_location()
       self.skip() // skip lident
-      let binder : @syntax.Binder = { name, loc: name_loc }
+      let binder : @syntax.Binder = { name, loc: name_loc, }
       let args = parse_constr_args_no_open()
       let loc = self.loc_start_with(spos)
       SpecialConstr(binder~, args~, loc~)
@@ -1730,7 +1730,7 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
     EXTEND if self.peek_token(nth=1) is LPAREN => {
       let name_loc = self.peek_location()
       self.skip() // skip extend
-      let binder : @syntax.Binder = { name: "extend", loc: name_loc }
+      let binder : @syntax.Binder = { name: "extend", loc: name_loc, }
       let args = parse_constr_args_no_open()
       let loc = self.loc_start_with(spos)
       SpecialConstr(binder~, args~, loc~)
@@ -1948,7 +1948,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               UIDENT(name) => {
                 let id_loc = self.peek_location()
                 self.skip()
-                let binder : @syntax.Binder = { name, loc: id_loc }
+                let binder : @syntax.Binder = { name, loc: id_loc, }
                 let loc = self.loc_start_with(pat_spos)
                 push_pat(ConstSpread(binder~, pkg=None, loc~))
               }
@@ -1956,7 +1956,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
                 self.skip()
                 let id_loc = self.peek_location()
                 let name = self.expect_dot_uident(context="name of constant")
-                let binder : @syntax.Binder = { name, loc: id_loc }
+                let binder : @syntax.Binder = { name, loc: id_loc, }
                 let loc = self.loc_start_with(pat_spos)
                 push_pat(ConstSpread(binder~, pkg=Some(pkg), loc~))
               }
@@ -2028,7 +2028,13 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             self.expect_token(TK_COLON)
             let pat = self.parse_pattern()
             let loc = self.loc_start_with(spos)
-            MapPatternFragment::MapElem({ key, pat, match_absent, key_loc, loc })
+            MapPatternFragment::MapElem({
+              key,
+              pat,
+              match_absent,
+              key_loc,
+              loc,
+            })
           }
 
           match self.peek_token() {
@@ -2130,12 +2136,12 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               [] => Map(elems=acc.rev(), is_closed=!has_dotdot, loc~)
               [Dotdot(loc), .. rest] => {
                 if !(rest is []) {
-                  self.report_error({ loc, msg: "Unexpected `..` here" })
+                  self.report_error({ loc, msg: "Unexpected `..` here", })
                 }
                 collect_elems(true, acc, rest)
               }
               [Field({ loc, .. }), .. rest] => {
-                self.report_error({ loc, msg: "Unexpected `..` here" })
+                self.report_error({ loc, msg: "Unexpected `..` here", })
                 collect_elems(has_dotdot, acc, rest)
               }
               [Error, .. rest] => collect_elems(has_dotdot, acc, rest)
@@ -2167,18 +2173,18 @@ priv enum BraceLikeSyntaxKind {
 ///|
 fn State::parse_label(self : Self, context~ : String) -> @syntax.Label {
   if self.mode is Panic(loc~, ..) {
-    return { name: "?lident", loc }
+    return { name: "?lident", loc, }
   }
   let loc = self.peek_location()
   let name = self.expect_lident(context~)
-  { name, loc }
+  { name, loc, }
 }
 
 ///|
 fn State::parse_field_pat(self : Self) -> @syntax.FieldPat {
   if self.mode is Panic(loc~, ..) {
     return {
-      label: { name: "?ident", loc },
+      label: { name: "?ident", loc, },
       pattern: Any(loc~),
       is_pun: false,
       loc,
@@ -2190,18 +2196,18 @@ fn State::parse_field_pat(self : Self) -> @syntax.FieldPat {
     self.skip()
     let pattern = self.parse_pattern()
     let loc = self.loc_start_with(spos)
-    { label, pattern, is_pun: false, loc }
+    { label, pattern, is_pun: false, loc, }
   } else {
     let loc = self.loc_start_with(spos)
-    let pattern : @syntax.Pattern = Var({ name: label.name, loc: label.loc })
-    { label, pattern, is_pun: true, loc }
+    let pattern : @syntax.Pattern = Var({ name: label.name, loc: label.loc, })
+    { label, pattern, is_pun: true, loc, }
   }
 }
 
 ///|
 fn State::parse_constr_pat_argument(self : Self) -> @syntax.ConstrPatArg {
   if self.mode is Panic(loc~, ..) {
-    return { pat: Any(loc~), kind: Positional }
+    return { pat: Any(loc~), kind: Positional, }
   }
   match self.peek_token() {
     // label~
@@ -2231,25 +2237,25 @@ fn State::parse_constr_pat_argument(self : Self) -> @syntax.ConstrPatArg {
           (Any(loc~), Labelled(label))
         }
       }
-      { pat, kind }
+      { pat, kind, }
     }
     LIDENT(name) | UIDENT(name) if self.peek_token(nth=1) is EQUAL => {
-      let label : @syntax.Label = { name, loc: self.peek_location() }
+      let label : @syntax.Label = { name, loc: self.peek_location(), }
       self.skip() // luident
       self.expect_token(TK_EQUAL)
       let pat = self.parse_pattern()
-      { pat, kind: Labelled(label) }
+      { pat, kind: Labelled(label), }
     }
     EXTEND if self.peek_token(nth=1) is EQUAL => {
-      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
+      let label : @syntax.Label = { name: "extend", loc: self.peek_location(), }
       self.skip() // extend
       self.expect_token(TK_EQUAL)
       let pat = self.parse_pattern()
-      { pat, kind: Labelled(label) }
+      { pat, kind: Labelled(label), }
     }
     _ => {
       let pat = self.parse_pattern()
-      { pat, kind: Positional }
+      { pat, kind: Positional, }
     }
   }
 }
@@ -2333,74 +2339,74 @@ fn get_binop_prior_assoc(tok : Token) -> (Int, Assocativity) {
 ///|
 fn State::parse_binop(self : Self) -> @syntax.Var {
   if self.mode is Panic(loc~, ..) {
-    return { name: Ident(name="?binop"), loc }
+    return { name: Ident(name="?binop"), loc, }
   }
   match self.peek_token() {
     IMPLIES => {
       let loc = self.peek_location()
       self.expect_token(TK_IMPLIES)
-      { name: Ident(name="→"), loc }
+      { name: Ident(name="→"), loc, }
     }
     BARBAR => {
       let loc = self.peek_location()
       self.expect_token(TK_BARBAR)
-      { name: Ident(name="||"), loc }
+      { name: Ident(name="||"), loc, }
     }
     AMPERAMPER => {
       let loc = self.peek_location()
       self.expect_token(TK_AMPERAMPER)
-      { name: Ident(name="&&"), loc }
+      { name: Ident(name="&&"), loc, }
     }
     BAR => {
       let loc = self.peek_location()
       self.expect_token(TK_BAR)
-      { name: Ident(name="|"), loc }
+      { name: Ident(name="|"), loc, }
     }
     CARET => {
       let loc = self.peek_location()
       self.expect_token(TK_CARET)
-      { name: Ident(name="^"), loc }
+      { name: Ident(name="^"), loc, }
     }
     AMPER => {
       let loc = self.peek_location()
       self.expect_token(TK_AMPER)
-      { name: Ident(name="&"), loc }
+      { name: Ident(name="&"), loc, }
     }
     INFIX1(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_INFIX1)
-      { name: Ident(name=x), loc }
+      { name: Ident(name=x), loc, }
     }
     INFIX2(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_INFIX2)
-      { name: Ident(name=x), loc }
+      { name: Ident(name=x), loc, }
     }
     PLUS => {
       let loc = self.peek_location()
       self.expect_token(TK_PLUS)
-      { name: Ident(name="+"), loc }
+      { name: Ident(name="+"), loc, }
     }
     MINUS => {
       let loc = self.peek_location()
       self.expect_token(TK_MINUS)
-      { name: Ident(name="-"), loc }
+      { name: Ident(name="-"), loc, }
     }
     INFIX3(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_INFIX3)
-      { name: Ident(name=x), loc }
+      { name: Ident(name=x), loc, }
     }
     INFIX4(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_INFIX4)
-      { name: Ident(name=x), loc }
+      { name: Ident(name=x), loc, }
     }
     other => {
       let other_loc = self.peek_location()
       self.report_failed_to_parse(other, "binary operator", other_loc)
       let loc = self.panic()
-      { name: Ident(name="?binop"), loc }
+      { name: Ident(name="?binop"), loc, }
     }
   }
 }
@@ -2435,12 +2441,12 @@ fn State::parse_foreach_binder(self : State) -> @syntax.Binder? {
     LIDENT(name) => {
       let loc = self.peek_location()
       self.skip()
-      Some({ name, loc })
+      Some({ name, loc, })
     }
     EXTEND => {
       let loc = self.peek_location()
       self.skip()
-      Some({ name: "extend", loc })
+      Some({ name: "extend", loc, })
     }
     other => {
       let loc = self.peek_location()
@@ -2465,7 +2471,7 @@ fn State::parse_where_clause(self : State) -> @syntax.WhereClause? {
     let fields = @list.List(fields)
     self.expect_token(TK_RBRACE)
     let loc = self.loc_start_with(spos)
-    Some({ fields, loc })
+    Some({ fields, loc, })
   } else {
     None
   }
@@ -2718,7 +2724,7 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
   self.expect_token(TK_CATCH)
   let lbrace_epos = self.peek_epos()
   // the catch_loc is the location of `catch {`
-  let catch_loc : Location = { start: catch_start, end: lbrace_epos }
+  let catch_loc : Location = { start: catch_start, end: lbrace_epos, }
   let catch_cases = self.surround_series(
       invalid_delims=[TK_COMMA],
       left=TK_LBRACE,
@@ -2732,7 +2738,7 @@ fn State::parse_try_expr(self : Self) -> @syntax.Expr {
     self.skip()
     let lbrace_epos = self.peek_epos()
     // the else_loc is the location of `noraise {`
-    let else_loc : Location = { start: else_spos, end: lbrace_epos }
+    let else_loc : Location = { start: else_spos, end: lbrace_epos, }
     let try_else_cases = self.surround_series(
         invalid_delims=[TK_COMMA],
         left=TK_LBRACE,
@@ -2811,7 +2817,7 @@ fn State::parse_match_expr(self : Self) -> @syntax.Expr {
   })
   let lbrace_epos = self.peek_epos()
   // The main_loc is the location of `match expr {`
-  let match_loc : Location = { start: spos, end: lbrace_epos }
+  let match_loc : Location = { start: spos, end: lbrace_epos, }
   let cases = self.surround_series(
       invalid_delims=[TK_COMMA],
       left=TK_LBRACE,
@@ -2836,7 +2842,7 @@ fn State::parse_case(self : Self) -> @syntax.Case {
   if self.peek_token() is ELLIPSIS {
     let loc = self.peek_location()
     self.skip()
-    { pattern: Any(loc~), guard_: None, body: Hole(loc~, kind=Todo) }
+    { pattern: Any(loc~), guard_: None, body: Hole(loc~, kind=Todo), }
   } else {
     let pat = self.with_syncs([TK_FAT_ARROW, TK_IF], State::parse_pattern)
     let guard_ = if self.peek_token() is IF {
@@ -2861,7 +2867,7 @@ fn State::parse_case(self : Self) -> @syntax.Case {
       None
     }
     let body = self.parse_fat_arrow_action()
-    { pattern: pat, guard_, body }
+    { pattern: pat, guard_, body, }
   }
 }
 
@@ -2911,7 +2917,7 @@ fn State::parse_lexmatch_expr(self : State) -> @syntax.Expr {
     let strategy = state.parse_opt_with_strategy()
     (expr, strategy)
   })
-  let match_loc = @basic.Location::{ start: spos, end: self.peek_epos() }
+  let match_loc = @basic.Location::{ start: spos, end: self.peek_epos(), }
   fn parse_body(state : State) -> @list.List[@syntax.LexCase] {
     let (cases, _) = state.series_with_follow(
       invalid_delims=[TK_COMMA],
@@ -2947,7 +2953,7 @@ fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
       )
       let guard_ = self.parse_lex_case_guard()
       let act = self.parse_fat_arrow_action()
-      { pat, pat_loc, guard_, body: act }
+      { pat, pat_loc, guard_, body: act, }
     }
   }
 }
@@ -2961,7 +2967,7 @@ fn State::parse_lexscan_expr(self : State) -> @syntax.Expr {
     let strategy = state.parse_opt_lexscan_strategy()
     (expr, strategy)
   })
-  let match_loc = @basic.Location::{ start: spos, end: self.peek_epos() }
+  let match_loc = @basic.Location::{ start: spos, end: self.peek_epos(), }
   fn parse_body(state : State) -> @list.List[@syntax.LexScanCase] {
     let (cases, _) = state.series_with_follow(
       invalid_delims=[TK_COMMA],
@@ -2997,7 +3003,7 @@ fn State::parse_lexscan_case(self : State) -> @syntax.LexScanCase {
       )
       let guard_ = self.parse_lex_case_guard()
       let body = self.parse_fat_arrow_action()
-      { pat, bindings, guard_, body }
+      { pat, bindings, guard_, body, }
     }
   }
 }
@@ -3108,7 +3114,7 @@ fn State::parse_lex_pattern(
     LIDENT(_) | EXTEND => {
       let loc = self.peek_location()
       let name = self.expect_lident(context="lex rest binder")
-      (@list.singleton(Binder({ name, loc })), loc)
+      (@list.singleton(Binder({ name, loc, })), loc)
     }
     UNDERSCORE => {
       let loc = self.peek_location()
@@ -3140,7 +3146,7 @@ fn State::parse_lex_top_pattern(self : State) -> @syntax.LexTopPattern {
     LIDENT(_) | EXTEND => {
       let loc = self.peek_location()
       let name = self.expect_lident(context="lex rest binder")
-      Binder({ name, loc })
+      Binder({ name, loc, })
     }
     UNDERSCORE(_) => {
       let loc = self.peek_location()
@@ -3350,7 +3356,7 @@ fn State::handle_lparen(self : Self) -> @syntax.Expr {
       self.skip()
       fn as_binder(expr : @syntax.Expr) -> @syntax.ArrowFnParam {
         match expr {
-          Ident(id={ name: Ident(name~), .. }, loc~) => Named({ name, loc })
+          Ident(id={ name: Ident(name~), .. }, loc~) => Named({ name, loc, })
           Hole(kind=Incomplete, loc~) => Unnamed(loc)
           // error recovery
           Hole(kind=Synthesized, loc~) => Unnamed(loc)
@@ -3574,7 +3580,7 @@ fn State::parse_simple_try_expr(
         self.skip()
         let lbrace_epos = self.peek_epos()
         // the else_loc is the location of `else {` or `noraise {`
-        let else_loc : Location = { start: else_spos, end: lbrace_epos }
+        let else_loc : Location = { start: else_spos, end: lbrace_epos, }
         let try_else_cases = self.surround_series(
             invalid_delims=[TK_COMMA],
             left=TK_LBRACE,
@@ -3638,7 +3644,7 @@ fn State::try_parse_arrow_fn_expr(
             let as_binder = fn(expr : @syntax.Expr) -> @syntax.ArrowFnParam {
               match expr {
                 Ident(id={ name: Ident(name~), .. }, loc~) =>
-                  Named({ name, loc })
+                  Named({ name, loc, })
                 Hole(kind=Incomplete, loc~) => Unnamed(loc)
                 Hole(kind=Synthesized, loc~) => Unnamed(loc)
                 expr => {
@@ -3754,7 +3760,7 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
             self.parse_infix_expr(parsed=None)
           }
           let loc = self.loc_start_with(spos)
-          let binder = @syntax.Binder::{ name: binder, loc: binder_loc }
+          let binder = @syntax.Binder::{ name: binder, loc: binder_loc, }
           let func = @syntax.make_arrow_fn(
             params_loc=binder_loc,
             loc~,
@@ -3883,33 +3889,33 @@ fn State::parse_regex_match_binding(
 ) -> (@syntax.Label, @syntax.Binder?) {
   match self.peek_token() {
     LIDENT(name) if self.peek_token(nth=1) is EQUAL => {
-      let label : @syntax.Label = { name, loc: self.peek_location() }
+      let label : @syntax.Label = { name, loc: self.peek_location(), }
       self.skip()
       self.expect_token(TK_EQUAL)
       let binder = if self.peek_token() is UNDERSCORE {
         let loc = self.peek_location()
         self.skip()
-        @syntax.Binder::{ name: "_", loc }
+        @syntax.Binder::{ name: "_", loc, }
       } else {
         self.parse_binder(context="regex match binding")
       }
       (label, Some(binder))
     }
     EXTEND if self.peek_token(nth=1) is EQUAL => {
-      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
+      let label : @syntax.Label = { name: "extend", loc: self.peek_location(), }
       self.skip()
       self.expect_token(TK_EQUAL)
       let binder = if self.peek_token() is UNDERSCORE {
         let loc = self.peek_location()
         self.skip()
-        @syntax.Binder::{ name: "_", loc }
+        @syntax.Binder::{ name: "_", loc, }
       } else {
         self.parse_binder(context="regex match binding")
       }
       (label, Some(binder))
     }
     POST_LABEL(name) => {
-      let label : @syntax.Label = { name, loc: self.peek_location() }
+      let label : @syntax.Label = { name, loc: self.peek_location(), }
       self.skip()
       (label, None)
     }
@@ -3917,7 +3923,7 @@ fn State::parse_regex_match_binding(
       let loc = self.peek_location()
       self.report_unexpected(other, [TK_LIDENT, TK_POST_LABEL], loc)
       self.panic() |> ignore
-      ({ name: "", loc }, None)
+      ({ name: "", loc, }, None)
     }
   }
 }
@@ -4093,7 +4099,7 @@ fn State::parse_range_expr(
       let op_loc = self.loc_start_with(op_start)
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
-      let op : @syntax.Var = { name: Ident(name="..="), loc: op_loc }
+      let op : @syntax.Var = { name: Ident(name="..="), loc: op_loc, }
       Infix(op~, lhs~, rhs~, loc~)
     }
     RANGE_LT_INCLUSIVE => {
@@ -4101,7 +4107,7 @@ fn State::parse_range_expr(
       let op_loc = self.loc_start_with(op_start)
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
-      let op : @syntax.Var = { name: Ident(name="..<="), loc: op_loc }
+      let op : @syntax.Var = { name: Ident(name="..<="), loc: op_loc, }
       Infix(op~, lhs~, rhs~, loc~)
     }
     RANGE_EXCLUSIVE => {
@@ -4109,7 +4115,7 @@ fn State::parse_range_expr(
       let op_loc = self.loc_start_with(op_start)
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
-      let op : @syntax.Var = { name: Ident(name="..<"), loc: op_loc }
+      let op : @syntax.Var = { name: Ident(name="..<"), loc: op_loc, }
       Infix(op~, lhs~, rhs~, loc~)
     }
     RANGE_INCLUSIVE_REV => {
@@ -4117,7 +4123,7 @@ fn State::parse_range_expr(
       let op_loc = self.loc_start_with(op_start)
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
-      let op : @syntax.Var = { name: Ident(name=">=.."), loc: op_loc }
+      let op : @syntax.Var = { name: Ident(name=">=.."), loc: op_loc, }
       Infix(op~, lhs~, rhs~, loc~)
     }
     RANGE_EXCLUSIVE_REV => {
@@ -4125,7 +4131,7 @@ fn State::parse_range_expr(
       let op_loc = self.loc_start_with(op_start)
       let rhs = self.parse_prefix_expr(parsed=None)
       let loc = self.loc_start_with(spos)
-      let op : @syntax.Var = { name: Ident(name=">.."), loc: op_loc }
+      let op : @syntax.Var = { name: Ident(name=">.."), loc: op_loc, }
       Infix(op~, lhs~, rhs~, loc~)
     }
     _ => lhs
@@ -4220,7 +4226,7 @@ fn State::parse_prefix_expr(
           }
           DOT_LIDENT(name) => {
             let label_loc = self.peek_location()
-            let label : @syntax.Label = { name, loc: label_loc }
+            let label : @syntax.Label = { name, loc: label_loc, }
             self.skip()
             match self.peek_token() {
               LPAREN => {
@@ -4310,7 +4316,7 @@ fn State::parse_constr_expr(
   let loc = self.loc_start_with(spos)
   let constr : @syntax.Constructor = {
     extra_info,
-    name: { name: constr_name, loc: name_loc },
+    name: { name: constr_name, loc: name_loc, },
     loc,
   }
   // constructor with arguments is handled by [Apply],
@@ -4327,7 +4333,7 @@ priv enum IndexingSyntaxFragment {
 ///|
 fn State::parse_argument(self : Self) -> @syntax.Argument {
   if self.mode is Panic(loc~, ..) {
-    return { value: Hole(loc~, kind=Synthesized), kind: Positional }
+    return { value: Hole(loc~, kind=Synthesized), kind: Positional, }
   }
   match self.peek_token() {
     // `label=expr` or `label?=expr`
@@ -4335,7 +4341,7 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
       (self.peek_token(nth=1) is QUESTION && self.peek_token(nth=2) is EQUAL) => {
       let label_loc = self.peek_location()
       let label_name = self.expect_lident(context="")
-      let label : @syntax.Label = { name: label_name, loc: label_loc }
+      let label : @syntax.Label = { name: label_name, loc: label_loc, }
       let kind : @syntax.ArgumentKind = if self.peek_token() is QUESTION {
         let question_loc = self.peek_location()
         self.skip()
@@ -4345,14 +4351,14 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
       }
       self.expect_token(TK_EQUAL) // `=`
       let value = self.parse_expr()
-      { value, kind }
+      { value, kind, }
     }
     // label~
     POST_LABEL(label_name) if !(self.peek_token(nth=1) is COLON) => {
       let spos = self.peek_spos()
       let label_loc = self.peek_location()
       self.skip()
-      let label : @syntax.Label = { name: label_name, loc: label_loc }
+      let label : @syntax.Label = { name: label_name, loc: label_loc, }
       // error recovery for `label~=value`
       if self.peek_token() is EQUAL {
         self.skip()
@@ -4362,13 +4368,13 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
           loc,
           msg: "Invalid syntax `label~=value`. Do you mean `label=value`?",
         })
-        { value, kind: Labelled(label) }
+        { value, kind: Labelled(label), }
       } else {
         let value = @syntax.label_to_expr(
           loc=Location::trim_last_char(label.loc),
           label,
         )
-        { value, kind: LabelledPun(label) }
+        { value, kind: LabelledPun(label), }
       }
     }
     // label?
@@ -4383,21 +4389,21 @@ fn State::parse_argument(self : Self) -> @syntax.Argument {
       self.expect_token(TK_QUESTION) // `?`
       let kind = @syntax.LabelledOptionPun(label~, question_loc~)
       let value = @syntax.label_to_expr(loc=label.loc, label)
-      { value, kind }
+      { value, kind, }
     }
     EXTEND if self.peek_token(nth=1) is QUESTION &&
       (self.peek_token(nth=2) is COMMA || self.peek_token(nth=2) is RPAREN) => {
-      let label : @syntax.Label = { name: "extend", loc: self.peek_location() }
+      let label : @syntax.Label = { name: "extend", loc: self.peek_location(), }
       self.skip() // extend
       let question_loc = self.peek_location()
       self.expect_token(TK_QUESTION) // `?`
       let kind = @syntax.LabelledOptionPun(label~, question_loc~)
       let value = @syntax.label_to_expr(loc=label.loc, label)
-      { value, kind }
+      { value, kind, }
     }
     _ => {
       let value = self.parse_expr()
-      { value, kind: Positional }
+      { value, kind: Positional, }
     }
   }
 }
@@ -4465,7 +4471,7 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
 ///|
 fn State::parse_parameter(self : Self) -> @syntax.Parameter {
   if self.mode is Panic(loc~, ..) {
-    return Positional(binder={ name: "?binder", loc }, ty=None)
+    return Positional(binder={ name: "?binder", loc, }, ty=None)
   }
   match self.peek_token() {
     UNDERSCORE => {
@@ -4576,7 +4582,7 @@ fn State::parse_parameter(self : Self) -> @syntax.Parameter {
       let other_loc = self.peek_location()
       self.report_failed_to_parse(other, "parameter name or label", other_loc)
       self.panic() |> ignore
-      Positional(binder={ name: "?binder", loc: @syntax.no_location }, ty=None)
+      Positional(binder={ name: "?binder", loc: @syntax.no_location, }, ty=None)
     }
   }
 }
@@ -4733,7 +4739,7 @@ fn State::parse_simple_expr(
           let spos = self.peek_spos()
           let name = self.parse_qual_lident(context="variable name")
           let loc = self.loc_start_with(spos)
-          Ident(id={ name, loc }, loc~)
+          Ident(id={ name, loc, }, loc~)
         }
       }
     LIDENT(_) | EXTEND | UIDENT(_) if self.peek_token(nth=1) is COLONCOLON =>
@@ -4865,11 +4871,11 @@ fn State::parse_coloncolon_expr(self : Self) -> @syntax.Expr {
         self.peek_location(),
       )
       let skipped_loc = self.panic()
-      let loc : Location = { start: spos, end: skipped_loc.end }
+      let loc : Location = { start: spos, end: skipped_loc.end, }
       Constr(
         constr={
           extra_info: TypeName(type_name),
-          name: { name: "?constr", loc: @syntax.no_location },
+          name: { name: "?constr", loc: @syntax.no_location, },
           loc,
         },
         loc~,
@@ -4902,7 +4908,7 @@ fn State::parse_template_object_expr(self : Self) -> @syntax.Expr {
       state.expect_token(TK_COLON)
       let expr = state.parse_expr()
       let loc = state.loc_start_with(elem_spos)
-      { key: String(key), expr, key_loc, loc }
+      { key: String(key), expr, key_loc, loc, }
     },
   )
   let loc = self.loc_start_with(spos)
@@ -5085,7 +5091,7 @@ fn State::parse_list_comprehension(
 fn State::parse_field_def(self : Self) -> @syntax.FieldDef {
   if self.mode is Panic(loc~, ..) {
     return {
-      label: { name: "?", loc },
+      label: { name: "?", loc, },
       expr: Hole(loc~, kind=Synthesized),
       is_pun: false,
       loc,
@@ -5112,10 +5118,10 @@ fn State::parse_field_def(self : Self) -> @syntax.FieldDef {
   }
   let loc = self.loc_start_with(spos)
   if expr_opt is Some(expr) {
-    { label, expr, is_pun: false, loc }
+    { label, expr, is_pun: false, loc, }
   } else {
     let expr = @syntax.label_to_expr(loc=label.loc, label)
-    { label, expr, is_pun: true, loc }
+    { label, expr, is_pun: true, loc, }
   }
 }
 
@@ -5193,7 +5199,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
       state.expect_token(TK_COLON)
       let expr = state.parse_expr()
       let loc = state.loc_start_with(spos)
-      Some({ key, expr, key_loc, loc })
+      Some({ key, expr, key_loc, loc, })
     }
 
     match state.peek_token() {
@@ -5486,7 +5492,7 @@ fn State::handle_unexpected_expr_or_statement(
     _ => panic()
   }
   let loc = expr.loc()
-  self.report_error({ loc, msg: "Unexpected \{actual} in \{context}" })
+  self.report_error({ loc, msg: "Unexpected \{actual} in \{context}", })
   expr
 }
 
@@ -5533,7 +5539,7 @@ fn State::parse_assign_or_simple_expr(self : Self) -> @syntax.Expr {
     }
     AUGMENTED_ASSIGNMENT(op) => {
       let op_loc = self.peek_location()
-      let op : @syntax.Var = { name: Ident(name=op), loc: op_loc }
+      let op : @syntax.Var = { name: Ident(name=op), loc: op_loc, }
       self.expect_token(TK_AUGMENTED_ASSIGNMENT)
       let rhs = self.parse_expr()
       let loc = self.loc_start_with(spos)
@@ -5549,7 +5555,7 @@ fn State::parse_assign_or_simple_expr(self : Self) -> @syntax.Expr {
     }
     PLUS_EQUAL => {
       let op_loc = self.peek_location()
-      let op : @syntax.Var = { name: Ident(name="+"), loc: op_loc }
+      let op : @syntax.Var = { name: Ident(name="+"), loc: op_loc, }
       self.expect_token(TK_PLUS_EQUAL)
       let rhs = self.parse_expr()
       let loc = self.loc_start_with(spos)
@@ -5599,12 +5605,12 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
         POST_LABEL(label_name) => {
           let loc = self.peek_location()
           self.skip()
-          Some(@syntax.Label::{ name: label_name, loc })
+          Some(@syntax.Label::{ name: label_name, loc, })
         }
         POST_LABEL_TRANSPARENT(label_name) => {
           let loc = self.peek_location()
           self.skip()
-          Some({ name: "\{label_name}~", loc })
+          Some({ name: "\{label_name}~", loc, })
         }
         _ => None
       }
@@ -5623,12 +5629,12 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
         POST_LABEL(label_name) if !(self.peek_token(nth=1) is COLON) => {
           let loc = self.peek_location()
           self.skip()
-          Some({ name: label_name, loc })
+          Some({ name: label_name, loc, })
         }
         POST_LABEL_TRANSPARENT(label_name) if !(self.peek_token(nth=1) is COLON) => {
           let loc = self.peek_location()
           self.skip()
-          Some({ name: "\{label_name}~", loc })
+          Some({ name: "\{label_name}~", loc, })
         }
         _ => None
       }
@@ -5668,13 +5674,13 @@ fn State::parse_error_type(self : Self) -> @syntax.Type {
       self.skip() // QUESTION  
       let name = @syntax.LongIdent::Ident(name=id + "?")
       let loc = self.loc_start_with(spos)
-      let constr_id : @syntax.ConstrId = { id: name, loc }
+      let constr_id : @syntax.ConstrId = { id: name, loc, }
       Name(constr_id~, tys=@list.new(), loc~)
     }
     _ => {
       let name = self.parse_qual_type_ident(context="error type")
       let loc = self.loc_start_with(spos)
-      let constr_id : @syntax.ConstrId = { id: name, loc }
+      let constr_id : @syntax.ConstrId = { id: name, loc, }
       Name(constr_id~, tys=@list.new(), loc~)
     }
   }
@@ -5695,7 +5701,7 @@ fn State::parse_error_annotation(self : Self) -> @syntax.ErrorType {
           self.skip()
           let loc = raise_loc.merge(question_loc)
           let fake_error = @syntax.Type::Name(
-            constr_id={ id: Ident(name="Error"), loc },
+            constr_id={ id: Ident(name="Error"), loc, },
             tys=@list.new(),
             loc~,
           )
@@ -5804,7 +5810,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       })
       let loc = self.loc_start_with(spos)
       let ty = @syntax.Type::Name(
-        constr_id={ id: name, loc: name_loc },
+        constr_id={ id: name, loc: name_loc, },
         tys=args.unwrap_or(@list.new()),
         loc~,
       )
@@ -5878,7 +5884,7 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       let spos = self.peek_spos()
       let lid = self.parse_qual_type_ident(context="object type")
       let loc = self.loc_start_with(spos)
-      let ty = @syntax.Type::Object({ id: lid, loc })
+      let ty = @syntax.Type::Object({ id: lid, loc, })
       parse_question_mark(spos, ty)
     }
     other => {

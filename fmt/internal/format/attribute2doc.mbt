@@ -1,6 +1,6 @@
 ///|
 fn attr_id2doc(id : @attribute.Id) -> Doc {
-  let { qual, name } = id
+  let { qual, name, } = id
   let qual = if qual is Some(q) { text(q) + text(".") } else { empty }
   qual + text(name)
 }

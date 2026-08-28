@@ -22,7 +22,7 @@ fn ConfigFmt::new(
   mapper? : @comment.CheckpointMapper,
   migration? : Bool = false,
 ) -> Self {
-  { mapper, migration }
+  { mapper, migration, }
 }
 
 ///|
@@ -59,13 +59,13 @@ fn ConfigFmt::eof(self : Self) -> Doc {
 
 ///|
 fn config_dummy_position() -> Position {
-  { fname: "", lnum: -1, bol: 0, cnum: 0 }
+  { fname: "", lnum: -1, bol: 0, cnum: 0, }
 }
 
 ///|
 fn config_dummy_location() -> Location {
   let pos = config_dummy_position()
-  { start: pos, end: pos }
+  { start: pos, end: pos, }
 }
 
 ///|

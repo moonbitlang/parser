@@ -121,7 +121,7 @@ fn lexer_test(t : @test.Test) -> Unit raise Error {
   }
   let tokens : Array[Json] = lex_result.tokens.map(triple => {
     "token": triple.0,
-    "loc": @basic.Location::{ start: triple.1, end: triple.2 }.to_json(),
+    "loc": @basic.Location::{ start: triple.1, end: triple.2, }.to_json(),
   })
   t.write(tokens.to_json().stringify(indent=2))
   t.snapshot(filename="\{name}.mbt.tokens.json")

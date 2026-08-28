@@ -6,7 +6,7 @@ fn lower_empty_doc() -> @syntax.DocString {
 ///|
 fn lower_empty_loc() -> Location {
   let pos = initial_position("")
-  Location::{ start: pos, end: pos }
+  Location::{ start: pos, end: pos, }
 }
 
 ///|
@@ -60,14 +60,14 @@ fn lower_semantic_string(node : CstNode) -> String? {
 ///|
 fn lower_label_from_node(node : CstNode) -> @syntax.Label {
   let name = lower_semantic_string(node).unwrap_or("")
-  @syntax.Label::{ name, loc: node.loc }
+  @syntax.Label::{ name, loc: node.loc, }
 }
 
 ///|
 fn lower_binder_from_node(node : CstNode) -> @syntax.Binder {
   let semantic = direct_semantic_scalar(node).unwrap_or(node)
   let name = lower_semantic_string(semantic).unwrap_or("")
-  @syntax.Binder::{ name, loc: semantic.loc }
+  @syntax.Binder::{ name, loc: semantic.loc, }
 }
 
 ///|
@@ -77,7 +77,7 @@ fn lower_post_label_binder_from_node(node : CstNode) -> @syntax.Binder {
 
 ///|
 fn lower_dummy_binder(loc : Location) -> @syntax.Binder {
-  @syntax.Binder::{ name: "", loc }
+  @syntax.Binder::{ name: "", loc, }
 }
 
 ///|
@@ -263,7 +263,7 @@ fn lower_error_annotation_type(node : CstNode) -> @syntax.Type {
   match lower_type(node) {
     @syntax.Type::Name(constr_id~, tys~, loc~) if node.kind is Type_Name =>
       @syntax.Type::Name(
-        constr_id=@syntax.ConstrId::{ id: constr_id.id, loc: node.loc },
+        constr_id=@syntax.ConstrId::{ id: constr_id.id, loc: node.loc, },
         tys~,
         loc~,
       )
@@ -647,7 +647,7 @@ fn lower_value_decl(node : CstNode, is_constant~ : Bool) -> @syntax.Impl {
     .unwrap_or(lower_unit_expr(node.loc))
   let parsed_loc = lower_decl_loc_without_trailing_trivia(node)
   let loc = if node.first_child_with_label("expr") is Some(_) {
-    Location::{ start: parsed_loc.start, end: expr.loc().end }
+    Location::{ start: parsed_loc.start, end: expr.loc().end, }
   } else {
     parsed_loc
   }
@@ -978,7 +978,7 @@ fn lower_struct_field(node : CstNode) -> @syntax.FieldDecl {
   let name_node = node.first_child_with_label("name").unwrap_or(node)
   let label = lower_semantic_string(name_node).unwrap_or("")
   @syntax.FieldDecl::{
-    name: @syntax.FieldName::{ label, loc: name_node.loc },
+    name: @syntax.FieldName::{ label, loc: name_node.loc, },
     ty: node
     .first_child_with_label("type")
     .map(lower_type)
@@ -1001,7 +1001,7 @@ fn lower_type_decl_params(node : CstNode) -> List[@syntax.TypeDeclBinder] {
         Some("_") => None
         value => value
       }
-      params.push(@syntax.TypeDeclBinder::{ name, loc: name_node.loc })
+      params.push(@syntax.TypeDeclBinder::{ name, loc: name_node.loc, })
     }
   } else {
     ()
@@ -1193,7 +1193,7 @@ fn lower_using_decl(node : CstNode) -> @syntax.Impl {
   let pkg = node
     .first_child_with_label("name")
     .map(lower_label_from_node)
-    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc })
+    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc, })
   @syntax.Impl::TopUsing(
     pkg~,
     names=lower_using_names(node),
@@ -1614,7 +1614,7 @@ fn lower_argument_kind(item : CstNode) -> @syntax.ArgumentKind {
         item
         .first_child_with_label("name")
         .map(lower_label_from_node)
-        .unwrap_or(@syntax.Label::{ name: "", loc: item.loc }),
+        .unwrap_or(@syntax.Label::{ name: "", loc: item.loc, }),
       )
     Argument_LabelledPun =>
       @syntax.ArgumentKind::LabelledPun(
@@ -1627,14 +1627,14 @@ fn lower_argument_kind(item : CstNode) -> @syntax.ArgumentKind {
           .map(fn(anchor) { anchor.loc })
           .unwrap_or(item.loc),
         })
-        .unwrap_or(@syntax.Label::{ name: "", loc: item.loc }),
+        .unwrap_or(@syntax.Label::{ name: "", loc: item.loc, }),
       )
     Argument_LabelledOption =>
       @syntax.ArgumentKind::LabelledOption(
         label=item
           .first_child_with_label("name")
           .map(lower_label_from_node)
-          .unwrap_or(@syntax.Label::{ name: "", loc: item.loc }),
+          .unwrap_or(@syntax.Label::{ name: "", loc: item.loc, }),
         question_loc=item
           .first_child_with_label("question_loc")
           .map(fn(anchor) { anchor.loc })
@@ -1645,7 +1645,7 @@ fn lower_argument_kind(item : CstNode) -> @syntax.ArgumentKind {
         label=item
           .first_child_with_label("name")
           .map(lower_label_from_node)
-          .unwrap_or(@syntax.Label::{ name: "", loc: item.loc }),
+          .unwrap_or(@syntax.Label::{ name: "", loc: item.loc, }),
         question_loc=item
           .first_child_with_label("question_loc")
           .map(fn(anchor) { anchor.loc })
@@ -1668,7 +1668,7 @@ fn lower_arguments(list : CstNode) -> List[@syntax.Argument] {
     } else {
       lower_expr(item)
     }
-    args.push(@syntax.Argument::{ value, kind: lower_argument_kind(item) })
+    args.push(@syntax.Argument::{ value, kind: lower_argument_kind(item), })
   }
   lower_array_to_list(args)
 }
@@ -1830,7 +1830,7 @@ fn lower_record_field_def(node : CstNode) -> @syntax.FieldDef {
   let label_node = node.first_child_with_label("name")
   let label = label_node
     .map(lower_label_from_node)
-    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc })
+    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc, })
   let expr = node
     .first_child_with_label("expr")
     .map(lower_expr)
@@ -1853,7 +1853,7 @@ fn lower_where_clause(node : CstNode) -> @syntax.WhereClause {
   } else {
     ()
   }
-  @syntax.WhereClause::{ fields: lower_array_to_list(fields), loc: node.loc }
+  @syntax.WhereClause::{ fields: lower_array_to_list(fields), loc: node.loc, }
 }
 
 ///|
@@ -2189,7 +2189,7 @@ fn lower_dot_apply_expr(node : CstNode) -> @syntax.Expr {
   let method_label = node
     .first_child_with_label("field")
     .map(lower_label_from_node)
-    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc })
+    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc, })
   let args = node
     .first_child_with_label("arg")
     .map(lower_arguments)
@@ -2237,7 +2237,7 @@ fn lower_method_expr(node : CstNode) -> @syntax.Expr {
     method_name=node
       .first_child_with_label("field")
       .map(lower_label_from_node)
-      .unwrap_or(@syntax.Label::{ name: "", loc: node.loc }),
+      .unwrap_or(@syntax.Label::{ name: "", loc: node.loc, }),
     loc=node.loc,
   )
 }
@@ -2255,7 +2255,7 @@ fn lower_accessor_child(node : CstNode) -> @syntax.Accessor {
       _ => @syntax.Accessor::Label(lower_label_from_node(field))
     }
   } else {
-    @syntax.Accessor::Label(@syntax.Label::{ name: "", loc: node.loc })
+    @syntax.Accessor::Label(@syntax.Label::{ name: "", loc: node.loc, })
   }
 }
 
@@ -2815,7 +2815,7 @@ fn lower_regex_match_binding(
   let label = node
     .first_child_with_label("name")
     .map(lower_label_from_node)
-    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc })
+    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc, })
   let binder = node.first_child_with_label("binder").map(lower_binder_from_node)
   (label, binder)
 }
@@ -3483,7 +3483,7 @@ fn lower_labelled_block_expr(node : CstNode) -> @syntax.Expr {
     label=node
       .first_child_with_label("label")
       .map(lower_label_from_node)
-      .unwrap_or({ name: "", loc: node.loc }),
+      .unwrap_or({ name: "", loc: node.loc, }),
     body=node
       .first_child_with_label("body")
       .map(lower_function_body_expr)
@@ -3811,7 +3811,7 @@ fn lower_record_pattern_field(node : CstNode) -> @syntax.FieldPat {
   let label_node = node.first_child_with_label("name")
   let label = label_node
     .map(lower_label_from_node)
-    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc })
+    .unwrap_or(@syntax.Label::{ name: "", loc: node.loc, })
   let pattern = node
     .first_child_with_label("pattern")
     .map(lower_pattern)
@@ -3948,7 +3948,7 @@ fn lower_constructor_from_names(
     ("", loc)
   }
   @syntax.Constructor::{
-    name: @syntax.ConstrName::{ name, loc: name_loc },
+    name: @syntax.ConstrName::{ name, loc: name_loc, },
     extra_info,
     loc,
   }
@@ -4003,7 +4003,7 @@ fn lower_constructor_pattern_arg(item : CstNode) -> @syntax.ConstrPatArg {
           item
           .first_child_with_label("name")
           .map(lower_label_from_node)
-          .unwrap_or(@syntax.Label::{ name: "", loc: item.loc }),
+          .unwrap_or(@syntax.Label::{ name: "", loc: item.loc, }),
         ),
       }
     _ =>
@@ -4150,7 +4150,7 @@ fn lower_option_type(node : CstNode) -> @syntax.Type {
     .unwrap_or(node.loc)
   let loc = match inner_node {
     Some(ty) if option_type_wraps_object(ty) =>
-      Location::{ start: inner.loc().start, end: node.loc.end }
+      Location::{ start: inner.loc().start, end: node.loc.end, }
     _ => node.loc
   }
   @syntax.Type::Option(ty=inner, loc~, question_loc~)
@@ -4244,7 +4244,7 @@ fn lower_type_name_from_type_node(node : CstNode) -> @syntax.TypeName {
     Type_Object =>
       if node.first_child_with_label("type") is Some(ty) {
         let base = lower_type_name_from_type_node(ty)
-        @syntax.TypeName::{ name: base.name, is_object: true, loc: node.loc }
+        @syntax.TypeName::{ name: base.name, is_object: true, loc: node.loc, }
       } else {
         @syntax.TypeName::{
           name: @syntax.LongIdent::dummy(),

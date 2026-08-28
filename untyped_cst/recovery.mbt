@@ -4,7 +4,7 @@ fn report_from_lex_error(
   end : Position,
   err : @lexer.LexicalError,
 ) -> Report {
-  Report::{ loc: mk_loc(start, end), msg: err.to_string() }
+  Report::{ loc: mk_loc(start, end), msg: err.to_string(), }
 }
 
 ///|
@@ -275,7 +275,7 @@ fn ParserState::report(
   loc : Location,
   msg : String,
 ) -> Unit {
-  self.reports.push(Report::{ loc, msg })
+  self.reports.push(Report::{ loc, msg, })
 }
 
 ///|

@@ -34,7 +34,7 @@ fn parse_impls(source : String) -> (@syntax.Impls, @tokens.Triples) raise {
 
 ///|
 fn find_iter_array_loc(impls : @syntax.Impls) -> Location raise {
-  let finder = { loc: None }
+  let finder = { loc: None, }
   impls.map(item => finder.visit_Impl(item)) |> ignore
   if finder.loc is Some(loc) {
     loc

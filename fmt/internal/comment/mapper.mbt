@@ -115,11 +115,11 @@ pub fn Mapper::new(tokens : Array[Triple], impls : @syntax.Impls) -> Self {
   }
   // println(@pp.pretty(queue))
   let document_loc : Location = {
-    let pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0 }
+    let pos : Position = { fname: "", lnum: 0, bol: 0, cnum: 0, }
     if tokens.last() is Some(eof) {
-      { start: pos, end: eof.2 }
+      { start: pos, end: eof.2, }
     } else {
-      { start: pos, end: pos }
+      { start: pos, end: pos, }
     }
   }
   let self = {

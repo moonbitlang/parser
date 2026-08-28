@@ -1,7 +1,7 @@
 ///|
 fn legacy_loc() -> @basic.Location {
-  let pos = @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }
-  { start: pos, end: pos }
+  let pos = @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0, }
+  { start: pos, end: pos, }
 }
 
 ///|

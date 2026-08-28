@@ -1,7 +1,7 @@
 ///|
 let dummy_loc : @basic.Location = {
-  let pos = @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0 }
-  { start: pos, end: pos }
+  let pos = @basic.Position::{ fname: "", lnum: 0, bol: 0, cnum: 0, }
+  { start: pos, end: pos, }
 }
 
 ///|
@@ -122,7 +122,7 @@ test "constant to_json" {
 
 ///|
 test "label to_json" {
-  let label = Label::{ name: "test_label", loc: dummy_loc }
+  let label = Label::{ name: "test_label", loc: dummy_loc, }
   json_inspect(label.json_repr(), content={
     "kind": "Label",
     "loc": null,
@@ -132,7 +132,7 @@ test "label to_json" {
 
 ///|
 test "constr_name to_json" {
-  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
+  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc, }
   json_inspect(constr_name.json_repr(), content={
     "kind": "ConstrName",
     "loc": null,
@@ -213,7 +213,7 @@ test "error_type to_json" {
     },
   )
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -270,7 +270,7 @@ test "error_type to_json" {
 ///|
 test "type to_json" {
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -416,7 +416,7 @@ test "type to_json" {
     },
   )
   json_inspect(
-    Type::Object({ id: Ident(name="TestObject"), loc: dummy_loc }).json_repr(),
+    Type::Object({ id: Ident(name="TestObject"), loc: dummy_loc, }).json_repr(),
     content={
       "kind": "Type::Object",
       "loc": null,
@@ -458,7 +458,7 @@ test "hole to_json" {
 
 ///|
 test "argument_kind to_json" {
-  let label = Label::{ name: "test_label", loc: dummy_loc }
+  let label = Label::{ name: "test_label", loc: dummy_loc, }
   json_inspect(ArgumentKind::Positional.json_repr(dummy_loc), content={
     "kind": "ArgumentKind::Positional",
     "loc": null,
@@ -587,7 +587,7 @@ test "TryOperatorKind to_json" {
 
 ///|
 test "binder to_json" {
-  let binder = Binder::{ name: "test_binder", loc: dummy_loc }
+  let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
   json_inspect(binder.json_repr(), content={
     "kind": "Binder",
     "loc": null,
@@ -597,7 +597,7 @@ test "binder to_json" {
 
 ///|
 test "var to_json" {
-  let variable = Var::{ name: Ident(name="test_var"), loc: dummy_loc }
+  let variable = Var::{ name: Ident(name="test_var"), loc: dummy_loc, }
   json_inspect(variable.json_repr(), content={
     "kind": "Var",
     "loc": null,
@@ -650,7 +650,7 @@ test "constructor_extra_info to_json" {
 
 ///|
 test "constructor to_json" {
-  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
+  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc, }
   let constr = Constructor::{
     name: constr_name,
     extra_info: NoExtraInfo,
@@ -676,7 +676,7 @@ test "constructor to_json" {
 
 ///|
 test "accessor to_json" {
-  let label = Label::{ name: "test_field", loc: dummy_loc }
+  let label = Label::{ name: "test_field", loc: dummy_loc, }
   json_inspect(Accessor::Label(label).json_repr(), content={
     "kind": "Accessor::Label",
     "loc": null,
@@ -707,7 +707,7 @@ test "exception_decl to_json" {
     "loc": null,
     "children": Json::empty_object(),
   })
-  let constr_name = ConstrName::{ name: "TestConstr", loc: dummy_loc }
+  let constr_name = ConstrName::{ name: "TestConstr", loc: dummy_loc, }
   let constr_decl = ConstrDecl::{
     name: constr_name,
     args: None,
@@ -757,7 +757,7 @@ test "type_desc to_json" {
     "children": Json::empty_object(),
   })
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -810,7 +810,7 @@ test "dot_dot_binder to_json" {
     "loc": null,
     "children": Json::empty_object(),
   })
-  let binder = Binder::{ name: "test_binder", loc: dummy_loc }
+  let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
   json_inspect(BinderAs(binder).json_repr(dummy_loc), content={
     "kind": "DotDotBinder::BinderAs",
     "loc": null,
@@ -865,7 +865,7 @@ test "array_pattern to_json" {
       "children": { "bytes": "b\"ABC\"" },
     },
   )
-  let binder = Binder::{ name: "test_binder", loc: dummy_loc }
+  let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
   json_inspect(
     ConstSpread(binder~, pkg=Some("test_pkg"), loc=dummy_loc).json_repr(),
     content={
@@ -1053,9 +1053,9 @@ test "func_stubs to_json" {
 
 ///|
 test "parameter to_json" {
-  let binder = Binder::{ name: "param", loc: dummy_loc }
+  let binder = Binder::{ name: "param", loc: dummy_loc, }
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -1368,7 +1368,7 @@ test "map_expr_elem to_json" {
 
 ///|
 test "field_def to_json" {
-  let label = Label::{ name: "field_name", loc: dummy_loc }
+  let label = Label::{ name: "field_name", loc: dummy_loc, }
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
   let field_def = FieldDef::{
     label,
@@ -1398,7 +1398,7 @@ test "field_def to_json" {
 ///|
 test "argument to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  let argument = Argument::{ value: unit_expr, kind: Positional }
+  let argument = Argument::{ value: unit_expr, kind: Positional, }
   json_inspect(argument.json_repr(), content={
     "kind": "Argument",
     "loc": null,
@@ -1474,7 +1474,7 @@ test "case to_json" {
 ///|
 test "static_assertion to_json" {
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -1518,10 +1518,10 @@ test "static_assertion to_json" {
 
 ///|
 test "func to_json" {
-  let binder = Binder::{ name: "param", loc: dummy_loc }
+  let binder = Binder::{ name: "param", loc: dummy_loc, }
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -1627,22 +1627,22 @@ test "func to_json" {
 
 ///|
 test "pattern to_json" {
-  let binder = Binder::{ name: "test_binder", loc: dummy_loc }
+  let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
   let any_pattern = Pattern::Any(loc=dummy_loc)
   let int_constant = Int("42")
   let constant_pattern = Pattern::Constant(c=int_constant, loc=dummy_loc)
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
-  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
+  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc, }
   let constr = Constructor::{
     name: constr_name,
     extra_info: NoExtraInfo,
     loc: dummy_loc,
   }
-  let label = Label::{ name: "test_field", loc: dummy_loc }
+  let label = Label::{ name: "test_field", loc: dummy_loc, }
   let field_pat = FieldPat::{
     label,
     pattern: any_pattern,
@@ -1656,7 +1656,7 @@ test "pattern to_json" {
     key_loc: dummy_loc,
     loc: dummy_loc,
   }
-  let constr_pat_arg = ConstrPatArg::{ pat: any_pattern, kind: Positional }
+  let constr_pat_arg = ConstrPatArg::{ pat: any_pattern, kind: Positional, }
   let array_patterns = ArrayPatterns::Closed(List([]))
   json_inspect(
     Pattern::Alias(pat=any_pattern, alias_=binder, loc=dummy_loc).json_repr(),
@@ -1977,7 +1977,7 @@ test "pattern to_json" {
 
 ///|
 test "field_name to_json" {
-  let field_name = FieldName::{ label: "test_field", loc: dummy_loc }
+  let field_name = FieldName::{ label: "test_field", loc: dummy_loc, }
   json_inspect(field_name.json_repr(), content={
     "kind": "FieldName",
     "loc": null,
@@ -1987,9 +1987,9 @@ test "field_name to_json" {
 
 ///|
 test "field_decl to_json" {
-  let field_name = FieldName::{ label: "test_field", loc: dummy_loc }
+  let field_name = FieldName::{ label: "test_field", loc: dummy_loc, }
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -2044,11 +2044,11 @@ test "field_decl to_json" {
 ///|
 test "constr_param to_json" {
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
-  let label = Label::{ name: "test_label", loc: dummy_loc }
+  let label = Label::{ name: "test_label", loc: dummy_loc, }
   let param_with_label = ConstrParam::{
     ty: int_type,
     mut_: false,
@@ -2119,14 +2119,14 @@ test "constr_param to_json" {
 
 ///|
 test "constr_decl to_json" {
-  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc }
+  let constr_name = ConstrName::{ name: "TestConstructor", loc: dummy_loc, }
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
-  let label = Label::{ name: "test_label", loc: dummy_loc }
-  let param = ConstrParam::{ ty: int_type, mut_: false, label: Some(label) }
+  let label = Label::{ name: "test_label", loc: dummy_loc, }
+  let param = ConstrParam::{ ty: int_type, mut_: false, label: Some(label), }
   let constr_with_args = ConstrDecl::{
     name: constr_name,
     args: Some(List([param])),
@@ -2280,7 +2280,7 @@ test "type_decl_binder to_json" {
     name: Some("TypeVar"),
     loc: dummy_loc,
   }
-  let binder_without_name = TypeDeclBinder::{ name: None, loc: dummy_loc }
+  let binder_without_name = TypeDeclBinder::{ name: None, loc: dummy_loc, }
   json_inspect(binder_with_name.json_repr(), content={
     "kind": "TypeDeclBinder",
     "loc": null,
@@ -2295,10 +2295,10 @@ test "type_decl_binder to_json" {
 
 ///|
 test "alias_target to_json" {
-  let binder = Binder::{ name: "test_binder", loc: dummy_loc }
-  let label = Label::{ name: "target_label", loc: dummy_loc }
-  let alias_with_target = AliasTarget::{ binder, target: Some(label) }
-  let alias_without_target = AliasTarget::{ binder, target: None }
+  let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
+  let label = Label::{ name: "target_label", loc: dummy_loc, }
+  let alias_with_target = AliasTarget::{ binder, target: Some(label), }
+  let alias_without_target = AliasTarget::{ binder, target: None, }
   json_inspect(alias_with_target.json_repr(), content={
     "kind": "AliasTarget",
     "loc": null,
@@ -2331,7 +2331,7 @@ test "alias_target to_json" {
 
 ///|
 test "field_pat to_json" {
-  let label = Label::{ name: "field_label", loc: dummy_loc }
+  let label = Label::{ name: "field_label", loc: dummy_loc, }
   let any_pattern = Pattern::Any(loc=dummy_loc)
   let field_pat = FieldPat::{
     label,
@@ -2361,8 +2361,8 @@ test "field_pat to_json" {
 ///|
 test "constr_pat_arg to_json" {
   let any_pattern = Pattern::Any(loc=dummy_loc)
-  let label = Label::{ name: "arg_label", loc: dummy_loc }
-  let arg = ConstrPatArg::{ pat: any_pattern, kind: Labelled(label) }
+  let label = Label::{ name: "arg_label", loc: dummy_loc, }
+  let arg = ConstrPatArg::{ pat: any_pattern, kind: Labelled(label), }
   json_inspect(arg.json_repr(), content={
     "kind": "ConstrPatArg",
     "loc": null,
@@ -2420,7 +2420,7 @@ test "map_pat_elem to_json" {
 ///|
 test "deriving_directive to_json" {
   let unit_expr = Expr::Unit(loc=dummy_loc, faked=false)
-  let argument = Argument::{ value: unit_expr, kind: Positional }
+  let argument = Argument::{ value: unit_expr, kind: Positional, }
   let deriving_directive = DerivingDirective::{
     type_name: {
       name: Dot(pkg="std", id="Show"),
@@ -2474,7 +2474,7 @@ test "deriving_directive to_json" {
 
 ///|
 test "type_decl to_json" {
-  let type_decl_binder = TypeDeclBinder::{ name: Some("T"), loc: dummy_loc }
+  let type_decl_binder = TypeDeclBinder::{ name: Some("T"), loc: dummy_loc, }
   let type_decl = TypeDecl::{
     tycon: "TestType",
     tycon_loc: dummy_loc,
@@ -2578,14 +2578,14 @@ test "decl_body to_json" {
 
 ///|
 test "fun_decl to_json" {
-  let binder = Binder::{ name: "test_func", loc: dummy_loc }
+  let binder = Binder::{ name: "test_func", loc: dummy_loc, }
   let type_name = TypeName::{
     name: Ident(name="TestType"),
     is_object: false,
     loc: dummy_loc,
   }
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -2755,9 +2755,9 @@ test "fun_decl to_json" {
 
 ///|
 test "trait_method_decl to_json" {
-  let binder = Binder::{ name: "trait_method", loc: dummy_loc }
+  let binder = Binder::{ name: "trait_method", loc: dummy_loc, }
   let int_type = Name(
-    constr_id={ id: Ident(name="Int"), loc: dummy_loc },
+    constr_id={ id: Ident(name="Int"), loc: dummy_loc, },
     tys=List([]),
     loc=dummy_loc,
   )
@@ -2885,12 +2885,12 @@ test "trait_method_decl to_json" {
 
 ///|
 test "trait_decl to_json" {
-  let trait_binder = Binder::{ name: "TestTrait", loc: dummy_loc }
+  let trait_binder = Binder::{ name: "TestTrait", loc: dummy_loc, }
   let super_constraint = TypeVarConstraint::{
     trait_: Ident(name="SuperTrait"),
     loc: dummy_loc,
   }
-  let method_binder = Binder::{ name: "method", loc: dummy_loc }
+  let method_binder = Binder::{ name: "method", loc: dummy_loc, }
   let trait_method = TraitMethodDecl::{
     name: method_binder,
     is_async: None,

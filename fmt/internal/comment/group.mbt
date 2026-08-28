@@ -12,7 +12,7 @@ fn pretty_triple(x : Triple?) -> @pp.Document {
   if x is Some(x) {
     text(x.0.to_expect_string()) +
     space +
-    @pp.parens(text(Location::{ start: x.1, end: x.2 }.to_string()))
+    @pp.parens(text(Location::{ start: x.1, end: x.2, }.to_string()))
   } else {
     text("None")
   }
@@ -27,7 +27,7 @@ fn pretty_triple(x : Triple?) -> @pp.Document {
 pub impl Pretty for Comment with fn pretty(self) {
   @pp.record({
     "kind": pretty(self.kind),
-    "loc": text(Location::{ start: self.start, end: self.end }.to_string()),
+    "loc": text(Location::{ start: self.start, end: self.end, }.to_string()),
     "surround": pretty((pretty_triple(self.left), pretty_triple(self.right))),
   })
 }

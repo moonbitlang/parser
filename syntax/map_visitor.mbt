@@ -2488,7 +2488,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeName
   let name = env.0.visit_LongIdent(type_name.name)
   let is_object = type_name.is_object
   let loc = type_name.loc
-  { name, is_object, loc }
+  { name, is_object, loc, }
 }
 
 ///|
@@ -2498,7 +2498,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_ConstrId
 ) {
   let id = env.0.visit_LongIdent(constr_id.id)
   let loc = constr_id.loc
-  { id, loc }
+  { id, loc, }
 }
 
 ///|
@@ -2640,7 +2640,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_ConstrPa
   let ty = env.0.visit_Type(constr_param.ty)
   let label = constr_param.label.map(x => env.0.visit_Label(x))
   let mut_ = constr_param.mut_
-  { ty, mut_, label }
+  { ty, mut_, label, }
 }
 
 ///|
@@ -2656,7 +2656,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_ConstrDe
   let loc = constr_decl.loc
   let attrs = constr_decl.attrs
   let doc = constr_decl.doc
-  { name, args, tag, loc, attrs, doc }
+  { name, args, tag, loc, attrs, doc, }
 }
 
 ///|
@@ -2700,7 +2700,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_FieldDec
   let loc = field_decl.loc
   let attrs = field_decl.attrs
   let doc = field_decl.doc
-  { name, ty, mut_, vis, loc, attrs, doc }
+  { name, ty, mut_, vis, loc, attrs, doc, }
 }
 
 ///|
@@ -2861,7 +2861,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeVarC
 ) {
   let trait_ = env.0.visit_LongIdent(type_var_constraint.trait_)
   let loc = type_var_constraint.loc
-  { trait_, loc }
+  { trait_, loc, }
 }
 
 ///|
@@ -2874,7 +2874,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeVarB
   })
   let name = type_var_binder.name
   let loc = type_var_binder.name_loc
-  { name, constraints, name_loc: loc }
+  { name, constraints, name_loc: loc, }
 }
 
 ///|
@@ -2900,7 +2900,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Var(
 ) {
   let name = env.0.visit_LongIdent(var_.name)
   let loc = var_.loc
-  { name, loc }
+  { name, loc, }
 }
 
 ///|
@@ -2944,7 +2944,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Construc
   let name = env.0.visit_ConstrName(constructor_.name)
   let extra_info = env.0.visit_ConstructorExtraInfo(constructor_.extra_info)
   let loc = constructor_.loc
-  { name, extra_info, loc }
+  { name, extra_info, loc, }
 }
 
 ///|
@@ -2992,7 +2992,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_AliasTar
 ) {
   let binder = env.0.visit_Binder(alias_target.binder)
   let target = alias_target.target
-  { binder, target }
+  { binder, target, }
 }
 
 ///|
@@ -3002,7 +3002,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Argument
 ) {
   let value = env.0.visit_Expr(argument.value)
   let kind = env.0.visit_ArgumentKind(argument.kind)
-  { value, kind }
+  { value, kind, }
 }
 
 ///|
@@ -3085,7 +3085,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Case(
   let pattern = env.0.visit_Pattern(case.pattern)
   let guard_ = case.guard_.map(x => env.0.visit_Expr(x))
   let body = env.0.visit_Expr(case.body)
-  { pattern, guard_, body }
+  { pattern, guard_, body, }
 }
 
 ///|
@@ -3127,7 +3127,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_MapExprE
   let expr = env.0.visit_Expr(mapexpr_elem.expr)
   let key_loc = mapexpr_elem.key_loc
   let loc = mapexpr_elem.loc
-  { key, expr, key_loc, loc }
+  { key, expr, key_loc, loc, }
 }
 
 ///|
@@ -3139,7 +3139,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_StaticAs
   let trait_ = env.0.visit_LongIdent(static_assertion.trait_)
   let loc = static_assertion.loc
   let msg = static_assertion.msg
-  { ty, trait_, loc, msg }
+  { ty, trait_, loc, msg, }
 }
 
 ///|
@@ -3162,7 +3162,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Func(
   let return_type = return_type.map(t => env.0.visit_Type(t))
   let error_type = env.0.visit_ErrorType(error_type)
   let kind = env.0.visit_FnKind(kind)
-  { is_async, parameters, params_loc, body, return_type, error_type, kind, loc }
+  {
+    is_async,
+    parameters,
+    params_loc,
+    body,
+    return_type,
+    error_type,
+    kind,
+    loc,
+  }
 }
 
 ///|
@@ -3174,7 +3183,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_FieldDef
   let expr = env.0.visit_Expr(field_def.expr)
   let is_pun = field_def.is_pun
   let loc = field_def.loc
-  { label, expr, is_pun, loc }
+  { label, expr, is_pun, loc, }
 }
 
 ///|
@@ -3379,7 +3388,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_WhereCla
 ) {
   let fields = where_clause.fields.map(x => env.0.visit_FieldDef(x))
   let loc = where_clause.loc
-  { fields, loc }
+  { fields, loc, }
 }
 
 ///|
@@ -3391,7 +3400,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_FieldPat
   let pattern = env.0.visit_Pattern(field_pat.pattern)
   let is_pun = field_pat.is_pun
   let loc = field_pat.loc
-  { label, pattern, is_pun, loc }
+  { label, pattern, is_pun, loc, }
 }
 
 ///|
@@ -3401,7 +3410,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_ConstrPa
 ) {
   let pat = env.0.visit_Pattern(constr_pat_arg.pat)
   let kind = env.0.visit_ArgumentKind(constr_pat_arg.kind)
-  { pat, kind }
+  { pat, kind, }
 }
 
 ///|
@@ -3414,7 +3423,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_MapPatEl
   let match_absent = mappat_elem.match_absent
   let key_loc = mappat_elem.key_loc
   let loc = mappat_elem.loc
-  { key, pat, match_absent, key_loc, loc }
+  { key, pat, match_absent, key_loc, loc, }
 }
 
 ///|
@@ -3623,7 +3632,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Deriving
   let type_name = env.0.visit_TypeName(deriving_directive.type_name)
   let args = deriving_directive.args.map(x => env.0.visit_Argument(x))
   let loc = deriving_directive.loc
-  { type_name, args, loc }
+  { type_name, args, loc, }
 }
 
 ///|
@@ -3824,7 +3833,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TraitDec
   let attrs = trait_decl.attrs
   let doc = trait_decl.doc
   let is_declare = trait_decl.is_declare
-  { name, supers, methods, vis, loc, attrs, doc, is_declare }
+  { name, supers, methods, vis, loc, attrs, doc, is_declare, }
 }
 
 ///|
@@ -5124,7 +5133,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexScanC
   })
   let guard_ = lex_scan_case.guard_.map(guard_ => env.0.visit_Expr(guard_))
   let body = env.0.visit_Expr(lex_scan_case.body)
-  { pat, bindings, guard_, body }
+  { pat, bindings, guard_, body, }
 }
 
 ///|
@@ -5176,7 +5185,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexCase(
   let guard_ = lex_case.guard_.map(guard_ => env.0.visit_Expr(guard_))
   let body = env.0.visit_Expr(lex_case.body)
   let pat_loc = lex_case.pat_loc
-  { pat, pat_loc, guard_, body }
+  { pat, pat_loc, guard_, body, }
 }
 
 ///|

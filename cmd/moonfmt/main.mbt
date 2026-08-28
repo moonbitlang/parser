@@ -71,7 +71,7 @@ fn parse_moonfmt_args(args : ArrayView[String]) -> MoonfmtOptions raise {
     Some([path]) => path
     _ => panic()
   }
-  { path, overwrite: matches.flags.get("overwrite").unwrap_or(false) }
+  { path, overwrite: matches.flags.get("overwrite").unwrap_or(false), }
 }
 
 ///|

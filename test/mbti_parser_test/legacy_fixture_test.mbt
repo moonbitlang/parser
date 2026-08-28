@@ -176,7 +176,7 @@ test "parse legacy mbti trait fixture" {
       name: { name: "f", .. },
       has_default: true,
       return_: (_, NoErrorType),
-      ..,
+      ..
     } else {
     fail("expected I1.f default method")
   }
@@ -268,7 +268,7 @@ test "parse legacy mbti extensible enum inline case" {
         vis,
         type_params,
         components: ExtensibleEnum(constructors),
-        ..,
+        ..
       }
     ) else {
     fail("expected base extensible enum")
@@ -286,7 +286,7 @@ test "parse legacy mbti extensible enum inline case" {
         vis,
         type_params,
         components: ExtendEnum(target~, constructors~),
-        ..,
+        ..
       }
     ) else {
     fail("expected extensible enum extension")

@@ -22,7 +22,7 @@ fn lex_reports(
 ) -> Array[Report] {
   errors.map(fn(error) {
     let (start, end, err) = error
-    { loc: { start, end }, msg: err.to_string() }
+    { loc: { start, end, }, msg: err.to_string(), }
   })
 }
 
@@ -36,19 +36,19 @@ pub fn parse_string(
   if !reports.is_empty() {
     (dummy_mbti(), reports)
   } else {
-    let initial_pos = Position::{ fname: name, lnum: 1, bol: 0, cnum: 0 }
+    let initial_pos = Position::{ fname: name, lnum: 1, bol: 0, cnum: 0, }
     (mbti(mbti_tokens(lex_result.tokens), initial_pos~), []) catch {
       UnexpectedEndOfInput(pos, _) =>
         (
           dummy_mbti(),
-          [{ loc: { start: pos, end: pos }, msg: "Unexpected end of file." }],
+          [{ loc: { start: pos, end: pos, }, msg: "Unexpected end of file.", }],
         )
       UnexpectedToken(token, (start, end), _) =>
         (
           dummy_mbti(),
           [
             {
-              loc: { start, end },
+              loc: { start, end, },
               msg: "unexpected \{token.to_expect_string()} here",
             },
           ],

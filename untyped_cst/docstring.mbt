@@ -45,7 +45,7 @@ fn attach_docstrings_to_impls(
     }
   }
 
-  let mut last_pos = Position::{ fname: "", lnum: -1, bol: 0, cnum: 0 }
+  let mut last_pos = Position::{ fname: "", lnum: -1, bol: 0, cnum: 0, }
   for toplevel in toplevels {
     let loc = toplevel.loc()
     let doc = search_docstrings(last_pos, loc)

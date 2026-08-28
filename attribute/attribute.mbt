@@ -61,11 +61,11 @@ pub fn Attribute::new(
   //TODO: report better syntax error for attribute 
   let (id, dot_id, raw_payload) = content
   let (raw, attr_id) = match dot_id {
-    None => ("#\{id}\{raw_payload}", { qual: None, name: id })
+    None => ("#\{id}\{raw_payload}", { qual: None, name: id, })
     Some(dot_id) =>
-      ("#\{id}.\{dot_id}\{raw_payload}", { qual: Some(id), name: dot_id })
+      ("#\{id}.\{dot_id}\{raw_payload}", { qual: Some(id), name: dot_id, })
   }
-  let { errors, docstrings: _, tokens } = @lexer.tokens_from_string(
+  let { errors, docstrings: _, tokens, } = @lexer.tokens_from_string(
     raw_payload,
     comment=false,
     start_pos=loc.start,
@@ -80,5 +80,5 @@ pub fn Attribute::new(
       }
     _ => None
   }
-  { loc, raw, parsed }
+  { loc, raw, parsed, }
 }

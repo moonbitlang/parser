@@ -1773,7 +1773,7 @@ fn lex_string(
               )
             } else {
               let source = string_repr_buf.to_string()
-              interps.push(InterpSource({ source, loc }))
+              interps.push(InterpSource({ source, loc, }))
             }
             string_repr_buf.reset()
             continue rest, env.calc_offset(base~, rest)

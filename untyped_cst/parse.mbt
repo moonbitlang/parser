@@ -3681,7 +3681,7 @@ fn with_try_location_anchors(
   if suffix_anchor_source is Some(anchor_source) {
     result = result.with_aggregate_span(
       "expr_loc",
-      Location::{ start: anchor_source.loc.start, end: source.loc.end },
+      Location::{ start: anchor_source.loc.start, end: source.loc.end, },
       mk_span(anchor_source.source_span.0, source.source_span.1),
     )
   }
@@ -9327,7 +9327,7 @@ fn ParserState::consume_error_for_progress(self : ParserState) -> CstNode? {
       self.suppress_next_top_level_recovery_report = true
       self.report_expected_tokens_at(RPAREN, bad.loc, [TokenKind::TK_LBRACE])
     } else {
-      self.reports.push(Report::{ loc: bad.loc, msg: "Unexpected token here." })
+      self.reports.push(Report::{ loc: bad.loc, msg: "Unexpected token here.", })
     }
     Some(error_node(bad.loc, bad.source_span, [(Some("item"), bad)]))
   } else {
@@ -12066,7 +12066,7 @@ fn parser_decl_loc_without_trailing_trivia(node : CstNode) -> Location {
     }
   }
   if found {
-    Location::{ start: node.loc.start, end }
+    Location::{ start: node.loc.start, end, }
   } else {
     node.loc
   }
@@ -12091,14 +12091,14 @@ fn parser_function_header_loc(node : CstNode) -> Location {
       None => ()
     }
   }
-  Location::{ start, end }
+  Location::{ start, end, }
 }
 
 ///|
 fn parser_trait_decl_loc(node : CstNode) -> Location {
   let semantic_loc = parser_decl_loc_without_trailing_trivia(node)
   if node.children_with_label("kw").get(0) is Some(keyword) {
-    Location::{ start: keyword.loc.start, end: semantic_loc.end }
+    Location::{ start: keyword.loc.start, end: semantic_loc.end, }
   } else {
     semantic_loc
   }
