@@ -360,11 +360,11 @@ fn State::parse_constr(self : Self) -> @syntax.Constructor {
       let loc = self.loc_start_with(spos)
       { name, extra_info: Package(pkg), loc, }
     }
-    LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | AMPER(_) => {
+    LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | AMPER => {
       // @pkg.TypeName::Constr
       // TypeName::@pkg.Constr
       // TypeName::Constr
-      // The "&" case is just for error recovery and consistency with yacc parser
+      // An optional `&` on the type name marks an object constructor.
       let type_name = self.parse_type_name()
       self.expect_token(TK_COLONCOLON)
       let (extra_info, right_loc, right) = if self.peek_token()
@@ -433,6 +433,7 @@ fn State::parse_fun_decl(
       quantifiers: @list.new(),
       return_type: None,
       error_type: NoErrorType,
+      nocancel_: None,
       vis: Default,
       doc: @syntax.DocString::empty(),
       attrs,
@@ -465,7 +466,7 @@ fn State::parse_fun_decl(
   } else {
     self.empty_loc()
   }
-  let (return_type, error_type) = self.parse_func_return_type()
+  let (return_type, error_type, nocancel_) = self.parse_func_return_type()
   let loc = self.loc_start_with(spos)
   {
     name,
@@ -476,6 +477,7 @@ fn State::parse_fun_decl(
     decl_params,
     return_type,
     error_type,
+    nocancel_,
     vis: Default,
     doc: @syntax.DocString::empty(),
     attrs,
@@ -493,6 +495,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
       params: @list.new(),
       return_type: None,
       error_type: NoErrorType,
+      nocancel_: None,
       has_default: None,
       attrs: @list.empty(),
       loc,
@@ -517,7 +520,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
   let func_name = self.parse_binder(context="trait method name")
   self.pop_sync(TK_LPAREN)
   let params = self.parse_trait_method_params()
-  let (return_type, error_type) = self.parse_func_return_type()
+  let (return_type, error_type, nocancel_) = self.parse_func_return_type()
   let has_default = if self.peek_token() is EQUAL {
     self.skip()
     let loc = self.peek_location()
@@ -534,6 +537,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
     params,
     return_type,
     error_type,
+    nocancel_,
     has_default,
     attrs,
     loc,
@@ -1154,7 +1158,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
                 State::parse_parameter,
               )
               |> @list.List
-            let (ret_ty, err_ty) = self.parse_func_return_type()
+            let (ret_ty, err_ty, nocancel_) = self.parse_func_return_type()
             self.pop_sync(TK_LBRACE)
             let body : @syntax.DeclBody = if self.peek_token() is EQUAL {
               self.skip()
@@ -1173,6 +1177,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               params~,
               ret_ty~,
               err_ty~,
+              nocancel_~,
               vis~,
               body~,
               loc=self.loc_start_with(spos),
@@ -1210,7 +1215,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
               State::parse_parameter,
             )
             |> @list.List
-          let (ret_ty, err_ty) = self.parse_func_return_type()
+          let (ret_ty, err_ty, nocancel_) = self.parse_func_return_type()
           self.pop_sync(TK_LBRACE)
           let body : @syntax.DeclBody = if self.peek_token() is EQUAL {
             self.skip()
@@ -1229,6 +1234,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             params~,
             ret_ty~,
             err_ty~,
+            nocancel_~,
             vis~,
             body~,
             loc=self.loc_start_with(spos),
@@ -1251,6 +1257,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             params=@list.new(),
             ret_ty=None,
             err_ty=NoErrorType,
+            nocancel_=None,
             vis~,
             body=DeclBody(expr=Hole(loc=@syntax.no_location, kind=Synthesized)),
             loc~,
@@ -1691,8 +1698,41 @@ fn State::parse_range_pattern(self : Self) -> @syntax.Pattern {
 }
 
 ///|
+fn State::starts_constr_any_pattern(self : Self) -> Bool {
+  match self.peek_token() {
+    UIDENT(_) =>
+      self.peek_token(nth=1) is COLONCOLON &&
+      self.peek_token(nth=2) is UNDERSCORE
+    PACKAGE_NAME(_) =>
+      self.peek_token(nth=1) is DOT_UIDENT(_) &&
+      self.peek_token(nth=2) is COLONCOLON &&
+      self.peek_token(nth=3) is UNDERSCORE
+    AMPER =>
+      match self.peek_token(nth=1) {
+        UIDENT(_) =>
+          self.peek_token(nth=2) is COLONCOLON &&
+          self.peek_token(nth=3) is UNDERSCORE
+        PACKAGE_NAME(_) =>
+          self.peek_token(nth=2) is DOT_UIDENT(_) &&
+          self.peek_token(nth=3) is COLONCOLON &&
+          self.peek_token(nth=4) is UNDERSCORE
+        _ => false
+      }
+    _ => false
+  }
+}
+
+///|
 fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
   let spos = self.peek_spos()
+  if self.starts_constr_any_pattern() {
+    let type_name = self.parse_type_name()
+    self.expect_token(TK_COLONCOLON)
+    self.expect_token(TK_UNDERSCORE)
+    let loc = self.loc_start_with(spos)
+    return ConstrAny(type_name~, loc~)
+  }
+
   fn parse_constr_args() {
     self.surround_series(left=TK_LPAREN, right=TK_RPAREN, delim=TK_COMMA, fn(
       _,
@@ -1735,7 +1775,7 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
       let loc = self.loc_start_with(spos)
       SpecialConstr(binder~, args~, loc~)
     }
-    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | EXTEND => {
+    AMPER | PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | EXTEND => {
       let constr = self.parse_constr()
       let maybe_args = self.optional([TK_LPAREN], _ => parse_constr_args())
       let mut is_open = false
@@ -1856,7 +1896,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       let binder = self.parse_binder(context="")
       Var(binder)
     }
-    PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | EXTEND =>
+    AMPER | PACKAGE_NAME(_) | UIDENT(_) | LIDENT(_) | EXTEND =>
       self.parse_constr_pattern()
     LPAREN => {
       let spos = self.peek_spos()
@@ -2876,7 +2916,7 @@ fn State::parse_fat_arrow_action(self : State) -> @syntax.Expr {
   self.expect_token(TK_FAT_ARROW)
   match self.peek_token() {
     // an error production to handle `pattern => invalid-expr-statement`
-    LET | LETREC | GUARD | DEFER =>
+    LET | LETREC | GUARD | DEFER | ERRDEFER =>
       self.handle_unexpected_expr_or_statement(
         context="the action part of a matching case",
       )
@@ -2918,44 +2958,19 @@ fn State::parse_lexmatch_expr(self : State) -> @syntax.Expr {
     (expr, strategy)
   })
   let match_loc = @basic.Location::{ start: spos, end: self.peek_epos(), }
-  fn parse_body(state : State) -> @list.List[@syntax.LexCase] {
+  fn parse_body(state : State) -> @list.List[@syntax.LexScanCase] {
     let (cases, _) = state.series_with_follow(
       invalid_delims=[TK_COMMA],
       delim=TK_SEMI,
       follow_set=[TK_RBRACE],
-      State::parse_lexmatch_case,
+      State::parse_lexscan_case,
     )
     List(cases)
   }
 
   let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
   let loc = self.loc_start_with(spos)
-  LexMatch(strategy~, expr~, cases~, match_loc~, loc~)
-}
-
-///|
-fn State::parse_lexmatch_case(self : State) -> @syntax.LexCase {
-  match self.peek_token() {
-    ELLIPSIS => {
-      let loc = self.peek_location()
-      self.skip()
-      {
-        pat: @list.singleton(Wildcard(loc~)),
-        pat_loc: loc,
-        guard_: None,
-        body: Hole(loc~, kind=Todo),
-      }
-    }
-    _ => {
-      let (pat, pat_loc) = self.with_syncs(
-        [TK_FAT_ARROW, TK_COMMA],
-        State::parse_lex_pattern,
-      )
-      let guard_ = self.parse_lex_case_guard()
-      let act = self.parse_fat_arrow_action()
-      { pat, pat_loc, guard_, body: act, }
-    }
-  }
+  LexScan(streaming=false, strategy~, expr~, cases~, match_loc~, loc~)
 }
 
 ///|
@@ -2980,7 +2995,7 @@ fn State::parse_lexscan_expr(self : State) -> @syntax.Expr {
 
   let cases = self.surround(left=TK_LBRACE, right=TK_RBRACE, parse_body)
   let loc = self.loc_start_with(spos)
-  LexScan(strategy~, expr~, match_loc~, cases~, loc~)
+  LexScan(streaming=true, strategy~, expr~, match_loc~, cases~, loc~)
 }
 
 ///|
@@ -2992,18 +3007,16 @@ fn State::parse_lexscan_case(self : State) -> @syntax.LexScanCase {
       {
         pat: Wildcard(loc~),
         bindings: @list.empty(),
-        guard_: None,
         body: Hole(loc~, kind=Todo),
       }
     }
     _ => {
       let (pat, bindings) = self.with_syncs(
-        [TK_FAT_ARROW, TK_IF],
+        [TK_FAT_ARROW],
         State::parse_lexscan_case_pattern_with_bindings,
       )
-      let guard_ = self.parse_lex_case_guard()
       let body = self.parse_fat_arrow_action()
-      { pat, bindings, guard_, body, }
+      { pat, bindings, body, }
     }
   }
 }
@@ -3064,225 +3077,6 @@ fn State::parse_lexscan_case_pattern(
       let pat = self.parse_regex_as_pattern()
       Pattern(pat)
     }
-  }
-}
-
-///|
-fn State::parse_lex_case_guard(self : State) -> @syntax.Expr? {
-  match self.peek_token() {
-    IF => {
-      self.skip()
-      // an error production to handle `lex pattern if invalid-infix-expr => action`
-      let expr = match self.peek_token() {
-        IF
-        | MATCH
-        | WHILE
-        | FOR
-        | TRY
-        | TRY_EXCLAMATION
-        | LET
-        | LETREC
-        | GUARD
-        | BREAK
-        | RETURN
-        | CONTINUE =>
-          self.handle_unexpected_expr_or_statement(context="lex case guard")
-        _ => self.parse_infix_expr(parsed=None)
-      }
-      Some(expr)
-    }
-    _ => None
-  }
-}
-
-///|
-fn State::parse_lex_pattern(
-  self : State,
-) -> (@list.List[@syntax.LexTopPattern], @basic.Location) {
-  match self.peek_token() {
-    LPAREN => {
-      let spos = self.peek_spos()
-      self.skip()
-      let pats = self.with_follow(follow_set=[TK_RPAREN], state => {
-          state.sepby1(delim=TK_COMMA, State::parse_lex_top_pattern)
-        })
-        |> @list.List
-      self.expect_token(TK_RPAREN)
-      let loc = self.loc_start_with(spos)
-      (pats, loc)
-    }
-    LIDENT(_) | EXTEND => {
-      let loc = self.peek_location()
-      let name = self.expect_lident(context="lex rest binder")
-      (@list.singleton(Binder({ name, loc, })), loc)
-    }
-    UNDERSCORE => {
-      let loc = self.peek_location()
-      self.skip()
-      (@list.singleton(Wildcard(loc~)), loc)
-    }
-    REGEX_LITERAL(_)
-    | REGEX_INTERP(_)
-    | STRING(_)
-    | INTERP(_)
-    | UIDENT(_)
-    | PACKAGE_NAME(_) => {
-      let spos = self.peek_spos()
-      let pat = self.parse_lex_simple_atom_pattern()
-      (@list.singleton(Pattern(pat)), self.loc_start_with(spos))
-    }
-    other => {
-      let other_loc = self.peek_location()
-      self.report_failed_to_parse(other, "lex pattern", other_loc)
-      let loc = self.panic()
-      (@list.singleton(Wildcard(loc~)), loc)
-    }
-  }
-}
-
-///|
-fn State::parse_lex_top_pattern(self : State) -> @syntax.LexTopPattern {
-  match self.peek_token() {
-    LIDENT(_) | EXTEND => {
-      let loc = self.peek_location()
-      let name = self.expect_lident(context="lex rest binder")
-      Binder({ name, loc, })
-    }
-    UNDERSCORE(_) => {
-      let loc = self.peek_location()
-      self.skip()
-      Wildcard(loc~)
-    }
-    _ => {
-      let pat = self.parse_lex_as_pattern()
-      Pattern(pat)
-    }
-  }
-}
-
-///|
-fn State::parse_lex_as_pattern(self : State) -> @syntax.LexPattern {
-  let spos = self.peek_spos()
-  let pats = self.parse_lex_pattern_sequence()
-  match pats {
-    More(pat, tail=Empty) if self.peek_token() is AS => {
-      self.skip()
-      let binder = self.parse_binder(context="binder in `as` pattern")
-      let loc = self.loc_start_with(spos)
-      Alias(pat~, binder~, loc~)
-    }
-    More(pat, tail=Empty) => return pat
-    _ => {
-      let loc = self.loc_start_with(spos)
-      Sequence(pats~, loc~)
-    }
-  }
-}
-
-///|
-fn State::parse_lex_pattern_sequence(
-  self : State,
-) -> @list.List[@syntax.LexPattern] {
-  let first = self.parse_lex_atom_pattern()
-  let pats = [first]
-  for tok = self.peek_token() {
-    match tok {
-      SEMI(_)
-      | REGEX_LITERAL(_)
-      | REGEX_INTERP(_)
-      | STRING(_)
-      | INTERP(_)
-      | UIDENT(_)
-      | PACKAGE_NAME(_)
-      | LPAREN => {
-        if tok is SEMI(_) {
-          self.skip()
-        }
-        let pat = self.parse_lex_atom_pattern()
-        pats.push(pat)
-        continue self.peek_token()
-      }
-      _ => break ()
-    }
-  }
-  List(pats)
-}
-
-///|
-fn State::parse_lex_atom_pattern(self : State) -> @syntax.LexPattern {
-  match self.peek_token() {
-    REGEX_LITERAL(_)
-    | REGEX_INTERP(_)
-    | STRING(_)
-    | INTERP(_)
-    | UIDENT(_)
-    | PACKAGE_NAME(_) => self.parse_lex_simple_atom_pattern()
-    LPAREN => {
-      self.skip()
-      let alias_spos = self.peek_spos()
-      let pats = self.with_syncs([TK_RPAREN], State::parse_lex_pattern_sequence)
-      match pats {
-        More(pat, tail=Empty) =>
-          match self.peek_token() {
-            AS => {
-              self.skip()
-              let binder = self.parse_binder(context="binder in `as` pattern")
-              let loc = self.loc_start_with(alias_spos)
-              self.expect_token(TK_RPAREN)
-              Alias(pat~, binder~, loc~)
-            }
-            _ => {
-              self.expect_token(TK_RPAREN)
-              pat
-            }
-          }
-        _ => {
-          self.expect_token(TK_RPAREN)
-          Sequence(pats~, loc=self.peek_location())
-        }
-      }
-    }
-    other => {
-      let other_loc = self.peek_location()
-      self.report_failed_to_parse(other, "lex atom pattern", other_loc)
-      let loc = self.panic()
-      Sequence(pats=@list.empty(), loc~)
-    }
-  }
-}
-
-///|
-fn State::parse_lex_simple_atom_pattern(self : State) -> @syntax.LexPattern {
-  match self.peek_token() {
-    REGEX_LITERAL(lit) => {
-      let loc = self.peek_location()
-      self.skip()
-      Regex(lit~, offset=3, loc~)
-    }
-    REGEX_INTERP(elems) => {
-      let loc = self.peek_location()
-      self.skip()
-      let elems = @syntax.make_interps(elems)
-      RegexInterp(elems~, loc~)
-    }
-    STRING(lit) => {
-      let loc = self.peek_location()
-      self.skip()
-      Regex(lit~, offset=1, loc~)
-    }
-    INTERP(elems) => {
-      let loc = self.peek_location()
-      self.skip()
-      let elems = @syntax.make_interps(elems)
-      RegexInterp(elems~, loc~)
-    }
-    UIDENT(_) | PACKAGE_NAME(_) => {
-      let spos = self.peek_spos()
-      let lid = self.parse_qual_uident()
-      let loc = self.loc_start_with(spos)
-      ConstantRef(lid~, loc~)
-    }
-    _ => panic()
   }
 }
 
@@ -4417,6 +4211,7 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
       body: Hole(loc~, kind=Synthesized),
       return_type: None,
       error_type: NoErrorType,
+      nocancel_: None,
       kind: Lambda,
       is_async,
       loc,
@@ -4433,7 +4228,7 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
         fn(s) -> @syntax.Parameter { s.parse_parameter() },
       )
       let params_loc = self.loc_start_with(param_loc_start)
-      let (return_type, error_type) = self.parse_func_return_type()
+      let (return_type, error_type, nocancel_) = self.parse_func_return_type()
       self.pop_sync(TK_LBRACE)
       let block = self.parse_block_expr()
       let func_loc = @syntax.no_location
@@ -4443,6 +4238,7 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
         body: block,
         return_type,
         error_type,
+        nocancel_,
         kind: Lambda,
         is_async,
         loc: func_loc,
@@ -4460,6 +4256,7 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
         body: Hole(loc~, kind=Synthesized),
         return_type: None,
         error_type: NoErrorType,
+        nocancel_: None,
         kind: Lambda,
         is_async,
         loc,
@@ -5288,6 +5085,7 @@ fn State::parse_letand_func(self : Self) -> @syntax.Func {
       body: Hole(loc~, kind=Synthesized),
       return_type: None,
       error_type: NoErrorType,
+      nocancel_: None,
       kind: Lambda,
       is_async: None,
       loc,
@@ -5435,6 +5233,13 @@ fn State::parse_stmt(self : Self) -> Statement {
       let loc = self.loc_start_with(spos)
       StmtDefer(expr~, loc~)
     }
+    ERRDEFER => {
+      let spos = self.peek_spos()
+      self.skip()
+      let expr = self.try_parse_pipe_expr()
+      let loc = self.loc_start_with(spos)
+      StmtErrdefer(expr~, loc~)
+    }
     PROOF_ASSERT => {
       let spos = self.peek_spos()
       self.skip()
@@ -5471,6 +5276,7 @@ fn State::handle_unexpected_expr_or_statement(
       | StmtFunc(loc~, ..)
       | StmtLetand(loc~, ..)
       | StmtDefer(loc~, ..)
+      | StmtErrdefer(loc~, ..)
       | StmtGuard(loc~, ..) => loc
     }
     Statement::compact_rev(List([stmt]), loc~)
@@ -5485,7 +5291,7 @@ fn State::handle_unexpected_expr_or_statement(
     TRY_EXCLAMATION => ("`try!` expression", self.parse_try_exclamation())
     LET | LETREC => ("let statement", handle_stmt(self))
     GUARD => ("guard statement", handle_stmt(self))
-    DEFER => ("defer statement", handle_stmt(self))
+    DEFER | ERRDEFER => ("defer statement", handle_stmt(self))
     BREAK => ("break statement", handle_stmt(self))
     CONTINUE => ("break statement", handle_stmt(self))
     RETURN => ("return statement", handle_stmt(self))
@@ -5687,7 +5493,10 @@ fn State::parse_error_type(self : Self) -> @syntax.Type {
 }
 
 ///|
-fn State::parse_error_annotation(self : Self) -> @syntax.ErrorType {
+fn State::parse_error_annotation(
+  self : Self,
+  required? : Bool = false,
+) -> @syntax.ErrorType {
   if self.mode is Panic(..) {
     return NoErrorType
   }
@@ -5719,19 +5528,66 @@ fn State::parse_error_annotation(self : Self) -> @syntax.ErrorType {
       self.skip()
       Noraise(loc~)
     }
-    _ => NoErrorType
+    other => {
+      if required {
+        let loc = self.peek_location()
+        self.panic() |> ignore
+        self.report_unexpected(other, [TK_RAISE, TK_NORAISE], loc)
+      }
+      NoErrorType
+    }
   }
 }
 
 ///|
-fn State::parse_return_type(self : Self) -> (@syntax.Type, @syntax.ErrorType) {
-  if self.mode is Panic(loc~, ..) {
-    return (Any(loc~), NoErrorType)
+fn State::parse_nocancel_annotation(self : Self) -> @basic.Location {
+  let loc = self.peek_location()
+  self.expect_token(TK_NOCANCEL)
+  loc
+}
+
+///|
+fn State::parse_effect_annotation(
+  self : Self,
+) -> (@syntax.ErrorType, @basic.Location?) {
+  match self.peek_token() {
+    RAISE | NORAISE => {
+      let err = self.parse_error_annotation()
+      let nocancel_ = if self.peek_token() is PLUS {
+        self.skip()
+        Some(self.parse_nocancel_annotation())
+      } else {
+        None
+      }
+      (err, nocancel_)
+    }
+    NOCANCEL => {
+      let nocancel_ = Some(self.parse_nocancel_annotation())
+      let err = if self.peek_token() is PLUS {
+        self.skip()
+        self.parse_error_annotation(required=true)
+      } else {
+        NoErrorType
+      }
+      (err, nocancel_)
+    }
+    _ => (NoErrorType, None)
   }
-  fn report_missing_return_type(token) -> (@syntax.Type, @syntax.ErrorType) {
+}
+
+///|
+fn State::parse_return_type(
+  self : Self,
+) -> (@syntax.Type, @syntax.ErrorType, @basic.Location?) {
+  if self.mode is Panic(loc~, ..) {
+    return (Any(loc~), NoErrorType, None)
+  }
+  fn report_missing_return_type(
+    token,
+  ) -> (@syntax.Type, @syntax.ErrorType, @basic.Location?) {
     let loc = self.peek_location()
     State::report_failed_to_parse(self, token, "return type annotation", loc)
-    (Any(loc~), NoErrorType)
+    (Any(loc~), NoErrorType, None)
   }
 
   match self.peek_token() {
@@ -5743,10 +5599,10 @@ fn State::parse_return_type(self : Self) -> (@syntax.Type, @syntax.ErrorType) {
     _ => {
       let (ty_res_is_simple, ty_res) = self.parse_type_aux()
       if !ty_res_is_simple {
-        (ty_res, NoErrorType)
+        (ty_res, NoErrorType, None)
       } else {
-        let err = self.parse_error_annotation()
-        (ty_res, err)
+        let (err, nocancel_) = self.parse_effect_annotation()
+        (ty_res, err, nocancel_)
       }
     }
   }
@@ -5755,17 +5611,17 @@ fn State::parse_return_type(self : Self) -> (@syntax.Type, @syntax.ErrorType) {
 ///|
 fn State::parse_func_return_type(
   self : Self,
-) -> (@syntax.Type?, @syntax.ErrorType) {
+) -> (@syntax.Type?, @syntax.ErrorType, @basic.Location?) {
   if self.mode is Panic(..) {
-    return (None, NoErrorType)
+    return (None, NoErrorType, None)
   }
   if self.peek_token() is THIN_ARROW {
     self.skip()
-    let (ret_ty, err_ty) = self.parse_return_type()
-    (Some(ret_ty), err_ty)
+    let (ret_ty, err_ty, nocancel_) = self.parse_return_type()
+    (Some(ret_ty), err_ty, nocancel_)
   } else {
-    let err = self.parse_error_annotation()
-    (None, err)
+    let (err, nocancel_) = self.parse_effect_annotation()
+    (None, err, nocancel_)
   }
 }
 
@@ -5827,9 +5683,12 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
         )
         |> @list.List
       self.expect_token(TK_THIN_ARROW)
-      let (ty_res, ty_err) = self.parse_return_type()
+      let (ty_res, ty_err, nocancel_) = self.parse_return_type()
       let loc = self.loc_start_with(spos)
-      (false, Arrow(args=tys, res=ty_res, err=ty_err, is_async~, loc~))
+      (
+        false,
+        Arrow(args=tys, res=ty_res, err=ty_err, is_async~, nocancel_~, loc~),
+      )
     }
     LPAREN => {
       let tys = self.surround_series(
@@ -5841,21 +5700,35 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
         |> @list.List
       if tys is Empty {
         self.expect_token(TK_THIN_ARROW)
-        let (ty_res, ty_err) = self.parse_return_type()
+        let (ty_res, ty_err, nocancel_) = self.parse_return_type()
         let loc = self.loc_start_with(spos)
         (
           false,
-          Arrow(args=@list.new(), res=ty_res, err=ty_err, is_async=None, loc~),
+          Arrow(
+            args=@list.new(),
+            res=ty_res,
+            err=ty_err,
+            is_async=None,
+            nocancel_~,
+            loc~,
+          ),
         )
       } else {
         match self.peek_token() {
           THIN_ARROW => {
             self.expect_token(TK_THIN_ARROW)
-            let (ty_res, ty_err) = self.parse_return_type()
+            let (ty_res, ty_err, nocancel_) = self.parse_return_type()
             let loc = self.loc_start_with(spos)
             (
               false,
-              Arrow(args=tys, res=ty_res, err=ty_err, is_async=None, loc~),
+              Arrow(
+                args=tys,
+                res=ty_res,
+                err=ty_err,
+                is_async=None,
+                nocancel_~,
+                loc~,
+              ),
             )
           }
           _ => {
