@@ -541,10 +541,10 @@ test "helper enum semantics are explicit CST children" {
   @test.assert_eq(lex.diagnostics_view().is_empty(), true)
   for
     pred in [
-      fn(kind) { kind is @untyped_cst.LexLiteral_Regex },
-      fn(kind) { kind is @untyped_cst.LexTopPattern_Pattern },
-      fn(kind) { kind is @untyped_cst.LexTopPattern_Binder },
-      fn(kind) { kind is @untyped_cst.LexTopPattern_Wildcard },
+      fn(kind) { kind is @untyped_cst.RegexPattern_Literal },
+      fn(kind) { kind is @untyped_cst.LexScanCasePattern_Pattern },
+      fn(kind) { kind is @untyped_cst.LexScanCasePattern_Binder },
+      fn(kind) { kind is @untyped_cst.LexScanCasePattern_Wildcard },
     ] {
     @test.assert_eq(api_has_kind(lex.root(), pred), true)
   }
@@ -780,15 +780,17 @@ test "location metadata kinds and scalar helpers are explicit" {
     true,
   )
   let lex_group = @untyped_cst.parse_expression(
-    "lexmatch source { (\"a\", (\"b\" \"c\")) => 1 }",
+    "lexmatch source { (re\"a\" + (re\"b\" + re\"c\")) => 1 }",
   )
   @test.assert_eq(lex_group.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(lex_group.root(), "handrolled_loc", fn(kind) {
-      kind is @untyped_cst.Syntax_Delimiter
-    }),
-    true,
-  )
+  for label in ["open", "close"] {
+    @test.assert_eq(
+      api_has_labeled_kind(lex_group.root(), label, fn(kind) {
+        kind is @untyped_cst.Syntax_Delimiter
+      }),
+      true,
+    )
+  }
 
   let constructor_tag = @untyped_cst.parse_structure("enum E { A = 1 }")
   @test.assert_eq(constructor_tag.diagnostics_view().is_empty(), true)

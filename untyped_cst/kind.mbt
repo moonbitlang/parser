@@ -203,6 +203,8 @@ pub enum NodeKind {
   Expr_LabelledBlock
   /// Corresponds to `@syntax.Expr::Defer`; following statements become its `body`.
   Expr_Defer
+  /// Corresponds to `@syntax.Expr::ErrDefer`; following statements become its `body`.
+  Expr_ErrDefer
   /// Corresponds to `@syntax.Expr::Guard`; following statements become its `body`.
   Expr_Guard
   /// Corresponds to `@syntax.Expr::Quantifier`.
@@ -239,6 +241,8 @@ pub enum NodeKind {
   Pattern_Map
   /// Corresponds to `@syntax.Pattern::Constr`.
   Pattern_Constr
+  /// Corresponds to `@syntax.Pattern::ConstrAny`.
+  Pattern_ConstrAny
   /// Corresponds to `@syntax.Pattern::SpecialConstr`.
   Pattern_SpecialConstr
   /// Corresponds to `@syntax.Pattern::Or`.
@@ -864,6 +868,7 @@ pub fn NodeKind::is_expr(self : NodeKind) -> Bool {
     | Expr_Continue
     | Expr_LabelledBlock
     | Expr_Defer
+    | Expr_ErrDefer
     | Expr_Guard
     | Expr_Quantifier
     | Expr_Hole
@@ -889,6 +894,7 @@ pub fn NodeKind::is_pattern(self : NodeKind) -> Bool {
     | Pattern_Record
     | Pattern_Map
     | Pattern_Constr
+    | Pattern_ConstrAny
     | Pattern_SpecialConstr
     | Pattern_Or
     | Pattern_Alias

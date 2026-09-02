@@ -970,7 +970,8 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
   if state.reports.length() == diagnostics_before &&
     (
       state.current_is(TokenKind::TK_RAISE) ||
-      state.current_is(TokenKind::TK_NORAISE)
+      state.current_is(TokenKind::TK_NORAISE) ||
+      state.current_is(TokenKind::TK_NOCANCEL)
     ) {
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
@@ -1457,7 +1458,8 @@ fn parse_invalid_struct_constructor(
   }
   if state.current_is(TokenKind::TK_THIN_ARROW) ||
     state.current_is(TokenKind::TK_RAISE) ||
-    state.current_is(TokenKind::TK_NORAISE) {
+    state.current_is(TokenKind::TK_NORAISE) ||
+    state.current_is(TokenKind::TK_NOCANCEL) {
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
   if state.current_is(TK_LBRACE) {
@@ -1552,7 +1554,8 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
     (
       state.current_is(TokenKind::TK_THIN_ARROW) ||
       state.current_is(TokenKind::TK_RAISE) ||
-      state.current_is(TokenKind::TK_NORAISE)
+      state.current_is(TokenKind::TK_NORAISE) ||
+      state.current_is(TokenKind::TK_NOCANCEL)
     ) {
     parsed_return_clause = true
     push_child(children, Some("clause"), parse_func_return_type(state))
@@ -2504,7 +2507,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           reports_before_return_type
         phase = if is_declare { Complete } else { AwaitingBody }
       }
-      Some((RAISE, _, _)) | Some((NORAISE, _, _)) if depth == 0 => {
+      Some((RAISE, _, _)) | Some((NORAISE, _, _)) | Some((NOCANCEL, _, _)) if depth ==
+        0 => {
         push_child(children, Some("clause"), parse_func_return_type(state))
         phase = if is_declare { Complete } else { AwaitingBody }
       }
@@ -3169,6 +3173,7 @@ fn statement_only_expression_token(tok : Token) -> Bool {
     | GUARD
     | GUARD_EXCLAMATION
     | DEFER
+    | ERRDEFER
     | PROOF_ASSERT
     | PROOF_LET
     | ELLIPSIS => true
@@ -3202,7 +3207,7 @@ fn unexpected_expr_or_statement_name(tok : Token) -> String? {
     TRY_EXCLAMATION => Some("`try!` expression")
     LET | LETREC => Some("let statement")
     GUARD | GUARD_EXCLAMATION => Some("guard statement")
-    DEFER => Some("defer statement")
+    DEFER | ERRDEFER => Some("defer statement")
     BREAK => Some("break statement")
     CONTINUE => Some("break statement")
     RETURN => Some("return statement")
@@ -3269,7 +3274,7 @@ fn token_disallowed_in_pattern_guard(tok : Token) -> Bool {
 ///|
 fn token_disallowed_in_match_action(tok : Token) -> Bool {
   match tok {
-    LET | LETREC | GUARD | GUARD_EXCLAMATION | DEFER => true
+    LET | LETREC | GUARD | GUARD_EXCLAMATION | DEFER | ERRDEFER => true
     _ => false
   }
 }
@@ -4159,6 +4164,7 @@ fn expr_stops_infix_chain(expr : CstNode) -> Bool {
     | Expr_Break
     | Expr_Continue
     | Expr_Defer
+    | Expr_ErrDefer
     | Expr_Guard
     | Expr_Quantifier => true
     _ => false
@@ -4562,8 +4568,11 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
 }
 
 ///|
-fn brace_starts_record_expr(state : ParserState) -> Bool {
-  let mut offset = 1
+fn brace_starts_record_expr(
+  state : ParserState,
+  start_offset? : Int = 0,
+) -> Bool {
+  let mut offset = start_offset + 1
   let mut done = false
   while !done {
     match state.peek(offset~) {
@@ -4590,8 +4599,8 @@ fn brace_starts_record_expr(state : ParserState) -> Bool {
 }
 
 ///|
-fn brace_starts_map_expr(state : ParserState) -> Bool {
-  let mut offset = 1
+fn brace_starts_map_expr(state : ParserState, start_offset? : Int = 0) -> Bool {
+  let mut offset = start_offset + 1
   let mut done = false
   while !done {
     match state.peek(offset~) {
@@ -5237,7 +5246,7 @@ fn parse_expr_simple(
     Some((LETREC, _, _)) => parse_letrec_statement(state)
     Some((GUARD, _, _)) | Some((GUARD_EXCLAMATION, _, _)) =>
       parse_guard_statement(state)
-    Some((DEFER, _, _)) => parse_defer_statement(state)
+    Some((DEFER, _, _)) | Some((ERRDEFER, _, _)) => parse_defer_statement(state)
     Some((PROOF_ASSERT, _, _)) => parse_proof_assert_statement(state)
     Some((PROOF_LET, _, _)) => parse_proof_let_statement(state)
     Some((TRY, _, _)) | Some((TRY_EXCLAMATION, _, _)) => parse_try_expr(state)
@@ -7077,6 +7086,28 @@ fn for_clause_stops() -> Array[TokenKind] {
 }
 
 ///|
+fn for_binding_expr_stops(state : ParserState) -> Array[TokenKind] {
+  let mut start_offset = 0
+  while state.peek(offset=start_offset) is Some((COMMENT(_) | NEWLINE, _, _)) {
+    start_offset += 1
+  }
+  if state.peek(offset=start_offset) is Some((LBRACE, _, _)) &&
+    (
+      brace_starts_record_expr(state, start_offset~) ||
+      brace_starts_map_expr(state, start_offset~)
+    ) {
+    [
+      TokenKind::TK_COMMA,
+      TokenKind::TK_SEMI,
+      TokenKind::TK_NEWLINE,
+      TokenKind::TK_EOF,
+    ]
+  } else {
+    for_clause_stops()
+  }
+}
+
+///|
 fn for_header_stops() -> Array[TokenKind] {
   [
     TokenKind::TK_SEMI,
@@ -7234,7 +7265,7 @@ fn parse_for_binding(state : ParserState) -> CstNode {
       .node_from_children(Binding_For, children)
       .with_structured_name("semantic_name", Name_Binder, ["name"])
   }
-  let expr = parse_expr_until(state, for_clause_stops())
+  let expr = parse_expr_until(state, for_binding_expr_stops(state))
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -7359,6 +7390,7 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
     | GUARD_EXCLAMATION
     | TRY
     | DEFER
+    | ERRDEFER
     | TRY_EXCLAMATION
     | FORALL
     | EXISTS
@@ -7625,11 +7657,7 @@ fn parse_lex_block_expr(state : ParserState, kind : NodeKind) -> CstNode {
     }
   }
   if state.current_is(TokenKind::TK_LBRACE) {
-    if kind is Expr_LexScan {
-      push_child(children, Some("case"), parse_lexscan_case_block(state))
-    } else {
-      push_child(children, Some("case"), parse_lexmatch_case_block(state))
-    }
+    push_child(children, Some("case"), parse_lexscan_case_block(state))
   }
   state.node_from_children(kind, children)
 }
@@ -7880,7 +7908,6 @@ fn parse_lexscan_case_block(state : ParserState) -> CstNode {
 ///|
 fn parse_lexscan_case_pattern(state : ParserState) -> CstNode {
   let stops = [
-    TokenKind::TK_IF,
     TokenKind::TK_FAT_ARROW,
     TokenKind::TK_SEMI,
     TokenKind::TK_RBRACE,
@@ -7946,13 +7973,7 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   }
   let parsed_pat = if state.current_is(TK_LPAREN) &&
     lexscan_paren_starts_bindings(state) {
-    parse_regex_match_rhs(state, [
-      TK_IF,
-      TK_FAT_ARROW,
-      TK_SEMI,
-      TK_RBRACE,
-      TK_EOF,
-    ])
+    parse_regex_match_rhs(state, [TK_FAT_ARROW, TK_SEMI, TK_RBRACE, TK_EOF])
   } else {
     parse_lexscan_case_pattern(state)
   }
@@ -7967,20 +7988,6 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   )
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
-  }
-  if state.current_is(TokenKind::TK_IF) {
-    if state.consume_any() is Some(if_token) {
-      push_child(children, Some("kw"), if_token)
-    } else {
-      ()
-    }
-    let guard_expr = parse_pattern_guard_expr(state, [
-      TokenKind::TK_FAT_ARROW,
-      TokenKind::TK_EOF,
-    ])
-    if !guard_expr.children.is_empty() {
-      push_child(children, Some("cond"), guard_expr)
-    }
   }
   if state.current_is(TokenKind::TK_FAT_ARROW) {
     if state.consume_any() is Some(arrow) {
@@ -8057,7 +8064,8 @@ fn parse_function_expr(
   }
   if state.current_is(TokenKind::TK_THIN_ARROW) ||
     state.current_is(TokenKind::TK_RAISE) ||
-    state.current_is(TokenKind::TK_NORAISE) {
+    state.current_is(TokenKind::TK_NORAISE) ||
+    state.current_is(TokenKind::TK_NOCANCEL) {
     push_child(children, Some("type"), parse_func_return_type(state))
   }
   if state.current_is(TokenKind::TK_LBRACE) {
@@ -8338,10 +8346,12 @@ fn expr_token_kind_label(kind : TokenKind) -> String? {
     TK_TRY_QUESTION
     | TK_TRY_EXCLAMATION
     | TK_NORAISE
+    | TK_NOCANCEL
     | TK_IS
     | TK_IN
     | TK_FOR
     | TK_DEFER
+    | TK_ERRDEFER
     | TK_GUARD
     | TK_GUARD_EXCLAMATION
     | TK_RETURN
@@ -8708,7 +8718,7 @@ fn parse_statement(state : ParserState) -> CstNode {
       ])
     Some((GUARD, _, _)) | Some((GUARD_EXCLAMATION, _, _)) =>
       parse_guard_statement(state)
-    Some((DEFER, _, _)) => parse_defer_statement(state)
+    Some((DEFER, _, _)) | Some((ERRDEFER, _, _)) => parse_defer_statement(state)
     Some((PROOF_ASSERT, _, _)) => parse_proof_assert_statement(state)
     Some((PROOF_LET, _, _)) => parse_proof_let_statement(state)
     Some((TYPE | STRUCT | ENUM | TRAIT | SUBERROR | EXTENUM, _, _)) => {
@@ -8845,6 +8855,11 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
 ///|
 fn parse_defer_statement(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
+  let kind = if state.current_is(TokenKind::TK_ERRDEFER) {
+    Expr_ErrDefer
+  } else {
+    Expr_Defer
+  }
   if state.consume_any() is Some(kw) {
     push_child(children, Some("kw"), kw)
   } else {
@@ -8861,7 +8876,7 @@ fn parse_defer_statement(state : ParserState) -> CstNode {
     Some("expr"),
     state.required_expr_node(expr, reports_before_expr),
   )
-  state.node_from_children(Expr_Defer, children)
+  state.node_from_children(kind, children)
 }
 
 ///|
@@ -9032,7 +9047,8 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
     }
     if state.current_is(TokenKind::TK_THIN_ARROW) ||
       state.current_is(TokenKind::TK_RAISE) ||
-      state.current_is(TokenKind::TK_NORAISE) {
+      state.current_is(TokenKind::TK_NORAISE) ||
+      state.current_is(TokenKind::TK_NOCANCEL) {
       push_child(children, Some("type"), parse_func_return_type(state))
     }
     if state.current_is(TokenKind::TK_LBRACE) {
@@ -9142,7 +9158,8 @@ fn parse_local_function_statement(
   }
   if state.current_is(TokenKind::TK_THIN_ARROW) ||
     state.current_is(TokenKind::TK_RAISE) ||
-    state.current_is(TokenKind::TK_NORAISE) {
+    state.current_is(TokenKind::TK_NORAISE) ||
+    state.current_is(TokenKind::TK_NOCANCEL) {
     push_child(children, Some("type"), parse_func_return_type(state))
   }
   if state.current_is(TokenKind::TK_LBRACE) {
@@ -9267,7 +9284,8 @@ fn parse_block_expr(
     | Expr_LetFn
     | Expr_LetAnd
     | Expr_Guard
-    | Expr_Defer)) {
+    | Expr_Defer
+    | Expr_ErrDefer)) {
     state.node_from_children(Expr_Sequence, [(Some("body"), list)])
   } else {
     list
@@ -9391,6 +9409,7 @@ fn report_next_top_level_recovery_point(state : ParserState) -> Unit {
           | CONTINUE
           | RAISE
           | DEFER
+          | ERRDEFER
           | GUARD
           | GUARD_EXCLAMATION,
           _,
@@ -9678,6 +9697,7 @@ fn pattern_can_start(tok : Token) -> Bool {
     | EXTEND
     | UIDENT(_)
     | PACKAGE_NAME(_)
+    | AMPER
     | LPAREN
     | LBRACKET
     | LBRACE
@@ -9872,6 +9892,125 @@ fn parse_parenthesized_with_pattern(state : ParserState) -> CstNode {
 }
 
 ///|
+fn pattern_starts_constr_any(state : ParserState) -> Bool {
+  let colon_offset = match state.peek_significant() {
+    Some((AMPER, _, _)) =>
+      match state.peek_nth_significant(1) {
+        Some((UIDENT(_), _, _)) => 2
+        Some((PACKAGE_NAME(_), _, _)) =>
+          match state.peek_nth_significant(2) {
+            Some((DOT_UIDENT(_), _, _)) => 3
+            _ => -1
+          }
+        _ => -1
+      }
+    Some((UIDENT(_), _, _)) => 1
+    Some((PACKAGE_NAME(_), _, _)) =>
+      match state.peek_nth_significant(1) {
+        Some((DOT_UIDENT(_), _, _)) => 2
+        _ => -1
+      }
+    _ => -1
+  }
+  colon_offset >= 0 &&
+  state.peek_nth_significant(colon_offset).map(item => item.0)
+  is Some(COLONCOLON) &&
+  state.peek_nth_significant(colon_offset + 1).map(item => item.0)
+  is Some(UNDERSCORE)
+}
+
+///|
+fn parse_constr_any_pattern(state : ParserState) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  push_child(children, Some("type"), parse_type_name_node(state))
+  push_child(children, Some("op"), state.expect_token(TokenKind::TK_COLONCOLON))
+  push_child(
+    children,
+    Some("wildcard"),
+    state.expect_token(TokenKind::TK_UNDERSCORE),
+  )
+  state.node_from_children(Pattern_ConstrAny, children)
+}
+
+///|
+fn finish_constructor_pattern(
+  state : ParserState,
+  children : Array[(String?, CstNode)],
+) -> CstNode {
+  if state.current_is(TK_LPAREN) {
+    push_child(children, Some("params"), parse_constructor_pattern_args(state))
+  }
+  let pattern = state
+    .node_from_children(Pattern_Constr, children)
+    .with_structured_name("semantic_name", Name_Constructor, [
+      "pkg", "type", "name", "field",
+    ])
+    .with_constructor_extra_info()
+  let is_open = pattern
+    .first_child_with_label("params")
+    .map(list => list_has_item_kind(list, Pattern_Rest))
+    .unwrap_or(false)
+  with_marker_child(
+    pattern,
+    "openness",
+    if is_open {
+      Openness_Open
+    } else {
+      Openness_Closed
+    },
+  )
+}
+
+///|
+fn parse_object_constructor_pattern(state : ParserState) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  push_child(children, Some("type"), parse_type_name_node(state))
+  push_child(children, Some("op"), state.expect_token(TK_COLONCOLON))
+  match state.peek() {
+    Some((UIDENT(_), _, _)) =>
+      if state.consume_any() is Some(name) {
+        push_child(children, Some("field"), name)
+      } else {
+        ()
+      }
+    Some((LIDENT(name), start, end)) => {
+      state.report(
+        mk_loc(start, end),
+        "Unexpected lowercase identifier \{name}, expected uppercase identifier in constructor name.",
+      )
+      if state.consume_any() is Some(name) {
+        push_child(children, Some("field"), name)
+      } else {
+        ()
+      }
+    }
+    Some((PACKAGE_NAME(_), _, _)) => {
+      if state.consume_any() is Some(pkg) {
+        push_child(children, Some("pkg"), pkg)
+      } else {
+        ()
+      }
+      match state.peek() {
+        Some((DOT_UIDENT(_), _, _)) =>
+          if state.consume_any() is Some(name) {
+            push_child(children, Some("field"), name)
+          } else {
+            ()
+          }
+        _ =>
+          push_child(
+            children,
+            Some("field"),
+            state.missing_token_node(TK_UIDENT),
+          )
+      }
+    }
+    _ => push_child(children, Some("field"), state.expect_token(TK_UIDENT))
+  }
+  finish_constructor_pattern(state, children)
+}
+
+///|
 fn parse_pattern_atom(
   state : ParserState,
   stop_kinds : Array[TokenKind],
@@ -9888,6 +10027,11 @@ fn parse_pattern_atom(
       state.node_from_children(Pattern_Constraint, children)
     }
     Some((UNDERSCORE, _, _)) => parse_single_token_pattern(state, Pattern_Any)
+    Some((AMPER, _, _))
+    | Some((UIDENT(_), _, _))
+    | Some((PACKAGE_NAME(_), _, _)) if pattern_starts_constr_any(state) =>
+      parse_constr_any_pattern(state)
+    Some((AMPER, _, _)) => parse_object_constructor_pattern(state)
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) => {
       let mut node = parse_single_token_pattern(state, Pattern_Var)
       if state.current_is(TokenKind::TK_LPAREN) {
@@ -9950,32 +10094,7 @@ fn parse_pattern_atom(
           _ => ()
         }
       }
-      if state.current_is(TokenKind::TK_LPAREN) {
-        push_child(
-          children,
-          Some("params"),
-          parse_constructor_pattern_args(state),
-        )
-      }
-      let pattern = state
-        .node_from_children(Pattern_Constr, children)
-        .with_structured_name("semantic_name", Name_Constructor, [
-          "pkg", "type", "name", "field",
-        ])
-        .with_constructor_extra_info()
-      let is_open = pattern
-        .first_child_with_label("params")
-        .map(list => list_has_item_kind(list, Pattern_Rest))
-        .unwrap_or(false)
-      with_marker_child(
-        pattern,
-        "openness",
-        if is_open {
-          Openness_Open
-        } else {
-          Openness_Closed
-        },
-      )
+      finish_constructor_pattern(state, children)
     }
     Some((LPAREN, _, _)) =>
       if parenthesized_pattern_has_top_level_with(state) {
@@ -10021,50 +10140,20 @@ fn parse_pattern_atom(
       }
     Some((found, start, end)) if found is (REGEX_INTERP(_) | INTERP(_)) => {
       let pat = parse_regex_interp_lex_pattern_node(state)
-      state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_TRUE,
-        TokenKind::TK_FALSE,
-        TokenKind::TK_CHAR,
-        TokenKind::TK_INT,
-        TokenKind::TK_BYTE,
-        TokenKind::TK_FLOAT,
-        TokenKind::TK_DOUBLE,
-        TokenKind::TK_MINUS,
-        TokenKind::TK_BYTES,
-        TokenKind::TK_STRING,
-        TokenKind::TK_UNDERSCORE,
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_EXTEND,
-        TokenKind::TK_PACKAGE_NAME,
-        TokenKind::TK_UIDENT,
-        TokenKind::TK_LPAREN,
-        TokenKind::TK_LBRACKET,
-        TokenKind::TK_LBRACE,
-      ])
+      state.report_expected_tokens_at(
+        found,
+        mk_loc(start, end),
+        required_pattern_start_tokens(),
+      )
       pat
     }
     Some((found, start, end)) if found is REGEX_LITERAL(_) => {
       let pat = parse_literal_pattern(state, stop_kinds)
-      state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_TRUE,
-        TokenKind::TK_FALSE,
-        TokenKind::TK_CHAR,
-        TokenKind::TK_INT,
-        TokenKind::TK_BYTE,
-        TokenKind::TK_FLOAT,
-        TokenKind::TK_DOUBLE,
-        TokenKind::TK_MINUS,
-        TokenKind::TK_BYTES,
-        TokenKind::TK_STRING,
-        TokenKind::TK_UNDERSCORE,
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_EXTEND,
-        TokenKind::TK_PACKAGE_NAME,
-        TokenKind::TK_UIDENT,
-        TokenKind::TK_LPAREN,
-        TokenKind::TK_LBRACKET,
-        TokenKind::TK_LBRACE,
-      ])
+      state.report_expected_tokens_at(
+        found,
+        mk_loc(start, end),
+        required_pattern_start_tokens(),
+      )
       pat
     }
     Some((TRUE, _, _))
@@ -12793,9 +12882,11 @@ fn parse_type_arrow(
       }
       match state.peek() {
         Some((RAISE, _, _)) if !kind_in(TokenKind::TK_RAISE, stop_kinds) =>
-          push_child(children, Some("clause"), parse_error_annotation(state))
+          parse_effect_annotation_into(state, children)
         Some((NORAISE, _, _)) if !kind_in(TokenKind::TK_NORAISE, stop_kinds) =>
-          push_child(children, Some("clause"), parse_error_annotation(state))
+          parse_effect_annotation_into(state, children)
+        Some((NOCANCEL, _, _)) if !kind_in(TokenKind::TK_NOCANCEL, stop_kinds) =>
+          parse_effect_annotation_into(state, children)
         _ => ()
       }
       if invalid_unparenthesized {
@@ -12870,11 +12961,56 @@ fn parse_return_type(state : ParserState) -> CstNode {
       parse_type_arrow(state, [
         TokenKind::TK_RAISE,
         TokenKind::TK_NORAISE,
+        TokenKind::TK_NOCANCEL,
         TokenKind::TK_LBRACE,
         TokenKind::TK_EQUAL,
         TokenKind::TK_SEMI,
         TokenKind::TK_EOF,
       ])
+  }
+}
+
+///|
+fn parse_effect_annotation_into(
+  state : ParserState,
+  children : Array[(String?, CstNode)],
+) -> Unit {
+  if state.current_is(TokenKind::TK_NOCANCEL) {
+    if state.consume_any() is Some(nocancel_anchor) {
+      push_child(children, Some("nocancel"), nocancel_anchor)
+    }
+    push_children(children, state.consume_trivia())
+    if state.current_is(TokenKind::TK_PLUS) {
+      if state.consume_any() is Some(op) {
+        push_child(children, Some("effect_op"), op)
+      }
+      push_children(children, state.consume_trivia())
+      if state.current_is(TokenKind::TK_RAISE) ||
+        state.current_is(TokenKind::TK_NORAISE) {
+        push_child(children, Some("clause"), parse_error_annotation(state))
+      } else {
+        state.report_expected_tokens([
+          TokenKind::TK_RAISE,
+          TokenKind::TK_NORAISE,
+        ])
+      }
+    }
+  } else {
+    push_child(children, Some("clause"), parse_error_annotation(state))
+    push_children(children, state.consume_trivia())
+    if state.current_is(TokenKind::TK_PLUS) {
+      if state.consume_any() is Some(op) {
+        push_child(children, Some("effect_op"), op)
+      }
+      push_children(children, state.consume_trivia())
+      if state.current_is(TokenKind::TK_NOCANCEL) {
+        if state.consume_any() is Some(nocancel_anchor) {
+          push_child(children, Some("nocancel"), nocancel_anchor)
+        }
+      } else {
+        state.report_expected_tokens([TokenKind::TK_NOCANCEL])
+      }
+    }
   }
 }
 
@@ -12904,8 +13040,8 @@ fn parse_func_return_type(state : ParserState) -> CstNode {
     }
   }
   match state.peek() {
-    Some((RAISE, _, _)) | Some((NORAISE, _, _)) =>
-      push_child(children, Some("clause"), parse_error_annotation(state))
+    Some((RAISE, _, _)) | Some((NORAISE, _, _)) | Some((NOCANCEL, _, _)) =>
+      parse_effect_annotation_into(state, children)
     _ => ()
   }
   state.node_from_children(Clause_ReturnType, children)
@@ -13049,6 +13185,8 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
         | Some((PACKAGE_NAME(_), _, _))
         | Some((UNDERSCORE, _, _)) => {
           let err_ty = parse_type_until(state, [
+            TokenKind::TK_PLUS,
+            TokenKind::TK_NOCANCEL,
             TokenKind::TK_LBRACE,
             TokenKind::TK_RBRACE,
             TokenKind::TK_RPAREN,

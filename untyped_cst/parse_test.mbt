@@ -193,17 +193,9 @@ fn is_interp_source_segment(node : @untyped_cst.CstNode) -> Bool {
 }
 
 ///|
-fn is_regex_interp_lex_pattern(node : @untyped_cst.CstNode) -> Bool {
+fn is_regex_literal_pattern(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    @untyped_cst.LexPattern_RegexInterp => true
-    _ => false
-  }
-}
-
-///|
-fn is_lex_literal_pattern(node : @untyped_cst.CstNode) -> Bool {
-  match node.kind {
-    @untyped_cst.LexPattern_Literal => true
+    @untyped_cst.RegexPattern_Literal => true
     _ => false
   }
 }
@@ -1247,25 +1239,15 @@ test "consecutive multiline string tokens form one multiline expression" {
 }
 
 ///|
-test "regex interpolation is represented as lex pattern segment" {
+test "regex interpolation is rejected as a lexscan pattern" {
   let source = "lexmatch s { re\"a\\{x}\" => 1 }"
   let result = @untyped_cst.parse_expression(source)
-  if result.diagnostics_view().length() != 0 {
-    fail(source)
-  }
   @test.assert_eq(result.root().text(source), source[:])
-  @test.assert_eq(
-    find_node(result.root(), is_regex_interp_lex_pattern) is Some(_),
-    true,
-  )
-  @test.assert_eq(
-    find_node(result.root(), is_interp_source_segment_with_expr) is Some(_),
-    true,
-  )
+  @test.assert_eq(result.diagnostics_view().is_empty(), false)
 }
 
 ///|
-test "regex literal uses live lex pattern node" {
+test "regex literal uses live regex pattern node" {
   let source = "lexmatch s { re\"a\" => 1 }"
   let result = @untyped_cst.parse_expression(source)
   if result.diagnostics_view().length() != 0 {
@@ -1273,7 +1255,7 @@ test "regex literal uses live lex pattern node" {
   }
   @test.assert_eq(result.root().text(source), source[:])
   @test.assert_eq(
-    find_node(result.root(), is_lex_literal_pattern) is Some(_),
+    find_node(result.root(), is_regex_literal_pattern) is Some(_),
     true,
   )
 }
