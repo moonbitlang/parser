@@ -90,6 +90,7 @@
 %token FN "fn"
 %token IF "if"
 %token LET "let"
+%token VAR "var"
 %token PROOF_ASSERT "proof_assert"
 %token PROOF_LET "proof_let"
 %token CONST "const"
@@ -112,6 +113,7 @@
 %token GUARD "guard"
 %token GUARD_EXCLAMATION "guard!"
 %token DEFER "defer"
+%token ERRDEFER "errdefer"
 %token FOR "for"
 %token IN "in"
 %token IS "is"
@@ -124,6 +126,7 @@
 %token USING "using"
 %token DECLARE         "declare"
 %token NORAISE "noraise"
+%token NOCANCEL "nocancel"
 %token NOBREAK         "nobreak"
 %token WHERE           "where"
 %token ENUMVIEW "enumview"
@@ -213,16 +216,16 @@ method_prefix -> Option[Name]
 func_sig -> FuncSig
   : attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
     let (type_name, name) = $6
-    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: $9}
+    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
   }
   ;
 
 trait_method_sig -> TraitMethodSig
   : attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: $8, has_default: $9}
+    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
   }
   | attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: $6, has_default: $7}
+    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
   }
   ;
 
@@ -386,20 +389,35 @@ simple_type -> Type
 
 type_ -> Type
   : simple_type { $1 }
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
   ;
 
-return_type -> (Type, ErrorType)
-  : type_ { ($1, NoErrorType) }
-  | simple_type "noraise" { ($1, Noraise(loc=mk_loc($sloc))) }
-  | simple_type "raise" { ($1, DefaultErrorType(loc=mk_loc($loc($2)))) }
-  | simple_type "raise" error_type { ($1, ErrorType(ty = $3)) }
-  | simple_type "raise" "?" {
+return_type -> (Type, ErrorType, Location?)
+  : type_ { ($1, NoErrorType, None) }
+  | simple_type effect_annotation { ($1, $2.0, $2.1) }
+  ;
+
+error_annotation -> ErrorType
+  : "noraise" { Noraise(loc=mk_loc($sloc)) }
+  | "raise" { DefaultErrorType(loc=mk_loc($loc($1))) }
+  | "raise" error_type { ErrorType(ty = $2) }
+  | "raise" "?" {
     let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
-    ($1, MaybeError(ty=fake_error))
+    MaybeError(ty=fake_error)
   }
+  ;
+
+nocancel_annotation -> Location
+  : "nocancel" { mk_loc($sloc) }
+  ;
+
+effect_annotation -> (ErrorType, Location?)
+  : error_annotation "+" nocancel_annotation { ($1, Some($3)) }
+  | nocancel_annotation "+" error_annotation { ($3, Some($1)) }
+  | error_annotation { ($1, None) }
+  | nocancel_annotation { (NoErrorType, Some($1)) }
   ;
 
 error_type -> Type
