@@ -143,6 +143,7 @@ test "impl variants to_json" {
     quantifiers: List([]),
     return_type: None,
     error_type: NoErrorType,
+    nocancel_: None,
     vis: Default,
     attrs: List([]),
     doc: dummy_docstring,
@@ -754,6 +755,7 @@ test "expr complex types to_json" {
           "loc": null,
           "children": { "faked": false },
         },
+        "exclamation": false,
       },
     },
   )
