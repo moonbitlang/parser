@@ -96,6 +96,7 @@
 %token FN "fn"
 %token IF "if"
 %token LET "let"
+%token VAR "var"
 %token PROOF_ASSERT "proof_assert"
 %token PROOF_LET "proof_let"
 %token CONST "const"
@@ -119,6 +120,7 @@
 %token GUARD "guard"
 %token GUARD_EXCLAMATION "guard!"
 %token DEFER "defer"
+%token ERRDEFER "errdefer"
 %token FOR "for"
 %token IN "in"
 %token IS "is"
@@ -132,6 +134,7 @@
 %token EXTENUM "extenum"
 %token DECLARE         "declare"
 %token NORAISE "noraise"
+%token NOCANCEL "nocancel"
 %token NOBREAK         "nobreak"
 %token WHERE           "where"
 %token TRY_QUESTION    "try?"
@@ -350,7 +353,7 @@ fun_binder -> (TypeName?, Binder)
 fun_header -> FunDecl
   : attributes visibility is_async fun_header_generic option(parameters) func_return_type {
     let ((type_name, f), quants) = $4
-    let (return_type, error_type) = $6
+    let (return_type, error_type, nocancel_) = $6
     {
       type_name,
       name: f,
@@ -360,6 +363,7 @@ fun_header -> FunDecl
       params_loc: mk_loc($loc($5)),
       return_type,
       error_type,
+      nocancel_,
       vis: $2,
       doc: DocString::empty(),
       attrs: $1,
@@ -371,7 +375,7 @@ fun_header -> FunDecl
 declare_fun_header -> FunDecl
   : attributes "declare" visibility is_async fun_header_generic option(parameters) func_return_type {
     let ((type_name, f), quants) = $5
-    let (return_type, error_type) = $7
+    let (return_type, error_type, nocancel_) = $7
     {
       type_name,
       name: f,
@@ -381,6 +385,7 @@ declare_fun_header -> FunDecl
       params_loc: mk_loc($loc($6)),
       return_type,
       error_type,
+      nocancel_,
       vis: $3,
       doc: DocString::empty(),
       attrs: $1,
@@ -395,7 +400,7 @@ fun_header_generic -> ((TypeName?, Binder), List[TypeVarBinder])
 extern_fun_header -> (StringLiteral, FunDecl)
   : attributes visibility "extern" STRING "fn" optional_type_parameters fun_binder option(parameters) func_return_type {
     let (type_name, f) = $7
-    let (return_type, error_type) = $9
+    let (return_type, error_type, nocancel_) = $9
     let fn_decl = FunDecl::{
       type_name,
       name: f,
@@ -405,6 +410,7 @@ extern_fun_header -> (StringLiteral, FunDecl)
       params_loc: mk_loc($loc($8)),
       return_type,
       error_type,
+      nocancel_,
       vis: $2,
       doc: DocString::empty(),
       attrs: $1,
@@ -716,7 +722,7 @@ structure_item -> Impl
     )
   }
   | attributes visibility "impl" optional_type_parameters type_name "for" type_ "with" impl_optional_fn binder parameters func_return_type impl_body {
-    let (ret_ty, err_ty) = $12
+    let (ret_ty, err_ty, nocancel_) = $12
     TopImpl(
       self_ty = Some($7),
       trait_ = $5,
@@ -726,6 +732,7 @@ structure_item -> Impl
       params = $11,
       ret_ty~,
       err_ty~,
+      nocancel_~,
       body = $13,
       vis = $2,
       loc = mk_loc($sloc),
@@ -734,7 +741,7 @@ structure_item -> Impl
     )
   }
   | attributes visibility "impl" optional_type_parameters type_name "with" impl_optional_fn binder parameters func_return_type impl_body {
-    let (ret_ty, err_ty) = $10
+    let (ret_ty, err_ty, nocancel_) = $10
     TopImpl(
       self_ty = None,
       trait_ = $5,
@@ -744,6 +751,7 @@ structure_item -> Impl
       params = $9,
       ret_ty~,
       err_ty~,
+      nocancel_~,
       body = $11,
       vis = $2,
       loc = mk_loc($sloc),
@@ -1057,7 +1065,7 @@ trait_method_fn_header -> List[TypeVarBinder]
 
 trait_method_decl -> TraitMethodDecl
   : attributes is_async trait_method_fn_header binder "(" list_commas(trait_method_param) ")" func_return_type option(preceded("=", wildcard)) {
-    let (return_type, error_type) = $8
+    let (return_type, error_type, nocancel_) = $8
     {
       name: $4,
       is_async: $2,
@@ -1065,6 +1073,7 @@ trait_method_decl -> TraitMethodDecl
       params: $6,
       return_type,
       error_type,
+      nocancel_,
       has_default: $9,
       attrs: $1,
       loc: mk_loc($sloc)
@@ -1143,13 +1152,14 @@ statement -> Statement
     StmtLetmut(binder = $3, ty_opt = $4, expr = $6, loc = mk_loc($sloc))
   }
   | is_async "fn" binder parameters func_return_type block_expr {
-    let (return_type, error_type) = $5
+    let (return_type, error_type, nocancel_) = $5
     let func = Func::{
       parameters : $4,
       params_loc : mk_loc($loc($4)),
       body : $6,
       return_type,
       error_type,
+      nocancel_,
       kind : Lambda,
       is_async : $1,
       loc : mk_loc($sloc)
@@ -1158,6 +1168,7 @@ statement -> Statement
   }
   | guard_statement { $1 }
   | "defer" pipe_expr { StmtDefer(expr = $2, loc = mk_loc($sloc)) }
+  | "errdefer" pipe_expr { StmtErrdefer(expr = $2, loc = mk_loc($sloc)) }
   | "proof_assert" quantifier_expr {
     StmtExpr(ProofAssert(expr = $2, loc = mk_loc($sloc)))
   }
@@ -1394,8 +1405,8 @@ match_expr -> Expr
   ;
 
 lexmatch_expr -> Expr:
-  | lexmatch_header list_semis(lex_case) "}" {
-    LexMatch(strategy=$1.1, expr=$1.0, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
+  | lexmatch_header list_semis(lexscan_case) "}" {
+    LexScan(streaming=false, strategy=$1.1, expr=$1.0, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
   }
 
 lexmatch_header -> (Expr, Label?):
@@ -1408,7 +1419,7 @@ lexmatch_header -> (Expr, Label?):
 
 lexscan_expr -> Expr:
   | lexscan_header list_semis(lexscan_case) "}" {
-    LexScan(strategy=$1.1, expr=$1.0, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
+    LexScan(streaming=true, strategy=$1.1, expr=$1.0, match_loc=mk_loc($loc($1)), cases=$2, loc=mk_loc($sloc))
   }
 
 lexscan_header -> (Expr, Label?):
@@ -1417,16 +1428,12 @@ lexscan_header -> (Expr, Label?):
 
 lexscan_case -> LexScanCase:
   | lexscan_case_pattern_with_bindings "=>" expr_statement {
-    { pat: $1.0, bindings: $1.1, guard_: None, body: $3 }
-  }
-  | lexscan_case_pattern_with_bindings "if" infix_expr "=>" expr_statement {
-    { pat: $1.0, bindings: $1.1, guard_: Some($3), body: $5 }
+    { pat: $1.0, bindings: $1.1, body: $3 }
   }
   | "..." {
     {
       pat: Wildcard(loc = mk_loc($loc($1))),
       bindings: @list.empty(),
-      guard_: None,
       body: Hole(loc = mk_loc($sloc), kind = Todo)
     }
   }
@@ -1442,79 +1449,6 @@ lexscan_case_pattern -> LexScanCasePattern:
   | binder { Binder($1) }
   | "_" { Wildcard(loc = mk_loc($sloc)) }
 
-lex_case -> LexCase :
-  | lex_pattern "=>" expr_statement {
-    {
-      pat : $1,
-      pat_loc : mk_loc($loc($1)),
-      guard_ : None,
-      body : $3
-    }
-  }
-  | lex_pattern "if" infix_expr "=>" expr_statement {
-    LexCase::{
-      pat : $1,
-      pat_loc : mk_loc($loc($1)),
-      guard_ : Some($3),
-      body : $5
-    }
-  }
-  | "..." {
-    let pat = @list.singleton(LexTopPattern::Wildcard(loc = mk_loc($sloc)))
-    LexCase::{
-      pat,
-      pat_loc : mk_loc($sloc),
-      guard_ : None,
-      body : Hole(loc=mk_loc($sloc), kind=Todo)
-    }
-  }
-
-lex_pattern -> @list.List[LexTopPattern]:
-  | "(" separated_nonempty_list(",", lex_top_pattern) ")" { $2 }
-  | "_" { @list.singleton(Wildcard(loc = mk_loc($sloc))) }
-  | binder { @list.singleton(Binder($1)) }
-  | lex_simple_atom_pattern { @list.singleton(Pattern($1)) }
-
-lex_top_pattern -> LexTopPattern :
-  | lex_as_pattern { Pattern($1) }
-  | "_" { Wildcard(loc = mk_loc($sloc)) }
-  | binder { Binder($1) }
-
-lex_as_pattern -> LexPattern :
-  | lex_pattern_sequence {
-    match $1 {
-      More(pat, tail=Empty) => pat
-      _ => Sequence(pats=$1, loc=mk_loc($sloc))
-    }
-  }
-  | lex_atom_pattern "as" binder {
-    Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
-  }
-
-lex_pattern_sequence -> @list.List[LexPattern] :
-  | lex_atom_pattern { @list.singleton($1) }
-  | lex_atom_pattern option(SEMI) lex_pattern_sequence { @list.cons($1, $3) }
-
-lex_atom_pattern -> LexPattern:
-  | lex_simple_atom_pattern { $1 }
-  | "(" lex_as_pattern ")" { $2 }
-
-lex_simple_atom_pattern -> LexPattern:
-  | REGEX_LITERAL {
-    Regex(lit=$1, offset=3, loc=mk_loc($sloc))
-  }
-  | REGEX_INTERP {
-    RegexInterp(elems=make_interps($1), loc=mk_loc($sloc))
-  }
-  | STRING {
-    Regex(lit = $1, offset = 1, loc = mk_loc($sloc))
-  }
-  | INTERP {
-    RegexInterp(elems = make_interps($1), loc = mk_loc($sloc))
-  }
-  | qual_uident {
-    ConstantRef(lid = $1, loc = mk_loc($sloc))
-  }
 
 for_binders -> List[(Binder, Expr)]
   : list_commas_no_trailing(separated_pair(binder, "=", expr)) { $1 }
@@ -1989,13 +1923,14 @@ tuple_expr -> Expr
 
 anony_fn -> Func
   : is_async "fn" parameters func_return_type block_expr {
-    let (return_type, error_type) = $4
+    let (return_type, error_type, nocancel_) = $4
     Func::{
       parameters : $3,
       params_loc : mk_loc($loc($3)),
       body : $5,
       return_type,
       error_type,
+      nocancel_,
       kind : Lambda,
       is_async : $1,
       loc : mk_loc($sloc)
@@ -2317,6 +2252,9 @@ simple_pattern -> Pattern
     }
     @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
   }
+  | type_name "::" "_" {
+    ConstrAny(type_name = $1, loc = mk_loc($sloc))
+  }
   // bits constr pattern `i32(args)`
   // To disambiguate with pattern variable, the args list must be present.
   | binder delimited("(", constr_pat_arguments_no_open, ")") {
@@ -2389,19 +2327,36 @@ error_annotation -> ErrorType
   }
   ;
 
-return_type -> (Type, ErrorType)
-  : type_ { ($1, NoErrorType) }
-  | simple_type error_annotation { ($1, $2) }
+nocancel_annotation -> Location
+  : "nocancel" { mk_loc($sloc) }
   ;
 
-func_return_type -> (Type?, ErrorType)
+effect_annotation -> (ErrorType, Location?)
+  : error_annotation "+" nocancel_annotation { ($1, Some($3)) }
+  | nocancel_annotation "+" error_annotation { ($3, Some($1)) }
+  | error_annotation { ($1, None) }
+  | nocancel_annotation { (NoErrorType, Some($1)) }
+  ;
+
+return_type -> (Type, ErrorType, Location?)
+  : type_ { ($1, NoErrorType, None) }
+  | simple_type effect_annotation {
+    let (err, nocancel_) = $2
+    ($1, err, nocancel_)
+  }
+  ;
+
+func_return_type -> (Type?, ErrorType, Location?)
   : "->" return_type {
     match $2 {
-      (ty, err) => (Some(ty), err)
+      (ty, err, nocancel_) => (Some(ty), err, nocancel_)
     }
   }
-  | error_annotation { (None, $1) }
-  |  { (None, NoErrorType) }
+  | effect_annotation {
+    let (err, nocancel_) = $1
+    (None, err, nocancel_)
+  }
+  |  { (None, NoErrorType, None) }
   ;
 
 error_type -> Type
@@ -2433,20 +2388,20 @@ simple_type -> Type
 type_ -> Type
   : simple_type { $1 }
   | is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
-    let (ty_res, ty_err) = $8
+    let (ty_res, ty_err, nocancel_) = $8
     let ts = match $5 {
       None => @list.empty()
       Some(ts) => ts
     }
-    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
   }
   | is_async "(" ")" "->" return_type {
-    let (ty_res, ty_err) = $5
-    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+    let (ty_res, ty_err, nocancel_) = $5
+    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
   }
   | is_async "(" type_ ")" "->" return_type {
-    let (ty_res, ty_err) = $6
-    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, loc = mk_loc($sloc))
+    let (ty_res, ty_err, nocancel_) = $6
+    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
   }
   ;
 

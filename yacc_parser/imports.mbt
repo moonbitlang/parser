@@ -61,14 +61,11 @@ using @syntax {
   type FunDecl,
   type ExceptionDecl,
   type ConstrId,
-  type LexPattern,
   type RegexPattern,
-  type LexTopPattern,
   type LexScanCase,
   type LexScanCasePattern,
   type UsingKind,
   type ImportPackage,
-  type LexCase,
   type WhereClause,
 }
 
