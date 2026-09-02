@@ -75,11 +75,7 @@ test {
             },
           },
         },
-        "vis": {
-          "kind": "Visibility::Default",
-          "loc": null,
-          "children": Json::empty_object(),
-        },
+        "vis": { "kind": "Visibility::Default", "loc": null, "children": {} },
         "is_constant": false,
         "is_declare": false,
         "attrs": {
@@ -208,12 +204,12 @@ test {
             "error_type": {
               "kind": "ErrorType::NoErrorType",
               "loc": null,
-              "children": Json::empty_object(),
+              "children": {},
             },
             "vis": {
               "kind": "Visibility::Default",
               "loc": null,
-              "children": Json::empty_object(),
+              "children": {},
             },
             "attrs": {
               "kind": "FunDecl::AttrList",
@@ -228,11 +224,6 @@ test {
           "kind": "DeclBody::DeclBody",
           "loc": null,
           "children": {
-            "local_types": {
-              "kind": "DeclBody::DeclBody::LocalTypeList",
-              "loc": null,
-              "children": [],
-            },
             "expr": {
               "kind": "Expr::Infix",
               "loc": null,
@@ -380,7 +371,7 @@ test {
             "type_vis": {
               "kind": "Visibility::Default",
               "loc": null,
-              "children": Json::empty_object(),
+              "children": {},
             },
             "is_declare": false,
             "deriving": {
@@ -449,7 +440,7 @@ test {
                         "vis": {
                           "kind": "Visibility::Default",
                           "loc": null,
-                          "children": Json::empty_object(),
+                          "children": {},
                         },
                         "attrs": {
                           "kind": "FieldDecl::AttrList",
@@ -494,7 +485,7 @@ test {
                         "vis": {
                           "kind": "Visibility::Default",
                           "loc": null,
-                          "children": Json::empty_object(),
+                          "children": {},
                         },
                         "attrs": {
                           "kind": "FieldDecl::AttrList",
@@ -517,7 +508,7 @@ test {
             "type_vis": {
               "kind": "Visibility::Default",
               "loc": null,
-              "children": Json::empty_object(),
+              "children": {},
             },
             "is_declare": false,
             "deriving": {

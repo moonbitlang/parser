@@ -49,11 +49,6 @@ test "impl variants to_json" {
           "children": { "faked": false },
         },
         "is_main": true,
-        "local_types": {
-          "kind": "Impl::TopExpr::LocalTypeList",
-          "loc": null,
-          "children": [],
-        },
         "is_async": null,
       },
     },
@@ -83,11 +78,6 @@ test "impl variants to_json" {
           "children": { "value": "test_string" },
         },
         "params": null,
-        "local_types": {
-          "kind": "Impl::TopTest::LocalTypeList",
-          "loc": null,
-          "children": [],
-        },
         "is_async": null,
         "attrs": {
           "kind": "Impl::TopTest::AttrList",
@@ -198,11 +188,6 @@ test "impl variants to_json" {
           "kind": "DeclBody::DeclBody",
           "loc": null,
           "children": {
-            "local_types": {
-              "kind": "DeclBody::DeclBody::LocalTypeList",
-              "loc": null,
-              "children": [],
-            },
             "expr": {
               "kind": "Expr::Unit",
               "loc": null,
