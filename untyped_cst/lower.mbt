@@ -219,6 +219,19 @@ fn lower_error_type_from_clause(node : CstNode?) -> @syntax.ErrorType {
 }
 
 ///|
+fn lower_nocancel_from_clause(node : CstNode?) -> Location? {
+  if node is Some(clause) {
+    if return_clause_nocancel_belongs_to_type(clause) {
+      None
+    } else {
+      clause.first_child_with_label("nocancel").map(fn(anchor) { anchor.loc })
+    }
+  } else {
+    None
+  }
+}
+
+///|
 fn return_clause_error_belongs_to_type(clause : CstNode) -> Bool {
   match clause.kind {
     Clause_ReturnType =>
@@ -226,6 +239,22 @@ fn return_clause_error_belongs_to_type(clause : CstNode) -> Bool {
         (
           clause.first_child_with_label("type"),
           clause.first_child_with_label("clause"),
+        ) {
+        (Some(ty), Some(_)) => ty.kind is Type_Arrow
+        _ => false
+      }
+    _ => false
+  }
+}
+
+///|
+fn return_clause_nocancel_belongs_to_type(clause : CstNode) -> Bool {
+  match clause.kind {
+    Clause_ReturnType =>
+      match
+        (
+          clause.first_child_with_label("type"),
+          clause.first_child_with_label("nocancel"),
         ) {
         (Some(ty), Some(_)) => ty.kind is Type_Arrow
         _ => false
@@ -452,6 +481,7 @@ fn lower_function_decl(node : CstNode) -> @syntax.Impl {
     error_type: lower_error_type_from_clause(
       node.first_child_with_label("clause"),
     ),
+    nocancel_: lower_nocancel_from_clause(node.first_child_with_label("clause")),
     vis: lower_visibility(node),
     attrs: lower_attrs(node),
     doc: lower_empty_doc(),
@@ -1055,6 +1085,7 @@ fn lower_trait_method(node : CstNode) -> @syntax.TraitMethodDecl {
     error_type: lower_error_type_from_clause(
       node.first_child_with_label("clause"),
     ),
+    nocancel_: lower_nocancel_from_clause(node.first_child_with_label("clause")),
     has_default: node.first_child_with_label("stub").map(fn(node) { node.loc }),
     attrs: lower_attrs(node),
     loc: node.loc,
@@ -1146,6 +1177,9 @@ fn lower_impl_method_decl(
       method_node.first_child_with_label("clause"),
     ),
     err_ty=lower_error_type_from_clause(
+      method_node.first_child_with_label("clause"),
+    ),
+    nocancel_=lower_nocancel_from_clause(
       method_node.first_child_with_label("clause"),
     ),
     body=lower_function_decl_body(
@@ -1400,6 +1434,7 @@ fn lower_expr(node : CstNode) -> @syntax.Expr {
       lower_assign_expr(node)
     Expr_Guard => lower_guard_expr_with_body(node, lower_unit_expr(node.loc))
     Expr_Defer => lower_defer_expr_with_body(node, lower_unit_expr(node.loc))
+    Expr_ErrDefer => lower_defer_expr_with_body(node, lower_unit_expr(node.loc))
     Expr_ProofAssert => lower_proof_assert_expr(node)
     Expr_ProofLet => lower_proof_let_expr(node)
     Expr_Return => lower_return_expr(node)
@@ -1554,7 +1589,7 @@ fn lower_constructor_expr(node : CstNode) -> @syntax.Expr {
         name: lower_semantic_string(field).unwrap_or(""),
         loc: field.loc,
       },
-      extra_info: lower_constructor_expr_extra_info(node),
+      extra_info: lower_constructor_extra_info(node),
       loc: node.loc,
     }
   } else {
@@ -1571,9 +1606,7 @@ fn lower_constructor_expr(node : CstNode) -> @syntax.Expr {
 }
 
 ///|
-fn lower_constructor_expr_extra_info(
-  node : CstNode,
-) -> @syntax.ConstructorExtraInfo {
+fn lower_constructor_extra_info(node : CstNode) -> @syntax.ConstructorExtraInfo {
   let marker = node.first_child_of_kind(NodeKind::is_constructor_extra_info)
   match marker.map(fn(marker) { marker.kind }) {
     Some(ConstructorExtraInfo_TypeNameWithConstrPackage) =>
@@ -2446,11 +2479,12 @@ fn lower_lexmatch_expr(node : CstNode) -> @syntax.Expr {
     .first_child_with_label("expr")
     .map(lower_expr)
     .unwrap_or(lower_hole_expr(node.loc))
-  let cases : Array[@syntax.LexCase] = []
+  let cases : Array[@syntax.LexScanCase] = []
   for case_node in lower_lex_case_nodes(node) {
-    cases.push(lower_lex_case(case_node))
+    cases.push(lower_lex_scan_case(case_node))
   }
-  @syntax.Expr::LexMatch(
+  @syntax.Expr::LexScan(
+    streaming=false,
     strategy=node.first_child_with_label("name").map(lower_label_from_node),
     expr~,
     match_loc=node.loc,
@@ -2470,6 +2504,7 @@ fn lower_lexscan_expr(node : CstNode) -> @syntax.Expr {
     cases.push(lower_lex_scan_case(case_node))
   }
   @syntax.Expr::LexScan(
+    streaming=true,
     strategy=node.first_child_with_label("name").map(lower_label_from_node),
     expr~,
     match_loc=node.loc,
@@ -2507,7 +2542,6 @@ fn lower_lex_scan_case(node : CstNode) -> @syntax.LexScanCase {
     .map(lower_lex_scan_case_pattern)
     .unwrap_or(@syntax.LexScanCasePattern::Wildcard(loc=node.loc)),
     bindings: lower_regex_match_bindings(pattern_node),
-    guard_: node.first_child_with_label("cond").map(lower_expr),
     body: node
     .first_child_with_label("body")
     .map(lower_expr)
@@ -2968,20 +3002,31 @@ fn lower_return_type_from_clause(node : CstNode?) -> @syntax.Type? {
   if node is Some(clause) {
     if clause.first_child_with_label("type") is Some(ty_node) {
       let ty = lower_type(ty_node)
-      match (ty, clause.first_child_with_label("clause")) {
-        (
-          @syntax.Type::Arrow(args~, res~, err=_, is_async~, loc~),
-          Some(error_clause),
-        ) if ty_node.kind is Type_Arrow =>
+      let outer_error = clause.first_child_with_label("clause")
+      let outer_nocancel = clause.first_child_with_label("nocancel")
+      match ty {
+        @syntax.Type::Arrow(args~, res~, err~, is_async~, nocancel_~, loc~) if ty_node.kind
+          is Type_Arrow &&
+          (outer_error is Some(_) || outer_nocancel is Some(_)) => {
+          let err = match outer_error {
+            Some(error_clause) => lower_error_annotation(error_clause)
+            None => err
+          }
+          let nocancel_ = match outer_nocancel {
+            Some(anchor) => Some(anchor.loc)
+            None => nocancel_
+          }
+          let loc = match (outer_error, outer_nocancel) {
+            (Some(error_clause), Some(anchor)) =>
+              loc.merge(error_clause.loc).merge(anchor.loc)
+            (Some(error_clause), None) => loc.merge(error_clause.loc)
+            (None, Some(anchor)) => loc.merge(anchor.loc)
+            (None, None) => loc
+          }
           Some(
-            @syntax.Type::Arrow(
-              args~,
-              res~,
-              err=lower_error_annotation(error_clause),
-              is_async~,
-              loc=loc.merge(error_clause.loc),
-            ),
+            @syntax.Type::Arrow(args~, res~, err~, is_async~, nocancel_~, loc~),
           )
+        }
         _ => Some(ty)
       }
     } else {
@@ -3029,6 +3074,7 @@ fn lower_function_expr_node(node : CstNode) -> @syntax.Expr {
     ),
     kind,
     is_async: lower_async_loc(node),
+    nocancel_: lower_nocancel_from_clause(node.first_child_with_label("type")),
     loc: node.loc,
   }
   @syntax.Expr::Function(func~, loc=node.loc)
@@ -3137,6 +3183,7 @@ fn lower_func_from_decl_like_node(node : CstNode) -> @syntax.Func {
     ),
     kind: @syntax.FnKind::Lambda,
     is_async: lower_async_loc(node),
+    nocancel_: lower_nocancel_from_clause(node.first_child_with_label("type")),
     loc,
   }
 }
@@ -3154,6 +3201,7 @@ fn lower_func_from_letrec_binding(node : CstNode) -> @syntax.Func {
         error_type: @syntax.ErrorType::NoErrorType,
         kind: @syntax.FnKind::Lambda,
         is_async: None,
+        nocancel_: None,
         loc: node.loc,
       }
     None => lower_func_from_decl_like_node(node)
@@ -3237,14 +3285,16 @@ fn lower_defer_expr_with_body(
   node : CstNode,
   body : @syntax.Expr,
 ) -> @syntax.Expr {
-  @syntax.Expr::Defer(
-    expr=node
-      .first_child_with_label("expr")
-      .map(lower_expr)
-      .unwrap_or(lower_hole_expr(node.loc)),
-    body~,
-    loc=node.loc.merge(body.loc()),
-  )
+  let expr = node
+    .first_child_with_label("expr")
+    .map(lower_expr)
+    .unwrap_or(lower_hole_expr(node.loc))
+  let loc = node.loc.merge(body.loc())
+  if node.kind is Expr_ErrDefer {
+    @syntax.Expr::ErrDefer(expr~, body~, loc~)
+  } else {
+    @syntax.Expr::Defer(expr~, body~, loc~)
+  }
 }
 
 ///|
@@ -3303,7 +3353,7 @@ fn lower_statement_sequence(
       let body = lower_statement_sequence(items, index + 1, loc)
       lower_guard_expr_with_body(first, body)
     }
-    Expr_Defer => {
+    Expr_Defer | Expr_ErrDefer => {
       let body = lower_statement_sequence(items, index + 1, loc)
       lower_defer_expr_with_body(first, body)
     }
@@ -3347,7 +3397,7 @@ fn lower_statement_sequence(
               lower_sequence_expr(prefix, guard_expr)
             }
           }
-          Expr_Defer => {
+          Expr_Defer | Expr_ErrDefer => {
             let body = lower_statement_sequence(items, i + 1, loc)
             let defer_expr = lower_defer_expr_with_body(items[i], body)
             return if prefix.length() == 0 {
@@ -3404,7 +3454,7 @@ fn lower_statement_tail_expr(item : CstNode) -> @syntax.Expr {
       lower_let_expr_with_body(item, lower_faked_unit_expr(item.loc))
     Expr_Guard =>
       lower_guard_expr_with_body(item, lower_faked_unit_expr(item.loc))
-    Expr_Defer =>
+    Expr_Defer | Expr_ErrDefer =>
       lower_defer_expr_with_body(item, lower_faked_unit_expr(item.loc))
     _ => lower_expr(item)
   }
@@ -3578,6 +3628,18 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
         loc=node.loc,
       )
     Pattern_Constr => lower_constructor_pattern(node)
+    Pattern_ConstrAny =>
+      @syntax.Pattern::ConstrAny(
+        type_name=node
+          .first_child_with_label("type")
+          .map(lower_type_name_from_type_node)
+          .unwrap_or(@syntax.TypeName::{
+            name: @syntax.LongIdent::dummy(),
+            is_object: false,
+            loc: node.loc,
+          }),
+        loc=node.loc,
+      )
     Pattern_SpecialConstr => lower_special_constructor_pattern(node)
     Pattern_Or => {
       let lhs = node
@@ -4016,14 +4078,29 @@ fn lower_constructor_pattern_arg(item : CstNode) -> @syntax.ConstrPatArg {
 
 ///|
 fn lower_constructor_pattern(node : CstNode) -> @syntax.Pattern {
-  let constr = lower_constructor_from_names(
-    node.children_with_label("name"),
-    node
-    .first_child_of_kind(NodeKind::is_constructor_extra_info)
-    .map(fn(marker) { marker.kind })
-    .unwrap_or(ConstructorExtraInfo_None),
-    node.loc,
-  )
+  let constr = if node.first_child_with_label("field") is Some(field) {
+    let loc = node
+      .first_child_with_label("type")
+      .map(type_name => type_name.loc.merge(field.loc))
+      .unwrap_or(field.loc)
+    @syntax.Constructor::{
+      name: {
+        name: lower_semantic_string(field).unwrap_or(""),
+        loc: field.loc,
+      },
+      extra_info: lower_constructor_extra_info(node),
+      loc,
+    }
+  } else {
+    lower_constructor_from_names(
+      node.children_with_label("name"),
+      node
+      .first_child_of_kind(NodeKind::is_constructor_extra_info)
+      .map(fn(marker) { marker.kind })
+      .unwrap_or(ConstructorExtraInfo_None),
+      node.loc,
+    )
+  }
   @syntax.Pattern::Constr(
     constr~,
     args=lower_constructor_pattern_args(node),
@@ -4205,7 +4282,7 @@ fn lower_type_arrow_args(param : CstNode) -> List[@syntax.Type] {
 fn lower_function_type(node : CstNode) -> @syntax.Type {
   if node.first_child_with_label("type") is Some(ty) {
     match lower_type(ty) {
-      @syntax.Type::Arrow(args~, res~, err~, loc=_, is_async=_) =>
+      @syntax.Type::Arrow(args~, res~, err~, loc=_, is_async=_, nocancel_~) =>
         @syntax.Type::Arrow(
           args~,
           res~,
@@ -4213,6 +4290,7 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
           is_async=node
             .first_child_with_label("async_loc")
             .map(fn(anchor) { anchor.loc }),
+          nocancel_~,
           loc=node.loc,
         )
       other => other
@@ -4233,6 +4311,9 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
       res~,
       err=lower_error_type_from_clause(node.first_child_with_label("clause")),
       is_async=None,
+      nocancel_=node
+        .first_child_with_label("nocancel")
+        .map(fn(anchor) { anchor.loc }),
       loc=node.loc,
     )
   }

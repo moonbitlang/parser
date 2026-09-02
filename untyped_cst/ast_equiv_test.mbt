@@ -217,6 +217,121 @@ test "representative snapshots are AST equivalent" {
 }
 
 ///|
+test "modern grammar snapshots are AST equivalent" {
+  let snapshots = [
+    "pipeline_test_errdefer.mbt", "pipeline_test_nocancel.mbt", "parse_test_constr_any_pattern.mbt",
+    "parse_test_lexscan.mbt",
+  ]
+  for snapshot in snapshots {
+    assert_ast_equiv(read_snapshot(snapshot), label=snapshot)
+  }
+  assert_ast_equiv(
+    (
+      #|fn f(x : Error) {
+      #|  match x {
+      #|    &T::C => ()
+      #|    &T::C(_) => ()
+      #|    &@pkg.T::C(_) => ()
+      #|    &T::@pkg.C(_, ..) => ()
+      #|    &T::_ => ()
+      #|    &@pkg.T::_ => ()
+      #|    _ => ()
+      #|  }
+      #|}
+    ),
+    label="object constructor patterns",
+  )
+  assert_ast_equiv(
+    (
+      #|trait T { fn run(Self) nocancel }
+      #|impl T for S with fn run(self : S) nocancel { () }
+      #|type F = () -> Unit nocancel
+      #|fn top() nocancel {
+      #|  let anon = fn() nocancel { () }
+      #|  fn local() nocancel { () }
+      #|  ignore(anon)
+      #|  local()
+      #|}
+      #|fn left() raise + nocancel { () }
+      #|fn right() nocancel + noraise { () }
+    ),
+    label="nocancel declaration contexts and effect orders",
+  )
+}
+
+///|
+test "compound effects preserve comment trivia in either order" {
+  let cases = [
+    (
+      #|fn error_first_inline_comment(
+      #|  callback : () -> Unit raise + // after plus
+      #|    nocancel,
+      #|) { callback() }
+    ),
+    (
+      #|fn error_first_ownline_comment(
+      #|  callback : () -> Unit raise +
+      #|    // after plus
+      #|    nocancel,
+      #|) { callback() }
+    ),
+    (
+      #|fn nocancel_first_inline_comment(
+      #|  callback : () -> Unit nocancel + // after plus
+      #|    noraise,
+      #|) { callback() }
+    ),
+    (
+      #|fn nocancel_first_ownline_comment(
+      #|  callback : () -> Unit nocancel +
+      #|    // after plus
+      #|    noraise,
+      #|) { callback() }
+    ),
+  ]
+  for source in cases {
+    assert_ast_equiv(source, label="commented compound effect")
+  }
+}
+
+///|
+test "record and map for initializers may follow trivia" {
+  let cases = [
+    (
+      #|fn record_initializer() {
+      #|  for state = // before record initializer
+      #|    { value: 0 } {
+      #|    break
+      #|  }
+      #|}
+    ),
+    (
+      #|fn map_initializer() {
+      #|  for state = // before map initializer
+      #|    { "value": 0 } {
+      #|    break
+      #|  }
+      #|}
+    ),
+  ]
+  for source in cases {
+    assert_ast_equiv(source, label="commented for initializer")
+  }
+}
+
+///|
+test "removed grammar forms stay rejected" {
+  for
+    source in [
+      "fn f() { lexmatch s { re\"a\" if true => () } }", "fn f() { lexscan s { re\"a\" if true => () } }",
+      "fn f(x : Error) { match x { T::_(arg) => (); _ => () } }", "fn f() { var x = 1 }",
+      "fn f() { type Local = Int }",
+    ] {
+    assert_all_parsers_reject(source)
+  }
+}
+
+///|
 test "valid reverse pipe snapshot matches handrolled AST" {
   assert_handrolled_cst_ast_equiv(read_snapshot("parse_test_reverse_pipe.mbt"))
 }
@@ -489,7 +604,7 @@ test "location metadata lowering remains handrolled-equivalent" {
   let expressions = [
     "value |> x => { x }", "try f() catch { _ => 0 } noraise { value => value }",
     "(f)() catch { _ => 0 }", "array[1:2]", "[ for i = 0; i < 1; i = i + 1 => i ]",
-    "f(label~, optional?)", "(\n#| one\n#| two\n)", "label~: while true {}", "lexmatch source { (\"a\", (\"b\" \"c\")) => 1 }",
+    "f(label~, optional?)", "(\n#| one\n#| two\n)", "label~: while true {}", "lexmatch source { (re\"a\" + (re\"b\" + re\"c\")) => 1 }",
   ]
   for source in expressions {
     let lex = @lexer.tokens_from_string(source, comment=true)
@@ -715,6 +830,14 @@ fn handrolled_cst_snapshot_allows_diagnostic_divergence(path : String) -> Bool {
     // Generic recovery after the removed `try?` syntax may consume subsequent
     // operands differently between the two parsers.
     "parse_test_try_unexpected_body_tokens.mbt" => true
+    // Interpolation bodies remain raw sources in the reference AST, while the
+    // CST recursively validates them and rejects the removed `try?` syntax.
+    "pipeline_test_lexmatch_first.mbt" => true
+    // These fixtures intentionally exercise recovery for removed `else` loop
+    // clauses or the old colon-only loop label syntax.
+    "parse_test_nobreak.mbt"
+    | "parse_test_for_else.mbt"
+    | "parse_test_while_else.mbt" => true
     _ => false
   }
 }
@@ -737,8 +860,7 @@ fn handrolled_cst_snapshot_issue(
   let diagnostic_divergence_allowed = handrolled_cst_snapshot_allows_diagnostic_divergence(
       path,
     ) &&
-    !hand_reports.is_empty() &&
-    !cst_reports.is_empty()
+    (!hand_reports.is_empty() || !cst_reports.is_empty())
   if reports_differ && !diagnostic_divergence_allowed {
     if hand_accepts {
       return (Some("handrolled accepts, CST reports"), hand_accepts)
@@ -772,6 +894,9 @@ fn handrolled_cst_snapshot_issue(
   }
   if cst.root().text(source) != source[:] {
     return (Some("source text"), hand_accepts)
+  }
+  if diagnostic_divergence_allowed {
+    return (None, hand_accepts)
   }
   if hand_accepts {
     let (cst_impls, conversion_reports) = cst.to_impls()
@@ -883,6 +1008,45 @@ test "handrolled/CST regression: malformed C-style for does not crash" {
   assert_handrolled_cst_structure_equiv(
     "malformed C-style for", "fn f() { for i = 0 if true {} }",
   )
+}
+
+///|
+test "errdefer match action is rejected without crashing" {
+  let source = "fn f() { match value { _ => errdefer cleanup() } }"
+  assert_all_parsers_reject(source)
+  assert_handrolled_cst_structure_equiv("errdefer match action", source)
+  let reports = reports_from_view(
+    @untyped_cst.parse_structure(source).diagnostics_view(),
+  )
+  guard reports is [report] else {
+    fail("expected one CST report, got \{reports.length()}")
+  }
+  @test.assert_eq(
+    report.msg,
+    "Unexpected defer statement in the action part of a matching case",
+  )
+}
+
+///|
+test "incomplete compound effects are rejected without crashing" {
+  let invalid = [
+    ("effect at EOF", "declare fn f() nocancel +"),
+    (
+      "effect before close parenthesis", "fn f(callback : () -> Unit nocancel +) {}",
+    ),
+    ("effect before body", "fn f() nocancel + { () }"),
+  ]
+  for case in invalid {
+    let (label, source) = case
+    assert_all_parsers_reject(source)
+    assert_handrolled_cst_structure_equiv(label, source)
+  }
+  for
+    source in [
+      "fn f() nocancel + raise { () }", "fn f() raise E { () }", "fn f() noraise { () }",
+    ] {
+    assert_ast_equiv(source, label="complete effect annotation")
+  }
 }
 
 ///|

@@ -118,6 +118,7 @@ pub enum NodeKind {
   Expr_Continue
   Expr_LabelledBlock
   Expr_Defer
+  Expr_ErrDefer
   Expr_Guard
   Expr_Quantifier
   Expr_Hole
@@ -135,6 +136,7 @@ pub enum NodeKind {
   Pattern_Record
   Pattern_Map
   Pattern_Constr
+  Pattern_ConstrAny
   Pattern_SpecialConstr
   Pattern_Or
   Pattern_Alias

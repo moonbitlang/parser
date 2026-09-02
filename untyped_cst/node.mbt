@@ -219,6 +219,7 @@ fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
     | TokenKind::TK_GUARD
     | TK_GUARD_EXCLAMATION
     | TokenKind::TK_DEFER
+    | TokenKind::TK_ERRDEFER
     | TokenKind::TK_FOR
     | TokenKind::TK_IN
     | TokenKind::TK_IS
@@ -231,8 +232,10 @@ fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
     | TokenKind::TK_EXTENUM
     | TokenKind::TK_DECLARE
     | TokenKind::TK_NORAISE
+    | TokenKind::TK_NOCANCEL
     | TokenKind::TK_NOBREAK
     | TokenKind::TK_WHERE
+    | TokenKind::TK_VAR
     | TokenKind::TK_TRY_QUESTION
     | TokenKind::TK_TRY_EXCLAMATION
     | TokenKind::TK_LEXMATCH

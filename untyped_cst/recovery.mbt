@@ -242,6 +242,7 @@ fn required_pattern_start_tokens() -> Array[TokenKind] {
     TokenKind::TK_EXTEND,
     TokenKind::TK_PACKAGE_NAME,
     TokenKind::TK_UIDENT,
+    TokenKind::TK_AMPER,
     TokenKind::TK_LPAREN,
     TokenKind::TK_LBRACKET,
     TokenKind::TK_LBRACE,
