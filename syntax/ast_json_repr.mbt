@@ -11,11 +11,6 @@ fn[T] list_json_repr(
 }
 
 ///|
-fn empty_list_json_repr(kind : String, loc : Location) -> Json {
-  { "kind": kind, "loc": loc, "children": [] }
-}
-
-///|
 fn[T] option_json_repr(opt : T?, f : (T) -> Json) -> Json {
   match opt {
     Some(value) => f(value)
@@ -1025,12 +1020,7 @@ fn FunDecl::json_repr(self : FunDecl) -> Json {
 fn DeclBody::json_repr(self : DeclBody, loc : Location) -> Json {
   match self {
     DeclBody(expr~) =>
-      tagged_node("DeclBody::DeclBody", loc, {
-        "local_types": empty_list_json_repr(
-          "DeclBody::DeclBody::LocalTypeList", loc,
-        ),
-        "expr": expr.json_repr(),
-      })
+      tagged_node("DeclBody::DeclBody", loc, { "expr": expr.json_repr() })
     DeclStubs(stubs) =>
       tagged_node1("DeclBody::DeclStubs", loc, stubs.json_repr(loc))
     DeclNone => tagged_node0("DeclBody::DeclNone", loc)
@@ -1853,7 +1843,6 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       tagged_node("Impl::TopExpr", loc, {
         "expr": expr.json_repr(),
         "is_main": Json::boolean(is_main),
-        "local_types": empty_list_json_repr("Impl::TopExpr::LocalTypeList", loc),
         "is_async": option_json_repr(is_async, async_json_repr),
       })
     TopTest(expr~, name~, params~, is_async~, loc~, attrs~, doc~) =>
@@ -1868,7 +1857,6 @@ pub fn Impl::json_repr(self : Impl) -> Json {
             Parameter::json_repr,
           )
         }),
-        "local_types": empty_list_json_repr("Impl::TopTest::LocalTypeList", loc),
         "is_async": option_json_repr(is_async, async_json_repr),
         "attrs": list_json_repr(
           "Impl::TopTest::AttrList",

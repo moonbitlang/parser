@@ -283,11 +283,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": "6:1-25:2",
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": "6:1-25:2",
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": "7:3-24:51",

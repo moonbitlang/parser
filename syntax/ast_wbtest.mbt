@@ -2542,11 +2542,6 @@ test "decl_body to_json" {
     "kind": "DeclBody::DeclBody",
     "loc": null,
     "children": {
-      "local_types": {
-        "kind": "DeclBody::DeclBody::LocalTypeList",
-        "loc": null,
-        "children": [],
-      },
       "expr": {
         "kind": "Expr::Unit",
         "loc": null,
