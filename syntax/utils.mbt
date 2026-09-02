@@ -434,6 +434,7 @@ pub fn make_arrow_fn(
     body,
     return_type: None,
     error_type: NoErrorType,
+    nocancel_: None,
     kind: Arrow,
     is_async: None,
     loc,
@@ -486,7 +487,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     Guard(loc~, ..) => loc
     Is(expr=_, pat=_, loc~) => loc
     RegexMatch(expr=_, pat=_, bindings=_, loc~) => loc
-    Defer(loc~, ..) => loc
+    Defer(loc~, ..) | ErrDefer(loc~, ..) => loc
     LetFn(name=_, func=_, body=_, loc~) => loc
     LetAnd(bindings=_, body=_, loc~) => loc
     Let(pattern=_, expr=_, body=_, loc~) => loc
@@ -564,6 +565,7 @@ pub fn Pattern::loc(self : Self) -> Location {
     | Tuple(loc~, ..)
     | Or(loc~, ..)
     | Constr(loc~, ..)
+    | ConstrAny(loc~, ..)
     | Constraint(loc~, ..)
     | Constant(loc~, ..)
     | Array(loc~, ..)

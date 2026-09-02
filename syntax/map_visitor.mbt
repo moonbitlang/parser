@@ -36,6 +36,7 @@ pub(open) trait MapVisitor {
     res~ : Type,
     err~ : ErrorType,
     is_async~ : Location?,
+    nocancel_~ : Location?,
     loc~ : Location,
   ) -> Type = _
   fn visit_Type_Tuple(Self, tys~ : @list.List[Type], loc~ : Location) -> Type = _
@@ -292,6 +293,7 @@ pub(open) trait MapVisitor {
     is_open~ : Bool,
     loc~ : Location,
   ) -> Pattern = _
+  fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : Location) -> Pattern = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : Location) -> Pattern = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : Location) -> Pattern = _
   fn visit_Pattern_Var(Self, Binder) -> Pattern = _
@@ -422,6 +424,7 @@ pub(open) trait MapVisitor {
     params~ : Parameters,
     ret_ty~ : Type?,
     err_ty~ : ErrorType,
+    nocancel_~ : Location?,
     body~ : DeclBody,
     vis~ : Visibility,
     loc~ : Location,
@@ -582,6 +585,7 @@ pub(open) trait MapVisitor {
   ) -> Expr = _
   fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : Location) -> Expr = _
   fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Expr = _
+  fn visit_Expr_ErrDefer(Self, expr~ : Expr, body~ : Expr, loc~ : Location) -> Expr = _
   fn visit_Expr_LetFn(
     Self,
     name~ : Binder,
@@ -669,6 +673,7 @@ pub(open) trait MapVisitor {
   ) -> Expr = _
   fn visit_Expr_LexScan(
     Self,
+    streaming~ : Bool,
     strategy~ : Label?,
     expr~ : Expr,
     match_loc~ : Location,
@@ -866,6 +871,7 @@ impl MapVisitor with fn visit_Impl_TopImpl(
   params~,
   ret_ty~,
   err_ty~,
+  nocancel_~,
   body~,
   vis~,
   loc~,
@@ -882,6 +888,7 @@ impl MapVisitor with fn visit_Impl_TopImpl(
     params~,
     ret_ty~,
     err_ty~,
+    nocancel_~,
     body~,
     vis~,
     loc~,
@@ -1185,6 +1192,11 @@ impl MapVisitor with fn visit_Expr_Is(env, expr~, pat~, loc~) {
 ///|
 impl MapVisitor with fn visit_Expr_Defer(env, expr~, body~, loc~) {
   MapVisitor::visit_Expr_Defer(env.base(), expr~, body~, loc~)
+}
+
+///|
+impl MapVisitor with fn visit_Expr_ErrDefer(env, expr~, body~, loc~) {
+  MapVisitor::visit_Expr_ErrDefer(env.base(), expr~, body~, loc~)
 }
 
 ///|
@@ -1530,9 +1542,18 @@ impl MapVisitor with fn visit_Type_Arrow(
   res~,
   err~,
   is_async~,
+  nocancel_~,
   loc~,
 ) {
-  MapVisitor::visit_Type_Arrow(env.base(), args~, res~, err~, is_async~, loc~)
+  MapVisitor::visit_Type_Arrow(
+    env.base(),
+    args~,
+    res~,
+    err~,
+    is_async~,
+    nocancel_~,
+    loc~,
+  )
 }
 
 ///|
@@ -2018,6 +2039,11 @@ impl MapVisitor with fn visit_Pattern_Constr(
 }
 
 ///|
+impl MapVisitor with fn visit_Pattern_ConstrAny(env, type_name~, loc~) {
+  MapVisitor::visit_Pattern_ConstrAny(env.base(), type_name~, loc~)
+}
+
+///|
 impl MapVisitor with fn visit_Pattern_Or(env, pat1~, pat2~, loc~) {
   MapVisitor::visit_Pattern_Or(env.base(), pat1~, pat2~, loc~)
 }
@@ -2159,6 +2185,7 @@ impl MapVisitor with fn visit_Expr_LexMatch(
 ///|
 impl MapVisitor with fn visit_Expr_LexScan(
   env,
+  streaming~,
   strategy~,
   expr~,
   match_loc~,
@@ -2167,6 +2194,7 @@ impl MapVisitor with fn visit_Expr_LexScan(
 ) {
   MapVisitor::visit_Expr_LexScan(
     env.base(),
+    streaming~,
     strategy~,
     expr~,
     match_loc~,
@@ -2303,6 +2331,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl(
       params~,
       ret_ty~,
       err_ty~,
+      nocancel_~,
       body~,
       vis~,
       loc~,
@@ -2318,6 +2347,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl(
         params~,
         ret_ty~,
         err_ty~,
+        nocancel_~,
         body~,
         vis~,
         loc~,
@@ -2508,8 +2538,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Type(
 ) {
   match type_ {
     Any(loc~) => env.0.visit_Type_Any(loc~)
-    Arrow(args~, res~, err~, is_async~, loc~) =>
-      env.0.visit_Type_Arrow(args~, res~, err~, is_async~, loc~)
+    Arrow(args~, res~, err~, is_async~, nocancel_~, loc~) =>
+      env.0.visit_Type_Arrow(args~, res~, err~, is_async~, nocancel_~, loc~)
     Tuple(tys~, loc~) => env.0.visit_Type_Tuple(tys~, loc~)
     Name(constr_id~, tys~, loc~) =>
       env.0.visit_Type_Name(constr_id~, tys~, loc~)
@@ -2534,12 +2564,13 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Type_Arr
   res~,
   err~,
   is_async~,
+  nocancel_~,
   loc~,
 ) {
   let args = args.map(x => env.0.visit_Type(x))
   let res = env.0.visit_Type(res)
   let err = env.0.visit_ErrorType(err)
-  Arrow(args~, res~, err~, is_async~, loc~)
+  Arrow(args~, res~, err~, is_async~, nocancel_~, loc~)
 }
 
 ///|
@@ -3149,6 +3180,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Func(
 ) {
   let {
     is_async,
+    nocancel_,
     parameters,
     params_loc,
     body,
@@ -3164,6 +3196,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Func(
   let kind = env.0.visit_FnKind(kind)
   {
     is_async,
+    nocancel_,
     parameters,
     params_loc,
     body,
@@ -3449,6 +3482,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Pattern(
       env.0.visit_Pattern_Constraint(pat~, ty~, loc~)
     Constr(constr~, args~, is_open~, loc~) =>
       env.0.visit_Pattern_Constr(constr~, args~, is_open~, loc~)
+    ConstrAny(type_name~, loc~) =>
+      env.0.visit_Pattern_ConstrAny(type_name~, loc~)
     Or(pat1~, pat2~, loc~) => env.0.visit_Pattern_Or(pat1~, pat2~, loc~)
     Tuple(pats~, loc~) => env.0.visit_Pattern_Tuple(pats~, loc~)
     Var(binder) => env.0.visit_Pattern_Var(binder)
@@ -3528,6 +3563,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Pattern_
   let constr = env.0.visit_Constructor(constr)
   let args = args.map(args => args.map(x => env.0.visit_ConstrPatArg(x)))
   Constr(constr~, args~, is_open~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Pattern_ConstrAny(
+  env,
+  type_name~,
+  loc~,
+) {
+  let type_name = env.0.visit_TypeName(type_name)
+  ConstrAny(type_name~, loc~)
 }
 
 ///|
@@ -3769,6 +3814,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_FunDecl(
   let quantifiers = fun_decl.quantifiers.map(x => env.0.visit_TypeVarBinder(x))
   let return_type = fun_decl.return_type.map(x => env.0.visit_Type(x))
   let error_type = env.0.visit_ErrorType(fun_decl.error_type)
+  let nocancel_ = fun_decl.nocancel_
   let vis = env.0.visit_Visibility(fun_decl.vis)
   let is_async = fun_decl.is_async
   let params_loc = fun_decl.params_loc
@@ -3784,6 +3830,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_FunDecl(
     quantifiers,
     return_type,
     error_type,
+    nocancel_,
     vis,
     attrs,
     doc,
@@ -3803,6 +3850,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TraitMet
   let params = method_decl.params.map(param => env.0.visit_Parameter(param))
   let return_type = method_decl.return_type.map(x => env.0.visit_Type(x))
   let error_type = env.0.visit_ErrorType(method_decl.error_type)
+  let nocancel_ = method_decl.nocancel_
   let is_async = method_decl.is_async
   let has_default = method_decl.has_default
   let attrs = method_decl.attrs
@@ -3814,6 +3862,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TraitMet
     params,
     return_type,
     error_type,
+    nocancel_,
     has_default,
     attrs,
     loc,
@@ -3939,6 +3988,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl_Top
   params~,
   ret_ty~,
   err_ty~,
+  nocancel_~,
   body~,
   vis~,
   loc~,
@@ -3966,6 +4016,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Impl_Top
     params~,
     ret_ty~,
     err_ty~,
+    nocancel_~,
     body~,
     vis~,
     loc~,
@@ -4384,6 +4435,18 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Def
   let expr = env.0.visit_Expr(expr)
   let body = env.0.visit_Expr(body)
   Defer(expr~, body~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_ErrDefer(
+  env,
+  expr~,
+  body~,
+  loc~,
+) {
+  let expr = env.0.visit_Expr(expr)
+  let body = env.0.visit_Expr(body)
+  ErrDefer(expr~, body~, loc~)
 }
 
 ///|
@@ -4941,6 +5004,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
       RegexMatch(expr~, pat~, bindings~, loc~)
     }
     Defer(expr~, body~, loc~) => env.0.visit_Expr_Defer(expr~, body~, loc~)
+    ErrDefer(expr~, body~, loc~) =>
+      env.0.visit_Expr_ErrDefer(expr~, body~, loc~)
     LetFn(name~, func~, body~, loc~) =>
       env.0.visit_Expr_LetFn(name~, func~, body~, loc~)
     LetAnd(bindings~, body~, loc~) =>
@@ -4967,8 +5032,15 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
       env.0.visit_Expr_Match(expr~, cases~, match_loc~, loc~)
     LexMatch(strategy~, expr~, match_loc~, cases~, loc~) =>
       env.0.visit_Expr_LexMatch(strategy~, expr~, match_loc~, cases~, loc~)
-    LexScan(strategy~, expr~, match_loc~, cases~, loc~) =>
-      env.0.visit_Expr_LexScan(strategy~, expr~, match_loc~, cases~, loc~)
+    LexScan(streaming~, strategy~, expr~, match_loc~, cases~, loc~) =>
+      env.0.visit_Expr_LexScan(
+        streaming~,
+        strategy~,
+        expr~,
+        match_loc~,
+        cases~,
+        loc~,
+      )
     LetMut(binder~, ty~, expr~, body~, loc~) =>
       env.0.visit_Expr_LetMut(binder~, ty~, expr~, body~, loc~)
     Pipe(lhs~, rhs~, loc~) => env.0.visit_Expr_Pipe(lhs~, rhs~, loc~)
@@ -5109,6 +5181,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Lex
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_LexScan(
   env,
+  streaming~,
   strategy~,
   expr~,
   match_loc~,
@@ -5118,7 +5191,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_Lex
   let strategy = strategy.map(strategy => env.0.visit_Label(strategy))
   let expr = env.0.visit_Expr(expr)
   let cases = cases.map(case => env.0.visit_LexScanCase(case))
-  LexScan(strategy~, expr~, match_loc~, cases~, loc~)
+  LexScan(streaming~, strategy~, expr~, match_loc~, cases~, loc~)
 }
 
 ///|
@@ -5131,9 +5204,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_LexScanC
     let (label, binder) = binding
     (env.0.visit_Label(label), binder.map(x => env.0.visit_Binder(x)))
   })
-  let guard_ = lex_scan_case.guard_.map(guard_ => env.0.visit_Expr(guard_))
   let body = env.0.visit_Expr(lex_scan_case.body)
-  { pat, bindings, guard_, body, }
+  { pat, bindings, body, }
 }
 
 ///|

@@ -20,6 +20,7 @@ pub(all) enum Statement {
   StmtFunc(binder~ : @syntax.Binder, func~ : @syntax.Func, loc~ : @basic.Location)
   StmtLetand(bindings~ : @list.List[(@syntax.Binder, @syntax.Type?, @syntax.Func)], loc~ : @basic.Location)
   StmtDefer(expr~ : @syntax.Expr, loc~ : @basic.Location)
+  StmtErrdefer(expr~ : @syntax.Expr, loc~ : @basic.Location)
 }
 pub fn Statement::collect_rev(@list.List[Self], @syntax.Expr) -> @syntax.Expr
 pub fn Statement::compact_rev(@list.List[Self], loc~ : @basic.Location) -> @syntax.Expr

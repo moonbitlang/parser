@@ -75,6 +75,7 @@ pub(all) enum Type {
     res~ : Type,
     err~ : ErrorType,
     is_async~ : Location?,
+    nocancel_~ : Location?,
     loc~ : Location
   )
   Tuple(tys~ : @list.List[Type], loc~ : Location)
@@ -319,6 +320,7 @@ pub(all) struct Func {
   error_type : ErrorType
   kind : FnKind
   is_async : Location?
+  nocancel_ : Location?
   loc : Location
 } derive(Debug)
 
@@ -371,7 +373,6 @@ pub(all) struct LexCase {
 pub(all) struct LexScanCase {
   pat : LexScanCasePattern
   bindings : @list.List[(Label, Binder?)]
-  guard_ : Expr?
   body : Expr
 } derive(Debug)
 
@@ -506,6 +507,8 @@ pub(all) enum Expr {
   )
   /// `defer e1; e2`
   Defer(expr~ : Expr, body~ : Expr, loc~ : Location)
+  /// `errdefer e1; e2`
+  ErrDefer(expr~ : Expr, body~ : Expr, loc~ : Location)
   /// `fn local(args){ e1 }; e2`
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : Location)
   LetAnd(
@@ -573,6 +576,7 @@ pub(all) enum Expr {
     loc~ : Location
   )
   LexScan(
+    streaming~ : Bool,
     strategy~ : Label?,
     expr~ : Expr,
     match_loc~ : Location,
@@ -748,6 +752,8 @@ pub(all) enum Pattern {
     is_open~ : Bool,
     loc~ : Location
   )
+  /// `T::_`
+  ConstrAny(type_name~ : TypeName, loc~ : Location)
   /// `pat1 | pat2`
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : Location)
   /// `(p1, p2, p3)`
@@ -827,6 +833,7 @@ pub(all) struct FunDecl {
   quantifiers : @list.List[TypeVarBinder]
   return_type : Type?
   error_type : ErrorType
+  nocancel_ : Location?
   vis : Visibility
   attrs : @list.List[Attribute]
   mut doc : DocString
@@ -841,6 +848,7 @@ pub(all) struct TraitMethodDecl {
   params : Parameters
   return_type : Type?
   error_type : ErrorType
+  nocancel_ : Location?
   has_default : Location?
   attrs : @list.List[Attribute]
   loc : Location
@@ -912,6 +920,7 @@ pub(all) enum Impl {
     params~ : Parameters,
     ret_ty~ : Type?,
     err_ty~ : ErrorType,
+    nocancel_~ : Location?,
     body~ : DeclBody,
     vis~ : Visibility,
     loc~ : Location,
