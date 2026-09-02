@@ -27,6 +27,7 @@ pub impl ToJson for Token with fn to_json(self) {
   match self {
     TRY_QUESTION => "TRY_QUESTION"
     NORAISE => "NORAISE"
+    NOCANCEL => "NOCANCEL"
     ENUMVIEW => "ENUMVIEW"
     LETREC => "LETREC"
     AND => "AND"
@@ -35,6 +36,7 @@ pub impl ToJson for Token with fn to_json(self) {
     IN => "IN"
     FOR => "FOR"
     DEFER => "DEFER"
+    ERRDEFER => "ERRDEFER"
     GUARD => "GUARD"
     GUARD_EXCLAMATION => "GUARD_EXCLAMATION"
     LOOP => "LOOP"
@@ -53,6 +55,7 @@ pub impl ToJson for Token with fn to_json(self) {
     MATCH => "MATCH"
     CONST => "CONST"
     LET => "LET"
+    VAR => "VAR"
     PROOF_ASSERT => "PROOF_ASSERT"
     PROOF_LET => "PROOF_LET"
     IF => "IF"

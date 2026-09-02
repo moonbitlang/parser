@@ -41,6 +41,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | PIPE
     | ELLIPSIS
     | NORAISE
+    | NOCANCEL
     | EXTEND
     | POST_LABEL(_)
     | POST_LABEL_TRANSPARENT(_) => true
@@ -65,6 +66,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | LPAREN
     | DOT_LPAREN
     | LET
+    | VAR
     | LETREC
     | AND
     | CONST
@@ -83,6 +85,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | GUARD_EXCLAMATION
     | DECLARE
     | DEFER
+    | ERRDEFER
     | WHILE
     | ASYNC
     | FN
@@ -184,6 +187,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | TRY_QUESTION
     | TRY_EXCLAMATION
     | LET
+    | VAR
     | PROOF_ASSERT
     | PROOF_LET
     | LETREC
@@ -195,6 +199,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | GUARD
     | GUARD_EXCLAMATION
     | DEFER
+    | ERRDEFER
     | DECLARE
     | WHILE
     | ASYNC
@@ -288,6 +293,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | EQ_TILDE
     | ELSE
     | NORAISE
+    | NOCANCEL
     | CATCH
     | COMMA
     | COLON

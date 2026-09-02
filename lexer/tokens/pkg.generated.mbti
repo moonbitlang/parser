@@ -123,6 +123,7 @@ pub(all) enum Token {
   FN
   IF
   LET
+  VAR
   PROOF_ASSERT
   PROOF_LET
   CONST
@@ -146,6 +147,7 @@ pub(all) enum Token {
   GUARD
   GUARD_EXCLAMATION
   DEFER
+  ERRDEFER
   FOR
   IN
   IS
@@ -159,6 +161,7 @@ pub(all) enum Token {
   EXTENUM
   DECLARE
   NORAISE
+  NOCANCEL
   NOBREAK
   WHERE
   TRY_QUESTION
@@ -262,6 +265,7 @@ pub(all) enum TokenKind {
   TK_FN
   TK_IF
   TK_LET
+  TK_VAR
   TK_PROOF_ASSERT
   TK_PROOF_LET
   TK_CONST
@@ -285,6 +289,7 @@ pub(all) enum TokenKind {
   TK_GUARD
   TK_GUARD_EXCLAMATION
   TK_DEFER
+  TK_ERRDEFER
   TK_FOR
   TK_IN
   TK_IS
@@ -298,6 +303,7 @@ pub(all) enum TokenKind {
   TK_EXTENUM
   TK_DECLARE
   TK_NORAISE
+  TK_NOCANCEL
   TK_NOBREAK
   TK_WHERE
   TK_TRY_QUESTION
