@@ -2,7 +2,7 @@
 ///|
 fn f(s : String) -> Unit {
   lexmatch s {
-    "a" => ()
+    re"a" => ()
     _ => ()
   }
 }

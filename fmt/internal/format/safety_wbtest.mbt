@@ -31,6 +31,24 @@ test "semantic equivalence is reflexive for declarations" {
 }
 
 ///|
+test "modern effects and parser forms format safely" {
+  let source =
+    #|fn f(callback : async () -> Unit noraise + nocancel) nocancel {
+    #|  errdefer cleanup()
+    #|  match value { T::_ => () }
+    #|  lexmatch input { re"a" => () }
+    #|}
+  let formatted = assert_safe_format(source)
+  for expected in ["nocancel", "errdefer cleanup()", "T::_", "lexmatch input"] {
+    if !formatted.contains(expected) {
+      fail(
+        "modern syntax disappeared while formatting: `\{expected}`\n\{formatted}",
+      )
+    }
+  }
+}
+
+///|
 test "constructor pattern labels and optional puns preserve meaning" {
   let formatted = assert_safe_format(
     (
@@ -103,7 +121,11 @@ test "all trailing block argument shapes are safe" {
 
 ///|
 test "invalid or recovered input is returned byte-for-byte" {
-  for source in ["fn f( {\n", "fn f() -> Unit { let s = \"unterminated\n}"] {
+  for
+    source in [
+      "fn f( {\n", "fn f() -> Unit { let s = \"unterminated\n}", "fn f() { match value { _ => errdefer cleanup() } }",
+      "fn f() nocancel + { () }",
+    ] {
     inspect(format(source, block_line=false), content=source)
   }
 }

@@ -251,23 +251,32 @@ fn Fmt::impls(fmt : Self, impls : List[@syntax.Impl]) -> Doc {
 }
 
 ///|
+fn Fmt::result_type_with_effect(
+  fmt : Self,
+  result_ty : @syntax.Type,
+  err_ty : @syntax.ErrorType,
+  nocancel_ : Location?,
+) -> Doc {
+  let result_ty = if result_ty is Arrow(..) &&
+    (!(err_ty is NoErrorType) || nocancel_ is Some(_)) {
+    char('(') + fmt.ty(result_ty) + char(')')
+  } else {
+    fmt.ty(result_ty)
+  }
+  space + text("->") + space + result_ty + fmt.effect_type(err_ty, nocancel_)
+}
+
+///|
 fn Fmt::return_and_error_type_annotation(
   fmt : Self,
   return_ty : @syntax.Type?,
   err_ty : @syntax.ErrorType,
+  nocancel_ : Location?,
 ) -> Doc {
-  let arrow = if return_ty is None && err_ty is NoErrorType {
-    empty
-  } else {
-    space + text("->")
+  match return_ty {
+    Some(ty) => fmt.result_type_with_effect(ty, err_ty, nocancel_)
+    None => fmt.effect_type(err_ty, nocancel_)
   }
-  let return_type = if return_ty is Some(ty) {
-    space + fmt.ty(ty)
-  } else {
-    empty
-  }
-  let error_type = fmt.error_type(err_ty)
-  arrow + return_type + error_type
 }
 
 ///|
@@ -347,6 +356,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       params~,
       ret_ty~,
       err_ty~,
+      nocancel_~,
       body~,
       vis~,
       attrs~,
@@ -394,7 +404,9 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
           rparen=None,
         ),
       )
-      let result = fmt.return_and_error_type_annotation(ret_ty, err_ty)
+      let result = fmt.return_and_error_type_annotation(
+        ret_ty, err_ty, nocancel_,
+      )
       let body = match body {
         DeclNone => empty
         DeclBody(expr~) => space + fmt.expr_block(expr, force_newline=true)
@@ -497,6 +509,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         quantifiers,
         return_type,
         error_type,
+        nocancel_,
         vis,
         attrs,
         doc,
@@ -536,7 +549,9 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       } else {
         empty
       }
-      let result = fmt.return_and_error_type_annotation(return_type, error_type)
+      let result = fmt.return_and_error_type_annotation(
+        return_type, error_type, nocancel_,
+      )
       let (extern_, body) = match decl_body {
         DeclNone => (empty, empty)
         DeclBody(expr~) => (empty, space + fmt.expr_block(expr))
@@ -848,6 +863,7 @@ fn Fmt::trait_method(fmt : Fmt, meth : @syntax.TraitMethodDecl) -> Doc {
     params,
     return_type,
     error_type,
+    nocancel_,
     loc,
     has_default,
     attrs: _,
@@ -864,21 +880,15 @@ fn Fmt::trait_method(fmt : Fmt, meth : @syntax.TraitMethodDecl) -> Doc {
     param_tables=@comment.NodeTableArray::empty(),
     kind=TraitMethod,
   )
-  let arrow = space + text("->")
-  let return_type = if return_type is Some(ty) {
-    space + fmt.ty(ty)
-  } else {
-    empty
-  }
-  let error_type = fmt.error_type(error_type)
+  let result = fmt.return_and_error_type_annotation(
+    return_type, error_type, nocancel_,
+  )
   let has_default = if has_default is Some(_) {
     space + char('=') + space + text("_")
   } else {
     empty
   }
-  let doc = group(
-    async_ + name + params + arrow + return_type + error_type + has_default,
-  )
+  let doc = group(async_ + name + params + result + has_default)
   let after = fmt.placeholder()
   ignore(fmt.checkpoint(loc.end))
   before + doc + after
@@ -1455,6 +1465,8 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       )
     Constr(constr~, args~, is_open~, loc=_) =>
       constr_pattern2doc(fmt.constr(constr), args, is_open)
+    ConstrAny(type_name~, loc=_) =>
+      fmt.type_name(type_name) + text("::") + char('_')
     Constant(c~, loc=_) => fmt.constant(c)
     Array(pats~, loc=_) => {
       fn array_pattern2doc(pat : @syntax.ArrayPattern) -> Doc {
@@ -1658,6 +1670,22 @@ fn Fmt::error_type(fmt : Self, err : @syntax.ErrorType) -> Doc {
 }
 
 ///|
+fn Fmt::effect_type(
+  fmt : Self,
+  err : @syntax.ErrorType,
+  nocancel_ : Location?,
+) -> Doc {
+  let error_type = fmt.error_type(err)
+  if nocancel_ is None {
+    error_type
+  } else if err is NoErrorType {
+    space + text("nocancel")
+  } else {
+    error_type + space + char('+') + space + text("nocancel")
+  }
+}
+
+///|
 fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
   let loc = ty.loc()
   ignore(fmt.checkpoint(loc.start))
@@ -1688,7 +1716,7 @@ fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
           })
         }),
       )
-    Arrow(args~, res~, err~, is_async~, loc=_) => {
+    Arrow(args~, res~, err~, is_async~, nocancel_~, loc=_) => {
       let async_ = if is_async is Some(_) {
         text("async") + space
       } else {
@@ -1701,10 +1729,7 @@ fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
           })
         }),
       )
-      let arrow = space + text("->")
-      let res = space + fmt.ty(res)
-      let err = fmt.error_type(err)
-      async_ + args + arrow + res + err
+      async_ + args + fmt.result_type_with_effect(res, err, nocancel_)
     }
     Option(ty~, loc=_, question_loc=_) => {
       let ty = match ty {
@@ -1916,7 +1941,16 @@ fn Fmt::func(
   binder? : @syntax.Binder,
 ) -> RawExprDoc {
   let is_annomyous = binder is None
-  let { parameters, body, return_type, error_type, kind, is_async, .. } = func
+  let {
+    parameters,
+    body,
+    return_type,
+    error_type,
+    nocancel_,
+    kind,
+    is_async,
+    ..
+  } = func
   let async_ = if is_async is Some(_) { text("async") + space } else { empty }
   let fn_ = match kind {
     Arrow => empty
@@ -1932,23 +1966,17 @@ fn Fmt::func(
       rparen=None,
     ),
   )
-  let has_error_ty = match error_type {
-    NoErrorType => false
-    DefaultErrorType(_) | Noraise(_) | ErrorType(_) | MaybeError(_) => true
-  }
-  let arrow = match kind {
-    Arrow => space + text("=>")
+  let result = match kind {
+    Arrow => {
+      let effect = fmt.effect_type(error_type, nocancel_)
+      let rty = if return_type is Some(ty) { space + fmt.ty(ty) } else { empty }
+      space + text("=>") + rty + effect
+    }
     Lambda =>
-      if return_type is Some(_) || has_error_ty {
-        space + text("->")
-      } else {
-        empty
-      }
+      fmt.return_and_error_type_annotation(return_type, error_type, nocancel_)
   }
-  let ety = fmt.error_type(error_type)
-  let rty = if return_type is Some(ty) { space + fmt.ty(ty) } else { empty }
   let body = space + fmt.expr_block(body, force_newline=!is_annomyous)
-  Collapsible(async_ + fn_ + binder + params + arrow + rty + ety, body)
+  Collapsible(async_ + fn_ + binder + params + result, body)
 }
 
 ///|
@@ -2141,7 +2169,7 @@ fn Fmt::lex_scan_case_pattern(
 
 ///|
 fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
-  let { pat, bindings, guard_, body, } = case_
+  let { pat, bindings, body, } = case_
   let before = fmt.placeholder()
   ignore(fmt.checkpoint(body.loc().start))
   fn binding2doc(binding : (@syntax.Label, @syntax.Binder?)) -> Doc {
@@ -2166,13 +2194,8 @@ fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
       }),
     )
   }
-  let guard_ = if guard_ is Some(expr) {
-    space + text("if") + space + fmt.compose(expr, Infix(Other))
-  } else {
-    empty
-  }
   let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt)
-  let doc = group(group(pattern) + guard_ + body)
+  let doc = group(group(pattern) + body)
   let after = fmt.placeholder()
   ignore(fmt.checkpoint(case_.body.loc().end))
   before + doc + after
@@ -2748,6 +2771,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         | Any(_)
         | Var(_)
         | Constr(_)
+        | ConstrAny(_)
         | SpecialConstr(_)
         | Tuple(_)
         | Constraint(_)
@@ -2796,6 +2820,13 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let expr = space + fmt.compose(expr, Pipeline) // TODO: compose_rhs
       let body = hardline + fmt.compose(body, Stmt)
       let doc = defer_ + expr + body
+      Normal(doc)
+    }
+    ErrDefer(expr~, body~, loc=_) => {
+      let errdefer_ = text("errdefer")
+      let expr = space + fmt.compose(expr, Pipeline)
+      let body = hardline + fmt.compose(body, Stmt)
+      let doc = errdefer_ + expr + body
       Normal(doc)
     }
     LetFn(name=_, func~, body~, loc=_) => { //TODO: fixme
@@ -3280,8 +3311,8 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         )
       Collapsible(lexmatch_ + cond + strategy, cases)
     }
-    LexScan(strategy~, expr~, match_loc=_, cases~, loc=_) => {
-      let lexscan_ = text("lexscan")
+    LexScan(streaming~, strategy~, expr~, match_loc=_, cases~, loc=_) => {
+      let lexscan_ = text(if streaming { "lexscan" } else { "lexmatch" })
       let cond = space + fmt.compose(expr, Infix(Other))
       let strategy = fmt.lex_strategy(strategy)
       let cases = space +
