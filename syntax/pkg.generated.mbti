@@ -265,6 +265,7 @@ pub(all) enum Expr {
   Is(expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location)
   RegexMatch(expr~ : Expr, pat~ : RegexPattern, bindings~ : @list.List[(Label, Binder?)], loc~ : @basic.Location)
   Defer(expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
+  ErrDefer(expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   LetFn(name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location)
   LetAnd(bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location)
   Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
@@ -279,7 +280,7 @@ pub(all) enum Expr {
   Mutate(record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
   Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location)
   LexMatch(strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location)
-  LexScan(strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location)
+  LexScan(streaming~ : Bool, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location)
   LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
   RevPipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
@@ -350,6 +351,7 @@ pub(all) struct FunDecl {
   quantifiers : @list.List[TypeVarBinder]
   return_type : Type?
   error_type : ErrorType
+  nocancel_ : @basic.Location?
   vis : Visibility
   attrs : @list.List[@attribute.Attribute]
   mut doc : DocString
@@ -364,6 +366,7 @@ pub(all) struct Func {
   error_type : ErrorType
   kind : FnKind
   is_async : @basic.Location?
+  nocancel_ : @basic.Location?
   loc : @basic.Location
 } derive(@debug.Debug)
 
@@ -390,7 +393,7 @@ pub(all) enum Impl {
   TopFuncDef(fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location)
   TopLetDef(binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString, is_declare~ : Bool)
   TopTrait(TraitDecl)
-  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
+  TopImpl(self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, nocancel_~ : @basic.Location?, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopView(quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], mut doc~ : DocString)
   TopImplRelation(self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString, is_declare~ : Bool)
   TopUsing(pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, mut doc~ : DocString)
@@ -439,7 +442,6 @@ pub(all) enum LexPattern {
 pub(all) struct LexScanCase {
   pat : LexScanCasePattern
   bindings : @list.List[(Label, Binder?)]
-  guard_ : Expr?
   body : Expr
 } derive(@debug.Debug)
 
@@ -505,6 +507,7 @@ pub(all) enum Pattern {
   Constant(c~ : Constant, loc~ : @basic.Location)
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : @basic.Location)
   Constr(constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location)
+  ConstrAny(type_name~ : TypeName, loc~ : @basic.Location)
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location)
   Tuple(pats~ : @list.List[Pattern], loc~ : @basic.Location)
   Var(Binder)
@@ -571,6 +574,7 @@ pub(all) struct TraitMethodDecl {
   params : @list.List[Parameter]
   return_type : Type?
   error_type : ErrorType
+  nocancel_ : @basic.Location?
   has_default : @basic.Location?
   attrs : @list.List[@attribute.Attribute]
   loc : @basic.Location
@@ -582,7 +586,7 @@ pub(all) enum TryOperatorKind {
 
 pub(all) enum Type {
   Any(loc~ : @basic.Location)
-  Arrow(args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location)
+  Arrow(args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, nocancel_~ : @basic.Location?, loc~ : @basic.Location)
   Tuple(tys~ : @list.List[Type], loc~ : @basic.Location)
   Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location)
   Option(ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location)
@@ -681,7 +685,7 @@ pub(open) trait IterVisitor {
   fn visit_ConstrId(Self, ConstrId) -> Unit = _
   fn visit_Type(Self, Type) -> Unit = _
   fn visit_Type_Any(Self, loc~ : @basic.Location) -> Unit = _
-  fn visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Unit = _
+  fn visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, nocancel_~ : @basic.Location?, loc~ : @basic.Location) -> Unit = _
   fn visit_Type_Name(Self, constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location) -> Unit = _
   fn visit_Type_Tuple(Self, tys~ : @list.List[Type], loc~ : @basic.Location) -> Unit = _
   fn visit_Type_Option(Self, ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location) -> Unit = _
@@ -783,6 +787,7 @@ pub(open) trait IterVisitor {
   fn visit_Pattern_Constant(Self, c~ : Constant, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Constr(Self, constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Unit = _
+  fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Var(Self, Binder) -> Unit = _
@@ -812,7 +817,7 @@ pub(open) trait IterVisitor {
   fn visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location) -> Unit = _
   fn visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Unit = _
   fn visit_Impl_TopTrait(Self, TraitDecl) -> Unit = _
-  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
+  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, nocancel_~ : @basic.Location?, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   fn visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Unit = _
   fn visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Unit = _
   fn visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Unit = _
@@ -844,6 +849,7 @@ pub(open) trait IterVisitor {
   fn visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, exclamation~ : Bool, guard_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
+  fn visit_Expr_ErrDefer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Unit = _
@@ -858,7 +864,7 @@ pub(open) trait IterVisitor {
   fn visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Unit = _
-  fn visit_Expr_LexScan(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Unit = _
+  fn visit_Expr_LexScan(Self, streaming~ : Bool, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Unit = _
   fn visit_LexScanCase(Self, LexScanCase) -> Unit = _
   fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> Unit = _
   fn visit_LexScanCasePattern_Pattern(Self, RegexPattern) -> Unit = _
@@ -897,7 +903,7 @@ pub(open) trait MapVisitor {
   fn visit_ConstrId(Self, ConstrId) -> ConstrId = _
   fn visit_Type(Self, Type) -> Type = _
   fn visit_Type_Any(Self, loc~ : @basic.Location) -> Type = _
-  fn visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, loc~ : @basic.Location) -> Type = _
+  fn visit_Type_Arrow(Self, args~ : @list.List[Type], res~ : Type, err~ : ErrorType, is_async~ : @basic.Location?, nocancel_~ : @basic.Location?, loc~ : @basic.Location) -> Type = _
   fn visit_Type_Tuple(Self, tys~ : @list.List[Type], loc~ : @basic.Location) -> Type = _
   fn visit_Type_Name(Self, constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : @basic.Location) -> Type = _
   fn visit_Type_Option(Self, ty~ : Type, loc~ : @basic.Location, question_loc~ : @basic.Location) -> Type = _
@@ -999,6 +1005,7 @@ pub(open) trait MapVisitor {
   fn visit_Pattern_Constant(Self, c~ : Constant, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Constr(Self, constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Pattern = _
+  fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Var(Self, Binder) -> Pattern = _
@@ -1030,7 +1037,7 @@ pub(open) trait MapVisitor {
   fn visit_Impl_TopFuncDef(Self, fun_decl~ : FunDecl, decl_body~ : DeclBody, where_clause~ : WhereClause?, loc~ : @basic.Location) -> Impl = _
   fn visit_Impl_TopLetDef(Self, binder~ : Binder, ty~ : Type?, expr~ : Expr, vis~ : Visibility, is_constant~ : Bool, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString, is_declare~ : Bool) -> Impl = _
   fn visit_Impl_TopTrait(Self, TraitDecl) -> Impl = _
-  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
+  fn visit_Impl_TopImpl(Self, self_ty~ : Type?, trait_~ : TypeName, method_name~ : Binder, quantifiers~ : @list.List[TypeVarBinder], method_quantifiers~ : @list.List[TypeVarBinder], params~ : @list.List[Parameter], ret_ty~ : Type?, err_ty~ : ErrorType, nocancel_~ : @basic.Location?, body~ : DeclBody, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   fn visit_Impl_TopView(Self, quantifiers~ : @list.List[TypeVarBinder], source_ty~ : Type, view_type_name~ : String, view_type_loc~ : @basic.Location, view_constrs~ : @list.List[ConstrDecl], view_func_name~ : Binder, parameters~ : @list.List[Parameter], params_loc~ : @basic.Location, body~ : Expr, vis~ : Visibility, loc~ : @basic.Location, attrs~ : @list.List[@attribute.Attribute], doc~ : DocString) -> Impl = _
   fn visit_Impl_TopImplRelation(Self, self_ty~ : Type, trait_~ : TypeName, quantifiers~ : @list.List[TypeVarBinder], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString, is_declare~ : Bool) -> Impl = _
   fn visit_Impl_TopUsing(Self, pkg~ : Label, names~ : @list.List[(AliasTarget, UsingKind)], vis~ : Visibility, attrs~ : @list.List[@attribute.Attribute], loc~ : @basic.Location, doc~ : DocString) -> Impl = _
@@ -1060,6 +1067,7 @@ pub(open) trait MapVisitor {
   fn visit_Expr_Guard(Self, cond~ : Expr, otherwise~ : Expr?, body~ : Expr, exclamation~ : Bool, guard_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Is(Self, expr~ : Expr, pat~ : Pattern, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Defer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
+  fn visit_Expr_ErrDefer(Self, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_LetFn(Self, name~ : Binder, func~ : Func, body~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_LetAnd(Self, bindings~ : @list.List[(Binder, Type?, Func)], body~ : Expr, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Let(Self, pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : @basic.Location) -> Expr = _
@@ -1074,7 +1082,7 @@ pub(open) trait MapVisitor {
   fn visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Expr = _
-  fn visit_Expr_LexScan(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Expr = _
+  fn visit_Expr_LexScan(Self, streaming~ : Bool, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Expr = _
   fn visit_LexScanCase(Self, LexScanCase) -> LexScanCase = _
   fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> LexScanCasePattern = _
   fn visit_LexScanCasePattern_Pattern(Self, RegexPattern) -> LexScanCasePattern = _

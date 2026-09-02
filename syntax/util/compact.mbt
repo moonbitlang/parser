@@ -50,6 +50,8 @@ pub(all) enum Statement {
   StmtLetand(bindings~ : @list.List[(Binder, Type?, Func)], loc~ : Location)
   /// defer statement
   StmtDefer(expr~ : Expr, loc~ : Location)
+  /// errdefer statement
+  StmtErrdefer(expr~ : Expr, loc~ : Location)
 }
 
 ///|
@@ -68,6 +70,7 @@ pub fn Statement::compact_rev(
           | StmtFunc(loc~, ..)
           | StmtLetand(loc~, ..)
           | StmtDefer(loc~, ..)
+          | StmtErrdefer(loc~, ..)
           | StmtGuard(loc~, ..),
           ..
         ) => loc
@@ -126,6 +129,10 @@ pub fn Statement::collect_rev(
             StmtDefer(expr~, loc~) => {
               let loc = loc.merge(loc_of_expression(cont))
               Defer(expr~, loc~, body=cont)
+            }
+            StmtErrdefer(expr~, loc~) => {
+              let loc = loc.merge(loc_of_expression(cont))
+              ErrDefer(expr~, loc~, body=cont)
             }
             StmtExpr(_) | StmtFunc(..) => panic()
           }
