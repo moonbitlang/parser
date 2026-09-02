@@ -135,6 +135,7 @@ fn TraitMethodDecl::json_repr(self : TraitMethodDecl) -> Json {
     ),
     "return_type": option_json_repr(self.return_type, Type::json_repr),
     "error_type": self.error_type.json_repr(self.loc),
+    "nocancel": option_json_repr(self.nocancel_, nocancel_json_repr),
     "has_default": option_json_repr(self.has_default, fn(loc) {
       tagged_node0("TraitMethodDecl::HasDefault", loc)
     }),
@@ -493,11 +494,12 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "ifso": ifso.json_repr(),
         "ifnot": option_json_repr(ifnot, Expr::json_repr),
       })
-    Guard(cond~, otherwise~, body~, loc~, ..) =>
+    Guard(cond~, otherwise~, body~, exclamation~, loc~, ..) =>
       tagged_node("Expr::Guard", loc, {
         "cond": cond.json_repr(),
         "otherwise": option_json_repr(otherwise, Expr::json_repr),
         "body": body.json_repr(),
+        "exclamation": Json::boolean(exclamation),
       })
     Is(expr~, pat~, loc~) =>
       tagged_node("Expr::Is", loc, {
@@ -523,6 +525,11 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       })
     Defer(expr~, body~, loc~) =>
       tagged_node("Expr::Defer", loc, {
+        "expr": expr.json_repr(),
+        "body": body.json_repr(),
+      })
+    ErrDefer(expr~, body~, loc~) =>
+      tagged_node("Expr::ErrDefer", loc, {
         "expr": expr.json_repr(),
         "body": body.json_repr(),
       })
@@ -654,9 +661,10 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         }),
       })
     }
-    LexScan(strategy~, expr~, match_loc~, cases~, loc~) => {
+    LexScan(streaming~, strategy~, expr~, match_loc~, cases~, loc~) => {
       ignore(match_loc)
       tagged_node("Expr::Lexscan", loc, {
+        "streaming": Json::boolean(streaming),
         "strategy": option_json_repr(strategy, Label::json_repr),
         "expr": expr.json_repr(),
         "cases": list_json_repr("Expr::Lexscan::CaseList", loc, cases, fn(
@@ -1051,7 +1059,7 @@ fn Binder::json_repr(self : Binder) -> Json {
 fn Type::json_repr(self : Type) -> Json {
   match self {
     Any(loc~) => tagged_node0("Type::Any", loc)
-    Arrow(args~, res~, err~, is_async~, loc~) =>
+    Arrow(args~, res~, err~, is_async~, nocancel_~, loc~) =>
       tagged_node("Type::Arrow", loc, {
         "args": list_json_repr(
           "Type::Arrow::ArgList",
@@ -1062,6 +1070,7 @@ fn Type::json_repr(self : Type) -> Json {
         "res": res.json_repr(),
         "err": err.json_repr(loc),
         "is_async": option_json_repr(is_async, async_json_repr),
+        "nocancel": option_json_repr(nocancel_, nocancel_json_repr),
       })
     Tuple(tys~, loc~) =>
       tagged_node("Type::Tuple", loc, {
@@ -1331,6 +1340,7 @@ fn Func::json_repr(self : Func) -> Json {
     "body": self.body.json_repr(),
     "return_type": option_json_repr(self.return_type, Type::json_repr),
     "error_type": self.error_type.json_repr(self.loc),
+    "nocancel": option_json_repr(self.nocancel_, nocancel_json_repr),
     "kind": self.kind.json_repr(self.loc),
     "has_error": Json::null(),
     "is_async": option_json_repr(self.is_async, async_json_repr),
@@ -1418,6 +1428,10 @@ fn Pattern::json_repr(self : Pattern) -> Json {
           )
         }),
         "is_open": Json::boolean(is_open),
+      })
+    ConstrAny(type_name~, loc~) =>
+      tagged_node("Pattern::ConstrAny", loc, {
+        "type_name": type_name.json_repr(),
       })
     Or(pat1~, pat2~, loc~) =>
       tagged_node("Pattern::Or", loc, {
@@ -1634,7 +1648,6 @@ fn LexScanCase::json_repr(self : LexScanCase, loc : Location) -> Json {
         "binder": option_json_repr(binder, Binder::json_repr),
       })
     }),
-    "guard": option_json_repr(self.guard_, Expr::json_repr),
     "body": self.body.json_repr(),
   })
 }
@@ -1829,6 +1842,11 @@ fn async_json_repr(is_async : Location) -> Json {
 }
 
 ///|
+fn nocancel_json_repr(nocancel_ : Location) -> Json {
+  tagged_node0("Nocancel", nocancel_)
+}
+
+///|
 pub fn Impl::json_repr(self : Impl) -> Json {
   match self {
     TopExpr(expr~, is_main~, is_async~, loc~) =>
@@ -1905,12 +1923,14 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       params~,
       ret_ty~,
       err_ty~,
+      nocancel_~,
       body~,
       vis~,
       loc~,
       attrs~,
       doc~
-    ) =>
+    ) => {
+      ignore(nocancel_)
       tagged_node("Impl::TopImpl", loc, {
         "self_ty": option_json_repr(self_ty, Type::json_repr),
         "trait": trait_.json_repr(),
@@ -1946,6 +1966,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
         ),
         "doc": doc,
       })
+    }
     TopView(
       quantifiers~,
       source_ty~,

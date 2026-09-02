@@ -842,6 +842,7 @@
                                     "kind": "Expr::Lexscan",
                                     "loc": "20:17-23:4",
                                     "children": {
+                                      "streaming": true,
                                       "strategy": {
                                         "kind": "Label",
                                         "loc": "20:37-20:44",
@@ -955,7 +956,6 @@
                                                   }
                                                 ]
                                               },
-                                              "guard": null,
                                               "body": {
                                                 "kind": "Expr::Ident",
                                                 "loc": "21:64-21:70",
@@ -1006,7 +1006,6 @@
                                                 "loc": "20:17-23:4",
                                                 "children": []
                                               },
-                                              "guard": null,
                                               "body": {
                                                 "kind": "Expr::Constant",
                                                 "loc": "22:22-22:23",

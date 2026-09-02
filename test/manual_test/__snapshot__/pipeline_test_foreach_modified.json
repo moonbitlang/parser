@@ -3234,6 +3234,7 @@
                                                         "loc": null,
                                                         "children": {}
                                                       },
+                                                      "nocancel": null,
                                                       "kind": {
                                                         "kind": "FnKind::Arrow",
                                                         "loc": null,
@@ -3275,6 +3276,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "kind": {
                     "kind": "FnKind::Lambda",
                     "loc": null,
@@ -3698,6 +3700,7 @@
                                                         "loc": null,
                                                         "children": {}
                                                       },
+                                                      "nocancel": null,
                                                       "kind": {
                                                         "kind": "FnKind::Lambda",
                                                         "loc": null,
@@ -3982,6 +3985,7 @@
                                                     "loc": null,
                                                     "children": {}
                                                   },
+                                                  "nocancel": null,
                                                   "kind": {
                                                     "kind": "FnKind::Lambda",
                                                     "loc": null,

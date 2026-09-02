@@ -285,6 +285,7 @@ test "type to_json" {
       res=int_type,
       err=NoErrorType,
       is_async=None,
+      nocancel_=None,
       loc=dummy_loc,
     ).json_repr(),
     content={
@@ -347,6 +348,7 @@ test "type to_json" {
           "children": Json::empty_object(),
         },
         "is_async": null,
+        "nocancel": null,
       },
     },
   )
@@ -1534,6 +1536,7 @@ test "func to_json" {
       body: unit_expr,
       return_type: Some(int_type),
       error_type: NoErrorType,
+      nocancel_: None,
       kind: Lambda,
       is_async: None,
       loc: dummy_loc,
@@ -1613,6 +1616,7 @@ test "func to_json" {
           "loc": null,
           "children": Json::empty_object(),
         },
+        "nocancel": null,
         "kind": {
           "kind": "FnKind::Lambda",
           "loc": null,
@@ -2608,6 +2612,7 @@ test "fun_decl to_json" {
     quantifiers: List([type_var_binder]),
     return_type: Some(int_type),
     error_type: NoErrorType,
+    nocancel_: None,
     vis: Priv(loc=dummy_loc),
     attrs: List([dummy_attribute]),
     doc: dummy_docstring,
@@ -2774,6 +2779,7 @@ test "trait_method_decl to_json" {
     params: List([param]),
     return_type: Some(int_type),
     error_type: DefaultErrorType(loc=dummy_loc),
+    nocancel_: None,
     has_default: Some(dummy_loc),
     attrs: @list.empty(),
     loc: dummy_loc,
@@ -2869,6 +2875,7 @@ test "trait_method_decl to_json" {
         "loc": null,
         "children": Json::empty_object(),
       },
+      "nocancel": null,
       "has_default": {
         "kind": "TraitMethodDecl::HasDefault",
         "loc": null,
@@ -2898,6 +2905,7 @@ test "trait_decl to_json" {
     params: List([]),
     return_type: None,
     error_type: NoErrorType,
+    nocancel_: None,
     has_default: None,
     attrs: @list.empty(),
     loc: dummy_loc,
@@ -2969,6 +2977,7 @@ test "trait_decl to_json" {
                 "loc": null,
                 "children": Json::empty_object(),
               },
+              "nocancel": null,
               "has_default": null,
               "attrs": {
                 "kind": "TraitMethodDecl::AttrList",
