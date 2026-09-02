@@ -10,6 +10,15 @@ test "reference keyword handling: where is a keyword without lexical error" {
 }
 
 ///|
+test "reference keyword handling: var is a keyword without lexical error" {
+  let result = tokens_from_string("var", comment=false)
+  guard result.errors.length() == 0 else {
+    fail("var should not be reported as a reserved keyword")
+  }
+  guard result.tokens[0].0 is VAR else { fail("var should tokenize as VAR") }
+}
+
+///|
 test "reference keyword handling: package remains a keyword" {
   let result = tokens_from_string("package", comment=false)
   guard result.errors.length() == 0 else {

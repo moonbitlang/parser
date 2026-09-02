@@ -87,6 +87,7 @@ pub(all) enum Token {
   FN
   IF
   LET
+  VAR
   PROOF_ASSERT
   PROOF_LET
   CONST
@@ -110,6 +111,7 @@ pub(all) enum Token {
   GUARD
   GUARD_EXCLAMATION
   DEFER
+  ERRDEFER
   FOR
   IN
   IS
@@ -123,6 +125,7 @@ pub(all) enum Token {
   EXTENUM
   DECLARE
   NORAISE
+  NOCANCEL
   NOBREAK
   WHERE
   TRY_QUESTION
@@ -224,6 +227,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     FN => TK_FN
     IF => TK_IF
     LET => TK_LET
+    VAR => TK_VAR
     PROOF_ASSERT => TK_PROOF_ASSERT
     PROOF_LET => TK_PROOF_LET
     CONST => TK_CONST
@@ -247,6 +251,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     GUARD => TK_GUARD
     GUARD_EXCLAMATION => TK_GUARD_EXCLAMATION
     DEFER => TK_DEFER
+    ERRDEFER => TK_ERRDEFER
     FOR => TK_FOR
     IN => TK_IN
     IS => TK_IS
@@ -260,6 +265,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     EXTENUM => TK_EXTENUM
     DECLARE => TK_DECLARE
     NORAISE => TK_NORAISE
+    NOCANCEL => TK_NOCANCEL
     NOBREAK => TK_NOBREAK
     WHERE => TK_WHERE
     TRY_QUESTION => TK_TRY_QUESTION
@@ -361,6 +367,7 @@ pub(all) enum TokenKind {
   TK_FN
   TK_IF
   TK_LET
+  TK_VAR
   TK_PROOF_ASSERT
   TK_PROOF_LET
   TK_CONST
@@ -384,6 +391,7 @@ pub(all) enum TokenKind {
   TK_GUARD
   TK_GUARD_EXCLAMATION
   TK_DEFER
+  TK_ERRDEFER
   TK_FOR
   TK_IN
   TK_IS
@@ -397,6 +405,7 @@ pub(all) enum TokenKind {
   TK_EXTENUM
   TK_DECLARE
   TK_NORAISE
+  TK_NOCANCEL
   TK_NOBREAK
   TK_WHERE
   TK_TRY_QUESTION
@@ -499,6 +508,7 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_FN => "\"fn\""
       TK_IF => "\"if\""
       TK_LET => "\"let\""
+      TK_VAR => "\"var\""
       TK_PROOF_ASSERT => "\"proof_assert\""
       TK_PROOF_LET => "\"proof_let\""
       TK_CONST => "\"const\""
@@ -522,6 +532,7 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_GUARD => "\"guard\""
       TK_GUARD_EXCLAMATION => "\"guard!\""
       TK_DEFER => "\"defer\""
+      TK_ERRDEFER => "\"errdefer\""
       TK_FOR => "\"for\""
       TK_IN => "\"in\""
       TK_IS => "\"is\""
@@ -535,6 +546,7 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_EXTENUM => "\"extenum\""
       TK_DECLARE => "\"declare\""
       TK_NORAISE => "\"noraise\""
+      TK_NOCANCEL => "\"nocancel\""
       TK_NOBREAK => "\"nobreak\""
       TK_WHERE => "\"where\""
       TK_TRY_QUESTION => "\"try?\""
@@ -638,6 +650,7 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_FN => Repr("fn")
       TK_IF => Repr("if")
       TK_LET => Repr("let")
+      TK_VAR => Repr("var")
       TK_PROOF_ASSERT => Repr("proof_assert")
       TK_PROOF_LET => Repr("proof_let")
       TK_CONST => Repr("const")
@@ -661,6 +674,7 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_GUARD => Repr("guard")
       TK_GUARD_EXCLAMATION => Repr("guard!")
       TK_DEFER => Repr("defer")
+      TK_ERRDEFER => Repr("errdefer")
       TK_FOR => Repr("for")
       TK_IN => Repr("in")
       TK_IS => Repr("is")
@@ -674,6 +688,7 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_EXTENUM => Repr("extenum")
       TK_DECLARE => Repr("declare")
       TK_NORAISE => Repr("noraise")
+      TK_NOCANCEL => Repr("nocancel")
       TK_NOBREAK => Repr("nobreak")
       TK_WHERE => Repr("where")
       TK_TRY_QUESTION => Repr("try?")

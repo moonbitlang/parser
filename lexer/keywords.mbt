@@ -7,6 +7,7 @@ let keyword_table : @hashmap.HashMap[String, Token] = [
     ("fnalias", FNALIAS),
     ("if", IF),
     ("let", LET),
+    ("var", VAR),
     ("proof_assert", PROOF_ASSERT),
     ("proof_let", PROOF_LET),
     ("const", CONST),
@@ -52,11 +53,13 @@ let keyword_table : @hashmap.HashMap[String, Token] = [
     ("extend", EXTEND),
     ("noraise", NORAISE),
     ("defer", DEFER),
+    ("errdefer", ERRDEFER),
     ("lexmatch", LEXMATCH),
     ("lexscan", LEXSCAN),
     ("where", WHERE),
     ("declare", DECLARE),
     ("nobreak", NOBREAK),
+    ("nocancel", NOCANCEL),
     ("package", PACKAGE),
   ]
   |> @hashmap.from_array()
