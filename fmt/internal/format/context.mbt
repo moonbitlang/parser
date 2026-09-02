@@ -171,6 +171,7 @@ fn @syntax.Expr::classify(expr : Self) -> ExprKind {
     | Hole(kind=Todo, ..) => ExprStmtKind
     Guard(_)
     | Defer(_)
+    | ErrDefer(_)
     | LetFn(_)
     | LetAnd(_)
     | Let(_)

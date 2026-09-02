@@ -1,3 +1,27 @@
 // generated file, do not edit!
 ///|
 type IntBoolPair = (Int, Bool)
+
+///|
+type NestedRaise = () -> (() -> Unit) raise
+
+///|
+type NestedTypedRaise = () -> (() -> Unit) raise Error
+
+///|
+type NestedMaybeRaise = () -> (() -> Unit) raise?
+
+///|
+type NestedNoraise = () -> (() -> Unit) noraise
+
+///|
+type NestedNocancel = () -> (() -> Unit) nocancel
+
+///|
+type NestedCombined = () -> (() -> Unit) raise Error + nocancel
+
+///|
+type NestedAsync = () -> (async () -> Unit) noraise + nocancel
+
+///|
+type NestedWithoutEffect = () -> () -> Unit
