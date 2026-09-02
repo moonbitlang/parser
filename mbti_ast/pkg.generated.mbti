@@ -33,6 +33,7 @@ pub(all) struct FuncSig {
   name : Name
   params : @list.List[@syntax.Parameter]
   return_ : (@syntax.Type, @syntax.ErrorType)
+  nocancel_ : @basic.Location?
   type_params : @list.List[TypeParamWithConstraints]
   is_async : @basic.Location?
 } derive(@debug.Debug)
@@ -91,6 +92,7 @@ pub(all) struct TraitMethodSig {
   is_async : @basic.Location?
   has_default : Bool
   return_ : (@syntax.Type, @syntax.ErrorType)
+  nocancel_ : @basic.Location?
   attrs : @list.List[@attribute.Attribute]
 } derive(@debug.Debug)
 

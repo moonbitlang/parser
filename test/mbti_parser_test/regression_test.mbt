@@ -119,3 +119,31 @@ test "trait_method_type_params" {
   }
   assert_eq(extend_params.length(), 0)
 }
+
+///|
+test "mbti nocancel effects are preserved" {
+  let function_body =
+    #|pub fn run(async () -> Unit noraise + nocancel) -> Unit nocancel
+    #|
+  guard first_sig("nocancel_function.mbti", function_body)
+    is Func({ params, nocancel_: Some(_), .. }) else {
+    fail("expected nocancel function signature")
+  }
+  guard params.head().unwrap()
+    is DiscardPositional(
+      ty=Some(Arrow(err=Noraise(_), nocancel_=Some(_), ..)),
+      ..
+    ) else {
+    fail("expected nocancel function parameter type")
+  }
+  let trait_body =
+    #|pub trait T {
+    #|  fn run(Self) -> Unit nocancel
+    #|}
+  guard first_sig("nocancel_trait.mbti", trait_body) is Trait({ methods, .. }) else {
+    fail("expected trait signature")
+  }
+  guard methods.head().unwrap() is { nocancel_: Some(_), .. } else {
+    fail("expected nocancel trait method signature")
+  }
+}
