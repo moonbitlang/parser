@@ -22,11 +22,11 @@ test {
   let _ = [ for p1 = 1, p2 = 1, i = 0; i < n; p1 = p1 + p2, p2 = p1, i = i + 1 => p1 ]
   // correct parsing: `x` is a tuple, body is `c => d` (arrow function)
   let _ = [ for x = (a, b) => c => d ]
-  // kept here just for better error recovery & reuse parser component.
-  // the formatter will turn this into `for ;; => 42`
+  // Invalid infinite-loop header retained to test error recovery.
+  // The explicit form is `[ for ;; => 42 ]`.
   let _ = [ for => 42 ]
-  // kept here just for better error recovery & reuse parser component.
-  // this is actually equivalent to `[ while f() is Some(x) => x ]` (if we support it).
-  // But honestly this looks way worse than `[ while .. ]`
+  // An infinite list-comprehension header must contain `;;`.
+  // Keep this malformed guarded form to test error recovery.
+  // The valid spelling begins `[ for ;; if ...`.
   let _ = [ for if f() is Some(x) => x ]
 }

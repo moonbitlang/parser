@@ -1,4 +1,4 @@
-//!build: -w -20-27-lexmatch_first_match
+//!build: -w -20-27
 
 ///|
 enum FizzBuzz {
@@ -28,15 +28,45 @@ fn hack(x : StringView) -> (StringView, Int) {
 ///|
 fn first_wrong(curr : StringView) -> Int? {
   for curr = curr, i = 1 {
-    lexmatch curr {
-      ("[ ]+", rest) => continue rest, i
-      ("[0-9]+" as n, rest) if fizzbuzz(i) is Number(x) && hack(rest) is (rest, _) && x[:] == n => continue rest, i + 1
-      ("fizz", rest) if fizzbuzz(i) is Fizz => continue rest, i + 1
-      ("buzz", rest) if fizzbuzz(i) is Buzz => continue rest, i + 1
-      ("fizzbuzz", rest) if fizzbuzz(i) is FizzBuzz => continue rest, i + 1
-      "" => return None
-      _ => return Some(i)
+    let skip_space = lexmatch curr {
+      (re"^[ ]+", after=rest) => Some(rest)
+      _ => None
     }
+    match skip_space {
+      Some(rest) => continue rest, i
+      None => ()
+    }
+    let at_end = lexmatch curr {
+      re"^$" => true
+      _ => false
+    }
+    if at_end {
+      return None
+    }
+    let next = match fizzbuzz(i) {
+      Number(expected) => lexmatch curr {
+        (re"^[0-9]+" as n, after=rest) =>
+          if hack(rest) is (rest, _) && expected[:] == n {
+            Some((rest, i + 1))
+          } else {
+            None
+          }
+        _ => None
+      }
+      Fizz => lexmatch curr {
+        (re"^fizz", after=rest) => Some((rest, i + 1))
+        _ => None
+      }
+      Buzz => lexmatch curr {
+        (re"^buzz", after=rest) => Some((rest, i + 1))
+        _ => None
+      }
+      FizzBuzz => lexmatch curr {
+        (re"^fizzbuzz", after=rest) => Some((rest, i + 1))
+        _ => None
+      }
+    }
+    match next { Some((rest, i)) => continue rest, i; None => return Some(i) }
   }
 }
 

@@ -27,12 +27,12 @@ suberror ErrNewType {
 ///|
 fn init {
   let t1 = { x: 42, y: "str", z: true, w: [0], m: (1, 2) }
-  println(t1.to_json().stringify())
-  println(NT([t1]).to_json().stringify())
-  println((C1 : E1[Int, Int]).to_json().stringify())
-  println(E1::C2(x=t1, (4.2, NT([{ "k": "v" }]))).to_json().stringify())
-  println(ErrNoPayload.to_json().stringify())
-  println(ErrNewType(42).to_json().stringify())
+  println(@json.to_json(t1).stringify())
+  println(@json.to_json(NT([t1])).stringify())
+  println(@json.to_json((C1 : E1[Int, Int])).stringify())
+  println(@json.to_json(E1::C2(x=t1, (4.2, NT([{ "k": "v" }])))).stringify())
+  println(@json.to_json(ErrNoPayload).stringify())
+  println(@json.to_json(ErrNewType(42)).stringify())
 }
 
 ///|
@@ -67,7 +67,7 @@ fn init {
     "nested_optional_string": ["str"],
     "number2": 42,
   }
-  let json = s.to_json()
+  let json = @json.to_json(s)
   println("\{json == expected}, json:\{json.stringify()}")
   let s = {
     number: 42,
@@ -79,7 +79,7 @@ fn init {
     number2: 42,
   }
   let expected : Json = { "number": 42, "string": "str", "number2": 42 }
-  let json = s.to_json()
+  let json = @json.to_json(s)
   println("\{json == expected}, json:\{json.stringify()}")
   let s = {
     number: 42,
@@ -99,7 +99,7 @@ fn init {
     "nested_optional_string": Json::null(),
     "number2": 42,
   }
-  let json = s.to_json()
+  let json = @json.to_json(s)
   println("\{json == expected}, json:\{json.stringify()}")
 }
 
@@ -137,15 +137,15 @@ fn init {
   println("")
   println("Field and variant renames")
   let s : FieldRename = { a: 42 }
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s = VariantRename::RenameMeToD1(42)
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s : FieldRenameAllCamel = { my_field: 42 }
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s : FieldRenameAllScreamingSnake = { my_field: 42 }
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s = VariantRenameAllSnake::MyVariant(42)
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
 }
 
 // ==== New enum styling options ====
@@ -171,19 +171,19 @@ fn init {
   //
   println("Legacy style")
   let s = NewStyleLegacy::C1
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s = NewStyleLegacy::C2("str")
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s = NewStyleLegacy::C3(42, true)
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   //
   println("Flat style")
   let s = NewStyleFlat::C1
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s = NewStyleFlat::C2("str")
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
   let s = NewStyleFlat::C3(42, true)
-  println(s.to_json().stringify())
+  println(@json.to_json(s).stringify())
 }
 
 // ==== Additional comprehensive tests ====
@@ -259,7 +259,7 @@ fn init {
   // Test tuple structs
   println("Tuple struct tests:")
   let ts = TupleStruct(42, "hello", true)
-  let ts_json = ts.to_json()
+  let ts_json = @json.to_json(ts)
   println("Original: \{Debug::to_repr(ts)}")
   println("JSON: \{ts_json.stringify()}")
   println("Expected structure: [\"TupleStruct\", 42, \"hello\", true]")
@@ -267,7 +267,7 @@ fn init {
   // Test empty struct
   println("Empty struct tests:")
   let es = EmptyStruct::{  }
-  let es_json = es.to_json()
+  let es_json = @json.to_json(es)
   println("Original: \{Debug::to_repr(es)}")
   println("JSON: \{es_json.stringify()}")
   println("Expected structure: {}")
@@ -275,7 +275,7 @@ fn init {
   // Test single variant enum
   println("Single variant enum tests (flat style):")
   let sve = SingleVariantEnum::OnlyVariant(123, "test")
-  let sve_json = sve.to_json()
+  let sve_json = @json.to_json(sve)
   println("Original: \{Debug::to_repr(sve)}")
   println("JSON: \{sve_json.stringify()}")
   println("Expected structure: [\"OnlyVariant\", 123, \"test\"]")
@@ -290,7 +290,7 @@ fn init {
     MixedEnum::MixedArgs(5, y="mixed", false),
   ]
   for i, variant in variants {
-    let json = variant.to_json()
+    let json = @json.to_json(variant)
     println("Variant \{i}: \{Debug::to_repr(variant)}")
     println("JSON: \{json.stringify()}")
     match variant {
@@ -312,7 +312,7 @@ fn init {
       nested: Some(Level4::FinalLevel("deep")),
     }),
   )
-  let deep_json = deep.to_json()
+  let deep_json = @json.to_json(deep)
   println("Original: \{Debug::to_repr(deep)}")
   println("JSON: \{deep_json.stringify()}")
   println("Expected nested structure with flat enum style")
@@ -324,11 +324,11 @@ fn init {
     second: "hello",
     optional: Some(24),
   }
-  let gs_json = gs.to_json()
+  let gs_json = @json.to_json(gs)
   println("Original: \{Debug::to_repr(gs)}")
   println("JSON: \{gs_json.stringify()}")
   let ge : GenericEnum[String] = GenericEnum::Pair("first", "second")
-  let ge_json = ge.to_json()
+  let ge_json = @json.to_json(ge)
   println("Original: \{Debug::to_repr(ge)}")
   println("JSON: \{ge_json.stringify()}")
   println("Expected: [\"Pair\", \"first\", \"second\"]")
@@ -349,7 +349,7 @@ fn init {
     EdgeCaseEnum::MixedFields(99, named="mixed", true),
   ]
   for i, case in edge_cases {
-    let json = case.to_json()
+    let json = @json.to_json(case)
     println("Edge case \{i}: \{Debug::to_repr(case)}")
     println("JSON: \{json.stringify()}")
     match case {
@@ -388,12 +388,12 @@ fn init {
   println("Style comparison for same enum:")
   let legacy_no_args = LegacyStyle::NoArgs
   let flat_no_args = FlatStyle::NoArgs
-  println("Legacy style (no args): \{legacy_no_args.to_json().stringify()}")
-  println("Flat style (no args): \{flat_no_args.to_json().stringify()}")
+  println("Legacy style (no args): \{@json.to_json(legacy_no_args).stringify()}")
+  println("Flat style (no args): \{@json.to_json(flat_no_args).stringify()}")
   let legacy_with_args = LegacyStyle::WithArgs(42, "test")
   let flat_with_args = FlatStyle::WithArgs(42, "test")
-  println("Legacy style (with args): \{legacy_with_args.to_json().stringify()}")
-  println("Flat style (with args): \{flat_with_args.to_json().stringify()}")
+  println("Legacy style (with args): \{@json.to_json(legacy_with_args).stringify()}")
+  println("Flat style (with args): \{@json.to_json(flat_with_args).stringify()}")
   println(
     "Legacy should use object format: {\"$tag\": \"variant\", \"0\": val1, \"1\": val2}",
   )

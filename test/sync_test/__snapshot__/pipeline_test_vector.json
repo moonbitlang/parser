@@ -341,11 +341,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Field",
             "loc": null,
@@ -552,11 +547,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::DotApply",
             "loc": null,
@@ -824,11 +814,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Record",
             "loc": null,
@@ -1174,11 +1159,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -1337,7 +1317,7 @@
             "kind": "Binder",
             "loc": null,
             "children": {
-              "name": "op_get"
+              "name": "get"
             }
           },
           "has_error": null,
@@ -1508,7 +1488,15 @@
           "attrs": {
             "kind": "FunDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#alias(\"_[_]\")"
+                }
+              }
+            ]
           },
           "doc": ""
         }
@@ -1518,11 +1506,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -1986,11 +1969,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -3531,11 +3509,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::DotApply",
             "loc": null,
@@ -3884,11 +3857,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,

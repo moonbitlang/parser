@@ -44,7 +44,7 @@
                             "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "value": "BytesView"
+                              "value": "StringView"
                             }
                           }
                         }
@@ -283,15 +283,11 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
-            "kind": "Expr::Lexmatch",
+            "kind": "Expr::Lexscan",
             "loc": null,
             "children": {
+              "streaming": false,
               "strategy": {
                 "kind": "Label",
                 "loc": null,
@@ -319,36 +315,42 @@
                 }
               },
               "cases": {
-                "kind": "Expr::Lexmatch::CaseList",
+                "kind": "Expr::Lexscan::CaseList",
                 "loc": null,
                 "children": [
                   {
-                    "kind": "LexCase",
+                    "kind": "LexscanCase",
                     "loc": null,
                     "children": {
                       "pat": {
-                        "kind": "LexCase::PatternList",
+                        "kind": "LexscanCasePattern::Pattern",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "RegexPattern::Literal",
+                            "loc": null,
+                            "children": {
+                              "lit": "^\\n"
+                            }
+                          }
+                        }
+                      },
+                      "bindings": {
+                        "kind": "LexscanCase::BindingList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "LexTopPattern::Pattern",
+                            "kind": "LexscanCase::Binding",
                             "loc": null,
                             "children": {
-                              "value": {
-                                "kind": "LexPattern::Regex",
+                              "label": {
+                                "kind": "Label",
                                 "loc": null,
                                 "children": {
-                                  "lit": "\\n",
-                                  "offset": 1
+                                  "name": "after"
                                 }
-                              }
-                            }
-                          },
-                          {
-                            "kind": "LexTopPattern::Binder",
-                            "loc": null,
-                            "children": {
-                              "value": {
+                              },
+                              "binder": {
                                 "kind": "Binder",
                                 "loc": null,
                                 "children": {
@@ -359,7 +361,6 @@
                           }
                         ]
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,
@@ -551,45 +552,51 @@
                     }
                   },
                   {
-                    "kind": "LexCase",
+                    "kind": "LexscanCase",
                     "loc": null,
                     "children": {
                       "pat": {
-                        "kind": "LexCase::PatternList",
+                        "kind": "LexscanCasePattern::Pattern",
                         "loc": null,
-                        "children": [
-                          {
-                            "kind": "LexTopPattern::Pattern",
+                        "children": {
+                          "value": {
+                            "kind": "RegexPattern::Alias",
                             "loc": null,
                             "children": {
-                              "value": {
-                                "kind": "LexPattern::Alias",
+                              "pat": {
+                                "kind": "RegexPattern::Literal",
                                 "loc": null,
                                 "children": {
-                                  "pat": {
-                                    "kind": "LexPattern::Regex",
-                                    "loc": null,
-                                    "children": {
-                                      "lit": "[^ \\t\\r\\n]+",
-                                      "offset": 1
-                                    }
-                                  },
-                                  "binder": {
-                                    "kind": "Binder",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "word"
-                                    }
-                                  }
+                                  "lit": "^[^ \\t\\r\\n]+"
+                                }
+                              },
+                              "binder": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "word"
                                 }
                               }
                             }
-                          },
+                          }
+                        }
+                      },
+                      "bindings": {
+                        "kind": "LexscanCase::BindingList",
+                        "loc": null,
+                        "children": [
                           {
-                            "kind": "LexTopPattern::Binder",
+                            "kind": "LexscanCase::Binding",
                             "loc": null,
                             "children": {
-                              "value": {
+                              "label": {
+                                "kind": "Label",
+                                "loc": null,
+                                "children": {
+                                  "name": "after"
+                                }
+                              },
+                              "binder": {
                                 "kind": "Binder",
                                 "loc": null,
                                 "children": {
@@ -600,7 +607,6 @@
                           }
                         ]
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,
@@ -854,32 +860,38 @@
                     }
                   },
                   {
-                    "kind": "LexCase",
+                    "kind": "LexscanCase",
                     "loc": null,
                     "children": {
                       "pat": {
-                        "kind": "LexCase::PatternList",
+                        "kind": "LexscanCasePattern::Pattern",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "RegexPattern::Literal",
+                            "loc": null,
+                            "children": {
+                              "lit": "^."
+                            }
+                          }
+                        }
+                      },
+                      "bindings": {
+                        "kind": "LexscanCase::BindingList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "LexTopPattern::Pattern",
+                            "kind": "LexscanCase::Binding",
                             "loc": null,
                             "children": {
-                              "value": {
-                                "kind": "LexPattern::Regex",
+                              "label": {
+                                "kind": "Label",
                                 "loc": null,
                                 "children": {
-                                  "lit": ".",
-                                  "offset": 1
+                                  "name": "after"
                                 }
-                              }
-                            }
-                          },
-                          {
-                            "kind": "LexTopPattern::Binder",
-                            "loc": null,
-                            "children": {
-                              "value": {
+                              },
+                              "binder": {
                                 "kind": "Binder",
                                 "loc": null,
                                 "children": {
@@ -890,7 +902,6 @@
                           }
                         ]
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,
@@ -1082,30 +1093,27 @@
                     }
                   },
                   {
-                    "kind": "LexCase",
+                    "kind": "LexscanCase",
                     "loc": null,
                     "children": {
                       "pat": {
-                        "kind": "LexCase::PatternList",
+                        "kind": "LexscanCasePattern::Pattern",
                         "loc": null,
-                        "children": [
-                          {
-                            "kind": "LexTopPattern::Pattern",
+                        "children": {
+                          "value": {
+                            "kind": "RegexPattern::Literal",
                             "loc": null,
                             "children": {
-                              "value": {
-                                "kind": "LexPattern::Regex",
-                                "loc": null,
-                                "children": {
-                                  "lit": "",
-                                  "offset": 1
-                                }
-                              }
+                              "lit": "^$"
                             }
                           }
-                        ]
+                        }
                       },
-                      "guard": null,
+                      "bindings": {
+                        "kind": "LexscanCase::BindingList",
+                        "loc": null,
+                        "children": []
+                      },
                       "body": {
                         "kind": "Expr::Tuple",
                         "loc": null,
@@ -1176,59 +1184,6 @@
                         }
                       }
                     }
-                  },
-                  {
-                    "kind": "LexCase",
-                    "loc": null,
-                    "children": {
-                      "pat": {
-                        "kind": "LexCase::PatternList",
-                        "loc": null,
-                        "children": [
-                          {
-                            "kind": "LexTopPattern::Wildcard",
-                            "loc": null,
-                            "children": {}
-                          }
-                        ]
-                      },
-                      "guard": null,
-                      "body": {
-                        "kind": "Expr::Apply",
-                        "loc": null,
-                        "children": {
-                          "func": {
-                            "kind": "Expr::Ident",
-                            "loc": null,
-                            "children": {
-                              "id": {
-                                "kind": "Var",
-                                "loc": null,
-                                "children": {
-                                  "name": {
-                                    "kind": "LongIdent::Ident",
-                                    "loc": null,
-                                    "children": {
-                                      "value": "panic"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "args": {
-                            "kind": "Expr::Apply::ArgumentList",
-                            "loc": null,
-                            "children": []
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
-                          }
-                        }
-                      }
-                    }
                   }
                 ]
               }
@@ -1286,11 +1241,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -1392,7 +1342,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Bytes",
+                                                "kind": "Constant::String",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "Non enim laborum velit commodo deserunt incididunt elit sunt nulla ullamco. Quis ipsum aliqua id mollit minim velit et cupidatat eiusmod nostrud pariatur duis irure ad. Dolore enim et elit fugiat.\\n"
@@ -1405,7 +1355,7 @@
                                             "loc": null,
                                             "children": {
                                               "constant": {
-                                                "kind": "Constant::Bytes",
+                                                "kind": "Constant::String",
                                                 "loc": null,
                                                 "children": {
                                                   "value": "Nostrud elit minim aute qui labore id aute aute ea nostrud cupidatat. Aliquip et commodo anim dolor nostrud voluptate proident. Voluptate tempor amet consequat nisi excepteur aute anim aute. Sunt ipsum tempor esse consequat cupidatat.\\n"
@@ -1420,7 +1370,7 @@
                                         "loc": null,
                                         "children": {
                                           "constant": {
-                                            "kind": "Constant::Bytes",
+                                            "kind": "Constant::String",
                                             "loc": null,
                                             "children": {
                                               "value": "Ipsum minim cillum adipisicing incididunt incididunt qui non excepteur mollit qui. Non aute sunt dolore eu sunt ea aute nisi dolor eiusmod. Fugiat id culpa exercitation consectetur cupidatat. Sunt sint nostrud dolor aute sit cupidatat voluptate reprehenderit ut cillum nulla. Dolore sunt elit elit et quis qui.\\n"

@@ -378,7 +378,8 @@
             "loc": null,
             "children": {}
           },
-          "is_async": null
+          "is_async": null,
+          "nocancel": null
         }
       },
       "expr": {
@@ -713,6 +714,7 @@
                 "loc": null,
                 "children": {}
               },
+              "nocancel": null,
               "kind": {
                 "kind": "FnKind::Lambda",
                 "loc": null,

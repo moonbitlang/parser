@@ -17,8 +17,8 @@ fn[X] Vector::new(cap: Int) -> Vector[X] {
   { data: UninitializedArray::make(cap), len: 0 }
 }
 
-
-fn[X] Vector::op_get(self: Vector[X], i: Int) -> X? {
+#alias("_[_]")
+fn[X] Vector::get(self: Vector[X], i: Int) -> X? {
   if i < self.len { Some(self.data[i]) } else { None }
 }
 

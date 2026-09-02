@@ -47,11 +47,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
@@ -94,6 +89,7 @@
                         "kind": "Expr::Lexscan",
                         "loc": null,
                         "children": {
+                          "streaming": false,
                           "strategy": {
                             "kind": "Label",
                             "loc": null,
@@ -221,7 +217,6 @@
                                       }
                                     ]
                                   },
-                                  "guard": null,
                                   "body": {
                                     "kind": "Expr::Apply",
                                     "loc": null,
@@ -304,7 +299,6 @@
                                     "loc": null,
                                     "children": []
                                   },
-                                  "guard": null,
                                   "body": {
                                     "kind": "Expr::Unit",
                                     "loc": null,
@@ -341,6 +335,7 @@
                         "kind": "Expr::Lexscan",
                         "loc": null,
                         "children": {
+                          "streaming": false,
                           "strategy": {
                             "kind": "Label",
                             "loc": null,
@@ -408,7 +403,6 @@
                                       }
                                     ]
                                   },
-                                  "guard": null,
                                   "body": {
                                     "kind": "Expr::Constant",
                                     "loc": null,
@@ -438,7 +432,6 @@
                                     "loc": null,
                                     "children": []
                                   },
-                                  "guard": null,
                                   "body": {
                                     "kind": "Expr::Constant",
                                     "loc": null,

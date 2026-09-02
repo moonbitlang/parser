@@ -2,7 +2,7 @@
 
 fn main {
   let f = "helo" 
-  let rest = lexscan f {
+  let rest = lexmatch f {
     (re"^el", after=rest) => Some(rest)
     _ => None
   }

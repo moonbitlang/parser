@@ -61,7 +61,7 @@ async fn Scheduler::suspend(self : Scheduler) -> Unit raise CancellationError {
   })
 }
 
-
+#warnings("-fragile_catch_all")
 fn init {
   let ctx = Scheduler::new()
   async fn worker(id : Int) -> Unit raise {

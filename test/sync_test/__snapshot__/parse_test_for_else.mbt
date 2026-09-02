@@ -1,7 +1,7 @@
 fn init {
   for ; ; {
     break(Some(0))
-  } else {
+  } nobreak {
     None
   }
 
@@ -11,7 +11,7 @@ fn init {
     } else {
       println(4)
     }
-  } else {
+  } nobreak {
     println(5)
   }
 

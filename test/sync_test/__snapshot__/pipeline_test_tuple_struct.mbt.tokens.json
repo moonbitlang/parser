@@ -520,36 +520,36 @@
   {
     "token": [
       "UIDENT",
-      "MyInt"
+      "Default"
     ],
-    "loc": "13:13-13:18"
+    "loc": "13:13-13:20"
   },
   {
     "token": "COLONCOLON",
-    "loc": "13:18-13:20"
+    "loc": "13:20-13:22"
   },
   {
     "token": [
       "LIDENT",
       "default"
     ],
-    "loc": "13:20-13:27"
+    "loc": "13:22-13:29"
   },
   {
     "token": "LPAREN",
-    "loc": "13:27-13:28"
+    "loc": "13:29-13:30"
   },
   {
     "token": "RPAREN",
-    "loc": "13:28-13:29"
-  },
-  {
-    "token": "LBRACE",
     "loc": "13:30-13:31"
   },
   {
+    "token": "LBRACE",
+    "loc": "13:32-13:33"
+  },
+  {
     "token": "NEWLINE",
-    "loc": "13:31-13:32"
+    "loc": "13:33-13:34"
   },
   {
     "token": [
@@ -1641,7 +1641,7 @@
   {
     "token": [
       "UIDENT",
-      "WithInt"
+      "Default"
     ],
     "loc": "49:13-49:20"
   },

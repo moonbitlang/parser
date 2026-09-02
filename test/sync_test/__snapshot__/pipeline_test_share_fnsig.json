@@ -119,7 +119,8 @@
                             "loc": null,
                             "children": {}
                           },
-                          "is_async": null
+                          "is_async": null,
+                          "nocancel": null
                         }
                       },
                       "mut": false,
@@ -234,7 +235,8 @@
                             "loc": null,
                             "children": {}
                           },
-                          "is_async": null
+                          "is_async": null,
+                          "nocancel": null
                         }
                       },
                       "mut": false,
@@ -702,7 +704,8 @@
                         "loc": null,
                         "children": {}
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   }
                 }
@@ -805,7 +808,8 @@
                         "loc": null,
                         "children": {}
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   }
                 }
@@ -864,11 +868,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Record",
             "loc": null,
@@ -1083,11 +1082,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::LetFn",
             "loc": null,
@@ -1278,6 +1272,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "kind": {
                     "kind": "FnKind::Lambda",
                     "loc": null,
@@ -1477,6 +1472,7 @@
                         "loc": null,
                         "children": {}
                       },
+                      "nocancel": null,
                       "kind": {
                         "kind": "FnKind::Lambda",
                         "loc": null,
@@ -1656,11 +1652,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,

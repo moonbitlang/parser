@@ -13,5 +13,5 @@ fn init {
 struct Point(Int,Int,Int) derive(ToJson)
 
 fn init {
-  println(Point(1,2,3).to_json().stringify())
+  println(@json.to_json(Point(1,2,3)).stringify())
 }

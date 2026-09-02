@@ -8,7 +8,8 @@ fn[T] View::length(self: View[T]) -> Int {
   self.len
 }
 
-fn[T] View::op_get(self: View[T], index: Int) -> T {
+#alias("_[_]")
+fn[T] View::get(self: View[T], index: Int) -> T {
   self.buf[self.start + index]
 }
 
@@ -16,7 +17,8 @@ struct MyFixedArray[T](FixedArray[T])
 
 // TODO: bound check
 // TODO: check op_as_view protocol
-fn[T] MyFixedArray::op_as_view(self: MyFixedArray[T], start~: Int = 0, end?: Int) -> View[T] {
+#alias("_[_:_]")
+fn[T] MyFixedArray::view(self: MyFixedArray[T], start~: Int = 0, end?: Int) -> View[T] {
   let end = end.unwrap_or(self.length())
   View::{ start, len: end - start, buf: self.0 }
 }
@@ -30,7 +32,8 @@ fn[T] MyFixedArray::make_view(self: MyFixedArray[T], start: Int, len: Int) -> Vi
 }
 
 // TODO: bound check
-fn[T] View::op_as_view(self: View[T], start~: Int = 0, end?: Int) -> View[T] {
+#alias("_[_:_]")
+fn[T] View::view(self: View[T], start~: Int = 0, end?: Int) -> View[T] {
   let end = end.unwrap_or(self.length())
   View::{ buf: self.buf, start: self.start+start, len: end-start }
 }

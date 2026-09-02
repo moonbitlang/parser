@@ -47,11 +47,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Sequence",
             "loc": null,
@@ -64,6 +59,7 @@
                     "kind": "Expr::Lexscan",
                     "loc": null,
                     "children": {
+                      "streaming": true,
                       "strategy": null,
                       "expr": {
                         "kind": "Expr::Ident",
@@ -110,7 +106,6 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -141,25 +136,6 @@
                                 "kind": "LexscanCase::BindingList",
                                 "loc": null,
                                 "children": []
-                              },
-                              "guard": {
-                                "kind": "Expr::Ident",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "Var",
-                                    "loc": null,
-                                    "children": {
-                                      "name": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "is_alpha"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
                               },
                               "body": {
                                 "kind": "Expr::Unit",
@@ -198,7 +174,6 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -230,7 +205,6 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Ident",
                                 "loc": null,
@@ -266,7 +240,6 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -286,6 +259,7 @@
                 "kind": "Expr::Lexscan",
                 "loc": null,
                 "children": {
+                  "streaming": true,
                   "strategy": {
                     "kind": "Label",
                     "loc": null,
@@ -399,7 +373,6 @@
                               }
                             ]
                           },
-                          "guard": null,
                           "body": {
                             "kind": "Expr::Ident",
                             "loc": null,
@@ -450,7 +423,6 @@
                             "loc": null,
                             "children": []
                           },
-                          "guard": null,
                           "body": {
                             "kind": "Expr::Unit",
                             "loc": null,

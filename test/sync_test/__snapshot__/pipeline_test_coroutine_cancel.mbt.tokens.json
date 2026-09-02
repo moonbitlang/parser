@@ -2140,8 +2140,19 @@
     "loc": "63:1-63:2"
   },
   {
+    "token": [
+      "ATTRIBUTE",
+      {
+        "id": "warnings",
+        "dot_id": "",
+        "raw_payload": "(\"-fragile_catch_all\")"
+      }
+    ],
+    "loc": "64:1-64:32"
+  },
+  {
     "token": "NEWLINE",
-    "loc": "64:1-64:2"
+    "loc": "64:32-64:33"
   },
   {
     "token": "FN",

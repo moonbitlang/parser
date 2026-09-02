@@ -2,7 +2,7 @@
 #warnings("-71")
 
 fn parse_digit(s : StringView) -> (Int64?, StringView) {
-  lexscan s with longest {
+  lexmatch s with longest {
     (re"^-?[0-9][0-9_]+[0-9]" as digit, after=rest) => {
       (Some (try! @string.parse_int64(digit)),rest)
     }

@@ -1,14 +1,9 @@
 fn main {
-  let x = 1
   lexmatch s with longest {
-    (re"ab$", _) => ()
-    (re"a\\{x}", _) => ()
-    (re"a\{x}", _) => ()
-    ("a\{x}", _) => ()
-    (("a"), _) => ()
-    (("a" "b"), _) => ()
-    ((1), _) => ()
-    1 => ()
+    (re"^ab$", after=_) => ()
+    (re"^a\\{x}", after=_) => ()
+    (re"^a", after=_) => ()
+    (re"^a" + re"b", after=_) => ()
     _ => ()
   }
 }

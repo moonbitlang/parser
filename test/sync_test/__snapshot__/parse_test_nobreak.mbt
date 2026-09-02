@@ -62,3 +62,11 @@ fn test_labeled_nobreak() -> Unit {
     println("outer done")
   }
 }
+
+// Keep the nobreak block and following statement when recovering to `{`.
+fn test_nobreak_recovery() -> Unit {
+  for ;; {} nobreak junk { for_nobreak_block }
+  after_for
+  while true {} nobreak junk { while_nobreak_block }
+  after_while
+}

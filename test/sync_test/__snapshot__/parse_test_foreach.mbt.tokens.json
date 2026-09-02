@@ -243,16 +243,16 @@
     "loc": "9:3-9:4"
   },
   {
-    "token": "ELSE",
-    "loc": "9:5-9:9"
+    "token": "NOBREAK",
+    "loc": "9:5-9:12"
   },
   {
     "token": "LBRACE",
-    "loc": "9:10-9:11"
+    "loc": "9:13-9:14"
   },
   {
     "token": "NEWLINE",
-    "loc": "9:11-9:12"
+    "loc": "9:14-9:15"
   },
   {
     "token": [
@@ -304,8 +304,117 @@
     "loc": "12:2-12:3"
   },
   {
+    "token": "FN",
+    "loc": "13:1-13:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "legacy_foreach_else"
+    ],
+    "loc": "13:4-13:23"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "13:23-13:24"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "xs"
+    ],
+    "loc": "13:24-13:26"
+  },
+  {
+    "token": "COLON",
+    "loc": "13:27-13:28"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Array"
+    ],
+    "loc": "13:29-13:34"
+  },
+  {
+    "token": "LBRACKET",
+    "loc": "13:34-13:35"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Int"
+    ],
+    "loc": "13:35-13:38"
+  },
+  {
+    "token": "RBRACKET",
+    "loc": "13:38-13:39"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "13:39-13:40"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "13:41-13:42"
+  },
+  {
+    "token": "FOR",
+    "loc": "13:43-13:46"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "x"
+    ],
+    "loc": "13:47-13:48"
+  },
+  {
+    "token": "IN",
+    "loc": "13:49-13:51"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "xs"
+    ],
+    "loc": "13:52-13:54"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "13:55-13:56"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "13:56-13:57"
+  },
+  {
+    "token": "ELSE",
+    "loc": "13:58-13:62"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "13:63-13:64"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "13:64-13:65"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "13:66-13:67"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "13:67-13:67"
+  },
+  {
     "token": "NEWLINE",
-    "loc": "13:1-13:2"
+    "loc": "13:67-13:68"
   },
   {
     "token": "FN",

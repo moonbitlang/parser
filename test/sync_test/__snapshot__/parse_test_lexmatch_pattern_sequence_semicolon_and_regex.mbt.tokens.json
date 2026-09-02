@@ -44,58 +44,66 @@
   {
     "token": [
       "REGEX_LITERAL",
-      "ab$"
+      "^ab$"
     ],
-    "loc": "3:6-3:13"
+    "loc": "3:6-3:14"
   },
   {
-    "token": [
-      "SEMI",
-      true
-    ],
-    "loc": "3:13-3:14"
+    "token": "PLUS",
+    "loc": "3:15-3:16"
   },
   {
     "token": [
       "REGEX_LITERAL",
       "cd$"
     ],
-    "loc": "3:15-3:22"
+    "loc": "3:17-3:24"
   },
   {
     "token": "COMMA",
-    "loc": "3:22-3:23"
-  },
-  {
-    "token": "UNDERSCORE",
     "loc": "3:24-3:25"
   },
   {
+    "token": [
+      "LIDENT",
+      "after"
+    ],
+    "loc": "3:26-3:31"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "3:31-3:32"
+  },
+  {
+    "token": "UNDERSCORE",
+    "loc": "3:32-3:33"
+  },
+  {
     "token": "RPAREN",
-    "loc": "3:25-3:26"
+    "loc": "3:33-3:34"
   },
   {
     "token": "FAT_ARROW",
-    "loc": "3:27-3:29"
+    "loc": "3:35-3:37"
   },
   {
     "token": "LPAREN",
-    "loc": "3:30-3:31"
+    "loc": "3:38-3:39"
   },
   {
     "token": "RPAREN",
-    "loc": "3:31-3:32"
+    "loc": "3:39-3:40"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "3:32-3:32"
+    "loc": "3:40-3:40"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:32-3:33"
+    "loc": "3:40-3:41"
   },
   {
     "token": "LPAREN",
@@ -103,52 +111,67 @@
   },
   {
     "token": [
-      "REGEX_INTERP",
-      "\"a\\{x}\""
+      "REGEX_LITERAL",
+      "^a"
     ],
-    "loc": "4:6-4:15"
+    "loc": "4:6-4:12"
+  },
+  {
+    "token": "PLUS",
+    "loc": "4:13-4:14"
   },
   {
     "token": [
       "REGEX_LITERAL",
       "b"
     ],
-    "loc": "4:16-4:21"
+    "loc": "4:15-4:20"
   },
   {
     "token": "COMMA",
-    "loc": "4:21-4:22"
+    "loc": "4:20-4:21"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "after"
+    ],
+    "loc": "4:22-4:27"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "4:27-4:28"
   },
   {
     "token": "UNDERSCORE",
-    "loc": "4:23-4:24"
+    "loc": "4:28-4:29"
   },
   {
     "token": "RPAREN",
-    "loc": "4:24-4:25"
-  },
-  {
-    "token": "FAT_ARROW",
-    "loc": "4:26-4:28"
-  },
-  {
-    "token": "LPAREN",
     "loc": "4:29-4:30"
   },
   {
+    "token": "FAT_ARROW",
+    "loc": "4:31-4:33"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "4:34-4:35"
+  },
+  {
     "token": "RPAREN",
-    "loc": "4:30-4:31"
+    "loc": "4:35-4:36"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "4:31-4:31"
+    "loc": "4:36-4:36"
   },
   {
     "token": "NEWLINE",
-    "loc": "4:31-4:32"
+    "loc": "4:36-4:37"
   },
   {
     "token": "UNDERSCORE",

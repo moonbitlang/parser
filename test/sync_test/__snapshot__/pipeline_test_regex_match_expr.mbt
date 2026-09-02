@@ -25,6 +25,25 @@ fn test_value_context() -> Unit raise {
 }
 
 ///|
+fn test_fastpath_unicode_offsets() -> Unit raise {
+  let str = "x𠮷y"
+  if str =~ (re"𠮷", before=head, after=tail) {
+    assert_true(head.length() == 1)
+    assert_true(tail.start_offset() == 3)
+    assert_true(tail is "y")
+  } else {
+    fail("test_fastpath_unicode_offsets")
+  }
+
+  if str =~ (re"^x𠮷", after=tail) {
+    assert_true(tail.start_offset() == 3)
+    assert_true(tail is "y")
+  } else {
+    fail("test_fastpath_unicode_offsets_prefix")
+  }
+}
+
+///|
 fn test_hidden_capture_in_regex_constant() -> Unit raise {
   assert_true("123" =~ HIDDEN_CAPTURE)
   assert_true(!("abc" =~ HIDDEN_CAPTURE))
@@ -125,6 +144,8 @@ fn test_alternation_and_no_match() -> Unit raise {
 fn main {
   println("test_value_context")
   debug(to_result(() => test_value_context()))
+  println("test_fastpath_unicode_offsets")
+  debug(to_result(() => test_fastpath_unicode_offsets()))
   println("test_hidden_capture_in_regex_constant")
   debug(to_result(() => test_hidden_capture_in_regex_constant()))
   println("test_hidden_capture_in_composed_regex_constant")

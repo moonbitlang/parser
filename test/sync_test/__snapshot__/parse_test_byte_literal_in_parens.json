@@ -156,11 +156,6 @@
       },
       "name": null,
       "params": null,
-      "local_types": {
-        "kind": "Impl::TopTest::LocalTypeList",
-        "loc": null,
-        "children": []
-      },
       "is_async": null,
       "attrs": {
         "kind": "Impl::TopTest::AttrList",

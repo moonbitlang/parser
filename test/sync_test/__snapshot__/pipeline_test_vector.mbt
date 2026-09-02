@@ -21,8 +21,8 @@ fn[X: Default] Vector::new(cap: Int) -> Vector[X] {
   Vector::new_with_default(cap, X::default())
 }
 
-
-fn[X] Vector::op_get(self: Vector[X], i: Int) -> X? {
+#alias("_[_]")
+fn[X] Vector::get(self: Vector[X], i: Int) -> X? {
   if i < self.len { Some(self.data[i]) } else { None }
 }
 

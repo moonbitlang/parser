@@ -55,11 +55,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -180,11 +175,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -305,11 +295,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -430,11 +415,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -565,11 +545,6 @@
       },
       "name": null,
       "params": null,
-      "local_types": {
-        "kind": "Impl::TopTest::LocalTypeList",
-        "loc": null,
-        "children": []
-      },
       "is_async": null,
       "attrs": {
         "kind": "Impl::TopTest::AttrList",
@@ -653,11 +628,6 @@
       },
       "name": null,
       "params": null,
-      "local_types": {
-        "kind": "Impl::TopTest::LocalTypeList",
-        "loc": null,
-        "children": []
-      },
       "is_async": null,
       "attrs": {
         "kind": "Impl::TopTest::AttrList",

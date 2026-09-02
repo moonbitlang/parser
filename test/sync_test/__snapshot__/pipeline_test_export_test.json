@@ -114,11 +114,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -2394,11 +2389,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -4011,11 +4001,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -4924,11 +4909,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -5121,11 +5101,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Ident",
             "loc": null,
@@ -5256,6 +5231,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "has_default": null,
                   "attrs": {
                     "kind": "TraitMethodDecl::AttrList",
@@ -5355,7 +5331,8 @@
                             "loc": null,
                             "children": {}
                           },
-                          "is_async": null
+                          "is_async": null,
+                          "nocancel": null
                         }
                       },
                       "mut": false,
@@ -5487,11 +5464,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Apply",
             "loc": null,
@@ -5643,7 +5615,8 @@
                         "loc": null,
                         "children": {}
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   }
                 }
@@ -5699,11 +5672,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Record",
             "loc": null,
@@ -5851,7 +5819,8 @@
                         "kind": "Async",
                         "loc": null,
                         "children": {}
-                      }
+                      },
+                      "nocancel": null
                     }
                   }
                 }
@@ -5909,7 +5878,8 @@
                         "kind": "Async",
                         "loc": null,
                         "children": {}
-                      }
+                      },
+                      "nocancel": null
                     }
                   }
                 }
@@ -5970,11 +5940,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Infix",
             "loc": null,

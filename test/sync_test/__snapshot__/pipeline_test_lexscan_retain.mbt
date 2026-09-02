@@ -1,3 +1,5 @@
+//!build: -w -unused_lexcase
+
 fn chunked(chunks : ReadOnlyArray[String]) -> @lexbuf.Lexbuf {
   let mut chunk_index = 0
   @lexbuf.Lexbuf::from_fn(fn() {

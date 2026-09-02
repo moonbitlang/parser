@@ -219,11 +219,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
@@ -998,7 +993,7 @@
                                                                     "kind": "LongIdent::Ident",
                                                                     "loc": null,
                                                                     "children": {
-                                                                      "value": "MyInt"
+                                                                      "value": "Default"
                                                                     }
                                                                   },
                                                                   "is_object": false
@@ -1618,11 +1613,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
@@ -2859,7 +2849,7 @@
                                                                                 "kind": "LongIdent::Ident",
                                                                                 "loc": null,
                                                                                 "children": {
-                                                                                  "value": "WithInt"
+                                                                                  "value": "Default"
                                                                                 }
                                                                               },
                                                                               "is_object": false
@@ -3745,11 +3735,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
@@ -4851,11 +4836,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,

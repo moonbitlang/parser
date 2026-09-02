@@ -11,7 +11,7 @@ fn init {
     })
     println(z)
     let a = MyInt::MyInt(0)
-    if a == MyInt::default() {
+    if a == Default::default() {
         println("ok")
     } else {
         println("not ok")
@@ -47,7 +47,7 @@ fn init {
     println(z2)
 
     let a = WithInt::WithInt((0, 0))
-    if a == WithInt::default() {
+    if a == Default::default() {
         println("ok")
     } else {
         println("not ok")

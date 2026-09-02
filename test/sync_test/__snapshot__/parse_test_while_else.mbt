@@ -1,7 +1,7 @@
 fn init {
   while i < 0 {
     break(Some(0))
-  } else {
+  } nobreak {
     None
   }
 
@@ -11,7 +11,7 @@ fn init {
     } else {
       println(4)
     }
-  } else {
+  } nobreak {
     println(5)
   }
 
@@ -36,13 +36,13 @@ fn init {
 }
 
 fn init {
-  let x = while true { x } else { y }
-  let y = (while true { x } else { y }) + (while true { x })
+  let x = while true { x } nobreak { y }
+  let y = (while true { x } nobreak { y }) + (while true { x })
   return(while true { x })
 }
 
 fn init {
-  return(while true { x } else { y })
+  return(while true { x } nobreak { y })
 }
 
 fn init {

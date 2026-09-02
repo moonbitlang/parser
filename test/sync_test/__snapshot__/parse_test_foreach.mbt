@@ -6,11 +6,11 @@ fn init {
   for k, v in dict.iter2() {
     println(k)
     println(v)
-  } else {
+  } nobreak {
     println("done")
   }
 }
-
+fn legacy_foreach_else(xs : Array[Int]) { for x in xs {} else {} }
 fn init {
   for in [ 1, 2, 3 ] {}
   for x {}

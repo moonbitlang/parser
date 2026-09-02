@@ -52,34 +52,34 @@
     "loc": "3:9-3:10"
   },
   {
-    "token": "LEXSCAN",
-    "loc": "3:11-3:18"
+    "token": "LEXMATCH",
+    "loc": "3:11-3:19"
   },
   {
     "token": [
       "STRING",
       ""
     ],
-    "loc": "3:19-3:21"
+    "loc": "3:20-3:22"
   },
   {
     "token": "WITH",
-    "loc": "3:22-3:26"
+    "loc": "3:23-3:27"
   },
   {
     "token": [
       "LIDENT",
       "longest"
     ],
-    "loc": "3:27-3:34"
+    "loc": "3:28-3:35"
   },
   {
     "token": "LBRACE",
-    "loc": "3:35-3:36"
+    "loc": "3:36-3:37"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:36-3:37"
+    "loc": "3:37-3:38"
   },
   {
     "token": "LPAREN",

@@ -7,7 +7,7 @@ fn semi_insertion() -> Bool {
 ///|
 fn expr_first_set() -> Unit {
   let a = ; //force to use hand-written parser
-  let _ = (!a)
+  var b = (!a)
+  let _ = b
 }
-
 

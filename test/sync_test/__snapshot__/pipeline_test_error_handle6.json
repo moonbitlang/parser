@@ -847,11 +847,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -1103,11 +1098,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -1359,11 +1349,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -1615,11 +1600,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -1894,7 +1874,8 @@
                 "loc": null,
                 "children": {}
               },
-              "is_async": null
+              "is_async": null,
+              "nocancel": null
             }
           },
           "error_type": {
@@ -1945,11 +1926,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -2058,6 +2034,7 @@
                         "loc": null,
                         "children": {}
                       },
+                      "nocancel": null,
                       "kind": {
                         "kind": "FnKind::Lambda",
                         "loc": null,
@@ -2309,11 +2286,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -2617,11 +2589,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::If",
             "loc": null,
@@ -2856,7 +2823,8 @@
                           }
                         }
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   }
                 }
@@ -2979,11 +2947,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Try",
             "loc": null,
@@ -3684,11 +3647,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Sequence",
             "loc": null,
@@ -3828,6 +3786,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -4010,6 +3969,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -4192,6 +4152,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -4374,6 +4335,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -4556,6 +4518,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -4738,6 +4701,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -4920,6 +4884,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -5102,6 +5067,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -5804,6 +5770,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -5986,6 +5953,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -6168,6 +6136,7 @@
                                         "loc": null,
                                         "children": {}
                                       },
+                                      "nocancel": null,
                                       "kind": {
                                         "kind": "FnKind::Arrow",
                                         "loc": null,
@@ -6352,6 +6321,7 @@
                                     "loc": null,
                                     "children": {}
                                   },
+                                  "nocancel": null,
                                   "kind": {
                                     "kind": "FnKind::Arrow",
                                     "loc": null,

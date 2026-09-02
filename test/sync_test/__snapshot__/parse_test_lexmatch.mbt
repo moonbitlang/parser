@@ -1,27 +1,25 @@
 fn init {
-  // well semantic
   lexmatch s with longest {
-    "a" => ()
-    ("a", _) => ()
+    re"^a$" => ()
+    (re"^a", after=_) => ()
     _ => ()
   }
   lexmatch s {
-    "a" => ()
-    (_, "a") => ()
-    (_, "a", _) => ()
-    ...
+    re"^a$" => ()
+    (re"a$", before=_) => ()
+    (re"a", before=_, after=_) => ()
+    _ => ()
   }
   lexmatch s {
-    ("a" as a) => ()
-    ("a" "b") => ()
-    ("a" ("b" as b)) => ()
-    ("a" "b", c) => ()
-    (("a" as a) "b", c) => ()
+    (re"^a$" as a) => ()
+    (re"^a" + re"b$") => ()
+    (re"^a" + (re"b$" as b)) => ()
+    (re"^a" + re"b", after=c) => ()
+    ((re"^a" as a) + re"b", after=c) => ()
     s2 => ()
   }
-  // ill semantic should be accepted by parser as well
   lexmatch s with xxx {
-    ("", "", "") => ()
-    (a, b, c) => ()
+    re"" => ()
+    a => ()
   }
 }

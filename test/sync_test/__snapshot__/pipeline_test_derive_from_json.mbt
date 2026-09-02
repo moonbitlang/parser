@@ -144,44 +144,44 @@ fn testNested(j : Json) -> Result[Nested3, @json.JsonDecodeError] {
 ///|
 fn init {
   let ee = EE::C2
-  debug(testEE(ee.to_json()))
+  debug(testEE(@json.to_json(ee)))
   let s = { x: 42, y: (42, true), z: "str" }
-  debug(testS(s.to_json()))
+  debug(testS(@json.to_json(s)))
   let eee = EEE::C2(s)
-  debug(testEEE(eee.to_json()))
+  debug(testEEE(@json.to_json(eee)))
   let a = A(42)
-  debug(testA(a.to_json()))
+  debug(testA(@json.to_json(a)))
   let e = E
-  debug(testE(e.to_json()))
+  debug(testE(@json.to_json(e)))
   let ei = EI(42)
-  debug(testEI(ei.to_json()))
+  debug(testEI(@json.to_json(ei)))
   let e0 = E0::C1(s)
-  debug(testE0(e0.to_json()))
+  debug(testE0(@json.to_json(e0)))
   let e0 = E0::C5(((1, 2), 3), 4)
-  debug(testE0(e0.to_json()))
+  debug(testE0(@json.to_json(e0)))
   let esmall = ESmall::C1
-  debug(testEE(esmall.to_json()))
+  debug(testEE(@json.to_json(esmall)))
   let esmall2 = ESmall2::C1(1, true)
-  debug(testEEE(esmall2.to_json()))
+  debug(testEEE(@json.to_json(esmall2)))
   let e0 = E0::C2(x=1, "str", y=2)
-  debug(testE0(e0.to_json()))
+  debug(testE0(@json.to_json(e0)))
   let nested : Nested3 = { x: { x: { x: 42, y: 42 }, y: 42 }, y: 42 }
-  debug(testNested(nested.to_json()))
+  debug(testNested(@json.to_json(nested)))
   let conErr = ConnectionError::BrokenPipe(42, "str")
-  debug(testErrEnum(conErr.to_json()))
+  debug(testErrEnum(@json.to_json(conErr)))
   let t1 = { x: nested, y: eee, z: ee, w: [0], q: e, c: conErr }
-  debug(testT1(t1.to_json()))
-  debug(testNT(NT([t1]).to_json()))
+  debug(testT1(@json.to_json(t1)))
+  debug(testNT(@json.to_json(NT([t1]))))
   println("Err:")
-  debug(testT1(NT([t1]).to_json()))
-  debug(testNT(t1.to_json()))
-  debug(testE0(t1.to_json()))
-  debug(testS(t1.to_json()))
-  debug(testEEE(ee.to_json()))
-  debug(testE0(ee.to_json()))
+  debug(testT1(@json.to_json(NT([t1]))))
+  debug(testNT(@json.to_json(t1)))
+  debug(testE0(@json.to_json(t1)))
+  debug(testS(@json.to_json(t1)))
+  debug(testEEE(@json.to_json(ee)))
+  debug(testE0(@json.to_json(ee)))
   let nested : Nested2 = { x: { x: 42, y: 42 }, y: 42 }
-  debug(testNested(nested.to_json()))
-  debug(testErrEnum(ee.to_json()))
+  debug(testNested(@json.to_json(nested)))
+  debug(testErrEnum(@json.to_json(ee)))
 }
 
 ///|
@@ -428,7 +428,7 @@ fn init {
   // Test tuple structs
   println("Tuple struct tests:")
   let ts = TupleStruct(42, "hello", true)
-  let ts_json = ts.to_json()
+  let ts_json = @json.to_json(ts)
   println("Original: \{Debug::to_repr(ts)}")
   println("JSON: \{ts_json.stringify()}")
   let ts_parsed : Result[TupleStruct, _] = to_result(() => @json.from_json(ts_json))
@@ -438,7 +438,7 @@ fn init {
   // Test empty struct
   println("Empty struct tests:")
   let es = EmptyStruct::{  }
-  let es_json = es.to_json()
+  let es_json = @json.to_json(es)
   println("Original: \{Debug::to_repr(es)}")
   println("JSON: \{es_json.stringify()}")
   let es_parsed : Result[EmptyStruct, _] = to_result(() => @json.from_json(es_json))

@@ -13,7 +13,7 @@ fn g(f : (Int, Int) -> Int) -> Int {
 }
 
 ///|
-suberror E Int
+suberror E { E(Int) }
 
 ///|
 fn f1(x : Int) -> Int raise E {

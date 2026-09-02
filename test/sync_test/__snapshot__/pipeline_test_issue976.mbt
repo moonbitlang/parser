@@ -20,11 +20,13 @@ fn Mapper::step_(self: Mapper) -> Unit {
   (self.step)(self)
 }
 
-fn Mapper::op_get(self: Mapper, adr: Int64) -> Int {
+#alias("_[_]")
+fn Mapper::get(self: Mapper, adr: Int64) -> Int {
   (self.idx)(self, adr)
 }
 
-fn Mapper::op_set(self: Mapper, adr: Int64, val: Int) -> Unit {
+#alias("_[_]=_")
+fn Mapper::set(self: Mapper, adr: Int64, val: Int) -> Unit {
   (self.idx_set)(self, adr, val)
 }
 
@@ -36,6 +38,6 @@ fn init {
   }
 
   mapper.step_()
-  let _ = mapper.op_get(2023L)
-  mapper.op_set(1110L, 2824)
+  let _ = mapper[2023L]
+  mapper[1110L] = 2824
 }

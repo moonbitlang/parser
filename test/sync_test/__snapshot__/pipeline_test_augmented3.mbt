@@ -4,12 +4,14 @@ struct U {
   set : FixedArray[Int]
 }
 
-fn U::op_get(self : U, id : Int) -> U {
+#alias("_[_]")
+fn U::get(self : U, id : Int) -> U {
   self.get[id] += 1
   self.arr[id]
 }
 
-fn U::op_set(self : U, id : Int, val : U) -> Unit {
+#alias("_[_]=_")
+fn U::set(self : U, id : Int, val : U) -> Unit {
   self.set[id] += 1
   self.arr[id] = val
 }

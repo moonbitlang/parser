@@ -1,10 +1,11 @@
-//!build: -w -20-27-lexmatch_first_match
+//!build: -w -20-27-unused_lexcase
 
 ///|
 fn test_exact() -> Unit raise {
   let str = "hello"
-  assert_true(lexscan str { re"^hello$" => true; _ => false })
-  let (matched, x, y) = lexscan str {
+  assert_true(lexmatch str { re"^hello$" => true; _ => false })
+  assert_false(lexmatch "a" with longest { (re"a^", after=_) => true; _ => false })
+  let (matched, x, y) = lexmatch str {
     (re"^hello$", before=x, after=y) => (true, x, y)
     _ => (false, ""[:], ""[:])
   }
@@ -18,33 +19,18 @@ fn test_exact() -> Unit raise {
 }
 
 ///|
-fn test_exact_bytes() -> Unit raise {
-  let str = b"hello"
-  assert_true(str lexmatch? "hello")
-  assert_true(
-    str lexmatch? (x, "^hello$", y) &&
-    physical_equal(x.data(), str) &&
-    x.start_offset() == 0 &&
-    x.length() == 0 &&
-    physical_equal(y.data(), str) &&
-    y.start_offset() == 5 &&
-    y.length() == 0,
-  )
-}
-
-///|
 fn test_empty() -> Unit raise {
   let str = "hello"
-  assert_false(lexscan str { re"^$" => true; _ => false })
-  let x = lexscan str { (re"$", before=x) => x; _ => ""[:] }
+  assert_false(lexmatch str { re"^$" => true; _ => false })
+  let x = lexmatch str { (re"$", before=x) => x; _ => ""[:] }
   assert_true(physical_equal(x.data(), str))
   assert_eq(x.start_offset(), 0)
   assert_eq(x.length(), 5)
-  let y = lexscan str { (re"^", after=y) => y; _ => ""[:] }
+  let y = lexmatch str { (re"^", after=y) => y; _ => ""[:] }
   assert_true(physical_equal(y.data(), str))
   assert_eq(y.start_offset(), 0)
   assert_eq(y.length(), 5)
-  let (x, y) = lexscan str {
+  let (x, y) = lexmatch str {
     (re"^", before=x, after=y) => (x, y)
     _ => (""[:], ""[:])
   }
@@ -56,39 +42,13 @@ fn test_empty() -> Unit raise {
 }
 
 ///|
-fn test_empty_bytes() -> Unit raise {
-  let str = b"hello"
-  assert_false(str lexmatch? "")
-  assert_true(
-    str lexmatch? (x, "") &&
-    physical_equal(x.data(), str) &&
-    x.start_offset() == 0 &&
-    x.length() == 5,
-  )
-  assert_true(
-    str lexmatch? ("", y) &&
-    physical_equal(y.data(), str) &&
-    y.start_offset() == 0 &&
-    y.length() == 5,
-  )
-  assert_true(
-    str lexmatch? (x, "", y) &&
-    physical_equal(x.data(), str) &&
-    x.start_offset() == 0 &&
-    x.length() == 0 &&
-    y.start_offset() == 0 &&
-    y.length() == 5,
-  )
-}
-
-///|
 fn test_prefix() -> Unit raise {
   let str = "hello world"
-  let y = lexscan str { (re"^hello", after=y) => y; _ => ""[:] }
+  let y = lexmatch str { (re"^hello", after=y) => y; _ => ""[:] }
   assert_true(physical_equal(y.data(), str))
   assert_eq(y.start_offset(), 5)
   assert_eq(y.length(), 6)
-  let (x, y) = lexscan str {
+  let (x, y) = lexmatch str {
     (re"^hello", before=x, after=y) => (x, y)
     _ => (""[:], ""[:])
   }
@@ -101,33 +61,13 @@ fn test_prefix() -> Unit raise {
 }
 
 ///|
-fn test_prefix_bytes() -> Unit raise {
-  let str = b"hello world"
-  assert_true(
-    str lexmatch? ("hello", y) &&
-    physical_equal(y.data(), str) &&
-    y.start_offset() == 5 &&
-    y.length() == 6,
-  )
-  assert_true(
-    str lexmatch? (x, "hello", y) &&
-    physical_equal(x.data(), str) &&
-    x.start_offset() == 0 &&
-    x.length() == 0 &&
-    physical_equal(y.data(), str) &&
-    y.start_offset() == 5 &&
-    y.length() == 6,
-  )
-}
-
-///|
 fn test_suffix() -> Unit raise {
   let str = "hello 中国𠮷"
-  let x = lexscan str { (re"中国𠮷$", before=x) => x; _ => ""[:] }
+  let x = lexmatch str { (re"中国𠮷$", before=x) => x; _ => ""[:] }
   assert_true(physical_equal(x.data(), str))
   assert_eq(x.start_offset(), 0)
   assert_eq(x.length(), 6)
-  let (x, y) = lexscan str {
+  let (x, y) = lexmatch str {
     (re"中国𠮷$", before=x, after=y) => (x, y)
     _ => (""[:], ""[:])
   }
@@ -140,29 +80,9 @@ fn test_suffix() -> Unit raise {
 }
 
 ///|
-fn test_suffix_bytes() -> Unit raise {
-  let str = b"hello world"
-  assert_true(
-    str lexmatch? (x, "world") &&
-    physical_equal(x.data(), str) &&
-    x.start_offset() == 0 &&
-    x.length() == 6,
-  )
-  assert_true(
-    str lexmatch? (x, "world$", y) &&
-    physical_equal(x.data(), str) &&
-    x.start_offset() == 0 &&
-    x.length() == 6 &&
-    physical_equal(y.data(), str) &&
-    y.start_offset() == 11 &&
-    y.length() == 0,
-  )
-}
-
-///|
 fn test_search() -> Unit raise {
   let str = "hello"
-  let (x, y) = lexscan str {
+  let (x, y) = lexmatch str {
     (re"el", before=x, after=y) => (x, y)
     _ => (""[:], ""[:])
   }
@@ -175,39 +95,15 @@ fn test_search() -> Unit raise {
 }
 
 ///|
-fn test_search_bytes() -> Unit raise {
-  let str = b"hello"
-  assert_true(
-    str lexmatch? (x, "el", y) &&
-    physical_equal(x.data(), str) &&
-    x.start_offset() == 0 &&
-    x.length() == 1 &&
-    physical_equal(y.data(), str) &&
-    y.start_offset() == 3 &&
-    y.length() == 2,
-  )
-}
-
-///|
 fn main {
   println("test_exact")
   println(try? test_exact())
-  println("test_exact_bytes")
-  println(try? test_exact_bytes())
   println("test_empty")
   println(try? test_empty())
-  println("test_empty_bytes")
-  println(try? test_empty_bytes())
   println("test_prefix")
   println(try? test_prefix())
-  println("test_prefix_bytes")
-  println(try? test_prefix_bytes())
   println("test_suffix")
   println(try? test_suffix())
-  println("test_suffix_bytes")
-  println(try? test_suffix_bytes())
   println("test_search")
   println(try? test_search())
-  println("test_search_bytes")
-  println(try? test_search_bytes())
 }

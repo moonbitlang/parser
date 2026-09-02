@@ -20,7 +20,7 @@ fn f1(x : S) -> S {
 
 ///|
 fn main {
-  let s0 = S::default()
+  let s0 : S = Default::default()
   println(f1(s0))
 }
 

@@ -153,4 +153,43 @@ fn main {
   println(mutarrayview_get(mv, 1))
   println(mut_arr[2])
   println(mut_arr[3])
+
+  let slice_arr = [5, 6, 7, 8]
+  let arr_all = slice_arr[:]
+  println(arrayview_length(arr_all))
+  let arr_tail = slice_arr[1:]
+  println(arrayview_get(arr_tail, 0))
+  let arr_head = slice_arr[:3]
+  println(arrayview_get(arr_head, 2))
+  let arr_mid = slice_arr[1:3]
+  println(arrayview_length(arr_mid))
+
+  let fixed : FixedArray[Int] = [10, 20, 30, 40]
+  let fixed_view = fixed[1:3]
+  println(arrayview_get(fixed_view, 0))
+  let ro_array : ReadOnlyArray[Int] = [11, 22, 33, 44]
+  let readonly_view = ro_array[2:]
+  println(arrayview_get(readonly_view, 0))
+  let nested_view = arr_mid[1:]
+  println(arrayview_get(nested_view, 0))
+
+  let nested_mut_view = mv.mut_view(start=1, end=3)
+  mutarrayview_set(nested_mut_view, 0, 200)
+  println(mut_arr[2])
+  let readonly_mut_view = mv[1:3]
+  println(arrayview_get(readonly_mut_view, 0))
+  let fixed_mut_view = fixed.mut_view(start=1, end=3)
+  mutarrayview_set(fixed_mut_view, 0, 2000)
+  println(fixed[1])
+
+  let bytes_all = bytes[:]
+  println(bytesview_length(bytes_all))
+  let bytes_tail = bytes[1:]
+  println(bytesview_get(bytes_tail, 0).to_int())
+  let bytes_head = bytes[:3]
+  println(bytesview_get(bytes_head, 2).to_int())
+  let bytes_mid = bytes[1:3]
+  println(bytesview_length(bytes_mid))
+  let nested_bytes = bytes_mid[1:]
+  println(bytesview_get(nested_bytes, 0).to_int())
 }

@@ -8,7 +8,7 @@ fn[T : Hash] stable_hash(value : T) -> Int {
 }
 
 fn main {
-  let s1 = S::default()
+  let s1 : S = Default::default()
   let s2 = S::S(1, Some(s1))
   debug(s2)
   println(s2 == s2)
