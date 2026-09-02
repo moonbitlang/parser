@@ -1194,9 +1194,11 @@
                                 }
                               }
                             }
-                          }
+                          },
+                          "exclamation": false
                         }
-                      }
+                      },
+                      "exclamation": true
                     }
                   }
                 }
