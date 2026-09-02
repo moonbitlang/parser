@@ -39,7 +39,7 @@ fn parse_unix_relative_path(
   let components : Array[StringView] = []
   let mut start = start
   for ;; {
-    lexscan rest with longest {
+    lexmatch rest with longest {
       // pattern: <path_component><slashes>
       // slashes elimination
       (((re"^[^/]+" as s) + re"(/)+") as all, after=r) => {
@@ -88,7 +88,7 @@ fn parse_unix_relative_path(
 
 ///|
 fn UnixPath::parse(path : StringView) -> UnixPath raise PathError {
-  lexscan path with longest {
+  lexmatch path with longest {
     // current path
     // syntax: `./<rest_of_path>`
     // slashes elimination 

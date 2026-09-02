@@ -294,7 +294,7 @@
             "kind": "Binder",
             "loc": null,
             "children": {
-              "name": "op_get"
+              "name": "get"
             }
           },
           "has_error": null,
@@ -421,7 +421,15 @@
           "attrs": {
             "kind": "FunDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#alias(\"_[_]\")"
+                }
+              }
+            ]
           },
           "doc": ""
         }
@@ -431,11 +439,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Sequence",
             "loc": null,
@@ -630,7 +633,7 @@
             "kind": "Binder",
             "loc": null,
             "children": {
-              "name": "op_set"
+              "name": "set"
             }
           },
           "has_error": null,
@@ -794,7 +797,15 @@
           "attrs": {
             "kind": "FunDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#alias(\"_[_]=_\")"
+                }
+              }
+            ]
           },
           "doc": ""
         }
@@ -804,11 +815,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Sequence",
             "loc": null,
@@ -1044,11 +1050,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::LetMut",
             "loc": null,

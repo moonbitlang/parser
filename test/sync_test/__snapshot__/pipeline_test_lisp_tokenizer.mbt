@@ -13,7 +13,7 @@ enum Token {
 fn lex_token(str : StringView) -> Array[Token] raise {
   let tokens : Array[Token] = []
   for str = str {
-    lexscan str with longest {
+    lexmatch str with longest {
       (re"^(\(|左括号)", after=rest) => {
         tokens.push(LParen)
         continue rest

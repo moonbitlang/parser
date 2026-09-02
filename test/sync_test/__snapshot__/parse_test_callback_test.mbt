@@ -44,16 +44,6 @@ fn[A,B] map (xs : List[A], f : (A) -> B) -> List[B] {
              }
            }
            let z = 1
-           struct U{
-             x : Int
-             y : V
-           }
-           struct V{
-             x : Int
-             h : U
-           }
-
-
 enum A{
   A(Int)
   B

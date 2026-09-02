@@ -1,4 +1,5 @@
 ///|
+#warnings("-fragile_catch_all")
 fn h(f : (Int) -> Unit raise?) -> Unit raise? {
   f(42) catch {
     e => raise e

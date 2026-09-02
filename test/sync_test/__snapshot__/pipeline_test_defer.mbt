@@ -25,6 +25,7 @@ fn init {
   ignore(to_result(() => basic_err(true)))
 }
 
+#warnings("-fragile_catch_all")
 fn basic_try(coin : Bool) -> Unit raise {
   defer println("defer outside try")
   try {

@@ -63,7 +63,8 @@ fn[X] Sparse_Array::has(self: Sparse_Array[X], idx: Int) -> Bool {
   self.elem_info.has(idx)
 }
 
-fn[X] Sparse_Array::op_get(self: Sparse_Array[X], idx: Int) -> X? {
+#alias("_[_]")
+fn[X] Sparse_Array::get(self: Sparse_Array[X], idx: Int) -> X? {
   if self.elem_info.has(idx) {
     Some (self.data[self.elem_info.index_of(idx)])
   } else {

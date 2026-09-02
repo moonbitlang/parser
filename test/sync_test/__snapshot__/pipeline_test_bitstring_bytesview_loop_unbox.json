@@ -74,11 +74,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Array",
             "loc": null,
@@ -951,11 +946,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
@@ -1456,6 +1446,7 @@
                                     "loc": null,
                                     "children": {}
                                   },
+                                  "nocancel": null,
                                   "kind": {
                                     "kind": "FnKind::Arrow",
                                     "loc": null,
@@ -1602,11 +1593,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Match",
             "loc": null,
@@ -3288,35 +3274,50 @@
                                                                                             "children": {}
                                                                                           }
                                                                                         }
-                                                                                      }
+                                                                                      },
+                                                                                      "exclamation": false
                                                                                     }
-                                                                                  }
+                                                                                  },
+                                                                                  "exclamation": false
                                                                                 }
-                                                                              }
+                                                                              },
+                                                                              "exclamation": false
                                                                             }
-                                                                          }
+                                                                          },
+                                                                          "exclamation": false
                                                                         }
-                                                                      }
+                                                                      },
+                                                                      "exclamation": false
                                                                     }
-                                                                  }
+                                                                  },
+                                                                  "exclamation": false
                                                                 }
-                                                              }
+                                                              },
+                                                              "exclamation": false
                                                             }
-                                                          }
+                                                          },
+                                                          "exclamation": false
                                                         }
-                                                      }
+                                                      },
+                                                      "exclamation": false
                                                     }
-                                                  }
+                                                  },
+                                                  "exclamation": false
                                                 }
-                                              }
+                                              },
+                                              "exclamation": false
                                             }
-                                          }
+                                          },
+                                          "exclamation": false
                                         }
-                                      }
+                                      },
+                                      "exclamation": false
                                     }
-                                  }
+                                  },
+                                  "exclamation": false
                                 }
-                              }
+                              },
+                              "exclamation": false
                             }
                           },
                           "group": {
@@ -3546,11 +3547,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Match",
             "loc": null,
@@ -5232,35 +5228,50 @@
                                                                                             "children": {}
                                                                                           }
                                                                                         }
-                                                                                      }
+                                                                                      },
+                                                                                      "exclamation": false
                                                                                     }
-                                                                                  }
+                                                                                  },
+                                                                                  "exclamation": false
                                                                                 }
-                                                                              }
+                                                                              },
+                                                                              "exclamation": false
                                                                             }
-                                                                          }
+                                                                          },
+                                                                          "exclamation": false
                                                                         }
-                                                                      }
+                                                                      },
+                                                                      "exclamation": false
                                                                     }
-                                                                  }
+                                                                  },
+                                                                  "exclamation": false
                                                                 }
-                                                              }
+                                                              },
+                                                              "exclamation": false
                                                             }
-                                                          }
+                                                          },
+                                                          "exclamation": false
                                                         }
-                                                      }
+                                                      },
+                                                      "exclamation": false
                                                     }
-                                                  }
+                                                  },
+                                                  "exclamation": false
                                                 }
-                                              }
+                                              },
+                                              "exclamation": false
                                             }
-                                          }
+                                          },
+                                          "exclamation": false
                                         }
-                                      }
+                                      },
+                                      "exclamation": false
                                     }
-                                  }
+                                  },
+                                  "exclamation": false
                                 }
-                              }
+                              },
+                              "exclamation": false
                             }
                           },
                           "group": {
@@ -5465,11 +5476,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::LetMut",
             "loc": null,
@@ -6856,11 +6862,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::LetMut",
             "loc": null,
@@ -8133,11 +8134,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
@@ -8757,6 +8753,7 @@
                                                     "loc": null,
                                                     "children": {}
                                                   },
+                                                  "nocancel": null,
                                                   "kind": {
                                                     "kind": "FnKind::Arrow",
                                                     "loc": null,
@@ -9139,6 +9136,7 @@
                                                                 "loc": null,
                                                                 "children": {}
                                                               },
+                                                              "nocancel": null,
                                                               "kind": {
                                                                 "kind": "FnKind::Arrow",
                                                                 "loc": null,
@@ -9584,6 +9582,7 @@
                                                                             "loc": null,
                                                                             "children": {}
                                                                           },
+                                                                          "nocancel": null,
                                                                           "kind": {
                                                                             "kind": "FnKind::Arrow",
                                                                             "loc": null,
@@ -9922,6 +9921,7 @@
                                                                                     "loc": null,
                                                                                     "children": {}
                                                                                   },
+                                                                                  "nocancel": null,
                                                                                   "kind": {
                                                                                     "kind": "FnKind::Arrow",
                                                                                     "loc": null,

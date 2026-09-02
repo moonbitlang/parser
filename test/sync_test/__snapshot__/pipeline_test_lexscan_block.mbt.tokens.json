@@ -3,7 +3,7 @@
     "token": [
       "COMMENT",
       {
-        "content": "//!build: -w -20-27-lexmatch_first_match -regex-backend block",
+        "content": "//!build: -w -20-27 -regex-backend block",
         "kind": [
           "Ownline",
           {
@@ -14,11 +14,11 @@
         "consumed_by_docstring": false
       }
     ],
-    "loc": "1:1-1:62"
+    "loc": "1:1-1:41"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:62-1:63"
+    "loc": "1:41-1:42"
   },
   {
     "token": "NEWLINE",
@@ -102,23 +102,23 @@
     "loc": "4:43-4:44"
   },
   {
-    "token": "LEXSCAN",
-    "loc": "5:3-5:10"
+    "token": "LEXMATCH",
+    "loc": "5:3-5:11"
   },
   {
     "token": [
       "LIDENT",
       "input"
     ],
-    "loc": "5:11-5:16"
+    "loc": "5:12-5:17"
   },
   {
     "token": "LBRACE",
-    "loc": "5:17-5:18"
+    "loc": "5:18-5:19"
   },
   {
     "token": "NEWLINE",
-    "loc": "5:18-5:19"
+    "loc": "5:19-5:20"
   },
   {
     "token": "LPAREN",
@@ -439,34 +439,34 @@
     "loc": "15:48-15:49"
   },
   {
-    "token": "LEXSCAN",
-    "loc": "16:3-16:10"
+    "token": "LEXMATCH",
+    "loc": "16:3-16:11"
   },
   {
     "token": [
       "LIDENT",
       "input"
     ],
-    "loc": "16:11-16:16"
+    "loc": "16:12-16:17"
   },
   {
     "token": "WITH",
-    "loc": "16:17-16:21"
+    "loc": "16:18-16:22"
   },
   {
     "token": [
       "LIDENT",
       "longest"
     ],
-    "loc": "16:22-16:29"
+    "loc": "16:23-16:30"
   },
   {
     "token": "LBRACE",
-    "loc": "16:30-16:31"
+    "loc": "16:31-16:32"
   },
   {
     "token": "NEWLINE",
-    "loc": "16:31-16:32"
+    "loc": "16:32-16:33"
   },
   {
     "token": "LPAREN",
@@ -732,23 +732,23 @@
     "loc": "24:48-24:49"
   },
   {
-    "token": "LEXSCAN",
-    "loc": "25:3-25:10"
+    "token": "LEXMATCH",
+    "loc": "25:3-25:11"
   },
   {
     "token": [
       "LIDENT",
       "input"
     ],
-    "loc": "25:11-25:16"
+    "loc": "25:12-25:17"
   },
   {
     "token": "LBRACE",
-    "loc": "25:17-25:18"
+    "loc": "25:18-25:19"
   },
   {
     "token": "NEWLINE",
-    "loc": "25:18-25:19"
+    "loc": "25:19-25:20"
   },
   {
     "token": "LPAREN",

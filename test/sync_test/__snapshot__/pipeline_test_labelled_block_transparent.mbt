@@ -1,3 +1,5 @@
+//!build: -w -unused_block_label
+
 // A `label~~` block is one inserted by a source-to-source transformation. Such a
 // block is transparent: an unlabelled `break` or `continue` inside it binds to
 // the enclosing loop rather than being captured by the block. The block can

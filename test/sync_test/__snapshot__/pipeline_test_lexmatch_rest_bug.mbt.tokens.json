@@ -52,72 +52,72 @@
     "loc": "2:16-2:17"
   },
   {
-    "token": "LEXSCAN",
-    "loc": "3:3-3:10"
+    "token": "LEXMATCH",
+    "loc": "3:3-3:11"
   },
   {
     "token": "LPAREN",
-    "loc": "3:11-3:12"
+    "loc": "3:12-3:13"
   },
   {
     "token": "TRY_EXCLAMATION",
-    "loc": "3:12-3:16"
+    "loc": "3:13-3:17"
   },
   {
     "token": [
       "LIDENT",
       "s"
     ],
-    "loc": "3:17-3:18"
+    "loc": "3:18-3:19"
   },
   {
     "token": "LBRACKET",
-    "loc": "3:18-3:19"
+    "loc": "3:19-3:20"
   },
   {
     "token": [
       "INT",
       "0"
     ],
-    "loc": "3:19-3:20"
+    "loc": "3:20-3:21"
   },
   {
     "token": "COLON",
-    "loc": "3:20-3:21"
+    "loc": "3:21-3:22"
   },
   {
     "token": [
       "INT",
       "1"
     ],
-    "loc": "3:21-3:22"
-  },
-  {
-    "token": "RBRACKET",
     "loc": "3:22-3:23"
   },
   {
-    "token": "RPAREN",
+    "token": "RBRACKET",
     "loc": "3:23-3:24"
   },
   {
+    "token": "RPAREN",
+    "loc": "3:24-3:25"
+  },
+  {
     "token": "WITH",
-    "loc": "3:25-3:29"
+    "loc": "3:26-3:30"
   },
   {
     "token": [
       "LIDENT",
       "longest"
     ],
-    "loc": "3:30-3:37"
+    "loc": "3:31-3:38"
   },
   {
     "token": "LBRACE",
-    "loc": "3:38-3:39"
+    "loc": "3:39-3:40"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:39-3:40"
+    "loc": "3:40-3:41"
   },
   {
     "token": "LPAREN",
@@ -244,34 +244,34 @@
     "loc": "7:16-7:17"
   },
   {
-    "token": "LEXSCAN",
-    "loc": "7:18-7:25"
+    "token": "LEXMATCH",
+    "loc": "7:18-7:26"
   },
   {
     "token": [
       "STRING",
       "ba"
     ],
-    "loc": "7:26-7:30"
+    "loc": "7:27-7:31"
   },
   {
     "token": "WITH",
-    "loc": "7:31-7:35"
+    "loc": "7:32-7:36"
   },
   {
     "token": [
       "LIDENT",
       "longest"
     ],
-    "loc": "7:36-7:43"
+    "loc": "7:37-7:44"
   },
   {
     "token": "LBRACE",
-    "loc": "7:44-7:45"
+    "loc": "7:45-7:46"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:45-7:46"
+    "loc": "7:46-7:47"
   },
   {
     "token": "LPAREN",

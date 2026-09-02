@@ -2,7 +2,7 @@
 fn test_unicode_support() -> Unit raise {
   // Test Unicode character matching
   fn f(str : String) -> Int {
-    lexscan str with longest {
+    lexmatch str with longest {
       re"^(我❤️中国|𠮷)$" => 1
       (re"^[\u3041-\u3096\u3099-\u309f]{3}" as s, after=_) => {
         println(s)
@@ -23,7 +23,7 @@ fn test_unicode_support() -> Unit raise {
 fn test_unicode_support2() -> Unit raise {
   // Test Unicode character matching
   fn f(str : String) -> Char raise {
-    lexscan str with longest {
+    lexmatch str with longest {
       (re"^." as c, after=_) => c
       _ => raise Failure::Failure("No match")
     }

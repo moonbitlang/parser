@@ -170,23 +170,23 @@
     "loc": "7:15-7:16"
   },
   {
-    "token": "LEXSCAN",
-    "loc": "7:17-7:24"
+    "token": "LEXMATCH",
+    "loc": "7:17-7:25"
   },
   {
     "token": [
       "LIDENT",
       "s"
     ],
-    "loc": "7:25-7:26"
+    "loc": "7:26-7:27"
   },
   {
     "token": "LBRACE",
-    "loc": "7:27-7:28"
+    "loc": "7:28-7:29"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:28-7:29"
+    "loc": "7:29-7:30"
   },
   {
     "token": "LPAREN",

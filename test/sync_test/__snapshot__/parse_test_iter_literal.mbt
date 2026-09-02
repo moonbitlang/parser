@@ -1,6 +1,6 @@
 ///|
 test {
-  let _ = [||]
+  let _ : () -> Iter[Int] = () => { return [||] }
   let xs = [| 1, 2, 3 |]
   let _ = [| 0, ..xs, 5 |]
   let _ = [| for x in 0..<10 => x + 1 |]

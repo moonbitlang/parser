@@ -341,11 +341,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
@@ -619,24 +614,49 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
             "children": {
               "pattern": {
-                "kind": "Pattern::Var",
+                "kind": "Pattern::Constraint",
                 "loc": null,
                 "children": {
-                  "value": {
-                    "kind": "Binder",
+                  "pat": {
+                    "kind": "Pattern::Var",
                     "loc": null,
                     "children": {
-                      "name": "s1"
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "s1"
+                        }
+                      }
+                    }
+                  },
+                  "ty": {
+                    "kind": "Type::Name",
+                    "loc": null,
+                    "children": {
+                      "constr_id": {
+                        "kind": "ConstrId",
+                        "loc": null,
+                        "children": {
+                          "id": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "S"
+                            }
+                          }
+                        }
+                      },
+                      "tys": {
+                        "kind": "Type::Name::TypeList",
+                        "loc": null,
+                        "children": []
+                      }
                     }
                   }
                 }
@@ -657,7 +677,7 @@
                             "kind": "LongIdent::Ident",
                             "loc": null,
                             "children": {
-                              "value": "S"
+                              "value": "Default"
                             }
                           },
                           "is_object": false
@@ -1609,11 +1629,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Match",
             "loc": null,

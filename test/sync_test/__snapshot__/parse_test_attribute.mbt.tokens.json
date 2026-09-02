@@ -1009,22 +1009,45 @@
     "loc": "52:14-52:19"
   },
   {
+    "token": "LBRACE",
+    "loc": "52:20-52:21"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "MyErr"
+    ],
+    "loc": "52:22-52:27"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "52:27-52:28"
+  },
+  {
     "token": [
       "UIDENT",
       "Int"
     ],
-    "loc": "52:20-52:23"
+    "loc": "52:28-52:31"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "52:31-52:32"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "52:33-52:34"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "52:23-52:23"
+    "loc": "52:34-52:34"
   },
   {
     "token": "NEWLINE",
-    "loc": "52:23-52:24"
+    "loc": "52:34-52:35"
   },
   {
     "token": "NEWLINE",

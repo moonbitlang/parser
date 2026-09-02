@@ -1,6 +1,6 @@
 ///|
 fn init {
-  let _ = lexscan "" with longest {
+  let _ = lexmatch "" with longest {
     (
       (re"^[0-9]{2}" as _hour_str) + re":" +
       (re"[0-9]{2}$" as _minute_str)

@@ -99,7 +99,8 @@
                             "kind": "Async",
                             "loc": null,
                             "children": {}
-                          }
+                          },
+                          "nocancel": null
                         }
                       },
                       "mut": false,

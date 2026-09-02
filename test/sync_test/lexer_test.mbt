@@ -121,7 +121,7 @@ test "lexing pipeline_test_stringview_literal" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_type" (t : @test.Test) {
+test "lexing pipeline_test_errdefer" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -356,11 +356,6 @@ test "lexing pipeline_test_chinese_ident" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_newtype_derive" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_err_array_set" (t : @test.Test) {
   lexer_test(t)
 }
@@ -376,12 +371,12 @@ test "lexing parse_test_match_case_start_post_label" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_typing_coverage_lexmatch" (t : @test.Test) {
+test "lexing parse_test_package" (t : @test.Test) {
   lexer_test(t)
 }
 
 ///|
-test "lexing parse_test_package" (t : @test.Test) {
+test "lexing parse_test_nocancel" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -541,6 +536,11 @@ test "lexing pipeline_test_global_func" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_foreach" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_string_unsafe_get" (t : @test.Test) {
   lexer_test(t)
 }
@@ -626,11 +626,6 @@ test "lexing pipeline_test_arrayview_in_array" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_type_enum" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_error_poly_raise" (t : @test.Test) {
   lexer_test(t)
 }
@@ -652,6 +647,11 @@ test "lexing pipeline_test_test_main" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_typing_coverage_records" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing parse_test_tuples" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -697,6 +697,11 @@ test "lexing pipeline_test_map_expr" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_bytesview_in_array" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing parse_test_trait_obj_pattern" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -761,6 +766,11 @@ test "lexing pipeline_test_github_16" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_nested_valtype_layout" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_value_enum_global" (t : @test.Test) {
   lexer_test(t)
 }
@@ -772,13 +782,6 @@ test "lexing pipeline_test_locals_contify" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_no_trailing_newline_type" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing parse_test_lexmatch_question_interpolated_patterns" (
-  t : @test.Test,
-) {
   lexer_test(t)
 }
 
@@ -1135,11 +1138,6 @@ test "lexing parse_test_match_case_start_augmented_assignment" (t : @test.Test) 
 }
 
 ///|
-test "lexing pipeline_test_local_struct_tuple" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_view_intrinsics" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1151,11 +1149,6 @@ test "lexing pipeline_test_try_result_type" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_impl_poly_prim" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing parse_test_type_bang_legacy" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -1181,6 +1174,11 @@ test "lexing pipeline_test_pattern_test" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_traitalias_list_no_pkg" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_nested_valtype_deep" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -1225,7 +1223,7 @@ test "lexing pipeline_test_constr_propagate_mut" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_type2" (t : @test.Test) {
+test "lexing pipeline_test_newtype_rec_funcref_erasure" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -1310,11 +1308,6 @@ test "lexing pipeline_test_option" (t : @test.Test) {
 }
 
 ///|
-test "lexing parse_test_local_types2" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_promoted_default_impl" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1375,6 +1368,11 @@ test "lexing pipeline_test_utf_conversion" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_bytesview_as_arrayview" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing parse_test_invalid_trait_def" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1400,11 +1398,6 @@ test "lexing pipeline_test_contify_ty_args" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_type4" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_run_with_declaration2" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1421,11 +1414,6 @@ test "lexing pipeline_test_value_enum_cast2" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_arrayview_make_bind" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_local_type6" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -1476,6 +1464,11 @@ test "lexing pipeline_test_multi_arg" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_impure" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_drop_specialization_joinlet" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -1635,6 +1628,11 @@ test "lexing pipeline_test_error_handle2" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_tail_labelled_block" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_as_view_wrap_ok" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1725,11 +1723,6 @@ test "lexing parse_test_extend" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_type3" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_bytesview_in_closure" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1792,6 +1785,11 @@ test "lexing pipeline_test_tuple_struct_pipe" (t : @test.Test) {
 }
 
 ///|
+test "lexing parse_test_constr_any_pattern" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing parse_test_invalid_expr_in_condition_letrec" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1813,11 +1811,6 @@ test "lexing pipeline_test_regex_literal_expr" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_newtype_array" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_local_type5" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -1868,6 +1861,11 @@ test "lexing pipeline_test_match_3" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_error_poly_iter" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_stale_fuse_rc_info" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -2072,6 +2070,16 @@ test "lexing parse_test_using" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_newtype_rec_funcref_nullable" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_pop_string_option" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_specialize_local_fn" (t : @test.Test) {
   lexer_test(t)
 }
@@ -2238,6 +2246,11 @@ test "lexing pipeline_test_uint" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_if_type" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing parse_test_invalid_error_type" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -2587,6 +2600,11 @@ test "lexing pipeline_test_mcore_inline_mut" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_nested_valtype_error_funcref" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing parse_test_operator_bitwise_or" (t : @test.Test) {
   lexer_test(t)
 }
@@ -2710,6 +2728,11 @@ test "lexing parse_test_invalid_expr_in_condition_try_operators" (
 
 ///|
 test "lexing parse_test_extenum" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_get_opt_is_shadow" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -2894,6 +2917,11 @@ test "lexing parse_test_invalid_expr_in_condition_loop" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_get_opt_is" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_pattern_guard_or" (t : @test.Test) {
   lexer_test(t)
 }
@@ -2969,6 +2997,11 @@ test "lexing pipeline_test_map_pattern" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_value_enum_physical_equal" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_const_propagate" (t : @test.Test) {
   lexer_test(t)
 }
@@ -2995,11 +3028,6 @@ test "lexing pipeline_test_uint64_conversion" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_annotation_node" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_local_type_derive" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -3035,6 +3063,11 @@ test "lexing pipeline_test_err_array_get" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_array_copy2" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_constr_any_pattern" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -3199,11 +3232,6 @@ test "lexing pipeline_test_newtype_circle_alias" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_type_in_foreign_impl" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing parse_test_pattern_guard" (t : @test.Test) {
   lexer_test(t)
 }
@@ -3255,6 +3283,11 @@ test "lexing parse_test_impl_stub_without_for" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_list_comprehension" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_bytesview_mtype" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -3374,6 +3407,11 @@ test "lexing parse_test_fun_binder" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_lexscan_string_scanner" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_autoloc" (t : @test.Test) {
   lexer_test(t)
 }
@@ -3390,6 +3428,11 @@ test "lexing pipeline_test_constr_mut_field" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_type_exclamation" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_tail_lexscan" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -3624,11 +3667,6 @@ test "lexing parse_test_cascade" (t : @test.Test) {
 }
 
 ///|
-test "lexing parse_test_local_types3" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing parse_test_bad_fn_binder_token" (t : @test.Test) {
   lexer_test(t)
 }
@@ -3660,6 +3698,11 @@ test "lexing pipeline_test_foreach_external" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_interp" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_defer_effect" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -3959,12 +4002,27 @@ test "lexing pipeline_test_notequal" (t : @test.Test) {
 }
 
 ///|
+test "lexing parse_test_error_type" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing parse_test_try_simple" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_js_comp_perf" (t : @test.Test) {
   lexer_test(t)
 }
 
 ///|
 test "lexing pipeline_test_bytesview_as_object" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_mul_wide" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -4324,6 +4382,11 @@ test "lexing pipeline_test_docstring" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_sequence_unit" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_bytesview_in_struct" (t : @test.Test) {
   lexer_test(t)
 }
@@ -4440,11 +4503,6 @@ test "lexing parse_test_explicit_method" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_char_array" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing parse_test_lexmatch_question_regex_literal" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -4579,6 +4637,11 @@ test "lexing pipeline_test_inline_attr" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_view_taking_intrinsics" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_rename_mono" (t : @test.Test) {
   lexer_test(t)
 }
@@ -4624,6 +4687,11 @@ test "lexing pipeline_test_bytearray" (t : @test.Test) {
 }
 
 ///|
+test "lexing parse_test_tuples_err9" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_eval_order2" (t : @test.Test) {
   lexer_test(t)
 }
@@ -4649,6 +4717,11 @@ test "lexing pipeline_test_error_to_json_generic" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_nested_valtype_wide_prefix" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing parse_test_range_inclusive_without_equal_in_for" (t : @test.Test) {
   lexer_test(t)
 }
@@ -4664,6 +4737,11 @@ test "lexing pipeline_test_make_string" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_lexmatch_first" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_predef_method" (t : @test.Test) {
   lexer_test(t)
 }
@@ -4675,11 +4753,6 @@ test "lexing parse_test_ffi_multiline_stub" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_docstring2" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_local_type_name" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -4740,6 +4813,11 @@ test "lexing pipeline_test_array_byte_set_null" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_nested_loop_bare_break" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_newtype_rec_funcref" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -4964,17 +5042,7 @@ test "lexing parse_test_derive_arguments" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_local_empty_struct" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_circle_with_node" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing parse_test_local_types" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -4990,6 +5058,11 @@ test "lexing pipeline_test_static_toplevel_let" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_dfa_state_test" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_unsafe_cycle_free_type_arg" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -5100,11 +5173,6 @@ test "lexing parse_test_callback_test" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_range_pattern" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_local_tuple_struct" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -5254,11 +5322,6 @@ test "lexing pipeline_test_tuple_struct2" (t : @test.Test) {
 }
 
 ///|
-test "lexing parse_test_type_bang_no_payload" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing parse_test_package3" (t : @test.Test) {
   lexer_test(t)
 }
@@ -5310,11 +5373,6 @@ test "lexing pipeline_test_foreach_nested_loop" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_stackallow_joinpoint" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_local_type_default" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -5549,6 +5607,11 @@ test "lexing pipeline_test_floats" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_value_enum_variant_type" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_tuple_struct_of_func" (t : @test.Test) {
   lexer_test(t)
 }
@@ -5564,17 +5627,7 @@ test "lexing pipeline_test_006" (t : @test.Test) {
 }
 
 ///|
-test "lexing parse_test_local_types_error" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing parse_test_break_with_post_label" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing parse_test_lexmatch_question" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -5729,11 +5782,6 @@ test "lexing pipeline_test_is_expr" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_match_regex_utf8_bug" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing parse_test_brace_pattern_record_kind_unexpected" (t : @test.Test) {
   lexer_test(t)
 }
@@ -5830,6 +5878,11 @@ test "lexing pipeline_test_tuple_struct4" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_nested_loop" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_array_unsafe_eval_order" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -6081,6 +6134,11 @@ test "lexing parse_test_traitalias_equal_dotted_target" (t : @test.Test) {
 }
 
 ///|
+test "lexing parse_test_constr_any_pattern_args" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_option_return_test" (t : @test.Test) {
   lexer_test(t)
 }
@@ -6126,6 +6184,11 @@ test "lexing pipeline_test_well_known_clos" (t : @test.Test) {
 }
 
 ///|
+test "lexing parse_test_tuples_err10" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing parse_test_typealias_invalid_start_token" (t : @test.Test) {
   lexer_test(t)
 }
@@ -6162,5 +6225,10 @@ test "lexing pipeline_test_issue915" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_bytesview_set_null" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_nocancel" (t : @test.Test) {
   lexer_test(t)
 }

@@ -113,15 +113,11 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Lexscan",
             "loc": null,
             "children": {
+              "streaming": true,
               "strategy": null,
               "expr": {
                 "kind": "Expr::Ident",
@@ -181,7 +177,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Interp",
                         "loc": null,
@@ -222,6 +217,43 @@
                             "kind": "RegexPattern::Literal",
                             "loc": null,
                             "children": {
+                              "lit": "^[a-z]+"
+                            }
+                          }
+                        }
+                      },
+                      "bindings": {
+                        "kind": "LexscanCase::BindingList",
+                        "loc": null,
+                        "children": []
+                      },
+                      "body": {
+                        "kind": "Expr::Constant",
+                        "loc": null,
+                        "children": {
+                          "constant": {
+                            "kind": "Constant::String",
+                            "loc": null,
+                            "children": {
+                              "value": "unreachable"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "kind": "LexscanCase",
+                    "loc": null,
+                    "children": {
+                      "pat": {
+                        "kind": "LexscanCasePattern::Pattern",
+                        "loc": null,
+                        "children": {
+                          "value": {
+                            "kind": "RegexPattern::Literal",
+                            "loc": null,
+                            "children": {
                               "lit": "^[0-9]+"
                             }
                           }
@@ -232,7 +264,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -270,7 +301,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Apply",
                         "loc": null,
@@ -353,7 +383,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -415,7 +444,15 @@
           "attrs": {
             "kind": "FunDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#warnings(\"-deprecated\") "
+                }
+              }
+            ]
           },
           "doc": ""
         }
@@ -425,11 +462,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,

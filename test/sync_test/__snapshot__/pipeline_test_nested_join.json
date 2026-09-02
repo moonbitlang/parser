@@ -295,11 +295,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::LetFn",
             "loc": null,
@@ -766,6 +761,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "kind": {
                     "kind": "FnKind::Lambda",
                     "loc": null,

@@ -1487,7 +1487,230 @@
     "loc": "64:2-64:3"
   },
   {
+    "token": "NEWLINE",
+    "loc": "65:1-65:2"
+  },
+  {
+    "token": [
+      "COMMENT",
+      {
+        "content": "// Keep the nobreak block and following statement when recovering to `{`.",
+        "kind": [
+          "Ownline",
+          {
+            "leading_blank_line": true,
+            "trailing_blank_line": false
+          }
+        ],
+        "consumed_by_docstring": false
+      }
+    ],
+    "loc": "66:1-66:74"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "66:74-66:75"
+  },
+  {
+    "token": "FN",
+    "loc": "67:1-67:3"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "test_nobreak_recovery"
+    ],
+    "loc": "67:4-67:25"
+  },
+  {
+    "token": "LPAREN",
+    "loc": "67:25-67:26"
+  },
+  {
+    "token": "RPAREN",
+    "loc": "67:26-67:27"
+  },
+  {
+    "token": "THIN_ARROW",
+    "loc": "67:28-67:30"
+  },
+  {
+    "token": [
+      "UIDENT",
+      "Unit"
+    ],
+    "loc": "67:31-67:35"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "67:36-67:37"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "67:37-67:38"
+  },
+  {
+    "token": "FOR",
+    "loc": "68:3-68:6"
+  },
+  {
+    "token": [
+      "SEMI",
+      true
+    ],
+    "loc": "68:7-68:8"
+  },
+  {
+    "token": [
+      "SEMI",
+      true
+    ],
+    "loc": "68:8-68:9"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "68:10-68:11"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "68:11-68:12"
+  },
+  {
+    "token": "NOBREAK",
+    "loc": "68:13-68:20"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "junk"
+    ],
+    "loc": "68:21-68:25"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "68:26-68:27"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "for_nobreak_block"
+    ],
+    "loc": "68:28-68:45"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "68:46-68:47"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "68:47-68:47"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "68:47-68:48"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "after_for"
+    ],
+    "loc": "69:3-69:12"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "69:12-69:12"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "69:12-69:13"
+  },
+  {
+    "token": "WHILE",
+    "loc": "70:3-70:8"
+  },
+  {
+    "token": "TRUE",
+    "loc": "70:9-70:13"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "70:14-70:15"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "70:15-70:16"
+  },
+  {
+    "token": "NOBREAK",
+    "loc": "70:17-70:24"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "junk"
+    ],
+    "loc": "70:25-70:29"
+  },
+  {
+    "token": "LBRACE",
+    "loc": "70:30-70:31"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "while_nobreak_block"
+    ],
+    "loc": "70:32-70:51"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "70:52-70:53"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "70:53-70:53"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "70:53-70:54"
+  },
+  {
+    "token": [
+      "LIDENT",
+      "after_while"
+    ],
+    "loc": "71:3-71:14"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "71:14-71:15"
+  },
+  {
+    "token": "RBRACE",
+    "loc": "72:1-72:2"
+  },
+  {
+    "token": [
+      "SEMI",
+      false
+    ],
+    "loc": "72:2-72:2"
+  },
+  {
+    "token": "NEWLINE",
+    "loc": "72:2-72:3"
+  },
+  {
     "token": "EOF",
-    "loc": "65:1-65:1"
+    "loc": "73:1-73:1"
   }
 ]

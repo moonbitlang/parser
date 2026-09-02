@@ -773,6 +773,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "has_default": null,
                   "attrs": {
                     "kind": "TraitMethodDecl::AttrList",
@@ -902,6 +903,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "has_default": null,
                   "attrs": {
                     "kind": "TraitMethodDecl::AttrList",

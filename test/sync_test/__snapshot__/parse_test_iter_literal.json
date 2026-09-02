@@ -8,20 +8,141 @@
         "loc": null,
         "children": {
           "pattern": {
-            "kind": "Pattern::Any",
-            "loc": null,
-            "children": {}
-          },
-          "expr": {
-            "kind": "Expr::Array",
+            "kind": "Pattern::Constraint",
             "loc": null,
             "children": {
-              "exprs": {
-                "kind": "Expr::Array::ExprList",
+              "pat": {
+                "kind": "Pattern::Any",
                 "loc": null,
-                "children": []
+                "children": {}
               },
-              "is_iter": true
+              "ty": {
+                "kind": "Type::Arrow",
+                "loc": null,
+                "children": {
+                  "args": {
+                    "kind": "Type::Arrow::ArgList",
+                    "loc": null,
+                    "children": []
+                  },
+                  "res": {
+                    "kind": "Type::Name",
+                    "loc": null,
+                    "children": {
+                      "constr_id": {
+                        "kind": "ConstrId",
+                        "loc": null,
+                        "children": {
+                          "id": {
+                            "kind": "LongIdent::Ident",
+                            "loc": null,
+                            "children": {
+                              "value": "Iter"
+                            }
+                          }
+                        }
+                      },
+                      "tys": {
+                        "kind": "Type::Name::TypeList",
+                        "loc": null,
+                        "children": [
+                          {
+                            "kind": "Type::Name",
+                            "loc": null,
+                            "children": {
+                              "constr_id": {
+                                "kind": "ConstrId",
+                                "loc": null,
+                                "children": {
+                                  "id": {
+                                    "kind": "LongIdent::Ident",
+                                    "loc": null,
+                                    "children": {
+                                      "value": "Int"
+                                    }
+                                  }
+                                }
+                              },
+                              "tys": {
+                                "kind": "Type::Name::TypeList",
+                                "loc": null,
+                                "children": []
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "err": {
+                    "kind": "ErrorType::NoErrorType",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "is_async": null,
+                  "nocancel": null
+                }
+              }
+            }
+          },
+          "expr": {
+            "kind": "Expr::Function",
+            "loc": null,
+            "children": {
+              "func": {
+                "kind": "Func::Lambda",
+                "loc": null,
+                "children": {
+                  "parameters": {
+                    "kind": "Func::Lambda::ParameterList",
+                    "loc": null,
+                    "children": []
+                  },
+                  "body": {
+                    "kind": "Expr::Group",
+                    "loc": null,
+                    "children": {
+                      "expr": {
+                        "kind": "Expr::Return",
+                        "loc": null,
+                        "children": {
+                          "return_value": {
+                            "kind": "Expr::Array",
+                            "loc": null,
+                            "children": {
+                              "exprs": {
+                                "kind": "Expr::Array::ExprList",
+                                "loc": null,
+                                "children": []
+                              },
+                              "is_iter": true
+                            }
+                          }
+                        }
+                      },
+                      "group": {
+                        "kind": "Group::Brace",
+                        "loc": null,
+                        "children": {}
+                      }
+                    }
+                  },
+                  "return_type": null,
+                  "error_type": {
+                    "kind": "ErrorType::NoErrorType",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "nocancel": null,
+                  "kind": {
+                    "kind": "FnKind::Arrow",
+                    "loc": null,
+                    "children": {}
+                  },
+                  "has_error": null,
+                  "is_async": null
+                }
+              }
             }
           },
           "body": {
@@ -534,11 +655,6 @@
       },
       "name": null,
       "params": null,
-      "local_types": {
-        "kind": "Impl::TopTest::LocalTypeList",
-        "loc": null,
-        "children": []
-      },
       "is_async": null,
       "attrs": {
         "kind": "Impl::TopTest::AttrList",

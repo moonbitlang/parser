@@ -1,7 +1,7 @@
 
 
 fn lex_suffix(str : StringView) -> StringView raise {
-  lexscan str with longest {
+  lexmatch str with longest {
     (re"^.*" + re"\." + (re".*$" as ext)) => ext
     _ => fail("Invalid suffix")
   }  

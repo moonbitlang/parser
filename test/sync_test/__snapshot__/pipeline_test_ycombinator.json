@@ -117,7 +117,8 @@
                         "loc": null,
                         "children": {}
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   }
                 ]
@@ -249,7 +250,8 @@
                                 "loc": null,
                                 "children": {}
                               },
-                              "is_async": null
+                              "is_async": null,
+                              "nocancel": null
                             }
                           }
                         ]
@@ -317,7 +319,8 @@
                             "loc": null,
                             "children": {}
                           },
-                          "is_async": null
+                          "is_async": null,
+                          "nocancel": null
                         }
                       },
                       "err": {
@@ -325,7 +328,8 @@
                         "loc": null,
                         "children": {}
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   }
                 }
@@ -425,7 +429,8 @@
                 "loc": null,
                 "children": {}
               },
-              "is_async": null
+              "is_async": null,
+              "nocancel": null
             }
           },
           "error_type": {
@@ -451,11 +456,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::LetFn",
             "loc": null,
@@ -570,7 +570,8 @@
                                         "loc": null,
                                         "children": {}
                                       },
-                                      "is_async": null
+                                      "is_async": null,
+                                      "nocancel": null
                                     }
                                   }
                                 ]
@@ -799,6 +800,7 @@
                             "loc": null,
                             "children": {}
                           },
+                          "nocancel": null,
                           "kind": {
                             "kind": "FnKind::Lambda",
                             "loc": null,
@@ -873,7 +875,8 @@
                         "loc": null,
                         "children": {}
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   },
                   "error_type": {
@@ -881,6 +884,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "kind": {
                     "kind": "FnKind::Lambda",
                     "loc": null,
@@ -1218,6 +1222,7 @@
                                                         "loc": null,
                                                         "children": {}
                                                       },
+                                                      "nocancel": null,
                                                       "kind": {
                                                         "kind": "FnKind::Lambda",
                                                         "loc": null,
@@ -1235,6 +1240,7 @@
                                                 "loc": null,
                                                 "children": {}
                                               },
+                                              "nocancel": null,
                                               "kind": {
                                                 "kind": "FnKind::Lambda",
                                                 "loc": null,
@@ -1380,7 +1386,8 @@
                         "loc": null,
                         "children": {}
                       },
-                      "is_async": null
+                      "is_async": null,
+                      "nocancel": null
                     }
                   }
                 }
@@ -1455,7 +1462,8 @@
                 "loc": null,
                 "children": {}
               },
-              "is_async": null
+              "is_async": null,
+              "nocancel": null
             }
           },
           "error_type": {
@@ -1481,11 +1489,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Function",
             "loc": null,
@@ -1772,6 +1775,7 @@
                     "loc": null,
                     "children": {}
                   },
+                  "nocancel": null,
                   "kind": {
                     "kind": "FnKind::Lambda",
                     "loc": null,
@@ -1835,11 +1839,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,

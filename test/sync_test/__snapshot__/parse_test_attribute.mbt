@@ -49,7 +49,7 @@ pub type MyTypeAlias = Int
 
 #alert(category1,"reason")
 #alert(category2,"reason")
-pub suberror MyErr Int
+pub suberror MyErr { MyErr(Int) }
 
 #alert(category1,"reason")
 #alert(category2,"reason")

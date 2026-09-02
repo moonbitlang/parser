@@ -32,6 +32,7 @@ fn init {
   to_result(() => has_error()) |> debug
 }
 
+#warnings("-fragile_catch_all")
 fn rethrow(f : () -> Int raise?) -> Int raise? {
   try {
     f()

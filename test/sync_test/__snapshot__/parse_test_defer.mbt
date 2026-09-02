@@ -9,3 +9,15 @@ test {
     block()
   }
 }
+
+test {
+  errdefer x
+  errdefer simple()
+  errdefer socket.close()
+  errdefer conn..send_farewell().close()
+  errdefer x |> f
+  errdefer {
+    block()
+    block()
+  }
+}

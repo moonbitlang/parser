@@ -10,4 +10,11 @@ fn main {
   let _ = s =~ ((re"x" | ALT) SUFFIX, before=head)
   let _ = s =~ non_constant
   let _ = s =~ (@pkg.non_constant)
+  let _ = s =~ "missing_prefix"
+  let _ = s =~ ("missing_prefix_with_binding", before=head)
+  let _ = s =~ (re"prefix" + "missing_sequence_prefix")
+  lexscan s {
+    "missing_lexscan_prefix" => ()
+    _ => ()
+  }
 }

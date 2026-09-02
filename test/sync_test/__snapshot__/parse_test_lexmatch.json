@@ -47,11 +47,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Sequence",
             "loc": null,
@@ -61,9 +56,10 @@
                 "loc": null,
                 "children": [
                   {
-                    "kind": "Expr::Lexmatch",
+                    "kind": "Expr::Lexscan",
                     "loc": null,
                     "children": {
+                      "streaming": false,
                       "strategy": {
                         "kind": "Label",
                         "loc": null,
@@ -91,34 +87,31 @@
                         }
                       },
                       "cases": {
-                        "kind": "Expr::Lexmatch::CaseList",
+                        "kind": "Expr::Lexscan::CaseList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Literal",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Regex",
-                                        "loc": null,
-                                        "children": {
-                                          "lit": "a",
-                                          "offset": 1
-                                        }
-                                      }
+                                      "lit": "^a$"
                                     }
                                   }
-                                ]
+                                }
                               },
-                              "guard": null,
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -129,35 +122,48 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Literal",
+                                    "loc": null,
+                                    "children": {
+                                      "lit": "^a"
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "LexTopPattern::Pattern",
+                                    "kind": "LexscanCase::Binding",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Regex",
+                                      "label": {
+                                        "kind": "Label",
                                         "loc": null,
                                         "children": {
-                                          "lit": "a",
-                                          "offset": 1
+                                          "name": "after"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_"
                                         }
                                       }
                                     }
-                                  },
-                                  {
-                                    "kind": "LexTopPattern::Wildcard",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 ]
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -168,21 +174,19 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Wildcard",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Wildcard",
-                                    "loc": null,
-                                    "children": {}
-                                  }
-                                ]
+                                "children": {}
                               },
-                              "guard": null,
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -197,9 +201,10 @@
                     }
                   },
                   {
-                    "kind": "Expr::Lexmatch",
+                    "kind": "Expr::Lexscan",
                     "loc": null,
                     "children": {
+                      "streaming": false,
                       "strategy": null,
                       "expr": {
                         "kind": "Expr::Ident",
@@ -221,34 +226,31 @@
                         }
                       },
                       "cases": {
-                        "kind": "Expr::Lexmatch::CaseList",
+                        "kind": "Expr::Lexscan::CaseList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Literal",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Regex",
-                                        "loc": null,
-                                        "children": {
-                                          "lit": "a",
-                                          "offset": 1
-                                        }
-                                      }
+                                      "lit": "^a$"
                                     }
                                   }
-                                ]
+                                }
                               },
-                              "guard": null,
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -259,35 +261,48 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Literal",
+                                    "loc": null,
+                                    "children": {
+                                      "lit": "a$"
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "LexTopPattern::Wildcard",
-                                    "loc": null,
-                                    "children": {}
-                                  },
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                    "kind": "LexscanCase::Binding",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Regex",
+                                      "label": {
+                                        "kind": "Label",
                                         "loc": null,
                                         "children": {
-                                          "lit": "a",
-                                          "offset": 1
+                                          "name": "before"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_"
                                         }
                                       }
                                     }
                                   }
                                 ]
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -298,40 +313,68 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Literal",
+                                    "loc": null,
+                                    "children": {
+                                      "lit": "a"
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "LexTopPattern::Wildcard",
-                                    "loc": null,
-                                    "children": {}
-                                  },
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                    "kind": "LexscanCase::Binding",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Regex",
+                                      "label": {
+                                        "kind": "Label",
                                         "loc": null,
                                         "children": {
-                                          "lit": "a",
-                                          "offset": 1
+                                          "name": "before"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_"
                                         }
                                       }
                                     }
                                   },
                                   {
-                                    "kind": "LexTopPattern::Wildcard",
+                                    "kind": "LexscanCase::Binding",
                                     "loc": null,
-                                    "children": {}
+                                    "children": {
+                                      "label": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "after"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "_"
+                                        }
+                                      }
+                                    }
                                   }
                                 ]
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -342,30 +385,24 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Wildcard",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Wildcard",
-                                    "loc": null,
-                                    "children": {}
-                                  }
-                                ]
+                                "children": {}
                               },
-                              "guard": null,
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "body": {
-                                "kind": "Expr::Hole",
+                                "kind": "Expr::Unit",
                                 "loc": null,
                                 "children": {
-                                  "kind": {
-                                    "kind": "Hole::Todo",
-                                    "loc": null,
-                                    "children": {}
-                                  }
+                                  "faked": false
                                 }
                               }
                             }
@@ -375,9 +412,10 @@
                     }
                   },
                   {
-                    "kind": "Expr::Lexmatch",
+                    "kind": "Expr::Lexscan",
                     "loc": null,
                     "children": {
+                      "streaming": false,
                       "strategy": null,
                       "expr": {
                         "kind": "Expr::Ident",
@@ -399,31 +437,240 @@
                         }
                       },
                       "cases": {
-                        "kind": "Expr::Lexmatch::CaseList",
+                        "kind": "Expr::Lexscan::CaseList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
+                                "kind": "LexscanCasePattern::Pattern",
                                 "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Alias",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Alias",
+                                      "pat": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "^a$"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "a"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
+                              "body": {
+                                "kind": "Expr::Unit",
+                                "loc": null,
+                                "children": {
+                                  "faked": false
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "LexscanCase",
+                            "loc": null,
+                            "children": {
+                              "pat": {
+                                "kind": "LexscanCasePattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Sequence",
+                                    "loc": null,
+                                    "children": {
+                                      "pat1": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "^a"
+                                        }
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "b$"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
+                              "body": {
+                                "kind": "Expr::Unit",
+                                "loc": null,
+                                "children": {
+                                  "faked": false
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "LexscanCase",
+                            "loc": null,
+                            "children": {
+                              "pat": {
+                                "kind": "LexscanCasePattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Sequence",
+                                    "loc": null,
+                                    "children": {
+                                      "pat1": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "^a"
+                                        }
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Alias",
                                         "loc": null,
                                         "children": {
                                           "pat": {
-                                            "kind": "LexPattern::Regex",
+                                            "kind": "RegexPattern::Literal",
                                             "loc": null,
                                             "children": {
-                                              "lit": "a",
-                                              "offset": 1
+                                              "lit": "b$"
+                                            }
+                                          },
+                                          "binder": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "b"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
+                              "body": {
+                                "kind": "Expr::Unit",
+                                "loc": null,
+                                "children": {
+                                  "faked": false
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "LexscanCase",
+                            "loc": null,
+                            "children": {
+                              "pat": {
+                                "kind": "LexscanCasePattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Sequence",
+                                    "loc": null,
+                                    "children": {
+                                      "pat1": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "^a"
+                                        }
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Literal",
+                                        "loc": null,
+                                        "children": {
+                                          "lit": "b"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": [
+                                  {
+                                    "kind": "LexscanCase::Binding",
+                                    "loc": null,
+                                    "children": {
+                                      "label": {
+                                        "kind": "Label",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "after"
+                                        }
+                                      },
+                                      "binder": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "c"
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "body": {
+                                "kind": "Expr::Unit",
+                                "loc": null,
+                                "children": {
+                                  "faked": false
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "LexscanCase",
+                            "loc": null,
+                            "children": {
+                              "pat": {
+                                "kind": "LexscanCasePattern::Pattern",
+                                "loc": null,
+                                "children": {
+                                  "value": {
+                                    "kind": "RegexPattern::Sequence",
+                                    "loc": null,
+                                    "children": {
+                                      "pat1": {
+                                        "kind": "RegexPattern::Alias",
+                                        "loc": null,
+                                        "children": {
+                                          "pat": {
+                                            "kind": "RegexPattern::Literal",
+                                            "loc": null,
+                                            "children": {
+                                              "lit": "^a"
                                             }
                                           },
                                           "binder": {
@@ -434,189 +681,34 @@
                                             }
                                           }
                                         }
-                                      }
-                                    }
-                                  }
-                                ]
-                              },
-                              "guard": null,
-                              "body": {
-                                "kind": "Expr::Unit",
-                                "loc": null,
-                                "children": {
-                                  "faked": false
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "kind": "LexCase",
-                            "loc": null,
-                            "children": {
-                              "pat": {
-                                "kind": "LexCase::PatternList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Sequence",
+                                      },
+                                      "pat2": {
+                                        "kind": "RegexPattern::Literal",
                                         "loc": null,
                                         "children": {
-                                          "pats": {
-                                            "kind": "LexPattern::Sequence::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "a",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "b",
-                                                  "offset": 1
-                                                }
-                                              }
-                                            ]
-                                          }
+                                          "lit": "b"
                                         }
                                       }
                                     }
                                   }
-                                ]
-                              },
-                              "guard": null,
-                              "body": {
-                                "kind": "Expr::Unit",
-                                "loc": null,
-                                "children": {
-                                  "faked": false
                                 }
-                              }
-                            }
-                          },
-                          {
-                            "kind": "LexCase",
-                            "loc": null,
-                            "children": {
-                              "pat": {
-                                "kind": "LexCase::PatternList",
+                              },
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "LexTopPattern::Pattern",
+                                    "kind": "LexscanCase::Binding",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Sequence",
+                                      "label": {
+                                        "kind": "Label",
                                         "loc": null,
                                         "children": {
-                                          "pats": {
-                                            "kind": "LexPattern::Sequence::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "a",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              {
-                                                "kind": "LexPattern::Alias",
-                                                "loc": null,
-                                                "children": {
-                                                  "pat": {
-                                                    "kind": "LexPattern::Regex",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "lit": "b",
-                                                      "offset": 1
-                                                    }
-                                                  },
-                                                  "binder": {
-                                                    "kind": "Binder",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "name": "b"
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            ]
-                                          }
+                                          "name": "after"
                                         }
-                                      }
-                                    }
-                                  }
-                                ]
-                              },
-                              "guard": null,
-                              "body": {
-                                "kind": "Expr::Unit",
-                                "loc": null,
-                                "children": {
-                                  "faked": false
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "kind": "LexCase",
-                            "loc": null,
-                            "children": {
-                              "pat": {
-                                "kind": "LexCase::PatternList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Sequence",
-                                        "loc": null,
-                                        "children": {
-                                          "pats": {
-                                            "kind": "LexPattern::Sequence::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "a",
-                                                  "offset": 1
-                                                }
-                                              },
-                                              {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "b",
-                                                  "offset": 1
-                                                }
-                                              }
-                                            ]
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  {
-                                    "kind": "LexTopPattern::Binder",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
+                                      },
+                                      "binder": {
                                         "kind": "Binder",
                                         "loc": null,
                                         "children": {
@@ -627,7 +719,6 @@
                                   }
                                 ]
                               },
-                              "guard": null,
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -638,109 +729,27 @@
                             }
                           },
                           {
-                            "kind": "LexCase",
+                            "kind": "LexscanCase",
                             "loc": null,
                             "children": {
                               "pat": {
-                                "kind": "LexCase::PatternList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Pattern",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "LexPattern::Sequence",
-                                        "loc": null,
-                                        "children": {
-                                          "pats": {
-                                            "kind": "LexPattern::Sequence::PatternList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "LexPattern::Alias",
-                                                "loc": null,
-                                                "children": {
-                                                  "pat": {
-                                                    "kind": "LexPattern::Regex",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "lit": "a",
-                                                      "offset": 1
-                                                    }
-                                                  },
-                                                  "binder": {
-                                                    "kind": "Binder",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "name": "a"
-                                                    }
-                                                  }
-                                                }
-                                              },
-                                              {
-                                                "kind": "LexPattern::Regex",
-                                                "loc": null,
-                                                "children": {
-                                                  "lit": "b",
-                                                  "offset": 1
-                                                }
-                                              }
-                                            ]
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  {
-                                    "kind": "LexTopPattern::Binder",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "Binder",
-                                        "loc": null,
-                                        "children": {
-                                          "name": "c"
-                                        }
-                                      }
-                                    }
-                                  }
-                                ]
-                              },
-                              "guard": null,
-                              "body": {
-                                "kind": "Expr::Unit",
+                                "kind": "LexscanCasePattern::Binder",
                                 "loc": null,
                                 "children": {
-                                  "faked": false
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "kind": "LexCase",
-                            "loc": null,
-                            "children": {
-                              "pat": {
-                                "kind": "LexCase::PatternList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "LexTopPattern::Binder",
+                                  "value": {
+                                    "kind": "Binder",
                                     "loc": null,
                                     "children": {
-                                      "value": {
-                                        "kind": "Binder",
-                                        "loc": null,
-                                        "children": {
-                                          "name": "s2"
-                                        }
-                                      }
+                                      "name": "s2"
                                     }
                                   }
-                                ]
+                                }
                               },
-                              "guard": null,
+                              "bindings": {
+                                "kind": "LexscanCase::BindingList",
+                                "loc": null,
+                                "children": []
+                              },
                               "body": {
                                 "kind": "Expr::Unit",
                                 "loc": null,
@@ -757,9 +766,10 @@
                 ]
               },
               "last_expr": {
-                "kind": "Expr::Lexmatch",
+                "kind": "Expr::Lexscan",
                 "loc": null,
                 "children": {
+                  "streaming": false,
                   "strategy": {
                     "kind": "Label",
                     "loc": null,
@@ -787,62 +797,31 @@
                     }
                   },
                   "cases": {
-                    "kind": "Expr::Lexmatch::CaseList",
+                    "kind": "Expr::Lexscan::CaseList",
                     "loc": null,
                     "children": [
                       {
-                        "kind": "LexCase",
+                        "kind": "LexscanCase",
                         "loc": null,
                         "children": {
                           "pat": {
-                            "kind": "LexCase::PatternList",
+                            "kind": "LexscanCasePattern::Pattern",
                             "loc": null,
-                            "children": [
-                              {
-                                "kind": "LexTopPattern::Pattern",
+                            "children": {
+                              "value": {
+                                "kind": "RegexPattern::Literal",
                                 "loc": null,
                                 "children": {
-                                  "value": {
-                                    "kind": "LexPattern::Regex",
-                                    "loc": null,
-                                    "children": {
-                                      "lit": "",
-                                      "offset": 1
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "kind": "LexTopPattern::Pattern",
-                                "loc": null,
-                                "children": {
-                                  "value": {
-                                    "kind": "LexPattern::Regex",
-                                    "loc": null,
-                                    "children": {
-                                      "lit": "",
-                                      "offset": 1
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "kind": "LexTopPattern::Pattern",
-                                "loc": null,
-                                "children": {
-                                  "value": {
-                                    "kind": "LexPattern::Regex",
-                                    "loc": null,
-                                    "children": {
-                                      "lit": "",
-                                      "offset": 1
-                                    }
-                                  }
+                                  "lit": ""
                                 }
                               }
-                            ]
+                            }
                           },
-                          "guard": null,
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Unit",
                             "loc": null,
@@ -853,55 +832,27 @@
                         }
                       },
                       {
-                        "kind": "LexCase",
+                        "kind": "LexscanCase",
                         "loc": null,
                         "children": {
                           "pat": {
-                            "kind": "LexCase::PatternList",
+                            "kind": "LexscanCasePattern::Binder",
                             "loc": null,
-                            "children": [
-                              {
-                                "kind": "LexTopPattern::Binder",
+                            "children": {
+                              "value": {
+                                "kind": "Binder",
                                 "loc": null,
                                 "children": {
-                                  "value": {
-                                    "kind": "Binder",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "a"
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "kind": "LexTopPattern::Binder",
-                                "loc": null,
-                                "children": {
-                                  "value": {
-                                    "kind": "Binder",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "b"
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "kind": "LexTopPattern::Binder",
-                                "loc": null,
-                                "children": {
-                                  "value": {
-                                    "kind": "Binder",
-                                    "loc": null,
-                                    "children": {
-                                      "name": "c"
-                                    }
-                                  }
+                                  "name": "a"
                                 }
                               }
-                            ]
+                            }
                           },
-                          "guard": null,
+                          "bindings": {
+                            "kind": "LexscanCase::BindingList",
+                            "loc": null,
+                            "children": []
+                          },
                           "body": {
                             "kind": "Expr::Unit",
                             "loc": null,

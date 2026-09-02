@@ -10,10 +10,11 @@ fn[X] Vector::length(self : Vector[X]) -> Int {
   self.len
 }
 
-/// `op_get[X](self : Vector[X], i : Int)`
+/// `get[X](self : Vector[X], i : Int)`
 ///
 /// Get the ith element of vector
-fn[X] Vector::op_get(self : Vector[X], i : Int) -> X? {
+#alias("_[_]")
+fn[X] Vector::get(self : Vector[X], i : Int) -> X? {
   if i < self.len {
     Some(self.data[i])
   } else {

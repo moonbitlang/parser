@@ -66,13 +66,13 @@ fn auto_semi_errors() {
 fn relaxed_for_with_else_part() {
   for ;; {
     ignore(5)
-  } else {
+  } nobreak {
     ignore(6)
   }
 
   for i = 0 {
     ignore(i)
-  } else {
+  } nobreak {
     ignore(i)
   }
 }

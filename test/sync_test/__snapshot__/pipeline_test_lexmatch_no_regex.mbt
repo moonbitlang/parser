@@ -2,11 +2,11 @@
 
 fn main {
   let h = "hello"
-  lexscan h {
+  lexmatch h {
     (re"^he", after=x) => println(x )
     _ => panic()
   }
-  let no_match = lexscan "xhello" {
+  let no_match = lexmatch "xhello" {
     (re"^he", after=_) => true
     _ => false
   }

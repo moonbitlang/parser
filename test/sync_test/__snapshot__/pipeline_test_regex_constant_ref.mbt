@@ -4,7 +4,7 @@ const COMMENT_START = re"/\*"
 const COMMENT_END = re"\*/"
 
 fn comment_content(s : StringView) -> StringView? {
-  let content = lexscan s {
+  let content = lexmatch s {
     (
       re"^" + COMMENT_START + (re".*?" as content) + COMMENT_END + re"$"
     ) => Some(content)

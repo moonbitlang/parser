@@ -138,11 +138,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::LetMut",
             "loc": null,
@@ -529,6 +524,7 @@
                                     "loc": null,
                                     "children": {}
                                   },
+                                  "nocancel": null,
                                   "kind": {
                                     "kind": "FnKind::Lambda",
                                     "loc": null,
@@ -676,15 +672,11 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Lexscan",
             "loc": null,
             "children": {
+              "streaming": true,
               "strategy": null,
               "expr": {
                 "kind": "Expr::Ident",
@@ -744,7 +736,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::DotApply",
                         "loc": null,
@@ -804,7 +795,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -942,15 +932,11 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Lexscan",
             "loc": null,
             "children": {
+              "streaming": true,
               "strategy": {
                 "kind": "Label",
                 "loc": null,
@@ -1003,7 +989,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -1041,7 +1026,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -1071,7 +1055,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -1209,15 +1192,11 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Lexscan",
             "loc": null,
             "children": {
+              "streaming": true,
               "strategy": null,
               "expr": {
                 "kind": "Expr::Ident",
@@ -1264,7 +1243,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -1294,7 +1272,6 @@
                         "loc": null,
                         "children": []
                       },
-                      "guard": null,
                       "body": {
                         "kind": "Expr::Constant",
                         "loc": null,
@@ -1366,11 +1343,6 @@
         "kind": "DeclBody::DeclBody",
         "loc": null,
         "children": {
-          "local_types": {
-            "kind": "DeclBody::DeclBody::LocalTypeList",
-            "loc": null,
-            "children": []
-          },
           "expr": {
             "kind": "Expr::Let",
             "loc": null,
