@@ -4255,7 +4255,11 @@ fn parse_expr_postfix(
         ()
       }
       let reports_before_pattern = state.reports.length()
-      let pat = parse_pattern_range(state, stop_kinds)
+      let pat = parse_pattern_range(
+        state,
+        stop_kinds,
+        allow_brace_pattern_start=true,
+      )
       push_child(
         children,
         Some("pattern"),
@@ -9805,17 +9809,36 @@ fn parse_object_constructor_pattern(state : ParserState) -> CstNode {
 fn parse_pattern_atom(
   state : ParserState,
   stop_kinds : Array[TokenKind],
+  allow_brace_pattern_start? : Bool = false,
 ) -> CstNode {
   match state.peek() {
-    Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) =>
+    Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) &&
+      !(allow_brace_pattern_start && tok.kind() is TokenKind::TK_LBRACE) =>
       state.node_from_children(Pattern_MissingPattern, [])
     Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => {
       let children = state.consume_trivia()
-      let pat = parse_pattern_atom(state, stop_kinds)
-      if !pat.children.is_empty() {
-        push_child(children, Some("pattern"), pat)
+      let pat = parse_pattern_atom(
+        state,
+        stop_kinds,
+        allow_brace_pattern_start~,
+      )
+      if allow_brace_pattern_start && pat.kind is (Pattern_Map | Pattern_Record) {
+        for entry in pat.children {
+          children.push(entry)
+        }
+        let (_, first) = children[0]
+        node(
+          pat.kind,
+          pat.loc,
+          mk_span(first.source_span.0, pat.source_span.1),
+          children,
+        )
+      } else {
+        if !pat.children.is_empty() {
+          push_child(children, Some("pattern"), pat)
+        }
+        state.node_from_children(Pattern_Constraint, children)
       }
-      state.node_from_children(Pattern_Constraint, children)
     }
     Some((UNDERSCORE, _, _)) => parse_single_token_pattern(state, Pattern_Any)
     Some((AMPER, _, _))
@@ -10876,8 +10899,13 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
 fn parse_pattern_postfix(
   state : ParserState,
   stop_kinds : Array[TokenKind],
+  allow_brace_pattern_start? : Bool = false,
 ) -> CstNode {
-  let mut pat = parse_pattern_atom(state, stop_kinds)
+  let mut pat = parse_pattern_atom(
+    state,
+    stop_kinds,
+    allow_brace_pattern_start~,
+  )
   let mut done = false
   while !done {
     match state.peek() {
@@ -10938,8 +10966,13 @@ fn parse_pattern_or(
 fn parse_pattern_range(
   state : ParserState,
   stop_kinds : Array[TokenKind],
+  allow_brace_pattern_start? : Bool = false,
 ) -> CstNode {
-  let mut lhs = parse_pattern_postfix(state, stop_kinds)
+  let mut lhs = parse_pattern_postfix(
+    state,
+    stop_kinds,
+    allow_brace_pattern_start~,
+  )
   match state.peek() {
     Some((RANGE_EXCLUSIVE, _, _)) | Some((RANGE_INCLUSIVE, _, _)) => {
       let range_kind = if state.current_is(TokenKind::TK_RANGE_EXCLUSIVE) {
@@ -10953,7 +10986,11 @@ fn parse_pattern_range(
       } else {
         ()
       }
-      let rhs = parse_pattern_postfix(state, stop_kinds)
+      let rhs = parse_pattern_postfix(
+        state,
+        stop_kinds,
+        allow_brace_pattern_start~,
+      )
       if !rhs.children.is_empty() {
         push_child(children, Some("rhs"), rhs)
       }
