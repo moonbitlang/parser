@@ -6186,6 +6186,7 @@ fn list_comprehension_is_foreach(state : ParserState) -> Bool {
           }
         }
         match state.peek(offset~) {
+          Some((IN, _, _)) => return true
           Some((LIDENT(_), _, _))
           | Some((EXTEND, _, _))
           | Some((UNDERSCORE, _, _)) => offset += 1
