@@ -85,7 +85,7 @@ fn generate(mode~ : Mode) -> Unit {
     }
     @fs.write_string_to_file(output, buf.to_string())
   } catch {
-    err => println(err)
+    err => println(Repr(err))
   }
 }
 
