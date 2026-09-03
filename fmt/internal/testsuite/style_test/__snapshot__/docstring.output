@@ -32,12 +32,12 @@ struct Record {
 ///|
 /// trait
 trait MyTrait {
-  meth(Self) -> Self
+  fn meth(Self) -> Self
 }
 
 ///|
 /// impl
-impl MyTrait for Foo with meth(self) {
+impl MyTrait for Foo with fn meth(self) {
   ...
 }
 
