@@ -173,11 +173,7 @@ pub enum NodeKind {
   TypeDesc_Record
   TypeDesc_TupleStruct
   TypeDesc_Alias
-  LexPattern_Literal
   LexPattern_RegexInterp
-  LexPattern_Sequence
-  LexPattern_Alias
-  LexPattern_ConstantRef
   RegexPattern_Placeholder
   RegexPattern_Literal
   RegexPattern_Reference
@@ -185,7 +181,6 @@ pub enum NodeKind {
   RegexPattern_Alternation
   RegexPattern_Alias
   Case_MatchCase
-  Case_LexCase
   Case_LexScanCase
   Argument_Positional
   Argument_Labelled
@@ -264,9 +259,6 @@ pub enum NodeKind {
   MultilineStringElement_Interp
   LexLiteral_String
   LexLiteral_Regex
-  LexTopPattern_Pattern
-  LexTopPattern_Binder
-  LexTopPattern_Wildcard
   LexScanCasePattern_Pattern
   LexScanCasePattern_Binder
   LexScanCasePattern_Wildcard
@@ -357,7 +349,6 @@ pub enum NodeKind {
   List_TypeArgumentList
   List_TuplePatternList
   List_ConstructorPatternArgumentList
-  List_LexTopPatternList
   List_ArrayPatternList
   List_RecordPatternFieldList
   List_MapPatternFieldList
@@ -369,10 +360,8 @@ pub enum NodeKind {
   List_ExtendItemList
   List_DerivingList
   List_MatchCaseList
-  List_LexCaseList
   List_LexScanCaseList
   List_RegexBindingList
-  List_LexPatternList
   List_ForBindingList
   List_ForEachBindingList
   List_WithBindingList

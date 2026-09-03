@@ -306,6 +306,123 @@ test "labelled-pun value and label locations agree across all parsers" {
 }
 
 ///|
+let lex_scan_case_arrow_loc_source =
+  #|fn locate(input : String) {
+  #|  let _ = lexmatch input {
+  #|    re"a" => ()
+  #|    ...
+  #|  }
+  #|  let _ = lexscan input {
+  #|    re"b" => ()
+  #|    ...
+  #|  }
+  #|}
+
+///|
+priv struct LexScanArrowLocationCollector {
+  locations : Array[@basic.Location]
+}
+
+///|
+extend LexScanArrowLocationCollector with IterVisitor::{base, visit_Impl}
+
+///|
+impl IterVisitor for LexScanArrowLocationCollector with fn visit_LexScanCase(
+  self,
+  case_,
+) {
+  self.locations.push(case_.arrow_loc)
+  self.base().visit_LexScanCase(case_)
+}
+
+///|
+fn find_lex_scan_arrow_locations(
+  impls : @syntax.Impls,
+) -> Array[@basic.Location] {
+  let collector : LexScanArrowLocationCollector = { locations: [], }
+  impls.each(impl_ => collector.visit_Impl(impl_))
+  collector.locations
+}
+
+///|
+fn parse_lex_scan_arrow_locations(
+  parser : @parser.Parser,
+) -> Array[@basic.Location] raise Error {
+  let (impls, diagnostics) = @parser.parse_string(
+    lex_scan_case_arrow_loc_source,
+    name="lex_scan_case_arrow_loc_regression.mbt",
+    parser~,
+  )
+  if !diagnostics.is_empty() {
+    fail("lex-scan arrow fixture was rejected by {parser}: {diagnostics}")
+  }
+  find_lex_scan_arrow_locations(impls)
+}
+
+///|
+fn parse_lex_scan_arrow_locations_from_cst() -> Array[@basic.Location] raise Error {
+  let result = @untyped_cst.parse_structure(
+    lex_scan_case_arrow_loc_source,
+    name="lex_scan_case_arrow_loc_regression.mbt",
+  )
+  if !result.diagnostics_view().is_empty() {
+    fail("lex-scan arrow fixture was rejected by the CST parser")
+  }
+  let (impls, diagnostics) = result.to_impls()
+  if !diagnostics.is_empty() {
+    fail("lex-scan CST lowering produced diagnostics: {diagnostics}")
+  }
+  find_lex_scan_arrow_locations(impls)
+}
+
+///|
+fn assert_lex_scan_arrow_locations(
+  locations : Array[@basic.Location],
+) -> Unit raise Error {
+  @test.assert_eq(locations.length(), 4)
+  inspect(
+    locations[0],
+    content="lex_scan_case_arrow_loc_regression.mbt-3:11-3:13",
+  )
+  inspect(
+    locations[1],
+    content="lex_scan_case_arrow_loc_regression.mbt-4:5-4:8",
+  )
+  inspect(
+    locations[2],
+    content="lex_scan_case_arrow_loc_regression.mbt-7:11-7:13",
+  )
+  inspect(
+    locations[3],
+    content="lex_scan_case_arrow_loc_regression.mbt-8:5-8:8",
+  )
+  let expected = ["=>", "...", "=>", "..."]
+  for i in 0..<locations.length() {
+    let loc = locations[i]
+    @test.assert_eq(
+      lex_scan_case_arrow_loc_source[loc.start.cnum:loc.end.cnum],
+      expected[i][:],
+    )
+  }
+}
+
+///|
+test "lexmatch and lexscan arrow locations agree across all parsers" {
+  let hand = parse_lex_scan_arrow_locations(Handrolled)
+  let yacc = parse_lex_scan_arrow_locations(MoonYacc)
+  let cst = parse_lex_scan_arrow_locations_from_cst()
+  assert_lex_scan_arrow_locations(hand)
+  assert_lex_scan_arrow_locations(yacc)
+  assert_lex_scan_arrow_locations(cst)
+  for i in 0..<hand.length() {
+    @test.assert_eq(yacc[i].start, hand[i].start)
+    @test.assert_eq(yacc[i].end, hand[i].end)
+    @test.assert_eq(cst[i].start, hand[i].start)
+    @test.assert_eq(cst[i].end, hand[i].end)
+  }
+}
+
+///|
 fn find_top_let_constant_loc(
   impls : @syntax.Impls,
 ) -> @basic.Location raise Error {

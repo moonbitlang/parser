@@ -175,7 +175,8 @@ pub enum NodeKind {
   Expr_As
   /// Corresponds to `@syntax.Expr::Is`.
   Expr_Is
-  /// Corresponds to `@syntax.Expr::LexMatch`.
+  /// The `lexmatch` source form, lowered to `@syntax.Expr::LexScan` with
+  /// `streaming=false`.
   Expr_LexMatch
   /// Corresponds to `@syntax.Expr::LexScan`.
   Expr_LexScan
@@ -319,16 +320,9 @@ pub enum NodeKind {
   TypeDesc_Alias
 
   // Lexing and regex patterns.
-  /// Literal lex pattern lowered to `@syntax.LexPattern::Regex`.
-  LexPattern_Literal
-  /// Corresponds to `@syntax.LexPattern::RegexInterp`.
+  /// Recovery node for a regex interpolation token found where an expression
+  /// or ordinary pattern was expected.
   LexPattern_RegexInterp
-  /// Corresponds to `@syntax.LexPattern::Sequence`.
-  LexPattern_Sequence
-  /// Corresponds to `@syntax.LexPattern::Alias`.
-  LexPattern_Alias
-  /// Corresponds to `@syntax.LexPattern::ConstantRef`.
-  LexPattern_ConstantRef
   /// Recovery wrapper removed before producing an `@syntax.RegexPattern`.
   RegexPattern_Placeholder
   /// Corresponds to `@syntax.RegexPattern::Literal`.
@@ -345,8 +339,6 @@ pub enum NodeKind {
   // Cases, arguments, parameters, fields, and bindings.
   /// Corresponds to `@syntax.Case`.
   Case_MatchCase
-  /// Corresponds to `@syntax.LexCase`.
-  Case_LexCase
   /// Corresponds to `@syntax.LexScanCase`.
   Case_LexScanCase
   /// Corresponds to `@syntax.ArgumentKind::Positional`.
@@ -513,16 +505,10 @@ pub enum NodeKind {
   MultilineStringElement_String
   /// Corresponds to `@syntax.MultilineStringElem::Interp`.
   MultilineStringElement_Interp
-  /// String lex-pattern payload lowered to `LexPattern::Regex` with string offset.
+  /// String payload lowered to a recovered `@syntax.RegexPattern::Literal`.
   LexLiteral_String
-  /// Regex lex-pattern payload lowered to `LexPattern::Regex` with regex offset.
+  /// Regex payload lowered to `@syntax.RegexPattern::Literal`.
   LexLiteral_Regex
-  /// Corresponds to `@syntax.LexTopPattern::Pattern`.
-  LexTopPattern_Pattern
-  /// Corresponds to `@syntax.LexTopPattern::Binder`.
-  LexTopPattern_Binder
-  /// Corresponds to `@syntax.LexTopPattern::Wildcard`.
-  LexTopPattern_Wildcard
   /// Corresponds to `@syntax.LexScanCasePattern::Pattern`.
   LexScanCasePattern_Pattern
   /// Corresponds to `@syntax.LexScanCasePattern::Binder`.
@@ -716,8 +702,6 @@ pub enum NodeKind {
   List_TuplePatternList
   /// CST container lowered to `Pattern::Constr::args`.
   List_ConstructorPatternArgumentList
-  /// CST container lowered to `LexCase::pat`.
-  List_LexTopPatternList
   /// CST container lowered to the elements of `@syntax.ArrayPatterns`.
   List_ArrayPatternList
   /// CST container lowered to `Pattern::Record::fields`.
@@ -740,14 +724,10 @@ pub enum NodeKind {
   List_DerivingList
   /// CST container lowered to `Expr::Match` or `Expr::Try` cases.
   List_MatchCaseList
-  /// CST container lowered to `Expr::LexMatch::cases`.
-  List_LexCaseList
   /// CST container lowered to `Expr::LexScan::cases`.
   List_LexScanCaseList
   /// CST container lowered to `Expr::RegexMatch::bindings`.
   List_RegexBindingList
-  /// CST container lowered to `@syntax.LexPattern::Sequence`.
-  List_LexPatternList
   /// CST container lowered to `(Binder, Expr)` loop binding lists.
   List_ForBindingList
   /// CST container lowered to list-comprehension `(Binder, Expr)` state bindings.
@@ -1041,15 +1021,6 @@ fn NodeKind::is_constructor_extra_info(self : NodeKind) -> Bool {
 fn NodeKind::is_lex_literal(self : NodeKind) -> Bool {
   match self {
     LexLiteral_String | LexLiteral_Regex => true
-    _ => false
-  }
-}
-
-///|
-fn NodeKind::is_lex_top_pattern(self : NodeKind) -> Bool {
-  match self {
-    LexTopPattern_Pattern | LexTopPattern_Binder | LexTopPattern_Wildcard =>
-      true
     _ => false
   }
 }

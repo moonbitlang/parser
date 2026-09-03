@@ -9143,17 +9143,17 @@ fn yy_action_262(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_263(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_4(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_5(_last_pos, _args[0:0])
@@ -9181,17 +9181,17 @@ fn yy_action_263(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_264(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_4(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_5(_last_pos, _args[0:0])
@@ -9219,17 +9219,17 @@ fn yy_action_264(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_265(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_4(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_11(_last_pos, _args[0:1])
@@ -9257,17 +9257,17 @@ fn yy_action_265(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_266(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_4(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_11(_last_pos, _args[0:1])
@@ -9295,17 +9295,17 @@ fn yy_action_266(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_267(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_4(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_42(_last_pos, _args[0:2])
@@ -9333,17 +9333,17 @@ fn yy_action_267(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_268(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_4(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_42(_last_pos, _args[0:2])
@@ -9371,17 +9371,17 @@ fn yy_action_268(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_269(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_68(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_5(_args[0].2, _args[1:1])
@@ -9409,17 +9409,17 @@ fn yy_action_269(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_270(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_68(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_5(_args[0].2, _args[1:1])
@@ -9447,17 +9447,17 @@ fn yy_action_270(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_271(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_68(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_11(_args[0].2, _args[1:2])
@@ -9485,17 +9485,17 @@ fn yy_action_271(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_272(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_68(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_11(_args[0].2, _args[1:2])
@@ -9553,17 +9553,17 @@ fn yy_action_275(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_276(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_68(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_42(_args[0].2, _args[1:3])
@@ -9591,17 +9591,17 @@ fn yy_action_276(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2409|    attributes visibility option("mut") lident_string ":" type_ {
-// 2410|    {
-// 2411|      name: { label: $4, loc: mk_loc($loc($4)) },
-// 2412|      ty: $6,
-// 2413|      mut_: $3 is Some(_),
-// 2414|      vis: $2,
-// 2415|      loc: mk_loc($sloc),
-// 2416|      attrs: $1,
-// 2417|      doc: DocString::empty()
-// 2418|    }
-// 2419|  }
+// 2411|    attributes visibility option("mut") lident_string ":" type_ {
+// 2412|    {
+// 2413|      name: { label: $4, loc: mk_loc($loc($4)) },
+// 2414|      ty: $6,
+// 2415|      mut_: $3 is Some(_),
+// 2416|      vis: $2,
+// 2417|      loc: mk_loc($sloc),
+// 2418|      attrs: $1,
+// 2419|      doc: DocString::empty()
+// 2420|    }
+// 2421|  }
 fn yy_action_277(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_68(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_42(_args[0].2, _args[1:3])
@@ -10868,7 +10868,7 @@ fn yy_action_343(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2147|    STRING { ($1, mk_loc($sloc)) }
+// 2149|    STRING { ($1, mk_loc($sloc)) }
 fn yy_action_344(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -11197,9 +11197,9 @@ fn yy_action_357(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2087|    UIDENT COLON separated_nonempty_list(PLUS, tvar_constraint) {
-// 2088|    { name: $1, constraints: $3, name_loc: mk_loc($loc($1)) }
-// 2089|  }
+// 2089|    UIDENT COLON separated_nonempty_list(PLUS, tvar_constraint) {
+// 2090|    { name: $1, constraints: $3, name_loc: mk_loc($loc($1)) }
+// 2091|  }
 fn yy_action_358(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   guard! _args[2].0 is YYObj__list_List_TypeVarConstraint_(_dollar3)
@@ -11211,7 +11211,7 @@ fn yy_action_358(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2098|    qual_ident_ty { { trait_: $1, loc: mk_loc($sloc) } }
+// 2100|    qual_ident_ty { { trait_: $1, loc: mk_loc($sloc) } }
 fn yy_action_359(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_LongIdent(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -11235,9 +11235,9 @@ fn yy_action_361(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2084|    UIDENT {
-// 2085|    { name: $1, constraints: @list.empty(), name_loc: mk_loc($loc($1)) }
-// 2086|  }
+// 2086|    UIDENT {
+// 2087|    { name: $1, constraints: @list.empty(), name_loc: mk_loc($loc($1)) }
+// 2088|  }
 fn yy_action_362(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -11415,16 +11415,16 @@ fn yy_action_370(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2441|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) {
-// 2442|    {
-// 2443|      name: { name: $2, loc: mk_loc($loc($2)) },
-// 2444|      args: $3,
-// 2445|      tag: $4,
-// 2446|      loc: mk_loc($sloc),
-// 2447|      attrs: $1,
-// 2448|      doc: DocString::empty()
-// 2449|    }
-// 2450|  }
+// 2443|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) {
+// 2444|    {
+// 2445|      name: { name: $2, loc: mk_loc($loc($2)) },
+// 2446|      args: $3,
+// 2447|      tag: $4,
+// 2448|      loc: mk_loc($sloc),
+// 2449|      attrs: $1,
+// 2450|      doc: DocString::empty()
+// 2451|    }
+// 2452|  }
 fn yy_action_371(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_4(_last_pos, _args[0:0])
   guard! _args[0].0 is YYObj_String(_dollar2)
@@ -11448,16 +11448,16 @@ fn yy_action_371(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2441|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) {
-// 2442|    {
-// 2443|      name: { name: $2, loc: mk_loc($loc($2)) },
-// 2444|      args: $3,
-// 2445|      tag: $4,
-// 2446|      loc: mk_loc($sloc),
-// 2447|      attrs: $1,
-// 2448|      doc: DocString::empty()
-// 2449|    }
-// 2450|  }
+// 2443|    attributes UIDENT option(delimited("(", non_empty_list_commas(constructor_param), ")")) option(eq_int_tag) {
+// 2444|    {
+// 2445|      name: { name: $2, loc: mk_loc($loc($2)) },
+// 2446|      args: $3,
+// 2447|      tag: $4,
+// 2448|      loc: mk_loc($sloc),
+// 2449|      attrs: $1,
+// 2450|      doc: DocString::empty()
+// 2451|    }
+// 2452|  }
 fn yy_action_372(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_68(_last_pos, _args[0:1])
   guard! _args[1].0 is YYObj_String(_dollar2)
@@ -11496,7 +11496,7 @@ fn yy_action_373(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2454|    "=" INT { ($2, mk_loc($loc($2))) }
+// 2456|    "=" INT { ($2, mk_loc($loc($2))) }
 fn yy_action_374(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -11511,13 +11511,13 @@ fn yy_action_375(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2423|    option("mut") type_ {
-// 2424|    {
-// 2425|      ty: $2,
-// 2426|      mut_: $1 is Some(_),
-// 2427|      label: None
-// 2428|    }
-// 2429|  }
+// 2425|    option("mut") type_ {
+// 2426|    {
+// 2427|      ty: $2,
+// 2428|      mut_: $1 is Some(_),
+// 2429|      label: None
+// 2430|    }
+// 2431|  }
 fn yy_action_376(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Type(_dollar2)
   guard! _args[0].0 is YYObj_Option_Unit_(_dollar1)
@@ -11531,14 +11531,14 @@ fn yy_action_376(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2430|    option("mut") POST_LABEL ":" type_ {
-// 2431|    let label = Label::{ name: $2, loc: mk_loc($loc($2)).trim_last_char() }
-// 2432|    {
-// 2433|      ty: $4,
-// 2434|      mut_: $1 is Some(_),
-// 2435|      label: Some(label)
-// 2436|    }
-// 2437|  }
+// 2432|    option("mut") POST_LABEL ":" type_ {
+// 2433|    let label = Label::{ name: $2, loc: mk_loc($loc($2)).trim_last_char() }
+// 2434|    {
+// 2435|      ty: $4,
+// 2436|      mut_: $1 is Some(_),
+// 2437|      label: Some(label)
+// 2438|    }
+// 2439|  }
 fn yy_action_377(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -12360,7 +12360,7 @@ fn yy_action_425(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2093|    UIDENT { { name: Some($1), loc: mk_loc($sloc) } }
+// 2095|    UIDENT { { name: Some($1), loc: mk_loc($sloc) } }
 fn yy_action_426(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -12369,7 +12369,7 @@ fn yy_action_426(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2094|    "_" { { name: None, loc: mk_loc($sloc) } }
+// 2096|    "_" { { name: None, loc: mk_loc($sloc) } }
 fn yy_action_427(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -12469,16 +12469,16 @@ fn yy_action_439(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2029|    "[|" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "|]" {
-// 2030|    let (init, continue_block) = $6
-// 2031|    ListComprehension(
-// 2032|      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
-// 2033|      guard_ = $7,
-// 2034|      body = $9,
-// 2035|      is_iter = true,
-// 2036|      loc = mk_loc($sloc)
-// 2037|    )
-// 2038|  }
+// 2031|    "[|" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "|]" {
+// 2032|    let (init, continue_block) = $6
+// 2033|    ListComprehension(
+// 2034|      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
+// 2035|      guard_ = $7,
+// 2036|      body = $9,
+// 2037|      is_iter = true,
+// 2038|      loc = mk_loc($sloc)
+// 2039|    )
+// 2040|  }
 fn yy_action_440(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[5].0 is YYObj__List__Binder__Expr____List__Binder__Expr___(_dollar6)
   guard! _args[2].0 is YYObj_List_Binder__(_dollar3)
@@ -12500,16 +12500,16 @@ fn yy_action_440(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2049|    "[|" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "|]" {
-// 2050|    let (binders, condition, continue_block, for_loc) = $3
-// 2051|    ListComprehension(
-// 2052|      kind = For(binders~, condition~, continue_block~, for_loc~),
-// 2053|      guard_ = $4,
-// 2054|      body = $6,
-// 2055|      is_iter = true,
-// 2056|      loc = mk_loc($sloc)
-// 2057|    )
-// 2058|  }
+// 2051|    "[|" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "|]" {
+// 2052|    let (binders, condition, continue_block, for_loc) = $3
+// 2053|    ListComprehension(
+// 2054|      kind = For(binders~, condition~, continue_block~, for_loc~),
+// 2055|      guard_ = $4,
+// 2056|      body = $6,
+// 2057|      is_iter = true,
+// 2058|      loc = mk_loc($sloc)
+// 2059|    )
+// 2060|  }
 fn yy_action_441(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__List__Binder__Expr____Expr___List__Binder__Expr____Location_(_dollar3)
   guard! _args[3].0 is YYObj_Option_Expr_(_dollar4)
@@ -12529,7 +12529,7 @@ fn yy_action_441(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2060|    "[|" list_commas(spreadable_elem) "|]" { @syntax.make_array_expr(loc = mk_loc($sloc), is_iter = true, $2) }
+// 2062|    "[|" list_commas(spreadable_elem) "|]" { @syntax.make_array_expr(loc = mk_loc($sloc), is_iter = true, $2) }
 fn yy_action_442(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -12538,9 +12538,9 @@ fn yy_action_442(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1462|    non_empty_list_commas_no_trailing(separated_pair(binder, "=", infix_expr)) {
-// 1463|    ($1, None, @list.empty(), mk_loc($sloc))
-// 1464|  }
+// 1464|    non_empty_list_commas_no_trailing(separated_pair(binder, "=", infix_expr)) {
+// 1465|    ($1, None, @list.empty(), mk_loc($sloc))
+// 1466|  }
 fn yy_action_443(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List__Binder__Expr__(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -12551,9 +12551,9 @@ fn yy_action_443(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1468|    for_binders_infix SEMI option(infix_expr) SEMI for_binders_infix {
-// 1469|    ($1, $3, $5, mk_loc($sloc))
-// 1470|  }
+// 1470|    for_binders_infix SEMI option(infix_expr) SEMI for_binders_infix {
+// 1471|    ($1, $3, $5, mk_loc($sloc))
+// 1472|  }
 fn yy_action_444(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List__Binder__Expr__(_dollar1)
   guard! _args[2].0 is YYObj_Option_Expr_(_dollar3)
@@ -12566,9 +12566,9 @@ fn yy_action_444(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1465|    for_binders_infix SEMI option(infix_expr) {
-// 1466|    ($1, $3, @list.empty(), mk_loc($sloc))
-// 1467|  }
+// 1467|    for_binders_infix SEMI option(infix_expr) {
+// 1468|    ($1, $3, @list.empty(), mk_loc($sloc))
+// 1469|  }
 fn yy_action_445(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List__Binder__Expr__(_dollar1)
   guard! _args[2].0 is YYObj_Option_Expr_(_dollar3)
@@ -12580,14 +12580,14 @@ fn yy_action_445(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1458|    list_commas_no_trailing(separated_pair(binder, "=", infix_expr)) { $1 }
+// 1460|    list_commas_no_trailing(separated_pair(binder, "=", infix_expr)) { $1 }
 fn yy_action_446(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List__Binder__Expr__(_dollar1)
   YYObj_List__Binder__Expr__({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1549|    SEMI for_binders_infix SEMI for_binders_infix { ($2, $4) }
+// 1551|    SEMI for_binders_infix SEMI for_binders_infix { ($2, $4) }
 fn yy_action_447(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List__Binder__Expr__(_dollar2)
   guard! _args[3].0 is YYObj_List__Binder__Expr__(_dollar4)
@@ -12595,7 +12595,7 @@ fn yy_action_447(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1548|    SEMI for_binders_infix { ($2, @list.empty()) }
+// 1550|    SEMI for_binders_infix { ($2, @list.empty()) }
 fn yy_action_448(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List__Binder__Expr__(_dollar2)
   YYObj__List__Binder__Expr____List__Binder__Expr___({();  (_dollar2, @list.empty()) })
@@ -12625,16 +12625,16 @@ fn yy_action_452(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2019|    "[" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "]" {
-// 2020|    let (init, continue_block) = $6
-// 2021|    ListComprehension(
-// 2022|      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
-// 2023|      guard_ = $7,
-// 2024|      body = $9,
-// 2025|      is_iter = false,
-// 2026|      loc = mk_loc($sloc)
-// 2027|    )
-// 2028|  }
+// 2021|    "[" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "]" {
+// 2022|    let (init, continue_block) = $6
+// 2023|    ListComprehension(
+// 2024|      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
+// 2025|      guard_ = $7,
+// 2026|      body = $9,
+// 2027|      is_iter = false,
+// 2028|      loc = mk_loc($sloc)
+// 2029|    )
+// 2030|  }
 fn yy_action_454(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[5].0 is YYObj__List__Binder__Expr____List__Binder__Expr___(_dollar6)
   guard! _args[2].0 is YYObj_List_Binder__(_dollar3)
@@ -12656,22 +12656,22 @@ fn yy_action_454(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1547|    { (@list.empty(), @list.empty()) }
+// 1549|    { (@list.empty(), @list.empty()) }
 fn yy_action_455(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj__List__Binder__Expr____List__Binder__Expr___({();  (@list.empty(), @list.empty()) })
 }
 
 // file:///./parser.mbty
-// 2039|    "[" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "]" {
-// 2040|    let (binders, condition, continue_block, for_loc) = $3
-// 2041|    ListComprehension(
-// 2042|      kind = For(binders~, condition~, continue_block~, for_loc~),
-// 2043|      guard_ = $4,
-// 2044|      body = $6,
-// 2045|      is_iter = false,
-// 2046|      loc = mk_loc($sloc)
-// 2047|    )
-// 2048|  }
+// 2041|    "[" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "]" {
+// 2042|    let (binders, condition, continue_block, for_loc) = $3
+// 2043|    ListComprehension(
+// 2044|      kind = For(binders~, condition~, continue_block~, for_loc~),
+// 2045|      guard_ = $4,
+// 2046|      body = $6,
+// 2047|      is_iter = false,
+// 2048|      loc = mk_loc($sloc)
+// 2049|    )
+// 2050|  }
 fn yy_action_456(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__List__Binder__Expr____Expr___List__Binder__Expr____Location_(_dollar3)
   guard! _args[3].0 is YYObj_Option_Expr_(_dollar4)
@@ -12727,11 +12727,11 @@ fn yy_action_453(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2458|    label_pun "," list_commas_with_trailing_info(record_defn_single) {
-// 2459|    let (fs, trailing) = $3
-// 2460|    let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { None }
-// 2461|    (fs.add($1), trailing_mark)
-// 2462|  }
+// 2460|    label_pun "," list_commas_with_trailing_info(record_defn_single) {
+// 2461|    let (fs, trailing) = $3
+// 2462|    let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { None }
+// 2463|    (fs.add($1), trailing_mark)
+// 2464|  }
 fn yy_action_459(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_460(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj__List_FieldDef___Bool_(_dollar3)
@@ -12744,10 +12744,10 @@ fn yy_action_459(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2463|    labeled_expr option(",") {
-// 2464|    let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { None }
-// 2465|    (@list.singleton($1), trailing_mark)
-// 2466|  }
+// 2465|    labeled_expr option(",") {
+// 2466|    let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { None }
+// 2467|    (@list.singleton($1), trailing_mark)
+// 2468|  }
 fn yy_action_461(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_462(_last_pos, _args[0:3])
   guard! _args[3].0 is YYObj_Option_Unit_(_dollar2)
@@ -12759,11 +12759,11 @@ fn yy_action_461(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2467|    labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) {
-// 2468|    let (fs, trailing) = $3
-// 2469|    let trailing_mark = if trailing { TrailingMark::Comma } else { None }
-// 2470|    (fs.add($1), trailing_mark)
-// 2471|  }
+// 2469|    labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) {
+// 2470|    let (fs, trailing) = $3
+// 2471|    let trailing_mark = if trailing { TrailingMark::Comma } else { None }
+// 2472|    (fs.add($1), trailing_mark)
+// 2473|  }
 fn yy_action_463(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_462(_last_pos, _args[0:3])
   guard! _args[4].0 is YYObj__List_FieldDef___Bool_(_dollar3)
@@ -12776,11 +12776,11 @@ fn yy_action_463(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2458|    label_pun "," list_commas_with_trailing_info(record_defn_single) {
-// 2459|    let (fs, trailing) = $3
-// 2460|    let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { None }
-// 2461|    (fs.add($1), trailing_mark)
-// 2462|  }
+// 2460|    label_pun "," list_commas_with_trailing_info(record_defn_single) {
+// 2461|    let (fs, trailing) = $3
+// 2462|    let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { None }
+// 2463|    (fs.add($1), trailing_mark)
+// 2464|  }
 fn yy_action_464(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_465(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj__List_FieldDef___Bool_(_dollar3)
@@ -12793,10 +12793,10 @@ fn yy_action_464(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2463|    labeled_expr option(",") {
-// 2464|    let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { None }
-// 2465|    (@list.singleton($1), trailing_mark)
-// 2466|  }
+// 2465|    labeled_expr option(",") {
+// 2466|    let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { None }
+// 2467|    (@list.singleton($1), trailing_mark)
+// 2468|  }
 fn yy_action_466(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_467(_last_pos, _args[0:3])
   guard! _args[3].0 is YYObj_Option_Unit_(_dollar2)
@@ -12808,11 +12808,11 @@ fn yy_action_466(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2467|    labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) {
-// 2468|    let (fs, trailing) = $3
-// 2469|    let trailing_mark = if trailing { TrailingMark::Comma } else { None }
-// 2470|    (fs.add($1), trailing_mark)
-// 2471|  }
+// 2469|    labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) {
+// 2470|    let (fs, trailing) = $3
+// 2471|    let trailing_mark = if trailing { TrailingMark::Comma } else { None }
+// 2472|    (fs.add($1), trailing_mark)
+// 2473|  }
 fn yy_action_468(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_467(_last_pos, _args[0:3])
   guard! _args[4].0 is YYObj__List_FieldDef___Bool_(_dollar3)
@@ -12825,10 +12825,10 @@ fn yy_action_468(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1942|    "{" record_defn "}" {
-// 1943|    let (fs, trailing) = $2
-// 1944|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing~, None, fs)
-// 1945|  }
+// 1944|    "{" record_defn "}" {
+// 1945|    let (fs, trailing) = $2
+// 1946|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing~, None, fs)
+// 1947|  }
 fn yy_action_469(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__List_FieldDef___TrailingMark_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -12840,9 +12840,9 @@ fn yy_action_469(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1951|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" {
-// 1952|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
-// 1953|  }
+// 1953|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" {
+// 1954|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
+// 1955|  }
 fn yy_action_470(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_471(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj_Option_TypeName_(_dollar1)
@@ -12855,9 +12855,9 @@ fn yy_action_470(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1954|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" {
-// 1955|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
-// 1956|  }
+// 1956|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" {
+// 1957|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
+// 1958|  }
 fn yy_action_472(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_471(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj_Option_TypeName_(_dollar1)
@@ -12877,18 +12877,18 @@ fn yy_action_471(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1957|    "{" semi_expr_semi_opt "}" {
-// 1958|    let (expr, trailing) = $2
-// 1959|    match expr {
-// 1960|      Ident(id = { name: Ident(name~), loc }, ..) => {
-// 1961|        let label = Label::{ name, loc }
-// 1962|        let field = @syntax.make_field_def(loc = mk_loc($sloc), label, expr, true)
-// 1963|        let trailing_mark = if trailing { TrailingMark::Semi } else { None }
-// 1964|        @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, None, @list.singleton(field))
-// 1965|      }
-// 1966|      _ => Group(expr~, group = Brace, loc = mk_loc($sloc))
-// 1967|    }
-// 1968|  }
+// 1959|    "{" semi_expr_semi_opt "}" {
+// 1960|    let (expr, trailing) = $2
+// 1961|    match expr {
+// 1962|      Ident(id = { name: Ident(name~), loc }, ..) => {
+// 1963|        let label = Label::{ name, loc }
+// 1964|        let field = @syntax.make_field_def(loc = mk_loc($sloc), label, expr, true)
+// 1965|        let trailing_mark = if trailing { TrailingMark::Semi } else { None }
+// 1966|        @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, None, @list.singleton(field))
+// 1967|      }
+// 1968|      _ => Group(expr~, group = Brace, loc = mk_loc($sloc))
+// 1969|    }
+// 1970|  }
 fn yy_action_473(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_474(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__Expr__Bool_(_dollar2)
@@ -12924,9 +12924,9 @@ fn yy_action_474(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1969|    "{" list_commas(map_expr_elem) "}" {
-// 1970|    Map(elems = $2, loc = mk_loc($sloc))
-// 1971|  }
+// 1971|    "{" list_commas(map_expr_elem) "}" {
+// 1972|    Map(elems = $2, loc = mk_loc($sloc))
+// 1973|  }
 fn yy_action_475(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List_MapExprElem_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -12972,11 +12972,11 @@ fn yy_action_479(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1946|    type_name COLONCOLON "{" list_commas_with_trailing_info(record_defn_single) "}" {
-// 1947|    let (fs, trailing) = $4
-// 1948|    let trailing_mark = if trailing { TrailingMark::Comma } else { None }
-// 1949|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, Some($1), fs)
-// 1950|  }
+// 1948|    type_name COLONCOLON "{" list_commas_with_trailing_info(record_defn_single) "}" {
+// 1949|    let (fs, trailing) = $4
+// 1950|    let trailing_mark = if trailing { TrailingMark::Comma } else { None }
+// 1951|    @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, Some($1), fs)
+// 1952|  }
 fn yy_action_480(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[3].0 is YYObj__List_FieldDef___Bool_(_dollar4)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -12990,9 +12990,9 @@ fn yy_action_480(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1951|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" {
-// 1952|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
-// 1953|  }
+// 1953|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" {
+// 1954|    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
+// 1955|  }
 fn yy_action_481(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_482(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj_Option_TypeName_(_dollar1)
@@ -13005,9 +13005,9 @@ fn yy_action_481(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1954|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" {
-// 1955|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
-// 1956|  }
+// 1956|    ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" {
+// 1957|    RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
+// 1958|  }
 fn yy_action_483(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_482(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj_Option_TypeName_(_dollar1)
@@ -13063,7 +13063,7 @@ fn yy_action_488(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2475|    labeled_expr { $1 }
+// 2477|    labeled_expr { $1 }
 fn yy_action_489(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_462(_last_pos, _args[0:3])
   guard! _sub_action_0_result is YYObj_FieldDef(_dollar1)
@@ -13071,7 +13071,7 @@ fn yy_action_489(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2476|   label_pun { $1 }
+// 2478|   label_pun { $1 }
 fn yy_action_490(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_460(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_FieldDef(_dollar1)
@@ -13079,7 +13079,7 @@ fn yy_action_490(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2484|    label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
+// 2486|    label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
 fn yy_action_460(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_491(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -13372,16 +13372,16 @@ fn yy_action_511(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2002|    simple_expr ".." lident_string "(" list_commas(argument) ")" {
-// 2003|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 2004|    DotApply(
-// 2005|      self = $1,
-// 2006|      method_name~,
-// 2007|      args = $5,
-// 2008|      return_self = true,
-// 2009|      loc = mk_loc($sloc)
-// 2010|    )
-// 2011|  }
+// 2004|    simple_expr ".." lident_string "(" list_commas(argument) ")" {
+// 2005|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 2006|    DotApply(
+// 2007|      self = $1,
+// 2008|      method_name~,
+// 2009|      args = $5,
+// 2010|      return_self = true,
+// 2011|      loc = mk_loc($sloc)
+// 2012|    )
+// 2013|  }
 fn yy_action_512(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_args[1].2, _args[2:3])
   guard! _sub_action_0_result is YYObj_String(_dollar3)
@@ -13404,16 +13404,16 @@ fn yy_action_512(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2002|    simple_expr ".." lident_string "(" list_commas(argument) ")" {
-// 2003|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 2004|    DotApply(
-// 2005|      self = $1,
-// 2006|      method_name~,
-// 2007|      args = $5,
-// 2008|      return_self = true,
-// 2009|      loc = mk_loc($sloc)
-// 2010|    )
-// 2011|  }
+// 2004|    simple_expr ".." lident_string "(" list_commas(argument) ")" {
+// 2005|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 2006|    DotApply(
+// 2007|      self = $1,
+// 2008|      method_name~,
+// 2009|      args = $5,
+// 2010|      return_self = true,
+// 2011|      loc = mk_loc($sloc)
+// 2012|    )
+// 2013|  }
 fn yy_action_513(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_args[1].2, _args[2:3])
   guard! _sub_action_0_result is YYObj_String(_dollar3)
@@ -13436,7 +13436,7 @@ fn yy_action_513(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1839|    "!" prefix_expr { make_unot(loc = mk_loc($sloc), $2) }
+// 1841|    "!" prefix_expr { make_unot(loc = mk_loc($sloc), $2) }
 fn yy_action_514(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -13445,9 +13445,9 @@ fn yy_action_514(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1721|    range_expr "as" type_name {
-// 1722|    As(expr = $1, trait_ = $3, loc = mk_loc($sloc))
-// 1723|  }
+// 1723|    range_expr "as" type_name {
+// 1724|    As(expr = $1, trait_ = $3, loc = mk_loc($sloc))
+// 1725|  }
 fn yy_action_515(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_TypeName(_dollar3)
@@ -13459,9 +13459,9 @@ fn yy_action_515(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1724|    range_expr "is" range_pattern {
-// 1725|    Is(expr = $1, pat = $3, loc = mk_loc($sloc))
-// 1726|  }
+// 1726|    range_expr "is" range_pattern {
+// 1727|    Is(expr = $1, pat = $3, loc = mk_loc($sloc))
+// 1728|  }
 fn yy_action_516(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Pattern(_dollar3)
@@ -13473,10 +13473,10 @@ fn yy_action_516(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1727|    range_expr "=~" regex_match_rhs {
-// 1728|    let (pat, bindings) = $3
-// 1729|    RegexMatch(expr = $1, pat~, bindings~, loc = mk_loc($sloc))
-// 1730|  }
+// 1729|    range_expr "=~" regex_match_rhs {
+// 1730|    let (pat, bindings) = $3
+// 1731|    RegexMatch(expr = $1, pat~, bindings~, loc = mk_loc($sloc))
+// 1732|  }
 fn yy_action_517(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__RegexPattern__List__Label__Binder____(_dollar3)
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -13489,14 +13489,14 @@ fn yy_action_517(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1741|    regex_atom_pattern { ($1, @list.empty()) }
+// 1743|    regex_atom_pattern { ($1, @list.empty()) }
 fn yy_action_518(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
   YYObj__RegexPattern__List__Label__Binder____({();  (_dollar1, @list.empty()) })
 }
 
 // file:///./parser.mbty
-// 1742|    "(" regex_as_pattern "," list_commas(regex_match_binding) ")" { ($2, $4) }
+// 1744|    "(" regex_as_pattern "," list_commas(regex_match_binding) ")" { ($2, $4) }
 fn yy_action_519(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_RegexPattern(_dollar2)
   guard! _args[3].0 is YYObj_List__Label__Binder___(_dollar4)
@@ -13504,9 +13504,9 @@ fn yy_action_519(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1731|    range_expr "<+" template_rhs {
-// 1732|    TemplateWriting(expr = $1, template = $3, is_conditional = false, loc = mk_loc($sloc))
-// 1733|  }
+// 1733|    range_expr "<+" template_rhs {
+// 1734|    TemplateWriting(expr = $1, template = $3, is_conditional = false, loc = mk_loc($sloc))
+// 1735|  }
 fn yy_action_520(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -13629,10 +13629,10 @@ fn yy_action_528(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1623|    binder "=>" "{" list_semis_rev(statement) "}" {
-// 1624|    let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
-// 1625|    make_arrow_fn(@list.singleton((Named($1), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1626|  }
+// 1625|    binder "=>" "{" list_semis_rev(statement) "}" {
+// 1626|    let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
+// 1627|    make_arrow_fn(@list.singleton((Named($1), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1628|  }
 fn yy_action_529(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[3].0 is YYObj_List_Statement_(_dollar4)
@@ -13652,10 +13652,10 @@ fn yy_action_529(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1623|    binder "=>" "{" list_semis_rev(statement) "}" {
-// 1624|    let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
-// 1625|    make_arrow_fn(@list.singleton((Named($1), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1626|  }
+// 1625|    binder "=>" "{" list_semis_rev(statement) "}" {
+// 1626|    let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
+// 1627|    make_arrow_fn(@list.singleton((Named($1), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1628|  }
 fn yy_action_530(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _args[3].0 is YYObj_List_Statement_(_dollar4)
@@ -13675,10 +13675,10 @@ fn yy_action_530(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1615|    "(" arrow_fn_prefix "=>" "{" list_semis_rev(statement) "}" {
-// 1616|    let body = Statement::compact_rev($5, loc = mk_loc($loc($4)).merge(mk_loc($loc($6))))
-// 1617|    make_arrow_fn($2, body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
-// 1618|  }
+// 1617|    "(" arrow_fn_prefix "=>" "{" list_semis_rev(statement) "}" {
+// 1618|    let body = Statement::compact_rev($5, loc = mk_loc($loc($4)).merge(mk_loc($loc($6))))
+// 1619|    make_arrow_fn($2, body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
+// 1620|  }
 fn yy_action_531(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[4].0 is YYObj_List_Statement_(_dollar5)
   let _start_pos_of_item3 = _args[3].1
@@ -13699,10 +13699,10 @@ fn yy_action_531(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1619|    "(" ")" "=>" "{" list_semis_rev(statement) "}" {
-// 1620|    let body = Statement::compact_rev($5, loc = mk_loc($loc($4)).merge(mk_loc($loc($6))))
-// 1621|    make_arrow_fn(@list.empty(), body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
-// 1622|  }
+// 1621|    "(" ")" "=>" "{" list_semis_rev(statement) "}" {
+// 1622|    let body = Statement::compact_rev($5, loc = mk_loc($loc($4)).merge(mk_loc($loc($6))))
+// 1623|    make_arrow_fn(@list.empty(), body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
+// 1624|  }
 fn yy_action_532(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[4].0 is YYObj_List_Statement_(_dollar5)
   let _start_pos_of_item3 = _args[3].1
@@ -14404,10 +14404,10 @@ fn yy_action_569(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1627|    "_" "=>" "{" list_semis_rev(statement) "}" {
-// 1628|    let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
-// 1629|    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1630|  }
+// 1629|    "_" "=>" "{" list_semis_rev(statement) "}" {
+// 1630|    let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
+// 1631|    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), body, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1632|  }
 fn yy_action_571(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[3].0 is YYObj_List_Statement_(_dollar4)
   let _start_pos_of_item2 = _args[2].1
@@ -14425,16 +14425,16 @@ fn yy_action_571(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1992|    simple_expr DOT_LIDENT "(" list_commas(argument) ")" {
-// 1993|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
-// 1994|    DotApply(
-// 1995|      self = $1,
-// 1996|      method_name~,
-// 1997|      args = $4,
-// 1998|      return_self = false,
-// 1999|      loc = mk_loc($sloc)
-// 2000|    )
-// 2001|  }
+// 1994|    simple_expr DOT_LIDENT "(" list_commas(argument) ")" {
+// 1995|    let method_name = Label::{ name: $2, loc: mk_loc($loc($2)) }
+// 1996|    DotApply(
+// 1997|      self = $1,
+// 1998|      method_name~,
+// 1999|      args = $4,
+// 2000|      return_self = false,
+// 2001|      loc = mk_loc($sloc)
+// 2002|    )
+// 2003|  }
 fn yy_action_572(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -14456,7 +14456,7 @@ fn yy_action_572(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1853|    simple_expr accessor { Field($1, $2) }
+// 1855|    simple_expr accessor { Field($1, $2) }
 fn yy_action_573(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_574(_args[0].2, _args[1:2])
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -14465,9 +14465,9 @@ fn yy_action_573(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2012|    simple_expr accessor %prec prec_field {
-// 2013|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
-// 2014|  }
+// 2014|    simple_expr accessor %prec prec_field {
+// 2015|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
+// 2016|  }
 fn yy_action_575(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_574(_args[0].2, _args[1:2])
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -14480,13 +14480,13 @@ fn yy_action_575(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2069|    DOT_LIDENT {
-// 2070|    if $1 == "_" {
-// 2071|      Newtype(loc = mk_loc($loc($1)))
-// 2072|    } else {
-// 2073|      Label({ name: $1, loc: mk_loc($sloc) })
-// 2074|    }
-// 2075|  }
+// 2071|    DOT_LIDENT {
+// 2072|    if $1 == "_" {
+// 2073|      Newtype(loc = mk_loc($loc($1)))
+// 2074|    } else {
+// 2075|      Label({ name: $1, loc: mk_loc($sloc) })
+// 2076|    }
+// 2077|  }
 fn yy_action_574(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -14503,7 +14503,7 @@ fn yy_action_574(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1853|    simple_expr accessor { Field($1, $2) }
+// 1855|    simple_expr accessor { Field($1, $2) }
 fn yy_action_576(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_577(_args[0].2, _args[1:2])
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -14512,7 +14512,7 @@ fn yy_action_576(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1854|    simple_expr "[" expr "]" { Array($1, $3) }
+// 1856|    simple_expr "[" expr "]" { Array($1, $3) }
 fn yy_action_578(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -14520,9 +14520,9 @@ fn yy_action_578(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1980|    simple_expr "[" expr "]" {
-// 1981|    ArrayGet(array = $1, index = $3, loc = mk_loc($sloc))
-// 1982|  }
+// 1982|    simple_expr "[" expr "]" {
+// 1983|    ArrayGet(array = $1, index = $3, loc = mk_loc($sloc))
+// 1984|  }
 fn yy_action_579(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -14534,15 +14534,15 @@ fn yy_action_579(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1983|    simple_expr "[" option(expr) ":" option(expr) "]" {
-// 1984|    ArrayGetSlice(
-// 1985|      array = $1,
-// 1986|      start_index = $3,
-// 1987|      end_index = $5,
-// 1988|      index_loc = mk_loc(($loc($2).0, $loc($6).1)),
-// 1989|      loc = mk_loc($sloc)
-// 1990|    )
-// 1991|  }
+// 1985|    simple_expr "[" option(expr) ":" option(expr) "]" {
+// 1986|    ArrayGetSlice(
+// 1987|      array = $1,
+// 1988|      start_index = $3,
+// 1989|      end_index = $5,
+// 1990|      index_loc = mk_loc(($loc($2).0, $loc($6).1)),
+// 1991|      loc = mk_loc($sloc)
+// 1992|    )
+// 1993|  }
 fn yy_action_580(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Option_Expr_(_dollar3)
@@ -14565,12 +14565,12 @@ fn yy_action_580(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2189|    lident_string "?" {
-// 2190|    let loc = mk_loc($loc($1))
-// 2191|    let label = Label::{ name: $1, loc }
-// 2192|    let arg_value = @syntax.make_ident_expr(loc~, { name: Ident(name = $1), loc })
-// 2193|    { value: arg_value, kind: LabelledOptionPun(label~, question_loc = mk_loc($loc($2))) }
-// 2194|  }
+// 2191|    lident_string "?" {
+// 2192|    let loc = mk_loc($loc($1))
+// 2193|    let label = Label::{ name: $1, loc }
+// 2194|    let arg_value = @syntax.make_ident_expr(loc~, { name: Ident(name = $1), loc })
+// 2195|    { value: arg_value, kind: LabelledOptionPun(label~, question_loc = mk_loc($loc($2))) }
+// 2196|  }
 fn yy_action_581(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_last_pos, _args[0:1])
   let _start_pos_of_item0 = _args[0].1
@@ -14587,13 +14587,13 @@ fn yy_action_581(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2175|    label optional_question "=" expr {
-// 2176|    let arg_kind : ArgumentKind = match $2 {
-// 2177|      Some(question_loc) => LabelledOption(label = $1, question_loc~)
-// 2178|      None => Labelled($1)
-// 2179|    }
-// 2180|    { value: $4, kind: arg_kind }
-// 2181|  }
+// 2177|    label optional_question "=" expr {
+// 2178|    let arg_kind : ArgumentKind = match $2 {
+// 2179|      Some(question_loc) => LabelledOption(label = $1, question_loc~)
+// 2180|      None => Labelled($1)
+// 2181|    }
+// 2182|    { value: $4, kind: arg_kind }
+// 2183|  }
 fn yy_action_582(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_491(_last_pos, _args[0:1])
   guard! _args[1].0 is YYObj_Location_(_dollar2)
@@ -14609,12 +14609,12 @@ fn yy_action_582(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2189|    lident_string "?" {
-// 2190|    let loc = mk_loc($loc($1))
-// 2191|    let label = Label::{ name: $1, loc }
-// 2192|    let arg_value = @syntax.make_ident_expr(loc~, { name: Ident(name = $1), loc })
-// 2193|    { value: arg_value, kind: LabelledOptionPun(label~, question_loc = mk_loc($loc($2))) }
-// 2194|  }
+// 2191|    lident_string "?" {
+// 2192|    let loc = mk_loc($loc($1))
+// 2193|    let label = Label::{ name: $1, loc }
+// 2194|    let arg_value = @syntax.make_ident_expr(loc~, { name: Ident(name = $1), loc })
+// 2195|    { value: arg_value, kind: LabelledOptionPun(label~, question_loc = mk_loc($loc($2))) }
+// 2196|  }
 fn yy_action_583(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_last_pos, _args[0:1])
   let _start_pos_of_item0 = _args[0].1
@@ -14631,7 +14631,7 @@ fn yy_action_583(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2170|    "?" { Some(mk_loc($sloc)) }
+// 2172|    "?" { Some(mk_loc($sloc)) }
 fn yy_action_584(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -14639,13 +14639,13 @@ fn yy_action_584(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2175|    label optional_question "=" expr {
-// 2176|    let arg_kind : ArgumentKind = match $2 {
-// 2177|      Some(question_loc) => LabelledOption(label = $1, question_loc~)
-// 2178|      None => Labelled($1)
-// 2179|    }
-// 2180|    { value: $4, kind: arg_kind }
-// 2181|  }
+// 2177|    label optional_question "=" expr {
+// 2178|    let arg_kind : ArgumentKind = match $2 {
+// 2179|      Some(question_loc) => LabelledOption(label = $1, question_loc~)
+// 2180|      None => Labelled($1)
+// 2181|    }
+// 2182|    { value: $4, kind: arg_kind }
+// 2183|  }
 fn yy_action_585(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_586(_last_pos, _args[0:1])
   guard! _args[1].0 is YYObj_Location_(_dollar2)
@@ -14661,18 +14661,18 @@ fn yy_action_585(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2171|     { None }
+// 2173|     { None }
 fn yy_action_587(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Location_({();  None })
 }
 
 // file:///./parser.mbty
-// 2183|    POST_LABEL {
-// 2184|    let label_loc = mk_loc($loc($1))
-// 2185|    let label = Label::{ name: $1, loc: label_loc }
-// 2186|    let arg_value = @syntax.label_to_expr(loc = label_loc.trim_last_char(), label)
-// 2187|    { value: arg_value, kind: LabelledPun(label) }
-// 2188|  }
+// 2185|    POST_LABEL {
+// 2186|    let label_loc = mk_loc($loc($1))
+// 2187|    let label = Label::{ name: $1, loc: label_loc }
+// 2188|    let arg_value = @syntax.label_to_expr(loc = label_loc.trim_last_char(), label)
+// 2189|    { value: arg_value, kind: LabelledPun(label) }
+// 2190|  }
 fn yy_action_588(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
@@ -14686,7 +14686,7 @@ fn yy_action_588(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1918|    "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
+// 1920|    "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
 fn yy_action_589(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -14697,7 +14697,7 @@ fn yy_action_589(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1918|    "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
+// 1920|    "(" binder ":" type_ ")" { Constraint(expr = @syntax.binder_to_expr($2), ty = $4, loc = mk_loc($sloc)) }
 fn yy_action_590(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -14708,9 +14708,9 @@ fn yy_action_590(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1634|    "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return {
-// 1635|    make_arrow_fn($2, $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
-// 1636|  }
+// 1636|    "(" arrow_fn_prefix "=>" expr_statement_no_break_continue_return {
+// 1637|    make_arrow_fn($2, $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
+// 1638|  }
 fn yy_action_591(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List__ArrowFnParam__Type___(_dollar2)
   guard! _args[3].0 is YYObj_Expr(_dollar4)
@@ -14726,9 +14726,9 @@ fn yy_action_591(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1637|    "(" ")" "=>" expr_statement_no_break_continue_return {
-// 1638|    make_arrow_fn(@list.empty(), $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
-// 1639|  }
+// 1639|    "(" ")" "=>" expr_statement_no_break_continue_return {
+// 1640|    make_arrow_fn(@list.empty(), $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
+// 1641|  }
 fn yy_action_592(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[3].0 is YYObj_Expr(_dollar4)
   let _start_pos_of_item0 = _args[0].1
@@ -14743,7 +14743,7 @@ fn yy_action_592(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1660|    binder ioption(",") ")" { @list.singleton(Named($1)) }
+// 1662|    binder ioption(",") ")" { @list.singleton(Named($1)) }
 fn yy_action_593(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   let _sub_action_1_result = yy_action_21(_last_pos, _args[0:1])
@@ -14752,7 +14752,7 @@ fn yy_action_593(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1660|    binder ioption(",") ")" { @list.singleton(Named($1)) }
+// 1662|    binder ioption(",") ")" { @list.singleton(Named($1)) }
 fn yy_action_595(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
@@ -14761,7 +14761,7 @@ fn yy_action_595(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1660|    binder ioption(",") ")" { @list.singleton(Named($1)) }
+// 1662|    binder ioption(",") ")" { @list.singleton(Named($1)) }
 fn yy_action_596(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
@@ -14770,7 +14770,7 @@ fn yy_action_596(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1662|    binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
+// 1664|    binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
 fn yy_action_598(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_List_ArrowFnParam_(_dollar3)
@@ -14779,7 +14779,7 @@ fn yy_action_598(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1894|    binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
+// 1896|    binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
 fn yy_action_599(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_List_Expr_(_dollar3)
@@ -14788,7 +14788,7 @@ fn yy_action_599(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1660|    binder ioption(",") ")" { @list.singleton(Named($1)) }
+// 1662|    binder ioption(",") ")" { @list.singleton(Named($1)) }
 fn yy_action_600(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   let _sub_action_1_result = yy_action_21(_last_pos, _args[0:1])
@@ -14797,7 +14797,7 @@ fn yy_action_600(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1662|    binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
+// 1664|    binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
 fn yy_action_601(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_List_ArrowFnParam_(_dollar3)
@@ -14806,7 +14806,7 @@ fn yy_action_601(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1894|    binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
+// 1896|    binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
 fn yy_action_602(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_List_Expr_(_dollar3)
@@ -14815,20 +14815,20 @@ fn yy_action_602(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1597|    pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" {
-// 1598|    let catch_loc = $2
-// 1599|    let else_loc = $5
-// 1600|    Try(
-// 1601|      body = $1,
-// 1602|      catch_ = $3,
-// 1603|      try_else = Some($6),
-// 1604|      has_try = false,
-// 1605|      try_loc = mk_loc($loc($1)),
-// 1606|      catch_loc~,
-// 1607|      else_loc~,
-// 1608|      loc = mk_loc($sloc)
-// 1609|    )
-// 1610|  }
+// 1599|    pipe_expr catch_keyword single_pattern_cases "}" else_keyword single_pattern_cases "}" {
+// 1600|    let catch_loc = $2
+// 1601|    let else_loc = $5
+// 1602|    Try(
+// 1603|      body = $1,
+// 1604|      catch_ = $3,
+// 1605|      try_else = Some($6),
+// 1606|      has_try = false,
+// 1607|      try_loc = mk_loc($loc($1)),
+// 1608|      catch_loc~,
+// 1609|      else_loc~,
+// 1610|      loc = mk_loc($sloc)
+// 1611|    )
+// 1612|  }
 fn yy_action_603(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_604(_args[3].2, _args[4:6])
   guard! _args[1].0 is YYObj_Location(_dollar2)
@@ -14857,19 +14857,19 @@ fn yy_action_603(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1584|    pipe_expr catch_keyword single_pattern_cases "}" {
-// 1585|    let catch_loc = $2
-// 1586|    Try(
-// 1587|      body = $1,
-// 1588|      catch_ = $3,
-// 1589|      try_else = None,
-// 1590|      has_try = false,
-// 1591|      try_loc = mk_loc($loc($1)),
-// 1592|      catch_loc~,
-// 1593|      else_loc = { start: { fname: "", lnum: 0, bol: 0, cnum: 0 }, end: { fname: "", lnum: 0, bol: 0, cnum: 0 } },
-// 1594|      loc = mk_loc($sloc)
-// 1595|    )
-// 1596|  }
+// 1586|    pipe_expr catch_keyword single_pattern_cases "}" {
+// 1587|    let catch_loc = $2
+// 1588|    Try(
+// 1589|      body = $1,
+// 1590|      catch_ = $3,
+// 1591|      try_else = None,
+// 1592|      has_try = false,
+// 1593|      try_loc = mk_loc($loc($1)),
+// 1594|      catch_loc~,
+// 1595|      else_loc = { start: { fname: "", lnum: 0, bol: 0, cnum: 0 }, end: { fname: "", lnum: 0, bol: 0, cnum: 0 } },
+// 1596|      loc = mk_loc($sloc)
+// 1597|    )
+// 1598|  }
 fn yy_action_605(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Location(_dollar2)
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -15112,18 +15112,18 @@ fn yy_action_624(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1485|    loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_nobreak optional_where_clause {
-// 1486|    For(
-// 1487|      binders = $3,
-// 1488|      condition = $5,
-// 1489|      continue_block = $7,
-// 1490|      body = $8,
-// 1491|      for_else = $9,
-// 1492|      label = $1,
-// 1493|      loc = mk_loc($sloc),
-// 1494|      where_clause = $10
-// 1495|    )
-// 1496|  }
+// 1487|    loop_label_colon "for" for_binders SEMI option(infix_expr) SEMI list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_nobreak optional_where_clause {
+// 1488|    For(
+// 1489|      binders = $3,
+// 1490|      condition = $5,
+// 1491|      continue_block = $7,
+// 1492|      body = $8,
+// 1493|      for_else = $9,
+// 1494|      label = $1,
+// 1495|      loc = mk_loc($sloc),
+// 1496|      where_clause = $10
+// 1497|    )
+// 1498|  }
 fn yy_action_625(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List__Binder__Expr__(_dollar3)
   guard! _args[4].0 is YYObj_Option_Expr_(_dollar5)
@@ -15149,18 +15149,18 @@ fn yy_action_625(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1497|    loop_label_colon "for" for_binders SEMI infix_expr block_expr optional_nobreak optional_where_clause {
-// 1498|    For(
-// 1499|      binders = $3,
-// 1500|      condition = Some($5),
-// 1501|      continue_block = @list.empty(),
-// 1502|      body = $6,
-// 1503|      for_else = $7,
-// 1504|      label = $1,
-// 1505|      loc = mk_loc($sloc),
-// 1506|      where_clause = $8
-// 1507|    )
-// 1508|  }
+// 1499|    loop_label_colon "for" for_binders SEMI infix_expr block_expr optional_nobreak optional_where_clause {
+// 1500|    For(
+// 1501|      binders = $3,
+// 1502|      condition = Some($5),
+// 1503|      continue_block = @list.empty(),
+// 1504|      body = $6,
+// 1505|      for_else = $7,
+// 1506|      label = $1,
+// 1507|      loc = mk_loc($sloc),
+// 1508|      where_clause = $8
+// 1509|    )
+// 1510|  }
 fn yy_action_626(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List__Binder__Expr__(_dollar3)
   guard! _args[4].0 is YYObj_Expr(_dollar5)
@@ -15198,18 +15198,18 @@ fn yy_action_628(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1509|    loop_label_colon "for" non_empty_list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_nobreak optional_where_clause {
-// 1510|    For(
-// 1511|      binders = $3,
-// 1512|      condition = None,
-// 1513|      continue_block = @list.empty(),
-// 1514|      body = $4,
-// 1515|      for_else = $5,
-// 1516|      label = $1,
-// 1517|      loc = mk_loc($sloc),
-// 1518|      where_clause = $6
-// 1519|    )
-// 1520|  }
+// 1511|    loop_label_colon "for" non_empty_list_commas_no_trailing(separated_pair(binder, "=", expr)) block_expr optional_nobreak optional_where_clause {
+// 1512|    For(
+// 1513|      binders = $3,
+// 1514|      condition = None,
+// 1515|      continue_block = @list.empty(),
+// 1516|      body = $4,
+// 1517|      for_else = $5,
+// 1518|      label = $1,
+// 1519|      loc = mk_loc($sloc),
+// 1520|      where_clause = $6
+// 1521|    )
+// 1522|  }
 fn yy_action_629(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List__Binder__Expr__(_dollar3)
   guard! _args[3].0 is YYObj_Expr(_dollar4)
@@ -15233,16 +15233,16 @@ fn yy_action_629(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1474|    "nobreak" block_expr { Some($2) }
+// 1476|    "nobreak" block_expr { Some($2) }
 fn yy_action_630(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Expr(_dollar2)
   YYObj_Expr_({();  Some(_dollar2) })
 }
 
 // file:///./parser.mbty
-// 1479|    "where" "{" list_commas(labeled_expr) "}" {
-// 1480|    Some({ fields : $3, loc : mk_loc($sloc) })
-// 1481|  }
+// 1481|    "where" "{" list_commas(labeled_expr) "}" {
+// 1482|    Some({ fields : $3, loc : mk_loc($sloc) })
+// 1483|  }
 fn yy_action_631(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List_FieldDef_(_dollar3)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -15293,7 +15293,7 @@ fn yy_action_636(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2480|    label ":" expr { @syntax.make_field_def(loc = mk_loc($sloc), $1, $3, false) }
+// 2482|    label ":" expr { @syntax.make_field_def(loc = mk_loc($sloc), $1, $3, false) }
 fn yy_action_462(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_491(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -15318,20 +15318,20 @@ fn yy_action_638(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1524|    loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr foreach_optional_loop_vars block_expr optional_nobreak optional_where_clause {
-// 1525|    let (init, continue_block) = $6
-// 1526|    ForEach(
-// 1527|      binders = $3,
-// 1528|      expr = $5,
-// 1529|      init~,
-// 1530|      continue_block~,
-// 1531|      body = $7,
-// 1532|      else_block = $8,
-// 1533|      where_clause = $9,
-// 1534|      label = $1,
-// 1535|      loc = mk_loc($sloc)
-// 1536|    )
-// 1537|  }
+// 1526|    loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr foreach_optional_loop_vars block_expr optional_nobreak optional_where_clause {
+// 1527|    let (init, continue_block) = $6
+// 1528|    ForEach(
+// 1529|      binders = $3,
+// 1530|      expr = $5,
+// 1531|      init~,
+// 1532|      continue_block~,
+// 1533|      body = $7,
+// 1534|      else_block = $8,
+// 1535|      where_clause = $9,
+// 1536|      label = $1,
+// 1537|      loc = mk_loc($sloc)
+// 1538|    )
+// 1539|  }
 fn yy_action_639(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[5].0 is YYObj__List__Binder__Expr____List__Binder__Expr___(_dollar6)
   guard! _args[2].0 is YYObj_List_Binder__(_dollar3)
@@ -15359,26 +15359,26 @@ fn yy_action_639(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1482|    { None }
+// 1484|    { None }
 fn yy_action_640(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_WhereClause_({();  None })
 }
 
 // file:///./parser.mbty
-// 1475|     { None }
+// 1477|     { None }
 fn yy_action_641(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr_({();  None })
 }
 
 // file:///./parser.mbty
-// 1454|    list_commas_no_trailing(separated_pair(binder, "=", expr)) { $1 }
+// 1456|    list_commas_no_trailing(separated_pair(binder, "=", expr)) { $1 }
 fn yy_action_642(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List__Binder__Expr__(_dollar1)
   YYObj_List__Binder__Expr__({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1543|    SEMI for_binders SEMI for_binders { ($2, $4) }
+// 1545|    SEMI for_binders SEMI for_binders { ($2, $4) }
 fn yy_action_643(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List__Binder__Expr__(_dollar2)
   guard! _args[3].0 is YYObj_List__Binder__Expr__(_dollar4)
@@ -15386,7 +15386,7 @@ fn yy_action_643(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1542|    SEMI for_binders { ($2, @list.empty()) }
+// 1544|    SEMI for_binders { ($2, @list.empty()) }
 fn yy_action_644(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List__Binder__Expr__(_dollar2)
   YYObj__List__Binder__Expr____List__Binder__Expr___({();  (_dollar2, @list.empty()) })
@@ -15400,7 +15400,7 @@ fn yy_action_645(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1541|    { (@list.empty(), @list.empty()) }
+// 1543|    { (@list.empty(), @list.empty()) }
 fn yy_action_646(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj__List__Binder__Expr____List__Binder__Expr___({();  (@list.empty(), @list.empty()) })
 }
@@ -15474,7 +15474,7 @@ fn yy_action_653(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2151|    "+=" { { name: Ident(name = "+"), loc: mk_loc($sloc) } }
+// 2153|    "+=" { { name: Ident(name = "+"), loc: mk_loc($sloc) } }
 fn yy_action_654(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -15516,7 +15516,7 @@ fn yy_action_656(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2152|    AUGMENTED_ASSIGNMENT { { name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 2154|    AUGMENTED_ASSIGNMENT { { name: Ident(name = $1), loc: mk_loc($sloc) } }
 fn yy_action_657(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -15566,9 +15566,9 @@ fn yy_action_662(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1640|    binder "=>" expr_statement_no_break_continue_return {
-// 1641|    make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1642|  }
+// 1642|    binder "=>" expr_statement_no_break_continue_return {
+// 1643|    make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1644|  }
 fn yy_action_663(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -15622,9 +15622,9 @@ fn yy_action_666(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1640|    binder "=>" expr_statement_no_break_continue_return {
-// 1641|    make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1642|  }
+// 1642|    binder "=>" expr_statement_no_break_continue_return {
+// 1643|    make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1644|  }
 fn yy_action_667(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -15639,10 +15639,10 @@ fn yy_action_667(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1558|    POST_LABEL ":" block_expr {
-// 1559|    let label : Label = { name: $1, loc: mk_loc($loc($1)) }
-// 1560|    LabelledBlock(label~, body=$3, loc=mk_loc($sloc))
-// 1561|  }
+// 1560|    POST_LABEL ":" block_expr {
+// 1561|    let label : Label = { name: $1, loc: mk_loc($loc($1)) }
+// 1562|    LabelledBlock(label~, body=$3, loc=mk_loc($sloc))
+// 1563|  }
 fn yy_action_668(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -15988,49 +15988,53 @@ fn yy_action_689(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 1430|    lexscan_case_pattern_with_bindings "=>" expr_statement {
-// 1431|    { pat: $1.0, bindings: $1.1, body: $3 }
+// 1431|    { pat: $1.0, bindings: $1.1, body: $3, arrow_loc: mk_loc($loc($2)) }
 // 1432|  }
 fn yy_action_690(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__LexScanCasePattern__List__Label__Binder____(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
+  let _start_pos_of_item1 = _args[1].1
+  let _end_pos_of_item1 = _args[1].2
   YYObj_LexScanCase({(); 
-    { pat: _dollar1.0, bindings: _dollar1.1, body: _dollar3 }
+    { pat: _dollar1.0, bindings: _dollar1.1, body: _dollar3, arrow_loc: mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }
   })
 }
 
 // file:///./parser.mbty
 // 1433|    "..." {
-// 1434|    {
-// 1435|      pat: Wildcard(loc = mk_loc($loc($1))),
-// 1436|      bindings: @list.empty(),
-// 1437|      body: Hole(loc = mk_loc($sloc), kind = Todo)
-// 1438|    }
-// 1439|  }
+// 1434|    let loc = mk_loc($loc($1))
+// 1435|    {
+// 1436|      pat: Wildcard(loc~),
+// 1437|      bindings: @list.empty(),
+// 1438|      body: Hole(loc~, kind = Todo),
+// 1439|      arrow_loc: loc
+// 1440|    }
+// 1441|  }
 fn yy_action_691(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
   YYObj_LexScanCase({(); 
+    let loc = mk_loc((_start_pos_of_item0, _end_pos_of_item0))
     {
-      pat: Wildcard(loc = mk_loc((_start_pos_of_item0, _end_pos_of_item0))),
+      pat: Wildcard(loc~),
       bindings: @list.empty(),
-      body: Hole(loc = mk_loc((_symbol_start_pos, _end_pos)), kind = Todo)
+      body: Hole(loc~, kind = Todo),
+      arrow_loc: loc
     }
   })
 }
 
 // file:///./parser.mbty
-// 1442|    lexscan_case_pattern { ($1, @list.empty()) }
+// 1444|    lexscan_case_pattern { ($1, @list.empty()) }
 fn yy_action_692(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_LexScanCasePattern(_dollar1)
   YYObj__LexScanCasePattern__List__Label__Binder____({();  (_dollar1, @list.empty()) })
 }
 
 // file:///./parser.mbty
-// 1443|    "(" regex_as_pattern "," list_commas(regex_match_binding) ")" {
-// 1444|    (Pattern($2), $4)
-// 1445|  }
+// 1445|    "(" regex_as_pattern "," list_commas(regex_match_binding) ")" {
+// 1446|    (Pattern($2), $4)
+// 1447|  }
 fn yy_action_693(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_RegexPattern(_dollar2)
   guard! _args[3].0 is YYObj_List__Label__Binder___(_dollar4)
@@ -16047,10 +16051,10 @@ fn yy_action_694(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1746|    lident_string "=" binder {
-// 1747|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
-// 1748|    (label, Some($3))
-// 1749|  }
+// 1748|    lident_string "=" binder {
+// 1749|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
+// 1750|    (label, Some($3))
+// 1751|  }
 fn yy_action_695(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_16(_args[1].2, _args[2:3])
@@ -16065,10 +16069,10 @@ fn yy_action_695(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1746|    lident_string "=" binder {
-// 1747|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
-// 1748|    (label, Some($3))
-// 1749|  }
+// 1748|    lident_string "=" binder {
+// 1749|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
+// 1750|    (label, Some($3))
+// 1751|  }
 fn yy_action_696(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_21(_args[1].2, _args[2:3])
@@ -16083,11 +16087,11 @@ fn yy_action_696(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1750|    lident_string "=" "_" {
-// 1751|    let label : Label = { name : $1, loc : mk_loc($loc($1)) }
-// 1752|    let binder : Binder = { name: "_", loc: mk_loc($loc($3)) }
-// 1753|    (label, Some(binder))
-// 1754|  }
+// 1752|    lident_string "=" "_" {
+// 1753|    let label : Label = { name : $1, loc : mk_loc($loc($1)) }
+// 1754|    let binder : Binder = { name: "_", loc: mk_loc($loc($3)) }
+// 1755|    (label, Some(binder))
+// 1756|  }
 fn yy_action_697(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_String(_dollar1)
@@ -16103,10 +16107,10 @@ fn yy_action_697(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1746|    lident_string "=" binder {
-// 1747|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
-// 1748|    (label, Some($3))
-// 1749|  }
+// 1748|    lident_string "=" binder {
+// 1749|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
+// 1750|    (label, Some($3))
+// 1751|  }
 fn yy_action_698(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_16(_args[1].2, _args[2:3])
@@ -16121,10 +16125,10 @@ fn yy_action_698(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1746|    lident_string "=" binder {
-// 1747|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
-// 1748|    (label, Some($3))
-// 1749|  }
+// 1748|    lident_string "=" binder {
+// 1749|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
+// 1750|    (label, Some($3))
+// 1751|  }
 fn yy_action_699(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_21(_args[1].2, _args[2:3])
@@ -16139,11 +16143,11 @@ fn yy_action_699(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1750|    lident_string "=" "_" {
-// 1751|    let label : Label = { name : $1, loc : mk_loc($loc($1)) }
-// 1752|    let binder : Binder = { name: "_", loc: mk_loc($loc($3)) }
-// 1753|    (label, Some(binder))
-// 1754|  }
+// 1752|    lident_string "=" "_" {
+// 1753|    let label : Label = { name : $1, loc : mk_loc($loc($1)) }
+// 1754|    let binder : Binder = { name: "_", loc: mk_loc($loc($3)) }
+// 1755|    (label, Some(binder))
+// 1756|  }
 fn yy_action_700(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_String(_dollar1)
@@ -16159,10 +16163,10 @@ fn yy_action_700(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1755|    POST_LABEL {
-// 1756|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
-// 1757|    (label, None)
-// 1758|  }
+// 1757|    POST_LABEL {
+// 1758|    let label = Label::{ name : $1, loc : mk_loc($loc($1)) }
+// 1759|    (label, None)
+// 1760|  }
 fn yy_action_701(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -16202,14 +16206,14 @@ fn yy_action_705(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1448|    regex_as_pattern { Pattern($1) }
+// 1450|    regex_as_pattern { Pattern($1) }
 fn yy_action_706(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
   YYObj_LexScanCasePattern({();  Pattern(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 1449|    binder { Binder($1) }
+// 1451|    binder { Binder($1) }
 fn yy_action_707(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -16217,7 +16221,7 @@ fn yy_action_707(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1449|    binder { Binder($1) }
+// 1451|    binder { Binder($1) }
 fn yy_action_708(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -16225,7 +16229,7 @@ fn yy_action_708(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1450|    "_" { Wildcard(loc = mk_loc($sloc)) }
+// 1452|    "_" { Wildcard(loc = mk_loc($sloc)) }
 fn yy_action_709(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -16233,9 +16237,9 @@ fn yy_action_709(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1777|    regex_sequence_pattern "+" regex_atom_pattern {
-// 1778|    RegexPattern::Sequence(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
-// 1779|  }
+// 1779|    regex_sequence_pattern "+" regex_atom_pattern {
+// 1780|    RegexPattern::Sequence(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
+// 1781|  }
 fn yy_action_710(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
   guard! _args[2].0 is YYObj_RegexPattern(_dollar3)
@@ -16247,9 +16251,9 @@ fn yy_action_710(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1770|    regex_or_pattern "|" regex_sequence_pattern {
-// 1771|    RegexPattern::Alternation(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
-// 1772|  }
+// 1772|    regex_or_pattern "|" regex_sequence_pattern {
+// 1773|    RegexPattern::Alternation(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
+// 1774|  }
 fn yy_action_711(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
   guard! _args[2].0 is YYObj_RegexPattern(_dollar3)
@@ -16261,16 +16265,16 @@ fn yy_action_711(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1762|    regex_or_pattern { $1 }
+// 1764|    regex_or_pattern { $1 }
 fn yy_action_712(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
   YYObj_RegexPattern({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1763|    regex_atom_pattern "as" binder {
-// 1764|    RegexPattern::Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
-// 1765|  }
+// 1765|    regex_atom_pattern "as" binder {
+// 1766|    RegexPattern::Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
+// 1767|  }
 fn yy_action_713(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_args[1].2, _args[2:3])
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
@@ -16283,9 +16287,9 @@ fn yy_action_713(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1763|    regex_atom_pattern "as" binder {
-// 1764|    RegexPattern::Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
-// 1765|  }
+// 1765|    regex_atom_pattern "as" binder {
+// 1766|    RegexPattern::Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
+// 1767|  }
 fn yy_action_714(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_args[1].2, _args[2:3])
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
@@ -16298,30 +16302,30 @@ fn yy_action_714(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1776|    regex_atom_pattern { $1 }
+// 1778|    regex_atom_pattern { $1 }
 fn yy_action_715(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
   YYObj_RegexPattern({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1789|    "(" regex_as_pattern ")" { $2 }
+// 1791|    "(" regex_as_pattern ")" { $2 }
 fn yy_action_716(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_RegexPattern(_dollar2)
   YYObj_RegexPattern({();  _dollar2 })
 }
 
 // file:///./parser.mbty
-// 1769|    regex_sequence_pattern { $1 }
+// 1771|    regex_sequence_pattern { $1 }
 fn yy_action_717(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_RegexPattern(_dollar1)
   YYObj_RegexPattern({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1783|    REGEX_LITERAL {
-// 1784|    RegexPattern::Literal(lit = $1, recovered_ = false, loc = mk_loc($loc($1)))
-// 1785|  }
+// 1785|    REGEX_LITERAL {
+// 1786|    RegexPattern::Literal(lit = $1, recovered_ = false, loc = mk_loc($loc($1)))
+// 1787|  }
 fn yy_action_718(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -16332,9 +16336,9 @@ fn yy_action_718(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1786|    qual_uident {
-// 1787|    RegexPattern::Reference(lid = $1, loc = mk_loc($sloc))
-// 1788|  }
+// 1788|    qual_uident {
+// 1789|    RegexPattern::Reference(lid = $1, loc = mk_loc($sloc))
+// 1790|  }
 fn yy_action_719(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_720(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_LongIdent(_dollar1)
@@ -16353,9 +16357,9 @@ fn yy_action_720(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1786|    qual_uident {
-// 1787|    RegexPattern::Reference(lid = $1, loc = mk_loc($sloc))
-// 1788|  }
+// 1788|    qual_uident {
+// 1789|    RegexPattern::Reference(lid = $1, loc = mk_loc($sloc))
+// 1790|  }
 fn yy_action_721(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_722(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj_LongIdent(_dollar1)
@@ -16421,10 +16425,10 @@ fn yy_action_728(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1562|    POST_LABEL_TRANSPARENT ":" block_expr {
-// 1563|    let label : Label = { name: $1 + "~", loc: mk_loc($loc($1)) }
-// 1564|    LabelledBlock(label~, body=$3, loc=mk_loc($sloc))
-// 1565|  }
+// 1564|    POST_LABEL_TRANSPARENT ":" block_expr {
+// 1565|    let label : Label = { name: $1 + "~", loc: mk_loc($loc($1)) }
+// 1566|    LabelledBlock(label~, body=$3, loc=mk_loc($sloc))
+// 1567|  }
 fn yy_action_729(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -16439,84 +16443,84 @@ fn yy_action_729(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1569|    labelled_block_expr { $1 }
+// 1571|    labelled_block_expr { $1 }
 fn yy_action_730(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1570|    for_expr { $1 }
+// 1572|    for_expr { $1 }
 fn yy_action_731(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1571|    foreach_expr { $1 }
+// 1573|    foreach_expr { $1 }
 fn yy_action_732(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1572|    while_expr { $1 }
+// 1574|    while_expr { $1 }
 fn yy_action_733(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1573|    try_expr { $1 }
+// 1575|    try_expr { $1 }
 fn yy_action_734(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1574|    if_expr { $1 }
+// 1576|    if_expr { $1 }
 fn yy_action_735(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1575|    match_expr { $1 }
+// 1577|    match_expr { $1 }
 fn yy_action_736(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1576|    lexmatch_expr { $1 }
+// 1578|    lexmatch_expr { $1 }
 fn yy_action_737(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1577|    lexscan_expr { $1 }
+// 1579|    lexscan_expr { $1 }
 fn yy_action_738(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1578|    simple_try_expr { $1 }
+// 1580|    simple_try_expr { $1 }
 fn yy_action_739(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1579|    quantifier_expr { $1 }
+// 1581|    quantifier_expr { $1 }
 fn yy_action_740(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1580|    arrow_fn_expr { Function(func = $1, loc = mk_loc($sloc)) }
+// 1582|    arrow_fn_expr { Function(func = $1, loc = mk_loc($sloc)) }
 fn yy_action_741(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Func(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16566,7 +16570,7 @@ fn yy_action_745(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2270|    "{" "}" { Record(fields = @list.empty(), is_closed = true, loc = mk_loc($sloc)) }
+// 2272|    "{" "}" { Record(fields = @list.empty(), is_closed = true, loc = mk_loc($sloc)) }
 fn yy_action_746(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -16574,7 +16578,7 @@ fn yy_action_746(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2271|    "{" ".." option(",") "}" { Record(fields = @list.empty(), is_closed = false, loc = mk_loc($sloc)) }
+// 2273|    "{" ".." option(",") "}" { Record(fields = @list.empty(), is_closed = false, loc = mk_loc($sloc)) }
 fn yy_action_747(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -16582,10 +16586,10 @@ fn yy_action_747(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2272|    "{" non_empty_fields_pat "}" {
-// 2273|    let (fields, is_closed) = $2
-// 2274|    Record(fields~, is_closed~, loc = mk_loc($sloc))
-// 2275|  }
+// 2274|    "{" non_empty_fields_pat "}" {
+// 2275|    let (fields, is_closed) = $2
+// 2276|    Record(fields~, is_closed~, loc = mk_loc($sloc))
+// 2277|  }
 fn yy_action_748(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__List_FieldPat___Bool_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16597,10 +16601,10 @@ fn yy_action_748(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2276|    "{" non_empty_map_elems_pat "}" {
-// 2277|    let (elems, is_closed) = $2
-// 2278|    Map(elems~, is_closed~, loc = mk_loc($sloc))
-// 2279|  }
+// 2278|    "{" non_empty_map_elems_pat "}" {
+// 2279|    let (elems, is_closed) = $2
+// 2280|    Map(elems~, is_closed~, loc = mk_loc($sloc))
+// 2281|  }
 fn yy_action_749(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__List_MapPatElem___Bool_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16612,35 +16616,35 @@ fn yy_action_749(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2488|    non_empty_list_commas(fields_pat_single) { ($1, true) }
+// 2490|    non_empty_list_commas(fields_pat_single) { ($1, true) }
 fn yy_action_750(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_FieldPat_(_dollar1)
   YYObj__List_FieldPat___Bool_({();  (_dollar1, true) })
 }
 
 // file:///./parser.mbty
-// 2489|    non_empty_list_commas_with_tail(fields_pat_single) ".." option(",") { ($1, false) }
+// 2491|    non_empty_list_commas_with_tail(fields_pat_single) ".." option(",") { ($1, false) }
 fn yy_action_751(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_FieldPat_(_dollar1)
   YYObj__List_FieldPat___Bool_({();  (_dollar1, false) })
 }
 
 // file:///./parser.mbty
-// 2506|    non_empty_list_commas(map_elem_pat) { ($1, true) }
+// 2508|    non_empty_list_commas(map_elem_pat) { ($1, true) }
 fn yy_action_752(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_MapPatElem_(_dollar1)
   YYObj__List_MapPatElem___Bool_({();  (_dollar1, true) })
 }
 
 // file:///./parser.mbty
-// 2507|    non_empty_list_commas_with_tail(map_elem_pat) ".." option(",") { ($1, false) }
+// 2509|    non_empty_list_commas_with_tail(map_elem_pat) ".." option(",") { ($1, false) }
 fn yy_action_753(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_MapPatElem_(_dollar1)
   YYObj__List_MapPatElem___Bool_({();  (_dollar1, false) })
 }
 
 // file:///./parser.mbty
-// 2493|    fpat_labeled_pattern { $1 }
+// 2495|    fpat_labeled_pattern { $1 }
 fn yy_action_754(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_755(_last_pos, _args[0:3])
   guard! _sub_action_0_result is YYObj_FieldPat(_dollar1)
@@ -16648,7 +16652,7 @@ fn yy_action_754(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2498|    label ":" pattern { @syntax.make_field_pat(loc = mk_loc($sloc), $1, $3, false) }
+// 2500|    label ":" pattern { @syntax.make_field_pat(loc = mk_loc($sloc), $1, $3, false) }
 fn yy_action_755(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_491(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16659,7 +16663,7 @@ fn yy_action_755(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2494|   fpat_label_pun { $1 }
+// 2496|   fpat_label_pun { $1 }
 fn yy_action_756(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_757(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_FieldPat(_dollar1)
@@ -16667,7 +16671,7 @@ fn yy_action_756(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2502|    label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
+// 2504|    label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
 fn yy_action_757(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_491(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16677,7 +16681,7 @@ fn yy_action_757(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2493|    fpat_labeled_pattern { $1 }
+// 2495|    fpat_labeled_pattern { $1 }
 fn yy_action_758(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_759(_last_pos, _args[0:3])
   guard! _sub_action_0_result is YYObj_FieldPat(_dollar1)
@@ -16685,7 +16689,7 @@ fn yy_action_758(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2498|    label ":" pattern { @syntax.make_field_pat(loc = mk_loc($sloc), $1, $3, false) }
+// 2500|    label ":" pattern { @syntax.make_field_pat(loc = mk_loc($sloc), $1, $3, false) }
 fn yy_action_759(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_586(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16696,7 +16700,7 @@ fn yy_action_759(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2494|   fpat_label_pun { $1 }
+// 2496|   fpat_label_pun { $1 }
 fn yy_action_760(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_761(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_FieldPat(_dollar1)
@@ -16704,7 +16708,7 @@ fn yy_action_760(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2502|    label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
+// 2504|    label { @syntax.make_field_pat(loc = mk_loc($sloc), $1, @syntax.label_to_pat(loc = mk_loc($sloc), $1), true) }
 fn yy_action_761(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_586(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16736,28 +16740,28 @@ fn yy_action_764(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2140|    simple_constant { $1 }
+// 2142|    simple_constant { $1 }
 fn yy_action_765(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Constant(_dollar1)
   YYObj_Constant({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 2141|    MINUS INT { make_int("-" + $2) }
+// 2143|    MINUS INT { make_int("-" + $2) }
 fn yy_action_766(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   YYObj_Constant({();  make_int("-" + _dollar2) })
 }
 
 // file:///./parser.mbty
-// 2142|    MINUS DOUBLE { make_double("-" + $2) }
+// 2144|    MINUS DOUBLE { make_double("-" + $2) }
 fn yy_action_767(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   YYObj_Constant({();  make_double("-" + _dollar2) })
 }
 
 // file:///./parser.mbty
-// 2143|    MINUS FLOAT { make_float("-" + $2) }
+// 2145|    MINUS FLOAT { make_float("-" + $2) }
 fn yy_action_768(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   YYObj_Constant({();  make_float("-" + _dollar2) })
@@ -16809,15 +16813,15 @@ fn yy_action_775(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2511|    map_syntax_key option("?") ":" pattern {
-// 2512|    {
-// 2513|      key: $1,
-// 2514|      pat: $4,
-// 2515|      match_absent: $2 is Some(_),
-// 2516|      key_loc: mk_loc($loc($1)),
-// 2517|      loc: mk_loc($sloc)
-// 2518|    }
-// 2519|  }
+// 2513|    map_syntax_key option("?") ":" pattern {
+// 2514|    {
+// 2515|      key: $1,
+// 2516|      pat: $4,
+// 2517|      match_absent: $2 is Some(_),
+// 2518|      key_loc: mk_loc($loc($1)),
+// 2519|      loc: mk_loc($sloc)
+// 2520|    }
+// 2521|  }
 fn yy_action_770(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Constant(_dollar1)
   guard! _args[3].0 is YYObj_Pattern(_dollar4)
@@ -16838,7 +16842,7 @@ fn yy_action_770(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2269|    "[" array_sub_patterns "]" { Array(pats = $2, loc = mk_loc($sloc)) }
+// 2271|    "[" array_sub_patterns "]" { Array(pats = $2, loc = mk_loc($sloc)) }
 fn yy_action_776(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_ArrayPatterns(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -16847,7 +16851,7 @@ fn yy_action_776(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2297|    ".." binder { Binder($2) }
+// 2299|    ".." binder { Binder($2) }
 fn yy_action_777(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -16855,7 +16859,7 @@ fn yy_action_777(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2297|    ".." binder { Binder($2) }
+// 2299|    ".." binder { Binder($2) }
 fn yy_action_778(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -16863,13 +16867,13 @@ fn yy_action_778(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2298|    ".." "_" { Underscore }
+// 2300|    ".." "_" { Underscore }
 fn yy_action_779(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_DotDotBinder({();  Underscore })
 }
 
 // file:///./parser.mbty
-// 2299|    ".." "as" binder { BinderAs($3) }
+// 2301|    ".." "as" binder { BinderAs($3) }
 fn yy_action_780(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_args[1].2, _args[2:3])
   guard! _sub_action_0_result is YYObj_Binder(_dollar3)
@@ -16877,7 +16881,7 @@ fn yy_action_780(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2299|    ".." "as" binder { BinderAs($3) }
+// 2301|    ".." "as" binder { BinderAs($3) }
 fn yy_action_781(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_args[1].2, _args[2:3])
   guard! _sub_action_0_result is YYObj_Binder(_dollar3)
@@ -16885,18 +16889,18 @@ fn yy_action_781(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2300|    ".." { NoBinder }
+// 2302|    ".." { NoBinder }
 fn yy_action_782(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_DotDotBinder({();  NoBinder })
 }
 
 // file:///./parser.mbty
-// 2306|    array_sub_pattern "," array_sub_patterns {
-// 2307|    match $3 {
-// 2308|      Closed(ps) => Closed(ps.add($1))
-// 2309|      Open(ps1, ps2, b) => Open(ps1.add($1), ps2, b)
-// 2310|    }
-// 2311|  }
+// 2308|    array_sub_pattern "," array_sub_patterns {
+// 2309|    match $3 {
+// 2310|      Closed(ps) => Closed(ps.add($1))
+// 2311|      Open(ps1, ps2, b) => Open(ps1.add($1), ps2, b)
+// 2312|    }
+// 2313|  }
 fn yy_action_783(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_ArrayPatterns(_dollar3)
   guard! _args[0].0 is YYObj_ArrayPattern(_dollar1)
@@ -16909,14 +16913,14 @@ fn yy_action_783(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2305|    array_sub_pattern { Closed(@list.singleton($1)) }
+// 2307|    array_sub_pattern { Closed(@list.singleton($1)) }
 fn yy_action_784(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ArrayPattern(_dollar1)
   YYObj_ArrayPatterns({();  Closed(@list.singleton(_dollar1)) })
 }
 
 // file:///./parser.mbty
-// 2312|    dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(@list.empty(), $3, $1) }
+// 2314|    dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(@list.empty(), $3, $1) }
 fn yy_action_785(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List_ArrayPattern_(_dollar3)
   guard! _args[0].0 is YYObj_DotDotBinder(_dollar1)
@@ -16924,16 +16928,16 @@ fn yy_action_785(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2283|    pattern { Pattern($1) }
+// 2285|    pattern { Pattern($1) }
 fn yy_action_786(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   YYObj_ArrayPattern({();  Pattern(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2263|    "(" pattern "with" non_empty_list_commas(with_pattern_binding) ")" {
-// 2264|    With(pat = $2, bindings = $4, loc = mk_loc($sloc))
-// 2265|  }
+// 2265|    "(" pattern "with" non_empty_list_commas(with_pattern_binding) ")" {
+// 2266|    With(pat = $2, bindings = $4, loc = mk_loc($sloc))
+// 2267|  }
 fn yy_action_787(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Pattern(_dollar2)
   guard! _args[3].0 is YYObj_List__Binder__Expr__(_dollar4)
@@ -16952,7 +16956,7 @@ fn yy_action_788(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2219|    binder "=" prefix_expr { ($1, $3) }
+// 2221|    binder "=" prefix_expr { ($1, $3) }
 fn yy_action_789(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -16961,7 +16965,7 @@ fn yy_action_789(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2219|    binder "=" prefix_expr { ($1, $3) }
+// 2221|    binder "=" prefix_expr { ($1, $3) }
 fn yy_action_790(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -16985,7 +16989,7 @@ fn yy_action_792(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2266|    "(" pattern ")" { $2 }
+// 2268|    "(" pattern ")" { $2 }
 fn yy_action_793(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Pattern(_dollar2)
   YYObj_Pattern({();  _dollar2 })
@@ -16999,7 +17003,7 @@ fn yy_action_794(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2267|    "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
+// 2269|    "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
 fn yy_action_795(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17024,7 +17028,7 @@ fn yy_action_797(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2268|    "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
+// 2270|    "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
 fn yy_action_798(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_550(_args[1].2, _args[2:4])
   guard! _args[1].0 is YYObj_Pattern(_dollar2)
@@ -17042,13 +17046,13 @@ fn yy_action_550(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2248|    constr option(delimited("(", constr_pat_arguments, ")")) {
-// 2249|    let (args, is_open) = match $2 {
-// 2250|      None => (None, false)
-// 2251|      Some((args, is_open)) => (Some(args), is_open)
-// 2252|    }
-// 2253|    @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
-// 2254|  }
+// 2250|    constr option(delimited("(", constr_pat_arguments, ")")) {
+// 2251|    let (args, is_open) = match $2 {
+// 2252|      None => (None, false)
+// 2253|      Some((args, is_open)) => (Some(args), is_open)
+// 2254|    }
+// 2255|    @syntax.make_constr_pattern(loc = mk_loc($sloc), $1, args, is_open)
+// 2256|  }
 fn yy_action_799(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Option__List_ConstrPatArg___Bool__(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -17064,19 +17068,19 @@ fn yy_action_799(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2523|    constr_pat_argument option(",") { (@list.singleton($1), false) }
+// 2525|    constr_pat_argument option(",") { (@list.singleton($1), false) }
 fn yy_action_800(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrPatArg(_dollar1)
   YYObj__List_ConstrPatArg___Bool_({();  (@list.singleton(_dollar1), false) })
 }
 
 // file:///./parser.mbty
-// 2537|    label "=" pattern {
-// 2538|    {
-// 2539|      pat: $3,
-// 2540|      kind: Labelled($1)
-// 2541|    }
-// 2542|  }
+// 2539|    label "=" pattern {
+// 2540|    {
+// 2541|      pat: $3,
+// 2542|      kind: Labelled($1)
+// 2543|    }
+// 2544|  }
 fn yy_action_801(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_586(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_Pattern(_dollar3)
@@ -17090,9 +17094,9 @@ fn yy_action_801(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2260|    binder delimited("(", constr_pat_arguments_no_open, ")") {
-// 2261|    SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
-// 2262|  }
+// 2262|    binder delimited("(", constr_pat_arguments_no_open, ")") {
+// 2263|    SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
+// 2264|  }
 fn yy_action_802(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_803(_args[0].2, _args[1:4])
   let _sub_action_1_result = yy_action_21(_last_pos, _args[0:1])
@@ -17106,19 +17110,19 @@ fn yy_action_802(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2532|    constr_pat_argument option(",") { @list.singleton($1) }
+// 2534|    constr_pat_argument option(",") { @list.singleton($1) }
 fn yy_action_804(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrPatArg(_dollar1)
   YYObj_List_ConstrPatArg_({();  @list.singleton(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2537|    label "=" pattern {
-// 2538|    {
-// 2539|      pat: $3,
-// 2540|      kind: Labelled($1)
-// 2541|    }
-// 2542|  }
+// 2539|    label "=" pattern {
+// 2540|    {
+// 2541|      pat: $3,
+// 2542|      kind: Labelled($1)
+// 2543|    }
+// 2544|  }
 fn yy_action_805(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_491(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_Pattern(_dollar3)
@@ -17132,7 +17136,7 @@ fn yy_action_805(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2065|    lident_string { Label::{ name: $1, loc: mk_loc($sloc) } }
+// 2067|    lident_string { Label::{ name: $1, loc: mk_loc($sloc) } }
 fn yy_action_491(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_String(_dollar1)
@@ -17142,7 +17146,7 @@ fn yy_action_491(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2214|    pattern "as" binder { @syntax.make_alias_pattern(loc = mk_loc($sloc), $1, $3) }
+// 2216|    pattern "as" binder { @syntax.make_alias_pattern(loc = mk_loc($sloc), $1, $3) }
 fn yy_action_806(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_args[1].2, _args[2:3])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -17153,7 +17157,7 @@ fn yy_action_806(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2214|    pattern "as" binder { @syntax.make_alias_pattern(loc = mk_loc($sloc), $1, $3) }
+// 2216|    pattern "as" binder { @syntax.make_alias_pattern(loc = mk_loc($sloc), $1, $3) }
 fn yy_action_807(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_args[1].2, _args[2:3])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -17164,12 +17168,12 @@ fn yy_action_807(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2552|    pattern {
-// 2553|    {
-// 2554|      pat: $1,
-// 2555|      kind: Positional
-// 2556|    }
-// 2557|  }
+// 2554|    pattern {
+// 2555|    {
+// 2556|      pat: $1,
+// 2557|      kind: Positional
+// 2558|    }
+// 2559|  }
 fn yy_action_808(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   YYObj_ConstrPatArg({(); 
@@ -17181,14 +17185,14 @@ fn yy_action_808(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2215|    or_pattern { $1 }
+// 2217|    or_pattern { $1 }
 fn yy_action_809(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   YYObj_Pattern({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 2223|    range_pattern "|" or_pattern { Or(pat1 = $1, pat2 = $3, loc = mk_loc($sloc)) }
+// 2225|    range_pattern "|" or_pattern { Or(pat1 = $1, pat2 = $3, loc = mk_loc($sloc)) }
 fn yy_action_810(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   guard! _args[2].0 is YYObj_Pattern(_dollar3)
@@ -17198,14 +17202,14 @@ fn yy_action_810(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2224|    range_pattern { $1 }
+// 2226|    range_pattern { $1 }
 fn yy_action_811(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   YYObj_Pattern({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 2228|    simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, kind=Exclusive, loc = mk_loc($sloc)) }
+// 2230|    simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, kind=Exclusive, loc = mk_loc($sloc)) }
 fn yy_action_812(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   guard! _args[2].0 is YYObj_Pattern(_dollar3)
@@ -17215,13 +17219,13 @@ fn yy_action_812(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1872|    type_name "::" UIDENT {
-// 1873|    {
-// 1874|      name: { name: $3, loc: mk_loc($loc($3)) },
-// 1875|      extra_info: TypeName($1),
-// 1876|      loc: mk_loc($sloc)
-// 1877|    }
-// 1878|  }
+// 1874|    type_name "::" UIDENT {
+// 1875|    {
+// 1876|      name: { name: $3, loc: mk_loc($loc($3)) },
+// 1877|      extra_info: TypeName($1),
+// 1878|      loc: mk_loc($sloc)
+// 1879|    }
+// 1880|  }
 fn yy_action_813(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_String(_dollar3)
   let _start_pos_of_item2 = _args[2].1
@@ -17239,13 +17243,13 @@ fn yy_action_813(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1879|    type_name "::" PACKAGE_NAME DOT_UIDENT {
-// 1880|    {
-// 1881|      name: { name: $4, loc: mk_loc($loc($4)) },
-// 1882|      extra_info: TypeNameWithConstrPackage(type_name = $1, pkg = $3),
-// 1883|      loc: mk_loc($sloc)
-// 1884|    }
-// 1885|  }
+// 1881|    type_name "::" PACKAGE_NAME DOT_UIDENT {
+// 1882|    {
+// 1883|      name: { name: $4, loc: mk_loc($loc($4)) },
+// 1884|      extra_info: TypeNameWithConstrPackage(type_name = $1, pkg = $3),
+// 1885|      loc: mk_loc($sloc)
+// 1886|    }
+// 1887|  }
 fn yy_action_814(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[3].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[3].1
@@ -17264,9 +17268,9 @@ fn yy_action_814(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2255|    type_name "::" "_" {
-// 2256|    ConstrAny(type_name = $1, loc = mk_loc($sloc))
-// 2257|  }
+// 2257|    type_name "::" "_" {
+// 2258|    ConstrAny(type_name = $1, loc = mk_loc($sloc))
+// 2259|  }
 fn yy_action_815(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_TypeName(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -17277,7 +17281,7 @@ fn yy_action_815(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2229|    simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
+// 2231|    simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
 fn yy_action_816(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   guard! _args[2].0 is YYObj_Pattern(_dollar3)
@@ -17287,14 +17291,14 @@ fn yy_action_816(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2230|    simple_pattern { $1 }
+// 2232|    simple_pattern { $1 }
 fn yy_action_817(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Pattern(_dollar1)
   YYObj_Pattern({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 2234|    TRUE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(true)) }
+// 2236|    TRUE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(true)) }
 fn yy_action_818(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17302,7 +17306,7 @@ fn yy_action_818(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2235|    FALSE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(false)) }
+// 2237|    FALSE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bool(false)) }
 fn yy_action_819(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17310,7 +17314,7 @@ fn yy_action_819(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2236|    CHAR { @syntax.make_constant_pattern(loc = mk_loc($sloc), Char($1)) }
+// 2238|    CHAR { @syntax.make_constant_pattern(loc = mk_loc($sloc), Char($1)) }
 fn yy_action_820(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17319,7 +17323,7 @@ fn yy_action_820(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2237|    INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int($1)) }
+// 2239|    INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int($1)) }
 fn yy_action_821(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17328,7 +17332,7 @@ fn yy_action_821(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2238|    BYTE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Byte($1)) }
+// 2240|    BYTE { @syntax.make_constant_pattern(loc = mk_loc($sloc), Byte($1)) }
 fn yy_action_822(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17337,7 +17341,7 @@ fn yy_action_822(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2239|    DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double($1)) }
+// 2241|    DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double($1)) }
 fn yy_action_823(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17346,7 +17350,7 @@ fn yy_action_823(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2240|    FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float($1)) }
+// 2242|    FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float($1)) }
 fn yy_action_824(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17355,7 +17359,7 @@ fn yy_action_824(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2241|    "-" INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int("-" + $2)) }
+// 2243|    "-" INT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_int("-" + $2)) }
 fn yy_action_825(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17364,7 +17368,7 @@ fn yy_action_825(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2242|    "-" DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double("-" + $2)) }
+// 2244|    "-" DOUBLE { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_double("-" + $2)) }
 fn yy_action_826(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17373,7 +17377,7 @@ fn yy_action_826(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2243|    "-" FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float("-" + $2)) }
+// 2245|    "-" FLOAT { @syntax.make_constant_pattern(loc = mk_loc($sloc), @syntax.make_float("-" + $2)) }
 fn yy_action_827(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17382,7 +17386,7 @@ fn yy_action_827(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2244|    STRING { @syntax.make_constant_pattern(loc = mk_loc($sloc), String($1)) }
+// 2246|    STRING { @syntax.make_constant_pattern(loc = mk_loc($sloc), String($1)) }
 fn yy_action_828(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17391,7 +17395,7 @@ fn yy_action_828(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2245|    BYTES { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bytes($1)) }
+// 2247|    BYTES { @syntax.make_constant_pattern(loc = mk_loc($sloc), Bytes($1)) }
 fn yy_action_829(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17400,7 +17404,7 @@ fn yy_action_829(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2246|    UNDERSCORE { Any(loc = mk_loc($sloc)) }
+// 2248|    UNDERSCORE { Any(loc = mk_loc($sloc)) }
 fn yy_action_830(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -17408,9 +17412,9 @@ fn yy_action_830(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2260|    binder delimited("(", constr_pat_arguments_no_open, ")") {
-// 2261|    SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
-// 2262|  }
+// 2262|    binder delimited("(", constr_pat_arguments_no_open, ")") {
+// 2263|    SpecialConstr(binder = $1, args = $2, loc = mk_loc($sloc))
+// 2264|  }
 fn yy_action_831(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_803(_args[0].2, _args[1:4])
   let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
@@ -17431,7 +17435,7 @@ fn yy_action_803(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2247|    binder { Var($1) }
+// 2249|    binder { Var($1) }
 fn yy_action_832(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -17439,7 +17443,7 @@ fn yy_action_832(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2533|    constr_pat_argument "," constr_pat_arguments_no_open { $3.add($1) }
+// 2535|    constr_pat_argument "," constr_pat_arguments_no_open { $3.add($1) }
 fn yy_action_833(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List_ConstrPatArg_(_dollar3)
   guard! _args[0].0 is YYObj_ConstrPatArg(_dollar1)
@@ -17447,7 +17451,7 @@ fn yy_action_833(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2247|    binder { Var($1) }
+// 2249|    binder { Var($1) }
 fn yy_action_834(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -17455,10 +17459,10 @@ fn yy_action_834(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2525|    constr_pat_argument "," constr_pat_arguments {
-// 2526|    let (args, is_open) = $3
-// 2527|    (args.add($1), is_open)
-// 2528|  }
+// 2527|    constr_pat_argument "," constr_pat_arguments {
+// 2528|    let (args, is_open) = $3
+// 2529|    (args.add($1), is_open)
+// 2530|  }
 fn yy_action_835(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__List_ConstrPatArg___Bool_(_dollar3)
   guard! _args[0].0 is YYObj_ConstrPatArg(_dollar1)
@@ -17469,21 +17473,21 @@ fn yy_action_835(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2524|    ".." option(",") { (@list.empty(), true) }
+// 2526|    ".." option(",") { (@list.empty(), true) }
 fn yy_action_836(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj__List_ConstrPatArg___Bool_({();  (@list.empty(), true) })
 }
 
 // file:///./parser.mbty
-// 2543|    POST_LABEL {
-// 2544|    let loc = mk_loc($loc($1))
-// 2545|    let label = Label::{ name: $1, loc }
-// 2546|    let pat = @syntax.label_to_pat(loc = loc.trim_last_char(), label)
-// 2547|    {
-// 2548|      pat,
-// 2549|      kind: LabelledPun(label)
-// 2550|    }
-// 2551|  }
+// 2545|    POST_LABEL {
+// 2546|    let loc = mk_loc($loc($1))
+// 2547|    let label = Label::{ name: $1, loc }
+// 2548|    let pat = @syntax.label_to_pat(loc = loc.trim_last_char(), label)
+// 2549|    {
+// 2550|      pat,
+// 2551|      kind: LabelledPun(label)
+// 2552|    }
+// 2553|  }
 fn yy_action_837(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
@@ -17521,7 +17525,7 @@ fn yy_action_840(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2284|    ".." STRING { StringSpread(str = $2, loc = mk_loc($loc($2))) }
+// 2286|    ".." STRING { StringSpread(str = $2, loc = mk_loc($loc($2))) }
 fn yy_action_841(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_StringLiteral(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -17530,7 +17534,7 @@ fn yy_action_841(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2285|    ".." BYTES { BytesSpread(bytes = $2, loc = mk_loc($loc($2))) }
+// 2287|    ".." BYTES { BytesSpread(bytes = $2, loc = mk_loc($loc($2))) }
 fn yy_action_842(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_StringLiteral(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -17539,10 +17543,10 @@ fn yy_action_842(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2286|    ".." UIDENT {
-// 2287|    let binder = Binder::{ name: $2, loc: mk_loc($loc($2)) }
-// 2288|    ConstSpread(binder~, pkg = None, loc = mk_loc($sloc))
-// 2289|  }
+// 2288|    ".." UIDENT {
+// 2289|    let binder = Binder::{ name: $2, loc: mk_loc($loc($2)) }
+// 2290|    ConstSpread(binder~, pkg = None, loc = mk_loc($sloc))
+// 2291|  }
 fn yy_action_843(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -17556,10 +17560,10 @@ fn yy_action_843(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2290|    ".." PACKAGE_NAME DOT_UIDENT {
-// 2291|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-// 2292|    ConstSpread(binder~, pkg = Some($2), loc = mk_loc($sloc))
-// 2293|  }
+// 2292|    ".." PACKAGE_NAME DOT_UIDENT {
+// 2293|    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
+// 2294|    ConstSpread(binder~, pkg = Some($2), loc = mk_loc($sloc))
+// 2295|  }
 fn yy_action_844(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_String(_dollar3)
   let _start_pos_of_item2 = _args[2].1
@@ -17596,7 +17600,7 @@ fn yy_action_847(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2313|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
+// 2315|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
 fn yy_action_848(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   guard! _args[0].0 is YYObj_DotDotBinder(_dollar1)
@@ -17604,7 +17608,7 @@ fn yy_action_848(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2313|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
+// 2315|    dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
 fn yy_action_849(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   guard! _args[0].0 is YYObj_DotDotBinder(_dollar1)
@@ -17612,7 +17616,7 @@ fn yy_action_849(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2304|     { Closed(@list.empty()) }
+// 2306|     { Closed(@list.empty()) }
 fn yy_action_850(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_ArrayPatterns({();  Closed(@list.empty()) })
 }
@@ -17638,14 +17642,14 @@ fn yy_action_853(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1611|    pipe_expr { $1 }
+// 1613|    pipe_expr { $1 }
 fn yy_action_854(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1661|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
+// 1663|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
 fn yy_action_855(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   let _start_pos_of_item0 = _args[0].1
@@ -17654,7 +17658,7 @@ fn yy_action_855(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1661|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
+// 1663|    "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
 fn yy_action_856(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   let _start_pos_of_item0 = _args[0].1
@@ -17663,7 +17667,7 @@ fn yy_action_856(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1663|    "_" "," arrow_fn_prefix_no_constraint { $3.add(Unnamed(mk_loc($loc($1)))) }
+// 1665|    "_" "," arrow_fn_prefix_no_constraint { $3.add(Unnamed(mk_loc($loc($1)))) }
 fn yy_action_857(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List_ArrowFnParam_(_dollar3)
   let _start_pos_of_item0 = _args[0].1
@@ -17672,7 +17676,7 @@ fn yy_action_857(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1895|    "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
+// 1897|    "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
 fn yy_action_858(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List_Expr_(_dollar3)
   let _start_pos_of_item0 = _args[0].1
@@ -17681,7 +17685,7 @@ fn yy_action_858(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1919|    "(" "_" ":" type_ ")" { Constraint(expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete), ty = $4, loc = mk_loc($sloc)) }
+// 1921|    "(" "_" ":" type_ ")" { Constraint(expr = Hole(loc = mk_loc($loc($2)), kind = Incomplete), ty = $4, loc = mk_loc($sloc)) }
 fn yy_action_859(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
@@ -17692,7 +17696,7 @@ fn yy_action_859(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1650|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
+// 1652|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
 fn yy_action_860(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   let _start_pos_of_item0 = _args[0].1
@@ -17701,7 +17705,7 @@ fn yy_action_860(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1649|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
+// 1651|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
 fn yy_action_861(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   let _sub_action_1_result = yy_action_21(_last_pos, _args[0:1])
@@ -17710,7 +17714,7 @@ fn yy_action_861(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1649|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
+// 1651|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
 fn yy_action_862(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   let _sub_action_1_result = yy_action_21(_last_pos, _args[0:1])
@@ -17719,7 +17723,7 @@ fn yy_action_862(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1653|    binder "," arrow_fn_prefix { $3.add((Named($1), None)) }
+// 1655|    binder "," arrow_fn_prefix { $3.add((Named($1), None)) }
 fn yy_action_863(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_List__ArrowFnParam__Type___(_dollar3)
@@ -17728,7 +17732,7 @@ fn yy_action_863(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1651|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
+// 1653|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
 fn yy_action_864(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[2].2, _args[3:3])
   let _sub_action_1_result = yy_action_21(_last_pos, _args[0:1])
@@ -17738,7 +17742,7 @@ fn yy_action_864(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1649|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
+// 1651|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
 fn yy_action_865(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
@@ -17747,7 +17751,7 @@ fn yy_action_865(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1649|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
+// 1651|    binder ioption(",") ")" { @list.singleton((Named($1), None)) }
 fn yy_action_866(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
@@ -17756,7 +17760,7 @@ fn yy_action_866(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1653|    binder "," arrow_fn_prefix { $3.add((Named($1), None)) }
+// 1655|    binder "," arrow_fn_prefix { $3.add((Named($1), None)) }
 fn yy_action_867(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_List__ArrowFnParam__Type___(_dollar3)
@@ -17765,7 +17769,7 @@ fn yy_action_867(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1651|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
+// 1653|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
 fn yy_action_868(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[2].2, _args[3:3])
   let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
@@ -17775,7 +17779,7 @@ fn yy_action_868(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1651|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
+// 1653|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
 fn yy_action_869(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[2].2, _args[3:4])
   let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
@@ -17785,7 +17789,7 @@ fn yy_action_869(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1655|    binder ":" type_ "," arrow_fn_prefix { $5.add((Named($1), Some($3))) }
+// 1657|    binder ":" type_ "," arrow_fn_prefix { $5.add((Named($1), Some($3))) }
 fn yy_action_870(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[4].0 is YYObj_List__ArrowFnParam__Type___(_dollar5)
@@ -17795,7 +17799,7 @@ fn yy_action_870(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1651|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
+// 1653|    binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
 fn yy_action_871(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[2].2, _args[3:4])
   let _sub_action_1_result = yy_action_21(_last_pos, _args[0:1])
@@ -17805,7 +17809,7 @@ fn yy_action_871(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1655|    binder ":" type_ "," arrow_fn_prefix { $5.add((Named($1), Some($3))) }
+// 1657|    binder ":" type_ "," arrow_fn_prefix { $5.add((Named($1), Some($3))) }
 fn yy_action_872(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _args[4].0 is YYObj_List__ArrowFnParam__Type___(_dollar5)
@@ -17815,7 +17819,7 @@ fn yy_action_872(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1650|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
+// 1652|    "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
 fn yy_action_873(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   let _start_pos_of_item0 = _args[0].1
@@ -17824,7 +17828,7 @@ fn yy_action_873(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1654|    "_" "," arrow_fn_prefix { $3.add((Unnamed(mk_loc($loc($1))), None)) }
+// 1656|    "_" "," arrow_fn_prefix { $3.add((Unnamed(mk_loc($loc($1))), None)) }
 fn yy_action_874(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List__ArrowFnParam__Type___(_dollar3)
   let _start_pos_of_item0 = _args[0].1
@@ -17833,7 +17837,7 @@ fn yy_action_874(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1652|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
+// 1654|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
 fn yy_action_875(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[2].2, _args[3:3])
   let _start_pos_of_item0 = _args[0].1
@@ -17843,7 +17847,7 @@ fn yy_action_875(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1652|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
+// 1654|    "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
 fn yy_action_876(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[2].2, _args[3:4])
   let _start_pos_of_item0 = _args[0].1
@@ -17853,7 +17857,7 @@ fn yy_action_876(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1656|    "_" ":" type_ "," arrow_fn_prefix { $5.add((Unnamed(mk_loc($loc($1))), Some($3))) }
+// 1658|    "_" ":" type_ "," arrow_fn_prefix { $5.add((Unnamed(mk_loc($loc($1))), Some($3))) }
 fn yy_action_877(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[4].0 is YYObj_List__ArrowFnParam__Type___(_dollar5)
   let _start_pos_of_item0 = _args[0].1
@@ -17863,9 +17867,9 @@ fn yy_action_877(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1643|    "_" "=>" expr_statement_no_break_continue_return {
-// 1644|    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
-// 1645|  }
+// 1645|    "_" "=>" expr_statement_no_break_continue_return {
+// 1646|    make_arrow_fn(@list.singleton((Unnamed(mk_loc($loc($1))), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
+// 1647|  }
 fn yy_action_878(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
@@ -17878,9 +17882,9 @@ fn yy_action_878(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1977|    simple_expr "(" list_commas(argument) ")" {
-// 1978|    Apply(func = $1, args = $3, loc = mk_loc($sloc))
-// 1979|  }
+// 1979|    simple_expr "(" list_commas(argument) ")" {
+// 1980|    Apply(func = $1, args = $3, loc = mk_loc($sloc))
+// 1981|  }
 fn yy_action_879(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_List_Argument_(_dollar3)
@@ -17899,7 +17903,7 @@ fn yy_action_880(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1852|    var { Var($1) }
+// 1854|    var { Var($1) }
 fn yy_action_881(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_882(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Var(_dollar1)
@@ -17907,7 +17911,7 @@ fn yy_action_881(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2102|    qual_ident { Var::{ name: $1, loc: mk_loc($sloc) } }
+// 2104|    qual_ident { Var::{ name: $1, loc: mk_loc($sloc) } }
 fn yy_action_882(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_LongIdent(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -17923,7 +17927,7 @@ fn yy_action_883(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1667|    arrow_fn_with_explicit_braces { Function(func = $1, loc = mk_loc($sloc)) }
+// 1669|    arrow_fn_with_explicit_braces { Function(func = $1, loc = mk_loc($sloc)) }
 fn yy_action_884(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Func(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -17932,16 +17936,16 @@ fn yy_action_884(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1668|    infix_expr { $1 }
+// 1670|    infix_expr { $1 }
 fn yy_action_885(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1682|    infix_expr "<|" backward_pipeline_rhs {
-// 1683|    RevPipe(lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1684|  }
+// 1684|    infix_expr "<|" backward_pipeline_rhs {
+// 1685|    RevPipe(lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1686|  }
 fn yy_action_886(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -17953,14 +17957,14 @@ fn yy_action_886(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1685|    infix_expr non_empty_list(preceded("|>", forward_pipeline_atom)) {
-// 1686|    let mut result = $1
-// 1687|    for rhs in $2 {
-// 1688|      let loc = result.loc().merge(rhs.loc())
-// 1689|      result = Pipe(lhs = result, rhs~, loc~)
-// 1690|    }
-// 1691|    result
-// 1692|  }
+// 1687|    infix_expr non_empty_list(preceded("|>", forward_pipeline_atom)) {
+// 1688|    let mut result = $1
+// 1689|    for rhs in $2 {
+// 1690|      let loc = result.loc().merge(rhs.loc())
+// 1691|      result = Pipe(lhs = result, rhs~, loc~)
+// 1692|    }
+// 1693|    result
+// 1694|  }
 fn yy_action_887(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[1].0 is YYObj_List_Expr_(_dollar2)
@@ -18000,12 +18004,12 @@ fn yy_action_889(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1673|    binder "=>" block_expr {
-// 1674|    let params_loc = mk_loc($loc($1))
-// 1675|    let fn_loc = mk_loc($loc($1)).merge(mk_loc($loc($3)))
-// 1676|    let func = make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc~, loc = fn_loc)
-// 1677|    Function(func~, loc = fn_loc)
-// 1678|  }
+// 1675|    binder "=>" block_expr {
+// 1676|    let params_loc = mk_loc($loc($1))
+// 1677|    let fn_loc = mk_loc($loc($1)).merge(mk_loc($loc($3)))
+// 1678|    let func = make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc~, loc = fn_loc)
+// 1679|    Function(func~, loc = fn_loc)
+// 1680|  }
 fn yy_action_891(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   let _start_pos_of_item0 = _args[0].1
@@ -18048,12 +18052,12 @@ fn yy_action_893(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1673|    binder "=>" block_expr {
-// 1674|    let params_loc = mk_loc($loc($1))
-// 1675|    let fn_loc = mk_loc($loc($1)).merge(mk_loc($loc($3)))
-// 1676|    let func = make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc~, loc = fn_loc)
-// 1677|    Function(func~, loc = fn_loc)
-// 1678|  }
+// 1675|    binder "=>" block_expr {
+// 1676|    let params_loc = mk_loc($loc($1))
+// 1677|    let fn_loc = mk_loc($loc($1)).merge(mk_loc($loc($3)))
+// 1678|    let func = make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc~, loc = fn_loc)
+// 1679|    Function(func~, loc = fn_loc)
+// 1680|  }
 fn yy_action_895(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   let _start_pos_of_item0 = _args[0].1
@@ -18096,23 +18100,23 @@ fn yy_action_897(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1672|    infix_expr { $1 }
+// 1674|    infix_expr { $1 }
 fn yy_action_899(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1693|    infix_expr { $1 }
+// 1695|    infix_expr { $1 }
 fn yy_action_900(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1700|    "∃" binder ":" type_ "," quantifier_body_expr {
-// 1701|    Quantifier(kind = Exists, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
-// 1702|  }
+// 1702|    "∃" binder ":" type_ "," quantifier_body_expr {
+// 1703|    Quantifier(kind = Exists, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
+// 1704|  }
 fn yy_action_901(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -18126,9 +18130,9 @@ fn yy_action_901(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1697|    "∀" binder ":" type_ "," quantifier_body_expr {
-// 1698|    Quantifier(kind = Forall, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
-// 1699|  }
+// 1699|    "∀" binder ":" type_ "," quantifier_body_expr {
+// 1700|    Quantifier(kind = Forall, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
+// 1701|  }
 fn yy_action_902(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -18142,9 +18146,9 @@ fn yy_action_902(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1697|    "∀" binder ":" type_ "," quantifier_body_expr {
-// 1698|    Quantifier(kind = Forall, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
-// 1699|  }
+// 1699|    "∀" binder ":" type_ "," quantifier_body_expr {
+// 1700|    Quantifier(kind = Forall, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
+// 1701|  }
 fn yy_action_903(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -18158,9 +18162,9 @@ fn yy_action_903(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1700|    "∃" binder ":" type_ "," quantifier_body_expr {
-// 1701|    Quantifier(kind = Exists, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
-// 1702|  }
+// 1702|    "∃" binder ":" type_ "," quantifier_body_expr {
+// 1703|    Quantifier(kind = Exists, binder = $2, binder_ty = $4, body = $6, loc = mk_loc($sloc))
+// 1704|  }
 fn yy_action_904(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Binder(_dollar2)
@@ -18174,16 +18178,16 @@ fn yy_action_904(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1706|    quantifier_expr { $1 }
+// 1708|    quantifier_expr { $1 }
 fn yy_action_905(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1711|    infix_expr "→" infix_expr {
-// 1712|    Implies(lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1713|  }
+// 1713|    infix_expr "→" infix_expr {
+// 1714|    Implies(lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1715|  }
 fn yy_action_906(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -18195,9 +18199,9 @@ fn yy_action_906(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_907(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_908(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18211,7 +18215,7 @@ fn yy_action_907(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2156|    INFIX4 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 2158|    INFIX4 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 fn yy_action_908(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18220,9 +18224,9 @@ fn yy_action_908(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_909(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_910(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18236,7 +18240,7 @@ fn yy_action_909(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2157|    INFIX3 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 2159|    INFIX3 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 fn yy_action_910(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18245,9 +18249,9 @@ fn yy_action_910(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_911(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_912(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18261,7 +18265,7 @@ fn yy_action_911(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2158|    INFIX2 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 2160|    INFIX2 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 fn yy_action_912(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18270,9 +18274,9 @@ fn yy_action_912(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_913(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_914(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18286,7 +18290,7 @@ fn yy_action_913(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2159|    INFIX1 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+// 2161|    INFIX1 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
 fn yy_action_914(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18295,9 +18299,9 @@ fn yy_action_914(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_915(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_916(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18311,7 +18315,7 @@ fn yy_action_915(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2160|    PLUS { Var::{ name: Ident(name = "+"), loc: mk_loc($sloc) } }
+// 2162|    PLUS { Var::{ name: Ident(name = "+"), loc: mk_loc($sloc) } }
 fn yy_action_916(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18319,9 +18323,9 @@ fn yy_action_916(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_917(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_918(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18335,7 +18339,7 @@ fn yy_action_917(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2161|    MINUS { Var::{ name: Ident(name = "-"), loc: mk_loc($sloc) } }
+// 2163|    MINUS { Var::{ name: Ident(name = "-"), loc: mk_loc($sloc) } }
 fn yy_action_918(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18343,9 +18347,9 @@ fn yy_action_918(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_919(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_920(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18359,7 +18363,7 @@ fn yy_action_919(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2162|    AMPER { Var::{ name: Ident(name = "&"), loc: mk_loc($sloc) } }
+// 2164|    AMPER { Var::{ name: Ident(name = "&"), loc: mk_loc($sloc) } }
 fn yy_action_920(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18367,9 +18371,9 @@ fn yy_action_920(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_921(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_922(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18383,7 +18387,7 @@ fn yy_action_921(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2163|    CARET { Var::{ name: Ident(name = "^"), loc: mk_loc($sloc) } }
+// 2165|    CARET { Var::{ name: Ident(name = "^"), loc: mk_loc($sloc) } }
 fn yy_action_922(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18391,9 +18395,9 @@ fn yy_action_922(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_923(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_924(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18407,7 +18411,7 @@ fn yy_action_923(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2164|    BAR { Var::{ name: Ident(name = "|"), loc: mk_loc($sloc) } }
+// 2166|    BAR { Var::{ name: Ident(name = "|"), loc: mk_loc($sloc) } }
 fn yy_action_924(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18415,9 +18419,9 @@ fn yy_action_924(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_925(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_926(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18431,7 +18435,7 @@ fn yy_action_925(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2165|    AMPERAMPER { Var::{ name: Ident(name = "&&"), loc: mk_loc($sloc) } }
+// 2167|    AMPERAMPER { Var::{ name: Ident(name = "&&"), loc: mk_loc($sloc) } }
 fn yy_action_926(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18439,9 +18443,9 @@ fn yy_action_926(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1714|    infix_expr infixop infix_expr {
-// 1715|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
-// 1716|  }
+// 1716|    infix_expr infixop infix_expr {
+// 1717|    Infix(op = $2, lhs = $1, rhs = $3, loc = mk_loc($sloc))
+// 1718|  }
 fn yy_action_927(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_928(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj_Var(_dollar2)
@@ -18455,7 +18459,7 @@ fn yy_action_927(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2166|    BARBAR { Var::{ name: Ident(name = "||"), loc: mk_loc($sloc) } }
+// 2168|    BARBAR { Var::{ name: Ident(name = "||"), loc: mk_loc($sloc) } }
 fn yy_action_928(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18463,14 +18467,14 @@ fn yy_action_928(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1707|    infix_expr { $1 }
+// 1709|    infix_expr { $1 }
 fn yy_action_929(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1717|    postfix_expr { $1 }
+// 1719|    postfix_expr { $1 }
 fn yy_action_930(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
@@ -18505,9 +18509,9 @@ fn yy_action_934(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1734|    range_expr "<?" template_rhs {
-// 1735|    TemplateWriting(expr = $1, template = $3, is_conditional = true, loc = mk_loc($sloc))
-// 1736|  }
+// 1736|    range_expr "<?" template_rhs {
+// 1737|    TemplateWriting(expr = $1, template = $3, is_conditional = true, loc = mk_loc($sloc))
+// 1738|  }
 fn yy_action_935(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -18519,21 +18523,21 @@ fn yy_action_935(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1737|    range_expr { $1 }
+// 1739|    range_expr { $1 }
 fn yy_action_936(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1793|    prefix_expr "..<" prefix_expr {
-// 1794|    Infix(
-// 1795|      op = Var::{ name: Ident(name = "..<"), loc: mk_loc($loc($2)) },
-// 1796|      lhs = $1,
-// 1797|      rhs = $3,
-// 1798|      loc = mk_loc($sloc)
-// 1799|    )
-// 1800|  }
+// 1795|    prefix_expr "..<" prefix_expr {
+// 1796|    Infix(
+// 1797|      op = Var::{ name: Ident(name = "..<"), loc: mk_loc($loc($2)) },
+// 1798|      lhs = $1,
+// 1799|      rhs = $3,
+// 1800|      loc = mk_loc($sloc)
+// 1801|    )
+// 1802|  }
 fn yy_action_937(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
@@ -18552,14 +18556,14 @@ fn yy_action_937(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1801|    prefix_expr "..=" prefix_expr {
-// 1802|    Infix(
-// 1803|      op = Var::{ name: Ident(name = "..="), loc: mk_loc($loc($2)) },
-// 1804|      lhs = $1,
-// 1805|      rhs = $3,
-// 1806|      loc = mk_loc($sloc)
-// 1807|    )
-// 1808|  }
+// 1803|    prefix_expr "..=" prefix_expr {
+// 1804|    Infix(
+// 1805|      op = Var::{ name: Ident(name = "..="), loc: mk_loc($loc($2)) },
+// 1806|      lhs = $1,
+// 1807|      rhs = $3,
+// 1808|      loc = mk_loc($sloc)
+// 1809|    )
+// 1810|  }
 fn yy_action_938(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
@@ -18578,14 +18582,14 @@ fn yy_action_938(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1809|    prefix_expr "..<=" prefix_expr {
-// 1810|    Infix(
-// 1811|      op = Var::{ name: Ident(name = "..<="), loc: mk_loc($loc($2)) },
-// 1812|      lhs = $1,
-// 1813|      rhs = $3,
-// 1814|      loc = mk_loc($sloc)
-// 1815|    )
-// 1816|  }
+// 1811|    prefix_expr "..<=" prefix_expr {
+// 1812|    Infix(
+// 1813|      op = Var::{ name: Ident(name = "..<="), loc: mk_loc($loc($2)) },
+// 1814|      lhs = $1,
+// 1815|      rhs = $3,
+// 1816|      loc = mk_loc($sloc)
+// 1817|    )
+// 1818|  }
 fn yy_action_939(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
@@ -18604,14 +18608,14 @@ fn yy_action_939(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1817|    prefix_expr ">=.." prefix_expr {
-// 1818|    Infix(
-// 1819|      op = Var::{ name: Ident(name = ">=.."), loc: mk_loc($loc($2)) },
-// 1820|      lhs = $1,
-// 1821|      rhs = $3,
-// 1822|      loc = mk_loc($sloc)
-// 1823|    )
-// 1824|  }
+// 1819|    prefix_expr ">=.." prefix_expr {
+// 1820|    Infix(
+// 1821|      op = Var::{ name: Ident(name = ">=.."), loc: mk_loc($loc($2)) },
+// 1822|      lhs = $1,
+// 1823|      rhs = $3,
+// 1824|      loc = mk_loc($sloc)
+// 1825|    )
+// 1826|  }
 fn yy_action_940(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
@@ -18630,14 +18634,14 @@ fn yy_action_940(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1825|    prefix_expr ">.." prefix_expr {
-// 1826|    Infix(
-// 1827|      op = Var::{ name: Ident(name = ">.."), loc: mk_loc($loc($2)) },
-// 1828|      lhs = $1,
-// 1829|      rhs = $3,
-// 1830|      loc = mk_loc($sloc)
-// 1831|    )
-// 1832|  }
+// 1827|    prefix_expr ">.." prefix_expr {
+// 1828|    Infix(
+// 1829|      op = Var::{ name: Ident(name = ">.."), loc: mk_loc($loc($2)) },
+// 1830|      lhs = $1,
+// 1831|      rhs = $3,
+// 1832|      loc = mk_loc($sloc)
+// 1833|    )
+// 1834|  }
 fn yy_action_941(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
@@ -18656,7 +18660,7 @@ fn yy_action_941(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1833|    prefix_expr { $1 }
+// 1835|    prefix_expr { $1 }
 fn yy_action_942(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
@@ -18687,13 +18691,13 @@ fn yy_action_945(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1865|    PACKAGE_NAME DOT_UIDENT {
-// 1866|    Constructor::{
-// 1867|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
-// 1868|      extra_info: Package($1),
-// 1869|      loc: mk_loc($sloc)
-// 1870|    }
-// 1871|  }
+// 1867|    PACKAGE_NAME DOT_UIDENT {
+// 1868|    Constructor::{
+// 1869|      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
+// 1870|      extra_info: Package($1),
+// 1871|      loc: mk_loc($sloc)
+// 1872|    }
+// 1873|  }
 fn yy_action_946(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -18711,13 +18715,13 @@ fn yy_action_946(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1858|    UIDENT {
-// 1859|    Constructor::{
-// 1860|      name: ConstrName::{ name: $1, loc: mk_loc($loc($1)) },
-// 1861|      extra_info: NoExtraInfo,
-// 1862|      loc: mk_loc($sloc)
-// 1863|    }
-// 1864|  }
+// 1860|    UIDENT {
+// 1861|    Constructor::{
+// 1862|      name: ConstrName::{ name: $1, loc: mk_loc($loc($1)) },
+// 1863|      extra_info: NoExtraInfo,
+// 1864|      loc: mk_loc($sloc)
+// 1865|    }
+// 1866|  }
 fn yy_action_947(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -18734,7 +18738,7 @@ fn yy_action_947(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1837|    id(plus) prefix_expr { make_uplus(loc = mk_loc($sloc), $1, $2) }
+// 1839|    id(plus) prefix_expr { make_uplus(loc = mk_loc($sloc), $1, $2) }
 fn yy_action_948(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_949(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18753,13 +18757,13 @@ fn yy_action_949(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1844|    PLUS { "+" }
+// 1846|    PLUS { "+" }
 fn yy_action_950(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_String({();  "+" })
 }
 
 // file:///./parser.mbty
-// 1838|    id(minus) prefix_expr { make_uminus(loc = mk_loc($sloc), $1, $2) }
+// 1840|    id(minus) prefix_expr { make_uminus(loc = mk_loc($sloc), $1, $2) }
 fn yy_action_951(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_952(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18778,13 +18782,13 @@ fn yy_action_952(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1848|    MINUS { "-" }
+// 1850|    MINUS { "-" }
 fn yy_action_953(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_String({();  "-" })
 }
 
 // file:///./parser.mbty
-// 1889|    expr ioption(",") ")" { @list.singleton($1) }
+// 1891|    expr ioption(",") ")" { @list.singleton($1) }
 fn yy_action_954(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_594(_args[0].2, _args[1:1])
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -18798,7 +18802,7 @@ fn yy_action_594(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1889|    expr ioption(",") ")" { @list.singleton($1) }
+// 1891|    expr ioption(",") ")" { @list.singleton($1) }
 fn yy_action_955(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_597(_args[0].2, _args[1:2])
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -18813,7 +18817,7 @@ fn yy_action_597(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1890|    expr "," non_empty_tuple_elems { $3.add($1) }
+// 1892|    expr "," non_empty_tuple_elems { $3.add($1) }
 fn yy_action_956(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_List_Expr_(_dollar3)
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -18821,7 +18825,7 @@ fn yy_action_956(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1920|    "(" expr ":" type_ ")" { Constraint(expr = $2, ty = $4, loc = mk_loc($sloc)) }
+// 1922|    "(" expr ":" type_ ")" { Constraint(expr = $2, ty = $4, loc = mk_loc($sloc)) }
 fn yy_action_957(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Expr(_dollar2)
   guard! _args[3].0 is YYObj_Type(_dollar4)
@@ -18831,25 +18835,25 @@ fn yy_action_957(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1896|    non_empty_tuple_elems { $1 }
+// 1898|    non_empty_tuple_elems { $1 }
 fn yy_action_958(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_Expr_(_dollar1)
   YYObj_List_Expr_({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1900|    "(" arrow_fn_prefix_no_constraint {
-// 1901|    let es = $2.map(@syntax.arrow_fn_param_to_expr)
-// 1902|    match es {
-// 1903|      @list.More(expr, tail=Empty) => {
-// 1904|        match expr {
-// 1905|          Constraint(..) => expr
-// 1906|          _ => Group(expr~, group = Paren, loc = mk_loc($sloc))
-// 1907|        }
-// 1908|      }
-// 1909|      _ => @syntax.make_tuple_expr(loc = mk_loc($sloc), es)
-// 1910|    }
-// 1911|  }
+// 1902|    "(" arrow_fn_prefix_no_constraint {
+// 1903|    let es = $2.map(@syntax.arrow_fn_param_to_expr)
+// 1904|    match es {
+// 1905|      @list.More(expr, tail=Empty) => {
+// 1906|        match expr {
+// 1907|          Constraint(..) => expr
+// 1908|          _ => Group(expr~, group = Paren, loc = mk_loc($sloc))
+// 1909|        }
+// 1910|      }
+// 1911|      _ => @syntax.make_tuple_expr(loc = mk_loc($sloc), es)
+// 1912|    }
+// 1913|  }
 fn yy_action_959(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List_ArrowFnParam_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18869,12 +18873,12 @@ fn yy_action_959(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1912|    "(" non_empty_tuple_elems_with_prefix {
-// 1913|    match $2 {
-// 1914|      More(expr, tail=Empty) => Group(expr~, group = Paren, loc = mk_loc($sloc))
-// 1915|      exprs => @syntax.make_tuple_expr(loc = mk_loc($sloc), exprs)
-// 1916|    }
-// 1917|  }
+// 1914|    "(" non_empty_tuple_elems_with_prefix {
+// 1915|    match $2 {
+// 1916|      More(expr, tail=Empty) => Group(expr~, group = Paren, loc = mk_loc($sloc))
+// 1917|      exprs => @syntax.make_tuple_expr(loc = mk_loc($sloc), exprs)
+// 1918|    }
+// 1919|  }
 fn yy_action_960(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List_Expr_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18888,7 +18892,7 @@ fn yy_action_960(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1921|    "(" ")" { Unit(loc = mk_loc($sloc), faked = false) }
+// 1923|    "(" ")" { Unit(loc = mk_loc($sloc), faked = false) }
 fn yy_action_961(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -18896,7 +18900,7 @@ fn yy_action_961(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2182|    expr { Argument::{ value: $1, kind: Positional } }
+// 2184|    expr { Argument::{ value: $1, kind: Positional } }
 fn yy_action_962(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Argument({();  Argument::{ value: _dollar1, kind: Positional } })
@@ -18931,9 +18935,9 @@ fn yy_action_966(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2012|    simple_expr accessor %prec prec_field {
-// 2013|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
-// 2014|  }
+// 2014|    simple_expr accessor %prec prec_field {
+// 2015|    Field(record = $1, accessor = $2, loc = mk_loc($sloc))
+// 2016|  }
 fn yy_action_967(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_577(_args[0].2, _args[1:2])
   guard! _args[0].0 is YYObj_Expr(_dollar1)
@@ -18946,7 +18950,7 @@ fn yy_action_967(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2076|    DOT_INT { Index(tuple_index = $1, loc = mk_loc($sloc)) }
+// 2078|    DOT_INT { Index(tuple_index = $1, loc = mk_loc($sloc)) }
 fn yy_action_577(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Int(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -18955,7 +18959,7 @@ fn yy_action_577(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1840|    simple_expr { $1 }
+// 1842|    simple_expr { $1 }
 fn yy_action_968(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
@@ -19021,20 +19025,20 @@ fn yy_action_974(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1925|    is_async "fn" parameters func_return_type block_expr {
-// 1926|    let (return_type, error_type, nocancel_) = $4
-// 1927|    Func::{
-// 1928|      parameters : $3,
-// 1929|      params_loc : mk_loc($loc($3)),
-// 1930|      body : $5,
-// 1931|      return_type,
-// 1932|      error_type,
-// 1933|      nocancel_,
-// 1934|      kind : Lambda,
-// 1935|      is_async : $1,
-// 1936|      loc : mk_loc($sloc)
-// 1937|    }
-// 1938|  }
+// 1927|    is_async "fn" parameters func_return_type block_expr {
+// 1928|    let (return_type, error_type, nocancel_) = $4
+// 1929|    Func::{
+// 1930|      parameters : $3,
+// 1931|      params_loc : mk_loc($loc($3)),
+// 1932|      body : $5,
+// 1933|      return_type,
+// 1934|      error_type,
+// 1935|      nocancel_,
+// 1936|      kind : Lambda,
+// 1937|      is_async : $1,
+// 1938|      loc : mk_loc($sloc)
+// 1939|    }
+// 1940|  }
 fn yy_action_975(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_6(_last_pos, _args[0:1])
   guard! _args[3].0 is YYObj__Type___ErrorType__Location__(_dollar4)
@@ -19062,7 +19066,7 @@ fn yy_action_975(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2475|    labeled_expr { $1 }
+// 2477|    labeled_expr { $1 }
 fn yy_action_976(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_467(_last_pos, _args[0:3])
   guard! _sub_action_0_result is YYObj_FieldDef(_dollar1)
@@ -19070,7 +19074,7 @@ fn yy_action_976(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2480|    label ":" expr { @syntax.make_field_def(loc = mk_loc($sloc), $1, $3, false) }
+// 2482|    label ":" expr { @syntax.make_field_def(loc = mk_loc($sloc), $1, $3, false) }
 fn yy_action_467(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_586(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -19081,7 +19085,7 @@ fn yy_action_467(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2476|   label_pun { $1 }
+// 2478|   label_pun { $1 }
 fn yy_action_977(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_465(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_FieldDef(_dollar1)
@@ -19089,7 +19093,7 @@ fn yy_action_977(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2484|    label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
+// 2486|    label { @syntax.make_field_def(loc = mk_loc($sloc), $1, @syntax.label_to_expr(loc = mk_loc($sloc), $1), true) }
 fn yy_action_465(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_586(_last_pos, _args[0:1])
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -19099,7 +19103,7 @@ fn yy_action_465(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2065|    lident_string { Label::{ name: $1, loc: mk_loc($sloc) } }
+// 2067|    lident_string { Label::{ name: $1, loc: mk_loc($sloc) } }
 fn yy_action_586(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_String(_dollar1)
@@ -19142,10 +19146,10 @@ fn yy_action_981(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2015|    type_name "::" lident_string {
-// 2016|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 2017|    Method(type_name = $1, method_name~, loc = mk_loc($sloc))
-// 2018|  }
+// 2017|    type_name "::" lident_string {
+// 2018|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 2019|    Method(type_name = $1, method_name~, loc = mk_loc($sloc))
+// 2020|  }
 fn yy_action_982(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_args[1].2, _args[2:3])
   guard! _sub_action_0_result is YYObj_String(_dollar3)
@@ -19161,10 +19165,10 @@ fn yy_action_982(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2015|    type_name "::" lident_string {
-// 2016|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
-// 2017|    Method(type_name = $1, method_name~, loc = mk_loc($sloc))
-// 2018|  }
+// 2017|    type_name "::" lident_string {
+// 2018|    let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
+// 2019|    Method(type_name = $1, method_name~, loc = mk_loc($sloc))
+// 2020|  }
 fn yy_action_983(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_args[1].2, _args[2:3])
   guard! _sub_action_0_result is YYObj_String(_dollar3)
@@ -19214,20 +19218,20 @@ fn yy_action_988(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1925|    is_async "fn" parameters func_return_type block_expr {
-// 1926|    let (return_type, error_type, nocancel_) = $4
-// 1927|    Func::{
-// 1928|      parameters : $3,
-// 1929|      params_loc : mk_loc($loc($3)),
-// 1930|      body : $5,
-// 1931|      return_type,
-// 1932|      error_type,
-// 1933|      nocancel_,
-// 1934|      kind : Lambda,
-// 1935|      is_async : $1,
-// 1936|      loc : mk_loc($sloc)
-// 1937|    }
-// 1938|  }
+// 1927|    is_async "fn" parameters func_return_type block_expr {
+// 1928|    let (return_type, error_type, nocancel_) = $4
+// 1929|    Func::{
+// 1930|      parameters : $3,
+// 1931|      params_loc : mk_loc($loc($3)),
+// 1932|      body : $5,
+// 1933|      return_type,
+// 1934|      error_type,
+// 1935|      nocancel_,
+// 1936|      kind : Lambda,
+// 1937|      is_async : $1,
+// 1938|      loc : mk_loc($sloc)
+// 1939|    }
+// 1940|  }
 fn yy_action_989(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard! _args[2].0 is YYObj__Type___ErrorType__Location__(_dollar4)
@@ -19255,11 +19259,11 @@ fn yy_action_989(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2350|    "->" return_type {
-// 2351|    match $2 {
-// 2352|      (ty, err, nocancel_) => (Some(ty), err, nocancel_)
-// 2353|    }
-// 2354|  }
+// 2352|    "->" return_type {
+// 2353|    match $2 {
+// 2354|      (ty, err, nocancel_) => (Some(ty), err, nocancel_)
+// 2355|    }
+// 2356|  }
 fn yy_action_990(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__Type__ErrorType__Location__(_dollar2)
   YYObj__Type___ErrorType__Location__({(); 
@@ -19270,14 +19274,14 @@ fn yy_action_990(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2390|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
-// 2391|    let (ty_res, ty_err, nocancel_) = $8
-// 2392|    let ts = match $5 {
-// 2393|      None => @list.empty()
-// 2394|      Some(ts) => ts
-// 2395|    }
-// 2396|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2397|  }
+// 2392|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
+// 2393|    let (ty_res, ty_err, nocancel_) = $8
+// 2394|    let ts = match $5 {
+// 2395|      None => @list.empty()
+// 2396|      Some(ts) => ts
+// 2397|    }
+// 2398|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2399|  }
 fn yy_action_991(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_6(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_992(_args[3].2, _args[4:4])
@@ -19298,14 +19302,14 @@ fn yy_action_991(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2390|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
-// 2391|    let (ty_res, ty_err, nocancel_) = $8
-// 2392|    let ts = match $5 {
-// 2393|      None => @list.empty()
-// 2394|      Some(ts) => ts
-// 2395|    }
-// 2396|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2397|  }
+// 2392|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
+// 2393|    let (ty_res, ty_err, nocancel_) = $8
+// 2394|    let ts = match $5 {
+// 2395|      None => @list.empty()
+// 2396|      Some(ts) => ts
+// 2397|    }
+// 2398|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2399|  }
 fn yy_action_993(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_6(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_994(_args[3].2, _args[4:5])
@@ -19326,10 +19330,10 @@ fn yy_action_993(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2402|    is_async "(" type_ ")" "->" return_type {
-// 2403|    let (ty_res, ty_err, nocancel_) = $6
-// 2404|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2405|  }
+// 2404|    is_async "(" type_ ")" "->" return_type {
+// 2405|    let (ty_res, ty_err, nocancel_) = $6
+// 2406|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2407|  }
 fn yy_action_995(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_6(_last_pos, _args[0:1])
   guard! _args[5].0 is YYObj__Type__ErrorType__Location__(_dollar6)
@@ -19344,13 +19348,13 @@ fn yy_action_995(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2377|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
-// 2378|    Name(
-// 2379|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 2380|      tys = $2,
-// 2381|      loc = mk_loc($sloc)
-// 2382|    )
-// 2383|  }
+// 2379|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+// 2380|    Name(
+// 2381|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 2382|      tys = $2,
+// 2383|      loc = mk_loc($sloc)
+// 2384|    )
+// 2385|  }
 fn yy_action_996(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_997(_last_pos, _args[0:2])
   let _sub_action_1_result = yy_action_998(_args[1].2, _args[2:5])
@@ -19370,13 +19374,13 @@ fn yy_action_996(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2377|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
-// 2378|    Name(
-// 2379|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 2380|      tys = $2,
-// 2381|      loc = mk_loc($sloc)
-// 2382|    )
-// 2383|  }
+// 2379|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+// 2380|    Name(
+// 2381|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 2382|      tys = $2,
+// 2383|      loc = mk_loc($sloc)
+// 2384|    )
+// 2385|  }
 fn yy_action_999(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_997(_last_pos, _args[0:2])
   let _sub_action_1_result = yy_action_1000(_args[1].2, _args[2:2])
@@ -19396,13 +19400,13 @@ fn yy_action_999(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2377|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
-// 2378|    Name(
-// 2379|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 2380|      tys = $2,
-// 2381|      loc = mk_loc($sloc)
-// 2382|    )
-// 2383|  }
+// 2379|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+// 2380|    Name(
+// 2381|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 2382|      tys = $2,
+// 2383|      loc = mk_loc($sloc)
+// 2384|    )
+// 2385|  }
 fn yy_action_1001(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_1002(_last_pos, _args[0:2])
   let _sub_action_1_result = yy_action_998(_args[1].2, _args[2:5])
@@ -19429,14 +19433,14 @@ fn yy_action_1003(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2390|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
-// 2391|    let (ty_res, ty_err, nocancel_) = $8
-// 2392|    let ts = match $5 {
-// 2393|      None => @list.empty()
-// 2394|      Some(ts) => ts
-// 2395|    }
-// 2396|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2397|  }
+// 2392|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
+// 2393|    let (ty_res, ty_err, nocancel_) = $8
+// 2394|    let ts = match $5 {
+// 2395|      None => @list.empty()
+// 2396|      Some(ts) => ts
+// 2397|    }
+// 2398|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2399|  }
 fn yy_action_1004(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_994(_args[2].2, _args[3:4])
@@ -19464,7 +19468,7 @@ fn yy_action_994(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2375|    "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.add($2)) }
+// 2377|    "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.add($2)) }
 fn yy_action_1005(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19474,14 +19478,14 @@ fn yy_action_1005(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2390|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
-// 2391|    let (ty_res, ty_err, nocancel_) = $8
-// 2392|    let ts = match $5 {
-// 2393|      None => @list.empty()
-// 2394|      Some(ts) => ts
-// 2395|    }
-// 2396|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2397|  }
+// 2392|    is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
+// 2393|    let (ty_res, ty_err, nocancel_) = $8
+// 2394|    let ts = match $5 {
+// 2395|      None => @list.empty()
+// 2396|      Some(ts) => ts
+// 2397|    }
+// 2398|    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2399|  }
 fn yy_action_1006(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_992(_args[2].2, _args[3:3])
@@ -19508,10 +19512,10 @@ fn yy_action_992(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 2402|    is_async "(" type_ ")" "->" return_type {
-// 2403|    let (ty_res, ty_err, nocancel_) = $6
-// 2404|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2405|  }
+// 2404|    is_async "(" type_ ")" "->" return_type {
+// 2405|    let (ty_res, ty_err, nocancel_) = $6
+// 2406|    Arrow(args = @list.singleton($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2407|  }
 fn yy_action_1007(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard! _args[4].0 is YYObj__Type__ErrorType__Location__(_dollar6)
@@ -19526,21 +19530,21 @@ fn yy_action_1007(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2376|    "(" type_ ")" { $2 }
+// 2378|    "(" type_ ")" { $2 }
 fn yy_action_1008(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Type(_dollar2)
   YYObj_Type({();  _dollar2 })
 }
 
 // file:///./parser.mbty
-// 2342|    type_ { ($1, NoErrorType, None) }
+// 2344|    type_ { ($1, NoErrorType, None) }
 fn yy_action_1009(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   YYObj__Type__ErrorType__Location__({();  (_dollar1, NoErrorType, None) })
 }
 
 // file:///./parser.mbty
-// 2331|    "nocancel" { mk_loc($sloc) }
+// 2333|    "nocancel" { mk_loc($sloc) }
 fn yy_action_1010(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19548,7 +19552,7 @@ fn yy_action_1010(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2335|    error_annotation "+" nocancel_annotation { ($1, Some($3)) }
+// 2337|    error_annotation "+" nocancel_annotation { ($1, Some($3)) }
 fn yy_action_1011(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ErrorType(_dollar1)
   guard! _args[2].0 is YYObj_Location(_dollar3)
@@ -19556,28 +19560,28 @@ fn yy_action_1011(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2337|    error_annotation { ($1, None) }
+// 2339|    error_annotation { ($1, None) }
 fn yy_action_1012(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ErrorType(_dollar1)
   YYObj__ErrorType__Location__({();  (_dollar1, None) })
 }
 
 // file:///./parser.mbty
-// 2318|    "raise" error_type { ErrorType(ty = $2) }
+// 2320|    "raise" error_type { ErrorType(ty = $2) }
 fn yy_action_1013(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Type(_dollar2)
   YYObj_ErrorType({();  ErrorType(ty = _dollar2) })
 }
 
 // file:///./parser.mbty
-// 2320|    "raise" "?" {
-// 2321|    let fake_error = Type::Name(
-// 2322|      constr_id = ConstrId::{ id: Ident(name = "Error"), loc: mk_loc($sloc) },
-// 2323|      tys = @list.empty(),
-// 2324|      loc = mk_loc($sloc)
-// 2325|    )
-// 2326|    MaybeError(ty = fake_error)
-// 2327|  }
+// 2322|    "raise" "?" {
+// 2323|    let fake_error = Type::Name(
+// 2324|      constr_id = ConstrId::{ id: Ident(name = "Error"), loc: mk_loc($sloc) },
+// 2325|      tys = @list.empty(),
+// 2326|      loc = mk_loc($sloc)
+// 2327|    )
+// 2328|    MaybeError(ty = fake_error)
+// 2329|  }
 fn yy_action_1014(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19592,13 +19596,13 @@ fn yy_action_1014(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2363|    qual_ident_ty {
-// 2364|    Name(
-// 2365|      constr_id = ConstrId::{ id: $1, loc: mk_loc($sloc) },
-// 2366|      tys = @list.empty(),
-// 2367|      loc = mk_loc($sloc)
-// 2368|    )
-// 2369|  }
+// 2365|    qual_ident_ty {
+// 2366|    Name(
+// 2367|      constr_id = ConstrId::{ id: $1, loc: mk_loc($sloc) },
+// 2368|      tys = @list.empty(),
+// 2369|      loc = mk_loc($sloc)
+// 2370|    )
+// 2371|  }
 fn yy_action_1015(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_LongIdent(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -19613,7 +19617,7 @@ fn yy_action_1015(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2370|    "_" { Any(loc = mk_loc($sloc)) }
+// 2372|    "_" { Any(loc = mk_loc($sloc)) }
 fn yy_action_1016(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19621,7 +19625,7 @@ fn yy_action_1016(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2317|    "raise" { DefaultErrorType(loc = mk_loc($sloc)) }
+// 2319|    "raise" { DefaultErrorType(loc = mk_loc($sloc)) }
 fn yy_action_1017(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19629,7 +19633,7 @@ fn yy_action_1017(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2319|    "noraise" { Noraise(loc = mk_loc($sloc)) }
+// 2321|    "noraise" { Noraise(loc = mk_loc($sloc)) }
 fn yy_action_1018(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19637,7 +19641,7 @@ fn yy_action_1018(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2336|    nocancel_annotation "+" error_annotation { ($3, Some($1)) }
+// 2338|    nocancel_annotation "+" error_annotation { ($3, Some($1)) }
 fn yy_action_1019(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_ErrorType(_dollar3)
   guard! _args[0].0 is YYObj_Location(_dollar1)
@@ -19645,17 +19649,17 @@ fn yy_action_1019(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2338|    nocancel_annotation { (NoErrorType, Some($1)) }
+// 2340|    nocancel_annotation { (NoErrorType, Some($1)) }
 fn yy_action_1020(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Location(_dollar1)
   YYObj__ErrorType__Location__({();  (NoErrorType, Some(_dollar1)) })
 }
 
 // file:///./parser.mbty
-// 2343|    simple_type effect_annotation {
-// 2344|    let (err, nocancel_) = $2
-// 2345|    ($1, err, nocancel_)
-// 2346|  }
+// 2345|    simple_type effect_annotation {
+// 2346|    let (err, nocancel_) = $2
+// 2347|    ($1, err, nocancel_)
+// 2348|  }
 fn yy_action_1021(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__ErrorType__Location__(_dollar2)
   guard! _args[0].0 is YYObj_Type(_dollar1)
@@ -19666,7 +19670,7 @@ fn yy_action_1021(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2374|    simple_type "?" { @syntax.make_option_type(loc = mk_loc($sloc), constr_loc = mk_loc($loc($2)), $1) }
+// 2376|    simple_type "?" { @syntax.make_option_type(loc = mk_loc($sloc), constr_loc = mk_loc($loc($2)), $1) }
 fn yy_action_1022(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19677,17 +19681,17 @@ fn yy_action_1022(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2389|    simple_type { $1 }
+// 2391|    simple_type { $1 }
 fn yy_action_1023(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   YYObj_Type({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 2398|    is_async "(" ")" "->" return_type {
-// 2399|    let (ty_res, ty_err, nocancel_) = $5
-// 2400|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2401|  }
+// 2400|    is_async "(" ")" "->" return_type {
+// 2401|    let (ty_res, ty_err, nocancel_) = $5
+// 2402|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2403|  }
 fn yy_action_1024(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_9(_last_pos, _args[0:0])
   guard! _args[3].0 is YYObj__Type__ErrorType__Location__(_dollar5)
@@ -19707,13 +19711,13 @@ fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 }
 
 // file:///./parser.mbty
-// 2377|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
-// 2378|    Name(
-// 2379|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 2380|      tys = $2,
-// 2381|      loc = mk_loc($sloc)
-// 2382|    )
-// 2383|  }
+// 2379|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+// 2380|    Name(
+// 2381|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 2382|      tys = $2,
+// 2383|      loc = mk_loc($sloc)
+// 2384|    )
+// 2385|  }
 fn yy_action_1025(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_1026(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_998(_args[0].2, _args[1:4])
@@ -19766,13 +19770,13 @@ fn yy_action_1028(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2377|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
-// 2378|    Name(
-// 2379|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 2380|      tys = $2,
-// 2381|      loc = mk_loc($sloc)
-// 2382|    )
-// 2383|  }
+// 2379|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+// 2380|    Name(
+// 2381|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 2382|      tys = $2,
+// 2383|      loc = mk_loc($sloc)
+// 2384|    )
+// 2385|  }
 fn yy_action_1029(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_1026(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_1000(_args[0].2, _args[1:1])
@@ -19807,13 +19811,13 @@ fn yy_action_1031(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2377|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
-// 2378|    Name(
-// 2379|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
-// 2380|      tys = $2,
-// 2381|      loc = mk_loc($sloc)
-// 2382|    )
-// 2383|  }
+// 2379|    qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+// 2380|    Name(
+// 2381|      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+// 2382|      tys = $2,
+// 2383|      loc = mk_loc($sloc)
+// 2384|    )
+// 2385|  }
 fn yy_action_1032(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_1002(_last_pos, _args[0:2])
   let _sub_action_1_result = yy_action_1000(_args[1].2, _args[2:2])
@@ -19857,7 +19861,7 @@ fn yy_action_1033(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2384|    "&" qual_ident_ty { Object(ConstrId::{ id: $2, loc: mk_loc($loc($2)) }) }
+// 2386|    "&" qual_ident_ty { Object(ConstrId::{ id: $2, loc: mk_loc($loc($2)) }) }
 fn yy_action_1034(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_LongIdent(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -19866,7 +19870,7 @@ fn yy_action_1034(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2385|    "_" { Any(loc = mk_loc($sloc)) }
+// 2387|    "_" { Any(loc = mk_loc($sloc)) }
 fn yy_action_1035(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19874,10 +19878,10 @@ fn yy_action_1035(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2398|    is_async "(" ")" "->" return_type {
-// 2399|    let (ty_res, ty_err, nocancel_) = $5
-// 2400|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
-// 2401|  }
+// 2400|    is_async "(" ")" "->" return_type {
+// 2401|    let (ty_res, ty_err, nocancel_) = $5
+// 2402|    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+// 2403|  }
 fn yy_action_1036(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_6(_last_pos, _args[0:1])
   guard! _args[4].0 is YYObj__Type__ErrorType__Location__(_dollar5)
@@ -19899,10 +19903,10 @@ fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 }
 
 // file:///./parser.mbty
-// 2355|    effect_annotation {
-// 2356|    let (err, nocancel_) = $1
-// 2357|    (None, err, nocancel_)
-// 2358|  }
+// 2357|    effect_annotation {
+// 2358|    let (err, nocancel_) = $1
+// 2359|    (None, err, nocancel_)
+// 2360|  }
 fn yy_action_1037(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__ErrorType__Location__(_dollar1)
   YYObj__Type___ErrorType__Location__({(); 
@@ -19912,20 +19916,20 @@ fn yy_action_1037(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2359|     { (None, NoErrorType, None) }
+// 2361|     { (None, NoErrorType, None) }
 fn yy_action_1038(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj__Type___ErrorType__Location__({();  (None, NoErrorType, None) })
 }
 
 // file:///./parser.mbty
-// 2203|    map_syntax_key ":" expr {
-// 2204|    MapExprElem::{
-// 2205|      key: $1,
-// 2206|      expr: $3,
-// 2207|      key_loc: mk_loc($loc($1)),
-// 2208|      loc: mk_loc($sloc)
-// 2209|    }
-// 2210|  }
+// 2205|    map_syntax_key ":" expr {
+// 2206|    MapExprElem::{
+// 2207|      key: $1,
+// 2208|      expr: $3,
+// 2209|      key_loc: mk_loc($loc($1)),
+// 2210|      loc: mk_loc($sloc)
+// 2211|    }
+// 2212|  }
 fn yy_action_1039(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Constant(_dollar1)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -19972,7 +19976,7 @@ fn yy_action_1043(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 1972|    anony_fn { Function(func = $1, loc = mk_loc($sloc)) }
+// 1974|    anony_fn { Function(func = $1, loc = mk_loc($sloc)) }
 fn yy_action_1044(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Func(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -19981,14 +19985,14 @@ fn yy_action_1044(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 1973|    atomic_expr { $1 }
+// 1975|    atomic_expr { $1 }
 fn yy_action_1045(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 1974|    "_" %prec prec_lower_than_arrow_fn { Hole(loc = mk_loc($sloc), kind = Incomplete) }
+// 1976|    "_" %prec prec_lower_than_arrow_fn { Hole(loc = mk_loc($sloc), kind = Incomplete) }
 fn yy_action_1046(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -19996,7 +20000,7 @@ fn yy_action_1046(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 1975|    qual_ident_simple_expr { @syntax.make_ident_expr(loc = mk_loc($sloc), Var::{ name: $1, loc: mk_loc($sloc) }) }
+// 1977|    qual_ident_simple_expr { @syntax.make_ident_expr(loc = mk_loc($sloc), Var::{ name: $1, loc: mk_loc($sloc) }) }
 fn yy_action_1047(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -20005,7 +20009,7 @@ fn yy_action_1047(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 1976|    constr { Constr(constr = $1, loc = mk_loc($sloc)) }
+// 1978|    constr { Constr(constr = $1, loc = mk_loc($sloc)) }
 fn yy_action_1048(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Constructor(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -20028,7 +20032,7 @@ fn yy_action_1050(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 1553|    binder { Some($1)}
+// 1555|    binder { Some($1)}
 fn yy_action_1051(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -20036,7 +20040,7 @@ fn yy_action_1051(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2080|    lident_string { Binder::{ name: $1, loc: mk_loc($sloc) } }
+// 2082|    lident_string { Binder::{ name: $1, loc: mk_loc($sloc) } }
 fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_232(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_String(_dollar1)
@@ -20053,7 +20057,7 @@ fn yy_action_232(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1553|    binder { Some($1)}
+// 1555|    binder { Some($1)}
 fn yy_action_1052(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_21(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Binder(_dollar1)
@@ -20061,7 +20065,7 @@ fn yy_action_1052(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2080|    lident_string { Binder::{ name: $1, loc: mk_loc($sloc) } }
+// 2082|    lident_string { Binder::{ name: $1, loc: mk_loc($sloc) } }
 fn yy_action_21(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_234(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_String(_dollar1)
@@ -20077,7 +20081,7 @@ fn yy_action_234(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 }
 
 // file:///./parser.mbty
-// 1554|    "_" { None }
+// 1556|    "_" { None }
 fn yy_action_1053(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Binder_({();  None })
 }
@@ -20104,7 +20108,7 @@ fn yy_action_1056(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2059|    "[" list_commas(spreadable_elem) "]" { @syntax.make_array_expr(loc = mk_loc($sloc), is_iter = false, $2) }
+// 2061|    "[" list_commas(spreadable_elem) "]" { @syntax.make_array_expr(loc = mk_loc($sloc), is_iter = false, $2) }
 fn yy_action_1057(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -20113,7 +20117,7 @@ fn yy_action_1057(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2198|    expr { Regular($1) }
+// 2200|    expr { Regular($1) }
 fn yy_action_1058(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_SpreadableElem({();  Regular(_dollar1) })
@@ -20127,7 +20131,7 @@ fn yy_action_1059(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2199|    ".." expr { Spread(expr = $2, loc = mk_loc($sloc)) }
+// 2201|    ".." expr { Spread(expr = $2, loc = mk_loc($sloc)) }
 fn yy_action_1060(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Expr(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -20177,14 +20181,14 @@ fn yy_action_1066(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2061|    tuple_expr { $1 }
+// 2063|    tuple_expr { $1 }
 fn yy_action_1067(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Expr({();  _dollar1 })
 }
 
 // file:///./parser.mbty
-// 2106|    qual_ident_ty { TypeName::{ name: $1, is_object: false, loc: mk_loc($sloc) } }
+// 2108|    qual_ident_ty { TypeName::{ name: $1, is_object: false, loc: mk_loc($sloc) } }
 fn yy_action_1068(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_LongIdent(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -20240,7 +20244,7 @@ fn yy_action_1002(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2107|    "&" qual_ident_ty { TypeName::{ name: $2, is_object: true, loc: mk_loc($sloc) } }
+// 2109|    "&" qual_ident_ty { TypeName::{ name: $2, is_object: true, loc: mk_loc($sloc) } }
 fn yy_action_1072(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_LongIdent(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -20249,7 +20253,7 @@ fn yy_action_1072(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2118|    simple_constant { make_constant_expr(loc = mk_loc($sloc), $1) }
+// 2120|    simple_constant { make_constant_expr(loc = mk_loc($sloc), $1) }
 fn yy_action_1073(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -20258,9 +20262,9 @@ fn yy_action_1073(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2119|    non_empty_list(multiline_string) {
-// 2120|    MultilineString(elems = $1, loc = mk_loc($sloc))
-// 2121|  }
+// 2121|    non_empty_list(multiline_string) {
+// 2122|    MultilineString(elems = $1, loc = mk_loc($sloc))
+// 2123|  }
 fn yy_action_1074(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_MultilineStringElem_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
@@ -20271,7 +20275,7 @@ fn yy_action_1074(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2122|    INTERP { make_interp_expr(loc = mk_loc($sloc), $1) }
+// 2124|    INTERP { make_interp_expr(loc = mk_loc($sloc), $1) }
 fn yy_action_1075(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -20280,7 +20284,7 @@ fn yy_action_1075(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2123|    BYTES_INTERP { make_bytes_interp_expr(loc = mk_loc($sloc), $1) }
+// 2125|    BYTES_INTERP { make_bytes_interp_expr(loc = mk_loc($sloc), $1) }
 fn yy_action_1076(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
@@ -20289,84 +20293,84 @@ fn yy_action_1076(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posi
 }
 
 // file:///./parser.mbty
-// 2127|    TRUE { Bool(true) }
+// 2129|    TRUE { Bool(true) }
 fn yy_action_1077(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Constant({();  Bool(true) })
 }
 
 // file:///./parser.mbty
-// 2128|    FALSE { Bool(false) }
+// 2130|    FALSE { Bool(false) }
 fn yy_action_1078(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Constant({();  Bool(false) })
 }
 
 // file:///./parser.mbty
-// 2129|    BYTE { Byte($1) }
+// 2131|    BYTE { Byte($1) }
 fn yy_action_1079(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_CharLiteral(_dollar1)
   YYObj_Constant({();  Byte(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2130|    BYTES { Bytes($1) }
+// 2132|    BYTES { Bytes($1) }
 fn yy_action_1080(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Constant({();  Bytes(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2131|    CHAR { Char($1) }
+// 2133|    CHAR { Char($1) }
 fn yy_action_1081(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_CharLiteral(_dollar1)
   YYObj_Constant({();  Char(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2132|    INT { make_int($1) }
+// 2134|    INT { make_int($1) }
 fn yy_action_1082(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_Constant({();  make_int(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2133|    DOUBLE { make_double($1) }
+// 2135|    DOUBLE { make_double($1) }
 fn yy_action_1083(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_Constant({();  make_double(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2134|    FLOAT { make_float($1) }
+// 2136|    FLOAT { make_float($1) }
 fn yy_action_1084(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_Constant({();  make_float(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2135|    STRING { String($1) }
+// 2137|    STRING { String($1) }
 fn yy_action_1085(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Constant({();  String(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2136|    REGEX_LITERAL { Regex($1) }
+// 2138|    REGEX_LITERAL { Regex($1) }
 fn yy_action_1086(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_Constant({();  Regex(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2111|    MULTILINE_STRING { String($1) }
+// 2113|    MULTILINE_STRING { String($1) }
 fn yy_action_1087(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_MultilineStringElem({();  String(_dollar1) })
 }
 
 // file:///./parser.mbty
-// 2112|    MULTILINE_INTERP {
-// 2113|    Interp(make_interps($1))
-// 2114|  }
+// 2114|    MULTILINE_INTERP {
+// 2115|    Interp(make_interps($1))
+// 2116|  }
 fn yy_action_1088(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_InterpLiteral(_dollar1)
   YYObj_MultilineStringElem({(); 

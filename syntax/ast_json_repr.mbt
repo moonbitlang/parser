@@ -644,18 +644,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         ),
       })
     }
-    LexMatch(strategy~, expr~, match_loc~, cases~, loc~) => {
-      ignore(match_loc)
-      tagged_node("Expr::Lexmatch", loc, {
-        "strategy": option_json_repr(strategy, Label::json_repr),
-        "expr": expr.json_repr(),
-        "cases": list_json_repr("Expr::Lexmatch::CaseList", loc, cases, fn(
-          case,
-        ) {
-          case.json_repr(loc)
-        }),
-      })
-    }
     LexScan(streaming~, strategy~, expr~, match_loc~, cases~, loc~) => {
       ignore(match_loc)
       tagged_node("Expr::Lexscan", loc, {
@@ -1613,19 +1601,6 @@ fn StaticAssertion::json_repr(self : StaticAssertion) -> Json {
 }
 
 ///|
-fn LexCase::json_repr(self : LexCase, loc : Location) -> Json {
-  tagged_node("LexCase", loc, {
-    "pat": list_json_repr("LexCase::PatternList", self.pat_loc, self.pat, fn(
-      ltp,
-    ) {
-      ltp.json_repr(self.pat_loc)
-    }),
-    "guard": option_json_repr(self.guard_, Expr::json_repr),
-    "body": self.body.json_repr(),
-  })
-}
-
-///|
 fn LexScanCase::json_repr(self : LexScanCase, loc : Location) -> Json {
   tagged_node("LexscanCase", loc, {
     "pat": self.pat.json_repr(loc),
@@ -1653,52 +1628,6 @@ fn LexScanCasePattern::json_repr(
     Binder(binder) =>
       tagged_node1("LexscanCasePattern::Binder", loc, binder.json_repr())
     Wildcard(loc~) => tagged_node0("LexscanCasePattern::Wildcard", loc)
-  }
-}
-
-///|
-fn LexTopPattern::json_repr(self : LexTopPattern, loc : Location) -> Json {
-  match self {
-    Pattern(pat) => tagged_node1("LexTopPattern::Pattern", loc, pat.json_repr())
-    Binder(binder) =>
-      tagged_node1("LexTopPattern::Binder", loc, binder.json_repr())
-    Wildcard(loc~) => tagged_node0("LexTopPattern::Wildcard", loc)
-  }
-}
-
-///|
-fn LexPattern::json_repr(self : LexPattern) -> Json {
-  match self {
-    Regex(lit~, offset~, loc~) =>
-      tagged_node("LexPattern::Regex", loc, {
-        "lit": Json::string(lit),
-        "offset": Json::number(offset.to_double()),
-      })
-    RegexInterp(elems~, loc~) =>
-      tagged_node("LexPattern::RegexInterp", loc, {
-        "elems": list_json_repr(
-          "LexPattern::RegexInterp::InterpElemList",
-          loc,
-          elems,
-          InterpElem::json_repr,
-        ),
-      })
-    ConstantRef(lid~, loc~) =>
-      tagged_node("LexPattern::ConstantRef", loc, { "lid": lid.json_repr(loc) })
-    Alias(pat~, binder~, loc~) =>
-      tagged_node("LexPattern::Alias", loc, {
-        "pat": pat.json_repr(),
-        "binder": binder.json_repr(),
-      })
-    Sequence(pats~, loc~) =>
-      tagged_node("LexPattern::Sequence", loc, {
-        "pats": list_json_repr(
-          "LexPattern::Sequence::PatternList",
-          loc,
-          pats,
-          LexPattern::json_repr,
-        ),
-      })
   }
 }
 

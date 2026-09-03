@@ -3011,6 +3011,7 @@ fn State::parse_lexscan_case(self : State) -> @syntax.LexScanCase {
         pat: Wildcard(loc~),
         bindings: @list.empty(),
         body: Hole(loc~, kind=Todo),
+        arrow_loc: loc,
       }
     }
     _ => {
@@ -3018,8 +3019,9 @@ fn State::parse_lexscan_case(self : State) -> @syntax.LexScanCase {
         [TK_FAT_ARROW],
         State::parse_lexscan_case_pattern_with_bindings,
       )
+      let arrow_loc = self.peek_location()
       let body = self.parse_fat_arrow_action()
-      { pat, bindings, body, }
+      { pat, bindings, body, arrow_loc, }
     }
   }
 }

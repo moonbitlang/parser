@@ -501,7 +501,6 @@ pub fn loc_of_expression(expr : Expr) -> Location {
     As(expr=_, trait_=_, loc~) => loc
     Mutate(record=_, accessor=_, field=_, augmented_by=_, loc~) => loc
     Match(expr=_, cases=_, match_loc=_, loc~) => loc
-    LexMatch(strategy=_, expr=_, match_loc=_, cases=_, loc~) => loc
     LexScan(loc~, ..) => loc
     LetMut(binder=_, ty=_, expr=_, body=_, loc~) => loc
     Pipe(lhs=_, rhs=_, loc~) => loc

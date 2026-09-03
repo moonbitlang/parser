@@ -43,9 +43,6 @@ fn category_count(kind : NodeKind) -> Int {
   if kind.is_lex_literal() {
     count += 1
   }
-  if kind.is_lex_top_pattern() {
-    count += 1
-  }
   if kind.is_lex_scan_case_pattern() {
     count += 1
   }
@@ -92,7 +89,7 @@ test "unclassified kinds do not match available categories" {
       Leaf(NodePayload::String("value")),
       Aggregate_Span,
       ArrayPattern_Pattern,
-      LexPattern_Literal,
+      LexPattern_RegexInterp,
       RegexPattern_Literal,
       Parameter_Positional,
       Field_Declaration,
@@ -405,10 +402,6 @@ test "semantic helper enum kinds are classified exhaustively" {
   assert_category([LexLiteral_String, LexLiteral_Regex], fn(kind) {
     kind.is_lex_literal()
   })
-  assert_category(
-    [LexTopPattern_Pattern, LexTopPattern_Binder, LexTopPattern_Wildcard],
-    fn(kind) { kind.is_lex_top_pattern() },
-  )
   assert_category(
     [
       LexScanCasePattern_Pattern,

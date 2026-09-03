@@ -346,34 +346,11 @@ pub(all) enum MultilineStringElem {
 } derive(Debug)
 
 ///|
-pub(all) enum LexPattern {
-  Regex(lit~ : String, offset~ : Int, loc~ : Location)
-  RegexInterp(elems~ : @list.List[InterpElem], loc~ : Location)
-  ConstantRef(lid~ : LongIdent, loc~ : Location)
-  Alias(pat~ : LexPattern, binder~ : Binder, loc~ : Location)
-  Sequence(pats~ : @list.List[LexPattern], loc~ : Location)
-} derive(Debug)
-
-///|
-pub(all) enum LexTopPattern {
-  Pattern(LexPattern)
-  Binder(Binder)
-  Wildcard(loc~ : Location)
-} derive(Debug)
-
-///|
-pub(all) struct LexCase {
-  pat : @list.List[LexTopPattern]
-  pat_loc : Location
-  guard_ : Expr?
-  body : Expr
-} derive(Debug)
-
-///|
 pub(all) struct LexScanCase {
   pat : LexScanCasePattern
   bindings : @list.List[(Label, Binder?)]
   body : Expr
+  arrow_loc : Location
 } derive(Debug)
 
 ///|
@@ -567,14 +544,8 @@ pub(all) enum Expr {
     match_loc~ : Location,
     loc~ : Location
   )
-  /// `lexmatch using strategy { c1 => e1; c2 => e2 }`
-  LexMatch(
-    strategy~ : Label?,
-    expr~ : Expr,
-    match_loc~ : Location,
-    cases~ : @list.List[LexCase],
-    loc~ : Location
-  )
+  /// `lexmatch expr { c1 => e1; c2 => e2 }` when `streaming` is false,
+  /// or `lexscan expr { c1 => e1; c2 => e2 }` when it is true.
   LexScan(
     streaming~ : Bool,
     strategy~ : Label?,

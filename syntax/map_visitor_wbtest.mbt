@@ -25,6 +25,39 @@ test "RegexPattern recovery marker" {
 }
 
 ///|
+test "LexScanCase arrow location survives identity mapping" {
+  let arrow_start = @basic.Position::{
+    fname: "lex_scan_case.mbt",
+    lnum: 3,
+    bol: 20,
+    cnum: 27,
+  }
+  let arrow_end = @basic.Position::{
+    fname: "lex_scan_case.mbt",
+    lnum: 3,
+    bol: 20,
+    cnum: 29,
+  }
+  let arrow_loc : @basic.Location = { start: arrow_start, end: arrow_end, }
+  let case_ = LexScanCase::{
+    pat: Wildcard(loc=dummy_loc),
+    bindings: List([]),
+    body: Expr::Unit(loc=dummy_loc, faked=false),
+    arrow_loc,
+  }
+  let mapped = MapVisitor::visit_LexScanCase(
+    MapVisitorBase(Identity(())),
+    case_,
+  )
+  @test.assert_eq(mapped.arrow_loc.start, arrow_start)
+  @test.assert_eq(mapped.arrow_loc.end, arrow_end)
+  @test.assert_eq(
+    case_.json_repr(dummy_loc).stringify().contains("arrow_loc"),
+    false,
+  )
+}
+
+///|
 test "Pattern" {
   let Identity(_) = Identity(())
   let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
