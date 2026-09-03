@@ -1,78 +1,4 @@
 ///|
-fn CstNode::first_child_of_kind(
-  self : CstNode,
-  pred : (NodeKind) -> Bool,
-) -> CstNode? {
-  for i in 0..<self.children.length() {
-    match self.children.get(i) {
-      Some((_, child)) if pred(child.kind) => return Some(child)
-      _ => ()
-    }
-  }
-  None
-}
-
-///|
-fn CstNode::children_of_kind(
-  self : CstNode,
-  pred : (NodeKind) -> Bool,
-) -> Array[CstNode] {
-  let result : Array[CstNode] = []
-  for i in 0..<self.children.length() {
-    match self.children.get(i) {
-      Some((_, child)) if pred(child.kind) => result.push(child)
-      _ => ()
-    }
-  }
-  result
-}
-
-///|
-fn CstNode::has_child_label(self : CstNode, label : String) -> Bool {
-  self.first_child_with_label(label) is Some(_)
-}
-
-///|
-fn CstNode::has_child_kind(self : CstNode, expected : NodeKind) -> Bool {
-  self.first_child_of_kind(fn(kind) { kind == expected }) is Some(_)
-}
-
-///|
-fn CstNode::has_child_or_grandchild_kind(
-  self : CstNode,
-  expected : NodeKind,
-) -> Bool {
-  if self.has_child_kind(expected) {
-    return true
-  }
-  for entry in self.children {
-    let (_, child) = entry
-    if child.has_child_kind(expected) {
-      return true
-    }
-  }
-  false
-}
-
-///|
-fn CstNode::bool_marker_value(self : CstNode, expected : NodeKind) -> Bool? {
-  self
-  .first_child_of_kind(fn(kind) { kind == expected })
-  .map(child => child.bool_payload())
-  .bind(value => value)
-}
-
-///|
-fn CstNode::with_kind(self : CstNode, kind : NodeKind) -> CstNode {
-  CstNode::{
-    kind,
-    loc: self.loc,
-    source_span: self.source_span,
-    children: self.children,
-  }
-}
-
-///|
 fn CstNode::lexical_name_value(self : CstNode) -> CstNode? {
   if self.kind is (Name_Identifier | Name_Package) {
     return Some(self)
@@ -180,7 +106,8 @@ fn CstNode::with_structured_name(
 
 ///|
 fn CstNode::with_constructor_extra_info(self : CstNode) -> CstNode {
-  let kind = if self.has_child_label("type") && self.has_child_label("pkg") {
+  let kind : NodeKind = if self.has_child_label("type") &&
+    self.has_child_label("pkg") {
     ConstructorExtraInfo_TypeNameWithConstrPackage
   } else if self.has_child_label("type") {
     ConstructorExtraInfo_TypeName
@@ -316,7 +243,7 @@ fn list_has_item_kind(node : CstNode, expected : NodeKind) -> Bool {
 
 ///|
 fn list_trailing_mark_kind(node : CstNode) -> NodeKind {
-  let mut trailing = TrailingMark_None
+  let mut trailing : NodeKind = TrailingMark_None
   for i in 0..<node.children.length() {
     match node.children.get(i) {
       Some((Some("item"), _)) => trailing = TrailingMark_None

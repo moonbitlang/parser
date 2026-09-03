@@ -150,7 +150,7 @@ fn attribute_metadata_node(
 ) -> CstNode {
   let (first, qualified_name, raw_payload) = content
   let children : Array[(String?, CstNode)] = []
-  let kind = match qualified_name {
+  let kind : NodeKind = match qualified_name {
     Some(name) => {
       push_child(
         children,
@@ -228,7 +228,7 @@ fn comment_metadata_node(
       ),
     ),
   ]
-  let kind = match comment.kind {
+  let kind : NodeKind = match comment.kind {
     @tokens.InlineTrailing => Comment_InlineTrailing
     @tokens.Ownline(leading_blank_line~, trailing_blank_line~) => {
       push_child(
