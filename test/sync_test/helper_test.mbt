@@ -14,7 +14,7 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
   let name = t.name()
   let source_file = "test/sync_test/__snapshot__/\{name}.mbt"
   let source = @fs.read_file_to_string(source_file) catch {
-    err => fail("failed to read file \{name}.mbt: \{err}")
+    err => fail("failed to read file \{name}.mbt: \{Repr(err)}")
   }
   let hand_result = @parser.parse_string(source, name~, parser=Handrolled)
   let yacc_result = @parser.parse_string(source, name~, parser=MoonYacc)
@@ -104,7 +104,7 @@ fn lexer_test(t : @test.Test) -> Unit raise Error {
   @basic.show_loc.val = String
   let source_file = "test/sync_test/__snapshot__/\{name}.mbt"
   let source = @fs.read_file_to_string(source_file) catch {
-    err => fail("failed to read file \{name}.mbt: \{err}")
+    err => fail("failed to read file \{name}.mbt: \{Repr(err)}")
   }
   let lex_result = @lexer.tokens_from_string(source, comment=true)
   let errors = lex_result.errors.filter(triple => {
@@ -137,6 +137,6 @@ fn init {
       @fs.remove_dir(debug_dir)
     }
   } catch {
-    e => println(e)
+    e => println(Repr(e))
   }
 }

@@ -7,7 +7,7 @@ fn run_modified_sync_lexer_test(t : @test.Test) -> Unit raise Error {
   @basic.show_loc.val = String
   let source_file = "test/manual_test/__snapshot__/\{name}.mbt"
   let source = @fs.read_file_to_string(source_file) catch {
-    err => fail("failed to read file \{name}.mbt: \{err}")
+    err => fail("failed to read file \{name}.mbt: \{Repr(err)}")
   }
   let lex_result = @lexer.tokens_from_string(source, comment=true)
   let errors = lex_result.errors.filter(triple => {
