@@ -251,6 +251,18 @@ fn Fmt::impls(fmt : Self, impls : List[@syntax.Impl]) -> Doc {
 }
 
 ///|
+fn normalize_async_error_type(
+  error_type : @syntax.ErrorType,
+  is_async : Location?,
+) -> @syntax.ErrorType {
+  if is_async is Some(_) && error_type is DefaultErrorType(_) {
+    NoErrorType
+  } else {
+    error_type
+  }
+}
+
+///|
 fn Fmt::result_type_with_effect(
   fmt : Self,
   result_ty : @syntax.Type,
@@ -381,10 +393,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         empty
       }
       let with_ = space + text("with")
-      let method_quantifiers = if method_quantifiers.is_empty() {
-        empty
-      } else {
-        space +
+      let method_quantifiers = space +
         text("fn") +
         fmt.type_var_binders(
           method_quantifiers,
@@ -393,7 +402,6 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
           tvar_tables=@comment.NodeTableArray::empty(),
           rbracket=None,
         )
-      }
       let method_name = space + text(method_name.name)
       let params = group(
         fmt.parameters(
@@ -550,7 +558,9 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         empty
       }
       let result = fmt.return_and_error_type_annotation(
-        return_type, error_type, nocancel_,
+        return_type,
+        normalize_async_error_type(error_type, is_async),
+        nocancel_,
       )
       let (extern_, body) = match decl_body {
         DeclNone => (empty, empty)
@@ -859,19 +869,28 @@ fn Fmt::trait_method(fmt : Fmt, meth : @syntax.TraitMethodDecl) -> Doc {
   let {
     name,
     is_async,
-    quantifiers: _,
+    quantifiers,
     params,
     return_type,
     error_type,
     nocancel_,
     loc,
     has_default,
-    attrs: _,
+    attrs,
   } = meth
   ignore(fmt.checkpoint(loc.start))
   let before = fmt.placeholder()
+  let attrs = fmt.attributes(attrs)
   let async_ = if is_async is Some(_) { text("async") + space } else { empty }
-  let name = text(name.name)
+  let fn_ = text("fn")
+  let quantifiers = fmt.type_var_binders(
+    quantifiers,
+    lbracket=None,
+    commas=@comment.NodeArray::empty(),
+    tvar_tables=@comment.NodeTableArray::empty(),
+    rbracket=None,
+  )
+  let name = space + fmt.binder(name)
   let params = fmt.parameters(
     params,
     lparen=None,
@@ -881,14 +900,17 @@ fn Fmt::trait_method(fmt : Fmt, meth : @syntax.TraitMethodDecl) -> Doc {
     kind=TraitMethod,
   )
   let result = fmt.return_and_error_type_annotation(
-    return_type, error_type, nocancel_,
+    return_type,
+    normalize_async_error_type(error_type, is_async),
+    nocancel_,
   )
   let has_default = if has_default is Some(_) {
     space + char('=') + space + text("_")
   } else {
     empty
   }
-  let doc = group(async_ + name + params + result + has_default)
+  let doc = attrs +
+    group(async_ + fn_ + quantifiers + name + params + result + has_default)
   let after = fmt.placeholder()
   ignore(fmt.checkpoint(loc.end))
   before + doc + after
@@ -1729,7 +1751,13 @@ fn Fmt::ty(fmt : Self, ty : @syntax.Type) -> Doc {
           })
         }),
       )
-      async_ + args + fmt.result_type_with_effect(res, err, nocancel_)
+      async_ +
+      args +
+      fmt.result_type_with_effect(
+        res,
+        normalize_async_error_type(err, is_async),
+        nocancel_,
+      )
     }
     Option(ty~, loc=_, question_loc=_) => {
       let ty = match ty {
@@ -1951,6 +1979,7 @@ fn Fmt::func(
     is_async,
     ..
   } = func
+  let error_type = normalize_async_error_type(error_type, is_async)
   let async_ = if is_async is Some(_) { text("async") + space } else { empty }
   let fn_ = match kind {
     Arrow => empty

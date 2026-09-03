@@ -5,6 +5,7 @@ trait Num : Show + ToJson {
   mul(Self,Self) -> Self = _
   div(Self,Self) -> Self raise DivError
   async from_string(String) -> Self
+  fn[A] map(Self, A) -> A
 }
 
 trait LineWrap1 : Trait1____ + Trait2____ + Trait3____ + Trait4____ + Trait5____ + Trait6____ {
@@ -13,7 +14,7 @@ trait LineWrap1 : Trait1____ + Trait2____ + Trait3____ + Trait4____ + Trait5____
 }
 
 
-impl Trait for Type with method(self, arg1, arg2) {
+impl Trait for Type with plain(self, arg1, arg2) {
   ...
 }
 
@@ -23,6 +24,10 @@ impl Trait for Type with labeled(self, label1~, label2~) {
 
 impl Trait for Type with type_annotation(self : Self, label1~ : Int, label2~ : Bool) -> Unit raise Error {
   ...
+}
+
+impl Trait for Type with fn[A] generic(self : Self, value : A) -> A {
+  value
 }
 
 impl Trait with f() {

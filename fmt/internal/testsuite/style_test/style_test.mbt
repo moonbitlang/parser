@@ -464,7 +464,7 @@ test "typedecl_alias" (t : @test.Test) {
 
 ///|
 test "trait_impl_decl" (t : @test.Test) {
-  t.run()
+  t.run_expect_change()
 }
 
 ///|

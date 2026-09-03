@@ -105,10 +105,93 @@ fn normalize_ast_json(value : Json) -> Json {
 }
 
 ///|
+priv struct SemanticNormalizer {}
+
+///|
+extend SemanticNormalizer with MapVisitor::{base, visit_Impl}
+
+///|
+impl MapVisitor for SemanticNormalizer with fn visit_Type_Arrow(
+  self,
+  args~,
+  res~,
+  err~,
+  is_async~,
+  nocancel_~,
+  loc~,
+) {
+  let err = normalize_async_error_type(err, is_async)
+  MapVisitor::visit_Type_Arrow(
+    self.base(),
+    args~,
+    res~,
+    err~,
+    is_async~,
+    nocancel_~,
+    loc~,
+  )
+}
+
+///|
+impl MapVisitor for SemanticNormalizer with fn visit_Func(self, func) {
+  let func = MapVisitor::visit_Func(self.base(), func)
+  let error_type = normalize_async_error_type(func.error_type, func.is_async)
+  { ..func, error_type, }
+}
+
+///|
+impl MapVisitor for SemanticNormalizer with fn visit_FunDecl(self, fun_decl) {
+  let fun_decl = MapVisitor::visit_FunDecl(self.base(), fun_decl)
+  let error_type = normalize_async_error_type(
+    fun_decl.error_type,
+    fun_decl.is_async,
+  )
+  { ..fun_decl, error_type, }
+}
+
+///|
+impl MapVisitor for SemanticNormalizer with fn visit_TraitMethodDecl(
+  self,
+  method_decl,
+) {
+  let method_decl = MapVisitor::visit_TraitMethodDecl(self.base(), method_decl)
+  let error_type = normalize_async_error_type(
+    method_decl.error_type,
+    method_decl.is_async,
+  )
+  { ..method_decl, error_type, }
+}
+
+///|
+fn SemanticNormalizer::process(impls : @syntax.Impls) -> @syntax.Impls {
+  let normalizer = SemanticNormalizer::{ }
+  impls.map(item => normalizer.visit_Impl(item))
+}
+
+///|
+fn omitted_nocancel_semantics(item : @syntax.Impl) -> Json {
+  match item {
+    TopFuncDef(fun_decl~, ..) => Json::boolean(fun_decl.nocancel_ is Some(_))
+    TopImpl(nocancel_~, ..) => Json::boolean(nocancel_ is Some(_))
+    _ => Json::null()
+  }
+}
+
+///|
 fn semantic_ast(impls : @syntax.Impls) -> Json {
   let impls = RemoveGroup::process(impls)
+  let impls = SemanticNormalizer::process(impls)
   Json::array(
-    impls.map(item => normalize_ast_json(item.json_repr())).to_array(),
+    impls
+    .map(item => {
+      Json::array([
+        normalize_ast_json(item.json_repr()),
+        // Keep the compiler-compatible JSON unchanged while comparing the two
+        // nocancel fields that representation intentionally omits.
+        omitted_nocancel_semantics(item),
+      ])
+    })
+    .to_array(),
   )
 }
 
