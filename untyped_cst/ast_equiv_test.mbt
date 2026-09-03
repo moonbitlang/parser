@@ -567,6 +567,50 @@ test "is RHS stops before an unparenthesized OR pattern" {
 }
 
 ///|
+test "is RHS brace patterns remain distinct from delimited bodies" {
+  let cases = [
+    (
+      "map pattern in if condition",
+      (
+        #|fn f(json) {
+        #|  if json is { "edits": Array(items), .. } {
+        #|    items
+        #|  }
+        #|}
+      ),
+    ),
+    (
+      "record pattern in if condition", "fn f(value) { if value is { field: item, .. } { item } }",
+    ),
+    (
+      "empty record pattern in if condition", "fn f(value) { if value is {} {} }",
+    ),
+    (
+      "record pattern in while condition", "fn f(value) { while value is { field: _, .. } {} }",
+    ),
+    (
+      "record pattern in match scrutinee", "fn f(value) { match value is { field: _, .. } { true => 1; false => 0 } }",
+    ),
+    (
+      "trivia before map pattern",
+      (
+        #|fn f(value) {
+        #|  if value is // pattern follows
+        #|    { "item": item, .. } {
+        #|    item
+        #|  }
+        #|}
+      ),
+    ),
+    ("brace pattern on range RHS", "fn f(value) { if value is 1 ..< {} {} }"),
+  ]
+  for case in cases {
+    let (label, source) = case
+    assert_ast_equiv(source, label~)
+  }
+}
+
+///|
 test "block statement AST equivalence cases" {
   let cases = [
     "{ let mut x = 1; x }", "{ fn f() { 1 }; f() }", "{ letrec f = fn() { 1 }; f() }",

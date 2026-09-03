@@ -428,6 +428,7 @@ test "diagnostics equivalence: reported expression boundary cases" {
     ("catch missing block", "try f() catch"),
     ("try missing body", "try catch { _ => 0 }"),
     ("if missing body", "if x"),
+    ("if is brace pattern missing body", "if x is {}"),
     ("while missing body", "while x"),
     ("uppercase lex alias", "lexmatch s { re\"a\" as X => 0 }"),
     ("missing lex alias", "lexmatch s { re\"a\" as => 0 }"),
