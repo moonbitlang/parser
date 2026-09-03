@@ -1,0 +1,448 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/untyped_cst/node"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
+}
+
+// Values
+pub fn bool_marker_node(NodeKind, @basic.Position, Int, Bool) -> CstNode
+
+pub fn empty_loc(@basic.Position) -> @basic.Location
+
+pub fn empty_span(Int) -> (Int, Int)
+
+pub fn error_node(@basic.Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode
+
+pub fn is_location_metadata_label(String?) -> Bool
+
+pub fn leaf_node(NodePayload, @basic.Location, (Int, Int)) -> CstNode
+
+pub fn marker_node(NodeKind, @basic.Position, Int) -> CstNode
+
+pub fn missing_node(@tokens.TokenKind, @basic.Position, Int) -> CstNode
+
+pub fn mk_loc(@basic.Position, @basic.Position) -> @basic.Location
+
+pub fn mk_span(Int, Int) -> (Int, Int)
+
+pub fn node(NodeKind, @basic.Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode
+
+pub fn node_with_payload(NodeKind, @basic.Location, (Int, Int), Array[(String?, CstNode)], NodePayload) -> CstNode
+
+pub fn push_child(Array[(String?, CstNode)], String?, CstNode) -> Unit
+
+pub fn push_children(Array[(String?, CstNode)], Array[(String?, CstNode)]) -> Unit
+
+pub fn push_payload_leaf(Array[(String?, CstNode)], NodePayload, @basic.Location, (Int, Int)) -> Unit
+
+pub fn scalar_node(NodeKind, @basic.Location, (Int, Int), NodePayload) -> CstNode
+
+pub fn syntax_kind_from_token_kind(@tokens.TokenKind) -> NodeKind
+
+pub fn token_node(@tokens.Token, @basic.Position, @basic.Position, (Int, Int)) -> CstNode
+
+pub fn token_node_with_children(@tokens.Token, @basic.Position, @basic.Position, (Int, Int), Array[(String?, CstNode)]) -> CstNode
+
+pub fn token_payload(@tokens.Token) -> NodePayload?
+
+pub fn token_string_payload(@tokens.Token) -> String?
+
+// Errors
+
+// Types and methods
+pub struct CstNode {
+  kind : NodeKind
+  loc : @basic.Location
+  source_span : (Int, Int)
+  children : ReadOnlyArray[(String?, CstNode)]
+} derive(@debug.Debug)
+pub fn CstNode::bool_marker_value(Self, NodeKind) -> Bool?
+pub fn CstNode::bool_payload(Self) -> Bool?
+pub fn CstNode::children_of_kind(Self, (NodeKind) -> Bool) -> Array[Self]
+pub fn CstNode::children_with_label(Self, String) -> Array[Self]
+pub fn CstNode::first_child_of_kind(Self, (NodeKind) -> Bool) -> Self?
+pub fn CstNode::first_child_with_label(Self, String) -> Self?
+pub fn CstNode::has_child_kind(Self, NodeKind) -> Bool
+pub fn CstNode::has_child_label(Self, String) -> Bool
+pub fn CstNode::has_child_or_grandchild_kind(Self, NodeKind) -> Bool
+pub fn CstNode::int_payload(Self) -> Int?
+pub fn CstNode::leaf_payload(Self) -> NodePayload?
+pub fn CstNode::string_payload(Self) -> String?
+pub fn CstNode::with_kind(Self, NodeKind) -> Self
+
+pub(all) enum NodeKind {
+  Impls
+  Expression
+  Missing
+  Error
+  Leaf(NodePayload)
+  Syntax_Keyword
+  Syntax_Delimiter
+  Syntax_Separator
+  Syntax_Operator
+  Syntax_Identifier
+  Syntax_Label
+  Syntax_Accessor
+  Syntax_Literal
+  Syntax_Interpolation
+  Syntax_Attribute
+  Syntax_Comment
+  Syntax_Eof
+  Syntax_Unexpected
+  Impl_Import
+  Impl_Extend
+  Impl_Using
+  Impl_Function
+  Impl_Let
+  Impl_Const
+  Impl_TypeAbstract
+  Impl_TypeAlias
+  Impl_RecordStruct
+  Impl_TupleStruct
+  Impl_EnumVariant
+  Impl_ExtensibleEnum
+  Impl_ExtendEnum
+  Impl_Suberror
+  Impl_SuberrorEnum
+  Impl_EnumView
+  Impl_Trait
+  Impl_ImplMethod
+  Impl_ImplRelation
+  Impl_Test
+  Expr_Ident
+  Expr_Constant
+  Expr_Interp
+  Expr_BytesInterp
+  Expr_Block
+  Expr_Apply
+  Expr_DotApply
+  Expr_Field
+  Expr_ArrayGet
+  Expr_ArrayGetSlice
+  Expr_Array
+  Expr_ArraySpread
+  Expr_ArraySet
+  Expr_ArrayAugmentedSet
+  Expr_ListComprehension
+  Expr_Unit
+  Expr_Group
+  Expr_Tuple
+  Expr_Sequence
+  Expr_Constraint
+  Expr_Record
+  Expr_RecordUpdate
+  Expr_Map
+  Expr_Infix
+  Expr_Pipe
+  Expr_RevPipe
+  Expr_Implies
+  Expr_Unary
+  Expr_Assign
+  Expr_Mutate
+  Expr_If
+  Expr_Match
+  Expr_Try
+  Expr_TryOperator
+  Expr_For
+  Expr_ForEach
+  Expr_While
+  Expr_Function
+  Expr_Method
+  Expr_As
+  Expr_Is
+  Expr_LexMatch
+  Expr_LexScan
+  Expr_RegexMatch
+  Expr_TemplateWriting
+  Expr_Let
+  Expr_LetMut
+  Expr_LetAnd
+  Expr_LetFn
+  Expr_Return
+  Expr_Raise
+  Expr_Break
+  Expr_Continue
+  Expr_LabelledBlock
+  Expr_Defer
+  Expr_ErrDefer
+  Expr_Guard
+  Expr_Quantifier
+  Expr_Hole
+  Expr_Constr
+  Expr_MultilineString
+  Expr_MissingExpr
+  Expr_ProofAssert
+  Expr_ProofLet
+  Pattern_Var
+  Pattern_Any
+  Pattern_Constant
+  Pattern_Tuple
+  Pattern_Array
+  Pattern_Rest
+  Pattern_Record
+  Pattern_Map
+  Pattern_Constr
+  Pattern_ConstrAny
+  Pattern_SpecialConstr
+  Pattern_Or
+  Pattern_Alias
+  Pattern_Range
+  Pattern_Constraint
+  Pattern_With
+  Pattern_MissingPattern
+  Pattern_Group
+  ArrayPattern_Pattern
+  ArrayPattern_StringSpread
+  ArrayPattern_BytesSpread
+  ArrayPattern_ConstSpread
+  ArrayPatterns_Closed
+  ArrayPatterns_Open
+  Type_Name
+  Type_Tuple
+  Type_Arrow
+  Type_Application
+  Type_Option
+  Type_Object
+  Type_Any
+  Type_Group
+  Type_MissingType
+  ErrorType_Error
+  ErrorType_Default
+  ErrorType_Noraise
+  ErrorType_Maybe
+  TypeDesc_Abstract
+  TypeDesc_ExtensibleEnum
+  TypeDesc_ErrorNoPayload
+  TypeDesc_ErrorEnumPayload
+  TypeDesc_Variant
+  TypeDesc_ExtendEnum
+  TypeDesc_Record
+  TypeDesc_TupleStruct
+  TypeDesc_Alias
+  LexPattern_RegexInterp
+  RegexPattern_Placeholder
+  RegexPattern_Literal
+  RegexPattern_Reference
+  RegexPattern_Sequence
+  RegexPattern_Alternation
+  RegexPattern_Alias
+  Case_MatchCase
+  Case_LexScanCase
+  Argument_Positional
+  Argument_Labelled
+  Argument_LabelledPun
+  Argument_LabelledOption
+  Argument_LabelledOptionPun
+  ArrayElement_Regular
+  ArrayElement_Spread
+  Parameter_DiscardPositional
+  Parameter_Positional
+  Parameter_Labelled
+  Parameter_Optional
+  Parameter_QuestionOptional
+  Parameter_TypeDecl
+  Parameter_TypeVar
+  Parameter_ConstructorPositional
+  Parameter_ConstructorLabelled
+  Field_Declaration
+  Field_Definition
+  Field_Pattern
+  Field_MapExpression
+  Field_MapPattern
+  Field_Where
+  Field_RecordSpread
+  Binding_LetRec
+  Binding_For
+  Binding_ForEach
+  Binding_Regex
+  TraitMethod_Declaration
+  Name_Identifier
+  Name_Package
+  LongIdent_Ident
+  LongIdent_Dot
+  Name_Binder
+  Name_Label
+  Name_Type
+  Name_Constr
+  Name_ConstrId
+  Name_Var
+  Name_Constructor
+  Name_Field
+  Name_AliasTarget
+  Accessor_Label
+  Accessor_Index
+  Accessor_Newtype
+  Name_Test
+  Constant_Bool
+  Constant_Byte
+  Constant_Bytes
+  Constant_Char
+  Constant_Int
+  Constant_Int64
+  Constant_UInt
+  Constant_UInt64
+  Constant_Float
+  Constant_Double
+  Constant_String
+  Constant_Regex
+  Constant_BigInt
+  Operator_Infix
+  Operator_Augmented
+  Operator_UnaryPlus
+  Operator_UnaryMinus
+  Operator_UnaryNot
+  ListComprehensionKind_For
+  ListComprehensionKind_ForEach
+  DotDotBinder_None
+  DotDotBinder_Underscore
+  DotDotBinder_Binder
+  DotDotBinder_BinderAs
+  ConstructorExtraInfo_None
+  ConstructorExtraInfo_Package
+  ConstructorExtraInfo_TypeName
+  ConstructorExtraInfo_TypeNameWithConstrPackage
+  MultilineStringElement_String
+  MultilineStringElement_Interp
+  LexLiteral_String
+  LexLiteral_Regex
+  LexScanCasePattern_Pattern
+  LexScanCasePattern_Binder
+  LexScanCasePattern_Wildcard
+  ConstructorTag_Value
+  Language_Value
+  Stub_ModuleName
+  Stub_FunctionName
+  Stub_Code
+  Aggregate_Span
+  DeclBody_Expr
+  DeclBody_Import
+  DeclBody_EmbeddedString
+  DeclBody_EmbeddedMultilineString
+  DeclBody_None
+  Visibility_Default
+  Visibility_Pub
+  Visibility_Priv
+  RangeKind_Inclusive
+  RangeKind_Exclusive
+  HoleKind_Incomplete
+  HoleKind_Todo
+  FnKind_Lambda
+  FnKind_Arrow
+  Group_Brace
+  Group_Paren
+  TrailingMark_Comma
+  TrailingMark_Semi
+  TrailingMark_None
+  TryOperatorKind_Exclamation
+  QuantifierKind_Forall
+  QuantifierKind_Exists
+  UsingKind_Value
+  UsingKind_Type
+  UsingKind_Trait
+  Openness_Open
+  Openness_Closed
+  ArrayKind_Array
+  ArrayKind_Iter
+  Flag_Async
+  Flag_Declare
+  Flag_Mutable
+  Flag_Pun
+  Flag_ReturnSelf
+  Flag_Conditional
+  Flag_HasTry
+  Flag_MatchAbsent
+  Flag_Faked
+  Flag_Augmented
+  Flag_Object
+  Flag_Exclamation
+  Attribute_Simple
+  Attribute_Qualified
+  Attribute_Name
+  Attribute_Qualifier
+  Attribute_RawPayload
+  Comment_InlineTrailing
+  Comment_Ownline
+  Comment_Content
+  Comment_LeadingBlankLine
+  Comment_TrailingBlankLine
+  Comment_ConsumedByDocstring
+  InterpSegment_Literal
+  InterpSegment_Source
+  Clause_ReturnType
+  Clause_Where
+  Clause_ConstructorDecl
+  Clause_UsingItem
+  Clause_ImportPackage
+  Clause_ExtendItem
+  Clause_WithBinding
+  Clause_DerivingDirective
+  List_ArgumentList
+  List_ParameterList
+  List_TraitMethodParameterList
+  List_TypeDeclParameterList
+  List_TypeVarBinderList
+  List_ConstructorParameterList
+  List_TupleStructTypeList
+  List_StructFieldList
+  List_TraitMethodList
+  List_RecordFieldList
+  List_MapFieldList
+  List_BlockStatementList
+  List_ContinueArgumentList
+  List_TupleElementList
+  List_TupleTypeList
+  List_ArrayElementList
+  List_TypeArgumentList
+  List_TuplePatternList
+  List_ConstructorPatternArgumentList
+  List_ArrayPatternList
+  List_RecordPatternFieldList
+  List_MapPatternFieldList
+  List_WhereFieldList
+  List_ObjectFieldList
+  List_ConstructorList
+  List_UsingItemList
+  List_ImportPackageList
+  List_ExtendItemList
+  List_DerivingList
+  List_MatchCaseList
+  List_LexScanCaseList
+  List_RegexBindingList
+  List_ForBindingList
+  List_ForEachBindingList
+  List_WithBindingList
+} derive(Eq, @debug.Debug)
+pub fn NodeKind::is_accessor(Self) -> Bool
+pub fn NodeKind::is_argument(Self) -> Bool
+pub fn NodeKind::is_constant(Self) -> Bool
+pub fn NodeKind::is_constructor_extra_info(Self) -> Bool
+pub fn NodeKind::is_decl_body(Self) -> Bool
+pub fn NodeKind::is_dot_dot_binder(Self) -> Bool
+pub fn NodeKind::is_error_type(Self) -> Bool
+pub fn NodeKind::is_expr(Self) -> Bool
+pub fn NodeKind::is_impl(Self) -> Bool
+pub fn NodeKind::is_interp_segment(Self) -> Bool
+pub fn NodeKind::is_lex_literal(Self) -> Bool
+pub fn NodeKind::is_lex_scan_case_pattern(Self) -> Bool
+pub fn NodeKind::is_name(Self) -> Bool
+pub fn NodeKind::is_operator(Self) -> Bool
+pub fn NodeKind::is_pattern(Self) -> Bool
+pub fn NodeKind::is_scalar_value(Self) -> Bool
+pub fn NodeKind::is_stub(Self) -> Bool
+pub fn NodeKind::is_syntax_flag(Self) -> Bool
+pub fn NodeKind::is_syntax_token(Self) -> Bool
+pub fn NodeKind::is_type(Self) -> Bool
+pub fn NodeKind::is_type_desc(Self) -> Bool
+
+pub(all) enum NodePayload {
+  String(String)
+  Int(Int)
+  Bool(Bool)
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
