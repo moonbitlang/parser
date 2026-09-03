@@ -2514,27 +2514,6 @@ fn lower_lexscan_expr(node : CstNode) -> @syntax.Expr {
 }
 
 ///|
-fn lower_lex_case(node : CstNode) -> @syntax.LexCase {
-  let pat_node = node.first_child_with_label("pattern")
-  let pat_loc = pat_node.map(fn(node) { node.loc }).unwrap_or(node.loc)
-  let body = if node.first_child_with_label("body") is Some(body_node) {
-    lower_expr(body_node)
-  } else if pat_node
-    .map(fn(pat) { pat.has_child_kind(LexTopPattern_Wildcard) })
-    .unwrap_or(false) {
-    lower_todo_hole_expr(node.loc)
-  } else {
-    lower_unit_expr(node.loc)
-  }
-  @syntax.LexCase::{
-    pat: pat_node.map(lower_lex_top_patterns).unwrap_or(@list.empty()),
-    pat_loc,
-    guard_: node.first_child_with_label("cond").map(lower_expr),
-    body,
-  }
-}
-
-///|
 fn lower_lex_scan_case(node : CstNode) -> @syntax.LexScanCase {
   let pattern_node = node.first_child_with_label("pattern")
   @syntax.LexScanCase::{
@@ -2546,6 +2525,10 @@ fn lower_lex_scan_case(node : CstNode) -> @syntax.LexScanCase {
     .first_child_with_label("body")
     .map(lower_expr)
     .unwrap_or(lower_unit_expr(node.loc)),
+    arrow_loc: node
+    .first_child_with_label("op")
+    .map(fn(op) { op.loc })
+    .unwrap_or(node.loc),
   }
 }
 
@@ -2555,205 +2538,6 @@ fn lower_pattern_tuple_items(node : CstNode) -> Array[CstNode] {
     lower_item_children(body)
   } else {
     []
-  }
-}
-
-///|
-fn lower_pattern_tuple_has_separator(node : CstNode) -> Bool {
-  if node.first_child_with_label("body") is Some(body) {
-    for i in 0..<body.children.length() {
-      match body.children.get(i) {
-        Some((Some("sep"), _)) => return true
-        _ => ()
-      }
-    }
-    false
-  } else {
-    false
-  }
-}
-
-///|
-fn lower_lex_top_patterns(node : CstNode) -> List[@syntax.LexTopPattern] {
-  let pats : Array[@syntax.LexTopPattern] = []
-  match node.kind {
-    Pattern_Tuple if !node.has_child_kind(Pattern_Group) =>
-      lower_lex_top_pattern_groups(node).each(fn(pat) { pats.push(pat) })
-    _ => pats.push(lower_lex_top_pattern(node))
-  }
-  lower_array_to_list(pats)
-}
-
-///|
-fn lower_lex_top_pattern_groups(node : CstNode) -> Array[@syntax.LexTopPattern] {
-  let pats : Array[@syntax.LexTopPattern] = []
-  if node.first_child_with_label("body") is Some(body) {
-    let mut group : Array[CstNode] = []
-    for i in 0..<body.children.length() {
-      match body.children.get(i) {
-        Some((Some("item"), item)) => group.push(item)
-        Some((Some("sep"), _)) => {
-          pats.push(lower_lex_top_pattern_group(group, node.loc))
-          group = []
-        }
-        _ => ()
-      }
-    }
-    if group.length() > 0 {
-      pats.push(lower_lex_top_pattern_group(group, node.loc))
-    }
-  } else {
-    ()
-  }
-  pats
-}
-
-///|
-fn lower_lex_top_pattern_group(
-  group : Array[CstNode],
-  loc : Location,
-) -> @syntax.LexTopPattern {
-  if group.length() == 0 {
-    @syntax.LexTopPattern::Wildcard(loc~)
-  } else if group.length() == 1 {
-    lower_lex_top_pattern(group[0])
-  } else {
-    let pats : Array[@syntax.LexPattern] = []
-    for item in group {
-      pats.push(lower_lex_pattern(item))
-    }
-    @syntax.LexTopPattern::Pattern(
-      @syntax.LexPattern::Sequence(pats=lower_array_to_list(pats), loc~),
-    )
-  }
-}
-
-///|
-fn lower_lex_top_pattern(node : CstNode) -> @syntax.LexTopPattern {
-  match node.first_child_of_kind(NodeKind::is_lex_top_pattern) {
-    Some(marker) =>
-      match marker.kind {
-        LexTopPattern_Wildcard => @syntax.LexTopPattern::Wildcard(loc=node.loc)
-        LexTopPattern_Binder =>
-          @syntax.LexTopPattern::Binder(
-            node
-            .first_child_with_label("semantic_name")
-            .map(lower_binder_from_node)
-            .unwrap_or(lower_dummy_binder(node.loc)),
-          )
-        LexTopPattern_Pattern =>
-          @syntax.LexTopPattern::Pattern(lower_lex_pattern(node))
-        _ => @syntax.LexTopPattern::Wildcard(loc=node.loc)
-      }
-    None => @syntax.LexTopPattern::Wildcard(loc=node.loc)
-  }
-}
-
-///|
-fn lower_todo_hole_expr(loc : Location) -> @syntax.Expr {
-  @syntax.Expr::Hole(loc~, kind=@syntax.Hole::Todo)
-}
-
-///|
-fn lower_lex_pattern(node : CstNode) -> @syntax.LexPattern {
-  match node.kind {
-    Pattern_Constant | LexPattern_Literal => lower_lex_literal_pattern(node)
-    LexPattern_RegexInterp =>
-      @syntax.LexPattern::RegexInterp(
-        elems=lower_interp_elems(node),
-        loc=node.loc,
-      )
-    Pattern_Alias | LexPattern_Alias => {
-      let pat = node
-        .first_child_with_label("pattern")
-        .map(lower_lex_pattern)
-        .unwrap_or(lower_lex_empty_regex(node.loc))
-      let binder = node
-        .first_child_with_label("name")
-        .map(lower_binder_from_node)
-        .unwrap_or(lower_dummy_binder(node.loc))
-      @syntax.LexPattern::Alias(pat~, binder~, loc=node.loc)
-    }
-    Pattern_Tuple | LexPattern_Sequence => {
-      let items = lower_pattern_tuple_items(node)
-      if items.length() == 0 {
-        lower_lex_empty_regex(node.loc)
-      } else if items.length() == 1 {
-        lower_lex_pattern(items[0])
-      } else {
-        let pats : Array[@syntax.LexPattern] = []
-        for item in items {
-          pats.push(lower_lex_pattern(item))
-        }
-        @syntax.LexPattern::Sequence(
-          pats=lower_array_to_list(pats),
-          loc=node
-            .first_child_with_label("handrolled_loc")
-            .map(fn(node) { node.loc })
-            .unwrap_or(node.loc),
-        )
-      }
-    }
-    Pattern_Constr | LexPattern_ConstantRef =>
-      @syntax.LexPattern::ConstantRef(
-        lid=lower_long_ident_from_child(node, "semantic_name", "name"),
-        loc=node.loc,
-      )
-    Pattern_Var =>
-      @syntax.LexPattern::ConstantRef(
-        lid=@syntax.LongIdent::Ident(
-          name=if node.first_child_with_label("name") is Some(name_node) {
-            lower_semantic_string(name_node).unwrap_or("")
-          } else {
-            ""
-          },
-        ),
-        loc=node.loc,
-      )
-    _ => lower_lex_empty_regex(node.loc)
-  }
-}
-
-///|
-fn lower_lex_empty_regex(loc : Location) -> @syntax.LexPattern {
-  @syntax.LexPattern::Regex(lit="", offset=1, loc~)
-}
-
-///|
-fn lower_lex_literal_pattern(node : CstNode) -> @syntax.LexPattern {
-  let literal = node.first_child_of_kind(NodeKind::is_lex_literal)
-  let constant = node.first_child_with_label("semantic_constant")
-  match (literal, constant) {
-    (Some(literal), _) if literal.kind is LexLiteral_Regex =>
-      @syntax.LexPattern::Regex(
-        lit=literal.string_payload().unwrap_or(""),
-        offset=3,
-        loc=node.loc,
-      )
-    (Some(literal), _) if literal.kind is LexLiteral_String =>
-      @syntax.LexPattern::Regex(
-        lit=literal.string_payload().unwrap_or(""),
-        offset=1,
-        loc=node.loc,
-      )
-    (_, Some(constant)) if constant.kind is Constant_Regex =>
-      @syntax.LexPattern::Regex(
-        lit=constant.string_payload().unwrap_or(""),
-        offset=3,
-        loc=node.loc,
-      )
-    (_, Some(constant)) if constant.kind is Constant_String =>
-      @syntax.LexPattern::Regex(
-        lit=constant.string_payload().unwrap_or(""),
-        offset=1,
-        loc=node.loc,
-      )
-    _ if node.first_child_with_label("semantic_name") is Some(name) =>
-      @syntax.LexPattern::ConstantRef(
-        lid=lower_long_ident_node(name),
-        loc=node.loc,
-      )
-    _ => lower_lex_empty_regex(node.loc)
   }
 }
 

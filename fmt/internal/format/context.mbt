@@ -148,7 +148,6 @@ fn @syntax.Expr::classify(expr : Self) -> ExprKind {
     Quantifier(_) => PrefixKind
     Implies(_) => PostfixKind("→")
     Match(_)
-    | LexMatch(_)
     | LexScan(_)
     | LabelledBlock(_)
     | If(_)

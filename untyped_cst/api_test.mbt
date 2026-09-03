@@ -69,6 +69,20 @@ fn api_count_direct_label(node : @untyped_cst.CstNode, label : String) -> Int {
 }
 
 ///|
+fn api_direct_child(
+  node : @untyped_cst.CstNode,
+  label : String,
+) -> @untyped_cst.CstNode? {
+  for entry in node.children {
+    match entry {
+      (Some(found), child) if found == label => return Some(child)
+      _ => ()
+    }
+  }
+  None
+}
+
+///|
 fn api_payload_leaf(node : @untyped_cst.CstNode) -> @untyped_cst.CstNode? {
   for entry in node.children {
     let (label, child) = entry
@@ -872,6 +886,49 @@ test "parse entry points preserve diagnostics and AST lowering" {
     @untyped_cst.parse_expression("1 +").diagnostics_view().is_empty(),
     false,
   )
+}
+
+///|
+test "lexscan missing arrow has a labelled recovery anchor" {
+  let source = "lexscan source { re\"a\" value }"
+  let result = @untyped_cst.parse_expression(
+    source,
+    name="lexscan_missing_arrow.mbt",
+  )
+  @test.assert_eq(result.diagnostics_view().is_empty(), false)
+  guard api_find_node(result.root(), fn(node) {
+      node.kind is @untyped_cst.Case_LexScanCase
+    })
+    is Some(case_node) else {
+    fail("expected a lexscan case node")
+  }
+  @test.assert_eq(api_count_direct_label(case_node, "op"), 1)
+  guard api_direct_child(case_node, "op") is Some(op) else {
+    fail("expected a labelled missing arrow node")
+  }
+  guard op.kind is @untyped_cst.Missing else {
+    fail("expected the arrow recovery node to be missing")
+  }
+  @test.assert_eq(op.source_span, (23, 23))
+  inspect(op.loc, content="lexscan_missing_arrow.mbt-1:24-1:24")
+}
+
+///|
+test "lexscan ellipsis exposes its token as the operator child" {
+  let source = "lexscan source { ... }"
+  let result = @untyped_cst.parse_expression(source)
+  @test.assert_eq(result.diagnostics_view().is_empty(), true)
+  guard api_find_node(result.root(), fn(node) {
+      node.kind is @untyped_cst.Case_LexScanCase
+    })
+    is Some(case_node) else {
+    fail("expected a lexscan case node")
+  }
+  guard api_direct_child(case_node, "op") is Some(op) else {
+    fail("expected a labelled ellipsis operator node")
+  }
+  @test.assert_eq(op.source_span, (17, 20))
+  @test.assert_eq(op.text(source), "..."[:])
 }
 
 ///|

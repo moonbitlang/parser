@@ -279,7 +279,6 @@ pub(all) enum Expr {
   As(expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location)
   Mutate(record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location)
   Match(expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location)
-  LexMatch(strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location)
   LexScan(streaming~ : Bool, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location)
   LetMut(binder~ : Binder, ty~ : Type?, expr~ : Expr, body~ : Expr, loc~ : @basic.Location)
   Pipe(lhs~ : Expr, rhs~ : Expr, loc~ : @basic.Location)
@@ -424,35 +423,15 @@ pub(all) struct Label {
   loc : @basic.Location
 } derive(@debug.Debug)
 
-pub(all) struct LexCase {
-  pat : @list.List[LexTopPattern]
-  pat_loc : @basic.Location
-  guard_ : Expr?
-  body : Expr
-} derive(@debug.Debug)
-
-pub(all) enum LexPattern {
-  Regex(lit~ : String, offset~ : Int, loc~ : @basic.Location)
-  RegexInterp(elems~ : @list.List[InterpElem], loc~ : @basic.Location)
-  ConstantRef(lid~ : LongIdent, loc~ : @basic.Location)
-  Alias(pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location)
-  Sequence(pats~ : @list.List[LexPattern], loc~ : @basic.Location)
-} derive(@debug.Debug)
-
 pub(all) struct LexScanCase {
   pat : LexScanCasePattern
   bindings : @list.List[(Label, Binder?)]
   body : Expr
+  arrow_loc : @basic.Location
 } derive(@debug.Debug)
 
 pub(all) enum LexScanCasePattern {
   Pattern(RegexPattern)
-  Binder(Binder)
-  Wildcard(loc~ : @basic.Location)
-} derive(@debug.Debug)
-
-pub(all) enum LexTopPattern {
-  Pattern(LexPattern)
   Binder(Binder)
   Wildcard(loc~ : @basic.Location)
 } derive(@debug.Debug)
@@ -738,17 +717,6 @@ pub(open) trait IterVisitor {
   fn visit_Parameter_Optional(Self, binder~ : Binder, default~ : Expr, ty~ : Type?) -> Unit = _
   fn visit_Parameter_QuestionOptional(Self, binder~ : Binder, ty~ : Type?) -> Unit = _
   fn visit_Case(Self, Case) -> Unit = _
-  fn visit_LexCase(Self, LexCase) -> Unit = _
-  fn visit_LexTopPattern(Self, LexTopPattern) -> Unit = _
-  fn visit_LexTopPattern_Pattern(Self, LexPattern) -> Unit = _
-  fn visit_LexTopPattern_Binder(Self, Binder) -> Unit = _
-  fn visit_LexTopPattern_Wildcard(Self, loc~ : @basic.Location) -> Unit = _
-  fn visit_LexPattern(Self, LexPattern) -> Unit = _
-  fn visit_LexPattern_Regex(Self, lit~ : String, offset~ : Int, loc~ : @basic.Location) -> Unit = _
-  fn visit_LexPattern_RegexInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> Unit = _
-  fn visit_LexPattern_ConstantRef(Self, lid~ : LongIdent, loc~ : @basic.Location) -> Unit = _
-  fn visit_LexPattern_Alias(Self, pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location) -> Unit = _
-  fn visit_LexPattern_Sequence(Self, pats~ : @list.List[LexPattern], loc~ : @basic.Location) -> Unit = _
   fn visit_SpreadableElem(Self, SpreadableElem) -> Unit = _
   fn visit_SpreadableElem_Regular(Self, Expr) -> Unit = _
   fn visit_SpreadableElem_Spread(Self, expr~ : Expr, loc~ : @basic.Location) -> Unit = _
@@ -863,7 +831,6 @@ pub(open) trait IterVisitor {
   fn visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Unit = _
-  fn visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Unit = _
   fn visit_Expr_LexScan(Self, streaming~ : Bool, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Unit = _
   fn visit_LexScanCase(Self, LexScanCase) -> Unit = _
   fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> Unit = _
@@ -956,17 +923,6 @@ pub(open) trait MapVisitor {
   fn visit_Parameter_Optional(Self, binder~ : Binder, default~ : Expr, ty~ : Type?) -> Parameter = _
   fn visit_Parameter_QuestionOptional(Self, binder~ : Binder, ty~ : Type?) -> Parameter = _
   fn visit_Case(Self, Case) -> Case = _
-  fn visit_LexCase(Self, LexCase) -> LexCase = _
-  fn visit_LexTopPattern(Self, LexTopPattern) -> LexTopPattern = _
-  fn visit_LexTopPattern_Pattern(Self, LexPattern) -> LexTopPattern = _
-  fn visit_LexTopPattern_Binder(Self, Binder) -> LexTopPattern = _
-  fn visit_LexTopPattern_Wildcard(Self, loc~ : @basic.Location) -> LexTopPattern = _
-  fn visit_LexPattern(Self, LexPattern) -> LexPattern = _
-  fn visit_LexPattern_Regex(Self, lit~ : String, offset~ : Int, loc~ : @basic.Location) -> LexPattern = _
-  fn visit_LexPattern_RegexInterp(Self, elems~ : @list.List[InterpElem], loc~ : @basic.Location) -> LexPattern = _
-  fn visit_LexPattern_ConstantRef(Self, lid~ : LongIdent, loc~ : @basic.Location) -> LexPattern = _
-  fn visit_LexPattern_Alias(Self, pat~ : LexPattern, binder~ : Binder, loc~ : @basic.Location) -> LexPattern = _
-  fn visit_LexPattern_Sequence(Self, pats~ : @list.List[LexPattern], loc~ : @basic.Location) -> LexPattern = _
   fn visit_SpreadableElem(Self, SpreadableElem) -> SpreadableElem = _
   fn visit_SpreadableElem_Regular(Self, Expr) -> SpreadableElem = _
   fn visit_SpreadableElem_Spread(Self, expr~ : Expr, loc~ : @basic.Location) -> SpreadableElem = _
@@ -1081,7 +1037,6 @@ pub(open) trait MapVisitor {
   fn visit_Expr_As(Self, expr~ : Expr, trait_~ : TypeName, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Mutate(Self, record~ : Expr, accessor~ : Accessor, field~ : Expr, augmented_by~ : Var?, loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_Match(Self, expr~ : Expr, cases~ : @list.List[Case], match_loc~ : @basic.Location, loc~ : @basic.Location) -> Expr = _
-  fn visit_Expr_LexMatch(Self, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexCase], loc~ : @basic.Location) -> Expr = _
   fn visit_Expr_LexScan(Self, streaming~ : Bool, strategy~ : Label?, expr~ : Expr, match_loc~ : @basic.Location, cases~ : @list.List[LexScanCase], loc~ : @basic.Location) -> Expr = _
   fn visit_LexScanCase(Self, LexScanCase) -> LexScanCase = _
   fn visit_LexScanCasePattern(Self, LexScanCasePattern) -> LexScanCasePattern = _

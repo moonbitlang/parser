@@ -37,9 +37,13 @@ test "modern effects and parser forms format safely" {
     #|  errdefer cleanup()
     #|  match value { T::_ => () }
     #|  lexmatch input { re"a" => () }
+    #|  lexscan input { re"b" => () }
     #|}
   let formatted = assert_safe_format(source)
-  for expected in ["nocancel", "errdefer cleanup()", "T::_", "lexmatch input"] {
+  for
+    expected in [
+      "nocancel", "errdefer cleanup()", "T::_", "lexmatch input", "lexscan input",
+    ] {
     if !formatted.contains(expected) {
       fail(
         "modern syntax disappeared while formatting: `\{expected}`\n\{formatted}",

@@ -2061,29 +2061,6 @@ fn Fmt::loop_label(
 }
 
 ///|
-fn Fmt::lex_pattern(fmt : Self, pat : @syntax.LexPattern) -> Doc {
-  match pat {
-    Regex(lit~, offset=_, loc=_) => double_quoted(text(lit))
-    ConstantRef(lid~, loc=_) => longident(lid)
-    RegexInterp(elems~, loc=_) => {
-      fn elem2doc(elem : @syntax.InterpElem) -> Doc {
-        match elem {
-          Literal(repr~, loc=_) => text(repr)
-          Expr(expr~, loc=_) =>
-            text("\\{") + fmt.compose(expr, Expr) + text("}")
-          Source({ source, loc: _, }) => text("\\{") + text(source) + text("}")
-        }
-      }
-
-      double_quoted(concat_map(elems, elem2doc))
-    }
-    Alias(pat~, binder~, loc=_) =>
-      fmt.lex_pattern(pat) + space + text("as") + space + fmt.binder(binder)
-    Sequence(pats~, loc=_) => separate(pats.map(p => fmt.lex_pattern(p)), space)
-  }
-}
-
-///|
 fn Fmt::regex_pattern(fmt : Self, pat : @syntax.RegexPattern) -> Doc {
   fn need_parens_in_alias(pat : @syntax.RegexPattern) -> Bool {
     match pat {
@@ -2143,48 +2120,6 @@ fn Fmt::regex_pattern(fmt : Self, pat : @syntax.RegexPattern) -> Doc {
 }
 
 ///|
-fn Fmt::lex_top_pattern(fmt : Self, pat : @syntax.LexTopPattern) -> Doc {
-  match pat {
-    Pattern(p) => fmt.lex_pattern(p)
-    Binder(b) => fmt.binder(b)
-    Wildcard(loc=_) => text("_")
-  }
-}
-
-///|
-fn Fmt::lex_top_patterns(fmt : Self, pats : List[@syntax.LexTopPattern]) -> Doc {
-  match pats {
-    More(x, tail=Empty) => fmt.lex_top_pattern(x)
-    _ =>
-      group(
-        fmt.commented_parens(fn() {
-          series(pats, comma, p => fmt.lex_top_pattern(p), separator=fn() {
-            fmt.comma_placeholder()
-          })
-        }),
-      )
-  }
-}
-
-///|
-fn Fmt::lex_case(fmt : Self, case_ : @syntax.LexCase) -> Doc {
-  let { pat, pat_loc, guard_, body, } = case_
-  let before = fmt.placeholder()
-  ignore(fmt.checkpoint(pat_loc.start))
-  let pattern = fmt.lex_top_patterns(pat)
-  let guard_ = if guard_ is Some(expr) {
-    space + text("if") + space + fmt.compose(expr, Infix(Other))
-  } else {
-    empty
-  }
-  let body = space + text("=>") + fmt.compose_case_rhs(body, ExprStmt)
-  let doc = group(group(pattern) + guard_ + body)
-  let after = fmt.placeholder()
-  ignore(fmt.checkpoint(case_.body.loc().end))
-  before + doc + after
-}
-
-///|
 fn Fmt::lex_scan_case_pattern(
   fmt : Self,
   pat : @syntax.LexScanCasePattern,
@@ -2198,7 +2133,7 @@ fn Fmt::lex_scan_case_pattern(
 
 ///|
 fn Fmt::lex_scan_case(fmt : Self, case_ : @syntax.LexScanCase) -> Doc {
-  let { pat, bindings, body, } = case_
+  let { pat, bindings, body, arrow_loc: _, } = case_
   let before = fmt.placeholder()
   ignore(fmt.checkpoint(body.loc().start))
   fn binding2doc(binding : (@syntax.Label, @syntax.Binder?)) -> Doc {
@@ -3326,19 +3261,6 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let template = fmt.compose(template, Infix(Other))
       let op = if is_conditional { "<?" } else { "<+" }
       Normal(group(expr + space + text(op) + space + template))
-    }
-    LexMatch(strategy~, expr~, match_loc=_, cases~, loc=_) => {
-      let lexmatch_ = text("lexmatch")
-      let cond = space + fmt.compose(expr, Infix(Other))
-      let strategy = fmt.lex_strategy(strategy)
-      let cases = space +
-        group(
-          fmt.commented_braces(
-            fn() { series1(cases.map(x => fmt.lex_case(x)), empty) },
-            force_newline=true,
-          ),
-        )
-      Collapsible(lexmatch_ + cond + strategy, cases)
     }
     LexScan(streaming~, strategy~, expr~, match_loc=_, cases~, loc=_) => {
       let lexscan_ = text(if streaming { "lexscan" } else { "lexmatch" })

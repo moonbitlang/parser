@@ -1428,13 +1428,15 @@ lexscan_header -> (Expr, Label?):
 
 lexscan_case -> LexScanCase:
   | lexscan_case_pattern_with_bindings "=>" expr_statement {
-    { pat: $1.0, bindings: $1.1, body: $3 }
+    { pat: $1.0, bindings: $1.1, body: $3, arrow_loc: mk_loc($loc($2)) }
   }
   | "..." {
+    let loc = mk_loc($loc($1))
     {
-      pat: Wildcard(loc = mk_loc($loc($1))),
+      pat: Wildcard(loc~),
       bindings: @list.empty(),
-      body: Hole(loc = mk_loc($sloc), kind = Todo)
+      body: Hole(loc~, kind = Todo),
+      arrow_loc: loc
     }
   }
 
