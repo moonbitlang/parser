@@ -531,7 +531,7 @@ pub(all) enum RangeKind {
 } derive(@debug.Debug)
 
 pub(all) enum RegexPattern {
-  Literal(lit~ : String, loc~ : @basic.Location)
+  Literal(lit~ : String, recovered_~ : Bool, loc~ : @basic.Location)
   Reference(lid~ : LongIdent, loc~ : @basic.Location)
   Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)
   Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)

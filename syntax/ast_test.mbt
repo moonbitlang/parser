@@ -17,6 +17,41 @@ let dummy_docstring : @syntax.DocString = {
 let dummy_string_literal : @tokens.StringLiteral = "test_string"
 
 ///|
+test "regex recovery marker is omitted from JSON" {
+  let expr = @syntax.Expr::RegexMatch(
+    expr=@syntax.Expr::Unit(loc=dummy_loc, faked=false),
+    pat=@syntax.RegexPattern::Literal(
+      lit="pattern",
+      recovered_=true,
+      loc=dummy_loc,
+    ),
+    bindings=List([]),
+    loc=dummy_loc,
+  )
+  json_inspect(expr.json_repr(), content={
+    "kind": "Expr::RegexMatch",
+    "loc": null,
+    "children": {
+      "expr": {
+        "kind": "Expr::Unit",
+        "loc": null,
+        "children": { "faked": false },
+      },
+      "pat": {
+        "kind": "RegexPattern::Literal",
+        "loc": null,
+        "children": { "lit": "pattern" },
+      },
+      "bindings": {
+        "kind": "Expr::RegexMatch::BindingList",
+        "loc": null,
+        "children": [],
+      },
+    },
+  })
+}
+
+///|
 test "impl variants to_json" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   let type_decl = @syntax.TypeDecl::{

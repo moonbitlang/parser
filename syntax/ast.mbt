@@ -378,7 +378,7 @@ pub(all) struct LexScanCase {
 
 ///|
 pub(all) enum RegexPattern {
-  Literal(lit~ : String, loc~ : Location)
+  Literal(lit~ : String, recovered_~ : Bool, loc~ : Location)
   Reference(lid~ : LongIdent, loc~ : Location)
   Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)
   Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)

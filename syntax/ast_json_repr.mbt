@@ -1705,7 +1705,7 @@ fn LexPattern::json_repr(self : LexPattern) -> Json {
 ///|
 fn RegexPattern::json_repr(self : RegexPattern) -> Json {
   match self {
-    Literal(lit~, loc~) =>
+    Literal(lit~, recovered_=_, loc~) =>
       tagged_node("RegexPattern::Literal", loc, { "lit": Json::string(lit) })
     Reference(lid~, loc~) =>
       tagged_node("RegexPattern::Reference", loc, { "lid": lid.json_repr(loc) })

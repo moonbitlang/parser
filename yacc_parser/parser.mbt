@@ -16320,14 +16320,14 @@ fn yy_action_717(_last_pos : Position, _args : ArrayView[(YYObj, Position, Posit
 
 // file:///./parser.mbty
 // 1783|    REGEX_LITERAL {
-// 1784|    RegexPattern::Literal(lit = $1, loc = mk_loc($loc($1)))
+// 1784|    RegexPattern::Literal(lit = $1, recovered_ = false, loc = mk_loc($loc($1)))
 // 1785|  }
 fn yy_action_718(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
   YYObj_RegexPattern({(); 
-    RegexPattern::Literal(lit = _dollar1, loc = mk_loc((_start_pos_of_item0, _end_pos_of_item0)))
+    RegexPattern::Literal(lit = _dollar1, recovered_ = false, loc = mk_loc((_start_pos_of_item0, _end_pos_of_item0)))
   })
 }
 

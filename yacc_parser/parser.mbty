@@ -1781,7 +1781,7 @@ regex_sequence_pattern -> RegexPattern
 
 regex_atom_pattern -> RegexPattern
   : REGEX_LITERAL {
-    RegexPattern::Literal(lit = $1, loc = mk_loc($loc($1)))
+    RegexPattern::Literal(lit = $1, recovered_ = false, loc = mk_loc($loc($1)))
   }
   | qual_uident {
     RegexPattern::Reference(lid = $1, loc = mk_loc($sloc))

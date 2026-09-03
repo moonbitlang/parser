@@ -4736,8 +4736,9 @@ fn[T : IterVisitor] iter_regex_pattern(
   pat : RegexPattern,
 ) -> Unit {
   match pat {
-    Literal(lit~, loc~) => {
+    Literal(lit~, recovered_~, loc~) => {
       ignore(lit)
+      ignore(recovered_)
       ignore(loc)
     }
     Reference(lid~, loc~) => {

@@ -11649,6 +11649,21 @@ fn parse_regex_atom_pattern(
       } else {
         state.node_from_children(RegexPattern_Literal, [])
       }
+    Some((raw, start, end)) if raw is STRING(_) => {
+      state.report_expected_tokens_at(raw, mk_loc(start, end), [
+        TokenKind::TK_REGEX_LITERAL,
+      ])
+      if state.consume_any() is Some(token) {
+        let children : Array[(String?, CstNode)] = [(Some("token"), token)]
+        if lex_literal_node_from_token(raw, token.loc, token.source_span)
+          is Some(literal) {
+          push_child(children, Some("lex_literal"), literal)
+        }
+        state.node_from_children(RegexPattern_Literal, children)
+      } else {
+        state.node_from_children(RegexPattern_Literal, [])
+      }
+    }
     Some((UIDENT(_), _, _)) => {
       if state.consume_any() is Some(name) {
         push_child(children, Some("name"), name)
