@@ -7379,6 +7379,7 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
     | LBRACE
     | UNDERSCORE
     | EXCLAMATION
+    | AMPER
     | IF
     | MATCH
     | PLUS
