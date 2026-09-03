@@ -3732,7 +3732,13 @@ fn State::parse_regex_atom_pattern(self : Self) -> @syntax.RegexPattern {
     REGEX_LITERAL(lit) => {
       let loc = self.peek_location()
       self.skip()
-      Literal(lit~, loc~)
+      Literal(lit~, recovered_=false, loc~)
+    }
+    STRING(lit) => {
+      let loc = self.peek_location()
+      self.report_unexpected(self.peek_token(), [TK_REGEX_LITERAL], loc)
+      self.skip()
+      Literal(lit~, recovered_=true, loc~)
     }
     UIDENT(_) | PACKAGE_NAME(_) => {
       let lid = self.parse_qual_uident()
@@ -3749,7 +3755,7 @@ fn State::parse_regex_atom_pattern(self : Self) -> @syntax.RegexPattern {
       let loc = self.peek_location()
       self.report_failed_to_parse(other, "regex pattern", loc)
       self.panic() |> ignore
-      Literal(lit="", loc~)
+      Literal(lit="", recovered_=false, loc~)
     }
   }
 }

@@ -4883,7 +4883,7 @@ fn[T : MapVisitor] map_regex_pattern(
   pat : RegexPattern,
 ) -> RegexPattern {
   match pat {
-    Literal(lit~, loc~) => Literal(lit~, loc~)
+    Literal(lit~, recovered_~, loc~) => Literal(lit~, recovered_~, loc~)
     Reference(lid~, loc~) => {
       let lid = env.0.visit_LongIdent(lid)
       Reference(lid~, loc~)

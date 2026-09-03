@@ -2856,7 +2856,7 @@ fn lower_regex_match_binding(
 
 ///|
 fn lower_empty_regex_pattern(loc : Location) -> @syntax.RegexPattern {
-  @syntax.RegexPattern::Literal(lit="", loc~)
+  @syntax.RegexPattern::Literal(lit="", recovered_=false, loc~)
 }
 
 ///|
@@ -2902,14 +2902,28 @@ fn lower_regex_literal_pattern(node : CstNode) -> @syntax.RegexPattern {
   let literal = node.first_child_of_kind(NodeKind::is_lex_literal)
   let constant = node.first_child_with_label("semantic_constant")
   match (literal, constant) {
+    (Some(literal), _) if literal.kind is LexLiteral_String =>
+      @syntax.RegexPattern::Literal(
+        lit=literal.string_payload().unwrap_or(""),
+        recovered_=true,
+        loc=node.loc,
+      )
     (Some(literal), _) =>
       @syntax.RegexPattern::Literal(
         lit=literal.string_payload().unwrap_or(""),
+        recovered_=false,
         loc=node.loc,
       )
-    (_, Some(constant)) if constant.kind is (Constant_String | Constant_Regex) =>
+    (_, Some(constant)) if constant.kind is Constant_String =>
       @syntax.RegexPattern::Literal(
         lit=constant.string_payload().unwrap_or(""),
+        recovered_=true,
+        loc=node.loc,
+      )
+    (_, Some(constant)) if constant.kind is Constant_Regex =>
+      @syntax.RegexPattern::Literal(
+        lit=constant.string_payload().unwrap_or(""),
+        recovered_=false,
         loc=node.loc,
       )
     _ if node.first_child_with_label("semantic_name") is Some(name) =>

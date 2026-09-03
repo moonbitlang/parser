@@ -2090,7 +2090,7 @@ fn Fmt::regex_pattern(fmt : Self, pat : @syntax.RegexPattern) -> Doc {
   }
 
   match pat {
-    Literal(lit~, loc=_) => text("re") + double_quoted(text(lit))
+    Literal(lit~, recovered_=_, loc=_) => text("re") + double_quoted(text(lit))
     Reference(lid~, loc=_) => longident(lid)
     Sequence(pat1~, pat2~, loc=_) =>
       inner(pat1, need_parens_in_sequence) +

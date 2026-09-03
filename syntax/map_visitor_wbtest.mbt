@@ -5,6 +5,26 @@ struct Identity(Unit)
 impl MapVisitor for Identity
 
 ///|
+test "RegexPattern recovery marker" {
+  let expr = Expr::RegexMatch(
+    expr=Expr::Unit(loc=dummy_loc, faked=false),
+    pat=RegexPattern::Literal(
+      lit="missing-prefix",
+      recovered_=true,
+      loc=dummy_loc,
+    ),
+    bindings=List([]),
+    loc=dummy_loc,
+  )
+  let mapped = MapVisitor::visit_Expr(MapVisitorBase(Identity(())), expr)
+  guard mapped is RegexMatch(pat=Literal(lit~, recovered_~, loc=_), ..) else {
+    fail("identity MapVisitor changed the regex expression shape")
+  }
+  @test.assert_eq(lit, "missing-prefix")
+  @test.assert_eq(recovered_, true)
+}
+
+///|
 test "Pattern" {
   let Identity(_) = Identity(())
   let binder = Binder::{ name: "test_binder", loc: dummy_loc, }
