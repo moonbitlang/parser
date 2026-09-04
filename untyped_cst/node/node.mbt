@@ -7,59 +7,27 @@ pub struct CstNode {
 } derive(@debug.Debug)
 
 ///|
-pub struct ParseResult {
-  root : CstNode
-  diagnostics : ReadOnlyArray[Report]
-  docstrings : ReadOnlyArray[List[(Location, Comment)]]
-} derive(@debug.Debug)
-
-///|
-/// Returns the concrete syntax tree root produced by parsing.
-///
-/// A root is available even when parsing emitted diagnostics. In that case it
-/// may contain recovered or missing nodes.
-pub fn ParseResult::root(self : ParseResult) -> CstNode {
-  self.root
-}
-
-///|
-/// Returns a read-only view of the diagnostics emitted while lexing and
-/// parsing.
-///
-/// The view is empty when no diagnostics were reported.
-pub fn ParseResult::diagnostics_view(self : ParseResult) -> ArrayView[Report] {
-  self.diagnostics.view()
-}
-
-///|
-fn ParseResult::docstrings_view(
-  self : ParseResult,
-) -> ArrayView[List[(Location, Comment)]] {
-  self.docstrings.view()
-}
-
-///|
-fn mk_loc(start : Position, end : Position) -> Location {
+pub fn mk_loc(start : Position, end : Position) -> Location {
   Location::{ start, end, }
 }
 
 ///|
-fn empty_loc(pos : Position) -> Location {
+pub fn empty_loc(pos : Position) -> Location {
   Location::{ start: pos, end: pos, }
 }
 
 ///|
-fn mk_span(start_offset : Int, end_offset : Int) -> (Int, Int) {
+pub fn mk_span(start_offset : Int, end_offset : Int) -> (Int, Int) {
   (start_offset, end_offset)
 }
 
 ///|
-fn empty_span(offset : Int) -> (Int, Int) {
+pub fn empty_span(offset : Int) -> (Int, Int) {
   (offset, offset)
 }
 
 ///|
-fn node(
+pub fn node(
   kind : NodeKind,
   loc : Location,
   source_span : (Int, Int),
@@ -74,7 +42,7 @@ fn node(
 }
 
 ///|
-fn leaf_node(
+pub fn leaf_node(
   payload : NodePayload,
   loc : Location,
   source_span : (Int, Int),
@@ -83,7 +51,7 @@ fn leaf_node(
 }
 
 ///|
-fn push_payload_leaf(
+pub fn push_payload_leaf(
   children : Array[(String?, CstNode)],
   payload : NodePayload,
   loc : Location,
@@ -93,7 +61,7 @@ fn push_payload_leaf(
 }
 
 ///|
-fn node_with_payload(
+pub fn node_with_payload(
   kind : NodeKind,
   loc : Location,
   source_span : (Int, Int),
@@ -105,7 +73,7 @@ fn node_with_payload(
 }
 
 ///|
-fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
+pub fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
   match kind {
     TokenKind::TK_CHAR
     | TokenKind::TK_INT
@@ -246,7 +214,7 @@ fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
 }
 
 ///|
-fn token_node(
+pub fn token_node(
   token : Token,
   start : Position,
   end : Position,
@@ -256,7 +224,7 @@ fn token_node(
 }
 
 ///|
-fn token_node_with_children(
+pub fn token_node_with_children(
   token : Token,
   start : Position,
   end : Position,
@@ -273,7 +241,7 @@ fn token_node_with_children(
 }
 
 ///|
-fn scalar_node(
+pub fn scalar_node(
   kind : NodeKind,
   loc : Location,
   source_span : (Int, Int),
@@ -283,12 +251,12 @@ fn scalar_node(
 }
 
 ///|
-fn marker_node(kind : NodeKind, pos : Position, offset : Int) -> CstNode {
+pub fn marker_node(kind : NodeKind, pos : Position, offset : Int) -> CstNode {
   node(kind, empty_loc(pos), empty_span(offset), [])
 }
 
 ///|
-fn bool_marker_node(
+pub fn bool_marker_node(
   kind : NodeKind,
   pos : Position,
   offset : Int,
@@ -298,13 +266,13 @@ fn bool_marker_node(
 }
 
 ///|
-fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
+pub fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
   let _ = kind
   node(NodeKind::Missing, empty_loc(pos), empty_span(offset), [])
 }
 
 ///|
-fn is_location_metadata_label(label : String?) -> Bool {
+pub fn is_location_metadata_label(label : String?) -> Bool {
   match label {
     Some(label) => label.has_suffix("_loc")
     None => false
@@ -312,7 +280,7 @@ fn is_location_metadata_label(label : String?) -> Bool {
 }
 
 ///|
-fn error_node(
+pub fn error_node(
   loc : Location,
   source_span : (Int, Int),
   children : Array[(String?, CstNode)],
@@ -335,7 +303,7 @@ fn error_node(
 }
 
 ///|
-fn push_child(
+pub fn push_child(
   children : Array[(String?, CstNode)],
   label : String?,
   child : CstNode,
@@ -344,24 +312,11 @@ fn push_child(
 }
 
 ///|
-fn push_children(
+pub fn push_children(
   children : Array[(String?, CstNode)],
   more : Array[(String?, CstNode)],
 ) -> Unit {
   for child in more {
     children.push(child)
-  }
-}
-
-///|
-fn parse_result(
-  root : CstNode,
-  diagnostics : Array[Report],
-  docstrings : Array[List[(Location, Comment)]],
-) -> ParseResult {
-  ParseResult::{
-    root,
-    diagnostics: ReadOnlyArray::from_array(diagnostics),
-    docstrings: ReadOnlyArray::from_array(docstrings),
   }
 }

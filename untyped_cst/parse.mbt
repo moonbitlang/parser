@@ -295,7 +295,7 @@ fn decl_prefix_token(tok : Token) -> Bool {
 fn parse_visibility_clause(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut is_pub = false
-  let mut visibility_kind = Visibility_Default
+  let mut visibility_kind : NodeKind = Visibility_Default
   match state.peek() {
     Some((PUB, _, _)) => {
       is_pub = true
@@ -504,7 +504,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       push_child(children, Some("default"), default)
     }
   }
-  let kind = if pat.kind is Pattern_Any {
+  let kind : NodeKind = if pat.kind is Pattern_Any {
     Parameter_DiscardPositional
   } else if is_labelled {
     if has_default {
@@ -1026,7 +1026,7 @@ fn parse_trait_method_param_list(state : ParserState) -> CstNode {
 ///|
 fn parse_trait_method_param_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut parameter_kind = Parameter_DiscardPositional
+  let mut parameter_kind : NodeKind = Parameter_DiscardPositional
   match state.peek() {
     Some((tok, _, _)) if tok is (LIDENT(_) | POST_LABEL(_) | EXTEND) =>
       match state.peek(offset=1) {
@@ -1722,7 +1722,7 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
       _ => ()
     }
   }
-  let using_kind = match name_kind {
+  let using_kind : NodeKind = match name_kind {
     2 => UsingKind_Type
     3 => UsingKind_Trait
     _ => UsingKind_Value
@@ -3364,7 +3364,7 @@ fn hole_node_from_children(
   children : Array[(String?, CstNode)],
   todo? : Bool = false,
 ) -> CstNode {
-  let kind = if todo { HoleKind_Todo } else { HoleKind_Incomplete }
+  let kind : NodeKind = if todo { HoleKind_Todo } else { HoleKind_Incomplete }
   with_marker_child(
     state.node_from_children(Expr_Hole, children),
     "hole_kind",
@@ -4186,7 +4186,7 @@ fn parse_expr_binary_prec(
       Some((tok, _, _)) =>
         match infix_precedence(tok) {
           Some((prec, right_assoc)) if prec >= min_prec => {
-            let expr_kind = if tok is IMPLIES {
+            let expr_kind : NodeKind = if tok is IMPLIES {
               Expr_Implies
             } else {
               Expr_Infix
@@ -4491,7 +4491,7 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
   push_children(children, state.consume_trivia())
   if state.current_is(TK_LBRACE) {
     let body = parse_record_field_list(state)
-    let kind = if list_has_item_kind(body, Field_RecordSpread) {
+    let kind : NodeKind = if list_has_item_kind(body, Field_RecordSpread) {
       Expr_RecordUpdate
     } else {
       Expr_Record
@@ -4887,7 +4887,7 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
 ///|
 fn parse_record_field_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut kind = Field_Definition
+  let mut kind : NodeKind = Field_Definition
   if state.current_is(TokenKind::TK_DOTDOT) {
     kind = Field_RecordSpread
     if state.consume_any() is Some(op) {
@@ -5829,7 +5829,7 @@ fn parse_paren_expr(
     }
   }
   let item_count = list.children_with_label("item").length()
-  let kind = if item_count == 0 {
+  let kind : NodeKind = if item_count == 0 {
     Expr_Unit
   } else if item_count == 1 {
     Expr_Group
@@ -6051,7 +6051,7 @@ fn parse_array_expr(state : ParserState) -> CstNode {
     List_ArrayElementList,
     sep_kind=TokenKind::TK_COMMA,
   )
-  let kind = if list_has_item_kind(list, ArrayElement_Spread) {
+  let kind : NodeKind = if list_has_item_kind(list, ArrayElement_Spread) {
     Expr_ArraySpread
   } else {
     Expr_Array
@@ -6704,8 +6704,8 @@ fn parse_if_expr(state : ParserState) -> CstNode {
 ///|
 fn parse_try_expr(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut kind = Expr_Try
-  let try_operator_kind = TryOperatorKind_Exclamation
+  let mut kind : NodeKind = Expr_Try
+  let try_operator_kind : NodeKind = TryOperatorKind_Exclamation
   match state.peek() {
     Some((TRY_EXCLAMATION, _, _)) => kind = Expr_TryOperator
     _ => ()
@@ -7586,7 +7586,7 @@ fn parse_quantifier_expr(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let quantifier_kind = if state.current_is(TokenKind::TK_EXISTS) {
+  let quantifier_kind : NodeKind = if state.current_is(TokenKind::TK_EXISTS) {
     QuantifierKind_Exists
   } else {
     QuantifierKind_Forall
@@ -8281,7 +8281,7 @@ fn parse_labelled_argument(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  let mut kind = Argument_Labelled
+  let mut kind : NodeKind = Argument_Labelled
   match state.peek() {
     Some((COMMA, _, _)) | Some((RPAREN, _, _)) | Some((EOF, _, _)) =>
       kind = Argument_LabelledPun
@@ -8342,7 +8342,7 @@ fn parse_optional_forwarding_argument(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  let mut kind = Argument_LabelledOptionPun
+  let mut kind : NodeKind = Argument_LabelledOptionPun
   if state.current_is(TokenKind::TK_EQUAL) {
     kind = Argument_LabelledOption
     if state.consume_any() is Some(equal) {
@@ -8388,7 +8388,7 @@ fn parse_statement_item(state : ParserState) -> CstNode {
 ///|
 fn parse_let_statement(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut expr_kind = Expr_Let
+  let mut expr_kind : NodeKind = Expr_Let
   match state.peek() {
     Some((LET, _, _)) =>
       if state.consume_any() is Some(let_token) {
@@ -8650,7 +8650,7 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
 ///|
 fn parse_defer_statement(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let kind = if state.current_is(TokenKind::TK_ERRDEFER) {
+  let kind : NodeKind = if state.current_is(TokenKind::TK_ERRDEFER) {
     Expr_ErrDefer
   } else {
     Expr_Defer
@@ -10242,7 +10242,7 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  let mut kind = Argument_LabelledPun
+  let mut kind : NodeKind = Argument_LabelledPun
   if state.current_is(TokenKind::TK_EQUAL) {
     kind = Argument_Labelled
     if state.consume_any() is Some(equal) {
@@ -10508,7 +10508,7 @@ fn parse_dotdot_pattern_rest_recording(
   rest_offenders : Array[(Token, Location)],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut binder_kind = DotDotBinder_None
+  let mut binder_kind : NodeKind = DotDotBinder_None
   let mut offender : (Token, Location)? = None
   let mut is_constant_spread = false
   if state.consume_any() is Some(op) {
@@ -10658,7 +10658,7 @@ fn parse_brace_pattern_item(state : ParserState) -> CstNode {
 ///|
 fn parse_record_pattern_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut kind = Pattern_MissingPattern
+  let mut kind : NodeKind = Pattern_MissingPattern
   match state.peek() {
     Some((DOTDOT, _, _)) => {
       if state.consume_any() is Some(op) {
@@ -10975,7 +10975,9 @@ fn parse_pattern_range(
   )
   match state.peek() {
     Some((RANGE_EXCLUSIVE, _, _)) | Some((RANGE_INCLUSIVE, _, _)) => {
-      let range_kind = if state.current_is(TokenKind::TK_RANGE_EXCLUSIVE) {
+      let range_kind : NodeKind = if state.current_is(
+          TokenKind::TK_RANGE_EXCLUSIVE,
+        ) {
         RangeKind_Exclusive
       } else {
         RangeKind_Inclusive
@@ -11478,7 +11480,7 @@ fn parse_string_literal_node(state : ParserState) -> CstNode {
           is Some(constant) {
           push_child(children, Some("constant"), constant)
         }
-        let kind = match tok {
+        let kind : NodeKind = match tok {
           INTERP(_) => Expr_Interp
           BYTES_INTERP(_) => Expr_BytesInterp
           _ => Expr_Constant
@@ -12331,7 +12333,7 @@ fn parse_paren_type(
       _ => ()
     }
   }
-  let kind = if item_count == 1 { Type_Group } else { Type_Tuple }
+  let kind : NodeKind = if item_count == 1 { Type_Group } else { Type_Tuple }
   if item_count == 0 && !state.current_is(TokenKind::TK_THIN_ARROW) {
     state.report_expected_tokens([TokenKind::TK_THIN_ARROW])
   }
@@ -12683,7 +12685,7 @@ fn parse_func_return_type(state : ParserState) -> CstNode {
 ///|
 fn parse_error_annotation(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut error_kind = ErrorType_Default
+  let mut error_kind : NodeKind = ErrorType_Default
   match state.peek() {
     Some((RAISE, _, _)) =>
       if state.consume_any() is Some(op) {

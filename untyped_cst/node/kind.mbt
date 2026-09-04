@@ -6,7 +6,7 @@
 /// Token-backed location metadata reuses the corresponding `Syntax_*` kind,
 /// while locations synthesized from multiple syntax elements use
 /// `Aggregate_Span`.
-pub enum NodeKind {
+pub(all) enum NodeKind {
   /// Root node lowered to `@syntax.Impls`.
   Impls
   /// Root wrapper whose `expr` child is lowered to `@syntax.Expr`.
@@ -742,7 +742,7 @@ pub enum NodeKind {
 /// A child labeled with an `_loc` suffix may reuse a `Syntax_*` kind as
 /// non-owning location metadata; callers enumerating original tokens must skip
 /// those labeled children.
-fn NodeKind::is_syntax_token(self : NodeKind) -> Bool {
+pub fn NodeKind::is_syntax_token(self : NodeKind) -> Bool {
   match self {
     Syntax_Keyword
     | Syntax_Delimiter
@@ -904,7 +904,7 @@ pub fn NodeKind::is_type(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_error_type(self : NodeKind) -> Bool {
+pub fn NodeKind::is_error_type(self : NodeKind) -> Bool {
   match self {
     ErrorType_Error | ErrorType_Default | ErrorType_Noraise | ErrorType_Maybe =>
       true
@@ -913,7 +913,7 @@ fn NodeKind::is_error_type(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_type_desc(self : NodeKind) -> Bool {
+pub fn NodeKind::is_type_desc(self : NodeKind) -> Bool {
   match self {
     TypeDesc_Abstract
     | TypeDesc_ExtensibleEnum
@@ -942,7 +942,7 @@ pub fn NodeKind::is_argument(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_name(self : NodeKind) -> Bool {
+pub fn NodeKind::is_name(self : NodeKind) -> Bool {
   match self {
     Name_Identifier
     | Name_Package
@@ -984,7 +984,7 @@ pub fn NodeKind::is_constant(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_operator(self : NodeKind) -> Bool {
+pub fn NodeKind::is_operator(self : NodeKind) -> Bool {
   match self {
     Operator_Infix
     | Operator_Augmented
@@ -996,7 +996,7 @@ fn NodeKind::is_operator(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_dot_dot_binder(self : NodeKind) -> Bool {
+pub fn NodeKind::is_dot_dot_binder(self : NodeKind) -> Bool {
   match self {
     DotDotBinder_None
     | DotDotBinder_Underscore
@@ -1007,7 +1007,7 @@ fn NodeKind::is_dot_dot_binder(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_constructor_extra_info(self : NodeKind) -> Bool {
+pub fn NodeKind::is_constructor_extra_info(self : NodeKind) -> Bool {
   match self {
     ConstructorExtraInfo_None
     | ConstructorExtraInfo_Package
@@ -1018,7 +1018,7 @@ fn NodeKind::is_constructor_extra_info(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_lex_literal(self : NodeKind) -> Bool {
+pub fn NodeKind::is_lex_literal(self : NodeKind) -> Bool {
   match self {
     LexLiteral_String | LexLiteral_Regex => true
     _ => false
@@ -1026,7 +1026,7 @@ fn NodeKind::is_lex_literal(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_lex_scan_case_pattern(self : NodeKind) -> Bool {
+pub fn NodeKind::is_lex_scan_case_pattern(self : NodeKind) -> Bool {
   match self {
     LexScanCasePattern_Pattern
     | LexScanCasePattern_Binder
@@ -1036,7 +1036,7 @@ fn NodeKind::is_lex_scan_case_pattern(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_scalar_value(self : NodeKind) -> Bool {
+pub fn NodeKind::is_scalar_value(self : NodeKind) -> Bool {
   match self {
     ConstructorTag_Value | Language_Value => true
     _ => false
@@ -1044,7 +1044,7 @@ fn NodeKind::is_scalar_value(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_stub(self : NodeKind) -> Bool {
+pub fn NodeKind::is_stub(self : NodeKind) -> Bool {
   match self {
     Stub_ModuleName | Stub_FunctionName | Stub_Code => true
     _ => false
@@ -1052,7 +1052,7 @@ fn NodeKind::is_stub(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_accessor(self : NodeKind) -> Bool {
+pub fn NodeKind::is_accessor(self : NodeKind) -> Bool {
   match self {
     Accessor_Label | Accessor_Index | Accessor_Newtype => true
     _ => false
@@ -1060,7 +1060,7 @@ fn NodeKind::is_accessor(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_decl_body(self : NodeKind) -> Bool {
+pub fn NodeKind::is_decl_body(self : NodeKind) -> Bool {
   match self {
     DeclBody_Expr
     | DeclBody_Import
@@ -1072,7 +1072,7 @@ fn NodeKind::is_decl_body(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_syntax_flag(self : NodeKind) -> Bool {
+pub fn NodeKind::is_syntax_flag(self : NodeKind) -> Bool {
   match self {
     Visibility_Default
     | Visibility_Pub
@@ -1115,7 +1115,7 @@ fn NodeKind::is_syntax_flag(self : NodeKind) -> Bool {
 }
 
 ///|
-fn NodeKind::is_interp_segment(self : NodeKind) -> Bool {
+pub fn NodeKind::is_interp_segment(self : NodeKind) -> Bool {
   match self {
     InterpSegment_Literal | InterpSegment_Source => true
     _ => false

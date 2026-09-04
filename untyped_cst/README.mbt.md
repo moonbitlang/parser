@@ -17,6 +17,17 @@ Successful results can be lowered with `ParseResult::to_impls` and
 `ParseResult::to_expr`, respectively. Calling a lowering method for the other
 root kind returns a diagnostic.
 
+## Node Model
+
+The source-independent node model lives in
+`moonbitlang/parser/untyped_cst/node`. Import that package directly when code
+only needs `CstNode`, `NodeKind`, `NodePayload`, or the generic node
+construction, traversal, payload, and classification helpers.
+
+The `untyped_cst` package re-exports the three node types for compatibility.
+Consequently, `ParseResult::root` can be used as either
+`@untyped_cst.CstNode` or `@node.CstNode`; both names refer to the same type.
+
 ## Source Text
 
 CST nodes do not own the original source text. 
