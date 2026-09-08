@@ -14,7 +14,7 @@ pub fn tokens_from_string(
   comment~ : Bool,
   str : StringView,
 ) -> LexResult {
-  let arr = Array::new(capacity=100)
+  let arr : Array[(Token, Position, Position)] = Array(capacity=100)
   let (start_lnum, start_bol, start_cnum) = (
     start_pos.lnum,
     start_pos.bol,
