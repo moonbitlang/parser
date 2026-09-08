@@ -7,7 +7,6 @@ import {
 }
 
 import {
-  "moonbitlang/core/test",
   "moonbitlang/core/json",
 } for "test"
 
