@@ -6,7 +6,7 @@
 /// Token-backed location metadata reuses the corresponding `Syntax_*` kind,
 /// while locations synthesized from multiple syntax elements use
 /// `Aggregate_Span`.
-pub(all) enum NodeKind {
+pub enum NodeKind {
   /// Root node lowered to `@syntax.Impls`.
   Impls
   /// Root wrapper whose `expr` child is lowered to `@syntax.Expr`.

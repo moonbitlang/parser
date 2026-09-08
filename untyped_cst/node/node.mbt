@@ -27,7 +27,7 @@ pub fn empty_span(offset : Int) -> (Int, Int) {
 }
 
 ///|
-pub fn node(
+fn node(
   kind : NodeKind,
   loc : Location,
   source_span : (Int, Int),
@@ -42,7 +42,19 @@ pub fn node(
 }
 
 ///|
-pub fn leaf_node(
+#internal(internal, "For untyped_cst parser implementation only")
+#doc(hidden)
+pub fn CstNode::internal_rebuild(
+  self : CstNode,
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  children~ : Array[(String?, CstNode)],
+) -> CstNode {
+  node(self.kind, loc, source_span, children)
+}
+
+///|
+fn leaf_node(
   payload : NodePayload,
   loc : Location,
   source_span : (Int, Int),
@@ -51,7 +63,7 @@ pub fn leaf_node(
 }
 
 ///|
-pub fn push_payload_leaf(
+fn push_payload_leaf(
   children : Array[(String?, CstNode)],
   payload : NodePayload,
   loc : Location,
@@ -61,7 +73,7 @@ pub fn push_payload_leaf(
 }
 
 ///|
-pub fn node_with_payload(
+fn node_with_payload(
   kind : NodeKind,
   loc : Location,
   source_span : (Int, Int),
@@ -214,7 +226,7 @@ pub fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
 }
 
 ///|
-pub fn token_node(
+fn token_node(
   token : Token,
   start : Position,
   end : Position,
@@ -224,7 +236,7 @@ pub fn token_node(
 }
 
 ///|
-pub fn token_node_with_children(
+fn token_node_with_children(
   token : Token,
   start : Position,
   end : Position,
@@ -241,7 +253,7 @@ pub fn token_node_with_children(
 }
 
 ///|
-pub fn scalar_node(
+fn scalar_node(
   kind : NodeKind,
   loc : Location,
   source_span : (Int, Int),
@@ -251,12 +263,12 @@ pub fn scalar_node(
 }
 
 ///|
-pub fn marker_node(kind : NodeKind, pos : Position, offset : Int) -> CstNode {
+fn marker_node(kind : NodeKind, pos : Position, offset : Int) -> CstNode {
   node(kind, empty_loc(pos), empty_span(offset), [])
 }
 
 ///|
-pub fn bool_marker_node(
+fn bool_marker_node(
   kind : NodeKind,
   pos : Position,
   offset : Int,
@@ -266,7 +278,7 @@ pub fn bool_marker_node(
 }
 
 ///|
-pub fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
+fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
   let _ = kind
   node(NodeKind::Missing, empty_loc(pos), empty_span(offset), [])
 }
@@ -280,7 +292,7 @@ pub fn is_location_metadata_label(label : String?) -> Bool {
 }
 
 ///|
-pub fn error_node(
+fn error_node(
   loc : Location,
   source_span : (Int, Int),
   children : Array[(String?, CstNode)],
@@ -303,7 +315,7 @@ pub fn error_node(
 }
 
 ///|
-pub fn push_child(
+fn push_child(
   children : Array[(String?, CstNode)],
   label : String?,
   child : CstNode,
@@ -312,7 +324,7 @@ pub fn push_child(
 }
 
 ///|
-pub fn push_children(
+fn push_children(
   children : Array[(String?, CstNode)],
   more : Array[(String?, CstNode)],
 ) -> Unit {

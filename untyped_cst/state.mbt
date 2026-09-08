@@ -124,7 +124,7 @@ fn advance_position(pos : Position, text : String) -> Position {
 
 ///|
 fn scalar_subtoken_node(
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   token_start : Position,
   token_span : (Int, Int),
   prefix : String,
@@ -134,7 +134,7 @@ fn scalar_subtoken_node(
   let end = advance_position(start, value)
   let span_start = token_span.0 + prefix.length()
   scalar_node(
-    kind,
+    builder,
     mk_loc(start, end),
     mk_span(span_start, span_start + value.length()),
     String(value),
@@ -150,13 +150,20 @@ fn attribute_metadata_node(
 ) -> CstNode {
   let (first, qualified_name, raw_payload) = content
   let children : Array[(String?, CstNode)] = []
-  let kind : NodeKind = match qualified_name {
+  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = match
+    qualified_name {
     Some(name) => {
       push_child(
         children,
         Some("qualifier"),
         scalar_subtoken_node(
-          Attribute_Qualifier,
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::attribute_qualifier(value~, loc~, source_span~)
+          },
           start,
           source_span,
           "#",
@@ -167,7 +174,13 @@ fn attribute_metadata_node(
         children,
         Some("name"),
         scalar_subtoken_node(
-          Attribute_Name,
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::attribute_name(value~, loc~, source_span~)
+          },
           start,
           source_span,
           "#\{first}.",
@@ -178,36 +191,85 @@ fn attribute_metadata_node(
         children,
         Some("raw_payload"),
         scalar_subtoken_node(
-          Attribute_RawPayload,
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::attribute_raw_payload(value~, loc~, source_span~)
+          },
           start,
           source_span,
           "#\{first}.\{name}",
           raw_payload,
         ),
       )
-      Attribute_Qualified
+      fn(loc, source_span, children) {
+        let qualifier = CstNode::first_child_with_label_from(
+          children, "qualifier",
+        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
+          CstNode::missing(loc~, source_span~),
+        )
+        let raw_payload = CstNode::first_child_with_label_from(
+          children, "raw_payload",
+        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        @node.CstNode::attribute_qualified(
+          loc~,
+          source_span~,
+          qualifier~,
+          name~,
+          raw_payload~,
+        )
+      }
     }
     None => {
       push_child(
         children,
         Some("name"),
-        scalar_subtoken_node(Attribute_Name, start, source_span, "#", first),
+        scalar_subtoken_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::attribute_name(value~, loc~, source_span~)
+          },
+          start,
+          source_span,
+          "#",
+          first,
+        ),
       )
       push_child(
         children,
         Some("raw_payload"),
         scalar_subtoken_node(
-          Attribute_RawPayload,
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::attribute_raw_payload(value~, loc~, source_span~)
+          },
           start,
           source_span,
           "#\{first}",
           raw_payload,
         ),
       )
-      Attribute_Simple
+      fn(loc, source_span, children) {
+        let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
+          CstNode::missing(loc~, source_span~),
+        )
+        let raw_payload = CstNode::first_child_with_label_from(
+          children, "raw_payload",
+        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        @node.CstNode::attribute_simple(loc~, source_span~, name~, raw_payload~)
+      }
     }
   }
-  node(kind, mk_loc(start, end), source_span, children)
+  node(builder, mk_loc(start, end), source_span, children)
 }
 
 ///|
@@ -221,21 +283,52 @@ fn comment_metadata_node(
     (
       Some("content"),
       scalar_node(
-        Comment_Content,
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::comment_content(value~, loc~, source_span~)
+        },
         mk_loc(start, end),
         source_span,
         String(comment.content),
       ),
     ),
   ]
-  let kind : NodeKind = match comment.kind {
-    @tokens.InlineTrailing => Comment_InlineTrailing
+  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = match
+    comment.kind {
+    @tokens.InlineTrailing =>
+      fn(loc, source_span, children) {
+        let content = CstNode::first_child_with_label_from(children, "content").unwrap_or(
+          CstNode::missing(loc~, source_span~),
+        )
+        let consumed_by_docstring = CstNode::first_child_with_label_from(
+          children, "consumed_by_docstring",
+        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        @node.CstNode::comment_inline_trailing(
+          loc~,
+          source_span~,
+          content~,
+          consumed_by_docstring~,
+        )
+      }
     @tokens.Ownline(leading_blank_line~, trailing_blank_line~) => {
       push_child(
         children,
         Some("leading_blank_line"),
         bool_marker_node(
-          Comment_LeadingBlankLine,
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Bool(value)) => value
+              _ => false
+            }
+            @node.CstNode::comment_leading_blank_line(
+              value~,
+              loc~,
+              source_span~,
+            )
+          },
           start,
           source_span.0,
           leading_blank_line,
@@ -245,26 +338,63 @@ fn comment_metadata_node(
         children,
         Some("trailing_blank_line"),
         bool_marker_node(
-          Comment_TrailingBlankLine,
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Bool(value)) => value
+              _ => false
+            }
+            @node.CstNode::comment_trailing_blank_line(
+              value~,
+              loc~,
+              source_span~,
+            )
+          },
           start,
           source_span.0,
           trailing_blank_line,
         ),
       )
-      Comment_Ownline
+      fn(loc, source_span, children) {
+        let content = CstNode::first_child_with_label_from(children, "content").unwrap_or(
+          CstNode::missing(loc~, source_span~),
+        )
+        let leading_blank_line = CstNode::first_child_with_label_from(
+          children, "leading_blank_line",
+        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        let trailing_blank_line = CstNode::first_child_with_label_from(
+          children, "trailing_blank_line",
+        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        let consumed_by_docstring = CstNode::first_child_with_label_from(
+          children, "consumed_by_docstring",
+        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        @node.CstNode::comment_ownline(
+          loc~,
+          source_span~,
+          content~,
+          leading_blank_line~,
+          trailing_blank_line~,
+          consumed_by_docstring~,
+        )
+      }
     }
   }
   push_child(
     children,
     Some("consumed_by_docstring"),
     bool_marker_node(
-      Comment_ConsumedByDocstring,
+      fn(loc, source_span, children) {
+        let value = match CstNode::payload_from_children(children) {
+          Some(NodePayload::Bool(value)) => value
+          _ => false
+        }
+        @node.CstNode::comment_consumed_by_docstring(value~, loc~, source_span~)
+      },
       start,
       source_span.0,
       comment.consumed_by_docstring,
     ),
   )
-  node(kind, mk_loc(start, end), source_span, children)
+  node(builder, mk_loc(start, end), source_span, children)
 }
 
 ///|

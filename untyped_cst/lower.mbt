@@ -405,7 +405,7 @@ fn lower_visibility(node : CstNode) -> @syntax.Visibility {
 
 ///|
 fn lower_async_loc(node : CstNode) -> Location? {
-  if node.bool_marker_value(Flag_Async) is Some(false) {
+  if node.bool_marker_value(fn(kind) { kind is Flag_Async }) is Some(false) {
     return None
   }
   node.first_child_with_label("async_loc").map(fn(anchor) { anchor.loc })
@@ -413,7 +413,7 @@ fn lower_async_loc(node : CstNode) -> Location? {
 
 ///|
 fn lower_is_declare(node : CstNode) -> Bool {
-  node.bool_marker_value(Flag_Declare).unwrap_or(false)
+  node.bool_marker_value(fn(kind) { kind is Flag_Declare }).unwrap_or(false)
 }
 
 ///|
@@ -538,7 +538,7 @@ fn lower_function_type_name(node : CstNode) -> @syntax.TypeName? {
 
 ///|
 fn lower_function_owner_object_loc(node : CstNode) -> Location? {
-  if node.bool_marker_value(Flag_Object) is Some(false) {
+  if node.bool_marker_value(fn(kind) { kind is Flag_Object }) is Some(false) {
     return None
   }
   node.first_child_with_label("object_loc").map(anchor => anchor.loc)
@@ -697,7 +697,7 @@ fn lower_value_decl(node : CstNode, is_constant~ : Bool) -> @syntax.Impl {
 ///|
 fn lower_type_decl(node : CstNode) -> @syntax.Impl {
   let (name, name_loc) = lower_decl_name_string(node)
-  let components = if node.has_child_kind(TypeDesc_Abstract) ||
+  let components = if node.has_child_kind(fn(kind) { kind is TypeDesc_Abstract }) ||
     node.kind is Impl_TypeAbstract {
     @syntax.TypeDesc::Abstract
   } else if node.first_child_with_label("type") is Some(ty) {
@@ -783,7 +783,8 @@ fn lower_deriving(node : CstNode) -> List[@syntax.DerivingDirective] {
 
 ///|
 fn lower_struct_decl(node : CstNode) -> @syntax.Impl {
-  if node.has_child_kind(TypeDesc_TupleStruct) || node.kind is Impl_TupleStruct {
+  if node.has_child_kind(fn(kind) { kind is TypeDesc_TupleStruct }) ||
+    node.kind is Impl_TupleStruct {
     let components = node
       .first_child_with_label("body")
       .map(fn(body) {
@@ -791,7 +792,7 @@ fn lower_struct_decl(node : CstNode) -> @syntax.Impl {
       })
       .unwrap_or(@syntax.TypeDesc::TupleStruct(@list.empty()))
     lower_simple_type_decl(node, components)
-  } else if node.has_child_kind(TypeDesc_Record) ||
+  } else if node.has_child_kind(fn(kind) { kind is TypeDesc_Record }) ||
     node.kind is Impl_RecordStruct {
     lower_simple_type_decl(
       node,
@@ -982,7 +983,9 @@ fn lower_constructor_param(node : CstNode) -> @syntax.ConstrParam {
     .first_child_with_label("type")
     .map(lower_type)
     .unwrap_or(@syntax.Type::Any(loc=node.loc)),
-    mut_: node.bool_marker_value(Flag_Mutable).unwrap_or(false),
+    mut_: node
+    .bool_marker_value(fn(kind) { kind is Flag_Mutable })
+    .unwrap_or(false),
     label,
   }
 }
@@ -1013,7 +1016,9 @@ fn lower_struct_field(node : CstNode) -> @syntax.FieldDecl {
     .first_child_with_label("type")
     .map(lower_type)
     .unwrap_or(@syntax.Type::Any(loc=node.loc)),
-    mut_: node.bool_marker_value(Flag_Mutable).unwrap_or(false),
+    mut_: node
+    .bool_marker_value(fn(kind) { kind is Flag_Mutable })
+    .unwrap_or(false),
     vis: lower_visibility(node),
     loc: node.loc,
     attrs: lower_attrs(node),
@@ -1391,7 +1396,7 @@ fn lower_expr(node : CstNode) -> @syntax.Expr {
     Expr_Hole =>
       @syntax.Expr::Hole(
         loc=node.loc,
-        kind=if node.has_child_kind(HoleKind_Todo) {
+        kind=if node.has_child_kind(fn(kind) { kind is HoleKind_Todo }) {
           @syntax.Hole::Todo
         } else {
           @syntax.Hole::Incomplete
@@ -1453,7 +1458,7 @@ fn lower_expr(node : CstNode) -> @syntax.Expr {
 
 ///|
 fn lower_quantifier_expr(node : CstNode) -> @syntax.Expr {
-  let kind = if node.has_child_kind(QuantifierKind_Exists) {
+  let kind = if node.has_child_kind(fn(kind) { kind is QuantifierKind_Exists }) {
     @syntax.PredicateQuantifierKind::Exists
   } else {
     @syntax.PredicateQuantifierKind::Forall
@@ -1507,7 +1512,9 @@ fn lower_template_writing_expr(node : CstNode) -> @syntax.Expr {
       .first_child_with_label("template")
       .map(lower_expr)
       .unwrap_or(lower_hole_expr(node.loc)),
-    is_conditional=node.bool_marker_value(Flag_Conditional).unwrap_or(false),
+    is_conditional=node
+      .bool_marker_value(fn(kind) { kind is Flag_Conditional })
+      .unwrap_or(false),
     loc=node.loc,
   )
 }
@@ -1597,8 +1604,7 @@ fn lower_constructor_expr(node : CstNode) -> @syntax.Expr {
       node.children_with_label("name"),
       node
       .first_child_of_kind(NodeKind::is_constructor_extra_info)
-      .map(fn(marker) { marker.kind })
-      .unwrap_or(ConstructorExtraInfo_None),
+      .map(fn(marker) { marker.kind }),
       node.loc,
     )
   }
@@ -1720,7 +1726,9 @@ fn lower_tuple_expr(node : CstNode) -> @syntax.Expr {
     Expr_Unit =>
       @syntax.Expr::Unit(
         loc=node.loc,
-        faked=node.bool_marker_value(Flag_Faked).unwrap_or(false),
+        faked=node
+          .bool_marker_value(fn(kind) { kind is Flag_Faked })
+          .unwrap_or(false),
       )
     Expr_Group =>
       @syntax.Expr::Group(
@@ -1752,7 +1760,7 @@ fn lower_constraint_expr(node : CstNode) -> @syntax.Expr {
 ///|
 fn lower_array_expr_node(node : CstNode) -> @syntax.Expr {
   let elems : Array[@syntax.SpreadableElem] = []
-  let is_iter = node.has_child_kind(ArrayKind_Iter)
+  let is_iter = node.has_child_kind(fn(kind) { kind is ArrayKind_Iter })
   if node.first_child_with_label("body") is Some(body) {
     for item in lower_item_children(body) {
       elems.push(lower_array_expr_elem(item))
@@ -1787,8 +1795,10 @@ fn lower_array_expr_elem(item : CstNode) -> @syntax.SpreadableElem {
 
 ///|
 fn lower_list_comprehension_expr(node : CstNode) -> @syntax.Expr {
-  let is_iter = node.has_child_kind(ArrayKind_Iter)
-  let kind = if node.has_child_kind(ListComprehensionKind_ForEach) {
+  let is_iter = node.has_child_kind(fn(kind) { kind is ArrayKind_Iter })
+  let kind = if node.has_child_kind(fn(kind) {
+      kind is ListComprehensionKind_ForEach
+    }) {
     @syntax.ListComprehensionKind::Foreach(
       binders=lower_foreach_binders(node),
       expr=node
@@ -1871,7 +1881,9 @@ fn lower_record_field_def(node : CstNode) -> @syntax.FieldDef {
   @syntax.FieldDef::{
     label,
     expr,
-    is_pun: node.bool_marker_value(Flag_Pun).unwrap_or(false),
+    is_pun: node
+    .bool_marker_value(fn(kind) { kind is Flag_Pun })
+    .unwrap_or(false),
     loc: node.loc,
   }
 }
@@ -2017,7 +2029,9 @@ fn lower_assign_expr(node : CstNode) -> @syntax.Expr {
   if node.first_child_with_label("lhs") is Some(_) {
     return lower_hole_expr(node.loc)
   }
-  let augmented = node.bool_marker_value(Flag_Augmented).unwrap_or(false)
+  let augmented = node
+    .bool_marker_value(fn(kind) { kind is Flag_Augmented })
+    .unwrap_or(false)
   match node.kind {
     Expr_Assign => {
       guard node.first_child_with_label("semantic_name") is Some(name) else {
@@ -2227,7 +2241,9 @@ fn lower_dot_apply_expr(node : CstNode) -> @syntax.Expr {
     .first_child_with_label("arg")
     .map(lower_arguments)
     .unwrap_or(@list.empty())
-  let return_self = node.bool_marker_value(Flag_ReturnSelf).unwrap_or(false)
+  let return_self = node
+    .bool_marker_value(fn(kind) { kind is Flag_ReturnSelf })
+    .unwrap_or(false)
   @syntax.Expr::DotApply(
     self=self_expr,
     method_name=method_label,
@@ -2418,7 +2434,9 @@ fn lower_try_expr(node : CstNode) -> @syntax.Expr {
     .first_child_with_label("try_loc")
     .map(fn(anchor) { anchor.loc })
     .unwrap_or(node.loc)
-  let has_try = node.bool_marker_value(Flag_HasTry).unwrap_or(false)
+  let has_try = node
+    .bool_marker_value(fn(kind) { kind is Flag_HasTry })
+    .unwrap_or(false)
   let catch_loc = node
     .first_child_with_label("catch_loc")
     .map(fn(anchor) { anchor.loc })
@@ -2857,7 +2875,7 @@ fn lower_function_expr_node(node : CstNode) -> @syntax.Expr {
   let return_type = lower_return_type_from_clause(
     node.first_child_with_label("type"),
   )
-  let kind = if node.has_child_kind(FnKind_Arrow) {
+  let kind = if node.has_child_kind(fn(kind) { kind is FnKind_Arrow }) {
     @syntax.FnKind::Arrow
   } else {
     @syntax.FnKind::Lambda
@@ -2892,7 +2910,7 @@ fn arrow_lambda_block_keeps_group(node : CstNode, body_node : CstNode) -> Bool {
   if node.first_child_with_label("pipe") is Some(_) {
     return false
   }
-  node.has_child_kind(FnKind_Arrow)
+  node.has_child_kind(fn(kind) { kind is FnKind_Arrow })
 }
 
 ///|
@@ -3069,7 +3087,9 @@ fn lower_guard_expr_with_body(
       .unwrap_or(lower_hole_expr(node.loc)),
     otherwise=node.first_child_with_label("else").map(lower_function_body_expr),
     body~,
-    exclamation=node.bool_marker_value(Flag_Exclamation).unwrap_or(false),
+    exclamation=node
+      .bool_marker_value(fn(kind) { kind is Flag_Exclamation })
+      .unwrap_or(false),
     guard_loc=node
       .first_child_with_label("kw")
       .map(anchor => anchor.loc)
@@ -3398,7 +3418,9 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
     Pattern_Any | Pattern_MissingPattern => @syntax.Pattern::Any(loc=node.loc)
     Pattern_Constant =>
       if lower_constant_from_node(node) is Some(c) {
-        let loc = if node.has_child_kind(Operator_UnaryMinus) {
+        let loc = if node.has_child_kind(fn(kind) {
+            kind is Operator_UnaryMinus
+          }) {
           node
           .first_child_with_label("semantic_constant")
           .map(constant => constant.loc)
@@ -3657,10 +3679,10 @@ fn lower_record_pattern_fields(node : CstNode) -> List[@syntax.FieldPat] {
 
 ///|
 fn lower_record_pattern_is_closed(node : CstNode) -> Bool {
-  if node.has_child_kind(Openness_Closed) {
+  if node.has_child_kind(fn(kind) { kind is Openness_Closed }) {
     return true
   }
-  if node.has_child_kind(Openness_Open) {
+  if node.has_child_kind(fn(kind) { kind is Openness_Open }) {
     return false
   }
   true
@@ -3679,17 +3701,19 @@ fn lower_record_pattern_field(node : CstNode) -> @syntax.FieldPat {
   @syntax.FieldPat::{
     label,
     pattern,
-    is_pun: node.bool_marker_value(Flag_Pun).unwrap_or(false),
+    is_pun: node
+    .bool_marker_value(fn(kind) { kind is Flag_Pun })
+    .unwrap_or(false),
     loc: node.loc,
   }
 }
 
 ///|
 fn lower_map_pattern_is_closed(node : CstNode) -> Bool {
-  if node.has_child_kind(Openness_Closed) {
+  if node.has_child_kind(fn(kind) { kind is Openness_Closed }) {
     return true
   }
-  if node.has_child_kind(Openness_Open) {
+  if node.has_child_kind(fn(kind) { kind is Openness_Open }) {
     return false
   }
   true
@@ -3719,7 +3743,9 @@ fn lower_map_pattern_elem(node : CstNode) -> @syntax.MapPatElem {
     .first_child_with_label("pattern")
     .map(lower_pattern)
     .unwrap_or(@syntax.Pattern::Any(loc=node.loc)),
-    match_absent: node.bool_marker_value(Flag_MatchAbsent).unwrap_or(false),
+    match_absent: node
+    .bool_marker_value(fn(kind) { kind is Flag_MatchAbsent })
+    .unwrap_or(false),
     key_loc,
     loc: node.loc,
   }
@@ -3758,7 +3784,7 @@ fn lower_pattern_items(node : CstNode) -> Array[@syntax.Pattern] {
 ///|
 fn lower_tuple_pattern(node : CstNode) -> @syntax.Pattern {
   let items = lower_pattern_items(node)
-  if node.has_child_kind(Pattern_Group) {
+  if node.has_child_kind(fn(kind) { kind is Pattern_Group }) {
     match items.get(0).unwrap_or(@syntax.Pattern::Any(loc=node.loc)) {
       @syntax.Pattern::Constraint(pat~, ty~, loc=_) =>
         @syntax.Pattern::Constraint(pat~, ty~, loc=node.loc)
@@ -3772,15 +3798,15 @@ fn lower_tuple_pattern(node : CstNode) -> @syntax.Pattern {
 ///|
 fn lower_constructor_from_names(
   names : Array[CstNode],
-  extra_info_kind : NodeKind,
+  extra_info_kind : NodeKind?,
   loc : Location,
 ) -> @syntax.Constructor {
   let extra_info = match extra_info_kind {
-    ConstructorExtraInfo_Package if names.length() >= 2 =>
+    Some(ConstructorExtraInfo_Package) if names.length() >= 2 =>
       @syntax.ConstructorExtraInfo::Package(
         lower_semantic_string(names[0]).unwrap_or(""),
       )
-    ConstructorExtraInfo_TypeName if names.length() >= 2 => {
+    Some(ConstructorExtraInfo_TypeName) if names.length() >= 2 => {
       let type_nodes : Array[CstNode] = []
       for i in 0..<(names.length() - 1) {
         type_nodes.push(names[i])
@@ -3833,10 +3859,10 @@ fn lower_constructor_pattern_args(
 
 ///|
 fn constructor_pattern_is_open(node : CstNode) -> Bool {
-  if node.has_child_kind(Openness_Open) {
+  if node.has_child_kind(fn(kind) { kind is Openness_Open }) {
     return true
   }
-  if node.has_child_kind(Openness_Closed) {
+  if node.has_child_kind(fn(kind) { kind is Openness_Closed }) {
     return false
   }
   false
@@ -3894,8 +3920,7 @@ fn lower_constructor_pattern(node : CstNode) -> @syntax.Pattern {
       node.children_with_label("name"),
       node
       .first_child_of_kind(NodeKind::is_constructor_extra_info)
-      .map(fn(marker) { marker.kind })
-      .unwrap_or(ConstructorExtraInfo_None),
+      .map(fn(marker) { marker.kind }),
       node.loc,
     )
   }
@@ -4134,7 +4159,9 @@ fn lower_type_name_from_type_node(node : CstNode) -> @syntax.TypeName {
     Type_Name =>
       @syntax.TypeName::{
         name: lower_long_ident_from_child(node, "semantic_name", "name"),
-        is_object: node.bool_marker_value(Flag_Object).unwrap_or(false),
+        is_object: node
+        .bool_marker_value(fn(kind) { kind is Flag_Object })
+        .unwrap_or(false),
         loc: node.loc,
       }
     _ =>

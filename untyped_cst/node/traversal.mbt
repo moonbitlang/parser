@@ -33,21 +33,24 @@ pub fn CstNode::has_child_label(self : CstNode, label : String) -> Bool {
 }
 
 ///|
-pub fn CstNode::has_child_kind(self : CstNode, expected : NodeKind) -> Bool {
-  self.first_child_of_kind(fn(kind) { kind == expected }) is Some(_)
+pub fn CstNode::has_child_kind(
+  self : CstNode,
+  pred : (NodeKind) -> Bool,
+) -> Bool {
+  self.first_child_of_kind(pred) is Some(_)
 }
 
 ///|
 pub fn CstNode::has_child_or_grandchild_kind(
   self : CstNode,
-  expected : NodeKind,
+  pred : (NodeKind) -> Bool,
 ) -> Bool {
-  if self.has_child_kind(expected) {
+  if self.has_child_kind(pred) {
     return true
   }
   for entry in self.children {
     let (_, child) = entry
-    if child.has_child_kind(expected) {
+    if child.has_child_kind(pred) {
       return true
     }
   }
@@ -55,15 +58,18 @@ pub fn CstNode::has_child_or_grandchild_kind(
 }
 
 ///|
-pub fn CstNode::bool_marker_value(self : CstNode, expected : NodeKind) -> Bool? {
+pub fn CstNode::bool_marker_value(
+  self : CstNode,
+  pred : (NodeKind) -> Bool,
+) -> Bool? {
   self
-  .first_child_of_kind(fn(kind) { kind == expected })
+  .first_child_of_kind(pred)
   .map(child => child.bool_payload())
   .bind(value => value)
 }
 
 ///|
-pub fn CstNode::with_kind(self : CstNode, kind : NodeKind) -> CstNode {
+fn CstNode::with_kind(self : CstNode, kind : NodeKind) -> CstNode {
   CstNode::{
     kind,
     loc: self.loc,

@@ -35,18 +35,25 @@ fn ParserState::current_position(self : ParserState) -> Position {
 /// text to the enclosing CST node.
 fn ParserState::current_significant_anchor(self : ParserState) -> CstNode {
   match self.peek_significant() {
-    Some((token, start, end)) =>
-      token_location_node(
-        syntax_kind_from_token_kind(token.kind()),
-        mk_loc(start, end),
-        empty_span(self.offset_for_position(start)),
+    Some((token, start, end)) => {
+      let anchor = token_node_with_children(
+        token,
+        start,
+        end,
+        self.token_source_span(start, end),
+        [],
       )
+      anchor.internal_rebuild(
+        loc=mk_loc(start, end),
+        source_span=empty_span(self.offset_for_position(start)),
+        children=[],
+      )
+    }
     None => {
       let pos = self.previous_end()
-      token_location_node(
-        Syntax_Eof,
-        empty_loc(pos),
-        empty_span(self.offset_for_position(pos)),
+      @node.CstNode::syntax_eof(
+        loc=empty_loc(pos),
+        source_span=empty_span(self.offset_for_position(pos)),
       )
     }
   }
@@ -171,25 +178,60 @@ fn ParserState::missing_token_node_silent(
 ///|
 fn ParserState::missing_syntax_node(
   self : ParserState,
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   let pos = self.current_position()
-  node(kind, empty_loc(pos), empty_span(self.offset_for_position(pos)), [])
+  node(builder, empty_loc(pos), empty_span(self.offset_for_position(pos)), [])
 }
 
 ///|
 fn ParserState::missing_type_node(self : ParserState) -> CstNode {
-  self.missing_syntax_node(Type_MissingType)
+  self.missing_syntax_node(fn(loc, source_span, children) {
+    let error = CstNode::children_with_label_from(children, "error")
+    @node.CstNode::type_missing_type(loc~, source_span~, error~)
+  })
 }
 
 ///|
 fn ParserState::missing_expr_node(self : ParserState) -> CstNode {
-  self.missing_syntax_node(Expr_MissingExpr)
+  self.missing_syntax_node(fn(loc, source_span, children) {
+    let label = CstNode::first_child_with_label_from(children, "label")
+    let trivia = CstNode::first_child_with_label_from(children, "trivia")
+    let label_loc = CstNode::first_child_with_label_from(children, "label_loc")
+    let expr = CstNode::first_child_with_label_from(children, "expr")
+    let op = CstNode::first_child_with_label_from(children, "op")
+    let loop_loc = CstNode::first_child_with_label_from(children, "loop_loc")
+    let error = CstNode::children_with_label_from(children, "error")
+    @node.CstNode::expr_missing_expr(
+      loc~,
+      source_span~,
+      label?,
+      trivia?,
+      label_loc?,
+      expr?,
+      op?,
+      loop_loc?,
+      error~,
+    )
+  })
 }
 
 ///|
 fn ParserState::missing_pattern_node(self : ParserState) -> CstNode {
-  self.missing_syntax_node(Pattern_MissingPattern)
+  self.missing_syntax_node(fn(loc, source_span, children) {
+    let error = CstNode::children_with_label_from(children, "error")
+    let token = CstNode::first_child_with_label_from(children, "token")
+    let lex_scan_case_pattern = CstNode::first_child_with_label_from(
+      children, "lex_scan_case_pattern",
+    )
+    @node.CstNode::pattern_missing_pattern(
+      loc~,
+      source_span~,
+      error~,
+      token?,
+      lex_scan_case_pattern?,
+    )
+  })
 }
 
 ///|

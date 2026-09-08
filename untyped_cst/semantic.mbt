@@ -1,11 +1,11 @@
 ///|
 fn constant_node(
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
   source_span : (Int, Int),
   value : String,
 ) -> CstNode {
-  scalar_node(kind, loc, source_span, String(value))
+  scalar_node(builder, loc, source_span, String(value))
 }
 
 ///|
@@ -15,19 +15,175 @@ fn constant_node_from_syntax(
   source_span : (Int, Int),
 ) -> CstNode {
   match constant {
-    Bool(value) => scalar_node(Constant_Bool, loc, source_span, Bool(value))
-    Byte(value) => constant_node(Constant_Byte, loc, source_span, value)
-    Bytes(value) => constant_node(Constant_Bytes, loc, source_span, value)
-    Char(value) => constant_node(Constant_Char, loc, source_span, value)
-    Int(value) => constant_node(Constant_Int, loc, source_span, value)
-    Int64(value) => constant_node(Constant_Int64, loc, source_span, value)
-    UInt(value) => constant_node(Constant_UInt, loc, source_span, value)
-    UInt64(value) => constant_node(Constant_UInt64, loc, source_span, value)
-    Float(value) => constant_node(Constant_Float, loc, source_span, value)
-    Double(value) => constant_node(Constant_Double, loc, source_span, value)
-    String(value) => constant_node(Constant_String, loc, source_span, value)
-    Regex(value) => constant_node(Constant_Regex, loc, source_span, value)
-    BigInt(value) => constant_node(Constant_BigInt, loc, source_span, value)
+    Bool(value) =>
+      scalar_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::Bool(value)) => value
+            _ => false
+          }
+          @node.CstNode::constant_bool(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        Bool(value),
+      )
+    Byte(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_byte(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    Bytes(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_bytes(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    Char(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_char(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    Int(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_int(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    Int64(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_int64(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    UInt(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_uint(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    UInt64(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_uint64(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    Float(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_float(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    Double(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_double(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    String(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_string(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    Regex(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_regex(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
+    BigInt(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_big_int(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
   }
 }
 
@@ -38,11 +194,81 @@ fn constant_node_from_token(
   source_span : (Int, Int),
 ) -> CstNode? {
   match token {
-    TRUE => Some(scalar_node(Constant_Bool, loc, source_span, Bool(true)))
-    FALSE => Some(scalar_node(Constant_Bool, loc, source_span, Bool(false)))
-    BYTE(value) => Some(constant_node(Constant_Byte, loc, source_span, value))
-    BYTES(value) => Some(constant_node(Constant_Bytes, loc, source_span, value))
-    CHAR(value) => Some(constant_node(Constant_Char, loc, source_span, value))
+    TRUE =>
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Bool(value)) => value
+              _ => false
+            }
+            @node.CstNode::constant_bool(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          Bool(true),
+        ),
+      )
+    FALSE =>
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Bool(value)) => value
+              _ => false
+            }
+            @node.CstNode::constant_bool(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          Bool(false),
+        ),
+      )
+    BYTE(value) =>
+      Some(
+        constant_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::constant_byte(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          value,
+        ),
+      )
+    BYTES(value) =>
+      Some(
+        constant_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::constant_bytes(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          value,
+        ),
+      )
+    CHAR(value) =>
+      Some(
+        constant_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::constant_char(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          value,
+        ),
+      )
     INT(value) =>
       Some(constant_node_from_syntax(@syntax.make_int(value), loc, source_span))
     FLOAT(value) =>
@@ -50,11 +276,50 @@ fn constant_node_from_token(
         constant_node_from_syntax(@syntax.make_float(value), loc, source_span),
       )
     DOUBLE(value) =>
-      Some(constant_node(Constant_Double, loc, source_span, value))
+      Some(
+        constant_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::constant_double(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          value,
+        ),
+      )
     STRING(value) =>
-      Some(constant_node(Constant_String, loc, source_span, value))
+      Some(
+        constant_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::constant_string(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          value,
+        ),
+      )
     REGEX_LITERAL(value) =>
-      Some(constant_node(Constant_Regex, loc, source_span, value))
+      Some(
+        constant_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::constant_regex(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          value,
+        ),
+      )
     _ => None
   }
 }
@@ -67,9 +332,35 @@ fn lexical_name_node_from_token(
 ) -> CstNode? {
   match token {
     LIDENT(value) | UIDENT(value) | DOT_LIDENT(value) | DOT_UIDENT(value) =>
-      Some(scalar_node(Name_Identifier, loc, source_span, String(value)))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::name_identifier(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String(value),
+        ),
+      )
     PACKAGE_NAME(value) =>
-      Some(scalar_node(Name_Package, loc, source_span, String(value)))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::name_package(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String(value),
+        ),
+      )
     POST_LABEL(value) => {
       let trimmed_loc = loc.trim_last_char()
       let trimmed_span = mk_span(
@@ -81,7 +372,18 @@ fn lexical_name_node_from_token(
         },
       )
       Some(
-        scalar_node(Name_Identifier, trimmed_loc, trimmed_span, String(value)),
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::name_identifier(value~, loc~, source_span~)
+          },
+          trimmed_loc,
+          trimmed_span,
+          String(value),
+        ),
       )
     }
     POST_LABEL_TRANSPARENT(value) => {
@@ -95,13 +397,50 @@ fn lexical_name_node_from_token(
         },
       )
       Some(
-        scalar_node(Name_Identifier, trimmed_loc, trimmed_span, String(value)),
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::name_identifier(value~, loc~, source_span~)
+          },
+          trimmed_loc,
+          trimmed_span,
+          String(value),
+        ),
       )
     }
     EXTEND =>
-      Some(scalar_node(Name_Identifier, loc, source_span, String("extend")))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::name_identifier(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String("extend"),
+        ),
+      )
     UNDERSCORE =>
-      Some(scalar_node(Name_Identifier, loc, source_span, String("_")))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::name_identifier(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String("_"),
+        ),
+      )
     _ => None
   }
 }
@@ -114,10 +453,47 @@ fn accessor_node_from_token_value(
 ) -> CstNode? {
   match token {
     DOT_INT(index) =>
-      Some(scalar_node(Accessor_Index, loc, source_span, Int(index)))
-    DOT_LIDENT("_") => Some(node(Accessor_Newtype, loc, source_span, []))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Int(value)) => value
+              _ => 0
+            }
+            @node.CstNode::accessor_index(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          Int(index),
+        ),
+      )
+    DOT_LIDENT("_") =>
+      Some(
+        node(
+          fn(loc, source_span, children) {
+            let _ = children
+            @node.CstNode::accessor_newtype(loc~, source_span~)
+          },
+          loc,
+          source_span,
+          [],
+        ),
+      )
     DOT_LIDENT(value) | DOT_UIDENT(value) =>
-      Some(scalar_node(Accessor_Label, loc, source_span, String(value)))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::accessor_label(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String(value),
+        ),
+      )
     _ => None
   }
 }
@@ -143,25 +519,69 @@ fn raw_token_semantic_children(
       push_child(
         children,
         Some("flag"),
-        bool_marker_node(Flag_Async, loc.start, source_span.0, true),
+        bool_marker_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Bool(value)) => value
+              _ => false
+            }
+            @node.CstNode::flag_async(value~, loc~, source_span~)
+          },
+          loc.start,
+          source_span.0,
+          true,
+        ),
       )
     DECLARE =>
       push_child(
         children,
         Some("flag"),
-        bool_marker_node(Flag_Declare, loc.start, source_span.0, true),
+        bool_marker_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Bool(value)) => value
+              _ => false
+            }
+            @node.CstNode::flag_declare(value~, loc~, source_span~)
+          },
+          loc.start,
+          source_span.0,
+          true,
+        ),
       )
     LT_QUESTION =>
       push_child(
         children,
         Some("flag"),
-        bool_marker_node(Flag_Conditional, loc.start, source_span.0, true),
+        bool_marker_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::Bool(value)) => value
+              _ => false
+            }
+            @node.CstNode::flag_conditional(value~, loc~, source_span~)
+          },
+          loc.start,
+          source_span.0,
+          true,
+        ),
       )
     PLUS_EQUAL | AUGMENTED_ASSIGNMENT(_) =>
       push_child(
         children,
         Some("operator"),
-        operator_node_from_token(Operator_Augmented, token, loc, source_span),
+        operator_node_from_token(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::operator_augmented(value~, loc~, source_span~)
+          },
+          token,
+          loc,
+          source_span,
+        ),
       )
     INFIX1(_)
     | INFIX2(_)
@@ -191,19 +611,44 @@ fn raw_token_semantic_children(
       push_child(
         children,
         Some("operator"),
-        operator_node_from_token(Operator_Infix, token, loc, source_span),
+        operator_node_from_token(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::operator_infix(value~, loc~, source_span~)
+          },
+          token,
+          loc,
+          source_span,
+        ),
       )
     COMMA =>
       push_child(
         children,
         Some("trailing"),
-        marker_node(TrailingMark_Comma, loc.start, source_span.0),
+        marker_node(
+          fn(loc, source_span, children) {
+            let _ = children
+            @node.CstNode::trailing_mark_comma(loc~, source_span~)
+          },
+          loc.start,
+          source_span.0,
+        ),
       )
     SEMI(true) =>
       push_child(
         children,
         Some("trailing"),
-        marker_node(TrailingMark_Semi, loc.start, source_span.0),
+        marker_node(
+          fn(loc, source_span, children) {
+            let _ = children
+            @node.CstNode::trailing_mark_semi(loc~, source_span~)
+          },
+          loc.start,
+          source_span.0,
+        ),
       )
     _ => ()
   }
@@ -245,13 +690,13 @@ fn operator_spelling(token : Token) -> String? {
 
 ///|
 fn operator_node_from_token(
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   token : Token,
   loc : Location,
   source_span : (Int, Int),
 ) -> CstNode {
   scalar_node(
-    kind,
+    builder,
     loc,
     source_span,
     String(operator_spelling(token).unwrap_or("")),
@@ -264,8 +709,8 @@ fn signed_constant_node(constant : CstNode, negative : Bool) -> CstNode {
     return constant
   }
   let value = constant.string_payload().unwrap_or("")
-  scalar_node(
-    constant.kind,
+  scalar_node_from_kind(
+    constant,
     constant.loc,
     constant.source_span,
     String(
@@ -286,9 +731,35 @@ fn lex_literal_node_from_token(
 ) -> CstNode? {
   match token {
     STRING(value) =>
-      Some(scalar_node(LexLiteral_String, loc, source_span, String(value)))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::lex_literal_string(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String(value),
+        ),
+      )
     REGEX_LITERAL(value) =>
-      Some(scalar_node(LexLiteral_Regex, loc, source_span, String(value)))
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match CstNode::payload_from_children(children) {
+              Some(NodePayload::String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::lex_literal_regex(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String(value),
+        ),
+      )
     _ => None
   }
 }
@@ -308,10 +779,48 @@ fn semantic_ident_expr(
   loc : Location,
   source_span : (Int, Int),
 ) -> CstNode {
-  let name_node = scalar_node(Name_Identifier, loc, source_span, String(name))
-  node(Expr_Ident, loc, source_span, [(Some("name"), name_node)]).with_structured_name(
+  let name_node = scalar_node(
+    fn(loc, source_span, children) {
+      let value = match CstNode::payload_from_children(children) {
+        Some(NodePayload::String(value)) => value
+        _ => ""
+      }
+      @node.CstNode::name_identifier(value~, loc~, source_span~)
+    },
+    loc,
+    source_span,
+    String(name),
+  )
+  node(
+    fn(loc, source_span, children) {
+      let async_loc = CstNode::first_child_with_label_from(
+        children, "async_loc",
+      )
+      let name = CstNode::children_with_label_from(children, "name")
+      let token = CstNode::first_child_with_label_from(children, "token")
+      let semantic_name = CstNode::first_child_with_label_from(
+        children, "semantic_name",
+      )
+      @node.CstNode::expr_ident(
+        loc~,
+        source_span~,
+        async_loc?,
+        name~,
+        token?,
+        semantic_name?,
+      )
+    },
+    loc,
+    source_span,
+    [(Some("name"), name_node)],
+  ).with_structured_name(
     "semantic_name",
-    Name_Var,
+    fn(loc, source_span, children) {
+      let long_ident = CstNode::first_child_with_label_from(
+        children, "long_ident",
+      ).unwrap_or(CstNode::missing(loc~, source_span~))
+      @node.CstNode::name_var(loc~, source_span~, long_ident~)
+    },
     ["name"],
   )
 }
@@ -322,10 +831,48 @@ fn semantic_var_pattern(
   loc : Location,
   source_span : (Int, Int),
 ) -> CstNode {
-  let name_node = scalar_node(Name_Identifier, loc, source_span, String(name))
-  node(Pattern_Var, loc, source_span, [(Some("name"), name_node)]).with_structured_name(
+  let name_node = scalar_node(
+    fn(loc, source_span, children) {
+      let value = match CstNode::payload_from_children(children) {
+        Some(NodePayload::String(value)) => value
+        _ => ""
+      }
+      @node.CstNode::name_identifier(value~, loc~, source_span~)
+    },
+    loc,
+    source_span,
+    String(name),
+  )
+  node(
+    fn(loc, source_span, children) {
+      let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
+        CstNode::missing(loc~, source_span~),
+      )
+      let semantic_name = CstNode::first_child_with_label_from(
+        children, "semantic_name",
+      )
+      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
+        children, "lex_scan_case_pattern",
+      )
+      @node.CstNode::pattern_var(
+        loc~,
+        source_span~,
+        name~,
+        semantic_name?,
+        lex_scan_case_pattern?,
+      )
+    },
+    loc,
+    source_span,
+    [(Some("name"), name_node)],
+  ).with_structured_name(
     "semantic_name",
-    Name_Binder,
+    fn(loc, source_span, children) {
+      let long_ident = CstNode::first_child_with_label_from(
+        children, "long_ident",
+      ).unwrap_or(CstNode::missing(loc~, source_span~))
+      @node.CstNode::name_binder(loc~, source_span~, long_ident~)
+    },
     ["name"],
   )
 }
@@ -370,7 +917,7 @@ fn CstNode::with_pun_expr(self : CstNode) -> CstNode {
     children.push(entry)
   }
   push_child(children, Some("expr"), expr)
-  node(self.kind, self.loc, self.source_span, children)
+  self.internal_rebuild(loc=self.loc, source_span=self.source_span, children~)
 }
 
 ///|
@@ -387,7 +934,7 @@ fn CstNode::with_pun_pattern(self : CstNode) -> CstNode {
     children.push(entry)
   }
   push_child(children, Some("pattern"), pattern)
-  node(self.kind, self.loc, self.source_span, children)
+  self.internal_rebuild(loc=self.loc, source_span=self.source_span, children~)
 }
 
 ///|
@@ -396,28 +943,26 @@ fn CstNode::with_pun_locations(self : CstNode) -> CstNode {
     name.lexical_name_value() is Some(value) else {
     return self
   }
-  let token_kind = if name.kind.is_syntax_token() {
-    name.kind
+  let label_loc = if name.kind.is_syntax_token() {
+    token_location_node(name, name.loc, name.source_span)
   } else {
-    Syntax_Delimiter
+    @node.CstNode::syntax_delimiter(loc=name.loc, source_span=name.source_span)
   }
   let with_label_loc = if self.first_child_with_label("label_loc") is None {
-    self.with_token_location(
-      "label_loc",
-      token_kind,
-      name.loc,
-      name.source_span,
-    )
+    self.with_location_metadata("label_loc", label_loc)
   } else {
     self
   }
   if with_label_loc.first_child_with_label("value_loc") is None {
-    with_label_loc.with_token_location(
-      "value_loc",
-      token_kind,
-      value.loc,
-      value.source_span,
-    )
+    let value_loc = if name.kind.is_syntax_token() {
+      token_location_node(name, value.loc, value.source_span)
+    } else {
+      @node.CstNode::syntax_delimiter(
+        loc=value.loc,
+        source_span=value.source_span,
+      )
+    }
+    with_label_loc.with_location_metadata("value_loc", value_loc)
   } else {
     with_label_loc
   }
@@ -436,8 +981,8 @@ fn folded_prefix_constant_node(
   let semantic_loc = if negative { loc } else { constant.loc }
   let semantic_span = if negative { source_span } else { constant.source_span }
   let signed = signed_constant_node(constant, negative)
-  let semantic_constant = scalar_node(
-    signed.kind,
+  let semantic_constant = scalar_node_from_kind(
+    signed,
     semantic_loc,
     semantic_span,
     String(signed.string_payload().unwrap_or("")),
@@ -452,7 +997,15 @@ fn folded_prefix_constant_node(
     }
   }
   push_child(children, Some("semantic_constant"), semantic_constant)
-  node(Expr_Constant, loc, source_span, children)
+  node(
+    fn(loc, source_span, children) {
+      let entries = recovery_children(children)
+      @node.CstNode::expr_constant(loc~, source_span~, entries~)
+    },
+    loc,
+    source_span,
+    children,
+  )
 }
 
 ///|
@@ -464,32 +1017,69 @@ fn unary_plus_apply_node(
   let loc = op.loc.merge(operand.loc)
   let source_span = mk_span(op.source_span.0, operand.source_span.1)
   let func = semantic_ident_expr("~+", loc, source_span)
-  let argument = node(Argument_Positional, operand.loc, operand.source_span, [
-    (Some("expr"), operand),
-  ])
-  let arguments = node(List_ArgumentList, operand.loc, operand.source_span, [
-    (Some("item"), argument),
-  ])
-  node(Expr_Apply, loc, source_span, [
-    (Some("op"), op),
-    (Some("operator"), operator),
-    (Some("func"), func),
-    (Some("arg"), arguments),
-  ])
+  let argument = node(
+    fn(loc, source_span, children) {
+      let expr = CstNode::first_child_with_label_from(children, "expr").unwrap_or(
+        CstNode::missing(loc~, source_span~),
+      )
+      @node.CstNode::argument_positional(loc~, source_span~, expr~)
+    },
+    operand.loc,
+    operand.source_span,
+    [(Some("expr"), operand)],
+  )
+  let arguments = node(
+    fn(loc, source_span, children) {
+      let entries = list_children(children)
+      @node.CstNode::list_argument_list(loc~, source_span~, entries~)
+    },
+    operand.loc,
+    operand.source_span,
+    [(Some("item"), argument)],
+  )
+  node(
+    fn(loc, source_span, children) {
+      let op = CstNode::first_child_with_label_from(children, "op")
+      let operator = CstNode::first_child_with_label_from(children, "operator")
+      let func = CstNode::first_child_with_label_from(children, "func").unwrap_or(
+        CstNode::missing(loc~, source_span~),
+      )
+      let arg = CstNode::first_child_with_label_from(children, "arg").unwrap_or(
+        CstNode::missing(loc~, source_span~),
+      )
+      @node.CstNode::expr_apply(loc~, source_span~, op?, operator?, func~, arg~)
+    },
+    loc,
+    source_span,
+    [
+      (Some("op"), op),
+      (Some("operator"), operator),
+      (Some("func"), func),
+      (Some("arg"), arguments),
+    ],
+  )
 }
 
 ///|
 fn token_location_node(
-  kind : NodeKind,
+  source : CstNode,
   loc : Location,
   source_span : (Int, Int),
 ) -> CstNode {
-  node(kind, loc, source_span, [])
+  source.internal_rebuild(loc~, source_span~, children=[])
 }
 
 ///|
 fn aggregate_span_node(loc : Location, source_span : (Int, Int)) -> CstNode {
-  node(Aggregate_Span, loc, source_span, [])
+  node(
+    fn(loc, source_span, children) {
+      let _ = children
+      @node.CstNode::aggregate_span(loc~, source_span~)
+    },
+    loc,
+    source_span,
+    [],
+  )
 }
 
 ///|
@@ -503,20 +1093,20 @@ fn CstNode::with_location_metadata(
     children.push(child)
   }
   push_child(children, Some(label), metadata)
-  node(self.kind, self.loc, self.source_span, children)
+  self.internal_rebuild(loc=self.loc, source_span=self.source_span, children~)
 }
 
 ///|
 fn CstNode::with_token_location(
   self : CstNode,
   label : String,
-  kind : NodeKind,
+  source : CstNode,
   loc : Location,
   source_span : (Int, Int),
 ) -> CstNode {
   self.with_location_metadata(
     label,
-    token_location_node(kind, loc, source_span),
+    token_location_node(source, loc, source_span),
   )
 }
 
@@ -542,15 +1132,15 @@ fn push_direct_operator(
 
 ///|
 fn CstNode::with_async_location_anchor(self : CstNode) -> CstNode {
-  if self.bool_marker_value(Flag_Async) is Some(false) ||
+  if self.bool_marker_value(fn(kind) { kind is Flag_Async }) is Some(false) ||
     self.first_child_with_label("async_loc") is Some(_) {
     return self
   }
   for keyword in self.children_with_label("kw") {
-    if keyword.has_child_kind(Flag_Async) {
+    if keyword.has_child_kind(fn(kind) { kind is Flag_Async }) {
       return self.with_token_location(
         "async_loc",
-        keyword.kind,
+        keyword,
         keyword.loc,
         keyword.source_span,
       )

@@ -9,8 +9,8 @@ fn CstNode::lexical_name_value(self : CstNode) -> CstNode? {
 ///|
 fn name_component_node(source : CstNode) -> CstNode {
   let value = source.lexical_name_value().unwrap_or(source)
-  scalar_node(
-    value.kind,
+  scalar_node_from_kind(
+    value,
     value.loc,
     value.source_span,
     String(value.string_payload().unwrap_or("")),
@@ -28,9 +28,19 @@ fn structured_long_ident_node(sources : Array[CstNode]) -> CstNode? {
   Some(
     node(
       if sources.length() >= 2 {
-        LongIdent_Dot
+        fn(loc, source_span, children) {
+          let component = CstNode::children_with_label_from(
+            children, "component",
+          )
+          @node.CstNode::long_ident_dot(loc~, source_span~, component~)
+        }
       } else {
-        LongIdent_Ident
+        fn(loc, source_span, children) {
+          let component = CstNode::first_child_with_label_from(
+            children, "component",
+          ).unwrap_or(CstNode::missing(loc~, source_span~))
+          @node.CstNode::long_ident_ident(loc~, source_span~, component~)
+        }
       },
       first.loc.merge(last.loc),
       mk_span(first.source_span.0, last.source_span.1),
@@ -40,13 +50,16 @@ fn structured_long_ident_node(sources : Array[CstNode]) -> CstNode? {
 }
 
 ///|
-fn structured_name_node(kind : NodeKind, sources : Array[CstNode]) -> CstNode? {
+fn structured_name_node(
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  sources : Array[CstNode],
+) -> CstNode? {
   guard structured_long_ident_node(sources) is Some(long_ident) else {
     return None
   }
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("long_ident"), long_ident)
-  Some(node(kind, long_ident.loc, long_ident.source_span, children))
+  Some(node(builder, long_ident.loc, long_ident.source_span, children))
 }
 
 ///|
@@ -70,7 +83,11 @@ fn CstNode::with_structured_long_ident(
         children.push(entry)
       }
       push_child(children, Some(label), long_ident)
-      node(self.kind, self.loc, self.source_span, children)
+      self.internal_rebuild(
+        loc=self.loc,
+        source_span=self.source_span,
+        children~,
+      )
     }
     None => self
   }
@@ -80,7 +97,7 @@ fn CstNode::with_structured_long_ident(
 fn CstNode::with_structured_name(
   self : CstNode,
   label : String,
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   source_labels : Array[String],
 ) -> CstNode {
   let sources : Array[CstNode] = []
@@ -91,14 +108,18 @@ fn CstNode::with_structured_name(
       }
     }
   }
-  match structured_name_node(kind, sources) {
+  match structured_name_node(builder, sources) {
     Some(name) => {
       let children : Array[(String?, CstNode)] = []
       for entry in self.children {
         children.push(entry)
       }
       push_child(children, Some(label), name)
-      node(self.kind, self.loc, self.source_span, children)
+      self.internal_rebuild(
+        loc=self.loc,
+        source_span=self.source_span,
+        children~,
+      )
     }
     None => self
   }
@@ -106,13 +127,27 @@ fn CstNode::with_structured_name(
 
 ///|
 fn CstNode::with_constructor_extra_info(self : CstNode) -> CstNode {
-  let kind : NodeKind = if self.has_child_label("type") &&
+  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if self.has_child_label(
+      "type",
+    ) &&
     self.has_child_label("pkg") {
-    ConstructorExtraInfo_TypeNameWithConstrPackage
+    fn(loc, source_span, children) {
+      let _ = children
+      @node.CstNode::constructor_extra_info_type_name_with_constr_package(
+        loc~,
+        source_span~,
+      )
+    }
   } else if self.has_child_label("type") {
-    ConstructorExtraInfo_TypeName
+    fn(loc, source_span, children) {
+      let _ = children
+      @node.CstNode::constructor_extra_info_type_name(loc~, source_span~)
+    }
   } else if self.has_child_label("pkg") {
-    ConstructorExtraInfo_Package
+    fn(loc, source_span, children) {
+      let _ = children
+      @node.CstNode::constructor_extra_info_package(loc~, source_span~)
+    }
   } else {
     let names = self.children_with_label("name")
     if names.length() == 2 &&
@@ -120,21 +155,30 @@ fn CstNode::with_constructor_extra_info(self : CstNode) -> CstNode {
       .lexical_name_value()
       .map(fn(name) { name.kind is Name_Package })
       .unwrap_or(false) {
-      ConstructorExtraInfo_Package
+      fn(loc, source_span, children) {
+        let _ = children
+        @node.CstNode::constructor_extra_info_package(loc~, source_span~)
+      }
     } else if names.length() >= 2 {
-      ConstructorExtraInfo_TypeName
+      fn(loc, source_span, children) {
+        let _ = children
+        @node.CstNode::constructor_extra_info_type_name(loc~, source_span~)
+      }
     } else {
-      ConstructorExtraInfo_None
+      fn(loc, source_span, children) {
+        let _ = children
+        @node.CstNode::constructor_extra_info_none(loc~, source_span~)
+      }
     }
   }
-  with_marker_child(self, "constructor_extra_info", kind)
+  with_marker_child(self, "constructor_extra_info", builder)
 }
 
 ///|
 fn CstNode::with_bool_marker(
   self : CstNode,
   label : String,
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   value : Bool,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -144,9 +188,9 @@ fn CstNode::with_bool_marker(
   push_child(
     children,
     Some(label),
-    bool_marker_node(kind, self.loc.end, self.source_span.1, value),
+    bool_marker_node(builder, self.loc.end, self.source_span.1, value),
   )
-  node(self.kind, self.loc, self.source_span, children)
+  self.internal_rebuild(loc=self.loc, source_span=self.source_span, children~)
 }
 
 ///|
@@ -156,7 +200,13 @@ fn accessor_node_from_token(token : CstNode) -> CstNode {
     None => {
       let value = token.lexical_name_value().unwrap_or(token)
       scalar_node(
-        Accessor_Label,
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::accessor_label(value~, loc~, source_span~)
+        },
         token.loc,
         token.source_span,
         String(value.string_payload().unwrap_or("")),
@@ -211,7 +261,11 @@ fn CstNode::with_direct_semantic_constant(self : CstNode) -> CstNode {
         children.push(entry)
       }
       push_child(children, Some("semantic_constant"), constant)
-      node(self.kind, self.loc, self.source_span, children)
+      self.internal_rebuild(
+        loc=self.loc,
+        source_span=self.source_span,
+        children~,
+      )
     }
     None => self
   }
@@ -232,9 +286,9 @@ fn CstNode::first_trailing_mark_descendant(self : CstNode) -> CstNode? {
 }
 
 ///|
-fn list_has_item_kind(node : CstNode, expected : NodeKind) -> Bool {
+fn list_has_item_kind(node : CstNode, pred : (NodeKind) -> Bool) -> Bool {
   for item in node.children_with_label("item") {
-    if item.kind == expected {
+    if pred(item.kind) {
       return true
     }
   }
@@ -242,19 +296,66 @@ fn list_has_item_kind(node : CstNode, expected : NodeKind) -> Bool {
 }
 
 ///|
-fn list_trailing_mark_kind(node : CstNode) -> NodeKind {
-  let mut trailing : NodeKind = TrailingMark_None
+fn list_trailing_mark_kind(
+  node : CstNode,
+) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
+  let mut trailing : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+    loc,
+    source_span,
+    children,
+  ) {
+    let _ = children
+    @node.CstNode::trailing_mark_none(loc~, source_span~)
+  }
   for i in 0..<node.children.length() {
     match node.children.get(i) {
-      Some((Some("item"), _)) => trailing = TrailingMark_None
+      Some((Some("item"), _)) =>
+        trailing = fn(loc, source_span, children) {
+          let _ = children
+          @node.CstNode::trailing_mark_none(loc~, source_span~)
+        }
       Some((Some("sep"), sep)) =>
         match sep.first_trailing_mark_descendant() {
-          Some(mark) => trailing = mark.kind
+          Some(mark) =>
+            trailing = match mark.kind {
+              TrailingMark_Comma =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_comma(loc~, source_span~)
+                }
+              TrailingMark_Semi =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_semi(loc~, source_span~)
+                }
+              _ =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_none(loc~, source_span~)
+                }
+            }
           None => ()
         }
       Some((Some("error"), error)) =>
         match error.first_trailing_mark_descendant() {
-          Some(mark) => trailing = mark.kind
+          Some(mark) =>
+            trailing = match mark.kind {
+              TrailingMark_Comma =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_comma(loc~, source_span~)
+                }
+              TrailingMark_Semi =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_semi(loc~, source_span~)
+                }
+              _ =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_none(loc~, source_span~)
+                }
+            }
           None => ()
         }
       _ => ()
@@ -267,7 +368,7 @@ fn list_trailing_mark_kind(node : CstNode) -> NodeKind {
 fn with_marker_child(
   source : CstNode,
   label : String,
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   for child in source.children {
@@ -276,9 +377,13 @@ fn with_marker_child(
   push_child(
     children,
     Some(label),
-    marker_node(kind, source.loc.end, source.source_span.1),
+    marker_node(builder, source.loc.end, source.source_span.1),
   )
-  node(source.kind, source.loc, source.source_span, children)
+  source.internal_rebuild(
+    loc=source.loc,
+    source_span=source.source_span,
+    children~,
+  )
 }
 
 ///|
