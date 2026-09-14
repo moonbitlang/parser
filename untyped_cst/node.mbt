@@ -28,14 +28,14 @@ pub fn ParseResult::root(self : ParseResult) -> CstNode {
 ///
 /// The view is empty when no diagnostics were reported.
 pub fn ParseResult::diagnostics_view(self : ParseResult) -> ArrayView[Report] {
-  self.diagnostics.view()
+  self.diagnostics.exact_view()
 }
 
 ///|
 fn ParseResult::docstrings_view(
   self : ParseResult,
 ) -> ArrayView[List[(Location, Comment)]] {
-  self.docstrings.view()
+  self.docstrings.exact_view()
 }
 
 ///|
