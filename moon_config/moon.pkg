@@ -3,7 +3,6 @@ import {
   "moonbitlang/lexer/tokens",
   "moonbitlang/lexer",
   "moonbitlang/core/immut/vector",
-  "moonbitlang/core/json",
 }
 
 import {
@@ -12,5 +11,4 @@ import {
 
 import {
   "moonbitlang/core/debug",
-  "moonbitlang/core/json",
 } for "wbtest"

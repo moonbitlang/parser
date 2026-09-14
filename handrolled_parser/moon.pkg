@@ -10,5 +10,4 @@ import {
 
 import {
   "moonbitlang/lexer",
-  "moonbitlang/core/json",
 } for "test"

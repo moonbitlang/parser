@@ -3,7 +3,6 @@ import {
   "moonbitlang/async",
   "moonbitlang/async/fs",
   "moonbitlang/async/stdio",
-  "moonbitlang/async/io",
   "moonbitlang/parser/fmt",
   "moonbitlang/core/env",
 }

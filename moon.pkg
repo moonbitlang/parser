@@ -9,7 +9,3 @@ import {
   "moonbitlang/core/list",
   "moonbitlang/core/debug",
 }
-
-import {
-  "moonbitlang/core/json",
-} for "test"
