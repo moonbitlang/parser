@@ -92,7 +92,7 @@ fn lex_tokens(
     ) -> StringView {
       let raw_end = env.calc_offset(rest, base~) - env.calc_offset(input, base~)
       add_metavar_error(
-        input.sub(start=0, end=raw_end),
+        input.exact_view(start=0, end=raw_end),
         rest,
         disabled_char,
         start_offset,
@@ -324,7 +324,7 @@ fn lex_tokens(
 
       // Byte literals - hex escape
       (re"^(?:b'\\x[0-9a-fA-F]{2}')" as raw, after=rest) => {
-        let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
+        let literal = raw.exact_view(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
         env.add_token_with_loc(
           BYTE(literal),
           start=env.calc_offset(input, base~),
@@ -335,7 +335,7 @@ fn lex_tokens(
 
       // Byte literals - octal escape
       (re"^(?:b'\\o[0-3][0-7]{2}')" as raw, after=rest) => {
-        let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
+        let literal = raw.exact_view(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
         env.add_token_with_loc(
           BYTE(literal),
           start=env.calc_offset(input, base~),
@@ -346,7 +346,9 @@ fn lex_tokens(
 
       // Byte literals - ASCII character
       (re"^(?:b'[\x00-\x7F]')" as raw, after=rest) => {
-        let ascii_char = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
+        let ascii_char = raw
+          .exact_view(start=2, end=raw.length() - 1)
+          .to_owned() // Remove b' and '
         env.add_token_with_loc(
           BYTE(ascii_char),
           start=env.calc_offset(input, base~),
@@ -357,7 +359,7 @@ fn lex_tokens(
 
       // Byte literals - escape sequences
       (re"^(?:b'\\[\\'\"`ntbrf/ ]')" as raw, after=rest) => {
-        let literal = raw.sub(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
+        let literal = raw.exact_view(start=2, end=raw.length() - 1).to_owned() // Remove b' and '
         env.add_token_with_loc(
           BYTE(literal),
           start=env.calc_offset(input, base~),
@@ -399,7 +401,7 @@ fn lex_tokens(
         // Need to handle integer..range specially
         let integer_end = integer_with_range.length() - 2 // Remove ".."
         let integer = integer_with_range
-          .sub(start=0, end=integer_end)
+          .exact_view(start=0, end=integer_end)
           .to_owned()
         env.add_token_with_loc(
           INT(integer),
@@ -438,7 +440,7 @@ fn lex_tokens(
       // Transparent post label identifiers (name~~) must be recognized before
       // ordinary post labels so the second `~` is part of the token.
       (re"^(?:[a-z_][a-zA-Z0-9_]*~~)" as raw, after=rest) => {
-        let ident = raw.sub(start=0, end=raw.length() - 2).to_owned()
+        let ident = raw.exact_view(start=0, end=raw.length() - 2).to_owned()
         env.add_token_with_loc(
           POST_LABEL_TRANSPARENT(ident),
           start=env.calc_offset(input, base~),
@@ -449,7 +451,7 @@ fn lex_tokens(
 
       // Post label identifiers (name~) - simplified pattern
       (re"^(?:[a-z_][a-zA-Z0-9_]*~)" as raw, after=rest) => {
-        let ident = raw.sub(start=0, end=raw.length() - 1).to_owned() // Remove ~
+        let ident = raw.exact_view(start=0, end=raw.length() - 1).to_owned() // Remove ~
         env.add_token_with_loc(
           POST_LABEL(ident),
           start=env.calc_offset(input, base~),
@@ -493,7 +495,7 @@ fn lex_tokens(
 
       // Augmented assignment operators
       (re"^(?:[+\-*/%]=)" as op, after=rest) => {
-        let op_char = op.sub(start=0, end=1).to_owned()
+        let op_char = op.exact_view(start=0, end=1).to_owned()
         env.add_token_with_loc(
           AUGMENTED_ASSIGNMENT(op_char),
           start=env.calc_offset(input, base~),
@@ -822,7 +824,7 @@ fn lex_tokens(
 
       // Dot with number
       (re"^(?:\.[0-9]+)" as dot_int, after=rest) => {
-        let digits_str = dot_int.sub(start=1, end=dot_int.length()) // Remove the '.'
+        let digits_str = dot_int.exact_view(start=1, end=dot_int.length()) // Remove the '.'
         let idx = @string.parse_int(digits_str) catch {
           _ => {
             let full_str = dot_int.to_owned()
@@ -1258,7 +1260,7 @@ fn lex_tokens(
           )
         }
         let content_str = multiline_str.to_owned()
-        let content = content_str.sub(start=2, end=content_str.length()) // Remove #|
+        let content = content_str.exact_view(start=2, end=content_str.length()) // Remove #|
         env.add_token_with_loc(
           MULTILINE_STRING(content.to_owned()),
           start=start_pos,
@@ -1272,7 +1274,9 @@ fn lex_tokens(
         re"^(?:@[a-zA-Z_][a-zA-Z0-9_\-]*(/[a-zA-Z_][a-zA-Z0-9_\-]*)*)" as raw,
         after=rest,
       ) => {
-        let pkg_name_without_at = raw.sub(start=1, end=raw.length()).to_owned()
+        let pkg_name_without_at = raw
+          .exact_view(start=1, end=raw.length())
+          .to_owned()
         env.add_token_with_loc(
           PACKAGE_NAME(pkg_name_without_at),
           start=env.calc_offset(input, base~),

@@ -14,16 +14,16 @@ fn mk_base_pos(pos : Position) -> @basic.BasePos {
 ///|
 fn make_int_literal(lit : String) -> Constant {
   if lit.has_suffix("L") {
-    let base = lit.sub(end=lit.length() - 1)
+    let base = lit.exact_view(end=lit.length() - 1)
     if base.has_suffix("U") {
-      UInt64(base.sub(end=base.length() - 1).to_owned())
+      UInt64(base.exact_view(end=base.length() - 1).to_owned())
     } else {
       Int64(base.to_owned())
     }
   } else if lit.has_suffix("U") {
-    UInt(lit.sub(end=lit.length() - 1).to_owned())
+    UInt(lit.exact_view(end=lit.length() - 1).to_owned())
   } else if lit.has_suffix("N") {
-    BigInt(lit.sub(end=lit.length() - 1).to_owned())
+    BigInt(lit.exact_view(end=lit.length() - 1).to_owned())
   } else {
     Int(lit)
   }
@@ -32,7 +32,7 @@ fn make_int_literal(lit : String) -> Constant {
 ///|
 fn make_float_literal(lit : String) -> Constant {
   if lit.has_suffix("F") {
-    Float(lit.sub(end=lit.length() - 1).to_owned())
+    Float(lit.exact_view(end=lit.length() - 1).to_owned())
   } else {
     Float(lit)
   }
