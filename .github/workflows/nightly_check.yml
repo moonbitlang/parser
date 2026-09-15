@@ -8,6 +8,10 @@ on:
       - main
   pull_request:
 
+env:
+  MOON_COVE_REPORT_ENABLED: "1"
+  MOON_WASM_NEW_ALLOCATOR: "1"
+
 jobs:
   check:
     strategy:
@@ -52,3 +56,9 @@ jobs:
       - name: moon test
         run: |
           moon test --target all
+
+      - name: coverage report
+        timeout-minutes: 10
+        run: |
+          moon test --target wasm --enable-coverage
+          moon coverage report -f summary | tee -a "$GITHUB_STEP_SUMMARY"
