@@ -291,3 +291,266 @@ test "ordinary type applications and variable patterns still lower correctly" {
   assert_expr_ast_equiv("match x { y => y }")
   assert_expr_ast_equiv("match x { (y : Int) => y }")
 }
+
+///|
+fn refactor_assert_source_range(
+  node : @untyped_cst.CstNode,
+  source : String,
+  text : String,
+  span : (Int, Int),
+  start : (Int, Int, Int),
+  end : (Int, Int, Int),
+) -> Unit raise {
+  @test.assert_eq(node.text(source), text[:])
+  @test.assert_eq(node.source_span, span)
+  @test.assert_eq(
+    (node.loc.start.lnum, node.loc.start.bol, node.loc.start.cnum),
+    start,
+  )
+  @test.assert_eq((node.loc.end.lnum, node.loc.end.bol, node.loc.end.cnum), end)
+}
+
+///|
+test "async tests retain single and consecutive comments before test" {
+  for multiple in [false, true] {
+    let source = if multiple {
+      "async // keep\n // second\n test \"named\" {}"
+    } else {
+      "async // keep\n test \"named\" {}"
+    }
+    let node = refactor_find_node(source, kind => kind is Impl_Test)
+    let labels = [Some("kw"), Some("trivia")]
+    if multiple {
+      labels.push(Some("trivia"))
+    }
+    labels.append([
+      Some("kw"),
+      Some("name"),
+      Some("test_name"),
+      Some("body"),
+      Some("vis"),
+      Some("declare"),
+      Some("async"),
+      Some("async_loc"),
+      Some("decl_loc"),
+    ])
+    @test.assert_eq(refactor_labels(node), labels)
+    let comments = node.children_with_label("trivia")
+    @test.assert_eq(comments.length(), if multiple { 2 } else { 1 })
+    for comment in comments {
+      @test.assert_eq(
+        comment.kind is @untyped_cst.NodeKind::Syntax_Comment,
+        true,
+      )
+    }
+    refactor_assert_source_range(
+      comments[0],
+      source,
+      "// keep",
+      (6, 13),
+      (1, 0, 6),
+      (1, 0, 13),
+    )
+    if multiple {
+      refactor_assert_source_range(
+        comments[1],
+        source,
+        "// second",
+        (15, 24),
+        (2, 14, 15),
+        (2, 14, 24),
+      )
+    }
+    let line = if multiple { 3 } else { 2 }
+    let bol = if multiple { 25 } else { 14 }
+    refactor_assert_source_range(
+      node,
+      source,
+      source,
+      (0, source.length()),
+      (1, 0, 0),
+      (line, bol, source.length()),
+    )
+    let test_name = node.first_child_with_label("test_name").unwrap()
+    @test.assert_eq(test_name.string_payload(), Some("named"))
+    refactor_assert_source_range(
+      test_name,
+      source,
+      "\"named\"",
+      (bol + 6, bol + 13),
+      (line, bol, bol + 6),
+      (line, bol, bol + 13),
+    )
+    assert_handrolled_cst_ast_equiv(source)
+  }
+}
+
+///|
+test "extend items retain comments on both sides of as" {
+  let source = "extend T with Trait::{f // before\n as // after\n g}"
+  let node = refactor_find_node(source, kind => kind is Clause_ExtendItem)
+  @test.assert_eq(refactor_labels(node), [
+    Some("target"),
+    Some("trivia"),
+    Some("kw"),
+    Some("trivia"),
+    Some("name"),
+    Some("semantic_name"),
+  ])
+  let comments = node.children_with_label("trivia")
+  @test.assert_eq(comments.length(), 2)
+  for comment in comments {
+    @test.assert_eq(comment.kind is @untyped_cst.NodeKind::Syntax_Comment, true)
+  }
+  refactor_assert_source_range(
+    comments[0],
+    source,
+    "// before",
+    (24, 33),
+    (1, 0, 24),
+    (1, 0, 33),
+  )
+  refactor_assert_source_range(
+    node.children[2].1,
+    source,
+    "as",
+    (35, 37),
+    (2, 34, 35),
+    (2, 34, 37),
+  )
+  refactor_assert_source_range(
+    comments[1],
+    source,
+    "// after",
+    (38, 46),
+    (2, 34, 38),
+    (2, 34, 46),
+  )
+  refactor_assert_source_range(
+    node.children[4].1,
+    source,
+    "g",
+    (48, 49),
+    (3, 47, 48),
+    (3, 47, 49),
+  )
+  refactor_assert_source_range(
+    node,
+    source,
+    "f // before\n as // after\n g",
+    (22, 49),
+    (1, 0, 22),
+    (3, 47, 49),
+  )
+  assert_handrolled_cst_ast_equiv(source)
+}
+
+///|
+test "import packages retain consecutive comments and UTF-16 spans" {
+  let source = "import { \"pkg\" // keep 🐇\n // second\n }"
+  let node = refactor_find_node(source, kind => kind is Clause_ImportPackage)
+  @test.assert_eq(refactor_labels(node), [
+    Some("path"),
+    Some("trivia"),
+    Some("trivia"),
+  ])
+  let comments = node.children_with_label("trivia")
+  @test.assert_eq(comments.length(), 2)
+  for comment in comments {
+    @test.assert_eq(comment.kind is @untyped_cst.NodeKind::Syntax_Comment, true)
+  }
+  refactor_assert_source_range(
+    comments[0],
+    source,
+    "// keep 🐇",
+    (15, 25),
+    (1, 0, 15),
+    (1, 0, 24),
+  )
+  refactor_assert_source_range(
+    comments[1],
+    source,
+    "// second",
+    (27, 36),
+    (2, 25, 26),
+    (2, 25, 35),
+  )
+  refactor_assert_source_range(
+    node,
+    source,
+    "\"pkg\" // keep 🐇\n // second",
+    (9, 36),
+    (1, 0, 9),
+    (2, 25, 35),
+  )
+  assert_handrolled_cst_ast_equiv(source)
+}
+
+///|
+test "invalid record patterns retain nested patterns and commas" {
+  for source in ["match x { {_,} => 0 }", "match x { {_, a} => 0 }"] {
+    let parsed = @untyped_cst.parse_expression(source)
+    guard api_find_node(parsed.root(), node => {
+        node.kind is List_RecordPatternFieldList
+      })
+      is Some(list) else {
+      fail("expected record pattern field list")
+    }
+    @test.assert_eq(
+      refactor_labels(list),
+      if source == "match x { {_,} => 0 }" {
+        [Some("open"), Some("item"), Some("sep"), Some("close")]
+      } else {
+        [Some("open"), Some("item"), Some("sep"), Some("item"), Some("close")]
+      },
+    )
+    let missing = list.children[1].1
+    @test.assert_eq(
+      missing.kind is @untyped_cst.NodeKind::Pattern_MissingPattern,
+      true,
+    )
+    @test.assert_eq(refactor_labels(missing), [Some("pattern")])
+    let pattern = missing.children[0].1
+    @test.assert_eq(pattern.kind is @untyped_cst.NodeKind::Pattern_Any, true)
+    @test.assert_eq(refactor_labels(pattern), [Some("name")])
+    for node in [missing, pattern, pattern.children[0].1] {
+      refactor_assert_source_range(
+        node,
+        source,
+        "_",
+        (11, 12),
+        (1, 0, 11),
+        (1, 0, 12),
+      )
+    }
+    let comma = list.children[2].1
+    @test.assert_eq(comma.kind is @untyped_cst.NodeKind::Syntax_Separator, true)
+    refactor_assert_source_range(
+      comma,
+      source,
+      ",",
+      (12, 13),
+      (1, 0, 12),
+      (1, 0, 13),
+    )
+    if list.children.length() == 5 {
+      let field = list.children[3].1
+      @test.assert_eq(field.kind is @untyped_cst.NodeKind::Field_Pattern, true)
+      refactor_assert_source_range(
+        field,
+        source,
+        "a",
+        (14, 15),
+        (1, 0, 14),
+        (1, 0, 15),
+      )
+    }
+  }
+}
+
+///|
+test "invalid record pattern diagnostics match handrolled locations and messages" {
+  for source in ["match x { {_,} => 0 }", "match x { {_, a} => 0 }"] {
+    assert_expression_acceptance("invalid record pattern field", source, false)
+  }
+}

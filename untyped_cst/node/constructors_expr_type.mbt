@@ -620,23 +620,14 @@ pub fn CstNode::pattern_with(
 pub fn CstNode::pattern_missing_pattern(
   loc~ : Location,
   source_span~ : (Int, Int),
-  error~ : ArrayView[CstNode],
-  token? : CstNode,
-  lex_scan_case_pattern? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for child in error {
-    children.push((Some("error"), child))
-  }
-  match token {
-    Some(child) => children.push((Some("token"), child))
-    None => ()
-  }
-  match lex_scan_case_pattern {
-    Some(child) => children.push((Some("lex_scan_case_pattern"), child))
-    None => ()
-  }
-  node(NodeKind::Pattern_MissingPattern, loc, source_span, children)
+  node(
+    NodeKind::Pattern_MissingPattern,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

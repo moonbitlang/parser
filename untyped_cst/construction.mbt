@@ -359,6 +359,7 @@ fn declaration_children(
         entries.push(CstDeclarationChild::SemanticTypeName(child))
       Some("stub") => entries.push(CstDeclarationChild::Stub(child))
       Some("stub_token") => entries.push(CstDeclarationChild::StubToken(child))
+      Some("test_name") => entries.push(CstDeclarationChild::TestName(child))
       Some("trait") => entries.push(CstDeclarationChild::Trait(child))
       Some("trivia") => entries.push(CstDeclarationChild::Trivia(child))
       Some("type") => entries.push(CstDeclarationChild::Type_(child))

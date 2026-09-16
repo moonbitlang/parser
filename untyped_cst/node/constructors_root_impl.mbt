@@ -516,66 +516,14 @@ pub fn CstNode::impl_impl_relation(
 pub fn CstNode::impl_test(
   loc~ : Location,
   source_span~ : (Int, Int),
-  attrs~ : ArrayView[CstNode],
-  kw~ : ArrayView[CstNode],
-  name? : CstNode,
-  test_name? : CstNode,
-  params? : CstNode,
-  body? : CstNode,
-  error~ : ArrayView[CstNode],
-  vis? : CstNode,
-  declare_? : CstNode,
-  async_? : CstNode,
-  async_loc? : CstNode,
-  decl_loc? : CstNode,
+  entries~ : ArrayView[CstDeclarationChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for child in attrs {
-    children.push((Some("attrs"), child))
-  }
-  for child in kw {
-    children.push((Some("kw"), child))
-  }
-  match name {
-    Some(child) => children.push((Some("name"), child))
-    None => ()
-  }
-  match test_name {
-    Some(child) => children.push((Some("test_name"), child))
-    None => ()
-  }
-  match params {
-    Some(child) => children.push((Some("params"), child))
-    None => ()
-  }
-  match body {
-    Some(child) => children.push((Some("body"), child))
-    None => ()
-  }
-  for child in error {
-    children.push((Some("error"), child))
-  }
-  match vis {
-    Some(child) => children.push((Some("vis"), child))
-    None => ()
-  }
-  match declare_ {
-    Some(child) => children.push((Some("declare"), child))
-    None => ()
-  }
-  match async_ {
-    Some(child) => children.push((Some("async"), child))
-    None => ()
-  }
-  match async_loc {
-    Some(child) => children.push((Some("async_loc"), child))
-    None => ()
-  }
-  match decl_loc {
-    Some(child) => children.push((Some("decl_loc"), child))
-    None => ()
-  }
-  node(NodeKind::Impl_Test, loc, source_span, children)
+  node(
+    NodeKind::Impl_Test,
+    loc,
+    source_span,
+    entries_from_cstdeclarationchild(entries),
+  )
 }
 
 ///|

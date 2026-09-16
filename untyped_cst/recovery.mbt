@@ -219,18 +219,8 @@ fn ParserState::missing_expr_node(self : ParserState) -> CstNode {
 ///|
 fn ParserState::missing_pattern_node(self : ParserState) -> CstNode {
   self.missing_syntax_node(fn(loc, source_span, children) {
-    let error = CstNode::children_with_label_from(children, "error")
-    let token = CstNode::first_child_with_label_from(children, "token")
-    let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-      children, "lex_scan_case_pattern",
-    )
-    @node.CstNode::pattern_missing_pattern(
-      loc~,
-      source_span~,
-      error~,
-      token?,
-      lex_scan_case_pattern?,
-    )
+    let entries = recovery_children(children)
+    @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
   })
 }
 

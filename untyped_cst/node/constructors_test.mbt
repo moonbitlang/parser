@@ -391,7 +391,7 @@ test "every NodeKind has one typed CstNode constructor" {
     @node.CstNode::impl_trait(loc~, source_span=span, entries=[]),
     @node.CstNode::impl_impl_method(loc~, source_span=span, entries=[]),
     @node.CstNode::impl_impl_relation(loc~, source_span=span, entries=[]),
-    @node.CstNode::impl_test(loc~, source_span=span, attrs=[], kw=[], error=[]),
+    @node.CstNode::impl_test(loc~, source_span=span, entries=[]),
     @node.CstNode::expr_ident(loc~, source_span=span, name=[]),
     @node.CstNode::expr_constant(loc~, source_span=span, entries=[]),
     @node.CstNode::expr_interp(loc~, source_span=span, token=missing),
@@ -700,7 +700,7 @@ test "every NodeKind has one typed CstNode constructor" {
       body=missing,
       close=missing,
     ),
-    @node.CstNode::pattern_missing_pattern(loc~, source_span=span, error=[]),
+    @node.CstNode::pattern_missing_pattern(loc~, source_span=span, entries=[]),
     @node.CstNode::pattern_group(loc~, source_span=span),
     @node.CstNode::array_pattern_pattern(
       loc~,
@@ -1067,8 +1067,12 @@ test "every NodeKind has one typed CstNode constructor" {
     ),
     @node.CstNode::clause_constructor_decl(loc~, source_span=span, attrs=[]),
     @node.CstNode::clause_using_item(loc~, source_span=span, target=missing),
-    @node.CstNode::clause_import_package(loc~, source_span=span, path=missing),
-    @node.CstNode::clause_extend_item(loc~, source_span=span, target=missing),
+    @node.CstNode::clause_import_package(loc~, source_span=span, entries=[
+      Path(missing),
+    ]),
+    @node.CstNode::clause_extend_item(loc~, source_span=span, entries=[
+      Target(missing),
+    ]),
     @node.CstNode::clause_with_binding(loc~, source_span=span, error=[]),
     @node.CstNode::clause_deriving_directive(loc~, source_span=span, name=[]),
     @node.CstNode::list_argument_list(loc~, source_span=span, entries=[]),

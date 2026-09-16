@@ -443,18 +443,8 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       let pos = state.current_position()
       node(
         fn(loc, source_span, children) {
-          let error = CstNode::children_with_label_from(children, "error")
-          let token = CstNode::first_child_with_label_from(children, "token")
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_missing_pattern(
-            loc~,
-            source_span~,
-            error~,
-            token?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
         },
         empty_loc(pos),
         empty_span(state.offset_for_position(pos)),
@@ -507,18 +497,8 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       }
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let error = CstNode::children_with_label_from(children, "error")
-          let token = CstNode::first_child_with_label_from(children, "token")
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_missing_pattern(
-            loc~,
-            source_span~,
-            error~,
-            token?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
         },
         invalid,
       )
@@ -526,18 +506,8 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
     None =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let error = CstNode::children_with_label_from(children, "error")
-          let token = CstNode::first_child_with_label_from(children, "token")
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_missing_pattern(
-            loc~,
-            source_span~,
-            error~,
-            token?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
         },
         [],
       )
@@ -2505,40 +2475,8 @@ fn classify_top_item_node_builder(
       }
     TopItemKind::Test =>
       fn(loc, source_span, children) {
-        let attrs = CstNode::children_with_label_from(children, "attrs")
-        let kw = CstNode::children_with_label_from(children, "kw")
-        let name = CstNode::first_child_with_label_from(children, "name")
-        let test_name = CstNode::first_child_with_label_from(
-          children, "test_name",
-        )
-        let params = CstNode::first_child_with_label_from(children, "params")
-        let body = CstNode::first_child_with_label_from(children, "body")
-        let error = CstNode::children_with_label_from(children, "error")
-        let vis = CstNode::first_child_with_label_from(children, "vis")
-        let declare_ = CstNode::first_child_with_label_from(children, "declare")
-        let async_ = CstNode::first_child_with_label_from(children, "async")
-        let async_loc = CstNode::first_child_with_label_from(
-          children, "async_loc",
-        )
-        let decl_loc = CstNode::first_child_with_label_from(
-          children, "decl_loc",
-        )
-        @node.CstNode::impl_test(
-          loc~,
-          source_span~,
-          attrs~,
-          kw~,
-          name?,
-          test_name?,
-          params?,
-          body?,
-          error~,
-          vis?,
-          declare_?,
-          async_?,
-          async_loc?,
-          decl_loc?,
-        )
+        let entries = declaration_children(children)
+        @node.CstNode::impl_test(loc~, source_span~, entries~)
       }
   }
 }
@@ -5272,18 +5210,8 @@ fn arrow_pattern_from_expr(expr : CstNode) -> CstNode? {
       Some(
         node(
           fn(loc, source_span, children) {
-            let error = CstNode::children_with_label_from(children, "error")
-            let token = CstNode::first_child_with_label_from(children, "token")
-            let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-              children, "lex_scan_case_pattern",
-            )
-            @node.CstNode::pattern_missing_pattern(
-              loc~,
-              source_span~,
-              error~,
-              token?,
-              lex_scan_case_pattern?,
-            )
+            let entries = recovery_children(children)
+            @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
           },
           expr.loc,
           expr.source_span,
@@ -9658,18 +9586,8 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
     } else {
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let error = CstNode::children_with_label_from(children, "error")
-          let token = CstNode::first_child_with_label_from(children, "token")
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_missing_pattern(
-            loc~,
-            source_span~,
-            error~,
-            token?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
         },
         [],
       )
@@ -10723,19 +10641,11 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
         let wildcard = with_marker_child(
           state.construct_from_children(
             fn(loc, source_span, children) {
-              let error = CstNode::children_with_label_from(children, "error")
-              let token = CstNode::first_child_with_label_from(
-                children, "token",
-              )
-              let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-                children, "lex_scan_case_pattern",
-              )
+              let entries = recovery_children(children)
               @node.CstNode::pattern_missing_pattern(
                 loc~,
                 source_span~,
-                error~,
-                token?,
-                lex_scan_case_pattern?,
+                entries~,
               )
             },
             [(Some("token"), todo)],
@@ -10988,19 +10898,11 @@ fn parse_match_case(state : ParserState) -> CstNode {
           Some("pattern"),
           state.construct_from_children(
             fn(loc, source_span, children) {
-              let error = CstNode::children_with_label_from(children, "error")
-              let token = CstNode::first_child_with_label_from(
-                children, "token",
-              )
-              let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-                children, "lex_scan_case_pattern",
-              )
+              let entries = recovery_children(children)
               @node.CstNode::pattern_missing_pattern(
                 loc~,
                 source_span~,
-                error~,
-                token?,
-                lex_scan_case_pattern?,
+                entries~,
               )
             },
             [(Some("token"), todo)],
@@ -13534,18 +13436,8 @@ fn parse_pattern_atom(
       !(allow_brace_pattern_start && tok.kind() is TokenKind::TK_LBRACE) =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let error = CstNode::children_with_label_from(children, "error")
-          let token = CstNode::first_child_with_label_from(children, "token")
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_missing_pattern(
-            loc~,
-            source_span~,
-            error~,
-            token?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
         },
         [],
       )
@@ -13852,18 +13744,8 @@ fn parse_pattern_atom(
       }
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let error = CstNode::children_with_label_from(children, "error")
-          let token = CstNode::first_child_with_label_from(children, "token")
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_missing_pattern(
-            loc~,
-            source_span~,
-            error~,
-            token?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
         },
         children,
       )
@@ -13871,18 +13753,8 @@ fn parse_pattern_atom(
     None =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let error = CstNode::children_with_label_from(children, "error")
-          let token = CstNode::first_child_with_label_from(children, "token")
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_missing_pattern(
-            loc~,
-            source_span~,
-            error~,
-            token?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
         },
         [],
       )
@@ -13937,18 +13809,8 @@ fn parse_single_token_pattern(
   } else {
     state.construct_from_children(
       fn(loc, source_span, children) {
-        let error = CstNode::children_with_label_from(children, "error")
-        let token = CstNode::first_child_with_label_from(children, "token")
-        let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-          children, "lex_scan_case_pattern",
-        )
-        @node.CstNode::pattern_missing_pattern(
-          loc~,
-          source_span~,
-          error~,
-          token?,
-          lex_scan_case_pattern?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
       },
       [],
     )
@@ -14897,18 +14759,8 @@ fn parse_record_pattern_item(state : ParserState) -> CstNode {
     source_span,
     children,
   ) {
-    let error = CstNode::children_with_label_from(children, "error")
-    let token = CstNode::first_child_with_label_from(children, "token")
-    let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-      children, "lex_scan_case_pattern",
-    )
-    @node.CstNode::pattern_missing_pattern(
-      loc~,
-      source_span~,
-      error~,
-      token?,
-      lex_scan_case_pattern?,
-    )
+    let entries = recovery_children(children)
+    @node.CstNode::pattern_missing_pattern(loc~, source_span~, entries~)
   }
   match state.peek() {
     Some((DOTDOT, _, _)) => {
@@ -16887,18 +16739,8 @@ fn parse_import_package_item(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let path = CstNode::first_child_with_label_from(children, "path").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let alias_ = CstNode::first_child_with_label_from(children, "alias")
-      let trivia = CstNode::first_child_with_label_from(children, "trivia")
-      @node.CstNode::clause_import_package(
-        loc~,
-        source_span~,
-        path~,
-        alias_?,
-        trivia?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::clause_import_package(loc~, source_span~, entries~)
     },
     children,
   )
@@ -16942,22 +16784,8 @@ fn parse_extend_name_item(state : ParserState) -> CstNode {
   state
   .construct_from_children(
     fn(loc, source_span, children) {
-      let target = CstNode::first_child_with_label_from(children, "target").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let kw = CstNode::first_child_with_label_from(children, "kw")
-      let name = CstNode::first_child_with_label_from(children, "name")
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
-      @node.CstNode::clause_extend_item(
-        loc~,
-        source_span~,
-        target~,
-        kw?,
-        name?,
-        semantic_name?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::clause_extend_item(loc~, source_span~, entries~)
     },
     children,
   )

@@ -642,47 +642,28 @@ pub fn CstNode::clause_using_item(
 pub fn CstNode::clause_import_package(
   loc~ : Location,
   source_span~ : (Int, Int),
-  path~ : CstNode,
-  alias_? : CstNode,
-  trivia? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("path"), path))
-  match alias_ {
-    Some(child) => children.push((Some("alias"), child))
-    None => ()
-  }
-  match trivia {
-    Some(child) => children.push((Some("trivia"), child))
-    None => ()
-  }
-  node(NodeKind::Clause_ImportPackage, loc, source_span, children)
+  node(
+    NodeKind::Clause_ImportPackage,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
 pub fn CstNode::clause_extend_item(
   loc~ : Location,
   source_span~ : (Int, Int),
-  target~ : CstNode,
-  kw? : CstNode,
-  name? : CstNode,
-  semantic_name? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("target"), target))
-  match kw {
-    Some(child) => children.push((Some("kw"), child))
-    None => ()
-  }
-  match name {
-    Some(child) => children.push((Some("name"), child))
-    None => ()
-  }
-  match semantic_name {
-    Some(child) => children.push((Some("semantic_name"), child))
-    None => ()
-  }
-  node(NodeKind::Clause_ExtendItem, loc, source_span, children)
+  node(
+    NodeKind::Clause_ExtendItem,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
