@@ -480,6 +480,7 @@ fn recovery_children(
       Some("group") => entries.push(CstRecoveryChild::Group(child))
       Some("guard") => entries.push(CstRecoveryChild::Guard(child))
       Some("has_try") => entries.push(CstRecoveryChild::HasTry(child))
+      Some("head") => entries.push(CstRecoveryChild::Head(child))
       Some("header_loc") => entries.push(CstRecoveryChild::HeaderLoc(child))
       Some("hole_kind") => entries.push(CstRecoveryChild::HoleKind(child))
       Some("index") => entries.push(CstRecoveryChild::Index(child))

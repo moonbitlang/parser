@@ -47,3 +47,35 @@ test "compatibility path retains public node-kind classifiers" {
     true,
   )
 }
+
+///|
+test "type-qualified enum cases work through both package paths" {
+  let parsed = @untyped_cst.parse_expression("x")
+  let ident : @node.CstNode = parsed
+    .root()
+    .first_child_with_label("expr")
+    .unwrap()
+  @test.assert_eq(ident.kind is @untyped_cst.NodeKind::Expr_Ident, true)
+  @test.assert_eq(ident.kind is @node.NodeKind::Expr_Ident, true)
+  let payloads : Array[@untyped_cst.NodePayload] = [
+    @untyped_cst.NodePayload::String("x"),
+    @untyped_cst.NodePayload::Int(3),
+    @untyped_cst.NodePayload::Bool(true),
+  ]
+  for payload in payloads {
+    let direct : @node.NodePayload = payload
+    let leaf : @untyped_cst.CstNode = @node.CstNode::leaf(
+      payload=direct,
+      loc=ident.loc,
+      source_span=ident.source_span,
+    )
+    guard leaf.kind is @untyped_cst.NodeKind::Leaf(compat_payload) else {
+      fail("expected leaf through compatibility path")
+    }
+    guard leaf.kind is @node.NodeKind::Leaf(direct_payload) else {
+      fail("expected leaf through direct path")
+    }
+    @test.assert_eq(compat_payload, payload)
+    @test.assert_eq(direct_payload, payload)
+  }
+}

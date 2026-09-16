@@ -210,43 +210,14 @@ pub fn CstNode::expr_hole(
 pub fn CstNode::expr_constr(
   loc~ : Location,
   source_span~ : (Int, Int),
-  name~ : ArrayView[CstNode],
-  type_? : CstNode,
-  op? : CstNode,
-  pkg? : CstNode,
-  field? : CstNode,
-  semantic_name? : CstNode,
-  constructor_extra_info? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for child in name {
-    children.push((Some("name"), child))
-  }
-  match type_ {
-    Some(child) => children.push((Some("type"), child))
-    None => ()
-  }
-  match op {
-    Some(child) => children.push((Some("op"), child))
-    None => ()
-  }
-  match pkg {
-    Some(child) => children.push((Some("pkg"), child))
-    None => ()
-  }
-  match field {
-    Some(child) => children.push((Some("field"), child))
-    None => ()
-  }
-  match semantic_name {
-    Some(child) => children.push((Some("semantic_name"), child))
-    None => ()
-  }
-  match constructor_extra_info {
-    Some(child) => children.push((Some("constructor_extra_info"), child))
-    None => ()
-  }
-  node(NodeKind::Expr_Constr, loc, source_span, children)
+  node(
+    NodeKind::Expr_Constr,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -345,21 +316,14 @@ pub fn CstNode::expr_proof_let(
 pub fn CstNode::pattern_var(
   loc~ : Location,
   source_span~ : (Int, Int),
-  name~ : CstNode,
-  semantic_name? : CstNode,
-  lex_scan_case_pattern? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("name"), name))
-  match semantic_name {
-    Some(child) => children.push((Some("semantic_name"), child))
-    None => ()
-  }
-  match lex_scan_case_pattern {
-    Some(child) => children.push((Some("lex_scan_case_pattern"), child))
-    None => ()
-  }
-  node(NodeKind::Pattern_Var, loc, source_span, children)
+  node(
+    NodeKind::Pattern_Var,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -623,15 +587,14 @@ pub fn CstNode::pattern_range(
 pub fn CstNode::pattern_constraint(
   loc~ : Location,
   source_span~ : (Int, Int),
-  pattern~ : CstNode,
-  op~ : CstNode,
-  type_~ : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("pattern"), pattern))
-  children.push((Some("op"), op))
-  children.push((Some("type"), type_))
-  node(NodeKind::Pattern_Constraint, loc, source_span, children)
+  node(
+    NodeKind::Pattern_Constraint,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -839,13 +802,14 @@ pub fn CstNode::type_arrow(
 pub fn CstNode::type_application(
   loc~ : Location,
   source_span~ : (Int, Int),
-  func~ : CstNode,
-  arg~ : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("func"), func))
-  children.push((Some("arg"), arg))
-  node(NodeKind::Type_Application, loc, source_span, children)
+  node(
+    NodeKind::Type_Application,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -902,19 +866,14 @@ pub fn CstNode::type_any(
 pub fn CstNode::type_group(
   loc~ : Location,
   source_span~ : (Int, Int),
-  body? : CstNode,
-  type_? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match body {
-    Some(child) => children.push((Some("body"), child))
-    None => ()
-  }
-  match type_ {
-    Some(child) => children.push((Some("type"), child))
-    None => ()
-  }
-  node(NodeKind::Type_Group, loc, source_span, children)
+  node(
+    NodeKind::Type_Group,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -1434,74 +1393,42 @@ pub fn CstNode::array_element_spread(
 pub fn CstNode::parameter_discard_positional(
   loc~ : Location,
   source_span~ : (Int, Int),
-  pattern? : CstNode,
-  op? : CstNode,
-  type_? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match pattern {
-    Some(child) => children.push((Some("pattern"), child))
-    None => ()
-  }
-  match op {
-    Some(child) => children.push((Some("op"), child))
-    None => ()
-  }
-  match type_ {
-    Some(child) => children.push((Some("type"), child))
-    None => ()
-  }
-  node(NodeKind::Parameter_DiscardPositional, loc, source_span, children)
+  node(
+    NodeKind::Parameter_DiscardPositional,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
 pub fn CstNode::parameter_positional(
   loc~ : Location,
   source_span~ : (Int, Int),
-  error? : CstNode,
-  pattern? : CstNode,
-  op? : CstNode,
-  type_? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match error {
-    Some(child) => children.push((Some("error"), child))
-    None => ()
-  }
-  match pattern {
-    Some(child) => children.push((Some("pattern"), child))
-    None => ()
-  }
-  match op {
-    Some(child) => children.push((Some("op"), child))
-    None => ()
-  }
-  match type_ {
-    Some(child) => children.push((Some("type"), child))
-    None => ()
-  }
-  node(NodeKind::Parameter_Positional, loc, source_span, children)
+  node(
+    NodeKind::Parameter_Positional,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
 pub fn CstNode::parameter_labelled(
   loc~ : Location,
   source_span~ : (Int, Int),
-  pattern~ : CstNode,
-  op? : CstNode,
-  type_? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("pattern"), pattern))
-  match op {
-    Some(child) => children.push((Some("op"), child))
-    None => ()
-  }
-  match type_ {
-    Some(child) => children.push((Some("type"), child))
-    None => ()
-  }
-  node(NodeKind::Parameter_Labelled, loc, source_span, children)
+  node(
+    NodeKind::Parameter_Labelled,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -1522,25 +1449,14 @@ pub fn CstNode::parameter_optional(
 pub fn CstNode::parameter_question_optional(
   loc~ : Location,
   source_span~ : (Int, Int),
-  pattern~ : CstNode,
-  question? : CstNode,
-  op~ : ArrayView[CstNode],
-  type_? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("pattern"), pattern))
-  match question {
-    Some(child) => children.push((Some("question"), child))
-    None => ()
-  }
-  for child in op {
-    children.push((Some("op"), child))
-  }
-  match type_ {
-    Some(child) => children.push((Some("type"), child))
-    None => ()
-  }
-  node(NodeKind::Parameter_QuestionOptional, loc, source_span, children)
+  node(
+    NodeKind::Parameter_QuestionOptional,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

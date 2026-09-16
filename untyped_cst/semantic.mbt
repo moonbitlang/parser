@@ -845,22 +845,8 @@ fn semantic_var_pattern(
   )
   node(
     fn(loc, source_span, children) {
-      let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
-      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-        children, "lex_scan_case_pattern",
-      )
-      @node.CstNode::pattern_var(
-        loc~,
-        source_span~,
-        name~,
-        semantic_name?,
-        lex_scan_case_pattern?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::pattern_var(loc~, source_span~, entries~)
     },
     loc,
     source_span,

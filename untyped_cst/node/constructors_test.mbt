@@ -538,15 +538,11 @@ test "every NodeKind has one typed CstNode constructor" {
       operator=missing,
       rhs=missing,
     ),
-    @node.CstNode::expr_if(
-      loc~,
-      source_span=span,
-      kw=missing,
-      cond=missing,
-      error=[],
-      body=missing,
-      else_=[],
-    ),
+    @node.CstNode::expr_if(loc~, source_span=span, entries=[
+      Kw(missing),
+      Cond(missing),
+      Body(missing),
+    ]),
     @node.CstNode::expr_match(loc~, source_span=span, entries=[]),
     @node.CstNode::expr_try(loc~, source_span=span, entries=[]),
     @node.CstNode::expr_try_operator(
@@ -630,7 +626,7 @@ test "every NodeKind has one typed CstNode constructor" {
       body=missing,
     ),
     @node.CstNode::expr_hole(loc~, source_span=span, token=missing),
-    @node.CstNode::expr_constr(loc~, source_span=span, name=[]),
+    @node.CstNode::expr_constr(loc~, source_span=span, entries=[]),
     @node.CstNode::expr_multiline_string(loc~, source_span=span, entries=[]),
     @node.CstNode::expr_missing_expr(loc~, source_span=span, error=[]),
     @node.CstNode::expr_proof_assert(
@@ -647,7 +643,7 @@ test "every NodeKind has one typed CstNode constructor" {
       op=missing,
       expr=missing,
     ),
-    @node.CstNode::pattern_var(loc~, source_span=span, name=missing),
+    @node.CstNode::pattern_var(loc~, source_span=span, entries=[Name(missing)]),
     @node.CstNode::pattern_any(loc~, source_span=span, name=missing),
     @node.CstNode::pattern_constant(loc~, source_span=span),
     @node.CstNode::pattern_tuple(loc~, source_span=span, body=missing),
@@ -690,13 +686,11 @@ test "every NodeKind has one typed CstNode constructor" {
       op=missing,
       rhs=missing,
     ),
-    @node.CstNode::pattern_constraint(
-      loc~,
-      source_span=span,
-      pattern=missing,
-      op=missing,
-      type_=missing,
-    ),
+    @node.CstNode::pattern_constraint(loc~, source_span=span, entries=[
+      Pattern(missing),
+      Op(missing),
+      Type_(missing),
+    ]),
     @node.CstNode::pattern_with(
       loc~,
       source_span=span,
@@ -739,12 +733,10 @@ test "every NodeKind has one typed CstNode constructor" {
     @node.CstNode::type_name(loc~, source_span=span, name=[], error=[]),
     @node.CstNode::type_tuple(loc~, source_span=span, body=missing),
     @node.CstNode::type_arrow(loc~, source_span=span, entries=[]),
-    @node.CstNode::type_application(
-      loc~,
-      source_span=span,
-      func=missing,
-      arg=missing,
-    ),
+    @node.CstNode::type_application(loc~, source_span=span, entries=[
+      Func(missing),
+      Arg(missing),
+    ]),
     @node.CstNode::type_option(
       loc~,
       source_span=span,
@@ -754,7 +746,7 @@ test "every NodeKind has one typed CstNode constructor" {
     ),
     @node.CstNode::type_object(loc~, source_span=span),
     @node.CstNode::type_any(loc~, source_span=span, name=missing),
-    @node.CstNode::type_group(loc~, source_span=span),
+    @node.CstNode::type_group(loc~, source_span=span, entries=[]),
     @node.CstNode::type_missing_type(loc~, source_span=span, error=[]),
     @node.CstNode::error_type_error(
       loc~,
@@ -853,16 +845,15 @@ test "every NodeKind has one typed CstNode constructor" {
       op=missing,
       expr=missing,
     ),
-    @node.CstNode::parameter_discard_positional(loc~, source_span=span),
-    @node.CstNode::parameter_positional(loc~, source_span=span),
-    @node.CstNode::parameter_labelled(loc~, source_span=span, pattern=missing),
+    @node.CstNode::parameter_discard_positional(loc~, source_span=span, entries=[]),
+    @node.CstNode::parameter_positional(loc~, source_span=span, entries=[]),
+    @node.CstNode::parameter_labelled(loc~, source_span=span, entries=[
+      Pattern(missing),
+    ]),
     @node.CstNode::parameter_optional(loc~, source_span=span, entries=[]),
-    @node.CstNode::parameter_question_optional(
-      loc~,
-      source_span=span,
-      pattern=missing,
-      op=[],
-    ),
+    @node.CstNode::parameter_question_optional(loc~, source_span=span, entries=[
+      Pattern(missing),
+    ]),
     @node.CstNode::parameter_type_decl(loc~, source_span=span, name=missing),
     @node.CstNode::parameter_type_var(loc~, source_span=span, entries=[]),
     @node.CstNode::parameter_constructor_positional(
@@ -905,13 +896,9 @@ test "every NodeKind has one typed CstNode constructor" {
       expr=missing,
     ),
     @node.CstNode::binding_regex(loc~, source_span=span, name=missing),
-    @node.CstNode::trait_method_declaration(
-      loc~,
-      source_span=span,
-      attrs=[],
-      kw=[],
-      name=missing,
-    ),
+    @node.CstNode::trait_method_declaration(loc~, source_span=span, entries=[
+      Name(missing),
+    ]),
     @node.CstNode::name_identifier(value="value", loc~, source_span=span),
     @node.CstNode::name_package(value="value", loc~, source_span=span),
     @node.CstNode::long_ident_ident(loc~, source_span=span, component=missing),

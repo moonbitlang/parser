@@ -260,64 +260,14 @@ pub fn CstNode::binding_regex(
 pub fn CstNode::trait_method_declaration(
   loc~ : Location,
   source_span~ : (Int, Int),
-  attrs~ : ArrayView[CstNode],
-  kw~ : ArrayView[CstNode],
-  quantifier? : CstNode,
-  name~ : CstNode,
-  params? : CstNode,
-  clause? : CstNode,
-  op? : CstNode,
-  stub? : CstNode,
-  semantic_name? : CstNode,
-  async_? : CstNode,
-  async_loc? : CstNode,
-  header_loc? : CstNode,
+  entries~ : ArrayView[CstDeclarationChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for child in attrs {
-    children.push((Some("attrs"), child))
-  }
-  for child in kw {
-    children.push((Some("kw"), child))
-  }
-  match quantifier {
-    Some(child) => children.push((Some("quantifier"), child))
-    None => ()
-  }
-  children.push((Some("name"), name))
-  match params {
-    Some(child) => children.push((Some("params"), child))
-    None => ()
-  }
-  match clause {
-    Some(child) => children.push((Some("clause"), child))
-    None => ()
-  }
-  match op {
-    Some(child) => children.push((Some("op"), child))
-    None => ()
-  }
-  match stub {
-    Some(child) => children.push((Some("stub"), child))
-    None => ()
-  }
-  match semantic_name {
-    Some(child) => children.push((Some("semantic_name"), child))
-    None => ()
-  }
-  match async_ {
-    Some(child) => children.push((Some("async"), child))
-    None => ()
-  }
-  match async_loc {
-    Some(child) => children.push((Some("async_loc"), child))
-    None => ()
-  }
-  match header_loc {
-    Some(child) => children.push((Some("header_loc"), child))
-    None => ()
-  }
-  node(NodeKind::TraitMethod_Declaration, loc, source_span, children)
+  node(
+    NodeKind::TraitMethod_Declaration,
+    loc,
+    source_span,
+    entries_from_cstdeclarationchild(entries),
+  )
 }
 
 ///|

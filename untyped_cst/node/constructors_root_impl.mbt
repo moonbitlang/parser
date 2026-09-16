@@ -1159,23 +1159,14 @@ pub fn CstNode::expr_mutate(
 pub fn CstNode::expr_if(
   loc~ : Location,
   source_span~ : (Int, Int),
-  kw~ : CstNode,
-  cond~ : CstNode,
-  error~ : ArrayView[CstNode],
-  body~ : CstNode,
-  else_~ : ArrayView[CstNode],
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("kw"), kw))
-  children.push((Some("cond"), cond))
-  for child in error {
-    children.push((Some("error"), child))
-  }
-  children.push((Some("body"), body))
-  for child in else_ {
-    children.push((Some("else"), child))
-  }
-  node(NodeKind::Expr_If, loc, source_span, children)
+  node(
+    NodeKind::Expr_If,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

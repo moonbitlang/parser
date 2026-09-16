@@ -464,42 +464,14 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
     Some((POST_LABEL(_), _, _)) => {
       is_labelled = true
       parse_single_token_pattern(state, fn(loc, source_span, children) {
-        let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let semantic_name = CstNode::first_child_with_label_from(
-          children, "semantic_name",
-        )
-        let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-          children, "lex_scan_case_pattern",
-        )
-        @node.CstNode::pattern_var(
-          loc~,
-          source_span~,
-          name~,
-          semantic_name?,
-          lex_scan_case_pattern?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::pattern_var(loc~, source_span~, entries~)
       })
     }
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
       parse_single_token_pattern(state, fn(loc, source_span, children) {
-        let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let semantic_name = CstNode::first_child_with_label_from(
-          children, "semantic_name",
-        )
-        let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-          children, "lex_scan_case_pattern",
-        )
-        @node.CstNode::pattern_var(
-          loc~,
-          source_span~,
-          name~,
-          semantic_name?,
-          lex_scan_case_pattern?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::pattern_var(loc~, source_span~, entries~)
       })
     Some((UNDERSCORE, _, _)) =>
       parse_single_token_pattern(state, fn(loc, source_span, children) {
@@ -630,16 +602,8 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
   let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if pat.kind
     is Pattern_Any {
     fn(loc, source_span, children) {
-      let pattern = CstNode::first_child_with_label_from(children, "pattern")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let type_ = CstNode::first_child_with_label_from(children, "type")
-      @node.CstNode::parameter_discard_positional(
-        loc~,
-        source_span~,
-        pattern?,
-        op?,
-        type_?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::parameter_discard_positional(loc~, source_span~, entries~)
     }
   } else if is_labelled {
     if has_default {
@@ -649,18 +613,8 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       }
     } else {
       fn(loc, source_span, children) {
-        let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let op = CstNode::first_child_with_label_from(children, "op")
-        let type_ = CstNode::first_child_with_label_from(children, "type")
-        @node.CstNode::parameter_labelled(
-          loc~,
-          source_span~,
-          pattern~,
-          op?,
-          type_?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::parameter_labelled(loc~, source_span~, entries~)
       }
     }
   } else if has_default {
@@ -670,35 +624,13 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
     }
   } else if has_question {
     fn(loc, source_span, children) {
-      let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let question = CstNode::first_child_with_label_from(children, "question")
-      let op = CstNode::children_with_label_from(children, "op")
-      let type_ = CstNode::first_child_with_label_from(children, "type")
-      @node.CstNode::parameter_question_optional(
-        loc~,
-        source_span~,
-        pattern~,
-        question?,
-        op~,
-        type_?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::parameter_question_optional(loc~, source_span~, entries~)
     }
   } else {
     fn(loc, source_span, children) {
-      let error = CstNode::first_child_with_label_from(children, "error")
-      let pattern = CstNode::first_child_with_label_from(children, "pattern")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let type_ = CstNode::first_child_with_label_from(children, "type")
-      @node.CstNode::parameter_positional(
-        loc~,
-        source_span~,
-        error?,
-        pattern?,
-        op?,
-        type_?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::parameter_positional(loc~, source_span~, entries~)
     }
   }
   state.construct_from_children(builder, children)
@@ -1275,44 +1207,8 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
   state
   .construct_from_children(
     fn(loc, source_span, children) {
-      let attrs = CstNode::children_with_label_from(children, "attrs")
-      let kw = CstNode::children_with_label_from(children, "kw")
-      let quantifier = CstNode::first_child_with_label_from(
-        children, "quantifier",
-      )
-      let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let params = CstNode::first_child_with_label_from(children, "params")
-      let clause = CstNode::first_child_with_label_from(children, "clause")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let stub = CstNode::first_child_with_label_from(children, "stub")
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
-      let async_ = CstNode::first_child_with_label_from(children, "async")
-      let async_loc = CstNode::first_child_with_label_from(
-        children, "async_loc",
-      )
-      let header_loc = CstNode::first_child_with_label_from(
-        children, "header_loc",
-      )
-      @node.CstNode::trait_method_declaration(
-        loc~,
-        source_span~,
-        attrs~,
-        kw~,
-        quantifier?,
-        name~,
-        params?,
-        clause?,
-        op?,
-        stub?,
-        semantic_name?,
-        async_?,
-        async_loc?,
-        header_loc?,
-      )
+      let entries = declaration_children(children)
+      @node.CstNode::trait_method_declaration(loc~, source_span~, entries~)
     },
     children,
   )
@@ -1373,16 +1269,8 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
     source_span,
     children,
   ) {
-    let pattern = CstNode::first_child_with_label_from(children, "pattern")
-    let op = CstNode::first_child_with_label_from(children, "op")
-    let type_ = CstNode::first_child_with_label_from(children, "type")
-    @node.CstNode::parameter_discard_positional(
-      loc~,
-      source_span~,
-      pattern?,
-      op?,
-      type_?,
-    )
+    let entries = recovery_children(children)
+    @node.CstNode::parameter_discard_positional(loc~, source_span~, entries~)
   }
   let mut parameter_is_positional = false
   match state.peek() {
@@ -1394,41 +1282,17 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
             parameter_builder = if tok is POST_LABEL(_) {
               parameter_is_positional = false
               fn(loc, source_span, children) {
-                let pattern = CstNode::first_child_with_label_from(
-                  children, "pattern",
-                ).unwrap_or(CstNode::missing(loc~, source_span~))
-                let op = CstNode::first_child_with_label_from(children, "op")
-                let type_ = CstNode::first_child_with_label_from(
-                  children, "type",
-                )
-                @node.CstNode::parameter_labelled(
-                  loc~,
-                  source_span~,
-                  pattern~,
-                  op?,
-                  type_?,
-                )
+                let entries = recovery_children(children)
+                @node.CstNode::parameter_labelled(loc~, source_span~, entries~)
               }
             } else {
               parameter_is_positional = true
               fn(loc, source_span, children) {
-                let error = CstNode::first_child_with_label_from(
-                  children, "error",
-                )
-                let pattern = CstNode::first_child_with_label_from(
-                  children, "pattern",
-                )
-                let op = CstNode::first_child_with_label_from(children, "op")
-                let type_ = CstNode::first_child_with_label_from(
-                  children, "type",
-                )
+                let entries = recovery_children(children)
                 @node.CstNode::parameter_positional(
                   loc~,
                   source_span~,
-                  error?,
-                  pattern?,
-                  op?,
-                  type_?,
+                  entries~,
                 )
               }
             }
@@ -1442,22 +1306,8 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
   if state.current_is(TokenKind::TK_QUESTION) {
     if parameter_is_positional {
       parameter_builder = fn(loc, source_span, children) {
-        let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let question = CstNode::first_child_with_label_from(
-          children, "question",
-        )
-        let op = CstNode::children_with_label_from(children, "op")
-        let type_ = CstNode::first_child_with_label_from(children, "type")
-        @node.CstNode::parameter_question_optional(
-          loc~,
-          source_span~,
-          pattern~,
-          question?,
-          op~,
-          type_?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::parameter_question_optional(loc~, source_span~, entries~)
       }
       parameter_is_positional = false
     }
@@ -3083,22 +2933,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           source_span,
           children,
         ) {
-          let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let semantic_name = CstNode::first_child_with_label_from(
-            children, "semantic_name",
-          )
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_var(
-            loc~,
-            source_span~,
-            name~,
-            semantic_name?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_var(loc~, source_span~, entries~)
         })
         push_child(children, Some("pattern"), pat)
         phase = AwaitingEqual
@@ -5308,65 +5144,27 @@ fn arrow_parameter_builder(
   match expr.kind {
     Expr_Hole | Expr_MissingExpr =>
       fn(loc, source_span, children) {
-        let pattern = CstNode::first_child_with_label_from(children, "pattern")
-        let op = CstNode::first_child_with_label_from(children, "op")
-        let type_ = CstNode::first_child_with_label_from(children, "type")
+        let entries = recovery_children(children)
         @node.CstNode::parameter_discard_positional(
           loc~,
           source_span~,
-          pattern?,
-          op?,
-          type_?,
+          entries~,
         )
       }
     Argument_Labelled | Argument_LabelledPun =>
       fn(loc, source_span, children) {
-        let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let op = CstNode::first_child_with_label_from(children, "op")
-        let type_ = CstNode::first_child_with_label_from(children, "type")
-        @node.CstNode::parameter_labelled(
-          loc~,
-          source_span~,
-          pattern~,
-          op?,
-          type_?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::parameter_labelled(loc~, source_span~, entries~)
       }
     Argument_LabelledOption | Argument_LabelledOptionPun =>
       fn(loc, source_span, children) {
-        let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let question = CstNode::first_child_with_label_from(
-          children, "question",
-        )
-        let op = CstNode::children_with_label_from(children, "op")
-        let type_ = CstNode::first_child_with_label_from(children, "type")
-        @node.CstNode::parameter_question_optional(
-          loc~,
-          source_span~,
-          pattern~,
-          question?,
-          op~,
-          type_?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::parameter_question_optional(loc~, source_span~, entries~)
       }
     _ =>
       fn(loc, source_span, children) {
-        let error = CstNode::first_child_with_label_from(children, "error")
-        let pattern = CstNode::first_child_with_label_from(children, "pattern")
-        let op = CstNode::first_child_with_label_from(children, "op")
-        let type_ = CstNode::first_child_with_label_from(children, "type")
-        @node.CstNode::parameter_positional(
-          loc~,
-          source_span~,
-          error?,
-          pattern?,
-          op?,
-          type_?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::parameter_positional(loc~, source_span~, entries~)
       }
   }
 }
@@ -5381,22 +5179,8 @@ fn arrow_var_pattern_from_ident(expr : CstNode) -> CstNode {
   }
   node(
     fn(loc, source_span, children) {
-      let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
-      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-        children, "lex_scan_case_pattern",
-      )
-      @node.CstNode::pattern_var(
-        loc~,
-        source_span~,
-        name~,
-        semantic_name?,
-        lex_scan_case_pattern?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::pattern_var(loc~, source_span~, entries~)
     },
     expr.loc,
     expr.source_span,
@@ -5453,22 +5237,8 @@ fn arrow_var_pattern_from_argument(expr : CstNode) -> CstNode? {
     Some(
       node(
         fn(loc, source_span, children) {
-          let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let semantic_name = CstNode::first_child_with_label_from(
-            children, "semantic_name",
-          )
-          let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-            children, "lex_scan_case_pattern",
-          )
-          @node.CstNode::pattern_var(
-            loc~,
-            source_span~,
-            name~,
-            semantic_name?,
-            lex_scan_case_pattern?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::pattern_var(loc~, source_span~, entries~)
         },
         name.loc,
         name.source_span,
@@ -6390,28 +6160,8 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
       state
       .construct_from_children(
         fn(loc, source_span, children) {
-          let name = CstNode::children_with_label_from(children, "name")
-          let type_ = CstNode::first_child_with_label_from(children, "type")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let pkg = CstNode::first_child_with_label_from(children, "pkg")
-          let field = CstNode::first_child_with_label_from(children, "field")
-          let semantic_name = CstNode::first_child_with_label_from(
-            children, "semantic_name",
-          )
-          let constructor_extra_info = CstNode::first_child_with_label_from(
-            children, "constructor_extra_info",
-          )
-          @node.CstNode::expr_constr(
-            loc~,
-            source_span~,
-            name~,
-            type_?,
-            op?,
-            pkg?,
-            field?,
-            semantic_name?,
-            constructor_extra_info?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::expr_constr(loc~, source_span~, entries~)
         },
         children,
       )
@@ -7569,28 +7319,8 @@ fn parse_expr_simple(
       parse_single_token_expr(
         state,
         fn(loc, source_span, children) {
-          let name = CstNode::children_with_label_from(children, "name")
-          let type_ = CstNode::first_child_with_label_from(children, "type")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let pkg = CstNode::first_child_with_label_from(children, "pkg")
-          let field = CstNode::first_child_with_label_from(children, "field")
-          let semantic_name = CstNode::first_child_with_label_from(
-            children, "semantic_name",
-          )
-          let constructor_extra_info = CstNode::first_child_with_label_from(
-            children, "constructor_extra_info",
-          )
-          @node.CstNode::expr_constr(
-            loc~,
-            source_span~,
-            name~,
-            type_?,
-            op?,
-            pkg?,
-            field?,
-            semantic_name?,
-            constructor_extra_info?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::expr_constr(loc~, source_span~, entries~)
         },
         "name",
       )
@@ -8286,28 +8016,8 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
       state
       .construct_from_children(
         fn(loc, source_span, children) {
-          let name = CstNode::children_with_label_from(children, "name")
-          let type_ = CstNode::first_child_with_label_from(children, "type")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let pkg = CstNode::first_child_with_label_from(children, "pkg")
-          let field = CstNode::first_child_with_label_from(children, "field")
-          let semantic_name = CstNode::first_child_with_label_from(
-            children, "semantic_name",
-          )
-          let constructor_extra_info = CstNode::first_child_with_label_from(
-            children, "constructor_extra_info",
-          )
-          @node.CstNode::expr_constr(
-            loc~,
-            source_span~,
-            name~,
-            type_?,
-            op?,
-            pkg?,
-            field?,
-            semantic_name?,
-            constructor_extra_info?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::expr_constr(loc~, source_span~, entries~)
         },
         children,
       )
@@ -9598,26 +9308,8 @@ fn parse_if_expr(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let kw = CstNode::first_child_with_label_from(children, "kw").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let cond = CstNode::first_child_with_label_from(children, "cond").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let error = CstNode::children_with_label_from(children, "error")
-      let body = CstNode::first_child_with_label_from(children, "body").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let else_ = CstNode::children_with_label_from(children, "else")
-      @node.CstNode::expr_if(
-        loc~,
-        source_span~,
-        kw~,
-        cond~,
-        error~,
-        body~,
-        else_~,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::expr_if(loc~, source_span~, entries~)
     },
     children,
   )
@@ -13880,22 +13572,8 @@ fn parse_pattern_atom(
         }
         state.construct_from_children(
           fn(loc, source_span, children) {
-            let pattern = CstNode::first_child_with_label_from(
-              children, "pattern",
-            ).unwrap_or(CstNode::missing(loc~, source_span~))
-            let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-              CstNode::missing(loc~, source_span~),
-            )
-            let type_ = CstNode::first_child_with_label_from(children, "type").unwrap_or(
-              CstNode::missing(loc~, source_span~),
-            )
-            @node.CstNode::pattern_constraint(
-              loc~,
-              source_span~,
-              pattern~,
-              op~,
-              type_~,
-            )
+            let entries = recovery_children(children)
+            @node.CstNode::pattern_constraint(loc~, source_span~, entries~)
           },
           children,
         )
@@ -13927,22 +13605,8 @@ fn parse_pattern_atom(
         source_span,
         children,
       ) {
-        let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let semantic_name = CstNode::first_child_with_label_from(
-          children, "semantic_name",
-        )
-        let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-          children, "lex_scan_case_pattern",
-        )
-        @node.CstNode::pattern_var(
-          loc~,
-          source_span~,
-          name~,
-          semantic_name?,
-          lex_scan_case_pattern?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::pattern_var(loc~, source_span~, entries~)
       })
       if state.current_is(TokenKind::TK_LPAREN) {
         let args = parse_constructor_pattern_args(state)
@@ -15621,22 +15285,8 @@ fn parse_pattern_postfix(
         }
         pat = state.construct_from_children(
           fn(loc, source_span, children) {
-            let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-              CstNode::missing(loc~, source_span~),
-            )
-            let semantic_name = CstNode::first_child_with_label_from(
-              children, "semantic_name",
-            )
-            let lex_scan_case_pattern = CstNode::first_child_with_label_from(
-              children, "lex_scan_case_pattern",
-            )
-            @node.CstNode::pattern_var(
-              loc~,
-              source_span~,
-              name~,
-              semantic_name?,
-              lex_scan_case_pattern?,
-            )
+            let entries = recovery_children(children)
+            @node.CstNode::pattern_var(loc~, source_span~, entries~)
           },
           children,
         )
@@ -15654,22 +15304,8 @@ fn parse_pattern_postfix(
         }
         pat = state.construct_from_children(
           fn(loc, source_span, children) {
-            let pattern = CstNode::first_child_with_label_from(
-              children, "pattern",
-            ).unwrap_or(CstNode::missing(loc~, source_span~))
-            let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-              CstNode::missing(loc~, source_span~),
-            )
-            let type_ = CstNode::first_child_with_label_from(children, "type").unwrap_or(
-              CstNode::missing(loc~, source_span~),
-            )
-            @node.CstNode::pattern_constraint(
-              loc~,
-              source_span~,
-              pattern~,
-              op~,
-              type_~,
-            )
+            let entries = recovery_children(children)
+            @node.CstNode::pattern_constraint(loc~, source_span~, entries~)
           },
           children,
         )
@@ -17534,9 +17170,8 @@ fn parse_type_atom(
       }
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let body = CstNode::first_child_with_label_from(children, "body")
-          let type_ = CstNode::first_child_with_label_from(children, "type")
-          @node.CstNode::type_group(loc~, source_span~, body?, type_?)
+          let entries = recovery_children(children)
+          @node.CstNode::type_group(loc~, source_span~, entries~)
         },
         children,
       )
@@ -17830,9 +17465,8 @@ fn parse_paren_type(
   let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if item_count ==
     1 {
     fn(loc, source_span, children) {
-      let body = CstNode::first_child_with_label_from(children, "body")
-      let type_ = CstNode::first_child_with_label_from(children, "type")
-      @node.CstNode::type_group(loc~, source_span~, body?, type_?)
+      let entries = recovery_children(children)
+      @node.CstNode::type_group(loc~, source_span~, entries~)
     }
   } else {
     fn(loc, source_span, children) {
@@ -17991,13 +17625,8 @@ fn parse_legacy_type_tail(
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let func = CstNode::first_child_with_label_from(children, "func").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let arg = CstNode::first_child_with_label_from(children, "arg").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      @node.CstNode::type_application(loc~, source_span~, func~, arg~)
+      let entries = recovery_children(children)
+      @node.CstNode::type_application(loc~, source_span~, entries~)
     },
     children,
   )
@@ -18026,13 +17655,8 @@ fn parse_type_postfix(
         push_child(children, Some("arg"), parse_type_argument_list(state))
         ty = state.construct_from_children(
           fn(loc, source_span, children) {
-            let func = CstNode::first_child_with_label_from(children, "func").unwrap_or(
-              CstNode::missing(loc~, source_span~),
-            )
-            let arg = CstNode::first_child_with_label_from(children, "arg").unwrap_or(
-              CstNode::missing(loc~, source_span~),
-            )
-            @node.CstNode::type_application(loc~, source_span~, func~, arg~)
+            let entries = recovery_children(children)
+            @node.CstNode::type_application(loc~, source_span~, entries~)
           },
           children,
         )
