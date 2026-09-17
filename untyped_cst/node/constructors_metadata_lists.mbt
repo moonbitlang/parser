@@ -550,6 +550,8 @@ pub fn CstNode::clause_where(
 }
 
 ///|
+/// Use clause_constructor_decl_from_entries to retain interleaved trivia and
+/// recovery children in their original order.
 pub fn CstNode::clause_constructor_decl(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -600,6 +602,22 @@ pub fn CstNode::clause_constructor_decl(
     None => ()
   }
   node(NodeKind::Clause_ConstructorDecl, loc, source_span, children)
+}
+
+///|
+/// Constructs a constructor declaration from ordered children, preserving every
+/// entry and its location, including repeated labels, trivia, and recovery nodes.
+pub fn CstNode::clause_constructor_decl_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Clause_ConstructorDecl,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

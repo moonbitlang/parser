@@ -68,6 +68,15 @@ recovered type parameter constraints, or the package qualifier in an incomplete
 constructor such as `T::@p`. Their existing labelled constructors keep the same
 signatures and child order.
 
+`clause_constructor_decl_from_entries` and `pattern_with_from_entries` take the
+same labelled `loc`, `source_span`, and `entries : ArrayView[CstRecoveryChild]`
+arguments. They retain every entry, repeated label, comment, and recovery node
+in the supplied order with its original location and UTF-16 source span. Use
+them for comments between constructor attributes or after visibility, and
+after the opening parenthesis of a `with` pattern. The existing
+`clause_constructor_decl` and `pattern_with` signatures and child order remain
+unchanged.
+
 The `untyped_cst` package re-exports the three node types for compatibility.
 Consequently, `ParseResult::root` can be used as either
 `@untyped_cst.CstNode` or `@node.CstNode`; both names refer to the same type.

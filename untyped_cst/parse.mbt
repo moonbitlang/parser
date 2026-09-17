@@ -1425,31 +1425,11 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
   state
   .construct_from_children(
     fn(loc, source_span, children) {
-      let attrs = CstNode::children_with_label_from(children, "attrs")
-      let error = CstNode::first_child_with_label_from(children, "error")
-      let vis = CstNode::first_child_with_label_from(children, "vis")
-      let name = CstNode::first_child_with_label_from(children, "name")
-      let params = CstNode::first_child_with_label_from(children, "params")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let tag = CstNode::first_child_with_label_from(children, "tag")
-      let constructor_tag = CstNode::first_child_with_label_from(
-        children, "constructor_tag",
-      )
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
-      @node.CstNode::clause_constructor_decl(
+      let entries = recovery_children(children)
+      @node.CstNode::clause_constructor_decl_from_entries(
         loc~,
         source_span~,
-        attrs~,
-        error?,
-        vis?,
-        name?,
-        params?,
-        op?,
-        tag?,
-        constructor_tag?,
-        semantic_name?,
+        entries~,
       )
     },
     children,
@@ -12850,30 +12830,17 @@ fn parse_parenthesized_with_pattern(state : ParserState) -> CstNode {
   push_child(children, Some("close"), state.expect_token(TK_RPAREN))
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let open = CstNode::first_child_with_label_from(children, "open").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let body = CstNode::first_child_with_label_from(children, "body").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let close = CstNode::first_child_with_label_from(children, "close").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      @node.CstNode::pattern_with(
-        loc~,
-        source_span~,
-        open~,
-        pattern~,
-        op~,
-        body~,
-        close~,
-      )
+      let entries = recovery_children(children)
+      if CstNode::first_child_with_label_from(children, "pattern") is None {
+        // Preserve the end-anchored fallback in the pattern's child slot.
+        for i, (label, _) in children {
+          if label == Some("op") {
+            entries.insert(i, Pattern(missing_at_end(loc~, source_span~)))
+            break
+          }
+        }
+      }
+      @node.CstNode::pattern_with_from_entries(loc~, source_span~, entries~)
     },
     children,
   )

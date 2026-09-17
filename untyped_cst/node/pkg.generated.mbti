@@ -127,6 +127,7 @@ pub fn CstNode::case_match_case(loc~ : @basic.Location, source_span~ : (Int, Int
 pub fn CstNode::children_of_kind(Self, (NodeKind) -> Bool) -> Array[Self]
 pub fn CstNode::children_with_label(Self, String) -> Array[Self]
 pub fn CstNode::clause_constructor_decl(loc~ : @basic.Location, source_span~ : (Int, Int), attrs~ : ArrayView[Self], error? : Self, vis? : Self, name? : Self, params? : Self, op? : Self, tag? : Self, constructor_tag? : Self, semantic_name? : Self) -> Self
+pub fn CstNode::clause_constructor_decl_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::clause_deriving_directive(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : ArrayView[Self], arg? : Self, semantic_name? : Self) -> Self
 pub fn CstNode::clause_extend_item(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::clause_import_package(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
@@ -392,6 +393,7 @@ pub fn CstNode::pattern_special_constr(loc~ : @basic.Location, source_span~ : (I
 pub fn CstNode::pattern_tuple(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, pattern_group? : Self) -> Self
 pub fn CstNode::pattern_var(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_with(loc~ : @basic.Location, source_span~ : (Int, Int), open~ : Self, pattern~ : Self, op~ : Self, body~ : Self, close~ : Self) -> Self
+pub fn CstNode::pattern_with_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::quantifier_kind_exists(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::quantifier_kind_forall(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::range_kind_exclusive(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self

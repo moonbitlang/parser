@@ -116,11 +116,80 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
     ("pkg", pkg),
     ("error", error),
   ])
+  let constructor_decl = @node.CstNode::clause_constructor_decl_from_entries(
+    loc~,
+    source_span=span,
+    entries=[
+      Attrs(name),
+      Trivia(first),
+      Attrs(name),
+      Trivia(second),
+      Vis(op),
+      Error(error),
+      Trivia(first),
+      Name(name),
+      Error(error),
+      Name(missing),
+    ],
+  )
+  @test.assert_eq(
+    constructor_decl.kind is @node.NodeKind::Clause_ConstructorDecl,
+    true,
+  )
+  assert_constructor_entries(constructor_decl, loc, span, [
+    ("attrs", name),
+    ("trivia", first),
+    ("attrs", name),
+    ("trivia", second),
+    ("vis", op),
+    ("error", error),
+    ("trivia", first),
+    ("name", name),
+    ("error", error),
+    ("name", missing),
+  ])
+  let with_pattern = @node.CstNode::pattern_with_from_entries(
+    loc~,
+    source_span=span,
+    entries=[
+      Open(op),
+      Trivia(first),
+      Trivia(second),
+      Pattern(name),
+      Op(op),
+      Error(error),
+      Pattern(missing),
+      Trivia(first),
+      Body(name),
+      Close(op),
+      Error(error),
+    ],
+  )
+  @test.assert_eq(with_pattern.kind is @node.NodeKind::Pattern_With, true)
+  assert_constructor_entries(with_pattern, loc, span, [
+    ("open", op),
+    ("trivia", first),
+    ("trivia", second),
+    ("pattern", name),
+    ("op", op),
+    ("error", error),
+    ("pattern", missing),
+    ("trivia", first),
+    ("body", name),
+    ("close", op),
+    ("error", error),
+  ])
   for
     empty in [
       @node.CstNode::binding_regex_from_entries(loc~, source_span=span, entries=[]),
       @node.CstNode::parameter_type_decl_from_entries(loc~, source_span=span, entries=[]),
       @node.CstNode::expr_method_from_entries(loc~, source_span=span, entries=[]),
+      @node.CstNode::clause_constructor_decl_from_entries(
+        loc~,
+        source_span=span,
+        entries=[],
+      ),
+      @node.CstNode::pattern_with_from_entries(loc~, source_span=span, entries=[]),
     ] {
     assert_constructor_entries(empty, loc, span, [])
   }
@@ -150,6 +219,7 @@ test "ordered constructors match legacy required and optional arguments" {
     let binding_entries : Array[@node.CstRecoveryChild] = [Name(type_)]
     let parameter_entries : Array[@node.CstRecoveryChild] = [Name(type_)]
     let method_entries : Array[@node.CstRecoveryChild] = [Type_(type_), Op(op)]
+    let constructor_entries : Array[@node.CstRecoveryChild] = []
     if full {
       binding_entries.append([
         Op(op),
@@ -163,6 +233,18 @@ test "ordered constructors match legacy required and optional arguments" {
         Trivia(trivia[1]),
         Error(error),
         Field(field),
+      ])
+      constructor_entries.append([
+        Attrs(trivia[0]),
+        Attrs(trivia[1]),
+        Error(error),
+        Vis(op),
+        Name(type_),
+        Params(field),
+        Op(op),
+        Tag(field),
+        ConstructorTag(field),
+        SemanticName(semantic_label),
       ])
     }
     let legacy_binding = if full {
@@ -202,6 +284,23 @@ test "ordered constructors match legacy required and optional arguments" {
     } else {
       @node.CstNode::expr_method(loc~, source_span=span, type_~, op~)
     }
+    let legacy_constructor = if full {
+      @node.CstNode::clause_constructor_decl(
+        loc~,
+        source_span=span,
+        attrs=trivia,
+        error~,
+        vis=op,
+        name=type_,
+        params=field,
+        op~,
+        tag=field,
+        constructor_tag=field,
+        semantic_name=semantic_label,
+      )
+    } else {
+      @node.CstNode::clause_constructor_decl(loc~, source_span=span, attrs=[])
+    }
     for
       (ordered, legacy) in [
         (
@@ -228,8 +327,34 @@ test "ordered constructors match legacy required and optional arguments" {
           ),
           legacy_method,
         ),
+        (
+          @node.CstNode::clause_constructor_decl_from_entries(
+            loc~,
+            source_span=span,
+            entries=constructor_entries[:],
+          ),
+          legacy_constructor,
+        ),
       ] {
       assert_constructor_tree(ordered, legacy)
     }
   }
+  assert_constructor_tree(
+    @node.CstNode::pattern_with_from_entries(loc~, source_span=span, entries=[
+      Open(op),
+      Pattern(type_),
+      Op(op),
+      Body(field),
+      Close(op),
+    ]),
+    @node.CstNode::pattern_with(
+      loc~,
+      source_span=span,
+      open=op,
+      pattern=type_,
+      op~,
+      body=field,
+      close=op,
+    ),
+  )
 }
