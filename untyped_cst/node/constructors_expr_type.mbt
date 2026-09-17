@@ -1466,6 +1466,8 @@ pub fn CstNode::parameter_question_optional(
 }
 
 ///|
+/// Use parameter_type_decl_from_entries to retain repeated constraint
+/// operators, types, and other ordered recovery children.
 pub fn CstNode::parameter_type_decl(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -1484,4 +1486,20 @@ pub fn CstNode::parameter_type_decl(
     None => ()
   }
   node(NodeKind::Parameter_TypeDecl, loc, source_span, children)
+}
+
+///|
+/// Constructs a type declaration parameter from ordered children, preserving
+/// every entry and its location without regrouping repeated labels.
+pub fn CstNode::parameter_type_decl_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Parameter_TypeDecl,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }

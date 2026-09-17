@@ -839,17 +839,11 @@ fn parse_type_parameter_item(
       }
     } else {
       fn(loc, source_span, children) {
-        let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let op = CstNode::first_child_with_label_from(children, "op")
-        let type_ = CstNode::first_child_with_label_from(children, "type")
-        @node.CstNode::parameter_type_decl(
+        let entries = recovery_children(children)
+        @node.CstNode::parameter_type_decl_from_entries(
           loc~,
           source_span~,
-          name~,
-          op?,
-          type_?,
+          entries~,
         )
       }
     },
@@ -5957,24 +5951,8 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
     } else {
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let type_ = CstNode::first_child_with_label_from(children, "type").unwrap_or(
-            missing_at_end(loc~, source_span~),
-          )
-          let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-            missing_at_end(loc~, source_span~),
-          )
-          let trivia = CstNode::children_with_label_from(children, "trivia")
-          let error = CstNode::first_child_with_label_from(children, "error")
-          let field = CstNode::first_child_with_label_from(children, "field")
-          @node.CstNode::expr_method(
-            loc~,
-            source_span~,
-            type_~,
-            op~,
-            trivia~,
-            error?,
-            field?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::expr_method_from_entries(loc~, source_span~, entries~)
         },
         children,
       )
@@ -15657,26 +15635,8 @@ fn parse_regex_match_binding(state : ParserState) -> CstNode {
   state
   .construct_from_children(
     fn(loc, source_span, children) {
-      let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let binder = CstNode::first_child_with_label_from(children, "binder")
-      let semantic_label = CstNode::first_child_with_label_from(
-        children, "semantic_label",
-      )
-      let semantic_binder = CstNode::first_child_with_label_from(
-        children, "semantic_binder",
-      )
-      @node.CstNode::binding_regex(
-        loc~,
-        source_span~,
-        name~,
-        op?,
-        binder?,
-        semantic_label?,
-        semantic_binder?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::binding_regex_from_entries(loc~, source_span~, entries~)
     },
     children,
   )

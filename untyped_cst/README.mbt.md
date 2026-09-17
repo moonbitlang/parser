@@ -59,6 +59,15 @@ keep their labelled arguments and child order. `parameter_constructor_positional
 also accepts an optional `op` child for a colon consumed without a parameter name;
 its children remain ordered as `mut?`, `op?`, `type`, `mutable?`.
 
+`binding_regex_from_entries`, `parameter_type_decl_from_entries`, and
+`expr_method_from_entries` also take labelled `loc`, `source_span`, and
+`entries : ArrayView[CstRecoveryChild]` arguments. They preserve every entry in
+the supplied order, including repeated labels, comments, recovery nodes, and
+their locations. Use them for comments around regex binding operators,
+recovered type parameter constraints, or the package qualifier in an incomplete
+constructor such as `T::@p`. Their existing labelled constructors keep the same
+signatures and child order.
+
 The `untyped_cst` package re-exports the three node types for compatibility.
 Consequently, `ParseResult::root` can be used as either
 `@untyped_cst.CstNode` or `@node.CstNode`; both names refer to the same type.

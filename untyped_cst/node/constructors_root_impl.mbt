@@ -1260,6 +1260,8 @@ pub fn CstNode::expr_function(
 
 ///|
 /// Retain trivia after `op` and before `error` or `field`, in source order.
+/// Use expr_method_from_entries to retain a package qualifier or other
+/// ordered recovery children.
 pub fn CstNode::expr_method(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -1284,6 +1286,22 @@ pub fn CstNode::expr_method(
     None => ()
   }
   node(NodeKind::Expr_Method, loc, source_span, children)
+}
+
+///|
+/// Constructs a method reference from ordered children, preserving every entry
+/// and its location, including package qualifiers and missing fields.
+pub fn CstNode::expr_method_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Expr_Method,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

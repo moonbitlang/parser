@@ -233,6 +233,8 @@ pub fn CstNode::binding_for_each(
 }
 
 ///|
+/// Use binding_regex_from_entries to retain interleaved trivia and recovery
+/// children in their original order.
 pub fn CstNode::binding_regex(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -261,6 +263,22 @@ pub fn CstNode::binding_regex(
     None => ()
   }
   node(NodeKind::Binding_Regex, loc, source_span, children)
+}
+
+///|
+/// Constructs a regex binding from ordered children, preserving every entry
+/// and its location, including repeated trivia and recovery children.
+pub fn CstNode::binding_regex_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Binding_Regex,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

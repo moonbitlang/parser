@@ -1,0 +1,235 @@
+///|
+test "ordered constructors preserve repeated labels, trivia, and recovery nodes" {
+  let loc = @node.mk_loc(test_position(1), test_position(24))
+  let span = (2, 26)
+  let name = @node.CstNode::name_identifier(
+    value="A",
+    loc=@node.mk_loc(test_position(1), test_position(2)),
+    source_span=(2, 3),
+  )
+  let op = @node.CstNode::syntax_operator(
+    loc=@node.mk_loc(test_position(3), test_position(4)),
+    source_span=(4, 5),
+  )
+  let first = @node.CstNode::syntax_comment(
+    loc=@node.mk_loc(test_position(5), test_position(12)),
+    source_span=(6, 13),
+  )
+  let second = @node.CstNode::syntax_comment(
+    loc=@node.mk_loc(test_position(13), test_position(22)),
+    source_span=(14, 24),
+  )
+  let pkg = @node.CstNode::name_package(
+    value="p",
+    loc=@node.mk_loc(test_position(22), test_position(24)),
+    source_span=(24, 26),
+  )
+  let missing = @node.CstNode::missing(
+    loc=@node.empty_loc(test_position(24)),
+    source_span=(26, 26),
+  )
+  let error = @node.CstNode::error(loc=op.loc, source_span=op.source_span, entries=[
+    Item(op),
+  ])
+  // Deliberately revisit earlier source positions and repeat identical children:
+  // the entry order must survive without sorting or deduplication.
+  let binding = @node.CstNode::binding_regex_from_entries(
+    loc~,
+    source_span=span,
+    entries=[
+      Name(name),
+      Trivia(first),
+      Op(op),
+      Error(error),
+      Trivia(second),
+      Binder(missing),
+      Trivia(first),
+      Op(op),
+      SemanticLabel(name),
+      SemanticBinder(missing),
+    ],
+  )
+  @test.assert_eq(binding.kind is @node.NodeKind::Binding_Regex, true)
+  assert_constructor_entries(binding, loc, span, [
+    ("name", name),
+    ("trivia", first),
+    ("op", op),
+    ("error", error),
+    ("trivia", second),
+    ("binder", missing),
+    ("trivia", first),
+    ("op", op),
+    ("semantic_label", name),
+    ("semantic_binder", missing),
+  ])
+  let parameter = @node.CstNode::parameter_type_decl_from_entries(
+    loc~,
+    source_span=span,
+    entries=[
+      Name(name),
+      Op(op),
+      Type_(name),
+      Trivia(first),
+      Op(op),
+      Error(error),
+      Trivia(second),
+      Type_(missing),
+      Error(error),
+    ],
+  )
+  @test.assert_eq(parameter.kind is @node.NodeKind::Parameter_TypeDecl, true)
+  assert_constructor_entries(parameter, loc, span, [
+    ("name", name),
+    ("op", op),
+    ("type", name),
+    ("trivia", first),
+    ("op", op),
+    ("error", error),
+    ("trivia", second),
+    ("type", missing),
+    ("error", error),
+  ])
+  let method_ref = @node.CstNode::expr_method_from_entries(
+    loc~,
+    source_span=span,
+    entries=[
+      Type_(name),
+      Op(op),
+      Trivia(first),
+      Pkg(pkg),
+      Error(error),
+      Trivia(second),
+      Field(missing),
+      Pkg(pkg),
+      Error(error),
+    ],
+  )
+  @test.assert_eq(method_ref.kind is @node.NodeKind::Expr_Method, true)
+  assert_constructor_entries(method_ref, loc, span, [
+    ("type", name),
+    ("op", op),
+    ("trivia", first),
+    ("pkg", pkg),
+    ("error", error),
+    ("trivia", second),
+    ("field", missing),
+    ("pkg", pkg),
+    ("error", error),
+  ])
+  for
+    empty in [
+      @node.CstNode::binding_regex_from_entries(loc~, source_span=span, entries=[]),
+      @node.CstNode::parameter_type_decl_from_entries(loc~, source_span=span, entries=[]),
+      @node.CstNode::expr_method_from_entries(loc~, source_span=span, entries=[]),
+    ] {
+    assert_constructor_entries(empty, loc, span, [])
+  }
+}
+
+///|
+test "ordered constructors match legacy required and optional arguments" {
+  let (type_, op, trivia, field) = coloncolon_constructor_nodes()
+  let loc = type_.loc.merge(field.loc)
+  let span = (0, 23)
+  let semantic_label = @node.CstNode::name_identifier(
+    value="before",
+    loc=type_.loc,
+    source_span=type_.source_span,
+  )
+  let semantic_binder = @node.CstNode::name_identifier(
+    value="head",
+    loc=field.loc,
+    source_span=field.source_span,
+  )
+  let error = @node.CstNode::error(
+    loc=field.loc,
+    source_span=field.source_span,
+    entries=[Item(field)],
+  )
+  for full in [false, true] {
+    let binding_entries : Array[@node.CstRecoveryChild] = [Name(type_)]
+    let parameter_entries : Array[@node.CstRecoveryChild] = [Name(type_)]
+    let method_entries : Array[@node.CstRecoveryChild] = [Type_(type_), Op(op)]
+    if full {
+      binding_entries.append([
+        Op(op),
+        Binder(field),
+        SemanticLabel(semantic_label),
+        SemanticBinder(semantic_binder),
+      ])
+      parameter_entries.append([Op(op), Type_(field)])
+      method_entries.append([
+        Trivia(trivia[0]),
+        Trivia(trivia[1]),
+        Error(error),
+        Field(field),
+      ])
+    }
+    let legacy_binding = if full {
+      @node.CstNode::binding_regex(
+        loc~,
+        source_span=span,
+        name=type_,
+        op~,
+        binder=field,
+        semantic_label~,
+        semantic_binder~,
+      )
+    } else {
+      @node.CstNode::binding_regex(loc~, source_span=span, name=type_)
+    }
+    let legacy_parameter = if full {
+      @node.CstNode::parameter_type_decl(
+        loc~,
+        source_span=span,
+        name=type_,
+        op~,
+        type_=field,
+      )
+    } else {
+      @node.CstNode::parameter_type_decl(loc~, source_span=span, name=type_)
+    }
+    let legacy_method = if full {
+      @node.CstNode::expr_method(
+        loc~,
+        source_span=span,
+        type_~,
+        op~,
+        trivia~,
+        error~,
+        field~,
+      )
+    } else {
+      @node.CstNode::expr_method(loc~, source_span=span, type_~, op~)
+    }
+    for
+      (ordered, legacy) in [
+        (
+          @node.CstNode::binding_regex_from_entries(
+            loc~,
+            source_span=span,
+            entries=binding_entries[:],
+          ),
+          legacy_binding,
+        ),
+        (
+          @node.CstNode::parameter_type_decl_from_entries(
+            loc~,
+            source_span=span,
+            entries=parameter_entries[:],
+          ),
+          legacy_parameter,
+        ),
+        (
+          @node.CstNode::expr_method_from_entries(
+            loc~,
+            source_span=span,
+            entries=method_entries[:],
+          ),
+          legacy_method,
+        ),
+      ] {
+      assert_constructor_tree(ordered, legacy)
+    }
+  }
+}
