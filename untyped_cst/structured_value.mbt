@@ -1,78 +1,4 @@
 ///|
-fn CstNode::first_child_of_kind(
-  self : CstNode,
-  pred : (NodeKind) -> Bool,
-) -> CstNode? {
-  for i in 0..<self.children.length() {
-    match self.children.get(i) {
-      Some((_, child)) if pred(child.kind) => return Some(child)
-      _ => ()
-    }
-  }
-  None
-}
-
-///|
-fn CstNode::children_of_kind(
-  self : CstNode,
-  pred : (NodeKind) -> Bool,
-) -> Array[CstNode] {
-  let result : Array[CstNode] = []
-  for i in 0..<self.children.length() {
-    match self.children.get(i) {
-      Some((_, child)) if pred(child.kind) => result.push(child)
-      _ => ()
-    }
-  }
-  result
-}
-
-///|
-fn CstNode::has_child_label(self : CstNode, label : String) -> Bool {
-  self.first_child_with_label(label) is Some(_)
-}
-
-///|
-fn CstNode::has_child_kind(self : CstNode, expected : NodeKind) -> Bool {
-  self.first_child_of_kind(fn(kind) { kind == expected }) is Some(_)
-}
-
-///|
-fn CstNode::has_child_or_grandchild_kind(
-  self : CstNode,
-  expected : NodeKind,
-) -> Bool {
-  if self.has_child_kind(expected) {
-    return true
-  }
-  for entry in self.children {
-    let (_, child) = entry
-    if child.has_child_kind(expected) {
-      return true
-    }
-  }
-  false
-}
-
-///|
-fn CstNode::bool_marker_value(self : CstNode, expected : NodeKind) -> Bool? {
-  self
-  .first_child_of_kind(fn(kind) { kind == expected })
-  .map(child => child.bool_payload())
-  .bind(value => value)
-}
-
-///|
-fn CstNode::with_kind(self : CstNode, kind : NodeKind) -> CstNode {
-  CstNode::{
-    kind,
-    loc: self.loc,
-    source_span: self.source_span,
-    children: self.children,
-  }
-}
-
-///|
 fn CstNode::lexical_name_value(self : CstNode) -> CstNode? {
   if self.kind is (Name_Identifier | Name_Package) {
     return Some(self)
@@ -82,13 +8,16 @@ fn CstNode::lexical_name_value(self : CstNode) -> CstNode? {
 
 ///|
 fn name_component_node(source : CstNode) -> CstNode {
-  let value = source.lexical_name_value().unwrap_or(source)
-  scalar_node(
-    value.kind,
-    value.loc,
-    value.source_span,
-    String(value.string_payload().unwrap_or("")),
-  )
+  let name = source.lexical_name_value().unwrap_or(source)
+  let value = name.string_payload().unwrap_or("")
+  let loc = name.loc
+  let source_span = name.source_span
+  match name.kind {
+    Name_Identifier =>
+      @node.CstNode::name_identifier(value~, loc~, source_span~)
+    Name_Package => @node.CstNode::name_package(value~, loc~, source_span~)
+    _ => abort("expected a lexical name component")
+  }
 }
 
 ///|
@@ -102,9 +31,19 @@ fn structured_long_ident_node(sources : Array[CstNode]) -> CstNode? {
   Some(
     node(
       if sources.length() >= 2 {
-        LongIdent_Dot
+        fn(loc, source_span, children) {
+          let component = CstNode::children_with_label_from(
+            children, "component",
+          )
+          @node.CstNode::long_ident_dot(loc~, source_span~, component~)
+        }
       } else {
-        LongIdent_Ident
+        fn(loc, source_span, children) {
+          let component = CstNode::first_child_with_label_from(
+            children, "component",
+          ).unwrap_or(missing_at_end(loc~, source_span~))
+          @node.CstNode::long_ident_ident(loc~, source_span~, component~)
+        }
       },
       first.loc.merge(last.loc),
       mk_span(first.source_span.0, last.source_span.1),
@@ -114,112 +53,126 @@ fn structured_long_ident_node(sources : Array[CstNode]) -> CstNode? {
 }
 
 ///|
-fn structured_name_node(kind : NodeKind, sources : Array[CstNode]) -> CstNode? {
+fn structured_name_node(
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  sources : Array[CstNode],
+) -> CstNode? {
   guard structured_long_ident_node(sources) is Some(long_ident) else {
     return None
   }
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("long_ident"), long_ident)
-  Some(node(kind, long_ident.loc, long_ident.source_span, children))
+  Some(node(builder, long_ident.loc, long_ident.source_span, children))
 }
 
 ///|
-fn CstNode::with_structured_long_ident(
-  self : CstNode,
+fn push_structured_long_ident(
+  children : Array[(String?, CstNode)],
   label : String,
   source_labels : Array[String],
-) -> CstNode {
+) -> Unit {
   let sources : Array[CstNode] = []
   for source_label in source_labels {
-    for source in self.children_with_label(source_label) {
+    for source in CstNode::children_with_label_from(children, source_label) {
       if source.lexical_name_value() is Some(_) {
         sources.push(source)
       }
     }
   }
-  match structured_long_ident_node(sources) {
-    Some(long_ident) => {
-      let children : Array[(String?, CstNode)] = []
-      for entry in self.children {
-        children.push(entry)
-      }
-      push_child(children, Some(label), long_ident)
-      node(self.kind, self.loc, self.source_span, children)
-    }
-    None => self
+  if structured_long_ident_node(sources) is Some(name) {
+    push_child(children, Some(label), name)
   }
 }
 
 ///|
-fn CstNode::with_structured_name(
-  self : CstNode,
+fn push_structured_name(
+  children : Array[(String?, CstNode)],
   label : String,
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   source_labels : Array[String],
-) -> CstNode {
+) -> Unit {
   let sources : Array[CstNode] = []
   for source_label in source_labels {
-    for source in self.children_with_label(source_label) {
+    for source in CstNode::children_with_label_from(children, source_label) {
       if source.lexical_name_value() is Some(_) {
         sources.push(source)
       }
     }
   }
-  match structured_name_node(kind, sources) {
-    Some(name) => {
-      let children : Array[(String?, CstNode)] = []
-      for entry in self.children {
-        children.push(entry)
-      }
-      push_child(children, Some(label), name)
-      node(self.kind, self.loc, self.source_span, children)
-    }
-    None => self
+  if structured_name_node(builder, sources) is Some(name) {
+    push_child(children, Some(label), name)
   }
 }
 
 ///|
-fn CstNode::with_constructor_extra_info(self : CstNode) -> CstNode {
-  let kind = if self.has_child_label("type") && self.has_child_label("pkg") {
-    ConstructorExtraInfo_TypeNameWithConstrPackage
-  } else if self.has_child_label("type") {
-    ConstructorExtraInfo_TypeName
-  } else if self.has_child_label("pkg") {
-    ConstructorExtraInfo_Package
+fn push_constructor_extra_info(
+  children : Array[(String?, CstNode)],
+  loc : Location,
+  source_span : (Int, Int),
+) -> Unit {
+  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if top_item_children_have_label(
+      children, "type",
+    ) &&
+    top_item_children_have_label(children, "pkg") {
+    fn(loc, source_span, children) {
+      let _ = children
+      @node.CstNode::constructor_extra_info_type_name_with_constr_package(
+        loc~,
+        source_span~,
+      )
+    }
+  } else if top_item_children_have_label(children, "type") {
+    fn(loc, source_span, children) {
+      let _ = children
+      @node.CstNode::constructor_extra_info_type_name(loc~, source_span~)
+    }
+  } else if top_item_children_have_label(children, "pkg") {
+    fn(loc, source_span, children) {
+      let _ = children
+      @node.CstNode::constructor_extra_info_package(loc~, source_span~)
+    }
   } else {
-    let names = self.children_with_label("name")
+    let names = CstNode::children_with_label_from(children, "name")
     if names.length() == 2 &&
       names[0]
       .lexical_name_value()
       .map(fn(name) { name.kind is Name_Package })
       .unwrap_or(false) {
-      ConstructorExtraInfo_Package
+      fn(loc, source_span, children) {
+        let _ = children
+        @node.CstNode::constructor_extra_info_package(loc~, source_span~)
+      }
     } else if names.length() >= 2 {
-      ConstructorExtraInfo_TypeName
+      fn(loc, source_span, children) {
+        let _ = children
+        @node.CstNode::constructor_extra_info_type_name(loc~, source_span~)
+      }
     } else {
-      ConstructorExtraInfo_None
+      fn(loc, source_span, children) {
+        let _ = children
+        @node.CstNode::constructor_extra_info_none(loc~, source_span~)
+      }
     }
   }
-  with_marker_child(self, "constructor_extra_info", kind)
+  push_marker_child(
+    children, loc, source_span, "constructor_extra_info", builder,
+  )
 }
 
 ///|
-fn CstNode::with_bool_marker(
-  self : CstNode,
+fn push_bool_marker(
+  children : Array[(String?, CstNode)],
+  loc : Location,
+  source_span : (Int, Int),
   label : String,
-  kind : NodeKind,
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   value : Bool,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for entry in self.children {
-    children.push(entry)
-  }
+) -> Unit {
   push_child(
     children,
     Some(label),
-    bool_marker_node(kind, self.loc.end, self.source_span.1, value),
+    bool_marker_node(builder, loc.end, source_span.1, value),
   )
-  node(self.kind, self.loc, self.source_span, children)
 }
 
 ///|
@@ -229,7 +182,13 @@ fn accessor_node_from_token(token : CstNode) -> CstNode {
     None => {
       let value = token.lexical_name_value().unwrap_or(token)
       scalar_node(
-        Accessor_Label,
+        fn(loc, source_span, children) {
+          let value = match CstNode::payload_from_children(children) {
+            Some(NodePayload::String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::accessor_label(value~, loc~, source_span~)
+        },
         token.loc,
         token.source_span,
         String(value.string_payload().unwrap_or("")),
@@ -273,20 +232,23 @@ fn CstNode::first_operator_descendant(self : CstNode) -> CstNode? {
 }
 
 ///|
-fn CstNode::with_direct_semantic_constant(self : CstNode) -> CstNode {
-  if self.first_child_with_label("semantic_constant") is Some(_) {
-    return self
+fn push_direct_semantic_constant(children : Array[(String?, CstNode)]) -> Unit {
+  if CstNode::first_child_with_label_from(children, "semantic_constant")
+    is Some(_) {
+    return
   }
-  match self.first_constant_descendant() {
-    Some(constant) => {
-      let children : Array[(String?, CstNode)] = []
-      for entry in self.children {
-        children.push(entry)
-      }
-      push_child(children, Some("semantic_constant"), constant)
-      node(self.kind, self.loc, self.source_span, children)
+  // Search direct constants before descending, as on an already constructed node.
+  for (_, child) in children {
+    if child.kind.is_constant() {
+      push_child(children, Some("semantic_constant"), child)
+      return
     }
-    None => self
+  }
+  for (_, child) in children {
+    if child.first_constant_descendant() is Some(constant) {
+      push_child(children, Some("semantic_constant"), constant)
+      return
+    }
   }
 }
 
@@ -305,9 +267,9 @@ fn CstNode::first_trailing_mark_descendant(self : CstNode) -> CstNode? {
 }
 
 ///|
-fn list_has_item_kind(node : CstNode, expected : NodeKind) -> Bool {
+fn list_has_item_kind(node : CstNode, pred : (NodeKind) -> Bool) -> Bool {
   for item in node.children_with_label("item") {
-    if item.kind == expected {
+    if pred(item.kind) {
       return true
     }
   }
@@ -315,19 +277,66 @@ fn list_has_item_kind(node : CstNode, expected : NodeKind) -> Bool {
 }
 
 ///|
-fn list_trailing_mark_kind(node : CstNode) -> NodeKind {
-  let mut trailing = TrailingMark_None
-  for i in 0..<node.children.length() {
-    match node.children.get(i) {
-      Some((Some("item"), _)) => trailing = TrailingMark_None
+fn list_trailing_mark_kind(
+  children : ArrayView[(String?, CstNode)],
+) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
+  let mut trailing : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+    loc,
+    source_span,
+    children,
+  ) {
+    let _ = children
+    @node.CstNode::trailing_mark_none(loc~, source_span~)
+  }
+  for i in 0..<children.length() {
+    match children.get(i) {
+      Some((Some("item"), _)) =>
+        trailing = fn(loc, source_span, children) {
+          let _ = children
+          @node.CstNode::trailing_mark_none(loc~, source_span~)
+        }
       Some((Some("sep"), sep)) =>
         match sep.first_trailing_mark_descendant() {
-          Some(mark) => trailing = mark.kind
+          Some(mark) =>
+            trailing = match mark.kind {
+              TrailingMark_Comma =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_comma(loc~, source_span~)
+                }
+              TrailingMark_Semi =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_semi(loc~, source_span~)
+                }
+              _ =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_none(loc~, source_span~)
+                }
+            }
           None => ()
         }
       Some((Some("error"), error)) =>
         match error.first_trailing_mark_descendant() {
-          Some(mark) => trailing = mark.kind
+          Some(mark) =>
+            trailing = match mark.kind {
+              TrailingMark_Comma =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_comma(loc~, source_span~)
+                }
+              TrailingMark_Semi =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_semi(loc~, source_span~)
+                }
+              _ =>
+                fn(loc, source_span, children) {
+                  let _ = children
+                  @node.CstNode::trailing_mark_none(loc~, source_span~)
+                }
+            }
           None => ()
         }
       _ => ()
@@ -337,21 +346,18 @@ fn list_trailing_mark_kind(node : CstNode) -> NodeKind {
 }
 
 ///|
-fn with_marker_child(
-  source : CstNode,
+fn push_marker_child(
+  children : Array[(String?, CstNode)],
+  loc : Location,
+  source_span : (Int, Int),
   label : String,
-  kind : NodeKind,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for child in source.children {
-    children.push(child)
-  }
+  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+) -> Unit {
   push_child(
     children,
     Some(label),
-    marker_node(kind, source.loc.end, source.source_span.1),
+    marker_node(builder, loc.end, source_span.1),
   )
-  node(source.kind, source.loc, source.source_span, children)
 }
 
 ///|

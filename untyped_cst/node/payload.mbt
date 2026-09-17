@@ -3,14 +3,17 @@
 ///
 /// Recursive syntax and non-scalar AST helper values are represented by
 /// explicitly-kinded child nodes instead of payload variants.
-pub enum NodePayload {
+pub(all) enum NodePayload {
   String(String)
   Int(Int)
   Bool(Bool)
 } derive(@debug.Debug, Eq)
 
 ///|
-fn CstNode::first_child_with_label(self : CstNode, label : String) -> CstNode? {
+pub fn CstNode::first_child_with_label(
+  self : CstNode,
+  label : String,
+) -> CstNode? {
   for i in 0..<self.children.length() {
     match self.children.get(i) {
       Some((Some(child_label), child)) if child_label == label =>
@@ -22,7 +25,7 @@ fn CstNode::first_child_with_label(self : CstNode, label : String) -> CstNode? {
 }
 
 ///|
-fn CstNode::children_with_label(
+pub fn CstNode::children_with_label(
   self : CstNode,
   label : String,
 ) -> Array[CstNode] {
@@ -38,7 +41,7 @@ fn CstNode::children_with_label(
 }
 
 ///|
-fn token_string_payload(token : Token) -> String? {
+pub fn token_string_payload(token : Token) -> String? {
   match token {
     CHAR(value)
     | INT(value)
@@ -66,7 +69,7 @@ fn token_string_payload(token : Token) -> String? {
 }
 
 ///|
-fn token_payload(token : Token) -> NodePayload? {
+pub fn token_payload(token : Token) -> NodePayload? {
   if token_string_payload(token) is Some(value) {
     return Some(String(value))
   }
@@ -80,7 +83,7 @@ fn token_payload(token : Token) -> NodePayload? {
 }
 
 ///|
-fn CstNode::leaf_payload(self : CstNode) -> NodePayload? {
+pub fn CstNode::leaf_payload(self : CstNode) -> NodePayload? {
   match self.first_child_with_label("payload") {
     Some(child) =>
       match child.kind {
@@ -92,7 +95,7 @@ fn CstNode::leaf_payload(self : CstNode) -> NodePayload? {
 }
 
 ///|
-fn CstNode::string_payload(self : CstNode) -> String? {
+pub fn CstNode::string_payload(self : CstNode) -> String? {
   match self.leaf_payload() {
     Some(String(value)) => Some(value)
     _ => None
@@ -100,7 +103,7 @@ fn CstNode::string_payload(self : CstNode) -> String? {
 }
 
 ///|
-fn CstNode::int_payload(self : CstNode) -> Int? {
+pub fn CstNode::int_payload(self : CstNode) -> Int? {
   match self.leaf_payload() {
     Some(Int(value)) => Some(value)
     _ => None
@@ -108,7 +111,7 @@ fn CstNode::int_payload(self : CstNode) -> Int? {
 }
 
 ///|
-fn CstNode::bool_payload(self : CstNode) -> Bool? {
+pub fn CstNode::bool_payload(self : CstNode) -> Bool? {
   match self.leaf_payload() {
     Some(Bool(value)) => Some(value)
     _ => None
