@@ -307,22 +307,8 @@ fn parse_visibility_clause(state : ParserState) -> CstNode {
     Some((PUB, _, _)) => {
       is_pub = true
       visibility_builder = fn(loc, source_span, children) {
-        let kw = CstNode::first_child_with_label_from(children, "kw").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let open = CstNode::first_child_with_label_from(children, "open")
-        let error = CstNode::first_child_with_label_from(children, "error")
-        let attr = CstNode::first_child_with_label_from(children, "attr")
-        let close = CstNode::first_child_with_label_from(children, "close")
-        @node.CstNode::visibility_pub(
-          loc~,
-          source_span~,
-          kw~,
-          open?,
-          error?,
-          attr?,
-          close?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::visibility_pub(loc~, source_span~, entries~)
       }
       if state.consume_any() is Some(kw) {
         push_child(children, Some("kw"), kw)
@@ -4118,89 +4104,13 @@ fn assignment_node_builder(
     Some(Expr_ArrayGet) =>
       if is_augmented {
         fn(loc, source_span, children) {
-          let self_ = CstNode::first_child_with_label_from(children, "self").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let open = CstNode::first_child_with_label_from(children, "open").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let index = CstNode::first_child_with_label_from(children, "index").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let close = CstNode::first_child_with_label_from(children, "close").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let index_loc = CstNode::first_child_with_label_from(
-            children, "index_loc",
-          ).unwrap_or(CstNode::missing(loc~, source_span~))
-          let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let operator = CstNode::first_child_with_label_from(
-            children, "operator",
-          ).unwrap_or(CstNode::missing(loc~, source_span~))
-          let rhs = CstNode::first_child_with_label_from(children, "rhs").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let augmented = CstNode::first_child_with_label_from(
-            children, "augmented",
-          )
-          @node.CstNode::expr_array_augmented_set(
-            loc~,
-            source_span~,
-            self_~,
-            open~,
-            index~,
-            close~,
-            index_loc~,
-            op~,
-            operator~,
-            rhs~,
-            augmented?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::expr_array_augmented_set(loc~, source_span~, entries~)
         }
       } else {
         fn(loc, source_span, children) {
-          let self_ = CstNode::first_child_with_label_from(children, "self").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let open = CstNode::first_child_with_label_from(children, "open").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let index = CstNode::first_child_with_label_from(children, "index").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let close = CstNode::first_child_with_label_from(children, "close").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let index_loc = CstNode::first_child_with_label_from(
-            children, "index_loc",
-          ).unwrap_or(CstNode::missing(loc~, source_span~))
-          let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let operator = CstNode::first_child_with_label_from(
-            children, "operator",
-          ).unwrap_or(CstNode::missing(loc~, source_span~))
-          let rhs = CstNode::first_child_with_label_from(children, "rhs").unwrap_or(
-            CstNode::missing(loc~, source_span~),
-          )
-          let augmented = CstNode::first_child_with_label_from(
-            children, "augmented",
-          )
-          @node.CstNode::expr_array_set(
-            loc~,
-            source_span~,
-            self_~,
-            open~,
-            index~,
-            close~,
-            index_loc~,
-            op~,
-            operator~,
-            rhs~,
-            augmented?,
-          )
+          let entries = recovery_children(children)
+          @node.CstNode::expr_array_set(loc~, source_span~, entries~)
         }
       }
     Some(Expr_Field) =>
@@ -7583,26 +7493,8 @@ fn parse_labelled_loop_expr(
     push_child(children, Some("body"), parse_block_expr(state))
     return state.construct_from_children(
       fn(loc, source_span, children) {
-        let label = CstNode::first_child_with_label_from(children, "label").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let label_loc = CstNode::first_child_with_label_from(
-          children, "label_loc",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
-        let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let body = CstNode::first_child_with_label_from(children, "body").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        @node.CstNode::expr_labelled_block(
-          loc~,
-          source_span~,
-          label~,
-          label_loc~,
-          op~,
-          body~,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::expr_labelled_block(loc~, source_span~, entries~)
       },
       children,
     )
@@ -8256,26 +8148,8 @@ fn parse_arrow_parameter_expr_item(state : ParserState) -> CstNode {
   )
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let open = CstNode::first_child_with_label_from(children, "open")
-      let expr = CstNode::first_child_with_label_from(children, "expr").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let type_ = CstNode::first_child_with_label_from(children, "type").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let close = CstNode::first_child_with_label_from(children, "close")
-      @node.CstNode::expr_constraint(
-        loc~,
-        source_span~,
-        open?,
-        expr~,
-        op~,
-        type_~,
-        close?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::expr_constraint(loc~, source_span~, entries~)
     },
     children,
   )
@@ -8431,26 +8305,8 @@ fn parse_constraint_paren_expr(state : ParserState) -> CstNode {
   push_child(children, Some("close"), state.expect_token(TokenKind::TK_RPAREN))
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let open = CstNode::first_child_with_label_from(children, "open")
-      let expr = CstNode::first_child_with_label_from(children, "expr").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let type_ = CstNode::first_child_with_label_from(children, "type").unwrap_or(
-        CstNode::missing(loc~, source_span~),
-      )
-      let close = CstNode::first_child_with_label_from(children, "close")
-      @node.CstNode::expr_constraint(
-        loc~,
-        source_span~,
-        open?,
-        expr~,
-        op~,
-        type_~,
-        close?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::expr_constraint(loc~, source_span~, entries~)
     },
     children,
   )
@@ -15189,16 +15045,8 @@ fn parse_pattern_or(
     }
     lhs = state.construct_from_children(
       fn(loc, source_span, children) {
-        let lhs = CstNode::first_child_with_label_from(children, "lhs").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        let rhs = CstNode::first_child_with_label_from(children, "rhs").unwrap_or(
-          CstNode::missing(loc~, source_span~),
-        )
-        @node.CstNode::pattern_or(loc~, source_span~, lhs~, op~, rhs~)
+        let entries = recovery_children(children)
+        @node.CstNode::pattern_or(loc~, source_span~, entries~)
       },
       children,
     )

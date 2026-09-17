@@ -111,17 +111,14 @@ pub fn CstNode::expr_continue(
 pub fn CstNode::expr_labelled_block(
   loc~ : Location,
   source_span~ : (Int, Int),
-  label~ : CstNode,
-  label_loc~ : CstNode,
-  op~ : CstNode,
-  body~ : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("label"), label))
-  children.push((Some("label_loc"), label_loc))
-  children.push((Some("op"), op))
-  children.push((Some("body"), body))
-  node(NodeKind::Expr_LabelledBlock, loc, source_span, children)
+  node(
+    NodeKind::Expr_LabelledBlock,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -537,15 +534,14 @@ pub fn CstNode::pattern_special_constr(
 pub fn CstNode::pattern_or(
   loc~ : Location,
   source_span~ : (Int, Int),
-  lhs~ : CstNode,
-  op~ : CstNode,
-  rhs~ : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("lhs"), lhs))
-  children.push((Some("op"), op))
-  children.push((Some("rhs"), rhs))
-  node(NodeKind::Pattern_Or, loc, source_span, children)
+  node(
+    NodeKind::Pattern_Or,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

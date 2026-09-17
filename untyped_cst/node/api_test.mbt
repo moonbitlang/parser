@@ -393,3 +393,245 @@ test "missing pattern entries preserve nested recovery and ordered errors" {
   )
   assert_constructor_entries(empty, @node.empty_loc(test_position(7)), (7, 7), [])
 }
+
+///|
+test "constraint, labelled block, and or pattern entries retain repeated trivia" {
+  let loc = @node.mk_loc(test_position(0), test_position(24))
+  let head = @node.CstNode::syntax_identifier(
+    loc=@node.mk_loc(test_position(0), test_position(1)),
+    source_span=(0, 1),
+    payload=@node.NodePayload::String("x"),
+  )
+  let op = @node.CstNode::syntax_separator(
+    loc=@node.mk_loc(test_position(2), test_position(3)),
+    source_span=(2, 3),
+  )
+  let first = @node.CstNode::syntax_comment(
+    loc=@node.mk_loc(test_position(4), test_position(11)),
+    source_span=(4, 11),
+  )
+  let second = @node.CstNode::syntax_comment(
+    loc=@node.mk_loc(test_position(13), test_position(22)),
+    source_span=(13, 22),
+  )
+  let tail = @node.CstNode::syntax_identifier(
+    loc=@node.mk_loc(test_position(23), test_position(24)),
+    source_span=(23, 24),
+    payload=@node.NodePayload::String("y"),
+  )
+  let constraint = @node.CstNode::expr_constraint(loc~, source_span=(0, 24), entries=[
+    Expr(head),
+    Op(op),
+    Trivia(first),
+    Trivia(second),
+    Type_(tail),
+  ])
+  assert_constructor_entries(constraint, loc, (0, 24), [
+    ("expr", head),
+    ("op", op),
+    ("trivia", first),
+    ("trivia", second),
+    ("type", tail),
+  ])
+  let block = @node.CstNode::expr_labelled_block(loc~, source_span=(0, 24), entries=[
+    Label(head),
+    LabelLoc(head),
+    Op(op),
+    Trivia(first),
+    Trivia(second),
+    Body(tail),
+  ])
+  assert_constructor_entries(block, loc, (0, 24), [
+    ("label", head),
+    ("label_loc", head),
+    ("op", op),
+    ("trivia", first),
+    ("trivia", second),
+    ("body", tail),
+  ])
+  let pattern = @node.CstNode::pattern_or(loc~, source_span=(0, 24), entries=[
+    Lhs(head),
+    Op(op),
+    Trivia(first),
+    Trivia(second),
+    Rhs(tail),
+  ])
+  assert_constructor_entries(pattern, loc, (0, 24), [
+    ("lhs", head),
+    ("op", op),
+    ("trivia", first),
+    ("trivia", second),
+    ("rhs", tail),
+  ])
+  for node in [constraint, block, pattern] {
+    let comments = node.children_with_label("trivia")
+    @test.assert_eq(comments.length(), 2)
+    for comment in comments {
+      @test.assert_eq(comment.kind is @node.NodeKind::Syntax_Comment, true)
+    }
+  }
+}
+
+///|
+test "public visibility entries retain repeated errors and their tokens" {
+  let loc = @node.mk_loc(test_position(0), test_position(8))
+  let kw = @node.CstNode::syntax_keyword(
+    loc=@node.mk_loc(test_position(0), test_position(3)),
+    source_span=(0, 3),
+  )
+  let open = @node.CstNode::syntax_delimiter(
+    loc=@node.mk_loc(test_position(3), test_position(4)),
+    source_span=(3, 4),
+  )
+  let errors : Array[@node.CstNode] = []
+  for i, value in ["1", "2"] {
+    let start = 4 + i * 2
+    let error_loc = @node.mk_loc(test_position(start), test_position(start + 1))
+    let token = @node.CstNode::syntax_literal(
+      loc=error_loc,
+      source_span=(start, start + 1),
+      payload=@node.NodePayload::String(value),
+    )
+    errors.push(
+      @node.CstNode::error(loc=error_loc, source_span=(start, start + 1), entries=[
+        Item(token),
+      ]),
+    )
+  }
+  let attr = @node.CstNode::missing(
+    loc=@node.empty_loc(test_position(7)),
+    source_span=(7, 7),
+  )
+  let close = @node.CstNode::syntax_delimiter(
+    loc=@node.mk_loc(test_position(7), test_position(8)),
+    source_span=(7, 8),
+  )
+  let visibility = @node.CstNode::visibility_pub(loc~, source_span=(0, 8), entries=[
+    Kw(kw),
+    Open(open),
+    Error(errors[0]),
+    Error(errors[1]),
+    Attr(attr),
+    Close(close),
+  ])
+  assert_constructor_entries(visibility, loc, (0, 8), [
+    ("kw", kw),
+    ("open", open),
+    ("error", errors[0]),
+    ("error", errors[1]),
+    ("attr", attr),
+    ("close", close),
+  ])
+  let actual = visibility.children_with_label("error")
+  @test.assert_eq(actual.length(), 2)
+  for i, error in actual {
+    @test.assert_eq(error.kind is @node.NodeKind::Error, true)
+    let token = error.first_child_with_label("item").unwrap()
+    @test.assert_eq(token.kind is @node.NodeKind::Syntax_Unexpected, true)
+    @test.assert_eq(
+      token.string_payload(),
+      Some(if i == 0 { "1" } else { "2" }),
+    )
+    @test.assert_eq(token.loc, errors[i].loc)
+    @test.assert_eq(token.source_span, errors[i].source_span)
+  }
+}
+
+///|
+test "array assignment entries retain expanded and unexpanded lhs children" {
+  let lhs_loc = @node.mk_loc(test_position(0), test_position(4))
+  let name_loc = @node.mk_loc(test_position(0), test_position(2))
+  let name = @node.CstNode::syntax_identifier(
+    loc=name_loc,
+    source_span=(0, 2),
+    payload=@node.NodePayload::String("xs"),
+  )
+  let array = @node.CstNode::expr_ident(loc=name_loc, source_span=(0, 2), name=[
+    name,
+  ])
+  let open = @node.CstNode::syntax_delimiter(
+    loc=@node.mk_loc(test_position(2), test_position(3)),
+    source_span=(2, 3),
+  )
+  let index = @node.CstNode::missing(
+    loc=@node.empty_loc(test_position(3)),
+    source_span=(3, 3),
+  )
+  let close = @node.CstNode::syntax_delimiter(
+    loc=@node.mk_loc(test_position(3), test_position(4)),
+    source_span=(3, 4),
+  )
+  let lhs = @node.CstNode::expr_array_get(
+    loc=lhs_loc,
+    source_span=(0, 4),
+    self_=array,
+    open~,
+    index~,
+    close~,
+  )
+  let op = @node.CstNode::syntax_operator(
+    loc=@node.mk_loc(test_position(5), test_position(6)),
+    source_span=(5, 6),
+  )
+  let rhs = @node.CstNode::syntax_identifier(
+    loc=@node.mk_loc(test_position(7), test_position(12)),
+    source_span=(7, 12),
+    payload=@node.NodePayload::String("value"),
+  )
+  let loc = @node.mk_loc(test_position(0), test_position(12))
+  let entries : ArrayView[@node.CstRecoveryChild] = [Lhs(lhs), Op(op), Rhs(rhs)]
+  for
+    node in [
+      @node.CstNode::expr_array_set(loc~, source_span=(0, 12), entries~),
+      @node.CstNode::expr_array_augmented_set(
+        loc~,
+        source_span=(0, 12),
+        entries~,
+      ),
+    ] {
+    assert_constructor_entries(node, loc, (0, 12), [
+      ("lhs", lhs),
+      ("op", op),
+      ("rhs", rhs),
+    ])
+    @test.assert_eq(node.has_child_label("self"), false)
+    let recovered = node.first_child_with_label("lhs").unwrap()
+    @test.assert_eq(recovered.kind is @node.NodeKind::Expr_ArrayGet, true)
+    assert_constructor_entries(recovered, lhs_loc, (0, 4), [
+      ("self", array),
+      ("open", open),
+      ("index", index),
+      ("close", close),
+    ])
+    assert_constructor_entries(recovered.children[0].1, name_loc, (0, 2), [
+      ("name", name),
+    ])
+  }
+  let entries : ArrayView[@node.CstRecoveryChild] = [
+    Self_(array),
+    Open(open),
+    Index(index),
+    Close(close),
+    Op(op),
+    Rhs(rhs),
+  ]
+  for
+    node in [
+      @node.CstNode::expr_array_set(loc~, source_span=(0, 12), entries~),
+      @node.CstNode::expr_array_augmented_set(
+        loc~,
+        source_span=(0, 12),
+        entries~,
+      ),
+    ] {
+    assert_constructor_entries(node, loc, (0, 12), [
+      ("self", array),
+      ("open", open),
+      ("index", index),
+      ("close", close),
+      ("op", op),
+      ("rhs", rhs),
+    ])
+    @test.assert_eq(node.has_child_label("lhs"), false)
+  }
+}

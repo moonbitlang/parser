@@ -1087,31 +1087,14 @@ pub fn CstNode::visibility_default(
 pub fn CstNode::visibility_pub(
   loc~ : Location,
   source_span~ : (Int, Int),
-  kw~ : CstNode,
-  open? : CstNode,
-  error? : CstNode,
-  attr? : CstNode,
-  close? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("kw"), kw))
-  match open {
-    Some(child) => children.push((Some("open"), child))
-    None => ()
-  }
-  match error {
-    Some(child) => children.push((Some("error"), child))
-    None => ()
-  }
-  match attr {
-    Some(child) => children.push((Some("attr"), child))
-    None => ()
-  }
-  match close {
-    Some(child) => children.push((Some("close"), child))
-    None => ()
-  }
-  node(NodeKind::Visibility_Pub, loc, source_span, children)
+  node(
+    NodeKind::Visibility_Pub,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

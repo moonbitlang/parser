@@ -768,60 +768,28 @@ pub fn CstNode::expr_array_spread(
 pub fn CstNode::expr_array_set(
   loc~ : Location,
   source_span~ : (Int, Int),
-  self_~ : CstNode,
-  open~ : CstNode,
-  index~ : CstNode,
-  close~ : CstNode,
-  index_loc~ : CstNode,
-  op~ : CstNode,
-  operator~ : CstNode,
-  rhs~ : CstNode,
-  augmented? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("self"), self_))
-  children.push((Some("open"), open))
-  children.push((Some("index"), index))
-  children.push((Some("close"), close))
-  children.push((Some("index_loc"), index_loc))
-  children.push((Some("op"), op))
-  children.push((Some("operator"), operator))
-  children.push((Some("rhs"), rhs))
-  match augmented {
-    Some(child) => children.push((Some("augmented"), child))
-    None => ()
-  }
-  node(NodeKind::Expr_ArraySet, loc, source_span, children)
+  node(
+    NodeKind::Expr_ArraySet,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
 pub fn CstNode::expr_array_augmented_set(
   loc~ : Location,
   source_span~ : (Int, Int),
-  self_~ : CstNode,
-  open~ : CstNode,
-  index~ : CstNode,
-  close~ : CstNode,
-  index_loc~ : CstNode,
-  op~ : CstNode,
-  operator~ : CstNode,
-  rhs~ : CstNode,
-  augmented? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  children.push((Some("self"), self_))
-  children.push((Some("open"), open))
-  children.push((Some("index"), index))
-  children.push((Some("close"), close))
-  children.push((Some("index_loc"), index_loc))
-  children.push((Some("op"), op))
-  children.push((Some("operator"), operator))
-  children.push((Some("rhs"), rhs))
-  match augmented {
-    Some(child) => children.push((Some("augmented"), child))
-    None => ()
-  }
-  node(NodeKind::Expr_ArrayAugmentedSet, loc, source_span, children)
+  node(
+    NodeKind::Expr_ArrayAugmentedSet,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -890,25 +858,14 @@ pub fn CstNode::expr_sequence(
 pub fn CstNode::expr_constraint(
   loc~ : Location,
   source_span~ : (Int, Int),
-  open? : CstNode,
-  expr~ : CstNode,
-  op~ : CstNode,
-  type_~ : CstNode,
-  close? : CstNode,
+  entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match open {
-    Some(child) => children.push((Some("open"), child))
-    None => ()
-  }
-  children.push((Some("expr"), expr))
-  children.push((Some("op"), op))
-  children.push((Some("type"), type_))
-  match close {
-    Some(child) => children.push((Some("close"), child))
-    None => ()
-  }
-  node(NodeKind::Expr_Constraint, loc, source_span, children)
+  node(
+    NodeKind::Expr_Constraint,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

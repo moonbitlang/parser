@@ -554,3 +554,344 @@ test "invalid record pattern diagnostics match handrolled locations and messages
     assert_expression_acceptance("invalid record pattern field", source, false)
   }
 }
+
+///|
+fn refactor_assert_ordered_comments(
+  prefix : String,
+  suffix : String,
+  pred : (@untyped_cst.NodeKind) -> Bool,
+  before : Array[String?],
+  after : Array[String?],
+  next_text : String,
+) -> Unit raise {
+  let cases : Array[Array[(String, Int)]] = [
+    [("// keep", 7)],
+    [("// keep", 7), ("// second", 9)],
+    [("// keep 🐇", 9), ("// second 🦀", 11)],
+  ]
+  for comments in cases {
+    let source = prefix + comments.map(c => c.0).join("\n ") + "\n " + suffix
+    let node = refactor_find_node(source, pred, expression=true)
+    let labels : Array[String?] = []
+    labels.append(before)
+    for _ in comments {
+      labels.push(Some("trivia"))
+    }
+    labels.append(after)
+    @test.assert_eq(refactor_labels(node), labels)
+    let trivia = node.children_with_label("trivia")
+    @test.assert_eq(trivia.length(), comments.length())
+    let mut offset = prefix.length()
+    let mut cnum = prefix.length()
+    let mut bol = 0
+    for i, (text, scalar_length) in comments {
+      @test.assert_eq(
+        trivia[i].kind is @untyped_cst.NodeKind::Syntax_Comment,
+        true,
+      )
+      refactor_assert_source_range(
+        trivia[i],
+        source,
+        text,
+        (offset, offset + text.length()),
+        (i + 1, bol, cnum),
+        (i + 1, bol, cnum + scalar_length),
+      )
+      offset += text.length() + 2
+      cnum += scalar_length + 2
+      bol = cnum - 1
+    }
+    refactor_assert_source_range(
+      node.children[before.length() + comments.length()].1,
+      source,
+      next_text,
+      (offset, offset + next_text.length()),
+      (comments.length() + 1, bol, cnum),
+      (comments.length() + 1, bol, cnum + next_text.length()),
+    )
+    assert_expr_ast_equiv(source)
+  }
+}
+
+///|
+test "CST preservation: expression constraints retain ordered comments" {
+  refactor_assert_ordered_comments(
+    "(x : Int ",
+    ")",
+    kind => kind is Expr_Constraint,
+    [Some("open"), Some("expr"), Some("op"), Some("type")],
+    [Some("close")],
+    ")",
+  )
+}
+
+///|
+test "CST preservation: labelled blocks retain ordered comments" {
+  refactor_assert_ordered_comments(
+    "label~: ",
+    "{ 1 }",
+    kind => kind is Expr_LabelledBlock,
+    [Some("label"), Some("label_loc"), Some("op")],
+    [Some("body")],
+    "{ 1 }",
+  )
+}
+
+///|
+test "CST preservation: or patterns retain ordered comments" {
+  refactor_assert_ordered_comments(
+    "match x { 1 ",
+    "| 2 => 0 }",
+    kind => kind is Pattern_Or,
+    [Some("lhs")],
+    [Some("op"), Some("rhs")],
+    "|",
+  )
+}
+
+///|
+fn refactor_assert_same_tree(
+  actual : @untyped_cst.CstNode,
+  expected : @untyped_cst.CstNode,
+) -> Unit raise {
+  @test.assert_eq(actual.kind == expected.kind, true)
+  @test.assert_eq(actual.loc, expected.loc)
+  @test.assert_eq(actual.source_span, expected.source_span)
+  @test.assert_eq(refactor_labels(actual), refactor_labels(expected))
+  for i, (_, child) in actual.children {
+    refactor_assert_same_tree(child, expected.children[i].1)
+  }
+}
+
+///|
+fn refactor_assert_array_assignment_recovery(op : String) -> Unit raise {
+  let source = "xs[] \{op} value"
+  let parsed = @untyped_cst.parse_expression(source)
+  json_inspect(
+    diagnostics_equiv_reports_json(reports_from_view(parsed.diagnostics_view())),
+    content=[
+      {
+        "type": "Error",
+        "loc": {
+          "file": "",
+          "start": { "line": 1, "column": 4 },
+          "end": { "line": 1, "column": 5 },
+        },
+        "msg": "Unexpected token `]`, you may expect simple expression.",
+      },
+    ],
+  )
+  let node = parsed.root().first_child_with_label("expr").unwrap()
+  @test.assert_eq(
+    if op == "=" {
+      node.kind is @untyped_cst.NodeKind::Expr_ArraySet
+    } else {
+      node.kind is @untyped_cst.NodeKind::Expr_ArrayAugmentedSet
+    },
+    true,
+  )
+  @test.assert_eq(refactor_labels(node), [
+    Some("lhs"),
+    Some("op"),
+    Some("operator"),
+    Some("rhs"),
+    Some("augmented"),
+  ])
+  let lhs = node.children[0].1
+  @test.assert_eq(lhs.kind is @untyped_cst.NodeKind::Expr_ArrayGet, true)
+  let original_lhs = @untyped_cst.parse_expression("xs[]")
+    .root()
+    .first_child_with_label("expr")
+    .unwrap()
+  refactor_assert_same_tree(lhs, original_lhs)
+  @test.assert_eq(refactor_labels(lhs), [
+    Some("self"),
+    Some("open"),
+    Some("index"),
+    Some("close"),
+    Some("index_loc"),
+  ])
+  refactor_assert_source_range(
+    lhs,
+    source,
+    "xs[]",
+    (0, 4),
+    (1, 0, 0),
+    (1, 0, 4),
+  )
+  let array = lhs.first_child_with_label("self").unwrap()
+  @test.assert_eq(array.kind is @untyped_cst.NodeKind::Expr_Ident, true)
+  let name = array.first_child_with_label("name").unwrap()
+  @test.assert_eq(name.kind is @untyped_cst.NodeKind::Syntax_Identifier, true)
+  @test.assert_eq(name.string_payload(), Some("xs"))
+  refactor_assert_source_range(name, source, "xs", (0, 2), (1, 0, 0), (1, 0, 2))
+  for (label, text, start) in [("open", "[", 2), ("close", "]", 3)] {
+    let token = lhs.first_child_with_label(label).unwrap()
+    @test.assert_eq(token.kind is @untyped_cst.NodeKind::Syntax_Delimiter, true)
+    refactor_assert_source_range(
+      token,
+      source,
+      text,
+      (start, start + 1),
+      (1, 0, start),
+      (1, 0, start + 1),
+    )
+  }
+  refactor_assert_source_range(
+    node.children[1].1,
+    source,
+    op,
+    (5, 5 + op.length()),
+    (1, 0, 5),
+    (1, 0, 5 + op.length()),
+  )
+  refactor_assert_source_range(
+    node.children[3].1,
+    source,
+    "value",
+    (6 + op.length(), source.length()),
+    (1, 0, 6 + op.length()),
+    (1, 0, source.length()),
+  )
+  @test.assert_eq(node.children[4].1.bool_payload(), Some(op != "="))
+  let (expr, reports) = parsed.to_expr()
+  @test.assert_eq(expr is None, true)
+  @test.assert_eq(
+    diagnostics_equiv_reports_json(reports),
+    diagnostics_equiv_reports_json(reports_from_view(parsed.diagnostics_view())),
+  )
+}
+
+///|
+test "CST preservation: array assignment retains the recovery lhs" {
+  refactor_assert_array_assignment_recovery("=")
+}
+
+///|
+test "CST preservation: augmented array assignment retains the recovery lhs" {
+  refactor_assert_array_assignment_recovery("+=")
+}
+
+///|
+test "CST preservation: public visibility retains every error node" {
+  let source = "pub(1 2) fn f() {}"
+  let parsed = @untyped_cst.parse_structure(source)
+  json_inspect(
+    diagnostics_equiv_reports_json(reports_from_view(parsed.diagnostics_view())),
+    content=[
+      {
+        "type": "Error",
+        "loc": {
+          "file": "",
+          "start": { "line": 1, "column": 5 },
+          "end": { "line": 1, "column": 6 },
+        },
+        "msg": "Unexpected token int, you may expect `readonly`, id (lowercase start), `extend`.",
+      },
+    ],
+  )
+  let node = api_find_node(parsed.root(), node => node.kind is Visibility_Pub).unwrap()
+  @test.assert_eq(refactor_labels(node), [
+    Some("kw"),
+    Some("open"),
+    Some("error"),
+    Some("error"),
+    Some("attr"),
+    Some("close"),
+  ])
+  let errors = node.children_with_label("error")
+  @test.assert_eq(errors.length(), 2)
+  for i, error in errors {
+    @test.assert_eq(error.kind is @untyped_cst.NodeKind::Error, true)
+    @test.assert_eq(refactor_labels(error), [Some("item")])
+    let token = error.children[0].1
+    @test.assert_eq(
+      token.kind is @untyped_cst.NodeKind::Syntax_Unexpected,
+      true,
+    )
+    let text = if i == 0 { "1" } else { "2" }
+    @test.assert_eq(token.string_payload(), Some(text))
+    let start = 4 + i * 2
+    for child in [error, token] {
+      refactor_assert_source_range(
+        child,
+        source,
+        text,
+        (start, start + 1),
+        (1, 0, start),
+        (1, 0, start + 1),
+      )
+    }
+  }
+  refactor_assert_source_range(
+    node,
+    source,
+    "pub(1 2)",
+    (0, 8),
+    (1, 0, 0),
+    (1, 0, 8),
+  )
+}
+
+///|
+test "valid array assignments retain expanded children and AST" {
+  for op in ["=", "+="] {
+    let source = "xs[0] \{op} value"
+    let node = refactor_find_node(
+      source,
+      kind => kind is (Expr_ArraySet | Expr_ArrayAugmentedSet),
+      expression=true,
+    )
+    @test.assert_eq(refactor_labels(node), [
+      Some("self"),
+      Some("open"),
+      Some("index"),
+      Some("close"),
+      Some("index_loc"),
+      Some("op"),
+      Some("operator"),
+      Some("rhs"),
+      Some("augmented"),
+    ])
+    for
+      (label, text, start, end) in [
+        ("self", "xs", 0, 2),
+        ("open", "[", 2, 3),
+        ("index", "0", 3, 4),
+        ("close", "]", 4, 5),
+        ("index_loc", "[0]", 2, 5),
+      ] {
+      refactor_assert_source_range(
+        node.first_child_with_label(label).unwrap(),
+        source,
+        text,
+        (start, end),
+        (1, 0, start),
+        (1, 0, end),
+      )
+    }
+    @test.assert_eq(api_has_kind(node, kind => kind is Missing), false)
+    assert_expr_ast_equiv(source)
+  }
+}
+
+///|
+test "valid visibility and expression constraints retain their AST" {
+  for visibility in ["pub", "pub(all)"] {
+    let source = "\{visibility} fn f() {}"
+    let node = refactor_find_node(source, kind => kind is Visibility_Pub)
+    @test.assert_eq(
+      refactor_labels(node),
+      if visibility == "pub" {
+        [Some("kw")]
+      } else {
+        [Some("kw"), Some("open"), Some("attr"), Some("close")]
+      },
+    )
+    @test.assert_eq(node.text(source), visibility[:])
+    @test.assert_eq(node.children_with_label("error").length(), 0)
+    assert_handrolled_cst_ast_equiv(source)
+  }
+  assert_expr_ast_equiv("(x : Int)")
+  assert_expr_ast_equiv("(x : Int) => x")
+}

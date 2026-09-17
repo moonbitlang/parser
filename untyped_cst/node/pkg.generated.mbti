@@ -173,10 +173,10 @@ pub fn CstNode::error_type_maybe(loc~ : @basic.Location, source_span~ : (Int, In
 pub fn CstNode::error_type_noraise(loc~ : @basic.Location, source_span~ : (Int, Int), op~ : Self) -> Self
 pub fn CstNode::expr_apply(loc~ : @basic.Location, source_span~ : (Int, Int), op? : Self, operator? : Self, func~ : Self, arg~ : Self) -> Self
 pub fn CstNode::expr_array(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, array_kind~ : Self) -> Self
-pub fn CstNode::expr_array_augmented_set(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, index~ : Self, close~ : Self, index_loc~ : Self, op~ : Self, operator~ : Self, rhs~ : Self, augmented? : Self) -> Self
+pub fn CstNode::expr_array_augmented_set(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_array_get(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, index~ : Self, close~ : Self, index_loc? : Self) -> Self
 pub fn CstNode::expr_array_get_slice(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, start? : Self, op~ : Self, end? : Self, close~ : Self, index_loc? : Self) -> Self
-pub fn CstNode::expr_array_set(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, index~ : Self, close~ : Self, index_loc~ : Self, op~ : Self, operator~ : Self, rhs~ : Self, augmented? : Self) -> Self
+pub fn CstNode::expr_array_set(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_array_spread(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, array_kind~ : Self) -> Self
 pub fn CstNode::expr_as(loc~ : @basic.Location, source_span~ : (Int, Int), expr~ : Self, op~ : Self, type_~ : Self) -> Self
 pub fn CstNode::expr_assign(loc~ : @basic.Location, source_span~ : (Int, Int), lhs? : Self, name~ : ArrayView[Self], semantic_name? : Self, op~ : Self, operator~ : Self, rhs~ : Self, augmented? : Self) -> Self
@@ -185,7 +185,7 @@ pub fn CstNode::expr_break(loc~ : @basic.Location, source_span~ : (Int, Int), kw
 pub fn CstNode::expr_bytes_interp(loc~ : @basic.Location, source_span~ : (Int, Int), token~ : Self) -> Self
 pub fn CstNode::expr_constant(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_constr(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
-pub fn CstNode::expr_constraint(loc~ : @basic.Location, source_span~ : (Int, Int), open? : Self, expr~ : Self, op~ : Self, type_~ : Self, close? : Self) -> Self
+pub fn CstNode::expr_constraint(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_continue(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, label_loc? : Self, label? : Self, arg? : Self) -> Self
 pub fn CstNode::expr_defer(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, expr~ : Self) -> Self
 pub fn CstNode::expr_dot_apply(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, op? : Self, error~ : ArrayView[Self], token? : Self, field? : Self, arg? : Self, return_self? : Self) -> Self
@@ -203,7 +203,7 @@ pub fn CstNode::expr_implies(loc~ : @basic.Location, source_span~ : (Int, Int), 
 pub fn CstNode::expr_infix(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, operator~ : Self, rhs~ : Self) -> Self
 pub fn CstNode::expr_interp(loc~ : @basic.Location, source_span~ : (Int, Int), token~ : Self) -> Self
 pub fn CstNode::expr_is(loc~ : @basic.Location, source_span~ : (Int, Int), expr~ : Self, op~ : Self, pattern~ : Self) -> Self
-pub fn CstNode::expr_labelled_block(loc~ : @basic.Location, source_span~ : (Int, Int), label~ : Self, label_loc~ : Self, op~ : Self, body~ : Self) -> Self
+pub fn CstNode::expr_labelled_block(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_let(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_let_and(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_let_fn(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
@@ -379,7 +379,7 @@ pub fn CstNode::pattern_constraint(loc~ : @basic.Location, source_span~ : (Int, 
 pub fn CstNode::pattern_group(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::pattern_map(loc~ : @basic.Location, source_span~ : (Int, Int), trivia? : Self, body~ : Self, openness? : Self) -> Self
 pub fn CstNode::pattern_missing_pattern(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
-pub fn CstNode::pattern_or(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self) -> Self
+pub fn CstNode::pattern_or(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_range(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self, range_kind? : Self) -> Self
 pub fn CstNode::pattern_record(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, openness? : Self) -> Self
 pub fn CstNode::pattern_rest(loc~ : @basic.Location, source_span~ : (Int, Int), op~ : Self, as_? : Self, bytes? : Self, pkg? : Self, str? : Self, name? : Self, const_? : Self, dot_dot_binder? : Self) -> Self
@@ -442,7 +442,7 @@ pub fn CstNode::using_kind_type(loc~ : @basic.Location, source_span~ : (Int, Int
 pub fn CstNode::using_kind_value(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::visibility_default(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::visibility_priv(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self) -> Self
-pub fn CstNode::visibility_pub(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, open? : Self, error? : Self, attr? : Self, close? : Self) -> Self
+pub fn CstNode::visibility_pub(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 
 pub(all) enum CstRecoveryChild {
   Accessor(CstNode)
