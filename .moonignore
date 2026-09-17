@@ -1,0 +1,14 @@
+# Keep the .gitignore exclusions here because .moonignore overrides it.
+_build
+target
+.mooncakes/
+.DS_Store
+.moonagent
+*.ml
+node_modules
+test/sync_test/debug
+extra_modules
+*.mbt.map.json
+
+# Test fixtures are tracked in Git but excluded from the published module.
+/test/

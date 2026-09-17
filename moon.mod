@@ -19,7 +19,3 @@ license = "Apache-2.0"
 keywords = [ "parser", "lexer", "AST", "MoonBit" ]
 
 description = "AST and parsers for the MoonBit programming language"
-
-options(
-  exclude: [ "test", "extra_modules" ],
-)
