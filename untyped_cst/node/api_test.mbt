@@ -183,10 +183,22 @@ fn assert_constructor_entries(
   for i, (label, child) in expected {
     let (actual_label, actual) = node.children[i]
     @test.assert_eq(actual_label, Some(label))
-    @test.assert_eq(actual.loc, child.loc)
-    @test.assert_eq(actual.source_span, child.source_span)
-    @test.assert_eq(actual.string_payload(), child.string_payload())
-    @test.assert_eq(actual.children.length(), child.children.length())
+    assert_constructor_tree(actual, child)
+  }
+}
+
+///|
+fn assert_constructor_tree(
+  actual : @node.CstNode,
+  expected : @node.CstNode,
+) -> Unit raise {
+  @test.assert_eq(actual.kind == expected.kind, true)
+  @test.assert_eq(actual.loc, expected.loc)
+  @test.assert_eq(actual.source_span, expected.source_span)
+  @test.assert_eq(actual.children.length(), expected.children.length())
+  for i, (label, child) in actual.children {
+    @test.assert_eq(label, expected.children[i].0)
+    assert_constructor_tree(child, expected.children[i].1)
   }
 }
 
@@ -634,4 +646,275 @@ test "array assignment entries retain expanded and unexpanded lhs children" {
     ])
     @test.assert_eq(node.has_child_label("lhs"), false)
   }
+}
+
+///|
+test "field assignment entry constructor preserves recovery and legacy calls" {
+  // Locations count characters; spans count UTF-16 code units after a non-BMP prefix.
+  let base_loc = @node.mk_loc(test_position(1), test_position(2))
+  let name = @node.CstNode::name_identifier(
+    value="x",
+    loc=base_loc,
+    source_span=(2, 3),
+  )
+  let self_ = @node.CstNode::expr_ident(loc=base_loc, source_span=(2, 3), name=[
+    name,
+  ])
+  let field_loc = @node.mk_loc(test_position(2), test_position(8))
+  let token = @node.CstNode::syntax_accessor(loc=field_loc, source_span=(3, 9))
+  let field = @node.CstNode::accessor_label(
+    value="field",
+    loc=field_loc,
+    source_span=(3, 9),
+  )
+  let lhs = @node.CstNode::expr_field(
+    loc=@node.mk_loc(test_position(1), test_position(8)),
+    source_span=(2, 9),
+    self_~,
+    token~,
+    field~,
+  )
+  let op_loc = @node.mk_loc(test_position(9), test_position(11))
+  let op = @node.CstNode::syntax_operator(loc=op_loc, source_span=(10, 12))
+  let operator = @node.CstNode::operator_augmented(
+    value="+=",
+    loc=op_loc,
+    source_span=(10, 12),
+  )
+  let rhs = @node.CstNode::expr_missing_expr(
+    loc=@node.empty_loc(test_position(11)),
+    source_span=(12, 12),
+    error=[],
+  )
+  let augmented = @node.CstNode::flag_augmented(
+    value=true,
+    loc=rhs.loc,
+    source_span=rhs.source_span,
+  )
+  let loc = @node.mk_loc(test_position(1), test_position(11))
+  let span = (2, 12)
+  for augmented in [None, Some(augmented)] {
+    let legacy = @node.CstNode::expr_mutate(
+      loc~,
+      source_span=span,
+      self_~,
+      token~,
+      field~,
+      op~,
+      operator~,
+      rhs~,
+      augmented?,
+    )
+    let entries : Array[@node.CstRecoveryChild] = [
+      Self_(self_),
+      Token(token),
+      Field(field),
+      Op(op),
+      Operator(operator),
+      Rhs(rhs),
+    ]
+    let expected = [
+      ("self", self_),
+      ("token", token),
+      ("field", field),
+      ("op", op),
+      ("operator", operator),
+      ("rhs", rhs),
+    ]
+    if augmented is Some(child) {
+      entries.push(Augmented(child))
+      expected.push(("augmented", child))
+    }
+    assert_constructor_entries(legacy, loc, span, expected)
+    let ordered = @node.CstNode::expr_mutate_from_entries(
+      loc~,
+      source_span=span,
+      entries~,
+    )
+    @test.assert_eq(ordered.kind is @node.NodeKind::Expr_Mutate, true)
+    assert_constructor_tree(ordered, legacy)
+  }
+  let recovered = @node.CstNode::expr_mutate_from_entries(
+    loc~,
+    source_span=span,
+    entries=[
+      Lhs(lhs),
+      Op(op),
+      Operator(operator),
+      Rhs(rhs),
+      Augmented(augmented),
+    ],
+  )
+  @test.assert_eq(recovered.kind is @node.NodeKind::Expr_Mutate, true)
+  assert_constructor_entries(recovered, loc, span, [
+    ("lhs", lhs),
+    ("op", op),
+    ("operator", operator),
+    ("rhs", rhs),
+    ("augmented", augmented),
+  ])
+  @test.assert_eq(recovered.has_child_label("self"), false)
+}
+
+///|
+test "missing expression entries retain repeated trivia, errors, and location metadata" {
+  let loc = @node.mk_loc(test_position(1), test_position(9))
+  let span = (2, 10)
+  let label = @node.CstNode::syntax_label(
+    loc=@node.mk_loc(test_position(1), test_position(3)),
+    source_span=(2, 4),
+  )
+  let first = @node.CstNode::syntax_unexpected(
+    loc=@node.mk_loc(test_position(3), test_position(4)),
+    source_span=(4, 5),
+  )
+  let second = @node.CstNode::syntax_unexpected(
+    loc=@node.mk_loc(test_position(4), test_position(5)),
+    source_span=(5, 6),
+  )
+  let label_loc = @node.CstNode::aggregate_span(
+    loc=label.loc,
+    source_span=label.source_span,
+  )
+  let loop_loc = @node.CstNode::aggregate_span(
+    loc=@node.empty_loc(test_position(9)),
+    source_span=(10, 10),
+  )
+  let op = @node.CstNode::syntax_operator(
+    loc=@node.mk_loc(test_position(5), test_position(6)),
+    source_span=(6, 7),
+  )
+  let error = @node.CstNode::error(loc=op.loc, source_span=op.source_span, entries=[
+    Item(op),
+  ])
+  let expr = @node.CstNode::expr_missing_expr(
+    loc=loop_loc.loc,
+    source_span=loop_loc.source_span,
+    error=[],
+  )
+  let legacy = @node.CstNode::expr_missing_expr(
+    loc~,
+    source_span=span,
+    label~,
+    trivia=first,
+    label_loc~,
+    expr~,
+    op~,
+    loop_loc~,
+    error=[error, error],
+  )
+  assert_constructor_entries(legacy, loc, span, [
+    ("label", label),
+    ("trivia", first),
+    ("label_loc", label_loc),
+    ("expr", expr),
+    ("op", op),
+    ("loop_loc", loop_loc),
+    ("error", error),
+    ("error", error),
+  ])
+  let ordered = @node.CstNode::expr_missing_expr_from_entries(
+    loc~,
+    source_span=span,
+    entries=[
+      Label(label),
+      Error(error),
+      Trivia(first),
+      LabelLoc(label_loc),
+      Expr(expr),
+      Trivia(second),
+      Op(op),
+      Error(error),
+      LoopLoc(loop_loc),
+    ],
+  )
+  @test.assert_eq(ordered.kind is @node.NodeKind::Expr_MissingExpr, true)
+  assert_constructor_entries(ordered, loc, span, [
+    ("label", label),
+    ("error", error),
+    ("trivia", first),
+    ("label_loc", label_loc),
+    ("expr", expr),
+    ("trivia", second),
+    ("op", op),
+    ("error", error),
+    ("loop_loc", loop_loc),
+  ])
+  let empty = @node.CstNode::expr_missing_expr_from_entries(
+    loc=loop_loc.loc,
+    source_span=loop_loc.source_span,
+    entries=[],
+  )
+  assert_constructor_tree(empty, expr)
+}
+
+///|
+test "positional constructor parameters keep optional colon order and legacy calls" {
+  let loc = @node.mk_loc(test_position(1), test_position(10))
+  let span = (2, 11)
+  let mut_ = @node.CstNode::syntax_keyword(
+    loc=@node.mk_loc(test_position(1), test_position(4)),
+    source_span=(2, 5),
+  )
+  let op = @node.CstNode::syntax_separator(
+    loc=@node.mk_loc(test_position(5), test_position(6)),
+    source_span=(6, 7),
+  )
+  let type_ = @node.CstNode::type_name(
+    loc=@node.mk_loc(test_position(7), test_position(10)),
+    source_span=(8, 11),
+    name=[],
+    error=[],
+  )
+  let mutable = @node.CstNode::flag_mutable(
+    value=true,
+    loc=@node.empty_loc(test_position(10)),
+    source_span=(11, 11),
+  )
+  let plain = @node.CstNode::parameter_constructor_positional(
+    loc~,
+    source_span=span,
+    type_~,
+  )
+  assert_constructor_entries(plain, loc, span, [("type", type_)])
+  let legacy = @node.CstNode::parameter_constructor_positional(
+    loc~,
+    source_span=span,
+    mut_~,
+    type_~,
+    mutable~,
+  )
+  assert_constructor_entries(legacy, loc, span, [
+    ("mut", mut_),
+    ("type", type_),
+    ("mutable", mutable),
+  ])
+  let recovered = @node.CstNode::parameter_constructor_positional(
+    loc~,
+    source_span=span,
+    mut_~,
+    op~,
+    type_~,
+    mutable~,
+  )
+  @test.assert_eq(
+    recovered.kind is @node.NodeKind::Parameter_ConstructorPositional,
+    true,
+  )
+  assert_constructor_entries(recovered, loc, span, [
+    ("mut", mut_),
+    ("op", op),
+    ("type", type_),
+    ("mutable", mutable),
+  ])
+  let without_mut = @node.CstNode::parameter_constructor_positional(
+    loc~,
+    source_span=span,
+    op~,
+    type_~,
+  )
+  assert_constructor_entries(without_mut, loc, span, [
+    ("op", op),
+    ("type", type_),
+  ])
 }

@@ -51,6 +51,14 @@ use typed ordered child-entry enums where child order is semantically relevant.
 Scalar constructors take their exact `String`, `Int`, or `Bool` value directly;
 `leaf` takes `NodePayload`.
 
+`expr_mutate_from_entries` and `expr_missing_expr_from_entries` accept ordered
+`CstRecoveryChild` entries, retaining labels, repeated children, and their
+locations. Use them to preserve a recovered assignment `lhs` or consecutive
+trivia and errors. The existing `expr_mutate` and `expr_missing_expr` constructors
+keep their labelled arguments and child order. `parameter_constructor_positional`
+also accepts an optional `op` child for a colon consumed without a parameter name;
+its children remain ordered as `mut?`, `op?`, `type`, `mutable?`.
+
 The `untyped_cst` package re-exports the three node types for compatibility.
 Consequently, `ParseResult::root` can be used as either
 `@untyped_cst.CstNode` or `@node.CstNode`; both names refer to the same type.

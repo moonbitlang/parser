@@ -1518,6 +1518,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
         .construct_from_children(
           fn(loc, source_span, children) {
             let mut_ = CstNode::first_child_with_label_from(children, "mut")
+            let op = CstNode::first_child_with_label_from(children, "op")
             let type_ = CstNode::first_child_with_label_from(children, "type").unwrap_or(
               missing_at_end(loc~, source_span~),
             )
@@ -1528,6 +1529,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
               loc~,
               source_span~,
               mut_?,
+              op?,
               type_~,
               mutable?,
             )
@@ -1609,6 +1611,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
     } else {
       fn(loc, source_span, children) {
         let mut_ = CstNode::first_child_with_label_from(children, "mut")
+        let op = CstNode::first_child_with_label_from(children, "op")
         let type_ = CstNode::first_child_with_label_from(children, "type").unwrap_or(
           missing_at_end(loc~, source_span~),
         )
@@ -1617,6 +1620,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
           loc~,
           source_span~,
           mut_?,
+          op?,
           type_~,
           mutable?,
         )
@@ -4115,38 +4119,8 @@ fn assignment_node_builder(
       }
     Some(Expr_Field) =>
       fn(loc, source_span, children) {
-        let self_ = CstNode::first_child_with_label_from(children, "self").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let token = CstNode::first_child_with_label_from(children, "token").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let field = CstNode::first_child_with_label_from(children, "field").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let op = CstNode::first_child_with_label_from(children, "op").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let operator = CstNode::first_child_with_label_from(
-          children, "operator",
-        ).unwrap_or(missing_at_end(loc~, source_span~))
-        let rhs = CstNode::first_child_with_label_from(children, "rhs").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let augmented = CstNode::first_child_with_label_from(
-          children, "augmented",
-        )
-        @node.CstNode::expr_mutate(
-          loc~,
-          source_span~,
-          self_~,
-          token~,
-          field~,
-          op~,
-          operator~,
-          rhs~,
-          augmented?,
-        )
+        let entries = recovery_children(children)
+        @node.CstNode::expr_mutate_from_entries(loc~, source_span~, entries~)
       }
     _ =>
       fn(loc, source_span, children) {
@@ -4443,25 +4417,11 @@ fn parse_invalid_guard_letrec(
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let label = CstNode::first_child_with_label_from(children, "label")
-      let trivia = CstNode::first_child_with_label_from(children, "trivia")
-      let label_loc = CstNode::first_child_with_label_from(
-        children, "label_loc",
-      )
-      let expr = CstNode::first_child_with_label_from(children, "expr")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let loop_loc = CstNode::first_child_with_label_from(children, "loop_loc")
-      let error = CstNode::children_with_label_from(children, "error")
-      @node.CstNode::expr_missing_expr(
+      let entries = recovery_children(children)
+      @node.CstNode::expr_missing_expr_from_entries(
         loc~,
         source_span~,
-        label?,
-        trivia?,
-        label_loc?,
-        expr?,
-        op?,
-        loop_loc?,
-        error~,
+        entries~,
       )
     },
     children,
@@ -5164,27 +5124,11 @@ fn parse_arrow_param_from_expr(expr : CstNode) -> CstNode {
     .unwrap_or(
       node(
         fn(loc, source_span, children) {
-          let label = CstNode::first_child_with_label_from(children, "label")
-          let trivia = CstNode::first_child_with_label_from(children, "trivia")
-          let label_loc = CstNode::first_child_with_label_from(
-            children, "label_loc",
-          )
-          let expr = CstNode::first_child_with_label_from(children, "expr")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let loop_loc = CstNode::first_child_with_label_from(
-            children, "loop_loc",
-          )
-          let error = CstNode::children_with_label_from(children, "error")
-          @node.CstNode::expr_missing_expr(
+          let entries = recovery_children(children)
+          @node.CstNode::expr_missing_expr_from_entries(
             loc~,
             source_span~,
-            label?,
-            trivia?,
-            label_loc?,
-            expr?,
-            op?,
-            loop_loc?,
-            error~,
+            entries~,
           )
         },
         expr.loc,
@@ -5251,25 +5195,11 @@ fn parse_invalid_infix_operand(
   )
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let label = CstNode::first_child_with_label_from(children, "label")
-      let trivia = CstNode::first_child_with_label_from(children, "trivia")
-      let label_loc = CstNode::first_child_with_label_from(
-        children, "label_loc",
-      )
-      let expr = CstNode::first_child_with_label_from(children, "expr")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let loop_loc = CstNode::first_child_with_label_from(children, "loop_loc")
-      let error = CstNode::children_with_label_from(children, "error")
-      @node.CstNode::expr_missing_expr(
+      let entries = recovery_children(children)
+      @node.CstNode::expr_missing_expr_from_entries(
         loc~,
         source_span~,
-        label?,
-        trivia?,
-        label_loc?,
-        expr?,
-        op?,
-        loop_loc?,
-        error~,
+        entries~,
       )
     },
     children,
@@ -6886,25 +6816,11 @@ fn parse_invalid_simple_expr(
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let label = CstNode::first_child_with_label_from(children, "label")
-      let trivia = CstNode::first_child_with_label_from(children, "trivia")
-      let label_loc = CstNode::first_child_with_label_from(
-        children, "label_loc",
-      )
-      let expr = CstNode::first_child_with_label_from(children, "expr")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let loop_loc = CstNode::first_child_with_label_from(children, "loop_loc")
-      let error = CstNode::children_with_label_from(children, "error")
-      @node.CstNode::expr_missing_expr(
+      let entries = recovery_children(children)
+      @node.CstNode::expr_missing_expr_from_entries(
         loc~,
         source_span~,
-        label?,
-        trivia?,
-        label_loc?,
-        expr?,
-        op?,
-        loop_loc?,
-        error~,
+        entries~,
       )
     },
     children,
@@ -6951,27 +6867,11 @@ fn parse_expr_simple(
     Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let label = CstNode::first_child_with_label_from(children, "label")
-          let trivia = CstNode::first_child_with_label_from(children, "trivia")
-          let label_loc = CstNode::first_child_with_label_from(
-            children, "label_loc",
-          )
-          let expr = CstNode::first_child_with_label_from(children, "expr")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let loop_loc = CstNode::first_child_with_label_from(
-            children, "loop_loc",
-          )
-          let error = CstNode::children_with_label_from(children, "error")
-          @node.CstNode::expr_missing_expr(
+          let entries = recovery_children(children)
+          @node.CstNode::expr_missing_expr_from_entries(
             loc~,
             source_span~,
-            label?,
-            trivia?,
-            label_loc?,
-            expr?,
-            op?,
-            loop_loc?,
-            error~,
+            entries~,
           )
         },
         [],
@@ -7096,33 +6996,11 @@ fn parse_expr_simple(
           } else {
             state.construct_from_children(
               fn(loc, source_span, children) {
-                let label = CstNode::first_child_with_label_from(
-                  children, "label",
-                )
-                let trivia = CstNode::first_child_with_label_from(
-                  children, "trivia",
-                )
-                let label_loc = CstNode::first_child_with_label_from(
-                  children, "label_loc",
-                )
-                let expr = CstNode::first_child_with_label_from(
-                  children, "expr",
-                )
-                let op = CstNode::first_child_with_label_from(children, "op")
-                let loop_loc = CstNode::first_child_with_label_from(
-                  children, "loop_loc",
-                )
-                let error = CstNode::children_with_label_from(children, "error")
-                @node.CstNode::expr_missing_expr(
+                let entries = recovery_children(children)
+                @node.CstNode::expr_missing_expr_from_entries(
                   loc~,
                   source_span~,
-                  label?,
-                  trivia?,
-                  label_loc?,
-                  expr?,
-                  op?,
-                  loop_loc?,
-                  error~,
+                  entries~,
                 )
               },
               [],
@@ -7178,27 +7056,11 @@ fn parse_expr_simple(
     None =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let label = CstNode::first_child_with_label_from(children, "label")
-          let trivia = CstNode::first_child_with_label_from(children, "trivia")
-          let label_loc = CstNode::first_child_with_label_from(
-            children, "label_loc",
-          )
-          let expr = CstNode::first_child_with_label_from(children, "expr")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let loop_loc = CstNode::first_child_with_label_from(
-            children, "loop_loc",
-          )
-          let error = CstNode::children_with_label_from(children, "error")
-          @node.CstNode::expr_missing_expr(
+          let entries = recovery_children(children)
+          @node.CstNode::expr_missing_expr_from_entries(
             loc~,
             source_span~,
-            label?,
-            trivia?,
-            label_loc?,
-            expr?,
-            op?,
-            loop_loc?,
-            error~,
+            entries~,
           )
         },
         [],
@@ -7545,27 +7407,11 @@ fn parse_labelled_loop_expr(
       }
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let label = CstNode::first_child_with_label_from(children, "label")
-          let trivia = CstNode::first_child_with_label_from(children, "trivia")
-          let label_loc = CstNode::first_child_with_label_from(
-            children, "label_loc",
-          )
-          let expr = CstNode::first_child_with_label_from(children, "expr")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let loop_loc = CstNode::first_child_with_label_from(
-            children, "loop_loc",
-          )
-          let error = CstNode::children_with_label_from(children, "error")
-          @node.CstNode::expr_missing_expr(
+          let entries = recovery_children(children)
+          @node.CstNode::expr_missing_expr_from_entries(
             loc~,
             source_span~,
-            label?,
-            trivia?,
-            label_loc?,
-            expr?,
-            op?,
-            loop_loc?,
-            error~,
+            entries~,
           )
         },
         invalid,
@@ -7574,27 +7420,11 @@ fn parse_labelled_loop_expr(
     None =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let label = CstNode::first_child_with_label_from(children, "label")
-          let trivia = CstNode::first_child_with_label_from(children, "trivia")
-          let label_loc = CstNode::first_child_with_label_from(
-            children, "label_loc",
-          )
-          let expr = CstNode::first_child_with_label_from(children, "expr")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let loop_loc = CstNode::first_child_with_label_from(
-            children, "loop_loc",
-          )
-          let error = CstNode::children_with_label_from(children, "error")
-          @node.CstNode::expr_missing_expr(
+          let entries = recovery_children(children)
+          @node.CstNode::expr_missing_expr_from_entries(
             loc~,
             source_span~,
-            label?,
-            trivia?,
-            label_loc?,
-            expr?,
-            op?,
-            loop_loc?,
-            error~,
+            entries~,
           )
         },
         [],
@@ -7728,29 +7558,11 @@ fn parse_single_token_expr(
       } else {
         state.construct_from_children(
           fn(loc, source_span, children) {
-            let label = CstNode::first_child_with_label_from(children, "label")
-            let trivia = CstNode::first_child_with_label_from(
-              children, "trivia",
-            )
-            let label_loc = CstNode::first_child_with_label_from(
-              children, "label_loc",
-            )
-            let expr = CstNode::first_child_with_label_from(children, "expr")
-            let op = CstNode::first_child_with_label_from(children, "op")
-            let loop_loc = CstNode::first_child_with_label_from(
-              children, "loop_loc",
-            )
-            let error = CstNode::children_with_label_from(children, "error")
-            @node.CstNode::expr_missing_expr(
+            let entries = recovery_children(children)
+            @node.CstNode::expr_missing_expr_from_entries(
               loc~,
               source_span~,
-              label?,
-              trivia?,
-              label_loc?,
-              expr?,
-              op?,
-              loop_loc?,
-              error~,
+              entries~,
             )
           },
           [],
@@ -7759,27 +7571,11 @@ fn parse_single_token_expr(
     None =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let label = CstNode::first_child_with_label_from(children, "label")
-          let trivia = CstNode::first_child_with_label_from(children, "trivia")
-          let label_loc = CstNode::first_child_with_label_from(
-            children, "label_loc",
-          )
-          let expr = CstNode::first_child_with_label_from(children, "expr")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let loop_loc = CstNode::first_child_with_label_from(
-            children, "loop_loc",
-          )
-          let error = CstNode::children_with_label_from(children, "error")
-          @node.CstNode::expr_missing_expr(
+          let entries = recovery_children(children)
+          @node.CstNode::expr_missing_expr_from_entries(
             loc~,
             source_span~,
-            label?,
-            trivia?,
-            label_loc?,
-            expr?,
-            op?,
-            loop_loc?,
-            error~,
+            entries~,
           )
         },
         [],
@@ -9499,27 +9295,11 @@ fn parse_foreach_iter_expr(state : ParserState) -> CstNode {
     !brace_expr_is_followed_by_range_operator(state) {
     state.construct_from_children(
       fn(loc, source_span, children) {
-        let label = CstNode::first_child_with_label_from(children, "label")
-        let trivia = CstNode::first_child_with_label_from(children, "trivia")
-        let label_loc = CstNode::first_child_with_label_from(
-          children, "label_loc",
-        )
-        let expr = CstNode::first_child_with_label_from(children, "expr")
-        let op = CstNode::first_child_with_label_from(children, "op")
-        let loop_loc = CstNode::first_child_with_label_from(
-          children, "loop_loc",
-        )
-        let error = CstNode::children_with_label_from(children, "error")
-        @node.CstNode::expr_missing_expr(
+        let entries = recovery_children(children)
+        @node.CstNode::expr_missing_expr_from_entries(
           loc~,
           source_span~,
-          label?,
-          trivia?,
-          label_loc?,
-          expr?,
-          op?,
-          loop_loc?,
-          error~,
+          entries~,
         )
       },
       [],
@@ -11704,25 +11484,11 @@ fn parse_invalid_local_decl(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let label = CstNode::first_child_with_label_from(children, "label")
-      let trivia = CstNode::first_child_with_label_from(children, "trivia")
-      let label_loc = CstNode::first_child_with_label_from(
-        children, "label_loc",
-      )
-      let expr = CstNode::first_child_with_label_from(children, "expr")
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let loop_loc = CstNode::first_child_with_label_from(children, "loop_loc")
-      let error = CstNode::children_with_label_from(children, "error")
-      @node.CstNode::expr_missing_expr(
+      let entries = recovery_children(children)
+      @node.CstNode::expr_missing_expr_from_entries(
         loc~,
         source_span~,
-        label?,
-        trivia?,
-        label_loc?,
-        expr?,
-        op?,
-        loop_loc?,
-        error~,
+        entries~,
       )
     },
     children,
@@ -15994,29 +15760,11 @@ fn parse_string_literal_node(state : ParserState) -> CstNode {
       } else {
         state.construct_from_children(
           fn(loc, source_span, children) {
-            let label = CstNode::first_child_with_label_from(children, "label")
-            let trivia = CstNode::first_child_with_label_from(
-              children, "trivia",
-            )
-            let label_loc = CstNode::first_child_with_label_from(
-              children, "label_loc",
-            )
-            let expr = CstNode::first_child_with_label_from(children, "expr")
-            let op = CstNode::first_child_with_label_from(children, "op")
-            let loop_loc = CstNode::first_child_with_label_from(
-              children, "loop_loc",
-            )
-            let error = CstNode::children_with_label_from(children, "error")
-            @node.CstNode::expr_missing_expr(
+            let entries = recovery_children(children)
+            @node.CstNode::expr_missing_expr_from_entries(
               loc~,
               source_span~,
-              label?,
-              trivia?,
-              label_loc?,
-              expr?,
-              op?,
-              loop_loc?,
-              error~,
+              entries~,
             )
           },
           [],
@@ -16025,27 +15773,11 @@ fn parse_string_literal_node(state : ParserState) -> CstNode {
     None =>
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let label = CstNode::first_child_with_label_from(children, "label")
-          let trivia = CstNode::first_child_with_label_from(children, "trivia")
-          let label_loc = CstNode::first_child_with_label_from(
-            children, "label_loc",
-          )
-          let expr = CstNode::first_child_with_label_from(children, "expr")
-          let op = CstNode::first_child_with_label_from(children, "op")
-          let loop_loc = CstNode::first_child_with_label_from(
-            children, "loop_loc",
-          )
-          let error = CstNode::children_with_label_from(children, "error")
-          @node.CstNode::expr_missing_expr(
+          let entries = recovery_children(children)
+          @node.CstNode::expr_missing_expr_from_entries(
             loc~,
             source_span~,
-            label?,
-            trivia?,
-            label_loc?,
-            expr?,
-            op?,
-            loop_loc?,
-            error~,
+            entries~,
           )
         },
         [],

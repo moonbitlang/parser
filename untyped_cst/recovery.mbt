@@ -195,24 +195,8 @@ fn ParserState::missing_type_node(self : ParserState) -> CstNode {
 ///|
 fn ParserState::missing_expr_node(self : ParserState) -> CstNode {
   self.missing_syntax_node(fn(loc, source_span, children) {
-    let label = CstNode::first_child_with_label_from(children, "label")
-    let trivia = CstNode::first_child_with_label_from(children, "trivia")
-    let label_loc = CstNode::first_child_with_label_from(children, "label_loc")
-    let expr = CstNode::first_child_with_label_from(children, "expr")
-    let op = CstNode::first_child_with_label_from(children, "op")
-    let loop_loc = CstNode::first_child_with_label_from(children, "loop_loc")
-    let error = CstNode::children_with_label_from(children, "error")
-    @node.CstNode::expr_missing_expr(
-      loc~,
-      source_span~,
-      label?,
-      trivia?,
-      label_loc?,
-      expr?,
-      op?,
-      loop_loc?,
-      error~,
-    )
+    let entries = recovery_children(children)
+    @node.CstNode::expr_missing_expr_from_entries(loc~, source_span~, entries~)
   })
 }
 

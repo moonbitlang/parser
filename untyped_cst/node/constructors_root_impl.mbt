@@ -1045,6 +1045,9 @@ pub fn CstNode::expr_assign(
 }
 
 ///|
+/// Constructs a field assignment with its normal, expanded left-hand children.
+/// Use expr_mutate_from_entries to retain an unexpanded recovery lhs or other
+/// ordered recovery children.
 pub fn CstNode::expr_mutate(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -1068,6 +1071,22 @@ pub fn CstNode::expr_mutate(
     None => ()
   }
   node(NodeKind::Expr_Mutate, loc, source_span, children)
+}
+
+///|
+/// Constructs a field assignment from ordered children, preserving every entry
+/// and its location, including an unexpanded recovery lhs.
+pub fn CstNode::expr_mutate_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Expr_Mutate,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|

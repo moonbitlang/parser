@@ -13,16 +13,23 @@ pub fn CstNode::parameter_type_var(
 }
 
 ///|
+/// Constructs a positional constructor parameter in mut, op, type, mutable order.
+/// The optional op retains a consumed colon when the parameter name is missing.
 pub fn CstNode::parameter_constructor_positional(
   loc~ : Location,
   source_span~ : (Int, Int),
   mut_? : CstNode,
+  op? : CstNode,
   type_~ : CstNode,
   mutable? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   match mut_ {
     Some(child) => children.push((Some("mut"), child))
+    None => ()
+  }
+  match op {
+    Some(child) => children.push((Some("op"), child))
     None => ()
   }
   children.push((Some("type"), type_))

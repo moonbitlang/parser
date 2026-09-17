@@ -895,3 +895,286 @@ test "valid visibility and expression constraints retain their AST" {
   assert_expr_ast_equiv("(x : Int)")
   assert_expr_ast_equiv("(x : Int) => x")
 }
+
+///|
+test "CST preservation: field assignments retain the complete recovery lhs" {
+  for prefix in ["", "// 🐇\n"] {
+    let offset = prefix.length()
+    let cnum = if prefix == "" { 0 } else { 5 }
+    let line = if prefix == "" { 1 } else { 2 }
+    let original = @untyped_cst.parse_expression(prefix + "xs[].field")
+    let original_lhs = api_find_node(original.root(), node => {
+      node.kind is Expr_Field
+    }).unwrap()
+    for op in ["=", "+="] {
+      let source = prefix + "xs[].field \{op} value"
+      let parsed = @untyped_cst.parse_expression(source)
+      let reports = parsed.diagnostics_view()
+      @test.assert_eq(reports.length(), 1)
+      @test.assert_eq(
+        reports[0].msg,
+        "Unexpected token `]`, you may expect simple expression.",
+      )
+      @test.assert_eq(reports[0].loc.start, @basic.Position::{
+        fname: "",
+        lnum: line,
+        bol: cnum,
+        cnum: cnum + 3,
+      })
+      @test.assert_eq(reports[0].loc.end.cnum, cnum + 4)
+      @test.assert_eq(
+        diagnostics_equiv_reports_json(reports_from_view(reports)),
+        diagnostics_equiv_reports_json(
+          reports_from_view(original.diagnostics_view()),
+        ),
+      )
+      let node = api_find_node(parsed.root(), node => node.kind is Expr_Mutate).unwrap()
+      @test.assert_eq(refactor_labels(node), [
+        Some("lhs"),
+        Some("op"),
+        Some("operator"),
+        Some("rhs"),
+        Some("augmented"),
+      ])
+      let lhs = node.children[0].1
+      refactor_assert_same_tree(lhs, original_lhs)
+      refactor_assert_source_range(
+        lhs,
+        source,
+        "xs[].field",
+        (offset, offset + 10),
+        (line, cnum, cnum),
+        (line, cnum, cnum + 10),
+      )
+      refactor_assert_source_range(
+        node.children[1].1,
+        source,
+        op,
+        (offset + 11, offset + 11 + op.length()),
+        (line, cnum, cnum + 11),
+        (line, cnum, cnum + 11 + op.length()),
+      )
+      @test.assert_eq(node.children[3].1.text(source), "value"[:])
+      @test.assert_eq(node.children[4].1.bool_payload(), Some(op != "="))
+      @test.assert_eq(
+        node.loc,
+        @node.mk_loc(lhs.loc.start, node.children[3].1.loc.end),
+      )
+      @test.assert_eq(node.source_span, (offset, source.length()))
+      let (expr, lowered_reports) = parsed.to_expr()
+      @test.assert_eq(expr is None, true)
+      @test.assert_eq(
+        diagnostics_equiv_reports_json(lowered_reports),
+        diagnostics_equiv_reports_json(reports_from_view(reports)),
+      )
+    }
+  }
+}
+
+///|
+test "CST preservation: valid field assignments retain expanded children and AST" {
+  let original_lhs = refactor_find_node(
+    "xs[0].field",
+    kind => kind is Expr_Field,
+    expression=true,
+  )
+  for op in ["=", "+="] {
+    let source = "xs[0].field \{op} value"
+    let node = refactor_find_node(
+      source,
+      kind => kind is Expr_Mutate,
+      expression=true,
+    )
+    @test.assert_eq(refactor_labels(node), [
+      Some("self"),
+      Some("token"),
+      Some("field"),
+      Some("op"),
+      Some("operator"),
+      Some("rhs"),
+      Some("augmented"),
+    ])
+    for i, (_, child) in original_lhs.children {
+      refactor_assert_same_tree(node.children[i].1, child)
+    }
+    @test.assert_eq(api_has_kind(node, kind => kind is Missing), false)
+    @test.assert_eq(node.children[6].1.bool_payload(), Some(op != "="))
+    assert_expr_ast_equiv(source)
+  }
+}
+
+///|
+test "CST preservation: missing expressions retain consecutive newline trivia" {
+  for prefix in ["", "// 🐇\n"] {
+    let offset = prefix.length()
+    let cnum = if prefix == "" { 0 } else { 5 }
+    let line = if prefix == "" { 1 } else { 2 }
+    for newlines in ["\n\n", "\n\n\n"] {
+      let count = newlines.length()
+      let source = prefix + "x +" + newlines + "let"
+      let parsed = @untyped_cst.parse_expression(source)
+      let reports = parsed.diagnostics_view()
+      @test.assert_eq(reports.length(), 1)
+      @test.assert_eq(
+        reports[0].msg,
+        "Unexpected token `let`, you may expect simple expression.",
+      )
+      let let_start = cnum + 3 + count
+      @test.assert_eq(
+        reports[0].loc,
+        @node.mk_loc(
+          @basic.Position::{
+            fname: "",
+            lnum: line + count,
+            bol: let_start,
+            cnum: let_start,
+          },
+          @basic.Position::{
+            fname: "",
+            lnum: line + count,
+            bol: let_start,
+            cnum: let_start + 3,
+          },
+        ),
+      )
+      let node = api_find_node(parsed.root(), node => {
+        node.kind is Expr_MissingExpr
+      }).unwrap()
+      let labels = [ for _ in 0..<count => Some("trivia") ]
+      labels.push(Some("expr"))
+      @test.assert_eq(refactor_labels(node), labels)
+      for i in 0..<count {
+        let trivia = node.children[i].1
+        @test.assert_eq(
+          trivia.kind is @untyped_cst.NodeKind::Syntax_Unexpected,
+          true,
+        )
+        let start = cnum + 3 + i
+        let bol = if i == 0 { cnum } else { start }
+        refactor_assert_source_range(
+          trivia,
+          source,
+          "\n",
+          (offset + 3 + i, offset + 4 + i),
+          (line + i, bol, start),
+          (line + i, bol, start + 1),
+        )
+      }
+      let expr = node.children[count].1
+      @test.assert_eq(
+        expr.kind is @untyped_cst.NodeKind::Expr_MissingExpr,
+        true,
+      )
+      @test.assert_eq(refactor_labels(expr), [Some("error")])
+      let error = expr.children[0].1
+      @test.assert_eq(error.kind is @untyped_cst.NodeKind::Error, true)
+      @test.assert_eq(refactor_labels(error), [Some("item")])
+      @test.assert_eq(
+        error.children[0].1.kind is @untyped_cst.NodeKind::Syntax_Unexpected,
+        true,
+      )
+      for child in [expr, error, error.children[0].1] {
+        refactor_assert_source_range(
+          child,
+          source,
+          "let",
+          (offset + 3 + count, source.length()),
+          (line + count, let_start, let_start),
+          (line + count, let_start, let_start + 3),
+        )
+      }
+      refactor_assert_source_range(
+        node,
+        source,
+        newlines + "let",
+        (offset + 3, source.length()),
+        (line, cnum, cnum + 3),
+        (line + count, let_start, let_start + 3),
+      )
+    }
+  }
+}
+
+///|
+test "CST preservation: constructor parameters retain colons without names" {
+  for prefix in ["", "// 🐇\n"] {
+    let offset = prefix.length()
+    let cnum = if prefix == "" { 0 } else { 5 }
+    let line = if prefix == "" { 1 } else { 2 }
+    for mut_prefix in ["", "mut "] {
+      for
+        (tail, colon_offset, labelled) in [
+          (": Int", Some(0), false),
+          ("Int", None, false),
+          ("name~: Int", Some(5), true),
+        ] {
+        let param = mut_prefix + tail
+        let source = prefix + "enum E { C(\{param}) }"
+        let parsed = @untyped_cst.parse_structure(source)
+        // Preserve the existing permissive parsing of a colon without a name.
+        @test.assert_eq(parsed.diagnostics_view().length(), 0)
+        let node = api_find_node(parsed.root(), node => {
+          node.kind
+          is (Parameter_ConstructorPositional | Parameter_ConstructorLabelled)
+        }).unwrap()
+        @test.assert_eq(
+          node.kind is @untyped_cst.NodeKind::Parameter_ConstructorLabelled,
+          labelled,
+        )
+        let labels = []
+        if mut_prefix != "" {
+          labels.push(Some("mut"))
+        }
+        if labelled {
+          labels.push(Some("name"))
+        }
+        if colon_offset is Some(_) {
+          labels.push(Some("op"))
+        }
+        labels.append([Some("type"), Some("mutable")])
+        @test.assert_eq(refactor_labels(node), labels)
+        if colon_offset is Some(colon_offset) {
+          let colon = node.first_child_with_label("op").unwrap()
+          let start = 11 + mut_prefix.length() + colon_offset
+          @test.assert_eq(
+            colon.kind is @untyped_cst.NodeKind::Syntax_Separator,
+            true,
+          )
+          refactor_assert_source_range(
+            colon,
+            source,
+            ":",
+            (offset + start, offset + start + 1),
+            (line, cnum, cnum + start),
+            (line, cnum, cnum + start + 1),
+          )
+        }
+        let ty = node.first_child_with_label("type").unwrap()
+        let end = 11 + param.length()
+        refactor_assert_source_range(
+          ty,
+          source,
+          "Int",
+          (offset + end - 3, offset + end),
+          (line, cnum, cnum + end - 3),
+          (line, cnum, cnum + end),
+        )
+        refactor_assert_source_range(
+          node,
+          source,
+          param,
+          (offset + 11, offset + end),
+          (line, cnum, cnum + 11),
+          (line, cnum, cnum + end),
+        )
+        let mutable = node.first_child_with_label("mutable").unwrap()
+        @test.assert_eq(mutable.bool_payload(), Some(mut_prefix != ""))
+        @test.assert_eq(mutable.loc, @node.empty_loc(node.loc.end))
+        @test.assert_eq(mutable.source_span, (offset + end, offset + end))
+        if tail != ": Int" {
+          assert_handrolled_cst_ast_equiv(source)
+        }
+      }
+    }
+  }
+}
