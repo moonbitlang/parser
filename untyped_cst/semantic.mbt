@@ -818,7 +818,7 @@ fn semantic_ident_expr(
     fn(loc, source_span, children) {
       let long_ident = CstNode::first_child_with_label_from(
         children, "long_ident",
-      ).unwrap_or(CstNode::missing(loc~, source_span~))
+      ).unwrap_or(missing_at_end(loc~, source_span~))
       @node.CstNode::name_var(loc~, source_span~, long_ident~)
     },
     ["name"],
@@ -856,7 +856,7 @@ fn semantic_var_pattern(
     fn(loc, source_span, children) {
       let long_ident = CstNode::first_child_with_label_from(
         children, "long_ident",
-      ).unwrap_or(CstNode::missing(loc~, source_span~))
+      ).unwrap_or(missing_at_end(loc~, source_span~))
       @node.CstNode::name_binder(loc~, source_span~, long_ident~)
     },
     ["name"],
@@ -1006,7 +1006,7 @@ fn unary_plus_apply_node(
   let argument = node(
     fn(loc, source_span, children) {
       let expr = CstNode::first_child_with_label_from(children, "expr").unwrap_or(
-        CstNode::missing(loc~, source_span~),
+        missing_at_end(loc~, source_span~),
       )
       @node.CstNode::argument_positional(loc~, source_span~, expr~)
     },
@@ -1028,10 +1028,10 @@ fn unary_plus_apply_node(
       let op = CstNode::first_child_with_label_from(children, "op")
       let operator = CstNode::first_child_with_label_from(children, "operator")
       let func = CstNode::first_child_with_label_from(children, "func").unwrap_or(
-        CstNode::missing(loc~, source_span~),
+        missing_at_end(loc~, source_span~),
       )
       let arg = CstNode::first_child_with_label_from(children, "arg").unwrap_or(
-        CstNode::missing(loc~, source_span~),
+        missing_at_end(loc~, source_span~),
       )
       @node.CstNode::expr_apply(loc~, source_span~, op?, operator?, func~, arg~)
     },

@@ -207,13 +207,13 @@ fn attribute_metadata_node(
       fn(loc, source_span, children) {
         let qualifier = CstNode::first_child_with_label_from(
           children, "qualifier",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        ).unwrap_or(missing_at_end(loc~, source_span~))
         let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-          CstNode::missing(loc~, source_span~),
+          missing_at_end(loc~, source_span~),
         )
         let raw_payload = CstNode::first_child_with_label_from(
           children, "raw_payload",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        ).unwrap_or(missing_at_end(loc~, source_span~))
         @node.CstNode::attribute_qualified(
           loc~,
           source_span~,
@@ -260,11 +260,11 @@ fn attribute_metadata_node(
       )
       fn(loc, source_span, children) {
         let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
-          CstNode::missing(loc~, source_span~),
+          missing_at_end(loc~, source_span~),
         )
         let raw_payload = CstNode::first_child_with_label_from(
           children, "raw_payload",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        ).unwrap_or(missing_at_end(loc~, source_span~))
         @node.CstNode::attribute_simple(loc~, source_span~, name~, raw_payload~)
       }
     }
@@ -301,11 +301,11 @@ fn comment_metadata_node(
     @tokens.InlineTrailing =>
       fn(loc, source_span, children) {
         let content = CstNode::first_child_with_label_from(children, "content").unwrap_or(
-          CstNode::missing(loc~, source_span~),
+          missing_at_end(loc~, source_span~),
         )
         let consumed_by_docstring = CstNode::first_child_with_label_from(
           children, "consumed_by_docstring",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        ).unwrap_or(missing_at_end(loc~, source_span~))
         @node.CstNode::comment_inline_trailing(
           loc~,
           source_span~,
@@ -356,17 +356,17 @@ fn comment_metadata_node(
       )
       fn(loc, source_span, children) {
         let content = CstNode::first_child_with_label_from(children, "content").unwrap_or(
-          CstNode::missing(loc~, source_span~),
+          missing_at_end(loc~, source_span~),
         )
         let leading_blank_line = CstNode::first_child_with_label_from(
           children, "leading_blank_line",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        ).unwrap_or(missing_at_end(loc~, source_span~))
         let trailing_blank_line = CstNode::first_child_with_label_from(
           children, "trailing_blank_line",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        ).unwrap_or(missing_at_end(loc~, source_span~))
         let consumed_by_docstring = CstNode::first_child_with_label_from(
           children, "consumed_by_docstring",
-        ).unwrap_or(CstNode::missing(loc~, source_span~))
+        ).unwrap_or(missing_at_end(loc~, source_span~))
         @node.CstNode::comment_ownline(
           loc~,
           source_span~,

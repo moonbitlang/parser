@@ -38,7 +38,7 @@ fn structured_long_ident_node(sources : Array[CstNode]) -> CstNode? {
         fn(loc, source_span, children) {
           let component = CstNode::first_child_with_label_from(
             children, "component",
-          ).unwrap_or(CstNode::missing(loc~, source_span~))
+          ).unwrap_or(missing_at_end(loc~, source_span~))
           @node.CstNode::long_ident_ident(loc~, source_span~, component~)
         }
       },

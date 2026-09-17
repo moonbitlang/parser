@@ -142,6 +142,16 @@ fn missing_node(_kind : TokenKind, pos : Position, offset : Int) -> CstNode {
 }
 
 ///|
+// Constructor fallbacks have no precise token position. Anchor them at the
+// parent's end, keeping character positions separate from UTF-16 offsets.
+fn missing_at_end(loc~ : Location, source_span~ : (Int, Int)) -> CstNode {
+  CstNode::missing(
+    loc=empty_loc(loc.end),
+    source_span=empty_span(source_span.1),
+  )
+}
+
+///|
 fn error_node(
   loc : Location,
   source_span : (Int, Int),

@@ -869,11 +869,13 @@ pub fn CstNode::expr_constraint(
 }
 
 ///|
+/// Retain trivia after `op` and before `body`, in source order.
 pub fn CstNode::expr_record(
   loc~ : Location,
   source_span~ : (Int, Int),
   type_? : CstNode,
   op? : CstNode,
+  trivia? : ArrayView[CstNode] = [],
   body~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -884,17 +886,22 @@ pub fn CstNode::expr_record(
   match op {
     Some(child) => children.push((Some("op"), child))
     None => ()
+  }
+  for child in trivia {
+    children.push((Some("trivia"), child))
   }
   children.push((Some("body"), body))
   node(NodeKind::Expr_Record, loc, source_span, children)
 }
 
 ///|
+/// Retain trivia after `op` and before `body`, in source order.
 pub fn CstNode::expr_record_update(
   loc~ : Location,
   source_span~ : (Int, Int),
   type_? : CstNode,
   op? : CstNode,
+  trivia? : ArrayView[CstNode] = [],
   body~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -905,6 +912,9 @@ pub fn CstNode::expr_record_update(
   match op {
     Some(child) => children.push((Some("op"), child))
     None => ()
+  }
+  for child in trivia {
+    children.push((Some("trivia"), child))
   }
   children.push((Some("body"), body))
   node(NodeKind::Expr_RecordUpdate, loc, source_span, children)
@@ -1230,17 +1240,22 @@ pub fn CstNode::expr_function(
 }
 
 ///|
+/// Retain trivia after `op` and before `error` or `field`, in source order.
 pub fn CstNode::expr_method(
   loc~ : Location,
   source_span~ : (Int, Int),
   type_~ : CstNode,
   op~ : CstNode,
+  trivia? : ArrayView[CstNode] = [],
   error? : CstNode,
   field? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   children.push((Some("type"), type_))
   children.push((Some("op"), op))
+  for child in trivia {
+    children.push((Some("trivia"), child))
+  }
   match error {
     Some(child) => children.push((Some("error"), child))
     None => ()

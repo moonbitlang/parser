@@ -213,7 +213,7 @@ pub fn CstNode::expr_lex_scan(loc~ : @basic.Location, source_span~ : (Int, Int),
 pub fn CstNode::expr_list_comprehension(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_map(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self) -> Self
 pub fn CstNode::expr_match(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
-pub fn CstNode::expr_method(loc~ : @basic.Location, source_span~ : (Int, Int), type_~ : Self, op~ : Self, error? : Self, field? : Self) -> Self
+pub fn CstNode::expr_method(loc~ : @basic.Location, source_span~ : (Int, Int), type_~ : Self, op~ : Self, trivia? : ArrayView[Self], error? : Self, field? : Self) -> Self
 pub fn CstNode::expr_missing_expr(loc~ : @basic.Location, source_span~ : (Int, Int), label? : Self, trivia? : Self, label_loc? : Self, expr? : Self, op? : Self, loop_loc? : Self, error~ : ArrayView[Self]) -> Self
 pub fn CstNode::expr_multiline_string(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstMultilineChild]) -> Self
 pub fn CstNode::expr_mutate(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, token~ : Self, field~ : Self, op~ : Self, operator~ : Self, rhs~ : Self, augmented? : Self) -> Self
@@ -222,8 +222,8 @@ pub fn CstNode::expr_proof_assert(loc~ : @basic.Location, source_span~ : (Int, I
 pub fn CstNode::expr_proof_let(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, name~ : Self, op~ : Self, expr~ : Self, semantic_name? : Self) -> Self
 pub fn CstNode::expr_quantifier(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, name~ : Self, op~ : Self, type_~ : Self, sep~ : Self, body~ : Self, quantifier_kind? : Self) -> Self
 pub fn CstNode::expr_raise(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, expr~ : Self) -> Self
-pub fn CstNode::expr_record(loc~ : @basic.Location, source_span~ : (Int, Int), type_? : Self, op? : Self, body~ : Self) -> Self
-pub fn CstNode::expr_record_update(loc~ : @basic.Location, source_span~ : (Int, Int), type_? : Self, op? : Self, body~ : Self) -> Self
+pub fn CstNode::expr_record(loc~ : @basic.Location, source_span~ : (Int, Int), type_? : Self, op? : Self, trivia? : ArrayView[Self], body~ : Self) -> Self
+pub fn CstNode::expr_record_update(loc~ : @basic.Location, source_span~ : (Int, Int), type_? : Self, op? : Self, trivia? : ArrayView[Self], body~ : Self) -> Self
 pub fn CstNode::expr_regex_match(loc~ : @basic.Location, source_span~ : (Int, Int), expr~ : Self, op~ : Self, pattern~ : Self) -> Self
 pub fn CstNode::expr_return(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, expr? : Self) -> Self
 pub fn CstNode::expr_rev_pipe(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self) -> Self
