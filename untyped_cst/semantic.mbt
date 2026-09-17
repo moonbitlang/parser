@@ -704,23 +704,37 @@ fn operator_node_from_token(
 }
 
 ///|
-fn signed_constant_node(constant : CstNode, negative : Bool) -> CstNode {
-  if !negative || constant.kind is Constant_Bool {
+fn signed_constant_node(
+  constant : CstNode,
+  negative : Bool,
+  loc? : Location = constant.loc,
+  source_span? : (Int, Int) = constant.source_span,
+) -> CstNode {
+  if (!negative && loc == constant.loc && source_span == constant.source_span) ||
+    constant.kind is Constant_Bool {
     return constant
   }
-  let value = constant.string_payload().unwrap_or("")
-  scalar_node_from_kind(
-    constant,
-    constant.loc,
-    constant.source_span,
-    String(
-      if value.has_prefix("-") {
-        value.unsafe_substring(start=1, end=value.length())
-      } else {
-        "-\{value}"
-      },
-    ),
-  )
+  let original = constant.string_payload().unwrap_or("")
+  let value = if !negative {
+    original
+  } else if original.has_prefix("-") {
+    original.unsafe_substring(start=1, end=original.length())
+  } else {
+    "-\{original}"
+  }
+  match constant.kind {
+    Constant_Int => @node.CstNode::constant_int(value~, loc~, source_span~)
+    Constant_Int64 => @node.CstNode::constant_int64(value~, loc~, source_span~)
+    Constant_UInt => @node.CstNode::constant_uint(value~, loc~, source_span~)
+    Constant_UInt64 =>
+      @node.CstNode::constant_uint64(value~, loc~, source_span~)
+    Constant_Float => @node.CstNode::constant_float(value~, loc~, source_span~)
+    Constant_Double =>
+      @node.CstNode::constant_double(value~, loc~, source_span~)
+    Constant_BigInt =>
+      @node.CstNode::constant_big_int(value~, loc~, source_span~)
+    _ => abort("expected a numeric constant")
+  }
 }
 
 ///|
@@ -793,6 +807,18 @@ fn semantic_ident_expr(
   )
   node(
     fn(loc, source_span, children) {
+      push_structured_name(
+        children,
+        "semantic_name",
+        fn(loc, source_span, children) {
+          let long_ident = CstNode::first_child_with_label_from(
+            children, "long_ident",
+          ).unwrap_or(missing_at_end(loc~, source_span~))
+          @node.CstNode::name_var(loc~, source_span~, long_ident~)
+        },
+        ["name"],
+      )
+
       let async_loc = CstNode::first_child_with_label_from(
         children, "async_loc",
       )
@@ -813,15 +839,6 @@ fn semantic_ident_expr(
     loc,
     source_span,
     [(Some("name"), name_node)],
-  ).with_structured_name(
-    "semantic_name",
-    fn(loc, source_span, children) {
-      let long_ident = CstNode::first_child_with_label_from(
-        children, "long_ident",
-      ).unwrap_or(missing_at_end(loc~, source_span~))
-      @node.CstNode::name_var(loc~, source_span~, long_ident~)
-    },
-    ["name"],
   )
 }
 
@@ -845,21 +862,24 @@ fn semantic_var_pattern(
   )
   node(
     fn(loc, source_span, children) {
+      push_structured_name(
+        children,
+        "semantic_name",
+        fn(loc, source_span, children) {
+          let long_ident = CstNode::first_child_with_label_from(
+            children, "long_ident",
+          ).unwrap_or(missing_at_end(loc~, source_span~))
+          @node.CstNode::name_binder(loc~, source_span~, long_ident~)
+        },
+        ["name"],
+      )
+
       let entries = recovery_children(children)
       @node.CstNode::pattern_var(loc~, source_span~, entries~)
     },
     loc,
     source_span,
     [(Some("name"), name_node)],
-  ).with_structured_name(
-    "semantic_name",
-    fn(loc, source_span, children) {
-      let long_ident = CstNode::first_child_with_label_from(
-        children, "long_ident",
-      ).unwrap_or(missing_at_end(loc~, source_span~))
-      @node.CstNode::name_binder(loc~, source_span~, long_ident~)
-    },
-    ["name"],
   )
 }
 
@@ -890,67 +910,46 @@ fn semantic_var_pattern_from_name(source : CstNode) -> CstNode? {
 }
 
 ///|
-fn CstNode::with_pun_expr(self : CstNode) -> CstNode {
-  if self.first_child_with_label("expr") is Some(_) {
-    return self
+fn push_pun_expr(children : Array[(String?, CstNode)]) -> Unit {
+  if CstNode::first_child_with_label_from(children, "expr") is Some(_) {
+    return
   }
-  guard self.first_child_with_label("name") is Some(name) &&
-    semantic_ident_expr_from_name(name) is Some(expr) else {
-    return self
+  if CstNode::first_child_with_label_from(children, "name") is Some(name) &&
+    semantic_ident_expr_from_name(name) is Some(value) {
+    push_child(children, Some("expr"), value)
   }
-  let children : Array[(String?, CstNode)] = []
-  for entry in self.children {
-    children.push(entry)
-  }
-  push_child(children, Some("expr"), expr)
-  self.internal_rebuild(loc=self.loc, source_span=self.source_span, children~)
 }
 
 ///|
-fn CstNode::with_pun_pattern(self : CstNode) -> CstNode {
-  if self.first_child_with_label("pattern") is Some(_) {
-    return self
+fn push_pun_pattern(children : Array[(String?, CstNode)]) -> Unit {
+  if CstNode::first_child_with_label_from(children, "pattern") is Some(_) {
+    return
   }
-  guard self.first_child_with_label("name") is Some(name) &&
-    semantic_var_pattern_from_name(name) is Some(pattern) else {
-    return self
+  if CstNode::first_child_with_label_from(children, "name") is Some(name) &&
+    semantic_var_pattern_from_name(name) is Some(value) {
+    push_child(children, Some("pattern"), value)
   }
-  let children : Array[(String?, CstNode)] = []
-  for entry in self.children {
-    children.push(entry)
-  }
-  push_child(children, Some("pattern"), pattern)
-  self.internal_rebuild(loc=self.loc, source_span=self.source_span, children~)
 }
 
 ///|
-fn CstNode::with_pun_locations(self : CstNode) -> CstNode {
-  guard self.first_child_with_label("name") is Some(name) &&
+fn push_pun_locations(children : Array[(String?, CstNode)]) -> Unit {
+  guard CstNode::first_child_with_label_from(children, "name") is Some(name) &&
     name.lexical_name_value() is Some(value) else {
-    return self
+    return
   }
-  let label_loc = if name.kind.is_syntax_token() {
-    token_location_node(name, name.loc, name.source_span)
-  } else {
-    @node.CstNode::syntax_delimiter(loc=name.loc, source_span=name.source_span)
-  }
-  let with_label_loc = if self.first_child_with_label("label_loc") is None {
-    self.with_location_metadata("label_loc", label_loc)
-  } else {
-    self
-  }
-  if with_label_loc.first_child_with_label("value_loc") is None {
-    let value_loc = if name.kind.is_syntax_token() {
-      token_location_node(name, value.loc, value.source_span)
-    } else {
-      @node.CstNode::syntax_delimiter(
-        loc=value.loc,
-        source_span=value.source_span,
-      )
+  for
+    (label, loc, source_span) in [
+      ("label_loc", name.loc, name.source_span),
+      ("value_loc", value.loc, value.source_span),
+    ] {
+    if CstNode::first_child_with_label_from(children, label) is None {
+      let anchor = if name.kind.is_syntax_token() {
+        token_location_node(name, loc, source_span)
+      } else {
+        @node.CstNode::syntax_delimiter(loc~, source_span~)
+      }
+      push_child(children, Some(label), anchor)
     }
-    with_label_loc.with_location_metadata("value_loc", value_loc)
-  } else {
-    with_label_loc
   }
 }
 
@@ -966,12 +965,11 @@ fn folded_prefix_constant_node(
   let source_span = mk_span(op.source_span.0, operand.source_span.1)
   let semantic_loc = if negative { loc } else { constant.loc }
   let semantic_span = if negative { source_span } else { constant.source_span }
-  let signed = signed_constant_node(constant, negative)
-  let semantic_constant = scalar_node_from_kind(
-    signed,
-    semantic_loc,
-    semantic_span,
-    String(signed.string_payload().unwrap_or("")),
+  let semantic_constant = signed_constant_node(
+    constant,
+    negative,
+    loc=semantic_loc,
+    source_span=semantic_span,
   )
   let children : Array[(String?, CstNode)] = [
     (Some("op"), op),
@@ -1052,7 +1050,33 @@ fn token_location_node(
   loc : Location,
   source_span : (Int, Int),
 ) -> CstNode {
-  source.internal_rebuild(loc~, source_span~, children=[])
+  syntax_location_node(source.kind, loc, source_span)
+}
+
+///|
+// This dispatch is limited to lexer syntax kinds; it cannot rebuild arbitrary nodes.
+fn syntax_location_node(
+  kind : NodeKind,
+  loc : Location,
+  source_span : (Int, Int),
+) -> CstNode {
+  match kind {
+    Syntax_Keyword => @node.CstNode::syntax_keyword(loc~, source_span~)
+    Syntax_Delimiter => @node.CstNode::syntax_delimiter(loc~, source_span~)
+    Syntax_Separator => @node.CstNode::syntax_separator(loc~, source_span~)
+    Syntax_Operator => @node.CstNode::syntax_operator(loc~, source_span~)
+    Syntax_Identifier => @node.CstNode::syntax_identifier(loc~, source_span~)
+    Syntax_Label => @node.CstNode::syntax_label(loc~, source_span~)
+    Syntax_Accessor => @node.CstNode::syntax_accessor(loc~, source_span~)
+    Syntax_Literal => @node.CstNode::syntax_literal(loc~, source_span~)
+    Syntax_Interpolation =>
+      @node.CstNode::syntax_interpolation(loc~, source_span~, segment=[])
+    Syntax_Attribute => @node.CstNode::syntax_attribute(loc~, source_span~)
+    Syntax_Comment => @node.CstNode::syntax_comment(loc~, source_span~)
+    Syntax_Eof => @node.CstNode::syntax_eof(loc~, source_span~)
+    Syntax_Unexpected => @node.CstNode::syntax_unexpected(loc~, source_span~)
+    _ => abort("expected a syntax token location anchor")
+  }
 }
 
 ///|
@@ -1069,41 +1093,28 @@ fn aggregate_span_node(loc : Location, source_span : (Int, Int)) -> CstNode {
 }
 
 ///|
-fn CstNode::with_location_metadata(
-  self : CstNode,
-  label : String,
-  metadata : CstNode,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for child in self.children {
-    children.push(child)
-  }
-  push_child(children, Some(label), metadata)
-  self.internal_rebuild(loc=self.loc, source_span=self.source_span, children~)
-}
-
-///|
-fn CstNode::with_token_location(
-  self : CstNode,
+fn push_token_location(
+  children : Array[(String?, CstNode)],
   label : String,
   source : CstNode,
   loc : Location,
   source_span : (Int, Int),
-) -> CstNode {
-  self.with_location_metadata(
-    label,
+) -> Unit {
+  push_child(
+    children,
+    Some(label),
     token_location_node(source, loc, source_span),
   )
 }
 
 ///|
-fn CstNode::with_aggregate_span(
-  self : CstNode,
+fn push_aggregate_span(
+  children : Array[(String?, CstNode)],
   label : String,
   loc : Location,
   source_span : (Int, Int),
-) -> CstNode {
-  self.with_location_metadata(label, aggregate_span_node(loc, source_span))
+) -> Unit {
+  push_child(children, Some(label), aggregate_span_node(loc, source_span))
 }
 
 ///|
@@ -1117,36 +1128,54 @@ fn push_direct_operator(
 }
 
 ///|
-fn CstNode::with_async_location_anchor(self : CstNode) -> CstNode {
-  if self.bool_marker_value(fn(kind) { kind is Flag_Async }) is Some(false) ||
-    self.first_child_with_label("async_loc") is Some(_) {
-    return self
+fn push_async_location_anchor(children : Array[(String?, CstNode)]) -> Unit {
+  if bool_marker_value_from_children(children, fn(kind) { kind is Flag_Async })
+    is Some(false) ||
+    CstNode::first_child_with_label_from(children, "async_loc") is Some(_) {
+    return
   }
-  for keyword in self.children_with_label("kw") {
+  for keyword in CstNode::children_with_label_from(children, "kw") {
     if keyword.has_child_kind(fn(kind) { kind is Flag_Async }) {
-      return self.with_token_location(
+      push_token_location(
+        children,
         "async_loc",
         keyword,
         keyword.loc,
         keyword.source_span,
       )
+      return
     }
   }
-  self
 }
 
 ///|
-fn CstNode::with_decl_like_function_location_anchor(self : CstNode) -> CstNode {
-  if self.first_child_with_label("header_loc") is Some(_) {
-    return self
+fn push_decl_like_function_location_anchor(
+  children : Array[(String?, CstNode)],
+  loc : Location,
+  source_span : (Int, Int),
+) -> Unit {
+  if CstNode::first_child_with_label_from(children, "header_loc") is Some(_) {
+    return
   }
-  match self.children_with_label("kw").get(0) {
-    Some(keyword) =>
-      self.with_aggregate_span(
-        "header_loc",
-        Location::{ start: keyword.loc.start, end: self.loc.end, },
-        mk_span(keyword.source_span.0, self.source_span.1),
-      )
-    None => self
+  if CstNode::first_child_with_label_from(children, "kw") is Some(keyword) {
+    push_aggregate_span(
+      children,
+      "header_loc",
+      Location::{ start: keyword.loc.start, end: loc.end, },
+      mk_span(keyword.source_span.0, source_span.1),
+    )
   }
+}
+
+///|
+fn bool_marker_value_from_children(
+  children : Array[(String?, CstNode)],
+  pred : (NodeKind) -> Bool,
+) -> Bool? {
+  for (_, child) in children {
+    if pred(child.kind) {
+      return child.bool_payload()
+    }
+  }
+  None
 }

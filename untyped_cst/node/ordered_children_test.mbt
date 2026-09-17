@@ -404,3 +404,71 @@ test "ordered constructors match legacy required and optional arguments" {
     ),
   )
 }
+
+///|
+test "pattern entry constructors preserve all labels and repeated children" {
+  let loc = @node.mk_loc(test_position(1), test_position(8))
+  let source_span = (2, 10)
+  let trivia = @node.CstNode::syntax_comment(loc~, source_span~)
+  let body = @node.CstNode::missing(
+    loc=@node.empty_loc(loc.end),
+    source_span=(10, 10),
+  )
+  let marker = @node.CstNode::lex_scan_case_pattern_pattern(
+    loc=body.loc,
+    source_span=body.source_span,
+  )
+  let entries : Array[@node.CstRecoveryChild] = [
+    Trivia(trivia),
+    Trivia(trivia),
+    Body(body),
+    Error(body),
+    Body(body),
+    LexScanCasePattern(marker),
+  ]
+  for
+    (node, expected_kind) in [
+      (
+        @node.CstNode::pattern_record_from_entries(loc~, source_span~, entries~),
+        "Pattern_Record",
+      ),
+      (
+        @node.CstNode::pattern_map_from_entries(loc~, source_span~, entries~),
+        "Pattern_Map",
+      ),
+      (
+        @node.CstNode::pattern_alias_from_entries(loc~, source_span~, entries~),
+        "Pattern_Alias",
+      ),
+      (
+        @node.CstNode::pattern_range_from_entries(loc~, source_span~, entries~),
+        "Pattern_Range",
+      ),
+      (
+        @node.CstNode::regex_pattern_sequence_from_entries(
+          loc~,
+          source_span~,
+          entries~,
+        ),
+        "RegexPattern_Sequence",
+      ),
+      (
+        @node.CstNode::regex_pattern_alternation_from_entries(
+          loc~,
+          source_span~,
+          entries~,
+        ),
+        "RegexPattern_Alternation",
+      ),
+    ] {
+    @test.assert_eq("\{Repr(node.kind)}", expected_kind)
+    assert_constructor_entries(node, loc, source_span, [
+      ("trivia", trivia),
+      ("trivia", trivia),
+      ("body", body),
+      ("error", body),
+      ("body", body),
+      ("lex_scan_case_pattern", marker),
+    ])
+  }
+}

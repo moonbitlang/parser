@@ -35,20 +35,12 @@ fn ParserState::current_position(self : ParserState) -> Position {
 /// text to the enclosing CST node.
 fn ParserState::current_significant_anchor(self : ParserState) -> CstNode {
   match self.peek_significant() {
-    Some((token, start, end)) => {
-      let anchor = token_node_with_children(
-        token,
-        start,
-        end,
-        self.token_source_span(start, end),
-        [],
+    Some((token, start, end)) =>
+      syntax_location_node(
+        syntax_kind_from_token_kind(token.kind()),
+        mk_loc(start, end),
+        empty_span(self.offset_for_position(start)),
       )
-      anchor.internal_rebuild(
-        loc=mk_loc(start, end),
-        source_span=empty_span(self.offset_for_position(start)),
-        children=[],
-      )
-    }
     None => {
       let pos = self.previous_end()
       @node.CstNode::syntax_eof(

@@ -101,18 +101,6 @@ fn scalar_node(
 }
 
 ///|
-fn scalar_node_from_kind(
-  source : CstNode,
-  loc : Location,
-  source_span : (Int, Int),
-  payload : NodePayload,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  push_payload_leaf(children, payload, loc, source_span)
-  source.internal_rebuild(loc~, source_span~, children~)
-}
-
-///|
 fn marker_node(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   pos : Position,

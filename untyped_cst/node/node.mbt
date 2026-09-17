@@ -42,18 +42,6 @@ fn node(
 }
 
 ///|
-#internal(internal, "For untyped_cst parser implementation only")
-#doc(hidden)
-pub fn CstNode::internal_rebuild(
-  self : CstNode,
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  children~ : Array[(String?, CstNode)],
-) -> CstNode {
-  node(self.kind, loc, source_span, children)
-}
-
-///|
 fn leaf_node(
   payload : NodePayload,
   loc : Location,

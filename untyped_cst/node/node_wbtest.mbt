@@ -38,29 +38,6 @@ test "node getters expose immutable shape" {
 }
 
 ///|
-test "internal rebuild preserves kind and replaces shape" {
-  let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
-  let old = CstNode::missing(loc=empty_loc(pos), source_span=empty_span(0))
-  let end = Position::{ ..pos, cnum: 2, }
-  let child = CstNode::leaf(
-    payload=NodePayload::String("x"),
-    loc=mk_loc(pos, end),
-    source_span=mk_span(0, 2),
-  )
-  let rebuilt = old.internal_rebuild(
-    loc=mk_loc(pos, end),
-    source_span=mk_span(3, 5),
-    children=[(Some("value"), child)],
-  )
-  @test.assert_eq(rebuilt.kind, old.kind)
-  @test.assert_eq(rebuilt.loc, mk_loc(pos, end))
-  @test.assert_eq(rebuilt.source_span, mk_span(3, 5))
-  @test.assert_eq(rebuilt.children.length(), 1)
-  @test.assert_eq(rebuilt.children[0].0, Some("value"))
-  @test.assert_eq(rebuilt.children[0].1.kind, child.kind)
-}
-
-///|
 test "all non-newline lexer token kinds map to dedicated syntax kinds" {
   let token_kinds = [
     TokenKind::TK_CHAR,

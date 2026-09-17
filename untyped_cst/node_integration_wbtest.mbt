@@ -116,3 +116,41 @@ test "extend soft keyword keeps its accessor label" {
   @test.assert_eq(field.kind is Accessor_Label, true)
   @test.assert_eq(field.string_payload(), Some("extend"))
 }
+
+///|
+test "token location anchors keep kind and explicit ranges without payloads" {
+  for
+    source in [
+      "async", "(", ":", "+", "name", "label~", ".field", "\"🐇\"", "\"a\\{x}\"",
+      "#deprecated", "// comment", "", "\n",
+    ] {
+    let lex = @lexer.tokens_from_string(source, comment=true)
+    let state = new_state(lex.tokens, source, [], false)
+    while state.consume_any() is Some(token) {
+      let loc = empty_loc(token.loc.end)
+      let source_span = empty_span(token.source_span.1)
+      let anchor = token_location_node(token, loc, source_span)
+      @test.assert_eq(anchor.kind, token.kind)
+      @test.assert_eq(anchor.loc, loc)
+      @test.assert_eq(anchor.source_span, source_span)
+      @test.assert_eq(anchor.children.length(), 0)
+    }
+  }
+}
+
+///|
+test "recovery anchors keep token locations and zero width UTF-16 spans" {
+  for tail in ["name", "\"🐇\"", "(", "async", ""] {
+    let source = "// 🐇\n" + tail
+    let lex = @lexer.tokens_from_string(source, comment=true)
+    let state = new_state(lex.tokens, source, [], false)
+    let (token, start, end) = state.peek_significant().unwrap()
+    let anchor = state.current_significant_anchor()
+    @test.assert_eq(anchor.kind, syntax_kind_from_token_kind(token.kind()))
+    @test.assert_eq(anchor.loc, mk_loc(start, end))
+    @test.assert_eq(anchor.source_span, (6, 6))
+    @test.assert_eq(anchor.loc.start.cnum, 5)
+    @test.assert_eq(anchor.children.length(), 0)
+    @test.assert_eq(source[anchor.source_span.0:anchor.source_span.1], ""[:])
+  }
+}

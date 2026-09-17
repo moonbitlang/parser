@@ -377,6 +377,7 @@ pub fn CstNode::parameter_type_decl(loc~ : @basic.Location, source_span~ : (Int,
 pub fn CstNode::parameter_type_decl_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::parameter_type_var(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_alias(loc~ : @basic.Location, source_span~ : (Int, Int), pattern~ : Self, op~ : Self, name~ : Self) -> Self
+pub fn CstNode::pattern_alias_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_any(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, lex_scan_case_pattern? : Self) -> Self
 pub fn CstNode::pattern_array(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self) -> Self
 pub fn CstNode::pattern_constant(loc~ : @basic.Location, source_span~ : (Int, Int), op? : Self, operator? : Self, error? : Self, token? : Self, constant? : Self, semantic_constant? : Self) -> Self
@@ -385,10 +386,13 @@ pub fn CstNode::pattern_constr_any(loc~ : @basic.Location, source_span~ : (Int, 
 pub fn CstNode::pattern_constraint(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_group(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::pattern_map(loc~ : @basic.Location, source_span~ : (Int, Int), trivia? : Self, body~ : Self, openness? : Self) -> Self
+pub fn CstNode::pattern_map_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_missing_pattern(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_or(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_range(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self, range_kind? : Self) -> Self
+pub fn CstNode::pattern_range_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_record(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, openness? : Self) -> Self
+pub fn CstNode::pattern_record_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_rest(loc~ : @basic.Location, source_span~ : (Int, Int), op~ : Self, as_? : Self, bytes? : Self, pkg? : Self, str? : Self, name? : Self, const_? : Self, dot_dot_binder? : Self) -> Self
 pub fn CstNode::pattern_special_constr(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, params~ : Self) -> Self
 pub fn CstNode::pattern_tuple(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, pattern_group? : Self) -> Self
@@ -401,10 +405,12 @@ pub fn CstNode::range_kind_exclusive(loc~ : @basic.Location, source_span~ : (Int
 pub fn CstNode::range_kind_inclusive(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::regex_pattern_alias(loc~ : @basic.Location, source_span~ : (Int, Int), pattern~ : Self, kw~ : Self, name~ : Self, lex_scan_case_pattern? : Self) -> Self
 pub fn CstNode::regex_pattern_alternation(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self) -> Self
+pub fn CstNode::regex_pattern_alternation_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::regex_pattern_literal(loc~ : @basic.Location, source_span~ : (Int, Int), error? : Self, token? : Self, lex_literal? : Self, lex_scan_case_pattern? : Self) -> Self
 pub fn CstNode::regex_pattern_placeholder(loc~ : @basic.Location, source_span~ : (Int, Int), open~ : Self, pattern~ : Self, bindings? : Self, error~ : ArrayView[Self], close~ : Self, lex_scan_case_pattern? : Self) -> Self
 pub fn CstNode::regex_pattern_reference(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : ArrayView[Self], semantic_name? : Self, lex_scan_case_pattern? : Self) -> Self
 pub fn CstNode::regex_pattern_sequence(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self) -> Self
+pub fn CstNode::regex_pattern_sequence_from_entries(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::string_payload(Self) -> String?
 pub fn CstNode::stub_code(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::stub_function_name(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self

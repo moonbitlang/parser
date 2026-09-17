@@ -487,6 +487,22 @@ pub fn CstNode::pattern_record(
 }
 
 ///|
+/// Construct a `Pattern_Record` with children in their original order, including
+/// repeated recovery, trivia, and semantic metadata entries.
+pub fn CstNode::pattern_record_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Pattern_Record,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
+}
+
+///|
 pub fn CstNode::pattern_map(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -505,6 +521,22 @@ pub fn CstNode::pattern_map(
     None => ()
   }
   node(NodeKind::Pattern_Map, loc, source_span, children)
+}
+
+///|
+/// Construct a `Pattern_Map` with children in their original order, including
+/// repeated recovery, trivia, and semantic metadata entries.
+pub fn CstNode::pattern_map_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Pattern_Map,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -579,6 +611,22 @@ pub fn CstNode::pattern_alias(
 }
 
 ///|
+/// Construct a `Pattern_Alias` with children in their original order, including
+/// repeated recovery, trivia, and semantic metadata entries.
+pub fn CstNode::pattern_alias_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Pattern_Alias,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
+}
+
+///|
 pub fn CstNode::pattern_range(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -596,6 +644,22 @@ pub fn CstNode::pattern_range(
     None => ()
   }
   node(NodeKind::Pattern_Range, loc, source_span, children)
+}
+
+///|
+/// Construct a `Pattern_Range` with children in their original order, including
+/// repeated recovery, trivia, and semantic metadata entries.
+pub fn CstNode::pattern_range_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Pattern_Range,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
@@ -1148,6 +1212,22 @@ pub fn CstNode::regex_pattern_sequence(
 }
 
 ///|
+/// Construct a `RegexPattern_Sequence` with children in their original order, including
+/// repeated recovery, trivia, and semantic metadata entries.
+pub fn CstNode::regex_pattern_sequence_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::RegexPattern_Sequence,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
+}
+
+///|
 pub fn CstNode::regex_pattern_alternation(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -1160,6 +1240,22 @@ pub fn CstNode::regex_pattern_alternation(
   children.push((Some("op"), op))
   children.push((Some("rhs"), rhs))
   node(NodeKind::RegexPattern_Alternation, loc, source_span, children)
+}
+
+///|
+/// Construct a `RegexPattern_Alternation` with children in their original order, including
+/// repeated recovery, trivia, and semantic metadata entries.
+pub fn CstNode::regex_pattern_alternation_from_entries(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::RegexPattern_Alternation,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
 }
 
 ///|
