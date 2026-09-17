@@ -128,6 +128,7 @@ pub(all) enum CstMultilineChild {
   Element(CstNode)
   LiteralLoc(CstNode)
   Token(CstNode)
+  Trivia(CstNode)
 }
 
 ///|
@@ -140,6 +141,7 @@ fn entries_from_cstmultilinechild(
       Element(child) => children.push((Some("element"), child))
       LiteralLoc(child) => children.push((Some("literal_loc"), child))
       Token(child) => children.push((Some("token"), child))
+      Trivia(child) => children.push((Some("trivia"), child))
     }
   }
   children

@@ -414,6 +414,7 @@ fn multiline_children(
       Some("element") => entries.push(CstMultilineChild::Element(child))
       Some("literal_loc") => entries.push(CstMultilineChild::LiteralLoc(child))
       Some("token") => entries.push(CstMultilineChild::Token(child))
+      Some("trivia") => entries.push(CstMultilineChild::Trivia(child))
       _ => abort("unsupported CST child label")
     }
   }

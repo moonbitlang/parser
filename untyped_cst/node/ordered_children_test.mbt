@@ -196,6 +196,52 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
 }
 
 ///|
+test "multiline constructor preserves repeated trivia and entry order" {
+  let loc = @node.mk_loc(test_position(0), test_position(19))
+  let span = (0, 19)
+  let token = @node.CstNode::syntax_literal(
+    loc=@node.mk_loc(test_position(0), test_position(3)),
+    source_span=(0, 3),
+  )
+  let element = @node.CstNode::multiline_string_element_string(
+    value="a",
+    loc=token.loc,
+    source_span=token.source_span,
+  )
+  let trivia = [
+    for (start, value) in [(4, "// keep"), (12, "// next")] => {
+      let loc = @node.mk_loc(test_position(start), test_position(start + 7))
+      let source_span = (start, start + 7)
+      @node.CstNode::syntax_comment(
+        loc~,
+        source_span~,
+        comment=@node.CstNode::comment_content(value~, loc~, source_span~),
+      )
+    }
+  ]
+  // Revisit earlier positions and repeat a node to catch sorting or deduplication.
+  let multiline = @node.CstNode::expr_multiline_string(loc~, source_span=span, entries=[
+    Token(token),
+    Element(element),
+    Trivia(trivia[1]),
+    Trivia(trivia[0]),
+    Trivia(trivia[0]),
+    LiteralLoc(token),
+    Trivia(trivia[1]),
+  ])
+  @test.assert_eq(multiline.kind is @node.NodeKind::Expr_MultilineString, true)
+  assert_constructor_entries(multiline, loc, span, [
+    ("token", token),
+    ("element", element),
+    ("trivia", trivia[1]),
+    ("trivia", trivia[0]),
+    ("trivia", trivia[0]),
+    ("literal_loc", token),
+    ("trivia", trivia[1]),
+  ])
+}
+
+///|
 test "ordered constructors match legacy required and optional arguments" {
   let (type_, op, trivia, field) = coloncolon_constructor_nodes()
   let loc = type_.loc.merge(field.loc)

@@ -83,6 +83,7 @@ pub(all) enum CstMultilineChild {
   Element(CstNode)
   LiteralLoc(CstNode)
   Token(CstNode)
+  Trivia(CstNode)
 }
 
 pub struct CstNode {
