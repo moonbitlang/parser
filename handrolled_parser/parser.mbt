@@ -4258,7 +4258,7 @@ fn State::parse_func(self : Self, is_async~ : Location?) -> @syntax.Func {
     other => {
       self.report_error({
         loc: self.peek_location(),
-        msg: "Failed to parse func: expected '(' or '{', got \{@debug.render(other.to_repr())}",
+        msg: "Failed to parse func: expected '(' or '{', got \{@debug.render(Debug::to_repr(other))}",
       })
       let loc = self.panic()
       {

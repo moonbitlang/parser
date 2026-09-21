@@ -148,7 +148,7 @@ pub fn parse_string(
           [
             {
               loc: { start, end, },
-              msg: "Unexpected `\{@debug.render(token.to_repr())}`.",
+              msg: "Unexpected `\{@debug.render(Debug::to_repr(token))}`.",
             },
           ],
         )
