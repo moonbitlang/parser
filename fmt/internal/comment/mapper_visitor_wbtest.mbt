@@ -16,7 +16,7 @@ impl IterVisitor for IterArrayFinder with fn visit_Expr_Array(
   if is_iter {
     self.loc = Some(loc)
   }
-  self.base().visit_Expr_Array(exprs~, is_iter~, loc~)
+  IterVisitor::visit_Expr_Array(self.base(), exprs~, is_iter~, loc~)
 }
 
 ///|

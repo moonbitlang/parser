@@ -635,7 +635,10 @@ fn parse_string(source : String, name? : String = "") -> (Ast, Array[Report]) {
   let diagnostics = []
   lex_result.errors.each(fn(err_triple) {
     let (start, end, err) = err_triple
-    diagnostics.push(Report::{ loc: { start, end, }, msg: err.to_string(), })
+    diagnostics.push(Report::{
+      loc: { start, end, },
+      msg: Show::to_string(err),
+    })
   })
   reports.each(report => diagnostics.push(report))
   (ast, diagnostics)

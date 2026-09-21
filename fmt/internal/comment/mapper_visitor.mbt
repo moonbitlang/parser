@@ -12,22 +12,22 @@ extend Mapper with IterVisitor::{
 
 ///|
 impl IterVisitor for Mapper with fn visit_Expr(self, expr) {
-  self..attach(Node(expr.loc())).base().visit_Expr(expr)
+  IterVisitor::visit_Expr(self..attach(Node(expr.loc())).base(), expr)
 }
 
 ///|
 impl IterVisitor for Mapper with fn visit_Pattern(self, pat) {
-  self..attach(Node(pat.loc())).base().visit_Pattern(pat)
+  IterVisitor::visit_Pattern(self..attach(Node(pat.loc())).base(), pat)
 }
 
 ///|
 impl IterVisitor for Mapper with fn visit_Type(self, ty) {
-  self..attach(Node(ty.loc())).base().visit_Type(ty)
+  IterVisitor::visit_Type(self..attach(Node(ty.loc())).base(), ty)
 }
 
 ///|
 impl IterVisitor for Mapper with fn visit_Impl(self, top) {
-  self..attach(Node(top.loc())).base().visit_Impl(top)
+  IterVisitor::visit_Impl(self..attach(Node(top.loc())).base(), top)
 }
 
 ///|

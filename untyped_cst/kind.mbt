@@ -1121,3 +1121,13 @@ fn NodeKind::is_interp_segment(self : NodeKind) -> Bool {
     _ => false
   }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend NodeKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend NodeKind with Eq::{not_equal, equal}

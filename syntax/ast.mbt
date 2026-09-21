@@ -950,3 +950,333 @@ pub(all) enum Impl {
 
 ///|
 pub type Impls = @list.List[Impl]
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Accessor with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend AliasTarget with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Argument with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ArgumentKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ArrayPattern with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ArrayPatterns with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Binder with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Case with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Constant with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ConstrDecl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ConstrId with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ConstrName with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ConstrParam with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ConstrPatArg with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Constructor with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ConstructorExtraInfo with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend DeclBody with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend DerivingDirective with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend DotDotBinder with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend EmbeddedCode with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ErrorType with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ExceptionDecl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Expr with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FieldDecl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FieldDef with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FieldName with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FieldPat with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FnKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FunDecl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Func with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FuncStubs with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Group with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Hole with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Impl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ImportPackage with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend InterpElem with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Label with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend LexScanCase with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend LexScanCasePattern with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ListComprehensionKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend LongIdent with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend MapExprElem with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend MapPatElem with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend MultilineStringElem with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Parameter with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Pattern with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend PredicateQuantifierKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend RangeKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend RegexPattern with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend SpreadableElem with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend StaticAssertion with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TrailingMark with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TraitDecl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TraitMethodDecl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TryOperatorKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Type with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeDecl with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeDeclBinder with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeDesc with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeName with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeVarBinder with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeVarConstraint with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend UsingKind with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Var with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Visibility with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend WhereClause with Debug::{to_repr}

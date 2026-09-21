@@ -25,7 +25,7 @@ test "parse moon.mod" {
     #|
   let (ast, reports) = @moon_config.parse_moon_mod(source)
   assert_eq(reports.length(), 0) // no error
-  json_inspect(ast.to_json(), content={
+  json_inspect(ToJson::to_json(ast), content={
     "name": "example/app",
     "version": "0.1.0",
     "deps": { "moonbitlang/x": "0.4.6" },
@@ -48,7 +48,7 @@ test "parse moon.pkg" {
     #|
   let (ast, reports) = @moon_config.parse_moon_pkg(source)
   assert_eq(reports.length(), 0) // no error
-  json_inspect(ast.to_json(), content={
+  json_inspect(ToJson::to_json(ast), content={
     "import": [{ "path": "moonbitlang/core/json", "alias": "json" }],
     "is-main": true,
   })
@@ -66,7 +66,7 @@ test "parse moon.work" {
     #|
   let (ast, reports) = @moon_config.parse_moon_work(source)
   assert_eq(reports.length(), 0) // no error
-  json_inspect(ast.to_json(), content={
+  json_inspect(ToJson::to_json(ast), content={
     "members": ["./app", "./shared"],
     "preferred_target": "native",
   })

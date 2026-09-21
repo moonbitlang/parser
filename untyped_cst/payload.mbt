@@ -116,3 +116,13 @@ fn CstNode::bool_payload(self : CstNode) -> Bool? {
 }
 
 ///|
+
+///|
+#deprecated
+#doc(hidden)
+pub extend NodePayload with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend NodePayload with Eq::{not_equal, equal}

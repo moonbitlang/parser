@@ -22,7 +22,7 @@ fn lex_reports(
 ) -> Array[Report] {
   errors.map(fn(error) {
     let (start, end, err) = error
-    { loc: { start, end, }, msg: err.to_string(), }
+    { loc: { start, end, }, msg: Show::to_string(err), }
   })
 }
 

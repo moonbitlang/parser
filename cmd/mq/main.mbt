@@ -87,7 +87,7 @@ async fn run_legacy(options : LegacyOptions) -> Unit {
     Code(source) => source
   }
   let ast = parse_config(kind, source)
-  write_result(options.output, ast.to_json().stringify())
+  write_result(options.output, ToJson::to_json(ast).stringify())
 }
 
 ///|

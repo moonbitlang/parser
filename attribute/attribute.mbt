@@ -82,3 +82,33 @@ pub fn Attribute::new(
   }
   { loc, raw, parsed, }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Attribute with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Attribute with ToJson::{to_json}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Expr with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Id with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Id with Show::{to_string, output}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Prop with Debug::{to_repr}

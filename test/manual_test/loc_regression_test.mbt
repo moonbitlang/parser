@@ -210,7 +210,7 @@ impl IterVisitor for LabelledPunLocationCollector with fn visit_Argument(
     LabelledPun(label) => self.locations.push((argument.value.loc(), label.loc))
     _ => ()
   }
-  self.base().visit_Argument(argument)
+  IterVisitor::visit_Argument(self.base(), argument)
 }
 
 ///|
@@ -332,7 +332,7 @@ impl IterVisitor for LexScanArrowLocationCollector with fn visit_LexScanCase(
   case_,
 ) {
   self.locations.push(case_.arrow_loc)
-  self.base().visit_LexScanCase(case_)
+  IterVisitor::visit_LexScanCase(self.base(), case_)
 }
 
 ///|

@@ -24,3 +24,8 @@ pub fn NodeArray::last(self : Self) -> Key? {
 pub impl Pretty for NodeArray with fn pretty(self) {
   @pp.pretty(self.0)
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend NodeArray with @moonbit-community/prettyprinter.Pretty::{pretty}

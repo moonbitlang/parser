@@ -44,3 +44,8 @@ pub impl ToJson for Ast with fn to_json(self) {
 
   convert(self, true)
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Ast with ToJson::{to_json}
