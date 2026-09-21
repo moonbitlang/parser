@@ -86,7 +86,7 @@ test "unclassified kinds do not match available categories" {
       Expression,
       Missing,
       Error,
-      Leaf(NodePayload::String("value")),
+      Leaf(String("value")),
       Aggregate_Span,
       ArrayPattern_Pattern,
       LexPattern_RegexInterp,
@@ -99,10 +99,7 @@ test "unclassified kinds do not match available categories" {
     ] {
     @test.assert_eq(category_count(kind), 0)
   }
-  @test.assert_eq(
-    Leaf(NodePayload::String("value")) == Leaf(NodePayload::String("value")),
-    true,
-  )
+  @test.assert_eq(Leaf(String("value")) == Leaf(String("value")), true)
 }
 
 ///|

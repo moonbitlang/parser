@@ -17,13 +17,13 @@ fn recovery_any_node(
 
 ///|
 fn recovery_is_missing() -> (@untyped_cst.CstNode) -> Bool {
-  fn(node) { node.kind is @untyped_cst.Missing }
+  fn(node) { node.kind is Missing }
 }
 
 ///|
 fn recovery_is_error(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    @untyped_cst.Error => true
+    Error => true
     _ => false
   }
 }
@@ -56,7 +56,7 @@ fn recovery_leaf_payload(
     let (label, child) = entry
     if label is Some("payload") {
       match child.kind {
-        @untyped_cst.Leaf(payload) => return Some(payload)
+        Leaf(payload) => return Some(payload)
         _ => ()
       }
     }
@@ -68,20 +68,20 @@ fn recovery_leaf_payload(
 fn recovery_is_syntax_string(value : String) -> (@untyped_cst.CstNode) -> Bool {
   fn(node) {
     node.kind
-    is (@untyped_cst.Syntax_Keyword
-    | @untyped_cst.Syntax_Delimiter
-    | @untyped_cst.Syntax_Separator
-    | @untyped_cst.Syntax_Operator
-    | @untyped_cst.Syntax_Identifier
-    | @untyped_cst.Syntax_Label
-    | @untyped_cst.Syntax_Accessor
-    | @untyped_cst.Syntax_Literal
-    | @untyped_cst.Syntax_Interpolation
-    | @untyped_cst.Syntax_Attribute
-    | @untyped_cst.Syntax_Comment
-    | @untyped_cst.Syntax_Eof
-    | @untyped_cst.Syntax_Unexpected) &&
-    recovery_leaf_payload(node) is Some(@untyped_cst.NodePayload::String(found)) &&
+    is (Syntax_Keyword
+    | Syntax_Delimiter
+    | Syntax_Separator
+    | Syntax_Operator
+    | Syntax_Identifier
+    | Syntax_Label
+    | Syntax_Accessor
+    | Syntax_Literal
+    | Syntax_Interpolation
+    | Syntax_Attribute
+    | Syntax_Comment
+    | Syntax_Eof
+    | Syntax_Unexpected) &&
+    recovery_leaf_payload(node) is Some(String(found)) &&
     found == value
   }
 }
@@ -116,10 +116,8 @@ test "invalid normalized forms retain their diagnostic source subtrees" {
   @test.assert_eq(assignment.diagnostics_view().is_empty(), false)
   @test.assert_eq(
     recovery_any_node(assignment.root(), fn(node) {
-      node.kind is @untyped_cst.Expr_Assign &&
-      recovery_has_direct_child(node, "lhs", fn(kind) {
-        kind is @untyped_cst.Expr_Group
-      })
+      node.kind is Expr_Assign &&
+      recovery_has_direct_child(node, "lhs", fn(kind) { kind is Expr_Group })
     }),
     true,
   )
@@ -128,10 +126,8 @@ test "invalid normalized forms retain their diagnostic source subtrees" {
   @test.assert_eq(arrow.diagnostics_view().is_empty(), false)
   @test.assert_eq(
     recovery_any_node(arrow.root(), fn(node) {
-      node.kind is @untyped_cst.Parameter_Positional &&
-      recovery_has_direct_child(node, "error", fn(kind) {
-        kind is @untyped_cst.Expr_Infix
-      })
+      node.kind is Parameter_Positional &&
+      recovery_has_direct_child(node, "error", fn(kind) { kind is Expr_Infix })
     }),
     true,
   )
@@ -166,9 +162,7 @@ test "invalid question token in block becomes error node" {
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(recovery_any_node(result.root(), recovery_is_error), true)
   @test.assert_eq(
-    recovery_any_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.Syntax_Unexpected
-    }),
+    recovery_any_node(result.root(), fn(node) { node.kind is Syntax_Unexpected }),
     true,
   )
 }
@@ -221,7 +215,7 @@ test "removed try question recovery keeps following top-level declaration" {
   guard recovery_root_item_at(result.root(), 1) is Some(following) else {
     fail("expected a following top-level declaration")
   }
-  @test.assert_eq(following.kind is @untyped_cst.Impl_Function, true)
+  @test.assert_eq(following.kind is Impl_Function, true)
   @test.assert_eq(
     recovery_any_node(following, recovery_is_syntax_string("kept")),
     true,
@@ -256,8 +250,7 @@ test "declare prefix survives recovery" {
   )
   @test.assert_eq(
     recovery_any_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.Syntax_Unexpected &&
-      node.text(source) == "\n"[:]
+      node.kind is Syntax_Unexpected && node.text(source) == "\n"[:]
     }),
     true,
   )

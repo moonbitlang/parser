@@ -24,7 +24,7 @@ fn lowered_regex_literal(source : String) -> @syntax.RegexPattern raise Error {
 ///|
 test "lower recovered bare string regex literal" {
   guard lowered_regex_literal("subject =~ \"bare\"")
-    is @syntax.RegexPattern::Literal(lit~, recovered_~, loc=_) else {
+    is Literal(lit~, recovered_~, loc=_) else {
     fail("expected a lowered regex literal")
   }
   @test.assert_eq(lit, "bare")
@@ -34,7 +34,7 @@ test "lower recovered bare string regex literal" {
 ///|
 test "lower regular regex literal" {
   guard lowered_regex_literal("subject =~ re\"regular\"")
-    is @syntax.RegexPattern::Literal(lit~, recovered_~, loc=_) else {
+    is Literal(lit~, recovered_~, loc=_) else {
     fail("expected a lowered regex literal")
   }
   @test.assert_eq(lit, "regular")

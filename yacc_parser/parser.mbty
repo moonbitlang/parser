@@ -1106,9 +1106,9 @@ qual_ident_simple_expr -> LongIdent
   ;
 
 %inline qual_ident_ty_inline -> LongIdent
-  : UIDENT { LongIdent::Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { LongIdent::Dot(pkg = $1, id = $2) }
-  | PACKAGE_NAME DOT_UIDENT { LongIdent::Dot(pkg = $1, id = $2) }
+  : UIDENT { Ident(name = $1) }
+  | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
+  | PACKAGE_NAME DOT_UIDENT { Dot(pkg = $1, id = $2) }
   ;
 
 qual_ident_ty -> LongIdent
@@ -1763,30 +1763,30 @@ regex_match_binding -> (Label, Binder?)
 regex_as_pattern -> RegexPattern
   : regex_or_pattern { $1 }
   | regex_atom_pattern "as" binder {
-    RegexPattern::Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
+    Alias(pat = $1, binder = $3, loc = mk_loc($sloc))
   }
   ;
 
 regex_or_pattern -> RegexPattern
   : regex_sequence_pattern { $1 }
   | regex_or_pattern "|" regex_sequence_pattern {
-    RegexPattern::Alternation(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
+    Alternation(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
   }
   ;
 
 regex_sequence_pattern -> RegexPattern
   : regex_atom_pattern { $1 }
   | regex_sequence_pattern "+" regex_atom_pattern {
-    RegexPattern::Sequence(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
+    Sequence(pat1 = $1, pat2 = $3, loc = mk_loc($sloc))
   }
   ;
 
 regex_atom_pattern -> RegexPattern
   : REGEX_LITERAL {
-    RegexPattern::Literal(lit = $1, recovered_ = false, loc = mk_loc($loc($1)))
+    Literal(lit = $1, recovered_ = false, loc = mk_loc($loc($1)))
   }
   | qual_uident {
-    RegexPattern::Reference(lid = $1, loc = mk_loc($sloc))
+    Reference(lid = $1, loc = mk_loc($sloc))
   }
   | "(" regex_as_pattern ")" { $2 }
   ;
@@ -1794,7 +1794,7 @@ regex_atom_pattern -> RegexPattern
 range_expr -> Expr
   : prefix_expr "..<" prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = "..<"), loc: mk_loc($loc($2)) },
+      op = { name: Ident(name = "..<"), loc: mk_loc($loc($2)) },
       lhs = $1,
       rhs = $3,
       loc = mk_loc($sloc)
@@ -1802,7 +1802,7 @@ range_expr -> Expr
   }
   | prefix_expr "..=" prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = "..="), loc: mk_loc($loc($2)) },
+      op = { name: Ident(name = "..="), loc: mk_loc($loc($2)) },
       lhs = $1,
       rhs = $3,
       loc = mk_loc($sloc)
@@ -1810,7 +1810,7 @@ range_expr -> Expr
   }
   | prefix_expr "..<=" prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = "..<="), loc: mk_loc($loc($2)) },
+      op = { name: Ident(name = "..<="), loc: mk_loc($loc($2)) },
       lhs = $1,
       rhs = $3,
       loc = mk_loc($sloc)
@@ -1818,7 +1818,7 @@ range_expr -> Expr
   }
   | prefix_expr ">=.." prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = ">=.."), loc: mk_loc($loc($2)) },
+      op = { name: Ident(name = ">=.."), loc: mk_loc($loc($2)) },
       lhs = $1,
       rhs = $3,
       loc = mk_loc($sloc)
@@ -1826,7 +1826,7 @@ range_expr -> Expr
   }
   | prefix_expr ">.." prefix_expr {
     Infix(
-      op = Var::{ name: Ident(name = ">.."), loc: mk_loc($loc($2)) },
+      op = { name: Ident(name = ">.."), loc: mk_loc($loc($2)) },
       lhs = $1,
       rhs = $3,
       loc = mk_loc($sloc)
@@ -1858,15 +1858,15 @@ left_value -> LeftValue
 
 constr -> Constructor
   : UIDENT {
-    Constructor::{
-      name: ConstrName::{ name: $1, loc: mk_loc($loc($1)) },
+    {
+      name: { name: $1, loc: mk_loc($loc($1)) },
       extra_info: NoExtraInfo,
       loc: mk_loc($sloc)
     }
   }
   | PACKAGE_NAME DOT_UIDENT {
-    Constructor::{
-      name: ConstrName::{ name: $2, loc: mk_loc($loc($2)) },
+    {
+      name: { name: $2, loc: mk_loc($loc($2)) },
       extra_info: Package($1),
       loc: mk_loc($sloc)
     }
@@ -1894,7 +1894,7 @@ non_empty_tuple_elems -> List[Expr]
 
 non_empty_tuple_elems_with_prefix -> List[Expr]
   : binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
-  | "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
+  | "_" "," non_empty_tuple_elems_with_prefix { $3.add(Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
   | non_empty_tuple_elems { $1 }
   ;
 
@@ -1902,7 +1902,7 @@ tuple_expr -> Expr
   : "(" arrow_fn_prefix_no_constraint {
     let es = $2.map(@syntax.arrow_fn_param_to_expr)
     match es {
-      @list.More(expr, tail=Empty) => {
+      More(expr, tail=Empty) => {
         match expr {
           Constraint(..) => expr
           _ => Group(expr~, group = Paren, loc = mk_loc($sloc))
@@ -1926,7 +1926,7 @@ tuple_expr -> Expr
 anony_fn -> Func
   : is_async "fn" parameters func_return_type block_expr {
     let (return_type, error_type, nocancel_) = $4
-    Func::{
+    {
       parameters : $3,
       params_loc : mk_loc($loc($3)),
       body : $5,
@@ -1974,7 +1974,7 @@ simple_expr -> Expr
   | anony_fn { Function(func = $1, loc = mk_loc($sloc)) }
   | atomic_expr { $1 }
   | "_" %prec prec_lower_than_arrow_fn { Hole(loc = mk_loc($sloc), kind = Incomplete) }
-  | qual_ident_simple_expr { @syntax.make_ident_expr(loc = mk_loc($sloc), Var::{ name: $1, loc: mk_loc($sloc) }) }
+  | qual_ident_simple_expr { @syntax.make_ident_expr(loc = mk_loc($sloc), { name: $1, loc: mk_loc($sloc) }) }
   | constr { Constr(constr = $1, loc = mk_loc($sloc)) }
   | simple_expr "(" list_commas(argument) ")" {
     Apply(func = $1, args = $3, loc = mk_loc($sloc))
@@ -2064,7 +2064,7 @@ simple_expr -> Expr
   ;
 
 %inline label -> Label
-  : lident_string { Label::{ name: $1, loc: mk_loc($sloc) } }
+  : lident_string { { name: $1, loc: mk_loc($sloc) } }
   ;
 
 %inline accessor -> Accessor
@@ -2079,7 +2079,7 @@ simple_expr -> Expr
   ;
 
 %inline binder -> Binder
-  : lident_string { Binder::{ name: $1, loc: mk_loc($sloc) } }
+  : lident_string { { name: $1, loc: mk_loc($sloc) } }
   ;
 
 tvar_binder -> TypeVarBinder
@@ -2101,12 +2101,12 @@ tvar_constraint -> TypeVarConstraint
   ;
 
 %inline var -> Var
-  : qual_ident { Var::{ name: $1, loc: mk_loc($sloc) } }
+  : qual_ident { { name: $1, loc: mk_loc($sloc) } }
   ;
 
 type_name -> TypeName
-  : qual_ident_ty { TypeName::{ name: $1, is_object: false, loc: mk_loc($sloc) } }
-  | "&" qual_ident_ty { TypeName::{ name: $2, is_object: true, loc: mk_loc($sloc) } }
+  : qual_ident_ty { { name: $1, is_object: false, loc: mk_loc($sloc) } }
+  | "&" qual_ident_ty { { name: $2, is_object: true, loc: mk_loc($sloc) } }
   ;
 
 multiline_string -> MultilineStringElem
@@ -2155,17 +2155,17 @@ map_syntax_key -> Constant
   ;
 
 %inline infixop -> Var
-  : INFIX4 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
-  | INFIX3 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
-  | INFIX2 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
-  | INFIX1 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
-  | PLUS { Var::{ name: Ident(name = "+"), loc: mk_loc($sloc) } }
-  | MINUS { Var::{ name: Ident(name = "-"), loc: mk_loc($sloc) } }
-  | AMPER { Var::{ name: Ident(name = "&"), loc: mk_loc($sloc) } }
-  | CARET { Var::{ name: Ident(name = "^"), loc: mk_loc($sloc) } }
-  | BAR { Var::{ name: Ident(name = "|"), loc: mk_loc($sloc) } }
-  | AMPERAMPER { Var::{ name: Ident(name = "&&"), loc: mk_loc($sloc) } }
-  | BARBAR { Var::{ name: Ident(name = "||"), loc: mk_loc($sloc) } }
+  : INFIX4 { { name: Ident(name = $1), loc: mk_loc($sloc) } }
+  | INFIX3 { { name: Ident(name = $1), loc: mk_loc($sloc) } }
+  | INFIX2 { { name: Ident(name = $1), loc: mk_loc($sloc) } }
+  | INFIX1 { { name: Ident(name = $1), loc: mk_loc($sloc) } }
+  | PLUS { { name: Ident(name = "+"), loc: mk_loc($sloc) } }
+  | MINUS { { name: Ident(name = "-"), loc: mk_loc($sloc) } }
+  | AMPER { { name: Ident(name = "&"), loc: mk_loc($sloc) } }
+  | CARET { { name: Ident(name = "^"), loc: mk_loc($sloc) } }
+  | BAR { { name: Ident(name = "|"), loc: mk_loc($sloc) } }
+  | AMPERAMPER { { name: Ident(name = "&&"), loc: mk_loc($sloc) } }
+  | BARBAR { { name: Ident(name = "||"), loc: mk_loc($sloc) } }
   ;
 
 optional_question -> Location?
@@ -2181,7 +2181,7 @@ argument -> Argument
     }
     { value: $4, kind: arg_kind }
   }
-  | expr { Argument::{ value: $1, kind: Positional } }
+  | expr { { value: $1, kind: Positional } }
   | POST_LABEL {
     let label_loc = mk_loc($loc($1))
     let label = Label::{ name: $1, loc: label_loc }
@@ -2203,7 +2203,7 @@ spreadable_elem -> SpreadableElem
 
 map_expr_elem -> MapExprElem
   : map_syntax_key ":" expr {
-    MapExprElem::{
+    {
       key: $1,
       expr: $3,
       key_loc: mk_loc($loc($1)),
@@ -2321,7 +2321,7 @@ error_annotation -> ErrorType
   | "noraise" { Noraise(loc = mk_loc($sloc)) }
   | "raise" "?" {
     let fake_error = Type::Name(
-      constr_id = ConstrId::{ id: Ident(name = "Error"), loc: mk_loc($sloc) },
+      constr_id = { id: Ident(name = "Error"), loc: mk_loc($sloc) },
       tys = @list.empty(),
       loc = mk_loc($sloc)
     )
@@ -2364,7 +2364,7 @@ func_return_type -> (Type?, ErrorType, Location?)
 error_type -> Type
   : qual_ident_ty {
     Name(
-      constr_id = ConstrId::{ id: $1, loc: mk_loc($sloc) },
+      constr_id = { id: $1, loc: mk_loc($sloc) },
       tys = @list.empty(),
       loc = mk_loc($sloc)
     )
@@ -2378,12 +2378,12 @@ simple_type -> Type
   | "(" type_ ")" { $2 }
   | qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
     Name(
-      constr_id = ConstrId::{ id: $1, loc: mk_loc($loc($1)) },
+      constr_id = { id: $1, loc: mk_loc($loc($1)) },
       tys = $2,
       loc = mk_loc($sloc)
     )
   }
-  | "&" qual_ident_ty { Object(ConstrId::{ id: $2, loc: mk_loc($loc($2)) }) }
+  | "&" qual_ident_ty { Object({ id: $2, loc: mk_loc($loc($2)) }) }
   | "_" { Any(loc = mk_loc($sloc)) }
   ;
 
