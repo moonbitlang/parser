@@ -7,12 +7,8 @@ impl MapVisitor for Identity
 ///|
 test "RegexPattern recovery marker" {
   let expr = Expr::RegexMatch(
-    expr=Expr::Unit(loc=dummy_loc, faked=false),
-    pat=RegexPattern::Literal(
-      lit="missing-prefix",
-      recovered_=true,
-      loc=dummy_loc,
-    ),
+    expr=Unit(loc=dummy_loc, faked=false),
+    pat=Literal(lit="missing-prefix", recovered_=true, loc=dummy_loc),
     bindings=List([]),
     loc=dummy_loc,
   )
@@ -42,7 +38,7 @@ test "LexScanCase arrow location survives identity mapping" {
   let case_ = LexScanCase::{
     pat: Wildcard(loc=dummy_loc),
     bindings: List([]),
-    body: Expr::Unit(loc=dummy_loc, faked=false),
+    body: Unit(loc=dummy_loc, faked=false),
     arrow_loc,
   }
   let mapped = MapVisitor::visit_LexScanCase(

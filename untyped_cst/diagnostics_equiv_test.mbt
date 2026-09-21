@@ -11,7 +11,7 @@ fn diagnostics_equiv_reports_from_view(
 
 ///|
 fn diagnostics_equiv_reports_json(reports : Array[@basic.Report]) -> Json {
-  @basic.show_loc.protect(@basic.Json, fn() { reports.to_json() })
+  @basic.show_loc.protect(Json, fn() { reports.to_json() })
 }
 
 ///|
@@ -52,7 +52,7 @@ fn assert_structure_acceptance(
   let (_, hand_reports) = @parser.parse_string(
     source,
     name="diagnostics_equiv.mbt",
-    parser=@parser.Handrolled,
+    parser=Handrolled,
   )
   let cst = @untyped_cst.parse_structure(source, name="diagnostics_equiv.mbt")
   let cst_reports = diagnostics_equiv_reports_from_view(cst.diagnostics_view())

@@ -19,12 +19,8 @@ let dummy_string_literal : @tokens.StringLiteral = "test_string"
 ///|
 test "regex recovery marker is omitted from JSON" {
   let expr = @syntax.Expr::RegexMatch(
-    expr=@syntax.Expr::Unit(loc=dummy_loc, faked=false),
-    pat=@syntax.RegexPattern::Literal(
-      lit="pattern",
-      recovered_=true,
-      loc=dummy_loc,
-    ),
+    expr=Unit(loc=dummy_loc, faked=false),
+    pat=Literal(lit="pattern", recovered_=true, loc=dummy_loc),
     bindings=List([]),
     loc=dummy_loc,
   )

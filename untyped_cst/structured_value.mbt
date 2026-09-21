@@ -64,7 +64,7 @@ fn CstNode::bool_marker_value(self : CstNode, expected : NodeKind) -> Bool? {
 
 ///|
 fn CstNode::with_kind(self : CstNode, kind : NodeKind) -> CstNode {
-  CstNode::{
+  {
     kind,
     loc: self.loc,
     source_span: self.source_span,
@@ -363,32 +363,19 @@ fn lower_constant_from_node(node : CstNode) -> @syntax.Constant? {
   }
   guard direct is Some(constant) else { return None }
   match constant.kind {
-    Constant_Bool =>
-      Some(@syntax.Constant::Bool(constant.bool_payload().unwrap_or(false)))
-    Constant_Byte =>
-      Some(@syntax.Constant::Byte(constant.string_payload().unwrap_or("")))
-    Constant_Bytes =>
-      Some(@syntax.Constant::Bytes(constant.string_payload().unwrap_or("")))
-    Constant_Char =>
-      Some(@syntax.Constant::Char(constant.string_payload().unwrap_or("")))
-    Constant_Int =>
-      Some(@syntax.Constant::Int(constant.string_payload().unwrap_or("")))
-    Constant_Int64 =>
-      Some(@syntax.Constant::Int64(constant.string_payload().unwrap_or("")))
-    Constant_UInt =>
-      Some(@syntax.Constant::UInt(constant.string_payload().unwrap_or("")))
-    Constant_UInt64 =>
-      Some(@syntax.Constant::UInt64(constant.string_payload().unwrap_or("")))
-    Constant_Float =>
-      Some(@syntax.Constant::Float(constant.string_payload().unwrap_or("")))
-    Constant_Double =>
-      Some(@syntax.Constant::Double(constant.string_payload().unwrap_or("")))
-    Constant_String =>
-      Some(@syntax.Constant::String(constant.string_payload().unwrap_or("")))
-    Constant_Regex =>
-      Some(@syntax.Constant::Regex(constant.string_payload().unwrap_or("")))
-    Constant_BigInt =>
-      Some(@syntax.Constant::BigInt(constant.string_payload().unwrap_or("")))
+    Constant_Bool => Some(Bool(constant.bool_payload().unwrap_or(false)))
+    Constant_Byte => Some(Byte(constant.string_payload().unwrap_or("")))
+    Constant_Bytes => Some(Bytes(constant.string_payload().unwrap_or("")))
+    Constant_Char => Some(Char(constant.string_payload().unwrap_or("")))
+    Constant_Int => Some(Int(constant.string_payload().unwrap_or("")))
+    Constant_Int64 => Some(Int64(constant.string_payload().unwrap_or("")))
+    Constant_UInt => Some(UInt(constant.string_payload().unwrap_or("")))
+    Constant_UInt64 => Some(UInt64(constant.string_payload().unwrap_or("")))
+    Constant_Float => Some(Float(constant.string_payload().unwrap_or("")))
+    Constant_Double => Some(Double(constant.string_payload().unwrap_or("")))
+    Constant_String => Some(String(constant.string_payload().unwrap_or("")))
+    Constant_Regex => Some(Regex(constant.string_payload().unwrap_or("")))
+    Constant_BigInt => Some(BigInt(constant.string_payload().unwrap_or("")))
     _ => None
   }
 }
@@ -424,18 +411,10 @@ fn lower_attribute_node(node : CstNode) -> @attribute.Attribute? {
 fn lower_interp_segment_value(node : CstNode) -> @syntax.InterpElem? {
   match node.kind {
     InterpSegment_Literal =>
-      Some(
-        @syntax.InterpElem::Literal(
-          repr=node.string_payload().unwrap_or(""),
-          loc=node.loc,
-        ),
-      )
+      Some(Literal(repr=node.string_payload().unwrap_or(""), loc=node.loc))
     InterpSegment_Source =>
       Some(
-        @syntax.InterpElem::Source(@tokens.InterpSource::{
-          source: node.string_payload().unwrap_or(""),
-          loc: node.loc,
-        }),
+        Source({ source: node.string_payload().unwrap_or(""), loc: node.loc, }),
       )
     _ => None
   }

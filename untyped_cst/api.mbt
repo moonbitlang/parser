@@ -1,6 +1,6 @@
 ///|
 fn initial_position(name : String) -> Position {
-  Position::{ fname: name, lnum: 1, bol: 0, cnum: 0, }
+  { fname: name, lnum: 1, bol: 0, cnum: 0, }
 }
 
 ///|

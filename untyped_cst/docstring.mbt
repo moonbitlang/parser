@@ -52,17 +52,14 @@ fn attach_docstrings_to_impls(
       .map(make_doc)
       .unwrap_or(@syntax.DocString::empty())
     match toplevel {
-      @syntax.TopTypeDef(td) => {
+      TopTypeDef(td) => {
         td.doc = doc
         last_pos = loc.start
         match td.components {
-          @syntax.Abstract
-          | @syntax.Alias(_)
-          | @syntax.Error(@syntax.NoPayload)
-          | @syntax.TupleStruct(_) => ()
-          @syntax.Error(@syntax.EnumPayload(constrs))
-          | @syntax.Variant(constrs)
-          | @syntax.ExtensibleEnum(constrs) =>
+          Abstract | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
+          Error(EnumPayload(constrs))
+          | Variant(constrs)
+          | ExtensibleEnum(constrs) =>
             constrs.each(constr => {
               let previous = search_docstrings(last_pos, constr.loc)
                 .map(make_doc)
@@ -70,7 +67,7 @@ fn attach_docstrings_to_impls(
               constr.doc = previous
               last_pos = constr.loc.end
             })
-          @syntax.ExtendEnum(constructors=constrs, ..) =>
+          ExtendEnum(constructors=constrs, ..) =>
             constrs.each(constr => {
               let previous = search_docstrings(last_pos, constr.loc)
                 .map(make_doc)
@@ -78,7 +75,7 @@ fn attach_docstrings_to_impls(
               constr.doc = previous
               last_pos = constr.loc.end
             })
-          @syntax.Record(fields~) =>
+          Record(fields~) =>
             fields.each(field => {
               let previous = search_docstrings(last_pos, field.loc)
                 .map(make_doc)
@@ -88,15 +85,15 @@ fn attach_docstrings_to_impls(
             })
         }
       }
-      @syntax.TopFuncDef(fun_decl~, ..) => fun_decl.doc = doc
-      @syntax.TopLetDef(..) as ld => ld.doc = doc
-      @syntax.TopExpr(..) => ()
-      @syntax.TopImplRelation(..) as imp => imp.doc = doc
-      @syntax.TopTest(..) as test_ => test_.doc = doc
-      @syntax.TopTrait(decl) => decl.doc = doc
-      @syntax.TopView(..) as view => view.doc = doc
-      @syntax.TopImpl(..) as imp => imp.doc = doc
-      @syntax.TopUsing(..) as using_stmt => using_stmt.doc = doc
+      TopFuncDef(fun_decl~, ..) => fun_decl.doc = doc
+      TopLetDef(..) as ld => ld.doc = doc
+      TopExpr(..) => ()
+      TopImplRelation(..) as imp => imp.doc = doc
+      TopTest(..) as test_ => test_.doc = doc
+      TopTrait(decl) => decl.doc = doc
+      TopView(..) as view => view.doc = doc
+      TopImpl(..) as imp => imp.doc = doc
+      TopUsing(..) as using_stmt => using_stmt.doc = doc
       TopExtend(..) as extend_stmt => extend_stmt.doc = doc
       TopImport(..) as import_stmt => import_stmt.doc = doc
     }

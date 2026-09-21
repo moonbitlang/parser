@@ -47,12 +47,9 @@ fn assert_ast_equiv(
 ) -> Unit raise {
   let (hand_impls, hand_reports) = @parser.parse_string(
     source,
-    parser=@parser.Handrolled,
+    parser=Handrolled,
   )
-  let (yacc_impls, yacc_reports) = @parser.parse_string(
-    source,
-    parser=@parser.MoonYacc,
-  )
+  let (yacc_impls, yacc_reports) = @parser.parse_string(source, parser=MoonYacc)
   let cst_result = @untyped_cst.parse_structure(source)
   if !(hand_reports.is_empty() && yacc_reports.is_empty()) {
     fail_parser_reports(source, hand_reports, yacc_reports)
@@ -88,11 +85,8 @@ fn assert_ast_equiv(
 
 ///|
 fn assert_all_parsers_reject(source : String) -> Unit raise {
-  let (_, hand_reports) = @parser.parse_string(
-    source,
-    parser=@parser.Handrolled,
-  )
-  let (_, yacc_reports) = @parser.parse_string(source, parser=@parser.MoonYacc)
+  let (_, hand_reports) = @parser.parse_string(source, parser=Handrolled)
+  let (_, yacc_reports) = @parser.parse_string(source, parser=MoonYacc)
   let cst_result = @untyped_cst.parse_structure(source)
   if hand_reports.is_empty() {
     fail("handrolled parser unexpectedly accepted:\n\{source}")
@@ -132,7 +126,7 @@ test "regex match RHS precedence matches across all parsers" {
 fn assert_handrolled_cst_ast_equiv(source : String) -> Unit raise {
   let (hand_impls, hand_reports) = @parser.parse_string(
     source,
-    parser=@parser.Handrolled,
+    parser=Handrolled,
   )
   let cst_result = @untyped_cst.parse_structure(source)
   if !hand_reports.is_empty() {
@@ -461,12 +455,12 @@ test "expression fragments lower complete statement sequences" {
     "fn helper(x) { x }",
   ).to_expr()
   @test.assert_eq(local_reports.length(), 0)
-  guard local_expr is Some(@syntax.Expr::LetFn(..)) else {
+  guard local_expr is Some(LetFn(..)) else {
     fail("expected local function expression root")
   }
   let (sequence, sequence_reports) = @untyped_cst.parse_expression("1; 2").to_expr()
   @test.assert_eq(sequence_reports.length(), 0)
-  guard sequence is Some(@syntax.Expr::Sequence(..)) else {
+  guard sequence is Some(Sequence(..)) else {
     fail("expected sequence expression root")
   }
 }
@@ -668,12 +662,8 @@ test "annotated let constraint location excludes statement syntax" {
   @test.assert_eq(lex.errors.length(), 0)
   @test.assert_eq(reports.length(), 0)
   guard expr
-    is @syntax.Expr::Let(
-      pattern=@syntax.Pattern::Constraint(
-        pat=inner_pattern,
-        ty~,
-        loc=constraint_loc
-      ),
+    is Let(
+      pattern=Constraint(pat=inner_pattern, ty~, loc=constraint_loc),
       expr=rhs,
       ..
     ) else {
@@ -709,7 +699,7 @@ test "structure docstring AST conversion preserves docstrings" {
   @test.assert_eq(reports.length(), 0)
   let (expected, expected_reports) = @parser.parse_string(
     source,
-    parser=@parser.Handrolled,
+    parser=Handrolled,
   )
   @test.assert_eq(expected_reports.length(), 0)
   @test.assert_eq(impls_json(impls), impls_json(expected))

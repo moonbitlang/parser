@@ -54,7 +54,7 @@ fn first_node(
 
 ///|
 fn is_comment(kind : @untyped_cst.NodeKind) -> Bool {
-  kind is @untyped_cst.Comment_Content
+  kind is Comment_Content
 }
 
 ///|
@@ -63,7 +63,7 @@ fn state_leaf_payload(node : @untyped_cst.CstNode) -> @untyped_cst.NodePayload? 
     let (label, child) = entry
     if label is Some("payload") {
       match child.kind {
-        @untyped_cst.Leaf(payload) => return Some(payload)
+        Leaf(payload) => return Some(payload)
         _ => ()
       }
     }
@@ -73,8 +73,8 @@ fn state_leaf_payload(node : @untyped_cst.CstNode) -> @untyped_cst.NodePayload? 
 
 ///|
 fn is_asi_semi(node : @untyped_cst.CstNode) -> Bool {
-  if node.kind is @untyped_cst.Syntax_Separator {
-    state_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(false))
+  if node.kind is Syntax_Separator {
+    state_leaf_payload(node) is Some(Bool(false))
   } else {
     false
   }
@@ -82,15 +82,14 @@ fn is_asi_semi(node : @untyped_cst.CstNode) -> Bool {
 
 ///|
 fn is_any_semi(node : @untyped_cst.CstNode) -> Bool {
-  node.kind is @untyped_cst.Syntax_Separator &&
-  state_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
+  node.kind is Syntax_Separator && state_leaf_payload(node) is Some(Bool(true))
 }
 
 ///|
 fn is_lident(name : String) -> (@untyped_cst.CstNode) -> Bool {
   fn(node) {
-    node.kind is @untyped_cst.Syntax_Identifier &&
-    state_leaf_payload(node) is Some(@untyped_cst.NodePayload::String(id)) &&
+    node.kind is Syntax_Identifier &&
+    state_leaf_payload(node) is Some(String(id)) &&
     id == name
   }
 }

@@ -2,8 +2,8 @@
 test "node getters expose immutable shape" {
   let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
   let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 3, }
-  let child = token_node(Token::LIDENT("x"), start, end, mk_span(0, 1))
-  let root = node(NodeKind::Impls, mk_loc(start, end), mk_span(0, 3), [
+  let child = token_node(LIDENT("x"), start, end, mk_span(0, 1))
+  let root = node(Impls, mk_loc(start, end), mk_span(0, 3), [
     (Some("item"), child),
   ])
   match root.kind {
@@ -23,7 +23,7 @@ test "node getters expose immutable shape" {
             fail("expected trailing payload Leaf")
           }
           match leaf.kind {
-            Leaf(NodePayload::String(name)) => @test.assert_eq(name, "x")
+            Leaf(String(name)) => @test.assert_eq(name, "x")
             _ => fail("expected identifier Leaf")
           }
           @test.assert_eq(leaf.loc, node.loc)
@@ -41,135 +41,135 @@ test "node getters expose immutable shape" {
 test "all non-newline lexer token kinds map to dedicated syntax kinds" {
   let token_kinds = [
     TokenKind::TK_CHAR,
-    TokenKind::TK_INT,
-    TokenKind::TK_BYTE,
-    TokenKind::TK_BYTES,
-    TokenKind::TK_FLOAT,
-    TokenKind::TK_DOUBLE,
-    TokenKind::TK_STRING,
-    TokenKind::TK_MULTILINE_STRING,
-    TokenKind::TK_MULTILINE_INTERP,
-    TokenKind::TK_INTERP,
-    TokenKind::TK_BYTES_INTERP,
-    TokenKind::TK_REGEX_LITERAL,
-    TokenKind::TK_REGEX_INTERP,
-    TokenKind::TK_ATTRIBUTE,
-    TokenKind::TK_LIDENT,
-    TokenKind::TK_UIDENT,
-    TokenKind::TK_POST_LABEL,
-    TokenKind::TK_COMMENT,
-    TokenKind::TK_INFIX1,
-    TokenKind::TK_INFIX2,
-    TokenKind::TK_INFIX3,
-    TokenKind::TK_INFIX4,
-    TokenKind::TK_AUGMENTED_ASSIGNMENT,
-    TokenKind::TK_PLUS_EQUAL,
-    TokenKind::TK_EOF,
-    TokenKind::TK_FALSE,
-    TokenKind::TK_TRUE,
-    TokenKind::TK_PUB,
-    TokenKind::TK_PRIV,
-    TokenKind::TK_READONLY,
-    TokenKind::TK_IMPORT,
-    TokenKind::TK_EXTERN,
-    TokenKind::TK_BREAK,
-    TokenKind::TK_CONTINUE,
-    TokenKind::TK_STRUCT,
-    TokenKind::TK_ENUM,
-    TokenKind::TK_TRAIT,
-    TokenKind::TK_DERIVE,
-    TokenKind::TK_IMPL,
-    TokenKind::TK_WITH,
-    TokenKind::TK_RAISE,
-    TokenKind::TK_THROW,
-    TokenKind::TK_TRY,
-    TokenKind::TK_CATCH,
-    TokenKind::TK_ASYNC,
-    TokenKind::TK_TYPEALIAS,
-    TokenKind::TK_TRAITALIAS,
-    TokenKind::TK_FNALIAS,
-    TokenKind::TK_EQUAL,
-    TokenKind::TK_EQ_TILDE,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_COMMA,
-    TokenKind::TK_MINUS,
-    TokenKind::TK_QUESTION,
-    TokenKind::TK_EXCLAMATION,
-    TokenKind::TK_DOT_LIDENT,
-    TokenKind::TK_DOT_UIDENT,
-    TokenKind::TK_DOT_INT,
-    TokenKind::TK_DOT_LPAREN,
-    TokenKind::TK_COLONCOLON,
-    TokenKind::TK_COLON,
-    TokenKind::TK_SEMI,
-    TokenKind::TK_LBRACKET,
-    TokenKind::TK_LBRACKET_BAR,
-    TokenKind::TK_PLUS,
-    TokenKind::TK_RBRACKET,
-    TokenKind::TK_BAR_RBRACKET,
-    TokenKind::TK_UNDERSCORE,
-    TokenKind::TK_BAR,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_AMPERAMPER,
-    TokenKind::TK_AMPER,
-    TokenKind::TK_CARET,
-    TokenKind::TK_BARBAR,
-    TokenKind::TK_PACKAGE_NAME,
-    TokenKind::TK_AS,
-    TokenKind::TK_PIPE,
-    TokenKind::TK_PIPE_LEFT,
-    TokenKind::TK_LT_PLUS,
-    TokenKind::TK_LT_QUESTION,
-    TokenKind::TK_ELSE,
-    TokenKind::TK_FN,
-    TokenKind::TK_IF,
-    TokenKind::TK_LET,
-    TokenKind::TK_PROOF_ASSERT,
-    TokenKind::TK_PROOF_LET,
-    TokenKind::TK_CONST,
-    TokenKind::TK_MATCH,
-    TokenKind::TK_USING,
-    TokenKind::TK_MUTABLE,
-    TokenKind::TK_TYPE,
-    TokenKind::TK_FAT_ARROW,
-    TokenKind::TK_THIN_ARROW,
-    TokenKind::TK_WHILE,
-    TokenKind::TK_RETURN,
-    TokenKind::TK_DOTDOT,
-    TokenKind::TK_RANGE_INCLUSIVE,
-    TokenKind::TK_RANGE_LT_INCLUSIVE,
-    TokenKind::TK_RANGE_EXCLUSIVE,
-    TokenKind::TK_RANGE_INCLUSIVE_REV,
-    TokenKind::TK_RANGE_EXCLUSIVE_REV,
-    TokenKind::TK_ELLIPSIS,
-    TokenKind::TK_TEST,
-    TokenKind::TK_LOOP,
-    TokenKind::TK_GUARD,
-    TokenKind::TK_DEFER,
-    TokenKind::TK_FOR,
-    TokenKind::TK_IN,
-    TokenKind::TK_IS,
-    TokenKind::TK_SUBERROR,
-    TokenKind::TK_AND,
-    TokenKind::TK_FORALL,
-    TokenKind::TK_EXISTS,
-    TokenKind::TK_IMPLIES,
-    TokenKind::TK_LETREC,
-    TokenKind::TK_ENUMVIEW,
-    TokenKind::TK_EXTENUM,
-    TokenKind::TK_DECLARE,
-    TokenKind::TK_NORAISE,
-    TokenKind::TK_NOBREAK,
-    TokenKind::TK_WHERE,
-    TokenKind::TK_TRY_QUESTION,
-    TokenKind::TK_TRY_EXCLAMATION,
-    TokenKind::TK_LEXMATCH,
-    TokenKind::TK_LEXMATCH_QUESTION,
-    TokenKind::TK_LEXSCAN,
-    TokenKind::TK_EXTEND,
-    TokenKind::TK_PACKAGE,
+    TK_INT,
+    TK_BYTE,
+    TK_BYTES,
+    TK_FLOAT,
+    TK_DOUBLE,
+    TK_STRING,
+    TK_MULTILINE_STRING,
+    TK_MULTILINE_INTERP,
+    TK_INTERP,
+    TK_BYTES_INTERP,
+    TK_REGEX_LITERAL,
+    TK_REGEX_INTERP,
+    TK_ATTRIBUTE,
+    TK_LIDENT,
+    TK_UIDENT,
+    TK_POST_LABEL,
+    TK_COMMENT,
+    TK_INFIX1,
+    TK_INFIX2,
+    TK_INFIX3,
+    TK_INFIX4,
+    TK_AUGMENTED_ASSIGNMENT,
+    TK_PLUS_EQUAL,
+    TK_EOF,
+    TK_FALSE,
+    TK_TRUE,
+    TK_PUB,
+    TK_PRIV,
+    TK_READONLY,
+    TK_IMPORT,
+    TK_EXTERN,
+    TK_BREAK,
+    TK_CONTINUE,
+    TK_STRUCT,
+    TK_ENUM,
+    TK_TRAIT,
+    TK_DERIVE,
+    TK_IMPL,
+    TK_WITH,
+    TK_RAISE,
+    TK_THROW,
+    TK_TRY,
+    TK_CATCH,
+    TK_ASYNC,
+    TK_TYPEALIAS,
+    TK_TRAITALIAS,
+    TK_FNALIAS,
+    TK_EQUAL,
+    TK_EQ_TILDE,
+    TK_LPAREN,
+    TK_RPAREN,
+    TK_COMMA,
+    TK_MINUS,
+    TK_QUESTION,
+    TK_EXCLAMATION,
+    TK_DOT_LIDENT,
+    TK_DOT_UIDENT,
+    TK_DOT_INT,
+    TK_DOT_LPAREN,
+    TK_COLONCOLON,
+    TK_COLON,
+    TK_SEMI,
+    TK_LBRACKET,
+    TK_LBRACKET_BAR,
+    TK_PLUS,
+    TK_RBRACKET,
+    TK_BAR_RBRACKET,
+    TK_UNDERSCORE,
+    TK_BAR,
+    TK_LBRACE,
+    TK_RBRACE,
+    TK_AMPERAMPER,
+    TK_AMPER,
+    TK_CARET,
+    TK_BARBAR,
+    TK_PACKAGE_NAME,
+    TK_AS,
+    TK_PIPE,
+    TK_PIPE_LEFT,
+    TK_LT_PLUS,
+    TK_LT_QUESTION,
+    TK_ELSE,
+    TK_FN,
+    TK_IF,
+    TK_LET,
+    TK_PROOF_ASSERT,
+    TK_PROOF_LET,
+    TK_CONST,
+    TK_MATCH,
+    TK_USING,
+    TK_MUTABLE,
+    TK_TYPE,
+    TK_FAT_ARROW,
+    TK_THIN_ARROW,
+    TK_WHILE,
+    TK_RETURN,
+    TK_DOTDOT,
+    TK_RANGE_INCLUSIVE,
+    TK_RANGE_LT_INCLUSIVE,
+    TK_RANGE_EXCLUSIVE,
+    TK_RANGE_INCLUSIVE_REV,
+    TK_RANGE_EXCLUSIVE_REV,
+    TK_ELLIPSIS,
+    TK_TEST,
+    TK_LOOP,
+    TK_GUARD,
+    TK_DEFER,
+    TK_FOR,
+    TK_IN,
+    TK_IS,
+    TK_SUBERROR,
+    TK_AND,
+    TK_FORALL,
+    TK_EXISTS,
+    TK_IMPLIES,
+    TK_LETREC,
+    TK_ENUMVIEW,
+    TK_EXTENUM,
+    TK_DECLARE,
+    TK_NORAISE,
+    TK_NOBREAK,
+    TK_WHERE,
+    TK_TRY_QUESTION,
+    TK_TRY_EXCLAMATION,
+    TK_LEXMATCH,
+    TK_LEXMATCH_QUESTION,
+    TK_LEXSCAN,
+    TK_EXTEND,
+    TK_PACKAGE,
   ]
   @test.assert_eq(token_kinds.length(), 130)
   for i, token_kind in token_kinds {
@@ -180,45 +180,24 @@ test "all non-newline lexer token kinds map to dedicated syntax kinds" {
       @test.assert_eq(token_kind == token_kinds[j], false)
     }
   }
-  @test.assert_eq(
-    syntax_kind_from_token_kind(TokenKind::TK_LIDENT),
-    Syntax_Identifier,
-  )
-  @test.assert_eq(
-    syntax_kind_from_token_kind(TokenKind::TK_POST_LABEL),
-    Syntax_Label,
-  )
-  @test.assert_eq(
-    syntax_kind_from_token_kind(TokenKind::TK_DOT_INT),
-    Syntax_Accessor,
-  )
-  @test.assert_eq(
-    syntax_kind_from_token_kind(TokenKind::TK_READONLY),
-    Syntax_Operator,
-  )
-  @test.assert_eq(
-    syntax_kind_from_token_kind(TokenKind::TK_EXTEND),
-    Syntax_Operator,
-  )
-  @test.assert_eq(
-    syntax_kind_from_token_kind(TokenKind::TK_PACKAGE),
-    Syntax_Keyword,
-  )
+  @test.assert_eq(syntax_kind_from_token_kind(TK_LIDENT), Syntax_Identifier)
+  @test.assert_eq(syntax_kind_from_token_kind(TK_POST_LABEL), Syntax_Label)
+  @test.assert_eq(syntax_kind_from_token_kind(TK_DOT_INT), Syntax_Accessor)
+  @test.assert_eq(syntax_kind_from_token_kind(TK_READONLY), Syntax_Operator)
+  @test.assert_eq(syntax_kind_from_token_kind(TK_EXTEND), Syntax_Operator)
+  @test.assert_eq(syntax_kind_from_token_kind(TK_PACKAGE), Syntax_Keyword)
 }
 
 ///|
 test "recovered newline token kind falls back to unexpected syntax" {
-  @test.assert_eq(
-    syntax_kind_from_token_kind(TokenKind::TK_NEWLINE),
-    Syntax_Unexpected,
-  )
+  @test.assert_eq(syntax_kind_from_token_kind(TK_NEWLINE), Syntax_Unexpected)
 }
 
 ///|
 test "node test json is stable" {
   let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
-  let root = node(NodeKind::Impls, empty_loc(pos), empty_span(0), [
-    (Some("missing"), missing_node(TokenKind::TK_EOF, pos, 0)),
+  let root = node(Impls, empty_loc(pos), empty_span(0), [
+    (Some("missing"), missing_node(TK_EOF, pos, 0)),
   ])
   json_inspect(root.to_test_json(), content={
     "kind": "Impls",
@@ -241,7 +220,7 @@ test "node test json is stable" {
 ///|
 test "leaf node test json exposes its payload" {
   let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
-  let leaf = leaf_node(NodePayload::String("x"), empty_loc(pos), empty_span(0))
+  let leaf = leaf_node(String("x"), empty_loc(pos), empty_span(0))
   json_inspect(leaf.to_test_json(), content={
     "kind": "Leaf",
     "payload": "String(\"x\")",
@@ -254,7 +233,7 @@ test "leaf node test json exposes its payload" {
 ///|
 test "implementation node test json uses concrete kind" {
   let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
-  let root = node(NodeKind::Impl_Function, empty_loc(pos), empty_span(0), [])
+  let root = node(Impl_Function, empty_loc(pos), empty_span(0), [])
   json_inspect(root.to_test_json(), content={
     "kind": "Impl_Function",
     "loc": { "start": 0, "end": 0 },
@@ -273,12 +252,7 @@ test "node text returns source span" {
     bol: 0,
     cnum: source.length(),
   }
-  let root = node(
-    NodeKind::Impls,
-    mk_loc(start, end),
-    mk_span(0, source.length()),
-    [],
-  )
+  let root = node(Impls, mk_loc(start, end), mk_span(0, source.length()), [])
   @test.assert_eq(root.text(source), source[:])
 }
 
@@ -287,7 +261,7 @@ test "token text returns token span" {
   let source = "let x = 1"
   let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4, }
   let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 5, }
-  let token = token_node(Token::LIDENT("x"), start, end, mk_span(4, 5))
+  let token = token_node(LIDENT("x"), start, end, mk_span(4, 5))
   @test.assert_eq(token.text(source), "x"[:])
 }
 
@@ -295,7 +269,7 @@ test "token text returns token span" {
 test "missing text is empty" {
   let source = "let x = 1"
   let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4, }
-  let missing = missing_node(TokenKind::TK_LIDENT, pos, 4)
+  let missing = missing_node(TK_LIDENT, pos, 4)
   @test.assert_eq(missing.text(source), ""[:])
 }
 
@@ -307,7 +281,7 @@ test "error recovery preserves token-shaped location metadata" {
   let span = mk_span(0, 1)
   let recovered = error_node(loc, span, [
     (Some("question_loc"), token_location_node(Syntax_Operator, loc, span)),
-    (Some("item"), token_node(Token::QUESTION, start, end, span)),
+    (Some("item"), token_node(QUESTION, start, end, span)),
   ])
   guard recovered.first_child_with_label("question_loc") is Some(metadata) else {
     fail("expected location metadata")
@@ -341,7 +315,7 @@ test "significant token search skips token-shaped location metadata" {
     ),
     (
       Some("token"),
-      token_node(Token::LIDENT("x"), token_start, token_end, mk_span(2, 3)),
+      token_node(LIDENT("x"), token_start, token_end, mk_span(2, 3)),
     ),
   ])
   guard parser_first_significant_token_at_or_after(root, start) is Some(found) else {

@@ -70,24 +70,24 @@ fn top_level_decl_can_start(tok : Token) -> Bool {
 fn top_level_decl_expected_tokens() -> Array[TokenKind] {
   [
     TK_IMPORT,
-    TokenKind::TK_PUB,
-    TokenKind::TK_PRIV,
-    TokenKind::TK_TYPE,
-    TokenKind::TK_SUBERROR,
-    TokenKind::TK_ASYNC,
-    TokenKind::TK_FN,
-    TokenKind::TK_STRUCT,
-    TokenKind::TK_ENUM,
-    TokenKind::TK_EXTENUM,
-    TokenKind::TK_LET,
-    TokenKind::TK_CONST,
-    TokenKind::TK_EXTERN,
-    TokenKind::TK_TEST,
-    TokenKind::TK_IMPL,
-    TokenKind::TK_TRAIT,
-    TokenKind::TK_ENUMVIEW,
-    TokenKind::TK_ATTRIBUTE,
-    TokenKind::TK_USING,
+    TK_PUB,
+    TK_PRIV,
+    TK_TYPE,
+    TK_SUBERROR,
+    TK_ASYNC,
+    TK_FN,
+    TK_STRUCT,
+    TK_ENUM,
+    TK_EXTENUM,
+    TK_LET,
+    TK_CONST,
+    TK_EXTERN,
+    TK_TEST,
+    TK_IMPL,
+    TK_TRAIT,
+    TK_ENUMVIEW,
+    TK_ATTRIBUTE,
+    TK_USING,
     TK_EXTEND,
   ]
 }
@@ -142,10 +142,9 @@ priv enum DeclExpectation {
 ///|
 fn decl_name_expectation(kind : TopItemKind) -> Array[TokenKind] {
   match kind {
-    TopItemKind::Function =>
-      [TokenKind::TK_LIDENT, TokenKind::TK_EXTEND, TokenKind::TK_PACKAGE_NAME]
-    TopItemKind::Impl => [TokenKind::TK_UIDENT, TokenKind::TK_PACKAGE_NAME]
-    _ => [TokenKind::TK_LIDENT]
+    Function => [TK_LIDENT, TK_EXTEND, TK_PACKAGE_NAME]
+    Impl => [TK_UIDENT, TK_PACKAGE_NAME]
+    _ => [TK_LIDENT]
   }
 }
 
@@ -156,24 +155,19 @@ fn decl_phase_expectation(
 ) -> DeclExpectation {
   match phase {
     AwaitingName => ExpectedTokens(decl_name_expectation(kind))
-    AwaitingLetPattern =>
-      ExpectedTokens([TokenKind::TK_LIDENT, TokenKind::TK_EXTEND])
-    AwaitingParameters => ExpectedTokens([TokenKind::TK_LPAREN])
-    AwaitingEqual => ExpectedTokens([TokenKind::TK_EQUAL])
+    AwaitingLetPattern => ExpectedTokens([TK_LIDENT, TK_EXTEND])
+    AwaitingParameters => ExpectedTokens([TK_LPAREN])
+    AwaitingEqual => ExpectedTokens([TK_EQUAL])
     AwaitingValue => ExpectedDescription("simple expression")
     AwaitingType => ExpectedDescription("type")
-    AwaitingBody | AwaitingEnumViewConstructors =>
-      ExpectedTokens([TokenKind::TK_LBRACE])
-    AwaitingImplRelation =>
-      ExpectedTokens([TokenKind::TK_FOR, TokenKind::TK_WITH])
-    AwaitingEnumViewFor => ExpectedTokens([TokenKind::TK_FOR])
-    AwaitingEnumViewWith => ExpectedTokens([TokenKind::TK_WITH])
-    AwaitingMethodName =>
-      ExpectedTokens([TokenKind::TK_LIDENT, TokenKind::TK_EXTEND])
-    AwaitingUsingName => ExpectedTokens([TokenKind::TK_PACKAGE_NAME])
-    AwaitingExternLanguage | AwaitingStub =>
-      ExpectedTokens([TokenKind::TK_STRING])
-    AwaitingExternFunction => ExpectedTokens([TokenKind::TK_FN])
+    AwaitingBody | AwaitingEnumViewConstructors => ExpectedTokens([TK_LBRACE])
+    AwaitingImplRelation => ExpectedTokens([TK_FOR, TK_WITH])
+    AwaitingEnumViewFor => ExpectedTokens([TK_FOR])
+    AwaitingEnumViewWith => ExpectedTokens([TK_WITH])
+    AwaitingMethodName => ExpectedTokens([TK_LIDENT, TK_EXTEND])
+    AwaitingUsingName => ExpectedTokens([TK_PACKAGE_NAME])
+    AwaitingExternLanguage | AwaitingStub => ExpectedTokens([TK_STRING])
+    AwaitingExternFunction => ExpectedTokens([TK_FN])
     Start | Complete => NoExpectation
   }
 }
@@ -181,14 +175,14 @@ fn decl_phase_expectation(
 ///|
 fn decl_phase_after_name(kind : TopItemKind, is_suberror : Bool) -> DeclPhase {
   match kind {
-    TopItemKind::Function => AwaitingBody
-    TopItemKind::Const => AwaitingEqual
-    TopItemKind::Type => Complete
-    TopItemKind::Struct => AwaitingBody
-    TopItemKind::Enum => if is_suberror { Complete } else { AwaitingBody }
-    TopItemKind::Trait => AwaitingBody
-    TopItemKind::Impl => AwaitingImplRelation
-    TopItemKind::EnumView => AwaitingEnumViewConstructors
+    Function => AwaitingBody
+    Const => AwaitingEqual
+    Type => Complete
+    Struct => AwaitingBody
+    Enum => if is_suberror { Complete } else { AwaitingBody }
+    Trait => AwaitingBody
+    Impl => AwaitingImplRelation
+    EnumView => AwaitingEnumViewConstructors
     Import | Extend => Complete
     _ => Complete
   }
@@ -244,15 +238,15 @@ fn decl_keyword_expects_name(tok : Token) -> Bool {
 ///|
 fn decl_keyword_kind(tok : Token) -> TopItemKind {
   match tok {
-    FN => TopItemKind::Function
-    CONST => TopItemKind::Const
-    TYPE => TopItemKind::Type
-    STRUCT => TopItemKind::Struct
-    ENUM | SUBERROR | EXTENUM => TopItemKind::Enum
-    ENUMVIEW => TopItemKind::EnumView
-    TRAIT => TopItemKind::Trait
-    IMPL => TopItemKind::Impl
-    _ => TopItemKind::Invalid
+    FN => Function
+    CONST => Const
+    TYPE => Type
+    STRUCT => Struct
+    ENUM | SUBERROR | EXTENUM => Enum
+    ENUMVIEW => EnumView
+    TRAIT => Trait
+    IMPL => Impl
+    _ => Invalid
   }
 }
 
@@ -314,15 +308,10 @@ fn parse_visibility_clause(state : ParserState) -> CstNode {
         ()
       }
     }
-    _ =>
-      push_child(
-        children,
-        Some("kw"),
-        state.missing_token_node(TokenKind::TK_PUB),
-      )
+    _ => push_child(children, Some("kw"), state.missing_token_node(TK_PUB))
   }
-  if is_pub && state.current_is(TokenKind::TK_LPAREN) {
-    push_child(children, Some("open"), state.expect_token(TokenKind::TK_LPAREN))
+  if is_pub && state.current_is(TK_LPAREN) {
+    push_child(children, Some("open"), state.expect_token(TK_LPAREN))
     match state.peek() {
       Some((LIDENT(_), _, _)) | Some((READONLY, _, _)) | Some((EXTEND, _, _)) =>
         if state.consume_any() is Some(attr) {
@@ -332,12 +321,12 @@ fn parse_visibility_clause(state : ParserState) -> CstNode {
         }
       Some((found, start, end)) => {
         state.report_expected_tokens_at(found, mk_loc(start, end), [
-          TokenKind::TK_READONLY,
-          TokenKind::TK_LIDENT,
-          TokenKind::TK_EXTEND,
+          TK_READONLY,
+          TK_LIDENT,
+          TK_EXTEND,
         ])
-        while !state.current_is(TokenKind::TK_RPAREN) &&
-              !state.current_is(TokenKind::TK_EOF) &&
+        while !state.current_is(TK_RPAREN) &&
+              !state.current_is(TK_EOF) &&
               !(state.peek() is None) {
           if state.consume_any() is Some(bad) {
             push_child(
@@ -352,21 +341,17 @@ fn parse_visibility_clause(state : ParserState) -> CstNode {
         push_child(
           children,
           Some("attr"),
-          state.missing_token_node_silent(TokenKind::TK_LIDENT),
+          state.missing_token_node_silent(TK_LIDENT),
         )
       }
       None =>
         push_child(
           children,
           Some("attr"),
-          state.missing_token_node_silent(TokenKind::TK_LIDENT),
+          state.missing_token_node_silent(TK_LIDENT),
         )
     }
-    push_child(
-      children,
-      Some("close"),
-      state.expect_token(TokenKind::TK_RPAREN),
-    )
+    push_child(children, Some("close"), state.expect_token(TK_RPAREN))
   }
   state.node_from_children(visibility_kind, children)
 }
@@ -390,14 +375,9 @@ fn is_name_token(tok : Token) -> Bool {
 ///|
 fn decl_name_token_is_valid(tok : Token, kind : TopItemKind) -> Bool {
   match kind {
-    TopItemKind::Function =>
-      tok is (LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | EXTEND)
-    TopItemKind::Type
-    | TopItemKind::Struct
-    | TopItemKind::Enum
-    | TopItemKind::EnumView
-    | TopItemKind::Trait
-    | TopItemKind::Impl => tok is (UIDENT(_) | PACKAGE_NAME(_))
+    Function => tok is (LIDENT(_) | UIDENT(_) | PACKAGE_NAME(_) | EXTEND)
+    Type | Struct | Enum | EnumView | Trait | Impl =>
+      tok is (UIDENT(_) | PACKAGE_NAME(_))
     _ => is_name_token(tok)
   }
 }
@@ -433,9 +413,9 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
         "parameter name or label",
       )
       let invalid : Array[(String?, CstNode)] = []
-      while !state.current_is(TokenKind::TK_COMMA) &&
-            !state.current_is(TokenKind::TK_RPAREN) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+      while !state.current_is(TK_COMMA) &&
+            !state.current_is(TK_RPAREN) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(invalid, Some("error"), bad)
@@ -450,7 +430,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
-  if state.current_is(TokenKind::TK_QUESTION) {
+  if state.current_is(TK_QUESTION) {
     has_question = true
     if state.consume_any() is Some(question) {
       push_child(children, Some("question"), question)
@@ -458,19 +438,14 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
     let reports_before_type = state.reports.length()
-    let ty = parse_type_arrow(state, [
-      TokenKind::TK_EQUAL,
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RPAREN,
-      TokenKind::TK_EOF,
-    ])
+    let ty = parse_type_arrow(state, [TK_EQUAL, TK_COMMA, TK_RPAREN, TK_EOF])
     push_child(
       children,
       Some("type"),
@@ -478,7 +453,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
     )
     push_children(children, state.consume_trivia())
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     has_default = true
     if !is_labelled && !has_question {
       match state.peek() {
@@ -495,11 +470,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
     } else {
       ()
     }
-    let default = parse_expr_until(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RPAREN,
-      TokenKind::TK_EOF,
-    ])
+    let default = parse_expr_until(state, [TK_COMMA, TK_RPAREN, TK_EOF])
     if !default.children.is_empty() {
       push_child(children, Some("default"), default)
     }
@@ -526,14 +497,14 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
 fn parse_parameter_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_parameter_item,
     List_ParameterList,
-    sep_kind=TokenKind::TK_COMMA,
-    follow_set=[TokenKind::TK_LBRACE],
+    sep_kind=TK_COMMA,
+    follow_set=[TK_LBRACE],
     item_expected="parameter name or label",
-    post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
+    post_item_expected=[TK_COMMA, TK_RPAREN],
   )
 }
 
@@ -658,7 +629,7 @@ fn parse_function_stub_tokens(
 ///|
 fn decl_accepts_type_params(kind : TopItemKind) -> Bool {
   match kind {
-    TopItemKind::Type | TopItemKind::Struct | TopItemKind::Enum => true
+    Type | Struct | Enum => true
     _ => false
   }
 }
@@ -676,43 +647,28 @@ fn parse_type_parameter_item(
       } else {
         ()
       }
-    _ =>
-      push_child(
-        children,
-        Some("name"),
-        state.missing_token_node(TokenKind::TK_UIDENT),
-      )
+    _ => push_child(children, Some("name"), state.missing_token_node(TK_UIDENT))
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if !allow_constraints {
-      state.report_expected_tokens([TokenKind::TK_COMMA, TokenKind::TK_RBRACKET])
+      state.report_expected_tokens([TK_COMMA, TK_RBRACKET])
     }
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
-    let ty = parse_type_until(state, [
-      TokenKind::TK_PLUS,
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RBRACKET,
-      TokenKind::TK_EOF,
-    ])
+    let ty = parse_type_until(state, [TK_PLUS, TK_COMMA, TK_RBRACKET, TK_EOF])
     if !ty.children.is_empty() {
       push_child(children, Some("type"), ty)
     }
-    while state.current_is(TokenKind::TK_PLUS) {
+    while state.current_is(TK_PLUS) {
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
       } else {
         ()
       }
-      let ty = parse_type_until(state, [
-        TokenKind::TK_PLUS,
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RBRACKET,
-        TokenKind::TK_EOF,
-      ])
+      let ty = parse_type_until(state, [TK_PLUS, TK_COMMA, TK_RBRACKET, TK_EOF])
       if !ty.children.is_empty() {
         push_child(children, Some("type"), ty)
       }
@@ -742,11 +698,11 @@ fn parse_fun_type_param_item(state : ParserState) -> CstNode {
 fn parse_type_decl_parameter_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACKET,
-    TokenKind::TK_RBRACKET,
+    TK_LBRACKET,
+    TK_RBRACKET,
     parse_type_decl_param_item,
     List_TypeDeclParameterList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
     require_nonempty=true,
   )
 }
@@ -755,33 +711,29 @@ fn parse_type_decl_parameter_list(state : ParserState) -> CstNode {
 fn parse_fun_type_parameter_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACKET,
-    TokenKind::TK_RBRACKET,
+    TK_LBRACKET,
+    TK_RBRACKET,
     parse_fun_type_param_item,
     List_TypeVarBinderList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
     require_nonempty=true,
   )
 }
 
 ///|
 fn parse_tuple_struct_type_item(state : ParserState) -> CstNode {
-  parse_type_arrow(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ])
+  parse_type_arrow(state, [TK_COMMA, TK_RPAREN, TK_EOF])
 }
 
 ///|
 fn parse_tuple_struct_type_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_tuple_struct_type_item,
     List_TupleStructTypeList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
     require_nonempty=true,
     nonempty_expected="type",
   )
@@ -790,7 +742,7 @@ fn parse_tuple_struct_type_list(state : ParserState) -> CstNode {
 ///|
 fn decl_body_uses_balanced_group(kind : TopItemKind) -> Bool {
   match kind {
-    TopItemKind::Struct | TopItemKind::Enum | TopItemKind::Trait => true
+    Struct | Enum | Trait => true
     _ => false
   }
 }
@@ -798,9 +750,9 @@ fn decl_body_uses_balanced_group(kind : TopItemKind) -> Bool {
 ///|
 fn decl_body_list_kind(kind : TopItemKind) -> NodeKind {
   match kind {
-    TopItemKind::Enum => List_ConstructorList
-    TopItemKind::Struct => List_StructFieldList
-    TopItemKind::Trait => List_TraitMethodList
+    Enum => List_ConstructorList
+    Struct => List_StructFieldList
+    Trait => List_TraitMethodList
     _ => List_BlockStatementList
   }
 }
@@ -856,12 +808,12 @@ fn parse_balanced_brace_group(
 fn parse_struct_member_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_struct_member_item,
     List_StructFieldList,
-    sep_kind=TokenKind::TK_SEMI,
-    invalid_delims=[TokenKind::TK_COMMA],
+    sep_kind=TK_SEMI,
+    invalid_delims=[TK_COMMA],
   )
 }
 
@@ -869,12 +821,12 @@ fn parse_struct_member_list(state : ParserState) -> CstNode {
 fn parse_enum_constructor_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_enum_constructor_item,
     List_ConstructorList,
-    sep_kind=TokenKind::TK_SEMI,
-    invalid_delims=[TokenKind::TK_COMMA],
+    sep_kind=TK_SEMI,
+    invalid_delims=[TK_COMMA],
   )
 }
 
@@ -882,11 +834,11 @@ fn parse_enum_constructor_list(state : ParserState) -> CstNode {
 fn parse_trait_member_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_trait_member_item,
     List_TraitMethodList,
-    sep_kind=TokenKind::TK_SEMI,
+    sep_kind=TK_SEMI,
   )
 }
 
@@ -895,7 +847,7 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
   let diagnostics_before = state.reports.length()
   let children : Array[(String?, CstNode)] = []
   let mut saw_params = false
-  while state.current_is(TokenKind::TK_ATTRIBUTE) {
+  while state.current_is(TK_ATTRIBUTE) {
     if state.consume_any() is Some(attr) {
       push_child(children, Some("attrs"), attr)
     } else {
@@ -903,7 +855,7 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
     }
     push_children(children, state.consume_trivia())
   }
-  if state.current_is(TokenKind::TK_ASYNC) {
+  if state.current_is(TK_ASYNC) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -911,13 +863,13 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
     }
     push_children(children, state.consume_trivia())
   }
-  if state.current_is(TokenKind::TK_FN) {
+  if state.current_is(TK_FN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACKET) {
+    if state.current_is(TK_LBRACKET) {
       push_child(
         children,
         Some("quantifier"),
@@ -945,38 +897,36 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
       }
     }
     _ => {
-      state.report_expected_tokens([TokenKind::TK_LIDENT, TokenKind::TK_EXTEND])
+      state.report_expected_tokens([TK_LIDENT, TK_EXTEND])
       push_child(
         children,
         Some("name"),
-        state.missing_token_node_silent(TokenKind::TK_LIDENT),
+        state.missing_token_node_silent(TK_LIDENT),
       )
     }
   }
-  if state.reports.length() == diagnostics_before &&
-    state.current_is(TokenKind::TK_LPAREN) {
+  if state.reports.length() == diagnostics_before && state.current_is(TK_LPAREN) {
     push_child(children, Some("params"), parse_trait_method_param_list(state))
     saw_params = true
   }
   if state.reports.length() == diagnostics_before &&
-    state.current_is(TokenKind::TK_THIN_ARROW) {
+    state.current_is(TK_THIN_ARROW) {
     let reports_before_return = state.reports.length()
     push_child(children, Some("clause"), parse_func_return_type(state))
     if state.reports.length() > reports_before_return &&
-      state.current_is(TokenKind::TK_LPAREN) {
-      state.report_expected_tokens([TokenKind::TK_SEMI, TokenKind::TK_RBRACE])
+      state.current_is(TK_LPAREN) {
+      state.report_expected_tokens([TK_SEMI, TK_RBRACE])
     }
   }
   if state.reports.length() == diagnostics_before &&
     (
-      state.current_is(TokenKind::TK_RAISE) ||
-      state.current_is(TokenKind::TK_NORAISE) ||
-      state.current_is(TokenKind::TK_NOCANCEL)
+      state.current_is(TK_RAISE) ||
+      state.current_is(TK_NORAISE) ||
+      state.current_is(TK_NOCANCEL)
     ) {
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
-  if state.reports.length() == diagnostics_before &&
-    state.current_is(TokenKind::TK_EQUAL) {
+  if state.reports.length() == diagnostics_before && state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
@@ -989,11 +939,11 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
         } else {
           ()
         }
-      _ => state.report_expected_tokens([TokenKind::TK_UNDERSCORE])
+      _ => state.report_expected_tokens([TK_UNDERSCORE])
     }
   }
   if state.reports.length() == diagnostics_before && !saw_params {
-    state.report_expected_tokens([TokenKind::TK_LPAREN])
+    state.report_expected_tokens([TK_LPAREN])
   }
   state
   .node_from_children(TraitMethod_Declaration, children)
@@ -1015,11 +965,11 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
 fn parse_trait_method_param_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_trait_method_param_item,
     List_TraitMethodParameterList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
 }
 
@@ -1045,7 +995,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_QUESTION) {
+  if state.current_is(TK_QUESTION) {
     if parameter_kind is Parameter_Positional {
       parameter_kind = Parameter_QuestionOptional
     }
@@ -1055,7 +1005,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
@@ -1071,26 +1021,22 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
     | Some((UNDERSCORE, _, _))
     | Some((AMPER, _, _))
     | Some((ASYNC, _, _)) =>
-      parse_type_arrow(state, [
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RPAREN,
-        TokenKind::TK_EOF,
-      ])
+      parse_type_arrow(state, [TK_COMMA, TK_RPAREN, TK_EOF])
     Some((COMMA | RPAREN | EOF, _, _)) => state.missing_type_node()
     Some((found, start, end)) => {
       state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_POST_LABEL,
-        TokenKind::TK_PACKAGE_NAME,
-        TokenKind::TK_UIDENT,
-        TokenKind::TK_LPAREN,
-        TokenKind::TK_UNDERSCORE,
-        TokenKind::TK_AMPER,
-        TokenKind::TK_ASYNC,
+        TK_POST_LABEL,
+        TK_PACKAGE_NAME,
+        TK_UIDENT,
+        TK_LPAREN,
+        TK_UNDERSCORE,
+        TK_AMPER,
+        TK_ASYNC,
       ])
       let invalid : Array[(String?, CstNode)] = []
-      while !state.current_is(TokenKind::TK_COMMA) &&
-            !state.current_is(TokenKind::TK_RPAREN) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+      while !state.current_is(TK_COMMA) &&
+            !state.current_is(TK_RPAREN) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(invalid, Some("error"), bad)
@@ -1113,7 +1059,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
 ///|
 fn parse_enum_constructor_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  while state.current_is(TokenKind::TK_ATTRIBUTE) {
+  while state.current_is(TK_ATTRIBUTE) {
     if state.consume_any() is Some(attr) {
       push_child(children, Some("attrs"), attr)
     } else {
@@ -1144,9 +1090,7 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
         ()
       }
     Some((found, start, end)) => {
-      state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_LIDENT,
-      ])
+      state.report_expected_tokens_at(found, mk_loc(start, end), [TK_LIDENT])
       if state.consume_any() is Some(bad) {
         push_child(
           children,
@@ -1158,16 +1102,12 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
       }
     }
     None =>
-      push_child(
-        children,
-        Some("name"),
-        state.missing_token_node(TokenKind::TK_LIDENT),
-      )
+      push_child(children, Some("name"), state.missing_token_node(TK_LIDENT))
   }
-  if state.current_is(TokenKind::TK_LPAREN) {
+  if state.current_is(TK_LPAREN) {
     push_child(children, Some("params"), parse_constructor_param_list(state))
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
@@ -1190,12 +1130,7 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
         } else {
           ()
         }
-      _ =>
-        push_child(
-          children,
-          Some("tag"),
-          state.missing_token_node(TokenKind::TK_INT),
-        )
+      _ => push_child(children, Some("tag"), state.missing_token_node(TK_INT))
     }
   }
   state
@@ -1207,12 +1142,12 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
 fn parse_constructor_param_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_constructor_param_item,
     List_ConstructorParameterList,
-    sep_kind=TokenKind::TK_COMMA,
-    post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
+    sep_kind=TK_COMMA,
+    post_item_expected=[TK_COMMA, TK_RPAREN],
     report_post_item_after_error=true,
   )
 }
@@ -1220,7 +1155,7 @@ fn parse_constructor_param_list(state : ParserState) -> CstNode {
 ///|
 fn parse_constructor_param_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  if state.current_is(TokenKind::TK_MUTABLE) {
+  if state.current_is(TK_MUTABLE) {
     if state.consume_any() is Some(mut_token) {
       push_child(children, Some("mut"), mut_token)
     } else {
@@ -1263,7 +1198,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
@@ -1271,11 +1206,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
     }
   }
   let reports_before_type = state.reports.length()
-  let ty = parse_type_arrow(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ])
+  let ty = parse_type_arrow(state, [TK_COMMA, TK_RPAREN, TK_EOF])
   push_child(
     children,
     Some("type"),
@@ -1356,38 +1287,30 @@ fn parse_struct_field_item(state : ParserState) -> CstNode {
     }
     Some((found, start, end)) => {
       state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_EXTEND,
+        TK_LIDENT,
+        TK_EXTEND,
       ])
       push_child(
         children,
         Some("name"),
-        state.missing_token_node_silent(TokenKind::TK_LIDENT),
+        state.missing_token_node_silent(TK_LIDENT),
       )
     }
     None =>
       push_child(
         children,
         Some("name"),
-        state.missing_token_node_with_expected(TokenKind::TK_LIDENT, [
-          TokenKind::TK_LIDENT,
-          TokenKind::TK_EXTEND,
-        ]),
+        state.missing_token_node_with_expected(TK_LIDENT, [TK_LIDENT, TK_EXTEND]),
       )
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
     let reports_before_type = state.reports.length()
-    let ty = parse_type_arrow(state, [
-      TokenKind::TK_NEWLINE,
-      TokenKind::TK_SEMI,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let ty = parse_type_arrow(state, [TK_NEWLINE, TK_SEMI, TK_RBRACE, TK_EOF])
     push_child(
       children,
       Some("type"),
@@ -1417,12 +1340,12 @@ fn parse_invalid_struct_constructor(
   match state.peek() {
     Some((found, start, end)) =>
       state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_EXTEND,
+        TK_LIDENT,
+        TK_EXTEND,
       ])
     None => ()
   }
-  if state.current_is(TokenKind::TK_ASYNC) {
+  if state.current_is(TK_ASYNC) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -1430,14 +1353,14 @@ fn parse_invalid_struct_constructor(
     }
     push_children(children, state.consume_trivia())
   }
-  if state.current_is(TokenKind::TK_FN) {
+  if state.current_is(TK_FN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_LBRACKET) {
+  if state.current_is(TK_LBRACKET) {
     push_child(
       children,
       Some("quantifier"),
@@ -1453,13 +1376,13 @@ fn parse_invalid_struct_constructor(
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_LPAREN) {
+  if state.current_is(TK_LPAREN) {
     push_child(children, Some("params"), parse_parameter_list(state))
   }
-  if state.current_is(TokenKind::TK_THIN_ARROW) ||
-    state.current_is(TokenKind::TK_RAISE) ||
-    state.current_is(TokenKind::TK_NORAISE) ||
-    state.current_is(TokenKind::TK_NOCANCEL) {
+  if state.current_is(TK_THIN_ARROW) ||
+    state.current_is(TK_RAISE) ||
+    state.current_is(TK_NORAISE) ||
+    state.current_is(TK_NOCANCEL) {
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
   if state.current_is(TK_LBRACE) {
@@ -1468,9 +1391,7 @@ fn parse_invalid_struct_constructor(
     push_child(
       children,
       Some("body"),
-      state.missing_token_node_with_expected(TokenKind::TK_LBRACE, [
-        TokenKind::TK_LBRACE,
-      ]),
+      state.missing_token_node_with_expected(TK_LBRACE, [TK_LBRACE]),
     )
   }
   state
@@ -1504,13 +1425,13 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
   let mut saw_body = false
   let mut saw_stub = false
   let mut parsed_return_clause = false
-  if state.current_is(TokenKind::TK_FN) {
+  if state.current_is(TK_FN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACKET) {
+    if state.current_is(TK_LBRACKET) {
       push_child(
         children,
         Some("quantifier"),
@@ -1537,36 +1458,34 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
       }
     }
     _ => {
-      state.report_expected_tokens([TokenKind::TK_LIDENT, TokenKind::TK_EXTEND])
+      state.report_expected_tokens([TK_LIDENT, TK_EXTEND])
       push_child(
         children,
         Some("name"),
-        state.missing_token_node_silent(TokenKind::TK_LIDENT),
+        state.missing_token_node_silent(TK_LIDENT),
       )
     }
   }
-  if state.reports.length() == diagnostics_before &&
-    state.current_is(TokenKind::TK_LPAREN) {
+  if state.reports.length() == diagnostics_before && state.current_is(TK_LPAREN) {
     push_child(children, Some("params"), parse_parameter_list(state))
     saw_params = true
   }
   if state.reports.length() == diagnostics_before &&
     (
-      state.current_is(TokenKind::TK_THIN_ARROW) ||
-      state.current_is(TokenKind::TK_RAISE) ||
-      state.current_is(TokenKind::TK_NORAISE) ||
-      state.current_is(TokenKind::TK_NOCANCEL)
+      state.current_is(TK_THIN_ARROW) ||
+      state.current_is(TK_RAISE) ||
+      state.current_is(TK_NORAISE) ||
+      state.current_is(TK_NOCANCEL)
     ) {
     parsed_return_clause = true
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
   if (state.reports.length() == diagnostics_before || parsed_return_clause) &&
-    state.current_is(TokenKind::TK_LBRACE) {
+    state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
     saw_body = true
   }
-  if state.reports.length() == diagnostics_before &&
-    state.current_is(TokenKind::TK_EQUAL) {
+  if state.reports.length() == diagnostics_before && state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
@@ -1577,14 +1496,14 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
         saw_stub = true
         parse_function_stub_tokens(state, children)
       }
-      _ => state.report_expected_tokens([TokenKind::TK_STRING])
+      _ => state.report_expected_tokens([TK_STRING])
     }
   }
   if state.reports.length() == diagnostics_before {
     if !saw_params {
-      state.report_expected_tokens([TokenKind::TK_LPAREN])
+      state.report_expected_tokens([TK_LPAREN])
     } else if !saw_body && !saw_stub {
-      state.report_expected_tokens([TokenKind::TK_LBRACE])
+      state.report_expected_tokens([TK_LBRACE])
     }
   }
   state
@@ -1614,11 +1533,11 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
 fn parse_using_name_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_using_name_item,
     List_UsingItemList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
 }
 
@@ -1666,16 +1585,16 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
       push_child(
         children,
         Some("target"),
-        state.missing_token_node_with_expected(TokenKind::TK_LIDENT, [
-          TokenKind::TK_LIDENT,
-          TokenKind::TK_EXTEND,
-          TokenKind::TK_UIDENT,
-          TokenKind::TK_TYPE,
-          TokenKind::TK_TRAIT,
+        state.missing_token_node_with_expected(TK_LIDENT, [
+          TK_LIDENT,
+          TK_EXTEND,
+          TK_UIDENT,
+          TK_TYPE,
+          TK_TRAIT,
         ]),
       )
   }
-  if state.current_is(TokenKind::TK_AS) {
+  if state.current_is(TK_AS) {
     if state.consume_any() is Some(as_token) {
       push_child(children, Some("kw"), as_token)
     } else {
@@ -1740,11 +1659,11 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
 fn parse_deriving_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_deriving_item,
     List_DerivingList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
 }
 
@@ -1774,14 +1693,9 @@ fn parse_deriving_item(state : ParserState) -> CstNode {
       } else {
         ()
       }
-    _ =>
-      push_child(
-        children,
-        Some("name"),
-        state.missing_token_node(TokenKind::TK_UIDENT),
-      )
+    _ => push_child(children, Some("name"), state.missing_token_node(TK_UIDENT))
   }
-  if state.current_is(TokenKind::TK_LPAREN) {
+  if state.current_is(TK_LPAREN) {
     push_child(children, Some("arg"), parse_argument_list(state))
   }
   state
@@ -1842,20 +1756,20 @@ fn classify_top_item_node_kind(
   saw_body : Bool,
 ) -> NodeKind {
   match parsed_kind {
-    TopItemKind::Invalid => Error
+    Invalid => Error
     Import => Impl_Import
     Extend => Impl_Extend
-    TopItemKind::Using => Impl_Using
-    TopItemKind::Function => Impl_Function
-    TopItemKind::Let => Impl_Let
-    TopItemKind::Const => Impl_Const
-    TopItemKind::Type =>
+    Using => Impl_Using
+    Function => Impl_Function
+    Let => Impl_Let
+    Const => Impl_Const
+    Type =>
       if top_item_children_have_label(children, "type") {
         Impl_TypeAlias
       } else {
         Impl_TypeAbstract
       }
-    TopItemKind::Struct =>
+    Struct =>
       if top_item_child_with_label_has_kind(
           children,
           "body",
@@ -1865,7 +1779,7 @@ fn classify_top_item_node_kind(
       } else {
         Impl_RecordStruct
       }
-    TopItemKind::Enum =>
+    Enum =>
       if is_suberror {
         if saw_body {
           Impl_SuberrorEnum
@@ -1884,15 +1798,15 @@ fn classify_top_item_node_kind(
       } else {
         Impl_EnumVariant
       }
-    TopItemKind::EnumView => Impl_EnumView
-    TopItemKind::Trait => Impl_Trait
-    TopItemKind::Impl =>
+    EnumView => Impl_EnumView
+    Trait => Impl_Trait
+    Impl =>
       if top_item_children_have_label(children, "method") {
         Impl_ImplMethod
       } else {
         Impl_ImplRelation
       }
-    TopItemKind::Test => Impl_Test
+    Test => Impl_Test
   }
 }
 
@@ -2010,7 +1924,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         done = true
       }
       Some((tok, start, end)) if phase is AwaitingName && is_name_token(tok) => {
-        if kind is TopItemKind::Function &&
+        if kind is Function &&
           tok is LIDENT(name) &&
           state.peek_nth_significant(1).map(item => item.0) is Some(COLONCOLON) {
           state.report(
@@ -2020,7 +1934,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         }
         if !decl_name_token_is_valid(tok, kind) {
           match (kind, tok) {
-            (TopItemKind::Struct, LIDENT(name)) =>
+            (Struct, LIDENT(name)) =>
               state.report(
                 mk_loc(start, end),
                 "Unexpected lowercase identifier \{name}, expected uppercase identifier in struct name.",
@@ -2037,22 +1951,20 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         phase = decl_phase_after_name(kind, is_suberror)
         accepts_params = true
       }
-      Some((LBRACKET, _, _)) if phase is AwaitingName &&
-        kind is TopItemKind::Function =>
+      Some((LBRACKET, _, _)) if phase is AwaitingName && kind is Function =>
         push_child(
           children,
           Some("quantifier"),
           parse_fun_type_parameter_list(state),
         )
       Some((LBRACKET, _, _)) if phase is AwaitingName &&
-        (kind is TopItemKind::Impl || kind is TopItemKind::EnumView) =>
+        (kind is Impl || kind is EnumView) =>
         push_child(
           children,
           Some("quantifier"),
           parse_fun_type_parameter_list(state),
         )
-      Some((AMPER, _, _)) if phase is AwaitingName &&
-        kind is TopItemKind::Function =>
+      Some((AMPER, _, _)) if phase is AwaitingName && kind is Function =>
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
           push_child(
@@ -2068,13 +1980,13 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         } else {
           ()
         }
-      Some((LPAREN, _, _)) if kind is TopItemKind::Struct => {
+      Some((LPAREN, _, _)) if kind is Struct => {
         push_child(children, Some("body"), parse_tuple_struct_type_list(state))
         saw_body = true
         accepts_params = false
         phase = Complete
       }
-      Some((LPAREN, _, _)) if accepts_params && kind is TopItemKind::Function => {
+      Some((LPAREN, _, _)) if accepts_params && kind is Function => {
         let params = parse_parameter_list(state)
         params_complete = !child_label_is_missing(params, "close")
         push_child(children, Some("params"), params)
@@ -2089,11 +2001,11 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       }
       Some((DOT_UIDENT(_), _, _)) | Some((DOT_LIDENT(_), _, _)) if accepts_params &&
         (
-          kind is TopItemKind::Type ||
-          kind is TopItemKind::Struct ||
-          kind is TopItemKind::Enum ||
-          kind is TopItemKind::EnumView ||
-          kind is TopItemKind::Impl
+          kind is Type ||
+          kind is Struct ||
+          kind is Enum ||
+          kind is EnumView ||
+          kind is Impl
         ) => {
         match state.peek() {
           Some((DOT_LIDENT(_), start, end)) =>
@@ -2107,14 +2019,13 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         }
       }
       Some((DOT_UIDENT(_), _, _)) | Some((DOT_LIDENT(_), _, _)) if accepts_params &&
-        kind is TopItemKind::Function =>
+        kind is Function =>
         if state.consume_any() is Some(name) {
           push_child(children, Some("name"), name)
         } else {
           ()
         }
-      Some((COLONCOLON, _, _)) if accepts_params &&
-        kind is TopItemKind::Function => {
+      Some((COLONCOLON, _, _)) if accepts_params && kind is Function => {
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
         } else {
@@ -2133,7 +2044,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             push_child(
               children,
               Some("method"),
-              state.missing_token_node(TokenKind::TK_LIDENT),
+              state.missing_token_node(TK_LIDENT),
             )
         }
       }
@@ -2151,10 +2062,10 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) if phase
         is AwaitingLetPattern => {
         let pat = parse_pattern_until(state, [
-          TokenKind::TK_COLON,
-          TokenKind::TK_EQUAL,
-          TokenKind::TK_SEMI,
-          TokenKind::TK_EOF,
+          TK_COLON,
+          TK_EQUAL,
+          TK_SEMI,
+          TK_EOF,
         ])
         if !pat.children.is_empty() {
           push_child(children, Some("pattern"), pat)
@@ -2162,9 +2073,9 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           push_child(
             children,
             Some("pattern"),
-            state.missing_token_node_with_expected(TokenKind::TK_LIDENT, [
-              TokenKind::TK_LIDENT,
-              TokenKind::TK_EXTEND,
+            state.missing_token_node_with_expected(TK_LIDENT, [
+              TK_LIDENT,
+              TK_EXTEND,
             ]),
           )
         }
@@ -2183,7 +2094,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             state.report_expected_tokens_at(
               found,
               mk_loc(next_start, next_end),
-              [TokenKind::TK_EQUAL],
+              [TK_EQUAL],
             )
             let mut recovering = true
             while recovering {
@@ -2211,13 +2122,13 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       }
       Some((found, start, end)) if phase is AwaitingLetPattern => {
         state.report_expected_tokens_at(found, mk_loc(start, end), [
-          TokenKind::TK_LIDENT,
-          TokenKind::TK_EXTEND,
+          TK_LIDENT,
+          TK_EXTEND,
         ])
         push_child(
           children,
           Some("pattern"),
-          state.missing_token_node_silent(TokenKind::TK_LIDENT),
+          state.missing_token_node_silent(TK_LIDENT),
         )
         let mut recovering = true
         while recovering {
@@ -2249,7 +2160,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         }
         phase = AwaitingLetPattern
       }
-      Some((TEST, _, _)) if kind is TopItemKind::Test => {
+      Some((TEST, _, _)) if kind is Test => {
         saw_core_keyword = true
         if state.consume_any() is Some(test_token) {
           push_child(children, decl_token_label(TEST), test_token)
@@ -2275,7 +2186,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             }
           _ => ()
         }
-        if state.current_is(TokenKind::TK_LPAREN) {
+        if state.current_is(TK_LPAREN) {
           push_child(children, Some("params"), parse_parameter_list(state))
         }
         phase = AwaitingBody
@@ -2310,7 +2221,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             } else {
               ()
             }
-          _ => state.report_expected_tokens([TokenKind::TK_STRING])
+          _ => state.report_expected_tokens([TK_STRING])
         }
       }
       Some((tok, _, _)) if decl_prefix_token(tok) => {
@@ -2330,12 +2241,10 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         if is_extern && saw_language && !(tok is FN) {
           match state.peek() {
             Some((found, start, end)) =>
-              state.report_expected_tokens_at(found, mk_loc(start, end), [
-                TokenKind::TK_FN,
-              ])
+              state.report_expected_tokens_at(found, mk_loc(start, end), [TK_FN])
             None => ()
           }
-          while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
+          while !state.current_is(TK_EOF) && !(state.peek() is None) {
             if state.consume_any() is Some(bad) {
               push_child(children, Some("error"), bad)
             } else {
@@ -2359,7 +2268,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         }
         phase = AwaitingName
       }
-      Some((USING, _, _)) if kind is TopItemKind::Using => {
+      Some((USING, _, _)) if kind is Using => {
         if is_declare {
           match state.peek() {
             Some((found, start, end)) =>
@@ -2370,7 +2279,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               )
             None => ()
           }
-          while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
+          while !state.current_is(TK_EOF) && !(state.peek() is None) {
             if state.consume_any() is Some(bad) {
               push_child(children, Some("error"), bad)
             } else {
@@ -2404,42 +2313,34 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         pattern_can_start(tok) &&
         state.pattern_has_top_level_annotation() => {
         let pat = parse_pattern_until(state, [
-          TokenKind::TK_COLON,
-          TokenKind::TK_COMMA,
-          TokenKind::TK_RPAREN,
-          TokenKind::TK_EOF,
+          TK_COLON,
+          TK_COMMA,
+          TK_RPAREN,
+          TK_EOF,
         ])
         if !pat.children.is_empty() {
           push_child(children, Some("pattern"), pat)
         }
       }
-      Some((COLON, _, _)) if kind is TopItemKind::Trait && depth == 0 => {
+      Some((COLON, _, _)) if kind is Trait && depth == 0 => {
         if state.consume_any() is Some(colon) {
           push_child(children, Some("op"), colon)
         } else {
           ()
         }
-        let stops = [
-          TokenKind::TK_PLUS,
-          TokenKind::TK_LBRACE,
-          TokenKind::TK_SEMI,
-          TokenKind::TK_EOF,
-        ]
+        let stops = [TokenKind::TK_PLUS, TK_LBRACE, TK_SEMI, TK_EOF]
         let reports_before_type = state.reports.length()
         let ty = parse_type_arrow(state, stops)
         let ty = if !ty.children.is_empty() {
           ty
         } else {
           if state.reports.length() == reports_before_type {
-            state.report_expected_tokens([
-              TokenKind::TK_UIDENT,
-              TokenKind::TK_PACKAGE_NAME,
-            ])
+            state.report_expected_tokens([TK_UIDENT, TK_PACKAGE_NAME])
           }
           state.missing_type_node()
         }
         push_child(children, Some("type"), ty)
-        while state.current_is(TokenKind::TK_PLUS) {
+        while state.current_is(TK_PLUS) {
           if state.consume_any() is Some(op) {
             push_child(children, Some("op"), op)
           } else {
@@ -2449,20 +2350,15 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           let ty = if !ty.children.is_empty() {
             ty
           } else {
-            state.report_expected_tokens([
-              TokenKind::TK_UIDENT,
-              TokenKind::TK_PACKAGE_NAME,
-            ])
+            state.report_expected_tokens([TK_UIDENT, TK_PACKAGE_NAME])
             state.missing_type_node()
           }
           push_child(children, Some("type"), ty)
         }
       }
-      Some((COLON, start, end)) if kind is TopItemKind::Function && depth == 0 => {
-        state.report_expected_tokens_at(COLON, mk_loc(start, end), [
-          TokenKind::TK_LBRACE,
-        ])
-        while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
+      Some((COLON, start, end)) if kind is Function && depth == 0 => {
+        state.report_expected_tokens_at(COLON, mk_loc(start, end), [TK_LBRACE])
+        while !state.current_is(TK_EOF) && !(state.peek() is None) {
           if state.consume_any() is Some(bad) {
             push_child(children, Some("error"), bad)
           } else {
@@ -2481,13 +2377,13 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         }
         let reports_before_type = state.reports.length()
         let ty = parse_type_arrow(state, [
-          TokenKind::TK_COMMA,
-          TokenKind::TK_RPAREN,
-          TokenKind::TK_RBRACKET,
-          TokenKind::TK_RBRACE,
-          TokenKind::TK_EQUAL,
-          TokenKind::TK_SEMI,
-          TokenKind::TK_EOF,
+          TK_COMMA,
+          TK_RPAREN,
+          TK_RBRACKET,
+          TK_RBRACE,
+          TK_EQUAL,
+          TK_SEMI,
+          TK_EOF,
         ])
         push_child(
           children,
@@ -2512,7 +2408,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         push_child(children, Some("clause"), parse_func_return_type(state))
         phase = if is_declare { Complete } else { AwaitingBody }
       }
-      Some((EQUAL, _, _)) if kind is TopItemKind::Type => {
+      Some((EQUAL, _, _)) if kind is Type => {
         phase = AwaitingType
         if state.consume_any() is Some(equal) {
           push_child(children, Some("op"), equal)
@@ -2520,15 +2416,14 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           ()
         }
         let reports_before_type = state.reports.length()
-        let ty = parse_type_arrow(state, [TokenKind::TK_SEMI, TokenKind::TK_EOF])
+        let ty = parse_type_arrow(state, [TK_SEMI, TK_EOF])
         let ty = state.required_type_node(ty, reports_before_type)
         push_child(children, Some("type"), ty)
         if !(ty.kind is Type_MissingType) {
           phase = Complete
         }
       }
-      Some((EQUAL, _, _)) if kind is TopItemKind::Let ||
-        kind is TopItemKind::Const => {
+      Some((EQUAL, _, _)) if kind is Let || kind is Const => {
         phase = AwaitingValue
         if state.consume_any() is Some(equal) {
           push_child(children, Some("op"), equal)
@@ -2539,10 +2434,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           .peek_significant()
           .map(item => item.0)
           is Some(LOOP)
-        let expr = parse_expr_until(state, [
-          TokenKind::TK_SEMI,
-          TokenKind::TK_EOF,
-        ])
+        let expr = parse_expr_until(state, [TK_SEMI, TK_EOF])
         if !expr.children.is_empty() {
           push_child(children, Some("expr"), expr)
           phase = Complete
@@ -2551,12 +2443,12 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           push_child(children, Some("expr"), state.missing_expr_node())
         }
         if value_started_with_loop &&
-          state.current_is(TokenKind::TK_SEMI) &&
+          state.current_is(TK_SEMI) &&
           state.peek_nth_significant(1).map(item => item.0) is Some(LPAREN) {
           state.suppress_next_top_level_recovery_report = true
         }
       }
-      Some((EQUAL, _, _)) if kind is TopItemKind::Function => {
+      Some((EQUAL, _, _)) if kind is Function => {
         phase = AwaitingStub
         if state.consume_any() is Some(equal) {
           push_child(children, Some("op"), equal)
@@ -2570,11 +2462,11 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             phase = Complete
             parse_function_stub_tokens(state, children)
           }
-          _ => state.report_expected_tokens([TokenKind::TK_STRING])
+          _ => state.report_expected_tokens([TK_STRING])
         }
         done = true
       }
-      Some((FOR, _, _)) if kind is TopItemKind::Impl => {
+      Some((FOR, _, _)) if kind is Impl => {
         phase = AwaitingType
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
@@ -2582,19 +2474,14 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           ()
         }
         let reports_before_type = state.reports.length()
-        let ty = parse_type_arrow(state, [
-          TokenKind::TK_WITH,
-          TokenKind::TK_LBRACE,
-          TokenKind::TK_SEMI,
-          TokenKind::TK_EOF,
-        ])
+        let ty = parse_type_arrow(state, [TK_WITH, TK_LBRACE, TK_SEMI, TK_EOF])
         let ty = state.required_type_node(ty, reports_before_type)
         push_child(children, Some("type"), ty)
         if !(ty.kind is Type_MissingType) {
           phase = Complete
         }
       }
-      Some((FOR, _, _)) if kind is TopItemKind::EnumView => {
+      Some((FOR, _, _)) if kind is EnumView => {
         phase = AwaitingType
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
@@ -2602,18 +2489,14 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           ()
         }
         let reports_before_type = state.reports.length()
-        let ty = parse_type_arrow(state, [
-          TokenKind::TK_WITH,
-          TokenKind::TK_SEMI,
-          TokenKind::TK_EOF,
-        ])
+        let ty = parse_type_arrow(state, [TK_WITH, TK_SEMI, TK_EOF])
         let ty = state.required_type_node(ty, reports_before_type)
         push_child(children, Some("type"), ty)
         if !(ty.kind is Type_MissingType) {
           phase = AwaitingEnumViewWith
         }
       }
-      Some((WITH, _, _)) if kind is TopItemKind::Impl => {
+      Some((WITH, _, _)) if kind is Impl => {
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
         } else {
@@ -2626,7 +2509,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           done = true
         }
       }
-      Some((WITH, _, _)) if kind is TopItemKind::EnumView => {
+      Some((WITH, _, _)) if kind is EnumView => {
         phase = AwaitingMethodName
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
@@ -2642,18 +2525,15 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               ()
             }
           _ => {
-            state.report_expected_tokens([
-              TokenKind::TK_LIDENT,
-              TokenKind::TK_EXTEND,
-            ])
+            state.report_expected_tokens([TK_LIDENT, TK_EXTEND])
             push_child(
               children,
               Some("method"),
-              state.missing_token_node_silent(TokenKind::TK_LIDENT),
+              state.missing_token_node_silent(TK_LIDENT),
             )
           }
         }
-        if state.current_is(TokenKind::TK_LPAREN) {
+        if state.current_is(TK_LPAREN) {
           push_child(children, Some("params"), parse_parameter_list(state))
           phase = AwaitingBody
         }
@@ -2670,25 +2550,23 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         } else {
           ()
         }
-        if state.current_is(TokenKind::TK_LPAREN) {
+        if state.current_is(TK_LPAREN) {
           push_child(children, Some("deriving"), parse_deriving_list(state))
         } else {
           push_child(
             children,
             Some("deriving"),
-            state.missing_token_node(TokenKind::TK_LPAREN),
+            state.missing_token_node(TK_LPAREN),
           )
         }
       }
-      Some((found, start, end)) if kind is TopItemKind::Function &&
+      Some((found, start, end)) if kind is Function &&
         phase is AwaitingBody &&
         found is (EXCLAMATION | QUESTION) => {
-        state.report_expected_tokens_at(found, mk_loc(start, end), [
-          TokenKind::TK_LBRACE,
-        ])
-        while !state.current_is(TokenKind::TK_LBRACE) &&
-              !state.current_is(TokenKind::TK_SEMI) &&
-              !state.current_is(TokenKind::TK_EOF) &&
+        state.report_expected_tokens_at(found, mk_loc(start, end), [TK_LBRACE])
+        while !state.current_is(TK_LBRACE) &&
+              !state.current_is(TK_SEMI) &&
+              !state.current_is(TK_EOF) &&
               !(state.peek() is None) {
           if state.consume_any() is Some(bad) {
             push_child(
@@ -2701,33 +2579,30 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           }
         }
       }
-      Some((WHERE, _, _)) if kind is TopItemKind::Function =>
+      Some((WHERE, _, _)) if kind is Function =>
         push_child(children, Some("where"), parse_where_clause(state))
-      Some((EXCLAMATION, _, _)) if kind is TopItemKind::Function &&
-        !(phase is AwaitingName) =>
+      Some((EXCLAMATION, _, _)) if kind is Function && !(phase is AwaitingName) =>
         if state.consume_error_for_progress() is Some(error) {
           push_child(children, Some("error"), error)
         } else {
           done = true
         }
-      Some((LBRACKET, _, _)) if accepts_params &&
-        kind is TopItemKind::Function &&
-        !saw_body =>
+      Some((LBRACKET, _, _)) if accepts_params && kind is Function && !saw_body =>
         match state.peek() {
           Some((found, start, end)) => {
             let expected = if is_extern {
               [TokenKind::TK_EQUAL]
             } else {
-              [TokenKind::TK_LBRACE]
+              [TK_LBRACE]
             }
             state.report_expected_tokens_at(found, mk_loc(start, end), expected)
             let recovery_kind = if is_extern {
               TokenKind::TK_EQUAL
             } else {
-              TokenKind::TK_LBRACE
+              TK_LBRACE
             }
             while !state.current_is(recovery_kind) &&
-                  !state.current_is(TokenKind::TK_EOF) &&
+                  !state.current_is(TK_EOF) &&
                   !(state.peek() is None) {
               if state.consume_any() is Some(bad) {
                 push_child(
@@ -2743,16 +2618,14 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           None => done = true
         }
       Some((QUESTION, _, _)) if depth == 0 &&
-        (!saw_core_keyword || kind is TopItemKind::Invalid) =>
+        (!saw_core_keyword || kind is Invalid) =>
         if state.consume_error_for_progress() is Some(error) {
           push_child(children, Some("error"), error)
         } else {
           done = true
         }
-      Some((RBRACE, start, end)) if kind is TopItemKind::Function && !saw_body => {
-        state.report_expected_tokens_at(RBRACE, mk_loc(start, end), [
-          TokenKind::TK_LBRACE,
-        ])
+      Some((RBRACE, start, end)) if kind is Function && !saw_body => {
+        state.report_expected_tokens_at(RBRACE, mk_loc(start, end), [TK_LBRACE])
         if state.consume_any() is Some(bad) {
           push_child(children, Some("error"), bad)
         } else {
@@ -2762,14 +2635,12 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         phase = Complete
         done = true
       }
-      Some((found, start, end)) if kind is TopItemKind::Invalid ||
+      Some((found, start, end)) if kind is Invalid ||
         (!saw_core_keyword && phase is Start) => {
         if state.suppress_next_top_level_recovery_report {
           state.suppress_next_top_level_recovery_report = false
         } else if saw_async_prefix {
-          state.report_expected_tokens_at(found, mk_loc(start, end), [
-            TokenKind::TK_FN,
-          ])
+          state.report_expected_tokens_at(found, mk_loc(start, end), [TK_FN])
         } else {
           state.report_expected_tokens_at(
             found,
@@ -2797,10 +2668,9 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         }
         done = true
       }
-      Some((LBRACE, start, end)) if kind is TopItemKind::Function &&
-        phase is AwaitingName => {
+      Some((LBRACE, start, end)) if kind is Function && phase is AwaitingName => {
         let mut recovery_end = end
-        while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
+        while !state.current_is(TK_EOF) && !(state.peek() is None) {
           match state.peek() {
             Some((next, _, _)) if top_level_decl_can_start(next) => break
             Some((SEMI(_), _, _)) => break
@@ -2822,17 +2692,17 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         done = true
       }
       Some((LBRACE, _, _)) =>
-        if kind is TopItemKind::Using {
+        if kind is Using {
           saw_body = true
           push_child(children, Some("body"), parse_using_name_list(state))
           phase = Complete
-        } else if kind is TopItemKind::Impl {
+        } else if kind is Impl {
           if phase is AwaitingImplRelation {
             match state.peek() {
               Some((found, start, end)) =>
                 state.report_expected_tokens_at(found, mk_loc(start, end), [
-                  TokenKind::TK_FOR,
-                  TokenKind::TK_WITH,
+                  TK_FOR,
+                  TK_WITH,
                 ])
               None => ()
             }
@@ -2868,26 +2738,26 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             invalid_grouped_impl = false
           }
           phase = Complete
-        } else if kind is TopItemKind::Struct {
+        } else if kind is Struct {
           saw_body = true
           let body = parse_struct_member_list(state)
           recovered_body_without_close = child_label_is_missing(body, "close")
           push_child(children, Some("body"), body)
           phase = Complete
-        } else if kind is TopItemKind::Enum {
+        } else if kind is Enum {
           saw_body = true
           push_child(children, Some("body"), parse_enum_constructor_list(state))
           phase = Complete
-        } else if kind is TopItemKind::EnumView && !enumview_has_constructors {
+        } else if kind is EnumView && !enumview_has_constructors {
           saw_body = true
           push_child(children, Some("body"), parse_enum_constructor_list(state))
           enumview_has_constructors = true
           phase = AwaitingEnumViewFor
-        } else if kind is TopItemKind::EnumView {
+        } else if kind is EnumView {
           saw_body = true
           push_child(children, Some("expr"), parse_block_expr(state))
           phase = Complete
-        } else if kind is TopItemKind::Trait {
+        } else if kind is Trait {
           saw_body = true
           push_child(children, Some("body"), parse_trait_member_list(state))
           phase = Complete
@@ -2906,17 +2776,16 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           phase = Complete
           if state.abort_current_decl {
             state.abort_current_decl = false
-            if state.current_is(TokenKind::TK_SEMI) ||
-              state.current_is(TokenKind::TK_EOF) {
+            if state.current_is(TK_SEMI) || state.current_is(TK_EOF) {
               done = true
             }
           }
         }
       Some((found, start, end)) if phase is AwaitingName => {
         let expected = decl_name_expectation(kind)
-        if kind is TopItemKind::Function {
+        if kind is Function {
           let mut recovery_end = end
-          while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
+          while !state.current_is(TK_EOF) && !(state.peek() is None) {
             match state.peek() {
               Some((next, _, _)) if top_level_decl_can_start(next) => break
               Some((SEMI(_), _, _)) => break
@@ -2936,7 +2805,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           )
           phase = Complete
           done = true
-        } else if kind is TopItemKind::Type {
+        } else if kind is Type {
           state.report_expected_tokens_at(found, mk_loc(start, end), expected)
           let mut recovering = true
           while recovering {
@@ -2979,12 +2848,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               state.report_expected_tokens_at(
                 next,
                 mk_loc(next_start, next_end),
-                [
-                  TokenKind::TK_SEMI,
-                  TokenKind::TK_EOF,
-                  TokenKind::TK_DERIVE,
-                  TokenKind::TK_EQUAL,
-                ],
+                [TK_SEMI, TK_EOF, TK_DERIVE, TK_EQUAL],
               )
             _ => ()
           }
@@ -3001,7 +2865,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       }
       Some((_, _, _)) if phase is Complete => {
         let completed_type_bad_token = match state.peek() {
-          Some((found, start, end)) if kind is TopItemKind::Type =>
+          Some((found, start, end)) if kind is Type =>
             Some((found, mk_loc(start, end)))
           _ => None
         }
@@ -3029,19 +2893,19 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           match completed_type_bad_token {
             Some((found, loc)) =>
               state.report_expected_tokens_at(found, loc, [
-                TokenKind::TK_SEMI,
-                TokenKind::TK_EOF,
-                TokenKind::TK_DERIVE,
-                TokenKind::TK_EQUAL,
+                TK_SEMI,
+                TK_EOF,
+                TK_DERIVE,
+                TK_EQUAL,
               ])
             None =>
               match state.peek() {
-                Some((found, start, end)) if kind is TopItemKind::Type =>
+                Some((found, start, end)) if kind is Type =>
                   state.report_expected_tokens_at(found, mk_loc(start, end), [
-                    TokenKind::TK_SEMI,
-                    TokenKind::TK_EOF,
-                    TokenKind::TK_DERIVE,
-                    TokenKind::TK_EQUAL,
+                    TK_SEMI,
+                    TK_EOF,
+                    TK_DERIVE,
+                    TK_EQUAL,
                   ])
                 Some((_, start, end)) =>
                   state.report(mk_loc(start, end), "Unexpected token here.")
@@ -3071,24 +2935,24 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
     (
       state.reports.length() == diagnostics_before ||
       (
-        kind is TopItemKind::Function &&
+        kind is Function &&
         !is_extern &&
         phase is AwaitingBody &&
         params_complete &&
         (
           !return_type_had_error ||
           missing_return_before_impl ||
-          state.current_is(TokenKind::TK_EOF)
+          state.current_is(TK_EOF)
         )
       )
     )
   if should_report_completion {
-    if kind is TopItemKind::Function && is_declare && (saw_body || saw_stub) {
+    if kind is Function && is_declare && (saw_body || saw_stub) {
       state.report(
         empty_loc(state.current_position()),
         "declare function cannot have a body",
       )
-    } else if kind is TopItemKind::Enum && suberror_had_type_params {
+    } else if kind is Enum && suberror_had_type_params {
       state.report(
         empty_loc(state.current_position()),
         "Unexpected token here.",
@@ -3519,14 +3383,14 @@ fn parse_expr_fragment(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("expr"), expr)
   push_children(children, state.consume_trivia())
-  while state.current_is(TokenKind::TK_SEMI) {
+  while state.current_is(TK_SEMI) {
     if state.consume_any() is Some(sep) {
       push_child(children, Some("sep"), sep)
     } else {
       ()
     }
     push_children(children, state.consume_trivia())
-    if !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
+    if !state.current_is(TK_EOF) && !(state.peek() is None) {
       let next = parse_expr_fragment_item(state)
       if !next.children.is_empty() {
         push_child(children, Some("expr"), next)
@@ -3534,9 +3398,9 @@ fn parse_expr_fragment(state : ParserState) -> CstNode {
       push_children(children, state.consume_trivia())
     }
   }
-  if !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
-    state.report_expected_tokens([TokenKind::TK_SEMI, TokenKind::TK_EOF])
-    while !state.current_is(TokenKind::TK_EOF) && !(state.peek() is None) {
+  if !state.current_is(TK_EOF) && !(state.peek() is None) {
+    state.report_expected_tokens([TK_SEMI, TK_EOF])
+    while !state.current_is(TK_EOF) && !(state.peek() is None) {
       if state.consume_any() is Some(bad) {
         push_child(
           children,
@@ -3567,12 +3431,9 @@ fn parse_expr_fragment(state : ParserState) -> CstNode {
 fn parse_expr_fragment_item(state : ParserState) -> CstNode {
   if local_function_statement_can_start(state) {
     discard_expr_trivia(state)
-    parse_local_function_statement(state, [
-      TokenKind::TK_SEMI,
-      TokenKind::TK_EOF,
-    ])
+    parse_local_function_statement(state, [TK_SEMI, TK_EOF])
   } else {
-    parse_expr_until(state, [TokenKind::TK_EOF])
+    parse_expr_until(state, [TK_EOF])
   }
 }
 
@@ -3686,7 +3547,7 @@ fn with_try_location_anchors(
   if suffix_anchor_source is Some(anchor_source) {
     result = result.with_aggregate_span(
       "expr_loc",
-      Location::{ start: anchor_source.loc.start, end: source.loc.end, },
+      { start: anchor_source.loc.start, end: source.loc.end, },
       mk_span(anchor_source.source_span.0, source.source_span.1),
     )
   }
@@ -3699,9 +3560,9 @@ fn parse_expr_catch_suffix(
   stop_kinds : Array[TokenKind],
   lhs : CstNode,
 ) -> CstNode {
-  if kind_in(TokenKind::TK_CATCH, stop_kinds) ||
+  if kind_in(TK_CATCH, stop_kinds) ||
     lhs.kind is Expr_Try ||
-    !state.current_is(TokenKind::TK_CATCH) {
+    !state.current_is(TK_CATCH) {
     return lhs
   }
   let leading_parenthesized_end = parser_leading_parenthesized_end(lhs)
@@ -3719,18 +3580,16 @@ fn parse_expr_catch_suffix(
     push_child(
       children,
       Some("case"),
-      state.missing_token_node_with_expected(TokenKind::TK_LBRACE, [
-        TokenKind::TK_LBRACE,
-      ]),
+      state.missing_token_node_with_expected(TK_LBRACE, [TK_LBRACE]),
     )
   }
-  if state.current_is(TokenKind::TK_NORAISE) {
+  if state.current_is(TK_NORAISE) {
     if state.consume_any() is Some(else_kw) {
       push_child(children, Some("else_kw"), else_kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_case_block(state))
     }
   }
@@ -3770,7 +3629,7 @@ fn parse_expr_pipe(
         if state.reports.length() == reports_before_lhs && !normalize_lhs {
           state.report(lhs.loc, "Invalid left value in assignment")
         }
-        let is_augmented = !state.current_is(TokenKind::TK_EQUAL)
+        let is_augmented = !state.current_is(TK_EQUAL)
         let kind = assignment_node_kind(lhs, is_augmented)
         let children : Array[(String?, CstNode)] = []
         push_assignment_lhs_children(children, lhs, normalize_lhs)
@@ -3792,10 +3651,10 @@ fn parse_expr_pipe(
           .with_bool_marker("augmented", Flag_Augmented, is_augmented)
       }
       Some((PIPE, _, _)) | Some((PIPE_LEFT, _, _)) => {
-        let pipe_kind = if state.current_is(TokenKind::TK_PIPE_LEFT) {
+        let pipe_kind = if state.current_is(TK_PIPE_LEFT) {
           TokenKind::TK_PIPE_LEFT
         } else {
-          TokenKind::TK_PIPE
+          TK_PIPE
         }
         let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
         if state.consume_any() is Some(op) {
@@ -3811,7 +3670,7 @@ fn parse_expr_pipe(
           state.required_expr_node(rhs, reports_before_rhs),
         )
         lhs = state.node_from_children(
-          if pipe_kind is TokenKind::TK_PIPE_LEFT {
+          if pipe_kind is TK_PIPE_LEFT {
             Expr_RevPipe
           } else {
             Expr_Pipe
@@ -3823,10 +3682,7 @@ fn parse_expr_pipe(
         if lhs.kind is Expr_Constraint &&
           lhs.first_child_with_label("open") is None {
           if lhs.first_child_with_label("op") is Some(op) {
-            state.report_expected_tokens_at(COLON, op.loc, [
-              TokenKind::TK_SEMI,
-              TokenKind::TK_EOF,
-            ])
+            state.report_expected_tokens_at(COLON, op.loc, [TK_SEMI, TK_EOF])
           } else {
             ()
           }
@@ -3853,7 +3709,7 @@ fn parse_expr_pipe(
 
 ///|
 fn stop_kinds_with_pipe(stop_kinds : Array[TokenKind]) -> Array[TokenKind] {
-  let stops : Array[TokenKind] = [TokenKind::TK_PIPE, TokenKind::TK_PIPE_LEFT]
+  let stops : Array[TokenKind] = [TK_PIPE, TK_PIPE_LEFT]
   for kind in stop_kinds {
     stops.push(kind)
   }
@@ -3879,7 +3735,7 @@ fn parse_pipe_rhs(
       } else {
         ()
       }
-      if pipe_kind is TokenKind::TK_PIPE {
+      if pipe_kind is TK_PIPE {
         match state.peek_significant() {
           Some((LBRACE, _, _)) => ()
           Some((found, start, end)) =>
@@ -4326,9 +4182,7 @@ fn report_invalid_template_literal_start(state : ParserState) -> Unit {
         Some((RBRACE, _, _)) | None => ()
         Some((STRING(_), _, _)) => ()
         Some((found, start, end)) =>
-          state.report_expected_tokens_at(found, mk_loc(start, end), [
-            TokenKind::TK_STRING,
-          ])
+          state.report_expected_tokens_at(found, mk_loc(start, end), [TK_STRING])
       }
     Some(
       (
@@ -4378,18 +4232,18 @@ fn parse_expr_simple_postfix(
 ///|
 fn template_operand_stops(stop_kinds : Array[TokenKind]) -> Array[TokenKind] {
   let stops = stop_kinds.copy()
-  stops.push(TokenKind::TK_IMPLIES)
-  stops.push(TokenKind::TK_BARBAR)
-  stops.push(TokenKind::TK_AMPERAMPER)
-  stops.push(TokenKind::TK_BAR)
-  stops.push(TokenKind::TK_CARET)
-  stops.push(TokenKind::TK_AMPER)
-  stops.push(TokenKind::TK_INFIX1)
-  stops.push(TokenKind::TK_INFIX2)
-  stops.push(TokenKind::TK_PLUS)
-  stops.push(TokenKind::TK_MINUS)
-  stops.push(TokenKind::TK_INFIX3)
-  stops.push(TokenKind::TK_INFIX4)
+  stops.push(TK_IMPLIES)
+  stops.push(TK_BARBAR)
+  stops.push(TK_AMPERAMPER)
+  stops.push(TK_BAR)
+  stops.push(TK_CARET)
+  stops.push(TK_AMPER)
+  stops.push(TK_INFIX1)
+  stops.push(TK_INFIX2)
+  stops.push(TK_PLUS)
+  stops.push(TK_MINUS)
+  stops.push(TK_INFIX3)
+  stops.push(TK_INFIX4)
   stops
 }
 
@@ -4414,7 +4268,7 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
       } else {
         ()
       }
-      if state.current_is(TokenKind::TK_LPAREN) {
+      if state.current_is(TK_LPAREN) {
         push_child(children, Some("arg"), parse_argument_list(state))
         Some(
           state
@@ -4445,12 +4299,12 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
         Some((found, start, end)) => {
           valid_field = false
           state.report_expected_tokens_at(found, mk_loc(start, end), [
-            TokenKind::TK_LIDENT,
-            TokenKind::TK_EXTEND,
+            TK_LIDENT,
+            TK_EXTEND,
           ])
-          while !state.current_is(TokenKind::TK_SEMI) &&
-                !state.current_is(TokenKind::TK_RBRACE) &&
-                !state.current_is(TokenKind::TK_EOF) &&
+          while !state.current_is(TK_SEMI) &&
+                !state.current_is(TK_RBRACE) &&
+                !state.current_is(TK_EOF) &&
                 !(state.peek() is None) {
             if state.consume_any() is Some(bad) {
               push_child(children, Some("error"), bad)
@@ -4461,14 +4315,10 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
         }
         None => valid_field = false
       }
-      if valid_field && state.current_is(TokenKind::TK_LPAREN) {
+      if valid_field && state.current_is(TK_LPAREN) {
         push_child(children, Some("arg"), parse_argument_list(state))
       } else if valid_field {
-        push_child(
-          children,
-          Some("arg"),
-          state.missing_token_node(TokenKind::TK_LPAREN),
-        )
+        push_child(children, Some("arg"), state.missing_token_node(TK_LPAREN))
       }
       Some(
         state
@@ -4532,7 +4382,7 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
             push_child(
               children,
               Some("field"),
-              state.missing_token_node(TokenKind::TK_UIDENT),
+              state.missing_token_node(TK_UIDENT),
             )
         }
       }
@@ -4555,7 +4405,7 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
         push_child(
           children,
           Some("field"),
-          state.missing_token_node_silent(TokenKind::TK_LIDENT),
+          state.missing_token_node_silent(TK_LIDENT),
         )
     }
     if field_is_constructor {
@@ -4713,11 +4563,11 @@ fn parse_map_expr(state : ParserState) -> CstNode {
 fn parse_record_field_list(state : ParserState) -> CstNode {
   let list = parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_record_field_item,
     List_RecordFieldList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let mut item_index = 0
   for i in 0..<list.children.length() {
@@ -4727,8 +4577,8 @@ fn parse_record_field_list(state : ParserState) -> CstNode {
           Field_RecordSpread if item_index > 0 =>
             if item.first_child_with_label("op") is Some(op) {
               state.report_expected_tokens_at(DOTDOT, op.loc, [
-                TokenKind::TK_LIDENT,
-                TokenKind::TK_EXTEND,
+                TK_LIDENT,
+                TK_EXTEND,
               ])
             }
           _ => ()
@@ -4745,11 +4595,11 @@ fn parse_record_field_list(state : ParserState) -> CstNode {
 fn parse_map_field_list(state : ParserState) -> CstNode {
   let list = parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_map_field_item,
     List_MapFieldList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   for i in 0..<list.children.length() {
     match list.children.get(i) {
@@ -4759,8 +4609,8 @@ fn parse_map_field_list(state : ParserState) -> CstNode {
           if operators.length() > 1 {
             let colon = operators[operators.length() - 1]
             state.report_expected_tokens_at(COLON, colon.loc, [
-              TokenKind::TK_SEMI,
-              TokenKind::TK_RBRACE,
+              TK_SEMI,
+              TK_RBRACE,
             ])
           }
         }
@@ -4837,15 +4687,15 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
       }
     Some((found, start, end)) => {
       state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_TRUE,
-        TokenKind::TK_FALSE,
-        TokenKind::TK_CHAR,
-        TokenKind::TK_INT,
-        TokenKind::TK_FLOAT,
-        TokenKind::TK_DOUBLE,
-        TokenKind::TK_MINUS,
-        TokenKind::TK_STRING,
-        TokenKind::TK_REGEX_LITERAL,
+        TK_TRUE,
+        TK_FALSE,
+        TK_CHAR,
+        TK_INT,
+        TK_FLOAT,
+        TK_DOUBLE,
+        TK_MINUS,
+        TK_STRING,
+        TK_REGEX_LITERAL,
       ])
       if state.consume_any() is Some(bad) {
         push_child(
@@ -4866,18 +4716,14 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
       signed_constant_node(value, negative),
     )
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
   }
-  let expr = parse_expr_until(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
-  ])
+  let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -4888,18 +4734,14 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
 fn parse_record_field_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut kind = Field_Definition
-  if state.current_is(TokenKind::TK_DOTDOT) {
+  if state.current_is(TK_DOTDOT) {
     kind = Field_RecordSpread
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
     } else {
       ()
     }
-    let expr = parse_expr_until(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
     if !expr.children.is_empty() {
       push_child(children, Some("expr"), expr)
     }
@@ -4916,26 +4758,18 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
         }
       _ => ()
     }
-    if state.current_is(TokenKind::TK_COLON) {
+    if state.current_is(TK_COLON) {
       if state.consume_any() is Some(colon) {
         push_child(children, Some("op"), colon)
       } else {
         ()
       }
-      let expr = parse_expr_until(state, [
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RBRACE,
-        TokenKind::TK_EOF,
-      ])
+      let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
       if !expr.children.is_empty() {
         push_child(children, Some("expr"), expr)
       }
     } else if children.length() == 0 {
-      let expr = parse_expr_until(state, [
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RBRACE,
-        TokenKind::TK_EOF,
-      ])
+      let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
       if !expr.children.is_empty() {
         push_child(children, Some("expr"), expr)
       }
@@ -4960,19 +4794,15 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
 ///|
 fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
   let children : Array[(String?, CstNode)] = [(Some("self"), lhs)]
-  let open = state.expect_token(TokenKind::TK_LBRACKET)
+  let open = state.expect_token(TK_LBRACKET)
   push_child(children, Some("open"), open)
   let mut start_index : CstNode? = None
   let reports_before_index = state.reports.length()
-  if !state.current_is(TokenKind::TK_COLON) {
-    let index = parse_expr_until(state, [
-      TokenKind::TK_RBRACKET,
-      TokenKind::TK_COLON,
-      TokenKind::TK_EOF,
-    ])
+  if !state.current_is(TK_COLON) {
+    let index = parse_expr_until(state, [TK_RBRACKET, TK_COLON, TK_EOF])
     start_index = Some(state.required_expr_node(index, reports_before_index))
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if start_index is Some(index) {
       push_child(children, Some("start"), index)
     } else {
@@ -4983,17 +4813,13 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
     } else {
       ()
     }
-    if !state.current_is(TokenKind::TK_RBRACKET) &&
-      !state.current_is(TokenKind::TK_EOF) {
-      let end_index = parse_expr_until(state, [
-        TokenKind::TK_RBRACKET,
-        TokenKind::TK_EOF,
-      ])
+    if !state.current_is(TK_RBRACKET) && !state.current_is(TK_EOF) {
+      let end_index = parse_expr_until(state, [TK_RBRACKET, TK_EOF])
       if !end_index.children.is_empty() {
         push_child(children, Some("end"), end_index)
       }
     }
-    let close = state.expect_token(TokenKind::TK_RBRACKET)
+    let close = state.expect_token(TK_RBRACKET)
     push_child(children, Some("close"), close)
     state
     .node_from_children(Expr_ArrayGetSlice, children)
@@ -5008,11 +4834,11 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
     } else {
       ()
     }
-    let close = if !state.current_is(TokenKind::TK_RBRACKET) &&
+    let close = if !state.current_is(TK_RBRACKET) &&
       state.reports.length() > reports_before_index {
-      state.missing_token_node_silent(TokenKind::TK_RBRACKET)
+      state.missing_token_node_silent(TK_RBRACKET)
     } else {
-      state.expect_token(TokenKind::TK_RBRACKET)
+      state.expect_token(TK_RBRACKET)
     }
     push_child(children, Some("close"), close)
     state
@@ -5146,7 +4972,7 @@ fn parse_invalid_simple_expr(
     None => false
   }
   while !state.current_in(stop_kinds) &&
-        !state.current_is(TokenKind::TK_EOF) &&
+        !state.current_is(TK_EOF) &&
         !(state.peek() is None) {
     match state.peek() {
       Some((found, _, _)) =>
@@ -5176,15 +5002,13 @@ fn parse_invalid_simple_expr(
   }
   if invalid_top_level_start &&
     pending_function_body &&
-    state.current_is(TokenKind::TK_EOF) {
-    state.report_expected_tokens([TokenKind::TK_LBRACE])
+    state.current_is(TK_EOF) {
+    state.report_expected_tokens([TK_LBRACE])
   }
-  if report_invalid_continue &&
-    saw_local_let &&
-    state.current_is(TokenKind::TK_SEMI) {
+  if report_invalid_continue && saw_local_let && state.current_is(TK_SEMI) {
     state.abort_current_decl = true
   }
-  if report_invalid_continue && state.current_is(TokenKind::TK_RPAREN) {
+  if report_invalid_continue && state.current_is(TK_RPAREN) {
     report_trailing_recovery_eof(state)
   }
   if invalid_pub_start {
@@ -5222,9 +5046,9 @@ fn report_promoted_anonymous_function(state : ParserState) -> Unit {
         }
       }
       state.report_expected_tokens_at(LPAREN, mk_loc(start, recovery_end), [
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_EXTEND,
-        TokenKind::TK_PACKAGE_NAME,
+        TK_LIDENT,
+        TK_EXTEND,
+        TK_PACKAGE_NAME,
       ])
       state.suppress_next_top_level_recovery_report = true
     }
@@ -5342,9 +5166,9 @@ fn parse_keyword_value_expr(
   if value_is_required ||
     (
       !state.current_in(stop_kinds) &&
-      !state.current_is(TokenKind::TK_SEMI) &&
-      !state.current_is(TokenKind::TK_RBRACE) &&
-      !state.current_is(TokenKind::TK_EOF)
+      !state.current_is(TK_SEMI) &&
+      !state.current_is(TK_RBRACE) &&
+      !state.current_is(TK_EOF)
     ) {
     let reports_before_expr = state.reports.length()
     let expr = parse_expr_until(state, stop_kinds)
@@ -5398,9 +5222,9 @@ fn parse_break_expr(
     _ => ()
   }
   if !state.current_in(stop_kinds) &&
-    !state.current_is(TokenKind::TK_SEMI) &&
-    !state.current_is(TokenKind::TK_RBRACE) &&
-    !state.current_is(TokenKind::TK_EOF) {
+    !state.current_is(TK_SEMI) &&
+    !state.current_is(TK_RBRACE) &&
+    !state.current_is(TK_EOF) {
     let expr = parse_expr_until(state, stop_kinds)
     if !expr.children.is_empty() {
       push_child(children, Some("expr"), expr)
@@ -5454,16 +5278,15 @@ fn parse_continue_expr(
     _ => ()
   }
   let has_same_line_arg = if anchor is Some(item) {
-    !state.current_starts_after_node_line(item) &&
-    !state.current_is(TokenKind::TK_NEWLINE)
+    !state.current_starts_after_node_line(item) && !state.current_is(TK_NEWLINE)
   } else {
     false
   }
   if has_same_line_arg &&
     !state.current_in(stop_kinds) &&
-    !state.current_is(TokenKind::TK_SEMI) &&
-    !state.current_is(TokenKind::TK_RBRACE) &&
-    !state.current_is(TokenKind::TK_EOF) {
+    !state.current_is(TK_SEMI) &&
+    !state.current_is(TK_RBRACE) &&
+    !state.current_is(TK_EOF) {
     let args = parse_continue_argument_list(state, stop_kinds)
     if !args.children.is_empty() {
       push_child(children, Some("arg"), args)
@@ -5550,7 +5373,7 @@ fn parse_labelled_loop_expr(
       state.report_expected_tokens_at(found, mk_loc(start, end), expected)
       let invalid : Array[(String?, CstNode)] = []
       while !state.current_in(stop_kinds) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(
@@ -5588,7 +5411,7 @@ fn parse_continue_argument_list(
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let item_stops = stop_kinds.copy()
-  item_stops.push(TokenKind::TK_COMMA)
+  item_stops.push(TK_COMMA)
   let mut done = false
   while !done {
     push_children(children, state.consume_trivia())
@@ -5608,7 +5431,7 @@ fn parse_continue_argument_list(
           push_child(children, Some("item"), expr)
         }
         push_children(children, state.consume_trivia())
-        if state.current_is(TokenKind::TK_COMMA) {
+        if state.current_is(TK_COMMA) {
           if state.consume_any() is Some(sep) {
             push_child(children, Some("sep"), sep)
           } else {
@@ -5712,7 +5535,7 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
 fn parse_type_name_node(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut is_object = false
-  if state.current_is(TokenKind::TK_AMPER) {
+  if state.current_is(TK_AMPER) {
     is_object = true
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
@@ -5759,9 +5582,9 @@ fn parse_type_name_node(state : ParserState) -> CstNode {
           push_child(
             children,
             Some("name"),
-            state.missing_token_node_with_expected(TokenKind::TK_UIDENT, [
-              TokenKind::TK_DOT_LIDENT,
-              TokenKind::TK_DOT_UIDENT,
+            state.missing_token_node_with_expected(TK_UIDENT, [
+              TK_DOT_LIDENT,
+              TK_DOT_UIDENT,
             ]),
           )
       }
@@ -5770,9 +5593,9 @@ fn parse_type_name_node(state : ParserState) -> CstNode {
       push_child(
         children,
         Some("name"),
-        state.missing_token_node_with_expected(TokenKind::TK_UIDENT, [
-          TokenKind::TK_UIDENT,
-          TokenKind::TK_PACKAGE_NAME,
+        state.missing_token_node_with_expected(TK_UIDENT, [
+          TK_UIDENT,
+          TK_PACKAGE_NAME,
         ]),
       )
   }
@@ -5787,7 +5610,7 @@ fn parse_paren_expr(
   state : ParserState,
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
-  let arrow_params = !kind_in(TokenKind::TK_FAT_ARROW, stop_kinds) &&
+  let arrow_params = !kind_in(TK_FAT_ARROW, stop_kinds) &&
     paren_expr_is_followed_by_fat_arrow(state)
   if !arrow_params && paren_expr_has_top_level_constraint(state) {
     return parse_constraint_paren_expr(state)
@@ -5795,21 +5618,21 @@ fn parse_paren_expr(
   let list = if arrow_params {
     parse_delimited(
       state,
-      TokenKind::TK_LPAREN,
-      TokenKind::TK_RPAREN,
+      TK_LPAREN,
+      TK_RPAREN,
       parse_arrow_parameter_expr_item,
       List_TupleElementList,
-      sep_kind=TokenKind::TK_COMMA,
+      sep_kind=TK_COMMA,
       item_expected="simple expression",
     )
   } else {
     parse_delimited(
       state,
-      TokenKind::TK_LPAREN,
-      TokenKind::TK_RPAREN,
+      TK_LPAREN,
+      TK_RPAREN,
       parse_tuple_expr_item,
       List_TupleElementList,
-      sep_kind=TokenKind::TK_COMMA,
+      sep_kind=TK_COMMA,
     )
   }
   if arrow_params {
@@ -5856,7 +5679,7 @@ fn parse_paren_expr(
 ///|
 fn parse_arrow_parameter_expr_item(state : ParserState) -> CstNode {
   let expr = parse_tuple_expr_item(state)
-  if !state.current_is(TokenKind::TK_COLON) {
+  if !state.current_is(TK_COLON) {
     return expr
   }
   let children : Array[(String?, CstNode)] = [(Some("expr"), expr)]
@@ -5866,11 +5689,7 @@ fn parse_arrow_parameter_expr_item(state : ParserState) -> CstNode {
     ()
   }
   let reports_before_type = state.reports.length()
-  let ty = parse_type_arrow(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ])
+  let ty = parse_type_arrow(state, [TK_COMMA, TK_RPAREN, TK_EOF])
   push_child(
     children,
     Some("type"),
@@ -5920,12 +5739,7 @@ fn paren_expr_is_followed_by_fat_arrow(state : ParserState) -> Bool {
 
 ///|
 fn parse_tuple_expr_item(state : ParserState) -> CstNode {
-  let item_stops = [
-    TokenKind::TK_COLON,
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ]
+  let item_stops = [TokenKind::TK_COLON, TK_COMMA, TK_RPAREN, TK_EOF]
   if state.current_argument_starts_optional_forwarding() {
     parse_optional_forwarding_argument(state)
   } else if state.current_argument_starts_labelled() {
@@ -6006,27 +5820,23 @@ fn parse_constraint_paren_expr(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  let expr = parse_expr_until(state, [
-    TokenKind::TK_COLON,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ])
+  let expr = parse_expr_until(state, [TK_COLON, TK_RPAREN, TK_EOF])
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
   }
-  let ty = parse_type_until(state, [TokenKind::TK_RPAREN, TokenKind::TK_EOF])
+  let ty = parse_type_until(state, [TK_RPAREN, TK_EOF])
   if !ty.children.is_empty() {
     push_child(children, Some("type"), ty)
   }
   push_children(children, state.consume_trivia())
-  push_child(children, Some("close"), state.expect_token(TokenKind::TK_RPAREN))
+  push_child(children, Some("close"), state.expect_token(TK_RPAREN))
   state.node_from_children(Expr_Constraint, children)
 }
 
@@ -6034,11 +5844,11 @@ fn parse_constraint_paren_expr(state : ParserState) -> CstNode {
 fn parse_array_expr(state : ParserState) -> CstNode {
   let open_kind = match state.peek() {
     Some((LBRACKET_BAR, _, _)) => TokenKind::TK_LBRACKET_BAR
-    _ => TokenKind::TK_LBRACKET
+    _ => TK_LBRACKET
   }
   let close_kind = match open_kind {
-    TokenKind::TK_LBRACKET_BAR => TokenKind::TK_BAR_RBRACKET
-    _ => TokenKind::TK_RBRACKET
+    TK_LBRACKET_BAR => TokenKind::TK_BAR_RBRACKET
+    _ => TK_RBRACKET
   }
   if array_starts_list_comprehension(state) {
     return parse_list_comprehension_expr(state, open_kind, close_kind)
@@ -6049,7 +5859,7 @@ fn parse_array_expr(state : ParserState) -> CstNode {
     close_kind,
     parse_array_expr_item,
     List_ArrayElementList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let kind = if list_has_item_kind(list, ArrayElement_Spread) {
     Expr_ArraySpread
@@ -6164,7 +5974,7 @@ fn parse_list_comprehension_expr(
   with_marker_child(
     result,
     "array_kind",
-    if open_kind is TokenKind::TK_LBRACKET_BAR {
+    if open_kind is TK_LBRACKET_BAR {
       ArrayKind_Iter
     } else {
       ArrayKind_Array
@@ -6211,27 +6021,12 @@ fn list_comprehension_is_foreach(state : ParserState) -> Bool {
 
 ///|
 fn list_comprehension_expr_stops(close_kind : TokenKind) -> Array[TokenKind] {
-  [
-    TokenKind::TK_SEMI,
-    TokenKind::TK_NEWLINE,
-    TokenKind::TK_IF,
-    TokenKind::TK_FAT_ARROW,
-    close_kind,
-    TokenKind::TK_EOF,
-  ]
+  [TK_SEMI, TK_NEWLINE, TK_IF, TK_FAT_ARROW, close_kind, TK_EOF]
 }
 
 ///|
 fn list_comprehension_binding_stops(close_kind : TokenKind) -> Array[TokenKind] {
-  [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_SEMI,
-    TokenKind::TK_NEWLINE,
-    TokenKind::TK_IF,
-    TokenKind::TK_FAT_ARROW,
-    close_kind,
-    TokenKind::TK_EOF,
-  ]
+  [TK_COMMA, TK_SEMI, TK_NEWLINE, TK_IF, TK_FAT_ARROW, close_kind, TK_EOF]
 }
 
 ///|
@@ -6275,7 +6070,7 @@ fn parse_list_comprehension_foreach_header(
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
-  if state.current_is(TokenKind::TK_IN) {
+  if state.current_is(TK_IN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -6286,12 +6081,11 @@ fn parse_list_comprehension_foreach_header(
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  if !state.current_is(TokenKind::TK_IF) &&
-    !state.current_is(TokenKind::TK_FAT_ARROW) &&
+  if !state.current_is(TK_IF) &&
+    !state.current_is(TK_FAT_ARROW) &&
     !state.current_is(close_kind) &&
-    !state.current_is(TokenKind::TK_EOF) {
-    if state.current_is(TokenKind::TK_SEMI) ||
-      state.current_is(TokenKind::TK_NEWLINE) {
+    !state.current_is(TK_EOF) {
+    if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
       consume_for_header_separator(state)
     }
     push_child(
@@ -6299,10 +6093,10 @@ fn parse_list_comprehension_foreach_header(
       Some("init"),
       parse_list_comprehension_binding_list(state, close_kind),
     )
-    if !state.current_is(TokenKind::TK_IF) &&
-      !state.current_is(TokenKind::TK_FAT_ARROW) &&
+    if !state.current_is(TK_IF) &&
+      !state.current_is(TK_FAT_ARROW) &&
       !state.current_is(close_kind) &&
-      !state.current_is(TokenKind::TK_EOF) {
+      !state.current_is(TK_EOF) {
       if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
         consume_for_header_separator(state)
       }
@@ -6337,20 +6131,19 @@ fn parse_list_comprehension_for_header(
       for_loc, "A list-comprehension `for` header cannot be empty; use `for ;;` for an infinite header.",
     )
   }
-  if !state.current_is(TokenKind::TK_IF) &&
-    !state.current_is(TokenKind::TK_FAT_ARROW) &&
+  if !state.current_is(TK_IF) &&
+    !state.current_is(TK_FAT_ARROW) &&
     !state.current_is(close_kind) &&
-    !state.current_is(TokenKind::TK_EOF) {
-    if state.current_is(TokenKind::TK_SEMI) ||
-      state.current_is(TokenKind::TK_NEWLINE) {
+    !state.current_is(TK_EOF) {
+    if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
       consume_for_header_separator(state)
     }
-    if !state.current_is(TokenKind::TK_SEMI) &&
-      !state.current_is(TokenKind::TK_NEWLINE) &&
-      !state.current_is(TokenKind::TK_IF) &&
-      !state.current_is(TokenKind::TK_FAT_ARROW) &&
+    if !state.current_is(TK_SEMI) &&
+      !state.current_is(TK_NEWLINE) &&
+      !state.current_is(TK_IF) &&
+      !state.current_is(TK_FAT_ARROW) &&
       !state.current_is(close_kind) &&
-      !state.current_is(TokenKind::TK_EOF) {
+      !state.current_is(TK_EOF) {
       let cond_expr = parse_expr_infix(
         state,
         list_comprehension_expr_stops(close_kind),
@@ -6359,10 +6152,10 @@ fn parse_list_comprehension_for_header(
         push_child(children, Some("cond"), cond_expr)
       }
     }
-    if !state.current_is(TokenKind::TK_IF) &&
-      !state.current_is(TokenKind::TK_FAT_ARROW) &&
+    if !state.current_is(TK_IF) &&
+      !state.current_is(TK_FAT_ARROW) &&
       !state.current_is(close_kind) &&
-      !state.current_is(TokenKind::TK_EOF) {
+      !state.current_is(TK_EOF) {
       if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
         consume_for_header_separator(state)
       }
@@ -6422,12 +6215,12 @@ fn parse_list_comprehension_binding_list(
     push_children(children, state.consume_trivia())
     match state.peek() {
       Some((tok, _, _)) if kind_in(tok.kind(), [
-          TokenKind::TK_SEMI,
-          TokenKind::TK_NEWLINE,
-          TokenKind::TK_IF,
-          TokenKind::TK_FAT_ARROW,
+          TK_SEMI,
+          TK_NEWLINE,
+          TK_IF,
+          TK_FAT_ARROW,
           close_kind,
-          TokenKind::TK_EOF,
+          TK_EOF,
         ]) => done = true
       Some((COMMA, _, _)) =>
         if state.consume_any() is Some(sep) {
@@ -6439,7 +6232,7 @@ fn parse_list_comprehension_binding_list(
         let item = parse_list_comprehension_binding(state, close_kind)
         push_child(children, Some("item"), item)
         push_children(children, state.consume_trivia())
-        if state.current_is(TokenKind::TK_COMMA) {
+        if state.current_is(TK_COMMA) {
           if state.consume_any() is Some(sep) {
             push_child(children, Some("sep"), sep)
           } else {
@@ -6468,14 +6261,9 @@ fn parse_list_comprehension_binding(
       } else {
         ()
       }
-    _ =>
-      push_child(
-        children,
-        Some("name"),
-        state.missing_token_node(TokenKind::TK_LIDENT),
-      )
+    _ => push_child(children, Some("name"), state.missing_token_node(TK_LIDENT))
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
@@ -6496,12 +6284,7 @@ fn parse_list_comprehension_binding(
 
 ///|
 fn parse_array_expr_item(state : ParserState) -> CstNode {
-  let stops = [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RBRACKET,
-    TokenKind::TK_BAR_RBRACKET,
-    TK_EOF,
-  ]
+  let stops = [TokenKind::TK_COMMA, TK_RBRACKET, TK_BAR_RBRACKET, TK_EOF]
   match state.peek() {
     Some((ELLIPSIS, _, _)) => parse_invalid_simple_expr(state, stops)
     Some((DOTDOT, _, _)) => {
@@ -6535,8 +6318,8 @@ fn parse_array_expr_item(state : ParserState) -> CstNode {
 ///|
 fn body_delimited_condition_stops(state : ParserState) -> Array[TokenKind] {
   match state.peek_significant() {
-    Some((LBRACE, _, _)) => [TokenKind::TK_EOF]
-    _ => [TokenKind::TK_LBRACE, TokenKind::TK_EOF]
+    Some((LBRACE, _, _)) => [TK_EOF]
+    _ => [TK_LBRACE, TK_EOF]
   }
 }
 
@@ -6574,10 +6357,10 @@ fn recover_to_required_block(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> Bool {
-  while !state.current_is(TokenKind::TK_LBRACE) &&
-        !state.current_is(TokenKind::TK_SEMI) &&
-        !state.current_is(TokenKind::TK_RBRACE) &&
-        !state.current_is(TokenKind::TK_EOF) &&
+  while !state.current_is(TK_LBRACE) &&
+        !state.current_is(TK_SEMI) &&
+        !state.current_is(TK_RBRACE) &&
+        !state.current_is(TK_EOF) &&
         !(state.peek() is None) {
     if state.consume_any() is Some(bad) {
       push_child(
@@ -6589,7 +6372,7 @@ fn recover_to_required_block(
       ()
     }
   }
-  state.current_is(TokenKind::TK_LBRACE)
+  state.current_is(TK_LBRACE)
 }
 
 ///|
@@ -6649,9 +6432,9 @@ fn parse_if_expr(state : ParserState) -> CstNode {
   if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   } else {
-    state.report_expected_tokens([TokenKind::TK_LBRACE])
-    report_recovered_body_eof = state.current_is(TokenKind::TK_LET) ||
-      state.current_is(TokenKind::TK_LETREC)
+    state.report_expected_tokens([TK_LBRACE])
+    report_recovered_body_eof = state.current_is(TK_LET) ||
+      state.current_is(TK_LETREC)
     if recover_to_required_block(state, children) {
       push_child(children, Some("body"), parse_block_expr(state))
     } else {
@@ -6674,7 +6457,7 @@ fn parse_if_expr(state : ParserState) -> CstNode {
     }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_ELSE) {
+  if state.current_is(TK_ELSE) {
     if state.consume_any() is Some(else_kw) {
       push_child(children, Some("else"), else_kw)
     } else {
@@ -6685,12 +6468,10 @@ fn parse_if_expr(state : ParserState) -> CstNode {
       Some((IF, _, _)) => parse_if_expr(state)
       Some((LBRACE, _, _)) => parse_block_expr(state)
       Some((found, start, end)) => {
-        state.report_expected_tokens_at(found, mk_loc(start, end), [
-          TokenKind::TK_LBRACE,
-        ])
-        parse_expr_until(state, [TokenKind::TK_SEMI, TokenKind::TK_EOF])
+        state.report_expected_tokens_at(found, mk_loc(start, end), [TK_LBRACE])
+        parse_expr_until(state, [TK_SEMI, TK_EOF])
       }
-      None => parse_expr_until(state, [TokenKind::TK_SEMI, TokenKind::TK_EOF])
+      None => parse_expr_until(state, [TK_SEMI, TK_EOF])
     }
     push_child(
       children,
@@ -6716,12 +6497,7 @@ fn parse_try_expr(state : ParserState) -> CstNode {
     ()
   }
   let reports_before_body = state.reports.length()
-  let try_body_stops = [
-    TokenKind::TK_CATCH,
-    TokenKind::TK_SEMI,
-    TK_RBRACE,
-    TokenKind::TK_EOF,
-  ]
+  let try_body_stops = [TokenKind::TK_CATCH, TK_SEMI, TK_RBRACE, TK_EOF]
   let panic_body_stops = [TokenKind::TK_SEMI, TK_RBRACE, TK_EOF]
   let body = match (kind, state.peek_significant()) {
     (Expr_Try, Some((TRY_EXCLAMATION | LOOP, _, _))) =>
@@ -6736,34 +6512,34 @@ fn parse_try_expr(state : ParserState) -> CstNode {
   let body = state.required_expr_node(body, reports_before_body)
   push_child(children, Some("body"), body)
   let mut saw_catch = false
-  if state.current_is(TokenKind::TK_CATCH) {
+  if state.current_is(TK_CATCH) {
     saw_catch = true
     if state.consume_any() is Some(catch_kw) {
       push_child(children, Some("kw"), catch_kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("case"), parse_case_block(state))
     } else {
-      state.report_expected_tokens([TokenKind::TK_LBRACE])
+      state.report_expected_tokens([TK_LBRACE])
       push_child(children, Some("case"), state.missing_expr_node())
     }
   }
-  if state.current_is(TokenKind::TK_NORAISE) {
+  if state.current_is(TK_NORAISE) {
     if state.consume_any() is Some(else_kw) {
       push_child(children, Some("else_kw"), else_kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_case_block(state))
     }
   }
   if kind is Expr_Try &&
     !saw_catch &&
     state.reports.length() == reports_before_body {
-    state.report_expected_tokens([TokenKind::TK_CATCH])
+    state.report_expected_tokens([TK_CATCH])
   }
   let result = state.node_from_children(kind, children)
   if kind is Expr_TryOperator {
@@ -6809,12 +6585,12 @@ fn parse_keyword_body_expr(state : ParserState, kind : NodeKind) -> CstNode {
     state.required_expr_node(cond, reports_before_cond),
   )
   let mut body_had_error = false
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     let reports_before_body = state.reports.length()
     push_child(children, Some("body"), parse_block_expr(state))
     body_had_error = state.reports.length() > reports_before_body
   } else {
-    state.report_expected_tokens([TokenKind::TK_LBRACE])
+    state.report_expected_tokens([TK_LBRACE])
     if recover_to_required_block(state, children) {
       let reports_before_body = state.reports.length()
       push_child(children, Some("body"), parse_block_expr(state))
@@ -6824,18 +6600,18 @@ fn parse_keyword_body_expr(state : ParserState, kind : NodeKind) -> CstNode {
     }
   }
   if kind is Expr_While && body_had_error {
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("error"), parse_block_expr(state))
     }
     report_next_statement_after_separator(state)
   }
-  if state.current_is(TokenKind::TK_NOBREAK) {
+  if state.current_is(TK_NOBREAK) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
     }
   }
@@ -6877,14 +6653,9 @@ fn parse_invalid_for_header(state : ParserState, skip_binder : Bool) -> CstNode 
   match state.peek() {
     Some((found, start, end)) => {
       let expected = if skip_binder {
-        [TokenKind::TK_EQUAL, TokenKind::TK_COMMA, TokenKind::TK_IN]
+        [TokenKind::TK_EQUAL, TK_COMMA, TK_IN]
       } else {
-        [
-          TokenKind::TK_LIDENT,
-          TokenKind::TK_EXTEND,
-          TokenKind::TK_SEMI,
-          TokenKind::TK_LBRACE,
-        ]
+        [TK_LIDENT, TK_EXTEND, TK_SEMI, TK_LBRACE]
       }
       state.report_expected_tokens_at(found, mk_loc(start, end), expected)
     }
@@ -6892,10 +6663,10 @@ fn parse_invalid_for_header(state : ParserState, skip_binder : Bool) -> CstNode 
   }
   let mut saw_header_separator = false
   let mut reported_missing_statement = false
-  while !state.current_is(TokenKind::TK_LBRACE) &&
-        !state.current_is(TokenKind::TK_EOF) &&
+  while !state.current_is(TK_LBRACE) &&
+        !state.current_is(TK_EOF) &&
         !(state.peek() is None) {
-    if state.current_is(TokenKind::TK_SEMI) {
+    if state.current_is(TK_SEMI) {
       if saw_header_separator && !reported_missing_statement {
         state.report_expected_description("simple expression")
         reported_missing_statement = true
@@ -6912,7 +6683,7 @@ fn parse_invalid_for_header(state : ParserState, skip_binder : Bool) -> CstNode 
       ()
     }
   }
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   } else {
     push_child(children, Some("body"), state.missing_expr_node())
@@ -6931,11 +6702,8 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
   while !done {
     push_children(children, state.consume_trivia())
     match state.peek() {
-      Some((tok, _, _)) if kind_in(tok.kind(), [
-          TokenKind::TK_IN,
-          TokenKind::TK_LBRACE,
-          TokenKind::TK_EOF,
-        ]) => done = true
+      Some((tok, _, _)) if kind_in(tok.kind(), [TK_IN, TK_LBRACE, TK_EOF]) =>
+        done = true
       Some((COMMA, _, _)) => {
         saw_sep = true
         if state.consume_any() is Some(sep) {
@@ -6953,16 +6721,16 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
             state.report_expected_tokens_at(found, mk_loc(start, end), [
               TK_LIDENT,
               TK_EXTEND,
-              TokenKind::TK_SEMI,
-              TokenKind::TK_LBRACE,
+              TK_SEMI,
+              TK_LBRACE,
             ])
           None => ()
         }
         let pat = parse_pattern_until(state, [
-          TokenKind::TK_COMMA,
-          TokenKind::TK_IN,
-          TokenKind::TK_LBRACE,
-          TokenKind::TK_EOF,
+          TK_COMMA,
+          TK_IN,
+          TK_LBRACE,
+          TK_EOF,
         ])
         if !pat.children.is_empty() {
           if first_pattern is None {
@@ -6972,7 +6740,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
         }
         push_child(children, Some("item"), pat)
         push_children(children, state.consume_trivia())
-        if state.current_is(TokenKind::TK_COMMA) {
+        if state.current_is(TK_COMMA) {
           saw_sep = true
           if state.consume_any() is Some(sep) {
             push_child(children, Some("sep"), sep)
@@ -6985,11 +6753,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
     }
   }
   if item_count == 0 {
-    state.report_expected_tokens([
-      TokenKind::TK_LIDENT,
-      TokenKind::TK_EXTEND,
-      TokenKind::TK_UNDERSCORE,
-    ])
+    state.report_expected_tokens([TK_LIDENT, TK_EXTEND, TK_UNDERSCORE])
   }
   if item_count == 1 && !saw_sep {
     if first_pattern is Some(pat) {
@@ -7006,7 +6770,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
 
 ///|
 fn parse_foreach_iter_expr(state : ParserState) -> CstNode {
-  if state.current_is(TokenKind::TK_LBRACE) &&
+  if state.current_is(TK_LBRACE) &&
     !brace_starts_record_expr(state) &&
     !brace_starts_map_expr(state) &&
     !brace_expr_is_followed_by_range_operator(state) {
@@ -7018,12 +6782,7 @@ fn parse_foreach_iter_expr(state : ParserState) -> CstNode {
 
 ///|
 fn foreach_iter_expr_stops() -> Array[TokenKind] {
-  [
-    TokenKind::TK_SEMI,
-    TokenKind::TK_NOBREAK,
-    TokenKind::TK_ELSE,
-    TokenKind::TK_EOF,
-  ]
+  [TK_SEMI, TK_NOBREAK, TK_ELSE, TK_EOF]
 }
 
 ///|
@@ -7038,7 +6797,7 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
-  if state.current_is(TokenKind::TK_IN) {
+  if state.current_is(TK_IN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -7049,10 +6808,10 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
       push_child(children, Some("expr"), expr)
     }
   }
-  if state.current_is(TokenKind::TK_SEMI) {
+  if state.current_is(TK_SEMI) {
     consume_for_header_separator(state)
     push_child(children, Some("init"), parse_for_binding_list(state))
-    if state.current_is(TokenKind::TK_SEMI) {
+    if state.current_is(TK_SEMI) {
       consume_for_header_separator(state)
       push_child(children, Some("continue"), parse_for_binding_list(state))
       if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
@@ -7060,20 +6819,20 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
       }
     }
   }
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   }
-  if state.current_is(TokenKind::TK_NOBREAK) {
+  if state.current_is(TK_NOBREAK) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
     }
   }
-  if state.current_is(TokenKind::TK_WHERE) {
+  if state.current_is(TK_WHERE) {
     push_child(children, Some("where"), parse_where_clause(state))
   }
   state.node_from_children(Expr_ForEach, children)
@@ -7081,13 +6840,7 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
 
 ///|
 fn for_clause_stops() -> Array[TokenKind] {
-  [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_SEMI,
-    TokenKind::TK_NEWLINE,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_EOF,
-  ]
+  [TK_COMMA, TK_SEMI, TK_NEWLINE, TK_LBRACE, TK_EOF]
 }
 
 ///|
@@ -7101,12 +6854,7 @@ fn for_binding_expr_stops(state : ParserState) -> Array[TokenKind] {
       brace_starts_record_expr(state, start_offset~) ||
       brace_starts_map_expr(state, start_offset~)
     ) {
-    [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_SEMI,
-      TokenKind::TK_NEWLINE,
-      TokenKind::TK_EOF,
-    ]
+    [TK_COMMA, TK_SEMI, TK_NEWLINE, TK_EOF]
   } else {
     for_clause_stops()
   }
@@ -7114,13 +6862,7 @@ fn for_binding_expr_stops(state : ParserState) -> Array[TokenKind] {
 
 ///|
 fn for_header_stops() -> Array[TokenKind] {
-  [
-    TokenKind::TK_SEMI,
-    TokenKind::TK_NEWLINE,
-    TokenKind::TK_LBRACE,
-    TK_RBRACE,
-    TokenKind::TK_EOF,
-  ]
+  [TK_SEMI, TK_NEWLINE, TK_LBRACE, TK_RBRACE, TK_EOF]
 }
 
 ///|
@@ -7174,13 +6916,13 @@ fn parse_for_binding(state : ParserState) -> CstNode {
       recover_invalid_statement_series = found is LET &&
         invalid_for_binding_series_has_underscore(state)
       state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_EXTEND,
+        TK_LIDENT,
+        TK_EXTEND,
       ])
       push_child(
         children,
         Some("name"),
-        state.missing_token_node_silent(TokenKind::TK_LIDENT),
+        state.missing_token_node_silent(TK_LIDENT),
       )
     }
     None => invalid_name = true
@@ -7224,9 +6966,9 @@ fn parse_for_binding(state : ParserState) -> CstNode {
         .node_from_children(Binding_For, children)
         .with_structured_name("semantic_name", Name_Binder, ["name"])
     }
-    while !state.current_is(TokenKind::TK_COMMA) &&
-          !state.current_is(TokenKind::TK_LBRACE) &&
-          !state.current_is(TokenKind::TK_EOF) &&
+    while !state.current_is(TK_COMMA) &&
+          !state.current_is(TK_LBRACE) &&
+          !state.current_is(TK_EOF) &&
           !(state.peek() is None) {
       if state.consume_any() is Some(bad) {
         push_child(
@@ -7247,14 +6989,14 @@ fn parse_for_binding(state : ParserState) -> CstNode {
       .node_from_children(Binding_For, children)
       .with_structured_name("semantic_name", Name_Binder, ["name"])
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
       ()
     }
   } else {
-    state.report_expected_tokens([TokenKind::TK_EQUAL])
+    state.report_expected_tokens([TK_EQUAL])
     while !state.current_in(for_clause_stops()) && !(state.peek() is None) {
       if state.consume_any() is Some(bad) {
         push_child(
@@ -7298,7 +7040,7 @@ fn parse_for_binding_list(state : ParserState) -> CstNode {
       Some(_) => {
         push_child(children, Some("item"), parse_for_binding(state))
         push_children(children, state.consume_trivia())
-        if state.current_is(TokenKind::TK_COMMA) {
+        if state.current_is(TK_COMMA) {
           if state.consume_any() is Some(sep) {
             push_child(children, Some("sep"), sep)
           } else {
@@ -7306,12 +7048,8 @@ fn parse_for_binding_list(state : ParserState) -> CstNode {
           }
         } else if !state.current_in(for_header_stops()) &&
           !(state.peek() is None) {
-          state.report_expected_tokens([
-            TokenKind::TK_COMMA,
-            TokenKind::TK_SEMI,
-            TokenKind::TK_LBRACE,
-          ])
-          while !state.current_is(TokenKind::TK_COMMA) &&
+          state.report_expected_tokens([TK_COMMA, TK_SEMI, TK_LBRACE])
+          while !state.current_is(TK_COMMA) &&
                 !state.current_in(for_header_stops()) &&
                 !(state.peek() is None) {
             if state.consume_any() is Some(bad) {
@@ -7324,7 +7062,7 @@ fn parse_for_binding_list(state : ParserState) -> CstNode {
               done = true
             }
           }
-          if state.current_is(TokenKind::TK_COMMA) {
+          if state.current_is(TK_COMMA) {
             if state.consume_any() is Some(sep) {
               push_child(children, Some("sep"), sep)
             } else {
@@ -7408,11 +7146,7 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
 ///|
 fn parse_for_condition(state : ParserState) -> CstNode {
   let first = state.peek().map(item => item.0)
-  let cond = parse_expr_infix(state, [
-    TokenKind::TK_SEMI,
-    TokenKind::TK_NEWLINE,
-    TokenKind::TK_EOF,
-  ])
+  let cond = parse_expr_infix(state, [TK_SEMI, TK_NEWLINE, TK_EOF])
   match first {
     Some(tok) if token_disallowed_in_condition(tok) =>
       if unexpected_expr_or_statement_name(tok) is Some(actual) {
@@ -7430,9 +7164,9 @@ fn recover_for_missing_separator(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> Unit {
-  while !state.current_is(TokenKind::TK_LBRACE) &&
-        !state.current_is(TokenKind::TK_RBRACE) &&
-        !state.current_is(TokenKind::TK_EOF) &&
+  while !state.current_is(TK_LBRACE) &&
+        !state.current_is(TK_RBRACE) &&
+        !state.current_is(TK_EOF) &&
         !(state.peek() is None) {
     if state.consume_any() is Some(bad) {
       push_child(
@@ -7467,11 +7201,11 @@ fn parse_c_style_for_expr(state : ParserState) -> CstNode {
   let reports_before_init = state.reports.length()
   push_child(children, Some("init"), parse_for_binding_list(state))
   let init_had_error = state.reports.length() > reports_before_init
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   } else {
-    let had_first_separator = state.current_is(TokenKind::TK_SEMI) ||
-      state.current_is(TokenKind::TK_NEWLINE)
+    let had_first_separator = state.current_is(TK_SEMI) ||
+      state.current_is(TK_NEWLINE)
     consume_for_header_separator(state)
     let has_condition = had_first_separator &&
       (match state.peek() {
@@ -7484,40 +7218,39 @@ fn parse_c_style_for_expr(state : ParserState) -> CstNode {
         push_child(children, Some("cond"), cond)
       }
     }
-    if init_had_error && state.current_is(TokenKind::TK_SEMI) {
+    if init_had_error && state.current_is(TK_SEMI) {
       state.report_expected_description("simple expression")
     }
-    if has_condition && state.current_is(TokenKind::TK_LBRACE) {
+    if has_condition && state.current_is(TK_LBRACE) {
       push_child(children, Some("body"), parse_block_expr(state))
-    } else if state.current_is(TokenKind::TK_SEMI) ||
-      state.current_is(TokenKind::TK_NEWLINE) {
+    } else if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
       consume_for_header_separator(state)
       push_child(children, Some("continue"), parse_for_binding_list(state))
-      if state.current_is(TokenKind::TK_SEMI) {
-        state.report_expected_tokens([TokenKind::TK_COMMA, TokenKind::TK_LBRACE])
+      if state.current_is(TK_SEMI) {
+        state.report_expected_tokens([TK_COMMA, TK_LBRACE])
       }
-      if state.current_is(TokenKind::TK_LBRACE) {
+      if state.current_is(TK_LBRACE) {
         push_child(children, Some("body"), parse_block_expr(state))
       }
     } else if had_first_separator {
-      state.report_expected_tokens([TokenKind::TK_SEMI])
+      state.report_expected_tokens([TK_SEMI])
       recover_for_missing_separator(state, children)
-      if state.current_is(TokenKind::TK_LBRACE) {
+      if state.current_is(TK_LBRACE) {
         push_child(children, Some("body"), parse_block_expr(state))
       }
     }
   }
-  if state.current_is(TokenKind::TK_NOBREAK) {
+  if state.current_is(TK_NOBREAK) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
     }
   }
-  if state.current_is(TokenKind::TK_WHERE) {
+  if state.current_is(TK_WHERE) {
     push_child(children, Some("where"), parse_where_clause(state))
   }
   state.node_from_children(Expr_For, children)
@@ -7531,17 +7264,17 @@ fn parse_where_clause(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     push_child(
       children,
       Some("body"),
       parse_delimited(
         state,
-        TokenKind::TK_LBRACE,
-        TokenKind::TK_RBRACE,
+        TK_LBRACE,
+        TK_RBRACE,
         parse_where_field_item,
         List_WhereFieldList,
-        sep_kind=TokenKind::TK_COMMA,
+        sep_kind=TK_COMMA,
       ),
     )
   }
@@ -7560,18 +7293,14 @@ fn parse_where_field_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
   }
-  let expr = parse_expr_until(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
-  ])
+  let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -7586,7 +7315,7 @@ fn parse_quantifier_expr(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let quantifier_kind = if state.current_is(TokenKind::TK_EXISTS) {
+  let quantifier_kind = if state.current_is(TK_EXISTS) {
     QuantifierKind_Exists
   } else {
     QuantifierKind_Forall
@@ -7605,18 +7334,18 @@ fn parse_quantifier_expr(
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
-    let ty = parse_type_arrow(state, [TokenKind::TK_COMMA, TokenKind::TK_EOF])
+    let ty = parse_type_arrow(state, [TK_COMMA, TK_EOF])
     if !ty.children.is_empty() {
       push_child(children, Some("type"), ty)
     }
   }
-  if state.current_is(TokenKind::TK_COMMA) {
+  if state.current_is(TK_COMMA) {
     if state.consume_any() is Some(sep) {
       push_child(children, Some("sep"), sep)
     } else {
@@ -7642,15 +7371,11 @@ fn parse_lex_block_expr(state : ParserState, kind : NodeKind) -> CstNode {
   } else {
     ()
   }
-  let expr = parse_expr_until(state, [
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_WITH,
-    TokenKind::TK_EOF,
-  ])
+  let expr = parse_expr_until(state, [TK_LBRACE, TK_WITH, TK_EOF])
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  if state.current_is(TokenKind::TK_WITH) {
+  if state.current_is(TK_WITH) {
     if state.consume_any() is Some(with_kw) {
       push_child(children, Some("kw"), with_kw)
     } else {
@@ -7662,7 +7387,7 @@ fn parse_lex_block_expr(state : ParserState, kind : NodeKind) -> CstNode {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     push_child(children, Some("case"), parse_lexscan_case_block(state))
   }
   state.node_from_children(kind, children)
@@ -7671,25 +7396,17 @@ fn parse_lex_block_expr(state : ParserState, kind : NodeKind) -> CstNode {
 ///|
 fn parse_lexscan_case_block(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  push_child(children, Some("open"), state.expect_token(TokenKind::TK_LBRACE))
+  push_child(children, Some("open"), state.expect_token(TK_LBRACE))
   let mut done = false
   while !done {
     push_children(children, state.consume_trivia())
     match state.peek() {
       Some((RBRACE, _, _)) => {
-        push_child(
-          children,
-          Some("close"),
-          state.expect_token(TokenKind::TK_RBRACE),
-        )
+        push_child(children, Some("close"), state.expect_token(TK_RBRACE))
         done = true
       }
       Some((EOF, _, _)) | None => {
-        push_child(
-          children,
-          Some("close"),
-          state.missing_token_node(TokenKind::TK_RBRACE),
-        )
+        push_child(children, Some("close"), state.missing_token_node(TK_RBRACE))
         done = true
       }
       Some((SEMI(_), _, _)) =>
@@ -7707,12 +7424,7 @@ fn parse_lexscan_case_block(state : ParserState) -> CstNode {
 
 ///|
 fn parse_lexscan_case_pattern(state : ParserState) -> CstNode {
-  let stops = [
-    TokenKind::TK_FAT_ARROW,
-    TokenKind::TK_SEMI,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
-  ]
+  let stops = [TokenKind::TK_FAT_ARROW, TK_SEMI, TK_RBRACE, TK_EOF]
   match state.peek() {
     Some((UNDERSCORE, _, _)) | Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
       parse_pattern_until(state, stops)
@@ -7790,10 +7502,10 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
-  push_child(children, Some("op"), state.expect_token(TokenKind::TK_FAT_ARROW))
+  push_child(children, Some("op"), state.expect_token(TK_FAT_ARROW))
   let body = parse_expr_with_context_restriction(
     state,
-    [TokenKind::TK_SEMI, TokenKind::TK_RBRACE, TokenKind::TK_EOF],
+    [TK_SEMI, TK_RBRACE, TK_EOF],
     "the action part of a matching case",
     token_disallowed_in_match_action,
   )
@@ -7809,21 +7521,21 @@ fn parse_function_expr(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  if state.current_is(TokenKind::TK_ASYNC) {
+  if state.current_is(TK_ASYNC) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_FN) {
+  if state.current_is(TK_FN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_EXCLAMATION) {
+  if state.current_is(TK_EXCLAMATION) {
     if state.consume_error_for_progress() is Some(error) {
       push_child(children, Some("error"), error)
     } else {
@@ -7837,7 +7549,7 @@ fn parse_function_expr(
         "Failed to parse func: expected '(' or '{', got \{@debug.render(Debug::to_repr(tok))}",
       )
       while !state.current_in(stop_kinds) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(
@@ -7854,24 +7566,22 @@ fn parse_function_expr(
     _ => ()
   }
   let reports_before_signature = state.reports.length()
-  if state.current_is(TokenKind::TK_LPAREN) {
+  if state.current_is(TK_LPAREN) {
     push_child(children, Some("params"), parse_parameter_list(state))
   }
-  if state.current_is(TokenKind::TK_THIN_ARROW) ||
-    state.current_is(TokenKind::TK_RAISE) ||
-    state.current_is(TokenKind::TK_NORAISE) ||
-    state.current_is(TokenKind::TK_NOCANCEL) {
+  if state.current_is(TK_THIN_ARROW) ||
+    state.current_is(TK_RAISE) ||
+    state.current_is(TK_NORAISE) ||
+    state.current_is(TK_NOCANCEL) {
     push_child(children, Some("type"), parse_func_return_type(state))
   }
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   } else {
     let body = if state.reports.length() > reports_before_signature {
-      state.missing_token_node_silent(TokenKind::TK_LBRACE)
+      state.missing_token_node_silent(TK_LBRACE)
     } else {
-      state.missing_token_node_with_expected(TokenKind::TK_LBRACE, [
-        TokenKind::TK_LBRACE,
-      ])
+      state.missing_token_node_with_expected(TK_LBRACE, [TK_LBRACE])
     }
     push_child(children, Some("body"), body)
   }
@@ -7881,25 +7591,17 @@ fn parse_function_expr(
 ///|
 fn parse_case_block(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  push_child(children, Some("open"), state.expect_token(TokenKind::TK_LBRACE))
+  push_child(children, Some("open"), state.expect_token(TK_LBRACE))
   let mut done = false
   while !done {
     push_children(children, state.consume_trivia())
     match state.peek() {
       Some((RBRACE, _, _)) => {
-        push_child(
-          children,
-          Some("close"),
-          state.expect_token(TokenKind::TK_RBRACE),
-        )
+        push_child(children, Some("close"), state.expect_token(TK_RBRACE))
         done = true
       }
       Some((EOF, _, _)) | None => {
-        push_child(
-          children,
-          Some("close"),
-          state.missing_token_node(TokenKind::TK_RBRACE),
-        )
+        push_child(children, Some("close"), state.missing_token_node(TK_RBRACE))
         done = true
       }
       Some((SEMI(_), _, _)) =>
@@ -7948,17 +7650,17 @@ fn parse_match_case(state : ParserState) -> CstNode {
   }
   let reports_before_pattern = state.reports.length()
   let pat = parse_pattern_until(state, [
-    TokenKind::TK_IF,
-    TokenKind::TK_FAT_ARROW,
-    TokenKind::TK_SEMI,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
+    TK_IF,
+    TK_FAT_ARROW,
+    TK_SEMI,
+    TK_RBRACE,
+    TK_EOF,
   ])
   let pat = state.required_pattern_node(pat, reports_before_pattern)
   if !pat.children.is_empty() {
     if pat.kind is Pattern_Constraint {
       if pat.first_child_with_label("op") is Some(op) {
-        state.report_expected_tokens_at(COLON, op.loc, [TokenKind::TK_FAT_ARROW])
+        state.report_expected_tokens_at(COLON, op.loc, [TK_FAT_ARROW])
       } else {
         ()
       }
@@ -7966,36 +7668,33 @@ fn parse_match_case(state : ParserState) -> CstNode {
   }
   push_child(children, Some("pattern"), pat)
   let mut saw_guard = false
-  if state.current_is(TokenKind::TK_IF) {
+  if state.current_is(TK_IF) {
     saw_guard = true
     if state.consume_any() is Some(if_token) {
       push_child(children, Some("kw"), if_token)
     } else {
       ()
     }
-    let guard_expr = parse_pattern_guard_expr(state, [
-      TokenKind::TK_FAT_ARROW,
-      TokenKind::TK_EOF,
-    ])
+    let guard_expr = parse_pattern_guard_expr(state, [TK_FAT_ARROW, TK_EOF])
     if !guard_expr.children.is_empty() {
       push_child(children, Some("cond"), guard_expr)
     }
   }
   let reports_before_body = reports_before_pattern
-  let has_arrow = state.current_is(TokenKind::TK_FAT_ARROW)
+  let has_arrow = state.current_is(TK_FAT_ARROW)
   let arrow = if !has_arrow &&
     state.reports.length() > reports_before_pattern &&
     !saw_guard &&
     !pat.has_child_or_grandchild_kind(Pattern_With) {
-    state.missing_token_node_silent(TokenKind::TK_FAT_ARROW)
+    state.missing_token_node_silent(TK_FAT_ARROW)
   } else {
-    state.expect_token(TokenKind::TK_FAT_ARROW)
+    state.expect_token(TK_FAT_ARROW)
   }
   push_child(children, Some("op"), arrow)
   if has_arrow {
     let body = parse_expr_with_context_restriction(
       state,
-      [TokenKind::TK_SEMI, TokenKind::TK_RBRACE, TokenKind::TK_EOF],
+      [TK_SEMI, TK_RBRACE, TK_EOF],
       "the action part of a matching case",
       token_disallowed_in_match_action,
     )
@@ -8041,15 +7740,11 @@ fn parse_match_expr(state : ParserState) -> CstNode {
         ()
       }
     _ => {
-      push_child(
-        children,
-        Some("open"),
-        state.missing_token_node(TokenKind::TK_LBRACE),
-      )
-      while !state.current_is(TokenKind::TK_LBRACE) &&
-            !state.current_is(TokenKind::TK_SEMI) &&
-            !state.current_is(TokenKind::TK_RBRACE) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+      push_child(children, Some("open"), state.missing_token_node(TK_LBRACE))
+      while !state.current_is(TK_LBRACE) &&
+            !state.current_is(TK_SEMI) &&
+            !state.current_is(TK_RBRACE) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(
@@ -8061,7 +7756,7 @@ fn parse_match_expr(state : ParserState) -> CstNode {
           ()
         }
       }
-      if state.current_is(TokenKind::TK_LBRACE) {
+      if state.current_is(TK_LBRACE) {
         if state.consume_any() is Some(open) {
           has_open = true
           push_child(children, Some("open"), open)
@@ -8097,9 +7792,9 @@ fn parse_match_expr(state : ParserState) -> CstNode {
         if has_open {
           let close = if state.reports.length() == reports_before_cases &&
             saw_case {
-            state.missing_token_node(TokenKind::TK_RBRACE)
+            state.missing_token_node(TK_RBRACE)
           } else {
-            state.missing_token_node_silent(TokenKind::TK_RBRACE)
+            state.missing_token_node_silent(TK_RBRACE)
           }
           push_child(children, Some("close"), close)
         }
@@ -8204,11 +7899,7 @@ fn expr_token_kind_label(kind : TokenKind) -> String? {
 
 ///|
 fn parse_argument_item(state : ParserState) -> CstNode {
-  let item_stops = [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ]
+  let item_stops = [TokenKind::TK_COMMA, TK_RPAREN, TK_EOF]
   if state.current_argument_starts_optional_forwarding() {
     parse_optional_forwarding_argument(state)
   } else if state.current_argument_starts_labelled() {
@@ -8293,11 +7984,7 @@ fn parse_labelled_argument(state : ParserState) -> CstNode {
       }
       report_statement_only_expression(state, "labelled call argument")
       let reports_before_expr = state.reports.length()
-      let expr = parse_expr_until(state, [
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RPAREN,
-        TokenKind::TK_EOF,
-      ])
+      let expr = parse_expr_until(state, [TK_COMMA, TK_RPAREN, TK_EOF])
       if invalid_tilde_label_start is Some(start) {
         state.report(
           mk_loc(start, expr.loc.end),
@@ -8343,7 +8030,7 @@ fn parse_optional_forwarding_argument(state : ParserState) -> CstNode {
     ()
   }
   let mut kind = Argument_LabelledOptionPun
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     kind = Argument_LabelledOption
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
@@ -8352,11 +8039,7 @@ fn parse_optional_forwarding_argument(state : ParserState) -> CstNode {
     }
     report_statement_only_expression(state, "optional call argument")
     let reports_before_expr = state.reports.length()
-    let expr = parse_expr_until(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RPAREN,
-      TokenKind::TK_EOF,
-    ])
+    let expr = parse_expr_until(state, [TK_COMMA, TK_RPAREN, TK_EOF])
     push_child(
       children,
       Some("expr"),
@@ -8410,30 +8093,25 @@ fn parse_let_statement(state : ParserState) -> CstNode {
   }
   let reports_before_pattern = state.reports.length()
   let pat = parse_pattern_until(state, [
-    TokenKind::TK_COLON,
-    TokenKind::TK_EQUAL,
-    TokenKind::TK_SEMI,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
+    TK_COLON,
+    TK_EQUAL,
+    TK_SEMI,
+    TK_RBRACE,
+    TK_EOF,
   ])
   push_child(
     children,
     Some("pattern"),
     state.required_pattern_node(pat, reports_before_pattern),
   )
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
     let reports_before_type = state.reports.length()
-    let ty = parse_type_arrow(state, [
-      TokenKind::TK_EQUAL,
-      TokenKind::TK_SEMI,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let ty = parse_type_arrow(state, [TK_EQUAL, TK_SEMI, TK_RBRACE, TK_EOF])
     push_child(
       children,
       Some("type"),
@@ -8441,13 +8119,13 @@ fn parse_let_statement(state : ParserState) -> CstNode {
     )
   }
   let reports_before_value = state.reports.length()
-  let has_equal = state.current_is(TokenKind::TK_EQUAL)
-  push_child(children, Some("op"), state.expect_token(TokenKind::TK_EQUAL))
+  let has_equal = state.current_is(TK_EQUAL)
+  push_child(children, Some("op"), state.expect_token(TK_EQUAL))
   if !has_equal {
-    while !state.current_is(TokenKind::TK_EQUAL) &&
-          !state.current_is(TokenKind::TK_SEMI) &&
-          !state.current_is(TokenKind::TK_RBRACE) &&
-          !state.current_is(TokenKind::TK_EOF) &&
+    while !state.current_is(TK_EQUAL) &&
+          !state.current_is(TK_SEMI) &&
+          !state.current_is(TK_RBRACE) &&
+          !state.current_is(TK_EOF) &&
           !(state.peek() is None) {
       if state.consume_any() is Some(bad) {
         push_child(
@@ -8459,7 +8137,7 @@ fn parse_let_statement(state : ParserState) -> CstNode {
         ()
       }
     }
-    if state.current_is(TokenKind::TK_EQUAL) {
+    if state.current_is(TK_EQUAL) {
       if state.consume_any() is Some(equal) {
         push_child(children, Some("op"), equal)
       } else {
@@ -8467,11 +8145,7 @@ fn parse_let_statement(state : ParserState) -> CstNode {
       }
     }
   }
-  let expr = parse_expr_until(state, [
-    TokenKind::TK_SEMI,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
-  ])
+  let expr = parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
   push_child(
     children,
     Some("expr"),
@@ -8505,12 +8179,7 @@ fn parse_statement(state : ParserState) -> CstNode {
     Some((LETREC, _, _)) => parse_letrec_statement(state)
     Some((FN, _, _)) | Some((ASYNC, _, _)) if local_function_statement_can_start(
         state,
-      ) =>
-      parse_local_function_statement(state, [
-        TokenKind::TK_SEMI,
-        TokenKind::TK_RBRACE,
-        TokenKind::TK_EOF,
-      ])
+      ) => parse_local_function_statement(state, [TK_SEMI, TK_RBRACE, TK_EOF])
     Some((GUARD, _, _)) | Some((GUARD_EXCLAMATION, _, _)) =>
       parse_guard_statement(state)
     Some((DEFER, _, _)) | Some((ERRDEFER, _, _)) => parse_defer_statement(state)
@@ -8520,12 +8189,7 @@ fn parse_statement(state : ParserState) -> CstNode {
       state.abort_current_decl = true
       parse_invalid_local_decl(state)
     }
-    _ =>
-      parse_expr_until(state, [
-        TokenKind::TK_SEMI,
-        TokenKind::TK_RBRACE,
-        TokenKind::TK_EOF,
-      ])
+    _ => parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
   }
 }
 
@@ -8543,9 +8207,9 @@ fn parse_invalid_local_decl(state : ParserState) -> CstNode {
         match state.peek_nth_significant(1) {
           Some((SEMI(explicit), next_start, next_end)) =>
             state.report_expected_tokens_at(
-              Token::SEMI(explicit),
+              SEMI(explicit),
               mk_loc(next_start, next_end),
-              [TokenKind::TK_LIDENT],
+              [TK_LIDENT],
             )
           _ => ()
         }
@@ -8618,12 +8282,7 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
   let reports_before_cond = state.reports.length()
   let cond = parse_expr_with_context_restriction(
     state,
-    [
-      TokenKind::TK_ELSE,
-      TokenKind::TK_SEMI,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ],
+    [TK_ELSE, TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
   )
@@ -8632,13 +8291,13 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
     Some("cond"),
     state.required_expr_node(cond, reports_before_cond),
   )
-  if state.current_is(TokenKind::TK_ELSE) {
+  if state.current_is(TK_ELSE) {
     if state.consume_any() is Some(else_kw) {
       push_child(children, Some("kw"), else_kw)
     } else {
       ()
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
     }
   }
@@ -8650,7 +8309,7 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
 ///|
 fn parse_defer_statement(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let kind = if state.current_is(TokenKind::TK_ERRDEFER) {
+  let kind = if state.current_is(TK_ERRDEFER) {
     Expr_ErrDefer
   } else {
     Expr_Defer
@@ -8661,11 +8320,7 @@ fn parse_defer_statement(state : ParserState) -> CstNode {
     ()
   }
   let reports_before_expr = state.reports.length()
-  let expr = parse_expr_until(state, [
-    TokenKind::TK_SEMI,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
-  ])
+  let expr = parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
   push_child(
     children,
     Some("expr"),
@@ -8682,11 +8337,7 @@ fn parse_proof_assert_statement(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  let expr = parse_expr_until(state, [
-    TokenKind::TK_SEMI,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
-  ])
+  let expr = parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -8710,17 +8361,13 @@ fn parse_proof_let_statement(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
       ()
     }
-    let expr = parse_expr_until(state, [
-      TokenKind::TK_SEMI,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let expr = parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
     if !expr.children.is_empty() {
       push_child(children, Some("expr"), expr)
     }
@@ -8769,23 +8416,18 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
-    let ty = parse_type_arrow(state, [
-      TokenKind::TK_EQUAL,
-      TokenKind::TK_SEMI,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let ty = parse_type_arrow(state, [TK_EQUAL, TK_SEMI, TK_RBRACE, TK_EOF])
     if !ty.children.is_empty() {
       push_child(children, Some("binding_type"), ty)
     }
   }
-  let has_equal = state.current_is(TokenKind::TK_EQUAL)
+  let has_equal = state.current_is(TK_EQUAL)
   if has_equal {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
@@ -8796,14 +8438,12 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
     push_child(
       children,
       Some("op"),
-      state.missing_token_node_with_expected(TokenKind::TK_EQUAL, [
-        TokenKind::TK_EQUAL,
-      ]),
+      state.missing_token_node_with_expected(TK_EQUAL, [TK_EQUAL]),
     )
-    while !state.current_is(TokenKind::TK_AND) &&
-          !state.current_is(TokenKind::TK_SEMI) &&
-          !state.current_is(TokenKind::TK_RBRACE) &&
-          !state.current_is(TokenKind::TK_EOF) &&
+    while !state.current_is(TK_AND) &&
+          !state.current_is(TK_SEMI) &&
+          !state.current_is(TK_RBRACE) &&
+          !state.current_is(TK_EOF) &&
           !(state.peek() is None) {
       if state.consume_any() is Some(bad) {
         push_child(
@@ -8821,14 +8461,14 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
       .with_bool_marker("async", Flag_Async, false)
   }
   let mut saw_fn = false
-  if state.current_is(TokenKind::TK_ASYNC) {
+  if state.current_is(TK_ASYNC) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_FN) {
+  if state.current_is(TK_FN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
       saw_fn = true
@@ -8837,30 +8477,20 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
     }
   }
   if saw_fn {
-    if state.current_is(TokenKind::TK_LPAREN) {
+    if state.current_is(TK_LPAREN) {
       push_child(children, Some("params"), parse_parameter_list(state))
     }
-    if state.current_is(TokenKind::TK_THIN_ARROW) ||
-      state.current_is(TokenKind::TK_RAISE) ||
-      state.current_is(TokenKind::TK_NORAISE) ||
-      state.current_is(TokenKind::TK_NOCANCEL) {
+    if state.current_is(TK_THIN_ARROW) ||
+      state.current_is(TK_RAISE) ||
+      state.current_is(TK_NORAISE) ||
+      state.current_is(TK_NOCANCEL) {
       push_child(children, Some("type"), parse_func_return_type(state))
     }
-    if state.current_is(TokenKind::TK_LBRACE) {
+    if state.current_is(TK_LBRACE) {
       push_child(children, Some("body"), parse_block_expr(state))
     }
-  } else if !state.current_in([
-      TokenKind::TK_AND,
-      TokenKind::TK_SEMI,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ]) {
-    let expr = parse_expr_until(state, [
-      TokenKind::TK_AND,
-      TokenKind::TK_SEMI,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+  } else if !state.current_in([TK_AND, TK_SEMI, TK_RBRACE, TK_EOF]) {
+    let expr = parse_expr_until(state, [TK_AND, TK_SEMI, TK_RBRACE, TK_EOF])
     if !expr.children.is_empty() {
       push_child(children, Some("expr"), expr)
     }
@@ -8887,7 +8517,7 @@ fn parse_local_function_statement(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  if state.current_is(TokenKind::TK_ASYNC) {
+  if state.current_is(TK_ASYNC) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -8895,7 +8525,7 @@ fn parse_local_function_statement(
     }
     push_children(children, state.consume_trivia())
   }
-  if state.current_is(TokenKind::TK_FN) {
+  if state.current_is(TK_FN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -8919,7 +8549,7 @@ fn parse_local_function_statement(
         "Failed to parse func: expected '(' or '{', got \{@debug.render(Debug::to_repr(tok))}",
       )
       while !state.current_in(stop_kinds) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(
@@ -8948,24 +8578,22 @@ fn parse_local_function_statement(
     _ => ()
   }
   let reports_before_signature = state.reports.length()
-  if state.current_is(TokenKind::TK_LPAREN) {
+  if state.current_is(TK_LPAREN) {
     push_child(children, Some("params"), parse_parameter_list(state))
   }
-  if state.current_is(TokenKind::TK_THIN_ARROW) ||
-    state.current_is(TokenKind::TK_RAISE) ||
-    state.current_is(TokenKind::TK_NORAISE) ||
-    state.current_is(TokenKind::TK_NOCANCEL) {
+  if state.current_is(TK_THIN_ARROW) ||
+    state.current_is(TK_RAISE) ||
+    state.current_is(TK_NORAISE) ||
+    state.current_is(TK_NOCANCEL) {
     push_child(children, Some("type"), parse_func_return_type(state))
   }
-  if state.current_is(TokenKind::TK_LBRACE) {
+  if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   } else {
     let body = if state.reports.length() > reports_before_signature {
-      state.missing_token_node_silent(TokenKind::TK_LBRACE)
+      state.missing_token_node_silent(TK_LBRACE)
     } else {
-      state.missing_token_node_with_expected(TokenKind::TK_LBRACE, [
-        TokenKind::TK_LBRACE,
-      ])
+      state.missing_token_node_with_expected(TK_LBRACE, [TK_LBRACE])
     }
     push_child(children, Some("body"), body)
   }
@@ -8989,13 +8617,13 @@ fn parse_argument_list(state : ParserState) -> CstNode {
   annotate_argument_list_locations(
     parse_delimited(
       state,
-      TokenKind::TK_LPAREN,
-      TokenKind::TK_RPAREN,
+      TK_LPAREN,
+      TK_RPAREN,
       parse_argument_item,
       List_ArgumentList,
-      sep_kind=TokenKind::TK_COMMA,
-      follow_set=[TokenKind::TK_SEMI, TokenKind::TK_RBRACE],
-      post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
+      sep_kind=TK_COMMA,
+      follow_set=[TK_SEMI, TK_RBRACE],
+      post_item_expected=[TK_COMMA, TK_RPAREN],
     ),
   )
 }
@@ -9023,11 +8651,11 @@ fn annotate_argument_list_locations(source : CstNode) -> CstNode {
 fn parse_statement_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_statement_item,
     List_BlockStatementList,
-    sep_kind=TokenKind::TK_SEMI,
+    sep_kind=TK_SEMI,
     item_expected="simple expression",
   )
 }
@@ -9138,9 +8766,9 @@ fn ParserState::consume_error_for_progress(self : ParserState) -> CstNode? {
   if self.consume_any() is Some(bad) {
     if misplaced_condition_close {
       self.suppress_next_top_level_recovery_report = true
-      self.report_expected_tokens_at(RPAREN, bad.loc, [TokenKind::TK_LBRACE])
+      self.report_expected_tokens_at(RPAREN, bad.loc, [TK_LBRACE])
     } else {
-      self.reports.push(Report::{ loc: bad.loc, msg: "Unexpected token here.", })
+      self.reports.push({ loc: bad.loc, msg: "Unexpected token here.", })
     }
     Some(error_node(bad.loc, bad.source_span, [(Some("item"), bad)]))
   } else {
@@ -9242,7 +8870,7 @@ fn parse_delimited(
   close_kind : TokenKind,
   item_parser : (ParserState) -> CstNode,
   list_kind : NodeKind,
-  sep_kind? : TokenKind = TokenKind::TK_COMMA,
+  sep_kind? : TokenKind = TK_COMMA,
   follow_set? : Array[TokenKind] = [],
   invalid_delims? : Array[TokenKind] = [],
   require_nonempty? : Bool = false,
@@ -9281,7 +8909,7 @@ fn parse_delimited(
       }
       push_child(children, Some("close"), state.expect_token(close_kind))
       done = true
-    } else if state.current_is(TokenKind::TK_EOF) ||
+    } else if state.current_is(TK_EOF) ||
       state.current_in(follow_set) ||
       state.peek() is None {
       if expect_item && list_kind is List_BlockStatementList {
@@ -9344,7 +8972,7 @@ fn parse_delimited(
         }
         if state.reports.length() > reports_before_item &&
           (
-            state.current_is(TokenKind::TK_EOF) ||
+            state.current_is(TK_EOF) ||
             state.current_in(follow_set) ||
             state.peek() is None
           ) {
@@ -9365,7 +8993,7 @@ fn parse_delimited(
           ) &&
           !state.current_is(sep_kind) &&
           !state.current_is(close_kind) &&
-          !state.current_is(TokenKind::TK_EOF) &&
+          !state.current_is(TK_EOF) &&
           !state.current_in(follow_set) &&
           !(state.peek() is None) {
           if report_post_item_after_error && !latest_report_is_at_current {
@@ -9379,7 +9007,7 @@ fn parse_delimited(
           while recovering {
             if state.current_is(sep_kind) ||
               state.current_is(close_kind) ||
-              state.current_is(TokenKind::TK_EOF) ||
+              state.current_is(TK_EOF) ||
               state.current_in(follow_set) ||
               state.peek() is None {
               recovering = false
@@ -9409,7 +9037,7 @@ fn parse_delimited(
           !done &&
           !state.current_is(close_kind) &&
           !state.current_is(sep_kind) &&
-          !state.current_is(TokenKind::TK_EOF) &&
+          !state.current_is(TK_EOF) &&
           !state.current_in(follow_set) {
           if state.consume_error_for_progress() is Some(error) {
             push_child(children, Some("error"), error)
@@ -9439,7 +9067,7 @@ fn parse_delimited(
       while recovering {
         if state.current_is(sep_kind) ||
           state.current_is(close_kind) ||
-          state.current_is(TokenKind::TK_EOF) ||
+          state.current_is(TK_EOF) ||
           state.current_in(follow_set) ||
           state.peek() is None {
           recovering = false
@@ -9718,12 +9346,8 @@ fn pattern_starts_constr_any(state : ParserState) -> Bool {
 fn parse_constr_any_pattern(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("type"), parse_type_name_node(state))
-  push_child(children, Some("op"), state.expect_token(TokenKind::TK_COLONCOLON))
-  push_child(
-    children,
-    Some("wildcard"),
-    state.expect_token(TokenKind::TK_UNDERSCORE),
-  )
+  push_child(children, Some("op"), state.expect_token(TK_COLONCOLON))
+  push_child(children, Some("wildcard"), state.expect_token(TK_UNDERSCORE))
   state.node_from_children(Pattern_ConstrAny, children)
 }
 
@@ -9813,7 +9437,7 @@ fn parse_pattern_atom(
 ) -> CstNode {
   match state.peek() {
     Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) &&
-      !(allow_brace_pattern_start && tok.kind() is TokenKind::TK_LBRACE) =>
+      !(allow_brace_pattern_start && tok.kind() is TK_LBRACE) =>
       state.node_from_children(Pattern_MissingPattern, [])
     Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => {
       let children = state.consume_trivia()
@@ -9848,7 +9472,7 @@ fn parse_pattern_atom(
     Some((AMPER, _, _)) => parse_object_constructor_pattern(state)
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) => {
       let mut node = parse_single_token_pattern(state, Pattern_Var)
-      if state.current_is(TokenKind::TK_LPAREN) {
+      if state.current_is(TK_LPAREN) {
         let args = parse_constructor_pattern_args(state)
         node = state.node_from_children(Pattern_SpecialConstr, [
           (Some("name"), node),
@@ -9873,7 +9497,7 @@ fn parse_pattern_atom(
           }
         _ => ()
       }
-      if state.current_is(TokenKind::TK_COLONCOLON) {
+      if state.current_is(TK_COLONCOLON) {
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
         } else {
@@ -9988,7 +9612,7 @@ fn parse_pattern_atom(
       )
       let children : Array[(String?, CstNode)] = []
       while !state.current_in(stop_kinds) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(
@@ -10104,9 +9728,9 @@ fn parse_literal_pattern(
       }
     Some((found, start, end)) if first_is_minus => {
       state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_INT,
-        TokenKind::TK_FLOAT,
-        TokenKind::TK_DOUBLE,
+        TK_INT,
+        TK_FLOAT,
+        TK_DOUBLE,
       ])
       if state.consume_any() is Some(token) {
         push_child(
@@ -10137,15 +9761,15 @@ fn parse_constructor_pattern_args(
 ) -> CstNode {
   let list = parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_constructor_pattern_arg,
     if tuple_pattern {
       List_TuplePatternList
     } else {
       List_ConstructorPatternArgumentList
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
     post_item_expected=if tuple_pattern {
       [TK_WITH, TK_COMMA, TK_COLON, TK_RPAREN]
     } else {
@@ -10193,7 +9817,7 @@ fn parse_constructor_pattern_args(
     }
     if saw_invalid_statement_separator {
       if close is Some(item) {
-        let expected = [TokenKind::TK_SEMI, TokenKind::TK_RBRACE]
+        let expected = [TokenKind::TK_SEMI, TK_RBRACE]
         if item.kind is Missing {
           state.report_expected_tokens(expected)
         } else {
@@ -10219,12 +9843,7 @@ fn parse_constructor_pattern_arg(state : ParserState) -> CstNode {
       | Some((UIDENT(_), _, _)),
       Some((EQUAL, _, _)),
     ) => parse_labelled_constructor_pattern_arg(state)
-    _ =>
-      parse_pattern_until(state, [
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RPAREN,
-        TokenKind::TK_EOF,
-      ])
+    _ => parse_pattern_until(state, [TK_COMMA, TK_RPAREN, TK_EOF])
   }
 }
 
@@ -10232,7 +9851,7 @@ fn parse_constructor_pattern_arg(state : ParserState) -> CstNode {
 fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   if state.consume_any() is Some(name) {
-    if state.current_is(TokenKind::TK_EQUAL) {
+    if state.current_is(TK_EQUAL) {
       state.report(
         name.loc,
         "unexpected `~` in argument. Did you mean `label=pattern` or `label~`?",
@@ -10243,18 +9862,14 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
     ()
   }
   let mut kind = Argument_LabelledPun
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     kind = Argument_Labelled
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
       ()
     }
-    let pat = parse_pattern_until(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RPAREN,
-      TokenKind::TK_EOF,
-    ])
+    let pat = parse_pattern_until(state, [TK_COMMA, TK_RPAREN, TK_EOF])
     if !pat.children.is_empty() {
       push_child(children, Some("pattern"), pat)
     }
@@ -10278,18 +9893,14 @@ fn parse_labelled_constructor_pattern_arg(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
       ()
     }
   }
-  let pat = parse_pattern_until(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ])
+  let pat = parse_pattern_until(state, [TK_COMMA, TK_RPAREN, TK_EOF])
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
@@ -10304,11 +9915,11 @@ fn parse_array_pattern_list(state : ParserState) -> CstNode {
   let rest_offenders : Array[(Token, Location)] = []
   let list = parse_delimited(
     state,
-    TokenKind::TK_LBRACKET,
-    TokenKind::TK_RBRACKET,
+    TK_LBRACKET,
+    TK_RBRACKET,
     fn(state) { parse_array_pattern_item(state, rest_offenders) },
     List_ArrayPatternList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let mut saw_ordinary_rest = false
   let mut rest_offender_index = 0
@@ -10323,8 +9934,8 @@ fn parse_array_pattern_list(state : ParserState) -> CstNode {
             if rest_offenders.get(rest_offender_index) is Some((found, loc)) {
               state.report(loc, "At most one `..` is allowed in array pattern.")
               state.report_expected_tokens_at(found, loc, [
-                TokenKind::TK_COMMA,
-                TokenKind::TK_RBRACKET,
+                TK_COMMA,
+                TK_RBRACKET,
               ])
             } else {
               ()
@@ -10358,12 +9969,7 @@ fn parse_array_pattern_item(
   let item = match state.peek() {
     Some((DOTDOT, _, _)) =>
       parse_dotdot_pattern_rest_recording(state, rest_offenders)
-    _ =>
-      parse_pattern_until(state, [
-        TokenKind::TK_COMMA,
-        TokenKind::TK_RBRACKET,
-        TokenKind::TK_EOF,
-      ])
+    _ => parse_pattern_until(state, [TK_COMMA, TK_RBRACKET, TK_EOF])
   }
   match item.kind {
     Pattern_Rest if item.first_child_with_label("str") is Some(_) =>
@@ -10385,15 +9991,15 @@ fn parse_array_pattern_item(
 ///|
 fn map_pattern_key_tokens() -> Array[TokenKind] {
   [
-    TokenKind::TK_TRUE,
-    TokenKind::TK_FALSE,
-    TokenKind::TK_CHAR,
-    TokenKind::TK_INT,
-    TokenKind::TK_FLOAT,
-    TokenKind::TK_DOUBLE,
-    TokenKind::TK_MINUS,
-    TokenKind::TK_STRING,
-    TokenKind::TK_REGEX_LITERAL,
+    TK_TRUE,
+    TK_FALSE,
+    TK_CHAR,
+    TK_INT,
+    TK_FLOAT,
+    TK_DOUBLE,
+    TK_MINUS,
+    TK_STRING,
+    TK_REGEX_LITERAL,
   ]
 }
 
@@ -10473,15 +10079,11 @@ fn validate_brace_pattern_list(
             }
           _ => {
             let expected = if !kind_known {
-              [
-                TokenKind::TK_LIDENT,
-                TokenKind::TK_EXTEND,
-                ..map_pattern_key_tokens(),
-              ]
+              [TokenKind::TK_LIDENT, TK_EXTEND, ..map_pattern_key_tokens()]
             } else if map_kind {
               map_pattern_key_tokens()
             } else {
-              [TokenKind::TK_LIDENT, TokenKind::TK_EXTEND]
+              [TK_LIDENT, TK_EXTEND]
             }
             match item_starts.get(item_index) {
               Some(Some((found, loc))) =>
@@ -10610,8 +10212,8 @@ fn parse_record_pattern_list(state : ParserState) -> CstNode {
   let item_starts : Array[(Token, Location)?] = []
   let list = parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     fn(state) {
       item_starts.push(
         state
@@ -10624,7 +10226,7 @@ fn parse_record_pattern_list(state : ParserState) -> CstNode {
       parse_brace_pattern_item(state)
     },
     List_RecordPatternFieldList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   validate_brace_pattern_list(state, list, false, item_starts)
   list
@@ -10684,26 +10286,18 @@ fn parse_record_pattern_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
-    let pat = parse_pattern_until(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let pat = parse_pattern_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
     if !pat.children.is_empty() {
       push_child(children, Some("pattern"), pat)
     }
   } else if children.length() == 0 {
-    let pat = parse_pattern_until(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let pat = parse_pattern_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
     if !pat.children.is_empty() {
       push_child(children, Some("pattern"), pat)
     }
@@ -10731,8 +10325,8 @@ fn parse_map_pattern_list(state : ParserState) -> CstNode {
   let item_starts : Array[(Token, Location)?] = []
   let list = parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     fn(state) {
       item_starts.push(
         state
@@ -10745,7 +10339,7 @@ fn parse_map_pattern_list(state : ParserState) -> CstNode {
       parse_brace_pattern_item(state)
     },
     List_MapPatternFieldList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   validate_brace_pattern_list(state, list, true, item_starts)
   list
@@ -10759,17 +10353,17 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
   match state.peek() {
     Some((found, start, end)) if found is REGEX_LITERAL(_) =>
       state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_EXTEND,
-        TokenKind::TK_TRUE,
-        TokenKind::TK_FALSE,
-        TokenKind::TK_CHAR,
-        TokenKind::TK_INT,
-        TokenKind::TK_FLOAT,
-        TokenKind::TK_DOUBLE,
-        TokenKind::TK_MINUS,
-        TokenKind::TK_STRING,
-        TokenKind::TK_REGEX_LITERAL,
+        TK_LIDENT,
+        TK_EXTEND,
+        TK_TRUE,
+        TK_FALSE,
+        TK_CHAR,
+        TK_INT,
+        TK_FLOAT,
+        TK_DOUBLE,
+        TK_MINUS,
+        TK_STRING,
+        TK_REGEX_LITERAL,
       ])
     _ => ()
   }
@@ -10818,8 +10412,8 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
           } else {
             ()
           }
-          while !state.current_is(TokenKind::TK_RBRACE) &&
-                !state.current_is(TokenKind::TK_EOF) &&
+          while !state.current_is(TK_RBRACE) &&
+                !state.current_is(TK_EOF) &&
                 !(state.peek() is None) {
             if state.consume_any() is Some(bad) {
               push_child(
@@ -10864,25 +10458,21 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
       signed_constant_node(value, negative),
     )
   }
-  if state.current_is(TokenKind::TK_QUESTION) {
+  if state.current_is(TK_QUESTION) {
     if state.consume_any() is Some(question) {
       push_child(children, Some("question"), question)
     } else {
       ()
     }
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
   }
-  let pat = parse_pattern_until(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RBRACE,
-    TokenKind::TK_EOF,
-  ])
+  let pat = parse_pattern_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
@@ -10945,7 +10535,7 @@ fn parse_pattern_or(
 ) -> CstNode {
   let mut lhs = parse_pattern_range(state, stop_kinds)
   let trivia = state.consume_trivia()
-  if state.current_is(TokenKind::TK_BAR) {
+  if state.current_is(TK_BAR) {
     let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
     push_children(children, trivia)
     if state.consume_any() is Some(op) {
@@ -10975,7 +10565,7 @@ fn parse_pattern_range(
   )
   match state.peek() {
     Some((RANGE_EXCLUSIVE, _, _)) | Some((RANGE_INCLUSIVE, _, _)) => {
-      let range_kind = if state.current_is(TokenKind::TK_RANGE_EXCLUSIVE) {
+      let range_kind = if state.current_is(TK_RANGE_EXCLUSIVE) {
         RangeKind_Exclusive
       } else {
         RangeKind_Inclusive
@@ -11011,7 +10601,7 @@ fn parse_pattern_alias(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let mut lhs = parse_pattern_or(state, stop_kinds)
-  while state.current_is(TokenKind::TK_AS) {
+  while state.current_is(TK_AS) {
     let children : Array[(String?, CstNode)] = [(Some("pattern"), lhs)]
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
@@ -11042,7 +10632,7 @@ fn parse_regex_match_rhs(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let _ = state.consume_trivia()
-  if state.current_is(TokenKind::TK_LPAREN) {
+  if state.current_is(TK_LPAREN) {
     let children : Array[(String?, CstNode)] = []
     if state.consume_any() is Some(open) {
       push_child(children, Some("open"), open)
@@ -11051,14 +10641,10 @@ fn parse_regex_match_rhs(
     }
     let _ = state.consume_trivia()
     let reports_before_pattern = state.reports.length()
-    let pat = parse_regex_as_pattern(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RPAREN,
-      TokenKind::TK_EOF,
-    ])
+    let pat = parse_regex_as_pattern(state, [TK_COMMA, TK_RPAREN, TK_EOF])
     push_child(children, Some("pattern"), pat)
     let _ = state.consume_trivia()
-    if state.current_is(TokenKind::TK_COMMA) {
+    if state.current_is(TK_COMMA) {
       push_child(
         children,
         Some("bindings"),
@@ -11066,15 +10652,11 @@ fn parse_regex_match_rhs(
       )
     }
     let _ = state.consume_trivia()
-    if state.current_is(TokenKind::TK_RPAREN) {
-      push_child(
-        children,
-        Some("close"),
-        state.expect_token(TokenKind::TK_RPAREN),
-      )
+    if state.current_is(TK_RPAREN) {
+      push_child(children, Some("close"), state.expect_token(TK_RPAREN))
     } else {
       if state.reports.length() == reports_before_pattern {
-        state.report_expected_tokens([TokenKind::TK_RPAREN])
+        state.report_expected_tokens([TK_RPAREN])
       }
       while state.peek() is Some((tok, _, _)) &&
             !kind_in(tok.kind(), stop_kinds) {
@@ -11091,7 +10673,7 @@ fn parse_regex_match_rhs(
       push_child(
         children,
         Some("close"),
-        state.missing_token_node_silent(TokenKind::TK_RPAREN),
+        state.missing_token_node_silent(TK_RPAREN),
       )
     }
     state.node_from_children(RegexPattern_Placeholder, children)
@@ -11107,7 +10689,7 @@ fn parse_regex_as_pattern(
 ) -> CstNode {
   let pat = parse_regex_atom_pattern(state, stop_kinds)
   let _ = state.consume_trivia()
-  if state.current_is(TokenKind::TK_AS) {
+  if state.current_is(TK_AS) {
     let children : Array[(String?, CstNode)] = [(Some("pattern"), pat)]
     if state.consume_any() is Some(as_token) {
       push_child(children, Some("kw"), as_token)
@@ -11133,14 +10715,11 @@ fn parse_regex_as_pattern(
         }
       }
       _ => {
-        state.report_expected_tokens([
-          TokenKind::TK_LIDENT,
-          TokenKind::TK_EXTEND,
-        ])
+        state.report_expected_tokens([TK_LIDENT, TK_EXTEND])
         push_child(
           children,
           Some("name"),
-          state.missing_token_node_silent(TokenKind::TK_LIDENT),
+          state.missing_token_node_silent(TK_LIDENT),
         )
       }
     }
@@ -11159,7 +10738,7 @@ fn parse_regex_or_pattern_tail(
 ) -> CstNode {
   let mut lhs = first
   let _ = state.consume_trivia()
-  while state.current_is(TokenKind::TK_BAR) {
+  while state.current_is(TK_BAR) {
     let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
@@ -11196,7 +10775,7 @@ fn parse_regex_sequence_pattern_tail(
 ) -> CstNode {
   let mut lhs = first
   let _ = state.consume_trivia()
-  while state.current_is(TokenKind::TK_PLUS) {
+  while state.current_is(TK_PLUS) {
     let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
@@ -11230,27 +10809,19 @@ fn parse_regex_atom_pattern(
       }
       let _ = state.consume_trivia()
       let reports_before_pattern = state.reports.length()
-      let pat = parse_regex_as_pattern(state, [TokenKind::TK_RPAREN])
+      let pat = parse_regex_as_pattern(state, [TK_RPAREN])
       push_child(children, Some("pattern"), pat)
       let _ = state.consume_trivia()
-      if state.current_is(TokenKind::TK_RPAREN) {
-        push_child(
-          children,
-          Some("close"),
-          state.expect_token(TokenKind::TK_RPAREN),
-        )
+      if state.current_is(TK_RPAREN) {
+        push_child(children, Some("close"), state.expect_token(TK_RPAREN))
       } else if state.reports.length() > reports_before_pattern {
         push_child(
           children,
           Some("close"),
-          state.missing_token_node_silent(TokenKind::TK_RPAREN),
+          state.missing_token_node_silent(TK_RPAREN),
         )
       } else {
-        push_child(
-          children,
-          Some("close"),
-          state.expect_token(TokenKind::TK_RPAREN),
-        )
+        push_child(children, Some("close"), state.expect_token(TK_RPAREN))
       }
       state.node_from_children(RegexPattern_Placeholder, children)
     }
@@ -11267,7 +10838,7 @@ fn parse_regex_atom_pattern(
       }
     Some((raw, start, end)) if raw is STRING(_) => {
       state.report_expected_tokens_at(raw, mk_loc(start, end), [
-        TokenKind::TK_REGEX_LITERAL,
+        TK_REGEX_LITERAL,
       ])
       if state.consume_any() is Some(token) {
         let children : Array[(String?, CstNode)] = [(Some("token"), token)]
@@ -11315,11 +10886,11 @@ fn parse_regex_atom_pattern(
           }
         }
         _ => {
-          state.report_expected_tokens([TokenKind::TK_DOT_UIDENT])
+          state.report_expected_tokens([TK_DOT_UIDENT])
           push_child(
             children,
             Some("name"),
-            state.missing_token_node_silent(TokenKind::TK_DOT_UIDENT),
+            state.missing_token_node_silent(TK_DOT_UIDENT),
           )
         }
       }
@@ -11356,15 +10927,14 @@ fn parse_regex_atom_pattern(
 ///|
 fn parse_regex_match_binding_list(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  while state.current_is(TokenKind::TK_COMMA) {
+  while state.current_is(TK_COMMA) {
     if state.consume_any() is Some(sep) {
       push_child(children, Some("sep"), sep)
     } else {
       ()
     }
     push_children(children, state.consume_trivia())
-    if state.current_is(TokenKind::TK_RPAREN) ||
-      state.current_is(TokenKind::TK_EOF) {
+    if state.current_is(TK_RPAREN) || state.current_is(TK_EOF) {
       break
     }
     push_child(children, Some("item"), parse_regex_match_binding(state))
@@ -11418,37 +10988,28 @@ fn parse_regex_match_binding(state : ParserState) -> CstNode {
             }
           }
           _ => {
-            state.report_expected_tokens([
-              TokenKind::TK_LIDENT,
-              TokenKind::TK_EXTEND,
-            ])
+            state.report_expected_tokens([TK_LIDENT, TK_EXTEND])
             push_child(
               children,
               Some("binder"),
-              state.missing_token_node_silent(TokenKind::TK_LIDENT),
+              state.missing_token_node_silent(TK_LIDENT),
             )
           }
         }
       } else {
-        state.report_expected_tokens([
-          TokenKind::TK_LIDENT,
-          TokenKind::TK_POST_LABEL,
-        ])
+        state.report_expected_tokens([TK_LIDENT, TK_POST_LABEL])
         push_child(
           children,
           Some("name"),
-          state.missing_token_node_silent(TokenKind::TK_LIDENT),
+          state.missing_token_node_silent(TK_LIDENT),
         )
       }
     _ => {
-      state.report_expected_tokens([
-        TokenKind::TK_LIDENT,
-        TokenKind::TK_POST_LABEL,
-      ])
+      state.report_expected_tokens([TK_LIDENT, TK_POST_LABEL])
       push_child(
         children,
         Some("name"),
-        state.missing_token_node_silent(TokenKind::TK_LIDENT),
+        state.missing_token_node_silent(TK_LIDENT),
       )
     }
   }
@@ -11655,7 +11216,7 @@ fn parse_interp_source_expr(
     state.reports,
     state.enable_metavar,
   )
-  parse_expr_until(inner_state, [TokenKind::TK_EOF])
+  parse_expr_until(inner_state, [TK_EOF])
 }
 
 ///|
@@ -11727,15 +11288,15 @@ fn peek_top_item_kind(state : ParserState) -> TopItemKind {
         offset += 1
       }
       Some((EXTERN, _, _)) => {
-        result = TopItemKind::Function
+        result = Function
         done = true
       }
       Some((TEST, _, _)) => {
-        result = TopItemKind::Test
+        result = Test
         done = true
       }
       Some((USING, _, _)) => {
-        result = TopItemKind::Using
+        result = Using
         done = true
       }
       Some((IMPORT, _, _)) => {
@@ -11747,7 +11308,7 @@ fn peek_top_item_kind(state : ParserState) -> TopItemKind {
         done = true
       }
       Some((LET, _, _)) => {
-        result = TopItemKind::Let
+        result = Let
         done = true
       }
       Some((tok, _, _)) if decl_keyword_expects_name(tok) => {
@@ -11756,11 +11317,7 @@ fn peek_top_item_kind(state : ParserState) -> TopItemKind {
       }
       Some((QUESTION, _, _)) => offset += 1
       _ => {
-        result = if saw_async {
-          TopItemKind::Function
-        } else {
-          TopItemKind::Invalid
-        }
+        result = if saw_async { Function } else { Invalid }
         done = true
       }
     }
@@ -11788,7 +11345,7 @@ fn parser_decl_loc_without_trailing_trivia(node : CstNode) -> Location {
     }
   }
   if found {
-    Location::{ start: node.loc.start, end, }
+    { start: node.loc.start, end, }
   } else {
     node.loc
   }
@@ -11813,14 +11370,14 @@ fn parser_function_header_loc(node : CstNode) -> Location {
       None => ()
     }
   }
-  Location::{ start, end, }
+  { start, end, }
 }
 
 ///|
 fn parser_trait_decl_loc(node : CstNode) -> Location {
   let semantic_loc = parser_decl_loc_without_trailing_trivia(node)
   if node.children_with_label("kw").get(0) is Some(keyword) {
-    Location::{ start: keyword.loc.start, end: semantic_loc.end, }
+    { start: keyword.loc.start, end: semantic_loc.end, }
   } else {
     semantic_loc
   }
@@ -12182,7 +11739,7 @@ fn parse_type_atom(
       state.report_expected_description_at(found, mk_loc(start, end), "type")
       let children : Array[(String?, CstNode)] = []
       while !state.current_in(stop_kinds) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(token) {
           push_child(children, Some("error"), token)
@@ -12242,12 +11799,7 @@ fn parse_object_type_atom(state : ParserState) -> CstNode {
         push_child(children, Some("type"), name)
       }
     }
-    _ =>
-      push_child(
-        children,
-        Some("type"),
-        state.missing_token_node(TokenKind::TK_UIDENT),
-      )
+    _ => push_child(children, Some("type"), state.missing_token_node(TK_UIDENT))
   }
   state.node_from_children(Type_Object, children)
 }
@@ -12266,9 +11818,7 @@ fn parse_async_type_atom(
   match state.peek_significant() {
     Some((LPAREN, _, _)) => ()
     Some((found, start, end)) => {
-      state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TokenKind::TK_LPAREN,
-      ])
+      state.report_expected_tokens_at(found, mk_loc(start, end), [TK_LPAREN])
       if top_level_decl_can_start(found) {
         push_children(children, state.consume_trivia())
         return state
@@ -12277,7 +11827,7 @@ fn parse_async_type_atom(
           .with_async_location_anchor()
       }
       while !state.current_in(stop_kinds) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(children, Some("error"), bad)
@@ -12290,7 +11840,7 @@ fn parse_async_type_atom(
         .with_bool_marker("async", Flag_Async, true)
         .with_async_location_anchor()
     }
-    None => state.report_expected_tokens([TokenKind::TK_LPAREN])
+    None => state.report_expected_tokens([TK_LPAREN])
   }
   let ty = parse_type_arrow(state, stop_kinds)
   if !ty.children.is_empty() {
@@ -12304,11 +11854,7 @@ fn parse_async_type_atom(
 
 ///|
 fn parse_paren_type_item(state : ParserState) -> CstNode {
-  parse_type_arrow(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ])
+  parse_type_arrow(state, [TK_COMMA, TK_RPAREN, TK_EOF])
 }
 
 ///|
@@ -12318,11 +11864,11 @@ fn parse_paren_type(
 ) -> CstNode {
   let list = parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_paren_type_item,
     List_TupleTypeList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let mut item_count = 0
   for i in 0..<list.children.length() {
@@ -12332,8 +11878,8 @@ fn parse_paren_type(
     }
   }
   let kind = if item_count == 1 { Type_Group } else { Type_Tuple }
-  if item_count == 0 && !state.current_is(TokenKind::TK_THIN_ARROW) {
-    state.report_expected_tokens([TokenKind::TK_THIN_ARROW])
+  if item_count == 0 && !state.current_is(TK_THIN_ARROW) {
+    state.report_expected_tokens([TK_THIN_ARROW])
   }
   state.node_from_children(kind, [(Some("body"), list)])
 }
@@ -12350,17 +11896,13 @@ fn parse_object_field_type_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_COLON) {
+  if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
-    let ty = parse_type_arrow(state, [
-      TokenKind::TK_COMMA,
-      TokenKind::TK_RBRACE,
-      TokenKind::TK_EOF,
-    ])
+    let ty = parse_type_arrow(state, [TK_COMMA, TK_RBRACE, TK_EOF])
     if !ty.children.is_empty() {
       push_child(children, Some("type"), ty)
     }
@@ -12379,34 +11921,30 @@ fn parse_object_field_type_item(state : ParserState) -> CstNode {
 fn parse_object_type_literal(state : ParserState) -> CstNode {
   let list = parse_delimited(
     state,
-    TokenKind::TK_LBRACE,
-    TokenKind::TK_RBRACE,
+    TK_LBRACE,
+    TK_RBRACE,
     parse_object_field_type_item,
     List_ObjectFieldList,
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   state.node_from_children(Type_Object, [(Some("body"), list)])
 }
 
 ///|
 fn parse_type_argument_item(state : ParserState) -> CstNode {
-  parse_type_arrow(state, [
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RBRACKET,
-    TokenKind::TK_EOF,
-  ])
+  parse_type_arrow(state, [TK_COMMA, TK_RBRACKET, TK_EOF])
 }
 
 ///|
 fn parse_type_argument_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LBRACKET,
-    TokenKind::TK_RBRACKET,
+    TK_LBRACKET,
+    TK_RBRACKET,
     parse_type_argument_item,
     List_TypeArgumentList,
-    sep_kind=TokenKind::TK_COMMA,
-    follow_set=[TokenKind::TK_WITH, TokenKind::TK_LBRACE, TokenKind::TK_SEMI],
+    sep_kind=TK_COMMA,
+    follow_set=[TK_WITH, TK_LBRACE, TK_SEMI],
     require_nonempty=true,
   )
 }
@@ -12494,10 +12032,7 @@ fn parse_type_arrow(
 ) -> CstNode {
   let lhs = parse_type_postfix(state, stop_kinds)
   match state.peek() {
-    Some((THIN_ARROW, start, end)) if !kind_in(
-        TokenKind::TK_THIN_ARROW,
-        stop_kinds,
-      ) => {
+    Some((THIN_ARROW, start, end)) if !kind_in(TK_THIN_ARROW, stop_kinds) => {
       let invalid_unparenthesized = match lhs.kind {
         Type_Group | Type_Tuple => false
         _ => true
@@ -12514,11 +12049,11 @@ fn parse_type_arrow(
         push_child(children, Some("result"), rhs)
       }
       match state.peek() {
-        Some((RAISE, _, _)) if !kind_in(TokenKind::TK_RAISE, stop_kinds) =>
+        Some((RAISE, _, _)) if !kind_in(TK_RAISE, stop_kinds) =>
           parse_effect_annotation_into(state, children)
-        Some((NORAISE, _, _)) if !kind_in(TokenKind::TK_NORAISE, stop_kinds) =>
+        Some((NORAISE, _, _)) if !kind_in(TK_NORAISE, stop_kinds) =>
           parse_effect_annotation_into(state, children)
-        Some((NOCANCEL, _, _)) if !kind_in(TokenKind::TK_NOCANCEL, stop_kinds) =>
+        Some((NOCANCEL, _, _)) if !kind_in(TK_NOCANCEL, stop_kinds) =>
           parse_effect_annotation_into(state, children)
         _ => ()
       }
@@ -12592,13 +12127,13 @@ fn parse_return_type(state : ParserState) -> CstNode {
     }
     _ =>
       parse_type_arrow(state, [
-        TokenKind::TK_RAISE,
-        TokenKind::TK_NORAISE,
-        TokenKind::TK_NOCANCEL,
-        TokenKind::TK_LBRACE,
-        TokenKind::TK_EQUAL,
-        TokenKind::TK_SEMI,
-        TokenKind::TK_EOF,
+        TK_RAISE,
+        TK_NORAISE,
+        TK_NOCANCEL,
+        TK_LBRACE,
+        TK_EQUAL,
+        TK_SEMI,
+        TK_EOF,
       ])
   }
 }
@@ -12608,40 +12143,36 @@ fn parse_effect_annotation_into(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> Unit {
-  if state.current_is(TokenKind::TK_NOCANCEL) {
+  if state.current_is(TK_NOCANCEL) {
     if state.consume_any() is Some(nocancel_anchor) {
       push_child(children, Some("nocancel"), nocancel_anchor)
     }
     push_children(children, state.consume_trivia())
-    if state.current_is(TokenKind::TK_PLUS) {
+    if state.current_is(TK_PLUS) {
       if state.consume_any() is Some(op) {
         push_child(children, Some("effect_op"), op)
       }
       push_children(children, state.consume_trivia())
-      if state.current_is(TokenKind::TK_RAISE) ||
-        state.current_is(TokenKind::TK_NORAISE) {
+      if state.current_is(TK_RAISE) || state.current_is(TK_NORAISE) {
         push_child(children, Some("clause"), parse_error_annotation(state))
       } else {
-        state.report_expected_tokens([
-          TokenKind::TK_RAISE,
-          TokenKind::TK_NORAISE,
-        ])
+        state.report_expected_tokens([TK_RAISE, TK_NORAISE])
       }
     }
   } else {
     push_child(children, Some("clause"), parse_error_annotation(state))
     push_children(children, state.consume_trivia())
-    if state.current_is(TokenKind::TK_PLUS) {
+    if state.current_is(TK_PLUS) {
       if state.consume_any() is Some(op) {
         push_child(children, Some("effect_op"), op)
       }
       push_children(children, state.consume_trivia())
-      if state.current_is(TokenKind::TK_NOCANCEL) {
+      if state.current_is(TK_NOCANCEL) {
         if state.consume_any() is Some(nocancel_anchor) {
           push_child(children, Some("nocancel"), nocancel_anchor)
         }
       } else {
-        state.report_expected_tokens([TokenKind::TK_NOCANCEL])
+        state.report_expected_tokens([TK_NOCANCEL])
       }
     }
   }
@@ -12730,11 +12261,9 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
       } else {
         ()
       }
-      state.report_expected_tokens_at(LBRACKET, mk_loc(start, end), [
-        TokenKind::TK_LBRACE,
-      ])
-      while !state.current_is(TokenKind::TK_LBRACE) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+      state.report_expected_tokens_at(LBRACKET, mk_loc(start, end), [TK_LBRACE])
+      while !state.current_is(TK_LBRACE) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(type_children, Some("error"), bad)
@@ -12776,12 +12305,10 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
       error_kind = ErrorType_Error
     }
     (Some((AMPER, start, end)), _) => {
-      state.report_expected_tokens_at(AMPER, mk_loc(start, end), [
-        TokenKind::TK_LBRACE,
-      ])
+      state.report_expected_tokens_at(AMPER, mk_loc(start, end), [TK_LBRACE])
       let type_children : Array[(String?, CstNode)] = []
-      while !state.current_is(TokenKind::TK_LBRACE) &&
-            !state.current_is(TokenKind::TK_EOF) &&
+      while !state.current_is(TK_LBRACE) &&
+            !state.current_is(TK_EOF) &&
             !(state.peek() is None) {
         if state.consume_any() is Some(bad) {
           push_child(type_children, Some("error"), bad)
@@ -12818,16 +12345,16 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
         | Some((PACKAGE_NAME(_), _, _))
         | Some((UNDERSCORE, _, _)) => {
           let err_ty = parse_type_until(state, [
-            TokenKind::TK_PLUS,
-            TokenKind::TK_NOCANCEL,
-            TokenKind::TK_LBRACE,
-            TokenKind::TK_RBRACE,
-            TokenKind::TK_RPAREN,
-            TokenKind::TK_RBRACKET,
-            TokenKind::TK_COMMA,
-            TokenKind::TK_EQUAL,
-            TokenKind::TK_SEMI,
-            TokenKind::TK_EOF,
+            TK_PLUS,
+            TK_NOCANCEL,
+            TK_LBRACE,
+            TK_RBRACE,
+            TK_RPAREN,
+            TK_RBRACKET,
+            TK_COMMA,
+            TK_EQUAL,
+            TK_SEMI,
+            TK_EOF,
           ])
           if !err_ty.children.is_empty() {
             match err_ty.kind {
