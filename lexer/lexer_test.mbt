@@ -1,6 +1,6 @@
 ///|
 test "reference keyword handling: where is a keyword without lexical error" {
-  let result = tokens_from_string("where", comment=false)
+  let result = @lexer.tokens_from_string("where", comment=false)
   guard result.errors.length() == 0 else {
     fail("where should not be reported as a reserved keyword")
   }
@@ -11,7 +11,7 @@ test "reference keyword handling: where is a keyword without lexical error" {
 
 ///|
 test "reference keyword handling: var is a keyword without lexical error" {
-  let result = tokens_from_string("var", comment=false)
+  let result = @lexer.tokens_from_string("var", comment=false)
   guard result.errors.length() == 0 else {
     fail("var should not be reported as a reserved keyword")
   }
@@ -20,7 +20,7 @@ test "reference keyword handling: var is a keyword without lexical error" {
 
 ///|
 test "reference keyword handling: package remains a keyword" {
-  let result = tokens_from_string("package", comment=false)
+  let result = @lexer.tokens_from_string("package", comment=false)
   guard result.errors.length() == 0 else {
     fail("package in normal source should not be a lexical error")
   }
@@ -31,7 +31,7 @@ test "reference keyword handling: package remains a keyword" {
 
 ///|
 test "reference byte literal recovery keeps a BYTE token after invalid contents" {
-  let result = tokens_from_string("b'🐰'", comment=false)
+  let result = @lexer.tokens_from_string("b'🐰'", comment=false)
   guard result.errors.length() == 1 else {
     fail("invalid byte literal should report exactly one lexical error")
   }
@@ -46,7 +46,7 @@ test "reference byte literal recovery keeps a BYTE token after invalid contents"
 ///|
 test "reference interpolation scanner handles nested bytes interpolation" {
   let source = "\"\\{b\"\\{\"}\"}\"}\""
-  let result = tokens_from_string(source, comment=false)
+  let result = @lexer.tokens_from_string(source, comment=false)
   guard result.errors.length() == 0 else {
     fail("nested bytes interpolation should not produce lexer errors")
   }
@@ -66,7 +66,7 @@ test "reference interpolation scanner handles nested bytes interpolation" {
 
 ///|
 test "reference dot recovery reports a missing identifier after dot" {
-  let result = tokens_from_string(".", comment=false)
+  let result = @lexer.tokens_from_string(".", comment=false)
   guard result.errors.length() == 1 else {
     fail("standalone dot should report exactly one lexical error")
   }

@@ -1,7 +1,7 @@
 ///|
 fn simple_parse_expr(source : String) -> @syntax.Expr raise {
   let tokens = @lexer.tokens_from_string(source, comment=true).tokens
-  let (expr, reports) = parse_expr(tokens)
+  let (expr, reports) = @handrolled_parser.parse_expr(tokens)
   if reports.is_empty() {
     return expr
   } else {
@@ -453,7 +453,7 @@ test {
 test "f(X=1)" {
   @basic.show_loc.val = Json
   let tokens = @lexer.tokens_from_string("f(X=1)", comment=true).tokens
-  let (expr, reports) = parse_expr(tokens)
+  let (expr, reports) = @handrolled_parser.parse_expr(tokens)
   json_inspect(reports, content=[
     {
       "type": "Error",

@@ -1,6 +1,6 @@
 ///|
 fn assert_single_metavar_result(
-  result : LexResult,
+  result : @lexer.LexResult,
   source : String,
   token_start : Int,
 ) -> Unit raise {
@@ -26,27 +26,27 @@ fn assert_single_metavar_result(
 
 ///|
 test "metavariable syntax is disabled by default" {
-  let result = tokens_from_string("$x", comment=false)
+  let result = @lexer.tokens_from_string("$x", comment=false)
   guard result.errors[0].2 is IllegalCharacter('$') else {
     fail(
       "expected disabled metavariable syntax to use normal illegal-char path",
     )
   }
-  let dot = tokens_from_string(".$field", comment=false)
+  let dot = @lexer.tokens_from_string(".$field", comment=false)
   guard dot.tokens[0].0 is DOT_LIDENT("") else {
     fail("expected disabled dot metavariable syntax to keep the dot token")
   }
   guard dot.tokens[1].0 is LIDENT("field") else {
     fail("expected disabled dot metavariable syntax to resume after $")
   }
-  let triple = tokens_from_string("$$$x", comment=false)
+  let triple = @lexer.tokens_from_string("$$$x", comment=false)
   guard triple.errors.length() == 3 else {
     fail("expected each disabled $$$ prefix character to be rejected")
   }
   guard triple.tokens[0].0 is LIDENT("x") else {
     fail("expected disabled $$$ metavariable syntax to resume after the prefix")
   }
-  let dot_triple = tokens_from_string(".$$$field", comment=false)
+  let dot_triple = @lexer.tokens_from_string(".$$$field", comment=false)
   guard dot_triple.errors.length() == 3 else {
     fail("expected each disabled dot $$$ prefix character to be rejected")
   }
@@ -60,11 +60,15 @@ test "metavariable syntax is disabled by default" {
 
 ///|
 test "metavariable syntax encodes as ordinary tokens when enabled" {
-  let exp = tokens_from_string("$(x:exp)", comment=false, enable_metavar=true)
+  let exp = @lexer.tokens_from_string(
+    "$(x:exp)",
+    comment=false,
+    enable_metavar=true,
+  )
   guard exp.tokens[0].0 is LIDENT("$(x:exp)") else {
     fail("expected LIDENT encoded typed metavariable")
   }
-  let spaced = tokens_from_string(
+  let spaced = @lexer.tokens_from_string(
     "$( x : exp )",
     comment=false,
     enable_metavar=true,
@@ -72,11 +76,15 @@ test "metavariable syntax encodes as ordinary tokens when enabled" {
   guard spaced.tokens[0].0 is LIDENT("$(x:exp)") else {
     fail("expected typed metavariable payload to normalize whitespace")
   }
-  let inferred = tokens_from_string("$x", comment=false, enable_metavar=true)
+  let inferred = @lexer.tokens_from_string(
+    "$x",
+    comment=false,
+    enable_metavar=true,
+  )
   guard inferred.tokens[0].0 is LIDENT("$x") else {
     fail("expected LIDENT encoded untyped metavariable")
   }
-  let type_name = tokens_from_string(
+  let type_name = @lexer.tokens_from_string(
     "$(Foo:type)",
     comment=false,
     enable_metavar=true,
@@ -84,7 +92,7 @@ test "metavariable syntax encodes as ordinary tokens when enabled" {
   guard type_name.tokens[0].0 is UIDENT("$(Foo:type)") else {
     fail("expected UIDENT encoded type metavariable")
   }
-  let dot = tokens_from_string(
+  let dot = @lexer.tokens_from_string(
     ".$(field:id)",
     comment=false,
     enable_metavar=true,
@@ -92,7 +100,7 @@ test "metavariable syntax encodes as ordinary tokens when enabled" {
   guard dot.tokens[0].0 is DOT_LIDENT("$(field:id)") else {
     fail("expected DOT_LIDENT encoded typed metavariable")
   }
-  let dot_inferred = tokens_from_string(
+  let dot_inferred = @lexer.tokens_from_string(
     ".$field",
     comment=false,
     enable_metavar=true,
@@ -100,7 +108,7 @@ test "metavariable syntax encodes as ordinary tokens when enabled" {
   guard dot_inferred.tokens[0].0 is DOT_LIDENT("$field") else {
     fail("expected DOT_LIDENT encoded untyped metavariable")
   }
-  let post = tokens_from_string(
+  let post = @lexer.tokens_from_string(
     "$(label:id)~",
     comment=false,
     enable_metavar=true,
@@ -108,7 +116,7 @@ test "metavariable syntax encodes as ordinary tokens when enabled" {
   guard post.tokens[0].0 is POST_LABEL("$(label:id)") else {
     fail("expected POST_LABEL encoded typed metavariable")
   }
-  let post_inferred = tokens_from_string(
+  let post_inferred = @lexer.tokens_from_string(
     "$label~",
     comment=false,
     enable_metavar=true,
@@ -120,12 +128,16 @@ test "metavariable syntax encodes as ordinary tokens when enabled" {
 
 ///|
 test "triple-dollar metavariable syntax preserves its prefix" {
-  let exp = tokens_from_string("$$$(x:exp)", comment=false, enable_metavar=true)
+  let exp = @lexer.tokens_from_string(
+    "$$$(x:exp)",
+    comment=false,
+    enable_metavar=true,
+  )
   assert_single_metavar_result(exp, "$$$(x:exp)", 0)
   guard exp.tokens[0].0 is LIDENT("$$$(x:exp)") else {
     fail("expected LIDENT encoded typed $$$ metavariable")
   }
-  let spaced = tokens_from_string(
+  let spaced = @lexer.tokens_from_string(
     "$$$( x : exp )",
     comment=false,
     enable_metavar=true,
@@ -134,12 +146,16 @@ test "triple-dollar metavariable syntax preserves its prefix" {
   guard spaced.tokens[0].0 is LIDENT("$$$(x:exp)") else {
     fail("expected typed $$$ metavariable payload to normalize whitespace")
   }
-  let inferred = tokens_from_string("$$$x", comment=false, enable_metavar=true)
+  let inferred = @lexer.tokens_from_string(
+    "$$$x",
+    comment=false,
+    enable_metavar=true,
+  )
   assert_single_metavar_result(inferred, "$$$x", 0)
   guard inferred.tokens[0].0 is LIDENT("$$$x") else {
     fail("expected LIDENT encoded untyped $$$ metavariable")
   }
-  let inferred_type = tokens_from_string(
+  let inferred_type = @lexer.tokens_from_string(
     "$$$Foo",
     comment=false,
     enable_metavar=true,
@@ -148,7 +164,7 @@ test "triple-dollar metavariable syntax preserves its prefix" {
   guard inferred_type.tokens[0].0 is UIDENT("$$$Foo") else {
     fail("expected UIDENT encoded untyped $$$ metavariable")
   }
-  let type_name = tokens_from_string(
+  let type_name = @lexer.tokens_from_string(
     "$$$(Foo:type)",
     comment=false,
     enable_metavar=true,
@@ -157,7 +173,7 @@ test "triple-dollar metavariable syntax preserves its prefix" {
   guard type_name.tokens[0].0 is UIDENT("$$$(Foo:type)") else {
     fail("expected UIDENT encoded typed $$$ metavariable")
   }
-  let dot = tokens_from_string(
+  let dot = @lexer.tokens_from_string(
     ".$$$(field:id)",
     comment=false,
     enable_metavar=true,
@@ -166,7 +182,7 @@ test "triple-dollar metavariable syntax preserves its prefix" {
   guard dot.tokens[0].0 is DOT_LIDENT("$$$(field:id)") else {
     fail("expected DOT_LIDENT encoded typed $$$ metavariable")
   }
-  let dot_inferred = tokens_from_string(
+  let dot_inferred = @lexer.tokens_from_string(
     ".$$$field",
     comment=false,
     enable_metavar=true,
@@ -175,7 +191,7 @@ test "triple-dollar metavariable syntax preserves its prefix" {
   guard dot_inferred.tokens[0].0 is DOT_LIDENT("$$$field") else {
     fail("expected DOT_LIDENT encoded untyped $$$ metavariable")
   }
-  let post = tokens_from_string(
+  let post = @lexer.tokens_from_string(
     "$$$(label:id)~",
     comment=false,
     enable_metavar=true,
@@ -184,7 +200,7 @@ test "triple-dollar metavariable syntax preserves its prefix" {
   guard post.tokens[0].0 is POST_LABEL("$$$(label:id)") else {
     fail("expected POST_LABEL encoded typed $$$ metavariable")
   }
-  let post_inferred = tokens_from_string(
+  let post_inferred = @lexer.tokens_from_string(
     "$$$label~",
     comment=false,
     enable_metavar=true,
@@ -197,7 +213,11 @@ test "triple-dollar metavariable syntax preserves its prefix" {
 
 ///|
 test "inferred metavariable annotation does not require whitespace" {
-  let bare = tokens_from_string("$x:Int", comment=false, enable_metavar=true)
+  let bare = @lexer.tokens_from_string(
+    "$x:Int",
+    comment=false,
+    enable_metavar=true,
+  )
   guard bare.errors.length() == 0 else {
     fail("expected no lexical errors for inferred metavariable annotation")
   }
@@ -206,7 +226,7 @@ test "inferred metavariable annotation does not require whitespace" {
     bare.tokens[2].0 is UIDENT("Int") else {
     fail("expected inferred metavariable annotation tokens")
   }
-  let result = tokens_from_string(
+  let result = @lexer.tokens_from_string(
     "($x:Foo)",
     comment=false,
     enable_metavar=true,
@@ -221,7 +241,7 @@ test "inferred metavariable annotation does not require whitespace" {
     result.tokens[4].0 is RPAREN else {
     fail("expected parenthesized inferred metavariable annotation tokens")
   }
-  let triple = tokens_from_string(
+  let triple = @lexer.tokens_from_string(
     "$$$x:Int",
     comment=false,
     enable_metavar=true,
@@ -243,7 +263,11 @@ test "metavariable malformed forms report lexical errors when enabled" {
       "$exp:x", "$(:exp)", "$(x:)", "$(x:exp", "$(\tx:exp)", "$$$exp:x", "$$$(:exp)",
       "$$$(x:)", "$$$(x:exp", "$$$(\tx:exp)", ".$$$(:exp)",
     ] {
-    let result = tokens_from_string(source, comment=false, enable_metavar=true)
+    let result = @lexer.tokens_from_string(
+      source,
+      comment=false,
+      enable_metavar=true,
+    )
     guard result.errors.length() > 0 &&
       result.errors[0].2 is InvalidMetavarSyntax(_) else {
       fail("expected InvalidMetavarSyntax for \{source}")
@@ -262,7 +286,11 @@ test "double-dollar metavariable prefix remains unsupported" {
       (".$$(field:id)", ".$$(field:id)", 1),
     ] {
     let (source, expected_raw, error_start) = case
-    let result = tokens_from_string(source, comment=false, enable_metavar=true)
+    let result = @lexer.tokens_from_string(
+      source,
+      comment=false,
+      enable_metavar=true,
+    )
     guard result.errors.length() == 1 else {
       fail("expected one lexical error for unsupported prefix in \{source}")
     }
@@ -281,7 +309,7 @@ test "double-dollar metavariable prefix remains unsupported" {
 
 ///|
 test "metavariable syntax remains enabled in interpolation sublexing" {
-  let result = tokens_from_string(
+  let result = @lexer.tokens_from_string(
     "$x",
     comment=false,
     is_interpolation=true,
@@ -297,7 +325,11 @@ test "metavariable syntax remains enabled in interpolation sublexing" {
 
 ///|
 test "multiline interpolation keeps precedence over metavariable syntax" {
-  let result = tokens_from_string("$|hello", comment=false, enable_metavar=true)
+  let result = @lexer.tokens_from_string(
+    "$|hello",
+    comment=false,
+    enable_metavar=true,
+  )
   guard result.tokens[0].0 is MULTILINE_INTERP(_) else {
     fail("expected MULTILINE_INTERP")
   }

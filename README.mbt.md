@@ -52,7 +52,7 @@ test {
     #|   x: Int
     #|   y: Int
     #| }
-  let (impls, _) = parse_string(source)
+  let (impls, _) = @parser.parse_string(source)
   json_inspect(impls.map(impl_ => impl_.json_repr()), content=[
     {
       "kind": "Impl::TopLetDef",

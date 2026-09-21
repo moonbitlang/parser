@@ -1,9 +1,9 @@
 ///|
-struct AstNoLoc(Ast)
+struct AstNoLoc(@moon_config.Ast)
 
 ///|
 impl @debug.Debug for AstNoLoc with fn to_repr(self) {
-  fn go(ast : Ast) -> @debug.Repr {
+  fn go(ast : @moon_config.Ast) -> @debug.Repr {
     match ast {
       Null(_) => @debug.Repr::ctor("Null", [])
       Bool(value, ..) => @debug.Repr::ctor("Bool", [(None, Repr(value))])
@@ -70,7 +70,7 @@ test "validate_moon_pkg accepts Ast returned by parse_moon_pkg" {
     #|rule(name: "rule1", command: "moon run")
     #|dev_build(rule: "rule1", input: "a", output: "b")
     #|
-  let (ast, parse_reports) = parse_moon_pkg(source)
+  let (ast, parse_reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     parse_reports,
     content=(
@@ -78,7 +78,7 @@ test "validate_moon_pkg accepts Ast returned by parse_moon_pkg" {
     ),
   )
   debug_inspect(
-    validate_moon_pkg(ast).map(report => report.msg),
+    @moon_config.validate_moon_pkg(ast).map(report => report.msg),
     content=(
       #|[]
     ),
@@ -101,7 +101,7 @@ test "validate_moon_mod accepts Ast returned by parse_moon_mod" {
     #|)
     #|rule(name: "rule1", command: "moon run")
     #|
-  let (ast, parse_reports) = parse_moon_mod(source)
+  let (ast, parse_reports) = @moon_config.parse_moon_mod(source)
   debug_inspect(
     parse_reports,
     content=(
@@ -109,7 +109,7 @@ test "validate_moon_mod accepts Ast returned by parse_moon_mod" {
     ),
   )
   debug_inspect(
-    validate_moon_mod(ast).map(report => report.msg),
+    @moon_config.validate_moon_mod(ast).map(report => report.msg),
     content=(
       #|[]
     ),
@@ -122,7 +122,7 @@ test "validate_moon_work accepts Ast returned by parse_moon_work" {
     #|members = ["./app", "./shared"]
     #|preferred_target = "native"
     #|
-  let (ast, parse_reports) = parse_moon_work(source)
+  let (ast, parse_reports) = @moon_config.parse_moon_work(source)
   debug_inspect(
     parse_reports,
     content=(
@@ -130,7 +130,7 @@ test "validate_moon_work accepts Ast returned by parse_moon_work" {
     ),
   )
   debug_inspect(
-    validate_moon_work(ast).map(report => report.msg),
+    @moon_config.validate_moon_work(ast).map(report => report.msg),
     content=(
       #|[]
     ),
@@ -140,7 +140,7 @@ test "validate_moon_work accepts Ast returned by parse_moon_work" {
 ///|
 test "validate_moon_pkg reports duplicate postprocessed keys" {
   let loc = test_loc()
-  let ast : Ast = Obj(
+  let ast : @moon_config.Ast = Obj(
     Vector([
       ("warn-list", Str("+w1", loc~)),
       ("warn-list", Str("+w2", loc~)),
@@ -153,7 +153,7 @@ test "validate_moon_pkg reports duplicate postprocessed keys" {
     ]),
     loc~,
   )
-  let reports : Array[@basic.Report] = validate_moon_pkg(ast)
+  let reports : Array[@basic.Report] = @moon_config.validate_moon_pkg(ast)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -168,7 +168,7 @@ test "validate_moon_pkg reports duplicate postprocessed keys" {
 ///|
 test "validate_moon_mod reports duplicate postprocessed keys" {
   let loc = test_loc()
-  let ast : Ast = Obj(
+  let ast : @moon_config.Ast = Obj(
     Vector([
       ("rule", Obj(Vector([("name", Str("r1", loc~))]), loc~)),
       ("rule", Obj(Vector([("name", Str("r2", loc~))]), loc~)),
@@ -179,7 +179,7 @@ test "validate_moon_mod reports duplicate postprocessed keys" {
     ]),
     loc~,
   )
-  let reports : Array[@basic.Report] = validate_moon_mod(ast)
+  let reports : Array[@basic.Report] = @moon_config.validate_moon_mod(ast)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -194,7 +194,7 @@ test "validate_moon_mod reports duplicate postprocessed keys" {
 ///|
 test "validate_moon_pkg reports raw keys left after failed postprocess" {
   let loc = test_loc()
-  let ast : Ast = Obj(
+  let ast : @moon_config.Ast = Obj(
     Vector([
       ("warnings", Str("+w1", loc~)),
       ("supported_targets", Str("native", loc~)),
@@ -202,7 +202,7 @@ test "validate_moon_pkg reports raw keys left after failed postprocess" {
     ]),
     loc~,
   )
-  let reports : Array[@basic.Report] = validate_moon_pkg(ast)
+  let reports : Array[@basic.Report] = @moon_config.validate_moon_pkg(ast)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -218,7 +218,7 @@ test "validate_moon_pkg reports raw keys left after failed postprocess" {
 ///|
 test "validate_moon_mod reports raw keys left after failed postprocess" {
   let loc = test_loc()
-  let ast : Ast = Obj(
+  let ast : @moon_config.Ast = Obj(
     Vector([
       ("warnings", Str("+w1", loc~)),
       ("supported_targets", Arr(Vector([Str("js", loc~)]), loc~)),
@@ -228,7 +228,7 @@ test "validate_moon_mod reports raw keys left after failed postprocess" {
     ]),
     loc~,
   )
-  let reports : Array[@basic.Report] = validate_moon_mod(ast)
+  let reports : Array[@basic.Report] = @moon_config.validate_moon_mod(ast)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -246,7 +246,7 @@ test "validate_moon_mod reports raw keys left after failed postprocess" {
 ///|
 test "validate_moon_work reports duplicate and unexpected fields" {
   let loc = test_loc()
-  let ast : Ast = Obj(
+  let ast : @moon_config.Ast = Obj(
     Vector([
       ("members", Arr(Vector([Str("./app", loc~)]), loc~)),
       ("members", Arr(Vector([Str("./lib", loc~)]), loc~)),
@@ -254,7 +254,7 @@ test "validate_moon_work reports duplicate and unexpected fields" {
     ]),
     loc~,
   )
-  let reports : Array[@basic.Report] = validate_moon_work(ast)
+  let reports : Array[@basic.Report] = @moon_config.validate_moon_work(ast)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -271,7 +271,7 @@ test "parse_moon_pkg reports raw unexpected top-level keys" {
   let source =
     #|unexpected = "value"
     #|
-  let (_, reports) = parse_moon_pkg(source)
+  let (_, reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -290,7 +290,7 @@ test "parse_moon_mod reports duplicate options blocks" {
     #|  repository: "https://example.com/repo",
     #|)
     #|
-  let (_, reports) = parse_moon_mod(source)
+  let (_, reports) = @moon_config.parse_moon_mod(source)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -305,7 +305,7 @@ test "parse_moon_pkg reports duplicate raw key names" {
     #|warnings = "+w1"
     #|warnings = "+w2"
     #|
-  let (_, reports) = parse_moon_pkg(source)
+  let (_, reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     reports.map(report => report.msg),
     content=(
@@ -327,7 +327,7 @@ test "parse_moon_pkg postprocesses options and repeatable fields" {
     #|dev_build(rule: "rule1", input: "a", output: "b")
     #|dev_build(rule: "rule2", input: "c", output: "d")
     #|
-  let (ast, reports) = parse_moon_pkg(source)
+  let (ast, reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     reports,
     content=(
@@ -364,7 +364,7 @@ test "parse_moon_pkg keeps repeated top-level rule entries in Ast" {
     #|rule(name:"rule1", command:"exe")
     #|rule(name:"rule2", command:"exe")
     #|
-  let (ast, reports) = parse_moon_pkg(source)
+  let (ast, reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     reports,
     content=(
@@ -408,7 +408,7 @@ test "parse_moon_pkg handles package imports aliases and targets" {
     #|  },
     #|)
     #|
-  let (ast, reports) = parse_moon_pkg(source)
+  let (ast, reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     reports,
     content=(
@@ -468,7 +468,7 @@ test "parse_moon_pkg handles link options" {
     #|  },
     #|)
     #|
-  let (ast, reports) = parse_moon_pkg(source)
+  let (ast, reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     reports,
     content=(
@@ -522,7 +522,7 @@ test "parse_moon_mod postprocesses imports and options" {
     #|rule(name: "rule1", command: "exe")
     #|rule(name: "rule2", command: "exe")
     #|
-  let (ast, reports) = parse_moon_mod(source)
+  let (ast, reports) = @moon_config.parse_moon_mod(source)
   debug_inspect(
     reports,
     content=(
@@ -573,7 +573,7 @@ test "parse_moon_mod handles metadata options" {
     #|  source: "src",
     #|)
     #|
-  let (ast, reports) = parse_moon_mod(source)
+  let (ast, reports) = @moon_config.parse_moon_mod(source)
   debug_inspect(
     reports,
     content=(
@@ -638,7 +638,7 @@ test "parse_moon_mod accepts documented top-level fields" {
     #|preferred_target = "js"
     #|supported_targets = ["js", "wasm-gc"]
     #|
-  let (ast, reports) = parse_moon_mod(source)
+  let (ast, reports) = @moon_config.parse_moon_mod(source)
   debug_inspect(
     reports,
     content=(
@@ -671,7 +671,7 @@ test "parse_moon_work parses workspace config" {
     #|members = ["./app", "./shared"]
     #|preferred_target = "wasm-gc"
     #|
-  let (ast, reports) = parse_moon_work(source)
+  let (ast, reports) = @moon_config.parse_moon_work(source)
   debug_inspect(
     reports,
     content=(
@@ -699,7 +699,7 @@ test "parse_moon_work handles multiline members" {
     #|  "./mod_b",
     #|]
     #|
-  let (ast, reports) = parse_moon_work(source)
+  let (ast, reports) = @moon_config.parse_moon_work(source)
   debug_inspect(
     reports,
     content=(
@@ -720,7 +720,7 @@ test "parse_moon_pkg reports config validation diagnostics" {
     #|warnings = true
     #|unexpected = "value"
     #|
-  let (ast, reports) = parse_moon_pkg(source)
+  let (ast, reports) = @moon_config.parse_moon_pkg(source)
   debug_inspect(
     reports,
     content=(
@@ -756,7 +756,7 @@ test "parse_moon_mod reports config validation diagnostics" {
     #|name = "user/first"
     #|name = "user/second"
     #|
-  let (ast, reports) = parse_moon_mod(source)
+  let (ast, reports) = @moon_config.parse_moon_mod(source)
   debug_inspect(
     reports,
     content=(
@@ -786,7 +786,7 @@ test "parse_moon_work reports config validation diagnostics" {
     #|members = ["./lib"]
     #|warnings = "+w1"
     #|
-  let (ast, reports) = parse_moon_work(source)
+  let (ast, reports) = @moon_config.parse_moon_work(source)
   debug_inspect(
     reports,
     content=(
