@@ -7834,7 +7834,7 @@ fn parse_function_expr(
     Some((tok, start, end)) if !(tok is LPAREN) => {
       state.report(
         mk_loc(start, end),
-        "Failed to parse func: expected '(' or '{', got \{@debug.render(tok.to_repr())}",
+        "Failed to parse func: expected '(' or '{', got \{@debug.render(Debug::to_repr(tok))}",
       )
       while !state.current_in(stop_kinds) &&
             !state.current_is(TokenKind::TK_EOF) &&
@@ -8916,7 +8916,7 @@ fn parse_local_function_statement(
     Some((tok, start, end)) if !(tok is LPAREN) => {
       state.report(
         mk_loc(start, end),
-        "Failed to parse func: expected '(' or '{', got \{@debug.render(tok.to_repr())}",
+        "Failed to parse func: expected '(' or '{', got \{@debug.render(Debug::to_repr(tok))}",
       )
       while !state.current_in(stop_kinds) &&
             !state.current_is(TokenKind::TK_EOF) &&
