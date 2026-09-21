@@ -1,3 +1,4 @@
+///|
 pub(all) enum Token {
   CHAR(CharLiteral)
   INT(String)
@@ -137,6 +138,11 @@ pub(all) enum Token {
   PACKAGE
 } derive(Debug)
 
+///|
+#deprecated("Use Debug::to_repr instead")
+#doc(hidden)
+pub extend Token with Debug::{to_repr}
+///|
 pub fn Token::kind(self : Token) -> TokenKind {
   match self {
     CHAR(_) => TK_CHAR
@@ -278,6 +284,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
   }
 }
 
+///|
 pub(all) enum TokenKind {
   TK_CHAR
   TK_INT
@@ -417,8 +424,28 @@ pub(all) enum TokenKind {
   TK_PACKAGE
 } derive(Eq, Hash, Compare)
 
+///|
+#deprecated("Use Eq::equal or Eq::not_equal instead")
+#doc(hidden)
+pub extend TokenKind with Eq::{equal, not_equal}
+
+///|
+#deprecated("Use Hash::hash or Hash::hash_combine instead")
+#doc(hidden)
+pub extend TokenKind with Hash::{hash, hash_combine}
+
+///|
+#deprecated("Use Compare::compare or Compare::op_ge or Compare::op_gt or Compare::op_le or Compare::op_lt instead")
+#doc(hidden)
+pub extend TokenKind with Compare::{compare, op_ge, op_gt, op_le, op_lt}
+
+///|
+#deprecated("Use Show::to_string or Show::output instead")
+#doc(hidden)
+pub extend TokenKind with Show::{output, to_string}
+///|
 pub impl Show for TokenKind with fn output(self, logger) {
-  logger.write_string(
+  Logger::write_string(logger,
     match self {
       TK_CHAR => "CHAR"
       TK_INT => "INT"
@@ -560,6 +587,11 @@ pub impl Show for TokenKind with fn output(self, logger) {
   )
 }
 
+///|
+#deprecated("Use Debug::to_repr instead")
+#doc(hidden)
+pub extend TokenKind with Debug::{to_repr}
+///|
 pub impl Debug for TokenKind with fn to_repr(self) {
     match self {
       TK_CHAR => Repr("CHAR")
