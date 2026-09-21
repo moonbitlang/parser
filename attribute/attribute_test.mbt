@@ -25,7 +25,7 @@ test "attribute payload accepts extend soft keyword" {
     (RPAREN, pos, pos),
     (EOF, pos, pos),
   ]
-  try payloads(tokens, initial_pos=pos) catch {
+  try @attribute.payloads(tokens, initial_pos=pos) catch {
     _ => fail("expected extend soft keyword in attribute payload to parse")
   } noraise {
     props =>
@@ -46,7 +46,10 @@ test "attribute payload accepts extend soft keyword" {
 
 ///|
 test "attribute" {
-  let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), "(a,b,c)"))
+  let attr = @attribute.Attribute::new(
+    loc=dummy_loc,
+    ("qual", Some("name"), "(a,b,c)"),
+  )
   debug_inspect(
     attr,
     content=(
@@ -65,7 +68,7 @@ test "attribute" {
       #|}
     ),
   )
-  let attr = Attribute::new(
+  let attr = @attribute.Attribute::new(
     loc=dummy_loc,
     ("qual", Some("name"), "(label1=abc, label2=cde)"),
   )
@@ -87,7 +90,7 @@ test "attribute" {
       #|}
     ),
   )
-  let attr = Attribute::new(
+  let attr = @attribute.Attribute::new(
     loc=dummy_loc,
     ("qual", Some("name"), "(f(false), g(true))"),
   )
@@ -113,7 +116,7 @@ test "attribute" {
       #|}
     ),
   )
-  let attr = Attribute::new(
+  let attr = @attribute.Attribute::new(
     loc=dummy_loc,
     ("qual", Some("name"), "(\"abcdef\", g(true))"),
   )
@@ -136,7 +139,10 @@ test "attribute" {
       #|}
     ),
   )
-  let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), ""))
+  let attr = @attribute.Attribute::new(
+    loc=dummy_loc,
+    ("qual", Some("name"), ""),
+  )
   debug_inspect(
     attr,
     content=(
@@ -150,7 +156,10 @@ test "attribute" {
       #|}
     ),
   )
-  let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), "(Debug)"))
+  let attr = @attribute.Attribute::new(
+    loc=dummy_loc,
+    ("qual", Some("name"), "(Debug)"),
+  )
   debug_inspect(
     attr,
     content=(
@@ -164,7 +173,10 @@ test "attribute" {
       #|}
     ),
   )
-  let attr = Attribute::new(loc=dummy_loc, ("qual", Some("name"), "("))
+  let attr = @attribute.Attribute::new(
+    loc=dummy_loc,
+    ("qual", Some("name"), "("),
+  )
   debug_inspect(
     attr,
     content=(
