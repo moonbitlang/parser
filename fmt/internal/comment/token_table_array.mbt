@@ -19,3 +19,8 @@ pub fn NodeTableArray::get(self : Self, idx : Int) -> NodeTable {
 pub impl Pretty for NodeTableArray with fn pretty(self) {
   @pp.pretty(self.0)
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend NodeTableArray with @moonbit-community/prettyprinter.Pretty::{pretty}

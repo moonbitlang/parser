@@ -43,3 +43,28 @@ fn InterpLiteral::to_string_repr(self : InterpLiteral) -> String {
     buf.to_string()
   }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend InterpElem with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend InterpElem with Eq::{not_equal, equal}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend InterpSource with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend InterpSource with Eq::{not_equal, equal}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend InterpSource with ToJson::{to_json}

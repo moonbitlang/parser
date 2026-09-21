@@ -146,3 +146,83 @@ pub fn Location::merge(self : Location, other : Location) -> Location {
   let end = if self.end > other.end { self.end } else { other.end }
   { start, end, }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend BasePos with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend BasePos with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend BasePos with Eq::{not_equal, equal}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend BasePos with Hash::{hash, hash_combine}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Location with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Location with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Location with Eq::{not_equal, equal}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Location with Hash::{hash, hash_combine}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Location with Show::{to_string, output}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Location with ToJson::{to_json}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Position with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Position with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Position with Eq::{not_equal, equal}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Position with Hash::{hash, hash_combine}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Position with Show::{to_string, output}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Position with ToJson::{to_json}

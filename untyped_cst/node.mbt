@@ -40,12 +40,12 @@ fn ParseResult::docstrings_view(
 
 ///|
 fn mk_loc(start : Position, end : Position) -> Location {
-  Location::{ start, end, }
+  { start, end, }
 }
 
 ///|
 fn empty_loc(pos : Position) -> Location {
-  Location::{ start: pos, end: pos, }
+  { start: pos, end: pos, }
 }
 
 ///|
@@ -65,12 +65,7 @@ fn node(
   source_span : (Int, Int),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
-  CstNode::{
-    kind,
-    loc,
-    source_span,
-    children: ReadOnlyArray::from_array(children),
-  }
+  { kind, loc, source_span, children: ReadOnlyArray::from_array(children), }
 }
 
 ///|
@@ -79,7 +74,7 @@ fn leaf_node(
   loc : Location,
   source_span : (Int, Int),
 ) -> CstNode {
-  node(NodeKind::Leaf(payload), loc, source_span, [])
+  node(Leaf(payload), loc, source_span, [])
 }
 
 ///|
@@ -107,141 +102,134 @@ fn node_with_payload(
 ///|
 fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
   match kind {
-    TokenKind::TK_CHAR
-    | TokenKind::TK_INT
-    | TokenKind::TK_BYTE
-    | TokenKind::TK_BYTES
-    | TokenKind::TK_FLOAT
-    | TokenKind::TK_DOUBLE
-    | TokenKind::TK_STRING
-    | TokenKind::TK_MULTILINE_STRING
-    | TokenKind::TK_REGEX_LITERAL
-    | TokenKind::TK_FALSE
-    | TokenKind::TK_TRUE => Syntax_Literal
-    TokenKind::TK_MULTILINE_INTERP
-    | TokenKind::TK_INTERP
-    | TokenKind::TK_BYTES_INTERP
-    | TokenKind::TK_REGEX_INTERP => Syntax_Interpolation
-    TokenKind::TK_ATTRIBUTE => Syntax_Attribute
-    TokenKind::TK_LIDENT
-    | TokenKind::TK_UIDENT
-    | TokenKind::TK_PACKAGE_NAME
-    | TokenKind::TK_UNDERSCORE => Syntax_Identifier
+    TK_CHAR
+    | TK_INT
+    | TK_BYTE
+    | TK_BYTES
+    | TK_FLOAT
+    | TK_DOUBLE
+    | TK_STRING
+    | TK_MULTILINE_STRING
+    | TK_REGEX_LITERAL
+    | TK_FALSE
+    | TK_TRUE => Syntax_Literal
+    TK_MULTILINE_INTERP | TK_INTERP | TK_BYTES_INTERP | TK_REGEX_INTERP =>
+      Syntax_Interpolation
+    TK_ATTRIBUTE => Syntax_Attribute
+    TK_LIDENT | TK_UIDENT | TK_PACKAGE_NAME | TK_UNDERSCORE => Syntax_Identifier
     TK_POST_LABEL | TK_POST_LABEL_TRANSPARENT => Syntax_Label
-    TokenKind::TK_DOT_LIDENT
-    | TokenKind::TK_DOT_UIDENT
-    | TokenKind::TK_DOT_INT => Syntax_Accessor
-    TokenKind::TK_COMMENT => Syntax_Comment
-    TokenKind::TK_NEWLINE => Syntax_Unexpected
-    TokenKind::TK_EOF => Syntax_Eof
-    TokenKind::TK_LPAREN
-    | TokenKind::TK_RPAREN
-    | TokenKind::TK_DOT_LPAREN
-    | TokenKind::TK_LBRACKET
-    | TokenKind::TK_LBRACKET_BAR
-    | TokenKind::TK_RBRACKET
-    | TokenKind::TK_BAR_RBRACKET
-    | TokenKind::TK_LBRACE
-    | TokenKind::TK_RBRACE => Syntax_Delimiter
-    TokenKind::TK_COMMA
-    | TokenKind::TK_COLON
-    | TokenKind::TK_COLONCOLON
-    | TokenKind::TK_SEMI
-    | TokenKind::TK_FAT_ARROW
-    | TokenKind::TK_THIN_ARROW => Syntax_Separator
-    TokenKind::TK_INFIX1
-    | TokenKind::TK_INFIX2
-    | TokenKind::TK_INFIX3
-    | TokenKind::TK_INFIX4
-    | TokenKind::TK_AUGMENTED_ASSIGNMENT
-    | TokenKind::TK_PLUS_EQUAL
-    | TokenKind::TK_EQUAL
-    | TokenKind::TK_EQ_TILDE
-    | TokenKind::TK_MINUS
-    | TokenKind::TK_QUESTION
-    | TokenKind::TK_EXCLAMATION
-    | TokenKind::TK_PLUS
-    | TokenKind::TK_BAR
-    | TokenKind::TK_AMPERAMPER
-    | TokenKind::TK_AMPER
-    | TokenKind::TK_CARET
-    | TokenKind::TK_BARBAR
-    | TokenKind::TK_PIPE
-    | TokenKind::TK_PIPE_LEFT
-    | TokenKind::TK_LT_PLUS
-    | TokenKind::TK_LT_QUESTION
-    | TokenKind::TK_DOTDOT
-    | TokenKind::TK_RANGE_INCLUSIVE
-    | TokenKind::TK_RANGE_LT_INCLUSIVE
-    | TokenKind::TK_RANGE_EXCLUSIVE
-    | TokenKind::TK_RANGE_INCLUSIVE_REV
-    | TokenKind::TK_RANGE_EXCLUSIVE_REV
-    | TokenKind::TK_IMPLIES
-    | TokenKind::TK_ELLIPSIS
-    | TokenKind::TK_READONLY
-    | TokenKind::TK_EXTEND => Syntax_Operator
-    TokenKind::TK_PUB
-    | TokenKind::TK_PRIV
-    | TokenKind::TK_IMPORT
-    | TokenKind::TK_EXTERN
-    | TokenKind::TK_BREAK
-    | TokenKind::TK_CONTINUE
-    | TokenKind::TK_STRUCT
-    | TokenKind::TK_ENUM
-    | TokenKind::TK_TRAIT
-    | TokenKind::TK_DERIVE
-    | TokenKind::TK_IMPL
-    | TokenKind::TK_WITH
-    | TokenKind::TK_RAISE
-    | TokenKind::TK_THROW
-    | TokenKind::TK_TRY
-    | TokenKind::TK_CATCH
-    | TokenKind::TK_ASYNC
-    | TokenKind::TK_TYPEALIAS
-    | TokenKind::TK_TRAITALIAS
-    | TokenKind::TK_FNALIAS
-    | TokenKind::TK_AS
-    | TokenKind::TK_ELSE
-    | TokenKind::TK_FN
-    | TokenKind::TK_IF
-    | TokenKind::TK_LET
-    | TokenKind::TK_PROOF_ASSERT
-    | TokenKind::TK_PROOF_LET
-    | TokenKind::TK_CONST
-    | TokenKind::TK_MATCH
-    | TokenKind::TK_USING
-    | TokenKind::TK_MUTABLE
-    | TokenKind::TK_TYPE
-    | TokenKind::TK_WHILE
-    | TokenKind::TK_RETURN
-    | TokenKind::TK_TEST
-    | TokenKind::TK_LOOP
-    | TokenKind::TK_GUARD
+    TK_DOT_LIDENT | TK_DOT_UIDENT | TK_DOT_INT => Syntax_Accessor
+    TK_COMMENT => Syntax_Comment
+    TK_NEWLINE => Syntax_Unexpected
+    TK_EOF => Syntax_Eof
+    TK_LPAREN
+    | TK_RPAREN
+    | TK_DOT_LPAREN
+    | TK_LBRACKET
+    | TK_LBRACKET_BAR
+    | TK_RBRACKET
+    | TK_BAR_RBRACKET
+    | TK_LBRACE
+    | TK_RBRACE => Syntax_Delimiter
+    TK_COMMA
+    | TK_COLON
+    | TK_COLONCOLON
+    | TK_SEMI
+    | TK_FAT_ARROW
+    | TK_THIN_ARROW => Syntax_Separator
+    TK_INFIX1
+    | TK_INFIX2
+    | TK_INFIX3
+    | TK_INFIX4
+    | TK_AUGMENTED_ASSIGNMENT
+    | TK_PLUS_EQUAL
+    | TK_EQUAL
+    | TK_EQ_TILDE
+    | TK_MINUS
+    | TK_QUESTION
+    | TK_EXCLAMATION
+    | TK_PLUS
+    | TK_BAR
+    | TK_AMPERAMPER
+    | TK_AMPER
+    | TK_CARET
+    | TK_BARBAR
+    | TK_PIPE
+    | TK_PIPE_LEFT
+    | TK_LT_PLUS
+    | TK_LT_QUESTION
+    | TK_DOTDOT
+    | TK_RANGE_INCLUSIVE
+    | TK_RANGE_LT_INCLUSIVE
+    | TK_RANGE_EXCLUSIVE
+    | TK_RANGE_INCLUSIVE_REV
+    | TK_RANGE_EXCLUSIVE_REV
+    | TK_IMPLIES
+    | TK_ELLIPSIS
+    | TK_READONLY
+    | TK_EXTEND => Syntax_Operator
+    TK_PUB
+    | TK_PRIV
+    | TK_IMPORT
+    | TK_EXTERN
+    | TK_BREAK
+    | TK_CONTINUE
+    | TK_STRUCT
+    | TK_ENUM
+    | TK_TRAIT
+    | TK_DERIVE
+    | TK_IMPL
+    | TK_WITH
+    | TK_RAISE
+    | TK_THROW
+    | TK_TRY
+    | TK_CATCH
+    | TK_ASYNC
+    | TK_TYPEALIAS
+    | TK_TRAITALIAS
+    | TK_FNALIAS
+    | TK_AS
+    | TK_ELSE
+    | TK_FN
+    | TK_IF
+    | TK_LET
+    | TK_PROOF_ASSERT
+    | TK_PROOF_LET
+    | TK_CONST
+    | TK_MATCH
+    | TK_USING
+    | TK_MUTABLE
+    | TK_TYPE
+    | TK_WHILE
+    | TK_RETURN
+    | TK_TEST
+    | TK_LOOP
+    | TK_GUARD
     | TK_GUARD_EXCLAMATION
-    | TokenKind::TK_DEFER
-    | TokenKind::TK_ERRDEFER
-    | TokenKind::TK_FOR
-    | TokenKind::TK_IN
-    | TokenKind::TK_IS
-    | TokenKind::TK_SUBERROR
-    | TokenKind::TK_AND
-    | TokenKind::TK_FORALL
-    | TokenKind::TK_EXISTS
-    | TokenKind::TK_LETREC
-    | TokenKind::TK_ENUMVIEW
-    | TokenKind::TK_EXTENUM
-    | TokenKind::TK_DECLARE
-    | TokenKind::TK_NORAISE
-    | TokenKind::TK_NOCANCEL
-    | TokenKind::TK_NOBREAK
-    | TokenKind::TK_WHERE
-    | TokenKind::TK_VAR
-    | TokenKind::TK_TRY_QUESTION
-    | TokenKind::TK_TRY_EXCLAMATION
-    | TokenKind::TK_LEXMATCH
-    | TokenKind::TK_LEXMATCH_QUESTION
-    | TokenKind::TK_LEXSCAN
-    | TokenKind::TK_PACKAGE => Syntax_Keyword
+    | TK_DEFER
+    | TK_ERRDEFER
+    | TK_FOR
+    | TK_IN
+    | TK_IS
+    | TK_SUBERROR
+    | TK_AND
+    | TK_FORALL
+    | TK_EXISTS
+    | TK_LETREC
+    | TK_ENUMVIEW
+    | TK_EXTENUM
+    | TK_DECLARE
+    | TK_NORAISE
+    | TK_NOCANCEL
+    | TK_NOBREAK
+    | TK_WHERE
+    | TK_VAR
+    | TK_TRY_QUESTION
+    | TK_TRY_EXCLAMATION
+    | TK_LEXMATCH
+    | TK_LEXMATCH_QUESTION
+    | TK_LEXSCAN
+    | TK_PACKAGE => Syntax_Keyword
   }
 }
 
@@ -300,7 +288,7 @@ fn bool_marker_node(
 ///|
 fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
   let _ = kind
-  node(NodeKind::Missing, empty_loc(pos), empty_span(offset), [])
+  node(Missing, empty_loc(pos), empty_span(offset), [])
 }
 
 ///|
@@ -331,7 +319,7 @@ fn error_node(
       ),
     )
   }
-  node(NodeKind::Error, loc, source_span, recovered_children)
+  node(Error, loc, source_span, recovered_children)
 }
 
 ///|
@@ -359,9 +347,19 @@ fn parse_result(
   diagnostics : Array[Report],
   docstrings : Array[List[(Location, Comment)]],
 ) -> ParseResult {
-  ParseResult::{
+  {
     root,
     diagnostics: ReadOnlyArray::from_array(diagnostics),
     docstrings: ReadOnlyArray::from_array(docstrings),
   }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend CstNode with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ParseResult with Debug::{to_repr}

@@ -167,3 +167,93 @@ pub(all) struct Mbti {
   loc : Location
   base_pos : BasePos
 } derive(Debug)
+
+///|
+#deprecated
+#doc(hidden)
+pub extend AliasSig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ConstSig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend FuncSig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ImplSig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Mbti with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend MethodSelfType with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Name with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Name with ToJson::{to_json}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend PackageImport with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend QualifiedName with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Sig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TraitMethodSig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TraitSig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeDefinition with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeParamNoConstraints with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeParamWithConstraints with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TypeSig with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ValueSig with Debug::{to_repr}

@@ -696,5 +696,5 @@ test "moon_config root loc stays ordered for layout-only source" {
       #|Obj([])
     ),
   )
-  debug_inspect(loc.start.compare(loc.end) <= 0, content="true")
+  debug_inspect(Compare::compare(loc.start, loc.end) <= 0, content="true")
 }

@@ -35,3 +35,8 @@ pub impl Show for LexicalError with fn output(self, logger) {
     },
   )
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend LexicalError with Show::{to_string, output}

@@ -4,7 +4,7 @@ fn report_from_lex_error(
   end : Position,
   err : @lexer.LexicalError,
 ) -> Report {
-  Report::{ loc: mk_loc(start, end), msg: err.to_string(), }
+  { loc: mk_loc(start, end), msg: Show::to_string(err), }
 }
 
 ///|
@@ -227,25 +227,25 @@ fn ParserState::required_expr_node(
 ///|
 fn required_pattern_start_tokens() -> Array[TokenKind] {
   [
-    TokenKind::TK_TRUE,
-    TokenKind::TK_FALSE,
-    TokenKind::TK_CHAR,
-    TokenKind::TK_INT,
-    TokenKind::TK_BYTE,
-    TokenKind::TK_FLOAT,
-    TokenKind::TK_DOUBLE,
-    TokenKind::TK_MINUS,
-    TokenKind::TK_BYTES,
-    TokenKind::TK_STRING,
-    TokenKind::TK_UNDERSCORE,
-    TokenKind::TK_LIDENT,
-    TokenKind::TK_EXTEND,
-    TokenKind::TK_PACKAGE_NAME,
-    TokenKind::TK_UIDENT,
-    TokenKind::TK_AMPER,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_LBRACKET,
-    TokenKind::TK_LBRACE,
+    TK_TRUE,
+    TK_FALSE,
+    TK_CHAR,
+    TK_INT,
+    TK_BYTE,
+    TK_FLOAT,
+    TK_DOUBLE,
+    TK_MINUS,
+    TK_BYTES,
+    TK_STRING,
+    TK_UNDERSCORE,
+    TK_LIDENT,
+    TK_EXTEND,
+    TK_PACKAGE_NAME,
+    TK_UIDENT,
+    TK_AMPER,
+    TK_LPAREN,
+    TK_LBRACKET,
+    TK_LBRACE,
   ]
 }
 
@@ -276,7 +276,7 @@ fn ParserState::report(
   loc : Location,
   msg : String,
 ) -> Unit {
-  self.reports.push(Report::{ loc, msg, })
+  self.reports.push({ loc, msg, })
 }
 
 ///|

@@ -114,14 +114,16 @@ fn lexer_test(t : @test.Test) -> Unit raise Error {
     }
   })
   if errors.length() > 0 {
-    let errors = errors.map(triple => (triple.0, triple.1, triple.2.to_string()))
+    let errors = errors.map(triple => {
+      (triple.0, triple.1, Show::to_string(triple.2))
+    })
     fail(
       "lexing \{name}.mbt failed due to errors: \{errors.to_json().stringify(indent=2)}",
     )
   }
   let tokens : Array[Json] = lex_result.tokens.map(triple => {
     "token": triple.0,
-    "loc": @basic.Location::{ start: triple.1, end: triple.2, }.to_json(),
+    "loc": ToJson::to_json(@basic.Location::{ start: triple.1, end: triple.2, }),
   })
   t.write(tokens.to_json().stringify(indent=2))
   t.snapshot(filename="\{name}.mbt.tokens.json")

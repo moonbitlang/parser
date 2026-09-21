@@ -52,7 +52,7 @@ test "mbti method self type location starts at type name" {
     is Func({ type_name: Some({ loc, .. }), .. }) else {
     fail("expected method function signature")
   }
-  inspect(loc.to_string(), content="method_self_loc.mbti-2:9-2:15")
+  inspect(Show::to_string(loc), content="method_self_loc.mbti-2:9-2:15")
 }
 
 ///|
@@ -66,7 +66,7 @@ test "mbti function post label location includes tilde" {
   guard params.head().unwrap() is Labelled(binder~, ..) else {
     fail("expected labelled parameter")
   }
-  inspect(binder.loc.to_string(), content="post_label_loc.mbti-2:10-2:16")
+  inspect(Show::to_string(binder.loc), content="post_label_loc.mbti-2:10-2:16")
 }
 
 ///|

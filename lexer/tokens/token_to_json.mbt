@@ -167,3 +167,18 @@ pub impl ToJson for Token with fn to_json(self) {
     IMPLIES => "IMPLIES"
   }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Comment with ToJson::{to_json}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend CommentKind with ToJson::{to_json}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Token with ToJson::{to_json}

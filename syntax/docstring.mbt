@@ -31,3 +31,13 @@ pub fn DocString::empty() -> DocString {
   let dummy_pos = Position::{ lnum: 0, cnum: 0, bol: 0, fname: "", }
   { content: @list.empty(), loc: { start: dummy_pos, end: dummy_pos, }, }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend DocString with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend DocString with ToJson::{to_json}

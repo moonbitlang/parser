@@ -19,3 +19,13 @@ pub fn Ast::loc(self : Self) -> Location {
     Obj(_, loc~) => loc
   }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Ast with Debug::{to_repr}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Ast with Eq::{not_equal, equal}

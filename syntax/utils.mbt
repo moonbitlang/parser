@@ -626,3 +626,8 @@ fn shift_col(pos : Position, offset : Int) -> Position {
     cnum: pos.cnum + offset,
   }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend ArrowFnParam with Debug::{to_repr}

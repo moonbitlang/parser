@@ -47,7 +47,7 @@ pub(all) enum Key {
 ///|
 pub impl Pretty for Key with fn pretty(self) {
   match self {
-    Token(loc) | Node(loc) => text(loc.to_string())
+    Token(loc) | Node(loc) => text(Show::to_string(loc))
   }
 }
 
@@ -89,3 +89,33 @@ pub fn NodeTable::get_array(self : Self, name : String) -> NodeArray {
     _ => empty_node_array
   }
 }
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Key with @moonbit-community/prettyprinter.Pretty::{pretty}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Key with Compare::{op_lt, op_le, op_ge, compare, op_gt}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Key with Eq::{not_equal, equal}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend Key with Hash::{hash, hash_combine}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend NodeTable with @moonbit-community/prettyprinter.Pretty::{pretty}
+
+///|
+#deprecated
+#doc(hidden)
+pub extend TokenGroup with @moonbit-community/prettyprinter.Pretty::{pretty}
