@@ -7,15 +7,13 @@ import {
   "moonbitlang/core/list",
 }
 
-// Warning 73 is emitted by moonyacc's generated semantic-value wrappers.
-
-warnings = "-6-text_segment_excceed"
+warnings = "-6"
 
 formatter(ignore: [ "parser.mbt" ])
 
 rule(
   name: "moonyacc",
-  command: "moonx moonbitlang/yacc@0.7.19 --no-comments --external-tokens $input -o $output",
+  command: "moonx moonbitlang/yacc@0.7.22 --no-comments --external-tokens $input -o $output",
 )
 
 dev_build(rule: "moonyacc", input: "parser.mbty", output: "parser.mbt")
