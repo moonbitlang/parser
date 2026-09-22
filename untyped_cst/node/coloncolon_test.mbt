@@ -5,25 +5,33 @@ fn coloncolon_constructor_nodes() -> (
   Array[@node.CstNode],
   @node.CstNode,
 ) {
-  let type_ = @node.CstNode::syntax_identifier(
+  let type_ = @node.CstNode::syntax_token(
+    token_kind=TK_UIDENT,
     loc=@node.mk_loc(test_position(0), test_position(1)),
     source_span=(0, 1),
+    entries=[],
   )
-  let op = @node.CstNode::syntax_operator(
+  let op = @node.CstNode::syntax_token(
+    token_kind=TK_COLONCOLON,
     loc=@node.mk_loc(test_position(1), test_position(3)),
     source_span=(1, 3),
+    entries=[],
   )
   let trivia = [
     for start in [4, 13] => {
-      @node.CstNode::syntax_comment(
+      @node.CstNode::syntax_token(
+        token_kind=TK_COMMENT,
         loc=@node.mk_loc(test_position(start), test_position(start + 7)),
         source_span=(start, start + 7),
+        entries=[],
       )
     }
   ]
-  let tail = @node.CstNode::syntax_identifier(
+  let tail = @node.CstNode::syntax_token(
+    token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(22), test_position(23)),
     source_span=(22, 23),
+    entries=[],
   )
   (type_, op, trivia, tail)
 }
@@ -40,7 +48,10 @@ fn assert_coloncolon_constructor_children(
     @test.assert_eq(child.loc, expected[i].1.loc)
     @test.assert_eq(child.source_span, expected[i].1.source_span)
     if label is Some("trivia") {
-      @test.assert_eq(child.kind is @node.NodeKind::Syntax_Comment, true)
+      @test.assert_eq(
+        child.kind is @node.NodeKind::Syntax_Token(TK_COMMENT),
+        true,
+      )
       @test.assert_eq(
         source[child.source_span.0:child.source_span.1],
         "// keep"[:],

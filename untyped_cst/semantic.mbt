@@ -819,9 +819,6 @@ fn semantic_ident_expr(
         ["name"],
       )
 
-      let async_loc = CstNode::first_child_with_label_from(
-        children, "async_loc",
-      )
       let name = CstNode::children_with_label_from(children, "name")
       let token = CstNode::first_child_with_label_from(children, "token")
       let semantic_name = CstNode::first_child_with_label_from(
@@ -830,7 +827,6 @@ fn semantic_ident_expr(
       @node.CstNode::expr_ident(
         loc~,
         source_span~,
-        async_loc?,
         name~,
         token?,
         semantic_name?,
@@ -932,28 +928,6 @@ fn push_pun_pattern(children : Array[(String?, CstNode)]) -> Unit {
 }
 
 ///|
-fn push_pun_locations(children : Array[(String?, CstNode)]) -> Unit {
-  guard CstNode::first_child_with_label_from(children, "name") is Some(name) &&
-    name.lexical_name_value() is Some(value) else {
-    return
-  }
-  for
-    (label, loc, source_span) in [
-      ("label_loc", name.loc, name.source_span),
-      ("value_loc", value.loc, value.source_span),
-    ] {
-    if CstNode::first_child_with_label_from(children, label) is None {
-      let anchor = if name.kind.is_syntax_token() {
-        token_location_node(name, loc, source_span)
-      } else {
-        @node.CstNode::syntax_delimiter(loc~, source_span~)
-      }
-      push_child(children, Some(label), anchor)
-    }
-  }
-}
-
-///|
 fn folded_prefix_constant_node(
   op : CstNode,
   operator : CstNode,
@@ -1045,125 +1019,12 @@ fn unary_plus_apply_node(
 }
 
 ///|
-fn token_location_node(
-  source : CstNode,
-  loc : Location,
-  source_span : (Int, Int),
-) -> CstNode {
-  syntax_location_node(source.kind, loc, source_span)
-}
-
-///|
-// This dispatch is limited to lexer syntax kinds; it cannot rebuild arbitrary nodes.
-fn syntax_location_node(
-  kind : NodeKind,
-  loc : Location,
-  source_span : (Int, Int),
-) -> CstNode {
-  match kind {
-    Syntax_Keyword => @node.CstNode::syntax_keyword(loc~, source_span~)
-    Syntax_Delimiter => @node.CstNode::syntax_delimiter(loc~, source_span~)
-    Syntax_Separator => @node.CstNode::syntax_separator(loc~, source_span~)
-    Syntax_Operator => @node.CstNode::syntax_operator(loc~, source_span~)
-    Syntax_Identifier => @node.CstNode::syntax_identifier(loc~, source_span~)
-    Syntax_Label => @node.CstNode::syntax_label(loc~, source_span~)
-    Syntax_Accessor => @node.CstNode::syntax_accessor(loc~, source_span~)
-    Syntax_Literal => @node.CstNode::syntax_literal(loc~, source_span~)
-    Syntax_Interpolation =>
-      @node.CstNode::syntax_interpolation(loc~, source_span~, segment=[])
-    Syntax_Attribute => @node.CstNode::syntax_attribute(loc~, source_span~)
-    Syntax_Comment => @node.CstNode::syntax_comment(loc~, source_span~)
-    Syntax_Eof => @node.CstNode::syntax_eof(loc~, source_span~)
-    Syntax_Unexpected => @node.CstNode::syntax_unexpected(loc~, source_span~)
-    _ => abort("expected a syntax token location anchor")
-  }
-}
-
-///|
-fn aggregate_span_node(loc : Location, source_span : (Int, Int)) -> CstNode {
-  node(
-    fn(loc, source_span, children) {
-      let _ = children
-      @node.CstNode::aggregate_span(loc~, source_span~)
-    },
-    loc,
-    source_span,
-    [],
-  )
-}
-
-///|
-fn push_token_location(
-  children : Array[(String?, CstNode)],
-  label : String,
-  source : CstNode,
-  loc : Location,
-  source_span : (Int, Int),
-) -> Unit {
-  push_child(
-    children,
-    Some(label),
-    token_location_node(source, loc, source_span),
-  )
-}
-
-///|
-fn push_aggregate_span(
-  children : Array[(String?, CstNode)],
-  label : String,
-  loc : Location,
-  source_span : (Int, Int),
-) -> Unit {
-  push_child(children, Some(label), aggregate_span_node(loc, source_span))
-}
-
-///|
 fn push_direct_operator(
   children : Array[(String?, CstNode)],
   token : CstNode,
 ) -> Unit {
   if token.first_operator_descendant() is Some(operator) {
     push_child(children, Some("operator"), operator)
-  }
-}
-
-///|
-fn push_async_location_anchor(children : Array[(String?, CstNode)]) -> Unit {
-  if bool_marker_value_from_children(children, fn(kind) { kind is Flag_Async })
-    is Some(false) ||
-    CstNode::first_child_with_label_from(children, "async_loc") is Some(_) {
-    return
-  }
-  for keyword in CstNode::children_with_label_from(children, "kw") {
-    if keyword.has_child_kind(fn(kind) { kind is Flag_Async }) {
-      push_token_location(
-        children,
-        "async_loc",
-        keyword,
-        keyword.loc,
-        keyword.source_span,
-      )
-      return
-    }
-  }
-}
-
-///|
-fn push_decl_like_function_location_anchor(
-  children : Array[(String?, CstNode)],
-  loc : Location,
-  source_span : (Int, Int),
-) -> Unit {
-  if CstNode::first_child_with_label_from(children, "header_loc") is Some(_) {
-    return
-  }
-  if CstNode::first_child_with_label_from(children, "kw") is Some(keyword) {
-    push_aggregate_span(
-      children,
-      "header_loc",
-      Location::{ start: keyword.loc.start, end: loc.end, },
-      (keyword.source_span.0, source_span.1),
-    )
   }
 }
 

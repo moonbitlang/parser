@@ -7,17 +7,23 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
     loc=@node.mk_loc(test_position(1), test_position(2)),
     source_span=(2, 3),
   )
-  let op = @node.CstNode::syntax_operator(
+  let op = @node.CstNode::syntax_token(
+    token_kind=TK_PLUS,
     loc=@node.mk_loc(test_position(3), test_position(4)),
     source_span=(4, 5),
+    entries=[],
   )
-  let first = @node.CstNode::syntax_comment(
+  let first = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(5), test_position(12)),
     source_span=(6, 13),
+    entries=[],
   )
-  let second = @node.CstNode::syntax_comment(
+  let second = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(13), test_position(22)),
     source_span=(14, 24),
+    entries=[],
   )
   let pkg = @node.CstNode::name_package(
     value="p",
@@ -199,9 +205,11 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
 test "multiline constructor preserves repeated trivia and entry order" {
   let loc = @node.mk_loc(test_position(0), test_position(19))
   let span = (0, 19)
-  let token = @node.CstNode::syntax_literal(
+  let token = @node.CstNode::syntax_token(
+    token_kind=TK_MULTILINE_STRING,
     loc=@node.mk_loc(test_position(0), test_position(3)),
     source_span=(0, 3),
+    entries=[],
   )
   let element = @node.CstNode::multiline_string_element_string(
     value="a",
@@ -212,11 +220,9 @@ test "multiline constructor preserves repeated trivia and entry order" {
     for (start, value) in [(4, "// keep"), (12, "// next")] => {
       let loc = @node.mk_loc(test_position(start), test_position(start + 7))
       let source_span = (start, start + 7)
-      @node.CstNode::syntax_comment(
-        loc~,
-        source_span~,
-        comment=@node.CstNode::comment_content(value~, loc~, source_span~),
-      )
+      @node.CstNode::syntax_token(token_kind=TK_COMMENT, loc~, source_span~, entries=[
+        Comment(@node.CstNode::comment_content(value~, loc~, source_span~)),
+      ])
     }
   ]
   // Revisit earlier positions and repeat a node to catch sorting or deduplication.
@@ -226,7 +232,6 @@ test "multiline constructor preserves repeated trivia and entry order" {
     Trivia(trivia[1]),
     Trivia(trivia[0]),
     Trivia(trivia[0]),
-    LiteralLoc(token),
     Trivia(trivia[1]),
   ])
   @test.assert_eq(multiline.kind is @node.NodeKind::Expr_MultilineString, true)
@@ -236,7 +241,6 @@ test "multiline constructor preserves repeated trivia and entry order" {
     ("trivia", trivia[1]),
     ("trivia", trivia[0]),
     ("trivia", trivia[0]),
-    ("literal_loc", token),
     ("trivia", trivia[1]),
   ])
 }
@@ -409,7 +413,12 @@ test "ordered constructors match legacy required and optional arguments" {
 test "pattern entry constructors preserve all labels and repeated children" {
   let loc = @node.mk_loc(test_position(1), test_position(8))
   let source_span = (2, 10)
-  let trivia = @node.CstNode::syntax_comment(loc~, source_span~)
+  let trivia = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
+    loc~,
+    source_span~,
+    entries=[],
+  )
   let body = @node.CstNode::missing(
     loc=@node.empty_loc(loc.end),
     source_span=(10, 10),

@@ -54,12 +54,12 @@ fn assert_multiline_trivia(lines : ArrayView[(String, Int)]) -> Unit raise {
           (line, bol, cnum + width),
         )
         let matches_kind = match label {
-          "trivia" => child.kind is Syntax_Comment
+          "trivia" => child.kind is Syntax_Token(TK_COMMENT)
           "token" =>
             if text.has_prefix("$|") {
-              child.kind is Syntax_Interpolation
+              child.kind is Syntax_Token(TK_MULTILINE_INTERP)
             } else {
-              child.kind is Syntax_Literal
+              child.kind is Syntax_Token(TK_MULTILINE_STRING)
             }
           _ =>
             if text.has_prefix("$|") {
@@ -80,9 +80,8 @@ fn assert_multiline_trivia(lines : ArrayView[(String, Int)]) -> Unit raise {
         bol = cnum
       }
     }
-    @test.assert_eq(multiline.children.length(), child_index + 1)
-    @test.assert_eq(multiline.children[child_index].0, Some("literal_loc"))
-    for node in [multiline, multiline.children[child_index].1] {
+    @test.assert_eq(multiline.children.length(), child_index)
+    for node in [multiline] {
       refactor_assert_source_range(
         node,
         source,

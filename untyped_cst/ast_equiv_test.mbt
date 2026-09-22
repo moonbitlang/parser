@@ -637,7 +637,7 @@ test "owner, labelled binder, and negative pattern locations match handrolled" {
 }
 
 ///|
-test "location metadata lowering remains handrolled-equivalent" {
+test "derived location lowering remains handrolled-equivalent" {
   assert_handrolled_cst_ast_equiv("async fn &T::f() {}")
   let expressions = [
     "value |> x => { x }", "try f() catch { _ => 0 } noraise { value => value }",
@@ -648,7 +648,7 @@ test "location metadata lowering remains handrolled-equivalent" {
     let lex = @lexer.tokens_from_string(source, comment=true)
     let (_, reports) = @handrolled_parser.parse_expr(lex.tokens)
     if !reports.is_empty() {
-      fail("handrolled diagnostics for location metadata case: \{source}")
+      fail("handrolled diagnostics for derived location case: \{source}")
     }
     assert_expr_ast_equiv(source)
   }

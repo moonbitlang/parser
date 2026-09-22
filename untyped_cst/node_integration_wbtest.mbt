@@ -1,57 +1,42 @@
 ///|
-test "significant token search skips token-shaped location metadata" {
+test "significant token search skips comments and newlines by exact kind" {
   let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
-  let metadata_start = Position::{
-    fname: "test.mbt",
-    lnum: 1,
-    bol: 0,
-    cnum: 1,
-  }
-  let token_start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 2, }
-  let token_end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 3, }
-  let root = node(
-    fn(loc, source_span, children) {
-      let async_loc = CstNode::first_child_with_label_from(
-        children, "async_loc",
-      )
-      let name = CstNode::children_with_label_from(children, "name")
-      let token = CstNode::first_child_with_label_from(children, "token")
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
-      @node.CstNode::expr_ident(
-        loc~,
-        source_span~,
-        async_loc?,
-        name~,
-        token?,
-        semantic_name?,
-      )
-    },
-    mk_loc(start, token_end),
-    (0, 3),
-    [
-      (
-        Some("async_loc"),
-        CstNode::syntax_keyword(
-          loc=mk_loc(metadata_start, token_start),
-          source_span=(1, 2),
+  let token_start = Position::{ ..start, cnum: 2, }
+  let token_end = Position::{ ..start, cnum: 3, }
+  let root = CstNode::expression(
+    loc=mk_loc(start, token_end),
+    source_span=(0, 3),
+    entries=[
+      Trivia(
+        CstNode::syntax_token(
+          token_kind=TK_COMMENT,
+          loc=mk_loc(start, token_start),
+          source_span=(0, 2),
+          entries=[],
         ),
       ),
-      (
-        Some("token"),
-        CstNode::syntax_identifier(
+      Trivia(
+        CstNode::syntax_unexpected(
+          token_kind=TK_NEWLINE,
+          loc=empty_loc(token_start),
+          source_span=(2, 2),
+          entries=[],
+        ),
+      ),
+      Expr(
+        CstNode::syntax_token(
+          token_kind=TK_LIDENT,
           loc=mk_loc(token_start, token_end),
           source_span=(2, 3),
-          payload=NodePayload::String("x"),
+          entries=[Payload(String("x"))],
         ),
       ),
     ],
   )
-  guard parser_first_significant_token_at_or_after(root, start) is Some(found) else {
+  guard lower_first_significant_token_at_or_after(root, start) is Some(found) else {
     fail("expected significant token")
   }
-  @test.assert_eq(found.kind is Syntax_Identifier, true)
+  @test.assert_eq(found.kind.token_kind(), Some(TK_LIDENT))
   @test.assert_eq(found.source_span, (2, 3))
 }
 
@@ -115,42 +100,4 @@ test "extend soft keyword keeps its accessor label" {
   @test.assert_eq(dot_applies.length(), 1)
   @test.assert_eq(field.kind is Accessor_Label, true)
   @test.assert_eq(field.string_payload(), Some("extend"))
-}
-
-///|
-test "token location anchors keep kind and explicit ranges without payloads" {
-  for
-    source in [
-      "async", "(", ":", "+", "name", "label~", ".field", "\"🐇\"", "\"a\\{x}\"",
-      "#deprecated", "// comment", "", "\n",
-    ] {
-    let lex = @lexer.tokens_from_string(source, comment=true)
-    let state = new_state(lex.tokens, source, [], false)
-    while state.consume_any() is Some(token) {
-      let loc = empty_loc(token.loc.end)
-      let source_span = empty_span(token.source_span.1)
-      let anchor = token_location_node(token, loc, source_span)
-      @test.assert_eq(anchor.kind, token.kind)
-      @test.assert_eq(anchor.loc, loc)
-      @test.assert_eq(anchor.source_span, source_span)
-      @test.assert_eq(anchor.children.length(), 0)
-    }
-  }
-}
-
-///|
-test "recovery anchors keep token locations and zero width UTF-16 spans" {
-  for tail in ["name", "\"🐇\"", "(", "async", ""] {
-    let source = "// 🐇\n" + tail
-    let lex = @lexer.tokens_from_string(source, comment=true)
-    let state = new_state(lex.tokens, source, [], false)
-    let (token, start, end) = state.peek_significant().unwrap()
-    let anchor = state.current_significant_anchor()
-    @test.assert_eq(anchor.kind, syntax_kind_from_token_kind(token.kind()))
-    @test.assert_eq(anchor.loc, mk_loc(start, end))
-    @test.assert_eq(anchor.source_span, (6, 6))
-    @test.assert_eq(anchor.loc.start.cnum, 5)
-    @test.assert_eq(anchor.children.length(), 0)
-    @test.assert_eq(source[anchor.source_span.0:anchor.source_span.1], ""[:])
-  }
 }

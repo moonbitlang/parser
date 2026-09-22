@@ -87,7 +87,6 @@ test "unclassified kinds do not match available categories" {
       Missing,
       Error,
       Leaf(String("value")),
-      Aggregate_Span,
       ArrayPattern_Pattern,
       LexPattern_RegexInterp,
       RegexPattern_Literal,
@@ -104,24 +103,11 @@ test "unclassified kinds do not match available categories" {
 
 ///|
 test "source syntax token kinds are classified exhaustively" {
-  assert_category(
-    [
-      Syntax_Keyword,
-      Syntax_Delimiter,
-      Syntax_Separator,
-      Syntax_Operator,
-      Syntax_Identifier,
-      Syntax_Label,
-      Syntax_Accessor,
-      Syntax_Literal,
-      Syntax_Interpolation,
-      Syntax_Attribute,
-      Syntax_Comment,
-      Syntax_Eof,
-      Syntax_Unexpected,
-    ],
-    fn(kind) { kind.is_syntax_token() },
-  )
+  assert_category([Syntax_Token(TK_LIDENT), Syntax_Unexpected(TK_LIDENT)], fn(
+    kind,
+  ) {
+    kind.is_syntax_token()
+  })
 }
 
 ///|

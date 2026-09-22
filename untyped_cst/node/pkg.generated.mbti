@@ -4,14 +4,13 @@ package "moonbitlang/parser/untyped_cst/node"
 import {
   "moonbitlang/core/debug",
   "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
 }
 
 // Values
 pub fn empty_loc(@basic.Position) -> @basic.Location
 
 pub fn empty_span(Int) -> (Int, Int)
-
-pub fn is_location_metadata_label(String?) -> Bool
 
 pub fn mk_loc(@basic.Position, @basic.Position) -> @basic.Location
 
@@ -20,18 +19,15 @@ pub fn mk_loc(@basic.Position, @basic.Position) -> @basic.Location
 // Types and methods
 pub(all) enum CstDeclarationChild {
   Async(CstNode)
-  AsyncLoc(CstNode)
   Attrs(CstNode)
   Body(CstNode)
   Clause(CstNode)
   DeclBodyKind(CstNode)
-  DeclLoc(CstNode)
   Declare(CstNode)
   Deriving(CstNode)
   EffectOp(CstNode)
   Error(CstNode)
   Expr(CstNode)
-  HeaderLoc(CstNode)
   Kind(CstNode)
   Kw(CstNode)
   Language(CstNode)
@@ -40,7 +36,6 @@ pub(all) enum CstDeclarationChild {
   Name(CstNode)
   Nocancel(CstNode)
   Object(CstNode)
-  ObjectLoc(CstNode)
   Op(CstNode)
   Params(CstNode)
   Pattern(CstNode)
@@ -72,7 +67,6 @@ pub(all) enum CstListChild {
 
 pub(all) enum CstMultilineChild {
   Element(CstNode)
-  LiteralLoc(CstNode)
   Token(CstNode)
   Trivia(CstNode)
 }
@@ -86,11 +80,10 @@ pub struct CstNode {
 pub fn CstNode::accessor_index(value~ : Int, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::accessor_label(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::accessor_newtype(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
-pub fn CstNode::aggregate_span(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::argument_labelled(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, op~ : Self, expr? : Self, pattern? : Self, semantic_name? : Self, pun? : Self) -> Self
-pub fn CstNode::argument_labelled_option(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, op~ : ArrayView[Self], expr~ : Self, semantic_name? : Self, pun? : Self, question_loc? : Self) -> Self
-pub fn CstNode::argument_labelled_option_pun(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, op~ : Self, semantic_name? : Self, pun? : Self, question_loc? : Self, label_loc? : Self, value_loc? : Self, expr? : Self) -> Self
-pub fn CstNode::argument_labelled_pun(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, semantic_name? : Self, pun? : Self, label_loc? : Self, value_loc? : Self, expr? : Self, pattern? : Self) -> Self
+pub fn CstNode::argument_labelled_option(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, op~ : ArrayView[Self], expr~ : Self, semantic_name? : Self, pun? : Self) -> Self
+pub fn CstNode::argument_labelled_option_pun(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, op~ : Self, semantic_name? : Self, pun? : Self, expr? : Self) -> Self
+pub fn CstNode::argument_labelled_pun(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : Self, semantic_name? : Self, pun? : Self, expr? : Self, pattern? : Self) -> Self
 pub fn CstNode::argument_positional(loc~ : @basic.Location, source_span~ : (Int, Int), expr~ : Self) -> Self
 pub fn CstNode::array_element_regular(loc~ : @basic.Location, source_span~ : (Int, Int), expr~ : Self) -> Self
 pub fn CstNode::array_element_spread(loc~ : @basic.Location, source_span~ : (Int, Int), op~ : Self, expr~ : Self) -> Self
@@ -165,30 +158,30 @@ pub fn CstNode::error_type_noraise(loc~ : @basic.Location, source_span~ : (Int, 
 pub fn CstNode::expr_apply(loc~ : @basic.Location, source_span~ : (Int, Int), op? : Self, operator? : Self, func~ : Self, arg~ : Self) -> Self
 pub fn CstNode::expr_array(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, array_kind~ : Self) -> Self
 pub fn CstNode::expr_array_augmented_set(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
-pub fn CstNode::expr_array_get(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, index~ : Self, close~ : Self, index_loc? : Self) -> Self
-pub fn CstNode::expr_array_get_slice(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, start? : Self, op~ : Self, end? : Self, close~ : Self, index_loc? : Self) -> Self
+pub fn CstNode::expr_array_get(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, index~ : Self, close~ : Self) -> Self
+pub fn CstNode::expr_array_get_slice(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, open~ : Self, start? : Self, op~ : Self, end? : Self, close~ : Self) -> Self
 pub fn CstNode::expr_array_set(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_array_spread(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, array_kind~ : Self) -> Self
 pub fn CstNode::expr_as(loc~ : @basic.Location, source_span~ : (Int, Int), expr~ : Self, op~ : Self, type_~ : Self) -> Self
 pub fn CstNode::expr_assign(loc~ : @basic.Location, source_span~ : (Int, Int), lhs? : Self, name~ : ArrayView[Self], semantic_name? : Self, op~ : Self, operator~ : Self, rhs~ : Self, augmented? : Self) -> Self
 pub fn CstNode::expr_block(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, group? : Self) -> Self
-pub fn CstNode::expr_break(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, label_loc? : Self, label? : Self, expr? : Self) -> Self
+pub fn CstNode::expr_break(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, label? : Self, expr? : Self) -> Self
 pub fn CstNode::expr_bytes_interp(loc~ : @basic.Location, source_span~ : (Int, Int), token~ : Self) -> Self
 pub fn CstNode::expr_constant(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_constr(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_constraint(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
-pub fn CstNode::expr_continue(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, label_loc? : Self, label? : Self, arg? : Self) -> Self
+pub fn CstNode::expr_continue(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, label? : Self, arg? : Self) -> Self
 pub fn CstNode::expr_defer(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, expr~ : Self) -> Self
 pub fn CstNode::expr_dot_apply(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, op? : Self, error~ : ArrayView[Self], token? : Self, field? : Self, arg? : Self, return_self? : Self) -> Self
 pub fn CstNode::expr_err_defer(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, expr~ : Self) -> Self
 pub fn CstNode::expr_field(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, token~ : Self, field~ : Self) -> Self
 pub fn CstNode::expr_for(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_for_each(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
-pub fn CstNode::expr_function(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : ArrayView[Self], error~ : ArrayView[Self], params? : Self, type_? : Self, op? : Self, pipe? : Self, body? : Self, async_? : Self, fn_kind? : Self, async_loc? : Self, params_loc? : Self) -> Self
+pub fn CstNode::expr_function(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : ArrayView[Self], error~ : ArrayView[Self], params? : Self, type_? : Self, op? : Self, pipe? : Self, body? : Self, async_? : Self, fn_kind? : Self) -> Self
 pub fn CstNode::expr_group(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, group~ : Self) -> Self
 pub fn CstNode::expr_guard(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_hole(loc~ : @basic.Location, source_span~ : (Int, Int), token~ : Self, hole_kind? : Self) -> Self
-pub fn CstNode::expr_ident(loc~ : @basic.Location, source_span~ : (Int, Int), async_loc? : Self, name~ : ArrayView[Self], token? : Self, semantic_name? : Self) -> Self
+pub fn CstNode::expr_ident(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : ArrayView[Self], token? : Self, semantic_name? : Self) -> Self
 pub fn CstNode::expr_if(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_implies(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, operator~ : Self, rhs~ : Self) -> Self
 pub fn CstNode::expr_infix(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, operator~ : Self, rhs~ : Self) -> Self
@@ -205,7 +198,7 @@ pub fn CstNode::expr_list_comprehension(loc~ : @basic.Location, source_span~ : (
 pub fn CstNode::expr_map(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self) -> Self
 pub fn CstNode::expr_match(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::expr_method(loc~ : @basic.Location, source_span~ : (Int, Int), type_~ : Self, op~ : Self, trivia? : ArrayView[Self], error? : Self, field? : Self) -> Self
-pub fn CstNode::expr_missing_expr(loc~ : @basic.Location, source_span~ : (Int, Int), label? : Self, trivia? : Self, label_loc? : Self, expr? : Self, op? : Self, loop_loc? : Self, error~ : ArrayView[Self]) -> Self
+pub fn CstNode::expr_missing_expr(loc~ : @basic.Location, source_span~ : (Int, Int), label? : Self, trivia? : Self, expr? : Self, op? : Self, error~ : ArrayView[Self]) -> Self
 pub fn CstNode::expr_multiline_string(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstMultilineChild]) -> Self
 pub fn CstNode::expr_mutate(loc~ : @basic.Location, source_span~ : (Int, Int), self_~ : Self, token~ : Self, field~ : Self, op~ : Self, operator~ : Self, rhs~ : Self, augmented? : Self) -> Self
 pub fn CstNode::expr_pipe(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self) -> Self
@@ -221,7 +214,7 @@ pub fn CstNode::expr_rev_pipe(loc~ : @basic.Location, source_span~ : (Int, Int),
 pub fn CstNode::expr_sequence(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self) -> Self
 pub fn CstNode::expr_template_writing(loc~ : @basic.Location, source_span~ : (Int, Int), expr~ : Self, op~ : Self, template~ : Self, conditional? : Self) -> Self
 pub fn CstNode::expr_try(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
-pub fn CstNode::expr_try_operator(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, body~ : Self, try_operator_kind? : Self, try_loc? : Self) -> Self
+pub fn CstNode::expr_try_operator(loc~ : @basic.Location, source_span~ : (Int, Int), kw~ : Self, body~ : Self, try_operator_kind? : Self) -> Self
 pub fn CstNode::expr_tuple(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self) -> Self
 pub fn CstNode::expr_unary(loc~ : @basic.Location, source_span~ : (Int, Int), op~ : Self, operator~ : Self, expr~ : Self) -> Self
 pub fn CstNode::expr_unit(loc~ : @basic.Location, source_span~ : (Int, Int), body~ : Self, faked~ : Self) -> Self
@@ -392,19 +385,8 @@ pub fn CstNode::string_payload(Self) -> String?
 pub fn CstNode::stub_code(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::stub_function_name(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::stub_module_name(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
-pub fn CstNode::syntax_accessor(loc~ : @basic.Location, source_span~ : (Int, Int), name_value? : Self, accessor? : Self, payload? : NodePayload) -> Self
-pub fn CstNode::syntax_attribute(loc~ : @basic.Location, source_span~ : (Int, Int), attribute? : Self) -> Self
-pub fn CstNode::syntax_comment(loc~ : @basic.Location, source_span~ : (Int, Int), comment? : Self) -> Self
-pub fn CstNode::syntax_delimiter(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
-pub fn CstNode::syntax_eof(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
-pub fn CstNode::syntax_identifier(loc~ : @basic.Location, source_span~ : (Int, Int), name_value? : Self, payload? : NodePayload) -> Self
-pub fn CstNode::syntax_interpolation(loc~ : @basic.Location, source_span~ : (Int, Int), segment~ : ArrayView[Self]) -> Self
-pub fn CstNode::syntax_keyword(loc~ : @basic.Location, source_span~ : (Int, Int), flag? : Self) -> Self
-pub fn CstNode::syntax_label(loc~ : @basic.Location, source_span~ : (Int, Int), name_value? : Self, payload? : NodePayload) -> Self
-pub fn CstNode::syntax_literal(loc~ : @basic.Location, source_span~ : (Int, Int), constant? : Self, payload? : NodePayload) -> Self
-pub fn CstNode::syntax_operator(loc~ : @basic.Location, source_span~ : (Int, Int), flag? : Self, name_value? : Self, operator? : Self, payload? : NodePayload) -> Self
-pub fn CstNode::syntax_separator(loc~ : @basic.Location, source_span~ : (Int, Int), trailing? : Self, payload? : NodePayload) -> Self
-pub fn CstNode::syntax_unexpected(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
+pub fn CstNode::syntax_token(token_kind~ : @tokens.TokenKind, loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstTokenChild]) -> Self
+pub fn CstNode::syntax_unexpected(token_kind~ : @tokens.TokenKind, loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstTokenChild]) -> Self
 pub fn CstNode::trailing_mark_comma(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::trailing_mark_none(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::trailing_mark_semi(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
@@ -442,7 +424,6 @@ pub(all) enum CstRecoveryChild {
   ArrayKind(CstNode)
   As(CstNode)
   Async(CstNode)
-  AsyncLoc(CstNode)
   Attr(CstNode)
   Attribute(CstNode)
   Attrs(CstNode)
@@ -454,7 +435,6 @@ pub(all) enum CstRecoveryChild {
   Body(CstNode)
   Bytes(CstNode)
   Case(CstNode)
-  CatchLoc(CstNode)
   Clause(CstNode)
   Close(CstNode)
   Comment(CstNode)
@@ -469,7 +449,6 @@ pub(all) enum CstRecoveryChild {
   Content(CstNode)
   Continue(CstNode)
   DeclBodyKind(CstNode)
-  DeclLoc(CstNode)
   Declare(CstNode)
   Default(CstNode)
   Deriving(CstNode)
@@ -478,34 +457,28 @@ pub(all) enum CstRecoveryChild {
   Element(CstNode)
   Else_(CstNode)
   ElseKw(CstNode)
-  ElseLoc(CstNode)
   End(CstNode)
   Eof(CstNode)
   Error(CstNode)
   Exclamation(CstNode)
   Expr(CstNode)
-  ExprLoc(CstNode)
   Faked(CstNode)
   Field(CstNode)
   Flag(CstNode)
   FnKind(CstNode)
-  ForLoc(CstNode)
   Func(CstNode)
   Group(CstNode)
   Guard(CstNode)
   HasTry(CstNode)
   Head(CstNode)
-  HeaderLoc(CstNode)
   HoleKind(CstNode)
   Index(CstNode)
-  IndexLoc(CstNode)
   Init(CstNode)
   Item(CstNode)
   Key(CstNode)
   Kind(CstNode)
   Kw(CstNode)
   Label(CstNode)
-  LabelLoc(CstNode)
   Language(CstNode)
   LanguageToken(CstNode)
   LeadingBlankLine(CstNode)
@@ -513,9 +486,7 @@ pub(all) enum CstRecoveryChild {
   LexScanCasePattern(CstNode)
   Lhs(CstNode)
   ListComprehensionKind(CstNode)
-  LiteralLoc(CstNode)
   LongIdent(CstNode)
-  LoopLoc(CstNode)
   MatchAbsent(CstNode)
   Method(CstNode)
   Mut(CstNode)
@@ -524,14 +495,12 @@ pub(all) enum CstRecoveryChild {
   NameValue(CstNode)
   Nocancel(CstNode)
   Object(CstNode)
-  ObjectLoc(CstNode)
   Op(CstNode)
   Open(CstNode)
   Openness(CstNode)
   Operator(CstNode)
   Param(CstNode)
   Params(CstNode)
-  ParamsLoc(CstNode)
   Path(CstNode)
   Pattern(CstNode)
   PatternGroup(CstNode)
@@ -543,7 +512,6 @@ pub(all) enum CstRecoveryChild {
   Quantifier(CstNode)
   QuantifierKind(CstNode)
   Question(CstNode)
-  QuestionLoc(CstNode)
   RangeKind(CstNode)
   RawPayload(CstNode)
   Result(CstNode)
@@ -571,13 +539,11 @@ pub(all) enum CstRecoveryChild {
   TrailingBlankLine(CstNode)
   Trait(CstNode)
   Trivia(CstNode)
-  TryLoc(CstNode)
   TryOperatorKind(CstNode)
   Type_(CstNode)
   TypeDesc(CstNode)
   TypeName(CstNode)
   UsingKind(CstNode)
-  ValueLoc(CstNode)
   Vis(CstNode)
   Where(CstNode)
   Wildcard(CstNode)
@@ -592,25 +558,27 @@ pub(all) enum CstRootChild {
   Trivia(CstNode)
 }
 
+pub(all) enum CstTokenChild {
+  Payload(NodePayload)
+  Flag(CstNode)
+  NameValue(CstNode)
+  Operator(CstNode)
+  Constant(CstNode)
+  Accessor(CstNode)
+  Trailing(CstNode)
+  Attribute(CstNode)
+  Comment(CstNode)
+  Segment(CstNode)
+}
+
 pub enum NodeKind {
   Impls
   Expression
   Missing
   Error
   Leaf(NodePayload)
-  Syntax_Keyword
-  Syntax_Delimiter
-  Syntax_Separator
-  Syntax_Operator
-  Syntax_Identifier
-  Syntax_Label
-  Syntax_Accessor
-  Syntax_Literal
-  Syntax_Interpolation
-  Syntax_Attribute
-  Syntax_Comment
-  Syntax_Eof
-  Syntax_Unexpected
+  Syntax_Token(@tokens.TokenKind)
+  Syntax_Unexpected(@tokens.TokenKind)
   Impl_Import
   Impl_Extend
   Impl_Using
@@ -835,7 +803,6 @@ pub enum NodeKind {
   Stub_ModuleName
   Stub_FunctionName
   Stub_Code
-  Aggregate_Span
   DeclBody_Expr
   DeclBody_Import
   DeclBody_EmbeddedString
@@ -955,6 +922,7 @@ pub fn NodeKind::is_syntax_flag(Self) -> Bool
 pub fn NodeKind::is_syntax_token(Self) -> Bool
 pub fn NodeKind::is_type(Self) -> Bool
 pub fn NodeKind::is_type_desc(Self) -> Bool
+pub fn NodeKind::token_kind(Self) -> @tokens.TokenKind?
 
 pub(all) enum NodePayload {
   String(String)
@@ -963,5 +931,6 @@ pub(all) enum NodePayload {
 } derive(Eq, @debug.Debug)
 
 // Type aliases
+pub using @tokens {type TokenKind}
 
 // Traits

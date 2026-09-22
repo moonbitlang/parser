@@ -1047,15 +1047,6 @@ pub fn CstNode::stub_code(
 }
 
 ///|
-pub fn CstNode::aggregate_span(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Aggregate_Span, loc, source_span, children)
-}
-
-///|
 pub fn CstNode::decl_body_expr(
   loc~ : Location,
   source_span~ : (Int, Int),

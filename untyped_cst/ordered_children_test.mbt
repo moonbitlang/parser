@@ -48,7 +48,10 @@ fn assert_regex_binding_comments(
     offset += text.length()
     cnum += width
     if label == "trivia" {
-      @test.assert_eq(child.kind is @untyped_cst.NodeKind::Syntax_Comment, true)
+      @test.assert_eq(
+        child.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
+        true,
+      )
       line += 1
       bol = cnum + 1
       offset += 2
@@ -261,7 +264,10 @@ fn assert_incomplete_constructor_package(
   let mut bol = 0
   for i, (text, width) in comments {
     let comment = node.children[i + 2].1
-    @test.assert_eq(comment.kind is @untyped_cst.NodeKind::Syntax_Comment, true)
+    @test.assert_eq(
+      comment.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
+      true,
+    )
     refactor_assert_source_range(
       comment,
       source,

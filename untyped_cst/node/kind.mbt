@@ -2,10 +2,7 @@
 /// Identifies the source-faithful CST node kinds and documents how each kind
 /// contributes to the typed definitions in `@syntax`.
 ///
-/// Children whose labels end in `_loc` are non-owning location metadata.
-/// Token-backed location metadata reuses the corresponding `Syntax_*` kind,
-/// while locations synthesized from multiple syntax elements use
-/// `Aggregate_Span`.
+/// AST locations are derived from token and syntax-node boundaries.
 pub enum NodeKind {
   /// Root node lowered to `@syntax.Impls`.
   Impls
@@ -17,32 +14,10 @@ pub enum NodeKind {
   Error
   /// Scalar payload child used by CST metadata; it has no direct AST node.
   Leaf(NodePayload)
-  /// Keyword token retained for source fidelity; AST lowering uses its enclosing node.
-  Syntax_Keyword
-  /// Parenthesis, bracket, or brace token; delimiters are represented by AST locations.
-  Syntax_Delimiter
-  /// Separator token such as `,`, `:`, `::`, `;`, or an arrow; it has no AST node.
-  Syntax_Separator
-  /// Operator token retained verbatim; semantic operators use `Operator_*` children.
-  Syntax_Operator
-  /// Identifier token retained verbatim; semantic names use the `Name_*` nodes.
-  Syntax_Identifier
-  /// Post-label token retained verbatim; lowering incorporates it into labels or binders.
-  Syntax_Label
-  /// Dot accessor token retained verbatim; semantic accessors use `Accessor_*` nodes.
-  Syntax_Accessor
-  /// Literal token retained verbatim; semantic values use `Constant_*` nodes.
-  Syntax_Literal
-  /// Interpolated-literal token retained verbatim; segments lower to `@syntax.InterpElem`.
-  Syntax_Interpolation
-  /// Attribute token retained verbatim; its metadata builds an `@attribute.Attribute`.
-  Syntax_Attribute
-  /// Comment token retained verbatim; comments have no direct `@syntax` expression node.
-  Syntax_Comment
-  /// End-of-file token retained in the CST; it has no direct AST node.
-  Syntax_Eof
-  /// Unexpected token preserved during recovery; it has no direct AST node.
-  Syntax_Unexpected
+  /// A lexical token, preserving its exact kind and ordered semantic children.
+  Syntax_Token(TokenKind)
+  /// An unexpected lexical token, retaining its original kind during recovery.
+  Syntax_Unexpected(TokenKind)
 
   // Top-level implementation items.
   /// Corresponds to `@syntax.Impl::TopImport`.
@@ -114,7 +89,7 @@ pub enum NodeKind {
   /// Corresponds to `@syntax.Expr::ArraySpread`.
   Expr_ArraySpread
   /// Corresponds to `@syntax.Expr::ArraySet`; directly owns `self`, `index`,
-  /// bracket syntax, `index_loc`, the assignment operator, and `rhs`.
+  /// bracket syntax, the assignment operator, and `rhs`.
   Expr_ArraySet
   /// Corresponds to `@syntax.Expr::ArrayAugmentedSet` with the same direct
   /// array/index children as `Expr_ArraySet` plus its augmented operator.
@@ -346,12 +321,12 @@ pub enum NodeKind {
   /// Corresponds to `@syntax.ArgumentKind::Labelled`.
   Argument_Labelled
   /// Corresponds to `@syntax.ArgumentKind::LabelledPun` and directly owns its
-  /// synthesized `Expr_Ident` value plus `label_loc` and `value_loc` anchors.
+  /// synthesized `Expr_Ident` value and the original label token.
   Argument_LabelledPun
   /// Corresponds to `@syntax.ArgumentKind::LabelledOption`.
   Argument_LabelledOption
   /// Corresponds to `@syntax.ArgumentKind::LabelledOptionPun` and directly
-  /// owns its synthesized `Expr_Ident` value and location anchors.
+  /// owns its synthesized `Expr_Ident` value and the original label token.
   Argument_LabelledOptionPun
   /// Corresponds to `@syntax.SpreadableElem::Regular`.
   ArrayElement_Regular
@@ -525,11 +500,6 @@ pub enum NodeKind {
   Stub_FunctionName
   /// Scalar embedded code stored in an `@syntax.EmbeddedCode` variant.
   Stub_Code
-  /// Non-owning location metadata synthesized from one or more syntax elements.
-  ///
-  /// Its kind remains `Aggregate_Span` when recovery collapses the range to a
-  /// single token or a zero-width point.
-  Aggregate_Span
 
   // Declaration bodies.
   /// Corresponds to `@syntax.DeclBody::DeclBody`.
@@ -737,27 +707,17 @@ pub enum NodeKind {
 } derive(@debug.Debug, Eq)
 
 ///|
-/// Returns whether this kind has a source-token shape.
-///
-/// A child labeled with an `_loc` suffix may reuse a `Syntax_*` kind as
-/// non-owning location metadata; callers enumerating original tokens must skip
-/// those labeled children.
+/// Whether this node retains a lexical token, including recovered tokens.
 pub fn NodeKind::is_syntax_token(self : NodeKind) -> Bool {
+  self.token_kind() is Some(_)
+}
+
+///|
+/// Returns the original lexical kind, independently of recovery status.
+pub fn NodeKind::token_kind(self : NodeKind) -> TokenKind? {
   match self {
-    Syntax_Keyword
-    | Syntax_Delimiter
-    | Syntax_Separator
-    | Syntax_Operator
-    | Syntax_Identifier
-    | Syntax_Label
-    | Syntax_Accessor
-    | Syntax_Literal
-    | Syntax_Interpolation
-    | Syntax_Attribute
-    | Syntax_Comment
-    | Syntax_Eof
-    | Syntax_Unexpected => true
-    _ => false
+    Syntax_Token(kind) | Syntax_Unexpected(kind) => Some(kind)
+    _ => None
   }
 }
 
