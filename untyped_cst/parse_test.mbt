@@ -1,7 +1,7 @@
 ///|
 fn root_is_impls(root : @untyped_cst.CstNode) -> Bool {
   match root.kind {
-    Impls => true
+    @untyped_cst.NodeKind::Impls => true
     _ => false
   }
 }
@@ -9,7 +9,7 @@ fn root_is_impls(root : @untyped_cst.CstNode) -> Bool {
 ///|
 fn root_is_expression(root : @untyped_cst.CstNode) -> Bool {
   match root.kind {
-    Expression => true
+    @untyped_cst.NodeKind::Expression => true
     _ => false
   }
 }
@@ -115,7 +115,7 @@ fn find_node(
 ///|
 fn is_argument_list(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    List_ArgumentList => true
+    @untyped_cst.NodeKind::List_ArgumentList => true
     _ => false
   }
 }
@@ -123,7 +123,7 @@ fn is_argument_list(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn is_statement_list(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    List_BlockStatementList => true
+    @untyped_cst.NodeKind::List_BlockStatementList => true
     _ => false
   }
 }
@@ -131,7 +131,7 @@ fn is_statement_list(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn has_missing_close(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    Missing => true
+    @untyped_cst.NodeKind::Missing => true
     _ => false
   }
 }
@@ -149,21 +149,21 @@ fn is_pattern_node(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn is_parameter_clause(node : @untyped_cst.CstNode) -> Bool {
   node.kind
-  is (Parameter_DiscardPositional
-  | Parameter_Positional
-  | Parameter_Labelled
-  | Parameter_Optional
-  | Parameter_QuestionOptional
-  | Parameter_TypeDecl
-  | Parameter_TypeVar
-  | Parameter_ConstructorPositional
-  | Parameter_ConstructorLabelled)
+  is (@untyped_cst.NodeKind::Parameter_DiscardPositional
+  | @untyped_cst.NodeKind::Parameter_Positional
+  | @untyped_cst.NodeKind::Parameter_Labelled
+  | @untyped_cst.NodeKind::Parameter_Optional
+  | @untyped_cst.NodeKind::Parameter_QuestionOptional
+  | @untyped_cst.NodeKind::Parameter_TypeDecl
+  | @untyped_cst.NodeKind::Parameter_TypeVar
+  | @untyped_cst.NodeKind::Parameter_ConstructorPositional
+  | @untyped_cst.NodeKind::Parameter_ConstructorLabelled)
 }
 
 ///|
 fn is_error_node(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    Error => true
+    @untyped_cst.NodeKind::Error => true
     _ => false
   }
 }
@@ -171,7 +171,7 @@ fn is_error_node(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn is_multiline_string_expr(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    Expr_MultilineString => true
+    @untyped_cst.NodeKind::Expr_MultilineString => true
     _ => false
   }
 }
@@ -179,7 +179,7 @@ fn is_multiline_string_expr(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn is_interp_literal_segment(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    InterpSegment_Literal => true
+    @untyped_cst.NodeKind::InterpSegment_Literal => true
     _ => false
   }
 }
@@ -187,7 +187,7 @@ fn is_interp_literal_segment(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn is_interp_source_segment(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    InterpSegment_Source => true
+    @untyped_cst.NodeKind::InterpSegment_Source => true
     _ => false
   }
 }
@@ -195,7 +195,7 @@ fn is_interp_source_segment(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn is_regex_literal_pattern(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    RegexPattern_Literal => true
+    @untyped_cst.NodeKind::RegexPattern_Literal => true
     _ => false
   }
 }
@@ -208,13 +208,16 @@ fn is_interp_source_segment_with_expr(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn is_error_annotation(node : @untyped_cst.CstNode) -> Bool {
   node.kind
-  is (ErrorType_Error | ErrorType_Default | ErrorType_Noraise | ErrorType_Maybe)
+  is (@untyped_cst.NodeKind::ErrorType_Error
+  | @untyped_cst.NodeKind::ErrorType_Default
+  | @untyped_cst.NodeKind::ErrorType_Noraise
+  | @untyped_cst.NodeKind::ErrorType_Maybe)
 }
 
 ///|
 fn is_return_type_clause(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    Clause_ReturnType => true
+    @untyped_cst.NodeKind::Clause_ReturnType => true
     _ => false
   }
 }
@@ -308,7 +311,7 @@ fn parse_leaf_payload(node : @untyped_cst.CstNode) -> @untyped_cst.NodePayload? 
     let (label, child) = entry
     if label is Some("payload") {
       match child.kind {
-        Leaf(payload) => return Some(payload)
+        @untyped_cst.NodeKind::Leaf(payload) => return Some(payload)
         _ => ()
       }
     }
@@ -334,13 +337,13 @@ fn has_bool_kind(
 fn has_type_kind(root : @untyped_cst.CstNode, expected : String) -> Bool {
   find_node(root, fn(node) {
     match node.kind {
-      Type_Name => expected == "Name"
-      Type_Tuple => expected == "Tuple"
-      Type_Arrow => expected == "Function"
-      Type_Application => expected == "Application"
-      Type_Option => expected == "Option"
-      Type_Object => expected == "Object"
-      Type_Group => expected == "Group"
+      @untyped_cst.NodeKind::Type_Name => expected == "Name"
+      @untyped_cst.NodeKind::Type_Tuple => expected == "Tuple"
+      @untyped_cst.NodeKind::Type_Arrow => expected == "Function"
+      @untyped_cst.NodeKind::Type_Application => expected == "Application"
+      @untyped_cst.NodeKind::Type_Option => expected == "Option"
+      @untyped_cst.NodeKind::Type_Object => expected == "Object"
+      @untyped_cst.NodeKind::Type_Group => expected == "Group"
       _ => false
     }
   })
@@ -350,7 +353,7 @@ fn has_type_kind(root : @untyped_cst.CstNode, expected : String) -> Bool {
 ///|
 fn is_placeholder_node(node : @untyped_cst.CstNode) -> Bool {
   match node.kind {
-    RegexPattern_Placeholder => true
+    @untyped_cst.NodeKind::RegexPattern_Placeholder => true
     _ => false
   }
 }
@@ -412,7 +415,7 @@ test "expression fragments recognize top-level local functions" {
     @test.assert_eq(result.diagnostics_view().length(), 0)
     let exprs = root_expr_children(result.root())
     @test.assert_eq(exprs.length(), 1)
-    @test.assert_eq(exprs[0].kind is Expr_LetFn, true)
+    @test.assert_eq(exprs[0].kind is @untyped_cst.NodeKind::Expr_LetFn, true)
     @test.assert_eq(result.root().text(source), source[:])
   }
   let sequence_cases = [
@@ -423,7 +426,7 @@ test "expression fragments recognize top-level local functions" {
     @test.assert_eq(result.diagnostics_view().length(), 0)
     let exprs = root_expr_children(result.root())
     @test.assert_eq(exprs.length(), 2)
-    @test.assert_eq(exprs[0].kind is Expr_LetFn, true)
+    @test.assert_eq(exprs[0].kind is @untyped_cst.NodeKind::Expr_LetFn, true)
     @test.assert_eq(count_root_label(result.root(), "sep"), 1)
     @test.assert_eq(result.root().text(source), source[:])
   }
@@ -431,7 +434,10 @@ test "expression fragments recognize top-level local functions" {
   @test.assert_eq(anonymous.diagnostics_view().length(), 0)
   let anonymous_exprs = root_expr_children(anonymous.root())
   @test.assert_eq(anonymous_exprs.length(), 1)
-  @test.assert_eq(anonymous_exprs[0].kind is Expr_Function, true)
+  @test.assert_eq(
+    anonymous_exprs[0].kind is @untyped_cst.NodeKind::Expr_Function,
+    true,
+  )
   let nested = @untyped_cst.parse_expression("consume(fn helper(x) { x })")
   @test.assert_eq(nested.diagnostics_view().is_empty(), false)
 }
@@ -804,24 +810,57 @@ test "expression cases preserve source text" {
 ///|
 test "valid expressions expose AST-aligned semantic kinds" {
   let cases : Array[(String, (@untyped_cst.CstNode) -> Bool)] = [
-    ("42", fn(node) { node.kind is Expr_Constant }),
-    ("-42", fn(node) { node.kind is Expr_Constant }),
-    ("+42", fn(node) { node.kind is Expr_Constant }),
-    ("\"hello \\{name}\"", fn(node) { node.kind is Expr_Interp }),
-    ("b\"hello \\{name}\"", fn(node) { node.kind is Expr_BytesInterp }),
-    ("()", fn(node) { node.kind is Expr_Unit }),
-    ("(value)", fn(node) { node.kind is Expr_Group }),
-    ("(left, right)", fn(node) { node.kind is Expr_Tuple }),
-    ("[..left, right]", fn(node) { node.kind is Expr_ArraySpread }),
-    ("{..base, value: 1}", fn(node) { node.kind is Expr_RecordUpdate }),
-    ("left |> right", fn(node) { node.kind is Expr_Pipe }),
-    ("left <| right", fn(node) { node.kind is Expr_RevPipe }),
-    ("left → right", fn(node) { node.kind is Expr_Implies }),
-    ("0..<n", fn(node) { node.kind is Expr_Infix }),
-    ("x += y", fn(node) { node.kind is Expr_Assign }),
-    ("array[0] = value", fn(node) { node.kind is Expr_ArraySet }),
-    ("array[0] += value", fn(node) { node.kind is Expr_ArrayAugmentedSet }),
-    ("record.field = value", fn(node) { node.kind is Expr_Mutate }),
+    ("42", fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Constant }),
+    ("-42", fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Constant }),
+    ("+42", fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Constant }),
+    (
+      "\"hello \\{name}\"",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Interp },
+    ),
+    (
+      "b\"hello \\{name}\"",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_BytesInterp },
+    ),
+    ("()", fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Unit }),
+    ("(value)", fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Group }),
+    (
+      "(left, right)",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Tuple },
+    ),
+    (
+      "[..left, right]",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_ArraySpread },
+    ),
+    (
+      "{..base, value: 1}",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_RecordUpdate },
+    ),
+    (
+      "left |> right",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Pipe },
+    ),
+    (
+      "left <| right",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_RevPipe },
+    ),
+    (
+      "left → right",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Implies },
+    ),
+    ("0..<n", fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Infix }),
+    ("x += y", fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Assign }),
+    (
+      "array[0] = value",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_ArraySet },
+    ),
+    (
+      "array[0] += value",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_ArrayAugmentedSet },
+    ),
+    (
+      "record.field = value",
+      fn(node) { node.kind is @untyped_cst.NodeKind::Expr_Mutate },
+    ),
   ]
   for case in cases {
     let (source, pred) = case
@@ -837,68 +876,94 @@ test "valid expressions expose AST-aligned semantic kinds" {
 test "assignment nodes directly own normalized lhs components" {
   let plain = @untyped_cst.parse_expression("x = y")
   @test.assert_eq(plain.diagnostics_view().is_empty(), true)
-  guard find_node(plain.root(), fn(node) { node.kind is Expr_Assign })
+  guard find_node(plain.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::Expr_Assign
+    })
     is Some(assign) else {
     fail("expected assignment")
   }
   @test.assert_eq(count_label(assign, "lhs"), 0)
   @test.assert_eq(
-    direct_has_kind(assign, "semantic_name", fn(kind) { kind is Name_Var }),
+    direct_has_kind(assign, "semantic_name", fn(kind) {
+      kind is @untyped_cst.NodeKind::Name_Var
+    }),
     true,
   )
   @test.assert_eq(
-    direct_has_kind(assign, "rhs", fn(kind) { kind is Expr_Ident }),
+    direct_has_kind(assign, "rhs", fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_Ident
+    }),
     true,
   )
 
   let mutate = @untyped_cst.parse_expression("obj.field += y")
   @test.assert_eq(mutate.diagnostics_view().is_empty(), true)
-  guard find_node(mutate.root(), fn(node) { node.kind is Expr_Mutate })
+  guard find_node(mutate.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::Expr_Mutate
+    })
     is Some(mutation) else {
     fail("expected mutation")
   }
   @test.assert_eq(count_label(mutation, "lhs"), 0)
   @test.assert_eq(
-    direct_has_kind(mutation, "self", fn(kind) { kind is Expr_Ident }),
+    direct_has_kind(mutation, "self", fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_Ident
+    }),
     true,
   )
   @test.assert_eq(
-    direct_has_kind(mutation, "field", fn(kind) { kind is Accessor_Label }),
+    direct_has_kind(mutation, "field", fn(kind) {
+      kind is @untyped_cst.NodeKind::Accessor_Label
+    }),
     true,
   )
 
   let array = @untyped_cst.parse_expression("foo[i] = x")
   @test.assert_eq(array.diagnostics_view().is_empty(), true)
-  guard find_node(array.root(), fn(node) { node.kind is Expr_ArraySet })
+  guard find_node(array.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::Expr_ArraySet
+    })
     is Some(array_set) else {
     fail("expected array set")
   }
   @test.assert_eq(count_label(array_set, "lhs"), 0)
   @test.assert_eq(
-    direct_has_kind(array_set, "self", fn(kind) { kind is Expr_Ident }),
+    direct_has_kind(array_set, "self", fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_Ident
+    }),
     true,
   )
   @test.assert_eq(
-    direct_has_kind(array_set, "index", fn(kind) { kind is Expr_Ident }),
+    direct_has_kind(array_set, "index", fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_Ident
+    }),
     true,
   )
   @test.assert_eq(
-    count_node_kind(array_set, fn(kind) { kind is Expr_ArrayGet }),
+    count_node_kind(array_set, fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_ArrayGet
+    }),
     0,
   )
 
   let nested = @untyped_cst.parse_expression("foo[i][j] = x")
   @test.assert_eq(nested.diagnostics_view().is_empty(), true)
-  guard find_node(nested.root(), fn(node) { node.kind is Expr_ArraySet })
+  guard find_node(nested.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::Expr_ArraySet
+    })
     is Some(nested_set) else {
     fail("expected nested array set")
   }
   @test.assert_eq(
-    count_node_kind(nested_set, fn(kind) { kind is Expr_ArrayGet }),
+    count_node_kind(nested_set, fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_ArrayGet
+    }),
     1,
   )
   @test.assert_eq(
-    direct_has_kind(nested_set, "self", fn(kind) { kind is Expr_ArrayGet }),
+    direct_has_kind(nested_set, "self", fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_ArrayGet
+    }),
     true,
   )
 }
@@ -908,7 +973,9 @@ test "prefix expressions are normalized to final CST constructors" {
   for source in ["+1", "-1L"] {
     let result = @untyped_cst.parse_expression(source)
     @test.assert_eq(result.diagnostics_view().is_empty(), true)
-    guard find_node(result.root(), fn(node) { node.kind is Expr_Constant })
+    guard find_node(result.root(), fn(node) {
+        node.kind is @untyped_cst.NodeKind::Expr_Constant
+      })
       is Some(constant) else {
       fail("expected folded constant for \{source}")
     }
@@ -917,20 +984,28 @@ test "prefix expressions are normalized to final CST constructors" {
   for source in ["+1.0F", "+x"] {
     let result = @untyped_cst.parse_expression(source)
     @test.assert_eq(result.diagnostics_view().is_empty(), true)
-    guard find_node(result.root(), fn(node) { node.kind is Expr_Apply })
+    guard find_node(result.root(), fn(node) {
+        node.kind is @untyped_cst.NodeKind::Expr_Apply
+      })
       is Some(apply) else {
       fail("expected unary-plus apply for \{source}")
     }
     @test.assert_eq(
-      direct_has_kind(apply, "func", fn(kind) { kind is Expr_Ident }),
+      direct_has_kind(apply, "func", fn(kind) {
+        kind is @untyped_cst.NodeKind::Expr_Ident
+      }),
       true,
     )
     @test.assert_eq(
-      direct_has_kind(apply, "arg", fn(kind) { kind is List_ArgumentList }),
+      direct_has_kind(apply, "arg", fn(kind) {
+        kind is @untyped_cst.NodeKind::List_ArgumentList
+      }),
       true,
     )
     @test.assert_eq(
-      direct_has_kind(apply, "operator", fn(kind) { kind is Operator_UnaryPlus }),
+      direct_has_kind(apply, "operator", fn(kind) {
+        kind is @untyped_cst.NodeKind::Operator_UnaryPlus
+      }),
       true,
     )
   }
@@ -938,7 +1013,10 @@ test "prefix expressions are normalized to final CST constructors" {
     let result = @untyped_cst.parse_expression(source)
     @test.assert_eq(result.diagnostics_view().is_empty(), true)
     @test.assert_eq(
-      find_node(result.root(), fn(node) { node.kind is Expr_Unary }) is Some(_),
+      find_node(result.root(), fn(node) {
+        node.kind is @untyped_cst.NodeKind::Expr_Unary
+      })
+      is Some(_),
       true,
     )
   }
@@ -952,7 +1030,9 @@ test "prefix expressions are normalized to final CST constructors" {
     let (source, value, start, end) = case
     let result = @untyped_cst.parse_expression(source)
     @test.assert_eq(result.diagnostics_view().is_empty(), true)
-    guard find_node(result.root(), fn(node) { node.kind is Expr_Constant })
+    guard find_node(result.root(), fn(node) {
+        node.kind is @untyped_cst.NodeKind::Expr_Constant
+      })
       is Some(expr) &&
       direct_child(expr, "semantic_constant") is Some(constant) else {
       fail("expected semantic constant for \{source}")
@@ -972,26 +1052,32 @@ test "pun nodes directly own synthesized values and patterns" {
   @test.assert_eq(call.diagnostics_view().is_empty(), true)
   for
     is_pun in [
-      fn(kind) { kind is @untyped_cst.Argument_LabelledPun },
-      fn(kind) { kind is Argument_LabelledOptionPun },
+      fn(kind) { kind is @untyped_cst.NodeKind::Argument_LabelledPun },
+      fn(kind) { kind is @untyped_cst.NodeKind::Argument_LabelledOptionPun },
     ] {
     guard find_node(call.root(), fn(node) { is_pun(node.kind) }) is Some(pun) else {
       fail("expected call pun")
     }
     @test.assert_eq(
-      direct_has_kind(pun, "expr", fn(kind) { kind is Expr_Ident }),
+      direct_has_kind(pun, "expr", fn(kind) {
+        kind is @untyped_cst.NodeKind::Expr_Ident
+      }),
       true,
     )
   }
 
   let record = @untyped_cst.parse_expression("{ field }")
   @test.assert_eq(record.diagnostics_view().is_empty(), true)
-  guard find_node(record.root(), fn(node) { node.kind is Field_Definition })
+  guard find_node(record.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::Field_Definition
+    })
     is Some(field) else {
     fail("expected record field pun")
   }
   @test.assert_eq(
-    direct_has_kind(field, "expr", fn(kind) { kind is Expr_Ident }),
+    direct_has_kind(field, "expr", fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_Ident
+    }),
     true,
   )
 
@@ -1000,8 +1086,10 @@ test "pun nodes directly own synthesized values and patterns" {
   )
   @test.assert_eq(constructor_pattern.diagnostics_view().is_empty(), true)
   guard find_node(constructor_pattern.root(), fn(node) {
-      node.kind is Argument_LabelledPun &&
-      direct_has_kind(node, "pattern", fn(kind) { kind is Pattern_Var })
+      node.kind is @untyped_cst.NodeKind::Argument_LabelledPun &&
+      direct_has_kind(node, "pattern", fn(kind) {
+        kind is @untyped_cst.NodeKind::Pattern_Var
+      })
     })
     is Some(_) else {
     fail("expected constructor-pattern pun")
@@ -1011,12 +1099,16 @@ test "pun nodes directly own synthesized values and patterns" {
     "match value { { field } => field }",
   )
   @test.assert_eq(record_pattern.diagnostics_view().is_empty(), true)
-  guard find_node(record_pattern.root(), fn(node) { node.kind is Field_Pattern })
+  guard find_node(record_pattern.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::Field_Pattern
+    })
     is Some(pattern_field) else {
     fail("expected record-pattern pun")
   }
   @test.assert_eq(
-    direct_has_kind(pattern_field, "pattern", fn(kind) { kind is Pattern_Var }),
+    direct_has_kind(pattern_field, "pattern", fn(kind) {
+      kind is @untyped_cst.NodeKind::Pattern_Var
+    }),
     true,
   )
 }
@@ -1025,7 +1117,9 @@ test "pun nodes directly own synthesized values and patterns" {
 test "arrow parameter lists contain final patterns and preserve delimiters" {
   let multi = @untyped_cst.parse_expression("(x, y) => x")
   @test.assert_eq(multi.diagnostics_view().is_empty(), true)
-  guard find_node(multi.root(), fn(node) { node.kind is List_ParameterList })
+  guard find_node(multi.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::List_ParameterList
+    })
     is Some(params) else {
     fail("expected arrow parameter list")
   }
@@ -1035,20 +1129,32 @@ test "arrow parameter lists contain final patterns and preserve delimiters" {
   @test.assert_eq(count_label(params, "close"), 1)
   @test.assert_eq(
     count_node_kind(params, fn(kind) {
-      kind is (Expr_Ident | Expr_Hole | Expr_Constraint)
+      kind
+      is (@untyped_cst.NodeKind::Expr_Ident
+      | @untyped_cst.NodeKind::Expr_Hole
+      | @untyped_cst.NodeKind::Expr_Constraint)
     }),
     0,
   )
-  @test.assert_eq(count_node_kind(params, fn(kind) { kind is Pattern_Var }), 2)
+  @test.assert_eq(
+    count_node_kind(params, fn(kind) {
+      kind is @untyped_cst.NodeKind::Pattern_Var
+    }),
+    2,
+  )
 
   let typed = @untyped_cst.parse_expression("(x : Int) => x")
   @test.assert_eq(typed.diagnostics_view().is_empty(), true)
-  guard find_node(typed.root(), fn(node) { node.kind is Parameter_Positional })
+  guard find_node(typed.root(), fn(node) {
+      node.kind is @untyped_cst.NodeKind::Parameter_Positional
+    })
     is Some(typed_param) else {
     fail("expected typed arrow parameter")
   }
   @test.assert_eq(
-    direct_has_kind(typed_param, "pattern", fn(kind) { kind is Pattern_Var }),
+    direct_has_kind(typed_param, "pattern", fn(kind) {
+      kind is @untyped_cst.NodeKind::Pattern_Var
+    }),
     true,
   )
   @test.assert_eq(
@@ -1056,33 +1162,39 @@ test "arrow parameter lists contain final patterns and preserve delimiters" {
     true,
   )
   @test.assert_eq(
-    count_node_kind(typed_param, fn(kind) { kind is Expr_Constraint }),
+    count_node_kind(typed_param, fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_Constraint
+    }),
     0,
   )
 
   let discard = @untyped_cst.parse_expression("_ => 0")
   @test.assert_eq(discard.diagnostics_view().is_empty(), true)
   guard find_node(discard.root(), fn(node) {
-      node.kind is Parameter_DiscardPositional
+      node.kind is @untyped_cst.NodeKind::Parameter_DiscardPositional
     })
     is Some(discard_param) else {
     fail("expected discard arrow parameter")
   }
   @test.assert_eq(
-    direct_has_kind(discard_param, "pattern", fn(kind) { kind is Pattern_Any }),
+    direct_has_kind(discard_param, "pattern", fn(kind) {
+      kind is @untyped_cst.NodeKind::Pattern_Any
+    }),
     true,
   )
 
   let pipeline = @untyped_cst.parse_expression("value |> x => { x }")
   @test.assert_eq(pipeline.diagnostics_view().is_empty(), true)
   guard find_node(pipeline.root(), fn(node) {
-      node.kind is Parameter_Positional
+      node.kind is @untyped_cst.NodeKind::Parameter_Positional
     })
     is Some(pipe_param) else {
     fail("expected pipeline arrow parameter")
   }
   @test.assert_eq(
-    direct_has_kind(pipe_param, "pattern", fn(kind) { kind is Pattern_Var }),
+    direct_has_kind(pipe_param, "pattern", fn(kind) {
+      kind is @untyped_cst.NodeKind::Pattern_Var
+    }),
     true,
   )
 }
@@ -1195,7 +1307,9 @@ test "top-level implementation items expose semantic children" {
   @test.assert_eq(fn_result.diagnostics_view().length(), 0)
   @test.assert_eq(fn_result.root().text(fn_source), fn_source[:])
   @test.assert_eq(
-    has_node_kind(fn_result.root(), fn(kind) { kind is Impl_Function }),
+    has_node_kind(fn_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_Function
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(fn_result.root(), "name"), true)
@@ -1206,7 +1320,9 @@ test "top-level implementation items expose semantic children" {
   let let_result = @untyped_cst.parse_structure(let_source)
   @test.assert_eq(let_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(let_result.root(), fn(kind) { kind is Impl_Let }),
+    has_node_kind(let_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_Let
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(let_result.root(), "pattern"), true)
@@ -1214,7 +1330,9 @@ test "top-level implementation items expose semantic children" {
   let const_result = @untyped_cst.parse_structure(const_source)
   @test.assert_eq(const_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(const_result.root(), fn(kind) { kind is Impl_Const }),
+    has_node_kind(const_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_Const
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(const_result.root(), "name"), true)
@@ -1222,7 +1340,9 @@ test "top-level implementation items expose semantic children" {
   let type_result = @untyped_cst.parse_structure(type_source)
   @test.assert_eq(type_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(type_result.root(), fn(kind) { kind is Impl_TypeAlias }),
+    has_node_kind(type_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_TypeAlias
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(type_result.root(), "name"), true)
@@ -1231,7 +1351,9 @@ test "top-level implementation items expose semantic children" {
   let struct_result = @untyped_cst.parse_structure(struct_source)
   @test.assert_eq(struct_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(struct_result.root(), fn(kind) { kind is Impl_RecordStruct }),
+    has_node_kind(struct_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_RecordStruct
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(struct_result.root(), "name"), true)
@@ -1240,7 +1362,9 @@ test "top-level implementation items expose semantic children" {
   let enum_result = @untyped_cst.parse_structure(enum_source)
   @test.assert_eq(enum_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(enum_result.root(), fn(kind) { kind is Impl_EnumVariant }),
+    has_node_kind(enum_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_EnumVariant
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(enum_result.root(), "name"), true)
@@ -1249,7 +1373,9 @@ test "top-level implementation items expose semantic children" {
   let trait_result = @untyped_cst.parse_structure(trait_source)
   @test.assert_eq(trait_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(trait_result.root(), fn(kind) { kind is Impl_Trait }),
+    has_node_kind(trait_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_Trait
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(trait_result.root(), "name"), true)
@@ -1258,7 +1384,9 @@ test "top-level implementation items expose semantic children" {
   let impl_result = @untyped_cst.parse_structure(impl_source)
   @test.assert_eq(impl_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(impl_result.root(), fn(kind) { kind is Impl_ImplMethod }),
+    has_node_kind(impl_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_ImplMethod
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(impl_result.root(), "name"), true)
@@ -1267,7 +1395,9 @@ test "top-level implementation items expose semantic children" {
   let test_result = @untyped_cst.parse_structure(test_source)
   @test.assert_eq(test_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(test_result.root(), fn(kind) { kind is Impl_Test }),
+    has_node_kind(test_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_Test
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(test_result.root(), "body"), true)
@@ -1275,14 +1405,18 @@ test "top-level implementation items expose semantic children" {
   let using_result = @untyped_cst.parse_structure(using_source)
   @test.assert_eq(using_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(using_result.root(), fn(kind) { kind is Impl_Using }),
+    has_node_kind(using_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_Using
+    }),
     true,
   )
   let extern_source = "extern \"js\" fn f() = \"f\""
   let extern_result = @untyped_cst.parse_structure(extern_source)
   @test.assert_eq(extern_result.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(extern_result.root(), fn(kind) { kind is Impl_Function }),
+    has_node_kind(extern_result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_Function
+    }),
     true,
   )
   @test.assert_eq(has_label_recursive(extern_result.root(), "name"), true)
@@ -1310,16 +1444,40 @@ test "successful top-level declarations are shaped without placeholders" {
 ///|
 test "top-level prefixes resolve declaration kind before body parsing" {
   let cases : Array[(String, (@untyped_cst.NodeKind) -> Bool)] = [
-    ("pub fn f() {}", fn(kind) { kind is Impl_Function }),
-    ("declare fn f()", fn(kind) { kind is Impl_Function }),
-    ("#deprecated\nfn f() {}", fn(kind) { kind is Impl_Function }),
-    ("priv type T = Int", fn(kind) { kind is Impl_TypeAlias }),
-    ("pub(all) struct S {}", fn(kind) { kind is Impl_RecordStruct }),
-    ("pub(open) trait T {}", fn(kind) { kind is Impl_Trait }),
-    ("pub(readonly) enum E { A }", fn(kind) { kind is Impl_EnumVariant }),
-    ("pub async fn f() {}", fn(kind) { kind is Impl_Function }),
-    ("async test {}", fn(kind) { kind is Impl_Test }),
-    ("extern \"js\" fn f() = \"f\"", fn(kind) { kind is Impl_Function }),
+    ("pub fn f() {}", fn(kind) { kind is @untyped_cst.NodeKind::Impl_Function }),
+    (
+      "declare fn f()",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_Function },
+    ),
+    (
+      "#deprecated\nfn f() {}",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_Function },
+    ),
+    (
+      "priv type T = Int",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_TypeAlias },
+    ),
+    (
+      "pub(all) struct S {}",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_RecordStruct },
+    ),
+    (
+      "pub(open) trait T {}",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_Trait },
+    ),
+    (
+      "pub(readonly) enum E { A }",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_EnumVariant },
+    ),
+    (
+      "pub async fn f() {}",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_Function },
+    ),
+    ("async test {}", fn(kind) { kind is @untyped_cst.NodeKind::Impl_Test }),
+    (
+      "extern \"js\" fn f() = \"f\"",
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_Function },
+    ),
   ]
   for case in cases {
     let (source, expected_kind) = case
@@ -1342,7 +1500,7 @@ test "incomplete top-level prefixes use error or implied function kind" {
     guard root_first_item(result.root()) is Some(item) else {
       fail("expected recovery item for \{source}")
     }
-    @test.assert_eq(item.kind is Error, true)
+    @test.assert_eq(item.kind is @untyped_cst.NodeKind::Error, true)
     @test.assert_eq(result.root().text(source), source[:])
   }
   let function_cases = [
@@ -1353,7 +1511,7 @@ test "incomplete top-level prefixes use error or implied function kind" {
     guard root_first_item(result.root()) is Some(item) else {
       fail("expected recovery item for \{source}")
     }
-    @test.assert_eq(item.kind is Impl_Function, true)
+    @test.assert_eq(item.kind is @untyped_cst.NodeKind::Impl_Function, true)
     @test.assert_eq(result.root().text(source), source[:])
   }
 }
@@ -1384,29 +1542,39 @@ test "context-specific expression children have explicit kinds" {
   let sequence = @untyped_cst.parse_expression("{ first(); second() }")
   @test.assert_eq(sequence.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(sequence.root(), fn(kind) { kind is Expr_Sequence }),
+    has_node_kind(sequence.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Expr_Sequence
+    }),
     true,
   )
   let call = @untyped_cst.parse_expression("f(1)")
   @test.assert_eq(call.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(call.root(), fn(kind) { kind is Argument_Positional }),
+    has_node_kind(call.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Argument_Positional
+    }),
     true,
   )
   let array = @untyped_cst.parse_expression("[..left, right]")
   @test.assert_eq(array.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(array.root(), fn(kind) { kind is ArrayElement_Spread }),
+    has_node_kind(array.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::ArrayElement_Spread
+    }),
     true,
   )
   @test.assert_eq(
-    has_node_kind(array.root(), fn(kind) { kind is ArrayElement_Regular }),
+    has_node_kind(array.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::ArrayElement_Regular
+    }),
     true,
   )
   let accessor = @untyped_cst.parse_expression("value._")
   @test.assert_eq(accessor.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(accessor.root(), fn(kind) { kind is Accessor_Newtype }),
+    has_node_kind(accessor.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Accessor_Newtype
+    }),
     true,
   )
 }
@@ -1417,11 +1585,11 @@ test "all source parameter forms have distinct kinds" {
   let result = @untyped_cst.parse_structure(source)
   @test.assert_eq(result.diagnostics_view().length(), 0)
   let expected : Array[(@untyped_cst.NodeKind) -> Bool] = [
-    fn(kind) { kind is Parameter_DiscardPositional },
-    fn(kind) { kind is Parameter_Positional },
-    fn(kind) { kind is Parameter_Labelled },
-    fn(kind) { kind is Parameter_Optional },
-    fn(kind) { kind is Parameter_QuestionOptional },
+    fn(kind) { kind is @untyped_cst.NodeKind::Parameter_DiscardPositional },
+    fn(kind) { kind is @untyped_cst.NodeKind::Parameter_Positional },
+    fn(kind) { kind is @untyped_cst.NodeKind::Parameter_Labelled },
+    fn(kind) { kind is @untyped_cst.NodeKind::Parameter_Optional },
+    fn(kind) { kind is @untyped_cst.NodeKind::Parameter_QuestionOptional },
   ]
   for pred in expected {
     @test.assert_eq(has_node_kind(result.root(), pred), true)
@@ -1435,48 +1603,48 @@ test "type declarations expose final declaration and type-description kinds" {
   ] = [
     (
       "type Abstract",
-      fn(kind) { kind is Impl_TypeAbstract },
-      fn(kind) { kind is TypeDesc_Abstract },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_TypeAbstract },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_Abstract },
     ),
     (
       "type Alias = Int",
-      fn(kind) { kind is Impl_TypeAlias },
-      fn(kind) { kind is TypeDesc_Alias },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_TypeAlias },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_Alias },
     ),
     (
       "struct Record { field : Int }",
-      fn(kind) { kind is Impl_RecordStruct },
-      fn(kind) { kind is TypeDesc_Record },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_RecordStruct },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_Record },
     ),
     (
       "struct Tuple(Int)",
-      fn(kind) { kind is Impl_TupleStruct },
-      fn(kind) { kind is TypeDesc_TupleStruct },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_TupleStruct },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_TupleStruct },
     ),
     (
       "enum Variant { A }",
-      fn(kind) { kind is Impl_EnumVariant },
-      fn(kind) { kind is TypeDesc_Variant },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_EnumVariant },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_Variant },
     ),
     (
       "extenum Open { A }",
-      fn(kind) { kind is Impl_ExtensibleEnum },
-      fn(kind) { kind is TypeDesc_ExtensibleEnum },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_ExtensibleEnum },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_ExtensibleEnum },
     ),
     (
       "extenum Open += { B }",
-      fn(kind) { kind is Impl_ExtendEnum },
-      fn(kind) { kind is TypeDesc_ExtendEnum },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_ExtendEnum },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_ExtendEnum },
     ),
     (
       "suberror Empty",
-      fn(kind) { kind is Impl_Suberror },
-      fn(kind) { kind is TypeDesc_ErrorNoPayload },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_Suberror },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_ErrorNoPayload },
     ),
     (
       "suberror Payload { A }",
-      fn(kind) { kind is Impl_SuberrorEnum },
-      fn(kind) { kind is TypeDesc_ErrorEnumPayload },
+      fn(kind) { kind is @untyped_cst.NodeKind::Impl_SuberrorEnum },
+      fn(kind) { kind is @untyped_cst.NodeKind::TypeDesc_ErrorEnumPayload },
     ),
   ]
   for case in cases {
@@ -1493,13 +1661,22 @@ test "type declarations expose final declaration and type-description kinds" {
 ///|
 test "function and impl forms expose body and relation kinds" {
   let body_cases : Array[(String, (@untyped_cst.NodeKind) -> Bool)] = [
-    ("fn defined() {}", fn(kind) { kind is DeclBody_Expr }),
-    ("fn embedded() = \"code\"", fn(kind) { kind is DeclBody_EmbeddedString }),
+    (
+      "fn defined() {}",
+      fn(kind) { kind is @untyped_cst.NodeKind::DeclBody_Expr },
+    ),
+    (
+      "fn embedded() = \"code\"",
+      fn(kind) { kind is @untyped_cst.NodeKind::DeclBody_EmbeddedString },
+    ),
     (
       "fn imported() = \"module\" \"name\"",
-      fn(kind) { kind is DeclBody_Import },
+      fn(kind) { kind is @untyped_cst.NodeKind::DeclBody_Import },
     ),
-    ("declare fn absent()", fn(kind) { kind is DeclBody_None }),
+    (
+      "declare fn absent()",
+      fn(kind) { kind is @untyped_cst.NodeKind::DeclBody_None },
+    ),
   ]
   for case in body_cases {
     let (source, body_kind) = case
@@ -1512,7 +1689,9 @@ test "function and impl forms expose body and relation kinds" {
   let relation = @untyped_cst.parse_structure("impl Eq for Int")
   @test.assert_eq(relation.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(relation.root(), fn(kind) { kind is Impl_ImplRelation }),
+    has_node_kind(relation.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_ImplRelation
+    }),
     true,
   )
   let impl_method = @untyped_cst.parse_structure(
@@ -1520,7 +1699,9 @@ test "function and impl forms expose body and relation kinds" {
   )
   @test.assert_eq(impl_method.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(impl_method.root(), fn(kind) { kind is Impl_ImplMethod }),
+    has_node_kind(impl_method.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_ImplMethod
+    }),
     true,
   )
 }
@@ -1530,25 +1711,41 @@ test "orthogonal syntax facts are boolean marker children" {
   let augmented = @untyped_cst.parse_expression("array[0] += value")
   @test.assert_eq(augmented.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_bool_kind(augmented.root(), fn(kind) { kind is Flag_Augmented }, true),
+    has_bool_kind(
+      augmented.root(),
+      fn(kind) { kind is @untyped_cst.NodeKind::Flag_Augmented },
+      true,
+    ),
     true,
   )
   let plain = @untyped_cst.parse_expression("array[0] = value")
   @test.assert_eq(plain.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_bool_kind(plain.root(), fn(kind) { kind is Flag_Augmented }, false),
+    has_bool_kind(
+      plain.root(),
+      fn(kind) { kind is @untyped_cst.NodeKind::Flag_Augmented },
+      false,
+    ),
     true,
   )
   let cascade = @untyped_cst.parse_expression("value..method()")
   @test.assert_eq(cascade.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_bool_kind(cascade.root(), fn(kind) { kind is Flag_ReturnSelf }, true),
+    has_bool_kind(
+      cascade.root(),
+      fn(kind) { kind is @untyped_cst.NodeKind::Flag_ReturnSelf },
+      true,
+    ),
     true,
   )
   let template = @untyped_cst.parse_expression("some <? \"value\"")
   @test.assert_eq(template.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_bool_kind(template.root(), fn(kind) { kind is Flag_Conditional }, true),
+    has_bool_kind(
+      template.root(),
+      fn(kind) { kind is @untyped_cst.NodeKind::Flag_Conditional },
+      true,
+    ),
     true,
   )
   let catching = @untyped_cst.parse_expression(
@@ -1556,7 +1753,11 @@ test "orthogonal syntax facts are boolean marker children" {
   )
   @test.assert_eq(catching.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_bool_kind(catching.root(), fn(kind) { kind is Flag_HasTry }, true),
+    has_bool_kind(
+      catching.root(),
+      fn(kind) { kind is @untyped_cst.NodeKind::Flag_HasTry },
+      true,
+    ),
     true,
   )
 }
@@ -1568,22 +1769,30 @@ test "regex bindings and array-pattern openness are structured" {
   )
   @test.assert_eq(regex.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(regex.root(), fn(kind) { kind is List_RegexBindingList }),
+    has_node_kind(regex.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::List_RegexBindingList
+    }),
     true,
   )
   @test.assert_eq(
-    has_node_kind(regex.root(), fn(kind) { kind is Binding_Regex }),
+    has_node_kind(regex.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Binding_Regex
+    }),
     true,
   )
   let source = "fn f() { let [head, .. tail] = value; let [only] = value }"
   let patterns = @untyped_cst.parse_structure(source)
   @test.assert_eq(patterns.diagnostics_view().length(), 0)
   @test.assert_eq(
-    has_node_kind(patterns.root(), fn(kind) { kind is ArrayPatterns_Open }),
+    has_node_kind(patterns.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::ArrayPatterns_Open
+    }),
     true,
   )
   @test.assert_eq(
-    has_node_kind(patterns.root(), fn(kind) { kind is ArrayPatterns_Closed }),
+    has_node_kind(patterns.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::ArrayPatterns_Closed
+    }),
     true,
   )
 }
@@ -1595,11 +1804,15 @@ test "malformed declarations retain their most specific known parent" {
   @test.assert_eq(result.diagnostics_view().length() > 0, true)
   @test.assert_eq(result.root().text(source), source[:])
   @test.assert_eq(
-    has_node_kind(result.root(), fn(kind) { kind is Impl_TypeAlias }),
+    has_node_kind(result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Impl_TypeAlias
+    }),
     true,
   )
   @test.assert_eq(
-    has_node_kind(result.root(), fn(kind) { kind is Type_MissingType }),
+    has_node_kind(result.root(), fn(kind) {
+      kind is @untyped_cst.NodeKind::Type_MissingType
+    }),
     true,
   )
 }

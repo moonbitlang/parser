@@ -7,54 +7,17 @@ pub struct CstNode {
 } derive(@debug.Debug)
 
 ///|
-pub struct ParseResult {
-  root : CstNode
-  diagnostics : ReadOnlyArray[Report]
-  docstrings : ReadOnlyArray[List[(Location, Comment)]]
-} derive(@debug.Debug)
-
-///|
-/// Returns the concrete syntax tree root produced by parsing.
-///
-/// A root is available even when parsing emitted diagnostics. In that case it
-/// may contain recovered or missing nodes.
-pub fn ParseResult::root(self : ParseResult) -> CstNode {
-  self.root
+pub fn mk_loc(start : Position, end : Position) -> Location {
+  Location::{ start, end, }
 }
 
 ///|
-/// Returns a read-only view of the diagnostics emitted while lexing and
-/// parsing.
-///
-/// The view is empty when no diagnostics were reported.
-pub fn ParseResult::diagnostics_view(self : ParseResult) -> ArrayView[Report] {
-  self.diagnostics.exact_view()
+pub fn empty_loc(pos : Position) -> Location {
+  Location::{ start: pos, end: pos, }
 }
 
 ///|
-fn ParseResult::docstrings_view(
-  self : ParseResult,
-) -> ArrayView[List[(Location, Comment)]] {
-  self.docstrings.exact_view()
-}
-
-///|
-fn mk_loc(start : Position, end : Position) -> Location {
-  { start, end, }
-}
-
-///|
-fn empty_loc(pos : Position) -> Location {
-  { start: pos, end: pos, }
-}
-
-///|
-fn mk_span(start_offset : Int, end_offset : Int) -> (Int, Int) {
-  (start_offset, end_offset)
-}
-
-///|
-fn empty_span(offset : Int) -> (Int, Int) {
+pub fn empty_span(offset : Int) -> (Int, Int) {
   (offset, offset)
 }
 
@@ -100,7 +63,9 @@ fn node_with_payload(
 }
 
 ///|
-fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
+#internal(internal, "For untyped_cst parser implementation only")
+#doc(hidden)
+pub fn syntax_kind_from_token_kind(kind : TokenKind) -> NodeKind {
   match kind {
     TK_CHAR
     | TK_INT
@@ -292,7 +257,7 @@ fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
 }
 
 ///|
-fn is_location_metadata_label(label : String?) -> Bool {
+pub fn is_location_metadata_label(label : String?) -> Bool {
   match label {
     Some(label) => label.has_suffix("_loc")
     None => false
@@ -342,24 +307,6 @@ fn push_children(
 }
 
 ///|
-fn parse_result(
-  root : CstNode,
-  diagnostics : Array[Report],
-  docstrings : Array[List[(Location, Comment)]],
-) -> ParseResult {
-  {
-    root,
-    diagnostics: ReadOnlyArray::from_array(diagnostics),
-    docstrings: ReadOnlyArray::from_array(docstrings),
-  }
-}
-
-///|
 #deprecated
 #doc(hidden)
 pub extend CstNode with Debug::{to_repr}
-
-///|
-#deprecated
-#doc(hidden)
-pub extend ParseResult with Debug::{to_repr}
