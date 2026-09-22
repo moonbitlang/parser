@@ -3,9 +3,7 @@ test "node getters expose immutable shape" {
   let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
   let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 3, }
   let child = token_node(LIDENT("x"), start, end, (0, 1))
-  let root = node(Impls, mk_loc(start, end), (0, 3), [
-    (Some("item"), child),
-  ])
+  let root = node(Impls, mk_loc(start, end), (0, 3), [(Some("item"), child)])
   match root.kind {
     Impls => ()
     _ => fail("expected Impls")
@@ -17,7 +15,7 @@ test "node getters expose immutable shape" {
     Some((Some(label), node)) => {
       @test.assert_eq(label, "item")
       match node.kind {
-        Syntax_Identifier => {
+        Syntax_Token(TK_LIDENT) => {
           guard node.children.get(node.children.length() - 1)
             is Some((Some("payload"), leaf)) else {
             fail("expected trailing payload Leaf")
@@ -38,7 +36,7 @@ test "node getters expose immutable shape" {
 }
 
 ///|
-test "all non-newline lexer token kinds map to dedicated syntax kinds" {
+test "all lexer token kinds retain their exact identity" {
   let token_kinds = [
     TokenKind::TK_CHAR,
     TK_INT,
@@ -170,27 +168,21 @@ test "all non-newline lexer token kinds map to dedicated syntax kinds" {
     TK_LEXSCAN,
     TK_EXTEND,
     TK_PACKAGE,
+    TK_NEWLINE,
   ]
-  @test.assert_eq(token_kinds.length(), 130)
+  @test.assert_eq(token_kinds.length(), 131)
   for i, token_kind in token_kinds {
-    let syntax_kind = syntax_kind_from_token_kind(token_kind)
+    let syntax_kind = Syntax_Token(token_kind)
     @test.assert_eq(syntax_kind.is_syntax_token(), true)
-    @test.assert_eq(syntax_kind == Syntax_Unexpected, false)
+    @test.assert_eq(syntax_kind.token_kind(), Some(token_kind))
+    @test.assert_eq(
+      Syntax_Unexpected(token_kind).token_kind(),
+      Some(token_kind),
+    )
     for j in 0..<i {
       @test.assert_eq(token_kind == token_kinds[j], false)
     }
   }
-  @test.assert_eq(syntax_kind_from_token_kind(TK_LIDENT), Syntax_Identifier)
-  @test.assert_eq(syntax_kind_from_token_kind(TK_POST_LABEL), Syntax_Label)
-  @test.assert_eq(syntax_kind_from_token_kind(TK_DOT_INT), Syntax_Accessor)
-  @test.assert_eq(syntax_kind_from_token_kind(TK_READONLY), Syntax_Operator)
-  @test.assert_eq(syntax_kind_from_token_kind(TK_EXTEND), Syntax_Operator)
-  @test.assert_eq(syntax_kind_from_token_kind(TK_PACKAGE), Syntax_Keyword)
-}
-
-///|
-test "recovered newline token kind falls back to unexpected syntax" {
-  @test.assert_eq(syntax_kind_from_token_kind(TK_NEWLINE), Syntax_Unexpected)
 }
 
 ///|
@@ -271,24 +263,4 @@ test "missing text is empty" {
   let pos = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 4, }
   let missing = missing_node(TK_LIDENT, pos, 4)
   @test.assert_eq(missing.text(source), ""[:])
-}
-
-///|
-test "error recovery preserves token-shaped location metadata" {
-  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
-  let end = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 1, }
-  let loc = mk_loc(start, end)
-  let span = (0, 1)
-  let recovered = error_node(loc, span, [
-    (Some("question_loc"), node(Syntax_Operator, loc, span, [])),
-    (Some("item"), token_node(Token::QUESTION, start, end, span)),
-  ])
-  guard recovered.first_child_with_label("question_loc") is Some(metadata) else {
-    fail("expected location metadata")
-  }
-  guard recovered.first_child_with_label("item") is Some(raw_token) else {
-    fail("expected recovered raw token")
-  }
-  @test.assert_eq(metadata.kind, Syntax_Operator)
-  @test.assert_eq(raw_token.kind, Syntax_Unexpected)
 }

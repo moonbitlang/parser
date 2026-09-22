@@ -37,7 +37,10 @@ fn assert_constructor_pattern_children(
       (line, bol, cnum + width),
     )
     if label == "trivia" {
-      @test.assert_eq(child.kind is @untyped_cst.NodeKind::Syntax_Comment, true)
+      @test.assert_eq(
+        child.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
+        true,
+      )
     }
     offset += text.length()
     cnum += width

@@ -60,16 +60,11 @@ pub fn CstNode::expr_break(
   loc~ : Location,
   source_span~ : (Int, Int),
   kw~ : CstNode,
-  label_loc? : CstNode,
   label? : CstNode,
   expr? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   children.push((Some("kw"), kw))
-  match label_loc {
-    Some(child) => children.push((Some("label_loc"), child))
-    None => ()
-  }
   match label {
     Some(child) => children.push((Some("label"), child))
     None => ()
@@ -86,16 +81,11 @@ pub fn CstNode::expr_continue(
   loc~ : Location,
   source_span~ : (Int, Int),
   kw~ : CstNode,
-  label_loc? : CstNode,
   label? : CstNode,
   arg? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   children.push((Some("kw"), kw))
-  match label_loc {
-    Some(child) => children.push((Some("label_loc"), child))
-    None => ()
-  }
   match label {
     Some(child) => children.push((Some("label"), child))
     None => ()
@@ -238,10 +228,8 @@ pub fn CstNode::expr_missing_expr(
   source_span~ : (Int, Int),
   label? : CstNode,
   trivia? : CstNode,
-  label_loc? : CstNode,
   expr? : CstNode,
   op? : CstNode,
-  loop_loc? : CstNode,
   error~ : ArrayView[CstNode],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -253,20 +241,12 @@ pub fn CstNode::expr_missing_expr(
     Some(child) => children.push((Some("trivia"), child))
     None => ()
   }
-  match label_loc {
-    Some(child) => children.push((Some("label_loc"), child))
-    None => ()
-  }
   match expr {
     Some(child) => children.push((Some("expr"), child))
     None => ()
   }
   match op {
     Some(child) => children.push((Some("op"), child))
-    None => ()
-  }
-  match loop_loc {
-    Some(child) => children.push((Some("loop_loc"), child))
     None => ()
   }
   for child in error {
@@ -277,7 +257,7 @@ pub fn CstNode::expr_missing_expr(
 
 ///|
 /// Constructs a missing expression from ordered children, preserving repeated
-/// trivia, errors, and location metadata without regrouping entries.
+/// trivia and errors without regrouping entries.
 #internal(internal, "For untyped_cst parser implementation only")
 #doc(hidden)
 pub fn CstNode::expr_missing_expr_from_entries(
@@ -1389,8 +1369,6 @@ pub fn CstNode::argument_labelled_pun(
   name~ : CstNode,
   semantic_name? : CstNode,
   pun? : CstNode,
-  label_loc? : CstNode,
-  value_loc? : CstNode,
   expr? : CstNode,
   pattern? : CstNode,
 ) -> CstNode {
@@ -1402,14 +1380,6 @@ pub fn CstNode::argument_labelled_pun(
   }
   match pun {
     Some(child) => children.push((Some("pun"), child))
-    None => ()
-  }
-  match label_loc {
-    Some(child) => children.push((Some("label_loc"), child))
-    None => ()
-  }
-  match value_loc {
-    Some(child) => children.push((Some("value_loc"), child))
     None => ()
   }
   match expr {
@@ -1432,7 +1402,6 @@ pub fn CstNode::argument_labelled_option(
   expr~ : CstNode,
   semantic_name? : CstNode,
   pun? : CstNode,
-  question_loc? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   children.push((Some("name"), name))
@@ -1448,10 +1417,6 @@ pub fn CstNode::argument_labelled_option(
     Some(child) => children.push((Some("pun"), child))
     None => ()
   }
-  match question_loc {
-    Some(child) => children.push((Some("question_loc"), child))
-    None => ()
-  }
   node(NodeKind::Argument_LabelledOption, loc, source_span, children)
 }
 
@@ -1463,9 +1428,6 @@ pub fn CstNode::argument_labelled_option_pun(
   op~ : CstNode,
   semantic_name? : CstNode,
   pun? : CstNode,
-  question_loc? : CstNode,
-  label_loc? : CstNode,
-  value_loc? : CstNode,
   expr? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -1477,18 +1439,6 @@ pub fn CstNode::argument_labelled_option_pun(
   }
   match pun {
     Some(child) => children.push((Some("pun"), child))
-    None => ()
-  }
-  match question_loc {
-    Some(child) => children.push((Some("question_loc"), child))
-    None => ()
-  }
-  match label_loc {
-    Some(child) => children.push((Some("label_loc"), child))
-    None => ()
-  }
-  match value_loc {
-    Some(child) => children.push((Some("value_loc"), child))
     None => ()
   }
   match expr {

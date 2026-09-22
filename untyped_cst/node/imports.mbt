@@ -2,4 +2,7 @@
 using @basic {type Location, type Position}
 
 ///|
-using @tokens {type Token, type TokenKind}
+using @tokens {type Token}
+
+///|
+pub using @tokens {type TokenKind}

@@ -217,7 +217,7 @@ test "parse entry points gate metavariable syntax" {
   @test.assert_eq(
     api_has_string_value(
       expression.root(),
-      fn(kind) { kind is Syntax_Identifier },
+      fn(kind) { kind is Syntax_Token(TK_LIDENT) },
       expression_source,
     ),
     true,
@@ -236,7 +236,7 @@ test "parse entry points gate metavariable syntax" {
   @test.assert_eq(
     api_has_string_value(
       structure.root(),
-      fn(kind) { kind is Syntax_Identifier },
+      fn(kind) { kind is Syntax_Token(TK_LIDENT) },
       "$(value:pat)",
     ),
     true,
@@ -255,7 +255,7 @@ test "metavariable option propagates into interpolation expressions" {
     @test.assert_eq(
       api_has_string_value(
         expression.root(),
-        fn(kind) { kind is Syntax_Identifier },
+        fn(kind) { kind is Syntax_Token(TK_LIDENT) },
         "$x",
       ),
       true,
@@ -605,7 +605,7 @@ test "helper enum semantics are explicit CST children" {
 }
 
 ///|
-test "location metadata kinds and scalar helpers are explicit" {
+test "semantic markers and scalar helpers remain explicit" {
   let async_fn = @untyped_cst.parse_structure("async fn f() { () }")
   @test.assert_eq(async_fn.diagnostics_view().is_empty(), true)
   @test.assert_eq(
@@ -616,197 +616,50 @@ test "location metadata kinds and scalar helpers are explicit" {
     ),
     true,
   )
-  for label in ["decl_loc", "header_loc"] {
-    @test.assert_eq(
-      api_has_labeled_kind(async_fn.root(), label, fn(kind) {
-        kind is @untyped_cst.NodeKind::Aggregate_Span
-      }),
-      true,
-    )
-  }
+  assert_no_location_metadata(async_fn.root())
+
   @test.assert_eq(
-    api_has_labeled_kind(async_fn.root(), "async_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Syntax_Keyword
+    api_has_labeled_kind(async_fn.root(), "kw", kind => {
+      kind.token_kind() == Some(TK_ASYNC)
     }),
     true,
   )
-
   let declared = @untyped_cst.parse_structure("declare fn f()")
   @test.assert_eq(declared.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_bool_value(
-      declared.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Flag_Declare },
-      true,
-    ),
+    api_has_bool_value(declared.root(), kind => kind is Flag_Declare, true),
     true,
   )
-
   let object_fn = @untyped_cst.parse_structure("fn &Obj::f() {}")
   @test.assert_eq(object_fn.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_bool_value(
-      object_fn.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Flag_Object },
-      true,
-    ),
+    api_has_bool_value(object_fn.root(), kind => kind is Flag_Object, true),
     true,
   )
   @test.assert_eq(
-    api_has_labeled_kind(object_fn.root(), "object_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Syntax_Operator
+    api_has_labeled_kind(object_fn.root(), "op", kind => {
+      kind.token_kind() == Some(TK_AMPER)
     }),
     true,
   )
-
-  let arrow = @untyped_cst.parse_expression("value |> x => { x }")
-  @test.assert_eq(arrow.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(arrow.root(), "params_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Syntax_Separator
-    }),
-    true,
-  )
-
-  let try_expr = @untyped_cst.parse_expression(
-    "try f() catch { _ => 0 } noraise { value => value }",
-  )
-  @test.assert_eq(try_expr.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(try_expr.root(), "try_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Syntax_Keyword
-    }),
-    true,
-  )
-  for label in ["catch_loc", "else_loc"] {
+  for
+    (source, label, token_kind) in [
+      ("value |> x => { x }", "op", @tokens.TokenKind::TK_FAT_ARROW),
+      ("try f() catch { _ => 0 }", "kw", TK_TRY),
+      ("f() catch { _ => 0 }", "kw", TK_CATCH),
+      ("[ for i = 0; i < 1; i = i + 1 => i ]", "kw", TK_FOR),
+      ("f(optional?)", "op", TK_QUESTION),
+      ("f(label~)", "name", TK_POST_LABEL),
+      ("array[1:2]", "open", TK_LBRACKET),
+      ("(\n#| one\n#| two\n)", "token", TK_MULTILINE_STRING),
+      ("label~: while true {}", "label", TK_POST_LABEL),
+    ] {
+    let parsed = @untyped_cst.parse_expression(source)
+    @test.assert_eq(parsed.diagnostics_view().is_empty(), true)
+    assert_no_location_metadata(parsed.root())
     @test.assert_eq(
-      api_has_labeled_kind(try_expr.root(), label, fn(kind) {
-        kind is @untyped_cst.NodeKind::Aggregate_Span
-      }),
-      true,
-    )
-  }
-  let suffix_try = @untyped_cst.parse_expression("(f)() catch { _ => 0 }")
-  @test.assert_eq(suffix_try.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(suffix_try.root(), "expr_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Aggregate_Span
-    }),
-    true,
-  )
-  let indexed = @untyped_cst.parse_expression("array[1:2]")
-  @test.assert_eq(indexed.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(indexed.root(), "index_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Aggregate_Span
-    }),
-    true,
-  )
-  let recovered_index = @untyped_cst.parse_expression("array[")
-  @test.assert_eq(recovered_index.diagnostics_view().is_empty(), false)
-  @test.assert_eq(
-    api_has_labeled_kind(recovered_index.root(), "index_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Aggregate_Span
-    }),
-    true,
-  )
-  let comprehension = @untyped_cst.parse_expression(
-    "[ for i = 0; i < 1; i = i + 1 => i ]",
-  )
-  @test.assert_eq(comprehension.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(comprehension.root(), "for_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Syntax_Keyword
-    }),
-    true,
-  )
-
-  let optional = @untyped_cst.parse_expression("f(optional?)")
-  @test.assert_eq(optional.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(optional.root(), "question_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Syntax_Operator
-    }),
-    true,
-  )
-  for label in ["label_loc", "value_loc"] {
-    @test.assert_eq(
-      api_has_labeled_kind(optional.root(), label, fn(kind) {
-        kind is @untyped_cst.NodeKind::Syntax_Identifier
-      }),
-      true,
-    )
-  }
-  let separated_pun = @untyped_cst.parse_expression("f(label~, value)")
-  @test.assert_eq(separated_pun.diagnostics_view().is_empty(), true)
-  for label in ["label_loc", "value_loc"] {
-    @test.assert_eq(
-      api_has_labeled_kind(separated_pun.root(), label, fn(kind) {
-        kind is @untyped_cst.NodeKind::Syntax_Label
-      }),
-      true,
-    )
-  }
-  let closed_pun = @untyped_cst.parse_expression("f(label~)")
-  @test.assert_eq(closed_pun.diagnostics_view().is_empty(), true)
-  for label in ["label_loc", "value_loc"] {
-    @test.assert_eq(
-      api_has_labeled_kind(closed_pun.root(), label, fn(kind) {
-        kind is @untyped_cst.NodeKind::Syntax_Label
-      }),
-      true,
-    )
-  }
-  let missing_close = @untyped_cst.parse_expression("f(label~")
-  @test.assert_eq(missing_close.diagnostics_view().is_empty(), false)
-  for label in ["label_loc", "value_loc"] {
-    @test.assert_eq(
-      api_has_labeled_kind(missing_close.root(), label, fn(kind) {
-        kind is @untyped_cst.NodeKind::Syntax_Label
-      }),
-      true,
-    )
-  }
-
-  let multiline = @untyped_cst.parse_expression("(\n#| one\n#| two\n)")
-  @test.assert_eq(multiline.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(multiline.root(), "literal_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Aggregate_Span
-    }),
-    true,
-  )
-
-  let labelled_loop = @untyped_cst.parse_expression("label~: while true {}")
-  @test.assert_eq(labelled_loop.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(labelled_loop.root(), "label_loc", fn(kind) {
-      kind is Syntax_Label
-    }),
-    true,
-  )
-  @test.assert_eq(
-    api_has_labeled_kind(labelled_loop.root(), "loop_loc", fn(kind) {
-      kind is @untyped_cst.NodeKind::Aggregate_Span
-    }),
-    true,
-  )
-  let eof_label = @untyped_cst.parse_expression("break label~")
-  @test.assert_eq(eof_label.diagnostics_view().is_empty(), true)
-  @test.assert_eq(
-    api_has_labeled_kind(eof_label.root(), "label_loc", fn(kind) {
-      kind is Syntax_Label
-    }),
-    true,
-  )
-  let lex_group = @untyped_cst.parse_expression(
-    "lexmatch source { (re\"a\" + (re\"b\" + re\"c\")) => 1 }",
-  )
-  @test.assert_eq(lex_group.diagnostics_view().is_empty(), true)
-  for label in ["open", "close"] {
-    @test.assert_eq(
-      api_has_labeled_kind(lex_group.root(), label, fn(kind) {
-        kind is @untyped_cst.NodeKind::Syntax_Delimiter
+      api_has_labeled_kind(parsed.root(), label, kind => {
+        kind.token_kind() == Some(token_kind)
       }),
       true,
     )
@@ -952,7 +805,7 @@ test "source spans and node text use UTF-16 slicing offsets" {
   let source = "let s = \"😀\"\nlet x = 1"
   let result = @untyped_cst.parse_structure(source)
   guard api_find_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Identifier &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_LIDENT) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("x"))
     })
     is Some(x) else {
@@ -989,7 +842,7 @@ test "CST Leaf payloads are scalar and recursive meaning stays in children" {
   }
   @test.assert_eq(api_payload_leaf(constant_node) is None, true)
   guard api_find_node(constant_node, fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Literal &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_INT) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("42"))
     })
     is Some(constant_token) else {
@@ -1006,7 +859,7 @@ test "CST Leaf payloads are scalar and recursive meaning stays in children" {
   }
   @test.assert_eq(api_payload_leaf(ident_node) is None, true)
   guard api_find_node(ident_node, fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Identifier &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_LIDENT) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("answer"))
     })
     is Some(ident_token) else {
@@ -1059,7 +912,7 @@ test "structured declarations keep their spelling in scalar token payloads" {
   @test.assert_eq(api_payload_leaf(deriving) is None, true)
   @test.assert_eq(
     api_find_node(deriving, fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Identifier &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_UIDENT) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("Eq"))
     })
     is Some(_),
@@ -1081,7 +934,7 @@ test "Leaf has exactly the three scalar payload representations" {
   let payloads : Array[@untyped_cst.NodePayload] = []
   let string_result = @untyped_cst.parse_expression("text")
   guard api_find_node(string_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Identifier &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_LIDENT) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("text"))
     })
     is Some(string_node) &&
@@ -1091,7 +944,7 @@ test "Leaf has exactly the three scalar payload representations" {
   payloads.push(string_payload)
   let int_result = @untyped_cst.parse_expression("tuple.7")
   guard api_find_node(int_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Accessor &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_DOT_INT) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Int(7))
     })
     is Some(int_node) &&
@@ -1101,7 +954,7 @@ test "Leaf has exactly the three scalar payload representations" {
   payloads.push(int_payload)
   let bool_result = @untyped_cst.parse_expression("true")
   guard api_find_node(bool_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Literal &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_TRUE) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
     })
     is Some(bool_node) &&
@@ -1126,7 +979,7 @@ test "Leaf has exactly the three scalar payload representations" {
 test "lexer token payload mapping is scalar and uniform" {
   let index = @untyped_cst.parse_expression("tuple.12")
   guard api_find_node(index.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Accessor &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_DOT_INT) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Int(12))
     })
     is Some(index_token) else {
@@ -1163,7 +1016,7 @@ test "lexer token payload mapping is scalar and uniform" {
   let boolean = @untyped_cst.parse_expression("true")
   @test.assert_eq(
     api_find_node(boolean.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Literal &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_TRUE) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
     })
     is Some(_),
@@ -1172,7 +1025,7 @@ test "lexer token payload mapping is scalar and uniform" {
   let explicit_semi = @untyped_cst.parse_structure("let x = 1;")
   @test.assert_eq(
     api_find_node(explicit_semi.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Separator &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_SEMI) &&
       api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
     })
     is Some(_),
@@ -1181,7 +1034,7 @@ test "lexer token payload mapping is scalar and uniform" {
   let fixed = @untyped_cst.parse_expression("1 + 2")
   @test.assert_eq(
     api_find_node(fixed.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Operator &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_PLUS) &&
       api_payload_leaf(node) is None
     })
     is Some(_),

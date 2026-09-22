@@ -51,6 +51,18 @@ use typed ordered child-entry enums where child order is semantically relevant.
 Scalar constructors take their exact `String`, `Int`, or `Bool` value directly;
 `leaf` takes `NodePayload`.
 
+Lexical nodes use `Syntax_Token(TokenKind)` or `Syntax_Unexpected(TokenKind)`.
+`NodeKind::token_kind()` returns the original lexical kind for both, while
+`is_syntax_token()` identifies either state. `TokenKind` is re-exported from the
+lexer by the node package. Build tokens with `CstNode::syntax_token` or
+`syntax_unexpected`, passing `token_kind~`, `loc~`, `source_span~`, and ordered
+`CstTokenChild` entries. Payloads and repeated semantic children retain their
+order, including after error recovery.
+
+Nodes retain `loc` and `source_span`; there are no additional location children.
+AST locations are computed during lowering from tokens and syntax boundaries,
+without reading source text or re-parsing it.
+
 The `untyped_cst` package re-exports the three node types for compatibility.
 Consequently, `ParseResult::root` can be used as either
 `@untyped_cst.CstNode` or `@node.CstNode`; both names refer to the same type.

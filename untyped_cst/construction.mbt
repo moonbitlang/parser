@@ -178,123 +178,35 @@ fn token_node_with_children(
   source_span : (Int, Int),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
-  let loc = mk_loc(start, end)
+  let entries : Array[@node.CstTokenChild] = []
+  for (label, child) in children {
+    match label {
+      Some("flag") => entries.push(Flag(child))
+      Some("name_value") => entries.push(NameValue(child))
+      Some("operator") => entries.push(Operator(child))
+      Some("constant") => entries.push(Constant(child))
+      Some("accessor") => entries.push(Accessor(child))
+      Some("trailing") => entries.push(Trailing(child))
+      Some("attribute") => entries.push(Attribute(child))
+      Some("comment") => entries.push(Comment(child))
+      Some("segment") => entries.push(Segment(child))
+      Some("payload") =>
+        match child.kind {
+          Leaf(payload) => entries.push(Payload(payload))
+          _ => abort("expected a token payload leaf")
+        }
+      _ => abort("unsupported token child label")
+    }
+  }
   if @node.token_payload(token) is Some(payload) {
-    push_payload_leaf(children, payload, loc, source_span)
+    entries.push(Payload(payload))
   }
-  match syntax_kind_from_token_kind(token.kind()) {
-    Syntax_Keyword =>
-      (fn(loc, source_span, children) {
-        let flag = CstNode::first_child_with_label_from(children, "flag")
-        @node.CstNode::syntax_keyword(loc~, source_span~, flag?)
-      })(loc, source_span, children)
-    Syntax_Delimiter =>
-      (fn(loc, source_span, children) {
-        let _ = children
-        @node.CstNode::syntax_delimiter(loc~, source_span~)
-      })(loc, source_span, children)
-    Syntax_Separator =>
-      (fn(loc, source_span, children) {
-        let trailing = CstNode::first_child_with_label_from(
-          children, "trailing",
-        )
-        let payload = CstNode::payload_from_children(children)
-        @node.CstNode::syntax_separator(loc~, source_span~, trailing?, payload?)
-      })(loc, source_span, children)
-    Syntax_Operator =>
-      (fn(loc, source_span, children) {
-        let flag = CstNode::first_child_with_label_from(children, "flag")
-        let name_value = CstNode::first_child_with_label_from(
-          children, "name_value",
-        )
-        let operator = CstNode::first_child_with_label_from(
-          children, "operator",
-        )
-        let payload = CstNode::payload_from_children(children)
-        @node.CstNode::syntax_operator(
-          loc~,
-          source_span~,
-          flag?,
-          name_value?,
-          operator?,
-          payload?,
-        )
-      })(loc, source_span, children)
-    Syntax_Identifier =>
-      (fn(loc, source_span, children) {
-        let name_value = CstNode::first_child_with_label_from(
-          children, "name_value",
-        )
-        let payload = CstNode::payload_from_children(children)
-        @node.CstNode::syntax_identifier(
-          loc~,
-          source_span~,
-          name_value?,
-          payload?,
-        )
-      })(loc, source_span, children)
-    Syntax_Label =>
-      (fn(loc, source_span, children) {
-        let name_value = CstNode::first_child_with_label_from(
-          children, "name_value",
-        )
-        let payload = CstNode::payload_from_children(children)
-        @node.CstNode::syntax_label(loc~, source_span~, name_value?, payload?)
-      })(loc, source_span, children)
-    Syntax_Accessor =>
-      (fn(loc, source_span, children) {
-        let name_value = CstNode::first_child_with_label_from(
-          children, "name_value",
-        )
-        let accessor = CstNode::first_child_with_label_from(
-          children, "accessor",
-        )
-        let payload = CstNode::payload_from_children(children)
-        @node.CstNode::syntax_accessor(
-          loc~,
-          source_span~,
-          name_value?,
-          accessor?,
-          payload?,
-        )
-      })(loc, source_span, children)
-    Syntax_Literal =>
-      (fn(loc, source_span, children) {
-        let constant = CstNode::first_child_with_label_from(
-          children, "constant",
-        )
-        let payload = CstNode::payload_from_children(children)
-        @node.CstNode::syntax_literal(loc~, source_span~, constant?, payload?)
-      })(loc, source_span, children)
-    Syntax_Interpolation =>
-      (fn(loc, source_span, children) {
-        let segment = CstNode::children_with_label_from(children, "segment")
-        @node.CstNode::syntax_interpolation(loc~, source_span~, segment~)
-      })(loc, source_span, children)
-    Syntax_Attribute =>
-      (fn(loc, source_span, children) {
-        let attribute = CstNode::first_child_with_label_from(
-          children, "attribute",
-        )
-        @node.CstNode::syntax_attribute(loc~, source_span~, attribute?)
-      })(loc, source_span, children)
-    Syntax_Comment =>
-      (fn(loc, source_span, children) {
-        let comment = CstNode::first_child_with_label_from(children, "comment")
-        @node.CstNode::syntax_comment(loc~, source_span~, comment?)
-      })(loc, source_span, children)
-    Syntax_Eof =>
-      (fn(loc, source_span, children) {
-        let _ = children
-        @node.CstNode::syntax_eof(loc~, source_span~)
-      })(loc, source_span, children)
-    Syntax_Unexpected =>
-      (fn(loc, source_span, children) {
-        let _ = children
-        @node.CstNode::syntax_unexpected(loc~, source_span~)
-      })(loc, source_span, children)
-    _ => abort("token kind mapped to a non-token CST kind")
-  }
+  CstNode::syntax_token(
+    token_kind=token.kind(),
+    loc=mk_loc(start, end),
+    source_span~,
+    entries~,
+  )
 }
 
 ///|
@@ -324,19 +236,16 @@ fn declaration_children(
     let (label, child) = entry
     match label {
       Some("async") => entries.push(CstDeclarationChild::Async(child))
-      Some("async_loc") => entries.push(CstDeclarationChild::AsyncLoc(child))
       Some("attrs") => entries.push(CstDeclarationChild::Attrs(child))
       Some("body") => entries.push(CstDeclarationChild::Body(child))
       Some("clause") => entries.push(CstDeclarationChild::Clause(child))
       Some("decl_body_kind") =>
         entries.push(CstDeclarationChild::DeclBodyKind(child))
-      Some("decl_loc") => entries.push(CstDeclarationChild::DeclLoc(child))
       Some("declare") => entries.push(CstDeclarationChild::Declare(child))
       Some("deriving") => entries.push(CstDeclarationChild::Deriving(child))
       Some("effect_op") => entries.push(CstDeclarationChild::EffectOp(child))
       Some("error") => entries.push(CstDeclarationChild::Error(child))
       Some("expr") => entries.push(CstDeclarationChild::Expr(child))
-      Some("header_loc") => entries.push(CstDeclarationChild::HeaderLoc(child))
       Some("kind") => entries.push(CstDeclarationChild::Kind(child))
       Some("kw") => entries.push(CstDeclarationChild::Kw(child))
       Some("language") => entries.push(CstDeclarationChild::Language(child))
@@ -346,7 +255,6 @@ fn declaration_children(
       Some("name") => entries.push(CstDeclarationChild::Name(child))
       Some("nocancel") => entries.push(CstDeclarationChild::Nocancel(child))
       Some("object") => entries.push(CstDeclarationChild::Object(child))
-      Some("object_loc") => entries.push(CstDeclarationChild::ObjectLoc(child))
       Some("op") => entries.push(CstDeclarationChild::Op(child))
       Some("params") => entries.push(CstDeclarationChild::Params(child))
       Some("pattern") => entries.push(CstDeclarationChild::Pattern(child))
@@ -400,7 +308,6 @@ fn multiline_children(
     let (label, child) = entry
     match label {
       Some("element") => entries.push(CstMultilineChild::Element(child))
-      Some("literal_loc") => entries.push(CstMultilineChild::LiteralLoc(child))
       Some("token") => entries.push(CstMultilineChild::Token(child))
       Some("trivia") => entries.push(CstMultilineChild::Trivia(child))
       _ => abort("unsupported CST child label")
@@ -423,7 +330,6 @@ fn recovery_children(
       Some("array_kind") => entries.push(CstRecoveryChild::ArrayKind(child))
       Some("as") => entries.push(CstRecoveryChild::As(child))
       Some("async") => entries.push(CstRecoveryChild::Async(child))
-      Some("async_loc") => entries.push(CstRecoveryChild::AsyncLoc(child))
       Some("attr") => entries.push(CstRecoveryChild::Attr(child))
       Some("attribute") => entries.push(CstRecoveryChild::Attribute(child))
       Some("attrs") => entries.push(CstRecoveryChild::Attrs(child))
@@ -435,7 +341,6 @@ fn recovery_children(
       Some("body") => entries.push(CstRecoveryChild::Body(child))
       Some("bytes") => entries.push(CstRecoveryChild::Bytes(child))
       Some("case") => entries.push(CstRecoveryChild::Case(child))
-      Some("catch_loc") => entries.push(CstRecoveryChild::CatchLoc(child))
       Some("clause") => entries.push(CstRecoveryChild::Clause(child))
       Some("close") => entries.push(CstRecoveryChild::Close(child))
       Some("comment") => entries.push(CstRecoveryChild::Comment(child))
@@ -454,7 +359,6 @@ fn recovery_children(
       Some("continue") => entries.push(CstRecoveryChild::Continue(child))
       Some("decl_body_kind") =>
         entries.push(CstRecoveryChild::DeclBodyKind(child))
-      Some("decl_loc") => entries.push(CstRecoveryChild::DeclLoc(child))
       Some("declare") => entries.push(CstRecoveryChild::Declare(child))
       Some("default") => entries.push(CstRecoveryChild::Default(child))
       Some("deriving") => entries.push(CstRecoveryChild::Deriving(child))
@@ -464,34 +368,28 @@ fn recovery_children(
       Some("element") => entries.push(CstRecoveryChild::Element(child))
       Some("else") => entries.push(CstRecoveryChild::Else_(child))
       Some("else_kw") => entries.push(CstRecoveryChild::ElseKw(child))
-      Some("else_loc") => entries.push(CstRecoveryChild::ElseLoc(child))
       Some("end") => entries.push(CstRecoveryChild::End(child))
       Some("eof") => entries.push(CstRecoveryChild::Eof(child))
       Some("error") => entries.push(CstRecoveryChild::Error(child))
       Some("exclamation") => entries.push(CstRecoveryChild::Exclamation(child))
       Some("expr") => entries.push(CstRecoveryChild::Expr(child))
-      Some("expr_loc") => entries.push(CstRecoveryChild::ExprLoc(child))
       Some("faked") => entries.push(CstRecoveryChild::Faked(child))
       Some("field") => entries.push(CstRecoveryChild::Field(child))
       Some("flag") => entries.push(CstRecoveryChild::Flag(child))
       Some("fn_kind") => entries.push(CstRecoveryChild::FnKind(child))
-      Some("for_loc") => entries.push(CstRecoveryChild::ForLoc(child))
       Some("func") => entries.push(CstRecoveryChild::Func(child))
       Some("group") => entries.push(CstRecoveryChild::Group(child))
       Some("guard") => entries.push(CstRecoveryChild::Guard(child))
       Some("has_try") => entries.push(CstRecoveryChild::HasTry(child))
       Some("head") => entries.push(CstRecoveryChild::Head(child))
-      Some("header_loc") => entries.push(CstRecoveryChild::HeaderLoc(child))
       Some("hole_kind") => entries.push(CstRecoveryChild::HoleKind(child))
       Some("index") => entries.push(CstRecoveryChild::Index(child))
-      Some("index_loc") => entries.push(CstRecoveryChild::IndexLoc(child))
       Some("init") => entries.push(CstRecoveryChild::Init(child))
       Some("item") => entries.push(CstRecoveryChild::Item(child))
       Some("key") => entries.push(CstRecoveryChild::Key(child))
       Some("kind") => entries.push(CstRecoveryChild::Kind(child))
       Some("kw") => entries.push(CstRecoveryChild::Kw(child))
       Some("label") => entries.push(CstRecoveryChild::Label(child))
-      Some("label_loc") => entries.push(CstRecoveryChild::LabelLoc(child))
       Some("language") => entries.push(CstRecoveryChild::Language(child))
       Some("language_token") =>
         entries.push(CstRecoveryChild::LanguageToken(child))
@@ -503,9 +401,7 @@ fn recovery_children(
       Some("lhs") => entries.push(CstRecoveryChild::Lhs(child))
       Some("list_comprehension_kind") =>
         entries.push(CstRecoveryChild::ListComprehensionKind(child))
-      Some("literal_loc") => entries.push(CstRecoveryChild::LiteralLoc(child))
       Some("long_ident") => entries.push(CstRecoveryChild::LongIdent(child))
-      Some("loop_loc") => entries.push(CstRecoveryChild::LoopLoc(child))
       Some("match_absent") => entries.push(CstRecoveryChild::MatchAbsent(child))
       Some("method") => entries.push(CstRecoveryChild::Method(child))
       Some("mut") => entries.push(CstRecoveryChild::Mut(child))
@@ -514,14 +410,12 @@ fn recovery_children(
       Some("name_value") => entries.push(CstRecoveryChild::NameValue(child))
       Some("nocancel") => entries.push(CstRecoveryChild::Nocancel(child))
       Some("object") => entries.push(CstRecoveryChild::Object(child))
-      Some("object_loc") => entries.push(CstRecoveryChild::ObjectLoc(child))
       Some("op") => entries.push(CstRecoveryChild::Op(child))
       Some("open") => entries.push(CstRecoveryChild::Open(child))
       Some("openness") => entries.push(CstRecoveryChild::Openness(child))
       Some("operator") => entries.push(CstRecoveryChild::Operator(child))
       Some("param") => entries.push(CstRecoveryChild::Param(child))
       Some("params") => entries.push(CstRecoveryChild::Params(child))
-      Some("params_loc") => entries.push(CstRecoveryChild::ParamsLoc(child))
       Some("path") => entries.push(CstRecoveryChild::Path(child))
       Some("pattern") => entries.push(CstRecoveryChild::Pattern(child))
       Some("pattern_group") =>
@@ -535,7 +429,6 @@ fn recovery_children(
       Some("quantifier_kind") =>
         entries.push(CstRecoveryChild::QuantifierKind(child))
       Some("question") => entries.push(CstRecoveryChild::Question(child))
-      Some("question_loc") => entries.push(CstRecoveryChild::QuestionLoc(child))
       Some("range_kind") => entries.push(CstRecoveryChild::RangeKind(child))
       Some("raw_payload") => entries.push(CstRecoveryChild::RawPayload(child))
       Some("result") => entries.push(CstRecoveryChild::Result(child))
@@ -569,14 +462,12 @@ fn recovery_children(
         entries.push(CstRecoveryChild::TrailingBlankLine(child))
       Some("trait") => entries.push(CstRecoveryChild::Trait(child))
       Some("trivia") => entries.push(CstRecoveryChild::Trivia(child))
-      Some("try_loc") => entries.push(CstRecoveryChild::TryLoc(child))
       Some("try_operator_kind") =>
         entries.push(CstRecoveryChild::TryOperatorKind(child))
       Some("type") => entries.push(CstRecoveryChild::Type_(child))
       Some("type_desc") => entries.push(CstRecoveryChild::TypeDesc(child))
       Some("type_name") => entries.push(CstRecoveryChild::TypeName(child))
       Some("using_kind") => entries.push(CstRecoveryChild::UsingKind(child))
-      Some("value_loc") => entries.push(CstRecoveryChild::ValueLoc(child))
       Some("vis") => entries.push(CstRecoveryChild::Vis(child))
       Some("where") => entries.push(CstRecoveryChild::Where(child))
       Some("wildcard") => entries.push(CstRecoveryChild::Wildcard(child))

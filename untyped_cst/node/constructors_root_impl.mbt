@@ -36,217 +36,6 @@ pub fn CstNode::error(
 }
 
 ///|
-pub fn CstNode::syntax_keyword(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  flag? : CstNode,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match flag {
-    Some(child) => children.push((Some("flag"), child))
-    None => ()
-  }
-  node(NodeKind::Syntax_Keyword, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_delimiter(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Syntax_Delimiter, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_separator(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  trailing? : CstNode,
-  payload? : NodePayload,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match trailing {
-    Some(child) => children.push((Some("trailing"), child))
-    None => ()
-  }
-  match payload {
-    Some(value) => push_payload_leaf(children, value, loc, source_span)
-    None => ()
-  }
-  node(NodeKind::Syntax_Separator, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_operator(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  flag? : CstNode,
-  name_value? : CstNode,
-  operator? : CstNode,
-  payload? : NodePayload,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match flag {
-    Some(child) => children.push((Some("flag"), child))
-    None => ()
-  }
-  match name_value {
-    Some(child) => children.push((Some("name_value"), child))
-    None => ()
-  }
-  match operator {
-    Some(child) => children.push((Some("operator"), child))
-    None => ()
-  }
-  match payload {
-    Some(value) => push_payload_leaf(children, value, loc, source_span)
-    None => ()
-  }
-  node(NodeKind::Syntax_Operator, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_identifier(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  name_value? : CstNode,
-  payload? : NodePayload,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match name_value {
-    Some(child) => children.push((Some("name_value"), child))
-    None => ()
-  }
-  match payload {
-    Some(value) => push_payload_leaf(children, value, loc, source_span)
-    None => ()
-  }
-  node(NodeKind::Syntax_Identifier, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_label(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  name_value? : CstNode,
-  payload? : NodePayload,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match name_value {
-    Some(child) => children.push((Some("name_value"), child))
-    None => ()
-  }
-  match payload {
-    Some(value) => push_payload_leaf(children, value, loc, source_span)
-    None => ()
-  }
-  node(NodeKind::Syntax_Label, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_accessor(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  name_value? : CstNode,
-  accessor? : CstNode,
-  payload? : NodePayload,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match name_value {
-    Some(child) => children.push((Some("name_value"), child))
-    None => ()
-  }
-  match accessor {
-    Some(child) => children.push((Some("accessor"), child))
-    None => ()
-  }
-  match payload {
-    Some(value) => push_payload_leaf(children, value, loc, source_span)
-    None => ()
-  }
-  node(NodeKind::Syntax_Accessor, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_literal(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  constant? : CstNode,
-  payload? : NodePayload,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match constant {
-    Some(child) => children.push((Some("constant"), child))
-    None => ()
-  }
-  match payload {
-    Some(value) => push_payload_leaf(children, value, loc, source_span)
-    None => ()
-  }
-  node(NodeKind::Syntax_Literal, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_interpolation(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  segment~ : ArrayView[CstNode],
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  for child in segment {
-    children.push((Some("segment"), child))
-  }
-  node(NodeKind::Syntax_Interpolation, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_attribute(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  attribute? : CstNode,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match attribute {
-    Some(child) => children.push((Some("attribute"), child))
-    None => ()
-  }
-  node(NodeKind::Syntax_Attribute, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_comment(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-  comment? : CstNode,
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  match comment {
-    Some(child) => children.push((Some("comment"), child))
-    None => ()
-  }
-  node(NodeKind::Syntax_Comment, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_eof(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Syntax_Eof, loc, source_span, children)
-}
-
-///|
-pub fn CstNode::syntax_unexpected(
-  loc~ : Location,
-  source_span~ : (Int, Int),
-) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Syntax_Unexpected, loc, source_span, children)
-}
-
-///|
 pub fn CstNode::impl_import(
   loc~ : Location,
   source_span~ : (Int, Int),
@@ -530,16 +319,11 @@ pub fn CstNode::impl_test(
 pub fn CstNode::expr_ident(
   loc~ : Location,
   source_span~ : (Int, Int),
-  async_loc? : CstNode,
   name~ : ArrayView[CstNode],
   token? : CstNode,
   semantic_name? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  match async_loc {
-    Some(child) => children.push((Some("async_loc"), child))
-    None => ()
-  }
   for child in name {
     children.push((Some("name"), child))
   }
@@ -692,17 +476,12 @@ pub fn CstNode::expr_array_get(
   open~ : CstNode,
   index~ : CstNode,
   close~ : CstNode,
-  index_loc? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   children.push((Some("self"), self_))
   children.push((Some("open"), open))
   children.push((Some("index"), index))
   children.push((Some("close"), close))
-  match index_loc {
-    Some(child) => children.push((Some("index_loc"), child))
-    None => ()
-  }
   node(NodeKind::Expr_ArrayGet, loc, source_span, children)
 }
 
@@ -716,7 +495,6 @@ pub fn CstNode::expr_array_get_slice(
   op~ : CstNode,
   end? : CstNode,
   close~ : CstNode,
-  index_loc? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   children.push((Some("self"), self_))
@@ -731,10 +509,6 @@ pub fn CstNode::expr_array_get_slice(
     None => ()
   }
   children.push((Some("close"), close))
-  match index_loc {
-    Some(child) => children.push((Some("index_loc"), child))
-    None => ()
-  }
   node(NodeKind::Expr_ArrayGetSlice, loc, source_span, children)
 }
 
@@ -1138,17 +912,12 @@ pub fn CstNode::expr_try_operator(
   kw~ : CstNode,
   body~ : CstNode,
   try_operator_kind? : CstNode,
-  try_loc? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   children.push((Some("kw"), kw))
   children.push((Some("body"), body))
   match try_operator_kind {
     Some(child) => children.push((Some("try_operator_kind"), child))
-    None => ()
-  }
-  match try_loc {
-    Some(child) => children.push((Some("try_loc"), child))
     None => ()
   }
   node(NodeKind::Expr_TryOperator, loc, source_span, children)
@@ -1209,8 +978,6 @@ pub fn CstNode::expr_function(
   body? : CstNode,
   async_? : CstNode,
   fn_kind? : CstNode,
-  async_loc? : CstNode,
-  params_loc? : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   for child in kw {
@@ -1245,14 +1012,6 @@ pub fn CstNode::expr_function(
   }
   match fn_kind {
     Some(child) => children.push((Some("fn_kind"), child))
-    None => ()
-  }
-  match async_loc {
-    Some(child) => children.push((Some("async_loc"), child))
-    None => ()
-  }
-  match params_loc {
-    Some(child) => children.push((Some("params_loc"), child))
     None => ()
   }
   node(NodeKind::Expr_Function, loc, source_span, children)

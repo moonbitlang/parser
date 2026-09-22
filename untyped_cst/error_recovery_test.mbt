@@ -67,20 +67,7 @@ fn recovery_leaf_payload(
 ///|
 fn recovery_is_syntax_string(value : String) -> (@untyped_cst.CstNode) -> Bool {
   fn(node) {
-    node.kind
-    is (@untyped_cst.NodeKind::Syntax_Keyword
-    | @untyped_cst.NodeKind::Syntax_Delimiter
-    | @untyped_cst.NodeKind::Syntax_Separator
-    | @untyped_cst.NodeKind::Syntax_Operator
-    | @untyped_cst.NodeKind::Syntax_Identifier
-    | @untyped_cst.NodeKind::Syntax_Label
-    | @untyped_cst.NodeKind::Syntax_Accessor
-    | @untyped_cst.NodeKind::Syntax_Literal
-    | @untyped_cst.NodeKind::Syntax_Interpolation
-    | @untyped_cst.NodeKind::Syntax_Attribute
-    | @untyped_cst.NodeKind::Syntax_Comment
-    | @untyped_cst.NodeKind::Syntax_Eof
-    | @untyped_cst.NodeKind::Syntax_Unexpected) &&
+    node.kind.is_syntax_token() &&
     recovery_leaf_payload(node) is Some(@untyped_cst.NodePayload::String(found)) &&
     found == value
   }
@@ -167,7 +154,7 @@ test "invalid question token in block becomes error node" {
   @test.assert_eq(recovery_any_node(result.root(), recovery_is_error), true)
   @test.assert_eq(
     recovery_any_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Unexpected
+      node.kind is @untyped_cst.NodeKind::Syntax_Unexpected(_)
     }),
     true,
   )
@@ -256,7 +243,7 @@ test "declare prefix survives recovery" {
   )
   @test.assert_eq(
     recovery_any_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Unexpected &&
+      node.kind is @untyped_cst.NodeKind::Syntax_Unexpected(_) &&
       node.text(source) == "\n"[:]
     }),
     true,

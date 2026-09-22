@@ -10,8 +10,18 @@ test "typed constructors retain fields, optional children, and scalar payloads" 
   let loc = @node.mk_loc(start, end)
   let span = (0, 2)
   let value = @node.CstNode::name_identifier(value="x", loc~, source_span=span)
-  let open = @node.CstNode::syntax_delimiter(loc~, source_span=span)
-  let close = @node.CstNode::syntax_delimiter(loc~, source_span=span)
+  let open = @node.CstNode::syntax_token(
+    token_kind=TK_LBRACKET,
+    loc~,
+    source_span=span,
+    entries=[],
+  )
+  let close = @node.CstNode::syntax_token(
+    token_kind=TK_RBRACKET,
+    loc~,
+    source_span=span,
+    entries=[],
+  )
   let index = @node.CstNode::constant_int(value="1", loc~, source_span=span)
   let get = @node.CstNode::expr_array_get(
     loc~,
@@ -44,28 +54,29 @@ test "syntax payload and ordered recovery entries are controlled" {
   let end = test_position(1)
   let loc = @node.mk_loc(start, end)
   let span = (0, 1)
-  let token = @node.CstNode::syntax_identifier(
+  let token = @node.CstNode::syntax_token(
+    token_kind=TK_LIDENT,
     loc~,
     source_span=span,
-    payload=@node.NodePayload::String("x"),
+    entries=[Payload(@node.NodePayload::String("x"))],
   )
   @test.assert_eq(token.string_payload(), Some("x"))
   let recovered = @node.CstNode::error(loc~, source_span=span, entries=[
     @node.CstRecoveryChild::Item(
-      @node.CstNode::syntax_operator(loc~, source_span=span),
+      @node.CstNode::syntax_token(token_kind=TK_PLUS, loc~, source_span=span, entries=[]),
     ),
-    @node.CstRecoveryChild::QuestionLoc(
-      @node.CstNode::syntax_operator(loc~, source_span=span),
+    @node.CstRecoveryChild::Op(
+      @node.CstNode::syntax_token(token_kind=TK_PLUS, loc~, source_span=span, entries=[]),
     ),
   ])
   @test.assert_eq(recovered.children[0].0, Some("item"))
   @test.assert_eq(
-    recovered.children[0].1.kind is @node.NodeKind::Syntax_Unexpected,
+    recovered.children[0].1.kind is @node.NodeKind::Syntax_Unexpected(_),
     true,
   )
-  @test.assert_eq(recovered.children[1].0, Some("question_loc"))
+  @test.assert_eq(recovered.children[1].0, Some("op"))
   @test.assert_eq(
-    recovered.children[1].1.kind is @node.NodeKind::Syntax_Operator,
+    recovered.children[1].1.kind is @node.NodeKind::Syntax_Unexpected(_),
     true,
   )
 }
@@ -97,18 +108,23 @@ test "legacy type application entries retain head, repeated tokens, and trivia" 
     name=[],
     error=[],
   )
-  let separator = @node.CstNode::syntax_separator(
+  let separator = @node.CstNode::syntax_token(
+    token_kind=TK_COLONCOLON,
     loc=@node.mk_loc(test_position(1), test_position(3)),
     source_span=(1, 3),
+    entries=[],
   )
-  let trivia = @node.CstNode::syntax_comment(
+  let trivia = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(4), test_position(11)),
     source_span=(4, 11),
+    entries=[],
   )
-  let tail = @node.CstNode::syntax_identifier(
+  let tail = @node.CstNode::syntax_token(
+    token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(12), test_position(13)),
     source_span=(12, 13),
-    payload=@node.NodePayload::String("B"),
+    entries=[Payload(@node.NodePayload::String("B"))],
   )
   let application = @node.CstNode::type_application(loc~, source_span=(0, 13), entries=[
     Head(head),
@@ -134,7 +150,12 @@ test "legacy type application entries retain head, repeated tokens, and trivia" 
 test "trait method entries preserve repeated clauses around trivia" {
   let loc = @node.mk_loc(test_position(0), test_position(12))
   let name = @node.CstNode::name_identifier(value="f", loc~, source_span=(0, 1))
-  let trivia = @node.CstNode::syntax_comment(loc~, source_span=(4, 8))
+  let trivia = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
+    loc~,
+    source_span=(4, 8),
+    entries=[],
+  )
   let first_clause = @node.CstNode::clause_return_type(
     loc~,
     source_span=(2, 3),
@@ -165,7 +186,7 @@ test "trait method entries preserve repeated clauses around trivia" {
   @test.assert_eq(clauses[0].source_span, (2, 3))
   @test.assert_eq(clauses[1].source_span, (9, 12))
   @test.assert_eq(
-    declaration.children[2].1.kind is @node.NodeKind::Syntax_Comment,
+    declaration.children[2].1.kind is @node.NodeKind::Syntax_Token(TK_COMMENT),
     true,
   )
 }
@@ -205,21 +226,29 @@ fn assert_constructor_tree(
 ///|
 test "test declaration entries preserve trivia between keywords and TestName" {
   let loc = @node.mk_loc(test_position(0), test_position(24))
-  let async_kw = @node.CstNode::syntax_keyword(
+  let async_kw = @node.CstNode::syntax_token(
+    token_kind=TK_ASYNC,
     loc=@node.mk_loc(test_position(0), test_position(5)),
     source_span=(0, 5),
+    entries=[],
   )
-  let first_comment = @node.CstNode::syntax_comment(
+  let first_comment = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(6), test_position(8)),
     source_span=(6, 8),
+    entries=[],
   )
-  let second_comment = @node.CstNode::syntax_comment(
+  let second_comment = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(9), test_position(11)),
     source_span=(9, 11),
+    entries=[],
   )
-  let test_kw = @node.CstNode::syntax_keyword(
+  let test_kw = @node.CstNode::syntax_token(
+    token_kind=TK_TEST,
     loc=@node.mk_loc(test_position(12), test_position(16)),
     source_span=(12, 16),
+    entries=[],
   )
   let name = @node.CstNode::name_test(
     value="named",
@@ -255,13 +284,17 @@ test "import package entries preserve repeated trivia before the alias" {
     loc=@node.mk_loc(test_position(0), test_position(5)),
     source_span=(0, 5),
   )
-  let first_comment = @node.CstNode::syntax_comment(
+  let first_comment = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(6), test_position(8)),
     source_span=(6, 8),
+    entries=[],
   )
-  let second_comment = @node.CstNode::syntax_comment(
+  let second_comment = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(9), test_position(11)),
     source_span=(9, 11),
+    entries=[],
   )
   let alias_ = @node.CstNode::name_package(
     value="p",
@@ -298,17 +331,23 @@ test "extend item entries preserve trivia around the keyword" {
     loc=@node.mk_loc(test_position(0), test_position(1)),
     source_span=(0, 1),
   )
-  let before = @node.CstNode::syntax_comment(
+  let before = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(2), test_position(4)),
     source_span=(2, 4),
+    entries=[],
   )
-  let keyword = @node.CstNode::syntax_keyword(
+  let keyword = @node.CstNode::syntax_token(
+    token_kind=TK_WITH,
     loc=@node.mk_loc(test_position(5), test_position(7)),
     source_span=(5, 7),
+    entries=[],
   )
-  let after = @node.CstNode::syntax_comment(
+  let after = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(8), test_position(10)),
     source_span=(8, 10),
+    entries=[],
   )
   let name = @node.CstNode::name_identifier(
     value="g",
@@ -336,10 +375,11 @@ test "extend item entries preserve trivia around the keyword" {
 test "missing pattern entries preserve nested recovery and ordered errors" {
   let loc = @node.mk_loc(test_position(0), test_position(7))
   let token_loc = @node.mk_loc(test_position(0), test_position(1))
-  let token = @node.CstNode::syntax_identifier(
+  let token = @node.CstNode::syntax_token(
+    token_kind=TK_UNDERSCORE,
     loc=token_loc,
     source_span=(0, 1),
-    payload=@node.NodePayload::String("_"),
+    entries=[],
   )
   let pattern = @node.CstNode::pattern_any(
     loc=token_loc,
@@ -347,7 +387,12 @@ test "missing pattern entries preserve nested recovery and ordered errors" {
     name=token,
   )
   let error_loc = @node.mk_loc(test_position(2), test_position(3))
-  let bad = @node.CstNode::syntax_unexpected(loc=error_loc, source_span=(2, 3))
+  let bad = @node.CstNode::syntax_unexpected(
+    token_kind=TK_NEWLINE,
+    loc=error_loc,
+    source_span=(2, 3),
+    entries=[],
+  )
   let error = @node.CstNode::error(loc=error_loc, source_span=(2, 3), entries=[
     Item(bad),
   ])
@@ -357,9 +402,11 @@ test "missing pattern entries preserve nested recovery and ordered errors" {
     source_span=(0, 3),
     entries=[Pattern(pattern), Error(error)],
   )
-  let trivia = @node.CstNode::syntax_comment(
+  let trivia = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(4), test_position(6)),
     source_span=(4, 6),
+    entries=[],
   )
   let marker = @node.CstNode::lex_scan_case_pattern_wildcard(
     loc=@node.empty_loc(test_position(7)),
@@ -409,27 +456,35 @@ test "missing pattern entries preserve nested recovery and ordered errors" {
 ///|
 test "constraint, labelled block, and or pattern entries retain repeated trivia" {
   let loc = @node.mk_loc(test_position(0), test_position(24))
-  let head = @node.CstNode::syntax_identifier(
+  let head = @node.CstNode::syntax_token(
+    token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(0), test_position(1)),
     source_span=(0, 1),
-    payload=@node.NodePayload::String("x"),
+    entries=[Payload(@node.NodePayload::String("x"))],
   )
-  let op = @node.CstNode::syntax_separator(
+  let op = @node.CstNode::syntax_token(
+    token_kind=TK_COLON,
     loc=@node.mk_loc(test_position(2), test_position(3)),
     source_span=(2, 3),
+    entries=[],
   )
-  let first = @node.CstNode::syntax_comment(
+  let first = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(4), test_position(11)),
     source_span=(4, 11),
+    entries=[],
   )
-  let second = @node.CstNode::syntax_comment(
+  let second = @node.CstNode::syntax_token(
+    token_kind=TK_COMMENT,
     loc=@node.mk_loc(test_position(13), test_position(22)),
     source_span=(13, 22),
+    entries=[],
   )
-  let tail = @node.CstNode::syntax_identifier(
+  let tail = @node.CstNode::syntax_token(
+    token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(23), test_position(24)),
     source_span=(23, 24),
-    payload=@node.NodePayload::String("y"),
+    entries=[Payload(@node.NodePayload::String("y"))],
   )
   let constraint = @node.CstNode::expr_constraint(loc~, source_span=(0, 24), entries=[
     Expr(head),
@@ -447,7 +502,6 @@ test "constraint, labelled block, and or pattern entries retain repeated trivia"
   ])
   let block = @node.CstNode::expr_labelled_block(loc~, source_span=(0, 24), entries=[
     Label(head),
-    LabelLoc(head),
     Op(op),
     Trivia(first),
     Trivia(second),
@@ -455,7 +509,6 @@ test "constraint, labelled block, and or pattern entries retain repeated trivia"
   ])
   assert_constructor_entries(block, loc, (0, 24), [
     ("label", head),
-    ("label_loc", head),
     ("op", op),
     ("trivia", first),
     ("trivia", second),
@@ -479,7 +532,10 @@ test "constraint, labelled block, and or pattern entries retain repeated trivia"
     let comments = node.children_with_label("trivia")
     @test.assert_eq(comments.length(), 2)
     for comment in comments {
-      @test.assert_eq(comment.kind is @node.NodeKind::Syntax_Comment, true)
+      @test.assert_eq(
+        comment.kind is @node.NodeKind::Syntax_Token(TK_COMMENT),
+        true,
+      )
     }
   }
 }
@@ -487,22 +543,27 @@ test "constraint, labelled block, and or pattern entries retain repeated trivia"
 ///|
 test "public visibility entries retain repeated errors and their tokens" {
   let loc = @node.mk_loc(test_position(0), test_position(8))
-  let kw = @node.CstNode::syntax_keyword(
+  let kw = @node.CstNode::syntax_token(
+    token_kind=TK_PUB,
     loc=@node.mk_loc(test_position(0), test_position(3)),
     source_span=(0, 3),
+    entries=[],
   )
-  let open = @node.CstNode::syntax_delimiter(
+  let open = @node.CstNode::syntax_token(
+    token_kind=TK_LPAREN,
     loc=@node.mk_loc(test_position(3), test_position(4)),
     source_span=(3, 4),
+    entries=[],
   )
   let errors : Array[@node.CstNode] = []
   for i, value in ["1", "2"] {
     let start = 4 + i * 2
     let error_loc = @node.mk_loc(test_position(start), test_position(start + 1))
-    let token = @node.CstNode::syntax_literal(
+    let token = @node.CstNode::syntax_token(
+      token_kind=TK_INT,
       loc=error_loc,
       source_span=(start, start + 1),
-      payload=@node.NodePayload::String(value),
+      entries=[Payload(@node.NodePayload::String(value))],
     )
     errors.push(
       @node.CstNode::error(loc=error_loc, source_span=(start, start + 1), entries=[
@@ -514,9 +575,11 @@ test "public visibility entries retain repeated errors and their tokens" {
     loc=@node.empty_loc(test_position(7)),
     source_span=(7, 7),
   )
-  let close = @node.CstNode::syntax_delimiter(
+  let close = @node.CstNode::syntax_token(
+    token_kind=TK_RPAREN,
     loc=@node.mk_loc(test_position(7), test_position(8)),
     source_span=(7, 8),
+    entries=[],
   )
   let visibility = @node.CstNode::visibility_pub(loc~, source_span=(0, 8), entries=[
     Kw(kw),
@@ -539,7 +602,7 @@ test "public visibility entries retain repeated errors and their tokens" {
   for i, error in actual {
     @test.assert_eq(error.kind is @node.NodeKind::Error, true)
     let token = error.first_child_with_label("item").unwrap()
-    @test.assert_eq(token.kind is @node.NodeKind::Syntax_Unexpected, true)
+    @test.assert_eq(token.kind is @node.NodeKind::Syntax_Unexpected(_), true)
     @test.assert_eq(
       token.string_payload(),
       Some(if i == 0 { "1" } else { "2" }),
@@ -553,25 +616,30 @@ test "public visibility entries retain repeated errors and their tokens" {
 test "array assignment entries retain expanded and unexpanded lhs children" {
   let lhs_loc = @node.mk_loc(test_position(0), test_position(4))
   let name_loc = @node.mk_loc(test_position(0), test_position(2))
-  let name = @node.CstNode::syntax_identifier(
+  let name = @node.CstNode::syntax_token(
+    token_kind=TK_LIDENT,
     loc=name_loc,
     source_span=(0, 2),
-    payload=@node.NodePayload::String("xs"),
+    entries=[Payload(@node.NodePayload::String("xs"))],
   )
   let array = @node.CstNode::expr_ident(loc=name_loc, source_span=(0, 2), name=[
     name,
   ])
-  let open = @node.CstNode::syntax_delimiter(
+  let open = @node.CstNode::syntax_token(
+    token_kind=TK_LBRACKET,
     loc=@node.mk_loc(test_position(2), test_position(3)),
     source_span=(2, 3),
+    entries=[],
   )
   let index = @node.CstNode::missing(
     loc=@node.empty_loc(test_position(3)),
     source_span=(3, 3),
   )
-  let close = @node.CstNode::syntax_delimiter(
+  let close = @node.CstNode::syntax_token(
+    token_kind=TK_RBRACKET,
     loc=@node.mk_loc(test_position(3), test_position(4)),
     source_span=(3, 4),
+    entries=[],
   )
   let lhs = @node.CstNode::expr_array_get(
     loc=lhs_loc,
@@ -581,14 +649,17 @@ test "array assignment entries retain expanded and unexpanded lhs children" {
     index~,
     close~,
   )
-  let op = @node.CstNode::syntax_operator(
+  let op = @node.CstNode::syntax_token(
+    token_kind=TK_EQUAL,
     loc=@node.mk_loc(test_position(5), test_position(6)),
     source_span=(5, 6),
+    entries=[],
   )
-  let rhs = @node.CstNode::syntax_identifier(
+  let rhs = @node.CstNode::syntax_token(
+    token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(7), test_position(12)),
     source_span=(7, 12),
-    payload=@node.NodePayload::String("value"),
+    entries=[Payload(@node.NodePayload::String("value"))],
   )
   let loc = @node.mk_loc(test_position(0), test_position(12))
   let entries : ArrayView[@node.CstRecoveryChild] = [Lhs(lhs), Op(op), Rhs(rhs)]
@@ -661,7 +732,12 @@ test "field assignment entry constructor preserves recovery and legacy calls" {
     name,
   ])
   let field_loc = @node.mk_loc(test_position(2), test_position(8))
-  let token = @node.CstNode::syntax_accessor(loc=field_loc, source_span=(3, 9))
+  let token = @node.CstNode::syntax_token(
+    token_kind=TK_DOT_LIDENT,
+    loc=field_loc,
+    source_span=(3, 9),
+    entries=[],
+  )
   let field = @node.CstNode::accessor_label(
     value="field",
     loc=field_loc,
@@ -675,7 +751,12 @@ test "field assignment entry constructor preserves recovery and legacy calls" {
     field~,
   )
   let op_loc = @node.mk_loc(test_position(9), test_position(11))
-  let op = @node.CstNode::syntax_operator(loc=op_loc, source_span=(10, 12))
+  let op = @node.CstNode::syntax_token(
+    token_kind=TK_PLUS_EQUAL,
+    loc=op_loc,
+    source_span=(10, 12),
+    entries=[],
+  )
   let operator = @node.CstNode::operator_augmented(
     value="+=",
     loc=op_loc,
@@ -757,39 +838,39 @@ test "field assignment entry constructor preserves recovery and legacy calls" {
 }
 
 ///|
-test "missing expression entries retain repeated trivia, errors, and location metadata" {
+test "missing expression entries retain repeated trivia and errors" {
   let loc = @node.mk_loc(test_position(1), test_position(9))
   let span = (2, 10)
-  let label = @node.CstNode::syntax_label(
+  let label = @node.CstNode::syntax_token(
+    token_kind=TK_POST_LABEL,
     loc=@node.mk_loc(test_position(1), test_position(3)),
     source_span=(2, 4),
+    entries=[],
   )
   let first = @node.CstNode::syntax_unexpected(
+    token_kind=TK_NEWLINE,
     loc=@node.mk_loc(test_position(3), test_position(4)),
     source_span=(4, 5),
+    entries=[],
   )
   let second = @node.CstNode::syntax_unexpected(
+    token_kind=TK_NEWLINE,
     loc=@node.mk_loc(test_position(4), test_position(5)),
     source_span=(5, 6),
+    entries=[],
   )
-  let label_loc = @node.CstNode::aggregate_span(
-    loc=label.loc,
-    source_span=label.source_span,
-  )
-  let loop_loc = @node.CstNode::aggregate_span(
-    loc=@node.empty_loc(test_position(9)),
-    source_span=(10, 10),
-  )
-  let op = @node.CstNode::syntax_operator(
+  let op = @node.CstNode::syntax_token(
+    token_kind=TK_PLUS,
     loc=@node.mk_loc(test_position(5), test_position(6)),
     source_span=(6, 7),
+    entries=[],
   )
   let error = @node.CstNode::error(loc=op.loc, source_span=op.source_span, entries=[
     Item(op),
   ])
   let expr = @node.CstNode::expr_missing_expr(
-    loc=loop_loc.loc,
-    source_span=loop_loc.source_span,
+    loc=@node.mk_loc(test_position(6), test_position(9)),
+    source_span=(7, 10),
     error=[],
   )
   let legacy = @node.CstNode::expr_missing_expr(
@@ -797,19 +878,15 @@ test "missing expression entries retain repeated trivia, errors, and location me
     source_span=span,
     label~,
     trivia=first,
-    label_loc~,
     expr~,
     op~,
-    loop_loc~,
     error=[error, error],
   )
   assert_constructor_entries(legacy, loc, span, [
     ("label", label),
     ("trivia", first),
-    ("label_loc", label_loc),
     ("expr", expr),
     ("op", op),
-    ("loop_loc", loop_loc),
     ("error", error),
     ("error", error),
   ])
@@ -820,12 +897,10 @@ test "missing expression entries retain repeated trivia, errors, and location me
       Label(label),
       Error(error),
       Trivia(first),
-      LabelLoc(label_loc),
       Expr(expr),
       Trivia(second),
       Op(op),
       Error(error),
-      LoopLoc(loop_loc),
     ],
   )
   @test.assert_eq(ordered.kind is @node.NodeKind::Expr_MissingExpr, true)
@@ -833,16 +908,14 @@ test "missing expression entries retain repeated trivia, errors, and location me
     ("label", label),
     ("error", error),
     ("trivia", first),
-    ("label_loc", label_loc),
     ("expr", expr),
     ("trivia", second),
     ("op", op),
     ("error", error),
-    ("loop_loc", loop_loc),
   ])
   let empty = @node.CstNode::expr_missing_expr_from_entries(
-    loc=loop_loc.loc,
-    source_span=loop_loc.source_span,
+    loc=@node.mk_loc(test_position(6), test_position(9)),
+    source_span=(7, 10),
     entries=[],
   )
   assert_constructor_tree(empty, expr)
@@ -852,13 +925,17 @@ test "missing expression entries retain repeated trivia, errors, and location me
 test "positional constructor parameters keep optional colon order and legacy calls" {
   let loc = @node.mk_loc(test_position(1), test_position(10))
   let span = (2, 11)
-  let mut_ = @node.CstNode::syntax_keyword(
+  let mut_ = @node.CstNode::syntax_token(
+    token_kind=TK_MUTABLE,
     loc=@node.mk_loc(test_position(1), test_position(4)),
     source_span=(2, 5),
+    entries=[],
   )
-  let op = @node.CstNode::syntax_separator(
+  let op = @node.CstNode::syntax_token(
+    token_kind=TK_COLON,
     loc=@node.mk_loc(test_position(5), test_position(6)),
     source_span=(6, 7),
+    entries=[],
   )
   let type_ = @node.CstNode::type_name(
     loc=@node.mk_loc(test_position(7), test_position(10)),

@@ -31,27 +31,6 @@ fn ParserState::current_position(self : ParserState) -> Position {
 }
 
 ///|
-/// Captures the handrolled parser's next-token location without adding source
-/// text to the enclosing CST node.
-fn ParserState::current_significant_anchor(self : ParserState) -> CstNode {
-  match self.peek_significant() {
-    Some((token, start, end)) =>
-      syntax_location_node(
-        syntax_kind_from_token_kind(token.kind()),
-        mk_loc(start, end),
-        empty_span(self.offset_for_position(start)),
-      )
-    None => {
-      let pos = self.previous_end()
-      @node.CstNode::syntax_eof(
-        loc=empty_loc(pos),
-        source_span=empty_span(self.offset_for_position(pos)),
-      )
-    }
-  }
-}
-
-///|
 fn expected_token_kinds_to_string(kinds : Array[TokenKind]) -> String {
   match kinds {
     [] => ""

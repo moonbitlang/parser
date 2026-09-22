@@ -1160,8 +1160,6 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
           entry.1.has_child_kind(fn(kind) { kind is Flag_Async })
         }),
       )
-      push_async_location_anchor(children)
-      push_decl_like_function_location_anchor(children, loc, source_span)
 
       let entries = declaration_children(children)
       @node.CstNode::trait_method_declaration(loc~, source_span~, entries~)
@@ -2404,11 +2402,6 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               true,
             ),
           )
-          push_child(
-            children,
-            Some("object_loc"),
-            token_location_node(op, op.loc, op.source_span),
-          )
         } else {
           ()
         }
@@ -3593,7 +3586,6 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
   } else {
     children
   }
-  push_top_level_location_anchors(state, final_kind, loc, children)
   final_builder(loc, source_span, children)
 }
 
@@ -3831,19 +3823,6 @@ fn function_node_from_children(
         }),
       )
       push_marker_child(children, loc, source_span, "fn_kind", fn_kind_builder)
-      push_async_location_anchor(children)
-
-      if CstNode::first_child_with_label_from(children, "pipe") is Some(_) &&
-        CstNode::first_child_with_label_from(children, "params") is Some(params) &&
-        params.children_with_label("item").length() == 1 &&
-        params.children_with_label("item").get(0) is Some(item) &&
-        params.loc.start == item.loc.start &&
-        params.loc.end == item.loc.end &&
-        CstNode::first_child_with_label_from(children, "op") is Some(op) {
-        push_token_location(children, "params_loc", op, op.loc, op.source_span)
-      } else {
-        ()
-      }
 
       let kw = CstNode::children_with_label_from(children, "kw")
       let error = CstNode::children_with_label_from(children, "error")
@@ -3854,12 +3833,6 @@ fn function_node_from_children(
       let body = CstNode::first_child_with_label_from(children, "body")
       let async_ = CstNode::first_child_with_label_from(children, "async")
       let fn_kind = CstNode::first_child_with_label_from(children, "fn_kind")
-      let async_loc = CstNode::first_child_with_label_from(
-        children, "async_loc",
-      )
-      let params_loc = CstNode::first_child_with_label_from(
-        children, "params_loc",
-      )
       @node.CstNode::expr_function(
         loc~,
         source_span~,
@@ -3872,8 +3845,6 @@ fn function_node_from_children(
         body?,
         async_?,
         fn_kind?,
-        async_loc?,
-        params_loc?,
       )
     },
     children,
@@ -4154,112 +4125,6 @@ fn parse_expr_until(
 }
 
 ///|
-fn parser_leading_parenthesized_end(node : CstNode) -> Position? {
-  match node.kind {
-    Expr_Unit | Expr_Group | Expr_Tuple | Expr_Constraint =>
-      return Some(node.loc.end)
-    _ => ()
-  }
-  for i in 0..<node.children.length() {
-    match node.children.get(i) {
-      Some((Some("trivia"), _)) => continue
-      Some((_, child)) => return parser_leading_parenthesized_end(child)
-      None => ()
-    }
-  }
-  None
-}
-
-///|
-fn parser_first_significant_token_at_or_after(
-  node : CstNode,
-  pos : Position,
-) -> CstNode? {
-  match node.kind {
-    _ if node.kind.is_syntax_token() &&
-      (
-        node.has_child_or_grandchild_kind(fn(kind) {
-          kind is Comment_InlineTrailing
-        }) ||
-        node.has_child_or_grandchild_kind(fn(kind) { kind is Comment_Ownline })
-      ) => ()
-    _ if node.kind.is_syntax_token() && node.loc.start.cnum >= pos.cnum =>
-      return Some(node)
-    _ => ()
-  }
-  for i in 0..<node.children.length() {
-    match node.children.get(i) {
-      Some((label, _)) if is_location_metadata_label(label) => continue
-      Some((_, child)) =>
-        if parser_first_significant_token_at_or_after(child, pos) is Some(found) {
-          return Some(found)
-        }
-      None => ()
-    }
-  }
-  None
-}
-
-///|
-fn push_try_location_anchors(
-  children : Array[(String?, CstNode)],
-  loc : Location,
-  source_span : (Int, Int),
-  has_try : Bool,
-  suffix_anchor_source? : CstNode,
-) -> Unit {
-  let keywords = CstNode::children_with_label_from(children, "kw")
-  let try_keyword = keywords.get(0)
-  let catch_keyword = if has_try { keywords.get(1) } else { keywords.get(0) }
-  if try_keyword is Some(keyword) {
-    push_token_location(
-      children,
-      "try_loc",
-      keyword,
-      keyword.loc,
-      keyword.source_span,
-    )
-  }
-  if catch_keyword is Some(keyword) {
-    let mut catch_end = keyword
-    if has_try &&
-      CstNode::children_with_label_from(children, "case").get(0)
-      is Some(case_list) &&
-      case_list.first_child_with_label("open") is Some(open) {
-      catch_end = open
-    }
-    push_aggregate_span(
-      children,
-      "catch_loc",
-      keyword.loc.merge(catch_end.loc),
-      (keyword.source_span.0, catch_end.source_span.1),
-    )
-  }
-  if CstNode::first_child_with_label_from(children, "else_kw") is Some(keyword) {
-    let mut else_end = keyword
-    if CstNode::children_with_label_from(children, "else").get(0)
-      is Some(case_list) &&
-      case_list.first_child_with_label("open") is Some(open) {
-      else_end = open
-    }
-    push_aggregate_span(
-      children,
-      "else_loc",
-      keyword.loc.merge(else_end.loc),
-      (keyword.source_span.0, else_end.source_span.1),
-    )
-  }
-  if suffix_anchor_source is Some(anchor_source) {
-    push_aggregate_span(
-      children,
-      "expr_loc",
-      Location::{ start: anchor_source.loc.start, end: loc.end, },
-      (anchor_source.source_span.0, source_span.1),
-    )
-  }
-}
-
-///|
 fn parse_expr_catch_suffix(
   state : ParserState,
   stop_kinds : Array[TokenKind],
@@ -4270,11 +4135,8 @@ fn parse_expr_catch_suffix(
     !state.current_is(TK_CATCH) {
     return lhs
   }
-  let leading_parenthesized_end = parser_leading_parenthesized_end(lhs)
   let children : Array[(String?, CstNode)] = [(Some("body"), lhs)]
-  let mut catch_keyword : CstNode? = None
   if state.consume_any() is Some(catch_kw) {
-    catch_keyword = Some(catch_kw)
     push_child(children, Some("kw"), catch_kw)
   } else {
     ()
@@ -4298,15 +4160,6 @@ fn parse_expr_catch_suffix(
       push_child(children, Some("else"), parse_case_block(state))
     }
   }
-  let suffix_anchor_source = match (leading_parenthesized_end, catch_keyword) {
-    (Some(paren_end), Some(catch_kw)) =>
-      Some(
-        parser_first_significant_token_at_or_after(lhs, paren_end).unwrap_or(
-          catch_kw,
-        ),
-      )
-    _ => None
-  }
   state.construct_from_children(
     fn(loc, source_span, children) {
       push_bool_marker(
@@ -4322,13 +4175,6 @@ fn parse_expr_catch_suffix(
           @node.CstNode::flag_has_try(value~, loc~, source_span~)
         },
         false,
-      )
-      push_try_location_anchors(
-        children,
-        loc,
-        source_span,
-        false,
-        suffix_anchor_source?,
       )
 
       let entries = recovery_children(children)
@@ -6124,13 +5970,6 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
     push_child(children, Some("close"), close)
     state.construct_from_children(
       fn(loc, source_span, children) {
-        push_aggregate_span(
-          children,
-          "index_loc",
-          open.loc.merge(close.loc),
-          (open.source_span.0, close.source_span.1),
-        )
-
         let self_ = CstNode::first_child_with_label_from(children, "self").unwrap_or(
           missing_at_end(loc~, source_span~),
         )
@@ -6145,9 +5984,6 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
         let close = CstNode::first_child_with_label_from(children, "close").unwrap_or(
           missing_at_end(loc~, source_span~),
         )
-        let index_loc = CstNode::first_child_with_label_from(
-          children, "index_loc",
-        )
         @node.CstNode::expr_array_get_slice(
           loc~,
           source_span~,
@@ -6157,7 +5993,6 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
           op~,
           end?,
           close~,
-          index_loc?,
         )
       },
       children,
@@ -6177,13 +6012,6 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
     push_child(children, Some("close"), close)
     state.construct_from_children(
       fn(loc, source_span, children) {
-        push_aggregate_span(
-          children,
-          "index_loc",
-          open.loc.merge(close.loc),
-          (open.source_span.0, close.source_span.1),
-        )
-
         let self_ = CstNode::first_child_with_label_from(children, "self").unwrap_or(
           missing_at_end(loc~, source_span~),
         )
@@ -6196,9 +6024,6 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
         let close = CstNode::first_child_with_label_from(children, "close").unwrap_or(
           missing_at_end(loc~, source_span~),
         )
-        let index_loc = CstNode::first_child_with_label_from(
-          children, "index_loc",
-        )
         @node.CstNode::expr_array_get(
           loc~,
           source_span~,
@@ -6206,7 +6031,6 @@ fn parse_array_get_suffix(state : ParserState, lhs : CstNode) -> CstNode {
           open~,
           index~,
           close~,
-          index_loc?,
         )
       },
       children,
@@ -6609,9 +6433,6 @@ fn parse_expr_simple(
                   ["name"],
                 )
 
-                let async_loc = CstNode::first_child_with_label_from(
-                  children, "async_loc",
-                )
                 let name = CstNode::children_with_label_from(children, "name")
                 let token = CstNode::first_child_with_label_from(
                   children, "token",
@@ -6622,7 +6443,6 @@ fn parse_expr_simple(
                 @node.CstNode::expr_ident(
                   loc~,
                   source_span~,
-                  async_loc?,
                   name~,
                   token?,
                   semantic_name?,
@@ -6756,22 +6576,12 @@ fn parse_break_expr(
   match state.peek() {
     Some((POST_LABEL(_), _, _)) =>
       if state.consume_any() is Some(label) {
-        push_child(
-          children,
-          Some("label_loc"),
-          token_location_node(label, label.loc, label.source_span),
-        )
         push_child(children, Some("label"), label)
       } else {
         ()
       }
     Some((POST_LABEL_TRANSPARENT(name), _, _)) =>
       if state.consume_any() is Some(label) {
-        push_child(
-          children,
-          Some("label_loc"),
-          token_location_node(label, label.loc, label.source_span),
-        )
         push_child(children, Some("label"), transparent_label_node(label, name))
       } else {
         ()
@@ -6792,19 +6602,9 @@ fn parse_break_expr(
       let kw = CstNode::first_child_with_label_from(children, "kw").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let label_loc = CstNode::first_child_with_label_from(
-        children, "label_loc",
-      )
       let label = CstNode::first_child_with_label_from(children, "label")
       let expr = CstNode::first_child_with_label_from(children, "expr")
-      @node.CstNode::expr_break(
-        loc~,
-        source_span~,
-        kw~,
-        label_loc?,
-        label?,
-        expr?,
-      )
+      @node.CstNode::expr_break(loc~, source_span~, kw~, label?, expr?)
     },
     children,
   )
@@ -6828,11 +6628,6 @@ fn parse_continue_expr(
       is Some(COLON)) =>
       if state.consume_any() is Some(label) {
         anchor = Some(label)
-        push_child(
-          children,
-          Some("label_loc"),
-          token_location_node(label, label.loc, label.source_span),
-        )
         push_child(children, Some("label"), label)
       } else {
         ()
@@ -6843,11 +6638,6 @@ fn parse_continue_expr(
       is Some(COLON)) =>
       if state.consume_any() is Some(label) {
         anchor = Some(label)
-        push_child(
-          children,
-          Some("label_loc"),
-          token_location_node(label, label.loc, label.source_span),
-        )
         push_child(children, Some("label"), transparent_label_node(label, name))
       } else {
         ()
@@ -6874,19 +6664,9 @@ fn parse_continue_expr(
       let kw = CstNode::first_child_with_label_from(children, "kw").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let label_loc = CstNode::first_child_with_label_from(
-        children, "label_loc",
-      )
       let label = CstNode::first_child_with_label_from(children, "label")
       let arg = CstNode::first_child_with_label_from(children, "arg")
-      @node.CstNode::expr_continue(
-        loc~,
-        source_span~,
-        kw~,
-        label_loc?,
-        label?,
-        arg?,
-      )
+      @node.CstNode::expr_continue(loc~, source_span~, kw~, label?, arg?)
     },
     children,
   )
@@ -6987,11 +6767,6 @@ fn parse_labelled_loop_expr(
       None => label
     }
     push_child(children, Some("label"), semantic_label)
-    push_child(
-      children,
-      Some("label_loc"),
-      token_location_node(label, label.loc, label.source_span),
-    )
   } else {
     ()
   }
@@ -7068,11 +6843,6 @@ fn parse_labelled_loop_expr(
         [],
       )
   }
-  push_child(
-    children,
-    Some("loop_loc"),
-    aggregate_span_node(loop_node.loc, loop_node.source_span),
-  )
   for i in 0..<loop_node.children.length() {
     if loop_node.children.get(i) is Some(child) {
       children.push(child)
@@ -7081,9 +6851,8 @@ fn parse_labelled_loop_expr(
     }
   }
   let (_, first) = children[0]
-  let (_, last) = children[children.length() - 1]
-  let loc = first.loc.merge(last.loc)
-  let source_span = (first.source_span.0, last.source_span.1)
+  let loc = first.loc.merge(loop_node.loc)
+  let source_span = (first.source_span.0, loop_node.source_span.1)
   let entries = recovery_children(children)
   match loop_node.kind {
     Expr_For => @node.CstNode::expr_for(loc~, source_span~, entries~)
@@ -7255,9 +7024,6 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
             ["name"],
           )
 
-          let async_loc = CstNode::first_child_with_label_from(
-            children, "async_loc",
-          )
           let name = CstNode::children_with_label_from(children, "name")
           let token = CstNode::first_child_with_label_from(children, "token")
           let semantic_name = CstNode::first_child_with_label_from(
@@ -7266,7 +7032,6 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
           @node.CstNode::expr_ident(
             loc~,
             source_span~,
-            async_loc?,
             name~,
             token?,
             semantic_name?,
@@ -7317,9 +7082,6 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
             ["name"],
           )
 
-          let async_loc = CstNode::first_child_with_label_from(
-            children, "async_loc",
-          )
           let name = CstNode::children_with_label_from(children, "name")
           let token = CstNode::first_child_with_label_from(children, "token")
           let semantic_name = CstNode::first_child_with_label_from(
@@ -7328,7 +7090,6 @@ fn parse_ident_or_qualified_expr(state : ParserState) -> CstNode {
           @node.CstNode::expr_ident(
             loc~,
             source_span~,
-            async_loc?,
             name~,
             token?,
             semantic_name?,
@@ -7861,11 +7622,6 @@ fn parse_list_comprehension_expr(
   }
   if state.consume_any() is Some(kw) {
     push_child(children, Some("kw"), kw)
-    push_child(
-      children,
-      Some("for_loc"),
-      token_location_node(kw, kw.loc, kw.source_span),
-    )
   } else {
     ()
   }
@@ -8540,14 +8296,12 @@ fn parse_try_expr(state : ParserState) -> CstNode {
       let try_operator_kind = CstNode::first_child_with_label_from(
         children, "try_operator_kind",
       )
-      let try_loc = CstNode::first_child_with_label_from(children, "try_loc")
       @node.CstNode::expr_try_operator(
         loc~,
         source_span~,
         kw~,
         body~,
         try_operator_kind?,
-        try_loc?,
       )
     }
   } else {
@@ -8617,15 +8371,6 @@ fn parse_try_expr(state : ParserState) -> CstNode {
             source_span=empty_span(source_span.1),
           ),
         )
-        if CstNode::first_child_with_label_from(children, "kw") is Some(keyword) {
-          push_token_location(
-            children,
-            "try_loc",
-            keyword,
-            keyword.loc,
-            keyword.source_span,
-          )
-        }
       } else {
         push_child(
           children,
@@ -8636,7 +8381,6 @@ fn parse_try_expr(state : ParserState) -> CstNode {
             source_span=empty_span(source_span.1),
           ),
         )
-        push_try_location_anchors(children, loc, source_span, true)
       }
       builder(loc, source_span, children)
     },
@@ -10530,12 +10274,6 @@ fn parse_labelled_argument(
           children, "semantic_name",
         )
         let pun = CstNode::first_child_with_label_from(children, "pun")
-        let label_loc = CstNode::first_child_with_label_from(
-          children, "label_loc",
-        )
-        let value_loc = CstNode::first_child_with_label_from(
-          children, "value_loc",
-        )
         let expr = CstNode::first_child_with_label_from(children, "expr")
         let pattern = CstNode::first_child_with_label_from(children, "pattern")
         @node.CstNode::argument_labelled_pun(
@@ -10544,8 +10282,6 @@ fn parse_labelled_argument(
           name~,
           semantic_name?,
           pun?,
-          label_loc?,
-          value_loc?,
           expr?,
           pattern?,
         )
@@ -10617,7 +10353,6 @@ fn parse_labelled_argument(
         is_pun,
       )
       if is_pun && complete_pun {
-        push_pun_locations(children)
         push_pun_expr(children)
       }
       argument_builder(loc, source_span, children)
@@ -10632,7 +10367,6 @@ fn parse_optional_forwarding_argument(
   complete_pun? : Bool = false,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut question_node : CstNode? = None
   match state.peek() {
     Some((UIDENT(name), start, end)) =>
       state.report(
@@ -10647,7 +10381,6 @@ fn parse_optional_forwarding_argument(
     ()
   }
   if state.consume_any() is Some(question) {
-    question_node = Some(question)
     push_child(children, Some("op"), question)
   } else {
     ()
@@ -10668,11 +10401,6 @@ fn parse_optional_forwarding_argument(
       children, "semantic_name",
     )
     let pun = CstNode::first_child_with_label_from(children, "pun")
-    let question_loc = CstNode::first_child_with_label_from(
-      children, "question_loc",
-    )
-    let label_loc = CstNode::first_child_with_label_from(children, "label_loc")
-    let value_loc = CstNode::first_child_with_label_from(children, "value_loc")
     let expr = CstNode::first_child_with_label_from(children, "expr")
     @node.CstNode::argument_labelled_option_pun(
       loc~,
@@ -10681,9 +10409,6 @@ fn parse_optional_forwarding_argument(
       op~,
       semantic_name?,
       pun?,
-      question_loc?,
-      label_loc?,
-      value_loc?,
       expr?,
     )
   }
@@ -10701,9 +10426,6 @@ fn parse_optional_forwarding_argument(
         children, "semantic_name",
       )
       let pun = CstNode::first_child_with_label_from(children, "pun")
-      let question_loc = CstNode::first_child_with_label_from(
-        children, "question_loc",
-      )
       @node.CstNode::argument_labelled_option(
         loc~,
         source_span~,
@@ -10712,7 +10434,6 @@ fn parse_optional_forwarding_argument(
         expr~,
         semantic_name?,
         pun?,
-        question_loc?,
       )
     }
     if state.consume_any() is Some(equal) {
@@ -10771,20 +10492,7 @@ fn parse_optional_forwarding_argument(
         is_pun,
       )
 
-      match question_node {
-        Some(question) =>
-          push_token_location(
-            children,
-            "question_loc",
-            question,
-            question.loc,
-            question.source_span,
-          )
-        None => ()
-      }
-
       if is_pun && complete_pun {
-        push_pun_locations(children)
         push_pun_expr(children)
       }
       argument_builder(loc, source_span, children)
@@ -11399,8 +11107,6 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
           entry.1.has_child_kind(fn(kind) { kind is Flag_Async })
         }),
       )
-      push_async_location_anchor(children)
-      push_decl_like_function_location_anchor(children, loc, source_span)
 
       let entries = recovery_children(children)
       @node.CstNode::binding_let_rec(loc~, source_span~, entries~)
@@ -11480,8 +11186,6 @@ fn parse_local_function_statement(
               entry.1.has_child_kind(fn(kind) { kind is Flag_Async })
             }),
           )
-          push_async_location_anchor(children)
-          push_decl_like_function_location_anchor(children, loc, source_span)
 
           let entries = recovery_children(children)
           @node.CstNode::expr_let_fn(loc~, source_span~, entries~)
@@ -11532,8 +11236,6 @@ fn parse_local_function_statement(
           entry.1.has_child_kind(fn(kind) { kind is Flag_Async })
         }),
       )
-      push_async_location_anchor(children)
-      push_decl_like_function_location_anchor(children, loc, source_span)
 
       let entries = recovery_children(children)
       @node.CstNode::expr_let_fn(loc~, source_span~, entries~)
@@ -13194,8 +12896,6 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
       children, "semantic_name",
     )
     let pun = CstNode::first_child_with_label_from(children, "pun")
-    let label_loc = CstNode::first_child_with_label_from(children, "label_loc")
-    let value_loc = CstNode::first_child_with_label_from(children, "value_loc")
     let expr = CstNode::first_child_with_label_from(children, "expr")
     let pattern = CstNode::first_child_with_label_from(children, "pattern")
     @node.CstNode::argument_labelled_pun(
@@ -13204,8 +12904,6 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
       name~,
       semantic_name?,
       pun?,
-      label_loc?,
-      value_loc?,
       expr?,
       pattern?,
     )
@@ -13289,7 +12987,6 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
       )
 
       if is_pun {
-        push_pun_locations(children)
         push_pun_pattern(children)
       } else {
         ()
@@ -15172,10 +14869,7 @@ fn parse_regex_match_binding(state : ParserState) -> CstNode {
 
 ///|
 fn loc_span(state : ParserState, loc : Location) -> (Int, Int) {
-  (
-    state.offset_for_position(loc.start),
-    state.offset_for_position(loc.end),
-  )
+  (state.offset_for_position(loc.start), state.offset_for_position(loc.end))
 }
 
 ///|
@@ -15246,8 +14940,6 @@ fn parse_string_literal_node(state : ParserState) -> CstNode {
 ///|
 fn parse_multiline_string_literal(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut first_token : CstNode? = None
-  let mut last_token : CstNode? = None
   let mut done = false
   while !done {
     match state.peek() {
@@ -15255,10 +14947,6 @@ fn parse_multiline_string_literal(state : ParserState) -> CstNode {
         match tok {
           MULTILINE_STRING(_) | MULTILINE_INTERP(_) =>
             if state.consume_any() is Some(token_node) {
-              if first_token is None {
-                first_token = Some(token_node)
-              }
-              last_token = Some(token_node)
               push_child(children, Some("token"), token_node)
               let element = match tok {
                 MULTILINE_STRING(value) =>
@@ -15331,17 +15019,6 @@ fn parse_multiline_string_literal(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      match (first_token, last_token) {
-        (Some(first), Some(last)) =>
-          push_aggregate_span(
-            children,
-            "literal_loc",
-            first.loc.merge(last.loc),
-            (first.source_span.0, last.source_span.1),
-          )
-        _ => ()
-      }
-
       let entries = multiline_children(children)
       @node.CstNode::expr_multiline_string(loc~, source_span~, entries~)
     },
@@ -15605,10 +15282,7 @@ fn ParserState::node_from_children(
   } else {
     let (_, first) = children[0]
     let (_, last) = children[children.length() - 1]
-    (
-      first.loc.merge(last.loc),
-      (first.source_span.0, last.source_span.1),
-    )
+    (first.loc.merge(last.loc), (first.source_span.0, last.source_span.1))
   }
 }
 
@@ -15822,7 +15496,6 @@ fn parse_import_decl(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      push_top_level_location_anchors(state, Other, loc, children)
       let entries = declaration_children(children)
       @node.CstNode::impl_import(loc~, source_span~, entries~)
     },
@@ -15866,7 +15539,6 @@ fn parse_extend_decl(state : ParserState) -> CstNode {
   )
   state.construct_from_children(
     fn(loc, source_span, children) {
-      push_top_level_location_anchors(state, Other, loc, children)
       let entries = declaration_children(children)
       @node.CstNode::impl_extend(loc~, source_span~, entries~)
     },
@@ -16155,7 +15827,6 @@ fn parse_async_type_atom(
               },
               true,
             )
-            push_async_location_anchor(children)
 
             let entries = recovery_children(children)
             @node.CstNode::type_arrow(loc~, source_span~, entries~)
@@ -16188,7 +15859,6 @@ fn parse_async_type_atom(
             },
             true,
           )
-          push_async_location_anchor(children)
 
           let entries = recovery_children(children)
           @node.CstNode::type_arrow(loc~, source_span~, entries~)
@@ -16218,7 +15888,6 @@ fn parse_async_type_atom(
         },
         true,
       )
-      push_async_location_anchor(children)
 
       let entries = recovery_children(children)
       @node.CstNode::type_arrow(loc~, source_span~, entries~)

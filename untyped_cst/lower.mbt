@@ -352,19 +352,6 @@ fn lower_top_item(node : CstNode) -> @syntax.Impl {
 }
 
 ///|
-fn lower_decl_loc_without_trailing_trivia(node : CstNode) -> Location {
-  node
-  .first_child_with_label("decl_loc")
-  .map(fn(anchor) { anchor.loc })
-  .unwrap_or(node.loc)
-}
-
-///|
-fn lower_trait_decl_loc(node : CstNode) -> Location {
-  lower_decl_loc_without_trailing_trivia(node)
-}
-
-///|
 fn lower_visibility(node : CstNode) -> @syntax.Visibility {
   for vis in node.children_with_label("vis") {
     let attr = if vis.first_child_with_label("attr") is Some(attr_node) {
@@ -379,14 +366,6 @@ fn lower_visibility(node : CstNode) -> @syntax.Visibility {
     }
   }
   Default
-}
-
-///|
-fn lower_async_loc(node : CstNode) -> Location? {
-  if node.bool_marker_value(fn(kind) { kind is Flag_Async }) is Some(false) {
-    return None
-  }
-  node.first_child_with_label("async_loc").map(fn(anchor) { anchor.loc })
 }
 
 ///|
@@ -474,14 +453,6 @@ fn lower_function_decl(node : CstNode) -> @syntax.Impl {
 }
 
 ///|
-fn lower_function_header_loc(node : CstNode) -> Location {
-  node
-  .first_child_with_label("header_loc")
-  .map(fn(anchor) { anchor.loc })
-  .unwrap_or(node.loc)
-}
-
-///|
 fn lower_function_name_binder(node : CstNode) -> @syntax.Binder {
   if node.first_child_with_label("method") is Some(method_name) {
     lower_binder_from_node(method_name)
@@ -512,14 +483,6 @@ fn lower_function_type_name(node : CstNode) -> @syntax.TypeName? {
   } else {
     None
   }
-}
-
-///|
-fn lower_function_owner_object_loc(node : CstNode) -> Location? {
-  if node.bool_marker_value(fn(kind) { kind is Flag_Object }) is Some(false) {
-    return None
-  }
-  node.first_child_with_label("object_loc").map(anchor => anchor.loc)
 }
 
 ///|
@@ -1514,14 +1477,6 @@ fn lower_multiline_string_expr(node : CstNode) -> @syntax.Expr {
 }
 
 ///|
-fn lower_multiline_string_loc(node : CstNode) -> Location {
-  node
-  .first_child_with_label("literal_loc")
-  .map(fn(anchor) { anchor.loc })
-  .unwrap_or(node.loc)
-}
-
-///|
 fn lower_constructor_expr(node : CstNode) -> @syntax.Expr {
   let constr = if node.first_child_with_label("field") is Some(field) {
     @syntax.Constructor::{
@@ -1590,10 +1545,7 @@ fn lower_argument_kind(item : CstNode) -> @syntax.ArgumentKind {
         .first_child_with_label("name")
         .map(name => @syntax.Label::{
           name: lower_semantic_string(name).unwrap_or(""),
-          loc: item
-          .first_child_with_label("label_loc")
-          .map(fn(anchor) { anchor.loc })
-          .unwrap_or(item.loc),
+          loc: name.loc,
         })
         .unwrap_or({ name: "", loc: item.loc, }),
       )
@@ -1603,10 +1555,9 @@ fn lower_argument_kind(item : CstNode) -> @syntax.ArgumentKind {
           .first_child_with_label("name")
           .map(lower_label_from_node)
           .unwrap_or({ name: "", loc: item.loc, }),
-        question_loc=item
-          .first_child_with_label("question_loc")
-          .map(fn(anchor) { anchor.loc })
-          .unwrap_or(item.loc),
+        question_loc=lower_token_loc(item, "op", TK_QUESTION).unwrap_or(
+          item.loc,
+        ),
       )
     Argument_LabelledOptionPun =>
       LabelledOptionPun(
@@ -1614,10 +1565,9 @@ fn lower_argument_kind(item : CstNode) -> @syntax.ArgumentKind {
           .first_child_with_label("name")
           .map(lower_label_from_node)
           .unwrap_or({ name: "", loc: item.loc, }),
-        question_loc=item
-          .first_child_with_label("question_loc")
-          .map(fn(anchor) { anchor.loc })
-          .unwrap_or(item.loc),
+        question_loc=lower_token_loc(item, "op", TK_QUESTION).unwrap_or(
+          item.loc,
+        ),
       )
     _ => Positional
   }
@@ -1741,10 +1691,7 @@ fn lower_list_comprehension_expr(node : CstNode) -> @syntax.Expr {
       binders=lower_for_binding_list(node, "init"),
       condition=node.first_child_with_label("cond").map(lower_expr),
       continue_block=lower_for_binding_list(node, "continue"),
-      for_loc=node
-        .first_child_with_label("for_loc")
-        .map(anchor => anchor.loc)
-        .unwrap_or(node.loc),
+      for_loc=lower_token_loc(node, "kw", TK_FOR).unwrap_or(node.loc),
     )
   }
   ListComprehension(
@@ -2113,13 +2060,7 @@ fn lower_foreach_expr(node : CstNode) -> @syntax.Expr {
 fn lower_loop_label(node : CstNode) -> @syntax.Label? {
   guard node.first_child_with_label("label") is Some(label) else { return None }
   let lowered = lower_label_from_node(label)
-  Some({
-    name: lowered.name,
-    loc: node
-    .first_child_with_label("label_loc")
-    .map(fn(anchor) { anchor.loc })
-    .unwrap_or(lowered.loc),
-  })
+  Some({ name: lowered.name, loc: label.loc, })
 }
 
 ///|
@@ -2252,10 +2193,7 @@ fn lower_array_get_slice_expr(node : CstNode) -> @syntax.Expr {
     array~,
     start_index~,
     end_index~,
-    index_loc=node
-      .first_child_with_label("index_loc")
-      .map(fn(anchor) { anchor.loc })
-      .unwrap_or(node.loc),
+    index_loc=lower_index_loc(node),
     loc=node.loc,
   )
 }
@@ -2330,25 +2268,13 @@ fn lower_try_expr(node : CstNode) -> @syntax.Expr {
   } else {
     Some(lower_array_to_list(else_cases))
   }
-  let try_loc = node
-    .first_child_with_label("try_loc")
-    .map(fn(anchor) { anchor.loc })
-    .unwrap_or(node.loc)
+  let try_loc = lower_try_loc(node)
   let has_try = node
     .bool_marker_value(fn(kind) { kind is Flag_HasTry })
     .unwrap_or(false)
-  let catch_loc = node
-    .first_child_with_label("catch_loc")
-    .map(fn(anchor) { anchor.loc })
-    .unwrap_or(node.loc)
-  let else_loc = node
-    .first_child_with_label("else_loc")
-    .map(fn(anchor) { anchor.loc })
-    .unwrap_or(node.loc)
-  let loc = node
-    .first_child_with_label("expr_loc")
-    .map(fn(anchor) { anchor.loc })
-    .unwrap_or(node.loc)
+  let catch_loc = lower_catch_loc(node)
+  let else_loc = lower_else_loc(node)
+  let loc = lower_try_expr_loc(node)
   Try(
     body=node
       .first_child_with_label("body")
@@ -2372,10 +2298,7 @@ fn lower_try_operator_expr(node : CstNode) -> @syntax.Expr {
       .map(lower_expr)
       .unwrap_or(lower_hole_expr(node.loc)),
     kind=Exclamation,
-    try_loc=node
-      .first_child_with_label("try_loc")
-      .map(fn(anchor) { anchor.loc })
-      .unwrap_or(node.loc),
+    try_loc=lower_try_loc(node),
     loc=node.loc,
   )
 }
@@ -2788,14 +2711,6 @@ fn lower_function_expr_node(node : CstNode) -> @syntax.Expr {
 }
 
 ///|
-fn lower_pipe_arrow_discard_loc(
-  node : CstNode,
-  _params_node : CstNode?,
-) -> Location? {
-  node.first_child_with_label("params_loc").map(fn(anchor) { anchor.loc })
-}
-
-///|
 fn arrow_lambda_block_keeps_group(node : CstNode, body_node : CstNode) -> Bool {
   guard body_node.kind is Expr_Block else { return false }
   if node.first_child_with_label("pipe") is Some(_) {
@@ -2868,10 +2783,7 @@ fn lower_func_from_decl_like_node(node : CstNode) -> @syntax.Func {
     .first_child_with_label("body")
     .map(lower_function_body_expr)
     .unwrap_or(lower_unit_expr(node.loc))
-  let loc = node
-    .first_child_with_label("header_loc")
-    .map(fn(anchor) { anchor.loc })
-    .unwrap_or(node.loc)
+  let loc = lower_local_function_loc(node)
   {
     parameters,
     params_loc,
@@ -3249,13 +3161,7 @@ fn lower_labelled_block_expr(node : CstNode) -> @syntax.Expr {
 fn lower_control_label(node : CstNode) -> @syntax.Label? {
   if node.first_child_with_label("label") is Some(label_node) {
     let label = lower_label_from_node(label_node)
-    Some({
-      name: label.name,
-      loc: node
-      .first_child_with_label("label_loc")
-      .map(fn(node) { node.loc })
-      .unwrap_or(label.loc),
-    })
+    Some({ name: label.name, loc: label_node.loc, })
   } else {
     None
   }
@@ -3967,9 +3873,7 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
           args~,
           res~,
           err~,
-          is_async=node
-            .first_child_with_label("async_loc")
-            .map(fn(anchor) { anchor.loc }),
+          is_async=lower_async_loc(node),
           nocancel_~,
           loc=node.loc,
         )

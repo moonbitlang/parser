@@ -14,13 +14,7 @@ using @node {
 }
 
 ///|
-using @node {
-  mk_loc,
-  empty_loc,
-  empty_span,
-  syntax_kind_from_token_kind,
-  is_location_metadata_label,
-}
+using @node {mk_loc, empty_loc, empty_span}
 
 ///|
 using @tokens {
