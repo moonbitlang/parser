@@ -263,15 +263,8 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
         ()
       }
       state.report_expected_tokens_at(LBRACKET, mk_loc(start, end), [TK_LBRACE])
-      while !state.current_is(TK_LBRACE) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(type_children, Some("error"), bad)
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until([TK_LBRACE])
+      push_recovered_errors(type_children, scan.skipped, wrap=false)
       push_child(
         children,
         Some("type"),
@@ -400,15 +393,8 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
     (Some((AMPER, start, end)), _) => {
       state.report_expected_tokens_at(AMPER, mk_loc(start, end), [TK_LBRACE])
       let type_children : Array[(String?, CstNode)] = []
-      while !state.current_is(TK_LBRACE) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(type_children, Some("error"), bad)
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until([TK_LBRACE])
+      push_recovered_errors(type_children, scan.skipped, wrap=false)
       push_child(
         children,
         Some("type"),

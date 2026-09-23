@@ -89,6 +89,38 @@ fn recovery_has_direct_child(
 }
 
 ///|
+fn recovery_check_source_spans(
+  node : @untyped_cst.CstNode,
+  source : String,
+  previous_end : Int,
+) -> Int raise {
+  let (start, end) = node.source_span
+  @test.assert_eq(start >= 0 && start <= end && end <= source.length(), true)
+  if node.kind.is_syntax_token() {
+    @test.assert_eq(start >= previous_end, true)
+    return end
+  }
+  let mut last_end = previous_end
+  for (_, child) in node.children {
+    last_end = recovery_check_source_spans(child, source, last_end)
+  }
+  last_end
+}
+
+///|
+test "recovered trees preserve source coverage and token order" {
+  for
+    source in [
+      "fn f(, x) { let y = 1 }", "fn f() { let (a;b) = x; let c = 2 }", "fn f() { f(1 !, 2) } fn g() {}",
+      "fn f() { let x: ? // keep\n = 1 }",
+    ] {
+    let result = @untyped_cst.parse_structure(source)
+    @test.assert_eq(result.root().text(source), source[:])
+    let _ = recovery_check_source_spans(result.root(), source, 0)
+  }
+}
+
+///|
 test "missing function parameter close recovers" {
   let source = "fn f("
   assert_structure_acceptance("missing function parameter close", source, false)

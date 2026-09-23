@@ -22,8 +22,10 @@ using @list {type List}
 ///|
 using @parserstate {
   type ParserState,
+  type RecoveryOwner,
   kind_in,
   new_state,
+  next_depth,
   required_pattern_start_tokens,
 }
 

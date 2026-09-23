@@ -1,5 +1,9 @@
 ///|
 fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode {
+  let recovery_scope = state.push_recovery_scope(
+    top_level_decl_core_sync_tokens(),
+    depth_sensitive=true,
+  )
   let diagnostics_before = state.reports.length()
   let children : Array[(String?, CstNode)] = []
   let mut depth = 0
@@ -252,24 +256,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               mk_loc(next_start, next_end),
               [TK_EQUAL],
             )
-            let mut recovering = true
-            while recovering {
-              match state.peek() {
-                Some((tok, _, _)) if top_level_decl_can_start(tok) =>
-                  recovering = false
-                Some((EOF, _, _)) | None => recovering = false
-                Some(_) =>
-                  if state.consume_any() is Some(bad) {
-                    push_child(
-                      children,
-                      Some("error"),
-                      error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-                    )
-                  } else {
-                    recovering = false
-                  }
-              }
-            }
+            let scan = state.recover_until(top_level_decl_sync_tokens())
+            push_recovered_errors(children, scan.skipped)
             phase = Complete
             done = true
           }
@@ -286,24 +274,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           Some("pattern"),
           state.missing_token_node_silent(TK_LIDENT),
         )
-        let mut recovering = true
-        while recovering {
-          match state.peek() {
-            Some((tok, _, _)) if top_level_decl_can_start(tok) =>
-              recovering = false
-            Some((EOF, _, _)) | None => recovering = false
-            Some(_) =>
-              if state.consume_any() is Some(bad) {
-                push_child(
-                  children,
-                  Some("error"),
-                  error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-                )
-              } else {
-                recovering = false
-              }
-          }
-        }
+        let scan = state.recover_until(top_level_decl_sync_tokens())
+        push_recovered_errors(children, scan.skipped)
         phase = Complete
         done = true
       }
@@ -414,13 +386,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               state.report_expected_tokens_at(found, mk_loc(start, end), [TK_FN])
             None => ()
           }
-          while !state.current_is(TK_EOF) && !(state.peek() is None) {
-            if state.consume_any() is Some(bad) {
-              push_child(children, Some("error"), bad)
-            } else {
-              ()
-            }
-          }
+          let scan = state.recover_until([TK_EOF])
+          push_recovered_errors(children, scan.skipped, wrap=false)
           done = true
           continue
         }
@@ -449,13 +416,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               )
             None => ()
           }
-          while !state.current_is(TK_EOF) && !(state.peek() is None) {
-            if state.consume_any() is Some(bad) {
-              push_child(children, Some("error"), bad)
-            } else {
-              ()
-            }
-          }
+          let scan = state.recover_until([TK_EOF])
+          push_recovered_errors(children, scan.skipped, wrap=false)
           done = true
           continue
         }
@@ -528,13 +490,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       }
       Some((COLON, start, end)) if kind is Function && depth == 0 => {
         state.report_expected_tokens_at(COLON, mk_loc(start, end), [TK_LBRACE])
-        while !state.current_is(TK_EOF) && !(state.peek() is None) {
-          if state.consume_any() is Some(bad) {
-            push_child(children, Some("error"), bad)
-          } else {
-            ()
-          }
-        }
+        let scan = state.recover_until([TK_EOF])
+        push_recovered_errors(children, scan.skipped, wrap=false)
         saw_body = true
         phase = Complete
         done = true
@@ -734,20 +691,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         phase is AwaitingBody &&
         found is (EXCLAMATION | QUESTION) => {
         state.report_expected_tokens_at(found, mk_loc(start, end), [TK_LBRACE])
-        while !state.current_is(TK_LBRACE) &&
-              !state.current_is(TK_SEMI) &&
-              !state.current_is(TK_EOF) &&
-              !(state.peek() is None) {
-          if state.consume_any() is Some(bad) {
-            push_child(
-              children,
-              Some("error"),
-              error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-            )
-          } else {
-            ()
-          }
-        }
+        let scan = state.recover_until([TK_LBRACE, TK_SEMI])
+        push_recovered_errors(children, scan.skipped)
       }
       Some((WHERE, _, _)) if kind is Function =>
         push_child(children, Some("where"), parse_where_clause(state))
@@ -771,19 +716,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             } else {
               TK_LBRACE
             }
-            while !state.current_is(recovery_kind) &&
-                  !state.current_is(TK_EOF) &&
-                  !(state.peek() is None) {
-              if state.consume_any() is Some(bad) {
-                push_child(
-                  children,
-                  Some("error"),
-                  error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-                )
-              } else {
-                ()
-              }
-            }
+            let scan = state.recover_until([recovery_kind])
+            push_recovered_errors(children, scan.skipped)
           }
           None => done = true
         }
@@ -818,41 +752,19 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             top_level_decl_expected_tokens(),
           )
         }
-        let mut recovering = true
-        while recovering {
-          match state.peek() {
-            Some((tok, _, _)) if top_level_decl_can_start(tok) =>
-              recovering = false
-            Some((EOF, _, _)) | None => recovering = false
-            Some(_) =>
-              if state.consume_any() is Some(bad) {
-                push_child(
-                  children,
-                  Some("error"),
-                  error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-                )
-              } else {
-                recovering = false
-              }
-          }
-        }
+        let scan = state.recover_until(top_level_decl_sync_tokens())
+        push_recovered_errors(children, scan.skipped)
         done = true
       }
       Some((LBRACE, start, end)) if kind is Function && phase is AwaitingName => {
-        let mut recovery_end = end
-        while !state.current_is(TK_EOF) && !(state.peek() is None) {
-          match state.peek() {
-            Some((next, _, _)) if top_level_decl_can_start(next) => break
-            Some((SEMI(_), _, _)) => break
-            _ => ()
-          }
-          if state.consume_any() is Some(bad) {
-            recovery_end = bad.loc.end
-            push_child(children, Some("error"), bad)
-          } else {
-            ()
-          }
+        let scan = state.recover_until(
+          [TK_SEMI, ..top_level_decl_sync_tokens()],
+        )
+        let recovery_end = match scan.skipped.get(scan.skipped.length() - 1) {
+          Some(last) => last.loc.end
+          None => end
         }
+        push_recovered_errors(children, scan.skipped, wrap=false)
         state.report_expected_tokens_at(
           LBRACE,
           mk_loc(start, recovery_end),
@@ -954,20 +866,14 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       Some((found, start, end)) if phase is AwaitingName => {
         let expected = decl_name_expectation(kind)
         if kind is Function {
-          let mut recovery_end = end
-          while !state.current_is(TK_EOF) && !(state.peek() is None) {
-            match state.peek() {
-              Some((next, _, _)) if top_level_decl_can_start(next) => break
-              Some((SEMI(_), _, _)) => break
-              _ => ()
-            }
-            if state.consume_any() is Some(bad) {
-              recovery_end = bad.loc.end
-              push_child(children, Some("error"), bad)
-            } else {
-              ()
-            }
+          let scan = state.recover_until(
+            [TK_SEMI, ..top_level_decl_sync_tokens()],
+          )
+          let recovery_end = match scan.skipped.get(scan.skipped.length() - 1) {
+            Some(last) => last.loc.end
+            None => end
           }
+          push_recovered_errors(children, scan.skipped, wrap=false)
           state.report_expected_tokens_at(
             found,
             mk_loc(start, recovery_end),
@@ -977,42 +883,23 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           done = true
         } else if kind is Type {
           state.report_expected_tokens_at(found, mk_loc(start, end), expected)
-          let mut recovering = true
-          while recovering {
-            match state.peek() {
-              Some(
-                (
-                  FN
-                  | LET
-                  | CONST
-                  | TYPE
-                  | STRUCT
-                  | ENUM
-                  | SUBERROR
-                  | EXTENUM
-                  | ENUMVIEW
-                  | TRAIT
-                  | IMPL
-                  | TEST
-                  | USING
-                  | EXTERN,
-                  _,
-                  _,
-                )
-              ) => recovering = false
-              Some((EOF, _, _)) | None => recovering = false
-              Some(_) =>
-                if state.consume_any() is Some(bad) {
-                  push_child(
-                    children,
-                    Some("error"),
-                    error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-                  )
-                } else {
-                  recovering = false
-                }
-            }
-          }
+          let scan = state.recover_until([
+            TK_FN,
+            TK_LET,
+            TK_CONST,
+            TK_TYPE,
+            TK_STRUCT,
+            TK_ENUM,
+            TK_SUBERROR,
+            TK_EXTENUM,
+            TK_ENUMVIEW,
+            TK_TRAIT,
+            TK_IMPL,
+            TK_TEST,
+            TK_USING,
+            TK_EXTERN,
+          ])
+          push_recovered_errors(children, scan.skipped)
           match state.peek() {
             Some((next, next_start, next_end)) if !(next is EOF) =>
               state.report_expected_tokens_at(
@@ -1039,24 +926,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             Some((found, mk_loc(start, end)))
           _ => None
         }
-        let mut recovering = true
-        while recovering {
-          match state.peek() {
-            Some((next, _, _)) if top_level_decl_can_start(next) =>
-              recovering = false
-            Some((EOF, _, _)) | None => recovering = false
-            Some(_) =>
-              if state.consume_any() is Some(bad) {
-                push_child(
-                  children,
-                  Some("error"),
-                  error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-                )
-              } else {
-                recovering = false
-              }
-          }
-        }
+        let scan = state.recover_until(top_level_decl_sync_tokens())
+        push_recovered_errors(children, scan.skipped)
         if state.suppress_next_top_level_recovery_report {
           state.suppress_next_top_level_recovery_report = false
         } else {
@@ -1303,5 +1174,6 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
   } else {
     children
   }
+  state.pop_recovery_scope(recovery_scope)
   final_builder(loc, source_span, children)
 }

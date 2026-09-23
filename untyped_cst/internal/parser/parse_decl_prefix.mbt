@@ -1,23 +1,4 @@
 ///|
-fn delimiter_depth_delta(tok : Token) -> Int {
-  match tok {
-    LPAREN | LBRACKET | LBRACKET_BAR | LBRACE => 1
-    RPAREN | RBRACKET | BAR_RBRACKET | RBRACE => -1
-    _ => 0
-  }
-}
-
-///|
-fn next_depth(depth : Int, tok : Token) -> Int {
-  let depth = depth + delimiter_depth_delta(tok)
-  if depth < 0 {
-    0
-  } else {
-    depth
-  }
-}
-
-///|
 fn next_paren_depth(depth : Int, tok : Token) -> Int {
   match tok {
     LPAREN => depth + 1
@@ -89,6 +70,33 @@ fn top_level_decl_expected_tokens() -> Array[TokenKind] {
     TK_ATTRIBUTE,
     TK_USING,
     TK_EXTEND,
+  ]
+}
+
+///|
+fn top_level_decl_sync_tokens() -> Array[TokenKind] {
+  [TK_DECLARE, ..top_level_decl_expected_tokens()]
+}
+
+///|
+fn top_level_decl_core_sync_tokens() -> Array[TokenKind] {
+  [
+    TK_FN,
+    TK_LET,
+    TK_CONST,
+    TK_TYPE,
+    TK_STRUCT,
+    TK_ENUM,
+    TK_SUBERROR,
+    TK_EXTENUM,
+    TK_ENUMVIEW,
+    TK_TRAIT,
+    TK_IMPL,
+    TK_TEST,
+    TK_USING,
+    TK_IMPORT,
+    TK_EXTEND,
+    TK_EXTERN,
   ]
 }
 
@@ -322,19 +330,8 @@ fn parse_visibility_clause(state : ParserState) -> CstNode {
           TK_LIDENT,
           TK_EXTEND,
         ])
-        while !state.current_is(TK_RPAREN) &&
-              !state.current_is(TK_EOF) &&
-              !(state.peek() is None) {
-          if state.consume_any() is Some(bad) {
-            push_child(
-              children,
-              Some("error"),
-              error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-            )
-          } else {
-            ()
-          }
-        }
+        let scan = state.recover_until([TK_RPAREN])
+        push_recovered_errors(children, scan.skipped)
         push_child(
           children,
           Some("attr"),
@@ -457,16 +454,8 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
         "parameter name or label",
       )
       let invalid : Array[(String?, CstNode)] = []
-      while !state.current_is(TK_COMMA) &&
-            !state.current_is(TK_RPAREN) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(invalid, Some("error"), bad)
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until([TK_COMMA, TK_RPAREN])
+      push_recovered_errors(invalid, scan.skipped, wrap=false)
       state.construct_from_children(
         fn(loc, source_span, children) {
           let entries = recovery_children(children)

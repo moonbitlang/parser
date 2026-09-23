@@ -335,6 +335,7 @@ pub fn ParserState::consume_any(self : ParserState) -> CstNode? {
   match self.peek() {
     Some((tok, start, end)) => {
       self.pos += 1
+      self.delimiter_depth = next_depth(self.delimiter_depth, tok)
       let source_span = self.token_source_span(start, end)
       Some(
         token_node_with_children(

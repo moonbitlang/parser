@@ -752,19 +752,8 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
           } else {
             ()
           }
-          while !state.current_is(TK_RBRACE) &&
-                !state.current_is(TK_EOF) &&
-                !(state.peek() is None) {
-            if state.consume_any() is Some(bad) {
-              push_child(
-                children,
-                Some("error"),
-                error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-              )
-            } else {
-              ()
-            }
-          }
+          let scan = state.recover_until([TK_RBRACE])
+          push_recovered_errors(children, scan.skipped)
           return state.construct_from_children(
             fn(loc, source_span, children) {
               push_direct_semantic_constant(children)

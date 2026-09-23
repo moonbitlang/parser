@@ -12,6 +12,8 @@ pub fn kind_in(@tokens.TokenKind, Array[@tokens.TokenKind]) -> Bool
 
 pub fn new_state(Array[(@tokens.Token, @basic.Position, @basic.Position)], String, Array[@basic.Report], Bool, (ParserState, @tokens.InterpElem) -> @node.CstNode) -> ParserState
 
+pub fn next_depth(Int, @tokens.Token) -> Int
+
 pub fn required_pattern_start_tokens() -> Array[@tokens.TokenKind]
 
 // Errors
@@ -20,12 +22,15 @@ pub fn required_pattern_start_tokens() -> Array[@tokens.TokenKind]
 pub(all) struct ParserState {
   tokens : Array[(@tokens.Token, @basic.Position, @basic.Position)]
   mut pos : Int
+  mut delimiter_depth : Int
   reports : Array[@basic.Report]
   enable_metavar : Bool
   mut abort_current_decl : Bool
   mut abort_infix_chain : Bool
   mut report_next_top_level_start : Bool
   mut suppress_next_top_level_recovery_report : Bool
+  recovery_scopes : Array[RecoveryScope]
+  mut next_recovery_scope_id : Int
   source : String
   cnum_to_source_offset : (Int) -> Int
   parse_interp_segment : (ParserState, @tokens.InterpElem) -> @node.CstNode
@@ -45,7 +50,11 @@ pub fn ParserState::offset_for_position(Self, @basic.Position) -> Int
 pub fn ParserState::peek(Self, offset? : Int) -> (@tokens.Token, @basic.Position, @basic.Position)?
 pub fn ParserState::peek_nth_significant(Self, Int) -> (@tokens.Token, @basic.Position, @basic.Position)?
 pub fn ParserState::peek_significant(Self) -> (@tokens.Token, @basic.Position, @basic.Position)?
+pub fn ParserState::pop_recovery_scope(Self, Int) -> Unit
 pub fn ParserState::previous_end(Self) -> @basic.Position
+pub fn ParserState::push_recovery_scope(Self, Array[@tokens.TokenKind], depth_sensitive? : Bool) -> Int
+pub fn ParserState::recover_until(Self, Array[@tokens.TokenKind], balance_groups? : Bool) -> RecoveryScan
+pub fn ParserState::recovery_stop_at(Self, Array[@tokens.TokenKind]) -> RecoveryOwner?
 pub fn ParserState::report(Self, @basic.Location, String) -> Unit
 pub fn ParserState::report_expected_description(Self, String) -> Unit
 pub fn ParserState::report_expected_description_at(Self, @tokens.Token, @basic.Location, String) -> Unit
@@ -56,6 +65,25 @@ pub fn ParserState::required_pattern_node(Self, @node.CstNode, Int, expected? : 
 pub fn ParserState::required_type_node(Self, @node.CstNode, Int) -> @node.CstNode
 pub fn ParserState::root_loc(Self) -> @basic.Location
 pub fn ParserState::root_span(Self) -> (Int, Int)
+
+pub(all) enum RecoveryOwner {
+  RecoveryLocal
+  RecoveryScopeOwner(Int)
+  RecoveryEof
+}
+
+pub(all) struct RecoveryScan {
+  skipped : Array[@node.CstNode]
+  hit : @tokens.Token?
+  owner : RecoveryOwner
+}
+
+pub(all) struct RecoveryScope {
+  id : Int
+  stop_kinds : Array[@tokens.TokenKind]
+  depth : Int
+  depth_sensitive : Bool
+}
 
 // Type aliases
 

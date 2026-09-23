@@ -675,23 +675,27 @@ fn parse_for_binding(state : ParserState) -> CstNode {
         children,
       )
     }
-    while !state.current_is(TokenKind::TK_COMMA) &&
-          !state.current_is(TokenKind::TK_LBRACE) &&
-          !state.current_is(TokenKind::TK_EOF) &&
-          !(state.peek() is None) {
-      if state.consume_any() is Some(bad) {
-        push_child(
-          children,
-          Some("error"),
-          error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-        )
-      } else {
-        ()
-      }
-    }
+    let scan = state.recover_until([TK_COMMA, TK_LBRACE])
+    push_recovered_errors(children, scan.skipped)
     match state.peek() {
       Some((EOF, start, end)) =>
         state.report(mk_loc(start, end), "Unexpected token here.")
+      _ if scan.owner is RecoveryScopeOwner(_) => {
+        // Keep the diagnostic that the former unbounded scan emitted at EOF.
+        // The enclosing block still owns its closing token.
+        let mut offset = 0
+        let mut done = false
+        while !done {
+          match state.peek(offset~) {
+            Some((COMMA | LBRACE, _, _)) | None => done = true
+            Some((EOF, start, end)) => {
+              state.report(mk_loc(start, end), "Unexpected token here.")
+              done = true
+            }
+            Some(_) => offset += 1
+          }
+        }
+      }
       _ => ()
     }
     return state.construct_from_children(
@@ -738,17 +742,8 @@ fn parse_for_binding(state : ParserState) -> CstNode {
     }
   } else {
     state.report_expected_tokens([TK_EQUAL])
-    while !state.current_in(for_clause_stops()) && !(state.peek() is None) {
-      if state.consume_any() is Some(bad) {
-        push_child(
-          children,
-          Some("error"),
-          error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-        )
-      } else {
-        ()
-      }
-    }
+    let scan = state.recover_until(for_clause_stops())
+    push_recovered_errors(children, scan.skipped)
     return state.construct_from_children(
       fn(loc, source_span, children) {
         push_structured_name(
@@ -854,19 +849,8 @@ fn parse_for_binding_list(state : ParserState) -> CstNode {
         } else if !state.current_in(for_header_stops()) &&
           !(state.peek() is None) {
           state.report_expected_tokens([TK_COMMA, TK_SEMI, TK_LBRACE])
-          while !state.current_is(TK_COMMA) &&
-                !state.current_in(for_header_stops()) &&
-                !(state.peek() is None) {
-            if state.consume_any() is Some(bad) {
-              push_child(
-                children,
-                Some("error"),
-                error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-              )
-            } else {
-              done = true
-            }
-          }
+          let scan = state.recover_until([TK_COMMA, ..for_header_stops()])
+          push_recovered_errors(children, scan.skipped)
           if state.current_is(TK_COMMA) {
             if state.consume_any() is Some(sep) {
               push_child(children, Some("sep"), sep)
@@ -975,20 +959,8 @@ fn recover_for_missing_separator(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> Unit {
-  while !state.current_is(TK_LBRACE) &&
-        !state.current_is(TK_RBRACE) &&
-        !state.current_is(TK_EOF) &&
-        !(state.peek() is None) {
-    if state.consume_any() is Some(bad) {
-      push_child(
-        children,
-        Some("error"),
-        error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-      )
-    } else {
-      ()
-    }
-  }
+  let scan = state.recover_until([TK_LBRACE, TK_RBRACE])
+  push_recovered_errors(children, scan.skipped)
 }
 
 ///|

@@ -68,21 +68,8 @@ fn parse_let_statement(state : ParserState) -> CstNode {
   let has_equal = state.current_is(TK_EQUAL)
   push_child(children, Some("op"), state.expect_token(TK_EQUAL))
   if !has_equal {
-    while !state.current_is(TK_EQUAL) &&
-          !state.current_is(TK_SEMI) &&
-          !state.current_is(TK_RBRACE) &&
-          !state.current_is(TK_EOF) &&
-          !(state.peek() is None) {
-      if state.consume_any() is Some(bad) {
-        push_child(
-          children,
-          Some("error"),
-          error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-        )
-      } else {
-        ()
-      }
-    }
+    let scan = state.recover_until([TK_EQUAL, TK_SEMI, TK_RBRACE])
+    push_recovered_errors(children, scan.skipped)
     if state.current_is(TK_EQUAL) {
       if state.consume_any() is Some(equal) {
         push_child(children, Some("op"), equal)
@@ -488,21 +475,8 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
       Some("op"),
       state.missing_token_node_with_expected(TK_EQUAL, [TK_EQUAL]),
     )
-    while !state.current_is(TK_AND) &&
-          !state.current_is(TK_SEMI) &&
-          !state.current_is(TK_RBRACE) &&
-          !state.current_is(TK_EOF) &&
-          !(state.peek() is None) {
-      if state.consume_any() is Some(bad) {
-        push_child(
-          children,
-          Some("error"),
-          error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-        )
-      } else {
-        ()
-      }
-    }
+    let scan = state.recover_until([TK_AND, TK_SEMI, TK_RBRACE])
+    push_recovered_errors(children, scan.skipped)
     return state.construct_from_children(
       fn(loc, source_span, children) {
         push_structured_name(
@@ -649,19 +623,8 @@ fn parse_local_function_statement(
         mk_loc(start, end),
         "Failed to parse func: expected '(' or '{', got \{@debug.render(Debug::to_repr(tok))}",
       )
-      while !state.current_in(stop_kinds) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(
-            children,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until(stop_kinds)
+      push_recovered_errors(children, scan.skipped)
       return state.construct_from_children(
         fn(loc, source_span, children) {
           push_bool_marker(
