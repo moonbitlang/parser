@@ -1,5 +1,5 @@
 ///|
-fn attach_docstrings_to_impls(
+pub fn attach_docstrings_to_impls(
   docstrings_view : ArrayView[List[(Location, Comment)]],
   toplevels : @syntax.Impls,
 ) -> Unit {

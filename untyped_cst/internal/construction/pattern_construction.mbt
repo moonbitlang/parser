@@ -1,7 +1,7 @@
 ///|
 // The lexscan grammar selects its case role only after parsing the whole
 // pattern. Reconstruct only the root forms reachable along this syntax path.
-fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
+pub fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
   let loc = source.loc
   let source_span = source.source_span
   let marker_loc = empty_loc(loc.end)
@@ -31,10 +31,10 @@ fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
       @node.CstNode::pattern_var(loc~, source_span~, entries~)
     }
     Pattern_Any => {
-      let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
+      let name = first_child_with_label_from(children, "name").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
+      let lex_scan_case_pattern = first_child_with_label_from(
         children, "lex_scan_case_pattern",
       )
       @node.CstNode::pattern_any(
@@ -69,18 +69,18 @@ fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
       @node.CstNode::pattern_with_from_entries(loc~, source_span~, entries~)
     }
     RegexPattern_Placeholder => {
-      let open = CstNode::first_child_with_label_from(children, "open").unwrap_or(
+      let open = first_child_with_label_from(children, "open").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
+      let pattern = first_child_with_label_from(children, "pattern").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let bindings = CstNode::first_child_with_label_from(children, "bindings")
-      let error = CstNode::children_with_label_from(children, "error")
-      let close = CstNode::first_child_with_label_from(children, "close").unwrap_or(
+      let bindings = first_child_with_label_from(children, "bindings")
+      let error = children_with_label_from(children, "error")
+      let close = first_child_with_label_from(children, "close").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
+      let lex_scan_case_pattern = first_child_with_label_from(
         children, "lex_scan_case_pattern",
       )
       @node.CstNode::regex_pattern_placeholder(
@@ -95,12 +95,10 @@ fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
       )
     }
     RegexPattern_Literal => {
-      let error = CstNode::first_child_with_label_from(children, "error")
-      let token = CstNode::first_child_with_label_from(children, "token")
-      let lex_literal = CstNode::first_child_with_label_from(
-        children, "lex_literal",
-      )
-      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
+      let error = first_child_with_label_from(children, "error")
+      let token = first_child_with_label_from(children, "token")
+      let lex_literal = first_child_with_label_from(children, "lex_literal")
+      let lex_scan_case_pattern = first_child_with_label_from(
         children, "lex_scan_case_pattern",
       )
       @node.CstNode::regex_pattern_literal(
@@ -113,11 +111,9 @@ fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
       )
     }
     RegexPattern_Reference => {
-      let name = CstNode::children_with_label_from(children, "name")
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
-      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
+      let name = children_with_label_from(children, "name")
+      let semantic_name = first_child_with_label_from(children, "semantic_name")
+      let lex_scan_case_pattern = first_child_with_label_from(
         children, "lex_scan_case_pattern",
       )
       @node.CstNode::regex_pattern_reference(
@@ -145,16 +141,16 @@ fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
       )
     }
     RegexPattern_Alias => {
-      let pattern = CstNode::first_child_with_label_from(children, "pattern").unwrap_or(
+      let pattern = first_child_with_label_from(children, "pattern").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let kw = CstNode::first_child_with_label_from(children, "kw").unwrap_or(
+      let kw = first_child_with_label_from(children, "kw").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let name = CstNode::first_child_with_label_from(children, "name").unwrap_or(
+      let name = first_child_with_label_from(children, "name").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let lex_scan_case_pattern = CstNode::first_child_with_label_from(
+      let lex_scan_case_pattern = first_child_with_label_from(
         children, "lex_scan_case_pattern",
       )
       @node.CstNode::regex_pattern_alias(

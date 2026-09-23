@@ -18,7 +18,7 @@ fn constant_node_from_syntax(
     Bool(value) =>
       scalar_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::Bool(value)) => value
             _ => false
           }
@@ -31,7 +31,7 @@ fn constant_node_from_syntax(
     Byte(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -44,7 +44,7 @@ fn constant_node_from_syntax(
     Bytes(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -57,7 +57,7 @@ fn constant_node_from_syntax(
     Char(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -70,7 +70,7 @@ fn constant_node_from_syntax(
     Int(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -83,7 +83,7 @@ fn constant_node_from_syntax(
     Int64(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -96,7 +96,7 @@ fn constant_node_from_syntax(
     UInt(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -109,7 +109,7 @@ fn constant_node_from_syntax(
     UInt64(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -122,7 +122,7 @@ fn constant_node_from_syntax(
     Float(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -135,7 +135,7 @@ fn constant_node_from_syntax(
     Double(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -148,7 +148,7 @@ fn constant_node_from_syntax(
     String(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -161,7 +161,7 @@ fn constant_node_from_syntax(
     Regex(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -174,7 +174,7 @@ fn constant_node_from_syntax(
     BigInt(value) =>
       constant_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -188,7 +188,7 @@ fn constant_node_from_syntax(
 }
 
 ///|
-fn constant_node_from_token(
+pub fn constant_node_from_token(
   token : Token,
   loc : Location,
   source_span : (Int, Int),
@@ -198,7 +198,7 @@ fn constant_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::Bool(value)) => value
               _ => false
             }
@@ -213,7 +213,7 @@ fn constant_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::Bool(value)) => value
               _ => false
             }
@@ -228,7 +228,7 @@ fn constant_node_from_token(
       Some(
         constant_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -243,7 +243,7 @@ fn constant_node_from_token(
       Some(
         constant_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -258,7 +258,7 @@ fn constant_node_from_token(
       Some(
         constant_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -279,7 +279,7 @@ fn constant_node_from_token(
       Some(
         constant_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -294,7 +294,7 @@ fn constant_node_from_token(
       Some(
         constant_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -309,7 +309,7 @@ fn constant_node_from_token(
       Some(
         constant_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -335,7 +335,7 @@ fn lexical_name_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -350,7 +350,7 @@ fn lexical_name_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -374,7 +374,7 @@ fn lexical_name_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -399,7 +399,7 @@ fn lexical_name_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -415,7 +415,7 @@ fn lexical_name_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -430,7 +430,7 @@ fn lexical_name_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -456,7 +456,7 @@ fn accessor_node_from_token_value(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::Int(value)) => value
               _ => 0
             }
@@ -483,7 +483,7 @@ fn accessor_node_from_token_value(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -499,7 +499,7 @@ fn accessor_node_from_token_value(
 }
 
 ///|
-fn raw_token_semantic_children(
+pub fn raw_token_semantic_children(
   token : Token,
   loc : Location,
   source_span : (Int, Int),
@@ -521,7 +521,7 @@ fn raw_token_semantic_children(
         Some("flag"),
         bool_marker_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::Bool(value)) => value
               _ => false
             }
@@ -538,7 +538,7 @@ fn raw_token_semantic_children(
         Some("flag"),
         bool_marker_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::Bool(value)) => value
               _ => false
             }
@@ -555,7 +555,7 @@ fn raw_token_semantic_children(
         Some("flag"),
         bool_marker_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::Bool(value)) => value
               _ => false
             }
@@ -572,7 +572,7 @@ fn raw_token_semantic_children(
         Some("operator"),
         operator_node_from_token(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -613,7 +613,7 @@ fn raw_token_semantic_children(
         Some("operator"),
         operator_node_from_token(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -689,7 +689,7 @@ fn operator_spelling(token : Token) -> String? {
 }
 
 ///|
-fn operator_node_from_token(
+pub fn operator_node_from_token(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   token : Token,
   loc : Location,
@@ -704,7 +704,7 @@ fn operator_node_from_token(
 }
 
 ///|
-fn signed_constant_node(
+pub fn signed_constant_node(
   constant : CstNode,
   negative : Bool,
   loc? : Location = constant.loc,
@@ -738,7 +738,7 @@ fn signed_constant_node(
 }
 
 ///|
-fn lex_literal_node_from_token(
+pub fn lex_literal_node_from_token(
   token : Token,
   loc : Location,
   source_span : (Int, Int),
@@ -748,7 +748,7 @@ fn lex_literal_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -763,7 +763,7 @@ fn lex_literal_node_from_token(
       Some(
         scalar_node(
           fn(loc, source_span, children) {
-            let value = match CstNode::payload_from_children(children) {
+            let value = match payload_from_children(children) {
               Some(NodePayload::String(value)) => value
               _ => ""
             }
@@ -779,7 +779,7 @@ fn lex_literal_node_from_token(
 }
 
 ///|
-fn constant_can_fold_prefix(constant : CstNode, operator : Token) -> Bool {
+pub fn constant_can_fold_prefix(constant : CstNode, operator : Token) -> Bool {
   match operator {
     PLUS => constant.kind is (Constant_Int | Constant_Double)
     MINUS => constant.kind is (Constant_Int | Constant_Int64 | Constant_Double)
@@ -795,7 +795,7 @@ fn semantic_ident_expr(
 ) -> CstNode {
   let name_node = scalar_node(
     fn(loc, source_span, children) {
-      let value = match CstNode::payload_from_children(children) {
+      let value = match payload_from_children(children) {
         Some(NodePayload::String(value)) => value
         _ => ""
       }
@@ -811,19 +811,17 @@ fn semantic_ident_expr(
         children,
         "semantic_name",
         fn(loc, source_span, children) {
-          let long_ident = CstNode::first_child_with_label_from(
-            children, "long_ident",
-          ).unwrap_or(missing_at_end(loc~, source_span~))
+          let long_ident = first_child_with_label_from(children, "long_ident").unwrap_or(
+            missing_at_end(loc~, source_span~),
+          )
           @node.CstNode::name_var(loc~, source_span~, long_ident~)
         },
         ["name"],
       )
 
-      let name = CstNode::children_with_label_from(children, "name")
-      let token = CstNode::first_child_with_label_from(children, "token")
-      let semantic_name = CstNode::first_child_with_label_from(
-        children, "semantic_name",
-      )
+      let name = children_with_label_from(children, "name")
+      let token = first_child_with_label_from(children, "token")
+      let semantic_name = first_child_with_label_from(children, "semantic_name")
       @node.CstNode::expr_ident(
         loc~,
         source_span~,
@@ -846,7 +844,7 @@ fn semantic_var_pattern(
 ) -> CstNode {
   let name_node = scalar_node(
     fn(loc, source_span, children) {
-      let value = match CstNode::payload_from_children(children) {
+      let value = match payload_from_children(children) {
         Some(NodePayload::String(value)) => value
         _ => ""
       }
@@ -862,9 +860,9 @@ fn semantic_var_pattern(
         children,
         "semantic_name",
         fn(loc, source_span, children) {
-          let long_ident = CstNode::first_child_with_label_from(
-            children, "long_ident",
-          ).unwrap_or(missing_at_end(loc~, source_span~))
+          let long_ident = first_child_with_label_from(children, "long_ident").unwrap_or(
+            missing_at_end(loc~, source_span~),
+          )
           @node.CstNode::name_binder(loc~, source_span~, long_ident~)
         },
         ["name"],
@@ -893,7 +891,7 @@ fn semantic_ident_expr_from_name(source : CstNode) -> CstNode? {
 }
 
 ///|
-fn semantic_var_pattern_from_name(source : CstNode) -> CstNode? {
+pub fn semantic_var_pattern_from_name(source : CstNode) -> CstNode? {
   source
   .lexical_name_value()
   .map(name => {
@@ -906,29 +904,29 @@ fn semantic_var_pattern_from_name(source : CstNode) -> CstNode? {
 }
 
 ///|
-fn push_pun_expr(children : Array[(String?, CstNode)]) -> Unit {
-  if CstNode::first_child_with_label_from(children, "expr") is Some(_) {
+pub fn push_pun_expr(children : Array[(String?, CstNode)]) -> Unit {
+  if first_child_with_label_from(children, "expr") is Some(_) {
     return
   }
-  if CstNode::first_child_with_label_from(children, "name") is Some(name) &&
+  if first_child_with_label_from(children, "name") is Some(name) &&
     semantic_ident_expr_from_name(name) is Some(value) {
     push_child(children, Some("expr"), value)
   }
 }
 
 ///|
-fn push_pun_pattern(children : Array[(String?, CstNode)]) -> Unit {
-  if CstNode::first_child_with_label_from(children, "pattern") is Some(_) {
+pub fn push_pun_pattern(children : Array[(String?, CstNode)]) -> Unit {
+  if first_child_with_label_from(children, "pattern") is Some(_) {
     return
   }
-  if CstNode::first_child_with_label_from(children, "name") is Some(name) &&
+  if first_child_with_label_from(children, "name") is Some(name) &&
     semantic_var_pattern_from_name(name) is Some(value) {
     push_child(children, Some("pattern"), value)
   }
 }
 
 ///|
-fn folded_prefix_constant_node(
+pub fn folded_prefix_constant_node(
   op : CstNode,
   operator : CstNode,
   operand : CstNode,
@@ -967,7 +965,7 @@ fn folded_prefix_constant_node(
 }
 
 ///|
-fn unary_plus_apply_node(
+pub fn unary_plus_apply_node(
   op : CstNode,
   operator : CstNode,
   operand : CstNode,
@@ -977,7 +975,7 @@ fn unary_plus_apply_node(
   let func = semantic_ident_expr("~+", loc, source_span)
   let argument = node(
     fn(loc, source_span, children) {
-      let expr = CstNode::first_child_with_label_from(children, "expr").unwrap_or(
+      let expr = first_child_with_label_from(children, "expr").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
       @node.CstNode::argument_positional(loc~, source_span~, expr~)
@@ -997,12 +995,12 @@ fn unary_plus_apply_node(
   )
   node(
     fn(loc, source_span, children) {
-      let op = CstNode::first_child_with_label_from(children, "op")
-      let operator = CstNode::first_child_with_label_from(children, "operator")
-      let func = CstNode::first_child_with_label_from(children, "func").unwrap_or(
+      let op = first_child_with_label_from(children, "op")
+      let operator = first_child_with_label_from(children, "operator")
+      let func = first_child_with_label_from(children, "func").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
-      let arg = CstNode::first_child_with_label_from(children, "arg").unwrap_or(
+      let arg = first_child_with_label_from(children, "arg").unwrap_or(
         missing_at_end(loc~, source_span~),
       )
       @node.CstNode::expr_apply(loc~, source_span~, op?, operator?, func~, arg~)
@@ -1019,17 +1017,17 @@ fn unary_plus_apply_node(
 }
 
 ///|
-fn push_direct_operator(
+pub fn push_direct_operator(
   children : Array[(String?, CstNode)],
   token : CstNode,
 ) -> Unit {
-  if token.first_operator_descendant() is Some(operator) {
+  if first_operator_descendant(token) is Some(operator) {
     push_child(children, Some("operator"), operator)
   }
 }
 
 ///|
-fn bool_marker_value_from_children(
+pub fn bool_marker_value_from_children(
   children : Array[(String?, CstNode)],
   pred : (NodeKind) -> Bool,
 ) -> Bool? {

@@ -35,8 +35,8 @@ pub fn ParseResult::to_impls(
         [conversion_report(self.root(), "expected structure parse result")],
       )
   }
-  let impls = lower_impls_from_cst(self.root())
-  attach_docstrings_to_impls(self.docstrings_view(), impls)
+  let impls = @lower.lower_impls_from_cst(self.root())
+  @lower.attach_docstrings_to_impls(self.docstrings_view(), impls)
   (impls, [])
 }
 
@@ -62,5 +62,5 @@ pub fn ParseResult::to_expr(
         [conversion_report(self.root(), "expected expression parse result")],
       )
   }
-  (Some(lower_expr(self.root())), [])
+  (Some(@lower.lower_expr(self.root())), [])
 }

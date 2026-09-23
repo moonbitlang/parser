@@ -15,7 +15,7 @@ fn find_regex_literal_node(node : CstNode) -> CstNode? {
 ///|
 fn lowered_regex_literal(source : String) -> @syntax.RegexPattern raise Error {
   let result = parse_expression(source)
-  guard find_regex_literal_node(result.root()) is Some(node) else {
+  guard find_regex_literal_node(result.root) is Some(node) else {
     fail("expected a regex literal CST node")
   }
   lower_regex_pattern(node)

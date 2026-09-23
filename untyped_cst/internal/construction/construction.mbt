@@ -1,5 +1,5 @@
 ///|
-fn CstNode::first_child_with_label_from(
+pub fn first_child_with_label_from(
   children : Array[(String?, CstNode)],
   label : String,
 ) -> CstNode? {
@@ -13,7 +13,7 @@ fn CstNode::first_child_with_label_from(
 }
 
 ///|
-fn CstNode::children_with_label_from(
+pub fn children_with_label_from(
   children : Array[(String?, CstNode)],
   label : String,
 ) -> Array[CstNode] {
@@ -28,17 +28,17 @@ fn CstNode::children_with_label_from(
 }
 
 ///|
-fn CstNode::payload_from_children(
+pub fn payload_from_children(
   children : Array[(String?, CstNode)],
 ) -> NodePayload? {
-  match CstNode::first_child_with_label_from(children, "payload") {
+  match first_child_with_label_from(children, "payload") {
     Some({ kind: Leaf(payload), .. }) => Some(payload)
     _ => None
   }
 }
 
 ///|
-fn node(
+pub fn node(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
   source_span : (Int, Int),
@@ -48,7 +48,7 @@ fn node(
 }
 
 ///|
-fn node_like(
+pub fn node_like(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   source : CstNode,
 ) -> CstNode {
@@ -79,7 +79,7 @@ fn push_payload_leaf(
 }
 
 ///|
-fn node_with_payload(
+pub fn node_with_payload(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
   source_span : (Int, Int),
@@ -91,7 +91,7 @@ fn node_with_payload(
 }
 
 ///|
-fn scalar_node(
+pub fn scalar_node(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
   source_span : (Int, Int),
@@ -101,7 +101,7 @@ fn scalar_node(
 }
 
 ///|
-fn marker_node(
+pub fn marker_node(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   pos : Position,
   offset : Int,
@@ -110,7 +110,7 @@ fn marker_node(
 }
 
 ///|
-fn bool_marker_node(
+pub fn bool_marker_node(
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
   pos : Position,
   offset : Int,
@@ -125,14 +125,14 @@ fn bool_marker_node(
 }
 
 ///|
-fn missing_node(_kind : TokenKind, pos : Position, offset : Int) -> CstNode {
+pub fn missing_node(_kind : TokenKind, pos : Position, offset : Int) -> CstNode {
   CstNode::missing(loc=empty_loc(pos), source_span=empty_span(offset))
 }
 
 ///|
 // Constructor fallbacks have no precise token position. Anchor them at the
 // parent's end, keeping character positions separate from UTF-16 offsets.
-fn missing_at_end(loc~ : Location, source_span~ : (Int, Int)) -> CstNode {
+pub fn missing_at_end(loc~ : Location, source_span~ : (Int, Int)) -> CstNode {
   CstNode::missing(
     loc=empty_loc(loc.end),
     source_span=empty_span(source_span.1),
@@ -140,7 +140,7 @@ fn missing_at_end(loc~ : Location, source_span~ : (Int, Int)) -> CstNode {
 }
 
 ///|
-fn error_node(
+pub fn error_node(
   loc : Location,
   source_span : (Int, Int),
   children : Array[(String?, CstNode)],
@@ -152,7 +152,7 @@ fn error_node(
 }
 
 ///|
-fn push_child(
+pub fn push_child(
   children : Array[(String?, CstNode)],
   label : String?,
   child : CstNode,
@@ -161,7 +161,7 @@ fn push_child(
 }
 
 ///|
-fn push_children(
+pub fn push_children(
   children : Array[(String?, CstNode)],
   more : Array[(String?, CstNode)],
 ) -> Unit {
@@ -171,7 +171,7 @@ fn push_children(
 }
 
 ///|
-fn token_node_with_children(
+pub fn token_node_with_children(
   token : Token,
   start : Position,
   end : Position,
@@ -210,7 +210,9 @@ fn token_node_with_children(
 }
 
 ///|
-fn root_children(children : Array[(String?, CstNode)]) -> Array[CstRootChild] {
+pub fn root_children(
+  children : Array[(String?, CstNode)],
+) -> Array[CstRootChild] {
   let entries : Array[CstRootChild] = []
   for entry in children {
     let (label, child) = entry
@@ -228,7 +230,7 @@ fn root_children(children : Array[(String?, CstNode)]) -> Array[CstRootChild] {
 }
 
 ///|
-fn declaration_children(
+pub fn declaration_children(
   children : Array[(String?, CstNode)],
 ) -> Array[CstDeclarationChild] {
   let entries : Array[CstDeclarationChild] = []
@@ -280,7 +282,9 @@ fn declaration_children(
 }
 
 ///|
-fn list_children(children : Array[(String?, CstNode)]) -> Array[CstListChild] {
+pub fn list_children(
+  children : Array[(String?, CstNode)],
+) -> Array[CstListChild] {
   let entries : Array[CstListChild] = []
   for entry in children {
     let (label, child) = entry
@@ -300,7 +304,7 @@ fn list_children(children : Array[(String?, CstNode)]) -> Array[CstListChild] {
 }
 
 ///|
-fn multiline_children(
+pub fn multiline_children(
   children : Array[(String?, CstNode)],
 ) -> Array[CstMultilineChild] {
   let entries : Array[CstMultilineChild] = []
@@ -317,7 +321,7 @@ fn multiline_children(
 }
 
 ///|
-fn recovery_children(
+pub fn recovery_children(
   children : Array[(String?, CstNode)],
 ) -> Array[CstRecoveryChild] {
   let entries : Array[CstRecoveryChild] = []

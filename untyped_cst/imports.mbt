@@ -1,32 +1,11 @@
 ///|
-using @basic {type Location, type Position, type Report}
+using @basic {type Location, type Report}
 
 ///|
 pub using @node {type CstNode, type NodeKind, type NodePayload}
 
 ///|
-using @node {
-  type CstDeclarationChild,
-  type CstListChild,
-  type CstMultilineChild,
-  type CstRecoveryChild,
-  type CstRootChild,
-}
-
-///|
-using @node {mk_loc, empty_loc, empty_span}
-
-///|
-using @tokens {
-  type Comment,
-  type InterpSource,
-  type Token,
-  type TokenKind,
-  type Triples,
-}
+using @tokens {type Comment}
 
 ///|
 using @list {type List}
-
-///|
-using @syntax {type Impls, type DocString}

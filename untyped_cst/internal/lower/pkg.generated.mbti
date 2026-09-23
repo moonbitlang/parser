@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/untyped_cst/internal/lower"
+
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/syntax",
+  "moonbitlang/parser/untyped_cst/node",
+}
+
+// Values
+pub fn attach_docstrings_to_impls(ArrayView[@list.List[(@basic.Location, @tokens.Comment)]], @list.List[@syntax.Impl]) -> Unit
+
+pub fn lower_expr(@node.CstNode) -> @syntax.Expr
+
+pub fn lower_impls_from_cst(@node.CstNode) -> @list.List[@syntax.Impl]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

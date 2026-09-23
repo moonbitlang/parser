@@ -1,0 +1,62 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/untyped_cst/internal/parser/parserstate"
+
+import {
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/untyped_cst/node",
+}
+
+// Values
+pub fn kind_in(@tokens.TokenKind, Array[@tokens.TokenKind]) -> Bool
+
+pub fn new_state(Array[(@tokens.Token, @basic.Position, @basic.Position)], String, Array[@basic.Report], Bool, (ParserState, @tokens.InterpElem) -> @node.CstNode) -> ParserState
+
+pub fn required_pattern_start_tokens() -> Array[@tokens.TokenKind]
+
+// Errors
+
+// Types and methods
+pub(all) struct ParserState {
+  tokens : Array[(@tokens.Token, @basic.Position, @basic.Position)]
+  mut pos : Int
+  reports : Array[@basic.Report]
+  enable_metavar : Bool
+  mut abort_current_decl : Bool
+  mut abort_infix_chain : Bool
+  mut report_next_top_level_start : Bool
+  mut suppress_next_top_level_recovery_report : Bool
+  source : String
+  cnum_to_source_offset : (Int) -> Int
+  parse_interp_segment : (ParserState, @tokens.InterpElem) -> @node.CstNode
+}
+pub fn ParserState::consume_any(Self) -> @node.CstNode?
+pub fn ParserState::consume_trivia(Self) -> Array[(String?, @node.CstNode)]
+pub fn ParserState::current_in(Self, Array[@tokens.TokenKind]) -> Bool
+pub fn ParserState::current_is(Self, @tokens.TokenKind) -> Bool
+pub fn ParserState::current_position(Self) -> @basic.Position
+pub fn ParserState::missing_eof_node(Self) -> @node.CstNode
+pub fn ParserState::missing_expr_node(Self) -> @node.CstNode
+pub fn ParserState::missing_token_node(Self, @tokens.TokenKind) -> @node.CstNode
+pub fn ParserState::missing_token_node_silent(Self, @tokens.TokenKind) -> @node.CstNode
+pub fn ParserState::missing_token_node_with_expected(Self, @tokens.TokenKind, Array[@tokens.TokenKind]) -> @node.CstNode
+pub fn ParserState::missing_type_node(Self) -> @node.CstNode
+pub fn ParserState::offset_for_position(Self, @basic.Position) -> Int
+pub fn ParserState::peek(Self, offset? : Int) -> (@tokens.Token, @basic.Position, @basic.Position)?
+pub fn ParserState::peek_nth_significant(Self, Int) -> (@tokens.Token, @basic.Position, @basic.Position)?
+pub fn ParserState::peek_significant(Self) -> (@tokens.Token, @basic.Position, @basic.Position)?
+pub fn ParserState::previous_end(Self) -> @basic.Position
+pub fn ParserState::report(Self, @basic.Location, String) -> Unit
+pub fn ParserState::report_expected_description(Self, String) -> Unit
+pub fn ParserState::report_expected_description_at(Self, @tokens.Token, @basic.Location, String) -> Unit
+pub fn ParserState::report_expected_tokens(Self, Array[@tokens.TokenKind]) -> Unit
+pub fn ParserState::report_expected_tokens_at(Self, @tokens.Token, @basic.Location, Array[@tokens.TokenKind]) -> Unit
+pub fn ParserState::required_expr_node(Self, @node.CstNode, Int) -> @node.CstNode
+pub fn ParserState::required_pattern_node(Self, @node.CstNode, Int, expected? : String) -> @node.CstNode
+pub fn ParserState::required_type_node(Self, @node.CstNode, Int) -> @node.CstNode
+pub fn ParserState::root_loc(Self) -> @basic.Location
+pub fn ParserState::root_span(Self) -> (Int, Int)
+
+// Type aliases
+
+// Traits

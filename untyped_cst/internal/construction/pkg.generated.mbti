@@ -1,0 +1,148 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/untyped_cst/internal/construction"
+
+import {
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/untyped_cst/node",
+}
+
+// Values
+pub fn accessor_node_from_token(@node.CstNode) -> @node.CstNode
+
+pub fn bool_marker_node((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, @basic.Position, Int, Bool) -> @node.CstNode
+
+pub fn bool_marker_value_from_children(Array[(String?, @node.CstNode)], (@node.NodeKind) -> Bool) -> Bool?
+
+pub fn children_with_label_from(Array[(String?, @node.CstNode)], String) -> Array[@node.CstNode]
+
+pub fn classify_top_item_construction(Array[(String?, @node.CstNode)], TopItemKind, Bool, Bool, Bool) -> (TopItemShape, (@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode)
+
+pub fn constant_can_fold_prefix(@node.CstNode, @tokens.Token) -> Bool
+
+pub fn constant_node_from_token(@tokens.Token, @basic.Location, (Int, Int)) -> @node.CstNode?
+
+pub fn declaration_children(Array[(String?, @node.CstNode)]) -> Array[@node.CstDeclarationChild]
+
+pub fn error_node(@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode
+
+pub fn finish_lexscan_case_pattern(@node.CstNode) -> @node.CstNode
+
+pub fn first_child_with_label_from(Array[(String?, @node.CstNode)], String) -> @node.CstNode?
+
+pub fn first_operator_descendant(@node.CstNode) -> @node.CstNode?
+
+pub fn first_trailing_mark_descendant(@node.CstNode) -> @node.CstNode?
+
+pub fn folded_prefix_constant_node(@node.CstNode, @node.CstNode, @node.CstNode, @node.CstNode, Bool) -> @node.CstNode
+
+pub fn lex_literal_node_from_token(@tokens.Token, @basic.Location, (Int, Int)) -> @node.CstNode?
+
+pub fn list_children(Array[(String?, @node.CstNode)]) -> Array[@node.CstListChild]
+
+pub fn list_has_item_kind(@node.CstNode, (@node.NodeKind) -> Bool) -> Bool
+
+pub fn list_trailing_mark_kind(ArrayView[(String?, @node.CstNode)]) -> (@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode
+
+pub fn marker_node((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, @basic.Position, Int) -> @node.CstNode
+
+pub fn missing_at_end(loc~ : @basic.Location, source_span~ : (Int, Int)) -> @node.CstNode
+
+pub fn missing_node(@tokens.TokenKind, @basic.Position, Int) -> @node.CstNode
+
+pub fn multiline_children(Array[(String?, @node.CstNode)]) -> Array[@node.CstMultilineChild]
+
+pub fn node((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, @basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode
+
+pub fn node_like((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, @node.CstNode) -> @node.CstNode
+
+pub fn node_with_payload((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, @basic.Location, (Int, Int), Array[(String?, @node.CstNode)], @node.NodePayload) -> @node.CstNode
+
+pub fn operator_node_from_token((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, @tokens.Token, @basic.Location, (Int, Int)) -> @node.CstNode
+
+pub fn payload_from_children(Array[(String?, @node.CstNode)]) -> @node.NodePayload?
+
+pub fn prepare_decl_body(Array[(String?, @node.CstNode)], @basic.Location, (Int, Int), Bool) -> Array[(String?, @node.CstNode)]
+
+pub fn push_bool_marker(Array[(String?, @node.CstNode)], @basic.Location, (Int, Int), String, (@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, Bool) -> Unit
+
+pub fn push_child(Array[(String?, @node.CstNode)], String?, @node.CstNode) -> Unit
+
+pub fn push_children(Array[(String?, @node.CstNode)], Array[(String?, @node.CstNode)]) -> Unit
+
+pub fn push_constructor_extra_info(Array[(String?, @node.CstNode)], @basic.Location, (Int, Int)) -> Unit
+
+pub fn push_direct_operator(Array[(String?, @node.CstNode)], @node.CstNode) -> Unit
+
+pub fn push_direct_semantic_constant(Array[(String?, @node.CstNode)]) -> Unit
+
+pub fn push_marker_child(Array[(String?, @node.CstNode)], @basic.Location, (Int, Int), String, (@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode) -> Unit
+
+pub fn push_pun_expr(Array[(String?, @node.CstNode)]) -> Unit
+
+pub fn push_pun_pattern(Array[(String?, @node.CstNode)]) -> Unit
+
+pub fn push_structured_long_ident(Array[(String?, @node.CstNode)], String, Array[String]) -> Unit
+
+pub fn push_structured_name(Array[(String?, @node.CstNode)], String, (@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, Array[String]) -> Unit
+
+pub fn raw_token_semantic_children(@tokens.Token, @basic.Location, (Int, Int)) -> Array[(String?, @node.CstNode)]
+
+pub fn recovery_children(Array[(String?, @node.CstNode)]) -> Array[@node.CstRecoveryChild]
+
+pub fn root_children(Array[(String?, @node.CstNode)]) -> Array[@node.CstRootChild]
+
+pub fn scalar_node((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode, @basic.Location, (Int, Int), @node.NodePayload) -> @node.CstNode
+
+pub fn semantic_var_pattern_from_name(@node.CstNode) -> @node.CstNode?
+
+pub fn signed_constant_node(@node.CstNode, Bool, loc? : @basic.Location, source_span? : (Int, Int)) -> @node.CstNode
+
+pub fn token_node_with_children(@tokens.Token, @basic.Position, @basic.Position, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode
+
+pub fn type_desc_builder_for_shape(TopItemShape) -> ((@basic.Location, (Int, Int), Array[(String?, @node.CstNode)]) -> @node.CstNode)?
+
+pub fn unary_plus_apply_node(@node.CstNode, @node.CstNode, @node.CstNode) -> @node.CstNode
+
+// Errors
+
+// Types and methods
+pub(all) enum TopItemKind {
+  Invalid
+  Import
+  Extend
+  Using
+  Function
+  Let
+  Const
+  Type
+  Struct
+  Enum
+  EnumView
+  Trait
+  Impl
+  Test
+}
+
+pub(all) enum TopItemShape {
+  Other
+  Using
+  Function
+  TypeAlias
+  TypeAbstract
+  TupleStruct
+  RecordStruct
+  SuberrorEnum
+  Suberror
+  ExtendEnum
+  ExtensibleEnum
+  EnumVariant
+  EnumView
+  Trait
+  ImplMethod
+  ImplRelation
+}
+
+// Type aliases
+
+// Traits
