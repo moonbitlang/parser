@@ -798,19 +798,8 @@ fn parse_pattern_atom(
         required_pattern_start_tokens(),
       )
       let children : Array[(String?, CstNode)] = []
-      while !state.current_in(stop_kinds) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(
-            children,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until(stop_kinds)
+      push_recovered_errors(children, scan.skipped)
       state.construct_from_children(
         fn(loc, source_span, children) {
           let entries = recovery_children(children)

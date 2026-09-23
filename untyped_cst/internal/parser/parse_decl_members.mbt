@@ -245,16 +245,8 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
         TK_ASYNC,
       ])
       let invalid : Array[(String?, CstNode)] = []
-      while !state.current_is(TK_COMMA) &&
-            !state.current_is(TK_RPAREN) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(invalid, Some("error"), bad)
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until([TK_COMMA, TK_RPAREN])
+      push_recovered_errors(invalid, scan.skipped, wrap=false)
       state.construct_from_children(
         fn(loc, source_span, children) {
           let error = @construction.children_with_label_from(children, "error")

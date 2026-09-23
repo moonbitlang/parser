@@ -34,3 +34,19 @@ fn ParserState::expect_token(self : ParserState, kind : TokenKind) -> CstNode {
     _ => self.missing_token_node(kind)
   }
 }
+
+///|
+fn push_recovered_errors(
+  children : Array[(String?, CstNode)],
+  skipped : Array[CstNode],
+  wrap? : Bool = true,
+) -> Unit {
+  for token in skipped {
+    let error = if wrap {
+      error_node(token.loc, token.source_span, [(Some("item"), token)])
+    } else {
+      token
+    }
+    push_child(children, Some("error"), error)
+  }
+}

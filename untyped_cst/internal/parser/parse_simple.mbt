@@ -769,19 +769,8 @@ fn parse_labelled_loop_expr(
       }
       state.report_expected_tokens_at(found, mk_loc(start, end), expected)
       let invalid : Array[(String?, CstNode)] = []
-      while !state.current_in(stop_kinds) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(
-            invalid,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until(stop_kinds)
+      push_recovered_errors(invalid, scan.skipped)
       state.construct_from_children(
         fn(loc, source_span, children) {
           let entries = recovery_children(children)

@@ -7,12 +7,15 @@ fn initial_position(name : String) -> Position {
 pub(all) struct ParserState {
   tokens : Triples
   mut pos : Int
+  mut delimiter_depth : Int
   reports : Array[Report]
   enable_metavar : Bool
   mut abort_current_decl : Bool
   mut abort_infix_chain : Bool
   mut report_next_top_level_start : Bool
   mut suppress_next_top_level_recovery_report : Bool
+  recovery_scopes : Array[RecoveryScope]
+  mut next_recovery_scope_id : Int
   source : String
   cnum_to_source_offset : (Int) -> Int
   parse_interp_segment : (ParserState, @tokens.InterpElem) -> CstNode
@@ -168,12 +171,15 @@ pub fn new_state(
   {
     tokens,
     pos: 0,
+    delimiter_depth: 0,
     reports,
     enable_metavar,
     abort_current_decl: false,
     abort_infix_chain: false,
     report_next_top_level_start: false,
     suppress_next_top_level_recovery_report: false,
+    recovery_scopes: [],
+    next_recovery_scope_id: 0,
     source,
     cnum_to_source_offset: mapper,
     parse_interp_segment,

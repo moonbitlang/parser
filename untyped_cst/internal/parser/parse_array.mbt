@@ -398,13 +398,8 @@ fn parse_invalid_list_comprehension_body(
   } else {
     state.report_expected_description("simple expression")
   }
-  while !state.current_is(close_kind) &&
-        !state.current_is(TK_EOF) &&
-        !(state.peek() is None) {
-    if state.consume_any() is Some(error) {
-      push_child(children, Some("error"), error)
-    }
-  }
+  let scan = state.recover_until([close_kind])
+  push_recovered_errors(children, scan.skipped, wrap=false)
   state.construct_from_children(
     fn(loc, source_span, children) {
       let entries = recovery_children(children)
@@ -599,27 +594,8 @@ fn recover_expr_until_statement_boundary(
   children : Array[(String?, CstNode)],
   balance_groups? : Bool = true,
 ) -> Unit {
-  let mut depth = 0
-  let mut done = false
-  while !done {
-    match state.peek() {
-      Some((SEMI(_) | RBRACE, _, _)) if depth == 0 => done = true
-      Some((EOF, _, _)) | None => done = true
-      Some((tok, _, _)) =>
-        if state.consume_any() is Some(bad) {
-          push_child(
-            children,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-          if balance_groups {
-            depth = next_depth(depth, tok)
-          }
-        } else {
-          done = true
-        }
-    }
-  }
+  let scan = state.recover_until([TK_SEMI, TK_RBRACE], balance_groups~)
+  push_recovered_errors(children, scan.skipped)
 }
 
 ///|
@@ -627,21 +603,8 @@ fn recover_to_required_block(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> Bool {
-  while !state.current_is(TK_LBRACE) &&
-        !state.current_is(TK_SEMI) &&
-        !state.current_is(TK_RBRACE) &&
-        !state.current_is(TK_EOF) &&
-        !(state.peek() is None) {
-    if state.consume_any() is Some(bad) {
-      push_child(
-        children,
-        Some("error"),
-        error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-      )
-    } else {
-      ()
-    }
-  }
+  let scan = state.recover_until([TK_LBRACE, TK_SEMI, TK_RBRACE])
+  push_recovered_errors(children, scan.skipped)
   state.current_is(TK_LBRACE)
 }
 

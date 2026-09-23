@@ -471,18 +471,8 @@ fn parse_expr_fragment(state : ParserState) -> CstNode {
   }
   if !state.current_is(TK_EOF) && !(state.peek() is None) {
     state.report_expected_tokens([TK_SEMI, TK_EOF])
-    while !state.current_is(TK_EOF) && !(state.peek() is None) {
-      if state.consume_any() is Some(bad) {
-        push_child(
-          children,
-          Some("error"),
-          error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-        )
-      } else {
-        ()
-      }
-      push_children(children, state.consume_trivia())
-    }
+    let scan = state.recover_until([TK_EOF])
+    push_recovered_errors(children, scan.skipped)
   }
   match state.peek() {
     Some((EOF, _, _)) =>

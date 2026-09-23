@@ -58,15 +58,8 @@ fn parse_type_atom(
     Some((found, start, end)) => {
       state.report_expected_description_at(found, mk_loc(start, end), "type")
       let children : Array[(String?, CstNode)] = []
-      while !state.current_in(stop_kinds) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(token) {
-          push_child(children, Some("error"), token)
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until(stop_kinds)
+      push_recovered_errors(children, scan.skipped, wrap=false)
       state.construct_from_children(
         fn(loc, source_span, children) {
           let error = @construction.children_with_label_from(children, "error")
@@ -229,15 +222,8 @@ fn parse_async_type_atom(
           children,
         )
       }
-      while !state.current_in(stop_kinds) &&
-            !state.current_is(TokenKind::TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(children, Some("error"), bad)
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until(stop_kinds)
+      push_recovered_errors(children, scan.skipped, wrap=false)
       return state.construct_from_children(
         fn(loc, source_span, children) {
           push_bool_marker(

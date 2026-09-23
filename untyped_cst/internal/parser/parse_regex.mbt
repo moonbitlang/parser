@@ -38,18 +38,8 @@ fn parse_regex_match_rhs(
       if state.reports.length() == reports_before_pattern {
         state.report_expected_tokens([TK_RPAREN])
       }
-      while state.peek() is Some((tok, _, _)) &&
-            !kind_in(tok.kind(), stop_kinds) {
-        if state.consume_any() is Some(bad) {
-          push_child(
-            children,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-        } else {
-          break
-        }
-      }
+      let scan = state.recover_until(stop_kinds)
+      push_recovered_errors(children, scan.skipped)
       push_child(
         children,
         Some("close"),

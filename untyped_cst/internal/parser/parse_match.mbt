@@ -336,19 +336,8 @@ fn parse_function_expr(
         mk_loc(start, end),
         "Failed to parse func: expected '(' or '{', got \{@debug.render(Debug::to_repr(tok))}",
       )
-      while !state.current_in(stop_kinds) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(
-            children,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until(stop_kinds)
+      push_recovered_errors(children, scan.skipped)
       return function_node_from_children(state, children, fn(
         loc,
         source_span,
@@ -601,21 +590,8 @@ fn parse_match_expr(state : ParserState) -> CstNode {
       }
     _ => {
       push_child(children, Some("open"), state.missing_token_node(TK_LBRACE))
-      while !state.current_is(TK_LBRACE) &&
-            !state.current_is(TK_SEMI) &&
-            !state.current_is(TK_RBRACE) &&
-            !state.current_is(TK_EOF) &&
-            !(state.peek() is None) {
-        if state.consume_any() is Some(bad) {
-          push_child(
-            children,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-        } else {
-          ()
-        }
-      }
+      let scan = state.recover_until([TK_LBRACE, TK_SEMI, TK_RBRACE])
+      push_recovered_errors(children, scan.skipped)
       if state.current_is(TK_LBRACE) {
         if state.consume_any() is Some(open) {
           has_open = true

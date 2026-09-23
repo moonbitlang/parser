@@ -46,15 +46,17 @@ fn ParserState::consume_invalid_series_delimiter(
 }
 
 ///|
-fn report_next_top_level_recovery_point(state : ParserState) -> Unit {
+fn report_next_top_level_recovery_point(state : ParserState) -> Bool {
   let mut offset = 0
   let mut depth = 0
   let mut saw_statement_boundary = false
   let mut done = false
+  let mut reported = false
   while !done {
     match state.peek(offset~) {
       Some((tok, start, end)) if depth == 0 && top_level_decl_can_start(tok) => {
         state.report(mk_loc(start, end), "Unexpected token here.")
+        reported = true
         done = true
       }
       Some((EOF, _, _)) | None => done = true
@@ -91,6 +93,7 @@ fn report_next_top_level_recovery_point(state : ParserState) -> Unit {
       Some(_) => offset += 1
     }
   }
+  reported
 }
 
 ///|
@@ -133,6 +136,9 @@ fn parse_delimited(
   let children : Array[(String?, CstNode)] = []
   push_children(children, state.consume_trivia())
   push_child(children, Some("open"), state.expect_token(open_kind))
+  // A separator belongs to this list's local recovery. Exposing it to an
+  // incomplete nested item changes which item reports the error.
+  let recovery_scope = state.push_recovery_scope([close_kind])
   let mut done = false
   let mut saw_item = false
   let mut expect_item = true
@@ -251,28 +257,21 @@ fn parse_delimited(
               state.report_expected_tokens([sep_kind, close_kind, ..follow_set])
             }
           }
-          let mut recovering = true
-          while recovering {
-            if state.current_is(sep_kind) ||
-              state.current_is(close_kind) ||
-              state.current_is(TK_EOF) ||
-              state.current_in(follow_set) ||
-              state.peek() is None {
-              recovering = false
-            } else if state.consume_any() is Some(bad) {
-              push_child(
-                children,
-                Some("error"),
-                error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-              )
-            } else {
-              recovering = false
-            }
-          }
+          let scan = state.recover_until([sep_kind, close_kind, ..follow_set])
+          push_recovered_errors(children, scan.skipped)
           saw_item = true
           expect_item = false
+          if scan.owner is RecoveryScopeOwner(_) {
+            push_child(
+              children,
+              Some("close"),
+              state.missing_token_node_silent(close_kind),
+            )
+            done = true
+          }
         }
-        if state.pos == entry_pos &&
+        if !done &&
+          state.pos == entry_pos &&
           state.reports.length() > reports_before_item {
           push_child(
             children,
@@ -311,32 +310,31 @@ fn parse_delimited(
       } else {
         state.report_expected_tokens([sep_kind, close_kind, ..follow_set])
       }
-      let mut recovering = true
-      while recovering {
-        if state.current_is(sep_kind) ||
-          state.current_is(close_kind) ||
-          state.current_is(TK_EOF) ||
-          state.current_in(follow_set) ||
-          state.peek() is None {
-          recovering = false
-        } else if state.consume_any() is Some(bad) {
-          push_child(
-            children,
-            Some("error"),
-            error_node(bad.loc, bad.source_span, [(Some("item"), bad)]),
-          )
-        } else {
-          recovering = false
-        }
-      }
+      let scan = state.recover_until([sep_kind, close_kind, ..follow_set])
+      push_recovered_errors(children, scan.skipped)
       if reports_else_recovery && recovery_token is Some(ELSE) {
-        report_next_top_level_recovery_point(state)
+        let reported = report_next_top_level_recovery_point(state)
+        if reported && scan.owner is RecoveryScopeOwner(_) {
+          state.suppress_next_top_level_recovery_report = true
+        }
       } else if is_block_statement_list &&
         recovery_token is Some(EXCLAMATION) &&
         recovery_crosses_argument_boundary(state) {
-        report_next_top_level_recovery_point(state)
+        let reported = report_next_top_level_recovery_point(state)
+        if reported && scan.owner is RecoveryScopeOwner(_) {
+          state.suppress_next_top_level_recovery_report = true
+        }
+      }
+      if scan.owner is RecoveryScopeOwner(_) {
+        push_child(
+          children,
+          Some("close"),
+          state.missing_token_node_silent(close_kind),
+        )
+        done = true
       }
     }
   }
+  state.pop_recovery_scope(recovery_scope)
   state.construct_from_children(list_builder, children)
 }

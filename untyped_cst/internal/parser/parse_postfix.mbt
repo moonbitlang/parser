@@ -390,16 +390,8 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
             TK_LIDENT,
             TK_EXTEND,
           ])
-          while !state.current_is(TK_SEMI) &&
-                !state.current_is(TK_RBRACE) &&
-                !state.current_is(TK_EOF) &&
-                !(state.peek() is None) {
-            if state.consume_any() is Some(bad) {
-              push_child(children, Some("error"), bad)
-            } else {
-              ()
-            }
-          }
+          let scan = state.recover_until([TK_SEMI, TK_RBRACE])
+          push_recovered_errors(children, scan.skipped, wrap=false)
         }
         None => valid_field = false
       }
