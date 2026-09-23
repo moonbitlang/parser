@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/untyped_cst/internal/parser"
+
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/untyped_cst/node",
+}
+
+// Values
+pub fn parse_expression(String, name? : String, enable_metavar? : Bool) -> ParseOutput
+
+pub fn parse_structure(String, name? : String, enable_metavar? : Bool) -> ParseOutput
+
+// Errors
+
+// Types and methods
+pub struct ParseOutput {
+  root : @node.CstNode
+  diagnostics : Array[@basic.Report]
+  docstrings : Array[@list.List[(@basic.Location, @tokens.Comment)]]
+}
+
+// Type aliases
+
+// Traits

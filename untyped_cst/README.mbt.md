@@ -67,6 +67,21 @@ The `untyped_cst` package re-exports the three node types for compatibility.
 Consequently, `ParseResult::root` can be used as either
 `@untyped_cst.CstNode` or `@node.CstNode`; both names refer to the same type.
 
+## Package Organization
+
+`untyped_cst` owns the public parsing entry points and `ParseResult`, including
+its AST conversion methods. Implementation details live in three internal
+packages:
+
+- `internal/construction` builds CST nodes and their semantic children.
+- `internal/parser` handles token streams, parsing, and error recovery.
+- `internal/lower` converts CST nodes to the syntax AST and attaches docstrings.
+
+The parser depends on construction helpers. Lowering reads the node model
+directly and does not depend on the parser. These internal packages are not
+part of the public API; callers continue to import `untyped_cst` and, when
+needed, the existing `untyped_cst/node` package.
+
 ## Source Text
 
 CST nodes do not own the original source text. 

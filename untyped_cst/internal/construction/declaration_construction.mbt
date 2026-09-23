@@ -1,7 +1,7 @@
 ///|
-// Parser-local declaration shapes are available before constructing the read-only
+// Internal declaration shapes are available before constructing the read-only
 // NodeKind. Each shape is selected together with its dedicated constructor.
-priv enum TopItemShape {
+pub(all) enum TopItemShape {
   Other
   Using
   Function
@@ -21,7 +21,7 @@ priv enum TopItemShape {
 }
 
 ///|
-fn classify_top_item_construction(
+pub fn classify_top_item_construction(
   children : Array[(String?, CstNode)],
   parsed_kind : TopItemKind,
   is_suberror : Bool,
@@ -220,7 +220,7 @@ fn classify_top_item_construction(
 }
 
 ///|
-fn type_desc_builder_for_shape(
+pub fn type_desc_builder_for_shape(
   kind : TopItemShape,
 ) -> ((Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode)? {
   match kind {
@@ -318,7 +318,7 @@ fn decl_body_builder(
         }
     }
   }
-  let stubs = CstNode::children_with_label_from(children, "stub")
+  let stubs = children_with_label_from(children, "stub")
   match stubs.get(0) {
     Some(first) =>
       if first.kind is Stub_ModuleName {
@@ -361,7 +361,7 @@ fn first_decl_body_child(children : Array[(String?, CstNode)]) -> CstNode? {
 }
 
 ///|
-fn prepare_decl_body(
+pub fn prepare_decl_body(
   children : Array[(String?, CstNode)],
   loc : Location,
   source_span : (Int, Int),

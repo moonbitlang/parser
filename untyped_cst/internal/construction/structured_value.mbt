@@ -32,16 +32,14 @@ fn structured_long_ident_node(sources : Array[CstNode]) -> CstNode? {
     node(
       if sources.length() >= 2 {
         fn(loc, source_span, children) {
-          let component = CstNode::children_with_label_from(
-            children, "component",
-          )
+          let component = children_with_label_from(children, "component")
           @node.CstNode::long_ident_dot(loc~, source_span~, component~)
         }
       } else {
         fn(loc, source_span, children) {
-          let component = CstNode::first_child_with_label_from(
-            children, "component",
-          ).unwrap_or(missing_at_end(loc~, source_span~))
+          let component = first_child_with_label_from(children, "component").unwrap_or(
+            missing_at_end(loc~, source_span~),
+          )
           @node.CstNode::long_ident_ident(loc~, source_span~, component~)
         }
       },
@@ -66,14 +64,14 @@ fn structured_name_node(
 }
 
 ///|
-fn push_structured_long_ident(
+pub fn push_structured_long_ident(
   children : Array[(String?, CstNode)],
   label : String,
   source_labels : Array[String],
 ) -> Unit {
   let sources : Array[CstNode] = []
   for source_label in source_labels {
-    for source in CstNode::children_with_label_from(children, source_label) {
+    for source in children_with_label_from(children, source_label) {
       if source.lexical_name_value() is Some(_) {
         sources.push(source)
       }
@@ -85,7 +83,7 @@ fn push_structured_long_ident(
 }
 
 ///|
-fn push_structured_name(
+pub fn push_structured_name(
   children : Array[(String?, CstNode)],
   label : String,
   builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
@@ -93,7 +91,7 @@ fn push_structured_name(
 ) -> Unit {
   let sources : Array[CstNode] = []
   for source_label in source_labels {
-    for source in CstNode::children_with_label_from(children, source_label) {
+    for source in children_with_label_from(children, source_label) {
       if source.lexical_name_value() is Some(_) {
         sources.push(source)
       }
@@ -105,7 +103,7 @@ fn push_structured_name(
 }
 
 ///|
-fn push_constructor_extra_info(
+pub fn push_constructor_extra_info(
   children : Array[(String?, CstNode)],
   loc : Location,
   source_span : (Int, Int),
@@ -132,7 +130,7 @@ fn push_constructor_extra_info(
       @node.CstNode::constructor_extra_info_package(loc~, source_span~)
     }
   } else {
-    let names = CstNode::children_with_label_from(children, "name")
+    let names = children_with_label_from(children, "name")
     if names.length() == 2 &&
       names[0]
       .lexical_name_value()
@@ -160,7 +158,7 @@ fn push_constructor_extra_info(
 }
 
 ///|
-fn push_bool_marker(
+pub fn push_bool_marker(
   children : Array[(String?, CstNode)],
   loc : Location,
   source_span : (Int, Int),
@@ -176,14 +174,14 @@ fn push_bool_marker(
 }
 
 ///|
-fn accessor_node_from_token(token : CstNode) -> CstNode {
+pub fn accessor_node_from_token(token : CstNode) -> CstNode {
   match token.first_child_of_kind(NodeKind::is_accessor) {
     Some(accessor) => accessor
     None => {
       let value = token.lexical_name_value().unwrap_or(token)
       scalar_node(
         fn(loc, source_span, children) {
-          let value = match CstNode::payload_from_children(children) {
+          let value = match payload_from_children(children) {
             Some(NodePayload::String(value)) => value
             _ => ""
           }
@@ -218,13 +216,13 @@ fn CstNode::first_constant_descendant(self : CstNode) -> CstNode? {
 }
 
 ///|
-fn CstNode::first_operator_descendant(self : CstNode) -> CstNode? {
-  if self.kind.is_operator() {
-    return Some(self)
+pub fn first_operator_descendant(source : CstNode) -> CstNode? {
+  if source.kind.is_operator() {
+    return Some(source)
   }
-  for entry in self.children {
+  for entry in source.children {
     let (_, child) = entry
-    if child.first_operator_descendant() is Some(operator) {
+    if first_operator_descendant(child) is Some(operator) {
       return Some(operator)
     }
   }
@@ -232,9 +230,10 @@ fn CstNode::first_operator_descendant(self : CstNode) -> CstNode? {
 }
 
 ///|
-fn push_direct_semantic_constant(children : Array[(String?, CstNode)]) -> Unit {
-  if CstNode::first_child_with_label_from(children, "semantic_constant")
-    is Some(_) {
+pub fn push_direct_semantic_constant(
+  children : Array[(String?, CstNode)],
+) -> Unit {
+  if first_child_with_label_from(children, "semantic_constant") is Some(_) {
     return
   }
   // Search direct constants before descending, as on an already constructed node.
@@ -253,13 +252,13 @@ fn push_direct_semantic_constant(children : Array[(String?, CstNode)]) -> Unit {
 }
 
 ///|
-fn CstNode::first_trailing_mark_descendant(self : CstNode) -> CstNode? {
-  if self.kind is (TrailingMark_Comma | TrailingMark_Semi | TrailingMark_None) {
-    return Some(self)
+pub fn first_trailing_mark_descendant(source : CstNode) -> CstNode? {
+  if source.kind is (TrailingMark_Comma | TrailingMark_Semi | TrailingMark_None) {
+    return Some(source)
   }
-  for entry in self.children {
+  for entry in source.children {
     let (_, child) = entry
-    if child.first_trailing_mark_descendant() is Some(mark) {
+    if first_trailing_mark_descendant(child) is Some(mark) {
       return Some(mark)
     }
   }
@@ -267,7 +266,7 @@ fn CstNode::first_trailing_mark_descendant(self : CstNode) -> CstNode? {
 }
 
 ///|
-fn list_has_item_kind(node : CstNode, pred : (NodeKind) -> Bool) -> Bool {
+pub fn list_has_item_kind(node : CstNode, pred : (NodeKind) -> Bool) -> Bool {
   for item in node.children_with_label("item") {
     if pred(item.kind) {
       return true
@@ -277,7 +276,7 @@ fn list_has_item_kind(node : CstNode, pred : (NodeKind) -> Bool) -> Bool {
 }
 
 ///|
-fn list_trailing_mark_kind(
+pub fn list_trailing_mark_kind(
   children : ArrayView[(String?, CstNode)],
 ) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
   let mut trailing : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
@@ -296,7 +295,7 @@ fn list_trailing_mark_kind(
           @node.CstNode::trailing_mark_none(loc~, source_span~)
         }
       Some((Some("sep"), sep)) =>
-        match sep.first_trailing_mark_descendant() {
+        match first_trailing_mark_descendant(sep) {
           Some(mark) =>
             trailing = match mark.kind {
               TrailingMark_Comma =>
@@ -318,7 +317,7 @@ fn list_trailing_mark_kind(
           None => ()
         }
       Some((Some("error"), error)) =>
-        match error.first_trailing_mark_descendant() {
+        match first_trailing_mark_descendant(error) {
           Some(mark) =>
             trailing = match mark.kind {
               TrailingMark_Comma =>
@@ -346,7 +345,7 @@ fn list_trailing_mark_kind(
 }
 
 ///|
-fn push_marker_child(
+pub fn push_marker_child(
   children : Array[(String?, CstNode)],
   loc : Location,
   source_span : (Int, Int),
@@ -358,88 +357,4 @@ fn push_marker_child(
     Some(label),
     marker_node(builder, loc.end, source_span.1),
   )
-}
-
-///|
-fn lower_constant_from_node(node : CstNode) -> @syntax.Constant? {
-  let direct = if node.kind.is_constant() {
-    Some(node)
-  } else {
-    node.first_child_with_label("semantic_constant")
-  }
-  guard direct is Some(constant) else { return None }
-  match constant.kind {
-    Constant_Bool => Some(Bool(constant.bool_payload().unwrap_or(false)))
-    Constant_Byte => Some(Byte(constant.string_payload().unwrap_or("")))
-    Constant_Bytes => Some(Bytes(constant.string_payload().unwrap_or("")))
-    Constant_Char => Some(Char(constant.string_payload().unwrap_or("")))
-    Constant_Int => Some(Int(constant.string_payload().unwrap_or("")))
-    Constant_Int64 => Some(Int64(constant.string_payload().unwrap_or("")))
-    Constant_UInt => Some(UInt(constant.string_payload().unwrap_or("")))
-    Constant_UInt64 => Some(UInt64(constant.string_payload().unwrap_or("")))
-    Constant_Float => Some(Float(constant.string_payload().unwrap_or("")))
-    Constant_Double => Some(Double(constant.string_payload().unwrap_or("")))
-    Constant_String => Some(String(constant.string_payload().unwrap_or("")))
-    Constant_Regex => Some(Regex(constant.string_payload().unwrap_or("")))
-    Constant_BigInt => Some(BigInt(constant.string_payload().unwrap_or("")))
-    _ => None
-  }
-}
-
-///|
-fn lower_attribute_node(node : CstNode) -> @attribute.Attribute? {
-  guard node.first_child_with_label("attribute") is Some(attribute) else {
-    return None
-  }
-  let name = attribute
-    .first_child_with_label("name")
-    .map(child => child.string_payload())
-    .bind(value => value)
-    .unwrap_or("")
-  let qualifier = attribute
-    .first_child_with_label("qualifier")
-    .map(child => child.string_payload())
-    .bind(value => value)
-  let raw_payload = attribute
-    .first_child_with_label("raw_payload")
-    .map(child => child.string_payload())
-    .bind(value => value)
-    .unwrap_or("")
-  let content = match attribute.kind {
-    Attribute_Qualified => (qualifier.unwrap_or(""), Some(name), raw_payload)
-    Attribute_Simple => (name, None, raw_payload)
-    _ => return None
-  }
-  Some(@attribute.Attribute::new(loc=node.loc, content))
-}
-
-///|
-fn lower_interp_segment_value(node : CstNode) -> @syntax.InterpElem? {
-  match node.kind {
-    InterpSegment_Literal =>
-      Some(Literal(repr=node.string_payload().unwrap_or(""), loc=node.loc))
-    InterpSegment_Source =>
-      Some(
-        Source({ source: node.string_payload().unwrap_or(""), loc: node.loc, }),
-      )
-    _ => None
-  }
-}
-
-///|
-fn collect_interp_segments(node : CstNode) -> Array[CstNode] {
-  let segments : Array[CstNode] = []
-  for child in node.children_with_label("segment") {
-    if child.kind.is_interp_segment() {
-      segments.push(child)
-    }
-  }
-  for token in node.children_with_label("token") {
-    for segment in token.children_with_label("segment") {
-      if segment.kind.is_interp_segment() {
-        segments.push(segment)
-      }
-    }
-  }
-  segments
 }

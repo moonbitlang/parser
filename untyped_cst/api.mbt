@@ -1,47 +1,4 @@
 ///|
-fn initial_position(name : String) -> Position {
-  { fname: name, lnum: 1, bol: 0, cnum: 0, }
-}
-
-///|
-fn parse_with_state(
-  tokens : Triples,
-  source : String,
-  diagnostics : Array[Report],
-  docstrings : Array[List[(Location, Comment)]],
-  enable_metavar : Bool,
-  parse_root : (ParserState) -> CstNode,
-) -> ParseResult {
-  let state = new_state(tokens, source, diagnostics, enable_metavar)
-  let root = parse_root(state)
-  parse_result(root, state.reports, docstrings)
-}
-
-///|
-fn parse_source(
-  source : String,
-  name : String,
-  enable_metavar : Bool,
-  parse_root : (ParserState) -> CstNode,
-) -> ParseResult {
-  let lex = @lexer.tokens_from_string(
-    source,
-    name~,
-    enable_metavar~,
-    comment=true,
-  )
-  let diagnostics = reports_from_lex_errors(lex.errors)
-  parse_with_state(
-    lex.tokens,
-    source,
-    diagnostics,
-    lex.docstrings,
-    enable_metavar,
-    parse_root,
-  )
-}
-
-///|
 /// Parses a MoonBit source file into a concrete syntax tree.
 ///
 /// Metavariable syntax is disabled by default. Set `enable_metavar=true` to
@@ -54,7 +11,8 @@ pub fn parse_structure(
   name? : String = "",
   enable_metavar? : Bool = false,
 ) -> ParseResult {
-  parse_source(source, name, enable_metavar, parse_source_file)
+  let parsed = @cst_parser.parse_structure(source, name~, enable_metavar~)
+  parse_result(parsed.root, parsed.diagnostics, parsed.docstrings)
 }
 
 ///|
@@ -70,5 +28,6 @@ pub fn parse_expression(
   name? : String = "",
   enable_metavar? : Bool = false,
 ) -> ParseResult {
-  parse_source(source, name, enable_metavar, parse_expr_fragment)
+  let parsed = @cst_parser.parse_expression(source, name~, enable_metavar~)
+  parse_result(parsed.root, parsed.diagnostics, parsed.docstrings)
 }

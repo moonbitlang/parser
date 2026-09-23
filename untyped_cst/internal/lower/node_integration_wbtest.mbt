@@ -63,7 +63,7 @@ test "brace record pun is classified while parsing" {
     #|let record = { x; }
   let records : Array[CstNode] = []
   collect_kind(
-    parse_structure(source).root(),
+    parse_structure(source).root,
     fn(kind) { kind is Expr_Record },
     records,
   )
@@ -87,7 +87,7 @@ test "extend soft keyword keeps its accessor label" {
   let source = "fn f(x : X) -> Unit { x..extend() }"
   let dot_applies : Array[CstNode] = []
   collect_kind(
-    parse_structure(source).root(),
+    parse_structure(source).root,
     fn(kind) { kind is Expr_DotApply },
     dot_applies,
   )

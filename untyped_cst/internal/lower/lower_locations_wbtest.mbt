@@ -104,8 +104,8 @@ test "pipe discard keeps the parameter list span and the historical arrow overri
       ("_ => 1", (0, 1), (0, 1)),
     ] {
     let parsed = parse_expression(source)
-    @test.assert_eq(parsed.diagnostics_view().length(), 0)
-    let expr = lower_expr(parsed.root())
+    @test.assert_eq(parsed.diagnostics.length(), 0)
+    let expr = lower_expr(parsed.root)
     let function = match expr {
       Pipe(rhs~, ..) => rhs
       other => other

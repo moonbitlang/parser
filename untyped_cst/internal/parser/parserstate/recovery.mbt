@@ -1,29 +1,5 @@
 ///|
-fn report_from_lex_error(
-  start : Position,
-  end : Position,
-  err : @lexer.LexicalError,
-) -> Report {
-  { loc: mk_loc(start, end), msg: Show::to_string(err), }
-}
-
-///|
-fn reports_from_lex_errors(
-  errors : Array[(Position, Position, @lexer.LexicalError)],
-) -> Array[Report] {
-  let reports : Array[Report] = []
-  for error in errors {
-    let (start, end, err) = error
-    match err {
-      Reserved_keyword(_) => ()
-      _ => reports.push(report_from_lex_error(start, end, err))
-    }
-  }
-  reports
-}
-
-///|
-fn ParserState::current_position(self : ParserState) -> Position {
+pub fn ParserState::current_position(self : ParserState) -> Position {
   match self.peek_significant() {
     Some((_, start, _)) => start
     None => self.previous_end()
@@ -40,7 +16,7 @@ fn expected_token_kinds_to_string(kinds : Array[TokenKind]) -> String {
 }
 
 ///|
-fn ParserState::report_expected_description_at(
+pub fn ParserState::report_expected_description_at(
   self : ParserState,
   found : Token,
   loc : Location,
@@ -57,7 +33,7 @@ fn ParserState::report_expected_description_at(
 }
 
 ///|
-fn ParserState::report_expected_tokens_at(
+pub fn ParserState::report_expected_tokens_at(
   self : ParserState,
   found : Token,
   loc : Location,
@@ -71,7 +47,7 @@ fn ParserState::report_expected_tokens_at(
 }
 
 ///|
-fn ParserState::report_expected_description(
+pub fn ParserState::report_expected_description(
   self : ParserState,
   expected : String,
 ) -> Unit {
@@ -89,7 +65,7 @@ fn ParserState::report_expected_description(
 }
 
 ///|
-fn ParserState::report_expected_tokens(
+pub fn ParserState::report_expected_tokens(
   self : ParserState,
   expected : Array[TokenKind],
 ) -> Unit {
@@ -97,7 +73,10 @@ fn ParserState::report_expected_tokens(
 }
 
 ///|
-fn ParserState::offset_for_position(self : ParserState, pos : Position) -> Int {
+pub fn ParserState::offset_for_position(
+  self : ParserState,
+  pos : Position,
+) -> Int {
   if self.peek() is None {
     self.source.length()
   } else {
@@ -106,7 +85,7 @@ fn ParserState::offset_for_position(self : ParserState, pos : Position) -> Int {
 }
 
 ///|
-fn ParserState::missing_token_node(
+pub fn ParserState::missing_token_node(
   self : ParserState,
   kind : TokenKind,
 ) -> CstNode {
@@ -116,7 +95,7 @@ fn ParserState::missing_token_node(
 }
 
 ///|
-fn ParserState::missing_token_node_with_expected(
+pub fn ParserState::missing_token_node_with_expected(
   self : ParserState,
   kind : TokenKind,
   expected : Array[TokenKind],
@@ -138,7 +117,7 @@ fn ParserState::missing_token_node_with_description(
 }
 
 ///|
-fn ParserState::missing_token_node_silent(
+pub fn ParserState::missing_token_node_silent(
   self : ParserState,
   kind : TokenKind,
 ) -> CstNode {
@@ -156,15 +135,15 @@ fn ParserState::missing_syntax_node(
 }
 
 ///|
-fn ParserState::missing_type_node(self : ParserState) -> CstNode {
+pub fn ParserState::missing_type_node(self : ParserState) -> CstNode {
   self.missing_syntax_node(fn(loc, source_span, children) {
-    let error = CstNode::children_with_label_from(children, "error")
+    let error = @construction.children_with_label_from(children, "error")
     @node.CstNode::type_missing_type(loc~, source_span~, error~)
   })
 }
 
 ///|
-fn ParserState::missing_expr_node(self : ParserState) -> CstNode {
+pub fn ParserState::missing_expr_node(self : ParserState) -> CstNode {
   self.missing_syntax_node(fn(loc, source_span, children) {
     let entries = recovery_children(children)
     @node.CstNode::expr_missing_expr_from_entries(loc~, source_span~, entries~)
@@ -180,7 +159,7 @@ fn ParserState::missing_pattern_node(self : ParserState) -> CstNode {
 }
 
 ///|
-fn ParserState::required_type_node(
+pub fn ParserState::required_type_node(
   self : ParserState,
   parsed : CstNode,
   reports_before : Int,
@@ -196,7 +175,7 @@ fn ParserState::required_type_node(
 }
 
 ///|
-fn ParserState::required_expr_node(
+pub fn ParserState::required_expr_node(
   self : ParserState,
   parsed : CstNode,
   reports_before : Int,
@@ -212,7 +191,7 @@ fn ParserState::required_expr_node(
 }
 
 ///|
-fn required_pattern_start_tokens() -> Array[TokenKind] {
+pub fn required_pattern_start_tokens() -> Array[TokenKind] {
   [
     TK_TRUE,
     TK_FALSE,
@@ -237,7 +216,7 @@ fn required_pattern_start_tokens() -> Array[TokenKind] {
 }
 
 ///|
-fn ParserState::required_pattern_node(
+pub fn ParserState::required_pattern_node(
   self : ParserState,
   parsed : CstNode,
   reports_before : Int,
@@ -258,23 +237,10 @@ fn ParserState::required_pattern_node(
 }
 
 ///|
-fn ParserState::report(
+pub fn ParserState::report(
   self : ParserState,
   loc : Location,
   msg : String,
 ) -> Unit {
   self.reports.push({ loc, msg, })
-}
-
-///|
-fn ParserState::expect_token(self : ParserState, kind : TokenKind) -> CstNode {
-  match self.peek() {
-    Some((tok, _, _)) if tok.kind() == kind =>
-      if self.consume_any() is Some(node) {
-        node
-      } else {
-        self.missing_token_node(kind)
-      }
-    _ => self.missing_token_node(kind)
-  }
 }
