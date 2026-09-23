@@ -6,7 +6,7 @@ import {
   "moonbitlang/lexer/basic",
   "moonbitlang/lexer/tokens",
   "moonbitlang/parser/syntax",
-  "moonbitlang/parser/untyped_cst/node",
+  "moonbitlang/parser/untyped_cst/internal/node",
 }
 
 // Values

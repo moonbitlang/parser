@@ -2,8 +2,8 @@
 
 `moonbitlang/parser/untyped_cst` parses MoonBit source into an untyped concrete
 syntax tree that preserves tokens, comments, delimiters, separators, and source
-spans. It is intended for tooling that needs source-faithful structure before
-or alongside the existing typed syntax AST.
+spans. Its public entry points provide parse diagnostics and conversion to the
+existing typed syntax AST.
 
 Use `parse_structure(source, name?, enable_metavar?)` for a MoonBit source file
 and `parse_expression(source, name?, enable_metavar?)` for a standalone
@@ -20,9 +20,10 @@ root kind returns a diagnostic.
 ## Node Model
 
 The source-independent node model lives in
-`moonbitlang/parser/untyped_cst/node`. Import that package directly when code
-only needs `CstNode`, `NodeKind`, `NodePayload`, or the node traversal,
-payload, and classification helpers.
+`moonbitlang/parser/untyped_cst/internal/node`. MoonBit restricts imports of
+this package to `untyped_cst` and its subpackages. Code within that subtree can
+use `CstNode`, `NodeKind`, `NodePayload`, and the node traversal, payload, and
+classification helpers.
 
 `NodeKind` is public but read-only outside the node package. Inspect it with
 pattern matching or its classification methods. Construct nodes with the
@@ -63,32 +64,34 @@ Nodes retain `loc` and `source_span`; there are no additional location children.
 AST locations are computed during lowering from tokens and syntax boundaries,
 without reading source text or re-parsing it.
 
-The `untyped_cst` package re-exports the three node types for compatibility.
-Consequently, `ParseResult::root` can be used as either
-`@untyped_cst.CstNode` or `@node.CstNode`; both names refer to the same type.
+The `untyped_cst` package re-exports the three node types for in-subtree code.
+MoonBit's internal visibility rules prevent outside packages from inspecting
+or constructing these types through the re-exports. Outside callers can use
+`ParseResult::diagnostics_view`, `ParseResult::to_impls`, and
+`ParseResult::to_expr`.
 
 ## Package Organization
 
 `untyped_cst` owns the public parsing entry points and `ParseResult`, including
-its AST conversion methods. Implementation details live in three internal
+its AST conversion methods. Implementation details live in four internal
 packages:
 
+- `internal/node` defines CST nodes and their constructors and helpers.
 - `internal/construction` builds CST nodes and their semantic children.
 - `internal/parser` handles token streams, parsing, and error recovery.
 - `internal/lower` converts CST nodes to the syntax AST and attaches docstrings.
 
 The parser depends on construction helpers. Lowering reads the node model
-directly and does not depend on the parser. These internal packages are not
-part of the public API; callers continue to import `untyped_cst` and, when
-needed, the existing `untyped_cst/node` package.
+directly and does not depend on the parser. Outside callers import
+`untyped_cst` for parsing and AST conversion.
 
 ## Source Text
 
-CST nodes do not own the original source text. 
+CST nodes do not own the original source text.
 
-`CstNode.source_span` is a pair of UTF-16 code-unit offsets: an inclusive start
-and an exclusive end. They can be used directly as `String`/`StringView`
-slicing offsets. 
+Within `untyped_cst`, `CstNode.source_span` is a pair of UTF-16 code-unit
+offsets: an inclusive start and an exclusive end. They can be used directly as
+`String`/`StringView` slicing offsets.
 
 Parse source text with one of the two entry points so every node span refers to
 the original source string.

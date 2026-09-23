@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/parser/untyped_cst/node"
+package "moonbitlang/parser/untyped_cst/internal/node"
 
 import {
   "moonbitlang/core/debug",
