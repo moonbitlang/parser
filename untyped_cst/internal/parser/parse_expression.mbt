@@ -1119,7 +1119,7 @@ fn infix_precedence(tok : Token) -> (Int, Bool)? {
     INFIX1(_) => Some((7, false))
     INFIX2(_) => Some((8, false))
     PLUS | MINUS => Some((9, false))
-    INFIX3(_) => Some((10, false))
+    INFIX3(_) | STAR => Some((10, false))
     INFIX4(_) => Some((11, false))
     _ => None
   }
