@@ -266,15 +266,6 @@ test {
               },
             ],
           },
-          "attr": {
-            "kind": "ApplyAttr::NoAttr",
-            "loc": {
-              "file": "",
-              "start": { "line": 1, "column": 6 },
-              "end": { "line": 1, "column": 19 },
-            },
-            "children": Json::empty_object(),
-          },
         },
       },
       "catch": {
@@ -415,15 +406,6 @@ test {
                             },
                           },
                         ],
-                      },
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": {
-                          "file": "",
-                          "start": { "line": 3, "column": 6 },
-                          "end": { "line": 3, "column": 14 },
-                        },
-                        "children": Json::empty_object(),
                       },
                     },
                   },

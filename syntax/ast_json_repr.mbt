@@ -366,7 +366,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       tagged_node("Expr::Apply", loc, {
         "func": func.json_repr(),
         "args": args_list,
-        "attr": apply_attr_json_repr(loc),
       })
     }
     Infix(op~, lhs~, rhs~, loc~) =>
@@ -617,7 +616,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "method_name": method_name.json_repr(),
         "args": args_list,
         "return_self": Json::boolean(return_self),
-        "attr": apply_attr_json_repr(loc),
       })
     }
     As(expr~, trait_~, loc~) =>
@@ -1197,11 +1195,6 @@ fn ArgumentKind::json_repr(self : ArgumentKind, loc : Location) -> Json {
       })
     }
   }
-}
-
-///|
-fn apply_attr_json_repr(loc : Location) -> Json {
-  tagged_node0("ApplyAttr::NoAttr", loc)
 }
 
 ///|

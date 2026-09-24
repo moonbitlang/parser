@@ -447,11 +447,6 @@ test "expr basic types to_json" {
             },
           ],
         },
-        "attr": {
-          "kind": "ApplyAttr::NoAttr",
-          "loc": null,
-          "children": Json::empty_object(),
-        },
       },
     },
   )
