@@ -48,7 +48,6 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     // ---------------------------
     // | EXCEPT
     TYPE
-    | TYPEALIAS
     | SUBERROR
     | STRUCT
     | SEMI(_)
@@ -89,7 +88,6 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | WHILE
     | ASYNC
     | FN
-    | FNALIAS
     | FAT_ARROW
     | THIN_ARROW
     | IN
@@ -116,7 +114,6 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | PRIV
     | READONLY
     | TRAIT
-    | TRAITALIAS
     | PROOF_ASSERT
     | PROOF_LET
     | FORALL
@@ -133,7 +130,6 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | ATTRIBUTE(_)
     | USING
     | LEXMATCH
-    | LEXMATCH_QUESTION
     | LEXSCAN
     | LT_QUESTION
     | WHERE
@@ -173,12 +169,10 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | THROW
     | RAISE
     | TYPE
-    | TYPEALIAS
     | SUBERROR
     | STRUCT
     | EXTENUM
     | TRAIT
-    | TRAITALIAS
     | PACKAGE_NAME(_)
     | PACKAGE
     | MUTABLE
@@ -204,7 +198,6 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | WHILE
     | ASYNC
     | FN
-    | FNALIAS
     | EOF
     | ENUM
     | FORALL
@@ -312,7 +305,6 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | RANGE_INCLUSIVE_REV
     | RANGE_EXCLUSIVE_REV
     | AND
-    | LEXMATCH_QUESTION
     | WHERE
     | NOBREAK => false
   }

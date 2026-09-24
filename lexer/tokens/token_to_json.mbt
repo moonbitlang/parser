@@ -95,9 +95,6 @@ pub impl ToJson for Token with fn to_json(self) {
     LPAREN => "LPAREN"
     EQUAL => "EQUAL"
     EQ_TILDE => "EQ_TILDE"
-    FNALIAS => "FNALIAS"
-    TRAITALIAS => "TRAITALIAS"
-    TYPEALIAS => "TYPEALIAS"
     ASYNC => "ASYNC"
     CATCH => "CATCH"
     TRY => "TRY"
@@ -149,7 +146,6 @@ pub impl ToJson for Token with fn to_json(self) {
     CHAR(str) => ["CHAR", str]
     TRY_EXCLAMATION => "TRY_EXCLAMATION"
     LEXMATCH => "LEXMATCH"
-    LEXMATCH_QUESTION => "LEXMATCH_QUESTION"
     LEXSCAN => "LEXSCAN"
     EXTEND => "EXTEND"
     REGEX_LITERAL(str) => ["REGEX_LITERAL", str]

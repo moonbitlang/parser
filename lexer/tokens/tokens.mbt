@@ -47,9 +47,6 @@ pub(all) enum Token {
   TRY
   CATCH
   ASYNC
-  TYPEALIAS
-  TRAITALIAS
-  FNALIAS
   EQUAL
   EQ_TILDE
   LPAREN
@@ -132,7 +129,6 @@ pub(all) enum Token {
   TRY_QUESTION
   TRY_EXCLAMATION
   LEXMATCH
-  LEXMATCH_QUESTION
   LEXSCAN
   EXTEND
   PACKAGE
@@ -192,9 +188,6 @@ pub fn Token::kind(self : Token) -> TokenKind {
     TRY => TK_TRY
     CATCH => TK_CATCH
     ASYNC => TK_ASYNC
-    TYPEALIAS => TK_TYPEALIAS
-    TRAITALIAS => TK_TRAITALIAS
-    FNALIAS => TK_FNALIAS
     EQUAL => TK_EQUAL
     EQ_TILDE => TK_EQ_TILDE
     LPAREN => TK_LPAREN
@@ -277,7 +270,6 @@ pub fn Token::kind(self : Token) -> TokenKind {
     TRY_QUESTION => TK_TRY_QUESTION
     TRY_EXCLAMATION => TK_TRY_EXCLAMATION
     LEXMATCH => TK_LEXMATCH
-    LEXMATCH_QUESTION => TK_LEXMATCH_QUESTION
     LEXSCAN => TK_LEXSCAN
     EXTEND => TK_EXTEND
     PACKAGE => TK_PACKAGE
@@ -333,9 +325,6 @@ pub(all) enum TokenKind {
   TK_TRY
   TK_CATCH
   TK_ASYNC
-  TK_TYPEALIAS
-  TK_TRAITALIAS
-  TK_FNALIAS
   TK_EQUAL
   TK_EQ_TILDE
   TK_LPAREN
@@ -418,7 +407,6 @@ pub(all) enum TokenKind {
   TK_TRY_QUESTION
   TK_TRY_EXCLAMATION
   TK_LEXMATCH
-  TK_LEXMATCH_QUESTION
   TK_LEXSCAN
   TK_EXTEND
   TK_PACKAGE
@@ -494,9 +482,6 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_TRY => "\"try\""
       TK_CATCH => "\"catch\""
       TK_ASYNC => "\"async\""
-      TK_TYPEALIAS => "\"typealias\""
-      TK_TRAITALIAS => "\"traitalias\""
-      TK_FNALIAS => "\"fnalias\""
       TK_EQUAL => "\"=\""
       TK_EQ_TILDE => "\"=~\""
       TK_LPAREN => "\"(\""
@@ -579,7 +564,6 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_TRY_QUESTION => "\"try?\""
       TK_TRY_EXCLAMATION => "\"try!\""
       TK_LEXMATCH => "\"lexmatch\""
-      TK_LEXMATCH_QUESTION => "\"lexmatch?\""
       TK_LEXSCAN => "\"lexscan\""
       TK_EXTEND => "\"extend\""
       TK_PACKAGE => "\"package\""
@@ -641,9 +625,6 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_TRY => Repr("try")
       TK_CATCH => Repr("catch")
       TK_ASYNC => Repr("async")
-      TK_TYPEALIAS => Repr("typealias")
-      TK_TRAITALIAS => Repr("traitalias")
-      TK_FNALIAS => Repr("fnalias")
       TK_EQUAL => Repr("=")
       TK_EQ_TILDE => Repr("=~")
       TK_LPAREN => Repr("(")
@@ -726,7 +707,6 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_TRY_QUESTION => Repr("try?")
       TK_TRY_EXCLAMATION => Repr("try!")
       TK_LEXMATCH => Repr("lexmatch")
-      TK_LEXMATCH_QUESTION => Repr("lexmatch?")
       TK_LEXSCAN => Repr("lexscan")
       TK_EXTEND => Repr("extend")
       TK_PACKAGE => Repr("package")
