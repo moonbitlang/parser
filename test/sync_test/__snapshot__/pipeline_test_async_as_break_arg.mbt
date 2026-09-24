@@ -1,5 +1,5 @@
 ///|
-async fn[X] suspend(f : ((X) -> Unit) -> Unit) -> X noraise = "%async.suspend"
+async fn[X] suspend(f : ((X) -> Unit) -> Unit) -> X noraise + nocancel = "%async.suspend"
 
 ///|
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"

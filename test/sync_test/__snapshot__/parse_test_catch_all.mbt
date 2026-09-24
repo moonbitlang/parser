@@ -1,6 +1,6 @@
 fn main {
   try {
-    f!(x)
+    f(x)
   } catch {
     E1 => println("x")
     e => raise e

@@ -21,6 +21,7 @@ pub fn gen_test_for_parser(name : String) -> String {
 ///|
 pub fn gen_test_for_lexer(name : String) -> String {
   (
+    $|///|
     $|test "lexing \{name}" (t : @test.Test) {
     $|  lexer_test(t)
     $|}
@@ -37,7 +38,7 @@ let snapshot_path : String = root + "/__snapshot__"
 let output_for_parser : String = root + "/parser.mbt"
 
 ///|
-let output_for_lexer : String = root + "/lexer.mbt"
+let output_for_lexer : String = root + "/lexer_test.mbt"
 
 ///|
 enum Mode {
