@@ -168,6 +168,7 @@ test "expression node kinds are classified exhaustively" {
       Expr_Map,
       Expr_Infix,
       Expr_Pipe,
+      Expr_PipeRecovery,
       Expr_RevPipe,
       Expr_Implies,
       Expr_Unary,

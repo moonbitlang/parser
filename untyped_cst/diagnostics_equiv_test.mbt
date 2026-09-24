@@ -103,6 +103,33 @@ test "structure diagnostics come from CST parser recovery" {
 }
 
 ///|
+test "pipe operator diagnostics and recovery agree with handrolled parser" {
+  let rejected = [
+    ("mixed forward then reverse", "a |> b <| c"),
+    ("mixed reverse then forward", "a <| b |> c"),
+    ("chained reverse", "a <| b <| c"),
+    ("reverse pipe arrow infix body", "f() <| x => x + 1"),
+    ("reverse pipe arrow call body", "f() <| x => g(x, y)"),
+  ]
+  for case in rejected {
+    let (label, source) = case
+    assert_expression_acceptance(label, source, false)
+    let lex = @lexer.tokens_from_string(source, comment=true)
+    let (hand_expr, _) = @handrolled_parser.parse_expr(lex.tokens)
+    let cst = @untyped_cst.parse_expression(source)
+    let cst_expr = @lower.lower_expr(cst.root())
+    @test.assert_eq(hand_expr.json_repr(), cst_expr.json_repr())
+  }
+  for
+    source in [
+      "a |> b |> c", "a <| b", "(a |> b) <| c", "(a <| b) |> c", "f() <| x => { x + 1 }",
+      "f() <| (x, y) => { x + y }",
+    ] {
+    assert_expression_acceptance("valid pipe", source, true)
+  }
+}
+
+///|
 test "labelled blocks require parentheses before composition" {
   let cases = [
     ("labelled block call", "fn f() { label~: {}() }"),
@@ -343,7 +370,6 @@ test "acceptance equivalence: expressions patterns and types" {
     ("try without catch", "try f()"),
     ("raise call argument", "f(raise e)"),
     ("non-block else", "if x {} else 1"),
-    ("parenthesized foreach binder", "for (x) in xs {}"),
     ("removed for else", "for x in xs {} else {}"),
     ("unparenthesized typed arrow", "x : Int => x"),
     ("unbraced pipeline arrow", "a |> x => x"),
@@ -367,6 +393,7 @@ test "acceptance equivalence: expressions patterns and types" {
     assert_structure_acceptance(label, source, false)
   }
   let valid_exprs = [
+    ("parenthesized foreach pattern", "for (x) in xs {}"),
     ("lex regex pattern", "lexmatch s { re\"a\" => 0 }"),
     ("parenthesized typed pattern", "match x { (y : Int) => y }"),
     ("array spreads", "[..a, ..b]"),

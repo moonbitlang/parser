@@ -688,7 +688,7 @@ pub(open) trait MapVisitor {
   ) -> Expr = _
   fn visit_Expr_ForEach(
     Self,
-    binders~ : @list.List[Binder?],
+    patterns~ : @list.List[Pattern],
     expr~ : Expr,
     init~ : @list.List[(Binder, Expr)],
     continue_block~ : @list.List[(Binder, Expr)],
@@ -1358,7 +1358,7 @@ impl MapVisitor with fn visit_Expr_For(
 ///|
 impl MapVisitor with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -1370,7 +1370,7 @@ impl MapVisitor with fn visit_Expr_ForEach(
 ) {
   MapVisitor::visit_Expr_ForEach(
     env.base(),
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -4679,7 +4679,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_For
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -4689,7 +4689,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_For
   label~,
   loc~,
 ) {
-  let binders = binders.map(binder => binder.map(x => env.0.visit_Binder(x)))
+  let patterns = patterns.map(pattern => env.0.visit_Pattern(pattern))
   let expr = env.0.visit_Expr(expr)
   let init = init.map(p => (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1)))
   let continue_block = continue_block.map(p => {
@@ -4700,7 +4700,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_For
   let where_clause = where_clause.map(x => env.0.visit_WhereClause(x))
   let label = label.map(x => env.0.visit_Label(x))
   ForEach(
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -4820,14 +4820,14 @@ fn[T : MapVisitor] map_list_comprehension_kind(
   kind : ListComprehensionKind,
 ) -> ListComprehensionKind {
   match kind {
-    Foreach(binders~, expr~, init~, continue_block~) => {
-      let binders = binders.map(binder => binder.map(x => env.0.visit_Binder(x)))
+    Foreach(patterns~, expr~, init~, continue_block~) => {
+      let patterns = patterns.map(pattern => env.0.visit_Pattern(pattern))
       let expr = env.0.visit_Expr(expr)
       let init = init.map(p => (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1)))
       let continue_block = continue_block.map(p => {
         (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1))
       })
-      Foreach(binders~, expr~, init~, continue_block~)
+      Foreach(patterns~, expr~, init~, continue_block~)
     }
     For(binders~, condition~, continue_block~, for_loc~) => {
       let binders = binders.map(p => {
@@ -5005,7 +5005,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
         where_clause~,
       )
     ForEach(
-      binders~,
+      patterns~,
       expr~,
       init~,
       continue_block~,
@@ -5016,7 +5016,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
       loc~
     ) =>
       env.0.visit_Expr_ForEach(
-        binders~,
+        patterns~,
         expr~,
         init~,
         continue_block~,

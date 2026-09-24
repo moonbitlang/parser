@@ -189,39 +189,7 @@ fn parse_list_comprehension_expr(
 
 ///|
 fn list_comprehension_is_foreach(state : ParserState) -> Bool {
-  let mut offset = 0
-  let mut done = false
-  while !done {
-    match state.peek(offset~) {
-      Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
-      Some((IN, _, _)) => return true
-      Some((COMMA, _, _)) => {
-        offset += 1
-        let mut skipping = true
-        while skipping {
-          match state.peek(offset~) {
-            Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
-            _ => skipping = false
-          }
-        }
-        match state.peek(offset~) {
-          Some((IN, _, _)) => return true
-          Some((LIDENT(_), _, _))
-          | Some((EXTEND, _, _))
-          | Some((UNDERSCORE, _, _)) => offset += 1
-          _ => return false
-        }
-      }
-      Some((EQUAL, _, _))
-      | Some((SEMI(_), _, _))
-      | Some((FAT_ARROW, _, _))
-      | Some((IF, _, _))
-      | Some((EOF, _, _)) => done = true
-      Some(_) => offset += 1
-      None => done = true
-    }
-  }
-  false
+  for_header_has_in(state, 0)
 }
 
 ///|

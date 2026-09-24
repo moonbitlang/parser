@@ -2518,29 +2518,32 @@ fn State::parse_loop_binder_with_infix_value(
 }
 
 ///|
-fn State::parse_foreach_binder(self : State) -> @syntax.Binder? {
-  match self.peek_token() {
-    UNDERSCORE => {
-      self.skip()
-      None
+fn State::next_for_header_has_in(self : State) -> Bool {
+  let mut nth = 0
+  let mut depth = 0
+  while true {
+    let token = self.peek_token(nth~)
+    if depth == 0 {
+      match token {
+        IN => return true
+        EQUAL | SEMI(_) | FAT_ARROW | IF | EOF => return false
+        _ => ()
+      }
     }
-    LIDENT(name) => {
-      let loc = self.peek_location()
-      self.skip()
-      Some({ name, loc, })
+    match token {
+      LPAREN | LBRACKET | LBRACKET_BAR | LBRACE => depth += 1
+      RPAREN | RBRACKET | BAR_RBRACKET | RBRACE => {
+        if depth == 0 {
+          return false
+        }
+        depth -= 1
+      }
+      EOF => return false
+      _ => ()
     }
-    EXTEND => {
-      let loc = self.peek_location()
-      self.skip()
-      Some({ name: "extend", loc, })
-    }
-    other => {
-      let loc = self.peek_location()
-      self.report_unexpected(other, [TK_LIDENT, TK_EXTEND, TK_UNDERSCORE], loc)
-      self.panic() |> ignore
-      None
-    }
+    nth += 1
   }
+  false
 }
 
 ///|
@@ -2603,6 +2606,9 @@ fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
     )
   }
 
+  if self.next_for_header_has_in() {
+    return self.parse_foreach_loop(spos~, label~)
+  }
   match self.peek_token() {
     SEMI(_) => self.parse_for_loop(spos~, label~)
     LBRACE => {
@@ -2612,11 +2618,7 @@ fn State::parse_for_expr(self : Self, label~ : @syntax.Label?) -> @syntax.Expr {
       })
       self.parse_for_loop(spos~, label~)
     }
-    UNDERSCORE | IN =>
-      // The case of `in` is actually syntax-incorrect,
-      // but it is very likely a `for .. in` loop,
-      // so we treat it as `for .. in` for better error message & recovery.
-      self.parse_foreach_loop(spos~, label~)
+    UNDERSCORE | IN => self.parse_foreach_loop(spos~, label~)
     LIDENT(_) | EXTEND =>
       match self.peek_token(nth=1) {
         EQUAL => self.parse_for_loop(spos~, label~)
@@ -2639,12 +2641,12 @@ fn State::parse_foreach_loop(
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  let (binders, _) = self.series1_with_follow(
+  let (patterns, _) = self.series1_with_follow(
     delim=TK_COMMA,
     follow_set=[TK_IN],
-    State::parse_foreach_binder,
+    State::parse_pattern,
   )
-  let binders = @list.List(binders)
+  let patterns = @list.List(patterns)
   self.expect_token(TK_IN)
   let expr = self.parse_expr()
   let (init, continue_block) = if self.peek_token() is SEMI(_) {
@@ -2680,7 +2682,7 @@ fn State::parse_foreach_loop(
   let where_clause = self.parse_where_clause()
   let loc = self.loc_start_with(spos)
   ForEach(
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -3459,8 +3461,14 @@ fn State::parse_arrow_fn_body(
   self : Self,
   explicit_brace_body~ : Bool,
 ) -> @syntax.Expr {
-  if explicit_brace_body && self.peek_token() is LBRACE {
-    self.parse_block_expr()
+  if explicit_brace_body {
+    if self.peek_token() is LBRACE {
+      self.parse_block_expr()
+    } else {
+      let loc = self.peek_location()
+      self.report_failed_to_parse(self.peek_token(), "`{ ... }`", loc)
+      self.parse_infix_expr(parsed=None)
+    }
   } else {
     self.parse_expr_stmt_no_break_continue_return()
   }
@@ -3585,7 +3593,28 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
   }
   let spos = self.peek_spos_with_parsed(parsed~)
   let mut lhs = self.parse_infix_expr(parsed~)
+  let mut pipe_mode = 0 // 0: none, 1: forward, 2: reverse
+  let mut dropping = false
   while self.peek_token() is (PIPE | PIPE_LEFT) {
+    let op = self.peek_token()
+    if !dropping {
+      let msg = match (pipe_mode, op) {
+        (1, PIPE_LEFT) | (2, PIPE) =>
+          Some(
+            "Parse error, `|>` and `<|` cannot be mixed in the same pipe expression.",
+          )
+        (2, PIPE_LEFT) => Some("Parse error, `<|` cannot be chained.")
+        _ => None
+      }
+      if msg is Some(msg) {
+        self.report_error({ loc: self.peek_location(), msg, })
+        dropping = true
+      } else if op is PIPE {
+        pipe_mode = 1
+      } else {
+        pipe_mode = 2
+      }
+    }
     match self.peek_token() {
       PIPE => {
         self.skip()
@@ -3628,7 +3657,9 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
           }
         }
         let loc = self.loc_start_with(spos)
-        lhs = Pipe(lhs~, rhs~, loc~)
+        if !dropping {
+          lhs = Pipe(lhs~, rhs~, loc~)
+        }
       }
       PIPE_LEFT => {
         self.skip()
@@ -3637,7 +3668,9 @@ fn State::parse_pipe_expr(self : Self, parsed~ : @syntax.Expr?) -> @syntax.Expr 
           Err(parsed) => self.parse_infix_expr(parsed~)
         }
         let loc = self.loc_start_with(spos)
-        lhs = RevPipe(lhs~, rhs~, loc~)
+        if !dropping {
+          lhs = RevPipe(lhs~, rhs~, loc~)
+        }
       }
       _ => panic()
     }
@@ -4829,27 +4862,7 @@ fn State::parse_template_literal_expr(self : Self) -> @syntax.Expr {
 
 ///|
 fn State::next_is_foreach_comprehension(self : Self) -> Bool {
-  let mut nth = 0
-  match self.peek_token(nth~) {
-    LIDENT(_) | EXTEND | UNDERSCORE => ()
-    _ => return false
-  }
-  while true {
-    nth += 1
-    match self.peek_token(nth~) {
-      IN => return true
-      COMMA => {
-        nth += 1
-        match self.peek_token(nth~) {
-          IN => return true
-          LIDENT(_) | EXTEND | UNDERSCORE => continue
-          _ => return false
-        }
-      }
-      _ => return false
-    }
-  }
-  false
+  self.next_for_header_has_in()
 }
 
 ///|
@@ -4864,12 +4877,12 @@ fn State::parse_list_comprehension(
   let for_spos = self.peek_spos()
   self.expect_token(TK_FOR)
   let kind : @syntax.ListComprehensionKind = if self.next_is_foreach_comprehension() {
-    let (binders, _) = self.series1_with_follow(
+    let (patterns, _) = self.series1_with_follow(
       delim=TK_COMMA,
       follow_set=[TK_IN],
-      State::parse_foreach_binder,
+      State::parse_pattern,
     )
-    let binders = @list.List(binders)
+    let patterns = @list.List(patterns)
     self.expect_token(TK_IN)
     let expr = self.parse_infix_expr(parsed=None)
     let (init, continue_block) = if self.peek_token() is SEMI(_) {
@@ -4895,7 +4908,7 @@ fn State::parse_list_comprehension(
     } else {
       (@list.empty(), @list.empty())
     }
-    Foreach(binders~, expr~, init~, continue_block~)
+    Foreach(patterns~, expr~, init~, continue_block~)
   } else {
     let (binders, _) = self.series_with_follow(
       delim=TK_COMMA,
