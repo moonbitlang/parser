@@ -188,6 +188,8 @@ test "deprecated syntax rejection matrix" {
     ("fn f() { loop 0 { value => value } else { 0 } }", "loop_else_removed.mbt"),
     ("fn f() { g!() }", "call_bang_removed.mbt"),
     ("fn f(x : X) { x.g!() }", "method_call_bang_removed.mbt"),
+    ("fn f(x : X) { x..g!() }", "dotdot_call_bang_removed.mbt"),
+    ("fn f() { x |> g!() }", "pipeline_call_bang_removed.mbt"),
     ("fn f() { 1 catch! { _ => 0 } }", "postfix_catch_bang_removed.mbt"),
     ("fn f() { try 1 catch! { _ => 0 } }", "try_catch_bang_removed.mbt"),
     ("fn f() -> Int! { 0 }", "old_default_error_annotation_removed.mbt"),
