@@ -359,6 +359,7 @@ pub fn CstNode::pattern_array(loc~ : @basic.Location, source_span~ : (Int, Int),
 pub fn CstNode::pattern_constant(loc~ : @basic.Location, source_span~ : (Int, Int), op? : Self, operator? : Self, error? : Self, token? : Self, constant? : Self, semantic_constant? : Self) -> Self
 pub fn CstNode::pattern_constr(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_constr_any(loc~ : @basic.Location, source_span~ : (Int, Int), type_~ : Self, op~ : Self, wildcard~ : Self) -> Self
+pub fn CstNode::pattern_constr_unknown(loc~ : @basic.Location, source_span~ : (Int, Int), type_~ : Self, op~ : Self, wildcard~ : Self) -> Self
 pub fn CstNode::pattern_constraint(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstRecoveryChild]) -> Self
 pub fn CstNode::pattern_group(loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::pattern_map(loc~ : @basic.Location, source_span~ : (Int, Int), trivia? : Self, body~ : Self, openness? : Self) -> Self
@@ -673,6 +674,7 @@ pub enum NodeKind {
   Pattern_Map
   Pattern_Constr
   Pattern_ConstrAny
+  Pattern_ConstrUnknown
   Pattern_SpecialConstr
   Pattern_Or
   Pattern_Alias

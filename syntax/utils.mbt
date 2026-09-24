@@ -565,6 +565,7 @@ pub fn Pattern::loc(self : Self) -> Location {
     | Or(loc~, ..)
     | Constr(loc~, ..)
     | ConstrAny(loc~, ..)
+    | ConstrUnknown(loc~, ..)
     | Constraint(loc~, ..)
     | Constant(loc~, ..)
     | Array(loc~, ..)

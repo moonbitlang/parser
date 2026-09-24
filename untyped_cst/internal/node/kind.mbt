@@ -219,6 +219,8 @@ pub enum NodeKind {
   Pattern_Constr
   /// Corresponds to `@syntax.Pattern::ConstrAny`.
   Pattern_ConstrAny
+  /// Corresponds to `@syntax.Pattern::ConstrUnknown`.
+  Pattern_ConstrUnknown
   /// Corresponds to `@syntax.Pattern::SpecialConstr`.
   Pattern_SpecialConstr
   /// Corresponds to `@syntax.Pattern::Or`.
@@ -835,6 +837,7 @@ pub fn NodeKind::is_pattern(self : NodeKind) -> Bool {
     | Pattern_Map
     | Pattern_Constr
     | Pattern_ConstrAny
+    | Pattern_ConstrUnknown
     | Pattern_SpecialConstr
     | Pattern_Or
     | Pattern_Alias
