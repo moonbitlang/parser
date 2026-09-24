@@ -51,6 +51,18 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
           }),
         loc=node.loc,
       )
+    Pattern_ConstrUnknown =>
+      ConstrUnknown(
+        type_name=node
+          .first_child_with_label("type")
+          .map(lower_type_name_from_type_node)
+          .unwrap_or({
+            name: @syntax.LongIdent::dummy(),
+            is_object: false,
+            loc: node.loc,
+          }),
+        loc=node.loc,
+      )
     Pattern_SpecialConstr => lower_special_constructor_pattern(node)
     Pattern_Or => {
       let lhs = node

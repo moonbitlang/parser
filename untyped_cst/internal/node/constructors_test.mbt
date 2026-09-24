@@ -334,6 +334,7 @@ fn constructor_kind_index(kind : @node.NodeKind) -> Int {
     List_ForEachBindingList => 325
     List_WithBindingList => 326
     Leaf(_) => 327
+    Pattern_ConstrUnknown => 328
   }
 }
 
@@ -1059,8 +1060,15 @@ test "every NodeKind has one typed CstNode constructor" {
       loc~,
       source_span=span,
     ),
+    @node.CstNode::pattern_constr_unknown(
+      loc~,
+      source_span=span,
+      type_=missing,
+      op=missing,
+      wildcard=missing,
+    ),
   ]
-  @test.assert_eq(nodes.length(), 328)
+  @test.assert_eq(nodes.length(), 329)
   for i, node in nodes {
     @test.assert_eq(constructor_kind_index(node.kind), i)
   }

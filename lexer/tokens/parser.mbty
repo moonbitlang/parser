@@ -2290,6 +2290,9 @@ simple_pattern -> Pattern
   | type_name "::" "_" {
     ConstrAny(type_name = $1, loc = mk_loc($sloc))
   }
+  | type_name "::" ".." {
+    ConstrUnknown(type_name = $1, loc = mk_loc($sloc))
+  }
   // bits constr pattern `i32(args)`
   // To disambiguate with pattern variable, the args list must be present.
   | binder delimited("(", constr_pat_arguments_no_open, ")") {

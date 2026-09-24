@@ -725,6 +725,8 @@ pub(all) enum Pattern {
   )
   /// `T::_`
   ConstrAny(type_name~ : TypeName, loc~ : Location)
+  /// `T::..`
+  ConstrUnknown(type_name~ : TypeName, loc~ : Location)
   /// `pat1 | pat2`
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : Location)
   /// `(p1, p2, p3)`

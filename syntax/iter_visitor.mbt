@@ -264,6 +264,7 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : Location) -> Unit = _
+  fn visit_Pattern_ConstrUnknown(Self, type_name~ : TypeName, loc~ : Location) -> Unit = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : Location) -> Unit = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : Location) -> Unit = _
   fn visit_Pattern_Var(Self, Binder) -> Unit = _
@@ -2018,6 +2019,11 @@ impl IterVisitor with fn visit_Pattern_ConstrAny(env, type_name~, loc~) {
 }
 
 ///|
+impl IterVisitor with fn visit_Pattern_ConstrUnknown(env, type_name~, loc~) {
+  IterVisitor::visit_Pattern_ConstrUnknown(env.base(), type_name~, loc~)
+}
+
+///|
 impl IterVisitor with fn visit_Pattern_Or(env, pat1~, pat2~, loc~) {
   IterVisitor::visit_Pattern_Or(env.base(), pat1~, pat2~, loc~)
 }
@@ -3314,6 +3320,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
       env.0.visit_Pattern_Constr(constr~, args~, is_open~, loc~)
     ConstrAny(type_name~, loc~) =>
       env.0.visit_Pattern_ConstrAny(type_name~, loc~)
+    ConstrUnknown(type_name~, loc~) =>
+      env.0.visit_Pattern_ConstrUnknown(type_name~, loc~)
     Or(pat1~, pat2~, loc~) => env.0.visit_Pattern_Or(pat1~, pat2~, loc~)
     Tuple(pats~, loc~) => env.0.visit_Pattern_Tuple(pats~, loc~)
     Var(binder) => env.0.visit_Pattern_Var(binder)
@@ -3398,6 +3406,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Pattern_ConstrAny(
+  env,
+  type_name~,
+  loc~,
+) {
+  ignore(loc)
+  env.0.visit_TypeName(type_name)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Pattern_ConstrUnknown(
   env,
   type_name~,
   loc~,
@@ -5128,6 +5146,7 @@ pub extend IterVisitorBase with IterVisitor::{
   visit_ErrorType_DefaultErrorType,
   visit_Expr_LetMut,
   visit_Pattern_ConstrAny,
+  visit_Pattern_ConstrUnknown,
   visit_TypeVarConstraint,
   visit_DotDotBinder_BinderAs,
   visit_Expr_Guard,
