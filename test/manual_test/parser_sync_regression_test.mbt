@@ -31,6 +31,34 @@ fn assert_parser_sync(source : String, name : String) -> Unit raise Error {
 }
 
 ///|
+test "struct constructor fixture agrees across source parsers" {
+  let source = @fs.read_file_to_string(
+    "test/sync_test/__snapshot__/parse_test_struct_constructor.mbt",
+  ) catch {
+    err => fail("failed to read struct constructor fixture: \{Repr(err)}")
+  }
+  assert_parser_sync(source, "parse_test_struct_constructor.mbt")
+}
+
+///|
+test "struct constructor placement and body restrictions agree" {
+  for
+    source in [
+      "struct S { fn new() -> S; fn new() -> S }", "struct S { fn new() -> S; value : Int }",
+      "struct S { fn new() -> S {} }",
+    ] {
+    let (_, hand_reports) = @parser.parse_string(source, parser=Handrolled)
+    let (_, yacc_reports) = @parser.parse_string(source, parser=MoonYacc)
+    let cst_reports = @untyped_cst.parse_structure(source).diagnostics_view()
+    if hand_reports.is_empty() ||
+      yacc_reports.is_empty() ||
+      cst_reports.is_empty() {
+      fail("a source parser accepted an invalid struct constructor: \{source}")
+    }
+  }
+}
+
+///|
 test "foreach binders accept a trailing comma" {
   let source =
     #|fn foreach_trailing(xs, pairs) {

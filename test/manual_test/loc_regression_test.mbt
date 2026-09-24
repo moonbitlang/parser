@@ -628,3 +628,71 @@ test "labelled loop expression locations agree across all parsers" {
     )
   }
 }
+
+///|
+fn find_record_constructor_params_loc(
+  impls : @syntax.Impls,
+) -> @basic.Location raise Error {
+  for impl_ in impls {
+    match impl_ {
+      TopTypeDef({ components: Record(constr_decl=Some(constr), ..), .. }) =>
+        return constr.params_loc
+      _ => ()
+    }
+  }
+  fail("expected a record constructor")
+}
+
+///|
+fn parse_record_constructor_params_loc(
+  source : String,
+  parser : @parser.Parser,
+) -> @basic.Location raise Error {
+  let name = "record_constructor_params_loc_regression.mbt"
+  let (impls, diagnostics) = @parser.parse_string(source, name~, parser~)
+  if !diagnostics.is_empty() {
+    fail("record-constructor fixture was rejected by {parser}: {diagnostics}")
+  }
+  find_record_constructor_params_loc(impls)
+}
+
+///|
+fn parse_record_constructor_params_loc_from_cst(
+  source : String,
+) -> @basic.Location raise Error {
+  let name = "record_constructor_params_loc_regression.mbt"
+  let result = @untyped_cst.parse_structure(source, name~)
+  if !result.diagnostics_view().is_empty() {
+    fail("record-constructor fixture was rejected by CST parser")
+  }
+  let (impls, diagnostics) = result.to_impls()
+  if !diagnostics.is_empty() {
+    fail("record-constructor CST lowering produced diagnostics: {diagnostics}")
+  }
+  find_record_constructor_params_loc(impls)
+}
+
+///|
+test "record constructor params locations agree across all parsers" {
+  let cases : Array[(String, Int, Int, String)] = [
+    ("struct Empty { fn new() -> Empty }", 22, 22, ""),
+    ("struct One { fn new(Int) -> One }", 20, 23, "Int"),
+    (
+      "struct Many { fn new(  Int, label~ : String,  ) -> Many }", 23, 44, "Int, label~ : String,",
+    ),
+  ]
+  for (source, expected_start, expected_end, expected_text) in cases {
+    let hand = parse_record_constructor_params_loc(source, Handrolled)
+    let yacc = parse_record_constructor_params_loc(source, MoonYacc)
+    let cst = parse_record_constructor_params_loc_from_cst(source)
+    for loc in [hand, yacc, cst] {
+      @test.assert_eq(loc.start.cnum, expected_start)
+      @test.assert_eq(loc.end.cnum, expected_end)
+      @test.assert_eq(source[loc.start.cnum:loc.end.cnum], expected_text[:])
+    }
+    @test.assert_eq(hand.start, yacc.start)
+    @test.assert_eq(hand.end, yacc.end)
+    @test.assert_eq(hand.start, cst.start)
+    @test.assert_eq(hand.end, cst.end)
+  }
+}

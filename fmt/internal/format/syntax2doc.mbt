@@ -1154,6 +1154,63 @@ fn Fmt::field_decl(fmt : Self, field_decl : @syntax.FieldDecl) -> Doc {
 }
 
 ///|
+fn Fmt::record_constr_decl(fmt : Self, decl : @syntax.FunDecl) -> Doc {
+  let {
+    name,
+    is_async,
+    decl_params,
+    quantifiers,
+    return_type,
+    error_type,
+    nocancel_,
+    attrs,
+    doc,
+    loc,
+    ..
+  } = decl
+  ignore(fmt.checkpoint(loc.start))
+  let before = fmt.placeholder()
+  let doc = fmt.docstring(doc, is_toplevel=false)
+  let attrs = fmt.attributes(attrs)
+  let async_ = if is_async is Some(_) { text("async") + space } else { empty }
+  let quantifiers = fmt.type_var_binders(
+    quantifiers,
+    lbracket=None,
+    commas=@comment.NodeArray::empty(),
+    tvar_tables=@comment.NodeTableArray::empty(),
+    rbracket=None,
+  )
+  let params = group(
+    fmt.parameters(
+      decl_params.unwrap_or(@list.empty()),
+      lparen=None,
+      rparen=None,
+      commas=@comment.NodeArray::empty(),
+      param_tables=@comment.NodeTableArray::empty(),
+      kind=TraitMethod,
+    ),
+  )
+  let result = fmt.return_and_error_type_annotation(
+    return_type,
+    normalize_async_error_type(error_type, is_async),
+    nocancel_,
+  )
+  let after = fmt.placeholder()
+  ignore(fmt.checkpoint(loc.end))
+  before +
+  doc +
+  attrs +
+  async_ +
+  text("fn") +
+  quantifiers +
+  space +
+  fmt.binder(name) +
+  params +
+  result +
+  after
+}
+
+///|
 fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
   ignore(fmt) //TODO: use fmt to access comments
   let {
@@ -1253,7 +1310,7 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       constrs +
       deriving
     }
-    Record(fields~) => {
+    Record(fields~, constr_decl~) => {
       let struct_ = text("struct")
       let tycon = space + text(tycon)
       let params = fmt.type_decl_binders(params)
@@ -1261,9 +1318,20 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       let fields_doc = space +
         fmt.commented_braces(
           fn() {
-            series(fields, semi, x => fmt.field_decl(x), separator=fn() {
+            let fields_doc = series(fields, semi, x => fmt.field_decl(x), separator=fn() {
               fmt.semi_placeholder()
             })
+            match constr_decl {
+              None => fields_doc
+              Some(decl) => {
+                let separation = if fields.is_empty() {
+                  empty
+                } else {
+                  hardline + hardline
+                }
+                fields_doc + separation + fmt.record_constr_decl(decl)
+              }
+            }
           },
           force_newline=true,
         )

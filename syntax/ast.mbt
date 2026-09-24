@@ -145,8 +145,8 @@ pub(all) enum TypeDesc {
   Variant(@list.List[ConstrDecl])
   /// `extenum T += { C1; C2 }`
   ExtendEnum(target~ : TypeName, constructors~ : @list.List[ConstrDecl])
-  /// `struct T { field1: T1; field2: T2 }`
-  Record(fields~ : @list.List[FieldDecl])
+  /// `struct T { field1: T1; fn new() -> T }`
+  Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
   /// `struct T (T1,T2)`
   TupleStruct(@list.List[Type])
   Alias(Type)

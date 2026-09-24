@@ -598,7 +598,7 @@ pub(all) enum TypeDesc {
   Error(ExceptionDecl)
   Variant(@list.List[ConstrDecl])
   ExtendEnum(target~ : TypeName, constructors~ : @list.List[ConstrDecl])
-  Record(fields~ : @list.List[FieldDecl])
+  Record(fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?)
   TupleStruct(@list.List[Type])
   Alias(Type)
 } derive(@debug.Debug)
@@ -684,7 +684,7 @@ pub(open) trait IterVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> Unit = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> Unit = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> Unit = _
-  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> Unit = _
+  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?) -> Unit = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> Unit = _
   fn visit_TypeDesc_Alias(Self, Type) -> Unit = _
   fn visit_Hole(Self, Hole) -> Unit = _
@@ -891,7 +891,7 @@ pub(open) trait MapVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> TypeDesc = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> TypeDesc = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> TypeDesc = _
-  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> TypeDesc = _
+  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl], constr_decl~ : FunDecl?) -> TypeDesc = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> TypeDesc = _
   fn visit_TypeDesc_Alias(Self, Type) -> TypeDesc = _
   fn visit_Hole(Self, Hole) -> Hole = _

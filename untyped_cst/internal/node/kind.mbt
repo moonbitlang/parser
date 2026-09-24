@@ -382,6 +382,8 @@ pub enum NodeKind {
   Binding_Regex
   /// Corresponds to `@syntax.TraitMethodDecl`.
   TraitMethod_Declaration
+  /// Corresponds to the optional `FunDecl` in `TypeDesc::Record`.
+  StructConstructor_Declaration
 
   // Names and accessors corresponding to AST helper types.
   /// Scalar identifier component used to build AST names; no standalone AST type.

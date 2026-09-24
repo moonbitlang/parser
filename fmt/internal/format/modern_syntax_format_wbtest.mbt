@@ -41,6 +41,32 @@ fn assert_modern_syntax_format_pipeline(source : String) -> String raise {
 }
 
 ///|
+test "record constructors format without losing semantics" {
+  let simple = assert_modern_syntax_format_pipeline(
+    "struct S{x:Int;fn new(x:Int)->S}",
+  )
+  if !simple.contains("fn new(x : Int) -> S") {
+    fail("record constructor missing from formatted source:\n\{simple}")
+  }
+  let decorated =
+    #|struct S {
+    #|  x : Int
+    #|  /// constructor documentation
+    #|  #callsite(autofill(loc))
+    #|  async fn[T : Eq] new(x~ : Int, loc~ : SourceLoc) -> S raise
+    #|}
+  let formatted = assert_safe_format(decorated)
+  if !formatted.contains("constructor documentation") ||
+    !formatted.contains("#callsite") ||
+    !formatted.contains("async fn[") ||
+    !formatted.contains("new(x~ : Int") {
+    fail(
+      "record constructor metadata missing from formatted source:\n\{formatted}",
+    )
+  }
+}
+
+///|
 test "async default raise normalizes in every formatter context" {
   let cases = [
     (

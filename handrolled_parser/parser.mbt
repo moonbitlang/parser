@@ -519,7 +519,7 @@ fn State::parse_trait_method_decl(self : Self) -> @syntax.TraitMethodDecl {
   }
   let func_name = self.parse_binder(context="trait method name")
   self.pop_sync(TK_LPAREN)
-  let params = self.parse_trait_method_params()
+  let (params, _) = self.parse_trait_method_params()
   let (return_type, error_type, nocancel_) = self.parse_func_return_type()
   let has_default = if self.peek_token() is EQUAL {
     self.skip()
@@ -1442,15 +1442,91 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
 }
 
 ///|
+priv enum StructMember {
+  StructField(@syntax.FieldDecl)
+  StructConstructor(@syntax.FunDecl)
+}
+
+///|
 fn State::parse_struct_body(self : State) -> @syntax.TypeDesc {
-  let fields = self.surround_series(
+  let members = self.surround_series(
     invalid_delims=[TK_COMMA],
     left=TK_LBRACE,
     right=TK_RBRACE,
     delim=TK_SEMI,
-    State::parse_field_decl,
+    State::parse_struct_member,
   )
-  Record(fields=List(fields))
+  let fields : Array[@syntax.FieldDecl] = []
+  let mut constr_decl : @syntax.FunDecl? = None
+  for entry in members {
+    match entry {
+      StructField(field) =>
+        if constr_decl is Some(_) {
+          self.report_error({
+            loc: field.loc,
+            msg: "Struct fields must precede the constructor.",
+          })
+        } else {
+          fields.push(field)
+        }
+      StructConstructor(decl) =>
+        if constr_decl is Some(_) {
+          self.report_error({
+            loc: decl.loc,
+            msg: "A struct can have only one constructor.",
+          })
+        } else {
+          constr_decl = Some(decl)
+        }
+    }
+  }
+  Record(fields=List(fields), constr_decl~)
+}
+
+///|
+fn State::parse_struct_member(self : State) -> StructMember {
+  let spos = self.peek_spos()
+  let attrs = self.parse_attributes()
+  match self.peek_token() {
+    FN | ASYNC =>
+      StructConstructor(self.parse_record_constr_decl(attrs~, spos~))
+    _ => StructField(self.parse_field_decl(attrs~, spos~))
+  }
+}
+
+///|
+fn State::parse_record_constr_decl(
+  self : State,
+  attrs~ : @list.List[@attribute.Attribute],
+  spos~ : Position,
+) -> @syntax.FunDecl {
+  let is_async = if self.peek_token() is ASYNC {
+    let loc = self.peek_location()
+    self.skip()
+    Some(loc)
+  } else {
+    None
+  }
+  self.expect_token(TK_FN)
+  let quantifiers = self.parse_opt_typ_params()
+  let name = self.parse_binder(context="constructor name")
+  let (decl_params, params_loc) = self.parse_trait_method_params()
+  let (return_type, error_type, nocancel_) = self.parse_func_return_type()
+  {
+    type_name: None,
+    name,
+    is_async,
+    decl_params: Some(decl_params),
+    params_loc,
+    quantifiers,
+    return_type,
+    error_type,
+    nocancel_,
+    vis: Default,
+    doc: @syntax.DocString::empty(),
+    attrs,
+    loc: self.loc_start_with(spos),
+  }
 }
 
 ///|
@@ -1501,61 +1577,82 @@ fn State::parse_deriving_directive(self : Self) -> @syntax.DerivingDirective {
 }
 
 ///|
-fn State::parse_trait_method_params(self : State) -> @syntax.Parameters {
-  let params = self.surround_series(
-    delim=TK_COMMA,
-    left=TK_LPAREN,
-    right=TK_RPAREN,
-    fn(state) -> @syntax.Parameter {
-      match state.peek_token() {
-        // `label~ : Type`
-        POST_LABEL(binder_name) => {
-          let binder_loc = Location::trim_last_char(state.peek_location())
-          state.skip()
-          let binder : @syntax.Binder = { name: binder_name, loc: binder_loc, }
-          state.expect_token(TK_COLON)
-          let typ = state.parse_type()
-          Labelled(binder~, ty=Some(typ))
-        }
-        LIDENT(_) | EXTEND => {
-          let binder_loc = state.peek_location()
-          let binder_name = state.expect_lident(context="parameter name")
-          let binder : @syntax.Binder = { name: binder_name, loc: binder_loc, }
-          let has_question = state.peek_token() is QUESTION
-          if has_question {
-            state.skip()
+fn State::parse_trait_method_params(
+  self : State,
+) -> (@syntax.Parameters, Location) {
+  let open_loc = self.peek_location()
+  let (params, params_loc) = self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(
+    state,
+  ) {
+    let params = state.series_with_follow(
+        delim=TK_COMMA,
+        follow_set=[TK_RPAREN],
+        fn(state) -> @syntax.Parameter {
+          match state.peek_token() {
+            // `label~ : Type`
+            POST_LABEL(binder_name) => {
+              let binder_loc = Location::trim_last_char(state.peek_location())
+              state.skip()
+              let binder : @syntax.Binder = {
+                name: binder_name,
+                loc: binder_loc,
+              }
+              state.expect_token(TK_COLON)
+              let typ = state.parse_type()
+              Labelled(binder~, ty=Some(typ))
+            }
+            LIDENT(_) | EXTEND => {
+              let binder_loc = state.peek_location()
+              let binder_name = state.expect_lident(context="parameter name")
+              let binder : @syntax.Binder = {
+                name: binder_name,
+                loc: binder_loc,
+              }
+              let has_question = state.peek_token() is QUESTION
+              if has_question {
+                state.skip()
+              }
+              state.expect_token(TK_COLON)
+              let typ = state.parse_type()
+              if has_question {
+                QuestionOptional(binder~, ty=Some(typ))
+              } else {
+                Positional(binder~, ty=Some(typ))
+              }
+            }
+            tok if first_type_.contains(tok.kind()) => {
+              let typ = state.parse_type()
+              let loc = typ.loc()
+              DiscardPositional(ty=Some(typ), loc~)
+            }
+            other => {
+              let other_loc = state.peek_location()
+              state.report_unexpected(
+                other,
+                [TK_POST_LABEL, ..first_type_],
+                other_loc,
+              )
+              let loc = state.panic()
+              DiscardPositional(ty=None, loc~)
+            }
           }
-          state.expect_token(TK_COLON)
-          let typ = state.parse_type()
-          if has_question {
-            QuestionOptional(binder~, ty=Some(typ))
-          } else {
-            Positional(binder~, ty=Some(typ))
-          }
-        }
-        tok if first_type_.contains(tok.kind()) => {
-          let typ = state.parse_type()
-          let loc = typ.loc()
-          DiscardPositional(ty=Some(typ), loc~)
-        }
-        other => {
-          let other_loc = state.peek_location()
-          state.report_unexpected(
-            other,
-            [TK_POST_LABEL, ..first_type_],
-            other_loc,
-          )
-          let loc = state.panic()
-          DiscardPositional(ty=None, loc~)
-        }
-      }
-    },
-  )
-  params |> List
+        },
+      ).0
+    let params_loc : Location = match params.get(0) {
+      Some(first) => { start: first.loc().start, end: state.parsed_position, }
+      None => { start: open_loc.end, end: open_loc.end, }
+    }
+    (params, params_loc)
+  })
+  (List(params), params_loc)
 }
 
 ///|
-fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
+fn State::parse_field_decl(
+  self : Self,
+  attrs~ : @list.List[@attribute.Attribute],
+  spos~ : Position,
+) -> @syntax.FieldDecl {
   if self.mode is Panic(loc~, ..) {
     return {
       name: { label: "?field_name", loc, },
@@ -1563,12 +1660,10 @@ fn State::parse_field_decl(self : Self) -> @syntax.FieldDecl {
       mut_: false,
       vis: Default,
       doc: DocString::empty(),
-      attrs: @list.empty(),
+      attrs,
       loc,
     }
   }
-  let spos = self.peek_spos()
-  let attrs = self.parse_attributes()
   let vis = self.parse_visibility()
   let mut_ = if self.peek_token() is MUTABLE {
     self.expect_token(TK_MUTABLE)

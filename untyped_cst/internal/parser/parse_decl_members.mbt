@@ -585,8 +585,7 @@ fn parse_struct_field_item(state : ParserState) -> CstNode {
     }
   }
   match state.peek() {
-    Some((FN | ASYNC, _, _)) =>
-      return parse_invalid_struct_constructor(state, children)
+    Some((FN | ASYNC, _, _)) => return parse_struct_constructor(state, children)
     _ => ()
   }
   match state.peek() {
@@ -688,17 +687,15 @@ fn parse_struct_field_item(state : ParserState) -> CstNode {
 }
 
 ///|
-fn parse_invalid_struct_constructor(
+fn parse_struct_constructor(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> CstNode {
-  match state.peek() {
-    Some((found, start, end)) =>
-      state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TK_LIDENT,
-        TK_EXTEND,
-      ])
-    None => ()
+  if children
+    .iter()
+    .any(fn(entry) { entry.0 is Some("vis") || entry.0 is Some("mut") }) {
+    let pos = state.current_position()
+    state.report(mk_loc(pos, pos), "Constructor cannot have field modifiers.")
   }
   if state.current_is(TK_ASYNC) {
     if state.consume_any() is Some(kw) {
@@ -715,6 +712,7 @@ fn parse_invalid_struct_constructor(
       ()
     }
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_LBRACKET) {
     push_child(
       children,
@@ -722,6 +720,7 @@ fn parse_invalid_struct_constructor(
       parse_fun_type_parameter_list(state),
     )
   }
+  push_children(children, state.consume_trivia())
   match state.peek() {
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
       if state.consume_any() is Some(name) {
@@ -729,25 +728,30 @@ fn parse_invalid_struct_constructor(
       } else {
         ()
       }
-    _ => ()
+    _ => {
+      state.report_expected_tokens([TK_LIDENT, TK_EXTEND])
+      push_child(
+        children,
+        Some("name"),
+        state.missing_token_node_silent(TK_LIDENT),
+      )
+    }
   }
   if state.current_is(TK_LPAREN) {
-    push_child(children, Some("params"), parse_parameter_list(state))
+    push_child(children, Some("params"), parse_trait_method_param_list(state))
+  } else {
+    state.report_expected_tokens([TK_LPAREN])
+    push_child(
+      children,
+      Some("params"),
+      state.missing_token_node_silent(TK_LPAREN),
+    )
   }
   if state.current_is(TK_THIN_ARROW) ||
     state.current_is(TK_RAISE) ||
     state.current_is(TK_NORAISE) ||
     state.current_is(TK_NOCANCEL) {
     push_child(children, Some("clause"), parse_func_return_type(state))
-  }
-  if state.current_is(TK_LBRACE) {
-    push_child(children, Some("body"), parse_block_expr(state))
-  } else {
-    push_child(
-      children,
-      Some("body"),
-      state.missing_token_node_with_expected(TK_LBRACE, [TK_LBRACE]),
-    )
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
@@ -781,28 +785,12 @@ fn parse_invalid_struct_constructor(
           entry.1.has_child_kind(fn(kind) { kind is Flag_Async })
         }),
       )
-      push_bool_marker(
-        children,
-        loc,
-        source_span,
-        "declare",
-        fn(loc, source_span, children) {
-          let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
-            _ => false
-          }
-          @node.CstNode::flag_declare(value~, loc~, source_span~)
-        },
-        children
-        .iter()
-        .any(fn(entry) {
-          entry.0 is Some("kw") &&
-          entry.1.has_child_kind(fn(kind) { kind is Flag_Declare })
-        }),
-      )
-
       let entries = declaration_children(children)
-      @node.CstNode::impl_function(loc~, source_span~, entries~)
+      @node.CstNode::struct_constructor_declaration(
+        loc~,
+        source_span~,
+        entries~,
+      )
     },
     children,
   )

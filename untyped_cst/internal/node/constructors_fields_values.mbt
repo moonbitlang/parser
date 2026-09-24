@@ -297,6 +297,20 @@ pub fn CstNode::trait_method_declaration(
 }
 
 ///|
+pub fn CstNode::struct_constructor_declaration(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstDeclarationChild],
+) -> CstNode {
+  node(
+    NodeKind::StructConstructor_Declaration,
+    loc,
+    source_span,
+    entries_from_cstdeclarationchild(entries),
+  )
+}
+
+///|
 pub fn CstNode::name_identifier(
   value~ : String,
   loc~ : Location,

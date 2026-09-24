@@ -955,11 +955,26 @@ fn parse_balanced_brace_group(
 
 ///|
 fn parse_struct_member_list(state : ParserState) -> CstNode {
+  let mut saw_constructor = false
   parse_delimited(
     state,
     TK_LBRACE,
     TK_RBRACE,
-    parse_struct_member_item,
+    fn(state) {
+      let item = parse_struct_member_item(state)
+      match item.kind {
+        StructConstructor_Declaration => {
+          if saw_constructor {
+            state.report(item.loc, "A struct can have only one constructor.")
+          }
+          saw_constructor = true
+        }
+        Field_Declaration if saw_constructor =>
+          state.report(item.loc, "Struct fields must precede the constructor.")
+        _ => ()
+      }
+      item
+    },
     fn(loc, source_span, children) {
       let entries = list_children(children)
       @node.CstNode::list_struct_field_list(loc~, source_span~, entries~)

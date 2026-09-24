@@ -83,7 +83,7 @@ pub fn attach_docstrings_to_impls(
               constr.doc = previous
               last_pos = constr.loc.end
             })
-          Record(fields~) =>
+          Record(fields~, constr_decl~) => {
             fields.each(field => {
               let previous = search_docstrings(last_pos, field.loc)
                 .map(make_doc)
@@ -91,6 +91,14 @@ pub fn attach_docstrings_to_impls(
               field.doc = previous
               last_pos = field.loc.end
             })
+            if constr_decl is Some(decl) {
+              let previous = search_docstrings(last_pos, decl.loc)
+                .map(make_doc)
+                .unwrap_or(@syntax.DocString::empty())
+              decl.doc = previous
+              last_pos = decl.loc.end
+            }
+          }
         }
       }
       TopFuncDef(fun_decl~, ..) => fun_decl.doc = doc

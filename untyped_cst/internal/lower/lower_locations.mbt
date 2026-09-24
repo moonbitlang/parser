@@ -98,6 +98,31 @@ fn lower_index_loc(node : CstNode) -> Location {
 }
 
 ///|
+fn lower_delimited_inner_loc(node : CstNode) -> Location {
+  let fallback = node
+    .first_child_with_label("open")
+    .map(open => open.loc.end)
+    .unwrap_or(node.loc.start)
+  let mut start = fallback
+  let mut end = fallback
+  let mut saw_item = false
+  for (label, child) in node.children {
+    match label {
+      Some("item") => {
+        if !saw_item {
+          start = child.loc.start
+          saw_item = true
+        }
+        end = child.loc.end
+      }
+      Some("sep") if saw_item => end = child.loc.end
+      _ => ()
+    }
+  }
+  { start, end, }
+}
+
+///|
 fn lower_multiline_string_loc(node : CstNode) -> Location {
   let tokens = node.children_with_label("token")
   match (tokens.get(0), tokens.last()) {

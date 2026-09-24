@@ -94,12 +94,18 @@ test "structure diagnostics come from CST parser recovery" {
     ("missing let pattern", "let = 1"),
     ("top-level recovery", "fn f(\nlet y = 1"),
     ("invalid question in block", "fn f() { ? }"),
-    ("removed struct constructor", "struct S { fn new() -> S }"),
   ]
   for case in cases {
     let (label, source) = case
     assert_structure_acceptance(label, source, false)
   }
+}
+
+///|
+test "struct constructor is accepted by handrolled and CST parsers" {
+  assert_structure_acceptance(
+    "struct constructor", "struct S { fn new() -> S }", true,
+  )
 }
 
 ///|

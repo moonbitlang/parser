@@ -31,6 +31,24 @@ test "semantic equivalence is reflexive for declarations" {
 }
 
 ///|
+test "declare let without initializer formats and remains a fixed point" {
+  let source =
+    #|declare  let value:Int
+    #|let initialized:Int=1
+    #|const ANSWER:Int=42
+  let formatted = assert_safe_format(source)
+  if !formatted.contains("declare let value : Int") {
+    fail("unexpected declaration formatting:\n\{formatted}")
+  }
+  assert_false(formatted.contains("declare let value : Int ="))
+  assert_true(formatted.contains("let initialized : Int = 1"))
+  assert_true(formatted.contains("const ANSWER : Int = 42"))
+  for invalid in ["let value", "declare let value ="] {
+    assert_eq(format(invalid, block_line=false), invalid)
+  }
+}
+
+///|
 test "modern effects and parser forms format safely" {
   let source =
     #|fn f(callback : async () -> Unit noraise + nocancel) nocancel {
