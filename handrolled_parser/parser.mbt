@@ -759,14 +759,23 @@ fn State::parse_alias_target(
 fn State::parse_import_package(self : Self) -> @syntax.ImportPackage {
   let path_loc = self.peek_location()
   let path = self.expect_string()
-  match self.peek_token() {
+  let alias_ = match self.peek_token() {
     PACKAGE_NAME(alias_name) => {
-      let alias_loc = self.peek_location()
       self.skip()
-      { path, alias_: Some(alias_name), loc: path_loc.merge(alias_loc), }
+      if self.peek_token() is STAR {
+        self.skip()
+        Some("*" + alias_name)
+      } else {
+        Some(alias_name)
+      }
     }
-    _ => { path, alias_: None, loc: path_loc, }
+    STAR => {
+      self.skip()
+      Some("*")
+    }
+    _ => None
   }
+  { path, alias_, loc: self.loc_start_with(path_loc.start), }
 }
 
 ///|
