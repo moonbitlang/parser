@@ -58,7 +58,6 @@ fn expr_token_kind_label(kind : TokenKind) -> String? {
     | TK_INFIX2
     | TK_INFIX1
     | TK_LEXMATCH
-    | TK_LEXMATCH_QUESTION
     | TK_LEXSCAN
     | TK_RANGE_EXCLUSIVE
     | TK_RANGE_INCLUSIVE
