@@ -889,7 +889,7 @@ fn lex_tokens(
       }
       (re"^(?:\*)", after=rest) => {
         env.add_token_with_loc(
-          INFIX3("*"),
+          STAR,
           start=env.calc_offset(input, base~),
           end=env.calc_offset(rest, base~),
         )

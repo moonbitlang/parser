@@ -55,6 +55,7 @@ fn expr_token_kind_label(kind : TokenKind) -> String? {
     | TK_PLUS_EQUAL
     | TK_INFIX4
     | TK_INFIX3
+    | TK_STAR
     | TK_INFIX2
     | TK_INFIX1
     | TK_LEXMATCH

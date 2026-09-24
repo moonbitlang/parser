@@ -118,6 +118,7 @@ pub impl ToJson for Token with fn to_json(self) {
     EOF => "EOF"
     AUGMENTED_ASSIGNMENT(str) => ["AUGMENTED_ASSIGNMENT", str]
     PLUS_EQUAL => "PLUS_EQUAL"
+    STAR => "STAR"
     INFIX4(str) => ["INFIX4", str]
     INFIX3(str) => ["INFIX3", str]
     INFIX2(str) => ["INFIX2", str]

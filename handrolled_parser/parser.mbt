@@ -2353,6 +2353,7 @@ fn is_binop(tok : Token) -> Bool {
     | PLUS
     | MINUS
     | INFIX3(_)
+    | STAR
     | INFIX4(_) => true
     _ => false
   }
@@ -2370,7 +2371,7 @@ fn get_binop_prior_assoc(tok : Token) -> (Int, Assocativity) {
     INFIX1(_) => (7, Left)
     INFIX2(_) => (8, Left)
     PLUS | MINUS => (9, Left)
-    INFIX3(_) => (10, Left)
+    INFIX3(_) | STAR => (10, Left)
     INFIX4(_) => (11, Left)
     _ => abort("not a binop!")
   }
@@ -2436,6 +2437,11 @@ fn State::parse_binop(self : Self) -> @syntax.Var {
       let loc = self.peek_location()
       self.expect_token(TK_INFIX3)
       { name: Ident(name=x), loc, }
+    }
+    STAR => {
+      let loc = self.peek_location()
+      self.expect_token(TK_STAR)
+      { name: Ident(name="*"), loc, }
     }
     INFIX4(x) => {
       let loc = self.peek_location()

@@ -75,6 +75,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | INFIX1(_)
     | INFIX4(_)
     | INFIX3(_)
+    | STAR
     | INFIX2(_)
     | IMPL
     | WITH
@@ -250,6 +251,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | INFIX1(_)
     | INFIX2(_)
     | INFIX3(_)
+    | STAR
     | INFIX4(_)
     | IMPLIES
     | AMPERAMPER
