@@ -84,13 +84,20 @@ fn attach_docstrings(
                 constr.doc = previous
               })
             }
-          Record(fields~) =>
+          Record(fields~, constr_decl~) => {
             fields.each(field => {
               let previous = skip_docstrings_before(field.loc.start)
                 .map(make_doc)
                 .unwrap_or(@syntax.DocString::empty())
               field.doc = previous
             })
+            if constr_decl is Some(decl) {
+              let previous = skip_docstrings_before(decl.loc.start)
+                .map(make_doc)
+                .unwrap_or(@syntax.DocString::empty())
+              decl.doc = previous
+            }
+          }
         }
       }
       TopFuncDef(fun_decl~, ..) => fun_decl.doc = doc

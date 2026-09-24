@@ -384,6 +384,7 @@ pub fn CstNode::regex_pattern_placeholder(loc~ : @basic.Location, source_span~ :
 pub fn CstNode::regex_pattern_reference(loc~ : @basic.Location, source_span~ : (Int, Int), name~ : ArrayView[Self], semantic_name? : Self, lex_scan_case_pattern? : Self) -> Self
 pub fn CstNode::regex_pattern_sequence(loc~ : @basic.Location, source_span~ : (Int, Int), lhs~ : Self, op~ : Self, rhs~ : Self) -> Self
 pub fn CstNode::string_payload(Self) -> String?
+pub fn CstNode::struct_constructor_declaration(loc~ : @basic.Location, source_span~ : (Int, Int), entries~ : ArrayView[CstDeclarationChild]) -> Self
 pub fn CstNode::stub_code(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::stub_function_name(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
 pub fn CstNode::stub_module_name(value~ : String, loc~ : @basic.Location, source_span~ : (Int, Int)) -> Self
@@ -750,6 +751,7 @@ pub enum NodeKind {
   Binding_ForEach
   Binding_Regex
   TraitMethod_Declaration
+  StructConstructor_Declaration
   Name_Identifier
   Name_Package
   LongIdent_Ident

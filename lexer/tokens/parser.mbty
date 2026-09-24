@@ -504,14 +504,15 @@ structure_item -> Impl
       }
     )
   }
-  | struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {
+  | struct_header "{" record_decl_body "}" deriving_directive_list {
     let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
+    let (fields, constr_decl) = $3
     TopTypeDef(
       {
         tycon,
         tycon_loc,
         params,
-        components: Record(fields=$3),
+        components: Record(fields~, constr_decl~),
         type_vis,
         doc : DocString::empty(),
         deriving: $5,
@@ -2449,6 +2450,38 @@ record_decl_field -> FieldDecl
       attrs: $1,
       doc: DocString::empty()
     }
+  }
+  ;
+
+record_constr_decl -> FunDecl
+  : attributes is_async "fn" optional_type_parameters binder "(" list_commas(trait_method_param) ")" func_return_type {
+    let (return_type, error_type, nocancel_) = $9
+    {
+      type_name: None,
+      name: $5,
+      is_async: $2,
+      decl_params: Some($7),
+      params_loc: mk_loc($loc($7)),
+      quantifiers: $4,
+      return_type,
+      error_type,
+      nocancel_,
+      vis: Default,
+      doc: DocString::empty(),
+      attrs: $1,
+      loc: mk_loc($sloc)
+    }
+  }
+  ;
+
+record_decl_body -> (List[FieldDecl], FunDecl?)
+  : { (@list.empty(), None) }
+  | record_constr_decl option(SEMI) { (@list.empty(), Some($1)) }
+  | non_empty_list_semi_rev_aux(record_decl_field) option(SEMI) {
+    ($1.rev(), None)
+  }
+  | non_empty_list_semi_rev_aux(record_decl_field) SEMI record_constr_decl option(SEMI) {
+    ($1.rev(), Some($3))
   }
   ;
 

@@ -212,15 +212,20 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
         ),
       })
     }
-    Record(fields~) =>
-      tagged_node("TypeDesc::Record", loc, {
+    Record(fields~, constr_decl~) => {
+      let children : Map[String, Json] = {
         "value": list_json_repr(
           "TypeDesc::Record::FieldList",
           loc,
           fields,
           FieldDecl::json_repr,
         ),
-      })
+      }
+      if constr_decl is Some(decl) {
+        children["constr_decl"] = decl.json_repr()
+      }
+      tagged_node("TypeDesc::Record", loc, children)
+    }
     TupleStruct(tys) => {
       let tys_loc = match tys {
         Empty => loc

@@ -424,7 +424,7 @@ fn lower_struct_decl(node : CstNode) -> @syntax.Impl {
     lower_simple_type_decl(node, components)
   } else if node.has_child_kind(fn(kind) { kind is TypeDesc_Record }) ||
     node.kind is Impl_RecordStruct {
-    lower_simple_type_decl(node, Record(fields=lower_struct_fields(node)))
+    lower_simple_type_decl(node, lower_record_desc(node))
   } else if node.first_child_with_label("body") is Some(body) {
     match body.kind {
       List_TupleStructTypeList =>
@@ -432,12 +432,19 @@ fn lower_struct_decl(node : CstNode) -> @syntax.Impl {
           node,
           TupleStruct(lower_tuple_struct_types(body)),
         )
-      _ =>
-        lower_simple_type_decl(node, Record(fields=lower_struct_fields(node)))
+      _ => lower_simple_type_decl(node, lower_record_desc(node))
     }
   } else {
-    lower_simple_type_decl(node, Record(fields=lower_struct_fields(node)))
+    lower_simple_type_decl(node, lower_record_desc(node))
   }
+}
+
+///|
+fn lower_record_desc(node : CstNode) -> @syntax.TypeDesc {
+  Record(
+    fields=lower_struct_fields(node),
+    constr_decl=lower_struct_constructor(node),
+  )
 }
 
 ///|
@@ -614,10 +621,13 @@ fn lower_constructor_param(node : CstNode) -> @syntax.ConstrParam {
 ///|
 fn lower_struct_fields(node : CstNode) -> List[@syntax.FieldDecl] {
   let fields : Array[@syntax.FieldDecl] = []
+  let mut saw_constructor = false
   if node.first_child_with_label("body") is Some(body) {
     for item in lower_item_children(body) {
       match item.kind {
-        Field_Declaration => fields.push(lower_struct_field(item))
+        StructConstructor_Declaration => saw_constructor = true
+        Field_Declaration if !saw_constructor =>
+          fields.push(lower_struct_field(item))
         _ => ()
       }
     }
@@ -625,6 +635,41 @@ fn lower_struct_fields(node : CstNode) -> List[@syntax.FieldDecl] {
     ()
   }
   lower_array_to_list(fields)
+}
+
+///|
+fn lower_struct_constructor(node : CstNode) -> @syntax.FunDecl? {
+  if node.first_child_with_label("body") is Some(body) {
+    for item in lower_item_children(body) {
+      if item.kind is StructConstructor_Declaration {
+        let (params, params_loc) = lower_trait_method_parameters(
+          item.first_child_with_label("params"),
+        )
+        return Some({
+          type_name: None,
+          name: lower_decl_name_binder(item),
+          is_async: lower_async_loc(item),
+          decl_params: Some(params),
+          params_loc,
+          quantifiers: lower_fun_quantifiers(item),
+          return_type: lower_return_type_from_clause(
+            item.first_child_with_label("clause"),
+          ),
+          error_type: lower_error_type_from_clause(
+            item.first_child_with_label("clause"),
+          ),
+          nocancel_: lower_nocancel_from_clause(
+            item.first_child_with_label("clause"),
+          ),
+          vis: Default,
+          attrs: lower_attrs(item),
+          doc: lower_empty_doc(),
+          loc: item.loc,
+        })
+      }
+    }
+  }
+  None
 }
 
 ///|
@@ -727,7 +772,7 @@ fn lower_trait_method_parameters(
     for item in lower_item_children(list) {
       params.push(lower_trait_method_parameter(item))
     }
-    (lower_array_to_list(params), list.loc)
+    (lower_array_to_list(params), lower_delimited_inner_loc(list))
   } else {
     (@list.empty(), lower_empty_loc())
   }

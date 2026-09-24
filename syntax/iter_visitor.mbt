@@ -81,7 +81,11 @@ pub(open) trait IterVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> Unit = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> Unit = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> Unit = _
-  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> Unit = _
+  fn visit_TypeDesc_Record(
+    Self,
+    fields~ : @list.List[FieldDecl],
+    constr_decl~ : FunDecl?,
+  ) -> Unit = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> Unit = _
   fn visit_TypeDesc_Alias(Self, Type) -> Unit = _
 
@@ -1617,8 +1621,8 @@ impl IterVisitor with fn visit_TypeDesc_Variant(env, constr_decls) {
 }
 
 ///|
-impl IterVisitor with fn visit_TypeDesc_Record(env, fields~) {
-  IterVisitor::visit_TypeDesc_Record(env.base(), fields~)
+impl IterVisitor with fn visit_TypeDesc_Record(env, fields~, constr_decl~) {
+  IterVisitor::visit_TypeDesc_Record(env.base(), fields~, constr_decl~)
 }
 
 ///|
@@ -2637,7 +2641,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
       env.0.visit_TypeName(target)
       constructors.each(x => env.0.visit_ConstrDecl(x))
     }
-    Record(fields~) => env.0.visit_TypeDesc_Record(fields~)
+    Record(fields~, constr_decl~) =>
+      env.0.visit_TypeDesc_Record(fields~, constr_decl~)
     TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
     Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
   }
@@ -2663,8 +2668,10 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeDesc_Record(
   env,
   fields~,
+  constr_decl~,
 ) {
   fields.each(x => env.0.visit_FieldDecl(x))
+  constr_decl.each(x => env.0.visit_FunDecl(x))
 }
 
 ///|

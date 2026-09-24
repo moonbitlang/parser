@@ -81,7 +81,11 @@ pub(open) trait MapVisitor {
   fn visit_TypeDesc(Self, TypeDesc) -> TypeDesc = _
   fn visit_TypeDesc_Error(Self, ExceptionDecl) -> TypeDesc = _
   fn visit_TypeDesc_Variant(Self, @list.List[ConstrDecl]) -> TypeDesc = _
-  fn visit_TypeDesc_Record(Self, fields~ : @list.List[FieldDecl]) -> TypeDesc = _
+  fn visit_TypeDesc_Record(
+    Self,
+    fields~ : @list.List[FieldDecl],
+    constr_decl~ : FunDecl?,
+  ) -> TypeDesc = _
   fn visit_TypeDesc_TupleStruct(Self, @list.List[Type]) -> TypeDesc = _
   fn visit_TypeDesc_Alias(Self, Type) -> TypeDesc = _
 
@@ -1610,8 +1614,8 @@ impl MapVisitor with fn visit_TypeDesc_Variant(env, constr_decls) {
 }
 
 ///|
-impl MapVisitor with fn visit_TypeDesc_Record(env, fields~) {
-  MapVisitor::visit_TypeDesc_Record(env.base(), fields~)
+impl MapVisitor with fn visit_TypeDesc_Record(env, fields~, constr_decl~) {
+  MapVisitor::visit_TypeDesc_Record(env.base(), fields~, constr_decl~)
 }
 
 ///|
@@ -2646,7 +2650,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc
       let constructors = constructors.map(x => env.0.visit_ConstrDecl(x))
       ExtendEnum(target~, constructors~)
     }
-    Record(fields~) => env.0.visit_TypeDesc_Record(fields~)
+    Record(fields~, constr_decl~) =>
+      env.0.visit_TypeDesc_Record(fields~, constr_decl~)
     TupleStruct(types) => env.0.visit_TypeDesc_TupleStruct(types)
     Alias(type_) => env.0.visit_TypeDesc_Alias(type_)
   }
@@ -2674,9 +2679,11 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc_Record(
   env,
   fields~,
+  constr_decl~,
 ) {
   let fields = fields.map(x => env.0.visit_FieldDecl(x))
-  Record(fields~)
+  let constr_decl = constr_decl.map(x => env.0.visit_FunDecl(x))
+  Record(fields~, constr_decl~)
 }
 
 ///|
