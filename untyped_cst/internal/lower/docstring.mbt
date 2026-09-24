@@ -57,9 +57,7 @@ pub fn attach_docstrings_to_impls(
         last_pos = loc.start
         match td.components {
           Abstract | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
-          Error(EnumPayload(constrs))
-          | Variant(constrs)
-          | ExtensibleEnum(constrs) =>
+          Error(EnumPayload(constrs)) | Variant(constrs) =>
             constrs.each(constr => {
               let previous = search_docstrings(last_pos, constr.loc)
                 .map(make_doc)
@@ -67,6 +65,16 @@ pub fn attach_docstrings_to_impls(
               constr.doc = previous
               last_pos = constr.loc.end
             })
+          ExtensibleEnum(constrs) =>
+            if constrs is Some(items) {
+              items.each(constr => {
+                let previous = search_docstrings(last_pos, constr.loc)
+                  .map(make_doc)
+                  .unwrap_or(@syntax.DocString::empty())
+                constr.doc = previous
+                last_pos = constr.loc.end
+              })
+            }
           ExtendEnum(constructors=constrs, ..) =>
             constrs.each(constr => {
               let previous = search_docstrings(last_pos, constr.loc)

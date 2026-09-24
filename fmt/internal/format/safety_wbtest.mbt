@@ -192,6 +192,99 @@ test "docstrings are consumed once and ordinary EOF comments survive" {
 }
 
 ///|
+test "extenum extensions keep generic parameters and derives" {
+  let formatted = assert_safe_format(
+    "pub extenum @pkg.Event[T] += { Added(T) } derive(Eq)",
+  )
+  assert_true(formatted.contains("@pkg.Event[T] +="))
+  assert_true(formatted.contains("derive(Eq)"))
+}
+
+///|
+test "deprecated extenum bodies migrate without losing declaration metadata" {
+  let source =
+    #|/// event docs
+    #|#deprecated
+    #|declare pub(all) extenum Event[T] {
+    #|  // constructor comment
+    #|  /// created docs
+    #|  Created(T)
+    #|} derive(Eq)
+  let formatted = assert_safe_format(source)
+  assert_true(formatted.contains("declare pub extenum Event[T]"))
+  assert_true(formatted.contains("pub(all) extenum Event[T] +="))
+  assert_eq(formatted.split("/// event docs").length(), 2)
+  assert_eq(formatted.split("// constructor comment").length(), 2)
+  assert_eq(formatted.split("#deprecated").length(), 3)
+  assert_eq(formatted.split("derive(Eq)").length(), 2)
+  assert_eq(formatted.split("declare").length(), 2)
+
+  let ast_source =
+    #|/// event docs
+    #|#deprecated
+    #|declare pub(all) extenum Event[T] {
+    #|  /// created docs
+    #|  Created(T)
+    #|} derive(Eq)
+  let (impls, reports, _) = parse(ast_source)
+  assert_true(reports.is_empty())
+  assert_eq(impls_to_string(impls).trim_end(), format(ast_source).trim_end())
+}
+
+///|
+test "deprecated empty extenum bodies retain an empty extension" {
+  let formatted = assert_safe_format("extenum Empty {}")
+  assert_true(formatted.contains("extenum Empty\n\nextenum Empty += {"))
+  assert_eq(format(formatted, block_line=false), formatted)
+}
+
+///|
+test "bare pub all extenum declarations normalize to pub" {
+  let formatted = assert_safe_format("pub(all) extenum Event[T]")
+  assert_true(formatted.contains("pub extenum Event[T]"))
+  assert_false(formatted.contains("pub(all)"))
+}
+
+///|
+test "extenum migration is the formatter semantic contract" {
+  let legacy = "#deprecated\npub(all) extenum E[T] { A(T) } derive(Eq)"
+  let migrated = "#deprecated\npub extenum E[T]\n\n#deprecated\npub(all) extenum E[T] += { A(T) } derive(Eq)"
+  assert_true(semantically_equivalent(legacy, migrated))
+  assert_false(
+    semantically_equivalent(
+      legacy, "#deprecated\npub extenum E[U]\n\n#deprecated\npub(all) extenum E[U] += { A(U) } derive(Eq)",
+    ),
+  )
+  assert_false(
+    semantically_equivalent(
+      legacy, "#deprecated\npub extenum E[T]\n\n#deprecated\npub(all) extenum E[T] += { B(T) } derive(Eq)",
+    ),
+  )
+  assert_false(
+    semantically_equivalent(
+      legacy, "pub extenum E[T]\n\npub(all) extenum E[T] += { A(T) } derive(Eq)",
+    ),
+  )
+}
+
+///|
+test "source imports omit only default aliases" {
+  let source =
+    #|import {
+    #|  "moonbitlang/core" @core,
+    #|  "moonbitlang/core" @core *,
+    #|  "moonbitlang/core" @custom,
+    #|  "other/pkg" *,
+    #|}
+  let formatted = assert_safe_format(source)
+  assert_true(formatted.contains("\"moonbitlang/core\","))
+  assert_true(formatted.contains("\"moonbitlang/core\" *"))
+  assert_true(formatted.contains("\"moonbitlang/core\" @custom"))
+  assert_true(formatted.contains("\"other/pkg\" *"))
+  assert_false(formatted.contains("@core"))
+}
+
+///|
 test "checkpoint mapper covers nested delimiters and separators" {
   let source =
     #|fn nested(value:T, result:Result[

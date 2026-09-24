@@ -137,8 +137,8 @@ pub(all) struct FieldDecl {
 pub(all) enum TypeDesc {
   /// `type T`
   Abstract
-  /// `extenum T { C1; C2 }`
-  ExtensibleEnum(@list.List[ConstrDecl])
+  /// `extenum T` or deprecated `extenum T { C1; C2 }`
+  ExtensibleEnum(@list.List[ConstrDecl]?)
   /// `suberror`
   Error(ExceptionDecl)
   /// `enum T { C1; C2 }`

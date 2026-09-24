@@ -505,7 +505,7 @@ structure_item -> Impl
     )
   }
   | struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       {
         tycon,
@@ -517,12 +517,12 @@ structure_item -> Impl
         deriving: $5,
         loc : mk_loc($sloc),
         attrs,
-        is_declare : false
+        is_declare
       }
     )
   }
   | struct_header "(" non_empty_list_commas(type_) ")" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       {
         tycon,
@@ -534,12 +534,12 @@ structure_item -> Impl
         deriving: $5,
         loc : mk_loc($sloc),
         attrs,
-        is_declare : false
+        is_declare
       }
     )
   }
   | enum_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       {
         tycon,
@@ -551,7 +551,7 @@ structure_item -> Impl
         deriving: $5,
         loc : mk_loc($sloc),
         attrs,
-        is_declare : false
+        is_declare
       }
     )
   }
@@ -562,13 +562,29 @@ structure_item -> Impl
         tycon : $5,
         tycon_loc,
         params : $6,
-        components : ExtensibleEnum($8),
+        components : ExtensibleEnum(Some($8)),
         type_vis : $3,
         doc : DocString::empty(),
         deriving : $10,
         loc : mk_loc($sloc),
         attrs : $1,
         is_declare : $2
+      }
+    )
+  }
+  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints deriving_directive_list {
+    TopTypeDef(
+      {
+        tycon: $5,
+        tycon_loc: mk_loc($loc($5)),
+        params: $6,
+        components: ExtensibleEnum(None),
+        type_vis: $3,
+        doc: DocString::empty(),
+        deriving: $7,
+        loc: mk_loc($sloc),
+        attrs: $1,
+        is_declare: $2,
       }
     )
   }
@@ -601,6 +617,19 @@ structure_item -> Impl
       attrs~,
       doc = DocString::empty(),
       is_declare~
+    )
+  }
+  | attributes "declare" visibility "let" binder opt_annot {
+    TopLetDef(
+      binder = $5,
+      ty = $6,
+      expr = Hole(loc = $5.loc, kind = Synthesized),
+      vis = $3,
+      is_constant = false,
+      loc = mk_loc($sloc),
+      attrs = $1,
+      doc = DocString::empty(),
+      is_declare = true
     )
   }
   | extern_fun_header "=" STRING STRING {
@@ -883,15 +912,15 @@ suberror_header -> (List[Attribute], Visibility, Bool, String, Location)
   : attributes is_declare visibility "suberror" UIDENT { ($1, $3, $2, $5, mk_loc($loc($5))) }
   ;
 
-struct_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "struct" UIDENT optional_type_parameters_no_constraints {
-    ($1, $2, $4, mk_loc($loc($4)), $5)
+struct_header -> (List[Attribute], Visibility, Bool, String, Location, List[TypeDeclBinder])
+  : attributes is_declare visibility "struct" UIDENT optional_type_parameters_no_constraints {
+    ($1, $3, $2, $5, mk_loc($loc($5)), $6)
   }
   ;
 
-enum_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "enum" UIDENT optional_type_parameters_no_constraints {
-    ($1, $2, $4, mk_loc($loc($4)), $5)
+enum_header -> (List[Attribute], Visibility, Bool, String, Location, List[TypeDeclBinder])
+  : attributes is_declare visibility "enum" UIDENT optional_type_parameters_no_constraints {
+    ($1, $3, $2, $5, mk_loc($loc($5)), $6)
   }
   ;
 
@@ -902,8 +931,8 @@ extenum_extension_target -> (String, Location, List[TypeDeclBinder], TypeName)
     ($1, loc, $2, target)
   }
   | PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints {
-    let tycon_loc = mk_loc($loc($2))
-    let target = TypeName::{ name: Dot(pkg = $1, id = $2), is_object: false, loc: mk_loc($sloc) }
+    let tycon_loc = mk_loc($loc($1)).merge(mk_loc($loc($2)))
+    let target = TypeName::{ name: Dot(pkg = $1, id = $2), is_object: false, loc: tycon_loc }
     ($2, tycon_loc, $3, target)
   }
   ;

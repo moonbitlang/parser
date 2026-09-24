@@ -593,7 +593,7 @@ pub(all) struct TypeDeclBinder {
 
 pub(all) enum TypeDesc {
   Abstract
-  ExtensibleEnum(@list.List[ConstrDecl])
+  ExtensibleEnum(@list.List[ConstrDecl]?)
   Error(ExceptionDecl)
   Variant(@list.List[ConstrDecl])
   ExtendEnum(target~ : TypeName, constructors~ : @list.List[ConstrDecl])
