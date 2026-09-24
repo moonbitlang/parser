@@ -5,6 +5,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | LIDENT(_)
     | DOT_UIDENT(_)
     | DOT_LIDENT(_)
+    | DOT_LPAREN
     | DOT_INT(_)
     | FLOAT(_)
     | DOUBLE(_)
@@ -63,7 +64,6 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | TRY_EXCLAMATION
     | CATCH
     | LPAREN
-    | DOT_LPAREN
     | LET
     | VAR
     | LETREC

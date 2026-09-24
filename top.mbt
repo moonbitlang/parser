@@ -122,7 +122,7 @@ pub fn parse_string(
   name? : String = "",
   parser? : Parser = Handrolled,
 ) -> (@syntax.Impls, Array[Report]) {
-  let { tokens, docstrings, .. } = @lexer.tokens_from_string(
+  let { tokens, docstrings, errors, } = @lexer.tokens_from_string(
     source,
     comment=true,
     name~,
@@ -160,7 +160,15 @@ pub fn parse_string(
     Handrolled => @handrolled_parser.parse(tokens)
   }
   attach_docstrings(docstrings, impls)
-  (impls, diagnostics)
+  let reports = errors.filter_map(fn(error) {
+    let (start, end, err) = error
+    match err {
+      Reserved_keyword(_) => None
+      _ => Some(Report::{ loc: { start, end, }, msg: Show::to_string(err), })
+    }
+  })
+  reports.append(diagnostics)
+  (impls, reports)
 }
 
 ///|

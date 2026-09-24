@@ -20,7 +20,7 @@ const RE_CHAR_QUOTE : Regex = re"'"
 const RE_CHAR_CONTENT : Regex = re"[^\\\n\r']"
 
 ///|
-const RE_CHAR_ESCAPE : Regex = re"\\[\\'\"ntbrf/ ]"
+const RE_CHAR_ESCAPE : Regex = re"\\[\\'\"ntbrf/]"
 
 ///|
 const RE_STRING_ESCAPE : Regex = re"\\[\\'\"`ntbrf/ ]"
