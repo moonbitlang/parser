@@ -12,6 +12,7 @@ pub fn normalize(json : String) -> String {
 ///|
 pub fn gen_test_for_parser(name : String) -> String {
   (
+    $|///|
     $|test "\{name}" (t : @test.Test) {
     $|  t.run()
     $|}
@@ -35,7 +36,7 @@ let root = "test/sync_test"
 let snapshot_path : String = root + "/__snapshot__"
 
 ///|
-let output_for_parser : String = root + "/parser.mbt"
+let output_for_parser : String = root + "/parser_test.mbt"
 
 ///|
 let output_for_lexer : String = root + "/lexer_test.mbt"
@@ -84,7 +85,10 @@ fn generate(mode~ : Mode) -> Unit {
       Parser => output_for_parser
       Lexer => output_for_lexer
     }
-    @fs.write_string_to_file(output, buf.to_string())
+    @fs.write_string_to_file(
+      output,
+      buf.to_string().trim_end(char_set="\n").to_owned() + "\n",
+    )
   } catch {
     err => println(Repr(err))
   }
