@@ -241,6 +241,31 @@ test "deprecated syntax rejection matrix" {
 test "modern replacements and retained underscore contexts are accepted" {
   expect_accepted("fn f() { try! g() }", "try_exclamation_retained.mbt")
   expect_accepted(
+    "fn f(x : Bool) { guard! x; !x }", "guard_and_unary_exclamation_retained.mbt",
+  )
+  expect_accepted(
+    "import { \"moonbitlang/core\" @core *, \"other\" * }", "import_all_aliases.mbt",
+  )
+  expect_accepted("declare let x : Int = 1", "declare_let.mbt")
+  expect_accepted("extenum E", "bare_extenum.mbt")
+  expect_accepted(
+    (
+      #|#non_exhaustive
+      #|enum E { A }
+      #|fn f(e : E) { match e { E::.. => () } }
+    ),
+    "unknown_constructor_pattern.mbt",
+  )
+  expect_accepted(
+    "fn f() { for Some(x), [head, ..tail], in values {} }", "foreach_pattern_trailing_comma.mbt",
+  )
+  expect_accepted(
+    "fn f() { for (x, y) in pairs {} }", "foreach_tuple_pattern.mbt",
+  )
+  expect_accepted(
+    "fn f() { let _ = [for Some(x), y in values => x] }", "list_comprehension_patterns.mbt",
+  )
+  expect_accepted(
     "fn f() { for ;; { break } }", "explicit_dead_for_retained.mbt",
   )
   expect_accepted(
