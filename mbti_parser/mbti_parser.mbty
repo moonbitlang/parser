@@ -249,6 +249,9 @@ type_sig -> TypeSig
   | attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
     {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
   }
+  | attributes vis "extenum" type_decl_name_with_params optional_derive {
+    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+  }
   | attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
     {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
   }

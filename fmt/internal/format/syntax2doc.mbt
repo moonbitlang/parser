@@ -496,6 +496,10 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       is_declare~,
       ..
     ) => {
+      let missing_initializer = is_declare &&
+        !is_constant &&
+        expr is Hole(kind=Synthesized, loc=hole_loc) &&
+        hole_loc == binder.loc
       let doc = fmt.docstring(doc, is_toplevel=true)
       let attrs = fmt.attributes(attrs)
       let declare_ = if is_declare { text("declare") + space } else { empty }
@@ -503,7 +507,11 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       let let_ = text(if is_constant { "const" } else { "let" })
       let binder = space + fmt.binder(binder)
       let ty = if ty is Some(ty) { space + colon + fmt.ty(ty) } else { empty }
-      let rhs = space + char('=') + fmt.compose(expr, Expr) // TODO: compose_rhs
+      let rhs = if missing_initializer {
+        empty
+      } else {
+        space + char('=') + fmt.compose(expr, Expr) // TODO: compose_rhs
+      }
       doc + attrs + declare_ + vis + let_ + binder + ty + rhs
     }
     TopTypeDef(typedecl) => fmt.typedecl(typedecl)
@@ -1133,7 +1141,11 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       )
       let tycon = space + text(tycon)
       let params = fmt.type_decl_binders(params)
-      let constrs = space +
+      let constrs = if components is ExtensibleEnum(_) &&
+        constr_decls.is_empty() {
+        empty
+      } else {
+        space +
         fmt.commented_braces(
           fn() {
             series(constr_decls, semi, x => fmt.constr_decl(x), separator=fn() {
@@ -1142,6 +1154,7 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
           },
           force_newline=true,
         )
+      }
       let deriving = fmt.deriving_directives(deriving)
       doc + attrs + declare_ + vis + enum_ + tycon + params + constrs + deriving
     }

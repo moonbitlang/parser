@@ -49,7 +49,19 @@ impl IterVisitor for RecoveredHoleDetector with fn visit_Expr_Hole(
 ///|
 fn has_recovered_hole(impls : @syntax.Impls) -> Bool {
   let detector = { found: false, }
-  impls.map(item => detector.visit_Impl(item)) |> ignore
+  impls.map(item => {
+    match item {
+      TopLetDef(
+        binder~,
+        expr=Hole(kind=Synthesized, loc=hole_loc),
+        is_declare=true,
+        is_constant=false,
+        ..
+      ) if hole_loc == binder.loc => ()
+      _ => detector.visit_Impl(item)
+    }
+  })
+  |> ignore
   detector.found
 }
 

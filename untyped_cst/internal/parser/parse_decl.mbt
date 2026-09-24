@@ -22,6 +22,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
   let mut is_extern = false
   let mut is_suberror = false
   let mut is_extenum = false
+  let mut extenum_extension = false
   let mut suberror_had_type_params = false
   let mut invalid_grouped_impl = false
   let mut missing_return_before_impl = false
@@ -44,6 +45,8 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
             state.reports.length() == diagnostics_before ||
             missing_return_before_impl
           ) &&
+          !(is_extenum && !extenum_extension && !saw_body) &&
+          !(kind is Let && is_declare && phase is AwaitingEqual) &&
           !recovered_body_without_close {
           match decl_phase_expectation(phase, kind) {
             NoExpectation =>
@@ -665,12 +668,14 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
           phase = AwaitingBody
         }
       }
-      Some((PLUS_EQUAL, _, _)) if is_extenum =>
+      Some((PLUS_EQUAL, _, _)) if is_extenum => {
+        extenum_extension = true
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
         } else {
           ()
         }
+      }
       Some((DERIVE, _, _)) if depth == 0 => {
         if state.consume_any() is Some(kw) {
           push_child(children, Some("kw"), kw)
@@ -988,7 +993,11 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       )
     )
   if should_report_completion {
-    if kind is Function && is_declare && (saw_body || saw_stub) {
+    if kind is Let && is_declare && phase is AwaitingEqual {
+      ()
+    } else if is_extenum && !extenum_extension && !saw_body {
+      ()
+    } else if kind is Function && is_declare && (saw_body || saw_stub) {
       state.report(
         empty_loc(state.current_position()),
         "declare function cannot have a body",

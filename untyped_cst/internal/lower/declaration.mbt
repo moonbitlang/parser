@@ -293,7 +293,13 @@ fn lower_value_decl(node : CstNode, is_constant~ : Bool) -> @syntax.Impl {
   let expr = node
     .first_child_with_label("expr")
     .map(lower_expr)
-    .unwrap_or(lower_unit_expr(node.loc))
+    .unwrap_or(
+      if lower_is_declare(node) && !is_constant {
+        @syntax.Expr::Hole(loc=binder.loc, kind=Synthesized)
+      } else {
+        lower_unit_expr(node.loc)
+      },
+    )
   let parsed_loc = lower_decl_loc_without_trailing_trivia(node)
   let loc = if node.first_child_with_label("expr") is Some(_) {
     Location::{ start: parsed_loc.start, end: expr.loc().end, }
@@ -344,9 +350,14 @@ fn lower_simple_type_decl(
   components : @syntax.TypeDesc,
 ) -> @syntax.Impl {
   let (name, name_loc) = lower_decl_name_string(node)
+  let tycon_loc = if node.kind is Impl_ExtendEnum {
+    lower_decl_type_name(node).loc
+  } else {
+    name_loc
+  }
   TopTypeDef({
     tycon: name,
-    tycon_loc: name_loc,
+    tycon_loc,
     params: lower_type_decl_params(node),
     components,
     attrs: lower_attrs(node),

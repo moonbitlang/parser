@@ -572,6 +572,22 @@ structure_item -> Impl
       }
     )
   }
+  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints deriving_directive_list {
+    TopTypeDef(
+      {
+        tycon: $5,
+        tycon_loc: mk_loc($loc($5)),
+        params: $6,
+        components: ExtensibleEnum(@list.empty()),
+        type_vis: $3,
+        doc: DocString::empty(),
+        deriving: $7,
+        loc: mk_loc($sloc),
+        attrs: $1,
+        is_declare: $2,
+      }
+    )
+  }
   | attributes is_declare visibility "extenum" extenum_extension_target "+=" "{" list_semis(enum_constructor) "}" deriving_directive_list {
     let (tycon, tycon_loc, params, target) = $5
     TopTypeDef(
@@ -601,6 +617,19 @@ structure_item -> Impl
       attrs~,
       doc = DocString::empty(),
       is_declare~
+    )
+  }
+  | attributes "declare" visibility "let" binder opt_annot {
+    TopLetDef(
+      binder = $5,
+      ty = $6,
+      expr = Hole(loc = $5.loc, kind = Synthesized),
+      vis = $3,
+      is_constant = false,
+      loc = mk_loc($sloc),
+      attrs = $1,
+      doc = DocString::empty(),
+      is_declare = true
     )
   }
   | extern_fun_header "=" STRING STRING {
@@ -902,8 +931,8 @@ extenum_extension_target -> (String, Location, List[TypeDeclBinder], TypeName)
     ($1, loc, $2, target)
   }
   | PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints {
-    let tycon_loc = mk_loc($loc($2))
-    let target = TypeName::{ name: Dot(pkg = $1, id = $2), is_object: false, loc: mk_loc($sloc) }
+    let tycon_loc = mk_loc($loc($1)).merge(mk_loc($loc($2)))
+    let target = TypeName::{ name: Dot(pkg = $1, id = $2), is_object: false, loc: tycon_loc }
     ($2, tycon_loc, $3, target)
   }
   ;

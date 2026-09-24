@@ -1006,7 +1006,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           )
           |> @list.List
         ExtendEnum(target~, constructors~)
-      } else {
+      } else if self.peek_token() is LBRACE {
         let constrs = self.surround_series(
             invalid_delims=[TK_COMMA],
             left=TK_LBRACE,
@@ -1016,6 +1016,8 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
           )
           |> @list.List
         ExtensibleEnum(constrs)
+      } else {
+        ExtensibleEnum(@list.empty())
       }
       let deriving = self.parse_deriving_directive_list()
       let loc = self.loc_start_with(spos)
@@ -1047,8 +1049,14 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
         _ => panic()
       }
       let ty = self.parse_opt_annot()
-      self.expect_token(TK_EQUAL)
-      let expr = self.parse_expr()
+      let expr : @syntax.Expr = if is_declare &&
+        !is_constant &&
+        !(self.peek_token() is EQUAL) {
+        Hole(loc=binder.loc, kind=Synthesized)
+      } else {
+        self.expect_token(TK_EQUAL)
+        self.parse_expr()
+      }
       let loc = self.loc_start_with(spos)
       TopLetDef(
         binder~,
