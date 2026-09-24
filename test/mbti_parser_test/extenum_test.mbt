@@ -13,12 +13,13 @@ fn parse_mbti_source(name : String, content : String) -> Unit raise {
 }
 
 ///|
-fn parse_mbti_source_expect_error(name : String, content : String) -> Unit {
-  try {
-    parse_mbti_source(name, content)
+fn parse_mbti_source_expect_error(
+  name : String,
+  content : String,
+) -> Unit raise {
+  let (_, reports) = @mbti_parser.parse_string(content, name~)
+  if reports.is_empty() {
     fail("parsing \{name} unexpectedly succeeded")
-  } catch {
-    _ => ()
   }
 }
 
@@ -78,11 +79,14 @@ test "parse mbti ocaml uppercase function name" {
 }
 
 ///|
-test "parse mbti ocaml visible fnalias" {
+test "reject deprecated mbti fnalias" {
   let body =
     #|pub(open) fnalias Box::make
     #|
-  parse_mbti_body("visible_fnalias.mbti", body)
+  parse_mbti_source_expect_error(
+    "visible_fnalias.mbti",
+    extenum_sample_header + body,
+  )
 }
 
 ///|

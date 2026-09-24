@@ -585,14 +585,6 @@ fn lex_tokens(
         )
         continue rest
       }
-      (re"^(?:lexmatch\?)", after=rest) => {
-        env.add_token_with_loc(
-          LEXMATCH_QUESTION,
-          start=env.calc_offset(input, base~),
-          end=env.calc_offset(rest, base~),
-        )
-        continue rest
-      }
       (re"^(?:==)", after=rest) => {
         env.add_token_with_loc(
           INFIX1("=="),

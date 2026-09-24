@@ -83,9 +83,6 @@ test "all lexer token kinds retain their exact identity" {
     TK_TRY,
     TK_CATCH,
     TK_ASYNC,
-    TK_TYPEALIAS,
-    TK_TRAITALIAS,
-    TK_FNALIAS,
     TK_EQUAL,
     TK_EQ_TILDE,
     TK_LPAREN,
@@ -164,13 +161,12 @@ test "all lexer token kinds retain their exact identity" {
     TK_TRY_QUESTION,
     TK_TRY_EXCLAMATION,
     TK_LEXMATCH,
-    TK_LEXMATCH_QUESTION,
     TK_LEXSCAN,
     TK_EXTEND,
     TK_PACKAGE,
     TK_NEWLINE,
   ]
-  @test.assert_eq(token_kinds.length(), 131)
+  @test.assert_eq(token_kinds.length(), 127)
   for i, token_kind in token_kinds {
     let syntax_kind = Syntax_Token(token_kind)
     @test.assert_eq(syntax_kind.is_syntax_token(), true)

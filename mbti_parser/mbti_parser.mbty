@@ -49,9 +49,6 @@
 %token TRY "try"
 %token CATCH "catch"
 %token ASYNC "async"
-%token TYPEALIAS "typealias"
-%token TRAITALIAS "traitalias"
-%token FNALIAS "fnalias"
 %token EQUAL "="
 %token EQ_TILDE "=~"
 %token LPAREN "("
@@ -134,7 +131,6 @@
 %token TRY_QUESTION    "try?"
 %token TRY_EXCLAMATION "try!"
 %token LEXMATCH        "lexmatch"
-%token LEXMATCH_QUESTION "lexmatch?"
 %token LEXSCAN "lexscan"
 %token EXTEND "extend"
 %token PACKAGE         "package"
@@ -294,9 +290,6 @@ using_binder -> Name?
 alias_sig -> AliasSig
   : attributes vis "type"  type_decl_name_with_params "=" type_ {
     TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
-  }
-  | attributes vis "fnalias" uident "::" lident {
-    FuncAlias(attrs = $1,name=$6, type_name=$4)
   }
   | attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
     let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
