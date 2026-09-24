@@ -65,6 +65,7 @@ pub(all) enum Token {
   LBRACKET
   LBRACKET_BAR
   PLUS
+  STAR
   RBRACKET
   BAR_RBRACKET
   UNDERSCORE
@@ -206,6 +207,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     LBRACKET => TK_LBRACKET
     LBRACKET_BAR => TK_LBRACKET_BAR
     PLUS => TK_PLUS
+    STAR => TK_STAR
     RBRACKET => TK_RBRACKET
     BAR_RBRACKET => TK_BAR_RBRACKET
     UNDERSCORE => TK_UNDERSCORE
@@ -343,6 +345,7 @@ pub(all) enum TokenKind {
   TK_LBRACKET
   TK_LBRACKET_BAR
   TK_PLUS
+  TK_STAR
   TK_RBRACKET
   TK_BAR_RBRACKET
   TK_UNDERSCORE
@@ -500,6 +503,7 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_LBRACKET => "\"[\""
       TK_LBRACKET_BAR => "\"[|\""
       TK_PLUS => "\"+\""
+      TK_STAR => "\"*\""
       TK_RBRACKET => "\"]\""
       TK_BAR_RBRACKET => "\"|]\""
       TK_UNDERSCORE => "\"_\""
@@ -643,6 +647,7 @@ pub impl Debug for TokenKind with fn to_repr(self) {
       TK_LBRACKET => Repr("[")
       TK_LBRACKET_BAR => Repr("[|")
       TK_PLUS => Repr("+")
+      TK_STAR => Repr("*")
       TK_RBRACKET => Repr("]")
       TK_BAR_RBRACKET => Repr("|]")
       TK_UNDERSCORE => Repr("_")

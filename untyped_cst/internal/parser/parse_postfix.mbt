@@ -242,6 +242,7 @@ fn template_operand_stops(stop_kinds : Array[TokenKind]) -> Array[TokenKind] {
   stops.push(TK_PLUS)
   stops.push(TK_MINUS)
   stops.push(TK_INFIX3)
+  stops.push(TK_STAR)
   stops.push(TK_INFIX4)
   stops
 }

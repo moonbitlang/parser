@@ -30,6 +30,17 @@ test "reference keyword handling: package remains a keyword" {
 }
 
 ///|
+test "multiplication has a dedicated STAR token" {
+  let result = @lexer.tokens_from_string("a * b", comment=false)
+  guard result.errors.is_empty() && result.tokens.length() >= 3 else {
+    fail("multiplication should lex without errors")
+  }
+  guard result.tokens[1].0 is STAR else {
+    fail("multiplication should lex as STAR")
+  }
+}
+
+///|
 test "reference byte literal recovery keeps a BYTE token after invalid contents" {
   let result = @lexer.tokens_from_string("b'🐰'", comment=false)
   guard result.errors.length() == 1 else {

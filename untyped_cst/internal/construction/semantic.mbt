@@ -586,6 +586,7 @@ pub fn raw_token_semantic_children(
     INFIX1(_)
     | INFIX2(_)
     | INFIX3(_)
+    | STAR
     | INFIX4(_)
     | PLUS
     | MINUS
@@ -664,6 +665,7 @@ fn operator_spelling(token : Token) -> String? {
     | INFIX4(value)
     | AUGMENTED_ASSIGNMENT(value) => Some(value)
     PLUS | PLUS_EQUAL => Some("+")
+    STAR => Some("*")
     MINUS => Some("-")
     EXCLAMATION => Some("!")
     QUESTION => Some("?")

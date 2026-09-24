@@ -73,6 +73,7 @@
 %token LBRACKET "["
 %token LBRACKET_BAR "[|"
 %token PLUS "+"
+%token STAR "*"
 %token RBRACKET "]"
 %token BAR_RBRACKET "|]"
 %token UNDERSCORE "_"
@@ -158,7 +159,7 @@
 %left INFIX1
 %left INFIX2
 %left PLUS MINUS
-%left INFIX3
+%left STAR INFIX3
 %left INFIX4
 %nonassoc prec_lower_than_as
 %nonassoc "as"
@@ -2153,6 +2154,7 @@ map_syntax_key -> Constant
 %inline infixop -> Var
   : INFIX4 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
   | INFIX3 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
+  | STAR { Var::{ name: Ident(name = "*"), loc: mk_loc($sloc) } }
   | INFIX2 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
   | INFIX1 { Var::{ name: Ident(name = $1), loc: mk_loc($sloc) } }
   | PLUS { Var::{ name: Ident(name = "+"), loc: mk_loc($sloc) } }

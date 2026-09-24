@@ -25,6 +25,7 @@ pub fn TokenKind::to_expect_string(self : Self) -> String {
     TK_COMMENT => "COMMENT"
     TK_NEWLINE => "NEWLINE"
     TK_INFIX1 | TK_INFIX2 | TK_INFIX3 | TK_INFIX4 => "infix operator"
+    TK_STAR => "`*`"
     TK_AUGMENTED_ASSIGNMENT => "augmented assignment"
     TK_PLUS_EQUAL => "`+=`"
     TK_EOF => "EOF"
