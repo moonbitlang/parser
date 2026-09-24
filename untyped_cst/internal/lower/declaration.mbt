@@ -865,12 +865,22 @@ fn lower_import_decl(node : CstNode) -> @syntax.Impl {
       let path_node = item.first_child_with_label("path").unwrap_or(item)
       let alias_node = item.first_child_with_label("alias")
       let alias_ = alias_node.map(lower_semantic_string).bind(value => value)
+      let star_node = item.first_child_with_label("op")
+      let alias_ = if star_node is Some(_) {
+        Some("*" + alias_.unwrap_or(""))
+      } else {
+        alias_
+      }
       packages.push({
         path: lower_string_literal_node(path_node),
         alias_,
-        loc: alias_node
-        .map(alias_ => path_node.loc.merge(alias_.loc))
-        .unwrap_or(path_node.loc),
+        loc: if star_node is Some(star) {
+          path_node.loc.merge(star.loc)
+        } else if alias_node is Some(alias_node) {
+          path_node.loc.merge(alias_node.loc)
+        } else {
+          path_node.loc
+        },
       })
     }
   }

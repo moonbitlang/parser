@@ -214,6 +214,9 @@ fn parse_import_package_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
+  if state.current_is(TK_STAR) {
+    push_child(children, Some("op"), state.expect_token(TK_STAR))
+  }
   state.construct_from_children(
     fn(loc, source_span, children) {
       let entries = recovery_children(children)

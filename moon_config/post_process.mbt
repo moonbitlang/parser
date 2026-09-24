@@ -13,10 +13,13 @@ fn post_process_moon_pkg(ast : Ast, diagnostics : Array[Report]) -> Ast {
           seen, diagnostics, "moon.pkg", allowed_duplicate, key, value,
         )
         match key {
+          "pkgtype" => {
+            validate_pkgtype_kind(value, diagnostics)
+            results.push(field)
+          }
           "import"
           | "wbtest-import"
           | "test-import"
-          | "pkgtype"
           | "dev_build"
           | "formatter"
           | "rule" => results.push(field)

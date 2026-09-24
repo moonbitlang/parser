@@ -11,7 +11,7 @@ fn f(writer : Writer, x : Int, xs : Array[Int]) -> Unit {
 ///|
 import {
   "pkg/core",
-  "pkg/other" @other,
+  "pkg/other",
 } for "native"
 
 ///|

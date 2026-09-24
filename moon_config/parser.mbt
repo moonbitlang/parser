@@ -402,7 +402,16 @@ fn parse_import_item(state : State) -> Ast {
     PACKAGE_NAME(alias_name) => {
       let alias_loc = state.peek_location()
       state.skip()
-      Some((alias_name, alias_loc))
+      if state.consume_if(TK_STAR) {
+        Some(("*" + alias_name, state.loc_start_with(alias_loc.start)))
+      } else {
+        Some((alias_name, alias_loc))
+      }
+    }
+    STAR => {
+      let star_loc = state.peek_location()
+      state.skip()
+      Some(("*", star_loc))
     }
     AS => {
       let alias_loc = state.peek_location()

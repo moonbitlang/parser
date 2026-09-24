@@ -8,7 +8,7 @@ test "moon.pkg keeps ordered fields, duplicate applies, and all imports" {
     #|rule(name: "r1", command: "one")
     #|supported_targets = "+wasm"
     #|import { "wb/pkg" } for "wbtest"
-    #|pkgtype(kind: "lib")
+    #|pkgtype(kind: "library")
     #|formatter(command: "fmt")
     #|dev_build(rule: "second", input: "c", output: "d")
     #|rule(name: "r2", command: "two")
@@ -39,7 +39,7 @@ test "moon.pkg keeps ordered fields, duplicate applies, and all imports" {
       #|  "wb/pkg",
       #|} for "wbtest"
       #|
-      #|pkgtype(kind: "lib")
+      #|pkgtype(kind: "library")
       #|
       #|formatter(command: "fmt")
       #|
@@ -53,6 +53,35 @@ test "moon.pkg keeps ordered fields, duplicate applies, and all imports" {
       #|)
     ),
   )
+}
+
+///|
+test "moon.pkg import all forms format as a fixed point" {
+  let source =
+    #|import { "plain"*, "renamed" @alias* }
+    #|pkgtype(kind:"library")
+  let formatted = format_moon_pkg(source)
+  assert_true(formatted.contains("\"plain\" *"))
+  assert_true(formatted.contains("\"renamed\" @alias *"))
+  assert_eq(format_moon_pkg(formatted), formatted)
+}
+
+///|
+test "moon.pkg omits default import aliases without losing import all" {
+  let source =
+    #|import {
+    #|  "moonbitlang/core" @core,
+    #|  "moonbitlang/core" @core *,
+    #|  "moonbitlang/core" @custom,
+    #|  "other/pkg" *,
+    #|}
+  let formatted = format_moon_pkg(source)
+  assert_true(formatted.contains("\"moonbitlang/core\","))
+  assert_true(formatted.contains("\"moonbitlang/core\" *"))
+  assert_true(formatted.contains("\"moonbitlang/core\" @custom"))
+  assert_true(formatted.contains("\"other/pkg\" *"))
+  assert_false(formatted.contains("@core"))
+  assert_eq(format_moon_pkg(formatted), formatted)
 }
 
 ///|

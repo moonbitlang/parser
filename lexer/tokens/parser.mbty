@@ -815,6 +815,12 @@ import_package -> ImportPackage
   : STRING PACKAGE_NAME {
     { path: $1, alias_: Some($2), loc: mk_loc($sloc) }
   }
+  | STRING PACKAGE_NAME "*" {
+    { path: $1, alias_: Some("*" + $2), loc: mk_loc($sloc) }
+  }
+  | STRING "*" {
+    { path: $1, alias_: Some("*"), loc: mk_loc($sloc) }
+  }
   | STRING {
     { path: $1, alias_: None, loc: mk_loc($sloc) }
   }

@@ -716,8 +716,15 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
         ignore(fmt.checkpoint(loc.start))
         let before = fmt.placeholder()
         ignore(fmt.token(TK_STRING))
+        let alias_ = canonical_import_alias(path, alias_)
         let alias_ = if alias_ is Some(name) {
-          space + char('@') + text(name)
+          if name == "*" {
+            space + char('*')
+          } else if name.has_prefix("*") {
+            space + char('@') + text(name[1:].to_owned()) + space + char('*')
+          } else {
+            space + char('@') + text(name)
+          }
         } else {
           empty
         }

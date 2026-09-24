@@ -310,10 +310,28 @@ fn ConfigFmt::import_item(self : Self, item : @moon_config.Ast) -> Doc {
   ignore(self.token(TK_STRING))
   let (path, package_alias) = import_item_parts(item)
   let path_doc = text(config_string_literal(path, self.migration))
+  let package_alias = canonical_import_alias(path, package_alias)
   match package_alias {
     Some(package_alias) => {
-      ignore(self.token(TK_PACKAGE_NAME))
-      path_doc + space + text("@" + package_alias)
+      let import_all = package_alias.has_prefix("*")
+      let alias_name = if import_all {
+        package_alias[1:].to_owned()
+      } else {
+        package_alias
+      }
+      let alias_doc = if alias_name == "" {
+        empty
+      } else {
+        ignore(self.token(TK_PACKAGE_NAME))
+        space + text("@" + alias_name)
+      }
+      let all_doc = if import_all {
+        ignore(self.token(TK_STAR))
+        space + char('*')
+      } else {
+        empty
+      }
+      path_doc + alias_doc + all_doc
     }
     None => path_doc
   }
@@ -707,6 +725,28 @@ fn config_fields_equal(
 }
 
 ///|
+fn canonical_config_import_item(item : @moon_config.Ast) -> @moon_config.Ast {
+  let loc = item.loc()
+  let (path, alias_) = import_item_parts(item)
+  match canonical_import_alias(path, alias_) {
+    None => Str(path, loc~)
+    Some(alias_) =>
+      Obj(
+        Vector([("path", Str(path, loc~)), ("alias", Str(alias_, loc~))]),
+        loc~,
+      )
+  }
+}
+
+///|
+fn canonical_config_imports(value : @moon_config.Ast) -> @moon_config.Ast {
+  match value {
+    Arr(items, loc~) => Arr(items.map(canonical_config_import_item), loc~)
+    _ => value
+  }
+}
+
+///|
 fn canonical_config_fields(
   ast : @moon_config.Ast,
   kind : ConfigKind,
@@ -722,7 +762,16 @@ fn canonical_config_fields(
             key == "deps" &&
             value is Obj(deps, ..) &&
             deps.is_empty()) {
-            known.push((key, value))
+            known.push(
+              (
+                key,
+                if key == "import" {
+                  canonical_config_imports(value)
+                } else {
+                  value
+                },
+              ),
+            )
           }
         } else {
           options.push((key, value))
