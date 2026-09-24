@@ -1,22 +1,22 @@
-//!build: -w -27
-
+#alias(plus)
+#alias(plus2)
 fn add(x : Int, y : Int) -> Int {
   x + y
 }
 
-fnalias add as plus
-fnalias plus as plus2
+
+
 
 struct Counter {
   mut value : Int
 }
-
+#as_free_fn(bump_counter)
 fn Counter::bump(self : Counter, step? : Int = 1) -> Int {
   self.value += step
   self.value
 }
 
-fnalias Counter::bump as bump_counter
+
 
 fn init {
   let c = Counter::{ value: 0 }
