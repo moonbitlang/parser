@@ -312,8 +312,25 @@ fn ConfigFmt::import_item(self : Self, item : @moon_config.Ast) -> Doc {
   let path_doc = text(config_string_literal(path, self.migration))
   match package_alias {
     Some(package_alias) => {
-      ignore(self.token(TK_PACKAGE_NAME))
-      path_doc + space + text("@" + package_alias)
+      let import_all = package_alias.has_prefix("*")
+      let alias_name = if import_all {
+        package_alias[1:].to_owned()
+      } else {
+        package_alias
+      }
+      let alias_doc = if alias_name == "" {
+        empty
+      } else {
+        ignore(self.token(TK_PACKAGE_NAME))
+        space + text("@" + alias_name)
+      }
+      let all_doc = if import_all {
+        ignore(self.token(TK_STAR))
+        space + char('*')
+      } else {
+        empty
+      }
+      path_doc + alias_doc + all_doc
     }
     None => path_doc
   }

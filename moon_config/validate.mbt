@@ -30,6 +30,28 @@ fn check_unique_toplevel(
 }
 
 ///|
+fn validate_pkgtype_kind(value : Ast, diagnostics : Array[Report]) -> Unit {
+  let mut valid = false
+  if value is Obj(fields, ..) {
+    for field in fields {
+      let (key, item) = field
+      if key == "kind" {
+        valid = match item {
+          Str("library" | "executable" | "foreign_library", ..) => true
+          _ => false
+        }
+      }
+    }
+  }
+  if !valid {
+    diagnostics.push({
+      loc: value.loc(),
+      msg: "Invalid `pkgtype` in moon.pkg file. Expected `pkgtype(kind: \"library\" | \"executable\" | \"foreign_library\")`.",
+    })
+  }
+}
+
+///|
 fn _validate_moon_pkg(ast : Ast, diagnostics : Array[Report]) -> Unit {
   match ast {
     Obj(fields, ..) => {
@@ -43,6 +65,7 @@ fn _validate_moon_pkg(ast : Ast, diagnostics : Array[Report]) -> Unit {
           seen, diagnostics, "moon.pkg", allowed_duplicate, key, value,
         )
         match key {
+          "pkgtype" => validate_pkgtype_kind(value, diagnostics)
           "warnings" | "supported_targets" | "options" =>
             emit_invalid_config(diagnostics, "moon.pkg", key, value)
           _ => ()

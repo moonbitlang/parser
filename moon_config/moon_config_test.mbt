@@ -455,6 +455,53 @@ test "parse_moon_pkg handles package imports aliases and targets" {
 }
 
 ///|
+test "parse_moon_pkg records import all aliases" {
+  let source = "import { \"plain\" *, \"renamed\" @alias * }"
+  let (ast, reports) = @moon_config.parse_moon_pkg(source)
+  assert_true(reports.is_empty())
+  debug_inspect(
+    AstNoLoc(ast),
+    content=(
+      #|Obj(
+      #|  [
+      #|    (
+      #|      "import",
+      #|      Arr(
+      #|        [
+      #|          Obj([("path", Str("plain")), ("alias", Str("*"))]),
+      #|          Obj([("path", Str("renamed")), ("alias", Str("*alias"))]),
+      #|        ],
+      #|      ),
+      #|    ),
+      #|  ],
+      #|)
+    ),
+  )
+}
+
+///|
+test "pkgtype kind is validated during parse and explicit validation" {
+  for kind in ["library", "executable", "foreign_library"] {
+    let (ast, reports) = @moon_config.parse_moon_pkg(
+      "pkgtype(kind: \"\{kind}\")",
+    )
+    assert_true(reports.is_empty())
+    assert_true(@moon_config.validate_moon_pkg(ast).is_empty())
+  }
+  for source in ["pkgtype(kind: \"lib\")", "pkgtype(kind: true)", "pkgtype()"] {
+    let (ast, reports) = @moon_config.parse_moon_pkg(source)
+    assert_eq(reports.length(), 1)
+    assert_eq(
+      reports[0].msg,
+      "Invalid `pkgtype` in moon.pkg file. Expected `pkgtype(kind: \"library\" | \"executable\" | \"foreign_library\")`.",
+    )
+    let validated = @moon_config.validate_moon_pkg(ast)
+    assert_eq(validated.length(), 1)
+    assert_eq(validated[0].msg, reports[0].msg)
+  }
+}
+
+///|
 test "parse_moon_pkg handles link options" {
   let source =
     #|options(
