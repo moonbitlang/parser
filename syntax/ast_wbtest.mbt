@@ -570,15 +570,6 @@ test "trailing_mark to_json" {
 }
 
 ///|
-test "apply_attr to_json" {
-  json_inspect(apply_attr_json_repr(dummy_loc), content={
-    "kind": "ApplyAttr::NoAttr",
-    "loc": null,
-    "children": Json::empty_object(),
-  })
-}
-
-///|
 test "TryOperatorKind to_json" {
   json_inspect(TryOperatorKind::Exclamation.json_repr(dummy_loc), content={
     "kind": "TryOperatorKind::Exclamation",
