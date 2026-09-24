@@ -1719,20 +1719,20 @@ fn State::starts_constr_any_pattern(self : Self) -> Bool {
   match self.peek_token() {
     UIDENT(_) =>
       self.peek_token(nth=1) is COLONCOLON &&
-      self.peek_token(nth=2) is UNDERSCORE
+      self.peek_token(nth=2) is (UNDERSCORE | DOTDOT)
     PACKAGE_NAME(_) =>
       self.peek_token(nth=1) is DOT_UIDENT(_) &&
       self.peek_token(nth=2) is COLONCOLON &&
-      self.peek_token(nth=3) is UNDERSCORE
+      self.peek_token(nth=3) is (UNDERSCORE | DOTDOT)
     AMPER =>
       match self.peek_token(nth=1) {
         UIDENT(_) =>
           self.peek_token(nth=2) is COLONCOLON &&
-          self.peek_token(nth=3) is UNDERSCORE
+          self.peek_token(nth=3) is (UNDERSCORE | DOTDOT)
         PACKAGE_NAME(_) =>
           self.peek_token(nth=2) is DOT_UIDENT(_) &&
           self.peek_token(nth=3) is COLONCOLON &&
-          self.peek_token(nth=4) is UNDERSCORE
+          self.peek_token(nth=4) is (UNDERSCORE | DOTDOT)
         _ => false
       }
     _ => false
@@ -1745,9 +1745,18 @@ fn State::parse_constr_pattern(self : Self) -> @syntax.Pattern {
   if self.starts_constr_any_pattern() {
     let type_name = self.parse_type_name()
     self.expect_token(TK_COLONCOLON)
-    self.expect_token(TK_UNDERSCORE)
+    let is_unknown = self.peek_token() is DOTDOT
+    if is_unknown {
+      self.expect_token(TK_DOTDOT)
+    } else {
+      self.expect_token(TK_UNDERSCORE)
+    }
     let loc = self.loc_start_with(spos)
-    return ConstrAny(type_name~, loc~)
+    return if is_unknown {
+      ConstrUnknown(type_name~, loc~)
+    } else {
+      ConstrAny(type_name~, loc~)
+    }
   }
 
   fn parse_constr_args() {

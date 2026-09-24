@@ -1404,6 +1404,10 @@ fn Pattern::json_repr(self : Pattern) -> Json {
       tagged_node("Pattern::ConstrAny", loc, {
         "type_name": type_name.json_repr(),
       })
+    ConstrUnknown(type_name~, loc~) =>
+      tagged_node("Pattern::ConstrUnknown", loc, {
+        "type_name": type_name.json_repr(),
+      })
     Or(pat1~, pat2~, loc~) =>
       tagged_node("Pattern::Or", loc, {
         "pat1": pat1.json_repr(),

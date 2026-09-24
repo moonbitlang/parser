@@ -553,6 +553,21 @@ pub fn CstNode::pattern_constr_any(
 }
 
 ///|
+pub fn CstNode::pattern_constr_unknown(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  type_~ : CstNode,
+  op~ : CstNode,
+  wildcard~ : CstNode,
+) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  children.push((Some("type"), type_))
+  children.push((Some("op"), op))
+  children.push((Some("wildcard"), wildcard))
+  node(NodeKind::Pattern_ConstrUnknown, loc, source_span, children)
+}
+
+///|
 pub fn CstNode::pattern_special_constr(
   loc~ : Location,
   source_span~ : (Int, Int),

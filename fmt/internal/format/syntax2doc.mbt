@@ -1508,6 +1508,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       constr_pattern2doc(fmt.constr(constr), args, is_open)
     ConstrAny(type_name~, loc=_) =>
       fmt.type_name(type_name) + text("::") + char('_')
+    ConstrUnknown(type_name~, loc=_) => fmt.type_name(type_name) + text("::..")
     Constant(c~, loc=_) => fmt.constant(c)
     Array(pats~, loc=_) => {
       fn array_pattern2doc(pat : @syntax.ArrayPattern) -> Doc {
@@ -2755,6 +2756,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         | Var(_)
         | Constr(_)
         | ConstrAny(_)
+        | ConstrUnknown(_)
         | SpecialConstr(_)
         | Tuple(_)
         | Constraint(_)

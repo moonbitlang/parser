@@ -226,6 +226,7 @@ test "pattern node kinds are classified exhaustively" {
       Pattern_Map,
       Pattern_Constr,
       Pattern_ConstrAny,
+      Pattern_ConstrUnknown,
       Pattern_SpecialConstr,
       Pattern_Or,
       Pattern_Alias,

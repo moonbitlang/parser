@@ -330,7 +330,7 @@ fn pattern_starts_constr_any(state : ParserState) -> Bool {
   state.peek_nth_significant(colon_offset).map(item => item.0)
   is Some(COLONCOLON) &&
   state.peek_nth_significant(colon_offset + 1).map(item => item.0)
-  is Some(UNDERSCORE)
+  is Some(UNDERSCORE | DOTDOT)
 }
 
 ///|
@@ -338,10 +338,11 @@ fn parse_constr_any_pattern(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("type"), parse_type_name_node(state))
   push_child(children, Some("op"), state.expect_token(TokenKind::TK_COLONCOLON))
+  let is_unknown = state.current_is(TK_DOTDOT)
   push_child(
     children,
     Some("wildcard"),
-    state.expect_token(TokenKind::TK_UNDERSCORE),
+    state.expect_token(if is_unknown { TK_DOTDOT } else { TK_UNDERSCORE }),
   )
   state.construct_from_children(
     fn(loc, source_span, children) {
@@ -354,13 +355,23 @@ fn parse_constr_any_pattern(state : ParserState) -> CstNode {
       let wildcard = @construction.first_child_with_label_from(
         children, "wildcard",
       ).unwrap_or(missing_at_end(loc~, source_span~))
-      @node.CstNode::pattern_constr_any(
-        loc~,
-        source_span~,
-        type_~,
-        op~,
-        wildcard~,
-      )
+      if is_unknown {
+        @node.CstNode::pattern_constr_unknown(
+          loc~,
+          source_span~,
+          type_~,
+          op~,
+          wildcard~,
+        )
+      } else {
+        @node.CstNode::pattern_constr_any(
+          loc~,
+          source_span~,
+          type_~,
+          op~,
+          wildcard~,
+        )
+      }
     },
     children,
   )

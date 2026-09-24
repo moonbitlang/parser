@@ -487,6 +487,7 @@ pub(all) enum Pattern {
   Constraint(pat~ : Pattern, ty~ : Type, loc~ : @basic.Location)
   Constr(constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location)
   ConstrAny(type_name~ : TypeName, loc~ : @basic.Location)
+  ConstrUnknown(type_name~ : TypeName, loc~ : @basic.Location)
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location)
   Tuple(pats~ : @list.List[Pattern], loc~ : @basic.Location)
   Var(Binder)
@@ -756,6 +757,7 @@ pub(open) trait IterVisitor {
   fn visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Constr(Self, constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : @basic.Location) -> Unit = _
+  fn visit_Pattern_ConstrUnknown(Self, type_name~ : TypeName, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : @basic.Location) -> Unit = _
   fn visit_Pattern_Var(Self, Binder) -> Unit = _
@@ -962,6 +964,7 @@ pub(open) trait MapVisitor {
   fn visit_Pattern_Constraint(Self, pat~ : Pattern, ty~ : Type, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Constr(Self, constr~ : Constructor, args~ : @list.List[ConstrPatArg]?, is_open~ : Bool, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : @basic.Location) -> Pattern = _
+  fn visit_Pattern_ConstrUnknown(Self, type_name~ : TypeName, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : @basic.Location) -> Pattern = _
   fn visit_Pattern_Var(Self, Binder) -> Pattern = _
