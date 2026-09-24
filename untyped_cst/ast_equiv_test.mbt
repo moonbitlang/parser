@@ -326,8 +326,11 @@ test "removed grammar forms stay rejected" {
 }
 
 ///|
-test "valid reverse pipe snapshot matches handrolled AST" {
-  assert_handrolled_cst_ast_equiv(read_snapshot("parse_test_reverse_pipe.mbt"))
+test "reverse pipe snapshot matches handrolled parser" {
+  assert_handrolled_cst_structure_equiv(
+    "reverse pipe snapshot",
+    read_snapshot("parse_test_reverse_pipe.mbt"),
+  )
 }
 
 ///|
@@ -872,6 +875,9 @@ fn handrolled_cst_snapshot_allows_diagnostic_divergence(path : String) -> Bool {
     "parse_test_nobreak.mbt"
     | "parse_test_for_else.mbt"
     | "parse_test_while_else.mbt" => true
+    // The handrolled infix recovery emits an additional diagnostic when the
+    // missing reverse-pipe block starts with an incomplete expression.
+    "parse_test_reverse_pipe_error.mbt" => true
     _ => false
   }
 }

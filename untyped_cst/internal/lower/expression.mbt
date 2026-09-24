@@ -40,6 +40,11 @@ pub fn lower_expr(node : CstNode) -> @syntax.Expr {
     Expr_Sequence => lower_sequence_cst_node(node)
     Expr_Infix | Expr_Pipe | Expr_RevPipe | Expr_Implies =>
       lower_infix_expr(node)
+    Expr_PipeRecovery =>
+      node
+      .first_child_with_label("lhs")
+      .map(lower_expr)
+      .unwrap_or(lower_hole_expr(node.loc))
     Expr_Unary => lower_prefix_expr(node)
     Expr_Apply => lower_apply_expr(node)
     Expr_DotApply => lower_dot_apply_expr(node)
@@ -399,7 +404,7 @@ fn lower_list_comprehension_expr(node : CstNode) -> @syntax.Expr {
       kind is ListComprehensionKind_ForEach
     }) {
     @syntax.ListComprehensionKind::Foreach(
-      binders=lower_foreach_binders(node),
+      patterns=lower_foreach_patterns(node),
       expr=node
         .first_child_with_label("expr")
         .map(lower_expr)

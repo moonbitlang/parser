@@ -592,6 +592,8 @@ fn parse_expr_pipe(
 ) -> CstNode {
   let reports_before_lhs = state.reports.length()
   let mut lhs = parse_expr_infix(state, stop_kinds)
+  let mut pipe_mode = 0 // 0: none, 1: forward, 2: reverse
+  let invalid_children : Array[(String?, CstNode)] = []
   let mut done = false
   while !done {
     discard_expr_trivia(state)
@@ -651,49 +653,84 @@ fn parse_expr_pipe(
         } else {
           TK_PIPE
         }
-        let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
+        if invalid_children.is_empty() {
+          let msg = match (pipe_mode, pipe_kind) {
+            (1, TK_PIPE_LEFT) | (2, TK_PIPE) =>
+              Some(
+                "Parse error, `|>` and `<|` cannot be mixed in the same pipe expression.",
+              )
+            (2, TK_PIPE_LEFT) => Some("Parse error, `<|` cannot be chained.")
+            _ => None
+          }
+          if msg is Some(msg) {
+            if state.peek() is Some((_, start, end)) {
+              state.report(mk_loc(start, end), msg)
+            }
+            push_child(invalid_children, Some("lhs"), lhs)
+          } else if pipe_kind is TK_PIPE {
+            pipe_mode = 1
+          } else {
+            pipe_mode = 2
+          }
+        }
+        let children : Array[(String?, CstNode)] = if invalid_children.is_empty() {
+          [(Some("lhs"), lhs)]
+        } else {
+          []
+        }
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
         } else {
           ()
         }
         let reports_before_rhs = state.reports.length()
-        let rhs = parse_pipe_rhs(state, stop_kinds, pipe_kind)
+        let rhs = parse_pipe_rhs(state, stop_kinds)
         push_child(
           children,
           Some("rhs"),
           state.required_expr_node(rhs, reports_before_rhs),
         )
-        lhs = state.construct_from_children(
-          if pipe_kind is TokenKind::TK_PIPE_LEFT {
-            fn(loc, source_span, children) {
-              let lhs = @construction.first_child_with_label_from(
-                children, "lhs",
-              ).unwrap_or(missing_at_end(loc~, source_span~))
-              let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-                missing_at_end(loc~, source_span~),
-              )
-              let rhs = @construction.first_child_with_label_from(
-                children, "rhs",
-              ).unwrap_or(missing_at_end(loc~, source_span~))
-              @node.CstNode::expr_rev_pipe(loc~, source_span~, lhs~, op~, rhs~)
-            }
-          } else {
-            fn(loc, source_span, children) {
-              let lhs = @construction.first_child_with_label_from(
-                children, "lhs",
-              ).unwrap_or(missing_at_end(loc~, source_span~))
-              let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-                missing_at_end(loc~, source_span~),
-              )
-              let rhs = @construction.first_child_with_label_from(
-                children, "rhs",
-              ).unwrap_or(missing_at_end(loc~, source_span~))
-              @node.CstNode::expr_pipe(loc~, source_span~, lhs~, op~, rhs~)
-            }
-          },
-          children,
-        )
+        if !invalid_children.is_empty() {
+          let error = state.construct_from_children(error_node, children)
+          push_child(invalid_children, Some("error"), error)
+        } else {
+          lhs = state.construct_from_children(
+            if pipe_kind is TokenKind::TK_PIPE_LEFT {
+              fn(loc, source_span, children) {
+                let lhs = @construction.first_child_with_label_from(
+                  children, "lhs",
+                ).unwrap_or(missing_at_end(loc~, source_span~))
+                let op = @construction.first_child_with_label_from(
+                  children, "op",
+                ).unwrap_or(missing_at_end(loc~, source_span~))
+                let rhs = @construction.first_child_with_label_from(
+                  children, "rhs",
+                ).unwrap_or(missing_at_end(loc~, source_span~))
+                @node.CstNode::expr_rev_pipe(
+                  loc~,
+                  source_span~,
+                  lhs~,
+                  op~,
+                  rhs~,
+                )
+              }
+            } else {
+              fn(loc, source_span, children) {
+                let lhs = @construction.first_child_with_label_from(
+                  children, "lhs",
+                ).unwrap_or(missing_at_end(loc~, source_span~))
+                let op = @construction.first_child_with_label_from(
+                  children, "op",
+                ).unwrap_or(missing_at_end(loc~, source_span~))
+                let rhs = @construction.first_child_with_label_from(
+                  children, "rhs",
+                ).unwrap_or(missing_at_end(loc~, source_span~))
+                @node.CstNode::expr_pipe(loc~, source_span~, lhs~, op~, rhs~)
+              }
+            },
+            children,
+          )
+        }
       }
       Some((FAT_ARROW, _, _)) if arrow_lhs_can_start_function(lhs) => {
         if lhs.kind is Expr_Constraint &&
@@ -728,7 +765,20 @@ fn parse_expr_pipe(
       _ => done = true
     }
   }
-  lhs
+  if invalid_children.is_empty() {
+    lhs
+  } else {
+    state.construct_from_children(
+      fn(loc, source_span, children) {
+        @node.CstNode::expr_pipe_recovery(
+          loc~,
+          source_span~,
+          entries=recovery_children(children),
+        )
+      },
+      invalid_children,
+    )
+  }
 }
 
 ///|
@@ -744,7 +794,6 @@ fn stop_kinds_with_pipe(stop_kinds : Array[TokenKind]) -> Array[TokenKind] {
 fn parse_pipe_rhs(
   state : ParserState,
   stop_kinds : Array[TokenKind],
-  pipe_kind : TokenKind,
 ) -> CstNode {
   let head = parse_expr_infix(state, stop_kinds)
   discard_expr_trivia(state)
@@ -759,17 +808,15 @@ fn parse_pipe_rhs(
       } else {
         ()
       }
-      if pipe_kind is TK_PIPE {
-        match state.peek_significant() {
-          Some((LBRACE, _, _)) => ()
-          Some((found, start, end)) =>
-            state.report_expected_description_at(
-              found,
-              mk_loc(start, end),
-              "`{ ... }`",
-            )
-          None => state.report_expected_description("`{ ... }`")
-        }
+      match state.peek_significant() {
+        Some((LBRACE, _, _)) => ()
+        Some((found, start, end)) =>
+          state.report_expected_description_at(
+            found,
+            mk_loc(start, end),
+            "`{ ... }`",
+          )
+        None => state.report_expected_description("`{ ... }`")
       }
       let reports_before_body = state.reports.length()
       let body = parse_arrow_fn_body_expr(

@@ -738,6 +738,20 @@ pub fn CstNode::expr_pipe(
 }
 
 ///|
+pub fn CstNode::expr_pipe_recovery(
+  loc~ : Location,
+  source_span~ : (Int, Int),
+  entries~ : ArrayView[CstRecoveryChild],
+) -> CstNode {
+  node(
+    NodeKind::Expr_PipeRecovery,
+    loc,
+    source_span,
+    entries_from_cstrecoverychild(entries),
+  )
+}
+
+///|
 pub fn CstNode::expr_rev_pipe(
   loc~ : Location,
   source_span~ : (Int, Int),

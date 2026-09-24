@@ -116,6 +116,8 @@ pub enum NodeKind {
   Expr_Infix
   /// Corresponds to `@syntax.Expr::Pipe`.
   Expr_Pipe
+  /// Invalid continuation of a pipe expression; lowers to its valid prefix.
+  Expr_PipeRecovery
   /// Corresponds to `@syntax.Expr::RevPipe`.
   Expr_RevPipe
   /// Corresponds to `@syntax.Expr::Implies`.
@@ -780,6 +782,7 @@ pub fn NodeKind::is_expr(self : NodeKind) -> Bool {
     | Expr_Map
     | Expr_Infix
     | Expr_Pipe
+    | Expr_PipeRecovery
     | Expr_RevPipe
     | Expr_Implies
     | Expr_Unary

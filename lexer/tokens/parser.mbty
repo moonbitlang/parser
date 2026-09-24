@@ -1555,10 +1555,10 @@ for_expr -> Expr
   ;
 
 foreach_expr -> Expr
-  : loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr foreach_optional_loop_vars block_expr optional_nobreak optional_where_clause {
+  : loop_label_colon "for" non_empty_list_commas(pattern) "in" expr foreach_optional_loop_vars block_expr optional_nobreak optional_where_clause {
     let (init, continue_block) = $6
     ForEach(
-      binders = $3,
+      patterns = $3,
       expr = $5,
       init~,
       continue_block~,
@@ -1581,11 +1581,6 @@ foreach_optional_loop_vars_infix -> (List[(Binder, Expr)], List[(Binder, Expr)])
   : { (@list.empty(), @list.empty()) }
   | SEMI for_binders_infix { ($2, @list.empty()) }
   | SEMI for_binders_infix SEMI for_binders_infix { ($2, $4) }
-  ;
-
-foreach_binder -> Binder?
-  : binder { Some($1)}
-  | "_" { None }
   ;
 
 labelled_block_expr -> Expr
@@ -2050,20 +2045,20 @@ simple_expr -> Expr
     let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
     Method(type_name = $1, method_name~, loc = mk_loc($sloc))
   }
-  | "[" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "]" {
+  | "[" "for" non_empty_list_commas(pattern) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "]" {
     let (init, continue_block) = $6
     ListComprehension(
-      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
+      kind = Foreach(patterns = $3, expr = $5, init~, continue_block~),
       guard_ = $7,
       body = $9,
       is_iter = false,
       loc = mk_loc($sloc)
     )
   }
-  | "[|" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "|]" {
+  | "[|" "for" non_empty_list_commas(pattern) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "|]" {
     let (init, continue_block) = $6
     ListComprehension(
-      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
+      kind = Foreach(patterns = $3, expr = $5, init~, continue_block~),
       guard_ = $7,
       body = $9,
       is_iter = true,
