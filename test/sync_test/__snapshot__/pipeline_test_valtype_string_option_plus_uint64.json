@@ -464,12 +464,7 @@
                                                         "loc": null,
                                                         "children": []
                                                       },
-                                                      "return_self": false,
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
-                                                      }
+                                                      "return_self": false
                                                     }
                                                   },
                                                   "is_pun": false
@@ -511,12 +506,7 @@
                           }
                         ]
                       },
-                      "return_self": false,
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": null,
-                        "children": {}
-                      }
+                      "return_self": false
                     }
                   },
                   "body": {
@@ -782,12 +772,7 @@
                                                 "loc": null,
                                                 "children": []
                                               },
-                                              "return_self": false,
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
-                                              }
+                                              "return_self": false
                                             }
                                           },
                                           "method_name": {
@@ -802,12 +787,7 @@
                                             "loc": null,
                                             "children": []
                                           },
-                                          "return_self": false,
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
-                                          }
+                                          "return_self": false
                                         }
                                       }
                                     }
@@ -950,12 +930,7 @@
                                             "loc": null,
                                             "children": []
                                           },
-                                          "return_self": false,
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
-                                          }
+                                          "return_self": false
                                         }
                                       },
                                       "kind": {
@@ -966,11 +941,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           }

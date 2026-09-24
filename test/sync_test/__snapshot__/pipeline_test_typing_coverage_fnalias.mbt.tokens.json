@@ -1,28 +1,33 @@
 [
   {
     "token": [
-      "COMMENT",
+      "ATTRIBUTE",
       {
-        "content": "//!build: -w -27",
-        "kind": [
-          "Ownline",
-          {
-            "leading_blank_line": false,
-            "trailing_blank_line": true
-          }
-        ],
-        "consumed_by_docstring": false
+        "id": "alias",
+        "dot_id": "",
+        "raw_payload": "(plus)"
       }
     ],
-    "loc": "1:1-1:17"
+    "loc": "1:1-1:13"
   },
   {
     "token": "NEWLINE",
-    "loc": "1:17-1:18"
+    "loc": "1:13-1:14"
+  },
+  {
+    "token": [
+      "ATTRIBUTE",
+      {
+        "id": "alias",
+        "dot_id": "",
+        "raw_payload": "(plus2)"
+      }
+    ],
+    "loc": "2:1-2:14"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:1-2:2"
+    "loc": "2:14-2:15"
   },
   {
     "token": "FN",
@@ -144,70 +149,12 @@
     "loc": "6:1-6:2"
   },
   {
-    "token": "FNALIAS",
-    "loc": "7:1-7:8"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "add"
-    ],
-    "loc": "7:9-7:12"
-  },
-  {
-    "token": "AS",
-    "loc": "7:13-7:15"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "plus"
-    ],
-    "loc": "7:16-7:20"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "7:20-7:20"
+    "token": "NEWLINE",
+    "loc": "7:1-7:2"
   },
   {
     "token": "NEWLINE",
-    "loc": "7:20-7:21"
-  },
-  {
-    "token": "FNALIAS",
-    "loc": "8:1-8:8"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "plus"
-    ],
-    "loc": "8:9-8:13"
-  },
-  {
-    "token": "AS",
-    "loc": "8:14-8:16"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "plus2"
-    ],
-    "loc": "8:17-8:22"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "8:22-8:22"
-  },
-  {
-    "token": "NEWLINE",
-    "loc": "8:22-8:23"
+    "loc": "8:1-8:2"
   },
   {
     "token": "NEWLINE",
@@ -274,8 +221,19 @@
     "loc": "12:2-12:3"
   },
   {
+    "token": [
+      "ATTRIBUTE",
+      {
+        "id": "as_free_fn",
+        "dot_id": "",
+        "raw_payload": "(bump_counter)"
+      }
+    ],
+    "loc": "13:1-13:26"
+  },
+  {
     "token": "NEWLINE",
-    "loc": "13:1-13:2"
+    "loc": "13:26-13:27"
   },
   {
     "token": "FN",
@@ -455,48 +413,8 @@
     "loc": "18:1-18:2"
   },
   {
-    "token": "FNALIAS",
-    "loc": "19:1-19:8"
-  },
-  {
-    "token": [
-      "UIDENT",
-      "Counter"
-    ],
-    "loc": "19:9-19:16"
-  },
-  {
-    "token": "COLONCOLON",
-    "loc": "19:16-19:18"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "bump"
-    ],
-    "loc": "19:18-19:22"
-  },
-  {
-    "token": "AS",
-    "loc": "19:23-19:25"
-  },
-  {
-    "token": [
-      "LIDENT",
-      "bump_counter"
-    ],
-    "loc": "19:26-19:38"
-  },
-  {
-    "token": [
-      "SEMI",
-      false
-    ],
-    "loc": "19:38-19:38"
-  },
-  {
     "token": "NEWLINE",
-    "loc": "19:38-19:39"
+    "loc": "19:1-19:2"
   },
   {
     "token": "NEWLINE",

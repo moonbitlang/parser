@@ -23,7 +23,7 @@ impl T1 for T2 with f(self,a,b) -> {}
       fn f4() -> 
       test {}
       fn f5() ->
-      typealias T1 as T2
+      type T2 = T1
       fn f6() ->
       async fn f7() ->
       const CONST = 5
@@ -45,7 +45,7 @@ fn f3() ->
 fn f4() -> 
 test {}
 fn f5() ->
-typealias T1 as T2
+type T2 = T1
 fn f6() ->
 async fn f7() ->
 const CONST = 5

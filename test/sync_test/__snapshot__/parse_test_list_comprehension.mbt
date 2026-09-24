@@ -30,3 +30,8 @@ test {
   // The valid spelling begins `[ for ;; if ...`.
   let _ = [ for if f() is Some(x) => x ]
 }
+///|
+test {
+  let _ = [ for Some(x) in xs => x ]
+  let _ = [ for i, (a, b) in indexed_values => i + a + b ]
+}

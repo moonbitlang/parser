@@ -193,12 +193,7 @@
                 "loc": null,
                 "children": []
               },
-              "return_self": false,
-              "attr": {
-                "kind": "ApplyAttr::NoAttr",
-                "loc": null,
-                "children": {}
-              }
+              "return_self": false
             }
           }
         }
@@ -399,12 +394,7 @@
                 "loc": null,
                 "children": []
               },
-              "return_self": false,
-              "attr": {
-                "kind": "ApplyAttr::NoAttr",
-                "loc": null,
-                "children": {}
-              }
+              "return_self": false
             }
           }
         }
@@ -549,11 +539,6 @@
                                 }
                               }
                             ]
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
                           }
                         }
                       },
@@ -561,15 +546,21 @@
                         "kind": "Expr::ForEach",
                         "loc": null,
                         "children": {
-                          "binders": {
-                            "kind": "Expr::ForEach::BinderList",
+                          "patterns": {
+                            "kind": "Expr::ForEach::PatternList",
                             "loc": null,
                             "children": [
                               {
-                                "kind": "Binder",
+                                "kind": "Pattern::Var",
                                 "loc": null,
                                 "children": {
-                                  "name": "c"
+                                  "value": {
+                                    "kind": "Binder",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "c"
+                                    }
+                                  }
                                 }
                               }
                             ]
@@ -669,12 +660,7 @@
                                             "loc": null,
                                             "children": []
                                           },
-                                          "return_self": false,
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
-                                          }
+                                          "return_self": false
                                         }
                                       },
                                       "kind": {
@@ -685,11 +671,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           },
@@ -750,11 +731,6 @@
                                 }
                               }
                             ]
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
                           }
                         }
                       },
@@ -762,22 +738,34 @@
                         "kind": "Expr::ForEach",
                         "loc": null,
                         "children": {
-                          "binders": {
-                            "kind": "Expr::ForEach::BinderList",
+                          "patterns": {
+                            "kind": "Expr::ForEach::PatternList",
                             "loc": null,
                             "children": [
                               {
-                                "kind": "Binder",
+                                "kind": "Pattern::Var",
                                 "loc": null,
                                 "children": {
-                                  "name": "i"
+                                  "value": {
+                                    "kind": "Binder",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "i"
+                                    }
+                                  }
                                 }
                               },
                               {
-                                "kind": "Binder",
+                                "kind": "Pattern::Var",
                                 "loc": null,
                                 "children": {
-                                  "name": "c"
+                                  "value": {
+                                    "kind": "Binder",
+                                    "loc": null,
+                                    "children": {
+                                      "name": "c"
+                                    }
+                                  }
                                 }
                               }
                             ]
@@ -883,11 +871,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           },
@@ -1002,11 +985,6 @@
                                         }
                                       }
                                     ]
-                                  },
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               },
@@ -1014,15 +992,21 @@
                                 "kind": "Expr::ForEach",
                                 "loc": null,
                                 "children": {
-                                  "binders": {
-                                    "kind": "Expr::ForEach::BinderList",
+                                  "patterns": {
+                                    "kind": "Expr::ForEach::PatternList",
                                     "loc": null,
                                     "children": [
                                       {
-                                        "kind": "Binder",
+                                        "kind": "Pattern::Var",
                                         "loc": null,
                                         "children": {
-                                          "name": "c"
+                                          "value": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "c"
+                                            }
+                                          }
                                         }
                                       }
                                     ]
@@ -1122,12 +1106,7 @@
                                                     "loc": null,
                                                     "children": []
                                                   },
-                                                  "return_self": false,
-                                                  "attr": {
-                                                    "kind": "ApplyAttr::NoAttr",
-                                                    "loc": null,
-                                                    "children": {}
-                                                  }
+                                                  "return_self": false
                                                 }
                                               },
                                               "kind": {
@@ -1138,11 +1117,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   },
@@ -1203,11 +1177,6 @@
                                         }
                                       }
                                     ]
-                                  },
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               },
@@ -1215,22 +1184,34 @@
                                 "kind": "Expr::ForEach",
                                 "loc": null,
                                 "children": {
-                                  "binders": {
-                                    "kind": "Expr::ForEach::BinderList",
+                                  "patterns": {
+                                    "kind": "Expr::ForEach::PatternList",
                                     "loc": null,
                                     "children": [
                                       {
-                                        "kind": "Binder",
+                                        "kind": "Pattern::Var",
                                         "loc": null,
                                         "children": {
-                                          "name": "i"
+                                          "value": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "i"
+                                            }
+                                          }
                                         }
                                       },
                                       {
-                                        "kind": "Binder",
+                                        "kind": "Pattern::Var",
                                         "loc": null,
                                         "children": {
-                                          "name": "c"
+                                          "value": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "c"
+                                            }
+                                          }
                                         }
                                       }
                                     ]
@@ -1336,11 +1317,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   },
@@ -1401,11 +1377,6 @@
                                         }
                                       }
                                     ]
-                                  },
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               },
@@ -1413,15 +1384,21 @@
                                 "kind": "Expr::ForEach",
                                 "loc": null,
                                 "children": {
-                                  "binders": {
-                                    "kind": "Expr::ForEach::BinderList",
+                                  "patterns": {
+                                    "kind": "Expr::ForEach::PatternList",
                                     "loc": null,
                                     "children": [
                                       {
-                                        "kind": "Binder",
+                                        "kind": "Pattern::Var",
                                         "loc": null,
                                         "children": {
-                                          "name": "c"
+                                          "value": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "c"
+                                            }
+                                          }
                                         }
                                       }
                                     ]
@@ -1562,11 +1539,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           }
@@ -1695,11 +1667,6 @@
                                         }
                                       }
                                     ]
-                                  },
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               },
@@ -1707,15 +1674,21 @@
                                 "kind": "Expr::ForEach",
                                 "loc": null,
                                 "children": {
-                                  "binders": {
-                                    "kind": "Expr::ForEach::BinderList",
+                                  "patterns": {
+                                    "kind": "Expr::ForEach::PatternList",
                                     "loc": null,
                                     "children": [
                                       {
-                                        "kind": "Binder",
+                                        "kind": "Pattern::Var",
                                         "loc": null,
                                         "children": {
-                                          "name": "c"
+                                          "value": {
+                                            "kind": "Binder",
+                                            "loc": null,
+                                            "children": {
+                                              "name": "c"
+                                            }
+                                          }
                                         }
                                       }
                                     ]
@@ -1856,11 +1829,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           }
@@ -2049,11 +2017,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -2061,22 +2024,34 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "i"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "i"
+                                                    }
+                                                  }
                                                 }
                                               },
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "c"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "c"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -2182,11 +2157,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
@@ -2247,11 +2217,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -2259,15 +2224,21 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "c"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "c"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -2408,11 +2379,6 @@
                                                             }
                                                           }
                                                         ]
-                                                      },
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
                                                       }
                                                     }
                                                   }
@@ -2541,11 +2507,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -2553,15 +2514,21 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "u"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "u"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -2601,12 +2568,7 @@
                                                 "loc": null,
                                                 "children": []
                                               },
-                                              "return_self": false,
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
-                                              }
+                                              "return_self": false
                                             }
                                           },
                                           "init": {
@@ -2685,12 +2647,7 @@
                                                             "loc": null,
                                                             "children": []
                                                           },
-                                                          "return_self": false,
-                                                          "attr": {
-                                                            "kind": "ApplyAttr::NoAttr",
-                                                            "loc": null,
-                                                            "children": {}
-                                                          }
+                                                          "return_self": false
                                                         }
                                                       },
                                                       "kind": {
@@ -2701,11 +2658,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
@@ -2766,11 +2718,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -2778,15 +2725,21 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "u"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "u"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -2826,12 +2779,7 @@
                                                 "loc": null,
                                                 "children": []
                                               },
-                                              "return_self": false,
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
-                                              }
+                                              "return_self": false
                                             }
                                           },
                                           "init": {
@@ -2951,11 +2899,6 @@
                                                             }
                                                           }
                                                         ]
-                                                      },
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
                                                       }
                                                     }
                                                   }
@@ -3084,11 +3027,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -3096,22 +3034,34 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "i"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "i"
+                                                    }
+                                                  }
                                                 }
                                               },
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "u"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "u"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -3151,12 +3101,7 @@
                                                 "loc": null,
                                                 "children": []
                                               },
-                                              "return_self": false,
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
-                                              }
+                                              "return_self": false
                                             }
                                           },
                                           "init": {
@@ -3315,12 +3260,7 @@
                                                             "loc": null,
                                                             "children": []
                                                           },
-                                                          "return_self": false,
-                                                          "attr": {
-                                                            "kind": "ApplyAttr::NoAttr",
-                                                            "loc": null,
-                                                            "children": {}
-                                                          }
+                                                          "return_self": false
                                                         }
                                                       }
                                                     }
@@ -3401,11 +3341,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
@@ -3467,11 +3402,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
@@ -3531,11 +3461,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -3543,15 +3468,21 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "u"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "u"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -3622,11 +3553,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
@@ -3747,11 +3673,6 @@
                                                             }
                                                           }
                                                         ]
-                                                      },
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
                                                       }
                                                     }
                                                   }
@@ -3880,11 +3801,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -3892,15 +3808,21 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "u"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "u"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -4085,11 +4007,6 @@
                                                             }
                                                           }
                                                         ]
-                                                      },
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
                                                       }
                                                     }
                                                   }
@@ -4218,11 +4135,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -4230,15 +4142,21 @@
                                         "kind": "Expr::ForEach",
                                         "loc": null,
                                         "children": {
-                                          "binders": {
-                                            "kind": "Expr::ForEach::BinderList",
+                                          "patterns": {
+                                            "kind": "Expr::ForEach::PatternList",
                                             "loc": null,
                                             "children": [
                                               {
-                                                "kind": "Binder",
+                                                "kind": "Pattern::Var",
                                                 "loc": null,
                                                 "children": {
-                                                  "name": "u"
+                                                  "value": {
+                                                    "kind": "Binder",
+                                                    "loc": null,
+                                                    "children": {
+                                                      "name": "u"
+                                                    }
+                                                  }
                                                 }
                                               }
                                             ]
@@ -4423,11 +4341,6 @@
                                                             }
                                                           }
                                                         ]
-                                                      },
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
                                                       }
                                                     }
                                                   }
@@ -4556,11 +4469,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       }
@@ -4570,15 +4478,21 @@
                                     "kind": "Expr::ForEach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "u"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "u"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -4618,12 +4532,7 @@
                                             "loc": null,
                                             "children": []
                                           },
-                                          "return_self": false,
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
-                                          }
+                                          "return_self": false
                                         }
                                       },
                                       "init": {
@@ -4743,11 +4652,6 @@
                                                         }
                                                       }
                                                     ]
-                                                  },
-                                                  "attr": {
-                                                    "kind": "ApplyAttr::NoAttr",
-                                                    "loc": null,
-                                                    "children": {}
                                                   }
                                                 }
                                               }

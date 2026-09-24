@@ -130,26 +130,34 @@
     "loc": "2:53-2:60"
   },
   {
-    "token": "EQUAL",
+    "token": "PLUS",
     "loc": "2:61-2:62"
+  },
+  {
+    "token": "NOCANCEL",
+    "loc": "2:63-2:71"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "2:72-2:73"
   },
   {
     "token": [
       "STRING",
       "%async.suspend"
     ],
-    "loc": "2:63-2:79"
+    "loc": "2:74-2:90"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "2:79-2:79"
+    "loc": "2:90-2:90"
   },
   {
     "token": "NEWLINE",
-    "loc": "2:79-2:80"
+    "loc": "2:90-2:91"
   },
   {
     "token": "NEWLINE",

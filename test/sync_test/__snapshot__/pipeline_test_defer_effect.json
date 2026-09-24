@@ -910,22 +910,34 @@
                     "kind": "Expr::ListComprehension::Kind::Foreach",
                     "loc": null,
                     "children": {
-                      "binders": {
-                        "kind": "Expr::ForEach::BinderList",
+                      "patterns": {
+                        "kind": "Expr::ForEach::PatternList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "Binder",
+                            "kind": "Pattern::Var",
                             "loc": null,
                             "children": {
-                              "name": "i"
+                              "value": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "i"
+                                }
+                              }
                             }
                           },
                           {
-                            "kind": "Binder",
+                            "kind": "Pattern::Var",
                             "loc": null,
                             "children": {
-                              "name": "should_raise"
+                              "value": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "should_raise"
+                                }
+                              }
                             }
                           }
                         ]
@@ -1099,11 +1111,6 @@
                                 }
                               }
                             ]
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
                           }
                         }
                       }
@@ -1407,11 +1414,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           }
@@ -1498,11 +1500,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           }
@@ -1589,11 +1586,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   }
@@ -1728,11 +1720,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   },
@@ -1816,11 +1803,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -1904,11 +1886,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
@@ -1992,11 +1969,6 @@
                                                         }
                                                       }
                                                     ]
-                                                  },
-                                                  "attr": {
-                                                    "kind": "ApplyAttr::NoAttr",
-                                                    "loc": null,
-                                                    "children": {}
                                                   }
                                                 }
                                               },
@@ -2159,11 +2131,6 @@
                                                                         }
                                                                       }
                                                                     ]
-                                                                  },
-                                                                  "attr": {
-                                                                    "kind": "ApplyAttr::NoAttr",
-                                                                    "loc": null,
-                                                                    "children": {}
                                                                   }
                                                                 }
                                                               }
@@ -2257,11 +2224,6 @@
                                                                         }
                                                                       }
                                                                     ]
-                                                                  },
-                                                                  "attr": {
-                                                                    "kind": "ApplyAttr::NoAttr",
-                                                                    "loc": null,
-                                                                    "children": {}
                                                                   }
                                                                 }
                                                               }
@@ -2384,11 +2346,6 @@
                                                                                         }
                                                                                       }
                                                                                     ]
-                                                                                  },
-                                                                                  "attr": {
-                                                                                    "kind": "ApplyAttr::NoAttr",
-                                                                                    "loc": null,
-                                                                                    "children": {}
                                                                                   }
                                                                                 }
                                                                               }
@@ -2455,11 +2412,6 @@
                                                                                         }
                                                                                       }
                                                                                     ]
-                                                                                  },
-                                                                                  "attr": {
-                                                                                    "kind": "ApplyAttr::NoAttr",
-                                                                                    "loc": null,
-                                                                                    "children": {}
                                                                                   }
                                                                                 }
                                                                               }
@@ -2561,11 +2513,6 @@
                                                                                     }
                                                                                   }
                                                                                 ]
-                                                                              },
-                                                                              "attr": {
-                                                                                "kind": "ApplyAttr::NoAttr",
-                                                                                "loc": null,
-                                                                                "children": {}
                                                                               }
                                                                             }
                                                                           }
@@ -2691,11 +2638,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   }
@@ -2769,11 +2711,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   }
@@ -3162,22 +3099,34 @@
                     "kind": "Expr::ListComprehension::Kind::Foreach",
                     "loc": null,
                     "children": {
-                      "binders": {
-                        "kind": "Expr::ForEach::BinderList",
+                      "patterns": {
+                        "kind": "Expr::ForEach::PatternList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "Binder",
+                            "kind": "Pattern::Var",
                             "loc": null,
                             "children": {
-                              "name": "i"
+                              "value": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "i"
+                                }
+                              }
                             }
                           },
                           {
-                            "kind": "Binder",
+                            "kind": "Pattern::Var",
                             "loc": null,
                             "children": {
-                              "name": "should_raise"
+                              "value": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "should_raise"
+                                }
+                              }
                             }
                           }
                         ]
@@ -3351,11 +3300,6 @@
                                 }
                               }
                             ]
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
                           }
                         }
                       }
@@ -3753,11 +3697,6 @@
                                                                             }
                                                                           }
                                                                         ]
-                                                                      },
-                                                                      "attr": {
-                                                                        "kind": "ApplyAttr::NoAttr",
-                                                                        "loc": null,
-                                                                        "children": {}
                                                                       }
                                                                     }
                                                                   },
@@ -3769,11 +3708,6 @@
                                                                 }
                                                               }
                                                             ]
-                                                          },
-                                                          "attr": {
-                                                            "kind": "ApplyAttr::NoAttr",
-                                                            "loc": null,
-                                                            "children": {}
                                                           }
                                                         }
                                                       }
@@ -3858,11 +3792,6 @@
                                                             }
                                                           }
                                                         ]
-                                                      },
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
                                                       }
                                                     }
                                                   }
@@ -3922,11 +3851,6 @@
                                                                 }
                                                               }
                                                             ]
-                                                          },
-                                                          "attr": {
-                                                            "kind": "ApplyAttr::NoAttr",
-                                                            "loc": null,
-                                                            "children": {}
                                                           }
                                                         }
                                                       }
@@ -4011,11 +3935,6 @@
                                                             }
                                                           }
                                                         ]
-                                                      },
-                                                      "attr": {
-                                                        "kind": "ApplyAttr::NoAttr",
-                                                        "loc": null,
-                                                        "children": {}
                                                       }
                                                     }
                                                   }
@@ -4176,11 +4095,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   },
@@ -4264,11 +4178,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -4352,11 +4261,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           },
@@ -4440,11 +4344,6 @@
                                                         }
                                                       }
                                                     ]
-                                                  },
-                                                  "attr": {
-                                                    "kind": "ApplyAttr::NoAttr",
-                                                    "loc": null,
-                                                    "children": {}
                                                   }
                                                 }
                                               },
@@ -4625,11 +4524,6 @@
                                                                                         }
                                                                                       }
                                                                                     ]
-                                                                                  },
-                                                                                  "attr": {
-                                                                                    "kind": "ApplyAttr::NoAttr",
-                                                                                    "loc": null,
-                                                                                    "children": {}
                                                                                   }
                                                                                 }
                                                                               }
@@ -4754,11 +4648,6 @@
                                                                                                     }
                                                                                                   }
                                                                                                 ]
-                                                                                              },
-                                                                                              "attr": {
-                                                                                                "kind": "ApplyAttr::NoAttr",
-                                                                                                "loc": null,
-                                                                                                "children": {}
                                                                                               }
                                                                                             }
                                                                                           },
@@ -4770,11 +4659,6 @@
                                                                                         }
                                                                                       }
                                                                                     ]
-                                                                                  },
-                                                                                  "attr": {
-                                                                                    "kind": "ApplyAttr::NoAttr",
-                                                                                    "loc": null,
-                                                                                    "children": {}
                                                                                   }
                                                                                 }
                                                                               }
@@ -4838,11 +4722,6 @@
                                                                         }
                                                                       }
                                                                     ]
-                                                                  },
-                                                                  "attr": {
-                                                                    "kind": "ApplyAttr::NoAttr",
-                                                                    "loc": null,
-                                                                    "children": {}
                                                                   }
                                                                 }
                                                               }
@@ -4968,11 +4847,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   }
@@ -5046,11 +4920,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   }
@@ -5131,15 +5000,21 @@
                     "kind": "Expr::ForEach",
                     "loc": null,
                     "children": {
-                      "binders": {
-                        "kind": "Expr::ForEach::BinderList",
+                      "patterns": {
+                        "kind": "Expr::ForEach::PatternList",
                         "loc": null,
                         "children": [
                           {
-                            "kind": "Binder",
+                            "kind": "Pattern::Var",
                             "loc": null,
                             "children": {
-                              "name": "config"
+                              "value": {
+                                "kind": "Binder",
+                                "loc": null,
+                                "children": {
+                                  "name": "config"
+                                }
+                              }
                             }
                           }
                         ]
@@ -5961,11 +5836,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -5977,11 +5847,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           }
@@ -5998,15 +5863,21 @@
                 "kind": "Expr::ForEach",
                 "loc": null,
                 "children": {
-                  "binders": {
-                    "kind": "Expr::ForEach::BinderList",
+                  "patterns": {
+                    "kind": "Expr::ForEach::PatternList",
                     "loc": null,
                     "children": [
                       {
-                        "kind": "Binder",
+                        "kind": "Pattern::Var",
                         "loc": null,
                         "children": {
-                          "name": "config"
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "config"
+                            }
+                          }
                         }
                       }
                     ]
@@ -6662,11 +6533,6 @@
                                                         }
                                                       }
                                                     ]
-                                                  },
-                                                  "attr": {
-                                                    "kind": "ApplyAttr::NoAttr",
-                                                    "loc": null,
-                                                    "children": {}
                                                   }
                                                 }
                                               },
@@ -6678,11 +6544,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   },

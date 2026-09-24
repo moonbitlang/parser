@@ -302,12 +302,7 @@
                       }
                     ]
                   },
-                  "return_self": false,
-                  "attr": {
-                    "kind": "ApplyAttr::NoAttr",
-                    "loc": null,
-                    "children": {}
-                  }
+                  "return_self": false
                 }
               },
               "method_name": {
@@ -322,12 +317,7 @@
                 "loc": null,
                 "children": []
               },
-              "return_self": false,
-              "attr": {
-                "kind": "ApplyAttr::NoAttr",
-                "loc": null,
-                "children": {}
-              }
+              "return_self": false
             }
           }
         }
@@ -767,11 +757,6 @@
                     }
                   }
                 ]
-              },
-              "attr": {
-                "kind": "ApplyAttr::NoAttr",
-                "loc": null,
-                "children": {}
               }
             }
           }
@@ -1038,11 +1023,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -1054,11 +1034,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           },
@@ -1199,11 +1174,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -1215,11 +1185,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           },
@@ -1390,11 +1355,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -1406,11 +1366,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           },
@@ -1551,11 +1506,6 @@
                                                 }
                                               }
                                             ]
-                                          },
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
                                           }
                                         }
                                       },
@@ -1567,11 +1517,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           }
@@ -1744,11 +1689,6 @@
                                             }
                                           }
                                         ]
-                                      },
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
                                       }
                                     }
                                   },
@@ -1760,11 +1700,6 @@
                                 }
                               }
                             ]
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
                           }
                         }
                       }

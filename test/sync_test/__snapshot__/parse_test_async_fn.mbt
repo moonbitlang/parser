@@ -7,6 +7,9 @@ fn main {
   f(async fn () { g!(); 42 })
   x.f()
   x |> f()
+  x.f!()
+  x..f!()
+  x |> f!()
 }
 
 fn h(

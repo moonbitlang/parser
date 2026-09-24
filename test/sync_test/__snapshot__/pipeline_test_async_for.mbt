@@ -1,4 +1,4 @@
-async fn[T] suspend(cb : ((T) -> Unit) -> Unit) -> T noraise = "%async.suspend"
+async fn[T] suspend(cb : ((T) -> Unit) -> Unit) -> T noraise + nocancel = "%async.suspend"
 fn run_async(f : async () -> Unit noraise) -> Unit = "%async.run"
 
 let coros : @deque.Deque[(Unit) -> Unit] = @deque.Deque([])

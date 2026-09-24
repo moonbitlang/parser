@@ -121,26 +121,34 @@
     "loc": "3:8-3:15"
   },
   {
-    "token": "EQUAL",
+    "token": "PLUS",
     "loc": "3:16-3:17"
+  },
+  {
+    "token": "NOCANCEL",
+    "loc": "3:18-3:26"
+  },
+  {
+    "token": "EQUAL",
+    "loc": "3:27-3:28"
   },
   {
     "token": [
       "STRING",
       "%async.suspend"
     ],
-    "loc": "3:18-3:34"
+    "loc": "3:29-3:45"
   },
   {
     "token": [
       "SEMI",
       false
     ],
-    "loc": "3:34-3:34"
+    "loc": "3:45-3:45"
   },
   {
     "token": "NEWLINE",
-    "loc": "3:34-3:35"
+    "loc": "3:45-3:46"
   },
   {
     "token": "NEWLINE",

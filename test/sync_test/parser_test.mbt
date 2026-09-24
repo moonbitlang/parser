@@ -46,6 +46,11 @@ test "pipeline_test_ycombinator" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_lexmatch_no_regex" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_009" (t : @test.Test) {
   t.run()
 }
@@ -112,6 +117,11 @@ test "pipeline_test_constant_2" (t : @test.Test) {
 
 ///|
 test "pipeline_test_string_unsafe_get" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_derive" (t : @test.Test) {
   t.run()
 }
 
@@ -491,6 +501,11 @@ test "pipeline_test_smart_switch_constant" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_typing_coverage_fnalias" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_global_func" (t : @test.Test) {
   t.run()
 }
@@ -522,6 +537,11 @@ test "pipeline_test_obj_in_arr" (t : @test.Test) {
 
 ///|
 test "pipeline_test_bytes" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bitstring_rev" (t : @test.Test) {
   t.run()
 }
 
@@ -776,6 +796,11 @@ test "pipeline_test_closure" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_foreach_pat" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_match_string2" (t : @test.Test) {
   t.run()
 }
@@ -891,6 +916,11 @@ test "pipeline_test_impure" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_async_short_circuit" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_tail_lexscan" (t : @test.Test) {
   t.run()
 }
@@ -972,6 +1002,11 @@ test "pipeline_test_closure_example" (t : @test.Test) {
 
 ///|
 test "parse_test_tuple" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_regex_constant_ref" (t : @test.Test) {
   t.run()
 }
 
@@ -1081,6 +1116,11 @@ test "pipeline_test_list_comprehension_iter" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_optional_arg2" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_string_literal" (t : @test.Test) {
   t.run()
 }
@@ -1111,6 +1151,11 @@ test "pipeline_test_error_to_string" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_json_roundtrip" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "parse_test_operator_bitwise_and" (t : @test.Test) {
   t.run()
 }
@@ -1122,11 +1167,6 @@ test "pipeline_test_view_taking_intrinsics" (t : @test.Test) {
 
 ///|
 test "pipeline_test_error_handle9" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "parse_test_extenum" (t : @test.Test) {
   t.run()
 }
 
@@ -1356,6 +1396,11 @@ test "pipeline_test_array_rest_pat" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_discard_valtype" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_newtype_rec_generic_wrapper" (t : @test.Test) {
   t.run()
 }
@@ -1546,6 +1591,11 @@ test "pipeline_test_static_toplevel_let_big_enum" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_bitstring_mixed2" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_tuple_struct_of_func" (t : @test.Test) {
   t.run()
 }
@@ -1702,11 +1752,6 @@ test "parse_test_async_type" (t : @test.Test) {
 
 ///|
 test "pipeline_test_trait_obj_bound" (t : @test.Test) {
-  t.run()
-}
-
-///|
-test "pipeline_test_error_poly_iter" (t : @test.Test) {
   t.run()
 }
 
@@ -1871,12 +1916,22 @@ test "pipeline_test_valtype_self_ref3" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_foreach_pattern" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_switch_int" (t : @test.Test) {
   t.run()
 }
 
 ///|
 test "pipeline_test_err_use_core" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bitstring_complex" (t : @test.Test) {
   t.run()
 }
 
@@ -2036,6 +2091,11 @@ test "pipeline_test_handle_error_upcast" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_simple_bitstring" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_pattern_guard_or" (t : @test.Test) {
   t.run()
 }
@@ -2112,6 +2172,11 @@ test "pipeline_test_newtype4" (t : @test.Test) {
 
 ///|
 test "pipeline_test_005" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bitstring_array_byte" (t : @test.Test) {
   t.run()
 }
 
@@ -2251,6 +2316,11 @@ test "pipeline_test_error_handle10" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_is_lexmatch" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_tuple_struct" (t : @test.Test) {
   t.run()
 }
@@ -2287,6 +2357,11 @@ test "pipeline_test_pop_string_option" (t : @test.Test) {
 
 ///|
 test "pipeline_test_empty_json" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_newtype5" (t : @test.Test) {
   t.run()
 }
 
@@ -2512,6 +2587,11 @@ test "pipeline_test_static_toplevel_let" (t : @test.Test) {
 
 ///|
 test "pipeline_test_ctz_test" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bitstring_range" (t : @test.Test) {
   t.run()
 }
 
@@ -2871,6 +2951,11 @@ test "pipeline_test_topo_sort_default_arg" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_lexmatch_codegen_test" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_test_map" (t : @test.Test) {
   t.run()
 }
@@ -2917,6 +3002,11 @@ test "pipeline_test_array_byte_literal" (t : @test.Test) {
 
 ///|
 test "pipeline_test_int_primitive" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_lexscan_non_streaming" (t : @test.Test) {
   t.run()
 }
 
@@ -3202,6 +3292,11 @@ test "pipeline_test_github_16" (t : @test.Test) {
 
 ///|
 test "pipeline_test_contify_handle_error" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_derive_from_json_default" (t : @test.Test) {
   t.run()
 }
 
@@ -3556,6 +3651,11 @@ test "pipeline_test_arith" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_lexscan_block" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_first_class_unit" (t : @test.Test) {
   t.run()
 }
@@ -3641,7 +3741,17 @@ test "pipeline_test_test_single_elem" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_with_pat_rec" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_predef_method" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "parse_test_foreach_trailing_comma" (t : @test.Test) {
   t.run()
 }
 
@@ -3821,6 +3931,11 @@ test "pipeline_test_nested_join" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_extenum" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_bytesview_implicit_cast" (t : @test.Test) {
   t.run()
 }
@@ -3966,6 +4081,11 @@ test "pipeline_test_try_catch_no_error" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_catch_all" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_trait_upcast" (t : @test.Test) {
   t.run()
 }
@@ -4067,6 +4187,11 @@ test "pipeline_test_if_branches_as" (t : @test.Test) {
 
 ///|
 test "pipeline_test_constr_field4" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_non_exhaustive_enum" (t : @test.Test) {
   t.run()
 }
 
@@ -4281,6 +4406,11 @@ test "pipeline_test_array" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_constr_unknown_pattern" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_call_trait_method" (t : @test.Test) {
   t.run()
 }
@@ -4317,6 +4447,11 @@ test "parse_test_array_pat_trailing_comma" (t : @test.Test) {
 
 ///|
 test "pipeline_test_init_order" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_lexmatch_first_guard" (t : @test.Test) {
   t.run()
 }
 
@@ -4417,6 +4552,11 @@ test "pipeline_test_error_handle4" (t : @test.Test) {
 
 ///|
 test "pipeline_test_letrec_normal" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_templated_writing_lambda_async" (t : @test.Test) {
   t.run()
 }
 
@@ -4562,6 +4702,11 @@ test "pipeline_test_option_optimization" (t : @test.Test) {
 
 ///|
 test "pipeline_test_fixedarray_make_with_blit" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bitstring_mixed" (t : @test.Test) {
   t.run()
 }
 
@@ -4907,6 +5052,11 @@ test "pipeline_test_stale_fuse_rc_info" (t : @test.Test) {
 
 ///|
 test "pipeline_test_tuple_struct3" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_stub_optional" (t : @test.Test) {
   t.run()
 }
 

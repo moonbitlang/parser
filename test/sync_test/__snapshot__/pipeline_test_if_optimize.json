@@ -134,11 +134,6 @@
                             }
                           }
                         ]
-                      },
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": null,
-                        "children": {}
                       }
                     }
                   }
@@ -351,11 +346,6 @@
                         "kind": "Expr::Apply::ArgumentList",
                         "loc": null,
                         "children": []
-                      },
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": null,
-                        "children": {}
                       }
                     }
                   },
@@ -386,11 +376,6 @@
                         "kind": "Expr::Apply::ArgumentList",
                         "loc": null,
                         "children": []
-                      },
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": null,
-                        "children": {}
                       }
                     }
                   },
@@ -421,11 +406,6 @@
                         "kind": "Expr::Apply::ArgumentList",
                         "loc": null,
                         "children": []
-                      },
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": null,
-                        "children": {}
                       }
                     }
                   }
@@ -489,11 +469,6 @@
                         }
                       }
                     ]
-                  },
-                  "attr": {
-                    "kind": "ApplyAttr::NoAttr",
-                    "loc": null,
-                    "children": {}
                   }
                 }
               }
