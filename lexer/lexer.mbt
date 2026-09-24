@@ -836,7 +836,7 @@ fn lex_tokens(
         continue rest
       }
 
-      // Dot with parenthesis
+      // Dot with parenthesis in grouped using declarations.
       (re"^(?:\.\()", after=rest) => {
         env.add_token_with_loc(
           DOT_LPAREN,
