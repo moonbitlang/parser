@@ -72,9 +72,7 @@ fn attach_docstrings(
           // there is no docstring inside the types
           Abstract | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
           // handle docstring before the enum/suberror constructor and struct fields 
-          Error(EnumPayload(constrs))
-          | Variant(constrs)
-          | ExtensibleEnum(constrs) =>
+          Error(EnumPayload(constrs)) | Variant(constrs) =>
             constrs.each(constr => {
               let previous = search_docstrings(last_pos, constr.loc)
                 .map(make_doc)
@@ -82,6 +80,16 @@ fn attach_docstrings(
               constr.doc = previous
               last_pos = constr.loc.end
             })
+          ExtensibleEnum(constrs) =>
+            if constrs is Some(items) {
+              items.each(constr => {
+                let previous = search_docstrings(last_pos, constr.loc)
+                  .map(make_doc)
+                  .unwrap_or(@syntax.DocString::empty())
+                constr.doc = previous
+                last_pos = constr.loc.end
+              })
+            }
           ExtendEnum(constructors=constrs, ..) =>
             constrs.each(constr => {
               let previous = search_docstrings(last_pos, constr.loc)

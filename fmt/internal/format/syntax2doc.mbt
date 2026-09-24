@@ -496,14 +496,26 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       is_declare~,
       ..
     ) => {
+      let missing_initializer = is_declare &&
+        !is_constant &&
+        expr is Hole(kind=Synthesized, loc=hole_loc) &&
+        hole_loc == binder.loc
       let doc = fmt.docstring(doc, is_toplevel=true)
       let attrs = fmt.attributes(attrs)
       let declare_ = if is_declare { text("declare") + space } else { empty }
       let vis = fmt.visibility(vis)
       let let_ = text(if is_constant { "const" } else { "let" })
       let binder = space + fmt.binder(binder)
-      let ty = if ty is Some(ty) { space + colon + fmt.ty(ty) } else { empty }
-      let rhs = space + char('=') + fmt.compose(expr, Expr) // TODO: compose_rhs
+      let ty = if ty is Some(ty) {
+        space + colon + space + fmt.ty(ty)
+      } else {
+        empty
+      }
+      let rhs = if missing_initializer {
+        empty
+      } else {
+        space + char('=') + space + fmt.compose(expr, Expr) // TODO: compose_rhs
+      }
       doc + attrs + declare_ + vis + let_ + binder + ty + rhs
     }
     TopTypeDef(typedecl) => fmt.typedecl(typedecl)
@@ -992,6 +1004,44 @@ fn Fmt::type_decl_binders(
 }
 
 ///|
+fn plain_type_decl_binders(binders : List[@syntax.TypeDeclBinder]) -> Doc {
+  match binders {
+    Empty => empty
+    More(_) =>
+      group(
+        char('[') +
+        nest(
+          softline +
+          separate_map(binders, comma + line, binder => {
+            match binder.name {
+              Some(name) => text(name)
+              None => char('_')
+            }
+          }),
+        ) +
+        softline +
+        char(']'),
+      )
+  }
+}
+
+///|
+fn plain_visibility(vis : @syntax.Visibility, declaration~ : Bool) -> Doc {
+  match vis {
+    Pub(attr~, ..) => {
+      let attr = if declaration && attr is Some("all") { None } else { attr }
+      let modifier = match attr {
+        Some(value) => char('(') + text(value) + char(')')
+        None => empty
+      }
+      text("pub") + modifier + space
+    }
+    Priv(..) => text("priv") + space
+    Default => empty
+  }
+}
+
+///|
 fn Fmt::constr_param(fmt : Self, constr_param : @syntax.ConstrParam) -> Doc {
   let { mut_, label, ty, } = constr_param
   let mut_ = if mut_ { text("mut") + space } else { empty }
@@ -1124,14 +1174,8 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
   let vis = fmt.visibility(type_vis)
   let semi = switch(char(';'), empty)
   match components {
-    Variant(constr_decls) | ExtensibleEnum(constr_decls) => {
-      let enum_ = text(
-        if components is ExtensibleEnum(_) {
-          "extenum"
-        } else {
-          "enum"
-        },
-      )
+    Variant(constr_decls) => {
+      let enum_ = text("enum")
       let tycon = space + text(tycon)
       let params = fmt.type_decl_binders(params)
       let constrs = space +
@@ -1145,6 +1189,69 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
         )
       let deriving = fmt.deriving_directives(deriving)
       doc + attrs + declare_ + vis + enum_ + tycon + params + constrs + deriving
+    }
+    ExtensibleEnum(None) => {
+      let params = fmt.type_decl_binders(params)
+      let deriving = fmt.deriving_directives(deriving)
+      let declaration_vis = match type_vis {
+        Pub(loc~, attr=Some("all")) =>
+          fmt.visibility(@syntax.Visibility::Pub(loc~, attr=None))
+        _ => vis
+      }
+      doc +
+      attrs +
+      declare_ +
+      declaration_vis +
+      text("extenum") +
+      space +
+      text(tycon) +
+      params +
+      deriving
+    }
+    ExtensibleEnum(Some(constr_decls)) => {
+      // Migrate the deprecated owner-body form into a bare declaration and a
+      // separate extension. The plain copies avoid printing comments attached
+      // to visibility/type-parameter tokens twice.
+      let declaration_vis = plain_visibility(type_vis, declaration=true)
+      let declaration_params = plain_type_decl_binders(params)
+      let extension_vis = fmt.visibility(type_vis)
+      let extension_params = fmt.type_decl_binders(params)
+      let extension_doc = if fmt.block_line {
+        text("///|") + hardline
+      } else {
+        empty
+      }
+      let constrs = space +
+        fmt.commented_braces(
+          fn() {
+            series(constr_decls, semi, x => fmt.constr_decl(x), separator=fn() {
+              fmt.semi_placeholder()
+            })
+          },
+          force_newline=true,
+        )
+      let deriving = fmt.deriving_directives(deriving)
+      doc +
+      attrs +
+      declare_ +
+      declaration_vis +
+      text("extenum") +
+      space +
+      text(tycon) +
+      declaration_params +
+      hardline +
+      hardline +
+      extension_doc +
+      attrs +
+      extension_vis +
+      text("extenum") +
+      space +
+      text(tycon) +
+      extension_params +
+      space +
+      text("+=") +
+      constrs +
+      deriving
     }
     Record(fields~) => {
       let struct_ = text("struct")
@@ -1193,6 +1300,7 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
     ExtendEnum(target~, constructors~) => {
       let enum_ = text("extenum")
       let target = space + fmt.type_name(target)
+      let params = fmt.type_decl_binders(params)
       let plus_equal = space + text("+=")
       let constrs = space +
         fmt.commented_braces(
@@ -1203,7 +1311,17 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
           },
           force_newline=true,
         )
-      doc + attrs + declare_ + vis + enum_ + target + plus_equal + constrs
+      let deriving = fmt.deriving_directives(deriving)
+      doc +
+      attrs +
+      declare_ +
+      vis +
+      enum_ +
+      target +
+      params +
+      plus_equal +
+      constrs +
+      deriving
     }
     Abstract => {
       let type_ = text("type")

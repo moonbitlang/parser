@@ -2630,7 +2630,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc
   match type_desc {
     Abstract => Abstract
     ExtensibleEnum(constr_decls) =>
-      ExtensibleEnum(constr_decls.map(x => env.0.visit_ConstrDecl(x)))
+      ExtensibleEnum(
+        constr_decls.map(constrs => constrs.map(x => env.0.visit_ConstrDecl(x))),
+      )
     Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
     Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
     ExtendEnum(target~, constructors~) => {

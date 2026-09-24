@@ -163,9 +163,59 @@ impl MapVisitor for SemanticNormalizer with fn visit_TraitMethodDecl(
 }
 
 ///|
+impl MapVisitor for SemanticNormalizer with fn visit_ImportPackage(
+  self,
+  import_package,
+) {
+  ignore(self)
+  {
+    ..import_package,
+    alias_: canonical_import_alias(import_package.path, import_package.alias_),
+  }
+}
+
+///|
 fn SemanticNormalizer::process(impls : @syntax.Impls) -> @syntax.Impls {
   let normalizer = SemanticNormalizer::{ }
-  impls.map(item => normalizer.visit_Impl(item))
+  impls.flat_map(item => {
+    let item = normalizer.visit_Impl(item)
+    match item {
+      TopTypeDef(decl) if decl.components is ExtensibleEnum(Some(constrs)) => {
+        let declaration_vis = match decl.type_vis {
+          Pub(loc~, attr=Some("all")) =>
+            @syntax.Visibility::Pub(loc~, attr=None)
+          vis => vis
+        }
+        let declaration : @syntax.Impl = @syntax.Impl::TopTypeDef({
+          ..decl,
+          components: ExtensibleEnum(None),
+          type_vis: declaration_vis,
+          deriving: @list.empty(),
+        })
+        let target = @syntax.TypeName::{
+          name: @syntax.LongIdent::Ident(name=decl.tycon),
+          is_object: false,
+          loc: decl.tycon_loc,
+        }
+        let extension : @syntax.Impl = @syntax.Impl::TopTypeDef({
+          ..decl,
+          components: ExtendEnum(target~, constructors=constrs),
+          doc: @syntax.DocString::empty(),
+          is_declare: false,
+        })
+        @list.List([declaration, extension])
+      }
+      TopTypeDef(decl) if decl.components is ExtensibleEnum(None) => {
+        let type_vis = match decl.type_vis {
+          Pub(loc~, attr=Some("all")) =>
+            @syntax.Visibility::Pub(loc~, attr=None)
+          vis => vis
+        }
+        @list.singleton(@syntax.Impl::TopTypeDef({ ..decl, type_vis, }))
+      }
+      _ => @list.singleton(item)
+    }
+  })
 }
 
 ///|

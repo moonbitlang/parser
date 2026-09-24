@@ -33,6 +33,136 @@ let dummy_attribute : @attribute.Attribute = {
 }
 
 ///|
+fn type_desc_test_loc(start_column : Int, end_column : Int) -> Location {
+  let position = fn(column : Int) -> Position {
+    { fname: "type_desc.mbt", lnum: 1, bol: 0, cnum: column - 1, }
+  }
+  { start: position(start_column), end: position(end_column), }
+}
+
+///|
+fn type_desc_test_constr(name : String, loc : Location) -> ConstrDecl {
+  {
+    name: { name, loc, },
+    args: None,
+    tag: None,
+    loc,
+    attrs: @list.empty(),
+    doc: { content: @list.empty(), loc, },
+  }
+}
+
+///|
+fn type_desc_test_object(value : Json) -> Map[String, Json] raise {
+  match value {
+    Object(fields) => fields
+    _ => fail("expected JSON object")
+  }
+}
+
+///|
+fn type_desc_test_array(value : Json) -> Array[Json] raise {
+  match value {
+    Array(items) => items
+    _ => fail("expected JSON array")
+  }
+}
+
+///|
+fn assert_type_desc_node_loc(value : Json, expected : String) -> Unit raise {
+  let fields = type_desc_test_object(value)
+  assert_eq(fields["loc"], Json::string(expected))
+}
+
+///|
+fn assert_type_desc_list_locs(
+  value : Json,
+  list_field : String,
+  expected_outer : String,
+  expected_list : String,
+  expected_items : Array[String],
+) -> Unit raise {
+  let root = type_desc_test_object(value)
+  assert_eq(root["loc"], Json::string(expected_outer))
+  let children = type_desc_test_object(root["children"])
+  let list = type_desc_test_object(children[list_field])
+  assert_eq(list["loc"], Json::string(expected_list))
+  let items = type_desc_test_array(list["children"])
+  assert_eq(items.length(), expected_items.length())
+  for index, expected in expected_items {
+    assert_type_desc_node_loc(items[index], expected)
+  }
+}
+
+///|
+test "type desc JSON uses declaration locations for extensible enums" {
+  let declaration = type_desc_test_loc(1, 30)
+  let constructor_loc = type_desc_test_loc(12, 14)
+  let desc = ExtensibleEnum(
+    Some(@list.singleton(type_desc_test_constr("A", constructor_loc))),
+  )
+  let json = @basic.show_loc.protect(String, fn() {
+    desc.json_repr(declaration)
+  })
+  assert_type_desc_list_locs(json, "value", "1:1-1:30", "1:1-1:30", [
+    "1:12-1:14",
+  ])
+}
+
+///|
+test "type desc JSON uses target-to-constructor locations for enum extensions" {
+  let declaration = type_desc_test_loc(1, 30)
+  let target_loc = type_desc_test_loc(4, 10)
+  let first_loc = type_desc_test_loc(12, 14)
+  let second_loc = type_desc_test_loc(16, 18)
+  let target : TypeName = {
+    name: Ident(name="E"),
+    is_object: false,
+    loc: target_loc,
+  }
+
+  let empty = @basic.show_loc.protect(String, fn() {
+    ExtendEnum(target~, constructors=@list.empty()).json_repr(declaration)
+  })
+  assert_type_desc_list_locs(empty, "constructors", "1:1-1:30", "1:1-1:30", [])
+  let empty_children = type_desc_test_object(
+    type_desc_test_object(empty)["children"],
+  )
+  assert_type_desc_node_loc(empty_children["target"], "1:4-1:10")
+
+  let single = @basic.show_loc.protect(String, fn() {
+    ExtendEnum(
+      target~,
+      constructors=@list.singleton(type_desc_test_constr("A", first_loc)),
+    ).json_repr(declaration)
+  })
+  assert_type_desc_list_locs(single, "constructors", "1:4-1:14", "1:4-1:14", [
+    "1:12-1:14",
+  ])
+  let single_children = type_desc_test_object(
+    type_desc_test_object(single)["children"],
+  )
+  assert_type_desc_node_loc(single_children["target"], "1:4-1:10")
+
+  let multiple = @basic.show_loc.protect(String, fn() {
+    ExtendEnum(
+      target~,
+      constructors=List([
+        type_desc_test_constr("A", first_loc),
+        type_desc_test_constr("B", second_loc),
+      ]),
+    ).json_repr(declaration)
+  })
+  assert_type_desc_list_locs(multiple, "constructors", "1:4-1:18", "1:4-1:18", [
+    "1:12-1:14", "1:16-1:18",
+  ])
+  let multiple_children = type_desc_test_object(
+    type_desc_test_object(multiple)["children"],
+  )
+  assert_type_desc_node_loc(multiple_children["target"], "1:4-1:10")
+}
+
+///|
 test "visibility to_json" {
   json_inspect(Default.json_repr(dummy_loc), content={
     "kind": "Visibility::Default",

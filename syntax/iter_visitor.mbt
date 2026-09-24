@@ -2624,7 +2624,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
   match type_desc {
     Abstract => ()
     ExtensibleEnum(constr_decls) =>
-      constr_decls.each(x => env.0.visit_ConstrDecl(x))
+      constr_decls.each(constrs => constrs.each(x => env.0.visit_ConstrDecl(x)))
     Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
     Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
     ExtendEnum(target~, constructors~) => {

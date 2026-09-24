@@ -68,7 +68,6 @@ fn attach_docstrings(
           // handle docstring before the enum/suberror constructor and struct fields 
           Error(EnumPayload(constrs))
           | Variant(constrs)
-          | ExtensibleEnum(constrs)
           | ExtendEnum(constructors=constrs, ..) =>
             constrs.each(constr => {
               let previous = skip_docstrings_before(constr.loc.start)
@@ -76,6 +75,15 @@ fn attach_docstrings(
                 .unwrap_or(@syntax.DocString::empty())
               constr.doc = previous
             })
+          ExtensibleEnum(constrs) =>
+            if constrs is Some(items) {
+              items.each(constr => {
+                let previous = skip_docstrings_before(constr.loc.start)
+                  .map(make_doc)
+                  .unwrap_or(@syntax.DocString::empty())
+                constr.doc = previous
+              })
+            }
           Record(fields~) =>
             fields.each(field => {
               let previous = skip_docstrings_before(field.loc.start)

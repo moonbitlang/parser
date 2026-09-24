@@ -162,17 +162,16 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
   match self {
     Abstract => tagged_node0("TypeDesc::Abstract", loc)
     ExtensibleEnum(constrs) => {
-      let constrs_loc = match constrs {
-        Empty => loc
-        More(constr, tail=Empty) => constr.loc
-        More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
-      }
+      // Keep the wire representation compatible: a bare declaration and a
+      // deprecated empty body are both represented by an empty constructor
+      // list in JSON.
+      let constrs = constrs.unwrap_or(@list.empty())
       tagged_node1(
         "TypeDesc::ExtensibleEnum",
-        constrs_loc,
+        loc,
         list_json_repr(
           "TypeDesc::ExtensibleEnum::ConstrList",
-          constrs_loc,
+          loc,
           constrs,
           ConstrDecl::json_repr,
         ),
@@ -198,16 +197,16 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
       )
     }
     ExtendEnum(target~, constructors~) => {
-      let constrs_loc = match constructors {
+      let loc = match constructors {
         Empty => loc
-        More(constr, tail=Empty) => constr.loc
-        More(first, tail~) => first.loc.merge(tail.last().unwrap().loc)
+        More(constr, tail=Empty) => target.loc.merge(constr.loc)
+        More(_, tail~) => target.loc.merge(tail.last().unwrap().loc)
       }
       tagged_node("TypeDesc::ExtendEnum", loc, {
         "target": target.json_repr(),
         "constructors": list_json_repr(
           "TypeDesc::ExtendEnum::ConstrList",
-          constrs_loc,
+          loc,
           constructors,
           ConstrDecl::json_repr,
         ),
