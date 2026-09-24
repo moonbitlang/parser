@@ -77,3 +77,15 @@ test "reference dot recovery reports a missing identifier after dot" {
     fail("standalone dot should still emit an empty DOT_LIDENT for recovery")
   }
 }
+
+///|
+test "escaped space is invalid in char but valid in byte" {
+  let char_result = @lexer.tokens_from_string("'\\ '", comment=false)
+  if char_result.errors.is_empty() {
+    fail("escaped space in a character literal should be a lexical error")
+  }
+  let byte_result = @lexer.tokens_from_string("b'\\ '", comment=false)
+  if !byte_result.errors.is_empty() || !(byte_result.tokens[0].0 is BYTE(_)) {
+    fail("escaped space in a byte literal should remain valid")
+  }
+}
