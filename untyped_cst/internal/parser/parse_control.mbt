@@ -245,6 +245,9 @@ fn parse_keyword_body_expr(
 
 ///|
 fn parse_for_expr(state : ParserState) -> CstNode {
+  if for_header_has_in(state, 1) {
+    return parse_foreach_expr(state)
+  }
   match state.peek_nth_significant(1) {
     Some((SEMI(_) | LBRACE, _, _)) => parse_c_style_for_expr(state)
     Some((UNDERSCORE | IN, _, _)) => parse_foreach_expr(state)
@@ -256,6 +259,38 @@ fn parse_for_expr(state : ParserState) -> CstNode {
       }
     _ => parse_invalid_for_header(state, false)
   }
+}
+
+///|
+fn for_header_has_in(state : ParserState, start_offset : Int) -> Bool {
+  let mut offset = start_offset
+  let mut depth = 0
+  while true {
+    let token = match state.peek_nth_significant(offset) {
+      Some((token, _, _)) => token
+      None => return false
+    }
+    if depth == 0 {
+      match token {
+        IN => return true
+        EQUAL | SEMI(_) | FAT_ARROW | IF | EOF => return false
+        _ => ()
+      }
+    }
+    match token {
+      LPAREN | LBRACKET | LBRACKET_BAR | LBRACE => depth += 1
+      RPAREN | RBRACKET | BAR_RBRACKET | RBRACE => {
+        if depth == 0 {
+          return false
+        }
+        depth -= 1
+      }
+      EOF => return false
+      _ => ()
+    }
+    offset += 1
+  }
+  false
 }
 
 ///|
@@ -333,8 +368,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
   while !done {
     push_children(children, state.consume_trivia())
     match state.peek() {
-      Some((tok, _, _)) if kind_in(tok.kind(), [TK_IN, TK_LBRACE, TK_EOF]) =>
-        done = true
+      Some((tok, _, _)) if kind_in(tok.kind(), [TK_IN, TK_EOF]) => done = true
       Some((COMMA, _, _)) => {
         saw_sep = true
         if state.consume_any() is Some(sep) {
@@ -345,9 +379,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
       }
       Some(_) => {
         match state.peek() {
-          Some((LIDENT(_), _, _))
-          | Some((EXTEND, _, _))
-          | Some((UNDERSCORE, _, _)) => ()
+          Some((found, _, _)) if pattern_can_start(found) => ()
           Some((found, start, end)) =>
             state.report_expected_tokens_at(found, mk_loc(start, end), [
               TK_LIDENT,
@@ -357,12 +389,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
             ])
           None => ()
         }
-        let pat = parse_pattern_until(state, [
-          TK_COMMA,
-          TK_IN,
-          TK_LBRACE,
-          TK_EOF,
-        ])
+        let pat = parse_pattern_until(state, [TK_COMMA, TK_IN, TK_EOF])
         if !pat.children.is_empty() {
           if first_pattern is None {
             first_pattern = Some(pat)
@@ -384,7 +411,27 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
     }
   }
   if item_count == 0 {
-    state.report_expected_tokens([TK_LIDENT, TK_EXTEND, TK_UNDERSCORE])
+    state.report_expected_tokens([
+      TK_TRUE,
+      TK_FALSE,
+      TK_CHAR,
+      TK_INT,
+      TK_BYTE,
+      TK_FLOAT,
+      TK_DOUBLE,
+      TK_MINUS,
+      TK_BYTES,
+      TK_STRING,
+      TK_UNDERSCORE,
+      TK_LIDENT,
+      TK_EXTEND,
+      TK_PACKAGE_NAME,
+      TK_UIDENT,
+      TK_AMPER,
+      TK_LPAREN,
+      TK_LBRACKET,
+      TK_LBRACE,
+    ])
   }
   if item_count == 1 && !saw_sep {
     if first_pattern is Some(pat) {
@@ -401,30 +448,10 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
   } else {
     state.construct_from_children(
       fn(loc, source_span, children) {
-        let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let pattern_group = @construction.first_child_with_label_from(
-          children, "pattern_group",
-        )
-        @node.CstNode::pattern_tuple(loc~, source_span~, body~, pattern_group?)
+        let entries = list_children(children)
+        @node.CstNode::list_tuple_pattern_list(loc~, source_span~, entries~)
       },
-      [
-        (
-          Some("body"),
-          state.construct_from_children(
-            fn(loc, source_span, children) {
-              let entries = list_children(children)
-              @node.CstNode::list_tuple_pattern_list(
-                loc~,
-                source_span~,
-                entries~,
-              )
-            },
-            children,
-          ),
-        ),
-      ],
+      children,
     )
   }
 }

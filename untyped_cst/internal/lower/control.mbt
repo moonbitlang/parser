@@ -134,32 +134,25 @@ fn lower_for_expr(node : CstNode) -> @syntax.Expr {
 }
 
 ///|
-fn lower_foreach_binders(node : CstNode) -> List[@syntax.Binder?] {
-  let binders : Array[@syntax.Binder?] = []
-  if node.first_child_with_label("pattern") is Some(pattern) {
-    match lower_pattern(pattern) {
-      Var(binder) => binders.push(Some(binder))
-      Tuple(pats~, ..) =>
-        for pat in pats {
-          match pat {
-            Var(binder) => binders.push(Some(binder))
-            Any(..) => binders.push(None)
-            _ => binders.push(Some(lower_dummy_binder(pattern.loc)))
-          }
-        }
-      Any(..) => binders.push(None)
-      _ => binders.push(Some(lower_dummy_binder(pattern.loc)))
-    }
-  } else {
-    ()
+fn lower_foreach_patterns(node : CstNode) -> List[@syntax.Pattern] {
+  guard node.first_child_with_label("pattern") is Some(pattern) else {
+    return @list.empty()
   }
-  lower_array_to_list(binders)
+  if pattern.kind is List_TuplePatternList {
+    let patterns : Array[@syntax.Pattern] = []
+    for item in lower_item_children(pattern) {
+      patterns.push(lower_pattern(item))
+    }
+    lower_array_to_list(patterns)
+  } else {
+    @list.singleton(lower_pattern(pattern))
+  }
 }
 
 ///|
 fn lower_foreach_expr(node : CstNode) -> @syntax.Expr {
   ForEach(
-    binders=lower_foreach_binders(node),
+    patterns=lower_foreach_patterns(node),
     expr=node
       .first_child_with_label("expr")
       .map(lower_expr)

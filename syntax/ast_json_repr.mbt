@@ -761,7 +761,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "label": option_json_repr(label, Label::json_repr),
       })
     ForEach(
-      binders~,
+      patterns~,
       expr~,
       init~,
       continue_block~,
@@ -772,11 +772,12 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       loc~
     ) => {
       let children : Map[String, Json] = {
-        "binders": list_json_repr("Expr::ForEach::BinderList", loc, binders, fn(
-          b,
-        ) {
-          option_json_repr(b, Binder::json_repr)
-        }),
+        "patterns": list_json_repr(
+          "Expr::ForEach::PatternList",
+          loc,
+          patterns,
+          Pattern::json_repr,
+        ),
         "expr": expr.json_repr(),
         "init": list_json_repr("Expr::ForEach::Init", loc, init, fn(binding) {
           let (binder, expr) = binding
@@ -1668,13 +1669,14 @@ fn ListComprehensionKind::json_repr(
   is_iter~ : Bool,
 ) -> Json {
   match self {
-    Foreach(binders~, expr~, init~, continue_block~) =>
+    Foreach(patterns~, expr~, init~, continue_block~) =>
       tagged_node("Expr::ListComprehension::Kind::Foreach", loc, {
-        "binders": list_json_repr("Expr::ForEach::BinderList", loc, binders, fn(
-          b,
-        ) {
-          option_json_repr(b, Binder::json_repr)
-        }),
+        "patterns": list_json_repr(
+          "Expr::ForEach::PatternList",
+          loc,
+          patterns,
+          Pattern::json_repr,
+        ),
         "expr": expr.json_repr(),
         "init": list_json_repr("Expr::ForEach::Init", loc, init, fn(binding) {
           let (binder, expr) = binding

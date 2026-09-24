@@ -343,7 +343,6 @@ test "acceptance equivalence: expressions patterns and types" {
     ("try without catch", "try f()"),
     ("raise call argument", "f(raise e)"),
     ("non-block else", "if x {} else 1"),
-    ("parenthesized foreach binder", "for (x) in xs {}"),
     ("removed for else", "for x in xs {} else {}"),
     ("unparenthesized typed arrow", "x : Int => x"),
     ("unbraced pipeline arrow", "a |> x => x"),
@@ -367,6 +366,7 @@ test "acceptance equivalence: expressions patterns and types" {
     assert_structure_acceptance(label, source, false)
   }
   let valid_exprs = [
+    ("parenthesized foreach pattern", "for (x) in xs {}"),
     ("lex regex pattern", "lexmatch s { re\"a\" => 0 }"),
     ("parenthesized typed pattern", "match x { (y : Int) => y }"),
     ("array spreads", "[..a, ..b]"),

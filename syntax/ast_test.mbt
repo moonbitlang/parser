@@ -1106,7 +1106,7 @@ test "foreach json includes empty continue block" {
   let unit_expr = @syntax.Expr::Unit(loc=dummy_loc, faked=false)
   json_inspect(
     @syntax.ForEach(
-      binders=List([]),
+      patterns=List([]),
       expr=unit_expr,
       init=List([]),
       continue_block=List([]),
@@ -1120,8 +1120,8 @@ test "foreach json includes empty continue block" {
       "kind": "Expr::ForEach",
       "loc": null,
       "children": {
-        "binders": {
-          "kind": "Expr::ForEach::BinderList",
+        "patterns": {
+          "kind": "Expr::ForEach::PatternList",
           "loc": null,
           "children": [],
         },

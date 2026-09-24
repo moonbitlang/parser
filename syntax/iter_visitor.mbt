@@ -688,7 +688,7 @@ pub(open) trait IterVisitor {
   ) -> Unit = _
   fn visit_Expr_ForEach(
     Self,
-    binders~ : @list.List[Binder?],
+    patterns~ : @list.List[Pattern],
     expr~ : Expr,
     init~ : @list.List[(Binder, Expr)],
     continue_block~ : @list.List[(Binder, Expr)],
@@ -1365,7 +1365,7 @@ impl IterVisitor with fn visit_Expr_For(
 ///|
 impl IterVisitor with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -1377,7 +1377,7 @@ impl IterVisitor with fn visit_Expr_ForEach(
 ) {
   IterVisitor::visit_Expr_ForEach(
     env.base(),
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -4541,7 +4541,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -4552,7 +4552,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   loc~,
 ) {
   ignore(loc)
-  binders.each(binder => binder.each(x => env.0.visit_Binder(x)))
+  patterns.each(pattern => env.0.visit_Pattern(pattern))
   env.0.visit_Expr(expr)
   init.each(p => {
     env.0.visit_Binder(p.0)
@@ -4670,8 +4670,8 @@ fn[T : IterVisitor] iter_list_comprehension_kind(
   kind : ListComprehensionKind,
 ) -> Unit {
   match kind {
-    Foreach(binders~, expr~, init~, continue_block~) => {
-      binders.each(binder => binder.each(x => env.0.visit_Binder(x)))
+    Foreach(patterns~, expr~, init~, continue_block~) => {
+      patterns.each(pattern => env.0.visit_Pattern(pattern))
       env.0.visit_Expr(expr)
       init.each(p => {
         env.0.visit_Binder(p.0)
@@ -4863,7 +4863,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
         where_clause~,
       )
     ForEach(
-      binders~,
+      patterns~,
       expr~,
       init~,
       continue_block~,
@@ -4874,7 +4874,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       loc~
     ) =>
       env.0.visit_Expr_ForEach(
-        binders~,
+        patterns~,
         expr~,
         init~,
         continue_block~,

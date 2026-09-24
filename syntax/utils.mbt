@@ -527,7 +527,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       where_clause=_
     ) => loc
     ForEach(
-      binders=_,
+      patterns=_,
       expr=_,
       init=_,
       continue_block=_,
