@@ -1,9 +1,9 @@
 name = "moonbitlang/moon_config"
 
-version = "0.4.0"
+version = "0.4.1"
 
 import {
-  "moonbitlang/lexer@0.4.0",
+  "moonbitlang/lexer@0.4.1",
 }
 
 repository = "https://github.com/moonbitlang/parser"
