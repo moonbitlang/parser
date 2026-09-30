@@ -20,10 +20,8 @@ root kind returns a diagnostic.
 ## Node Model
 
 The source-independent node model lives in
-`moonbitlang/parser/untyped_cst/internal/node`. MoonBit restricts imports of
-this package to `untyped_cst` and its subpackages. Code within that subtree can
-use `CstNode`, `NodeKind`, `NodePayload`, and the node traversal, payload, and
-classification helpers.
+`moonbitlang/parser/untyped_cst/node`. Code can use `CstNode`, `NodeKind`,
+`NodePayload`, and the node traversal, payload, and classification helpers.
 
 `NodeKind` is public but read-only outside the node package. Inspect it with
 pattern matching or its classification methods. Construct nodes with the
@@ -64,19 +62,18 @@ Nodes retain `loc` and `source_span`; there are no additional location children.
 AST locations are computed during lowering from tokens and syntax boundaries,
 without reading source text or re-parsing it.
 
-The `untyped_cst` package re-exports the three node types for in-subtree code.
-MoonBit's internal visibility rules prevent outside packages from inspecting
-or constructing these types through the re-exports. Outside callers can use
-`ParseResult::diagnostics_view`, `ParseResult::to_impls`, and
-`ParseResult::to_expr`.
+The `untyped_cst` package re-exports the three node types. Callers that need
+constructors or helpers can import `untyped_cst/node` directly; callers that
+only parse and lower source can use `ParseResult::diagnostics_view`,
+`ParseResult::to_impls`, and `ParseResult::to_expr` from `untyped_cst`.
 
 ## Package Organization
 
 `untyped_cst` owns the public parsing entry points and `ParseResult`, including
-its AST conversion methods. Implementation details live in four internal
-packages:
+its AST conversion methods. The node model is a public subpackage, while the
+remaining implementation details live in three internal packages:
 
-- `internal/node` defines CST nodes and their constructors and helpers.
+- `node` defines CST nodes and their constructors and helpers.
 - `internal/construction` builds CST nodes and their semantic children.
 - `internal/parser` handles token streams, parsing, and error recovery.
 - `internal/lower` converts CST nodes to the syntax AST and attaches docstrings.
