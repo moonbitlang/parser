@@ -52,3 +52,21 @@ jobs:
       - name: moon test
         run: |
           moon test --target all
+
+      - name: checkout openseek corpus
+        uses: actions/checkout@v4
+        with:
+          repository: moonbitlang/openseek
+          ref: main
+          path: .openseek
+          fetch-depth: 1
+          submodules: recursive
+          persist-credentials: false
+
+      - name: test openseek corpus
+        env:
+          OPENSEEK_ROOT: ${{ github.workspace }}/.openseek
+        run: |
+          echo "OpenSeek commit: $(git -C "$OPENSEEK_ROOT" rev-parse HEAD)"
+          git -C "$OPENSEEK_ROOT" submodule status --recursive
+          moon test test/openseek_test/openseek_test.mbt --target native --include-skipped

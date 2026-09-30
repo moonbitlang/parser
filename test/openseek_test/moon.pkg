@@ -1,0 +1,7 @@
+import {
+  "moonbitlang/parser",
+  "moonbitlang/parser/untyped_cst",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/x/fs",
+  "moonbitlang/core/env",
+} for "test"
