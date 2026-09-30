@@ -26,16 +26,75 @@ fn expect_yacc_rejected(source : String) -> Unit raise {
 }
 
 ///|
-test "yacc: `extend` is a keyword" {
-  expect_yacc_rejected("fn f(extend : Int) -> Unit {}")
-  expect_yacc_rejected("fn f() -> Unit { let extend = 1 }")
-  expect_yacc_rejected("fn f(x : X) -> Unit { x..extend() }")
-  expect_yacc_rejected("pub(extend) fn g() -> Unit {}")
+test "yacc: patterns in for-in loops and comprehensions" {
+  let json = yacc_json(
+    (
+      #|fn f() {
+      #|  for (a, b), _ in xs {}
+      #|  for Some(x) as item, { y, .. } in ys {}
+      #|  for 0 | 1 in bits {}
+      #|  let _ = [for (k, v) in m => k]
+      #|}
+    ),
+  )
+  for
+    kind in [
+      "Expr::ForEach::PatternList", "Pattern::Tuple", "Pattern::Any", "Pattern::Alias",
+      "Pattern::Record", "Pattern::Or", "Expr::ListComprehension::Kind::Foreach",
+    ] {
+    if !json.contains(kind) {
+      fail("expected \{kind} in for-in AST")
+    }
+  }
 }
 
 ///|
-test "yacc: array elements cannot be bare `for` loops" {
-  expect_yacc_rejected("fn f() -> Unit { let _ = [for x in xs { }] }")
+test "yacc: `T::..` pattern" {
+  let json = yacc_json(
+    (
+      #|fn f(x : T) -> Unit {
+      #|  match x {
+      #|    T::A => ()
+      #|    T::.. => ()
+      #|  }
+      #|}
+    ),
+  )
+  if !json.contains("Pattern::ConstrUnknown") {
+    fail("expected Pattern::ConstrUnknown")
+  }
+}
+
+///|
+test "yacc: extenum declarations and extensions" {
+  let impls = yacc_parse(
+    (
+      #|pub extenum Bare
+      #|pub extenum Generic[T] derive(Debug)
+      #|extenum Generic[T] += { Value(T) }
+      #|pub extenum @pkg.Expr[T] += { Let(String) }
+    ),
+  )
+  let components = impls.map(impl_ => {
+    guard impl_ is TopTypeDef(td) else { fail("expected a type definition") }
+    td.components
+  })
+  guard components
+    is More(
+      ExtensibleEnum(None),
+      tail=More(
+        ExtensibleEnum(None),
+        tail=More(
+          ExtendEnum(target={ name: Ident(name="Generic"), .. }, ..),
+          tail=More(
+            ExtendEnum(target={ name: Dot(pkg="pkg", id="Expr"), .. }, ..),
+            tail=Empty
+          )
+        )
+      )
+    ) else {
+    fail("unexpected extenum components")
+  }
 }
 
 ///|
@@ -81,4 +140,17 @@ test "yacc: `label~ = value` arguments and constructor patterns" {
   if !json.contains("ArgumentKind::Labelled") {
     fail("expected a labelled argument")
   }
+}
+
+///|
+test "yacc: `extend` is a keyword" {
+  expect_yacc_rejected("fn f(extend : Int) -> Unit {}")
+  expect_yacc_rejected("fn f() -> Unit { let extend = 1 }")
+  expect_yacc_rejected("fn f(x : X) -> Unit { x..extend() }")
+  expect_yacc_rejected("pub(extend) fn g() -> Unit {}")
+}
+
+///|
+test "yacc: array elements cannot be bare `for` loops" {
+  expect_yacc_rejected("fn f() -> Unit { let _ = [for x in xs { }] }")
 }

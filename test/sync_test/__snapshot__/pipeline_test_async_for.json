@@ -1575,22 +1575,34 @@
                                                     "kind": "Expr::ForEach",
                                                     "loc": null,
                                                     "children": {
-                                                      "binders": {
-                                                        "kind": "Expr::ForEach::BinderList",
+                                                      "patterns": {
+                                                        "kind": "Expr::ForEach::PatternList",
                                                         "loc": null,
                                                         "children": [
                                                           {
-                                                            "kind": "Binder",
+                                                            "kind": "Pattern::Var",
                                                             "loc": null,
                                                             "children": {
-                                                              "name": "k"
+                                                              "value": {
+                                                                "kind": "Binder",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "name": "k"
+                                                                }
+                                                              }
                                                             }
                                                           },
                                                           {
-                                                            "kind": "Binder",
+                                                            "kind": "Pattern::Var",
                                                             "loc": null,
                                                             "children": {
-                                                              "name": "v"
+                                                              "value": {
+                                                                "kind": "Binder",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "name": "v"
+                                                                }
+                                                              }
                                                             }
                                                           }
                                                         ]
@@ -1841,15 +1853,21 @@
                                                     "kind": "Expr::ForEach",
                                                     "loc": null,
                                                     "children": {
-                                                      "binders": {
-                                                        "kind": "Expr::ForEach::BinderList",
+                                                      "patterns": {
+                                                        "kind": "Expr::ForEach::PatternList",
                                                         "loc": null,
                                                         "children": [
                                                           {
-                                                            "kind": "Binder",
+                                                            "kind": "Pattern::Var",
                                                             "loc": null,
                                                             "children": {
-                                                              "name": "c"
+                                                              "value": {
+                                                                "kind": "Binder",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "name": "c"
+                                                                }
+                                                              }
                                                             }
                                                           }
                                                         ]

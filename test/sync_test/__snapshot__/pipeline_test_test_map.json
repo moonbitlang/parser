@@ -908,22 +908,34 @@
             "kind": "Expr::ForEach",
             "loc": null,
             "children": {
-              "binders": {
-                "kind": "Expr::ForEach::BinderList",
+              "patterns": {
+                "kind": "Expr::ForEach::PatternList",
                 "loc": null,
                 "children": [
                   {
-                    "kind": "Binder",
+                    "kind": "Pattern::Var",
                     "loc": null,
                     "children": {
-                      "name": "filename"
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "filename"
+                        }
+                      }
                     }
                   },
                   {
-                    "kind": "Binder",
+                    "kind": "Pattern::Var",
                     "loc": null,
                     "children": {
-                      "name": "tests"
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "tests"
+                        }
+                      }
                     }
                   }
                 ]
@@ -961,22 +973,34 @@
                 "kind": "Expr::ForEach",
                 "loc": null,
                 "children": {
-                  "binders": {
-                    "kind": "Expr::ForEach::BinderList",
+                  "patterns": {
+                    "kind": "Expr::ForEach::PatternList",
                     "loc": null,
                     "children": [
                       {
-                        "kind": "Binder",
+                        "kind": "Pattern::Var",
                         "loc": null,
                         "children": {
-                          "name": "index"
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "index"
+                            }
+                          }
                         }
                       },
                       {
-                        "kind": "Binder",
+                        "kind": "Pattern::Var",
                         "loc": null,
                         "children": {
-                          "name": "test_case"
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "test_case"
+                            }
+                          }
                         }
                       }
                     ]

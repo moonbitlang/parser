@@ -906,15 +906,21 @@
                                     "kind": "Expr::ForEach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "y"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "y"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -1374,15 +1380,21 @@
                                                     "kind": "Expr::ForEach",
                                                     "loc": null,
                                                     "children": {
-                                                      "binders": {
-                                                        "kind": "Expr::ForEach::BinderList",
+                                                      "patterns": {
+                                                        "kind": "Expr::ForEach::PatternList",
                                                         "loc": null,
                                                         "children": [
                                                           {
-                                                            "kind": "Binder",
+                                                            "kind": "Pattern::Var",
                                                             "loc": null,
                                                             "children": {
-                                                              "name": "w"
+                                                              "value": {
+                                                                "kind": "Binder",
+                                                                "loc": null,
+                                                                "children": {
+                                                                  "name": "w"
+                                                                }
+                                                              }
                                                             }
                                                           }
                                                         ]

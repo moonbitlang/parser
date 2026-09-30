@@ -1006,7 +1006,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
             State::parse_constr_decl,
           )
           |> @list.List
-        ExtensibleEnum(constrs)
+        ExtensibleEnum(Some(constrs))
       }
       let deriving = self.parse_deriving_directive_list()
       let loc = self.loc_start_with(spos)
@@ -2472,27 +2472,28 @@ fn State::parse_loop_binder_with_infix_value(
 }
 
 ///|
-fn State::parse_foreach_binder(self : State) -> @syntax.Binder? {
+fn State::parse_foreach_binder(self : State) -> @syntax.Pattern {
   match self.peek_token() {
     UNDERSCORE => {
+      let loc = self.peek_location()
       self.skip()
-      None
+      Any(loc~)
     }
     LIDENT(name) => {
       let loc = self.peek_location()
       self.skip()
-      Some({ name, loc, })
+      Var({ name, loc, })
     }
     EXTEND => {
       let loc = self.peek_location()
       self.skip()
-      Some({ name: "extend", loc, })
+      Var({ name: "extend", loc, })
     }
     other => {
       let loc = self.peek_location()
       self.report_unexpected(other, [TK_LIDENT, TK_EXTEND, TK_UNDERSCORE], loc)
       self.panic() |> ignore
-      None
+      Any(loc~)
     }
   }
 }
@@ -2593,12 +2594,12 @@ fn State::parse_foreach_loop(
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  let (binders, _) = self.series1_with_follow(
+  let (patterns, _) = self.series1_with_follow(
     delim=TK_COMMA,
     follow_set=[TK_IN],
     State::parse_foreach_binder,
   )
-  let binders = @list.List(binders)
+  let patterns = @list.List(patterns)
   self.expect_token(TK_IN)
   let expr = self.parse_expr()
   let (init, continue_block) = if self.peek_token() is SEMI(_) {
@@ -2634,7 +2635,7 @@ fn State::parse_foreach_loop(
   let where_clause = self.parse_where_clause()
   let loc = self.loc_start_with(spos)
   ForEach(
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -4818,12 +4819,12 @@ fn State::parse_list_comprehension(
   let for_spos = self.peek_spos()
   self.expect_token(TK_FOR)
   let kind : @syntax.ListComprehensionKind = if self.next_is_foreach_comprehension() {
-    let (binders, _) = self.series1_with_follow(
+    let (patterns, _) = self.series1_with_follow(
       delim=TK_COMMA,
       follow_set=[TK_IN],
       State::parse_foreach_binder,
     )
-    let binders = @list.List(binders)
+    let patterns = @list.List(patterns)
     self.expect_token(TK_IN)
     let expr = self.parse_infix_expr(parsed=None)
     let (init, continue_block) = if self.peek_token() is SEMI(_) {
@@ -4849,7 +4850,7 @@ fn State::parse_list_comprehension(
     } else {
       (@list.empty(), @list.empty())
     }
-    Foreach(binders~, expr~, init~, continue_block~)
+    Foreach(patterns~, expr~, init~, continue_block~)
   } else {
     let (binders, _) = self.series_with_follow(
       delim=TK_COMMA,

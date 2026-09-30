@@ -551,14 +551,29 @@ structure_item -> Impl
       }
     )
   }
-  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let tycon_loc = mk_loc($loc($5))
+  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints deriving_directive_list {
     TopTypeDef(
       {
         tycon : $5,
-        tycon_loc,
+        tycon_loc : mk_loc($loc($5)),
         params : $6,
-        components : ExtensibleEnum($8),
+        components : ExtensibleEnum(None),
+        type_vis : $3,
+        doc : DocString::empty(),
+        deriving : $7,
+        loc : mk_loc($sloc),
+        attrs : $1,
+        is_declare : $2
+      }
+    )
+  }
+  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints "{" list_semis(enum_constructor) "}" deriving_directive_list {
+    TopTypeDef(
+      {
+        tycon : $5,
+        tycon_loc : mk_loc($loc($5)),
+        params : $6,
+        components : ExtensibleEnum(Some($8)),
         type_vis : $3,
         doc : DocString::empty(),
         deriving : $10,
@@ -568,17 +583,36 @@ structure_item -> Impl
       }
     )
   }
-  | attributes is_declare visibility "extenum" extenum_extension_target "+=" "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (tycon, tycon_loc, params, target) = $5
+  | attributes is_declare visibility "extenum" UIDENT optional_type_parameters_no_constraints "+=" "{" list_semis(enum_constructor) "}" deriving_directive_list {
+    let tycon_loc = mk_loc($loc($5))
+    let target = TypeName::{ name: Ident(name = $5), is_object: false, loc: tycon_loc }
     TopTypeDef(
       {
-        tycon,
+        tycon : $5,
         tycon_loc,
-        params,
-        components : ExtendEnum(target~, constructors = $8),
+        params : $6,
+        components : ExtendEnum(target~, constructors = $9),
         type_vis : $3,
         doc : DocString::empty(),
-        deriving : $10,
+        deriving : $11,
+        loc : mk_loc($sloc),
+        attrs : $1,
+        is_declare : $2
+      }
+    )
+  }
+  | attributes is_declare visibility "extenum" PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints "+=" "{" list_semis(enum_constructor) "}" deriving_directive_list {
+    let tycon_loc = mk_loc($loc($5)).merge(mk_loc($loc($6)))
+    let target = TypeName::{ name: Dot(pkg = $5, id = $6), is_object: false, loc: tycon_loc }
+    TopTypeDef(
+      {
+        tycon : $6,
+        tycon_loc,
+        params : $7,
+        components : ExtendEnum(target~, constructors = $10),
+        type_vis : $3,
+        doc : DocString::empty(),
+        deriving : $12,
         loc : mk_loc($sloc),
         attrs : $1,
         is_declare : $2
@@ -895,19 +929,6 @@ struct_header -> (List[Attribute], Visibility, Bool, String, Location, List[Type
 enum_header -> (List[Attribute], Visibility, Bool, String, Location, List[TypeDeclBinder])
   : attributes is_declare visibility "enum" UIDENT optional_type_parameters_no_constraints {
     ($1, $3, $2, $5, mk_loc($loc($5)), $6)
-  }
-  ;
-
-extenum_extension_target -> (String, Location, List[TypeDeclBinder], TypeName)
-  : UIDENT optional_type_parameters_no_constraints {
-    let loc = mk_loc($loc($1))
-    let target = TypeName::{ name: Ident(name = $1), is_object: false, loc }
-    ($1, loc, $2, target)
-  }
-  | PACKAGE_NAME DOT_UIDENT optional_type_parameters_no_constraints {
-    let tycon_loc = mk_loc($loc($2))
-    let target = TypeName::{ name: Dot(pkg = $1, id = $2), is_object: false, loc: mk_loc($sloc) }
-    ($2, tycon_loc, $3, target)
   }
   ;
 
@@ -1460,10 +1481,10 @@ for_expr -> Expr
   ;
 
 foreach_expr -> Expr
-  : loop_label_colon "for" non_empty_list_commas(foreach_binder) "in" expr foreach_optional_loop_vars block_expr optional_nobreak optional_where_clause {
+  : loop_label_colon "for" non_empty_list_commas(pattern) "in" expr foreach_optional_loop_vars block_expr optional_nobreak optional_where_clause {
     let (init, continue_block) = $6
     ForEach(
-      binders = $3,
+      patterns = $3,
       expr = $5,
       init~,
       continue_block~,
@@ -1486,11 +1507,6 @@ foreach_optional_loop_vars_infix -> (List[(Binder, Expr)], List[(Binder, Expr)])
   : { (@list.empty(), @list.empty()) }
   | SEMI for_binders_infix { ($2, @list.empty()) }
   | SEMI for_binders_infix SEMI for_binders_infix { ($2, $4) }
-  ;
-
-foreach_binder -> Binder?
-  : binder { Some($1)}
-  | "_" { None }
   ;
 
 labelled_block_expr -> Expr
@@ -1959,20 +1975,20 @@ simple_expr -> Expr
     let method_name = Label::{ name: $3, loc: mk_loc($loc($3)) }
     Method(type_name = $1, method_name~, loc = mk_loc($sloc))
   }
-  | "[" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "]" {
+  | "[" "for" non_empty_list_commas(pattern) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "]" {
     let (init, continue_block) = $6
     ListComprehension(
-      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
+      kind = Foreach(patterns = $3, expr = $5, init~, continue_block~),
       guard_ = $7,
       body = $9,
       is_iter = false,
       loc = mk_loc($sloc)
     )
   }
-  | "[|" "for" non_empty_list_commas(foreach_binder) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "|]" {
+  | "[|" "for" non_empty_list_commas(pattern) "in" infix_expr foreach_optional_loop_vars_infix option(preceded("if", infix_expr)) "=>" expr "|]" {
     let (init, continue_block) = $6
     ListComprehension(
-      kind = Foreach(binders = $3, expr = $5, init~, continue_block~),
+      kind = Foreach(patterns = $3, expr = $5, init~, continue_block~),
       guard_ = $7,
       body = $9,
       is_iter = true,
@@ -2203,6 +2219,9 @@ simple_pattern -> Pattern
   }
   | type_name "::" "_" {
     ConstrAny(type_name = $1, loc = mk_loc($sloc))
+  }
+  | type_name "::" ".." {
+    ConstrUnknown(type_name = $1, loc = mk_loc($sloc))
   }
   // bits constr pattern `i32(args)`
   // To disambiguate with pattern variable, the args list must be present.

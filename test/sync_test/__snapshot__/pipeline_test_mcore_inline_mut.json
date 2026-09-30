@@ -254,15 +254,21 @@
                 "kind": "Expr::ForEach",
                 "loc": null,
                 "children": {
-                  "binders": {
-                    "kind": "Expr::ForEach::BinderList",
+                  "patterns": {
+                    "kind": "Expr::ForEach::PatternList",
                     "loc": null,
                     "children": [
                       {
-                        "kind": "Binder",
+                        "kind": "Pattern::Var",
                         "loc": null,
                         "children": {
-                          "name": "a"
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "a"
+                            }
+                          }
                         }
                       }
                     ]

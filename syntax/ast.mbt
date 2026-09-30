@@ -137,8 +137,8 @@ pub(all) struct FieldDecl {
 pub(all) enum TypeDesc {
   /// `type T`
   Abstract
-  /// `extenum T { C1; C2 }`
-  ExtensibleEnum(@list.List[ConstrDecl])
+  /// `extenum T` or `extenum T { C1; C2 }`
+  ExtensibleEnum(@list.List[ConstrDecl]?)
   /// `suberror`
   Error(ExceptionDecl)
   /// `enum T { C1; C2 }`
@@ -378,7 +378,7 @@ pub(all) enum PredicateQuantifierKind {
 ///|
 pub(all) enum ListComprehensionKind {
   Foreach(
-    binders~ : @list.List[Binder?],
+    patterns~ : @list.List[Pattern],
     expr~ : Expr,
     init~ : @list.List[(Binder, Expr)],
     continue_block~ : @list.List[(Binder, Expr)]
@@ -604,9 +604,9 @@ pub(all) enum Expr {
     label~ : Label?,
     loc~ : Location
   )
-  /// `for b1,b2 in e1; init; continue_block { e2 }`
+  /// `for p1,p2 in e1; init; continue_block { e2 }`
   ForEach(
-    binders~ : @list.List[Binder?],
+    patterns~ : @list.List[Pattern],
     expr~ : Expr,
     init~ : @list.List[(Binder, Expr)],
     continue_block~ : @list.List[(Binder, Expr)],
@@ -725,6 +725,8 @@ pub(all) enum Pattern {
   )
   /// `T::_`
   ConstrAny(type_name~ : TypeName, loc~ : Location)
+  /// `T::..`
+  ConstrUnknown(type_name~ : TypeName, loc~ : Location)
   /// `pat1 | pat2`
   Or(pat1~ : Pattern, pat2~ : Pattern, loc~ : Location)
   /// `(p1, p2, p3)`

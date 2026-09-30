@@ -1117,7 +1117,14 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
   let vis = fmt.visibility(type_vis)
   let semi = switch(char(';'), empty)
   match components {
-    Variant(constr_decls) | ExtensibleEnum(constr_decls) => {
+    ExtensibleEnum(None) => {
+      let enum_ = text("extenum")
+      let tycon = space + text(tycon)
+      let params = fmt.type_decl_binders(params)
+      let deriving = fmt.deriving_directives(deriving)
+      doc + attrs + declare_ + vis + enum_ + tycon + params + deriving
+    }
+    Variant(constr_decls) | ExtensibleEnum(Some(constr_decls)) => {
       let enum_ = text(
         if components is ExtensibleEnum(_) {
           "extenum"
@@ -1489,6 +1496,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       constr_pattern2doc(fmt.constr(constr), args, is_open)
     ConstrAny(type_name~, loc=_) =>
       fmt.type_name(type_name) + text("::") + char('_')
+    ConstrUnknown(type_name~, loc=_) => fmt.type_name(type_name) + text("::..")
     Constant(c~, loc=_) => fmt.constant(c)
     Array(pats~, loc=_) => {
       fn array_pattern2doc(pat : @syntax.ArrayPattern) -> Doc {
@@ -2242,17 +2250,9 @@ fn Fmt::list_comprehension_kind(
     fmt.binder(binder) + space + equal + space + fmt.compose(expr, Infix(Other))
   }
 
-  fn foreach_binder2doc(binder : @syntax.Binder?) -> Doc {
-    if binder is Some(x) {
-      fmt.binder(x)
-    } else {
-      empty
-    }
-  }
-
   let semi_or_newline = switch(semi + space, softline)
   match kind {
-    Foreach(binders~, expr~, init~, continue_block~) => {
+    Foreach(patterns~, expr~, init~, continue_block~) => {
       let init = match init {
         Empty => empty
         More(_) =>
@@ -2267,7 +2267,7 @@ fn Fmt::list_comprehension_kind(
       }
       text("for") +
       space +
-      series(binders, comma, foreach_binder2doc, trailing=AlwaysHidden) +
+      series(patterns, comma, x => fmt.pattern(x), trailing=AlwaysHidden) +
       space +
       text("in") +
       space +
@@ -2736,6 +2736,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         | Var(_)
         | Constr(_)
         | ConstrAny(_)
+        | ConstrUnknown(_)
         | SpecialConstr(_)
         | Tuple(_)
         | Constraint(_)
@@ -3156,7 +3157,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Normal(doc)
     }
     ForEach(
-      binders~,
+      patterns~,
       expr~,
       init~,
       continue_block~,
@@ -3168,13 +3169,6 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
     ) => {
       let label = fmt.loop_label(label, trailing_colon=true)
       let for_ = text("for")
-      fn foreach_binder2doc(binder : @syntax.Binder?) -> Doc {
-        if binder is Some(x) {
-          fmt.binder(x)
-        } else {
-          empty
-        }
-      }
       fn binder_expr2doc(pair : (@syntax.Binder, @syntax.Expr)) -> Doc {
         let (binder, expr) = pair
         fmt.binder(binder) +
@@ -3184,8 +3178,10 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         fmt.compose(expr, Infix(Other))
       }
 
-      let binders = space +
-        group(series(binders, comma, foreach_binder2doc, trailing=AlwaysHidden))
+      let patterns = space +
+        group(
+          series(patterns, comma, x => fmt.pattern(x), trailing=AlwaysHidden),
+        )
       let in_ = space + text("in")
       let expr = space + fmt.compose(expr, Infix(Other))
       let semi_or_newline = switch(semi + space, softline)
@@ -3208,7 +3204,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         empty
       }
       let where_ = fmt.where_clause(where_clause)
-      let header = group(for_ + binders + in_ + expr + init + continue_block)
+      let header = group(for_ + patterns + in_ + expr + init + continue_block)
       let doc = label + header + body + else_block + where_
       Normal(doc)
     }

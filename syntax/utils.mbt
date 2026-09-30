@@ -527,7 +527,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       where_clause=_
     ) => loc
     ForEach(
-      binders=_,
+      patterns=_,
       expr=_,
       init=_,
       continue_block=_,
@@ -565,6 +565,7 @@ pub fn Pattern::loc(self : Self) -> Location {
     | Or(loc~, ..)
     | Constr(loc~, ..)
     | ConstrAny(loc~, ..)
+    | ConstrUnknown(loc~, ..)
     | Constraint(loc~, ..)
     | Constant(loc~, ..)
     | Array(loc~, ..)

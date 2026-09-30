@@ -142,15 +142,21 @@
             "kind": "Expr::ForEach",
             "loc": null,
             "children": {
-              "binders": {
-                "kind": "Expr::ForEach::BinderList",
+              "patterns": {
+                "kind": "Expr::ForEach::PatternList",
                 "loc": null,
                 "children": [
                   {
-                    "kind": "Binder",
+                    "kind": "Pattern::Var",
                     "loc": null,
                     "children": {
-                      "name": "i"
+                      "value": {
+                        "kind": "Binder",
+                        "loc": null,
+                        "children": {
+                          "name": "i"
+                        }
+                      }
                     }
                   }
                 ]
@@ -214,15 +220,21 @@
                 "kind": "Expr::ForEach",
                 "loc": null,
                 "children": {
-                  "binders": {
-                    "kind": "Expr::ForEach::BinderList",
+                  "patterns": {
+                    "kind": "Expr::ForEach::PatternList",
                     "loc": null,
                     "children": [
                       {
-                        "kind": "Binder",
+                        "kind": "Pattern::Var",
                         "loc": null,
                         "children": {
-                          "name": "j"
+                          "value": {
+                            "kind": "Binder",
+                            "loc": null,
+                            "children": {
+                              "name": "j"
+                            }
+                          }
                         }
                       }
                     ]

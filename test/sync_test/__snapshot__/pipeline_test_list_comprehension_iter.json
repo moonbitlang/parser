@@ -1126,15 +1126,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "x"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "x"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -1311,15 +1317,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "x"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "x"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -1528,15 +1540,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "x"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "x"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -1713,15 +1731,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "x"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "x"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -1930,15 +1954,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "x"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "x"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -2279,15 +2309,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "x"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "x"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -2516,15 +2552,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "x"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "x"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -2804,18 +2846,28 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "i"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "i"
+                                                }
+                                              }
                                             }
                                           },
-                                          null
+                                          {
+                                            "kind": "Pattern::Any",
+                                            "loc": null,
+                                            "children": {}
+                                          }
                                         ]
                                       },
                                       "expr": {
@@ -2964,15 +3016,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "c"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "c"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -3166,15 +3224,21 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "b"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "b"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -3277,22 +3341,34 @@
                                     "kind": "Expr::ListComprehension::Kind::Foreach",
                                     "loc": null,
                                     "children": {
-                                      "binders": {
-                                        "kind": "Expr::ForEach::BinderList",
+                                      "patterns": {
+                                        "kind": "Expr::ForEach::PatternList",
                                         "loc": null,
                                         "children": [
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "k"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "k"
+                                                }
+                                              }
                                             }
                                           },
                                           {
-                                            "kind": "Binder",
+                                            "kind": "Pattern::Var",
                                             "loc": null,
                                             "children": {
-                                              "name": "v"
+                                              "value": {
+                                                "kind": "Binder",
+                                                "loc": null,
+                                                "children": {
+                                                  "name": "v"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -3718,15 +3794,21 @@
                             "kind": "Expr::ListComprehension::Kind::Foreach",
                             "loc": null,
                             "children": {
-                              "binders": {
-                                "kind": "Expr::ForEach::BinderList",
+                              "patterns": {
+                                "kind": "Expr::ForEach::PatternList",
                                 "loc": null,
                                 "children": [
                                   {
-                                    "kind": "Binder",
+                                    "kind": "Pattern::Var",
                                     "loc": null,
                                     "children": {
-                                      "name": "x"
+                                      "value": {
+                                        "kind": "Binder",
+                                        "loc": null,
+                                        "children": {
+                                          "name": "x"
+                                        }
+                                      }
                                     }
                                   }
                                 ]
@@ -4991,15 +5073,21 @@
                                             "kind": "Expr::ListComprehension::Kind::Foreach",
                                             "loc": null,
                                             "children": {
-                                              "binders": {
-                                                "kind": "Expr::ForEach::BinderList",
+                                              "patterns": {
+                                                "kind": "Expr::ForEach::PatternList",
                                                 "loc": null,
                                                 "children": [
                                                   {
-                                                    "kind": "Binder",
+                                                    "kind": "Pattern::Var",
                                                     "loc": null,
                                                     "children": {
-                                                      "name": "i"
+                                                      "value": {
+                                                        "kind": "Binder",
+                                                        "loc": null,
+                                                        "children": {
+                                                          "name": "i"
+                                                        }
+                                                      }
                                                     }
                                                   }
                                                 ]
