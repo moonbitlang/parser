@@ -501,7 +501,7 @@ structure_item -> Impl
     )
   }
   | struct_header "{" list_semis(record_decl_field) "}" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       {
         tycon,
@@ -513,12 +513,12 @@ structure_item -> Impl
         deriving: $5,
         loc : mk_loc($sloc),
         attrs,
-        is_declare : false
+        is_declare
       }
     )
   }
   | struct_header "(" non_empty_list_commas(type_) ")" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       {
         tycon,
@@ -530,12 +530,12 @@ structure_item -> Impl
         deriving: $5,
         loc : mk_loc($sloc),
         attrs,
-        is_declare : false
+        is_declare
       }
     )
   }
   | enum_header "{" list_semis(enum_constructor) "}" deriving_directive_list {
-    let (attrs, type_vis, tycon, tycon_loc, params) = $1
+    let (attrs, type_vis, is_declare, tycon, tycon_loc, params) = $1
     TopTypeDef(
       {
         tycon,
@@ -547,7 +547,7 @@ structure_item -> Impl
         deriving: $5,
         loc : mk_loc($sloc),
         attrs,
-        is_declare : false
+        is_declare
       }
     )
   }
@@ -597,6 +597,19 @@ structure_item -> Impl
       attrs~,
       doc = DocString::empty(),
       is_declare~
+    )
+  }
+  | attributes "declare" visibility "let" binder opt_annot {
+    TopLetDef(
+      binder = $5,
+      ty = $6,
+      expr = Hole(loc = $5.loc, kind = Synthesized),
+      vis = $3,
+      is_constant = false,
+      loc = mk_loc($sloc),
+      attrs = $1,
+      doc = DocString::empty(),
+      is_declare = true
     )
   }
   | extern_fun_header "=" STRING STRING {
@@ -873,15 +886,15 @@ suberror_header -> (List[Attribute], Visibility, Bool, String, Location)
   : attributes is_declare visibility "suberror" UIDENT { ($1, $3, $2, $5, mk_loc($loc($5))) }
   ;
 
-struct_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "struct" UIDENT optional_type_parameters_no_constraints {
-    ($1, $2, $4, mk_loc($loc($4)), $5)
+struct_header -> (List[Attribute], Visibility, Bool, String, Location, List[TypeDeclBinder])
+  : attributes is_declare visibility "struct" UIDENT optional_type_parameters_no_constraints {
+    ($1, $3, $2, $5, mk_loc($loc($5)), $6)
   }
   ;
 
-enum_header -> (List[Attribute], Visibility, String, Location, List[TypeDeclBinder])
-  : attributes visibility "enum" UIDENT optional_type_parameters_no_constraints {
-    ($1, $2, $4, mk_loc($loc($4)), $5)
+enum_header -> (List[Attribute], Visibility, Bool, String, Location, List[TypeDeclBinder])
+  : attributes is_declare visibility "enum" UIDENT optional_type_parameters_no_constraints {
+    ($1, $3, $2, $5, mk_loc($loc($5)), $6)
   }
   ;
 
@@ -2118,6 +2131,10 @@ argument -> Argument
     let arg_value = @syntax.label_to_expr(loc = label_loc.trim_last_char(), label)
     { value: arg_value, kind: LabelledPun(label) }
   }
+  | POST_LABEL "=" expr {
+    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
+    { value: $3, kind: Labelled(label) }
+  }
   | lident_string "?" {
     let loc = mk_loc($loc($1))
     let label = Label::{ name: $1, loc }
@@ -2471,6 +2488,10 @@ constr_pat_argument -> ConstrPatArg
       pat: $3,
       kind: Labelled($1)
     }
+  }
+  | POST_LABEL "=" pattern {
+    let label = Label::{ name: $1, loc: mk_loc($loc($1)) }
+    { pat: $3, kind: Labelled(label) }
   }
   | POST_LABEL {
     let loc = mk_loc($loc($1))
