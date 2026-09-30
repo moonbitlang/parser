@@ -99,7 +99,7 @@ test "trait_method_type_params" {
   let body =
     #|pub trait T {
     #|  fn[A : Show] map(Self, A) -> Unit
-    #|  fn extend(Self) -> Unit
+    #|  fn apply(Self) -> Unit
     #|}
   guard first_sig("trait_method_type_params.mbti", body)
     is Trait({ methods, .. }) else {
@@ -114,10 +114,10 @@ test "trait_method_type_params" {
   inspect(type_param.name.name, content="A")
   assert_eq(type_param.constraints.length(), 1)
   guard methods.nth(1)
-    is Some({ name: { name: "extend", .. }, type_params: extend_params, .. }) else {
-    fail("expected extend method")
+    is Some({ name: { name: "apply", .. }, type_params: apply_params, .. }) else {
+    fail("expected apply method")
   }
-  assert_eq(extend_params.length(), 0)
+  assert_eq(apply_params.length(), 0)
 }
 
 ///|

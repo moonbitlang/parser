@@ -4442,9 +4442,6 @@ test "lexing pipeline_test_global" (t : @test.Test) {
 }
 
 ///|
-test "lexing parse_test_extend_soft_keyword" (t : @test.Test) {
-  lexer_test(t)
-}
 
 ///|
 test "lexing pipeline_test_conditional_template_writing" (t : @test.Test) {

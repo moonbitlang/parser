@@ -172,7 +172,6 @@
 
 lident_string -> String:
   | LIDENT { $1 }
-  | "extend" { "extend" }
 
 payloads -> List[Prop]: 
   | EOF { @list.empty() }

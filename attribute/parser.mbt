@@ -241,14 +241,14 @@ fn init {
 
 ///|
 // file:///./parser.mbty
-// 178|    EOF { @list.empty() }
+// 177|    EOF { @list.empty() }
 fn yy_action_0(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_({();  @list.empty() })
 }
 
 ///|
 // file:///./parser.mbty
-// 179|    properties { $1 }
+// 178|    properties { $1 }
 fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_Prop_(_dollar1)
   YYObj_List_Prop_({();  _dollar1 })
@@ -256,14 +256,14 @@ fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 
 ///|
 // file:///./parser.mbty
-// 196|    "(" ")"                      { @list.empty() }
+// 195|    "(" ")"                      { @list.empty() }
 fn yy_action_2(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_({();  @list.empty() })
 }
 
 ///|
 // file:///./parser.mbty
-// 197|    "(" non_empty_properties ")" { $2 }
+// 196|    "(" non_empty_properties ")" { $2 }
 fn yy_action_3(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List_Prop_(_dollar2)
   YYObj_List_Prop_({();  _dollar2 })
@@ -279,15 +279,8 @@ fn yy_action_4(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 
 ///|
 // file:///./parser.mbty
-// 175|    "extend" { "extend" }
+// 181|    name=lident_string "=" expr   { Labeled(name, $3) }
 fn yy_action_5(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_String({();  "extend" })
-}
-
-///|
-// file:///./parser.mbty
-// 182|    name=lident_string "=" expr   { Labeled(name, $3) }
-fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
   YYObj_Prop({();  Labeled(name, _dollar3) })
@@ -295,8 +288,8 @@ fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 
 ///|
 // file:///./parser.mbty
-// 190|    qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
-fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 189|    qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+fn yy_action_6(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(qual)
   guard! _args[1].0 is YYObj_String(name)
   guard! _args[2].0 is YYObj_List_Prop_(props)
@@ -305,8 +298,8 @@ fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 
 ///|
 // file:///./parser.mbty
-// 188|    qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
-fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 187|    qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+fn yy_action_7(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(qual)
   guard! _args[1].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: Some(qual), name}) })
@@ -314,8 +307,8 @@ fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 
 ///|
 // file:///./parser.mbty
-// 189|    name=lident_string props=properties                 { Apply({qual: None, name}, props) }
-fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 188|    name=lident_string props=properties                 { Apply({qual: None, name}, props) }
+fn yy_action_8(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   guard! _args[1].0 is YYObj_List_Prop_(props)
   YYObj_Expr({();  Apply({qual: None, name}, props) })
@@ -323,54 +316,54 @@ fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 
 ///|
 // file:///./parser.mbty
-// 186|    name=lident_string                                  { Ident({qual: None, name}) }
-fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 185|    name=lident_string                                  { Ident({qual: None, name}) }
+fn yy_action_9(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: None, name}) })
 }
 
 ///|
 // file:///./parser.mbty
-// 183|    expr                   { Expr($1) }
-fn yy_action_11(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 182|    expr                   { Expr($1) }
+fn yy_action_10(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Prop({();  Expr(_dollar1) })
 }
 
 ///|
 // file:///./parser.mbty
-// 187|    name=UIDENT                                         { Ident({qual: None, name}) }
-fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 186|    name=UIDENT                                         { Ident({qual: None, name}) }
+fn yy_action_11(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr({();  Ident({qual: None, name}) })
 }
 
 ///|
 // file:///./parser.mbty
-// 191|    STRING                                              { String($1) }
-fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 190|    STRING                                              { String($1) }
+fn yy_action_12(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Expr({();  String(_dollar1) })
 }
 
 ///|
 // file:///./parser.mbty
-// 192|    TRUE                                                { Bool(true) }
-fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 191|    TRUE                                                { Bool(true) }
+fn yy_action_13(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr({();  Bool(true) })
 }
 
 ///|
 // file:///./parser.mbty
-// 193|    FALSE                                               { Bool(false) }
-fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 192|    FALSE                                               { Bool(false) }
+fn yy_action_14(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr({();  Bool(false) })
 }
 
 ///|
 // file:///./parser.mbty
-// 201|    x=property "," xs=non_empty_properties{ xs.add(x) }
-fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 200|    x=property "," xs=non_empty_properties{ xs.add(x) }
+fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Prop(x)
   guard! _args[2].0 is YYObj_List_Prop_(xs)
   YYObj_List_Prop_({();  xs.add(x) })
@@ -378,8 +371,8 @@ fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 
 ///|
 // file:///./parser.mbty
-// 200|    property { List([$1]) }
-fn yy_action_17(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
+// 199|    property { List([$1]) }
+fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Prop(_dollar1)
   YYObj_List_Prop_({();  List([_dollar1]) })
 }
@@ -527,44 +520,43 @@ fn yy_input(token : Token, _start_pos : Position, _end_pos : Position) -> (YYSym
 }
 
 ///|
-// [2, payloads → • EOF, $]
-// [3, payloads → • properties, $]
-// [14, properties → • LPAREN RPAREN, $]
-// [15, properties → • LPAREN non_empty_properties RPAREN, $]
-// [18, payloads_prime → • payloads, $]
+// [1, payloads → • EOF, $]
+// [2, payloads → • properties, $]
+// [13, properties → • LPAREN RPAREN, $]
+// [14, properties → • LPAREN non_empty_properties RPAREN, $]
+// [17, payloads_prime → • payloads, $]
 fn yy_state_0(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     NT_payloads => Shift(yy_state_1)
     T_LPAREN => Shift(yy_state_2)
-    NT_properties => Shift(yy_state_23)
-    T_EOF => Shift(yy_state_24)
+    NT_properties => Shift(yy_state_22)
+    T_EOF => Shift(yy_state_23)
     _ => Error
   }
 }
 
 ///|
-// [18, payloads_prime → payloads •, $]
+// [17, payloads_prime → payloads •, $]
 fn yy_state_1(_lookahead : YYSymbol) -> YYDecision {
   Accept
 }
 
 ///|
 // [0, lident_string → • LIDENT, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
-// [1, lident_string → • EXTEND, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
-// [4, property → • lident_string EQUAL expr, RPAREN / COMMA]
-// [5, property → • expr, RPAREN / COMMA]
-// [6, expr → • lident_string, RPAREN / COMMA]
-// [7, expr → • UIDENT, RPAREN / COMMA]
-// [8, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
-// [9, expr → • lident_string properties, RPAREN / COMMA]
-// [10, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
-// [11, expr → • STRING, RPAREN / COMMA]
-// [12, expr → • TRUE, RPAREN / COMMA]
-// [13, expr → • FALSE, RPAREN / COMMA]
-// [14, properties → LPAREN • RPAREN, $ / RPAREN / COMMA]
-// [15, properties → LPAREN • non_empty_properties RPAREN, $ / RPAREN / COMMA]
-// [16, non_empty_properties → • property, RPAREN]
-// [17, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
+// [3, property → • lident_string EQUAL expr, RPAREN / COMMA]
+// [4, property → • expr, RPAREN / COMMA]
+// [5, expr → • lident_string, RPAREN / COMMA]
+// [6, expr → • UIDENT, RPAREN / COMMA]
+// [7, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
+// [8, expr → • lident_string properties, RPAREN / COMMA]
+// [9, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
+// [10, expr → • STRING, RPAREN / COMMA]
+// [11, expr → • TRUE, RPAREN / COMMA]
+// [12, expr → • FALSE, RPAREN / COMMA]
+// [13, properties → LPAREN • RPAREN, $ / RPAREN / COMMA]
+// [14, properties → LPAREN • non_empty_properties RPAREN, $ / RPAREN / COMMA]
+// [15, non_empty_properties → • property, RPAREN]
+// [16, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
 fn yy_state_2(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     NT_property => Shift(yy_state_3)
@@ -574,41 +566,39 @@ fn yy_state_2(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_9)
     NT_expr => Shift(yy_state_10)
     NT_lident_string => Shift(yy_state_11)
-    T_EXTEND => Shift(yy_state_18)
-    T_LIDENT => Shift(yy_state_19)
-    NT_non_empty_properties => Shift(yy_state_20)
-    T_RPAREN => Shift(yy_state_22)
+    T_LIDENT => Shift(yy_state_18)
+    NT_non_empty_properties => Shift(yy_state_19)
+    T_RPAREN => Shift(yy_state_21)
     _ => Error
   }
 }
 
 ///|
-// [16, non_empty_properties → property •, RPAREN]
-// [17, non_empty_properties → property • COMMA non_empty_properties, RPAREN]
+// [15, non_empty_properties → property •, RPAREN]
+// [16, non_empty_properties → property • COMMA non_empty_properties, RPAREN]
 fn yy_state_3(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COMMA => Shift(yy_state_4)
-    T_RPAREN => Reduce(1, NT_non_empty_properties, yy_action_17)
+    T_RPAREN => Reduce(1, NT_non_empty_properties, yy_action_16)
     _ => Error
   }
 }
 
 ///|
 // [0, lident_string → • LIDENT, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
-// [1, lident_string → • EXTEND, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
-// [4, property → • lident_string EQUAL expr, RPAREN / COMMA]
-// [5, property → • expr, RPAREN / COMMA]
-// [6, expr → • lident_string, RPAREN / COMMA]
-// [7, expr → • UIDENT, RPAREN / COMMA]
-// [8, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
-// [9, expr → • lident_string properties, RPAREN / COMMA]
-// [10, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
-// [11, expr → • STRING, RPAREN / COMMA]
-// [12, expr → • TRUE, RPAREN / COMMA]
-// [13, expr → • FALSE, RPAREN / COMMA]
-// [16, non_empty_properties → • property, RPAREN]
-// [17, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
-// [17, non_empty_properties → property COMMA • non_empty_properties, RPAREN]
+// [3, property → • lident_string EQUAL expr, RPAREN / COMMA]
+// [4, property → • expr, RPAREN / COMMA]
+// [5, expr → • lident_string, RPAREN / COMMA]
+// [6, expr → • UIDENT, RPAREN / COMMA]
+// [7, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
+// [8, expr → • lident_string properties, RPAREN / COMMA]
+// [9, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
+// [10, expr → • STRING, RPAREN / COMMA]
+// [11, expr → • TRUE, RPAREN / COMMA]
+// [12, expr → • FALSE, RPAREN / COMMA]
+// [15, non_empty_properties → • property, RPAREN]
+// [16, non_empty_properties → • property COMMA non_empty_properties, RPAREN]
+// [16, non_empty_properties → property COMMA • non_empty_properties, RPAREN]
 fn yy_state_4(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     NT_property => Shift(yy_state_3)
@@ -619,105 +609,103 @@ fn yy_state_4(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_9)
     NT_expr => Shift(yy_state_10)
     NT_lident_string => Shift(yy_state_11)
-    T_EXTEND => Shift(yy_state_18)
-    T_LIDENT => Shift(yy_state_19)
+    T_LIDENT => Shift(yy_state_18)
     _ => Error
   }
 }
 
 ///|
-// [17, non_empty_properties → property COMMA non_empty_properties •, RPAREN]
+// [16, non_empty_properties → property COMMA non_empty_properties •, RPAREN]
 fn yy_state_5(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_non_empty_properties, yy_action_16)
+  ReduceNoLookahead(3, NT_non_empty_properties, yy_action_15)
 }
 
 ///|
-// [13, expr → FALSE •, RPAREN / COMMA]
+// [12, expr → FALSE •, RPAREN / COMMA]
 fn yy_state_6(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_expr, yy_action_15)
-}
-
-///|
-// [12, expr → TRUE •, RPAREN / COMMA]
-fn yy_state_7(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_expr, yy_action_14)
 }
 
 ///|
-// [11, expr → STRING •, RPAREN / COMMA]
-fn yy_state_8(_lookahead : YYSymbol) -> YYDecision {
+// [11, expr → TRUE •, RPAREN / COMMA]
+fn yy_state_7(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_expr, yy_action_13)
 }
 
 ///|
-// [7, expr → UIDENT •, RPAREN / COMMA]
-fn yy_state_9(_lookahead : YYSymbol) -> YYDecision {
+// [10, expr → STRING •, RPAREN / COMMA]
+fn yy_state_8(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_expr, yy_action_12)
 }
 
 ///|
-// [5, property → expr •, RPAREN / COMMA]
-fn yy_state_10(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_property, yy_action_11)
+// [6, expr → UIDENT •, RPAREN / COMMA]
+fn yy_state_9(_lookahead : YYSymbol) -> YYDecision {
+  ReduceNoLookahead(1, NT_expr, yy_action_11)
 }
 
 ///|
-// [4, property → lident_string • EQUAL expr, RPAREN / COMMA]
-// [6, expr → lident_string •, RPAREN / COMMA]
-// [8, expr → lident_string • DOT_LIDENT, RPAREN / COMMA]
-// [9, expr → lident_string • properties, RPAREN / COMMA]
-// [10, expr → lident_string • DOT_LIDENT properties, RPAREN / COMMA]
-// [14, properties → • LPAREN RPAREN, RPAREN / COMMA]
-// [15, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
+// [4, property → expr •, RPAREN / COMMA]
+fn yy_state_10(_lookahead : YYSymbol) -> YYDecision {
+  ReduceNoLookahead(1, NT_property, yy_action_10)
+}
+
+///|
+// [3, property → lident_string • EQUAL expr, RPAREN / COMMA]
+// [5, expr → lident_string •, RPAREN / COMMA]
+// [7, expr → lident_string • DOT_LIDENT, RPAREN / COMMA]
+// [8, expr → lident_string • properties, RPAREN / COMMA]
+// [9, expr → lident_string • DOT_LIDENT properties, RPAREN / COMMA]
+// [13, properties → • LPAREN RPAREN, RPAREN / COMMA]
+// [14, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
 fn yy_state_11(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_2)
     NT_properties => Shift(yy_state_12)
     T_DOT_LIDENT => Shift(yy_state_13)
     T_EQUAL => Shift(yy_state_15)
-    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_10)
+    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_9)
     _ => Error
   }
 }
 
 ///|
-// [9, expr → lident_string properties •, RPAREN / COMMA]
+// [8, expr → lident_string properties •, RPAREN / COMMA]
 fn yy_state_12(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_expr, yy_action_9)
+  ReduceNoLookahead(2, NT_expr, yy_action_8)
 }
 
 ///|
-// [8, expr → lident_string DOT_LIDENT •, RPAREN / COMMA]
-// [10, expr → lident_string DOT_LIDENT • properties, RPAREN / COMMA]
-// [14, properties → • LPAREN RPAREN, RPAREN / COMMA]
-// [15, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
+// [7, expr → lident_string DOT_LIDENT •, RPAREN / COMMA]
+// [9, expr → lident_string DOT_LIDENT • properties, RPAREN / COMMA]
+// [13, properties → • LPAREN RPAREN, RPAREN / COMMA]
+// [14, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
 fn yy_state_13(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_2)
     NT_properties => Shift(yy_state_14)
-    T_RPAREN | T_COMMA => Reduce(2, NT_expr, yy_action_8)
+    T_RPAREN | T_COMMA => Reduce(2, NT_expr, yy_action_7)
     _ => Error
   }
 }
 
 ///|
-// [10, expr → lident_string DOT_LIDENT properties •, RPAREN / COMMA]
+// [9, expr → lident_string DOT_LIDENT properties •, RPAREN / COMMA]
 fn yy_state_14(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_expr, yy_action_7)
+  ReduceNoLookahead(3, NT_expr, yy_action_6)
 }
 
 ///|
 // [0, lident_string → • LIDENT, LPAREN / RPAREN / COMMA / DOT_LIDENT]
-// [1, lident_string → • EXTEND, LPAREN / RPAREN / COMMA / DOT_LIDENT]
-// [4, property → lident_string EQUAL • expr, RPAREN / COMMA]
-// [6, expr → • lident_string, RPAREN / COMMA]
-// [7, expr → • UIDENT, RPAREN / COMMA]
-// [8, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
-// [9, expr → • lident_string properties, RPAREN / COMMA]
-// [10, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
-// [11, expr → • STRING, RPAREN / COMMA]
-// [12, expr → • TRUE, RPAREN / COMMA]
-// [13, expr → • FALSE, RPAREN / COMMA]
+// [3, property → lident_string EQUAL • expr, RPAREN / COMMA]
+// [5, expr → • lident_string, RPAREN / COMMA]
+// [6, expr → • UIDENT, RPAREN / COMMA]
+// [7, expr → • lident_string DOT_LIDENT, RPAREN / COMMA]
+// [8, expr → • lident_string properties, RPAREN / COMMA]
+// [9, expr → • lident_string DOT_LIDENT properties, RPAREN / COMMA]
+// [10, expr → • STRING, RPAREN / COMMA]
+// [11, expr → • TRUE, RPAREN / COMMA]
+// [12, expr → • FALSE, RPAREN / COMMA]
 fn yy_state_15(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_FALSE => Shift(yy_state_6)
@@ -726,77 +714,70 @@ fn yy_state_15(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_9)
     NT_lident_string => Shift(yy_state_16)
     NT_expr => Shift(yy_state_17)
-    T_EXTEND => Shift(yy_state_18)
-    T_LIDENT => Shift(yy_state_19)
+    T_LIDENT => Shift(yy_state_18)
     _ => Error
   }
 }
 
 ///|
-// [6, expr → lident_string •, RPAREN / COMMA]
-// [8, expr → lident_string • DOT_LIDENT, RPAREN / COMMA]
-// [9, expr → lident_string • properties, RPAREN / COMMA]
-// [10, expr → lident_string • DOT_LIDENT properties, RPAREN / COMMA]
-// [14, properties → • LPAREN RPAREN, RPAREN / COMMA]
-// [15, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
+// [5, expr → lident_string •, RPAREN / COMMA]
+// [7, expr → lident_string • DOT_LIDENT, RPAREN / COMMA]
+// [8, expr → lident_string • properties, RPAREN / COMMA]
+// [9, expr → lident_string • DOT_LIDENT properties, RPAREN / COMMA]
+// [13, properties → • LPAREN RPAREN, RPAREN / COMMA]
+// [14, properties → • LPAREN non_empty_properties RPAREN, RPAREN / COMMA]
 fn yy_state_16(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_2)
     NT_properties => Shift(yy_state_12)
     T_DOT_LIDENT => Shift(yy_state_13)
-    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_10)
+    T_RPAREN | T_COMMA => Reduce(1, NT_expr, yy_action_9)
     _ => Error
   }
 }
 
 ///|
-// [4, property → lident_string EQUAL expr •, RPAREN / COMMA]
+// [3, property → lident_string EQUAL expr •, RPAREN / COMMA]
 fn yy_state_17(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_property, yy_action_6)
-}
-
-///|
-// [1, lident_string → EXTEND •, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
-fn yy_state_18(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_lident_string, yy_action_5)
+  ReduceNoLookahead(3, NT_property, yy_action_5)
 }
 
 ///|
 // [0, lident_string → LIDENT •, EQUAL / LPAREN / RPAREN / COMMA / DOT_LIDENT]
-fn yy_state_19(_lookahead : YYSymbol) -> YYDecision {
+fn yy_state_18(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_lident_string, yy_action_4)
 }
 
 ///|
-// [15, properties → LPAREN non_empty_properties • RPAREN, $ / RPAREN / COMMA]
-fn yy_state_20(_lookahead : YYSymbol) -> YYDecision {
+// [14, properties → LPAREN non_empty_properties • RPAREN, $ / RPAREN / COMMA]
+fn yy_state_19(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    T_RPAREN => Shift(yy_state_21)
+    T_RPAREN => Shift(yy_state_20)
     _ => Error
   }
 }
 
 ///|
-// [15, properties → LPAREN non_empty_properties RPAREN •, $ / RPAREN / COMMA]
-fn yy_state_21(_lookahead : YYSymbol) -> YYDecision {
+// [14, properties → LPAREN non_empty_properties RPAREN •, $ / RPAREN / COMMA]
+fn yy_state_20(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(3, NT_properties, yy_action_3)
 }
 
 ///|
-// [14, properties → LPAREN RPAREN •, $ / RPAREN / COMMA]
-fn yy_state_22(_lookahead : YYSymbol) -> YYDecision {
+// [13, properties → LPAREN RPAREN •, $ / RPAREN / COMMA]
+fn yy_state_21(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(2, NT_properties, yy_action_2)
 }
 
 ///|
-// [3, payloads → properties •, $]
-fn yy_state_23(_lookahead : YYSymbol) -> YYDecision {
+// [2, payloads → properties •, $]
+fn yy_state_22(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_payloads, yy_action_1)
 }
 
 ///|
-// [2, payloads → EOF •, $]
-fn yy_state_24(_lookahead : YYSymbol) -> YYDecision {
+// [1, payloads → EOF •, $]
+fn yy_state_23(_lookahead : YYSymbol) -> YYDecision {
   ReduceNoLookahead(1, NT_payloads, yy_action_0)
 }
 

@@ -483,7 +483,6 @@ uident -> Name
 
 lident -> Name
   : LIDENT { {name: $1, loc: mk_loc($sloc)} }
-  | "extend" { {name: "extend", loc: mk_loc($sloc)} }
   ;
 
 label -> Label

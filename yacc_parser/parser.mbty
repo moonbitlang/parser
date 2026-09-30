@@ -334,7 +334,6 @@ optional_type_parameters_no_constraints -> List[TypeDeclBinder]
 
 %inline lident_string -> String
   : LIDENT { $1 }
-  | "extend" { "extend" }
   ;
 
 luident -> String

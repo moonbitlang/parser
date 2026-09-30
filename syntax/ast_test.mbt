@@ -416,7 +416,39 @@ test "expr basic types to_json" {
   })
   json_inspect(
     @syntax.Expr::Apply(func=unit_expr, args=List([argument]), loc=dummy_loc).json_repr(),
-    content=({"kind":"Expr::Apply","loc":null,"children":{"func":{"kind":"Expr::Unit","loc":null,"children":{"faked":false}},"args":{"kind":"Expr::Apply::ArgumentList","loc":null,"children":[{"kind":"Argument","loc":null,"children":{"value":{"kind":"Expr::Unit","loc":null,"children":{"faked":false}},"kind":{"kind":"ArgumentKind::Positional","loc":null,"children":{}}}}]}}}),
+    content={
+      "kind": "Expr::Apply",
+      "loc": null,
+      "children": {
+        "func": {
+          "kind": "Expr::Unit",
+          "loc": null,
+          "children": { "faked": false },
+        },
+        "args": {
+          "kind": "Expr::Apply::ArgumentList",
+          "loc": null,
+          "children": [
+            {
+              "kind": "Argument",
+              "loc": null,
+              "children": {
+                "value": {
+                  "kind": "Expr::Unit",
+                  "loc": null,
+                  "children": { "faked": false },
+                },
+                "kind": {
+                  "kind": "ArgumentKind::Positional",
+                  "loc": null,
+                  "children": {},
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   )
   json_inspect(
     @syntax.Infix(op=variable, lhs=unit_expr, rhs=unit_expr, loc=dummy_loc).json_repr(),
