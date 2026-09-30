@@ -264,6 +264,7 @@ pub(open) trait MapVisitor {
     loc~ : Location,
   ) -> Pattern = _
   fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : Location) -> Pattern = _
+  fn visit_Pattern_ConstrUnknown(Self, type_name~ : TypeName, loc~ : Location) -> Pattern = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : Location) -> Pattern = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : Location) -> Pattern = _
   fn visit_Pattern_Var(Self, Binder) -> Pattern = _
@@ -687,7 +688,7 @@ pub(open) trait MapVisitor {
   ) -> Expr = _
   fn visit_Expr_ForEach(
     Self,
-    binders~ : @list.List[Binder?],
+    patterns~ : @list.List[Pattern],
     expr~ : Expr,
     init~ : @list.List[(Binder, Expr)],
     continue_block~ : @list.List[(Binder, Expr)],
@@ -1357,7 +1358,7 @@ impl MapVisitor with fn visit_Expr_For(
 ///|
 impl MapVisitor with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -1369,7 +1370,7 @@ impl MapVisitor with fn visit_Expr_ForEach(
 ) {
   MapVisitor::visit_Expr_ForEach(
     env.base(),
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -2006,6 +2007,11 @@ impl MapVisitor with fn visit_Pattern_ConstrAny(env, type_name~, loc~) {
 }
 
 ///|
+impl MapVisitor with fn visit_Pattern_ConstrUnknown(env, type_name~, loc~) {
+  MapVisitor::visit_Pattern_ConstrUnknown(env.base(), type_name~, loc~)
+}
+
+///|
 impl MapVisitor with fn visit_Pattern_Or(env, pat1~, pat2~, loc~) {
   MapVisitor::visit_Pattern_Or(env.base(), pat1~, pat2~, loc~)
 }
@@ -2630,7 +2636,9 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_TypeDesc
   match type_desc {
     Abstract => Abstract
     ExtensibleEnum(constr_decls) =>
-      ExtensibleEnum(constr_decls.map(x => env.0.visit_ConstrDecl(x)))
+      ExtensibleEnum(
+        constr_decls.map(cs => cs.map(x => env.0.visit_ConstrDecl(x))),
+      )
     Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
     Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
     ExtendEnum(target~, constructors~) => {
@@ -3372,6 +3380,8 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Pattern(
       env.0.visit_Pattern_Constr(constr~, args~, is_open~, loc~)
     ConstrAny(type_name~, loc~) =>
       env.0.visit_Pattern_ConstrAny(type_name~, loc~)
+    ConstrUnknown(type_name~, loc~) =>
+      env.0.visit_Pattern_ConstrUnknown(type_name~, loc~)
     Or(pat1~, pat2~, loc~) => env.0.visit_Pattern_Or(pat1~, pat2~, loc~)
     Tuple(pats~, loc~) => env.0.visit_Pattern_Tuple(pats~, loc~)
     Var(binder) => env.0.visit_Pattern_Var(binder)
@@ -3461,6 +3471,16 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Pattern_
 ) {
   let type_name = env.0.visit_TypeName(type_name)
   ConstrAny(type_name~, loc~)
+}
+
+///|
+pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Pattern_ConstrUnknown(
+  env,
+  type_name~,
+  loc~,
+) {
+  let type_name = env.0.visit_TypeName(type_name)
+  ConstrUnknown(type_name~, loc~)
 }
 
 ///|
@@ -4659,7 +4679,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_For
 ///|
 pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -4669,7 +4689,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_For
   label~,
   loc~,
 ) {
-  let binders = binders.map(binder => binder.map(x => env.0.visit_Binder(x)))
+  let patterns = patterns.map(x => env.0.visit_Pattern(x))
   let expr = env.0.visit_Expr(expr)
   let init = init.map(p => (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1)))
   let continue_block = continue_block.map(p => {
@@ -4680,7 +4700,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr_For
   let where_clause = where_clause.map(x => env.0.visit_WhereClause(x))
   let label = label.map(x => env.0.visit_Label(x))
   ForEach(
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -4800,14 +4820,14 @@ fn[T : MapVisitor] map_list_comprehension_kind(
   kind : ListComprehensionKind,
 ) -> ListComprehensionKind {
   match kind {
-    Foreach(binders~, expr~, init~, continue_block~) => {
-      let binders = binders.map(binder => binder.map(x => env.0.visit_Binder(x)))
+    Foreach(patterns~, expr~, init~, continue_block~) => {
+      let patterns = patterns.map(x => env.0.visit_Pattern(x))
       let expr = env.0.visit_Expr(expr)
       let init = init.map(p => (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1)))
       let continue_block = continue_block.map(p => {
         (env.0.visit_Binder(p.0), env.0.visit_Expr(p.1))
       })
-      Foreach(binders~, expr~, init~, continue_block~)
+      Foreach(patterns~, expr~, init~, continue_block~)
     }
     For(binders~, condition~, continue_block~, for_loc~) => {
       let binders = binders.map(p => {
@@ -4985,7 +5005,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
         where_clause~,
       )
     ForEach(
-      binders~,
+      patterns~,
       expr~,
       init~,
       continue_block~,
@@ -4996,7 +5016,7 @@ pub impl[T : MapVisitor] MapVisitor for MapVisitorBase[T] with fn visit_Expr(
       loc~
     ) =>
       env.0.visit_Expr_ForEach(
-        binders~,
+        patterns~,
         expr~,
         init~,
         continue_block~,
@@ -5270,6 +5290,7 @@ pub extend MapVisitorBase with MapVisitor::{
   visit_ErrorType_DefaultErrorType,
   visit_Expr_LetMut,
   visit_Pattern_ConstrAny,
+  visit_Pattern_ConstrUnknown,
   visit_TypeVarConstraint,
   visit_DotDotBinder_BinderAs,
   visit_Expr_Guard,

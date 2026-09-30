@@ -264,6 +264,7 @@ pub(open) trait IterVisitor {
     loc~ : Location,
   ) -> Unit = _
   fn visit_Pattern_ConstrAny(Self, type_name~ : TypeName, loc~ : Location) -> Unit = _
+  fn visit_Pattern_ConstrUnknown(Self, type_name~ : TypeName, loc~ : Location) -> Unit = _
   fn visit_Pattern_Or(Self, pat1~ : Pattern, pat2~ : Pattern, loc~ : Location) -> Unit = _
   fn visit_Pattern_Tuple(Self, pats~ : @list.List[Pattern], loc~ : Location) -> Unit = _
   fn visit_Pattern_Var(Self, Binder) -> Unit = _
@@ -687,7 +688,7 @@ pub(open) trait IterVisitor {
   ) -> Unit = _
   fn visit_Expr_ForEach(
     Self,
-    binders~ : @list.List[Binder?],
+    patterns~ : @list.List[Pattern],
     expr~ : Expr,
     init~ : @list.List[(Binder, Expr)],
     continue_block~ : @list.List[(Binder, Expr)],
@@ -1364,7 +1365,7 @@ impl IterVisitor with fn visit_Expr_For(
 ///|
 impl IterVisitor with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -1376,7 +1377,7 @@ impl IterVisitor with fn visit_Expr_ForEach(
 ) {
   IterVisitor::visit_Expr_ForEach(
     env.base(),
-    binders~,
+    patterns~,
     expr~,
     init~,
     continue_block~,
@@ -2018,6 +2019,11 @@ impl IterVisitor with fn visit_Pattern_ConstrAny(env, type_name~, loc~) {
 }
 
 ///|
+impl IterVisitor with fn visit_Pattern_ConstrUnknown(env, type_name~, loc~) {
+  IterVisitor::visit_Pattern_ConstrUnknown(env.base(), type_name~, loc~)
+}
+
+///|
 impl IterVisitor with fn visit_Pattern_Or(env, pat1~, pat2~, loc~) {
   IterVisitor::visit_Pattern_Or(env.base(), pat1~, pat2~, loc~)
 }
@@ -2624,7 +2630,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_TypeD
   match type_desc {
     Abstract => ()
     ExtensibleEnum(constr_decls) =>
-      constr_decls.each(x => env.0.visit_ConstrDecl(x))
+      constr_decls.each(cs => cs.each(x => env.0.visit_ConstrDecl(x)))
     Error(exception_decl) => env.0.visit_TypeDesc_Error(exception_decl)
     Variant(constr_decls) => env.0.visit_TypeDesc_Variant(constr_decls)
     ExtendEnum(target~, constructors~) => {
@@ -3314,6 +3320,8 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
       env.0.visit_Pattern_Constr(constr~, args~, is_open~, loc~)
     ConstrAny(type_name~, loc~) =>
       env.0.visit_Pattern_ConstrAny(type_name~, loc~)
+    ConstrUnknown(type_name~, loc~) =>
+      env.0.visit_Pattern_ConstrUnknown(type_name~, loc~)
     Or(pat1~, pat2~, loc~) => env.0.visit_Pattern_Or(pat1~, pat2~, loc~)
     Tuple(pats~, loc~) => env.0.visit_Pattern_Tuple(pats~, loc~)
     Var(binder) => env.0.visit_Pattern_Var(binder)
@@ -3398,6 +3406,16 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Patte
 
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Pattern_ConstrAny(
+  env,
+  type_name~,
+  loc~,
+) {
+  ignore(loc)
+  env.0.visit_TypeName(type_name)
+}
+
+///|
+pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Pattern_ConstrUnknown(
   env,
   type_name~,
   loc~,
@@ -4523,7 +4541,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
 ///|
 pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_ForEach(
   env,
-  binders~,
+  patterns~,
   expr~,
   init~,
   continue_block~,
@@ -4534,7 +4552,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr_
   loc~,
 ) {
   ignore(loc)
-  binders.each(binder => binder.each(x => env.0.visit_Binder(x)))
+  patterns.each(x => env.0.visit_Pattern(x))
   env.0.visit_Expr(expr)
   init.each(p => {
     env.0.visit_Binder(p.0)
@@ -4652,8 +4670,8 @@ fn[T : IterVisitor] iter_list_comprehension_kind(
   kind : ListComprehensionKind,
 ) -> Unit {
   match kind {
-    Foreach(binders~, expr~, init~, continue_block~) => {
-      binders.each(binder => binder.each(x => env.0.visit_Binder(x)))
+    Foreach(patterns~, expr~, init~, continue_block~) => {
+      patterns.each(x => env.0.visit_Pattern(x))
       env.0.visit_Expr(expr)
       init.each(p => {
         env.0.visit_Binder(p.0)
@@ -4845,7 +4863,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
         where_clause~,
       )
     ForEach(
-      binders~,
+      patterns~,
       expr~,
       init~,
       continue_block~,
@@ -4856,7 +4874,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       loc~
     ) =>
       env.0.visit_Expr_ForEach(
-        binders~,
+        patterns~,
         expr~,
         init~,
         continue_block~,
@@ -5128,6 +5146,7 @@ pub extend IterVisitorBase with IterVisitor::{
   visit_ErrorType_DefaultErrorType,
   visit_Expr_LetMut,
   visit_Pattern_ConstrAny,
+  visit_Pattern_ConstrUnknown,
   visit_TypeVarConstraint,
   visit_DotDotBinder_BinderAs,
   visit_Expr_Guard,

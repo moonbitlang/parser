@@ -162,6 +162,7 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
   match self {
     Abstract => tagged_node0("TypeDesc::Abstract", loc)
     ExtensibleEnum(constrs) => {
+      let constrs = constrs.unwrap_or(@list.empty())
       let constrs_loc = match constrs {
         Empty => loc
         More(constr, tail=Empty) => constr.loc
@@ -366,7 +367,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       tagged_node("Expr::Apply", loc, {
         "func": func.json_repr(),
         "args": args_list,
-        "attr": apply_attr_json_repr(loc),
       })
     }
     Infix(op~, lhs~, rhs~, loc~) =>
@@ -617,7 +617,6 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "method_name": method_name.json_repr(),
         "args": args_list,
         "return_self": Json::boolean(return_self),
-        "attr": apply_attr_json_repr(loc),
       })
     }
     As(expr~, trait_~, loc~) =>
@@ -763,7 +762,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
         "label": option_json_repr(label, Label::json_repr),
       })
     ForEach(
-      binders~,
+      patterns~,
       expr~,
       init~,
       continue_block~,
@@ -774,11 +773,12 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       loc~
     ) => {
       let children : Map[String, Json] = {
-        "binders": list_json_repr("Expr::ForEach::BinderList", loc, binders, fn(
-          b,
-        ) {
-          option_json_repr(b, Binder::json_repr)
-        }),
+        "patterns": list_json_repr(
+          "Expr::ForEach::PatternList",
+          loc,
+          patterns,
+          Pattern::json_repr,
+        ),
         "expr": expr.json_repr(),
         "init": list_json_repr("Expr::ForEach::Init", loc, init, fn(binding) {
           let (binder, expr) = binding
@@ -1200,11 +1200,6 @@ fn ArgumentKind::json_repr(self : ArgumentKind, loc : Location) -> Json {
 }
 
 ///|
-fn apply_attr_json_repr(loc : Location) -> Json {
-  tagged_node0("ApplyAttr::NoAttr", loc)
-}
-
-///|
 fn Var::json_repr(self : Var) -> Json {
   tagged_node("Var", self.loc, { "name": self.name.json_repr(self.loc) })
 }
@@ -1409,6 +1404,10 @@ fn Pattern::json_repr(self : Pattern) -> Json {
       })
     ConstrAny(type_name~, loc~) =>
       tagged_node("Pattern::ConstrAny", loc, {
+        "type_name": type_name.json_repr(),
+      })
+    ConstrUnknown(type_name~, loc~) =>
+      tagged_node("Pattern::ConstrUnknown", loc, {
         "type_name": type_name.json_repr(),
       })
     Or(pat1~, pat2~, loc~) =>
@@ -1671,13 +1670,14 @@ fn ListComprehensionKind::json_repr(
   is_iter~ : Bool,
 ) -> Json {
   match self {
-    Foreach(binders~, expr~, init~, continue_block~) =>
+    Foreach(patterns~, expr~, init~, continue_block~) =>
       tagged_node("Expr::ListComprehension::Kind::Foreach", loc, {
-        "binders": list_json_repr("Expr::ForEach::BinderList", loc, binders, fn(
-          b,
-        ) {
-          option_json_repr(b, Binder::json_repr)
-        }),
+        "patterns": list_json_repr(
+          "Expr::ForEach::PatternList",
+          loc,
+          patterns,
+          Pattern::json_repr,
+        ),
         "expr": expr.json_repr(),
         "init": list_json_repr("Expr::ForEach::Init", loc, init, fn(binding) {
           let (binder, expr) = binding

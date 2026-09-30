@@ -4371,9 +4371,6 @@ test "parse_test_get_slice" (t : @test.Test) {
 }
 
 ///|
-test "parse_test_extend_soft_keyword" (t : @test.Test) {
-  t.run()
-}
 
 ///|
 test "pipeline_test_tlink_to_obj" (t : @test.Test) {

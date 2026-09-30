@@ -5,43 +5,21 @@ let dummy_loc : @basic.Location = {
 }
 
 ///|
-test "attribute payload accepts extend soft keyword" {
+test "attribute payload rejects extend keyword" {
   let pos = dummy_loc.start
   let tokens : Array[(@tokens.Token, @basic.Position, @basic.Position)] = [
     (LPAREN, pos, pos),
     (EXTEND, pos, pos),
-    (COMMA, pos, pos),
-    (EXTEND, pos, pos),
-    (EQUAL, pos, pos),
-    (TRUE, pos, pos),
-    (COMMA, pos, pos),
-    (EXTEND, pos, pos),
-    (LPAREN, pos, pos),
-    (EXTEND, pos, pos),
-    (RPAREN, pos, pos),
-    (COMMA, pos, pos),
-    (EXTEND, pos, pos),
-    (DOT_LIDENT("field"), pos, pos),
     (RPAREN, pos, pos),
     (EOF, pos, pos),
   ]
-  try @attribute.payloads(tokens, initial_pos=pos) catch {
-    _ => fail("expected extend soft keyword in attribute payload to parse")
-  } noraise {
-    props =>
-      debug_inspect(
-        props,
-        content=(
-          #|<List:
-          #|  [
-          #|    Expr(Ident(extend)),
-          #|    Labeled("extend", Bool(true)),
-          #|    Expr(Apply(extend, <List: [Expr(Ident(extend))]>)),
-          #|    Expr(Ident(extend.field)),
-          #|  ]>
-        ),
-      )
+  let rejected = try {
+    @attribute.payloads(tokens, initial_pos=pos) |> ignore
+    false
+  } catch {
+    _ => true
   }
+  assert_true(rejected)
 }
 
 ///|

@@ -295,9 +295,6 @@ alias_sig -> AliasSig
   : attributes vis "type"  type_decl_name_with_params "=" type_ {
     TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
   }
-  | attributes vis "fnalias" uident "::" lident {
-    FuncAlias(attrs = $1,name=$6, type_name=$4)
-  }
   | attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
     let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
     Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
@@ -483,7 +480,6 @@ uident -> Name
 
 lident -> Name
   : LIDENT { {name: $1, loc: mk_loc($sloc)} }
-  | "extend" { {name: "extend", loc: mk_loc($sloc)} }
   ;
 
 label -> Label

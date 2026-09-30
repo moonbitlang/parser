@@ -676,17 +676,6 @@ test "annotated let constraint location excludes statement syntax" {
 }
 
 ///|
-test "soft keyword extend in function binder positions is AST equivalent" {
-  let cases = [
-    "fn main() { fn extend() {} }", "fn main() { async fn extend() {} }", "fn main() { letrec extend = fn() {} }",
-    "fn main() { letrec f = fn() {} and extend = fn() {} }", "fn T::extend() {}",
-  ]
-  for source in cases {
-    assert_ast_equiv(source)
-  }
-}
-
-///|
 test "docstring AST equivalence cases" {
   assert_ast_equiv(docstring_source())
 }
@@ -1168,17 +1157,16 @@ test "semantic CST migration regression snapshots" {
     "parse_test_uminus.mbt", "pipeline_test_defer.mbt", "pipeline_test_dlist.mbt",
     "parse_test_postfix_label.mbt", "parse_test_regex_match_expr.mbt", "parse_test_ffi_multiline_stub.mbt",
     "pipeline_test_labelled_constr.mbt", "pipeline_test_match_multi_arg.mbt", "parse_test_brace_grouped_ident.mbt",
-    "parse_test_extend_soft_keyword.mbt", "parse_test_labelled_while_expr.mbt", "pipeline_test_constr_mut_field.mbt",
-    "pipeline_test_list_comprehension.mbt", "pipeline_test_foreach_break_label.mbt",
-    "pipeline_test_label_loop_foreach2.mbt", "pipeline_test_label_loop_foreach3.mbt",
-    "parse_test_no_trailing_newline_extern.mbt", "parse_test_lexmatch_pattern_sequence_semicolon_and_regex.mbt",
-    "parse_test_map_pattern.mbt", "parse_test_pattern_tuple.mbt", "parse_test_map_pattern_more_coverage.mbt",
-    "parse_test_array_pattern_dotdot_variants.mbt", "parse_test_brace_pattern_record_kind_unexpected.mbt",
-    "parse_test_brace_pattern_unknown_kind_unexpected.mbt", "pipeline_test_valstruct_in_array.mbt",
-    "parse_test_trait.mbt", "pipeline_test_async_join2.mbt", "pipeline_test_guard.mbt",
-    "pipeline_test_guard_is.mbt", "pipeline_test_empty_json.mbt", "pipeline_test_nested_map.mbt",
-    "pipeline_test_map_pattern.mbt", "pipeline_test_json_pattern.mbt", "pipeline_test_map_pattern2.mbt",
-    "parse_test_map_literal_with_bytes.mbt",
+    "parse_test_labelled_while_expr.mbt", "pipeline_test_constr_mut_field.mbt", "pipeline_test_list_comprehension.mbt",
+    "pipeline_test_foreach_break_label.mbt", "pipeline_test_label_loop_foreach2.mbt",
+    "pipeline_test_label_loop_foreach3.mbt", "parse_test_no_trailing_newline_extern.mbt",
+    "parse_test_lexmatch_pattern_sequence_semicolon_and_regex.mbt", "parse_test_map_pattern.mbt",
+    "parse_test_pattern_tuple.mbt", "parse_test_map_pattern_more_coverage.mbt", "parse_test_array_pattern_dotdot_variants.mbt",
+    "parse_test_brace_pattern_record_kind_unexpected.mbt", "parse_test_brace_pattern_unknown_kind_unexpected.mbt",
+    "pipeline_test_valstruct_in_array.mbt", "parse_test_trait.mbt", "pipeline_test_async_join2.mbt",
+    "pipeline_test_guard.mbt", "pipeline_test_guard_is.mbt", "pipeline_test_empty_json.mbt",
+    "pipeline_test_nested_map.mbt", "pipeline_test_map_pattern.mbt", "pipeline_test_json_pattern.mbt",
+    "pipeline_test_map_pattern2.mbt", "parse_test_map_literal_with_bytes.mbt",
   ]
   for snapshot in snapshots {
     assert_handrolled_cst_structure_equiv(snapshot, read_snapshot(snapshot))

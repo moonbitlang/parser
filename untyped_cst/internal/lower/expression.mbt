@@ -399,7 +399,7 @@ fn lower_list_comprehension_expr(node : CstNode) -> @syntax.Expr {
       kind is ListComprehensionKind_ForEach
     }) {
     @syntax.ListComprehensionKind::Foreach(
-      binders=lower_foreach_binders(node),
+      patterns=lower_foreach_patterns(node),
       expr=node
         .first_child_with_label("expr")
         .map(lower_expr)

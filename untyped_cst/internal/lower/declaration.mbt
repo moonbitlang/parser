@@ -457,7 +457,7 @@ fn lower_enum_decl(node : CstNode) -> @syntax.Impl {
     Impl_ExtensibleEnum =>
       return lower_simple_type_decl(
         node,
-        ExtensibleEnum(lower_enum_constructors(node)),
+        ExtensibleEnum(Some(lower_enum_constructors(node))),
       )
     Impl_EnumVariant =>
       return lower_simple_type_decl(

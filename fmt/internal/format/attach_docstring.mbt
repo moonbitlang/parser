@@ -64,11 +64,15 @@ fn attach_docstrings(
         td.doc = doc
         match td.components {
           // there is no docstring inside the types
-          Abstract | Alias(_) | Error(NoPayload) | TupleStruct(_) => ()
+          Abstract
+          | Alias(_)
+          | Error(NoPayload)
+          | TupleStruct(_)
+          | ExtensibleEnum(None) => ()
           // handle docstring before the enum/suberror constructor and struct fields 
           Error(EnumPayload(constrs))
           | Variant(constrs)
-          | ExtensibleEnum(constrs)
+          | ExtensibleEnum(Some(constrs))
           | ExtendEnum(constructors=constrs, ..) =>
             constrs.each(constr => {
               let previous = skip_docstrings_before(constr.loc.start)

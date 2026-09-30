@@ -155,11 +155,6 @@
                         }
                       }
                     ]
-                  },
-                  "attr": {
-                    "kind": "ApplyAttr::NoAttr",
-                    "loc": null,
-                    "children": {}
                   }
                 }
               },
@@ -231,12 +226,7 @@
                               }
                             ]
                           },
-                          "return_self": false,
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
-                          }
+                          "return_self": false
                         }
                       },
                       {
@@ -278,12 +268,7 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "return_self": false,
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
-                              }
+                              "return_self": false
                             }
                           },
                           "rhs": {
@@ -346,12 +331,7 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "return_self": false,
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
-                              }
+                              "return_self": false
                             }
                           },
                           "rhs": {
@@ -435,12 +415,7 @@
                               }
                             ]
                           },
-                          "return_self": false,
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
-                          }
+                          "return_self": false
                         }
                       },
                       {
@@ -482,12 +457,7 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "return_self": false,
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
-                              }
+                              "return_self": false
                             }
                           },
                           "rhs": {
@@ -550,12 +520,7 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "return_self": false,
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
-                              }
+                              "return_self": false
                             }
                           },
                           "rhs": {
@@ -639,12 +604,7 @@
                               }
                             ]
                           },
-                          "return_self": false,
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
-                          }
+                          "return_self": false
                         }
                       },
                       {
@@ -686,12 +646,7 @@
                                 "loc": null,
                                 "children": []
                               },
-                              "return_self": false,
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
-                              }
+                              "return_self": false
                             }
                           },
                           "loop_body": {
@@ -773,12 +728,7 @@
                           }
                         ]
                       },
-                      "return_self": false,
-                      "attr": {
-                        "kind": "ApplyAttr::NoAttr",
-                        "loc": null,
-                        "children": {}
-                      }
+                      "return_self": false
                     }
                   }
                 }
@@ -2612,11 +2562,6 @@
                                 }
                               }
                             ]
-                          },
-                          "attr": {
-                            "kind": "ApplyAttr::NoAttr",
-                            "loc": null,
-                            "children": {}
                           }
                         }
                       },
@@ -3152,11 +3097,6 @@
                                     }
                                   }
                                 ]
-                              },
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
                               }
                             }
                           },
@@ -3472,11 +3412,6 @@
                                         }
                                       }
                                     ]
-                                  },
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               },
@@ -3573,12 +3508,7 @@
                                               }
                                             ]
                                           },
-                                          "return_self": false,
-                                          "attr": {
-                                            "kind": "ApplyAttr::NoAttr",
-                                            "loc": null,
-                                            "children": {}
-                                          }
+                                          "return_self": false
                                         }
                                       },
                                       {
@@ -4189,12 +4119,7 @@
                                           }
                                         ]
                                       },
-                                      "return_self": false,
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
-                                      }
+                                      "return_self": false
                                     }
                                   },
                                   {
@@ -4301,12 +4226,7 @@
                                           }
                                         ]
                                       },
-                                      "return_self": false,
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
-                                      }
+                                      "return_self": false
                                     }
                                   },
                                   {
@@ -4816,11 +4736,6 @@
                                         }
                                       }
                                     ]
-                                  },
-                                  "attr": {
-                                    "kind": "ApplyAttr::NoAttr",
-                                    "loc": null,
-                                    "children": {}
                                   }
                                 }
                               }
@@ -6544,11 +6459,6 @@
                                                     }
                                                   }
                                                 ]
-                                              },
-                                              "attr": {
-                                                "kind": "ApplyAttr::NoAttr",
-                                                "loc": null,
-                                                "children": {}
                                               }
                                             }
                                           }
@@ -6832,11 +6742,6 @@
                     "kind": "Expr::Apply::ArgumentList",
                     "loc": null,
                     "children": []
-                  },
-                  "attr": {
-                    "kind": "ApplyAttr::NoAttr",
-                    "loc": null,
-                    "children": {}
                   }
                 }
               },
@@ -6902,12 +6807,7 @@
                                         "loc": null,
                                         "children": []
                                       },
-                                      "return_self": false,
-                                      "attr": {
-                                        "kind": "ApplyAttr::NoAttr",
-                                        "loc": null,
-                                        "children": {}
-                                      }
+                                      "return_self": false
                                     }
                                   }
                                 }
@@ -7158,12 +7058,7 @@
                                   }
                                 ]
                               },
-                              "return_self": false,
-                              "attr": {
-                                "kind": "ApplyAttr::NoAttr",
-                                "loc": null,
-                                "children": {}
-                              }
+                              "return_self": false
                             }
                           },
                           "for_else": null,
