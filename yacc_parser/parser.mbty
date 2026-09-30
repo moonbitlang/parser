@@ -164,11 +164,7 @@
 %left PLUS MINUS
 %left INFIX3
 %left INFIX4
-%nonassoc prec_lower_than_as
-%nonassoc "as"
 %nonassoc prec_apply_non_ident_fn
-%nonassoc "!"
-%nonassoc "?"
 
 // the precedence of "," and ")" are used to compare with prec_apply_non_ident_fn
 // to make sure when parsing (a, b) => ...
@@ -177,8 +173,6 @@
 %nonassoc ","
 %nonassoc ")"
 %nonassoc ":"
-
-%nonassoc WITH
 
 %%
 
@@ -904,75 +898,6 @@ extenum_extension_target -> (String, Location, List[TypeDeclBinder], TypeName)
   }
   ;
 
-batch_type_alias_targets -> (Bool, Label?, List[AliasTarget])
-  : PACKAGE_NAME batch_type_alias_target(DOT_UIDENT) {
-    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    (false, Some(pkg), @list.singleton($2))
-  }
-  | PACKAGE_NAME ".(" non_empty_list_commas(batch_type_alias_target(UIDENT)) ")" {
-    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    (true, Some(pkg), $3)
-  }
-  | batch_type_alias_target(UIDENT) { (false, None, @list.singleton($1)) }
-  ;
-
-batch_type_alias_target(UIDENT_MAYBE_DOT) -> AliasTarget
-  : UIDENT_MAYBE_DOT {
-    let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-    AliasTarget::{ binder, target: None }
-  }
-  | UIDENT_MAYBE_DOT "as" UIDENT {
-    let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    let binder = Binder::{ name: $3, loc: mk_loc($loc($3)) }
-    AliasTarget::{ binder, target: Some(target) }
-  }
-  ;
-
-func_alias_targets -> (Label?, Label?, Bool, List[AliasTarget])
-  : ioption(func_alias_type_name(lident_string, UIDENT)) func_alias_target(lident_string) {
-    (None, $1, false, @list.singleton($2))
-  }
-  | PACKAGE_NAME func_alias_target(DOT_LIDENT) {
-    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    (Some(pkg), None, false, @list.singleton($2))
-  }
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) func_alias_target(lident_string) {
-    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    (Some(pkg), Some($2), false, @list.singleton($3))
-  }
-  | option(func_alias_type_name(lident_string, UIDENT)) "(" non_empty_list_commas(func_alias_target(lident_string)) ")" {
-    (None, $1, true, $3)
-  }
-  | PACKAGE_NAME ".(" non_empty_list_commas(func_alias_target(lident_string)) ")" {
-    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    (Some(pkg), None, true, $3)
-  }
-  | PACKAGE_NAME func_alias_type_name(DOT_LIDENT, DOT_UIDENT) "(" non_empty_list_commas(func_alias_target(lident_string)) ")" {
-    let pkg = Label::{ name: $1, loc: mk_loc($loc($1)) }
-    (Some(pkg), Some($2), true, $4)
-  }
-  ;
-
-func_alias_type_name(LIDENT_MAYBE_DOT, UIDENT_MAYBE_DOT) -> Label
-  : LIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
-  | UIDENT_MAYBE_DOT "::" { Label::{ name: $1, loc: mk_loc($loc($1)) } }
-  ;
-
-func_alias_target(LIDENT_MAYBE_DOT) -> AliasTarget
-  : LIDENT_MAYBE_DOT option(preceded("as", binder)) {
-    match $2 {
-      None => {
-        let binder = Binder::{ name: $1, loc: mk_loc($loc($1)) }
-        AliasTarget::{ binder, target: None }
-      }
-      Some(binder) => {
-        let target = Label::{ name: $1, loc: mk_loc($loc($1)) }
-        AliasTarget::{ binder, target: Some(target) }
-      }
-    }
-  }
-  ;
-
 using_binder -> (AliasTarget, UsingKind):
   | lident_string {
     let binder = Binder::{
@@ -1104,19 +1029,19 @@ qual_ident_simple_expr -> LongIdent
   | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
   ;
 
-%inline qual_ident_ty_inline -> LongIdent
+%inline qual_uident -> LongIdent
   : UIDENT { Ident(name = $1) }
-  | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
   | PACKAGE_NAME DOT_UIDENT { Dot(pkg = $1, id = $2) }
+  ;
+
+// Unlike upstream, this parser keeps accepting `@pkg.lower` as a type name.
+%inline qual_ident_ty_inline -> LongIdent
+  : qual_uident { $1 }
+  | PACKAGE_NAME DOT_LIDENT { Dot(pkg = $1, id = $2) }
   ;
 
 qual_ident_ty -> LongIdent
   : qual_ident_ty_inline { $1 }
-  ;
-
-%inline qual_uident -> LongIdent
-  : UIDENT { Ident(name = $1) }
-  | PACKAGE_NAME DOT_UIDENT { Dot(pkg = $1, id = $2) }
   ;
 
 %inline semi_expr_semi_opt -> (Expr, Bool)
@@ -1567,9 +1492,13 @@ labelled_block_expr -> Expr
   ;
 
 expr -> Expr
-  : labelled_block_expr { $1 }
-  | for_expr { $1 }
+  : for_expr { $1 }
   | foreach_expr { $1 }
+  | expr_no_for { $1 }
+  ;
+
+expr_no_for -> Expr
+  : labelled_block_expr { $1 }
   | while_expr { $1 }
   | try_expr { $1 }
   | if_expr { $1 }
@@ -2038,7 +1967,8 @@ simple_expr -> Expr
     )
   }
   | "[" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "]" {
-    let (binders, condition, continue_block, for_loc) = $3
+    let (binders, condition, continue_block, header_loc) = $3
+    let for_loc = mk_loc($loc($2)).merge(header_loc)
     ListComprehension(
       kind = For(binders~, condition~, continue_block~, for_loc~),
       guard_ = $4,
@@ -2048,7 +1978,8 @@ simple_expr -> Expr
     )
   }
   | "[|" "for" list_comp_for_header option(preceded("if", infix_expr)) "=>" expr "|]" {
-    let (binders, condition, continue_block, for_loc) = $3
+    let (binders, condition, continue_block, header_loc) = $3
+    let for_loc = mk_loc($loc($2)).merge(header_loc)
     ListComprehension(
       kind = For(binders~, condition~, continue_block~, for_loc~),
       guard_ = $4,
@@ -2196,7 +2127,7 @@ argument -> Argument
   ;
 
 spreadable_elem -> SpreadableElem
-  : expr { Regular($1) }
+  : expr_no_for { Regular($1) }
   | ".." expr { Spread(expr = $2, loc = mk_loc($sloc)) }
   ;
 
@@ -2375,7 +2306,7 @@ simple_type -> Type
   : simple_type "?" { @syntax.make_option_type(loc = mk_loc($sloc), constr_loc = mk_loc($loc($2)), $1) }
   | "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.add($2)) }
   | "(" type_ ")" { $2 }
-  | qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
+  | qual_ident_ty_inline optional_type_arguments {
     Name(
       constr_id = { id: $1, loc: mk_loc($loc($1)) },
       tys = $2,

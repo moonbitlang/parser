@@ -16,3 +16,8 @@ test "yacc: `extend` is a keyword" {
   expect_yacc_rejected("fn f(x : X) -> Unit { x..extend() }")
   expect_yacc_rejected("pub(extend) fn g() -> Unit {}")
 }
+
+///|
+test "yacc: array elements cannot be bare `for` loops" {
+  expect_yacc_rejected("fn f() -> Unit { let _ = [for x in xs { }] }")
+}
