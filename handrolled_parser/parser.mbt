@@ -1981,21 +1981,22 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
       Constant(c=@syntax.make_double(x), loc~)
     }
     MINUS => {
+      let sign_spos = self.peek_spos()
       self.expect_token(TK_MINUS)
       match self.peek_token() {
         INT(x) => {
-          let loc = self.peek_location()
           self.expect_token(TK_INT)
+          let loc = self.loc_start_with(sign_spos)
           Constant(c=@syntax.make_int("-\{x}"), loc~)
         }
         FLOAT(x) => {
-          let loc = self.peek_location()
           self.expect_token(TK_FLOAT)
+          let loc = self.loc_start_with(sign_spos)
           Constant(c=@syntax.make_float("-\{x}"), loc~)
         }
         DOUBLE(x) => {
-          let loc = self.peek_location()
           self.expect_token(TK_DOUBLE)
+          let loc = self.loc_start_with(sign_spos)
           Constant(c=@syntax.make_double("-\{x}"), loc~)
         }
         other => {
@@ -5922,9 +5923,9 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
     }
     AMPER => {
       self.skip()
-      let spos = self.peek_spos()
+      let name_spos = self.peek_spos()
       let lid = self.parse_qual_type_ident(context="object type")
-      let loc = self.loc_start_with(spos)
+      let loc = self.loc_start_with(name_spos)
       let ty = @syntax.Type::Object({ id: lid, loc, })
       parse_question_mark(spos, ty)
     }

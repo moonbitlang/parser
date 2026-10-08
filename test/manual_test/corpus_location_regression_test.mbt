@@ -119,6 +119,50 @@ test "corpus locations include trait prefixes but not trailing comments" {
 }
 
 ///|
+test "corpus locations include signs in negative patterns" {
+  let prefix = "fn f(x) { match x { "
+  for literal in ["-1", "- 2", "-3L", "-4.5F", "- 5.5F", "-6.5", "- 7.5"] {
+    assert_corpus_locations(prefix + literal + " => 0 } }", [
+      ("pattern", prefix.length(), prefix.length() + literal.length()),
+    ])
+  }
+  assert_corpus_locations(prefix + "Number(-32601) => 0 } }", [
+    ("pattern", prefix.length() + 7, prefix.length() + 13),
+  ])
+  for operator in ["..=", "..<"] {
+    assert_corpus_locations(prefix + "-10 " + operator + " -2 => 0 } }", [
+      ("pattern", prefix.length(), prefix.length() + 3),
+      ("pattern", prefix.length() + 8, prefix.length() + 10),
+    ])
+  }
+}
+
+///|
+test "corpus locations separate optional object types from their names" {
+  let prefix = "fn f(x : "
+  let start = prefix.length()
+  for name in ["T", "@pkg.Trait"] {
+    let end = start + 1 + name.length()
+    assert_corpus_locations(prefix + "&" + name + ") {}", [
+      ("object", start + 1, end),
+    ])
+    assert_corpus_locations(prefix + "&" + name + "?) {}", [
+      ("option", start, end + 1),
+      ("object", start + 1, end),
+    ])
+    assert_corpus_locations(prefix + "&" + name + "??) {}", [
+      ("option", start, end + 2),
+      ("option", start, end + 1),
+      ("object", start + 1, end),
+    ])
+    assert_corpus_locations(prefix + "(&" + name + ")?) {}", [
+      ("option", start, end + 3),
+      ("object", start + 2, end + 1),
+    ])
+  }
+}
+
+///|
 test "corpus locations cover complete trait constraints and retain binder names" {
   for name in ["Eq", "@json.FromJson"] {
     assert_corpus_locations("fn[T : " + name + "] f(x : T) {}", [
