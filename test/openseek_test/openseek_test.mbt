@@ -58,8 +58,15 @@ fn record_diagnostics(
 }
 
 ///|
+fn impls_json(impls : @syntax.Impls) -> Json {
+  @basic.show_loc.protect(String, fn() {
+    impls.map(impl_ => impl_.json_repr()).to_json()
+  })
+}
+
+///|
 #skip("requires an external openseek checkout")
-test "all OpenSeek MoonBit sources parse without diagnostics" {
+test "all OpenSeek MoonBit sources parse to equivalent ASTs without diagnostics" {
   let root = @env.get_env_var("OPENSEEK_ROOT").unwrap_or_else(() => {
     fail("OPENSEEK_ROOT must point to an OpenSeek checkout")
   })
@@ -83,13 +90,13 @@ test "all OpenSeek MoonBit sources parse without diagnostics" {
     let source = @fs.read_file_to_string(path) catch {
       err => fail("failed to read \{path}: \{Repr(err)}")
     }
-    let (_, handrolled_reports) = @parser.parse_string(
+    let (handrolled_impls, handrolled_reports) = @parser.parse_string(
       source,
       name=path,
       parser=Handrolled,
     )
     record_diagnostics(failures, path, "Handrolled", handrolled_reports)
-    let (_, moonyacc_reports) = @parser.parse_string(
+    let (moonyacc_impls, moonyacc_reports) = @parser.parse_string(
       source,
       name=path,
       parser=MoonYacc,
@@ -102,14 +109,35 @@ test "all OpenSeek MoonBit sources parse without diagnostics" {
       "untyped CST",
       reports_from_view(cst.diagnostics_view()),
     )
-    let (_, lowering_reports) = cst.to_impls()
+    let (cst_impls, lowering_reports) = cst.to_impls()
     record_diagnostics(failures, path, "untyped CST to_impls", lowering_reports)
+    if !(handrolled_reports.is_empty() &&
+      moonyacc_reports.is_empty() &&
+      cst.diagnostics_view().is_empty() &&
+      lowering_reports.is_empty()) {
+      continue
+    }
+    let handrolled_json = impls_json(handrolled_impls)
+    let moonyacc_json = impls_json(moonyacc_impls)
+    let cst_json = impls_json(cst_impls)
+    if handrolled_json != moonyacc_json {
+      failures.push(
+        "\{path}\nAST mismatch: Handrolled vs MoonYacc\nHandrolled:\n\{handrolled_json.stringify(indent=2)}\nMoonYacc:\n\{moonyacc_json.stringify(indent=2)}",
+      )
+    }
+    if handrolled_json != cst_json {
+      failures.push(
+        "\{path}\nAST mismatch: Handrolled vs untyped CST\nHandrolled:\n\{handrolled_json.stringify(indent=2)}\nuntyped CST:\n\{cst_json.stringify(indent=2)}",
+      )
+    }
   }
   if !failures.is_empty() {
     fail(
-      "OpenSeek corpus parsing failed for \{failures.length()} parser/file checks:\n\n" +
+      "OpenSeek corpus validation failed for \{failures.length()} checks:\n\n" +
       failures.join("\n\n"),
     )
   }
-  println("parsed \{files.length()} OpenSeek .mbt files with all three parsers")
+  println(
+    "parsed \{files.length()} OpenSeek .mbt files with equivalent ASTs from all three parsers",
+  )
 }
