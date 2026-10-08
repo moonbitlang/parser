@@ -10,17 +10,7 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
     Pattern_Any | Pattern_MissingPattern => Any(loc=node.loc)
     Pattern_Constant =>
       if lower_constant_from_node(node) is Some(c) {
-        let loc = if node.has_child_kind(fn(kind) {
-            kind is Operator_UnaryMinus
-          }) {
-          node
-          .first_child_with_label("semantic_constant")
-          .map(constant => constant.loc)
-          .unwrap_or(node.loc)
-        } else {
-          node.loc
-        }
-        Constant(c~, loc~)
+        Constant(c~, loc=node.loc)
       } else {
         Any(loc=node.loc)
       }

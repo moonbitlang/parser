@@ -86,25 +86,7 @@ fn lower_option_type(node : CstNode) -> @syntax.Type {
     .first_child_of_kind(NodeKind::is_operator)
     .map(fn(operator) { operator.loc })
     .unwrap_or(node.loc)
-  let loc = match inner_node {
-    Some(ty) if option_type_wraps_object(ty) =>
-      Location::{ start: inner.loc().start, end: node.loc.end, }
-    _ => node.loc
-  }
-  Option(ty=inner, loc~, question_loc~)
-}
-
-///|
-fn option_type_wraps_object(node : CstNode) -> Bool {
-  match node.kind {
-    Type_Object => true
-    Type_Option =>
-      node
-      .first_child_with_label("type")
-      .map(option_type_wraps_object)
-      .unwrap_or(false)
-    _ => false
-  }
+  Option(ty=inner, loc=node.loc, question_loc~)
 }
 
 ///|
