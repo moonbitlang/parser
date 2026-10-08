@@ -388,7 +388,6 @@ fn lower_try_expr(node : CstNode) -> @syntax.Expr {
     .unwrap_or(false)
   let catch_loc = lower_catch_loc(node)
   let else_loc = lower_else_loc(node)
-  let loc = lower_try_expr_loc(node)
   Try(
     body=node
       .first_child_with_label("body")
@@ -400,7 +399,7 @@ fn lower_try_expr(node : CstNode) -> @syntax.Expr {
     try_loc~,
     catch_loc~,
     else_loc~,
-    loc~,
+    loc=node.loc,
   )
 }
 

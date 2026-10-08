@@ -181,52 +181,17 @@ fn lower_else_loc(node : CstNode) -> Location {
 }
 
 ///|
-fn lower_leading_parenthesized_end(node : CstNode) -> Position? {
-  match node.kind {
-    Expr_Unit | Expr_Group | Expr_Tuple | Expr_Constraint =>
-      return Some(node.loc.end)
-    _ => ()
-  }
-  for (label, child) in node.children {
-    if label is Some("trivia") {
-      continue
-    }
-    return lower_leading_parenthesized_end(child)
-  }
-  None
-}
-
-///|
-fn lower_first_significant_token_at_or_after(
-  node : CstNode,
-  pos : Position,
-) -> CstNode? {
+fn lower_last_significant_token_end(node : CstNode) -> Position? {
   match node.kind.token_kind() {
-    Some(TK_COMMENT | TK_NEWLINE) => return None
-    Some(_) if node.loc.start.cnum >= pos.cnum => return Some(node)
-    _ => ()
+    Some(TK_COMMENT | TK_NEWLINE | TK_EOF) => return None
+    Some(_) => return Some(node.loc.end)
+    None => ()
   }
-  for (_, child) in node.children {
-    if lower_first_significant_token_at_or_after(child, pos) is Some(found) {
+  for i = node.children.length() - 1; i >= 0; i = i - 1 {
+    let (_, child) = node.children[i]
+    if lower_last_significant_token_end(child) is Some(found) {
       return Some(found)
     }
   }
   None
-}
-
-///|
-fn lower_try_expr_loc(node : CstNode) -> Location {
-  if node.bool_marker_value(fn(kind) { kind is Flag_HasTry }) is Some(true) {
-    return node.loc
-  }
-  if node.first_child_with_label("body") is Some(body) &&
-    lower_leading_parenthesized_end(body) is Some(paren_end) &&
-    lower_token_loc(node, "kw", TK_CATCH) is Some(catch_loc) {
-    let start = lower_first_significant_token_at_or_after(body, paren_end)
-      .map(token => token.loc.start)
-      .unwrap_or(catch_loc.start)
-    Location::{ start, end: node.loc.end, }
-  } else {
-    node.loc
-  }
 }

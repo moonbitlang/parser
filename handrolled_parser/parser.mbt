@@ -3502,7 +3502,7 @@ fn State::parse_simple_try_expr(
   if self.mode is Panic(loc~, ..) {
     return Hole(loc~, kind=Synthesized)
   }
-  let spos = self.peek_spos()
+  let spos = self.peek_spos_with_parsed(parsed~)
   let e = self.parse_pipe_expr(parsed~)
   match self.peek_token() {
     CATCH => {
