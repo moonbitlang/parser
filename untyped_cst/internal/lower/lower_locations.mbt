@@ -55,11 +55,7 @@ fn lower_decl_loc_without_trailing_trivia(node : CstNode) -> Location {
 
 ///|
 fn lower_trait_decl_loc(node : CstNode) -> Location {
-  let loc = lower_decl_loc_without_trailing_trivia(node)
-  match node.first_child_with_label("kw") {
-    Some(keyword) => Location::{ start: keyword.loc.start, end: loc.end, }
-    None => loc
-  }
+  lower_decl_loc_without_trailing_trivia(node)
 }
 
 ///|

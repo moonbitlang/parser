@@ -294,6 +294,14 @@ fn State::parse_var(self : Self) -> @syntax.Var {
 }
 
 ///|
+fn State::parse_trait_constraint(self : Self) -> @syntax.TypeVarConstraint {
+  let spos = self.peek_spos()
+  let trait_ = self.parse_qual_type_ident(context="trait name")
+  let loc = self.loc_start_with(spos)
+  { trait_, loc, }
+}
+
+///|
 fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
   if self.mode is Panic(loc~, ..) {
     return { name: "?tvar_name", name_loc: loc, constraints: List([]), }
@@ -305,12 +313,7 @@ fn State::parse_tvar_binder(self : Self) -> @syntax.TypeVarBinder {
     [TK_COLON],
     fn(state) {
       state.expect_token(TK_COLON)
-      state.sepby1(delim=TK_PLUS, fn(state) {
-        let loc = state.peek_location()
-        let trait_ = state.parse_qual_type_ident(context="trait name")
-        { trait_, loc, }
-      })
-      |> List
+      state.sepby1(delim=TK_PLUS, State::parse_trait_constraint) |> List
     },
   )
   let constraints = if constraints is Some(xs) { xs } else { @list.new() }
@@ -571,12 +574,7 @@ fn State::parse_trait_decl(
   let supers = if self.peek_token() is COLON {
     self.skip()
     self.with_follow(follow_set=[TK_LBRACE], fn(state) {
-      state.sepby1(delim=TK_PLUS, fn(state) {
-        let loc = state.peek_location()
-        let trait_ = state.parse_qual_type_ident(context="trait name")
-        @syntax.TypeVarConstraint::{ trait_, loc, }
-      })
-      |> @list.List
+      state.sepby1(delim=TK_PLUS, State::parse_trait_constraint) |> @list.List
     })
   } else {
     @list.new()
@@ -1147,7 +1145,7 @@ fn State::parse_top(self : Self) -> @syntax.Impl {
     FN => self.parse_top_func(attrs~, vis~, spos~, is_declare~)
     TRAIT => {
       let trait_decl = self.parse_trait_decl(attrs~, vis~, is_declare~)
-      let trait_decl = { ..trait_decl, vis, }
+      let trait_decl = { ..trait_decl, vis, loc: self.loc_start_with(spos), }
       TopTrait(trait_decl)
     }
     TEST => self.parse_test_block(attrs~, spos~, is_async=None)
