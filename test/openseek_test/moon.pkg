@@ -1,5 +1,6 @@
 import {
   "moonbitlang/parser",
+  "moonbitlang/parser/syntax",
   "moonbitlang/parser/untyped_cst",
   "moonbitlang/lexer/basic",
   "moonbitlang/x/fs",
