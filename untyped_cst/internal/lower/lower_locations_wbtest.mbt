@@ -20,6 +20,59 @@ fn detached_token(kind : TokenKind, start : Int, end : Int) -> CstNode {
 }
 
 ///|
+test "continue locations handle trivia-only lists and detached recovery nodes" {
+  let kw = detached_token(TK_CONTINUE, 2, 10)
+  let comment = detached_token(TK_COMMENT, 25, 35)
+  let trivia = CstNode::list_continue_argument_list(
+    loc=comment.loc,
+    source_span=comment.source_span,
+    entries=[Trivia(comment)],
+  )
+  for label in [None, Some(detached_token(TK_POST_LABEL, 11, 17))] {
+    let node = CstNode::expr_continue(
+      loc=detached_loc(2, 35),
+      source_span=(3, 36),
+      kw~,
+      label?,
+      arg=trivia,
+    )
+    guard lower_expr(node) is Continue(args~, loc~, ..) else {
+      fail("expected continue")
+    }
+    @test.assert_eq(args.length(), 0)
+    @test.assert_eq(
+      loc,
+      detached_loc(2, if label is Some(_) { 17 } else { 10 }),
+    )
+  }
+  let missing = CstNode::missing(loc=detached_loc(20, 20), source_span=(21, 21))
+  let args = CstNode::list_continue_argument_list(
+    loc=detached_loc(20, 35),
+    source_span=(21, 36),
+    entries=[Item(missing), Trivia(comment)],
+  )
+  let recovered = CstNode::expr_continue(
+    loc=detached_loc(2, 35),
+    source_span=(3, 36),
+    kw~,
+    arg=args,
+  )
+  guard lower_expr(recovered) is Continue(loc~, ..) else {
+    fail("expected recovered continue")
+  }
+  @test.assert_eq(loc, detached_loc(2, 20))
+  let missing_keyword = CstNode::expr_continue(
+    loc=detached_loc(20, 20),
+    source_span=(21, 21),
+    kw=missing,
+  )
+  guard lower_expr(missing_keyword) is Continue(loc~, ..) else {
+    fail("expected continue with missing keyword")
+  }
+  @test.assert_eq(loc, missing_keyword.loc)
+}
+
+///|
 test "detached CST derives locations only from the owning syntax fields" {
   let nested = CstNode::expr_try_operator(
     loc=detached_loc(30, 45),

@@ -189,17 +189,27 @@ fn lower_break_expr(node : CstNode) -> @syntax.Expr {
 ///|
 fn lower_continue_expr(node : CstNode) -> @syntax.Expr {
   let args : Array[@syntax.Expr] = []
+  let keyword_loc = lower_token_loc(node, "kw", TK_CONTINUE).unwrap_or(node.loc)
+  let start = keyword_loc.start
+  let mut end = node
+    .first_child_with_label("label")
+    .map(label => label.loc.end)
+    .unwrap_or(keyword_loc.end)
   if node.first_child_with_label("arg") is Some(list) {
     for item in lower_item_children(list) {
       args.push(lower_expr(item))
+      // Use syntax tokens so grouping delimiters survive, but trailing trivia
+      // cannot extend the AST location. Detached recovery nodes may lack tokens.
+      end = lower_last_significant_token_end(item).unwrap_or(item.loc.end)
     }
   } else if node.first_child_with_label("expr") is Some(expr) {
     args.push(lower_expr(expr))
+    end = lower_last_significant_token_end(expr).unwrap_or(expr.loc.end)
   } else {
     ()
   }
   let label = lower_control_label(node)
-  Continue(args=lower_array_to_list(args), label~, loc=node.loc)
+  Continue(args=lower_array_to_list(args), label~, loc={ start, end, })
 }
 
 ///|

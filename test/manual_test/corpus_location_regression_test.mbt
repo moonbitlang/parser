@@ -163,6 +163,23 @@ test "corpus locations separate optional object types from their names" {
 }
 
 ///|
+test "corpus locations start catch expressions at the pre-parsed body" {
+  let prefix = "fn f() { "
+  for
+    body in [
+      "()", "(x)", "((f()))", "(x, y)", "(x : Int)", "(f)()", "(xs)[0]", "(x).method()",
+      "(x) |> f",
+    ] {
+    for suffix in [" catch { _ => 0 }", " catch { _ => 0 } noraise { x => x }"] {
+      let expr = body + suffix
+      assert_corpus_locations(prefix + expr + " }", [
+        ("try", prefix.length(), prefix.length() + expr.length()),
+      ])
+    }
+  }
+}
+
+///|
 test "corpus locations cover complete trait constraints and retain binder names" {
   for name in ["Eq", "@json.FromJson"] {
     assert_corpus_locations("fn[T : " + name + "] f(x : T) {}", [
@@ -180,4 +197,25 @@ test "corpus locations cover complete trait constraints and retain binder names"
     ("constraint", 10, 12),
     ("constraint", 15, 29),
   ])
+}
+
+///|
+test "corpus locations exclude comments after continue" {
+  for newline in ["\n", "\r\n"] {
+    let prefix = "fn f() {" + newline + "  "
+    for
+      statement in [
+        "continue", "continue label~", "continue label~~", "continue 1", "continue (1)",
+        "continue label~ 1, (2)", "continue label~~ (1), (2)",
+      ] {
+      assert_corpus_locations(
+        prefix + statement + " // trailing 🐇" + newline + "}",
+        [("continue", prefix.length(), prefix.length() + statement.length())],
+      )
+    }
+  }
+  assert_corpus_locations(
+    "fn f() {\n  continue // first\n  continue // second\n}",
+    [("continue", 11, 19), ("continue", 31, 39)],
+  )
 }

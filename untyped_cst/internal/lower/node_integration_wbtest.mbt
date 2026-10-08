@@ -1,43 +1,29 @@
 ///|
-test "significant token search skips comments and newlines by exact kind" {
-  let start = Position::{ fname: "test.mbt", lnum: 1, bol: 0, cnum: 0, }
-  let token_start = Position::{ ..start, cnum: 2, }
-  let token_end = Position::{ ..start, cnum: 3, }
-  let root = CstNode::expression(
-    loc=mk_loc(start, token_end),
-    source_span=(0, 3),
-    entries=[
-      Trivia(
-        CstNode::syntax_token(
-          token_kind=TK_COMMENT,
-          loc=mk_loc(start, token_start),
-          source_span=(0, 2),
-          entries=[],
-        ),
+test "last significant token search skips trailing trivia by exact kind" {
+  let root = CstNode::expression(loc=detached_loc(2, 31), source_span=(3, 32), entries=[
+    Expr(
+      CstNode::syntax_unexpected(
+        token_kind=TK_LIDENT,
+        loc=detached_loc(2, 3),
+        source_span=(3, 4),
+        entries=[Payload(String("x"))],
       ),
-      Trivia(
-        CstNode::syntax_unexpected(
-          token_kind=TK_NEWLINE,
-          loc=empty_loc(token_start),
-          source_span=(2, 2),
-          entries=[],
-        ),
+    ),
+    Trivia(detached_token(TK_COMMENT, 4, 30)),
+    Trivia(
+      CstNode::syntax_unexpected(
+        token_kind=TK_NEWLINE,
+        loc=detached_loc(30, 31),
+        source_span=(31, 32),
+        entries=[],
       ),
-      Expr(
-        CstNode::syntax_token(
-          token_kind=TK_LIDENT,
-          loc=mk_loc(token_start, token_end),
-          source_span=(2, 3),
-          entries=[Payload(String("x"))],
-        ),
-      ),
-    ],
+    ),
+    Trivia(detached_token(TK_EOF, 31, 31)),
+  ])
+  @test.assert_eq(
+    lower_last_significant_token_end(root),
+    Some(detached_loc(2, 3).end),
   )
-  guard lower_first_significant_token_at_or_after(root, start) is Some(found) else {
-    fail("expected significant token")
-  }
-  @test.assert_eq(found.kind.token_kind(), Some(TK_LIDENT))
-  @test.assert_eq(found.source_span, (2, 3))
 }
 
 ///|
