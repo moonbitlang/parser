@@ -11,6 +11,12 @@ post-processing the raw AST, so their diagnostics include duplicate and
 unexpected top-level keys. Use `validate_moon_mod`, `validate_moon_pkg`, or
 `validate_moon_work` only when validating an already post-processed `Ast`.
 
+`moon.mod` accepts an optional boolean `private` field. An absent field or
+`private = false` denotes public access; `private = true` denotes private access
+in a registry that supports it. Both a top-level assignment and
+`options(private: true)` are preserved in the JSON output. Non-boolean values
+and duplicate fields produce diagnostics.
+
 ## Examples
 
 Parse a `moon.mod` file and convert the returned `Ast` to JSON:

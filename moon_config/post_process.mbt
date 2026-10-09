@@ -99,6 +99,10 @@ fn post_process_moon_mod(ast : Ast, diagnostics : Array[Report]) -> Ast {
           | "description"
           | "source"
           | "rule" => results.push(field)
+          "private" => {
+            validate_private(value, diagnostics)
+            results.push(field)
+          }
           "preferred_target" => results.push(("preferred-target", value))
           "warnings" =>
             match value {
@@ -146,6 +150,9 @@ fn post_process_moon_mod(ast : Ast, diagnostics : Array[Report]) -> Ast {
                     seen, diagnostics, "moon.mod", allowed_duplicate, option_key,
                     option_value,
                   )
+                  if option_key == "private" {
+                    validate_private(option_value, diagnostics)
+                  }
                   results.push(option_field)
                 }
               _ => {
