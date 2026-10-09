@@ -52,6 +52,16 @@ fn validate_pkgtype_kind(value : Ast, diagnostics : Array[Report]) -> Unit {
 }
 
 ///|
+fn validate_private(value : Ast, diagnostics : Array[Report]) -> Unit {
+  if !(value is Bool(_, ..)) {
+    diagnostics.push({
+      loc: value.loc(),
+      msg: "Invalid moon.mod config: `private` must be a boolean.",
+    })
+  }
+}
+
+///|
 fn _validate_moon_pkg(ast : Ast, diagnostics : Array[Report]) -> Unit {
   match ast {
     Obj(fields, ..) => {
@@ -88,6 +98,7 @@ fn _validate_moon_mod(ast : Ast, diagnostics : Array[Report]) -> Unit {
           seen, diagnostics, "moon.mod", allowed_duplicate, key, value,
         )
         match key {
+          "private" => validate_private(value, diagnostics)
           "warnings"
           | "supported_targets"
           | "preferred_target"
