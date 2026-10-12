@@ -253,7 +253,7 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
         "exclamation",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_exclamation(value~, loc~, source_span~)
@@ -272,7 +272,7 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
 fn parse_defer_statement(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
-      TokenKind::TK_ERRDEFER,
+      TK_ERRDEFER,
     ) {
     fn(loc, source_span, children) {
       let kw = @construction.first_child_with_label_from(children, "kw").unwrap_or(
@@ -497,7 +497,7 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
           "async",
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::Bool(value)) => value
+              Some(Bool(value)) => value
               _ => false
             }
             @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -566,7 +566,7 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
         "async",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -634,7 +634,7 @@ fn parse_local_function_statement(
             "async",
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::Bool(value)) => value
+                Some(Bool(value)) => value
                 _ => false
               }
               @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -684,7 +684,7 @@ fn parse_local_function_statement(
         "async",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -708,16 +708,16 @@ fn parse_local_function_statement(
 fn parse_argument_list(state : ParserState) -> CstNode {
   parse_delimited(
     state,
-    TokenKind::TK_LPAREN,
-    TokenKind::TK_RPAREN,
+    TK_LPAREN,
+    TK_RPAREN,
     parse_argument_item,
     fn(loc, source_span, children) {
       let entries = list_children(children)
       @node.CstNode::list_argument_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
-    follow_set=[TokenKind::TK_SEMI, TokenKind::TK_RBRACE],
-    post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
+    sep_kind=TK_COMMA,
+    follow_set=[TK_SEMI, TK_RBRACE],
+    post_item_expected=[TK_COMMA, TK_RPAREN],
     reports_else_recovery=true,
   )
 }
@@ -733,7 +733,7 @@ fn parse_statement_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_block_statement_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_SEMI,
+    sep_kind=TK_SEMI,
     item_expected="simple expression",
     is_block_statement_list=true,
   )
@@ -742,7 +742,7 @@ fn parse_statement_list(state : ParserState) -> CstNode {
 ///|
 fn parse_block_expr(
   state : ParserState,
-  classify_record_pun? : Bool = false,
+  classify_record_pun~ : Bool = false,
 ) -> CstNode {
   match state.peek_nth_significant(1) {
     Some((EOF, start, end)) =>
@@ -777,7 +777,7 @@ fn parse_block_expr(
             "pun",
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::Bool(value)) => value
+                Some(Bool(value)) => value
                 _ => false
               }
               @node.CstNode::flag_pun(value~, loc~, source_span~)

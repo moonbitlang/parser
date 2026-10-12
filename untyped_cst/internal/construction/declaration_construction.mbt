@@ -32,7 +32,7 @@ pub fn classify_top_item_construction(
   (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
 ) {
   match parsed_kind {
-    TopItemKind::Invalid =>
+    Invalid =>
       (
         Other,
         fn(loc, source_span, children) {
@@ -56,7 +56,7 @@ pub fn classify_top_item_construction(
           @node.CstNode::impl_extend(loc~, source_span~, entries~)
         },
       )
-    TopItemKind::Using =>
+    Using =>
       (
         Using,
         fn(loc, source_span, children) {
@@ -64,7 +64,7 @@ pub fn classify_top_item_construction(
           @node.CstNode::impl_using(loc~, source_span~, entries~)
         },
       )
-    TopItemKind::Function =>
+    Function =>
       (
         Function,
         fn(loc, source_span, children) {
@@ -72,7 +72,7 @@ pub fn classify_top_item_construction(
           @node.CstNode::impl_function(loc~, source_span~, entries~)
         },
       )
-    TopItemKind::Let =>
+    Let =>
       (
         Other,
         fn(loc, source_span, children) {
@@ -80,7 +80,7 @@ pub fn classify_top_item_construction(
           @node.CstNode::impl_let(loc~, source_span~, entries~)
         },
       )
-    TopItemKind::Const =>
+    Const =>
       (
         Other,
         fn(loc, source_span, children) {
@@ -88,7 +88,7 @@ pub fn classify_top_item_construction(
           @node.CstNode::impl_const(loc~, source_span~, entries~)
         },
       )
-    TopItemKind::Type =>
+    Type =>
       if top_item_children_have_label(children, "type") {
         (
           TypeAlias,
@@ -106,7 +106,7 @@ pub fn classify_top_item_construction(
           },
         )
       }
-    TopItemKind::Struct =>
+    Struct =>
       if top_item_child_with_label_has_kind(children, "body", fn(kind) {
           kind is List_TupleStructTypeList
         }) {
@@ -126,7 +126,7 @@ pub fn classify_top_item_construction(
           },
         )
       }
-    TopItemKind::Enum =>
+    Enum =>
       if is_suberror {
         if saw_body {
           (
@@ -174,7 +174,7 @@ pub fn classify_top_item_construction(
           },
         )
       }
-    TopItemKind::EnumView =>
+    EnumView =>
       (
         EnumView,
         fn(loc, source_span, children) {
@@ -182,7 +182,7 @@ pub fn classify_top_item_construction(
           @node.CstNode::impl_enum_view(loc~, source_span~, entries~)
         },
       )
-    TopItemKind::Trait =>
+    Trait =>
       (
         Trait,
         fn(loc, source_span, children) {
@@ -190,7 +190,7 @@ pub fn classify_top_item_construction(
           @node.CstNode::impl_trait(loc~, source_span~, entries~)
         },
       )
-    TopItemKind::Impl =>
+    Impl =>
       if top_item_children_have_label(children, "method") {
         (
           ImplMethod,
@@ -208,7 +208,7 @@ pub fn classify_top_item_construction(
           },
         )
       }
-    TopItemKind::Test =>
+    Test =>
       (
         Other,
         fn(loc, source_span, children) {

@@ -569,8 +569,8 @@ fn parse_parameter_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_parameter_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
-    follow_set=[TokenKind::TK_LBRACE],
+    sep_kind=TK_COMMA,
+    follow_set=[TK_LBRACE],
     item_expected="parameter name or label",
     post_item_expected=[TK_COMMA, TK_RPAREN],
   )
@@ -603,7 +603,7 @@ fn parse_function_stub_tokens(
                   fn(loc, source_span, children) {
                     let value = match
                       @construction.payload_from_children(children) {
-                      Some(NodePayload::String(value)) => value
+                      Some(String(value)) => value
                       _ => ""
                     }
                     @node.CstNode::stub_module_name(value~, loc~, source_span~)
@@ -621,7 +621,7 @@ fn parse_function_stub_tokens(
                 fn(loc, source_span, children) {
                   let value = match
                     @construction.payload_from_children(children) {
-                    Some(NodePayload::String(value)) => value
+                    Some(String(value)) => value
                     _ => ""
                   }
                   @node.CstNode::stub_function_name(value~, loc~, source_span~)
@@ -655,7 +655,7 @@ fn parse_function_stub_tokens(
                 fn(loc, source_span, children) {
                   let value = match
                     @construction.payload_from_children(children) {
-                    Some(NodePayload::String(value)) => value
+                    Some(String(value)) => value
                     _ => ""
                   }
                   @node.CstNode::stub_code(value~, loc~, source_span~)
@@ -695,7 +695,7 @@ fn parse_function_stub_tokens(
                   fn(loc, source_span, children) {
                     let value = match
                       @construction.payload_from_children(children) {
-                      Some(NodePayload::String(value)) => value
+                      Some(String(value)) => value
                       _ => ""
                     }
                     @node.CstNode::stub_code(value~, loc~, source_span~)
@@ -827,7 +827,7 @@ fn parse_type_decl_parameter_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_type_decl_parameter_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
     require_nonempty=true,
   )
 }
@@ -843,7 +843,7 @@ fn parse_fun_type_parameter_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_type_var_binder_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
     require_nonempty=true,
   )
 }
@@ -864,7 +864,7 @@ fn parse_tuple_struct_type_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_tuple_struct_type_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
     require_nonempty=true,
     nonempty_expected="type",
   )
@@ -883,17 +883,17 @@ fn decl_body_list_builder(
   kind : TopItemKind,
 ) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
   match kind {
-    TopItemKind::Enum =>
+    Enum =>
       fn(loc, source_span, children) {
         let entries = list_children(children)
         @node.CstNode::list_constructor_list(loc~, source_span~, entries~)
       }
-    TopItemKind::Struct =>
+    Struct =>
       fn(loc, source_span, children) {
         let entries = list_children(children)
         @node.CstNode::list_struct_field_list(loc~, source_span~, entries~)
       }
-    TopItemKind::Trait =>
+    Trait =>
       fn(loc, source_span, children) {
         let entries = list_children(children)
         @node.CstNode::list_trait_method_list(loc~, source_span~, entries~)
@@ -979,8 +979,8 @@ fn parse_struct_member_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_struct_field_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_SEMI,
-    invalid_delims=[TokenKind::TK_COMMA],
+    sep_kind=TK_SEMI,
+    invalid_delims=[TK_COMMA],
   )
 }
 
@@ -995,8 +995,8 @@ fn parse_enum_constructor_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_constructor_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_SEMI,
-    invalid_delims=[TokenKind::TK_COMMA],
+    sep_kind=TK_SEMI,
+    invalid_delims=[TK_COMMA],
   )
 }
 
@@ -1011,6 +1011,6 @@ fn parse_trait_member_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_trait_method_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_SEMI,
+    sep_kind=TK_SEMI,
   )
 }

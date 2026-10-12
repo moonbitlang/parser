@@ -47,8 +47,8 @@ fn type_desc_test_constr(name : String, loc : Location) -> ConstrDecl {
     args: None,
     tag: None,
     loc,
-    attrs: @list.empty(),
-    doc: { content: @list.empty(), loc, },
+    attrs: List([]),
+    doc: { content: List([]), loc, },
   }
 }
 
@@ -122,7 +122,7 @@ test "type desc JSON uses target-to-constructor locations for enum extensions" {
   }
 
   let empty = @basic.show_loc.protect(String, fn() {
-    ExtendEnum(target~, constructors=@list.empty()).json_repr(declaration)
+    ExtendEnum(target~, constructors=List([])).json_repr(declaration)
   })
   assert_type_desc_list_locs(empty, "constructors", "1:1-1:30", "1:1-1:30", [])
   let empty_children = type_desc_test_object(
@@ -836,7 +836,7 @@ test "exception_decl to_json" {
     args: None,
     tag: None,
     loc: dummy_loc,
-    attrs: @list.empty(),
+    attrs: List([]),
     doc: dummy_docstring,
   }
   json_inspect(EnumPayload(List([constr_decl])).json_repr(dummy_loc), content={
@@ -2124,7 +2124,7 @@ test "field_decl to_json" {
     mut_: false,
     vis: Default,
     loc: dummy_loc,
-    attrs: @list.empty(),
+    attrs: List([]),
     doc: dummy_docstring,
   }
   json_inspect(field_decl.json_repr(), content={
@@ -2257,7 +2257,7 @@ test "constr_decl to_json" {
     args: Some(List([param])),
     tag: Some(("tag_value", dummy_loc)),
     loc: dummy_loc,
-    attrs: @list.empty(),
+    attrs: List([]),
     doc: dummy_docstring,
   }
   let constr_without_args = ConstrDecl::{
@@ -2265,7 +2265,7 @@ test "constr_decl to_json" {
     args: None,
     tag: None,
     loc: dummy_loc,
-    attrs: @list.empty(),
+    attrs: List([]),
     doc: dummy_docstring,
   }
   json_inspect(constr_with_args.json_repr(), content={
@@ -2897,7 +2897,7 @@ test "trait_method_decl to_json" {
     error_type: DefaultErrorType(loc=dummy_loc),
     nocancel_: None,
     has_default: Some(dummy_loc),
-    attrs: @list.empty(),
+    attrs: List([]),
     loc: dummy_loc,
   }
   json_inspect(trait_method.json_repr(), content={
@@ -3023,7 +3023,7 @@ test "trait_decl to_json" {
     error_type: NoErrorType,
     nocancel_: None,
     has_default: None,
-    attrs: @list.empty(),
+    attrs: List([]),
     loc: dummy_loc,
   }
   let trait_decl = TraitDecl::{

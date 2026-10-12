@@ -1,6 +1,6 @@
 ///|
 fn detached_loc(start : Int, end : Int) -> Location {
-  mk_loc(Position::{ fname: "detached", lnum: 1, bol: 0, cnum: start, }, Position::{
+  mk_loc({ fname: "detached", lnum: 1, bol: 0, cnum: start, }, {
     fname: "detached",
     lnum: 1,
     bol: 0,

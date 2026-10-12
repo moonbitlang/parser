@@ -88,7 +88,7 @@ fn api_payload_leaf(node : @untyped_cst.CstNode) -> @untyped_cst.CstNode? {
     let (label, child) = entry
     if label is Some("payload") {
       match child.kind {
-        @untyped_cst.NodeKind::Leaf(_) => return Some(child)
+        Leaf(_) => return Some(child)
         _ => ()
       }
     }
@@ -101,7 +101,7 @@ fn api_leaf_payload(node : @untyped_cst.CstNode) -> @untyped_cst.NodePayload? {
   match api_payload_leaf(node) {
     Some(child) =>
       match child.kind {
-        @untyped_cst.NodeKind::Leaf(payload) => Some(payload)
+        Leaf(payload) => Some(payload)
         _ => None
       }
     None => None
@@ -143,19 +143,19 @@ fn api_has_semantic_payload(
   payload : String,
 ) -> Bool {
   let kind_matches = match (kind, node.kind) {
-    ("bool", @untyped_cst.NodeKind::Constant_Bool)
-    | ("byte", @untyped_cst.NodeKind::Constant_Byte)
-    | ("bytes", @untyped_cst.NodeKind::Constant_Bytes)
-    | ("char", @untyped_cst.NodeKind::Constant_Char)
-    | ("int", @untyped_cst.NodeKind::Constant_Int)
-    | ("int64", @untyped_cst.NodeKind::Constant_Int64)
-    | ("uint", @untyped_cst.NodeKind::Constant_UInt)
-    | ("uint64", @untyped_cst.NodeKind::Constant_UInt64)
-    | ("float", @untyped_cst.NodeKind::Constant_Float)
-    | ("double", @untyped_cst.NodeKind::Constant_Double)
-    | ("string", @untyped_cst.NodeKind::Constant_String)
-    | ("regex", @untyped_cst.NodeKind::Constant_Regex)
-    | ("bigint", @untyped_cst.NodeKind::Constant_BigInt) => true
+    ("bool", Constant_Bool)
+    | ("byte", Constant_Byte)
+    | ("bytes", Constant_Bytes)
+    | ("char", Constant_Char)
+    | ("int", Constant_Int)
+    | ("int64", Constant_Int64)
+    | ("uint", Constant_UInt)
+    | ("uint64", Constant_UInt64)
+    | ("float", Constant_Float)
+    | ("double", Constant_Double)
+    | ("string", Constant_String)
+    | ("regex", Constant_Regex)
+    | ("bigint", Constant_BigInt) => true
     _ => false
   }
   let payload_matches = match api_leaf_payload(node) {
@@ -187,13 +187,11 @@ test "parse entry points expose distinct roots and propagate names" {
     "let x = 1",
     name="structure.mbt",
   )
-  guard structure.root().kind is @untyped_cst.NodeKind::Impls else {
-    fail("expected Impls")
-  }
+  guard structure.root().kind is Impls else { fail("expected Impls") }
   @test.assert_eq(structure.root().loc.start.fname, "structure.mbt")
   @test.assert_eq(structure.root().loc.end.fname, "structure.mbt")
   let expression = @untyped_cst.parse_expression("1 + 2", name="expression.mbt")
-  guard expression.root().kind is @untyped_cst.NodeKind::Expression else {
+  guard expression.root().kind is Expression else {
     fail("expected Expression")
   }
   @test.assert_eq(expression.root().loc.start.fname, "expression.mbt")
@@ -297,73 +295,57 @@ test "constant kinds and normalized payloads are parser semantics" {
 test "public CST children expose parse-time normalized expression trees" {
   let assignment = @untyped_cst.parse_expression("array[i] = value")
   @test.assert_eq(assignment.diagnostics_view().is_empty(), true)
-  guard api_find_node(assignment.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Expr_ArraySet
-    })
+  guard api_find_node(assignment.root(), fn(node) { node.kind is Expr_ArraySet })
     is Some(array_set) else {
     fail("expected array set")
   }
   @test.assert_eq(api_count_direct_label(array_set, "lhs"), 0)
   @test.assert_eq(
-    api_direct_labeled_kind(array_set, "self", fn(kind) {
-      kind is @untyped_cst.NodeKind::Expr_Ident
-    }),
+    api_direct_labeled_kind(array_set, "self", fn(kind) { kind is Expr_Ident }),
     true,
   )
   @test.assert_eq(
-    api_direct_labeled_kind(array_set, "index", fn(kind) {
-      kind is @untyped_cst.NodeKind::Expr_Ident
-    }),
+    api_direct_labeled_kind(array_set, "index", fn(kind) { kind is Expr_Ident }),
     true,
   )
 
   let unary_plus = @untyped_cst.parse_expression("+value")
   @test.assert_eq(unary_plus.diagnostics_view().is_empty(), true)
-  guard api_find_node(unary_plus.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Expr_Apply
-    })
+  guard api_find_node(unary_plus.root(), fn(node) { node.kind is Expr_Apply })
     is Some(apply) else {
     fail("expected normalized unary-plus apply")
   }
   @test.assert_eq(
-    api_direct_labeled_kind(apply, "func", fn(kind) {
-      kind is @untyped_cst.NodeKind::Expr_Ident
-    }),
+    api_direct_labeled_kind(apply, "func", fn(kind) { kind is Expr_Ident }),
     true,
   )
   @test.assert_eq(
-    api_direct_labeled_kind(apply, "arg", fn(kind) {
-      kind is @untyped_cst.NodeKind::List_ArgumentList
-    }),
+    api_direct_labeled_kind(apply, "arg", fn(kind) { kind is List_ArgumentList }),
     true,
   )
 
   let pun = @untyped_cst.parse_expression("f(label~)")
   @test.assert_eq(pun.diagnostics_view().is_empty(), true)
-  guard api_find_node(pun.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Argument_LabelledPun
-    })
+  guard api_find_node(pun.root(), fn(node) { node.kind is Argument_LabelledPun })
     is Some(argument) else {
     fail("expected labelled pun")
   }
   @test.assert_eq(
-    api_direct_labeled_kind(argument, "expr", fn(kind) {
-      kind is @untyped_cst.NodeKind::Expr_Ident
-    }),
+    api_direct_labeled_kind(argument, "expr", fn(kind) { kind is Expr_Ident }),
     true,
   )
 
   let arrow = @untyped_cst.parse_expression("(x : Int) => x")
   @test.assert_eq(arrow.diagnostics_view().is_empty(), true)
   guard api_find_node(arrow.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Parameter_Positional
+      node.kind is Parameter_Positional
     })
     is Some(parameter) else {
     fail("expected arrow parameter")
   }
   @test.assert_eq(
     api_direct_labeled_kind(parameter, "pattern", fn(kind) {
-      kind is @untyped_cst.NodeKind::Pattern_Var
+      kind is Pattern_Var
     }),
     true,
   )
@@ -378,11 +360,7 @@ test "operators grouping and signed map keys are parser semantics" {
   let infix = @untyped_cst.parse_expression("left + right")
   @test.assert_eq(infix.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_string_value(
-      infix.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Operator_Infix },
-      "+",
-    ),
+    api_has_string_value(infix.root(), fn(kind) { kind is Operator_Infix }, "+"),
     true,
   )
 
@@ -391,7 +369,7 @@ test "operators grouping and signed map keys are parser semantics" {
   @test.assert_eq(
     api_has_string_value(
       augmented.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Operator_Augmented },
+      fn(kind) { kind is Operator_Augmented },
       "+",
     ),
     true,
@@ -399,7 +377,7 @@ test "operators grouping and signed map keys are parser semantics" {
   @test.assert_eq(
     api_has_bool_value(
       augmented.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Flag_Augmented },
+      fn(kind) { kind is Flag_Augmented },
       true,
     ),
     true,
@@ -410,7 +388,7 @@ test "operators grouping and signed map keys are parser semantics" {
   @test.assert_eq(
     api_has_string_value(
       unary.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Operator_UnaryMinus },
+      fn(kind) { kind is Operator_UnaryMinus },
       "-",
     ),
     true,
@@ -423,9 +401,8 @@ test "operators grouping and signed map keys are parser semantics" {
     @test.assert_eq(
       api_has_kind(parsed.root(), fn(kind) {
         match (expected, kind) {
-          ("unit", @untyped_cst.NodeKind::Expr_Unit)
-          | ("group", @untyped_cst.NodeKind::Expr_Group)
-          | ("tuple", @untyped_cst.NodeKind::Expr_Tuple) => true
+          ("unit", Expr_Unit) | ("group", Expr_Group) | ("tuple", Expr_Tuple) =>
+            true
           _ => false
         }
       }),
@@ -438,17 +415,13 @@ test "operators grouping and signed map keys are parser semantics" {
   )
   @test.assert_eq(pattern_group.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_kind(pattern_group.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::Pattern_Group
-    }),
+    api_has_kind(pattern_group.root(), fn(kind) { kind is Pattern_Group }),
     true,
   )
   let type_group = @untyped_cst.parse_structure("fn f(x : (Int)) {}")
   @test.assert_eq(type_group.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_kind(type_group.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::Type_Group
-    }),
+    api_has_kind(type_group.root(), fn(kind) { kind is Type_Group }),
     true,
   )
 
@@ -462,24 +435,12 @@ test "operators grouping and signed map keys are parser semantics" {
 ///|
 test "helper enum semantics are explicit CST children" {
   let constructor_cases : Array[(String, (@untyped_cst.NodeKind) -> Bool)] = [
-    (
-      "Some(1)",
-      fn(kind) { kind is @untyped_cst.NodeKind::ConstructorExtraInfo_None },
-    ),
-    (
-      "@pkg.Constr(1)",
-      fn(kind) { kind is @untyped_cst.NodeKind::ConstructorExtraInfo_Package },
-    ),
-    (
-      "Option::Some(1)",
-      fn(kind) { kind is @untyped_cst.NodeKind::ConstructorExtraInfo_TypeName },
-    ),
+    ("Some(1)", fn(kind) { kind is ConstructorExtraInfo_None }),
+    ("@pkg.Constr(1)", fn(kind) { kind is ConstructorExtraInfo_Package }),
+    ("Option::Some(1)", fn(kind) { kind is ConstructorExtraInfo_TypeName }),
     (
       "@pkg.Option::@pkg.Some(1)",
-      fn(kind) {
-        kind
-        is @untyped_cst.NodeKind::ConstructorExtraInfo_TypeNameWithConstrPackage
-      },
+      fn(kind) { kind is ConstructorExtraInfo_TypeNameWithConstrPackage },
     ),
   ]
   for case in constructor_cases {
@@ -495,7 +456,7 @@ test "helper enum semantics are explicit CST children" {
   @test.assert_eq(foreach.diagnostics_view().is_empty(), true)
   @test.assert_eq(
     api_has_kind(foreach.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::ListComprehensionKind_ForEach
+      kind is ListComprehensionKind_ForEach
     }),
     true,
   )
@@ -504,28 +465,20 @@ test "helper enum semantics are explicit CST children" {
   )
   @test.assert_eq(c_style.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_kind(c_style.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::ListComprehensionKind_For
-    }),
+    api_has_kind(c_style.root(), fn(kind) { kind is ListComprehensionKind_For }),
     true,
   )
 
   let rest_cases : Array[(String, (@untyped_cst.NodeKind) -> Bool)] = [
-    (
-      "match xs { [ .. ] => 0 }",
-      fn(kind) { kind is @untyped_cst.NodeKind::DotDotBinder_None },
-    ),
-    (
-      "match xs { [ .._ ] => 0 }",
-      fn(kind) { kind is @untyped_cst.NodeKind::DotDotBinder_Underscore },
-    ),
+    ("match xs { [ .. ] => 0 }", fn(kind) { kind is DotDotBinder_None }),
+    ("match xs { [ .._ ] => 0 }", fn(kind) { kind is DotDotBinder_Underscore }),
     (
       "match xs { [ ..rest ] => rest }",
-      fn(kind) { kind is @untyped_cst.NodeKind::DotDotBinder_Binder },
+      fn(kind) { kind is DotDotBinder_Binder },
     ),
     (
       "match xs { [ .. as rest ] => rest }",
-      fn(kind) { kind is @untyped_cst.NodeKind::DotDotBinder_BinderAs },
+      fn(kind) { kind is DotDotBinder_BinderAs },
     ),
   ]
   for case in rest_cases {
@@ -540,13 +493,13 @@ test "helper enum semantics are explicit CST children" {
   @test.assert_eq(multiline.diagnostics_view().is_empty(), true)
   @test.assert_eq(
     api_has_kind(multiline.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::MultilineStringElement_Interp
+      kind is MultilineStringElement_Interp
     }),
     true,
   )
   @test.assert_eq(
     api_has_kind(multiline.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::MultilineStringElement_String
+      kind is MultilineStringElement_String
     }),
     true,
   )
@@ -562,9 +515,9 @@ test "helper enum semantics are explicit CST children" {
   for
     pred in [
       fn(kind) { kind is @untyped_cst.NodeKind::RegexPattern_Literal },
-      fn(kind) { kind is @untyped_cst.NodeKind::LexScanCasePattern_Pattern },
-      fn(kind) { kind is @untyped_cst.NodeKind::LexScanCasePattern_Binder },
-      fn(kind) { kind is @untyped_cst.NodeKind::LexScanCasePattern_Wildcard },
+      fn(kind) { kind is LexScanCasePattern_Pattern },
+      fn(kind) { kind is LexScanCasePattern_Binder },
+      fn(kind) { kind is LexScanCasePattern_Wildcard },
     ] {
     @test.assert_eq(api_has_kind(lex.root(), pred), true)
   }
@@ -580,8 +533,8 @@ test "helper enum semantics are explicit CST children" {
   for
     pred in [
       fn(kind) { kind is @untyped_cst.NodeKind::LexScanCasePattern_Pattern },
-      fn(kind) { kind is @untyped_cst.NodeKind::LexScanCasePattern_Binder },
-      fn(kind) { kind is @untyped_cst.NodeKind::LexScanCasePattern_Wildcard },
+      fn(kind) { kind is LexScanCasePattern_Binder },
+      fn(kind) { kind is LexScanCasePattern_Wildcard },
     ] {
     @test.assert_eq(api_has_kind(lexscan_result.root(), pred), true)
   }
@@ -589,16 +542,14 @@ test "helper enum semantics are explicit CST children" {
   let regex_literal = @untyped_cst.parse_expression("source =~ re\"a\"")
   @test.assert_eq(regex_literal.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_kind(regex_literal.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::RegexPattern_Literal
-    }),
+    api_has_kind(regex_literal.root(), fn(kind) { kind is RegexPattern_Literal }),
     true,
   )
   let regex_reference = @untyped_cst.parse_expression("source =~ PREFIX")
   @test.assert_eq(regex_reference.diagnostics_view().is_empty(), true)
   @test.assert_eq(
     api_has_kind(regex_reference.root(), fn(kind) {
-      kind is @untyped_cst.NodeKind::RegexPattern_Reference
+      kind is RegexPattern_Reference
     }),
     true,
   )
@@ -609,11 +560,7 @@ test "semantic markers and scalar helpers remain explicit" {
   let async_fn = @untyped_cst.parse_structure("async fn f() { () }")
   @test.assert_eq(async_fn.diagnostics_view().is_empty(), true)
   @test.assert_eq(
-    api_has_bool_value(
-      async_fn.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Flag_Async },
-      true,
-    ),
+    api_has_bool_value(async_fn.root(), fn(kind) { kind is Flag_Async }, true),
     true,
   )
   assert_no_location_metadata(async_fn.root())
@@ -670,7 +617,7 @@ test "semantic markers and scalar helpers remain explicit" {
   @test.assert_eq(
     api_has_string_value(
       constructor_tag.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::ConstructorTag_Value },
+      fn(kind) { kind is ConstructorTag_Value },
       "1",
     ),
     true,
@@ -680,7 +627,7 @@ test "semantic markers and scalar helpers remain explicit" {
   @test.assert_eq(
     api_has_string_value(
       test_name.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Name_Test },
+      fn(kind) { kind is Name_Test },
       "named",
     ),
     true,
@@ -701,9 +648,9 @@ test "semantic markers and scalar helpers remain explicit" {
         imported.root(),
         fn(node_kind) {
           match (kind, node_kind) {
-            ("language", @untyped_cst.NodeKind::Language_Value)
-            | ("module", @untyped_cst.NodeKind::Stub_ModuleName)
-            | ("function", @untyped_cst.NodeKind::Stub_FunctionName) => true
+            ("language", Language_Value)
+            | ("module", Stub_ModuleName)
+            | ("function", Stub_FunctionName) => true
             _ => false
           }
         },
@@ -719,7 +666,7 @@ test "semantic markers and scalar helpers remain explicit" {
   @test.assert_eq(
     api_has_string_value(
       embedded.root(),
-      fn(kind) { kind is @untyped_cst.NodeKind::Stub_Code },
+      fn(kind) { kind is Stub_Code },
       "code",
     ),
     true,
@@ -755,9 +702,7 @@ test "lexscan missing arrow has a labelled recovery anchor" {
     name="lexscan_missing_arrow.mbt",
   )
   @test.assert_eq(result.diagnostics_view().is_empty(), false)
-  guard api_find_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Case_LexScanCase
-    })
+  guard api_find_node(result.root(), fn(node) { node.kind is Case_LexScanCase })
     is Some(case_node) else {
     fail("expected a lexscan case node")
   }
@@ -765,7 +710,7 @@ test "lexscan missing arrow has a labelled recovery anchor" {
   guard api_direct_child(case_node, "op") is Some(op) else {
     fail("expected a labelled missing arrow node")
   }
-  guard op.kind is @untyped_cst.NodeKind::Missing else {
+  guard op.kind is Missing else {
     fail("expected the arrow recovery node to be missing")
   }
   @test.assert_eq(op.source_span, (23, 23))
@@ -777,9 +722,7 @@ test "lexscan ellipsis exposes its token as the operator child" {
   let source = "lexscan source { ... }"
   let result = @untyped_cst.parse_expression(source)
   @test.assert_eq(result.diagnostics_view().is_empty(), true)
-  guard api_find_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Case_LexScanCase
-    })
+  guard api_find_node(result.root(), fn(node) { node.kind is Case_LexScanCase })
     is Some(case_node) else {
     fail("expected a lexscan case node")
   }
@@ -805,8 +748,8 @@ test "source spans and node text use UTF-16 slicing offsets" {
   let source = "let s = \"😀\"\nlet x = 1"
   let result = @untyped_cst.parse_structure(source)
   guard api_find_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_LIDENT) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("x"))
+      node.kind is Syntax_Token(TK_LIDENT) &&
+      api_leaf_payload(node) is Some(String("x"))
     })
     is Some(x) else {
     fail("expected x token")
@@ -821,9 +764,7 @@ test "source spans and node text use UTF-16 slicing offsets" {
 test "missing nodes return an empty StringView" {
   let source = "fn f("
   let result = @untyped_cst.parse_structure(source)
-  guard api_find_node(result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Missing
-    })
+  guard api_find_node(result.root(), fn(node) { node.kind is Missing })
     is Some(missing) else {
     fail("expected missing right parenthesis")
   }
@@ -834,16 +775,14 @@ test "missing nodes return an empty StringView" {
 ///|
 test "CST Leaf payloads are scalar and recursive meaning stays in children" {
   let constant = @untyped_cst.parse_expression("42")
-  guard api_find_node(constant.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Expr_Constant
-    })
+  guard api_find_node(constant.root(), fn(node) { node.kind is Expr_Constant })
     is Some(constant_node) else {
     fail("expected constant expression")
   }
   @test.assert_eq(api_payload_leaf(constant_node) is None, true)
   guard api_find_node(constant_node, fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_INT) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("42"))
+      node.kind is Syntax_Token(TK_INT) &&
+      api_leaf_payload(node) is Some(String("42"))
     })
     is Some(constant_token) else {
     fail("expected integer token")
@@ -851,16 +790,14 @@ test "CST Leaf payloads are scalar and recursive meaning stays in children" {
   @test.assert_eq(api_leaf_payload(constant_token) is Some(String("42")), true)
 
   let ident = @untyped_cst.parse_expression("answer")
-  guard api_find_node(ident.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Expr_Ident
-    })
+  guard api_find_node(ident.root(), fn(node) { node.kind is Expr_Ident })
     is Some(ident_node) else {
     fail("expected identifier expression")
   }
   @test.assert_eq(api_payload_leaf(ident_node) is None, true)
   guard api_find_node(ident_node, fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_LIDENT) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("answer"))
+      node.kind is Syntax_Token(TK_LIDENT) &&
+      api_leaf_payload(node) is Some(String("answer"))
     })
     is Some(ident_token) else {
     fail("expected identifier token")
@@ -872,18 +809,14 @@ test "CST Leaf payloads are scalar and recursive meaning stays in children" {
 test "long identifiers encode their AST variant in NodeKind" {
   let unqualified = @untyped_cst.parse_expression("answer")
   @test.assert_eq(
-    api_find_node(unqualified.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::LongIdent_Ident
-    })
+    api_find_node(unqualified.root(), fn(node) { node.kind is LongIdent_Ident })
     is Some(_),
     true,
   )
   let qualified = @untyped_cst.parse_expression("@pkg.answer")
   @test.assert_eq(qualified.diagnostics_view().length(), 0)
   @test.assert_eq(
-    api_find_node(qualified.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::LongIdent_Dot
-    })
+    api_find_node(qualified.root(), fn(node) { node.kind is LongIdent_Dot })
     is Some(_),
     true,
   )
@@ -895,7 +828,7 @@ test "structured declarations keep their spelling in scalar token payloads" {
     "using @pkg {type Item as Alias}",
   )
   guard api_find_node(using_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Clause_UsingItem
+      node.kind is Clause_UsingItem
     })
     is Some(using_item) else {
     fail("expected using item")
@@ -904,7 +837,7 @@ test "structured declarations keep their spelling in scalar token payloads" {
 
   let deriving_result = @untyped_cst.parse_structure("type U derive(Eq)")
   guard api_find_node(deriving_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Clause_DerivingDirective
+      node.kind is Clause_DerivingDirective
     })
     is Some(deriving) else {
     fail("expected deriving directive")
@@ -912,8 +845,8 @@ test "structured declarations keep their spelling in scalar token payloads" {
   @test.assert_eq(api_payload_leaf(deriving) is None, true)
   @test.assert_eq(
     api_find_node(deriving, fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_UIDENT) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("Eq"))
+      node.kind is Syntax_Token(TK_UIDENT) &&
+      api_leaf_payload(node) is Some(String("Eq"))
     })
     is Some(_),
     true,
@@ -921,7 +854,7 @@ test "structured declarations keep their spelling in scalar token payloads" {
 
   let enum_result = @untyped_cst.parse_structure("enum E { A }")
   guard api_find_node(enum_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Clause_ConstructorDecl
+      node.kind is Clause_ConstructorDecl
     })
     is Some(constructor_node) else {
     fail("expected constructor declaration")
@@ -934,8 +867,8 @@ test "Leaf has exactly the three scalar payload representations" {
   let payloads : Array[@untyped_cst.NodePayload] = []
   let string_result = @untyped_cst.parse_expression("text")
   guard api_find_node(string_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_LIDENT) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("text"))
+      node.kind is Syntax_Token(TK_LIDENT) &&
+      api_leaf_payload(node) is Some(String("text"))
     })
     is Some(string_node) &&
     api_leaf_payload(string_node) is Some(string_payload) else {
@@ -944,8 +877,8 @@ test "Leaf has exactly the three scalar payload representations" {
   payloads.push(string_payload)
   let int_result = @untyped_cst.parse_expression("tuple.7")
   guard api_find_node(int_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_DOT_INT) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Int(7))
+      node.kind is Syntax_Token(TK_DOT_INT) &&
+      api_leaf_payload(node) is Some(Int(7))
     })
     is Some(int_node) &&
     api_leaf_payload(int_node) is Some(int_payload) else {
@@ -954,8 +887,8 @@ test "Leaf has exactly the three scalar payload representations" {
   payloads.push(int_payload)
   let bool_result = @untyped_cst.parse_expression("true")
   guard api_find_node(bool_result.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_TRUE) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
+      node.kind is Syntax_Token(TK_TRUE) &&
+      api_leaf_payload(node) is Some(Bool(true))
     })
     is Some(bool_node) &&
     api_leaf_payload(bool_node) is Some(bool_payload) else {
@@ -979,8 +912,8 @@ test "Leaf has exactly the three scalar payload representations" {
 test "lexer token payload mapping is scalar and uniform" {
   let index = @untyped_cst.parse_expression("tuple.12")
   guard api_find_node(index.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_DOT_INT) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Int(12))
+      node.kind is Syntax_Token(TK_DOT_INT) &&
+      api_leaf_payload(node) is Some(Int(12))
     })
     is Some(index_token) else {
     fail("expected DOT_INT token")
@@ -990,8 +923,7 @@ test "lexer token payload mapping is scalar and uniform" {
     is Some((Some("payload"), index_leaf)) else {
     fail("expected trailing payload Leaf")
   }
-  guard index_leaf.kind
-    is @untyped_cst.NodeKind::Leaf(@untyped_cst.NodePayload::Int(12)) else {
+  guard index_leaf.kind is Leaf(Int(12)) else {
     fail("expected integer payload Leaf")
   }
   @test.assert_eq(index_leaf.loc, index_token.loc)
@@ -1000,14 +932,12 @@ test "lexer token payload mapping is scalar and uniform" {
   let mut payload_leaf_count = 0
   for entry in index_token.children {
     let (label, child) = entry
-    if label is Some("payload") && child.kind is @untyped_cst.NodeKind::Leaf(_) {
+    if label is Some("payload") && child.kind is Leaf(_) {
       payload_leaf_count += 1
     }
   }
   @test.assert_eq(payload_leaf_count, 1)
-  guard api_find_node(index.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Accessor_Index
-    })
+  guard api_find_node(index.root(), fn(node) { node.kind is Accessor_Index })
     is Some(index_accessor) else {
     fail("expected structured tuple accessor")
   }
@@ -1016,8 +946,8 @@ test "lexer token payload mapping is scalar and uniform" {
   let boolean = @untyped_cst.parse_expression("true")
   @test.assert_eq(
     api_find_node(boolean.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_TRUE) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
+      node.kind is Syntax_Token(TK_TRUE) &&
+      api_leaf_payload(node) is Some(Bool(true))
     })
     is Some(_),
     true,
@@ -1025,8 +955,8 @@ test "lexer token payload mapping is scalar and uniform" {
   let explicit_semi = @untyped_cst.parse_structure("let x = 1;")
   @test.assert_eq(
     api_find_node(explicit_semi.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_SEMI) &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(true))
+      node.kind is Syntax_Token(TK_SEMI) &&
+      api_leaf_payload(node) is Some(Bool(true))
     })
     is Some(_),
     true,
@@ -1034,8 +964,7 @@ test "lexer token payload mapping is scalar and uniform" {
   let fixed = @untyped_cst.parse_expression("1 + 2")
   @test.assert_eq(
     api_find_node(fixed.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Syntax_Token(TK_PLUS) &&
-      api_payload_leaf(node) is None
+      node.kind is Syntax_Token(TK_PLUS) && api_payload_leaf(node) is None
     })
     is Some(_),
     true,
@@ -1049,23 +978,23 @@ test "attribute and comment tokens expose structured metadata" {
   @test.assert_eq(attribute.diagnostics_view().length(), 0)
   @test.assert_eq(
     api_find_node(attribute.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Attribute_Qualifier &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("test"))
+      node.kind is Attribute_Qualifier &&
+      api_leaf_payload(node) is Some(String("test"))
     })
     is Some(_),
     true,
   )
   @test.assert_eq(
     api_find_node(attribute.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Attribute_Name &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::String("bench"))
+      node.kind is Attribute_Name &&
+      api_leaf_payload(node) is Some(String("bench"))
     })
     is Some(_),
     true,
   )
   @test.assert_eq(
     api_find_node(attribute.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Attribute_RawPayload
+      node.kind is Attribute_RawPayload
     })
     is Some(_),
     true,
@@ -1075,17 +1004,16 @@ test "attribute and comment tokens expose structured metadata" {
   @test.assert_eq(comment.diagnostics_view().length(), 0)
   @test.assert_eq(
     api_find_node(comment.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Comment_Content &&
-      api_leaf_payload(node)
-      is Some(@untyped_cst.NodePayload::String("// note"))
+      node.kind is Comment_Content &&
+      api_leaf_payload(node) is Some(String("// note"))
     })
     is Some(_),
     true,
   )
   @test.assert_eq(
     api_find_node(comment.root(), fn(node) {
-      node.kind is @untyped_cst.NodeKind::Comment_ConsumedByDocstring &&
-      api_leaf_payload(node) is Some(@untyped_cst.NodePayload::Bool(false))
+      node.kind is Comment_ConsumedByDocstring &&
+      api_leaf_payload(node) is Some(Bool(false))
     })
     is Some(_),
     true,

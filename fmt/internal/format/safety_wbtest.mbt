@@ -203,8 +203,8 @@ test "docstrings are consumed once and ordinary EOF comments survive" {
     #|fn  documented( )->Unit { }
     #|// ordinary eof
   let formatted = assert_safe_format(source)
-  if formatted.split("/// API docs").length() != 2 ||
-    formatted.split("// ordinary eof").length() != 2 {
+  if formatted.split("/// API docs").count() != 2 ||
+    formatted.split("// ordinary eof").count() != 2 {
     fail("doc or EOF comment was duplicated:\n\{formatted}")
   }
 }
@@ -231,11 +231,11 @@ test "deprecated extenum bodies migrate without losing declaration metadata" {
   let formatted = assert_safe_format(source)
   assert_true(formatted.contains("declare pub extenum Event[T]"))
   assert_true(formatted.contains("pub(all) extenum Event[T] +="))
-  assert_eq(formatted.split("/// event docs").length(), 2)
-  assert_eq(formatted.split("// constructor comment").length(), 2)
-  assert_eq(formatted.split("#deprecated").length(), 3)
-  assert_eq(formatted.split("derive(Eq)").length(), 2)
-  assert_eq(formatted.split("declare").length(), 2)
+  assert_eq(formatted.split("/// event docs").count(), 2)
+  assert_eq(formatted.split("// constructor comment").count(), 2)
+  assert_eq(formatted.split("#deprecated").count(), 3)
+  assert_eq(formatted.split("derive(Eq)").count(), 2)
+  assert_eq(formatted.split("declare").count(), 2)
 
   let ast_source =
     #|/// event docs

@@ -66,7 +66,7 @@ fn has_recovered_hole(impls : @syntax.Impls) -> Bool {
 }
 
 ///|
-pub fn format(source : String, block_line? : Bool = true) -> String {
+pub fn format(source : String, block_line~ : Bool = true) -> String {
   guard strict_parse(source) is Some(parsed) else { return source }
   guard format_once(parsed.impls, parsed.tokens, block_line~) is Some(candidate) else {
     return source

@@ -121,7 +121,7 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
         "async",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -156,7 +156,7 @@ fn parse_trait_method_param_list(state : ParserState) -> CstNode {
         entries~,
       )
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
 }
 
@@ -202,7 +202,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
-  if state.current_is(TokenKind::TK_QUESTION) {
+  if state.current_is(TK_QUESTION) {
     if parameter_is_positional {
       parameter_builder = fn(loc, source_span, children) {
         let entries = recovery_children(children)
@@ -333,7 +333,7 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
               fn(loc, source_span, children) {
                 let value = match
                   @construction.payload_from_children(children) {
-                  Some(NodePayload::String(value)) => value
+                  Some(String(value)) => value
                   _ => ""
                 }
                 @node.CstNode::constructor_tag_value(value~, loc~, source_span~)
@@ -389,8 +389,8 @@ fn parse_constructor_param_list(state : ParserState) -> CstNode {
         entries~,
       )
     },
-    sep_kind=TokenKind::TK_COMMA,
-    post_item_expected=[TokenKind::TK_COMMA, TokenKind::TK_RPAREN],
+    sep_kind=TK_COMMA,
+    post_item_expected=[TK_COMMA, TK_RPAREN],
     report_post_item_after_error=true,
   )
 }
@@ -425,7 +425,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
             "mutable",
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::Bool(value)) => value
+                Some(Bool(value)) => value
                 _ => false
               }
               @node.CstNode::flag_mutable(value~, loc~, source_span~)
@@ -493,7 +493,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
         "mutable",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_mutable(value~, loc~, source_span~)
@@ -658,7 +658,7 @@ fn parse_struct_field_item(state : ParserState) -> CstNode {
         "mutable",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_mutable(value~, loc~, source_span~)
@@ -773,7 +773,7 @@ fn parse_struct_constructor(
         "async",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -905,7 +905,7 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
         "async",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -924,7 +924,7 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
         "declare",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_declare(value~, loc~, source_span~)
@@ -956,7 +956,7 @@ fn parse_using_name_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_using_item_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
 }
 
@@ -1131,7 +1131,7 @@ fn parse_deriving_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_deriving_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
 }
 

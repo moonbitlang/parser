@@ -20,7 +20,7 @@ fn parse_array_expr(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_array_element_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if list_has_item_kind(
       list,
@@ -167,7 +167,7 @@ fn parse_list_comprehension_expr(
         loc,
         source_span,
         "array_kind",
-        if open_kind is TokenKind::TK_LBRACKET_BAR {
+        if open_kind is TK_LBRACKET_BAR {
           fn(loc, source_span, children) {
             let _ = children
             @node.CstNode::array_kind_iter(loc~, source_span~)
@@ -560,7 +560,7 @@ fn body_delimited_condition_stops(state : ParserState) -> Array[TokenKind] {
 fn recover_expr_until_statement_boundary(
   state : ParserState,
   children : Array[(String?, CstNode)],
-  balance_groups? : Bool = true,
+  balance_groups~ : Bool = true,
 ) -> Unit {
   let scan = state.recover_until([TK_SEMI, TK_RBRACE], balance_groups~)
   push_recovered_errors(children, scan.skipped)

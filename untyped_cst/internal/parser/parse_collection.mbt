@@ -1,7 +1,7 @@
 ///|
 fn brace_starts_record_expr(
   state : ParserState,
-  start_offset? : Int = 0,
+  start_offset~ : Int = 0,
 ) -> Bool {
   let mut offset = start_offset + 1
   let mut done = false
@@ -30,7 +30,7 @@ fn brace_starts_record_expr(
 }
 
 ///|
-fn brace_starts_map_expr(state : ParserState, start_offset? : Int = 0) -> Bool {
+fn brace_starts_map_expr(state : ParserState, start_offset~ : Int = 0) -> Bool {
   let mut offset = start_offset + 1
   let mut done = false
   while !done {
@@ -180,7 +180,7 @@ fn parse_record_field_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_record_field_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let mut item_index = 0
   for i in 0..<list.children.length() {
@@ -222,7 +222,7 @@ fn parse_map_field_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_map_field_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   for i in 0..<list.children.length() {
     match list.children.get(i) {
@@ -263,7 +263,7 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
           operator_node_from_token(
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::String(value)) => value
+                Some(String(value)) => value
                 _ => ""
               }
               @node.CstNode::operator_unary_minus(value~, loc~, source_span~)
@@ -397,7 +397,7 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
         "pun",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_pun(value~, loc~, source_span~)
@@ -414,7 +414,7 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
     let entries = recovery_children(children)
     @node.CstNode::field_definition(loc~, source_span~, entries~)
   }
-  if state.current_is(TokenKind::TK_DOTDOT) {
+  if state.current_is(TK_DOTDOT) {
     field_builder = fn(loc, source_span, children) {
       let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
         missing_at_end(loc~, source_span~),

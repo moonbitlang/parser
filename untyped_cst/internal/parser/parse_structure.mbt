@@ -96,11 +96,7 @@ fn peek_top_item_kind(state : ParserState) -> TopItemKind {
       }
       Some((QUESTION, _, _)) => offset += 1
       _ => {
-        result = if saw_async {
-          TopItemKind::Function
-        } else {
-          TopItemKind::Invalid
-        }
+        result = if saw_async { Function } else { Invalid }
         done = true
       }
     }

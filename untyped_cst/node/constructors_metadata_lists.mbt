@@ -4,7 +4,7 @@ pub fn CstNode::fn_kind_lambda(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::FnKind_Lambda, loc, source_span, children)
+  node(FnKind_Lambda, loc, source_span, children)
 }
 
 ///|
@@ -13,7 +13,7 @@ pub fn CstNode::fn_kind_arrow(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::FnKind_Arrow, loc, source_span, children)
+  node(FnKind_Arrow, loc, source_span, children)
 }
 
 ///|
@@ -22,7 +22,7 @@ pub fn CstNode::group_brace(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Group_Brace, loc, source_span, children)
+  node(Group_Brace, loc, source_span, children)
 }
 
 ///|
@@ -31,7 +31,7 @@ pub fn CstNode::group_paren(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Group_Paren, loc, source_span, children)
+  node(Group_Paren, loc, source_span, children)
 }
 
 ///|
@@ -40,7 +40,7 @@ pub fn CstNode::trailing_mark_comma(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::TrailingMark_Comma, loc, source_span, children)
+  node(TrailingMark_Comma, loc, source_span, children)
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn CstNode::trailing_mark_semi(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::TrailingMark_Semi, loc, source_span, children)
+  node(TrailingMark_Semi, loc, source_span, children)
 }
 
 ///|
@@ -58,7 +58,7 @@ pub fn CstNode::trailing_mark_none(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::TrailingMark_None, loc, source_span, children)
+  node(TrailingMark_None, loc, source_span, children)
 }
 
 ///|
@@ -67,7 +67,7 @@ pub fn CstNode::try_operator_kind_exclamation(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::TryOperatorKind_Exclamation, loc, source_span, children)
+  node(TryOperatorKind_Exclamation, loc, source_span, children)
 }
 
 ///|
@@ -76,7 +76,7 @@ pub fn CstNode::quantifier_kind_forall(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::QuantifierKind_Forall, loc, source_span, children)
+  node(QuantifierKind_Forall, loc, source_span, children)
 }
 
 ///|
@@ -85,7 +85,7 @@ pub fn CstNode::quantifier_kind_exists(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::QuantifierKind_Exists, loc, source_span, children)
+  node(QuantifierKind_Exists, loc, source_span, children)
 }
 
 ///|
@@ -94,7 +94,7 @@ pub fn CstNode::using_kind_value(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::UsingKind_Value, loc, source_span, children)
+  node(UsingKind_Value, loc, source_span, children)
 }
 
 ///|
@@ -103,7 +103,7 @@ pub fn CstNode::using_kind_type(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::UsingKind_Type, loc, source_span, children)
+  node(UsingKind_Type, loc, source_span, children)
 }
 
 ///|
@@ -112,7 +112,7 @@ pub fn CstNode::using_kind_trait(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::UsingKind_Trait, loc, source_span, children)
+  node(UsingKind_Trait, loc, source_span, children)
 }
 
 ///|
@@ -121,7 +121,7 @@ pub fn CstNode::openness_open(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Openness_Open, loc, source_span, children)
+  node(Openness_Open, loc, source_span, children)
 }
 
 ///|
@@ -130,7 +130,7 @@ pub fn CstNode::openness_closed(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::Openness_Closed, loc, source_span, children)
+  node(Openness_Closed, loc, source_span, children)
 }
 
 ///|
@@ -139,7 +139,7 @@ pub fn CstNode::array_kind_array(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::ArrayKind_Array, loc, source_span, children)
+  node(ArrayKind_Array, loc, source_span, children)
 }
 
 ///|
@@ -148,7 +148,7 @@ pub fn CstNode::array_kind_iter(
   source_span~ : (Int, Int),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  node(NodeKind::ArrayKind_Iter, loc, source_span, children)
+  node(ArrayKind_Iter, loc, source_span, children)
 }
 
 ///|
@@ -157,13 +157,7 @@ pub fn CstNode::flag_async(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Async,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Async, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -172,13 +166,7 @@ pub fn CstNode::flag_declare(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Declare,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Declare, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -187,13 +175,7 @@ pub fn CstNode::flag_mutable(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Mutable,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Mutable, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -202,13 +184,7 @@ pub fn CstNode::flag_pun(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Pun,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Pun, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -217,13 +193,7 @@ pub fn CstNode::flag_return_self(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_ReturnSelf,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_ReturnSelf, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -232,13 +202,7 @@ pub fn CstNode::flag_conditional(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Conditional,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Conditional, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -247,13 +211,7 @@ pub fn CstNode::flag_has_try(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_HasTry,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_HasTry, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -262,13 +220,7 @@ pub fn CstNode::flag_match_absent(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_MatchAbsent,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_MatchAbsent, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -277,13 +229,7 @@ pub fn CstNode::flag_faked(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Faked,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Faked, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -292,13 +238,7 @@ pub fn CstNode::flag_augmented(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Augmented,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Augmented, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -307,13 +247,7 @@ pub fn CstNode::flag_object(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Object,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Object, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -322,13 +256,7 @@ pub fn CstNode::flag_exclamation(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Flag_Exclamation,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Flag_Exclamation, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -341,7 +269,7 @@ pub fn CstNode::attribute_simple(
   let children : Array[(String?, CstNode)] = []
   children.push((Some("name"), name))
   children.push((Some("raw_payload"), raw_payload))
-  node(NodeKind::Attribute_Simple, loc, source_span, children)
+  node(Attribute_Simple, loc, source_span, children)
 }
 
 ///|
@@ -356,7 +284,7 @@ pub fn CstNode::attribute_qualified(
   children.push((Some("qualifier"), qualifier))
   children.push((Some("name"), name))
   children.push((Some("raw_payload"), raw_payload))
-  node(NodeKind::Attribute_Qualified, loc, source_span, children)
+  node(Attribute_Qualified, loc, source_span, children)
 }
 
 ///|
@@ -365,13 +293,7 @@ pub fn CstNode::attribute_name(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Attribute_Name,
-    loc,
-    source_span,
-    [],
-    NodePayload::String(value),
-  )
+  node_with_payload(Attribute_Name, loc, source_span, [], String(value))
 }
 
 ///|
@@ -380,13 +302,7 @@ pub fn CstNode::attribute_qualifier(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Attribute_Qualifier,
-    loc,
-    source_span,
-    [],
-    NodePayload::String(value),
-  )
+  node_with_payload(Attribute_Qualifier, loc, source_span, [], String(value))
 }
 
 ///|
@@ -395,13 +311,7 @@ pub fn CstNode::attribute_raw_payload(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Attribute_RawPayload,
-    loc,
-    source_span,
-    [],
-    NodePayload::String(value),
-  )
+  node_with_payload(Attribute_RawPayload, loc, source_span, [], String(value))
 }
 
 ///|
@@ -414,7 +324,7 @@ pub fn CstNode::comment_inline_trailing(
   let children : Array[(String?, CstNode)] = []
   children.push((Some("content"), content))
   children.push((Some("consumed_by_docstring"), consumed_by_docstring))
-  node(NodeKind::Comment_InlineTrailing, loc, source_span, children)
+  node(Comment_InlineTrailing, loc, source_span, children)
 }
 
 ///|
@@ -431,7 +341,7 @@ pub fn CstNode::comment_ownline(
   children.push((Some("leading_blank_line"), leading_blank_line))
   children.push((Some("trailing_blank_line"), trailing_blank_line))
   children.push((Some("consumed_by_docstring"), consumed_by_docstring))
-  node(NodeKind::Comment_Ownline, loc, source_span, children)
+  node(Comment_Ownline, loc, source_span, children)
 }
 
 ///|
@@ -440,13 +350,7 @@ pub fn CstNode::comment_content(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Comment_Content,
-    loc,
-    source_span,
-    [],
-    NodePayload::String(value),
-  )
+  node_with_payload(Comment_Content, loc, source_span, [], String(value))
 }
 
 ///|
@@ -455,13 +359,7 @@ pub fn CstNode::comment_leading_blank_line(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::Comment_LeadingBlankLine,
-    loc,
-    source_span,
-    [],
-    NodePayload::Bool(value),
-  )
+  node_with_payload(Comment_LeadingBlankLine, loc, source_span, [], Bool(value))
 }
 
 ///|
@@ -471,11 +369,11 @@ pub fn CstNode::comment_trailing_blank_line(
   source_span~ : (Int, Int),
 ) -> CstNode {
   node_with_payload(
-    NodeKind::Comment_TrailingBlankLine,
+    Comment_TrailingBlankLine,
     loc,
     source_span,
     [],
-    NodePayload::Bool(value),
+    Bool(value),
   )
 }
 
@@ -486,11 +384,11 @@ pub fn CstNode::comment_consumed_by_docstring(
   source_span~ : (Int, Int),
 ) -> CstNode {
   node_with_payload(
-    NodeKind::Comment_ConsumedByDocstring,
+    Comment_ConsumedByDocstring,
     loc,
     source_span,
     [],
-    NodePayload::Bool(value),
+    Bool(value),
   )
 }
 
@@ -500,13 +398,7 @@ pub fn CstNode::interp_segment_literal(
   loc~ : Location,
   source_span~ : (Int, Int),
 ) -> CstNode {
-  node_with_payload(
-    NodeKind::InterpSegment_Literal,
-    loc,
-    source_span,
-    [],
-    NodePayload::String(value),
-  )
+  node_with_payload(InterpSegment_Literal, loc, source_span, [], String(value))
 }
 
 ///|
@@ -519,7 +411,7 @@ pub fn CstNode::interp_segment_source(
   let children : Array[(String?, CstNode)] = []
   children.push((Some("expr"), expr))
   children.push((Some("payload"), payload))
-  node(NodeKind::InterpSegment_Source, loc, source_span, children)
+  node(InterpSegment_Source, loc, source_span, children)
 }
 
 ///|
@@ -529,7 +421,7 @@ pub fn CstNode::clause_return_type(
   entries~ : ArrayView[CstDeclarationChild],
 ) -> CstNode {
   node(
-    NodeKind::Clause_ReturnType,
+    Clause_ReturnType,
     loc,
     source_span,
     entries_from_cstdeclarationchild(entries),
@@ -546,7 +438,7 @@ pub fn CstNode::clause_where(
   let children : Array[(String?, CstNode)] = []
   children.push((Some("kw"), kw))
   children.push((Some("body"), body))
-  node(NodeKind::Clause_Where, loc, source_span, children)
+  node(Clause_Where, loc, source_span, children)
 }
 
 ///|
@@ -600,7 +492,7 @@ pub fn CstNode::clause_constructor_decl(
     Some(child) => children.push((Some("semantic_name"), child))
     None => ()
   }
-  node(NodeKind::Clause_ConstructorDecl, loc, source_span, children)
+  node(Clause_ConstructorDecl, loc, source_span, children)
 }
 
 ///|
@@ -614,7 +506,7 @@ pub fn CstNode::clause_constructor_decl_from_entries(
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
-    NodeKind::Clause_ConstructorDecl,
+    Clause_ConstructorDecl,
     loc,
     source_span,
     entries_from_cstrecoverychild(entries),
@@ -654,7 +546,7 @@ pub fn CstNode::clause_using_item(
     Some(child) => children.push((Some("using_kind"), child))
     None => ()
   }
-  node(NodeKind::Clause_UsingItem, loc, source_span, children)
+  node(Clause_UsingItem, loc, source_span, children)
 }
 
 ///|
@@ -664,7 +556,7 @@ pub fn CstNode::clause_import_package(
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
-    NodeKind::Clause_ImportPackage,
+    Clause_ImportPackage,
     loc,
     source_span,
     entries_from_cstrecoverychild(entries),
@@ -678,7 +570,7 @@ pub fn CstNode::clause_extend_item(
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
-    NodeKind::Clause_ExtendItem,
+    Clause_ExtendItem,
     loc,
     source_span,
     entries_from_cstrecoverychild(entries),
@@ -715,7 +607,7 @@ pub fn CstNode::clause_with_binding(
     Some(child) => children.push((Some("semantic_name"), child))
     None => ()
   }
-  node(NodeKind::Clause_WithBinding, loc, source_span, children)
+  node(Clause_WithBinding, loc, source_span, children)
 }
 
 ///|
@@ -738,7 +630,7 @@ pub fn CstNode::clause_deriving_directive(
     Some(child) => children.push((Some("semantic_name"), child))
     None => ()
   }
-  node(NodeKind::Clause_DerivingDirective, loc, source_span, children)
+  node(Clause_DerivingDirective, loc, source_span, children)
 }
 
 ///|
@@ -747,12 +639,7 @@ pub fn CstNode::list_argument_list(
   source_span~ : (Int, Int),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
-  node(
-    NodeKind::List_ArgumentList,
-    loc,
-    source_span,
-    entries_from_cstlistchild(entries),
-  )
+  node(List_ArgumentList, loc, source_span, entries_from_cstlistchild(entries))
 }
 
 ///|
@@ -761,12 +648,7 @@ pub fn CstNode::list_parameter_list(
   source_span~ : (Int, Int),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
-  node(
-    NodeKind::List_ParameterList,
-    loc,
-    source_span,
-    entries_from_cstlistchild(entries),
-  )
+  node(List_ParameterList, loc, source_span, entries_from_cstlistchild(entries))
 }
 
 ///|
@@ -776,7 +658,7 @@ pub fn CstNode::list_trait_method_parameter_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TraitMethodParameterList,
+    List_TraitMethodParameterList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -790,7 +672,7 @@ pub fn CstNode::list_type_decl_parameter_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TypeDeclParameterList,
+    List_TypeDeclParameterList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -804,7 +686,7 @@ pub fn CstNode::list_type_var_binder_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TypeVarBinderList,
+    List_TypeVarBinderList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -818,7 +700,7 @@ pub fn CstNode::list_constructor_parameter_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ConstructorParameterList,
+    List_ConstructorParameterList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -832,7 +714,7 @@ pub fn CstNode::list_tuple_struct_type_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TupleStructTypeList,
+    List_TupleStructTypeList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -846,7 +728,7 @@ pub fn CstNode::list_struct_field_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_StructFieldList,
+    List_StructFieldList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -860,7 +742,7 @@ pub fn CstNode::list_trait_method_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TraitMethodList,
+    List_TraitMethodList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -874,7 +756,7 @@ pub fn CstNode::list_record_field_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_RecordFieldList,
+    List_RecordFieldList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -887,12 +769,7 @@ pub fn CstNode::list_map_field_list(
   source_span~ : (Int, Int),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
-  node(
-    NodeKind::List_MapFieldList,
-    loc,
-    source_span,
-    entries_from_cstlistchild(entries),
-  )
+  node(List_MapFieldList, loc, source_span, entries_from_cstlistchild(entries))
 }
 
 ///|
@@ -902,7 +779,7 @@ pub fn CstNode::list_block_statement_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_BlockStatementList,
+    List_BlockStatementList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -916,7 +793,7 @@ pub fn CstNode::list_continue_argument_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ContinueArgumentList,
+    List_ContinueArgumentList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -930,7 +807,7 @@ pub fn CstNode::list_tuple_element_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TupleElementList,
+    List_TupleElementList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -943,12 +820,7 @@ pub fn CstNode::list_tuple_type_list(
   source_span~ : (Int, Int),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
-  node(
-    NodeKind::List_TupleTypeList,
-    loc,
-    source_span,
-    entries_from_cstlistchild(entries),
-  )
+  node(List_TupleTypeList, loc, source_span, entries_from_cstlistchild(entries))
 }
 
 ///|
@@ -958,7 +830,7 @@ pub fn CstNode::list_array_element_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ArrayElementList,
+    List_ArrayElementList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -972,7 +844,7 @@ pub fn CstNode::list_type_argument_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TypeArgumentList,
+    List_TypeArgumentList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -986,7 +858,7 @@ pub fn CstNode::list_tuple_pattern_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_TuplePatternList,
+    List_TuplePatternList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1000,7 +872,7 @@ pub fn CstNode::list_constructor_pattern_argument_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ConstructorPatternArgumentList,
+    List_ConstructorPatternArgumentList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1014,7 +886,7 @@ pub fn CstNode::list_array_pattern_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ArrayPatternList,
+    List_ArrayPatternList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1028,7 +900,7 @@ pub fn CstNode::list_record_pattern_field_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_RecordPatternFieldList,
+    List_RecordPatternFieldList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1042,7 +914,7 @@ pub fn CstNode::list_map_pattern_field_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_MapPatternFieldList,
+    List_MapPatternFieldList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1056,7 +928,7 @@ pub fn CstNode::list_where_field_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_WhereFieldList,
+    List_WhereFieldList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1070,7 +942,7 @@ pub fn CstNode::list_object_field_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ObjectFieldList,
+    List_ObjectFieldList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1084,7 +956,7 @@ pub fn CstNode::list_constructor_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ConstructorList,
+    List_ConstructorList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1097,12 +969,7 @@ pub fn CstNode::list_using_item_list(
   source_span~ : (Int, Int),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
-  node(
-    NodeKind::List_UsingItemList,
-    loc,
-    source_span,
-    entries_from_cstlistchild(entries),
-  )
+  node(List_UsingItemList, loc, source_span, entries_from_cstlistchild(entries))
 }
 
 ///|
@@ -1112,7 +979,7 @@ pub fn CstNode::list_import_package_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ImportPackageList,
+    List_ImportPackageList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1126,7 +993,7 @@ pub fn CstNode::list_extend_item_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ExtendItemList,
+    List_ExtendItemList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1139,12 +1006,7 @@ pub fn CstNode::list_deriving_list(
   source_span~ : (Int, Int),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
-  node(
-    NodeKind::List_DerivingList,
-    loc,
-    source_span,
-    entries_from_cstlistchild(entries),
-  )
+  node(List_DerivingList, loc, source_span, entries_from_cstlistchild(entries))
 }
 
 ///|
@@ -1153,12 +1015,7 @@ pub fn CstNode::list_match_case_list(
   source_span~ : (Int, Int),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
-  node(
-    NodeKind::List_MatchCaseList,
-    loc,
-    source_span,
-    entries_from_cstlistchild(entries),
-  )
+  node(List_MatchCaseList, loc, source_span, entries_from_cstlistchild(entries))
 }
 
 ///|
@@ -1168,7 +1025,7 @@ pub fn CstNode::list_lex_scan_case_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_LexScanCaseList,
+    List_LexScanCaseList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1182,7 +1039,7 @@ pub fn CstNode::list_regex_binding_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_RegexBindingList,
+    List_RegexBindingList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1196,7 +1053,7 @@ pub fn CstNode::list_for_binding_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ForBindingList,
+    List_ForBindingList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1210,7 +1067,7 @@ pub fn CstNode::list_for_each_binding_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_ForEachBindingList,
+    List_ForEachBindingList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),
@@ -1224,7 +1081,7 @@ pub fn CstNode::list_with_binding_list(
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
-    NodeKind::List_WithBindingList,
+    List_WithBindingList,
     loc,
     source_span,
     entries_from_cstlistchild(entries),

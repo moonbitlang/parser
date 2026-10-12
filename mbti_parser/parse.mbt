@@ -2,8 +2,8 @@
 fn dummy_mbti() -> Mbti {
   {
     package_name: "",
-    imports: @list.empty(),
-    sigs: @list.empty(),
+    imports: List([]),
+    sigs: List([]),
     loc: @syntax.no_location,
     base_pos: @basic.BasePos::none(),
   }
@@ -29,7 +29,7 @@ fn lex_reports(
 ///|
 pub fn parse_string(
   source : String,
-  name? : String = "",
+  name~ : String = "",
 ) -> (Mbti, Array[Report]) {
   let lex_result = @lexer.tokens_from_string(name~, source, comment=false)
   let reports = lex_reports(lex_result.errors)

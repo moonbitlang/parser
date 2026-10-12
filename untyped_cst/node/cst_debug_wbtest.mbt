@@ -27,7 +27,7 @@ fn NodeKind::test_name(self : NodeKind) -> String {
 }
 
 ///|
-fn CstNode::to_test_json(self : CstNode, source? : String = "") -> Json {
+fn CstNode::to_test_json(self : CstNode, source~ : String = "") -> Json {
   let _ = source
   let children : Array[Json] = []
   for i in 0..<self.children.length() {

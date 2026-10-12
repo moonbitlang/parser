@@ -1,13 +1,13 @@
 name = "moonbitlang/parser"
 
-version = "0.4.3"
+version = "0.4.4"
 
 import {
   "moonbitlang/x@0.5.1",
   "moonbitlang/lexer@0.4.2",
   "moonbitlang/moon_config@0.4.2",
   "moonbitlang/async@0.22.4",
-  "moonbit-community/prettyprinter@0.4.10",
+  "moonbit-community/prettyprinter@0.4.11",
 }
 
 readme = "README.md"

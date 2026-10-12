@@ -11,7 +11,7 @@ fn parse_ok(name : String, content : String) -> Mbti raise {
   let (mbti, reports) = @mbti_parser.parse_string(content, name~)
   if !reports.is_empty() {
     fail(
-      "parsing \{name} failed with diagnostics: \{reports.to_json().stringify(indent=2)}",
+      "parsing \{name} failed with diagnostics: \{Json(reports).stringify(indent=2)}",
     )
   }
   mbti

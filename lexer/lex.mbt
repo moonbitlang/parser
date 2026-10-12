@@ -7,10 +7,10 @@ pub struct LexResult {
 
 ///|
 pub fn tokens_from_string(
-  name? : String = "",
-  start_pos? : Position = { fname: "", lnum: 1, bol: 0, cnum: 0, },
-  is_interpolation? : Bool = false,
-  enable_metavar? : Bool = false,
+  name~ : String = "",
+  start_pos~ : Position = { fname: "", lnum: 1, bol: 0, cnum: 0, },
+  is_interpolation~ : Bool = false,
+  enable_metavar~ : Bool = false,
   comment~ : Bool,
   str : StringView,
 ) -> LexResult {
@@ -29,7 +29,7 @@ pub fn tokens_from_string(
     current_line: start_lnum,
     current_bol: start_bol,
     start_cnum,
-    last_unhandled_comment: @ref.new(None),
+    last_unhandled_comment: Ref(None),
     asi_context: ASIContext::new(),
     is_interpolation,
     enable_metavar,
@@ -47,10 +47,10 @@ pub fn tokens_from_string(
 
 ///|
 pub fn tokens_from_string_with_utf16_location(
-  name? : String = "",
-  start_pos? : Position = { fname: "", lnum: 1, bol: 0, cnum: 0, },
-  is_interpolation? : Bool = false,
-  enable_metavar? : Bool = false,
+  name~ : String = "",
+  start_pos~ : Position = { fname: "", lnum: 1, bol: 0, cnum: 0, },
+  is_interpolation~ : Bool = false,
+  enable_metavar~ : Bool = false,
   comment~ : Bool,
   str : StringView,
 ) -> LexResult {

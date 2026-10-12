@@ -95,7 +95,7 @@ fn assert_corpus_locations(
     impls.each(impl_ => collector.visit_Impl(impl_))
     @test.assert_eq(collector.spans, expected, msg="\{parser}: \{source}")
     let json = @basic.show_loc.protect(String, fn() {
-      impls.map(impl_ => impl_.json_repr()).to_json()
+      Json(impls.map(impl_ => impl_.json_repr()))
     })
     if reference is Some(expected_json) {
       @test.assert_eq(json, expected_json, msg="\{parser}: \{source}")

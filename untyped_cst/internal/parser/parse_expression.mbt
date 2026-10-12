@@ -219,7 +219,7 @@ fn function_node_from_children(
         "async",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -266,7 +266,7 @@ fn function_node_from_children(
 fn hole_node_from_children(
   state : ParserState,
   children : Array[(String?, CstNode)],
-  todo? : Bool = false,
+  todo~ : Bool = false,
 ) -> CstNode {
   let hole_kind_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if todo {
     fn(loc, source_span, children) {
@@ -510,7 +510,7 @@ fn parse_expr_fragment_item(state : ParserState) -> CstNode {
 fn parse_expr_until(
   state : ParserState,
   stop_kinds : Array[TokenKind],
-  allow_argument_label_question? : Bool = false,
+  allow_argument_label_question~ : Bool = false,
 ) -> CstNode {
   let _ = allow_argument_label_question
   discard_expr_trivia(state)
@@ -570,7 +570,7 @@ fn parse_expr_catch_suffix(
         "has_try",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_has_try(value~, loc~, source_span~)
@@ -608,7 +608,7 @@ fn parse_expr_pipe(
         if state.reports.length() == reports_before_lhs && !normalize_lhs {
           state.report(lhs.loc, "Invalid left value in assignment")
         }
-        let is_augmented = !state.current_is(TokenKind::TK_EQUAL)
+        let is_augmented = !state.current_is(TK_EQUAL)
         let assignment_builder = assignment_node_builder(lhs, is_augmented)
         let children : Array[(String?, CstNode)] = []
         push_assignment_lhs_children(children, lhs, normalize_lhs)
@@ -635,7 +635,7 @@ fn parse_expr_pipe(
               fn(loc, source_span, children) {
                 let value = match
                   @construction.payload_from_children(children) {
-                  Some(NodePayload::Bool(value)) => value
+                  Some(Bool(value)) => value
                   _ => false
                 }
                 @node.CstNode::flag_augmented(value~, loc~, source_span~)
@@ -695,7 +695,7 @@ fn parse_expr_pipe(
           push_child(invalid_children, Some("error"), error)
         } else {
           lhs = state.construct_from_children(
-            if pipe_kind is TokenKind::TK_PIPE_LEFT {
+            if pipe_kind is TK_PIPE_LEFT {
               fn(loc, source_span, children) {
                 let lhs = @construction.first_child_with_label_from(
                   children, "lhs",

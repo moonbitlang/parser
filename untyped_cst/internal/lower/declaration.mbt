@@ -295,7 +295,7 @@ fn lower_value_decl(node : CstNode, is_constant~ : Bool) -> @syntax.Impl {
     .map(lower_expr)
     .unwrap_or(
       if lower_is_declare(node) && !is_constant {
-        @syntax.Expr::Hole(loc=binder.loc, kind=Synthesized)
+        Hole(loc=binder.loc, kind=Synthesized)
       } else {
         lower_unit_expr(node.loc)
       },
@@ -401,7 +401,7 @@ fn lower_deriving(node : CstNode) -> List[@syntax.DerivingDirective] {
         args: item
         .first_child_with_label("arg")
         .map(lower_arguments)
-        .unwrap_or(@list.empty()),
+        .unwrap_or(List([])),
         loc: item.loc,
       })
     }
@@ -420,7 +420,7 @@ fn lower_struct_decl(node : CstNode) -> @syntax.Impl {
       .map(fn(body) {
         @syntax.TypeDesc::TupleStruct(lower_tuple_struct_types(body))
       })
-      .unwrap_or(TupleStruct(@list.empty()))
+      .unwrap_or(TupleStruct(List([])))
     lower_simple_type_decl(node, components)
   } else if node.has_child_kind(fn(kind) { kind is TypeDesc_Record }) ||
     node.kind is Impl_RecordStruct {
@@ -610,7 +610,7 @@ fn lower_constructor_param(node : CstNode) -> @syntax.ConstrParam {
     ty: node
     .first_child_with_label("type")
     .map(lower_type)
-    .unwrap_or(@syntax.Type::Any(loc=node.loc)),
+    .unwrap_or(Any(loc=node.loc)),
     mut_: node
     .bool_marker_value(fn(kind) { kind is Flag_Mutable })
     .unwrap_or(false),
@@ -681,7 +681,7 @@ fn lower_struct_field(node : CstNode) -> @syntax.FieldDecl {
     ty: node
     .first_child_with_label("type")
     .map(lower_type)
-    .unwrap_or(@syntax.Type::Any(loc=node.loc)),
+    .unwrap_or(Any(loc=node.loc)),
     mut_: node
     .bool_marker_value(fn(kind) { kind is Flag_Mutable })
     .unwrap_or(false),
@@ -774,7 +774,7 @@ fn lower_trait_method_parameters(
     }
     (lower_array_to_list(params), lower_delimited_inner_loc(list))
   } else {
-    (@list.empty(), lower_empty_loc())
+    (List([]), lower_empty_loc())
   }
 }
 

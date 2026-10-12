@@ -140,7 +140,7 @@
 
 non_empty_list_commas_rev[T](X : T) -> @list.List[T]
   : X { @list.singleton($1) }
-  | non_empty_list_commas_rev(X) "," X { $1.add($3) }
+  | non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
   ;
 
 non_empty_list_commas[T](X : T) -> @list.List[T]
@@ -152,7 +152,7 @@ mbti -> Mbti
   ;
 
 imports -> @list.List[PackageImport]
-  :  { @list.empty() }
+  :  { List([]) }
   | "import" "{" non_empty_list_commas(package_import) "}" ";" { $3 }
   ;
 
@@ -162,9 +162,9 @@ package_import -> PackageImport
   ;
 
 sigs -> @list.List[(Sig, Location)]
-  :  { @list.empty() }
+  :  { List([]) }
   | sig_ { @list.singleton(($1, mk_loc($sloc))) }
-  | sig_ ";" sigs { $3.add(($1, mk_loc($loc($1)))) }
+  | sig_ ";" sigs { $3.prepend(($1, mk_loc($loc($1)))) }
   ;
 
 sig_ -> Sig
@@ -222,7 +222,7 @@ trait_method_sig -> TraitMethodSig
     { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
   }
   | attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
   }
   ;
 
@@ -235,10 +235,10 @@ type_sig -> TypeSig
     {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
   }
   | attributes vis "suberror" uident optional_derive {
-    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
   }
   | attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
   }
   | attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
     {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
@@ -250,7 +250,7 @@ type_sig -> TypeSig
     {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
   }
   | attributes vis "extenum" type_decl_name_with_params optional_derive {
-    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
   }
   | attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
     {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
@@ -262,7 +262,7 @@ type_sig -> TypeSig
   ;
 
 optional_derive -> @list.List[QualifiedName]
-  : { @list.empty() }
+  : { List([]) }
   | "derive" "(" non_empty_list_commas(qualified_uident) ")" { $3 }
   ;
 
@@ -271,7 +271,7 @@ impl_sig -> ImplSig
     {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
   }
   | attributes vis "impl" qualified_uident "for" type_ {
-    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
   }
   ;
 
@@ -282,7 +282,7 @@ trait_sig -> TraitSig
   ;
 
 trait_body -> @list.List[TraitMethodSig]
-  : { @list.empty() }
+  : { List([]) }
   | "{" separated_list(";", trait_method_sig) "}" { $2 }
   ;
 
@@ -333,7 +333,7 @@ record_decl_body -> TypeDefinition
   ;
 
 type_param_with_constraints -> TypeParamWithConstraints
-  : uident { {name: $1, constraints: @list.empty()} }
+  : uident { {name: $1, constraints: List([])} }
   | uident ":" separated_nonempty_list("+", type_constraint) { {name: $1, constraints: $3} }
   ;
 
@@ -351,7 +351,7 @@ type_params_no_constraints -> @list.List[TypeParamNoConstraints]
   ;
 
 optional_type_params_no_constraints -> @list.List[TypeParamNoConstraints]
-  : { @list.empty() }
+  : { List([]) }
   | type_params_no_constraints { $1 }
   ;
 
@@ -377,7 +377,7 @@ extensible_enum_extension_target -> (Name, @list.List[TypeParamNoConstraints], Q
 
 simple_type -> Type
   : simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
-  | "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.add($2), loc=mk_loc($sloc)) }
+  | "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.prepend($2), loc=mk_loc($sloc)) }
   | "(" type_ ")" { $2 }
   | qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
   | "&" qualified_uident_ { Object($2) }
@@ -386,8 +386,8 @@ simple_type -> Type
 
 type_ -> Type
   : simple_type { $1 }
-  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
-  | is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+  | is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
   | is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
   ;
 
@@ -401,7 +401,7 @@ error_annotation -> ErrorType
   | "raise" { DefaultErrorType(loc=mk_loc($loc($1))) }
   | "raise" error_type { ErrorType(ty = $2) }
   | "raise" "?" {
-    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
+    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=List([]), loc=@syntax.no_location)
     MaybeError(ty=fake_error)
   }
   ;
@@ -418,12 +418,12 @@ effect_annotation -> (ErrorType, Location?)
   ;
 
 error_type -> Type
-  : qualified_uident_ { Name(constr_id=$1, tys=@list.empty(), loc=mk_loc($sloc)) }
+  : qualified_uident_ { Name(constr_id=$1, tys=List([]), loc=mk_loc($sloc)) }
   ;
 
 optional_type_arguments -> @list.List[Type]
   : delimited("[", separated_nonempty_list(",", type_), "]") { $1 }
-  |  { @list.empty() }
+  |  { List([]) }
   ;
 
 parameter -> Parameter
@@ -492,7 +492,7 @@ post_label -> Label
   ;
 
 %inline attributes -> @list.List[Attribute]
-  :  {  @list.empty() }
+  :  {  List([]) }
   | nonempty_list(attribute) { $1 }
   ;
 

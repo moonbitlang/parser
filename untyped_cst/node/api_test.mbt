@@ -1,6 +1,6 @@
 ///|
 fn test_position(offset : Int) -> @basic.Position {
-  @basic.Position::{ fname: "node_test.mbt", lnum: 1, bol: 0, cnum: offset, }
+  { fname: "node_test.mbt", lnum: 1, bol: 0, cnum: offset, }
 }
 
 ///|
@@ -33,8 +33,7 @@ test "typed constructors retain fields, optional children, and scalar payloads" 
   )
   @test.assert_eq(get.children.length(), 4)
   @test.assert_eq(
-    get.first_child_with_label("self").unwrap().kind
-    is @node.NodeKind::Name_Identifier,
+    get.first_child_with_label("self").unwrap().kind is Name_Identifier,
     true,
   )
   @test.assert_eq(get.has_child_label("index_loc"), false)
@@ -58,27 +57,21 @@ test "syntax payload and ordered recovery entries are controlled" {
     token_kind=TK_LIDENT,
     loc~,
     source_span=span,
-    entries=[Payload(@node.NodePayload::String("x"))],
+    entries=[Payload(String("x"))],
   )
   @test.assert_eq(token.string_payload(), Some("x"))
   let recovered = @node.CstNode::error(loc~, source_span=span, entries=[
-    @node.CstRecoveryChild::Item(
+    Item(
       @node.CstNode::syntax_token(token_kind=TK_PLUS, loc~, source_span=span, entries=[]),
     ),
-    @node.CstRecoveryChild::Op(
+    Op(
       @node.CstNode::syntax_token(token_kind=TK_PLUS, loc~, source_span=span, entries=[]),
     ),
   ])
   @test.assert_eq(recovered.children[0].0, Some("item"))
-  @test.assert_eq(
-    recovered.children[0].1.kind is @node.NodeKind::Syntax_Unexpected(_),
-    true,
-  )
+  @test.assert_eq(recovered.children[0].1.kind is Syntax_Unexpected(_), true)
   @test.assert_eq(recovered.children[1].0, Some("op"))
-  @test.assert_eq(
-    recovered.children[1].1.kind is @node.NodeKind::Syntax_Unexpected(_),
-    true,
-  )
+  @test.assert_eq(recovered.children[1].1.kind is Syntax_Unexpected(_), true)
 }
 
 ///|
@@ -87,14 +80,11 @@ test "predicate traversal remains usable with read-only NodeKind" {
   let span = @node.empty_span(0)
   let child = @node.CstNode::constant_bool(value=true, loc~, source_span=span)
   let root = @node.CstNode::expression(loc~, source_span=span, entries=[
-    @node.CstRootChild::Expr(child),
+    Expr(child),
   ])
+  @test.assert_eq(root.has_child_kind(fn(kind) { kind is Constant_Bool }), true)
   @test.assert_eq(
-    root.has_child_kind(fn(kind) { kind is @node.NodeKind::Constant_Bool }),
-    true,
-  )
-  @test.assert_eq(
-    root.bool_marker_value(fn(kind) { kind is @node.NodeKind::Constant_Bool }),
+    root.bool_marker_value(fn(kind) { kind is Constant_Bool }),
     Some(true),
   )
 }
@@ -124,7 +114,7 @@ test "legacy type application entries retain head, repeated tokens, and trivia" 
     token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(12), test_position(13)),
     source_span=(12, 13),
-    entries=[Payload(@node.NodePayload::String("B"))],
+    entries=[Payload(String("B"))],
   )
   let application = @node.CstNode::type_application(loc~, source_span=(0, 13), entries=[
     Head(head),
@@ -186,7 +176,7 @@ test "trait method entries preserve repeated clauses around trivia" {
   @test.assert_eq(clauses[0].source_span, (2, 3))
   @test.assert_eq(clauses[1].source_span, (9, 12))
   @test.assert_eq(
-    declaration.children[2].1.kind is @node.NodeKind::Syntax_Token(TK_COMMENT),
+    declaration.children[2].1.kind is Syntax_Token(TK_COMMENT),
     true,
   )
 }
@@ -262,7 +252,7 @@ test "test declaration entries preserve trivia between keywords and TestName" {
     Kw(test_kw),
     TestName(name),
   ])
-  @test.assert_eq(declaration.kind is @node.NodeKind::Impl_Test, true)
+  @test.assert_eq(declaration.kind is Impl_Test, true)
   assert_constructor_entries(declaration, loc, (0, 24), [
     ("kw", async_kw),
     ("trivia", first_comment),
@@ -311,10 +301,7 @@ test "import package entries preserve repeated trivia before the alias" {
       Alias(alias_),
     ],
   )
-  @test.assert_eq(
-    import_package.kind is @node.NodeKind::Clause_ImportPackage,
-    true,
-  )
+  @test.assert_eq(import_package.kind is Clause_ImportPackage, true)
   assert_constructor_entries(import_package, loc, (0, 15), [
     ("path", path),
     ("trivia", first_comment),
@@ -361,7 +348,7 @@ test "extend item entries preserve trivia around the keyword" {
     Trivia(after),
     Name(name),
   ])
-  @test.assert_eq(item.kind is @node.NodeKind::Clause_ExtendItem, true)
+  @test.assert_eq(item.kind is Clause_ExtendItem, true)
   assert_constructor_entries(item, loc, (0, 12), [
     ("target", target),
     ("trivia", before),
@@ -424,7 +411,7 @@ test "missing pattern entries preserve nested recovery and ordered errors" {
       LexScanCasePattern(marker),
     ],
   )
-  @test.assert_eq(missing.kind is @node.NodeKind::Pattern_MissingPattern, true)
+  @test.assert_eq(missing.kind is Pattern_MissingPattern, true)
   assert_constructor_entries(missing, loc, (0, 7), [
     ("error", error),
     ("pattern", recovered),
@@ -434,7 +421,7 @@ test "missing pattern entries preserve nested recovery and ordered errors" {
     ("lex_scan_case_pattern", marker),
   ])
   let nested = missing.first_child_with_label("pattern").unwrap()
-  @test.assert_eq(nested.kind is @node.NodeKind::Pattern_MissingPattern, true)
+  @test.assert_eq(nested.kind is Pattern_MissingPattern, true)
   assert_constructor_entries(nested, recovered_loc, (0, 3), [
     ("pattern", pattern),
     ("error", error),
@@ -460,7 +447,7 @@ test "constraint, labelled block, and or pattern entries retain repeated trivia"
     token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(0), test_position(1)),
     source_span=(0, 1),
-    entries=[Payload(@node.NodePayload::String("x"))],
+    entries=[Payload(String("x"))],
   )
   let op = @node.CstNode::syntax_token(
     token_kind=TK_COLON,
@@ -484,7 +471,7 @@ test "constraint, labelled block, and or pattern entries retain repeated trivia"
     token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(23), test_position(24)),
     source_span=(23, 24),
-    entries=[Payload(@node.NodePayload::String("y"))],
+    entries=[Payload(String("y"))],
   )
   let constraint = @node.CstNode::expr_constraint(loc~, source_span=(0, 24), entries=[
     Expr(head),
@@ -532,10 +519,7 @@ test "constraint, labelled block, and or pattern entries retain repeated trivia"
     let comments = node.children_with_label("trivia")
     @test.assert_eq(comments.length(), 2)
     for comment in comments {
-      @test.assert_eq(
-        comment.kind is @node.NodeKind::Syntax_Token(TK_COMMENT),
-        true,
-      )
+      @test.assert_eq(comment.kind is Syntax_Token(TK_COMMENT), true)
     }
   }
 }
@@ -563,7 +547,7 @@ test "public visibility entries retain repeated errors and their tokens" {
       token_kind=TK_INT,
       loc=error_loc,
       source_span=(start, start + 1),
-      entries=[Payload(@node.NodePayload::String(value))],
+      entries=[Payload(String(value))],
     )
     errors.push(
       @node.CstNode::error(loc=error_loc, source_span=(start, start + 1), entries=[
@@ -600,9 +584,9 @@ test "public visibility entries retain repeated errors and their tokens" {
   let actual = visibility.children_with_label("error")
   @test.assert_eq(actual.length(), 2)
   for i, error in actual {
-    @test.assert_eq(error.kind is @node.NodeKind::Error, true)
+    @test.assert_eq(error.kind is Error, true)
     let token = error.first_child_with_label("item").unwrap()
-    @test.assert_eq(token.kind is @node.NodeKind::Syntax_Unexpected(_), true)
+    @test.assert_eq(token.kind is Syntax_Unexpected(_), true)
     @test.assert_eq(
       token.string_payload(),
       Some(if i == 0 { "1" } else { "2" }),
@@ -620,7 +604,7 @@ test "array assignment entries retain expanded and unexpanded lhs children" {
     token_kind=TK_LIDENT,
     loc=name_loc,
     source_span=(0, 2),
-    entries=[Payload(@node.NodePayload::String("xs"))],
+    entries=[Payload(String("xs"))],
   )
   let array = @node.CstNode::expr_ident(loc=name_loc, source_span=(0, 2), name=[
     name,
@@ -659,7 +643,7 @@ test "array assignment entries retain expanded and unexpanded lhs children" {
     token_kind=TK_LIDENT,
     loc=@node.mk_loc(test_position(7), test_position(12)),
     source_span=(7, 12),
-    entries=[Payload(@node.NodePayload::String("value"))],
+    entries=[Payload(String("value"))],
   )
   let loc = @node.mk_loc(test_position(0), test_position(12))
   let entries : ArrayView[@node.CstRecoveryChild] = [Lhs(lhs), Op(op), Rhs(rhs)]
@@ -679,7 +663,7 @@ test "array assignment entries retain expanded and unexpanded lhs children" {
     ])
     @test.assert_eq(node.has_child_label("self"), false)
     let recovered = node.first_child_with_label("lhs").unwrap()
-    @test.assert_eq(recovered.kind is @node.NodeKind::Expr_ArrayGet, true)
+    @test.assert_eq(recovered.kind is Expr_ArrayGet, true)
     assert_constructor_entries(recovered, lhs_loc, (0, 4), [
       ("self", array),
       ("open", open),
@@ -812,7 +796,7 @@ test "field assignment entry constructor preserves recovery and legacy calls" {
       source_span=span,
       entries~,
     )
-    @test.assert_eq(ordered.kind is @node.NodeKind::Expr_Mutate, true)
+    @test.assert_eq(ordered.kind is Expr_Mutate, true)
     assert_constructor_tree(ordered, legacy)
   }
   let recovered = @node.CstNode::expr_mutate_from_entries(
@@ -826,7 +810,7 @@ test "field assignment entry constructor preserves recovery and legacy calls" {
       Augmented(augmented),
     ],
   )
-  @test.assert_eq(recovered.kind is @node.NodeKind::Expr_Mutate, true)
+  @test.assert_eq(recovered.kind is Expr_Mutate, true)
   assert_constructor_entries(recovered, loc, span, [
     ("lhs", lhs),
     ("op", op),
@@ -903,7 +887,7 @@ test "missing expression entries retain repeated trivia and errors" {
       Error(error),
     ],
   )
-  @test.assert_eq(ordered.kind is @node.NodeKind::Expr_MissingExpr, true)
+  @test.assert_eq(ordered.kind is Expr_MissingExpr, true)
   assert_constructor_entries(ordered, loc, span, [
     ("label", label),
     ("error", error),
@@ -974,10 +958,7 @@ test "positional constructor parameters keep optional colon order and legacy cal
     type_~,
     mutable~,
   )
-  @test.assert_eq(
-    recovered.kind is @node.NodeKind::Parameter_ConstructorPositional,
-    true,
-  )
+  @test.assert_eq(recovered.kind is Parameter_ConstructorPositional, true)
   assert_constructor_entries(recovered, loc, span, [
     ("mut", mut_),
     ("op", op),

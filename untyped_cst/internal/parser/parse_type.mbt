@@ -208,7 +208,7 @@ fn parse_async_type_atom(
               fn(loc, source_span, children) {
                 let value = match
                   @construction.payload_from_children(children) {
-                  Some(NodePayload::Bool(value)) => value
+                  Some(Bool(value)) => value
                   _ => false
                 }
                 @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -233,7 +233,7 @@ fn parse_async_type_atom(
             "async",
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::Bool(value)) => value
+                Some(Bool(value)) => value
                 _ => false
               }
               @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -262,7 +262,7 @@ fn parse_async_type_atom(
         "async",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_async(value~, loc~, source_span~)
@@ -296,7 +296,7 @@ fn parse_paren_type(
       let entries = list_children(children)
       @node.CstNode::list_tuple_type_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let mut item_count = 0
   for i in 0..<list.children.length() {
@@ -319,8 +319,8 @@ fn parse_paren_type(
       @node.CstNode::type_tuple(loc~, source_span~, body~)
     }
   }
-  if item_count == 0 && !state.current_is(TokenKind::TK_THIN_ARROW) {
-    state.report_expected_tokens([TokenKind::TK_THIN_ARROW])
+  if item_count == 0 && !state.current_is(TK_THIN_ARROW) {
+    state.report_expected_tokens([TK_THIN_ARROW])
   }
   state.construct_from_children(builder, [(Some("body"), list)])
 }
@@ -368,7 +368,7 @@ fn parse_object_field_type_item(state : ParserState) -> CstNode {
         "mutable",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_mutable(value~, loc~, source_span~)
@@ -402,7 +402,7 @@ fn parse_object_type_literal(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_object_field_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   state.construct_from_children(
     fn(loc, source_span, children) {
@@ -431,8 +431,8 @@ fn parse_type_argument_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_type_argument_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
-    follow_set=[TokenKind::TK_WITH, TokenKind::TK_LBRACE, TokenKind::TK_SEMI],
+    sep_kind=TK_COMMA,
+    follow_set=[TK_WITH, TK_LBRACE, TK_SEMI],
     require_nonempty=true,
   )
 }

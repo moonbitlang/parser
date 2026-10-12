@@ -7,7 +7,7 @@ fn assert_parser_sync(source : String, name : String) -> Unit raise Error {
   )
   if !hand_reports.is_empty() {
     fail(
-      "handrolled parser rejected \{name}: \{hand_reports.to_json().stringify(indent=2)}",
+      "handrolled parser rejected \{name}: \{Json(hand_reports).stringify(indent=2)}",
     )
   }
   let (yacc_impls, yacc_reports) = @parser.parse_string(
@@ -17,11 +17,11 @@ fn assert_parser_sync(source : String, name : String) -> Unit raise Error {
   )
   if !yacc_reports.is_empty() {
     fail(
-      "moonyacc parser rejected \{name}: \{yacc_reports.to_json().stringify(indent=2)}",
+      "moonyacc parser rejected \{name}: \{Json(yacc_reports).stringify(indent=2)}",
     )
   }
-  let hand_json = hand_impls.map(impl_ => impl_.json_repr()).to_json()
-  let yacc_json = yacc_impls.map(impl_ => impl_.json_repr()).to_json()
+  let hand_json = Json(hand_impls.map(impl_ => impl_.json_repr()))
+  let yacc_json = Json(yacc_impls.map(impl_ => impl_.json_repr()))
   let cst_json = cst_impls_json(source, name)
   if hand_json != yacc_json || hand_json != cst_json {
     fail(

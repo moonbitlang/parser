@@ -43,8 +43,7 @@ fn cst_leaf_string(node : @node.CstNode) -> String? {
     let (label, child) = entry
     if label is Some("payload") {
       match child.kind {
-        @node.NodeKind::Leaf(@node.NodePayload::String(value)) =>
-          return Some(value)
+        Leaf(String(value)) => return Some(value)
         _ => ()
       }
     }
@@ -57,11 +56,10 @@ fn collect_cst_recovered_regex_literals(
   node : @node.CstNode,
   literals : Array[String],
 ) -> Unit {
-  if node.kind is @node.NodeKind::RegexPattern_Literal {
+  if node.kind is RegexPattern_Literal {
     for entry in node.children {
       let (label, child) = entry
-      if label is Some("lex_literal") &&
-        child.kind is @node.NodeKind::LexLiteral_String {
+      if label is Some("lex_literal") && child.kind is LexLiteral_String {
         if cst_leaf_string(child) is Some(value) {
           literals.push(value)
         }

@@ -337,7 +337,7 @@ fn pattern_starts_constr_any(state : ParserState) -> Bool {
 fn parse_constr_any_pattern(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("type"), parse_type_name_node(state))
-  push_child(children, Some("op"), state.expect_token(TokenKind::TK_COLONCOLON))
+  push_child(children, Some("op"), state.expect_token(TK_COLONCOLON))
   let is_unknown = state.current_is(TK_DOTDOT)
   push_child(
     children,
@@ -483,11 +483,11 @@ fn parse_object_constructor_pattern(state : ParserState) -> CstNode {
 fn parse_pattern_atom(
   state : ParserState,
   stop_kinds : Array[TokenKind],
-  allow_brace_pattern_start? : Bool = false,
+  allow_brace_pattern_start~ : Bool = false,
 ) -> CstNode {
   match state.peek() {
     Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) &&
-      !(allow_brace_pattern_start && tok.kind() is TokenKind::TK_LBRACE) =>
+      !(allow_brace_pattern_start && tok.kind() is TK_LBRACE) =>
       state.construct_from_children(
         fn(loc, source_span, children) {
           let entries = recovery_children(children)
@@ -579,7 +579,7 @@ fn parse_pattern_atom(
         let entries = recovery_children(children)
         @node.CstNode::pattern_var(loc~, source_span~, entries~)
       })
-      if state.current_is(TokenKind::TK_LPAREN) {
+      if state.current_is(TK_LPAREN) {
         let args = parse_constructor_pattern_args(state)
         node = state.construct_from_children(
           fn(loc, source_span, children) {
@@ -899,7 +899,7 @@ fn parse_literal_pattern(
         operator_node_from_token(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::String(value)) => value
+              Some(String(value)) => value
               _ => ""
             }
             @node.CstNode::operator_unary_minus(value~, loc~, source_span~)
@@ -995,7 +995,7 @@ fn parse_literal_pattern(
 ///|
 fn parse_constructor_pattern_args(
   state : ParserState,
-  tuple_pattern? : Bool = false,
+  tuple_pattern~ : Bool = false,
 ) -> CstNode {
   let list = parse_delimited(
     state,
@@ -1136,7 +1136,7 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
       pattern?,
     )
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     is_pun = false
     argument_builder = fn(loc, source_span, children) {
       let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
@@ -1210,7 +1210,7 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
         "pun",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_pun(value~, loc~, source_span~)
@@ -1285,7 +1285,7 @@ fn parse_labelled_constructor_pattern_arg(state : ParserState) -> CstNode {
         "pun",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_pun(value~, loc~, source_span~)

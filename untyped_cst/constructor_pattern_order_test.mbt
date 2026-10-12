@@ -37,10 +37,7 @@ fn assert_constructor_pattern_children(
       (line, bol, cnum + width),
     )
     if label == "trivia" {
-      @test.assert_eq(
-        child.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-        true,
-      )
+      @test.assert_eq(child.kind is Syntax_Token(TK_COMMENT), true)
     }
     offset += text.length()
     cnum += width
@@ -165,7 +162,7 @@ test "constructor recovery retains visibility before an invalid name" {
       ("error", "x", 1),
     ])
     let error = node.children[1].1
-    @test.assert_eq(error.kind is @untyped_cst.NodeKind::Error, true)
+    @test.assert_eq(error.kind is Error, true)
     @test.assert_eq(refactor_labels(error), [Some("item")])
     @test.assert_eq(error.children[0].1.text(source), "x"[:])
     @test.assert_eq(reports[0].loc, node.children[0].1.loc)
@@ -229,7 +226,7 @@ test "missing with patterns retain an end-anchored placeholder before with" {
     labels.append([Some("pattern"), Some("op"), Some("body"), Some("close")])
     @test.assert_eq(refactor_labels(node), labels)
     let missing = node.children[comment_count + 1].1
-    @test.assert_eq(missing.kind is @untyped_cst.NodeKind::Missing, true)
+    @test.assert_eq(missing.kind is Missing, true)
     @test.assert_eq(missing.loc, @node.empty_loc(node.loc.end))
     @test.assert_eq(
       missing.source_span,

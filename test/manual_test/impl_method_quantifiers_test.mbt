@@ -15,7 +15,7 @@ test "parse impl method quantifiers" {
   )
   if !hand_reports.is_empty() {
     fail(
-      "handrolled parser rejected impl method quantifiers: \{hand_reports.to_json().stringify(indent=2)}",
+      "handrolled parser rejected impl method quantifiers: \{Json(hand_reports).stringify(indent=2)}",
     )
   }
   let (yacc_impls, yacc_reports) = @parser.parse_string(
@@ -25,11 +25,11 @@ test "parse impl method quantifiers" {
   )
   if !yacc_reports.is_empty() {
     fail(
-      "moonyacc parser rejected impl method quantifiers: \{yacc_reports.to_json().stringify(indent=2)}",
+      "moonyacc parser rejected impl method quantifiers: \{Json(yacc_reports).stringify(indent=2)}",
     )
   }
-  let hand_json = hand_impls.map(impl_ => impl_.json_repr()).to_json()
-  let yacc_json = yacc_impls.map(impl_ => impl_.json_repr()).to_json()
+  let hand_json = Json(hand_impls.map(impl_ => impl_.json_repr()))
+  let yacc_json = Json(yacc_impls.map(impl_ => impl_.json_repr()))
   let cst_json = cst_impls_json(source, "impl_method_quantifiers.mbt")
   if hand_json != yacc_json || hand_json != cst_json {
     fail(

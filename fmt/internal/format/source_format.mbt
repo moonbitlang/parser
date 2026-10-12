@@ -222,7 +222,7 @@ fn format_nth_markdown_impl(
 pub fn format_nth_impl_from_source(
   source : String,
   index : Int,
-  is_markdown? : Bool = false,
+  is_markdown~ : Bool = false,
 ) -> (Int, Int, String)? {
   if is_markdown {
     format_nth_markdown_impl(source, index)
@@ -234,8 +234,8 @@ pub fn format_nth_impl_from_source(
 ///|
 pub fn format_markdown(
   source : String,
-  name? : String = "",
-  block_line? : Bool = false,
+  name~ : String = "",
+  block_line~ : Bool = false,
 ) -> String {
   ignore(name)
   let lines = split_lines(source)

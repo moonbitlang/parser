@@ -1,7 +1,7 @@
 ///|
 fn impls_json(impls : @syntax.Impls) -> Json {
   @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
 }
 
@@ -32,9 +32,9 @@ fn fail_parser_reports(
     ..write_string("Source:\n")
     ..write_string(source)
     ..write_string("\nHandrolled parser diagnostics: ")
-    ..write_string(hand_reports.to_json().stringify(indent=2))
+    ..write_string(Json(hand_reports).stringify(indent=2))
     ..write_string("\nYacc parser diagnostics: ")
-    ..write_string(yacc_reports.to_json().stringify(indent=2))
+    ..write_string(Json(yacc_reports).stringify(indent=2))
     .write_string("\n")
   })
   fail(buf.to_string())
@@ -43,7 +43,7 @@ fn fail_parser_reports(
 ///|
 fn assert_ast_equiv(
   source : String,
-  label? : String = "<source>",
+  label~ : String = "<source>",
 ) -> Unit raise {
   let (hand_impls, hand_reports) = @parser.parse_string(
     source,
@@ -57,7 +57,7 @@ fn assert_ast_equiv(
   if cst_result.diagnostics_view().length() != 0 {
     let reports = reports_from_view(cst_result.diagnostics_view())
     let rendered = @basic.show_loc.protect(String, fn() {
-      reports.to_json().stringify(indent=2)
+      Json(reports).stringify(indent=2)
     })
     fail("CST diagnostics for \{label}: \{rendered}")
   }
@@ -744,7 +744,7 @@ test "copied AST parser bridge files are removed from package sources" {
 
 ///|
 fn handrolled_cst_reports_json(reports : Array[@basic.Report]) -> Json {
-  @basic.show_loc.protect(Json, fn() { reports.to_json() })
+  @basic.show_loc.protect(Json, fn() { Json(reports) })
 }
 
 ///|

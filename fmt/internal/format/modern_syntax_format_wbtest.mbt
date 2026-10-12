@@ -6,7 +6,7 @@ fn assert_modern_syntax_format_pipeline(source : String) -> String raise {
       .join(", ")
     let (_, reports, _) = parse(source)
     fail(
-      "modern syntax regression source must parse:\n\{source}\nlex: \{lex_errors}\nparse: \{reports.to_json().stringify(indent=2)}",
+      "modern syntax regression source must parse:\n\{source}\nlex: \{lex_errors}\nparse: \{Json(reports).stringify(indent=2)}",
     )
   }
   guard format_once(original.impls, original.tokens, block_line=false)

@@ -329,7 +329,7 @@ fn lower_map_pattern_elem(node : CstNode) -> @syntax.MapPatElem {
     pat: node
     .first_child_with_label("pattern")
     .map(lower_pattern)
-    .unwrap_or(@syntax.Pattern::Any(loc=node.loc)),
+    .unwrap_or(Any(loc=node.loc)),
     match_absent: node
     .bool_marker_value(fn(kind) { kind is Flag_MatchAbsent })
     .unwrap_or(false),
@@ -370,9 +370,8 @@ fn lower_pattern_items(node : CstNode) -> Array[@syntax.Pattern] {
 fn lower_tuple_pattern(node : CstNode) -> @syntax.Pattern {
   let items = lower_pattern_items(node)
   if node.has_child_kind(fn(kind) { kind is Pattern_Group }) {
-    match items.get(0).unwrap_or(@syntax.Pattern::Any(loc=node.loc)) {
-      @syntax.Pattern::Constraint(pat~, ty~, loc=_) =>
-        @syntax.Pattern::Constraint(pat~, ty~, loc=node.loc)
+    match items.get(0).unwrap_or(Any(loc=node.loc)) {
+      Constraint(pat~, ty~, loc=_) => Constraint(pat~, ty~, loc=node.loc)
       item => item
     }
   } else {

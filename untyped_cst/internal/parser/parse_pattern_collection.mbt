@@ -10,7 +10,7 @@ fn parse_array_pattern_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_array_pattern_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   let mut saw_ordinary_rest = false
   let mut rest_offender_index = 0
@@ -462,7 +462,7 @@ fn parse_record_pattern_list(state : ParserState) -> CstNode {
         entries~,
       )
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   validate_brace_pattern_list(state, list, false, item_starts)
   list
@@ -569,7 +569,7 @@ fn parse_record_pattern_item(state : ParserState) -> CstNode {
             "pun",
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::Bool(value)) => value
+                Some(Bool(value)) => value
                 _ => false
               }
               @node.CstNode::flag_pun(value~, loc~, source_span~)
@@ -641,7 +641,7 @@ fn parse_map_pattern_list(state : ParserState) -> CstNode {
       let entries = list_children(children)
       @node.CstNode::list_map_pattern_field_list(loc~, source_span~, entries~)
     },
-    sep_kind=TokenKind::TK_COMMA,
+    sep_kind=TK_COMMA,
   )
   validate_brace_pattern_list(state, list, true, item_starts)
   list
@@ -720,7 +720,7 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
           operator_node_from_token(
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::String(value)) => value
+                Some(String(value)) => value
                 _ => ""
               }
               @node.CstNode::operator_unary_minus(value~, loc~, source_span~)
@@ -766,7 +766,7 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
                 fn(loc, source_span, children) {
                   let value = match
                     @construction.payload_from_children(children) {
-                    Some(NodePayload::Bool(value)) => value
+                    Some(Bool(value)) => value
                     _ => false
                   }
                   @node.CstNode::flag_match_absent(value~, loc~, source_span~)
@@ -838,7 +838,7 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
         "match_absent",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_match_absent(value~, loc~, source_span~)
@@ -857,7 +857,7 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
 fn parse_pattern_postfix(
   state : ParserState,
   stop_kinds : Array[TokenKind],
-  allow_brace_pattern_start? : Bool = false,
+  allow_brace_pattern_start~ : Bool = false,
 ) -> CstNode {
   let mut pat = parse_pattern_atom(
     state,
@@ -942,7 +942,7 @@ fn parse_pattern_or(
 fn parse_pattern_range(
   state : ParserState,
   stop_kinds : Array[TokenKind],
-  allow_brace_pattern_start? : Bool = false,
+  allow_brace_pattern_start~ : Bool = false,
 ) -> CstNode {
   let mut lhs = parse_pattern_postfix(
     state,
@@ -952,7 +952,7 @@ fn parse_pattern_range(
   match state.peek() {
     Some((RANGE_EXCLUSIVE, _, _)) | Some((RANGE_INCLUSIVE, _, _)) => {
       let range_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
-          TokenKind::TK_RANGE_EXCLUSIVE,
+          TK_RANGE_EXCLUSIVE,
         ) {
         fn(loc, source_span, children) {
           let _ = children

@@ -220,7 +220,7 @@ pub fn ParserState::required_pattern_node(
   self : ParserState,
   parsed : CstNode,
   reports_before : Int,
-  expected? : String = "",
+  expected~ : String = "",
 ) -> CstNode {
   if !parsed.children.is_empty() {
     parsed

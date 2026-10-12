@@ -55,7 +55,7 @@ pub fn CstNode::bool_marker_value(
 
 ///|
 fn CstNode::with_kind(self : CstNode, kind : NodeKind) -> CstNode {
-  CstNode::{
+  {
     kind,
     loc: self.loc,
     source_span: self.source_span,

@@ -50,7 +50,7 @@ fn attribute_metadata_node(
         scalar_subtoken_node(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::String(value)) => value
+              Some(String(value)) => value
               _ => ""
             }
             @node.CstNode::attribute_qualifier(value~, loc~, source_span~)
@@ -67,7 +67,7 @@ fn attribute_metadata_node(
         scalar_subtoken_node(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::String(value)) => value
+              Some(String(value)) => value
               _ => ""
             }
             @node.CstNode::attribute_name(value~, loc~, source_span~)
@@ -84,7 +84,7 @@ fn attribute_metadata_node(
         scalar_subtoken_node(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::String(value)) => value
+              Some(String(value)) => value
               _ => ""
             }
             @node.CstNode::attribute_raw_payload(value~, loc~, source_span~)
@@ -121,7 +121,7 @@ fn attribute_metadata_node(
         scalar_subtoken_node(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::String(value)) => value
+              Some(String(value)) => value
               _ => ""
             }
             @node.CstNode::attribute_name(value~, loc~, source_span~)
@@ -138,7 +138,7 @@ fn attribute_metadata_node(
         scalar_subtoken_node(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::String(value)) => value
+              Some(String(value)) => value
               _ => ""
             }
             @node.CstNode::attribute_raw_payload(value~, loc~, source_span~)
@@ -176,7 +176,7 @@ fn comment_metadata_node(
       scalar_node(
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::String(value)) => value
+            Some(String(value)) => value
             _ => ""
           }
           @node.CstNode::comment_content(value~, loc~, source_span~)
@@ -189,7 +189,7 @@ fn comment_metadata_node(
   ]
   let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = match
     comment.kind {
-    @tokens.InlineTrailing =>
+    InlineTrailing =>
       fn(loc, source_span, children) {
         let content = @construction.first_child_with_label_from(
           children, "content",
@@ -204,14 +204,14 @@ fn comment_metadata_node(
           consumed_by_docstring~,
         )
       }
-    @tokens.Ownline(leading_blank_line~, trailing_blank_line~) => {
+    Ownline(leading_blank_line~, trailing_blank_line~) => {
       push_child(
         children,
         Some("leading_blank_line"),
         bool_marker_node(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::Bool(value)) => value
+              Some(Bool(value)) => value
               _ => false
             }
             @node.CstNode::comment_leading_blank_line(
@@ -231,7 +231,7 @@ fn comment_metadata_node(
         bool_marker_node(
           fn(loc, source_span, children) {
             let value = match @construction.payload_from_children(children) {
-              Some(NodePayload::Bool(value)) => value
+              Some(Bool(value)) => value
               _ => false
             }
             @node.CstNode::comment_trailing_blank_line(
@@ -275,7 +275,7 @@ fn comment_metadata_node(
     bool_marker_node(
       fn(loc, source_span, children) {
         let value = match @construction.payload_from_children(children) {
-          Some(NodePayload::Bool(value)) => value
+          Some(Bool(value)) => value
           _ => false
         }
         @node.CstNode::comment_consumed_by_docstring(value~, loc~, source_span~)

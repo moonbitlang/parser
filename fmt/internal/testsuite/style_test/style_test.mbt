@@ -7,7 +7,7 @@ fn read_fixture(path : String) -> String raise {
 fn inspect_nth(
   source : String,
   index : Int,
-  is_markdown? : Bool = false,
+  is_markdown~ : Bool = false,
 ) -> String {
   match @format.format_nth_impl_from_source(source, index, is_markdown~) {
     None => "none"
@@ -74,7 +74,7 @@ fn ast_check(name~ : String, source~ : String, round1~ : String) -> Unit raise {
       (
         $| format(\{name}.mbt) produced diagnostics on the original source.
         $|================= diagnostics =================
-        $|\{report1.to_json().stringify(indent=2)})}
+        $|\{Json(report1).stringify(indent=2)})}
       ),
     )
   }
@@ -83,7 +83,7 @@ fn ast_check(name~ : String, source~ : String, round1~ : String) -> Unit raise {
       (
         $| format(\{name}.mbt) produced diagnostics on the formatted source.
         $|================= diagnostics =================
-        $|\{report2.to_json().stringify(indent=2)}
+        $|\{Json(report2).stringify(indent=2)}
       ),
     )
   }
@@ -95,9 +95,9 @@ fn ast_check(name~ : String, source~ : String, round1~ : String) -> Unit raise {
       (
         $| format(\{name}.mbt) changed the AST.
         $|================= source AST =================
-        $|\{source_ast.to_json().stringify(indent=2)}
+        $|\{Json(source_ast).stringify(indent=2)}
         $|================= round1 AST =================
-        $|\{round1_ast.to_json().stringify(indent=2)}
+        $|\{Json(round1_ast).stringify(indent=2)}
       ),
     )
   }

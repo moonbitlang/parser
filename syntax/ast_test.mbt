@@ -294,17 +294,17 @@ test "impl variants to_json" {
     },
   )
   let view = @syntax.TopView(
-    quantifiers=@list.empty(),
+    quantifiers=List([]),
     source_ty=int_type,
     view_type_name="TestViewType",
     view_func_name=binder,
     view_type_loc=dummy_loc,
     params_loc=dummy_loc,
-    view_constrs=@list.empty(),
-    parameters=@list.empty(),
+    view_constrs=List([]),
+    parameters=List([]),
     body=unit_expr,
     vis=Default,
-    attrs=@list.empty(),
+    attrs=List([]),
     doc=dummy_docstring,
     loc=dummy_loc,
   )

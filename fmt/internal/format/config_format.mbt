@@ -20,7 +20,7 @@ priv struct ConfigFmt {
 ///|
 fn ConfigFmt::new(
   mapper? : @comment.CheckpointMapper,
-  migration? : Bool = false,
+  migration~ : Bool = false,
 ) -> Self {
   { mapper, migration, }
 }
@@ -950,8 +950,8 @@ fn config_tokens_after_edits(
 fn format_config_checked(
   source : String,
   kind : ConfigKind,
-  add_dependencies? : ArrayView[String] = [],
-  remove_dependencies? : ArrayView[String] = [],
+  add_dependencies~ : ArrayView[String] = [],
+  remove_dependencies~ : ArrayView[String] = [],
 ) -> String {
   guard parse_config(source, kind) is Some(parsed) else { return source }
   let (expected_ast, removed_locs, surviving_locs) = if kind is MoonMod {
@@ -1020,8 +1020,8 @@ pub fn format_moon_pkg(source : String) -> String {
 ///|
 pub fn format_moon_mod(
   source : String,
-  add_dependencies? : ArrayView[String] = [],
-  remove_dependencies? : ArrayView[String] = [],
+  add_dependencies~ : ArrayView[String] = [],
+  remove_dependencies~ : ArrayView[String] = [],
 ) -> String {
   format_config_checked(
     source,

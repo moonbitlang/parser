@@ -186,24 +186,24 @@ fn SemanticNormalizer::process(impls : @syntax.Impls) -> @syntax.Impls {
             @syntax.Visibility::Pub(loc~, attr=None)
           vis => vis
         }
-        let declaration : @syntax.Impl = @syntax.Impl::TopTypeDef({
+        let declaration : @syntax.Impl = TopTypeDef({
           ..decl,
           components: ExtensibleEnum(None),
           type_vis: declaration_vis,
-          deriving: @list.empty(),
+          deriving: List([]),
         })
         let target = @syntax.TypeName::{
-          name: @syntax.LongIdent::Ident(name=decl.tycon),
+          name: Ident(name=decl.tycon),
           is_object: false,
           loc: decl.tycon_loc,
         }
-        let extension : @syntax.Impl = @syntax.Impl::TopTypeDef({
+        let extension : @syntax.Impl = TopTypeDef({
           ..decl,
           components: ExtendEnum(target~, constructors=constrs),
           doc: @syntax.DocString::empty(),
           is_declare: false,
         })
-        @list.List([declaration, extension])
+        List([declaration, extension])
       }
       TopTypeDef(decl) if decl.components is ExtensibleEnum(None) => {
         let type_vis = match decl.type_vis {
@@ -211,7 +211,7 @@ fn SemanticNormalizer::process(impls : @syntax.Impls) -> @syntax.Impls {
             @syntax.Visibility::Pub(loc~, attr=None)
           vis => vis
         }
-        @list.singleton(@syntax.Impl::TopTypeDef({ ..decl, type_vis, }))
+        @list.singleton(TopTypeDef({ ..decl, type_vis, }))
       }
       _ => @list.singleton(item)
     }

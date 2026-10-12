@@ -8,12 +8,12 @@ pub struct CstNode {
 
 ///|
 pub fn mk_loc(start : Position, end : Position) -> Location {
-  Location::{ start, end, }
+  { start, end, }
 }
 
 ///|
 pub fn empty_loc(pos : Position) -> Location {
-  Location::{ start: pos, end: pos, }
+  { start: pos, end: pos, }
 }
 
 ///|

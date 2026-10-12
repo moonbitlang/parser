@@ -182,7 +182,7 @@ pub fn accessor_node_from_token(token : CstNode) -> CstNode {
       scalar_node(
         fn(loc, source_span, children) {
           let value = match payload_from_children(children) {
-            Some(NodePayload::String(value)) => value
+            Some(String(value)) => value
             _ => ""
           }
           @node.CstNode::accessor_label(value~, loc~, source_span~)

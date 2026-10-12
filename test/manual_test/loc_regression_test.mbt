@@ -34,7 +34,7 @@ fn parse_loc_regression(
     }
   }
   let json = @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
   match (brace_group_loc, params_loc) {
     (Some(brace_group_loc), Some(params_loc)) =>
@@ -84,7 +84,7 @@ fn parse_grouped_pattern_loc_regression(
     fail("\{Repr(diagnostics)}")
   }
   @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
 }
 
@@ -142,7 +142,7 @@ fn parse_modern_syntax_loc_regression(
     )
   }
   @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
 }
 
@@ -257,7 +257,7 @@ fn parse_labelled_pun_loc_regression(
   }
   let (value_loc, label_loc) = find_labelled_pun_locations(impls)
   let json = @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
   (value_loc, label_loc, json)
 }
@@ -280,7 +280,7 @@ fn parse_labelled_pun_cst_loc_regression() -> (
   }
   let (value_loc, label_loc) = find_labelled_pun_locations(impls)
   let json = @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
   (value_loc, label_loc, json)
 }
@@ -521,10 +521,10 @@ test "nested array-set locations agree across all parsers" {
     fail("nested array-set fixture was rejected")
   }
   let hand_json = @basic.show_loc.protect(String, fn() {
-    hand_impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(hand_impls.map(impl_ => impl_.json_repr()))
   })
   let yacc_json = @basic.show_loc.protect(String, fn() {
-    yacc_impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(yacc_impls.map(impl_ => impl_.json_repr()))
   })
   let cst_json = @basic.show_loc.protect(String, fn() raise {
     cst_impls_json(source, name)
@@ -594,7 +594,7 @@ fn parse_labelled_loop_expr_loc_regression(
     fail("labelled-loop fixture was rejected by {parser}: {diagnostics}")
   }
   @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
 }
 

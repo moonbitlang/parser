@@ -36,9 +36,7 @@ fn constructor_example() -> Unit {
   let span = @node.empty_span(0)
   let name = @node.CstNode::name_identifier(value="x", loc~, source_span=span)
   let ident = @node.CstNode::expr_ident(loc~, source_span=span, name=[name])
-  guard ident.kind is @node.NodeKind::Expr_Ident else {
-    abort("unexpected node kind")
-  }
+  guard ident.kind is Expr_Ident else { abort("unexpected node kind") }
 }
 ```
 

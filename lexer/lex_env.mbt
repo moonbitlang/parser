@@ -121,7 +121,7 @@ fn LexEnv::add_token_with_loc(
   tok : Token,
   start~ : Int,
   end~ : Int,
-  start_offset? : Int = 0,
+  start_offset~ : Int = 0,
 ) -> Unit {
   let start = self.make_pos(start + start_offset)
   let end = self.make_pos(end)
@@ -147,7 +147,7 @@ fn LexEnv::preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
             docstrings[last_idx] = last.rev()
             docstrings.push(@list.singleton((loc, comment)))
           } else {
-            docstrings[last_idx] = docstrings[last_idx].add((loc, comment))
+            docstrings[last_idx] = docstrings[last_idx].prepend((loc, comment))
           }
         }
       }
