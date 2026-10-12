@@ -82,7 +82,7 @@ fn parse_type_atom(
 ///|
 fn parse_single_token_type(
   state : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   if state.consume_any() is Some(token) {
     state.construct_from_children(builder, [(Some("name"), token)])
@@ -305,7 +305,7 @@ fn parse_paren_type(
       _ => ()
     }
   }
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if item_count ==
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if item_count ==
     1 {
     fn(loc, source_span, children) {
       let entries = recovery_children(children)

@@ -57,7 +57,7 @@ fn api_direct_labeled_kind(
 }
 
 ///|
-fn api_count_direct_label(node : @untyped_cst.CstNode, label : String) -> Int {
+fn api_count_direct_label(node : @untyped_cst.CstNode, label : String) -> Int32 {
   let mut count = 0
   for entry in node.children {
     match entry {

@@ -31,7 +31,7 @@ fn recovery_is_error(node : @untyped_cst.CstNode) -> Bool {
 ///|
 fn recovery_root_item_at(
   root : @untyped_cst.CstNode,
-  index : Int,
+  index : Int32,
 ) -> @untyped_cst.CstNode? {
   let mut item_index = 0
   for entry in root.children {
@@ -92,8 +92,8 @@ fn recovery_has_direct_child(
 fn recovery_check_source_spans(
   node : @untyped_cst.CstNode,
   source : String,
-  previous_end : Int,
-) -> Int raise {
+  previous_end : Int32,
+) -> Int32 raise {
   let (start, end) = node.source_span
   @test.assert_eq(start >= 0 && start <= end && end <= source.length(), true)
   if node.kind.is_syntax_token() {

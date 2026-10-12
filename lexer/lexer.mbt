@@ -6,7 +6,7 @@ fn lex_tokens(
   input : StringView,
   base~ : StringView,
   env~ : LexEnv,
-  preserve_comment~ : (Comment, Int, Int) -> Unit,
+  preserve_comment~ : (Comment, Int32, Int32) -> Unit,
 ) -> Unit {
   fn metavar_enabled() -> Bool {
     env.enable_metavar
@@ -49,7 +49,7 @@ fn lex_tokens(
       tok : @tokens.Token,
       rest : StringView,
       disabled_char : Char,
-      start_offset : Int,
+      start_offset : Int32,
     ) -> StringView {
       if metavar_enabled() {
         env.add_token_with_loc(
@@ -69,7 +69,7 @@ fn lex_tokens(
       raw : StringView,
       rest : StringView,
       disabled_char : Char,
-      start_offset : Int,
+      start_offset : Int32,
     ) -> StringView {
       if metavar_enabled() {
         env.add_lexing_error(
@@ -88,7 +88,7 @@ fn lex_tokens(
     fn add_metavar_error_to_rest(
       rest : StringView,
       disabled_char : Char,
-      start_offset : Int,
+      start_offset : Int32,
     ) -> StringView {
       let raw_end = env.calc_offset(rest, base~) - env.calc_offset(input, base~)
       add_metavar_error(
@@ -1354,9 +1354,9 @@ fn scan_interpolation_source(
   base~ : StringView,
   env~ : LexEnv,
   buf~ : StringBuilder,
-  brace_depth~ : Int,
+  brace_depth~ : Int32,
   preserve~ : Bool,
-) -> (StringView, Int) {
+) -> (StringView, Int32) {
   for input = input, brace_depth = brace_depth {
     lexmatch input with longest {
       (re"^" + ((RE_UNICODE_SPACES + re"\}") as raw), after=rest) =>
@@ -1514,11 +1514,11 @@ fn scan_interpolation_string_atom(
   base~ : StringView,
   env~ : LexEnv,
   buf~ : StringBuilder,
-  brace_depth~ : Int,
+  brace_depth~ : Int32,
   preserve~ : Bool,
   allow_interp~ : Bool,
   escaped~ : Bool,
-) -> (StringView, Int) {
+) -> (StringView, Int32) {
   for input = input, escaped = escaped {
     lexmatch input with longest {
       re"^$" => {
@@ -1581,10 +1581,10 @@ fn scan_interpolation_char_atom(
   base~ : StringView,
   env~ : LexEnv,
   buf~ : StringBuilder,
-  brace_depth~ : Int,
+  brace_depth~ : Int32,
   preserve~ : Bool,
   escaped~ : Bool,
-) -> (StringView, Int) {
+) -> (StringView, Int32) {
   for input = input, escaped = escaped {
     lexmatch input with longest {
       re"^$" => {
@@ -1628,7 +1628,7 @@ fn lex_invalid_byte(
   input : StringView,
   base~ : StringView,
   env~ : LexEnv,
-  start~ : Int,
+  start~ : Int32,
 ) -> StringView {
   let invalid_byte_repr_buf = StringBuilder()
   fn add_invalid_byte(rest : StringView) -> StringView {
@@ -1671,11 +1671,11 @@ fn lex_string(
   env~ : LexEnv,
   end_with_newline~ : Bool,
   allow_interp~ : Bool,
-  start_pos~ : Int,
+  start_pos~ : Int32,
 ) -> (StringView, Array[InterpElem]) {
   let string_repr_buf = StringBuilder()
   let interps = []
-  fn add_literal(repr : String, start : Int, end : Int) -> Unit {
+  fn add_literal(repr : String, start : Int32, end : Int32) -> Unit {
     interps.push(
       @tokens.InterpElem::InterpLit(repr~, loc={
         start: env.make_pos(start),
@@ -1684,7 +1684,7 @@ fn lex_string(
     )
   }
 
-  fn process_string(input : StringView, start_pos : Int) -> StringView {
+  fn process_string(input : StringView, start_pos : Int32) -> StringView {
     for input = input, start_pos = start_pos {
       lexmatch input with longest {
         (

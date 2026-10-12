@@ -161,11 +161,11 @@ fn parse_labelled_argument(
     ()
   }
   let mut is_pun = false
-  let mut argument_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
-    loc,
-    source_span,
-    children,
-  ) {
+  let mut argument_builder : (
+    Location,
+    (Int32, Int32),
+    Array[(String?, CstNode)],
+  ) -> CstNode = fn(loc, source_span, children) {
     let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
       missing_at_end(loc~, source_span~),
     )
@@ -316,11 +316,11 @@ fn parse_optional_forwarding_argument(
     ()
   }
   let mut is_pun = true
-  let mut argument_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
-    loc,
-    source_span,
-    children,
-  ) {
+  let mut argument_builder : (
+    Location,
+    (Int32, Int32),
+    Array[(String?, CstNode)],
+  ) -> CstNode = fn(loc, source_span, children) {
     let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
       missing_at_end(loc~, source_span~),
     )

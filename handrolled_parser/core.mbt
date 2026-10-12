@@ -1,7 +1,7 @@
 ///|
 priv enum Mode {
   Normal
-  Panic(fail_at~ : TokenKind, sync_at~ : Int, loc~ : Location)
+  Panic(fail_at~ : TokenKind, sync_at~ : Int32, loc~ : Location)
 }
 
 ///|
@@ -21,7 +21,7 @@ test {
 priv struct State {
   tokens : Array[Triple]
   diagnostics : Array[Report]
-  mut next : Int
+  mut next : Int32
   syncs : Array[TokenKind]
   mut mode : Mode
   mut parsed_position : Position
@@ -42,7 +42,7 @@ priv struct State {
 // }
 
 ///|
-fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
+fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int32? {
   let mut i = xs.length() - 1
   while i >= 0 {
     if xs[i] == kind {
@@ -58,7 +58,7 @@ fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
 /// 
 /// peek(nth=0) returns the next not consumed token
 /// peek(nth=1) returns the next token after the next not consumed token
-fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
+fn State::peek(state : Self, nth~ : Int32 = 0) -> Triple {
   let mut ofs = 0
   let mut step = 0
   while state.tokens.get(state.next + ofs) is Some((token, _, _) as triple) {
@@ -97,22 +97,22 @@ fn State::consume(state : Self) -> Triple {
 }
 
 ///|
-fn State::peek_token(state : Self, nth~ : Int = 0) -> Token {
+fn State::peek_token(state : Self, nth~ : Int32 = 0) -> Token {
   state.peek(nth~).0
 }
 
 ///|
-fn State::peek_kind(state : Self, nth~ : Int = 0) -> TokenKind {
+fn State::peek_kind(state : Self, nth~ : Int32 = 0) -> TokenKind {
   state.peek(nth~).0.kind()
 }
 
 ///|
-fn State::peek_spos(state : Self, nth~ : Int = 0) -> Position {
+fn State::peek_spos(state : Self, nth~ : Int32 = 0) -> Position {
   state.peek(nth~).1
 }
 
 ///|
-fn State::peek_epos(state : Self, nth~ : Int = 0) -> Position {
+fn State::peek_epos(state : Self, nth~ : Int32 = 0) -> Position {
   state.peek(nth~).2
 }
 
@@ -472,7 +472,7 @@ fn State::expect_dot_uident(self : Self, context~ : String) -> String {
 }
 
 ///|
-fn State::expect_dot_int(self : Self) -> Int {
+fn State::expect_dot_int(self : Self) -> Int32 {
   self.expect(TK_PACKAGE_NAME, default=0, tok => {
     match tok {
       DOT_INT(s) => Some(s)

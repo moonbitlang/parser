@@ -4,7 +4,7 @@
 fn construction_tree_snapshot(
   t : @test.Test,
   node : @untyped_cst.CstNode,
-  depth : Int,
+  depth : Int32,
   label : String?,
 ) -> Unit {
   let indent = "  ".repeat(depth)

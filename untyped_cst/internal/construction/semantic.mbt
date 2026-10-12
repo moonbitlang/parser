@@ -1,8 +1,8 @@
 ///|
 fn constant_node(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   value : String,
 ) -> CstNode {
   scalar_node(builder, loc, source_span, String(value))
@@ -12,7 +12,7 @@ fn constant_node(
 fn constant_node_from_syntax(
   constant : @syntax.Constant,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   match constant {
     Bool(value) =>
@@ -191,7 +191,7 @@ fn constant_node_from_syntax(
 pub fn constant_node_from_token(
   token : Token,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode? {
   match token {
     TRUE =>
@@ -328,7 +328,7 @@ pub fn constant_node_from_token(
 fn lexical_name_node_from_token(
   token : Token,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode? {
   match token {
     LIDENT(value) | UIDENT(value) | DOT_LIDENT(value) | DOT_UIDENT(value) =>
@@ -449,7 +449,7 @@ fn lexical_name_node_from_token(
 fn accessor_node_from_token_value(
   token : Token,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode? {
   match token {
     DOT_INT(index) =>
@@ -502,7 +502,7 @@ fn accessor_node_from_token_value(
 pub fn raw_token_semantic_children(
   token : Token,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> Array[(String?, CstNode)] {
   let children : Array[(String?, CstNode)] = []
   if constant_node_from_token(token, loc, source_span) is Some(constant) {
@@ -692,10 +692,10 @@ fn operator_spelling(token : Token) -> String? {
 
 ///|
 pub fn operator_node_from_token(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   token : Token,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   scalar_node(
     builder,
@@ -710,7 +710,7 @@ pub fn signed_constant_node(
   constant : CstNode,
   negative : Bool,
   loc~ : Location = constant.loc,
-  source_span~ : (Int, Int) = constant.source_span,
+  source_span~ : (Int32, Int32) = constant.source_span,
 ) -> CstNode {
   if (!negative && loc == constant.loc && source_span == constant.source_span) ||
     constant.kind is Constant_Bool {
@@ -743,7 +743,7 @@ pub fn signed_constant_node(
 pub fn lex_literal_node_from_token(
   token : Token,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode? {
   match token {
     STRING(value) =>
@@ -793,7 +793,7 @@ pub fn constant_can_fold_prefix(constant : CstNode, operator : Token) -> Bool {
 fn semantic_ident_expr(
   name : String,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   let name_node = scalar_node(
     fn(loc, source_span, children) {
@@ -842,7 +842,7 @@ fn semantic_ident_expr(
 fn semantic_var_pattern(
   name : String,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   let name_node = scalar_node(
     fn(loc, source_span, children) {

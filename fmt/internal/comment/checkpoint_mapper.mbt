@@ -13,22 +13,22 @@ pub struct CommentSlot {
 ///|
 pub struct CheckpointMapper {
   tokens : @tokens.Triples
-  start : Int
-  limit : Int
+  start : Int32
+  limit : Int32
   slots : Array[CommentSlot]
   dangling : Array[@tokens.Comment]
   mut mode : CheckpointMode
-  mut cursor : Int
-  mut current_slot : Int?
-  mut pretty_slot : Int
+  mut cursor : Int32
+  mut current_slot : Int32?
+  mut pretty_slot : Int32
   mut failed : Bool
 }
 
 ///|
 pub fn CheckpointMapper::new(
   tokens : @tokens.Triples,
-  start~ : Int = 0,
-  len~ : Int = -1,
+  start~ : Int32 = 0,
+  len~ : Int32 = -1,
 ) -> Self {
   let start = @cmp.maximum(0, @cmp.minimum(start, tokens.length()))
   let limit = if len < 0 {

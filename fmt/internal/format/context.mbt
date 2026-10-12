@@ -11,7 +11,7 @@ priv enum InfixCtx {
 }
 
 ///|
-fn precedence_of_operator(op : String) -> Int {
+fn precedence_of_operator(op : String) -> Int32 {
   match op {
     "||" => 1
     "&&" => 2

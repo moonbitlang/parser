@@ -7,7 +7,7 @@ struct Mapper {
   /// for debug purpose
   comments : Array[Comment]
   tokens : Array[Triple]
-  mut cursor : Int
+  mut cursor : Int32
 }
 
 ///|

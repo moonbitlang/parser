@@ -5,7 +5,7 @@
 /// explicitly-kinded child nodes instead of payload variants.
 pub(all) enum NodePayload {
   String(String)
-  Int(Int)
+  Int(Int32)
   Bool(Bool)
 } derive(@debug.Debug, Eq)
 
@@ -105,7 +105,7 @@ pub fn CstNode::string_payload(self : CstNode) -> String? {
 }
 
 ///|
-pub fn CstNode::int_payload(self : CstNode) -> Int? {
+pub fn CstNode::int_payload(self : CstNode) -> Int32? {
   match self.leaf_payload() {
     Some(Int(value)) => Some(value)
     _ => None

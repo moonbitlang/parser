@@ -1,6 +1,6 @@
 ///|
 struct BinderCounter {
-  mut count : Int
+  mut count : Int32
 }
 
 ///|

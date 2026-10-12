@@ -1,5 +1,5 @@
 ///|
-fn assert_multiline_trivia(lines : ArrayView[(String, Int)]) -> Unit raise {
+fn assert_multiline_trivia(lines : ArrayView[(String, Int32)]) -> Unit raise {
   for in_function in [false, true] {
     let prefix = if in_function { "fn f() {\n" } else { "" }
     let indent = if in_function { "  " } else { "" }

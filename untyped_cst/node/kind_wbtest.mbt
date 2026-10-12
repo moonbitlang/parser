@@ -1,5 +1,5 @@
 ///|
-fn category_count(kind : NodeKind) -> Int {
+fn category_count(kind : NodeKind) -> Int32 {
   let mut count = 0
   if kind.is_syntax_token() {
     count += 1

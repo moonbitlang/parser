@@ -163,11 +163,11 @@ fn parse_trait_method_param_list(state : ParserState) -> CstNode {
 ///|
 fn parse_trait_method_param_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut parameter_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
-    loc,
-    source_span,
-    children,
-  ) {
+  let mut parameter_builder : (
+    Location,
+    (Int32, Int32),
+    Array[(String?, CstNode)],
+  ) -> CstNode = fn(loc, source_span, children) {
     let entries = recovery_children(children)
     @node.CstNode::parameter_discard_positional(loc~, source_span~, entries~)
   }
@@ -1060,7 +1060,7 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
       _ => ()
     }
   }
-  let using_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = match
+  let using_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = match
     name_kind {
     2 =>
       fn(loc, source_span, children) {

@@ -1,5 +1,5 @@
 ///|
-fn next_paren_depth(depth : Int, tok : Token) -> Int {
+fn next_paren_depth(depth : Int32, tok : Token) -> Int32 {
   match tok {
     LPAREN => depth + 1
     RPAREN => if depth > 0 { depth - 1 } else { 0 }
@@ -8,7 +8,7 @@ fn next_paren_depth(depth : Int, tok : Token) -> Int {
 }
 
 ///|
-fn is_top_level_boundary(tok : Token, depth : Int) -> Bool {
+fn is_top_level_boundary(tok : Token, depth : Int32) -> Bool {
   if depth == 0 {
     match tok {
       SEMI(_) | EOF => true
@@ -279,11 +279,11 @@ fn decl_prefix_token(tok : Token) -> Bool {
 fn parse_visibility_clause(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut is_pub = false
-  let mut visibility_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
-    loc,
-    source_span,
-    children,
-  ) {
+  let mut visibility_builder : (
+    Location,
+    (Int32, Int32),
+    Array[(String?, CstNode)],
+  ) -> CstNode = fn(loc, source_span, children) {
     let _ = children
     @node.CstNode::visibility_default(loc~, source_span~)
   }
@@ -521,7 +521,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       push_child(children, Some("default"), default)
     }
   }
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if pat.kind
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if pat.kind
     is Pattern_Any {
     fn(loc, source_span, children) {
       let entries = recovery_children(children)
@@ -881,7 +881,7 @@ fn decl_body_uses_balanced_group(kind : TopItemKind) -> Bool {
 ///|
 fn decl_body_list_builder(
   kind : TopItemKind,
-) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
+) -> (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode {
   match kind {
     Enum =>
       fn(loc, source_span, children) {
@@ -909,7 +909,7 @@ fn decl_body_list_builder(
 ///|
 fn parse_balanced_brace_group(
   state : ParserState,
-  list_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  list_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut depth = 0

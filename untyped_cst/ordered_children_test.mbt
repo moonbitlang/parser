@@ -1,7 +1,7 @@
 ///|
 fn assert_regex_binding_comments(
-  before : ArrayView[(String, Int)],
-  after : ArrayView[(String, Int)],
+  before : ArrayView[(String, Int32)],
+  after : ArrayView[(String, Int32)],
 ) -> Unit raise {
   // Explicit character widths distinguish locations from UTF-16 source spans.
   let pieces = [("name", "before", 6)]
@@ -115,7 +115,7 @@ test "regex binding retains single and consecutive comments after equals" {
 ///|
 fn assert_type_parameter_recovery(
   parameter : String,
-  expected : ArrayView[(String, String, Int)],
+  expected : ArrayView[(String, String, Int32)],
 ) -> Unit raise {
   let source = "type T[" + parameter + "] = Int"
   let parsed = @untyped_cst.parse_structure(source)
@@ -212,7 +212,7 @@ test "type parameter recovery retains a separator without a following type" {
 
 ///|
 fn assert_incomplete_constructor_package(
-  comments : ArrayView[(String, Int)],
+  comments : ArrayView[(String, Int32)],
 ) -> Unit raise {
   let mut source = if comments.is_empty() { "T::" } else { "T:: " }
   for (text, _) in comments {

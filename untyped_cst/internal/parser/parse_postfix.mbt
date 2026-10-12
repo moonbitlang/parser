@@ -468,7 +468,7 @@ fn parse_coloncolon_suffix(state : ParserState, lhs : CstNode) -> CstNode {
   push_children(children, state.consume_trivia())
   if state.current_is(TK_LBRACE) {
     let body = parse_record_field_list(state)
-    let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if list_has_item_kind(
+    let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if list_has_item_kind(
         body,
         fn(kind) { kind is Field_RecordSpread },
       ) {

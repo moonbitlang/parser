@@ -39,9 +39,9 @@ pub fn payload_from_children(
 
 ///|
 pub fn node(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
   builder(loc, source_span, children)
@@ -49,7 +49,7 @@ pub fn node(
 
 ///|
 pub fn node_like(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   source : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -63,7 +63,7 @@ pub fn node_like(
 fn leaf_node(
   payload : NodePayload,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   CstNode::leaf(payload~, loc~, source_span~)
 }
@@ -73,16 +73,16 @@ fn push_payload_leaf(
   children : Array[(String?, CstNode)],
   payload : NodePayload,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> Unit {
   children.push((Some("payload"), leaf_node(payload, loc, source_span)))
 }
 
 ///|
 pub fn node_with_payload(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
   payload : NodePayload,
 ) -> CstNode {
@@ -92,9 +92,9 @@ pub fn node_with_payload(
 
 ///|
 pub fn scalar_node(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   payload : NodePayload,
 ) -> CstNode {
   node_with_payload(builder, loc, source_span, [], payload)
@@ -102,32 +102,39 @@ pub fn scalar_node(
 
 ///|
 pub fn marker_node(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   pos : Position,
-  offset : Int,
+  offset : Int32,
 ) -> CstNode {
   builder(empty_loc(pos), empty_span(offset), [])
 }
 
 ///|
 pub fn bool_marker_node(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   pos : Position,
-  offset : Int,
+  offset : Int32,
   value : Bool,
 ) -> CstNode {
   scalar_node(builder, empty_loc(pos), empty_span(offset), Bool(value))
 }
 
 ///|
-pub fn missing_node(_kind : TokenKind, pos : Position, offset : Int) -> CstNode {
+pub fn missing_node(
+  _kind : TokenKind,
+  pos : Position,
+  offset : Int32,
+) -> CstNode {
   CstNode::missing(loc=empty_loc(pos), source_span=empty_span(offset))
 }
 
 ///|
 // Constructor fallbacks have no precise token position. Anchor them at the
 // parent's end, keeping character positions separate from UTF-16 offsets.
-pub fn missing_at_end(loc~ : Location, source_span~ : (Int, Int)) -> CstNode {
+pub fn missing_at_end(
+  loc~ : Location,
+  source_span~ : (Int32, Int32),
+) -> CstNode {
   CstNode::missing(
     loc=empty_loc(loc.end),
     source_span=empty_span(source_span.1),
@@ -137,7 +144,7 @@ pub fn missing_at_end(loc~ : Location, source_span~ : (Int, Int)) -> CstNode {
 ///|
 pub fn error_node(
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
   (fn(loc, source_span, children) {
@@ -170,7 +177,7 @@ pub fn token_node_with_children(
   token : Token,
   start : Position,
   end : Position,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
   let entries : Array[@node.CstTokenChild] = []

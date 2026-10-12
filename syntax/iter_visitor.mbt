@@ -142,7 +142,7 @@ pub(open) trait IterVisitor {
   // Accessor
   fn visit_Accessor(Self, Accessor) -> Unit = _
   fn visit_Accessor_Label(Self, Label) -> Unit = _
-  fn visit_Accessor_Index(Self, tuple_index~ : Int, loc~ : Location) -> Unit = _
+  fn visit_Accessor_Index(Self, tuple_index~ : Int32, loc~ : Location) -> Unit = _
   fn visit_Accessor_Newtype(Self, loc~ : Location) -> Unit = _
 
   // AliasTarget

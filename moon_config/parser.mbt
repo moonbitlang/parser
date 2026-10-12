@@ -2,7 +2,7 @@
 priv struct State {
   tokens : Triples
   diagnostics : Array[Report]
-  mut next : Int
+  mut next : Int32
   mut parsed_position : Position
 }
 
@@ -18,7 +18,7 @@ fn is_layout(token : Token) -> Bool {
 }
 
 ///|
-fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
+fn State::peek(state : Self, nth~ : Int32 = 0) -> Triple {
   let mut offset = 0
   let mut step = 0
   while state.tokens.get(state.next + offset) is Some((token, _, _) as triple) {
@@ -57,17 +57,17 @@ fn State::skip(state : Self) -> Unit {
 }
 
 ///|
-fn State::peek_token(state : Self, nth~ : Int = 0) -> Token {
+fn State::peek_token(state : Self, nth~ : Int32 = 0) -> Token {
   state.peek(nth~).0
 }
 
 ///|
-fn State::peek_kind(state : Self, nth~ : Int = 0) -> TokenKind {
+fn State::peek_kind(state : Self, nth~ : Int32 = 0) -> TokenKind {
   state.peek(nth~).0.kind()
 }
 
 ///|
-fn State::peek_spos(state : Self, nth~ : Int = 0) -> Position {
+fn State::peek_spos(state : Self, nth~ : Int32 = 0) -> Position {
   state.peek(nth~).1
 }
 

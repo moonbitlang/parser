@@ -33,8 +33,8 @@ let dummy_attribute : @attribute.Attribute = {
 }
 
 ///|
-fn type_desc_test_loc(start_column : Int, end_column : Int) -> Location {
-  let position = fn(column : Int) -> Position {
+fn type_desc_test_loc(start_column : Int32, end_column : Int32) -> Location {
+  let position = fn(column : Int32) -> Position {
     { fname: "type_desc.mbt", lnum: 1, bol: 0, cnum: column - 1, }
   }
   { start: position(start_column), end: position(end_column), }

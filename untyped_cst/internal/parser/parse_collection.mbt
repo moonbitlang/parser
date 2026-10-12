@@ -1,7 +1,7 @@
 ///|
 fn brace_starts_record_expr(
   state : ParserState,
-  start_offset~ : Int = 0,
+  start_offset~ : Int32 = 0,
 ) -> Bool {
   let mut offset = start_offset + 1
   let mut done = false
@@ -30,7 +30,10 @@ fn brace_starts_record_expr(
 }
 
 ///|
-fn brace_starts_map_expr(state : ParserState, start_offset~ : Int = 0) -> Bool {
+fn brace_starts_map_expr(
+  state : ParserState,
+  start_offset~ : Int32 = 0,
+) -> Bool {
   let mut offset = start_offset + 1
   let mut done = false
   while !done {
@@ -372,7 +375,7 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
 ///|
 fn parse_record_field_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut field_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+  let mut field_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = fn(
     loc,
     source_span,
     children,

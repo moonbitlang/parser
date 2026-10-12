@@ -492,7 +492,7 @@ fn parse_expr_simple(
 ///|
 fn parse_keyword_value_expr(
   state : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   stop_kinds : Array[TokenKind],
   value_is_required~ : Bool,
 ) -> CstNode {
@@ -880,7 +880,7 @@ fn discard_expr_trivia(state : ParserState) -> Unit {
 ///|
 fn parse_single_token_expr(
   state : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   label : String,
 ) -> CstNode {
   match state.peek() {
@@ -1233,7 +1233,7 @@ fn parse_paren_expr(
     }
   }
   let item_count = list.children_with_label("item").length()
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if item_count ==
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if item_count ==
     0 {
     fn(loc, source_span, children) {
       let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
