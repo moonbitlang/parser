@@ -290,9 +290,9 @@ fn refactor_assert_source_range(
   node : @untyped_cst.CstNode,
   source : String,
   text : String,
-  span : (Int, Int),
-  start : (Int, Int, Int),
-  end : (Int, Int, Int),
+  span : (Int32, Int32),
+  start : (Int32, Int32, Int32),
+  end : (Int32, Int32, Int32),
 ) -> Unit raise {
   @test.assert_eq(node.text(source), text[:])
   @test.assert_eq(node.source_span, span)
@@ -549,7 +549,7 @@ fn refactor_assert_ordered_comments(
   after : Array[String?],
   next_text : String,
 ) -> Unit raise {
-  let cases : Array[Array[(String, Int)]] = [
+  let cases : Array[Array[(String, Int32)]] = [
     [("// keep", 7)],
     [("// keep", 7), ("// second", 9)],
     [("// keep 🐇", 9), ("// second 🦀", 11)],

@@ -6,8 +6,8 @@ fn initial_position(name : String) -> Position {
 ///|
 pub(all) struct ParserState {
   tokens : Triples
-  mut pos : Int
-  mut delimiter_depth : Int
+  mut pos : Int32
+  mut delimiter_depth : Int32
   reports : Array[Report]
   enable_metavar : Bool
   mut abort_current_decl : Bool
@@ -15,14 +15,14 @@ pub(all) struct ParserState {
   mut report_next_top_level_start : Bool
   mut suppress_next_top_level_recovery_report : Bool
   recovery_scopes : Array[RecoveryScope]
-  mut next_recovery_scope_id : Int
+  mut next_recovery_scope_id : Int32
   source : String
-  cnum_to_source_offset : (Int) -> Int
+  cnum_to_source_offset : (Int32) -> Int32
   parse_interp_segment : (ParserState, @tokens.InterpElem) -> CstNode
 }
 
 ///|
-fn default_location_mapper(source : String) -> (Int) -> Int {
+fn default_location_mapper(source : String) -> (Int32) -> Int32 {
   let view = source.view()
   let source_len = view.length()
   let table = Array::make(source_len + 1, source_len)
@@ -43,7 +43,7 @@ fn default_location_mapper(source : String) -> (Int) -> Int {
       source_offset += 1
     }
   }
-  fn(cnum : Int) -> Int {
+  fn(cnum : Int32) -> Int32 {
     if cnum < 0 {
       0
     } else if cnum >= table.length() {
@@ -57,7 +57,7 @@ fn default_location_mapper(source : String) -> (Int) -> Int {
 ///|
 pub fn ParserState::peek(
   self : ParserState,
-  offset~ : Int = 0,
+  offset~ : Int32 = 0,
 ) -> (Token, Position, Position)? {
   self.tokens.get(self.pos + offset)
 }
@@ -82,7 +82,7 @@ pub fn ParserState::peek_significant(
 ///|
 pub fn ParserState::peek_nth_significant(
   self : ParserState,
-  nth : Int,
+  nth : Int32,
 ) -> (Token, Position, Position)? {
   let mut offset = 0
   let mut seen = 0
@@ -109,7 +109,7 @@ fn ParserState::token_source_span(
   self : ParserState,
   start : Position,
   end : Position,
-) -> (Int, Int) {
+) -> (Int32, Int32) {
   (
     (self.cnum_to_source_offset)(start.cnum),
     (self.cnum_to_source_offset)(end.cnum),
@@ -130,7 +130,7 @@ pub fn ParserState::previous_end(self : ParserState) -> Position {
 }
 
 ///|
-fn ParserState::missing_eof_offset(self : ParserState) -> Int {
+fn ParserState::missing_eof_offset(self : ParserState) -> Int32 {
   self.source.length()
 }
 
@@ -155,7 +155,7 @@ pub fn ParserState::root_loc(self : ParserState) -> Location {
 }
 
 ///|
-pub fn ParserState::root_span(self : ParserState) -> (Int, Int) {
+pub fn ParserState::root_span(self : ParserState) -> (Int32, Int32) {
   (0, self.source.length())
 }
 

@@ -4,7 +4,7 @@ fn constructor_test_position() -> @basic.Position {
 }
 
 ///|
-fn constructor_kind_index(kind : @node.NodeKind) -> Int {
+fn constructor_kind_index(kind : @node.NodeKind) -> Int32 {
   match kind {
     Impls => 0
     Expression => 1

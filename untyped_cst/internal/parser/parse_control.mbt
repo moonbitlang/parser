@@ -82,7 +82,7 @@ fn parse_if_expr(state : ParserState) -> CstNode {
 fn parse_try_expr(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let is_try_operator = state.current_is(TK_TRY_EXCLAMATION)
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if is_try_operator {
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if is_try_operator {
     fn(loc, source_span, children) {
       let kw = @construction.first_child_with_label_from(children, "kw").unwrap_or(
         missing_at_end(loc~, source_span~),
@@ -188,7 +188,7 @@ fn parse_try_expr(state : ParserState) -> CstNode {
 ///|
 fn parse_keyword_body_expr(
   state : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   is_while~ : Bool,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -262,7 +262,7 @@ fn parse_for_expr(state : ParserState) -> CstNode {
 }
 
 ///|
-fn for_header_has_in(state : ParserState, start_offset : Int) -> Bool {
+fn for_header_has_in(state : ParserState, start_offset : Int32) -> Bool {
   let mut offset = start_offset
   let mut depth = 0
   while true {

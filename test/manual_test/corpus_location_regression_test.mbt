@@ -1,6 +1,6 @@
 ///|
 priv struct CorpusLocationCollector {
-  spans : Array[(String, Int, Int)]
+  spans : Array[(String, Int32, Int32)]
 }
 
 ///|
@@ -69,7 +69,7 @@ impl IterVisitor for CorpusLocationCollector with fn visit_TypeVarConstraint(
 ///|
 fn assert_corpus_locations(
   source : String,
-  expected : Array[(String, Int, Int)],
+  expected : Array[(String, Int32, Int32)],
 ) -> Unit raise Error {
   let name = "corpus_locations.mbt"
   let results : Array[(String, @syntax.Impls)] = []

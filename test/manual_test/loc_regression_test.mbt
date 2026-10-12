@@ -476,7 +476,7 @@ fn parse_prefix_constant_cst_loc_regression(
 ///|
 test "folded prefix constant locations agree across all parsers" {
   let base = "let result = ".length()
-  let cases : Array[(String, Int, Int)] = [
+  let cases : Array[(String, Int32, Int32)] = [
     ("+1", 1, 2),
     ("++1", 2, 3),
     ("+-1", 1, 3),
@@ -674,7 +674,7 @@ fn parse_record_constructor_params_loc_from_cst(
 
 ///|
 test "record constructor params locations agree across all parsers" {
-  let cases : Array[(String, Int, Int, String)] = [
+  let cases : Array[(String, Int32, Int32, String)] = [
     ("struct Empty { fn new() -> Empty }", 22, 22, ""),
     ("struct One { fn new(Int) -> One }", 20, 23, "Int"),
     (

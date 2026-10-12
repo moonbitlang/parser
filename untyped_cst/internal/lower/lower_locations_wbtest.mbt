@@ -1,5 +1,5 @@
 ///|
-fn detached_loc(start : Int, end : Int) -> Location {
+fn detached_loc(start : Int32, end : Int32) -> Location {
   mk_loc({ fname: "detached", lnum: 1, bol: 0, cnum: start, }, {
     fname: "detached",
     lnum: 1,
@@ -9,7 +9,7 @@ fn detached_loc(start : Int, end : Int) -> Location {
 }
 
 ///|
-fn detached_token(kind : TokenKind, start : Int, end : Int) -> CstNode {
+fn detached_token(kind : TokenKind, start : Int32, end : Int32) -> CstNode {
   // Model a preceding non-BMP character: UTF-16 offsets are not character offsets.
   CstNode::syntax_token(
     token_kind=kind,

@@ -136,7 +136,7 @@ fn assignment_lhs_kind(node : CstNode) -> NodeKind? {
 fn assignment_node_builder(
   lhs : CstNode,
   is_augmented : Bool,
-) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
+) -> (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode {
   match assignment_lhs_kind(lhs) {
     Some(Expr_ArrayGet) =>
       if is_augmented {
@@ -208,7 +208,7 @@ fn push_assignment_lhs_children(
 fn function_node_from_children(
   state : ParserState,
   children : Array[(String?, CstNode)],
-  fn_kind_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  fn_kind_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   state.construct_from_children(
     fn(loc, source_span, children) {
@@ -268,7 +268,7 @@ fn hole_node_from_children(
   children : Array[(String?, CstNode)],
   todo~ : Bool = false,
 ) -> CstNode {
-  let hole_kind_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if todo {
+  let hole_kind_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if todo {
     fn(loc, source_span, children) {
       let _ = children
       @node.CstNode::hole_kind_todo(loc~, source_span~)
@@ -891,7 +891,7 @@ fn parse_single_arrow_param_list(expr : CstNode) -> CstNode {
 ///|
 fn arrow_parameter_builder(
   expr : CstNode,
-) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
+) -> (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode {
   match expr.kind {
     Expr_Hole | Expr_MissingExpr =>
       fn(loc, source_span, children) {
@@ -1155,7 +1155,7 @@ fn parse_invalid_infix_operand(
 }
 
 ///|
-fn infix_precedence(tok : Token) -> (Int, Bool)? {
+fn infix_precedence(tok : Token) -> (Int32, Bool)? {
   match tok {
     IMPLIES => Some((1, true))
     BARBAR => Some((2, true))
@@ -1227,7 +1227,7 @@ fn expr_stops_infix_chain(expr : CstNode) -> Bool {
 fn parse_expr_binary_prec(
   state : ParserState,
   stop_kinds : Array[TokenKind],
-  min_prec : Int,
+  min_prec : Int32,
 ) -> CstNode {
   let mut lhs = parse_expr_postfix(state, stop_kinds)
   let mut done = expr_stops_infix_chain(lhs)
@@ -1238,8 +1238,11 @@ fn parse_expr_binary_prec(
       Some((tok, _, _)) =>
         match infix_precedence(tok) {
           Some((prec, right_assoc)) if prec >= min_prec => {
-            let expr_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if tok
-              is IMPLIES {
+            let expr_builder : (
+              Location,
+              (Int32, Int32),
+              Array[(String?, CstNode)],
+            ) -> CstNode = if tok is IMPLIES {
               fn(loc, source_span, children) {
                 let lhs = @construction.first_child_with_label_from(
                   children, "lhs",

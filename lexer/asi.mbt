@@ -321,7 +321,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
 
 ///|
 priv struct ASIContext {
-  mut last_unhandled_newline : Int
+  mut last_unhandled_newline : Int32
 }
 
 ///|
@@ -341,7 +341,7 @@ fn ASIContext::new() -> ASIContext {
 fn[C] ASIContext::add_token(
   self : ASIContext,
   tokens~ : Array[(Token, Position, Position)],
-  last_unhandled_comment~ : Ref[(C, Int)?],
+  last_unhandled_comment~ : Ref[(C, Int32)?],
   next_token : Token,
 ) -> Unit {
   match next_token {

@@ -3,7 +3,7 @@
 // Translated from src/ast/parsing_util.ml
 
 // Global counter for generating unique variable names
-let counter : Ref[Int] = Ref(0)
+let counter : Ref[Int32] = Ref(0)
 
 ///|
 /// Create constant expression with location
@@ -619,7 +619,7 @@ pub fn AliasTarget::loc(self : AliasTarget) -> Location {
 }
 
 ///|
-fn shift_col(pos : Position, offset : Int) -> Position {
+fn shift_col(pos : Position, offset : Int32) -> Position {
   {
     lnum: pos.lnum,
     fname: pos.fname,

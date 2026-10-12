@@ -142,7 +142,7 @@ pub(open) trait MapVisitor {
   // Accessor
   fn visit_Accessor(Self, Accessor) -> Accessor = _
   fn visit_Accessor_Label(Self, Label) -> Accessor = _
-  fn visit_Accessor_Index(Self, tuple_index~ : Int, loc~ : Location) -> Accessor = _
+  fn visit_Accessor_Index(Self, tuple_index~ : Int32, loc~ : Location) -> Accessor = _
   fn visit_Accessor_Newtype(Self, loc~ : Location) -> Accessor = _
 
   // AliasTarget

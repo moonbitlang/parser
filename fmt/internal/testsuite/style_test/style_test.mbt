@@ -6,7 +6,7 @@ fn read_fixture(path : String) -> String raise {
 ///|
 fn inspect_nth(
   source : String,
-  index : Int,
+  index : Int32,
   is_markdown~ : Bool = false,
 ) -> String {
   match @format.format_nth_impl_from_source(source, index, is_markdown~) {

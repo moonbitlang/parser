@@ -1,7 +1,7 @@
 ///|
 pub fn CstNode::expr_let_and(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Expr_LetAnd, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -10,7 +10,7 @@ pub fn CstNode::expr_let_and(
 ///|
 pub fn CstNode::expr_let_fn(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Expr_LetFn, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -19,7 +19,7 @@ pub fn CstNode::expr_let_fn(
 ///|
 pub fn CstNode::expr_return(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   expr? : CstNode,
 ) -> CstNode {
@@ -35,7 +35,7 @@ pub fn CstNode::expr_return(
 ///|
 pub fn CstNode::expr_raise(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   expr~ : CstNode,
 ) -> CstNode {
@@ -48,7 +48,7 @@ pub fn CstNode::expr_raise(
 ///|
 pub fn CstNode::expr_break(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   label? : CstNode,
   expr? : CstNode,
@@ -69,7 +69,7 @@ pub fn CstNode::expr_break(
 ///|
 pub fn CstNode::expr_continue(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   label? : CstNode,
   arg? : CstNode,
@@ -90,7 +90,7 @@ pub fn CstNode::expr_continue(
 ///|
 pub fn CstNode::expr_labelled_block(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -104,7 +104,7 @@ pub fn CstNode::expr_labelled_block(
 ///|
 pub fn CstNode::expr_defer(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   expr~ : CstNode,
 ) -> CstNode {
@@ -117,7 +117,7 @@ pub fn CstNode::expr_defer(
 ///|
 pub fn CstNode::expr_err_defer(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   expr~ : CstNode,
 ) -> CstNode {
@@ -130,7 +130,7 @@ pub fn CstNode::expr_err_defer(
 ///|
 pub fn CstNode::expr_guard(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Expr_Guard, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -139,7 +139,7 @@ pub fn CstNode::expr_guard(
 ///|
 pub fn CstNode::expr_quantifier(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   name~ : CstNode,
   op~ : CstNode,
@@ -165,7 +165,7 @@ pub fn CstNode::expr_quantifier(
 ///|
 pub fn CstNode::expr_hole(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   token~ : CstNode,
   hole_kind? : CstNode,
 ) -> CstNode {
@@ -181,7 +181,7 @@ pub fn CstNode::expr_hole(
 ///|
 pub fn CstNode::expr_constr(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Expr_Constr, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -190,7 +190,7 @@ pub fn CstNode::expr_constr(
 ///|
 pub fn CstNode::expr_multiline_string(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstMultilineChild],
 ) -> CstNode {
   node(
@@ -205,7 +205,7 @@ pub fn CstNode::expr_multiline_string(
 /// Constructs a missing expression with optional fields followed by errors.
 pub fn CstNode::expr_missing_expr(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   label? : CstNode,
   trivia? : CstNode,
   expr? : CstNode,
@@ -242,7 +242,7 @@ pub fn CstNode::expr_missing_expr(
 #doc(hidden)
 pub fn CstNode::expr_missing_expr_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -256,7 +256,7 @@ pub fn CstNode::expr_missing_expr_from_entries(
 ///|
 pub fn CstNode::expr_proof_assert(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   expr~ : CstNode,
 ) -> CstNode {
@@ -269,7 +269,7 @@ pub fn CstNode::expr_proof_assert(
 ///|
 pub fn CstNode::expr_proof_let(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   name~ : CstNode,
   op~ : CstNode,
@@ -291,7 +291,7 @@ pub fn CstNode::expr_proof_let(
 ///|
 pub fn CstNode::pattern_var(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_Var, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -300,7 +300,7 @@ pub fn CstNode::pattern_var(
 ///|
 pub fn CstNode::pattern_any(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   lex_scan_case_pattern? : CstNode,
 ) -> CstNode {
@@ -316,7 +316,7 @@ pub fn CstNode::pattern_any(
 ///|
 pub fn CstNode::pattern_constant(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op? : CstNode,
   operator? : CstNode,
   error? : CstNode,
@@ -355,7 +355,7 @@ pub fn CstNode::pattern_constant(
 ///|
 pub fn CstNode::pattern_tuple(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   body~ : CstNode,
   pattern_group? : CstNode,
 ) -> CstNode {
@@ -371,7 +371,7 @@ pub fn CstNode::pattern_tuple(
 ///|
 pub fn CstNode::pattern_array(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   body~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -382,7 +382,7 @@ pub fn CstNode::pattern_array(
 ///|
 pub fn CstNode::pattern_rest(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
   as_? : CstNode,
   bytes? : CstNode,
@@ -428,7 +428,7 @@ pub fn CstNode::pattern_rest(
 ///|
 pub fn CstNode::pattern_record(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   body~ : CstNode,
   openness? : CstNode,
 ) -> CstNode {
@@ -448,7 +448,7 @@ pub fn CstNode::pattern_record(
 #doc(hidden)
 pub fn CstNode::pattern_record_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_Record, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -457,7 +457,7 @@ pub fn CstNode::pattern_record_from_entries(
 ///|
 pub fn CstNode::pattern_map(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   trivia? : CstNode,
   body~ : CstNode,
   openness? : CstNode,
@@ -482,7 +482,7 @@ pub fn CstNode::pattern_map(
 #doc(hidden)
 pub fn CstNode::pattern_map_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_Map, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -491,7 +491,7 @@ pub fn CstNode::pattern_map_from_entries(
 ///|
 pub fn CstNode::pattern_constr(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_Constr, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -500,7 +500,7 @@ pub fn CstNode::pattern_constr(
 ///|
 pub fn CstNode::pattern_constr_any(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   type_~ : CstNode,
   op~ : CstNode,
   wildcard~ : CstNode,
@@ -515,7 +515,7 @@ pub fn CstNode::pattern_constr_any(
 ///|
 pub fn CstNode::pattern_constr_unknown(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   type_~ : CstNode,
   op~ : CstNode,
   wildcard~ : CstNode,
@@ -530,7 +530,7 @@ pub fn CstNode::pattern_constr_unknown(
 ///|
 pub fn CstNode::pattern_special_constr(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   params~ : CstNode,
 ) -> CstNode {
@@ -543,7 +543,7 @@ pub fn CstNode::pattern_special_constr(
 ///|
 pub fn CstNode::pattern_or(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_Or, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -552,7 +552,7 @@ pub fn CstNode::pattern_or(
 ///|
 pub fn CstNode::pattern_alias(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   pattern~ : CstNode,
   op~ : CstNode,
   name~ : CstNode,
@@ -571,7 +571,7 @@ pub fn CstNode::pattern_alias(
 #doc(hidden)
 pub fn CstNode::pattern_alias_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_Alias, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -580,7 +580,7 @@ pub fn CstNode::pattern_alias_from_entries(
 ///|
 pub fn CstNode::pattern_range(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   lhs~ : CstNode,
   op~ : CstNode,
   rhs~ : CstNode,
@@ -604,7 +604,7 @@ pub fn CstNode::pattern_range(
 #doc(hidden)
 pub fn CstNode::pattern_range_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_Range, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -613,7 +613,7 @@ pub fn CstNode::pattern_range_from_entries(
 ///|
 pub fn CstNode::pattern_constraint(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -628,7 +628,7 @@ pub fn CstNode::pattern_constraint(
 /// Constructs a with pattern from its normalized children.
 pub fn CstNode::pattern_with(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   open~ : CstNode,
   pattern~ : CstNode,
   op~ : CstNode,
@@ -651,7 +651,7 @@ pub fn CstNode::pattern_with(
 #doc(hidden)
 pub fn CstNode::pattern_with_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Pattern_With, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -660,7 +660,7 @@ pub fn CstNode::pattern_with_from_entries(
 ///|
 pub fn CstNode::pattern_missing_pattern(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -674,7 +674,7 @@ pub fn CstNode::pattern_missing_pattern(
 ///|
 pub fn CstNode::pattern_group(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(Pattern_Group, loc, source_span, children)
@@ -683,7 +683,7 @@ pub fn CstNode::pattern_group(
 ///|
 pub fn CstNode::array_pattern_pattern(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   pattern~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -694,7 +694,7 @@ pub fn CstNode::array_pattern_pattern(
 ///|
 pub fn CstNode::array_pattern_string_spread(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
   str~ : CstNode,
   dot_dot_binder~ : CstNode,
@@ -709,7 +709,7 @@ pub fn CstNode::array_pattern_string_spread(
 ///|
 pub fn CstNode::array_pattern_bytes_spread(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
   bytes~ : CstNode,
   dot_dot_binder~ : CstNode,
@@ -724,7 +724,7 @@ pub fn CstNode::array_pattern_bytes_spread(
 ///|
 pub fn CstNode::array_pattern_const_spread(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
   pkg? : CstNode,
   const_~ : CstNode,
@@ -749,7 +749,7 @@ pub fn CstNode::array_pattern_const_spread(
 ///|
 pub fn CstNode::array_patterns_closed(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   body~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -760,7 +760,7 @@ pub fn CstNode::array_patterns_closed(
 ///|
 pub fn CstNode::array_patterns_open(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   body~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -771,7 +771,7 @@ pub fn CstNode::array_patterns_open(
 ///|
 pub fn CstNode::type_name(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op? : CstNode,
   name~ : ArrayView[CstNode],
   error~ : ArrayView[CstNode],
@@ -808,7 +808,7 @@ pub fn CstNode::type_name(
 ///|
 pub fn CstNode::type_tuple(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   body~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -819,7 +819,7 @@ pub fn CstNode::type_tuple(
 ///|
 pub fn CstNode::type_arrow(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Type_Arrow, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -828,7 +828,7 @@ pub fn CstNode::type_arrow(
 ///|
 pub fn CstNode::type_application(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -842,7 +842,7 @@ pub fn CstNode::type_application(
 ///|
 pub fn CstNode::type_option(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   type_~ : CstNode,
   op~ : CstNode,
   operator~ : CstNode,
@@ -857,7 +857,7 @@ pub fn CstNode::type_option(
 ///|
 pub fn CstNode::type_object(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   body? : CstNode,
   op? : CstNode,
   type_? : CstNode,
@@ -881,7 +881,7 @@ pub fn CstNode::type_object(
 ///|
 pub fn CstNode::type_any(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -892,7 +892,7 @@ pub fn CstNode::type_any(
 ///|
 pub fn CstNode::type_group(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(Type_Group, loc, source_span, entries_from_cstrecoverychild(entries))
@@ -901,7 +901,7 @@ pub fn CstNode::type_group(
 ///|
 pub fn CstNode::type_missing_type(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   error~ : ArrayView[CstNode],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -914,7 +914,7 @@ pub fn CstNode::type_missing_type(
 ///|
 pub fn CstNode::error_type_error(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
   type_~ : CstNode,
 ) -> CstNode {
@@ -927,7 +927,7 @@ pub fn CstNode::error_type_error(
 ///|
 pub fn CstNode::error_type_default(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -938,7 +938,7 @@ pub fn CstNode::error_type_default(
 ///|
 pub fn CstNode::error_type_noraise(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -949,7 +949,7 @@ pub fn CstNode::error_type_noraise(
 ///|
 pub fn CstNode::error_type_maybe(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
   type_~ : CstNode,
 ) -> CstNode {
@@ -962,7 +962,7 @@ pub fn CstNode::error_type_maybe(
 ///|
 pub fn CstNode::type_desc_abstract(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_Abstract, loc, source_span, children)
@@ -971,7 +971,7 @@ pub fn CstNode::type_desc_abstract(
 ///|
 pub fn CstNode::type_desc_extensible_enum(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_ExtensibleEnum, loc, source_span, children)
@@ -980,7 +980,7 @@ pub fn CstNode::type_desc_extensible_enum(
 ///|
 pub fn CstNode::type_desc_error_no_payload(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_ErrorNoPayload, loc, source_span, children)
@@ -989,7 +989,7 @@ pub fn CstNode::type_desc_error_no_payload(
 ///|
 pub fn CstNode::type_desc_error_enum_payload(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_ErrorEnumPayload, loc, source_span, children)
@@ -998,7 +998,7 @@ pub fn CstNode::type_desc_error_enum_payload(
 ///|
 pub fn CstNode::type_desc_variant(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_Variant, loc, source_span, children)
@@ -1007,7 +1007,7 @@ pub fn CstNode::type_desc_variant(
 ///|
 pub fn CstNode::type_desc_extend_enum(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_ExtendEnum, loc, source_span, children)
@@ -1016,7 +1016,7 @@ pub fn CstNode::type_desc_extend_enum(
 ///|
 pub fn CstNode::type_desc_record(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_Record, loc, source_span, children)
@@ -1025,7 +1025,7 @@ pub fn CstNode::type_desc_record(
 ///|
 pub fn CstNode::type_desc_tuple_struct(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_TupleStruct, loc, source_span, children)
@@ -1034,7 +1034,7 @@ pub fn CstNode::type_desc_tuple_struct(
 ///|
 pub fn CstNode::type_desc_alias(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TypeDesc_Alias, loc, source_span, children)
@@ -1043,7 +1043,7 @@ pub fn CstNode::type_desc_alias(
 ///|
 pub fn CstNode::lex_pattern_regex_interp(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(LexPattern_RegexInterp, loc, source_span, children)
@@ -1052,7 +1052,7 @@ pub fn CstNode::lex_pattern_regex_interp(
 ///|
 pub fn CstNode::regex_pattern_placeholder(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   open~ : CstNode,
   pattern~ : CstNode,
   bindings? : CstNode,
@@ -1081,7 +1081,7 @@ pub fn CstNode::regex_pattern_placeholder(
 ///|
 pub fn CstNode::regex_pattern_literal(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   error? : CstNode,
   token? : CstNode,
   lex_literal? : CstNode,
@@ -1110,7 +1110,7 @@ pub fn CstNode::regex_pattern_literal(
 ///|
 pub fn CstNode::regex_pattern_reference(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : ArrayView[CstNode],
   semantic_name? : CstNode,
   lex_scan_case_pattern? : CstNode,
@@ -1133,7 +1133,7 @@ pub fn CstNode::regex_pattern_reference(
 ///|
 pub fn CstNode::regex_pattern_sequence(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   lhs~ : CstNode,
   op~ : CstNode,
   rhs~ : CstNode,
@@ -1152,7 +1152,7 @@ pub fn CstNode::regex_pattern_sequence(
 #doc(hidden)
 pub fn CstNode::regex_pattern_sequence_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -1166,7 +1166,7 @@ pub fn CstNode::regex_pattern_sequence_from_entries(
 ///|
 pub fn CstNode::regex_pattern_alternation(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   lhs~ : CstNode,
   op~ : CstNode,
   rhs~ : CstNode,
@@ -1185,7 +1185,7 @@ pub fn CstNode::regex_pattern_alternation(
 #doc(hidden)
 pub fn CstNode::regex_pattern_alternation_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -1199,7 +1199,7 @@ pub fn CstNode::regex_pattern_alternation_from_entries(
 ///|
 pub fn CstNode::regex_pattern_alias(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   pattern~ : CstNode,
   kw~ : CstNode,
   name~ : CstNode,
@@ -1219,7 +1219,7 @@ pub fn CstNode::regex_pattern_alias(
 ///|
 pub fn CstNode::case_match_case(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   pattern~ : CstNode,
   kw? : CstNode,
   cond? : CstNode,
@@ -1251,7 +1251,7 @@ pub fn CstNode::case_match_case(
 ///|
 pub fn CstNode::case_lex_scan_case(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   pattern~ : CstNode,
   op~ : CstNode,
   body~ : CstNode,
@@ -1266,7 +1266,7 @@ pub fn CstNode::case_lex_scan_case(
 ///|
 pub fn CstNode::argument_positional(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   expr~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -1277,7 +1277,7 @@ pub fn CstNode::argument_positional(
 ///|
 pub fn CstNode::argument_labelled(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   op~ : CstNode,
   expr? : CstNode,
@@ -1310,7 +1310,7 @@ pub fn CstNode::argument_labelled(
 ///|
 pub fn CstNode::argument_labelled_pun(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   semantic_name? : CstNode,
   pun? : CstNode,
@@ -1341,7 +1341,7 @@ pub fn CstNode::argument_labelled_pun(
 ///|
 pub fn CstNode::argument_labelled_option(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   op~ : ArrayView[CstNode],
   expr~ : CstNode,
@@ -1368,7 +1368,7 @@ pub fn CstNode::argument_labelled_option(
 ///|
 pub fn CstNode::argument_labelled_option_pun(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   op~ : CstNode,
   semantic_name? : CstNode,
@@ -1396,7 +1396,7 @@ pub fn CstNode::argument_labelled_option_pun(
 ///|
 pub fn CstNode::array_element_regular(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   expr~ : CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
@@ -1407,7 +1407,7 @@ pub fn CstNode::array_element_regular(
 ///|
 pub fn CstNode::array_element_spread(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   op~ : CstNode,
   expr~ : CstNode,
 ) -> CstNode {
@@ -1420,7 +1420,7 @@ pub fn CstNode::array_element_spread(
 ///|
 pub fn CstNode::parameter_discard_positional(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -1434,7 +1434,7 @@ pub fn CstNode::parameter_discard_positional(
 ///|
 pub fn CstNode::parameter_positional(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -1448,7 +1448,7 @@ pub fn CstNode::parameter_positional(
 ///|
 pub fn CstNode::parameter_labelled(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -1462,7 +1462,7 @@ pub fn CstNode::parameter_labelled(
 ///|
 pub fn CstNode::parameter_optional(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -1476,7 +1476,7 @@ pub fn CstNode::parameter_optional(
 ///|
 pub fn CstNode::parameter_question_optional(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -1491,7 +1491,7 @@ pub fn CstNode::parameter_question_optional(
 /// Constructs a type declaration parameter from its normalized children.
 pub fn CstNode::parameter_type_decl(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   op? : CstNode,
   type_? : CstNode,
@@ -1516,7 +1516,7 @@ pub fn CstNode::parameter_type_decl(
 #doc(hidden)
 pub fn CstNode::parameter_type_decl_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(

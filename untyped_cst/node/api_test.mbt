@@ -1,5 +1,5 @@
 ///|
-fn test_position(offset : Int) -> @basic.Position {
+fn test_position(offset : Int32) -> @basic.Position {
   { fname: "node_test.mbt", lnum: 1, bol: 0, cnum: offset, }
 }
 
@@ -185,7 +185,7 @@ test "trait method entries preserve repeated clauses around trivia" {
 fn assert_constructor_entries(
   node : @node.CstNode,
   loc : @basic.Location,
-  span : (Int, Int),
+  span : (Int32, Int32),
   expected : ArrayView[(String, @node.CstNode)],
 ) -> Unit raise {
   @test.assert_eq(node.loc, loc)

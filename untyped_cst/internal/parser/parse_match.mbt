@@ -4,7 +4,7 @@ fn parse_quantifier_expr(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let quantifier_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
+  let quantifier_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
       TK_EXISTS,
     ) {
     fn(loc, source_span, children) {
@@ -99,7 +99,7 @@ fn parse_quantifier_expr(
 ///|
 fn parse_lex_block_expr(
   state : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   if state.consume_any() is Some(kw) {

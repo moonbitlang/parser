@@ -1,8 +1,8 @@
 ///|
 priv struct MarkdownBlock {
-  open_line : Int
-  content_start : Int
-  close_line : Int
+  open_line : Int32
+  content_start : Int32
+  close_line : Int32
   indent : String
   content : String
 }
@@ -122,7 +122,7 @@ fn impl_docstring(item : @syntax.Impl) -> @syntax.DocString {
 }
 
 ///|
-fn impl_start_line(item : @syntax.Impl) -> Int {
+fn impl_start_line(item : @syntax.Impl) -> Int32 {
   let doc = impl_docstring(item)
   if doc.loc.start.lnum <= 0 {
     item.loc().start.lnum
@@ -175,7 +175,10 @@ fn format_single_impl(
 }
 
 ///|
-fn format_nth_plain_impl(source : String, index : Int) -> (Int, Int, String)? {
+fn format_nth_plain_impl(
+  source : String,
+  index : Int32,
+) -> (Int32, Int32, String)? {
   guard strict_parse(source) is Some(parsed) else { return None }
   let items = parsed.impls.to_array()
   if items.get(index) is Some(item) {
@@ -193,8 +196,8 @@ fn format_nth_plain_impl(source : String, index : Int) -> (Int, Int, String)? {
 ///|
 fn format_nth_markdown_impl(
   source : String,
-  index : Int,
-) -> (Int, Int, String)? {
+  index : Int32,
+) -> (Int32, Int32, String)? {
   let blocks = markdown_blocks(source)
   let mut remaining = index
   for block in blocks {
@@ -221,9 +224,9 @@ fn format_nth_markdown_impl(
 ///|
 pub fn format_nth_impl_from_source(
   source : String,
-  index : Int,
+  index : Int32,
   is_markdown~ : Bool = false,
-) -> (Int, Int, String)? {
+) -> (Int32, Int32, String)? {
   if is_markdown {
     format_nth_markdown_impl(source, index)
   } else {

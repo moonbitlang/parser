@@ -247,7 +247,7 @@ pub(all) struct Constructor {
 ///|
 pub(all) enum Accessor {
   Label(Label)
-  Index(tuple_index~ : Int, loc~ : Location)
+  Index(tuple_index~ : Int32, loc~ : Location)
   Newtype(loc~ : Location)
 } derive(Debug)
 

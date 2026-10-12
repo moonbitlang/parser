@@ -1,15 +1,15 @@
 ///|
 pub(all) struct RecoveryScope {
-  id : Int
+  id : Int32
   stop_kinds : Array[TokenKind]
-  depth : Int
+  depth : Int32
   depth_sensitive : Bool
 }
 
 ///|
 pub(all) enum RecoveryOwner {
   RecoveryLocal
-  RecoveryScopeOwner(Int)
+  RecoveryScopeOwner(Int32)
   RecoveryEof
 }
 
@@ -25,7 +25,7 @@ pub fn ParserState::push_recovery_scope(
   self : ParserState,
   stop_kinds : Array[TokenKind],
   depth_sensitive~ : Bool = false,
-) -> Int {
+) -> Int32 {
   let id = self.next_recovery_scope_id
   self.next_recovery_scope_id += 1
   self.recovery_scopes.push({
@@ -38,7 +38,7 @@ pub fn ParserState::push_recovery_scope(
 }
 
 ///|
-pub fn ParserState::pop_recovery_scope(self : ParserState, id : Int) -> Unit {
+pub fn ParserState::pop_recovery_scope(self : ParserState, id : Int32) -> Unit {
   match self.recovery_scopes.pop() {
     Some(scope) if scope.id == id => ()
     _ => abort("recovery scopes must be popped in nesting order")
@@ -115,7 +115,7 @@ pub fn ParserState::recover_until(
 }
 
 ///|
-pub fn next_depth(depth : Int, tok : Token) -> Int {
+pub fn next_depth(depth : Int32, tok : Token) -> Int32 {
   let delta = match tok {
     LPAREN | LBRACKET | LBRACKET_BAR | LBRACE => 1
     RPAREN | RBRACKET | BAR_RBRACKET | RBRACE => -1

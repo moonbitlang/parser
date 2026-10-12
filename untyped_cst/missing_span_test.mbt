@@ -2,7 +2,7 @@
 fn assert_missing_spans(
   node : @untyped_cst.CstNode,
   source : String,
-) -> Int raise {
+) -> Int32 raise {
   let mut count = 0
   if node.kind is Missing {
     @test.assert_eq(node.loc.start, node.loc.end)

@@ -15,9 +15,9 @@ fn advance_position(pos : Position, text : String) -> Position {
 
 ///|
 fn scalar_subtoken_node(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   token_start : Position,
-  token_span : (Int, Int),
+  token_span : (Int32, Int32),
   prefix : String,
   value : String,
 ) -> CstNode {
@@ -37,11 +37,11 @@ fn attribute_metadata_node(
   content : (String, String?, String),
   start : Position,
   end : Position,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   let (first, qualified_name, raw_payload) = content
   let children : Array[(String?, CstNode)] = []
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = match
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = match
     qualified_name {
     Some(name) => {
       push_child(
@@ -168,7 +168,7 @@ fn comment_metadata_node(
   comment : Comment,
   start : Position,
   end : Position,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = [
     (
@@ -187,7 +187,7 @@ fn comment_metadata_node(
       ),
     ),
   ]
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = match
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = match
     comment.kind {
     InlineTrailing =>
       fn(loc, source_span, children) {
@@ -294,7 +294,7 @@ fn ParserState::token_metadata_children(
   token : Token,
   start : Position,
   end : Position,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> Array[(String?, CstNode)] {
   let children : Array[(String?, CstNode)] = []
   match token {

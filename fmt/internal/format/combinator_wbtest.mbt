@@ -1,6 +1,6 @@
 ///|
 test "catifflat renders compact, mixed, and expanded layouts" {
-  let integer = fn(x : Int) { text(x.to_string()) }
+  let integer = fn(x : Int32) { text(x.to_string()) }
   let numbers = @list.List([111111, 22222222, 33333333, 444444444])
   let left = group(
     nest(break_(0) + separate_map(numbers, comma + break_(1), integer) + comma),

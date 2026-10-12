@@ -31,7 +31,7 @@ fn has_impl_shape(node : @untyped_cst.CstNode) -> Bool {
 }
 
 ///|
-fn count_root_label(root : @untyped_cst.CstNode, label : String) -> Int {
+fn count_root_label(root : @untyped_cst.CstNode, label : String) -> Int32 {
   let mut count = 0
   for i in 0..<root.children.length() {
     match root.children.get(i) {
@@ -43,7 +43,7 @@ fn count_root_label(root : @untyped_cst.CstNode, label : String) -> Int {
 }
 
 ///|
-fn count_root_items(root : @untyped_cst.CstNode) -> Int {
+fn count_root_items(root : @untyped_cst.CstNode) -> Int32 {
   let mut count = 0
   for i in 0..<root.children.length() {
     match root.children.get(i) {
@@ -235,7 +235,7 @@ fn has_node_text(
 }
 
 ///|
-fn count_label(node : @untyped_cst.CstNode, label : String) -> Int {
+fn count_label(node : @untyped_cst.CstNode, label : String) -> Int32 {
   let mut count = 0
   for i in 0..<node.children.length() {
     match node.children.get(i) {
@@ -273,7 +273,7 @@ fn direct_has_kind(
 fn count_node_kind(
   node : @untyped_cst.CstNode,
   pred : (@untyped_cst.NodeKind) -> Bool,
-) -> Int {
+) -> Int32 {
   let mut count = if pred(node.kind) { 1 } else { 0 }
   for entry in node.children {
     let (_, child) = entry
@@ -942,7 +942,7 @@ test "prefix expressions are normalized to final CST constructors" {
       true,
     )
   }
-  let repeated : Array[(String, String, Int, Int)] = [
+  let repeated : Array[(String, String, Int32, Int32)] = [
     ("++1", "1", 2, 3),
     ("+-1", "-1", 1, 3),
     ("-+1", "-1", 0, 3),

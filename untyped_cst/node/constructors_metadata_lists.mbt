@@ -1,7 +1,7 @@
 ///|
 pub fn CstNode::fn_kind_lambda(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(FnKind_Lambda, loc, source_span, children)
@@ -10,7 +10,7 @@ pub fn CstNode::fn_kind_lambda(
 ///|
 pub fn CstNode::fn_kind_arrow(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(FnKind_Arrow, loc, source_span, children)
@@ -19,7 +19,7 @@ pub fn CstNode::fn_kind_arrow(
 ///|
 pub fn CstNode::group_brace(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(Group_Brace, loc, source_span, children)
@@ -28,7 +28,7 @@ pub fn CstNode::group_brace(
 ///|
 pub fn CstNode::group_paren(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(Group_Paren, loc, source_span, children)
@@ -37,7 +37,7 @@ pub fn CstNode::group_paren(
 ///|
 pub fn CstNode::trailing_mark_comma(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TrailingMark_Comma, loc, source_span, children)
@@ -46,7 +46,7 @@ pub fn CstNode::trailing_mark_comma(
 ///|
 pub fn CstNode::trailing_mark_semi(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TrailingMark_Semi, loc, source_span, children)
@@ -55,7 +55,7 @@ pub fn CstNode::trailing_mark_semi(
 ///|
 pub fn CstNode::trailing_mark_none(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TrailingMark_None, loc, source_span, children)
@@ -64,7 +64,7 @@ pub fn CstNode::trailing_mark_none(
 ///|
 pub fn CstNode::try_operator_kind_exclamation(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(TryOperatorKind_Exclamation, loc, source_span, children)
@@ -73,7 +73,7 @@ pub fn CstNode::try_operator_kind_exclamation(
 ///|
 pub fn CstNode::quantifier_kind_forall(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(QuantifierKind_Forall, loc, source_span, children)
@@ -82,7 +82,7 @@ pub fn CstNode::quantifier_kind_forall(
 ///|
 pub fn CstNode::quantifier_kind_exists(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(QuantifierKind_Exists, loc, source_span, children)
@@ -91,7 +91,7 @@ pub fn CstNode::quantifier_kind_exists(
 ///|
 pub fn CstNode::using_kind_value(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(UsingKind_Value, loc, source_span, children)
@@ -100,7 +100,7 @@ pub fn CstNode::using_kind_value(
 ///|
 pub fn CstNode::using_kind_type(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(UsingKind_Type, loc, source_span, children)
@@ -109,7 +109,7 @@ pub fn CstNode::using_kind_type(
 ///|
 pub fn CstNode::using_kind_trait(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(UsingKind_Trait, loc, source_span, children)
@@ -118,7 +118,7 @@ pub fn CstNode::using_kind_trait(
 ///|
 pub fn CstNode::openness_open(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(Openness_Open, loc, source_span, children)
@@ -127,7 +127,7 @@ pub fn CstNode::openness_open(
 ///|
 pub fn CstNode::openness_closed(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(Openness_Closed, loc, source_span, children)
@@ -136,7 +136,7 @@ pub fn CstNode::openness_closed(
 ///|
 pub fn CstNode::array_kind_array(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(ArrayKind_Array, loc, source_span, children)
@@ -145,7 +145,7 @@ pub fn CstNode::array_kind_array(
 ///|
 pub fn CstNode::array_kind_iter(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(ArrayKind_Iter, loc, source_span, children)
@@ -155,7 +155,7 @@ pub fn CstNode::array_kind_iter(
 pub fn CstNode::flag_async(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Async, loc, source_span, [], Bool(value))
 }
@@ -164,7 +164,7 @@ pub fn CstNode::flag_async(
 pub fn CstNode::flag_declare(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Declare, loc, source_span, [], Bool(value))
 }
@@ -173,7 +173,7 @@ pub fn CstNode::flag_declare(
 pub fn CstNode::flag_mutable(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Mutable, loc, source_span, [], Bool(value))
 }
@@ -182,7 +182,7 @@ pub fn CstNode::flag_mutable(
 pub fn CstNode::flag_pun(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Pun, loc, source_span, [], Bool(value))
 }
@@ -191,7 +191,7 @@ pub fn CstNode::flag_pun(
 pub fn CstNode::flag_return_self(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_ReturnSelf, loc, source_span, [], Bool(value))
 }
@@ -200,7 +200,7 @@ pub fn CstNode::flag_return_self(
 pub fn CstNode::flag_conditional(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Conditional, loc, source_span, [], Bool(value))
 }
@@ -209,7 +209,7 @@ pub fn CstNode::flag_conditional(
 pub fn CstNode::flag_has_try(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_HasTry, loc, source_span, [], Bool(value))
 }
@@ -218,7 +218,7 @@ pub fn CstNode::flag_has_try(
 pub fn CstNode::flag_match_absent(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_MatchAbsent, loc, source_span, [], Bool(value))
 }
@@ -227,7 +227,7 @@ pub fn CstNode::flag_match_absent(
 pub fn CstNode::flag_faked(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Faked, loc, source_span, [], Bool(value))
 }
@@ -236,7 +236,7 @@ pub fn CstNode::flag_faked(
 pub fn CstNode::flag_augmented(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Augmented, loc, source_span, [], Bool(value))
 }
@@ -245,7 +245,7 @@ pub fn CstNode::flag_augmented(
 pub fn CstNode::flag_object(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Object, loc, source_span, [], Bool(value))
 }
@@ -254,7 +254,7 @@ pub fn CstNode::flag_object(
 pub fn CstNode::flag_exclamation(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Flag_Exclamation, loc, source_span, [], Bool(value))
 }
@@ -262,7 +262,7 @@ pub fn CstNode::flag_exclamation(
 ///|
 pub fn CstNode::attribute_simple(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : CstNode,
   raw_payload~ : CstNode,
 ) -> CstNode {
@@ -275,7 +275,7 @@ pub fn CstNode::attribute_simple(
 ///|
 pub fn CstNode::attribute_qualified(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   qualifier~ : CstNode,
   name~ : CstNode,
   raw_payload~ : CstNode,
@@ -291,7 +291,7 @@ pub fn CstNode::attribute_qualified(
 pub fn CstNode::attribute_name(
   value~ : String,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Attribute_Name, loc, source_span, [], String(value))
 }
@@ -300,7 +300,7 @@ pub fn CstNode::attribute_name(
 pub fn CstNode::attribute_qualifier(
   value~ : String,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Attribute_Qualifier, loc, source_span, [], String(value))
 }
@@ -309,7 +309,7 @@ pub fn CstNode::attribute_qualifier(
 pub fn CstNode::attribute_raw_payload(
   value~ : String,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Attribute_RawPayload, loc, source_span, [], String(value))
 }
@@ -317,7 +317,7 @@ pub fn CstNode::attribute_raw_payload(
 ///|
 pub fn CstNode::comment_inline_trailing(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   content~ : CstNode,
   consumed_by_docstring~ : CstNode,
 ) -> CstNode {
@@ -330,7 +330,7 @@ pub fn CstNode::comment_inline_trailing(
 ///|
 pub fn CstNode::comment_ownline(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   content~ : CstNode,
   leading_blank_line~ : CstNode,
   trailing_blank_line~ : CstNode,
@@ -348,7 +348,7 @@ pub fn CstNode::comment_ownline(
 pub fn CstNode::comment_content(
   value~ : String,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Comment_Content, loc, source_span, [], String(value))
 }
@@ -357,7 +357,7 @@ pub fn CstNode::comment_content(
 pub fn CstNode::comment_leading_blank_line(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(Comment_LeadingBlankLine, loc, source_span, [], Bool(value))
 }
@@ -366,7 +366,7 @@ pub fn CstNode::comment_leading_blank_line(
 pub fn CstNode::comment_trailing_blank_line(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(
     Comment_TrailingBlankLine,
@@ -381,7 +381,7 @@ pub fn CstNode::comment_trailing_blank_line(
 pub fn CstNode::comment_consumed_by_docstring(
   value~ : Bool,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(
     Comment_ConsumedByDocstring,
@@ -396,7 +396,7 @@ pub fn CstNode::comment_consumed_by_docstring(
 pub fn CstNode::interp_segment_literal(
   value~ : String,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
 ) -> CstNode {
   node_with_payload(InterpSegment_Literal, loc, source_span, [], String(value))
 }
@@ -404,7 +404,7 @@ pub fn CstNode::interp_segment_literal(
 ///|
 pub fn CstNode::interp_segment_source(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   expr~ : CstNode,
   payload~ : CstNode,
 ) -> CstNode {
@@ -417,7 +417,7 @@ pub fn CstNode::interp_segment_source(
 ///|
 pub fn CstNode::clause_return_type(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstDeclarationChild],
 ) -> CstNode {
   node(
@@ -431,7 +431,7 @@ pub fn CstNode::clause_return_type(
 ///|
 pub fn CstNode::clause_where(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kw~ : CstNode,
   body~ : CstNode,
 ) -> CstNode {
@@ -445,7 +445,7 @@ pub fn CstNode::clause_where(
 /// Constructs a constructor declaration from its normalized children.
 pub fn CstNode::clause_constructor_decl(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   attrs~ : ArrayView[CstNode],
   error? : CstNode,
   vis? : CstNode,
@@ -502,7 +502,7 @@ pub fn CstNode::clause_constructor_decl(
 #doc(hidden)
 pub fn CstNode::clause_constructor_decl_from_entries(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -516,7 +516,7 @@ pub fn CstNode::clause_constructor_decl_from_entries(
 ///|
 pub fn CstNode::clause_using_item(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   kind? : CstNode,
   target~ : CstNode,
   kw? : CstNode,
@@ -552,7 +552,7 @@ pub fn CstNode::clause_using_item(
 ///|
 pub fn CstNode::clause_import_package(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -566,7 +566,7 @@ pub fn CstNode::clause_import_package(
 ///|
 pub fn CstNode::clause_extend_item(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstRecoveryChild],
 ) -> CstNode {
   node(
@@ -580,7 +580,7 @@ pub fn CstNode::clause_extend_item(
 ///|
 pub fn CstNode::clause_with_binding(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   error~ : ArrayView[CstNode],
   name? : CstNode,
   op? : CstNode,
@@ -613,7 +613,7 @@ pub fn CstNode::clause_with_binding(
 ///|
 pub fn CstNode::clause_deriving_directive(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   name~ : ArrayView[CstNode],
   arg? : CstNode,
   semantic_name? : CstNode,
@@ -636,7 +636,7 @@ pub fn CstNode::clause_deriving_directive(
 ///|
 pub fn CstNode::list_argument_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(List_ArgumentList, loc, source_span, entries_from_cstlistchild(entries))
@@ -645,7 +645,7 @@ pub fn CstNode::list_argument_list(
 ///|
 pub fn CstNode::list_parameter_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(List_ParameterList, loc, source_span, entries_from_cstlistchild(entries))
@@ -654,7 +654,7 @@ pub fn CstNode::list_parameter_list(
 ///|
 pub fn CstNode::list_trait_method_parameter_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -668,7 +668,7 @@ pub fn CstNode::list_trait_method_parameter_list(
 ///|
 pub fn CstNode::list_type_decl_parameter_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -682,7 +682,7 @@ pub fn CstNode::list_type_decl_parameter_list(
 ///|
 pub fn CstNode::list_type_var_binder_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -696,7 +696,7 @@ pub fn CstNode::list_type_var_binder_list(
 ///|
 pub fn CstNode::list_constructor_parameter_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -710,7 +710,7 @@ pub fn CstNode::list_constructor_parameter_list(
 ///|
 pub fn CstNode::list_tuple_struct_type_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -724,7 +724,7 @@ pub fn CstNode::list_tuple_struct_type_list(
 ///|
 pub fn CstNode::list_struct_field_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -738,7 +738,7 @@ pub fn CstNode::list_struct_field_list(
 ///|
 pub fn CstNode::list_trait_method_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -752,7 +752,7 @@ pub fn CstNode::list_trait_method_list(
 ///|
 pub fn CstNode::list_record_field_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -766,7 +766,7 @@ pub fn CstNode::list_record_field_list(
 ///|
 pub fn CstNode::list_map_field_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(List_MapFieldList, loc, source_span, entries_from_cstlistchild(entries))
@@ -775,7 +775,7 @@ pub fn CstNode::list_map_field_list(
 ///|
 pub fn CstNode::list_block_statement_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -789,7 +789,7 @@ pub fn CstNode::list_block_statement_list(
 ///|
 pub fn CstNode::list_continue_argument_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -803,7 +803,7 @@ pub fn CstNode::list_continue_argument_list(
 ///|
 pub fn CstNode::list_tuple_element_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -817,7 +817,7 @@ pub fn CstNode::list_tuple_element_list(
 ///|
 pub fn CstNode::list_tuple_type_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(List_TupleTypeList, loc, source_span, entries_from_cstlistchild(entries))
@@ -826,7 +826,7 @@ pub fn CstNode::list_tuple_type_list(
 ///|
 pub fn CstNode::list_array_element_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -840,7 +840,7 @@ pub fn CstNode::list_array_element_list(
 ///|
 pub fn CstNode::list_type_argument_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -854,7 +854,7 @@ pub fn CstNode::list_type_argument_list(
 ///|
 pub fn CstNode::list_tuple_pattern_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -868,7 +868,7 @@ pub fn CstNode::list_tuple_pattern_list(
 ///|
 pub fn CstNode::list_constructor_pattern_argument_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -882,7 +882,7 @@ pub fn CstNode::list_constructor_pattern_argument_list(
 ///|
 pub fn CstNode::list_array_pattern_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -896,7 +896,7 @@ pub fn CstNode::list_array_pattern_list(
 ///|
 pub fn CstNode::list_record_pattern_field_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -910,7 +910,7 @@ pub fn CstNode::list_record_pattern_field_list(
 ///|
 pub fn CstNode::list_map_pattern_field_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -924,7 +924,7 @@ pub fn CstNode::list_map_pattern_field_list(
 ///|
 pub fn CstNode::list_where_field_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -938,7 +938,7 @@ pub fn CstNode::list_where_field_list(
 ///|
 pub fn CstNode::list_object_field_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -952,7 +952,7 @@ pub fn CstNode::list_object_field_list(
 ///|
 pub fn CstNode::list_constructor_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -966,7 +966,7 @@ pub fn CstNode::list_constructor_list(
 ///|
 pub fn CstNode::list_using_item_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(List_UsingItemList, loc, source_span, entries_from_cstlistchild(entries))
@@ -975,7 +975,7 @@ pub fn CstNode::list_using_item_list(
 ///|
 pub fn CstNode::list_import_package_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -989,7 +989,7 @@ pub fn CstNode::list_import_package_list(
 ///|
 pub fn CstNode::list_extend_item_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -1003,7 +1003,7 @@ pub fn CstNode::list_extend_item_list(
 ///|
 pub fn CstNode::list_deriving_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(List_DerivingList, loc, source_span, entries_from_cstlistchild(entries))
@@ -1012,7 +1012,7 @@ pub fn CstNode::list_deriving_list(
 ///|
 pub fn CstNode::list_match_case_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(List_MatchCaseList, loc, source_span, entries_from_cstlistchild(entries))
@@ -1021,7 +1021,7 @@ pub fn CstNode::list_match_case_list(
 ///|
 pub fn CstNode::list_lex_scan_case_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -1035,7 +1035,7 @@ pub fn CstNode::list_lex_scan_case_list(
 ///|
 pub fn CstNode::list_regex_binding_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -1049,7 +1049,7 @@ pub fn CstNode::list_regex_binding_list(
 ///|
 pub fn CstNode::list_for_binding_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -1063,7 +1063,7 @@ pub fn CstNode::list_for_binding_list(
 ///|
 pub fn CstNode::list_for_each_binding_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(
@@ -1077,7 +1077,7 @@ pub fn CstNode::list_for_each_binding_list(
 ///|
 pub fn CstNode::list_with_binding_list(
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstListChild],
 ) -> CstNode {
   node(

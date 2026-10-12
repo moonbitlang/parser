@@ -101,7 +101,7 @@ let hardline : Doc = @pp.hardline
 let line : Doc = @pp.line
 
 ///|
-fn break_(n : Int) -> Doc {
+fn break_(n : Int32) -> Doc {
   switch(text(String::make(n, ' ')), hardline)
 }
 
@@ -164,6 +164,6 @@ fn separate(xs : List[Doc], sep : Doc) -> Doc {
 }
 
 ///|
-fn current_column_without_indent(f : (Int) -> Doc) -> Doc {
+fn current_column_without_indent(f : (Int32) -> Doc) -> Doc {
   dynamic(fn(ctx) { f(ctx.indent - ctx.next_indent) })
 }
