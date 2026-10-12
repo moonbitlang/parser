@@ -132,7 +132,7 @@ fn parse_expr_postfix(
             "conditional",
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::Bool(value)) => value
+                Some(Bool(value)) => value
                 _ => false
               }
               @node.CstNode::flag_conditional(value~, loc~, source_span~)
@@ -300,7 +300,7 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
                 fn(loc, source_span, children) {
                   let value = match
                     @construction.payload_from_children(children) {
-                    Some(NodePayload::Bool(value)) => value
+                    Some(Bool(value)) => value
                     _ => false
                   }
                   @node.CstNode::flag_return_self(value~, loc~, source_span~)
@@ -412,7 +412,7 @@ fn parse_expr_postfix_suffix(state : ParserState, lhs : CstNode) -> CstNode? {
               fn(loc, source_span, children) {
                 let value = match
                   @construction.payload_from_children(children) {
-                  Some(NodePayload::Bool(value)) => value
+                  Some(Bool(value)) => value
                   _ => false
                 }
                 @node.CstNode::flag_return_self(value~, loc~, source_span~)

@@ -39,7 +39,7 @@ fn ParserState::expect_token(self : ParserState, kind : TokenKind) -> CstNode {
 fn push_recovered_errors(
   children : Array[(String?, CstNode)],
   skipped : Array[CstNode],
-  wrap? : Bool = true,
+  wrap~ : Bool = true,
 ) -> Unit {
   for token in skipped {
     let error = if wrap {

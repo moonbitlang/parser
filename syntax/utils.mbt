@@ -31,10 +31,10 @@ pub fn make_array_expr(
   elems : @list.List[SpreadableElem],
 ) -> Expr {
   // Try to convert to regular array if no spread elements
-  let mut acc : @list.List[Expr] = @list.empty()
+  let mut acc : @list.List[Expr] = List([])
   for elem in elems {
     match elem {
-      Regular(e) => acc = acc.add(e)
+      Regular(e) => acc = acc.prepend(e)
       Spread(_) => return ArraySpread(elems~, is_iter~, loc~)
     }
   } nobreak {

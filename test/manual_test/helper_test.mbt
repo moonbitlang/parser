@@ -13,16 +13,16 @@ fn cst_impls_json(source : String, name : String) -> Json raise Error {
   let diagnostics = reports_from_view(result.diagnostics_view())
   if !diagnostics.is_empty() {
     fail(
-      "CST parser rejected \{name}: \{diagnostics.to_json().stringify(indent=2)}",
+      "CST parser rejected \{name}: \{Json(diagnostics).stringify(indent=2)}",
     )
   }
   let (impls, reports) = result.to_impls()
   if !reports.is_empty() {
     fail(
-      "converting CST for \{name} produced diagnostics: \{reports.to_json().stringify(indent=2)}",
+      "converting CST for \{name} produced diagnostics: \{Json(reports).stringify(indent=2)}",
     )
   }
-  impls.map(impl_ => impl_.json_repr()).to_json()
+  Json(impls.map(impl_ => impl_.json_repr()))
 }
 
 ///|
@@ -52,15 +52,15 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
       buf
       ..write_string("parsing \{name}.mbt failed due to diagnostics.\n")
       ..write_string("Handrolled parser diagnostics: ")
-      ..write_string(hand_result.1.to_json().stringify(indent=2))
+      ..write_string(Json(hand_result.1).stringify(indent=2))
       ..write_string("\nYacc parser diagnostics: ")
-      ..write_string(yacc_result.1.to_json().stringify(indent=2))
+      ..write_string(Json(yacc_result.1).stringify(indent=2))
       .write_string("\n")
     })
     fail(buf.to_string())
   }
-  let hand_json = hand_result.0.map(impl_ => impl_.json_repr()).to_json()
-  let yacc_json = yacc_result.0.map(impl_ => impl_.json_repr()).to_json()
+  let hand_json = Json(hand_result.0.map(impl_ => impl_.json_repr()))
+  let yacc_json = Json(yacc_result.0.map(impl_ => impl_.json_repr()))
   if hand_json != yacc_json || hand_json != cst_json {
     @fs.create_dir(debug_dir)
     @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)

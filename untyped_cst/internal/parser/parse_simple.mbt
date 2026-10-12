@@ -79,7 +79,7 @@ fn parse_expr_prefix(
           PLUS =>
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::String(value)) => value
+                Some(String(value)) => value
                 _ => ""
               }
               @node.CstNode::operator_unary_plus(value~, loc~, source_span~)
@@ -87,7 +87,7 @@ fn parse_expr_prefix(
           MINUS =>
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::String(value)) => value
+                Some(String(value)) => value
                 _ => ""
               }
               @node.CstNode::operator_unary_minus(value~, loc~, source_span~)
@@ -95,7 +95,7 @@ fn parse_expr_prefix(
           _ =>
             fn(loc, source_span, children) {
               let value = match @construction.payload_from_children(children) {
-                Some(NodePayload::String(value)) => value
+                Some(String(value)) => value
                 _ => ""
               }
               @node.CstNode::operator_unary_not(value~, loc~, source_span~)
@@ -1145,7 +1145,7 @@ fn parse_type_name_node(state : ParserState) -> CstNode {
         "object",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_object(value~, loc~, source_span~)
@@ -1198,7 +1198,7 @@ fn parse_paren_expr(
         let entries = list_children(children)
         @node.CstNode::list_tuple_element_list(loc~, source_span~, entries~)
       },
-      sep_kind=TokenKind::TK_COMMA,
+      sep_kind=TK_COMMA,
       item_expected="simple expression",
       reports_else_recovery=true,
     )
@@ -1212,7 +1212,7 @@ fn parse_paren_expr(
         let entries = list_children(children)
         @node.CstNode::list_tuple_element_list(loc~, source_span~, entries~)
       },
-      sep_kind=TokenKind::TK_COMMA,
+      sep_kind=TK_COMMA,
       reports_else_recovery=true,
     )
   }
@@ -1270,7 +1270,7 @@ fn parse_paren_expr(
       bool_marker_node(
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_faked(value~, loc~, source_span~)
@@ -1368,12 +1368,7 @@ fn paren_expr_is_followed_by_fat_arrow(state : ParserState) -> Bool {
 fn parse_tuple_expr_item(state : ParserState) -> CstNode {
   // Tuple entries retain their recovery shape. The shared argument parsers
   // materialize pun locations and values only when parsing call arguments.
-  let item_stops = [
-    TokenKind::TK_COLON,
-    TokenKind::TK_COMMA,
-    TokenKind::TK_RPAREN,
-    TokenKind::TK_EOF,
-  ]
+  let item_stops = [TokenKind::TK_COLON, TK_COMMA, TK_RPAREN, TK_EOF]
   if state.current_argument_starts_optional_forwarding() {
     parse_optional_forwarding_argument(state)
   } else if state.current_argument_starts_labelled() {
@@ -1470,7 +1465,7 @@ fn parse_constraint_paren_expr(state : ParserState) -> CstNode {
     push_child(children, Some("type"), ty)
   }
   push_children(children, state.consume_trivia())
-  push_child(children, Some("close"), state.expect_token(TokenKind::TK_RPAREN))
+  push_child(children, Some("close"), state.expect_token(TK_RPAREN))
   state.construct_from_children(
     fn(loc, source_span, children) {
       let entries = recovery_children(children)

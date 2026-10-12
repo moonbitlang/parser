@@ -58,7 +58,7 @@ fn inidex_of_token_kind(xs : Array[TokenKind], kind : TokenKind) -> Int? {
 /// 
 /// peek(nth=0) returns the next not consumed token
 /// peek(nth=1) returns the next token after the next not consumed token
-fn State::peek(state : Self, nth? : Int = 0) -> Triple {
+fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
   let mut ofs = 0
   let mut step = 0
   while state.tokens.get(state.next + ofs) is Some((token, _, _) as triple) {
@@ -97,22 +97,22 @@ fn State::consume(state : Self) -> Triple {
 }
 
 ///|
-fn State::peek_token(state : Self, nth? : Int = 0) -> Token {
+fn State::peek_token(state : Self, nth~ : Int = 0) -> Token {
   state.peek(nth~).0
 }
 
 ///|
-fn State::peek_kind(state : Self, nth? : Int = 0) -> TokenKind {
+fn State::peek_kind(state : Self, nth~ : Int = 0) -> TokenKind {
   state.peek(nth~).0.kind()
 }
 
 ///|
-fn State::peek_spos(state : Self, nth? : Int = 0) -> Position {
+fn State::peek_spos(state : Self, nth~ : Int = 0) -> Position {
   state.peek(nth~).1
 }
 
 ///|
-fn State::peek_epos(state : Self, nth? : Int = 0) -> Position {
+fn State::peek_epos(state : Self, nth~ : Int = 0) -> Position {
   state.peek(nth~).2
 }
 
@@ -607,7 +607,7 @@ fn[A] State::with_follow(
 /// This version requires at least one element.
 fn[A] State::series1_with_follow(
   self : Self,
-  invalid_delims? : Array[TokenKind] = [],
+  invalid_delims~ : Array[TokenKind] = [],
   delim~ : TokenKind,
   follow_set~ : Array[TokenKind],
   f : (State) -> A,
@@ -682,9 +682,9 @@ fn[A] State::series1_with_follow(
 /// with a trailing delimiter, and followed by a set of tokens (not consumed).
 fn[A] State::series_with_follow(
   self : Self,
-  invalid_delims? : Array[TokenKind] = [],
+  invalid_delims~ : Array[TokenKind] = [],
   delim~ : TokenKind,
-  follow_set? : Array[TokenKind] = [],
+  follow_set~ : Array[TokenKind] = [],
   f : (State) -> A,
 ) -> (Array[A], Bool) {
   fn try_recover_to_delim() {
@@ -751,7 +751,7 @@ fn[A] State::series_with_follow(
 /// (which are not consumed).
 fn[A] State::surround_series(
   self : Self,
-  invalid_delims? : Array[TokenKind] = [],
+  invalid_delims~ : Array[TokenKind] = [],
   left~ : TokenKind,
   right~ : TokenKind,
   delim~ : TokenKind,

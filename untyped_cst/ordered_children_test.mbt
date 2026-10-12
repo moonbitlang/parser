@@ -48,10 +48,7 @@ fn assert_regex_binding_comments(
     offset += text.length()
     cnum += width
     if label == "trivia" {
-      @test.assert_eq(
-        child.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-        true,
-      )
+      @test.assert_eq(child.kind is Syntax_Token(TK_COMMENT), true)
       line += 1
       bol = cnum + 1
       offset += 2
@@ -130,7 +127,7 @@ fn assert_type_parameter_recovery(
   )
   @test.assert_eq(
     reports[0].loc,
-    @node.mk_loc(@basic.Position::{ fname: "", lnum: 1, bol: 0, cnum: 9, }, @basic.Position::{
+    @node.mk_loc({ fname: "", lnum: 1, bol: 0, cnum: 9, }, {
       fname: "",
       lnum: 1,
       bol: 0,
@@ -236,7 +233,7 @@ fn assert_incomplete_constructor_package(
     diagnostics_equiv_reports_json(reports),
   )
   let node = parsed.root().first_child_with_label("expr").unwrap()
-  @test.assert_eq(node.kind is @untyped_cst.NodeKind::Expr_Method, true)
+  @test.assert_eq(node.kind is Expr_Method, true)
   let labels = [Some("type"), Some("op")]
   for _ in comments {
     labels.push(Some("trivia"))
@@ -264,10 +261,7 @@ fn assert_incomplete_constructor_package(
   let mut bol = 0
   for i, (text, width) in comments {
     let comment = node.children[i + 2].1
-    @test.assert_eq(
-      comment.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-      true,
-    )
+    @test.assert_eq(comment.kind is Syntax_Token(TK_COMMENT), true)
     refactor_assert_source_range(
       comment,
       source,
@@ -290,7 +284,7 @@ fn assert_incomplete_constructor_package(
     (line, bol, cnum + 2),
   )
   let field = node.first_child_with_label("field").unwrap()
-  @test.assert_eq(field.kind is @untyped_cst.NodeKind::Missing, true)
+  @test.assert_eq(field.kind is Missing, true)
   refactor_assert_source_range(
     field,
     source,

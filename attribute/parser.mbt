@@ -238,9 +238,9 @@ fn init {
 
 ///|
 // file:///./parser.mbty
-// 175|    EOF { @list.empty() }
+// 175|    EOF { List([]) }
 fn yy_action_0(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_List_Prop_({();  @list.empty() })
+  YYObj_List_Prop_({();  List([]) })
 }
 
 ///|
@@ -253,9 +253,9 @@ fn yy_action_1(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positio
 
 ///|
 // file:///./parser.mbty
-// 193|    "(" ")"                      { @list.empty() }
+// 193|    "(" ")"                      { List([]) }
 fn yy_action_2(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
-  YYObj_List_Prop_({();  @list.empty() })
+  YYObj_List_Prop_({();  List([]) })
 }
 
 ///|
@@ -366,11 +366,11 @@ fn yy_action_15(_last_pos : Position, _args : ArrayView[(YYObj, Position, Positi
 
 ///|
 // file:///./parser.mbty
-// 198|    x=property "," xs=non_empty_properties{ xs.add(x) }
+// 198|    x=property "," xs=non_empty_properties{ xs.prepend(x) }
 fn yy_action_16(_last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Prop(x)
   guard! _args[2].0 is YYObj_List_Prop_(xs)
-  YYObj_List_Prop_({();  xs.add(x) })
+  YYObj_List_Prop_({();  xs.prepend(x) })
 }
 
 ///|

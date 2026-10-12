@@ -36,7 +36,7 @@ fn parse_result(
   diagnostics : Array[Report],
   docstrings : Array[List[(Location, Comment)]],
 ) -> ParseResult {
-  ParseResult::{
+  {
     root,
     diagnostics: ReadOnlyArray::from_array(diagnostics),
     docstrings: ReadOnlyArray::from_array(docstrings),

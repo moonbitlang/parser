@@ -24,9 +24,9 @@ pub fn lower_expr(node : CstNode) -> @syntax.Expr {
       Hole(
         loc=node.loc,
         kind=if node.has_child_kind(fn(kind) { kind is HoleKind_Todo }) {
-          @syntax.Hole::Todo
+          Todo
         } else {
-          @syntax.Hole::Incomplete
+          Incomplete
         },
       )
     Expr_MissingExpr => lower_hole_expr(node.loc)

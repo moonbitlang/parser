@@ -165,7 +165,7 @@ fn TypeDesc::json_repr(self : TypeDesc, loc : Location) -> Json {
       // Keep the wire representation compatible: a bare declaration and a
       // deprecated empty body are both represented by an empty constructor
       // list in JSON.
-      let constrs = constrs.unwrap_or(@list.empty())
+      let constrs = constrs.unwrap_or(List([]))
       tagged_node1(
         "TypeDesc::ExtensibleEnum",
         loc,

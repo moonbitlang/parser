@@ -21,14 +21,14 @@ fn run_modified_sync_lexer_test(t : @test.Test) -> Unit raise Error {
       (triple.0, triple.1, Show::to_string(triple.2))
     })
     fail(
-      "lexing \{name}.mbt failed due to errors: \{errors.to_json().stringify(indent=2)}",
+      "lexing \{name}.mbt failed due to errors: \{Json(errors).stringify(indent=2)}",
     )
   }
   let tokens : Array[Json] = lex_result.tokens.map(triple => {
     "token": triple.0,
     "loc": ToJson::to_json(@basic.Location::{ start: triple.1, end: triple.2, }),
   })
-  t.write(tokens.to_json().stringify(indent=2))
+  t.write(Json(tokens).stringify(indent=2))
   t.snapshot(filename="\{name}.mbt.tokens.json")
 }
 

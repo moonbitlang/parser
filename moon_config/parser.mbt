@@ -18,7 +18,7 @@ fn is_layout(token : Token) -> Bool {
 }
 
 ///|
-fn State::peek(state : Self, nth? : Int = 0) -> Triple {
+fn State::peek(state : Self, nth~ : Int = 0) -> Triple {
   let mut offset = 0
   let mut step = 0
   while state.tokens.get(state.next + offset) is Some((token, _, _) as triple) {
@@ -57,17 +57,17 @@ fn State::skip(state : Self) -> Unit {
 }
 
 ///|
-fn State::peek_token(state : Self, nth? : Int = 0) -> Token {
+fn State::peek_token(state : Self, nth~ : Int = 0) -> Token {
   state.peek(nth~).0
 }
 
 ///|
-fn State::peek_kind(state : Self, nth? : Int = 0) -> TokenKind {
+fn State::peek_kind(state : Self, nth~ : Int = 0) -> TokenKind {
   state.peek(nth~).0.kind()
 }
 
 ///|
-fn State::peek_spos(state : Self, nth? : Int = 0) -> Position {
+fn State::peek_spos(state : Self, nth~ : Int = 0) -> Position {
   state.peek(nth~).1
 }
 
@@ -638,7 +638,7 @@ fn moon_pkg_of_tokens(tokens : Triples) -> (Ast, Array[Report]) {
 }
 
 ///|
-fn parse_string(source : String, name? : String = "") -> (Ast, Array[Report]) {
+fn parse_string(source : String, name~ : String = "") -> (Ast, Array[Report]) {
   let lex_result = @lexer.tokens_from_string(source, comment=false, name~)
   let (ast, reports) = moon_pkg_of_tokens(lex_result.tokens)
   let diagnostics = []

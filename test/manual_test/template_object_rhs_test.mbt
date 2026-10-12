@@ -17,16 +17,16 @@ test "parse template object rhs" {
   )
   if !yacc_reports.is_empty() {
     fail(
-      "moonyacc parser rejected template object rhs: \{yacc_reports.to_json().stringify(indent=2)}",
+      "moonyacc parser rejected template object rhs: \{Json(yacc_reports).stringify(indent=2)}",
     )
   }
   if !hand_reports.is_empty() {
     fail(
-      "handrolled parser rejected template object rhs: \{hand_reports.to_json().stringify(indent=2)}",
+      "handrolled parser rejected template object rhs: \{Json(hand_reports).stringify(indent=2)}",
     )
   }
-  let yacc_json = yacc_impls.map(impl_ => impl_.json_repr()).to_json()
-  let hand_json = hand_impls.map(impl_ => impl_.json_repr()).to_json()
+  let yacc_json = Json(yacc_impls.map(impl_ => impl_.json_repr()))
+  let hand_json = Json(hand_impls.map(impl_ => impl_.json_repr()))
   let cst_json = cst_impls_json(source, "template_object_rhs.mbt")
   if yacc_json != hand_json || hand_json != cst_json {
     fail(

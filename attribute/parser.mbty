@@ -172,7 +172,7 @@ lident_string -> String:
   | "extend" { "extend" }
 
 payloads -> List[Prop]: 
-  | EOF { @list.empty() }
+  | EOF { List([]) }
   | properties { $1 }
 
 property -> Prop:
@@ -190,9 +190,9 @@ expr -> Expr:
   | FALSE                                               { Bool(false) }
 
 properties -> List[Prop]:
-  | "(" ")"                      { @list.empty() }
+  | "(" ")"                      { List([]) }
   | "(" non_empty_properties ")" { $2 }
 
 non_empty_properties -> List[Prop]:
   | property { List([$1]) }
-  | x=property "," xs=non_empty_properties{ xs.add(x) }
+  | x=property "," xs=non_empty_properties{ xs.prepend(x) }

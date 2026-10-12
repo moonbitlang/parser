@@ -40,10 +40,7 @@ fn assert_coloncolon_trivia(
     let mut cnum = 4
     let mut bol = 0
     for i, comment in comments {
-      @test.assert_eq(
-        comment.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-        true,
-      )
+      @test.assert_eq(comment.kind is Syntax_Token(TK_COMMENT), true)
       refactor_assert_source_range(
         comment,
         source,

@@ -298,12 +298,12 @@ fn lower_question_suffixed_error_type(node : CstNode) -> @syntax.Type {
   let name = base_name + "?"
   Name(
     constr_id={ id: Ident(name~), loc: node.loc, },
-    tys=@list.empty(),
+    tys=List([]),
     loc=node.loc,
   )
 }
 
 ///|
 fn lower_fake_error_type(loc : Location) -> @syntax.Type {
-  Name(constr_id={ id: Ident(name="Error"), loc, }, tys=@list.empty(), loc~)
+  Name(constr_id={ id: Ident(name="Error"), loc, }, tys=List([]), loc~)
 }

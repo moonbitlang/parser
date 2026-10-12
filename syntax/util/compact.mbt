@@ -97,7 +97,7 @@ pub fn Statement::collect_rev(
         StmtExpr(_) =>
           Statement::collect_sequence(
             loc=loc_of_expression(cont),
-            @list.empty(),
+            List([]),
             rest,
             cont,
           )
@@ -152,7 +152,7 @@ fn Statement::collect_sequence(
   match todo {
     More(StmtExpr(expr), tail=rest) => {
       let loc = loc.merge(expr.loc())
-      Statement::collect_sequence(loc~, acc.add(expr), rest, cont)
+      Statement::collect_sequence(loc~, acc.prepend(expr), rest, cont)
     }
     _ => Statement::collect_rev(todo, Sequence(exprs=acc, last_expr=cont, loc~))
   }

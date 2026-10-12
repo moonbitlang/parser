@@ -27,8 +27,8 @@ pub struct CheckpointMapper {
 ///|
 pub fn CheckpointMapper::new(
   tokens : @tokens.Triples,
-  start? : Int = 0,
-  len? : Int = -1,
+  start~ : Int = 0,
+  len~ : Int = -1,
 ) -> Self {
   let start = @cmp.maximum(0, @cmp.minimum(start, tokens.length()))
   let limit = if len < 0 {
@@ -146,7 +146,7 @@ fn comment_slot_doc(slot : CommentSlot) -> @pp.Document {
 ///|
 pub fn CheckpointMapper::placeholder(
   self : Self,
-  ignore_blank? : Bool = false,
+  ignore_blank~ : Bool = false,
 ) -> @pp.Document {
   match self.mode {
     Attach => {
@@ -171,7 +171,7 @@ pub fn CheckpointMapper::placeholder(
 ///|
 pub fn CheckpointMapper::placeholder_or_space(
   self : Self,
-  ignore_blank? : Bool = false,
+  ignore_blank~ : Bool = false,
 ) -> @pp.Document {
   match self.mode {
     Attach => {

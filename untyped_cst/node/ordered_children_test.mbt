@@ -55,7 +55,7 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
       SemanticBinder(missing),
     ],
   )
-  @test.assert_eq(binding.kind is @node.NodeKind::Binding_Regex, true)
+  @test.assert_eq(binding.kind is Binding_Regex, true)
   assert_constructor_entries(binding, loc, span, [
     ("name", name),
     ("trivia", first),
@@ -83,7 +83,7 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
       Error(error),
     ],
   )
-  @test.assert_eq(parameter.kind is @node.NodeKind::Parameter_TypeDecl, true)
+  @test.assert_eq(parameter.kind is Parameter_TypeDecl, true)
   assert_constructor_entries(parameter, loc, span, [
     ("name", name),
     ("op", op),
@@ -110,7 +110,7 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
       Error(error),
     ],
   )
-  @test.assert_eq(method_ref.kind is @node.NodeKind::Expr_Method, true)
+  @test.assert_eq(method_ref.kind is Expr_Method, true)
   assert_constructor_entries(method_ref, loc, span, [
     ("type", name),
     ("op", op),
@@ -138,10 +138,7 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
       Name(missing),
     ],
   )
-  @test.assert_eq(
-    constructor_decl.kind is @node.NodeKind::Clause_ConstructorDecl,
-    true,
-  )
+  @test.assert_eq(constructor_decl.kind is Clause_ConstructorDecl, true)
   assert_constructor_entries(constructor_decl, loc, span, [
     ("attrs", name),
     ("trivia", first),
@@ -171,7 +168,7 @@ test "ordered constructors preserve repeated labels, trivia, and recovery nodes"
       Error(error),
     ],
   )
-  @test.assert_eq(with_pattern.kind is @node.NodeKind::Pattern_With, true)
+  @test.assert_eq(with_pattern.kind is Pattern_With, true)
   assert_constructor_entries(with_pattern, loc, span, [
     ("open", op),
     ("trivia", first),
@@ -234,7 +231,7 @@ test "multiline constructor preserves repeated trivia and entry order" {
     Trivia(trivia[0]),
     Trivia(trivia[1]),
   ])
-  @test.assert_eq(multiline.kind is @node.NodeKind::Expr_MultilineString, true)
+  @test.assert_eq(multiline.kind is Expr_MultilineString, true)
   assert_constructor_entries(multiline, loc, span, [
     ("token", token),
     ("element", element),

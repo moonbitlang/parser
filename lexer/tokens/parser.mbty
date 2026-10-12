@@ -182,17 +182,17 @@
 
 non_empty_list_rev[T](X : T) -> List[T]
   : X { @list.singleton($1) }
-  | non_empty_list_rev(X) X { $1.add($2) }
+  | non_empty_list_rev(X) X { $1.prepend($2) }
   ;
 
 non_empty_list[T](X : T) -> List[T]
   : X { @list.singleton($1) }
-  | X non_empty_list(X) { $2.add($1) }
+  | X non_empty_list(X) { $2.prepend($1) }
   ;
 
 non_empty_list_commas_rev[T](X : T) -> List[T]
   : X { @list.singleton($1) }
-  | non_empty_list_commas_rev(X) "," X { $1.add($3) }
+  | non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
   ;
 
 non_empty_list_commas_no_trailing[T](X : T) -> List[T]
@@ -208,12 +208,12 @@ non_empty_list_commas_with_tail[T](X : T) -> List[T]
   ;
 
 list_commas[T](X : T) -> List[T]
-  : { @list.empty() }
+  : { List([]) }
   | non_empty_list_commas(X) { $1 }
   ;
 
 list_commas_no_trailing[T](X : T) -> List[T]
-  : { @list.empty() }
+  : { List([]) }
   | non_empty_list_commas_no_trailing(X) { $1 }
   ;
 
@@ -224,13 +224,13 @@ non_empty_list_commas_with_trailing_info[T](X : T) -> (List[T], Bool)
   ;
 
 list_commas_with_trailing_info[T](X : T) -> (List[T], Bool)
-  : { (@list.empty(), false) }
+  : { (List([]), false) }
   | non_empty_list_commas_with_trailing_info(X) { $1 }
   ;
 
 non_empty_list_semi_rev_aux[T](X : T) -> List[T]
   : X { @list.singleton($1) }
-  | non_empty_list_semi_rev_aux(X) SEMI X { $1.add($3) }
+  | non_empty_list_semi_rev_aux(X) SEMI X { $1.prepend($3) }
   ;
 
 non_empty_list_semis_rev[T](X : T) -> List[T]
@@ -243,16 +243,16 @@ none_empty_list_semis_rev_with_trailing_info[T](X : T) -> (List[T], Bool)
 
 non_empty_list_semis[T](X : T) -> List[T]
   : X option(SEMI) { @list.singleton($1) }
-  | X SEMI non_empty_list_semis(X) { $3.add($1) }
+  | X SEMI non_empty_list_semis(X) { $3.prepend($1) }
   ;
 
 list_semis_rev[T](X : T) -> List[T]
-  : { @list.empty() }
+  : { List([]) }
   | non_empty_list_semis_rev(X) { $1 }
   ;
 
 list_semis[T](X : T) -> List[T]
-  : { @list.empty() }
+  : { List([]) }
   | non_empty_list_semis(X) { $1 }
   ;
 
@@ -305,7 +305,7 @@ type_parameters -> List[TypeVarBinder]
 optional_type_parameters -> List[TypeVarBinder]
   : option(type_parameters) {
     match $1 {
-      None => @list.empty()
+      None => List([])
       Some(params) => params
     }
   }
@@ -314,7 +314,7 @@ optional_type_parameters -> List[TypeVarBinder]
 optional_type_parameters_no_constraints -> List[TypeDeclBinder]
   : option(delimited("[", non_empty_list_commas(id(type_decl_binder)), "]")) {
     match $1 {
-      None => @list.empty()
+      None => List([])
       Some(params) => params
     }
   }
@@ -323,7 +323,7 @@ optional_type_parameters_no_constraints -> List[TypeDeclBinder]
 %inline optional_type_arguments -> List[Type]
   : ioption(delimited("[", non_empty_list_commas(type_), "]")) {
     match $1 {
-      None => @list.empty()
+      None => List([])
       Some(params) => params
     }
   }
@@ -474,7 +474,7 @@ structure_item -> Impl
       {
         tycon,
         tycon_loc,
-        params: @list.empty(),
+        params: List([]),
         components: Error(exception_decl),
         type_vis,
         doc : DocString::empty(),
@@ -493,7 +493,7 @@ structure_item -> Impl
       {
         tycon,
         tycon_loc,
-        params: @list.empty(),
+        params: List([]),
         components: Error(exception_decl),
         type_vis,
         doc : DocString::empty(),
@@ -704,7 +704,7 @@ structure_item -> Impl
   | attributes is_declare visibility "trait" UIDENT option(preceded(COLON, separated_nonempty_list(PLUS, tvar_constraint))) "{" list_semis(trait_method_decl) "}" {
     let name = Binder::{ name: $5, loc: mk_loc($loc($5)) }
     let supers = match $6 {
-      None => @list.empty()
+      None => List([])
       Some(supers) => supers
     }
     TopTrait(
@@ -874,12 +874,12 @@ extend_alias_target -> AliasTarget
   ;
 
 impl_optional_fn -> List[TypeVarBinder]
-  : { @list.empty() }
+  : { List([]) }
   | "fn" optional_type_parameters { $2 }
   ;
 
 %inline attributes -> List[Attribute]
-  :  { @list.empty() }
+  :  { List([]) }
   | non_empty_list(attribute) { $1 }
   ;
 
@@ -1082,17 +1082,17 @@ using_binder -> (AliasTarget, UsingKind):
   }
 
 deriving_directive -> DerivingDirective
-  : type_name { { type_name: $1, args: @list.empty(), loc: mk_loc($sloc) } }
+  : type_name { { type_name: $1, args: List([]), loc: mk_loc($sloc) } }
   | type_name "(" list_commas(argument) ")" { { type_name: $1, args: $3, loc: mk_loc($sloc) } }
   ;
 
 deriving_directive_list -> List[DerivingDirective]
-  :  { @list.empty() }
+  :  { List([]) }
   | "derive" "(" list_commas(deriving_directive) ")" { $3 }
   ;
 
 trait_method_fn_header -> List[TypeVarBinder]
-  : { @list.empty() }
+  : { List([]) }
   | "fn" optional_type_parameters { $2 }
   ;
 
@@ -1178,7 +1178,7 @@ statement -> Statement
     StmtLet(pat~, expr = $5, loc = mk_loc($sloc))
   }
   | "letrec" binder opt_annot "=" letand_func list(and_func) {
-    let bindings = $6.add(($2, $3, $5))
+    let bindings = $6.prepend(($2, $3, $5))
     StmtLetand(bindings~, loc = mk_loc($sloc))
   }
   | "let" "mut" binder opt_annot "=" expr {
@@ -1430,7 +1430,7 @@ match_expr -> Expr
     let expr = $1
     Match(
       expr~,
-      cases = @list.empty(),
+      cases = List([]),
       match_loc = mk_loc($loc($1)),
       loc = mk_loc($sloc)
     )
@@ -1467,14 +1467,14 @@ lexscan_case -> LexScanCase:
     let loc = mk_loc($loc($1))
     {
       pat: Wildcard(loc~),
-      bindings: @list.empty(),
+      bindings: List([]),
       body: Hole(loc~, kind = Todo),
       arrow_loc: loc
     }
   }
 
 lexscan_case_pattern_with_bindings -> (LexScanCasePattern, List[(Label, Binder?)]):
-  | lexscan_case_pattern { ($1, @list.empty()) }
+  | lexscan_case_pattern { ($1, List([])) }
   | "(" regex_as_pattern "," list_commas(regex_match_binding) ")" {
     (Pattern($2), $4)
   }
@@ -1495,10 +1495,10 @@ for_binders_infix -> List[(Binder, Expr)]
 
 list_comp_for_header -> (List[(Binder, Expr)], Expr?, List[(Binder, Expr)], Location)
   : non_empty_list_commas_no_trailing(separated_pair(binder, "=", infix_expr)) {
-    ($1, None, @list.empty(), mk_loc($sloc))
+    ($1, None, List([]), mk_loc($sloc))
   }
   | for_binders_infix SEMI option(infix_expr) {
-    ($1, $3, @list.empty(), mk_loc($sloc))
+    ($1, $3, List([]), mk_loc($sloc))
   }
   | for_binders_infix SEMI option(infix_expr) SEMI for_binders_infix {
     ($1, $3, $5, mk_loc($sloc))
@@ -1533,7 +1533,7 @@ for_expr -> Expr
     For(
       binders = $3,
       condition = Some($5),
-      continue_block = @list.empty(),
+      continue_block = List([]),
       body = $6,
       for_else = $7,
       label = $1,
@@ -1545,7 +1545,7 @@ for_expr -> Expr
     For(
       binders = $3,
       condition = None,
-      continue_block = @list.empty(),
+      continue_block = List([]),
       body = $4,
       for_else = $5,
       label = $1,
@@ -1573,14 +1573,14 @@ foreach_expr -> Expr
   ;
 
 foreach_optional_loop_vars -> (List[(Binder, Expr)], List[(Binder, Expr)])
-  : { (@list.empty(), @list.empty()) }
-  | SEMI for_binders { ($2, @list.empty()) }
+  : { (List([]), List([])) }
+  | SEMI for_binders { ($2, List([])) }
   | SEMI for_binders SEMI for_binders { ($2, $4) }
   ;
 
 foreach_optional_loop_vars_infix -> (List[(Binder, Expr)], List[(Binder, Expr)])
-  : { (@list.empty(), @list.empty()) }
-  | SEMI for_binders_infix { ($2, @list.empty()) }
+  : { (List([]), List([])) }
+  | SEMI for_binders_infix { ($2, List([])) }
   | SEMI for_binders_infix SEMI for_binders_infix { ($2, $4) }
   ;
 
@@ -1648,7 +1648,7 @@ arrow_fn_with_explicit_braces -> Func
   }
   | "(" ")" "=>" "{" list_semis_rev(statement) "}" {
     let body = Statement::compact_rev($5, loc = mk_loc($loc($4)).merge(mk_loc($loc($6))))
-    make_arrow_fn(@list.empty(), body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
+    make_arrow_fn(List([]), body, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
   }
   | binder "=>" "{" list_semis_rev(statement) "}" {
     let body = Statement::compact_rev($4, loc = mk_loc($loc($3)).merge(mk_loc($loc($5))))
@@ -1665,7 +1665,7 @@ arrow_fn_expr -> Func
     make_arrow_fn($2, $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))), loc = mk_loc($sloc))
   }
   | "(" ")" "=>" expr_statement_no_break_continue_return {
-    make_arrow_fn(@list.empty(), $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
+    make_arrow_fn(List([]), $4, params_loc = mk_loc($loc($1)).merge(mk_loc($loc($2))),loc = mk_loc($sloc))
   }
   | binder "=>" expr_statement_no_break_continue_return {
     make_arrow_fn(@list.singleton((Named($1), None)), $3, params_loc = mk_loc($loc($1)), loc = mk_loc($sloc))
@@ -1680,17 +1680,17 @@ arrow_fn_prefix -> List[(ArrowFnParam, Type?)]
   | "_" ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), None)) }
   | binder ":" type_ ioption(",") ")" { @list.singleton((Named($1), Some($3))) }
   | "_" ":" type_ ioption(",") ")" { @list.singleton((Unnamed(mk_loc($loc($1))), Some($3))) }
-  | binder "," arrow_fn_prefix { $3.add((Named($1), None)) }
-  | "_" "," arrow_fn_prefix { $3.add((Unnamed(mk_loc($loc($1))), None)) }
-  | binder ":" type_ "," arrow_fn_prefix { $5.add((Named($1), Some($3))) }
-  | "_" ":" type_ "," arrow_fn_prefix { $5.add((Unnamed(mk_loc($loc($1))), Some($3))) }
+  | binder "," arrow_fn_prefix { $3.prepend((Named($1), None)) }
+  | "_" "," arrow_fn_prefix { $3.prepend((Unnamed(mk_loc($loc($1))), None)) }
+  | binder ":" type_ "," arrow_fn_prefix { $5.prepend((Named($1), Some($3))) }
+  | "_" ":" type_ "," arrow_fn_prefix { $5.prepend((Unnamed(mk_loc($loc($1))), Some($3))) }
   ;
 
 arrow_fn_prefix_no_constraint -> List[ArrowFnParam]
   : binder ioption(",") ")" { @list.singleton(Named($1)) }
   | "_" ioption(",") ")" { @list.singleton(Unnamed(mk_loc($loc($1)))) }
-  | binder "," arrow_fn_prefix_no_constraint { $3.add(Named($1)) }
-  | "_" "," arrow_fn_prefix_no_constraint { $3.add(Unnamed(mk_loc($loc($1)))) }
+  | binder "," arrow_fn_prefix_no_constraint { $3.prepend(Named($1)) }
+  | "_" "," arrow_fn_prefix_no_constraint { $3.prepend(Unnamed(mk_loc($loc($1)))) }
   ;
 
 backward_pipeline_rhs -> Expr
@@ -1768,7 +1768,7 @@ postfix_expr -> Expr
   ;
 
 regex_match_rhs -> (RegexPattern, List[(Label, Binder?)])
-  : regex_atom_pattern { ($1, @list.empty()) }
+  : regex_atom_pattern { ($1, List([])) }
   | "(" regex_as_pattern "," list_commas(regex_match_binding) ")" { ($2, $4) }
   ;
 
@@ -1917,12 +1917,12 @@ constr -> Constructor
 
 non_empty_tuple_elems -> List[Expr]
   : expr ioption(",") ")" { @list.singleton($1) }
-  | expr "," non_empty_tuple_elems { $3.add($1) }
+  | expr "," non_empty_tuple_elems { $3.prepend($1) }
   ;
 
 non_empty_tuple_elems_with_prefix -> List[Expr]
-  : binder "," non_empty_tuple_elems_with_prefix { $3.add(@syntax.binder_to_expr($1)) }
-  | "_" "," non_empty_tuple_elems_with_prefix { $3.add(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
+  : binder "," non_empty_tuple_elems_with_prefix { $3.prepend(@syntax.binder_to_expr($1)) }
+  | "_" "," non_empty_tuple_elems_with_prefix { $3.prepend(Expr::Hole(loc = mk_loc($loc($1)), kind = Incomplete)) }
   | non_empty_tuple_elems { $1 }
   ;
 
@@ -1979,7 +1979,7 @@ simple_expr -> Expr
     @syntax.make_record_expr(loc = mk_loc($sloc), trailing = trailing_mark, Some($1), fs)
   }
   | ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "}" {
-    RecordUpdate(type_name = $1, record = $4, fields = @list.empty(), loc = mk_loc($sloc))
+    RecordUpdate(type_name = $1, record = $4, fields = List([]), loc = mk_loc($sloc))
   }
   | ioption(terminated(type_name, COLONCOLON)) "{" ".." expr "," list_commas(record_defn_single) "}" {
     RecordUpdate(type_name = $1, record = $4, fields = $6, loc = mk_loc($sloc))
@@ -2112,7 +2112,7 @@ simple_expr -> Expr
 
 tvar_binder -> TypeVarBinder
   : UIDENT {
-    { name: $1, constraints: @list.empty(), name_loc: mk_loc($loc($1)) }
+    { name: $1, constraints: List([]), name_loc: mk_loc($loc($1)) }
   }
   | UIDENT COLON separated_nonempty_list(PLUS, tvar_constraint) {
     { name: $1, constraints: $3, name_loc: mk_loc($loc($1)) }
@@ -2298,11 +2298,11 @@ simple_pattern -> Pattern
     With(pat = $2, bindings = $4, loc = mk_loc($sloc))
   }
   | "(" pattern ")" { $2 }
-  | "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.add($2)) }
+  | "(" pattern "," non_empty_list_commas(pattern) ")" { @syntax.make_tuple_pattern(loc = mk_loc($sloc), $4.prepend($2)) }
   | "(" pattern annot ")" { Constraint(pat = $2, ty = $3, loc = mk_loc($sloc)) }
   | "[" array_sub_patterns "]" { Array(pats = $2, loc = mk_loc($sloc)) }
-  | "{" "}" { Record(fields = @list.empty(), is_closed = true, loc = mk_loc($sloc)) }
-  | "{" ".." option(",") "}" { Record(fields = @list.empty(), is_closed = false, loc = mk_loc($sloc)) }
+  | "{" "}" { Record(fields = List([]), is_closed = true, loc = mk_loc($sloc)) }
+  | "{" ".." option(",") "}" { Record(fields = List([]), is_closed = false, loc = mk_loc($sloc)) }
   | "{" non_empty_fields_pat "}" {
     let (fields, is_closed) = $2
     Record(fields~, is_closed~, loc = mk_loc($sloc))
@@ -2335,16 +2335,16 @@ dotdot_binder -> DotDotBinder
   ;
 
 array_sub_patterns -> ArrayPatterns
-  :  { Closed(@list.empty()) }
+  :  { Closed(List([])) }
   | array_sub_pattern { Closed(@list.singleton($1)) }
   | array_sub_pattern "," array_sub_patterns {
     match $3 {
-      Closed(ps) => Closed(ps.add($1))
-      Open(ps1, ps2, b) => Open(ps1.add($1), ps2, b)
+      Closed(ps) => Closed(ps.prepend($1))
+      Open(ps1, ps2, b) => Open(ps1.prepend($1), ps2, b)
     }
   }
-  | dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(@list.empty(), $3, $1) }
-  | dotdot_binder ioption(",") { Open(@list.empty(), @list.empty(), $1) }
+  | dotdot_binder "," non_empty_list_commas(array_sub_pattern) { Open(List([]), $3, $1) }
+  | dotdot_binder ioption(",") { Open(List([]), List([]), $1) }
   ;
 
 error_annotation -> ErrorType
@@ -2354,7 +2354,7 @@ error_annotation -> ErrorType
   | "raise" "?" {
     let fake_error = Type::Name(
       constr_id = ConstrId::{ id: Ident(name = "Error"), loc: mk_loc($sloc) },
-      tys = @list.empty(),
+      tys = List([]),
       loc = mk_loc($sloc)
     )
     MaybeError(ty = fake_error)
@@ -2397,7 +2397,7 @@ error_type -> Type
   : qual_ident_ty {
     Name(
       constr_id = ConstrId::{ id: $1, loc: mk_loc($sloc) },
-      tys = @list.empty(),
+      tys = List([]),
       loc = mk_loc($sloc)
     )
   }
@@ -2406,7 +2406,7 @@ error_type -> Type
 
 simple_type -> Type
   : simple_type "?" { @syntax.make_option_type(loc = mk_loc($sloc), constr_loc = mk_loc($loc($2)), $1) }
-  | "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.add($2)) }
+  | "(" type_ "," non_empty_list_commas(type_) ")" { @syntax.make_tuple_type(loc = mk_loc($sloc), $4.prepend($2)) }
   | "(" type_ ")" { $2 }
   | qual_ident_ty_inline optional_type_arguments %prec prec_lower_than_as {
     Name(
@@ -2424,14 +2424,14 @@ type_ -> Type
   | is_async "(" type_ "," ioption(non_empty_list_commas(type_)) ")" "->" return_type {
     let (ty_res, ty_err, nocancel_) = $8
     let ts = match $5 {
-      None => @list.empty()
+      None => List([])
       Some(ts) => ts
     }
-    Arrow(args = ts.add($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+    Arrow(args = ts.prepend($3), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
   }
   | is_async "(" ")" "->" return_type {
     let (ty_res, ty_err, nocancel_) = $5
-    Arrow(args = @list.empty(), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
+    Arrow(args = List([]), res = ty_res, err = ty_err, is_async = $1, nocancel_~, loc = mk_loc($sloc))
   }
   | is_async "(" type_ ")" "->" return_type {
     let (ty_res, ty_err, nocancel_) = $6
@@ -2475,8 +2475,8 @@ record_constr_decl -> FunDecl
   ;
 
 record_decl_body -> (List[FieldDecl], FunDecl?)
-  : { (@list.empty(), None) }
-  | record_constr_decl option(SEMI) { (@list.empty(), Some($1)) }
+  : { (List([]), None) }
+  | record_constr_decl option(SEMI) { (List([]), Some($1)) }
   | non_empty_list_semi_rev_aux(record_decl_field) option(SEMI) {
     ($1.rev(), None)
   }
@@ -2524,7 +2524,7 @@ record_defn -> (List[FieldDef], TrailingMark)
   : label_pun "," list_commas_with_trailing_info(record_defn_single) {
     let (fs, trailing) = $3
     let trailing_mark = if fs.is_empty() || trailing { TrailingMark::Comma } else { None }
-    (fs.add($1), trailing_mark)
+    (fs.prepend($1), trailing_mark)
   }
   | labeled_expr option(",") {
     let trailing_mark = if $2 is Some(_) { TrailingMark::Comma } else { None }
@@ -2533,7 +2533,7 @@ record_defn -> (List[FieldDef], TrailingMark)
   | labeled_expr "," non_empty_list_commas_with_trailing_info(record_defn_single) {
     let (fs, trailing) = $3
     let trailing_mark = if trailing { TrailingMark::Comma } else { None }
-    (fs.add($1), trailing_mark)
+    (fs.prepend($1), trailing_mark)
   }
   ;
 
@@ -2587,16 +2587,16 @@ non_empty_map_elems_pat -> (List[MapPatElem], Bool)
 
 constr_pat_arguments -> (List[ConstrPatArg], Bool)
   : constr_pat_argument option(",") { (@list.singleton($1), false) }
-  | ".." option(",") { (@list.empty(), true) }
+  | ".." option(",") { (List([]), true) }
   | constr_pat_argument "," constr_pat_arguments {
     let (args, is_open) = $3
-    (args.add($1), is_open)
+    (args.prepend($1), is_open)
   }
   ;
 
 constr_pat_arguments_no_open -> List[ConstrPatArg]
   : constr_pat_argument option(",") { @list.singleton($1) }
-  | constr_pat_argument "," constr_pat_arguments_no_open { $3.add($1) }
+  | constr_pat_argument "," constr_pat_arguments_no_open { $3.prepend($1) }
   ;
 
 constr_pat_argument -> ConstrPatArg

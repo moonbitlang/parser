@@ -71,10 +71,7 @@ test "token constructors preserve exact kinds and ordered repeated entries" {
     assert_constructor_entries(token, loc, source_span, expected)
     let error = @node.CstNode::error(loc~, source_span~, entries=[Item(token)])
     let recovered = error.children[0].1
-    @test.assert_eq(
-      recovered.kind is @node.NodeKind::Syntax_Unexpected(_),
-      true,
-    )
+    @test.assert_eq(recovered.kind is Syntax_Unexpected(_), true)
     @test.assert_eq(recovered.kind.token_kind(), Some(token_kind))
     assert_constructor_entries(recovered, loc, source_span, expected)
     let unexpected = @node.CstNode::syntax_unexpected(

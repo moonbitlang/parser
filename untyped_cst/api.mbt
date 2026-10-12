@@ -8,8 +8,8 @@
 /// code-unit offsets suitable for slicing the original `source` string.
 pub fn parse_structure(
   source : String,
-  name? : String = "",
-  enable_metavar? : Bool = false,
+  name~ : String = "",
+  enable_metavar~ : Bool = false,
 ) -> ParseResult {
   let parsed = @cst_parser.parse_structure(source, name~, enable_metavar~)
   parse_result(parsed.root, parsed.diagnostics, parsed.docstrings)
@@ -25,8 +25,8 @@ pub fn parse_structure(
 /// UTF-16 code-unit offsets suitable for slicing the original `source` string.
 pub fn parse_expression(
   source : String,
-  name? : String = "",
-  enable_metavar? : Bool = false,
+  name~ : String = "",
+  enable_metavar~ : Bool = false,
 ) -> ParseResult {
   let parsed = @cst_parser.parse_expression(source, name~, enable_metavar~)
   parse_result(parsed.root, parsed.diagnostics, parsed.docstrings)

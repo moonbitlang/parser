@@ -1,6 +1,6 @@
 ///|
 fn constructor_test_position() -> @basic.Position {
-  @basic.Position::{ fname: "constructors_test.mbt", lnum: 1, bol: 0, cnum: 0, }
+  { fname: "constructors_test.mbt", lnum: 1, bol: 0, cnum: 0, }
 }
 
 ///|
@@ -1057,11 +1057,7 @@ test "every NodeKind has one typed CstNode constructor" {
     @node.CstNode::list_for_binding_list(loc~, source_span=span, entries=[]),
     @node.CstNode::list_for_each_binding_list(loc~, source_span=span, entries=[]),
     @node.CstNode::list_with_binding_list(loc~, source_span=span, entries=[]),
-    @node.CstNode::leaf(
-      payload=@node.NodePayload::String("payload"),
-      loc~,
-      source_span=span,
-    ),
+    @node.CstNode::leaf(payload=String("payload"), loc~, source_span=span),
     @node.CstNode::pattern_constr_unknown(
       loc~,
       source_span=span,

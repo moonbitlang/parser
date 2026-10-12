@@ -5,7 +5,7 @@ fn parse_quantifier_expr(
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let quantifier_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
-      TokenKind::TK_EXISTS,
+      TK_EXISTS,
     ) {
     fn(loc, source_span, children) {
       let _ = children
@@ -511,7 +511,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
     state.reports.length() > reports_before_pattern &&
     !saw_guard &&
     !pat.has_child_or_grandchild_kind(fn(kind) { kind is Pattern_With }) {
-    state.missing_token_node_silent(TokenKind::TK_FAT_ARROW)
+    state.missing_token_node_silent(TK_FAT_ARROW)
   } else {
     state.expect_token(TK_FAT_ARROW)
   }

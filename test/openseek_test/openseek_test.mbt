@@ -51,7 +51,7 @@ fn record_diagnostics(
 ) -> Unit {
   if !reports.is_empty() {
     let rendered = @basic.show_loc.protect(String, fn() {
-      reports.to_json().stringify(indent=2)
+      Json(reports).stringify(indent=2)
     })
     failures.push("\{path}\nparser: \{parser}\ndiagnostics:\n\{rendered}")
   }
@@ -60,7 +60,7 @@ fn record_diagnostics(
 ///|
 fn impls_json(impls : @syntax.Impls) -> Json {
   @basic.show_loc.protect(String, fn() {
-    impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(impls.map(impl_ => impl_.json_repr()))
   })
 }
 

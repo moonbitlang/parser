@@ -2,7 +2,7 @@
 fn refactor_find_node(
   source : String,
   pred : (@untyped_cst.NodeKind) -> Bool,
-  expression? : Bool = false,
+  expression~ : Bool = false,
 ) -> @untyped_cst.CstNode raise {
   let parsed = if expression {
     @untyped_cst.parse_expression(source)
@@ -34,10 +34,7 @@ fn refactor_assert_comment(
   guard node.first_child_with_label("trivia") is Some(comment) else {
     fail("expected comment in \{source}")
   }
-  @test.assert_eq(
-    comment.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-    true,
-  )
+  @test.assert_eq(comment.kind is Syntax_Token(TK_COMMENT), true)
   @test.assert_eq(comment.text(source), "// keep"[:])
   @test.assert_eq(comment.source_span, (prefix.length(), prefix.length() + 7))
   @test.assert_eq(comment.loc.start.cnum, prefix.length())
@@ -58,14 +55,8 @@ test "type trivia retains comments, source order, and UTF-16 spans" {
   let first = group.children[0].1
   let second = group.children[1].1
   let ty = group.children[2].1
-  @test.assert_eq(
-    first.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-    true,
-  )
-  @test.assert_eq(
-    second.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-    true,
-  )
+  @test.assert_eq(first.kind is Syntax_Token(TK_COMMENT), true)
+  @test.assert_eq(second.kind is Syntax_Token(TK_COMMENT), true)
   @test.assert_eq(first.text(source), "// keep 🐇"[:])
   @test.assert_eq(second.text(source), "// second"[:])
   @test.assert_eq(first.source_span, (9, 19))
@@ -199,16 +190,10 @@ test "pattern trivia wrappers retain their original shape" {
   // Keep the pre-refactor wrapper's lowering, including its unconstrained type.
   let (expr, reports) = @untyped_cst.parse_expression(source).to_expr()
   @test.assert_eq(reports.length(), 0)
-  guard expr
-    is Some(@syntax.Expr::Group(expr=@syntax.Expr::Let(pattern~, ..), ..)) else {
+  guard expr is Some(Group(expr=Let(pattern~, ..), ..)) else {
     fail("expected grouped let expression")
   }
-  guard pattern
-    is @syntax.Pattern::Constraint(
-      pat=@syntax.Pattern::Var(binder),
-      ty=@syntax.Type::Any(loc=type_loc),
-      loc~
-    ) else {
+  guard pattern is Constraint(pat=Var(binder), ty=Any(loc=type_loc), loc~) else {
     fail("expected the pre-refactor pattern wrapper")
   }
   @test.assert_eq(binder.name, "x")
@@ -242,19 +227,19 @@ test "legacy type tails retain their head and lowering behavior" {
     }
     let (impls, reports) = parsed.to_impls()
     @test.assert_eq(reports.length(), 0)
-    guard impls.to_array() is [@syntax.Impl::TopFuncDef(fun_decl~, ..)] else {
+    guard impls.to_array() is [TopFuncDef(fun_decl~, ..)] else {
       fail("expected function")
     }
     guard fun_decl.decl_params is Some(params) else {
       fail("expected parameters")
     }
-    guard params.to_array() is [@syntax.Parameter::Positional(ty=Some(ty), ..)] else {
+    guard params.to_array() is [Positional(ty=Some(ty), ..)] else {
       fail("expected typed parameter")
     }
-    guard ty is @syntax.Type::Name(constr_id~, tys~, loc~) else {
+    guard ty is Name(constr_id~, tys~, loc~) else {
       fail("legacy type head must not lower to Any")
     }
-    @test.assert_eq(constr_id.id is @syntax.LongIdent::Ident(name="A"), true)
+    @test.assert_eq(constr_id.id is Ident(name="A"), true)
     @test.assert_eq(tys.length(), 0)
     @test.assert_eq(loc, node.loc)
   }
@@ -280,10 +265,10 @@ test "question postfix patterns retain the pattern and operator" {
     @test.assert_eq(node.source_span, (10, 12))
     let (expr, reports) = parsed.to_expr()
     @test.assert_eq(reports.length(), 0)
-    guard expr is Some(@syntax.Expr::Match(cases~, ..)) else {
+    guard expr is Some(Match(cases~, ..)) else {
       fail("expected match expression")
     }
-    guard cases.to_array() is [{ pattern: @syntax.Pattern::Any(loc~), .. }] else {
+    guard cases.to_array() is [{ pattern: Any(loc~), .. }] else {
       fail("question pattern must retain its previous lowering")
     }
     @test.assert_eq(loc, node.loc)
@@ -344,10 +329,7 @@ test "async tests retain single and consecutive comments before test" {
     let comments = node.children_with_label("trivia")
     @test.assert_eq(comments.length(), if multiple { 2 } else { 1 })
     for comment in comments {
-      @test.assert_eq(
-        comment.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-        true,
-      )
+      @test.assert_eq(comment.kind is Syntax_Token(TK_COMMENT), true)
     }
     refactor_assert_source_range(
       comments[0],
@@ -406,10 +388,7 @@ test "extend items retain comments on both sides of as" {
   let comments = node.children_with_label("trivia")
   @test.assert_eq(comments.length(), 2)
   for comment in comments {
-    @test.assert_eq(
-      comment.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-      true,
-    )
+    @test.assert_eq(comment.kind is Syntax_Token(TK_COMMENT), true)
   }
   refactor_assert_source_range(
     comments[0],
@@ -466,10 +445,7 @@ test "import packages retain consecutive comments and UTF-16 spans" {
   let comments = node.children_with_label("trivia")
   @test.assert_eq(comments.length(), 2)
   for comment in comments {
-    @test.assert_eq(
-      comment.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-      true,
-    )
+    @test.assert_eq(comment.kind is Syntax_Token(TK_COMMENT), true)
   }
   refactor_assert_source_range(
     comments[0],
@@ -517,13 +493,10 @@ test "invalid record patterns retain nested patterns and commas" {
       },
     )
     let missing = list.children[1].1
-    @test.assert_eq(
-      missing.kind is @untyped_cst.NodeKind::Pattern_MissingPattern,
-      true,
-    )
+    @test.assert_eq(missing.kind is Pattern_MissingPattern, true)
     @test.assert_eq(refactor_labels(missing), [Some("pattern")])
     let pattern = missing.children[0].1
-    @test.assert_eq(pattern.kind is @untyped_cst.NodeKind::Pattern_Any, true)
+    @test.assert_eq(pattern.kind is Pattern_Any, true)
     @test.assert_eq(refactor_labels(pattern), [Some("name")])
     for node in [missing, pattern, pattern.children[0].1] {
       refactor_assert_source_range(
@@ -536,10 +509,7 @@ test "invalid record patterns retain nested patterns and commas" {
       )
     }
     let comma = list.children[2].1
-    @test.assert_eq(
-      comma.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMA),
-      true,
-    )
+    @test.assert_eq(comma.kind is Syntax_Token(TK_COMMA), true)
     refactor_assert_source_range(
       comma,
       source,
@@ -550,7 +520,7 @@ test "invalid record patterns retain nested patterns and commas" {
     )
     if list.children.length() == 5 {
       let field = list.children[3].1
-      @test.assert_eq(field.kind is @untyped_cst.NodeKind::Field_Pattern, true)
+      @test.assert_eq(field.kind is Field_Pattern, true)
       refactor_assert_source_range(
         field,
         source,
@@ -600,10 +570,7 @@ fn refactor_assert_ordered_comments(
     let mut cnum = prefix.length()
     let mut bol = 0
     for i, (text, scalar_length) in comments {
-      @test.assert_eq(
-        trivia[i].kind is @untyped_cst.NodeKind::Syntax_Token(TK_COMMENT),
-        true,
-      )
+      @test.assert_eq(trivia[i].kind is Syntax_Token(TK_COMMENT), true)
       refactor_assert_source_range(
         trivia[i],
         source,
@@ -699,9 +666,9 @@ fn refactor_assert_array_assignment_recovery(op : String) -> Unit raise {
   let node = parsed.root().first_child_with_label("expr").unwrap()
   @test.assert_eq(
     if op == "=" {
-      node.kind is @untyped_cst.NodeKind::Expr_ArraySet
+      node.kind is Expr_ArraySet
     } else {
-      node.kind is @untyped_cst.NodeKind::Expr_ArrayAugmentedSet
+      node.kind is Expr_ArrayAugmentedSet
     },
     true,
   )
@@ -713,7 +680,7 @@ fn refactor_assert_array_assignment_recovery(op : String) -> Unit raise {
     Some("augmented"),
   ])
   let lhs = node.children[0].1
-  @test.assert_eq(lhs.kind is @untyped_cst.NodeKind::Expr_ArrayGet, true)
+  @test.assert_eq(lhs.kind is Expr_ArrayGet, true)
   let original_lhs = @untyped_cst.parse_expression("xs[]")
     .root()
     .first_child_with_label("expr")
@@ -734,21 +701,14 @@ fn refactor_assert_array_assignment_recovery(op : String) -> Unit raise {
     (1, 0, 4),
   )
   let array = lhs.first_child_with_label("self").unwrap()
-  @test.assert_eq(array.kind is @untyped_cst.NodeKind::Expr_Ident, true)
+  @test.assert_eq(array.kind is Expr_Ident, true)
   let name = array.first_child_with_label("name").unwrap()
-  @test.assert_eq(
-    name.kind is @untyped_cst.NodeKind::Syntax_Token(TK_LIDENT),
-    true,
-  )
+  @test.assert_eq(name.kind is Syntax_Token(TK_LIDENT), true)
   @test.assert_eq(name.string_payload(), Some("xs"))
   refactor_assert_source_range(name, source, "xs", (0, 2), (1, 0, 0), (1, 0, 2))
   for (label, text, start) in [("open", "[", 2), ("close", "]", 3)] {
     let token = lhs.first_child_with_label(label).unwrap()
-    @test.assert_eq(
-      token.kind
-      is @untyped_cst.NodeKind::Syntax_Token(TK_LBRACKET | TK_RBRACKET),
-      true,
-    )
+    @test.assert_eq(token.kind is Syntax_Token(TK_LBRACKET | TK_RBRACKET), true)
     refactor_assert_source_range(
       token,
       source,
@@ -823,13 +783,10 @@ test "CST preservation: public visibility retains every error node" {
   let errors = node.children_with_label("error")
   @test.assert_eq(errors.length(), 2)
   for i, error in errors {
-    @test.assert_eq(error.kind is @untyped_cst.NodeKind::Error, true)
+    @test.assert_eq(error.kind is Error, true)
     @test.assert_eq(refactor_labels(error), [Some("item")])
     let token = error.children[0].1
-    @test.assert_eq(
-      token.kind is @untyped_cst.NodeKind::Syntax_Unexpected(_),
-      true,
-    )
+    @test.assert_eq(token.kind is Syntax_Unexpected(_), true)
     let text = if i == 0 { "1" } else { "2" }
     @test.assert_eq(token.string_payload(), Some(text))
     let start = 4 + i * 2
@@ -934,7 +891,7 @@ test "CST preservation: field assignments retain the complete recovery lhs" {
         reports[0].msg,
         "Unexpected token `]`, you may expect simple expression.",
       )
-      @test.assert_eq(reports[0].loc.start, @basic.Position::{
+      @test.assert_eq(reports[0].loc.start, {
         fname: "",
         lnum: line,
         bol: cnum,
@@ -1042,13 +999,8 @@ test "CST preservation: missing expressions retain consecutive newline trivia" {
       @test.assert_eq(
         reports[0].loc,
         @node.mk_loc(
-          @basic.Position::{
-            fname: "",
-            lnum: line + count,
-            bol: let_start,
-            cnum: let_start,
-          },
-          @basic.Position::{
+          { fname: "", lnum: line + count, bol: let_start, cnum: let_start, },
+          {
             fname: "",
             lnum: line + count,
             bol: let_start,
@@ -1064,10 +1016,7 @@ test "CST preservation: missing expressions retain consecutive newline trivia" {
       @test.assert_eq(refactor_labels(node), labels)
       for i in 0..<count {
         let trivia = node.children[i].1
-        @test.assert_eq(
-          trivia.kind is @untyped_cst.NodeKind::Syntax_Token(TK_NEWLINE),
-          true,
-        )
+        @test.assert_eq(trivia.kind is Syntax_Token(TK_NEWLINE), true)
         let start = cnum + 3 + i
         let bol = if i == 0 { cnum } else { start }
         refactor_assert_source_range(
@@ -1080,18 +1029,12 @@ test "CST preservation: missing expressions retain consecutive newline trivia" {
         )
       }
       let expr = node.children[count].1
-      @test.assert_eq(
-        expr.kind is @untyped_cst.NodeKind::Expr_MissingExpr,
-        true,
-      )
+      @test.assert_eq(expr.kind is Expr_MissingExpr, true)
       @test.assert_eq(refactor_labels(expr), [Some("error")])
       let error = expr.children[0].1
-      @test.assert_eq(error.kind is @untyped_cst.NodeKind::Error, true)
+      @test.assert_eq(error.kind is Error, true)
       @test.assert_eq(refactor_labels(error), [Some("item")])
-      @test.assert_eq(
-        error.children[0].1.kind is @untyped_cst.NodeKind::Syntax_Unexpected(_),
-        true,
-      )
+      @test.assert_eq(error.children[0].1.kind is Syntax_Unexpected(_), true)
       for child in [expr, error, error.children[0].1] {
         refactor_assert_source_range(
           child,
@@ -1136,10 +1079,7 @@ test "CST preservation: constructor parameters retain colons without names" {
           node.kind
           is (Parameter_ConstructorPositional | Parameter_ConstructorLabelled)
         }).unwrap()
-        @test.assert_eq(
-          node.kind is @untyped_cst.NodeKind::Parameter_ConstructorLabelled,
-          labelled,
-        )
+        @test.assert_eq(node.kind is Parameter_ConstructorLabelled, labelled)
         let labels = []
         if mut_prefix != "" {
           labels.push(Some("mut"))
@@ -1155,10 +1095,7 @@ test "CST preservation: constructor parameters retain colons without names" {
         if colon_offset is Some(colon_offset) {
           let colon = node.first_child_with_label("op").unwrap()
           let start = 11 + mut_prefix.length() + colon_offset
-          @test.assert_eq(
-            colon.kind is @untyped_cst.NodeKind::Syntax_Token(TK_COLON),
-            true,
-          )
+          @test.assert_eq(colon.kind is Syntax_Token(TK_COLON), true)
           refactor_assert_source_range(
             colon,
             source,

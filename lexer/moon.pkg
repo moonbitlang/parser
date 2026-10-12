@@ -4,7 +4,6 @@ import {
   "moonbitlang/core/list",
   "moonbitlang/core/string",
   "moonbitlang/core/cmp",
-  "moonbitlang/core/ref",
   "moonbitlang/core/hashset",
   "moonbitlang/core/hashmap",
 }

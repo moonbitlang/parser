@@ -116,7 +116,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
               fn(loc, source_span, children) {
                 let value = match
                   @construction.payload_from_children(children) {
-                  Some(NodePayload::Bool(value)) => value
+                  Some(Bool(value)) => value
                   _ => false
                 }
                 @node.CstNode::flag_object(value~, loc~, source_span~)
@@ -314,7 +314,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
                   fn(loc, source_span, children) {
                     let value = match
                       @construction.payload_from_children(children) {
-                      Some(NodePayload::String(value)) => value
+                      Some(String(value)) => value
                       _ => ""
                     }
                     @node.CstNode::name_test(value~, loc~, source_span~)
@@ -358,7 +358,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
                   fn(loc, source_span, children) {
                     let value = match
                       @construction.payload_from_children(children) {
-                      Some(NodePayload::String(value)) => value
+                      Some(String(value)) => value
                       _ => ""
                     }
                     @node.CstNode::language_value(value~, loc~, source_span~)
@@ -1164,7 +1164,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       "declare",
       fn(loc, source_span, children) {
         let value = match @construction.payload_from_children(children) {
-          Some(NodePayload::Bool(value)) => value
+          Some(Bool(value)) => value
           _ => false
         }
         @node.CstNode::flag_declare(value~, loc~, source_span~)
@@ -1181,7 +1181,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
       "async",
       fn(loc, source_span, children) {
         let value = match @construction.payload_from_children(children) {
-          Some(NodePayload::Bool(value)) => value
+          Some(Bool(value)) => value
           _ => false
         }
         @node.CstNode::flag_async(value~, loc~, source_span~)

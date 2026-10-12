@@ -57,7 +57,7 @@ fn default_location_mapper(source : String) -> (Int) -> Int {
 ///|
 pub fn ParserState::peek(
   self : ParserState,
-  offset? : Int = 0,
+  offset~ : Int = 0,
 ) -> (Token, Position, Position)? {
   self.tokens.get(self.pos + offset)
 }

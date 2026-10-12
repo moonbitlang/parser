@@ -85,7 +85,7 @@ fn parse_multiline_string_literal(state : ParserState) -> CstNode {
                     fn(loc, source_span, children) {
                       let value = match
                         @construction.payload_from_children(children) {
-                        Some(NodePayload::String(value)) => value
+                        Some(String(value)) => value
                         _ => ""
                       }
                       @node.CstNode::multiline_string_element_string(
@@ -226,7 +226,7 @@ fn parse_interp_segment(
       node_with_payload(
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::String(value)) => value
+            Some(String(value)) => value
             _ => ""
           }
           @node.CstNode::interp_segment_literal(value~, loc~, source_span~)

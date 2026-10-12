@@ -72,7 +72,7 @@ fn Fmt::commented_parens(fmt : Self, content : () -> Doc) -> Doc {
 fn Fmt::commented_braces(
   fmt : Self,
   content : () -> Doc,
-  force_newline? : Bool = false,
+  force_newline~ : Bool = false,
 ) -> Doc {
   let left = fmt.token(TK_LBRACE)
   let before = fmt.placeholder()
@@ -102,7 +102,7 @@ fn Fmt::commented_brackets(fmt : Self, content : () -> Doc) -> Doc {
 fn Fmt::commented_iter_brackets(
   fmt : Self,
   content : () -> Doc,
-  is_empty? : Bool = false,
+  is_empty~ : Bool = false,
 ) -> Doc {
   let left = fmt.token(TK_LBRACKET_BAR)
   let before = fmt.placeholder()
@@ -119,7 +119,7 @@ fn Fmt::commented_iter_brackets(
 }
 
 ///|
-fn Fmt::placeholder(fmt : Self, ignore_blank? : Bool = false) -> Doc {
+fn Fmt::placeholder(fmt : Self, ignore_blank~ : Bool = false) -> Doc {
   match fmt.checkpoint_mapper {
     Some(mapper) => mapper.placeholder(ignore_blank~)
     None => empty
@@ -127,7 +127,7 @@ fn Fmt::placeholder(fmt : Self, ignore_blank? : Bool = false) -> Doc {
 }
 
 ///|
-fn Fmt::comment_or_space(fmt : Self, ignore_blank? : Bool = false) -> Doc {
+fn Fmt::comment_or_space(fmt : Self, ignore_blank~ : Bool = false) -> Doc {
   match fmt.checkpoint_mapper {
     Some(mapper) => mapper.placeholder_or_space(ignore_blank~)
     None => space
@@ -232,7 +232,7 @@ fn Fmt::get_table(fmt : Self, node : Location) -> @comment.NodeTable {
 fn Fmt::new(
   mapper? : @comment.Mapper,
   checkpoint_mapper? : @comment.CheckpointMapper,
-  block_line? : Bool = true,
+  block_line~ : Bool = true,
 ) -> Self {
   { mapper, checkpoint_mapper, block_line, }
 }
@@ -1182,7 +1182,7 @@ fn Fmt::record_constr_decl(fmt : Self, decl : @syntax.FunDecl) -> Doc {
   )
   let params = group(
     fmt.parameters(
-      decl_params.unwrap_or(@list.empty()),
+      decl_params.unwrap_or(List([])),
       lparen=None,
       rparen=None,
       commas=@comment.NodeArray::empty(),
@@ -1251,8 +1251,7 @@ fn Fmt::typedecl(fmt : Fmt, typedecl : @syntax.TypeDecl) -> Doc {
       let params = fmt.type_decl_binders(params)
       let deriving = fmt.deriving_directives(deriving)
       let declaration_vis = match type_vis {
-        Pub(loc~, attr=Some("all")) =>
-          fmt.visibility(@syntax.Visibility::Pub(loc~, attr=None))
+        Pub(loc~, attr=Some("all")) => fmt.visibility(Pub(loc~, attr=None))
         _ => vis
       }
       doc +
@@ -1852,8 +1851,8 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       let sep = line + char('|') + space
       let pats = for acc = @list.List([pat1]), cur = pat2 {
         match cur {
-          Or(pat1~, pat2~, loc=_) => continue acc.add(pat1), pat2
-          pat => break acc.add(pat).rev()
+          Or(pat1~, pat2~, loc=_) => continue acc.prepend(pat1), pat2
+          pat => break acc.prepend(pat).rev()
         }
       }
       let lparen = switch(empty, char('(') + space)
@@ -1998,7 +1997,7 @@ fn Fmt::parameter(
   fmt : Self,
   parameter : @syntax.Parameter,
   table : @comment.NodeTable,
-  kind? : ParameterListKind = Regular,
+  kind~ : ParameterListKind = Regular,
 ) -> Doc {
   ignore(table) // TODO: use table for comments
   match parameter {
@@ -2081,7 +2080,7 @@ fn Fmt::parameters(
   param_tables~ : @comment.NodeTableArray,
   commas~ : @comment.NodeArray,
   rparen~ : @comment.Key?,
-  kind? : ParameterListKind = Regular,
+  kind~ : ParameterListKind = Regular,
 ) -> Doc {
   ignore(rparen) //TODO: use rparen comment
   let sep = comma
@@ -2390,8 +2389,8 @@ fn Fmt::case(fmt : Self, case_ : @syntax.Case) -> Doc {
 fn Fmt::expr_block(
   fmt : Self,
   expr : @syntax.Expr,
-  force_newline? : Bool = true,
-  grouped? : Bool = true,
+  force_newline~ : Bool = true,
+  grouped~ : Bool = true,
 ) -> Doc {
   let doc = fmt.commented_braces(
     fn() { fmt.compose(expr, Stmt) },
@@ -2496,7 +2495,7 @@ fn Fmt::list_comprehension_kind(
 fn Fmt::case_block(
   self : Self,
   cases : List[@syntax.Case],
-  force_newline? : Bool = true,
+  force_newline~ : Bool = true,
 ) -> Doc {
   group(
     self.commented_braces(
@@ -2546,11 +2545,11 @@ fn Fmt::case_block(
 ///   )
 /// ```
 fn Fmt::chained_dot_expr(fmt : Self, e : @syntax.Expr) -> RawExprDoc {
-  let xs = for acc = @list.empty(), cur = e {
+  let xs = for acc = List([]), cur = e {
     match cur {
-      DotApply(self~, ..) as apply => continue acc.add(apply), self
-      Field(record~, ..) as field => continue acc.add(field), record
-      expr => break acc.add(expr)
+      DotApply(self~, ..) as apply => continue acc.prepend(apply), self
+      Field(record~, ..) as field => continue acc.prepend(field), record
+      expr => break acc.prepend(expr)
     }
   }
   let (s, chained_exprs) = match xs {
@@ -3487,7 +3486,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
         )
       }
 
-      let docs = asserts.map(assertion2doc).add(fmt.compose(body, Stmt))
+      let docs = asserts.map(assertion2doc).prepend(fmt.compose(body, Stmt))
       Normal(separate(docs, hardline))
     }
   }

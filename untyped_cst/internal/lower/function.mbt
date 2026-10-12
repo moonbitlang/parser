@@ -56,7 +56,7 @@ fn lower_parameters_from_list_with_discard_loc(
     }
     (lower_array_to_list(params), list.loc)
   } else {
-    (@list.empty(), lower_empty_loc())
+    (List([]), lower_empty_loc())
   }
 }
 
@@ -250,7 +250,7 @@ fn lower_func_from_letrec_binding(node : CstNode) -> @syntax.Func {
     Some(Function(func~, ..)) => func
     Some(expr) =>
       {
-        parameters: @list.empty(),
+        parameters: List([]),
         params_loc: lower_empty_loc(),
         body: expr,
         return_type: None,

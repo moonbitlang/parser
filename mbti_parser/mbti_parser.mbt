@@ -620,13 +620,13 @@ fn yy_action_3(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Pos
 
 ///|
 // file:///./mbti_parser.mbty
-// 167|    sig_ ";" sigs { $3.add(($1, mk_loc($loc($1)))) }
+// 167|    sig_ ";" sigs { $3.prepend(($1, mk_loc($loc($1)))) }
 fn yy_action_4(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__list_List__Sig__Location__(_dollar3)
   guard! _args[0].0 is YYObj_Sig(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj__list_List__Sig__Location__({();  _dollar3.add((_dollar1, mk_loc((_start_pos_of_item0, _end_pos_of_item0)))) })
+  YYObj__list_List__Sig__Location__({();  _dollar3.prepend((_dollar1, mk_loc((_start_pos_of_item0, _end_pos_of_item0)))) })
 }
 
 ///|
@@ -816,7 +816,7 @@ fn yy_action_25(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
 fn yy_action_26(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -826,14 +826,14 @@ fn yy_action_26(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
 fn yy_action_27(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -844,7 +844,7 @@ fn yy_action_27(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
@@ -905,7 +905,7 @@ fn yy_action_30(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
 fn yy_action_31(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -915,7 +915,7 @@ fn yy_action_31(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(@list.empty()), derives: _dollar5}
+    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
   })
 }
 
@@ -977,7 +977,7 @@ fn yy_action_34(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
 fn yy_action_35(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -986,7 +986,7 @@ fn yy_action_35(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[4].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+    {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
@@ -1158,7 +1158,7 @@ fn yy_action_45(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
 fn yy_action_46(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1168,14 +1168,14 @@ fn yy_action_46(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
 fn yy_action_47(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1186,7 +1186,7 @@ fn yy_action_47(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
@@ -1247,7 +1247,7 @@ fn yy_action_50(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
 fn yy_action_51(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1257,7 +1257,7 @@ fn yy_action_51(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(@list.empty()), derives: _dollar5}
+    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
   })
 }
 
@@ -1319,7 +1319,7 @@ fn yy_action_54(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
 fn yy_action_55(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -1328,7 +1328,7 @@ fn yy_action_55(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[5].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+    {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
@@ -1513,7 +1513,7 @@ fn yy_action_66(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
 fn yy_action_67(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1523,14 +1523,14 @@ fn yy_action_67(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
 fn yy_action_68(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1541,7 +1541,7 @@ fn yy_action_68(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
@@ -1602,7 +1602,7 @@ fn yy_action_71(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
 fn yy_action_72(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1612,7 +1612,7 @@ fn yy_action_72(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(@list.empty()), derives: _dollar5}
+    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
   })
 }
 
@@ -1674,7 +1674,7 @@ fn yy_action_75(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
 fn yy_action_76(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1683,7 +1683,7 @@ fn yy_action_76(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[5].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+    {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
@@ -1958,7 +1958,7 @@ fn yy_action_97(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
 fn yy_action_98(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1968,14 +1968,14 @@ fn yy_action_98(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[4].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
 fn yy_action_99(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -1986,7 +1986,7 @@ fn yy_action_99(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
   guard! _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
@@ -2047,7 +2047,7 @@ fn yy_action_102(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
 fn yy_action_103(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2057,7 +2057,7 @@ fn yy_action_103(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(@list.empty()), derives: _dollar5}
+    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
   })
 }
 
@@ -2119,7 +2119,7 @@ fn yy_action_106(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
 fn yy_action_107(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2128,7 +2128,7 @@ fn yy_action_107(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[6].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+    {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
@@ -2319,7 +2319,7 @@ fn yy_action_118(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
 fn yy_action_119(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2329,14 +2329,14 @@ fn yy_action_119(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
 fn yy_action_120(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2347,7 +2347,7 @@ fn yy_action_120(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
@@ -2408,7 +2408,7 @@ fn yy_action_123(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
 fn yy_action_124(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2418,7 +2418,7 @@ fn yy_action_124(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(@list.empty()), derives: _dollar5}
+    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
   })
 }
 
@@ -2480,7 +2480,7 @@ fn yy_action_127(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
 fn yy_action_128(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -2489,7 +2489,7 @@ fn yy_action_128(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[4].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+    {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
@@ -2709,7 +2709,7 @@ fn yy_action_142(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(NoPayload), derives: $5}
+// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
 fn yy_action_143(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2719,14 +2719,14 @@ fn yy_action_143(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[1].0 is YYObj_Name(_dollar4)
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(NoPayload), derives: _dollar5}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
   })
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: @list.empty(), components: Error(EnumPayload($6)), derives: $8}
+// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
 fn yy_action_144(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2737,7 +2737,7 @@ fn yy_action_144(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
   YYObj_TypeSig({(); 
-    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: @list.empty(), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
+    {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
   })
 }
 
@@ -2893,7 +2893,7 @@ fn yy_action_156(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(@list.empty()), derives: $5}
+// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
 fn yy_action_157(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -2903,7 +2903,7 @@ fn yy_action_157(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
   YYObj_TypeSig({(); 
-    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(@list.empty()), derives: _dollar5}
+    {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
   })
 }
 
@@ -2963,11 +2963,11 @@ fn yy_action_161(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 143|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 143|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
 fn yy_action_162(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_QualifiedName_(_dollar1)
   guard! _args[2].0 is YYObj_QualifiedName(_dollar3)
-  YYObj__list_List_QualifiedName_({();  _dollar1.add(_dollar3) })
+  YYObj__list_List_QualifiedName_({();  _dollar1.prepend(_dollar3) })
 }
 
 ///|
@@ -2980,9 +2980,9 @@ fn yy_action_163(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 265|    { @list.empty() }
+// 265|    { List([]) }
 fn yy_action_164(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_QualifiedName_({();  @list.empty() })
+  YYObj__list_List_QualifiedName_({();  List([]) })
 }
 
 ///|
@@ -3280,9 +3280,9 @@ fn yy_action_194(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 354|    { @list.empty() }
+// 354|    { List([]) }
 fn yy_action_195(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TypeParamNoConstraints_({();  @list.empty() })
+  YYObj__list_List_TypeParamNoConstraints_({();  List([]) })
 }
 
 ///|
@@ -3305,7 +3305,7 @@ fn yy_action_196(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : @list.empty(), trait_name : $4, type_ : $6, attrs : $1}
+// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
 fn yy_action_197(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3314,7 +3314,7 @@ fn yy_action_197(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[3].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   YYObj_ImplSig({(); 
-    {type_params : @list.empty(), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
+    {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
   })
 }
 
@@ -3376,7 +3376,7 @@ fn yy_action_201(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
 fn yy_action_202(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3389,7 +3389,7 @@ fn yy_action_202(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[6].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[7].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
   })
 }
 
@@ -3438,7 +3438,7 @@ fn yy_action_204(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
 fn yy_action_205(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -3451,7 +3451,7 @@ fn yy_action_205(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[7].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[8].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
   })
 }
 
@@ -3528,10 +3528,10 @@ fn yy_action_212(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 336|    uident { {name: $1, constraints: @list.empty()} }
+// 336|    uident { {name: $1, constraints: List([])} }
 fn yy_action_213(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_TypeParamWithConstraints({();  {name: _dollar1, constraints: @list.empty()} })
+  YYObj_TypeParamWithConstraints({();  {name: _dollar1, constraints: List([])} })
 }
 
 ///|
@@ -3576,7 +3576,7 @@ fn yy_action_218(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
 fn yy_action_219(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
@@ -3589,7 +3589,7 @@ fn yy_action_219(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[6].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[7].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
   })
 }
 
@@ -3604,7 +3604,7 @@ fn yy_action_60(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 ///|
 // file:///./mbti_parser.mbty
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: @list.empty(), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
 fn yy_action_220(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
@@ -3617,7 +3617,7 @@ fn yy_action_220(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _args[5].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[6].0 is YYObj_Bool(_dollar7)
   YYObj_TraitMethodSig({(); 
-    { attrs : _dollar1, is_async: _dollar2, type_params: @list.empty(), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
+    { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
   })
 }
 
@@ -3680,7 +3680,7 @@ fn yy_action_226(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_227(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_20(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_228(_args[3].2, _args[4:4])
@@ -3690,12 +3690,12 @@ fn yy_action_227(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(@list.empty()).add(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_229(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_20(_last_pos, _args[0:1])
   let _sub_action_1_result = yy_action_230(_args[3].2, _args[4:5])
@@ -3705,7 +3705,7 @@ fn yy_action_229(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(@list.empty()).add(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
@@ -3751,7 +3751,7 @@ fn yy_action_234(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_235(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_23(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_230(_args[2].2, _args[3:4])
@@ -3761,7 +3761,7 @@ fn yy_action_235(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(@list.empty()).add(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
@@ -3774,18 +3774,18 @@ fn yy_action_230(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 380|    "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.add($2), loc=mk_loc($sloc)) }
+// 380|    "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.prepend($2), loc=mk_loc($sloc)) }
 fn yy_action_236(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[3].0 is YYObj__list_List_Type_(_dollar4)
   guard! _args[1].0 is YYObj_Type(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Tuple(tys=_dollar4.add(_dollar2), loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Tuple(tys=_dollar4.prepend(_dollar2), loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(@list.empty()).add($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_237(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_23(_last_pos, _args[0:0])
   let _sub_action_1_result = yy_action_228(_args[2].2, _args[3:3])
@@ -3795,7 +3795,7 @@ fn yy_action_237(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(@list.empty()).add(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
@@ -3893,24 +3893,24 @@ fn yy_action_246(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 ///|
 // file:///./mbti_parser.mbty
 // 403|    "raise" "?" {
-// 404|    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
+// 404|    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=List([]), loc=@syntax.no_location)
 // 405|    MaybeError(ty=fake_error)
 // 406|  }
 fn yy_action_247(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_ErrorType({(); 
-    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=@list.empty(), loc=@syntax.no_location)
+    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=List([]), loc=@syntax.no_location)
     MaybeError(ty=fake_error)
   })
 }
 
 ///|
 // file:///./mbti_parser.mbty
-// 421|    qualified_uident_ { Name(constr_id=$1, tys=@list.empty(), loc=mk_loc($sloc)) }
+// 421|    qualified_uident_ { Name(constr_id=$1, tys=List([]), loc=mk_loc($sloc)) }
 fn yy_action_248(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrId(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Name(constr_id=_dollar1, tys=@list.empty(), loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Name(constr_id=_dollar1, tys=List([]), loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
@@ -3949,14 +3949,14 @@ fn yy_action_252(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 390|    is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
+// 390|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_253(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_23(_last_pos, _args[0:0])
   guard! _args[3].0 is YYObj__Type__ErrorType__Location__(_dollar5)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=@list.empty(), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Arrow(args=List([]), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
@@ -3985,9 +3985,9 @@ fn yy_action_255(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 426|     { @list.empty() }
+// 426|     { List([]) }
 fn yy_action_256(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_Type_({();  @list.empty() })
+  YYObj__list_List_Type_({();  List([]) })
 }
 
 ///|
@@ -4009,14 +4009,14 @@ fn yy_action_258(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 390|    is_async "(" ")" "->" return_type { Arrow(args=@list.empty(), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
+// 390|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_259(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_20(_last_pos, _args[0:1])
   guard! _args[4].0 is YYObj__Type__ErrorType__Location__(_dollar5)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
   let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=@list.empty(), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  YYObj_Type({();  Arrow(args=List([]), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
 }
 
 ///|
@@ -4143,9 +4143,9 @@ fn yy_action_272(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 285|    { @list.empty() }
+// 285|    { List([]) }
 fn yy_action_273(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TraitMethodSig_({();  @list.empty() })
+  YYObj__list_List_TraitMethodSig_({();  List([]) })
 }
 
 ///|
@@ -4269,9 +4269,9 @@ fn yy_action_15(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 
 ///|
 // file:///./mbti_parser.mbty
-// 495|     {  @list.empty() }
+// 495|     {  List([]) }
 fn yy_action_14(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_Attribute_({();   @list.empty() })
+  YYObj__list_List_Attribute_({();   List([]) })
 }
 
 ///|
@@ -4322,9 +4322,9 @@ fn yy_action_287(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 165|     { @list.empty() }
+// 165|     { List([]) }
 fn yy_action_289(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List__Sig__Location__({();  @list.empty() })
+  YYObj__list_List__Sig__Location__({();  List([]) })
 }
 
 ///|
@@ -4362,11 +4362,11 @@ fn yy_action_293(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 143|    non_empty_list_commas_rev(X) "," X { $1.add($3) }
+// 143|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
 fn yy_action_294(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_PackageImport_(_dollar1)
   guard! _args[2].0 is YYObj_PackageImport(_dollar3)
-  YYObj__list_List_PackageImport_({();  _dollar1.add(_dollar3) })
+  YYObj__list_List_PackageImport_({();  _dollar1.prepend(_dollar3) })
 }
 
 ///|
@@ -4394,9 +4394,9 @@ fn yy_action_297(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 
 ///|
 // file:///./mbti_parser.mbty
-// 155|     { @list.empty() }
+// 155|     { List([]) }
 fn yy_action_298(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_PackageImport_({();  @list.empty() })
+  YYObj__list_List_PackageImport_({();  List([]) })
 }
 
 ///|

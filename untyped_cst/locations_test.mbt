@@ -81,7 +81,7 @@ test "lexer tokens retain exact kind payload and character and UTF-16 ranges" {
   let parsed = @untyped_cst.parse_structure(source)
   @test.assert_eq(parsed.diagnostics_view().length(), 0)
   for (token, start, end) in lex.tokens {
-    if token.kind() == @tokens.TokenKind::TK_NEWLINE {
+    if token.kind() == TK_NEWLINE {
       continue
     }
     guard api_find_node(parsed.root(), node => {
@@ -93,8 +93,8 @@ test "lexer tokens retain exact kind payload and character and UTF-16 ranges" {
       fail("missing token \{token.to_expect_string()} at \{start.cnum}")
     }
     @test.assert_eq(found.leaf_payload(), @node.token_payload(token))
-    @test.assert_eq(found.kind is @node.NodeKind::Syntax_Token(_), true)
-    if token.kind() == @tokens.TokenKind::TK_FN {
+    @test.assert_eq(found.kind is Syntax_Token(_), true)
+    if token.kind() == TK_FN {
       @test.assert_eq(found.loc.start.cnum, 5)
       @test.assert_eq(found.source_span, (6, 8))
       @test.assert_eq(found.text(source), "fn"[:])

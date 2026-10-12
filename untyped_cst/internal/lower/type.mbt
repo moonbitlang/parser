@@ -13,7 +13,7 @@ fn lower_type(node : CstNode) -> @syntax.Type {
         if lower_type_items_from_list(body).get(0) is Some(ty) {
           ty
         } else {
-          Tuple(tys=@list.empty(), loc=node.loc)
+          Tuple(tys=List([]), loc=node.loc)
         }
       } else {
         Any(loc=node.loc)
@@ -32,7 +32,7 @@ fn lower_name_type(node : CstNode, is_object~ : Bool) -> @syntax.Type {
   if is_object {
     Object(constr_id)
   } else {
-    Name(constr_id~, tys=@list.empty(), loc=node.loc)
+    Name(constr_id~, tys=List([]), loc=node.loc)
   }
 }
 
@@ -115,7 +115,7 @@ fn lower_type_arrow_args(param : CstNode) -> List[@syntax.Type] {
       if param.first_child_with_label("body") is Some(body) {
         lower_array_to_list(lower_type_items_from_list(body))
       } else {
-        @list.empty()
+        List([])
       }
     _ => @list.singleton(lower_type(param))
   }
@@ -140,7 +140,7 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
     let args = if node.first_child_with_label("param") is Some(param) {
       lower_type_arrow_args(param)
     } else {
-      @list.empty()
+      List([])
     }
     let res = if node.first_child_with_label("result") is Some(result) {
       lower_type(result)

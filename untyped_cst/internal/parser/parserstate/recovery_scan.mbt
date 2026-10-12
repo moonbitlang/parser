@@ -24,7 +24,7 @@ pub(all) struct RecoveryScan {
 pub fn ParserState::push_recovery_scope(
   self : ParserState,
   stop_kinds : Array[TokenKind],
-  depth_sensitive? : Bool = false,
+  depth_sensitive~ : Bool = false,
 ) -> Int {
   let id = self.next_recovery_scope_id
   self.next_recovery_scope_id += 1
@@ -82,7 +82,7 @@ pub fn ParserState::recovery_stop_at(
 pub fn ParserState::recover_until(
   self : ParserState,
   local_stops : Array[TokenKind],
-  balance_groups? : Bool = false,
+  balance_groups~ : Bool = false,
 ) -> RecoveryScan {
   let skipped : Array[CstNode] = []
   let mut depth = 0

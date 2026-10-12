@@ -28,28 +28,28 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
       buf
       ..write_string("parsing \{name}.mbt failed due to diagnostics.\n")
       ..write_string("Handrolled parser diagnostics: ")
-      ..write_string(hand_result.1.to_json().stringify(indent=2))
+      ..write_string(Json(hand_result.1).stringify(indent=2))
       ..write_string("\nYacc parser diagnostics: ")
-      ..write_string(yacc_result.1.to_json().stringify(indent=2))
+      ..write_string(Json(yacc_result.1).stringify(indent=2))
       ..write_string("\nCST parser diagnostics: ")
-      ..write_string(cst_diagnostics.to_json().stringify(indent=2))
+      ..write_string(Json(cst_diagnostics).stringify(indent=2))
       .write_string("\n")
     })
     fail(buf.to_string())
   }
-  let hand_json = hand_result.0.map(impl_ => impl_.json_repr()).to_json()
-  let yacc_json = yacc_result.0.map(impl_ => impl_.json_repr()).to_json()
+  let hand_json = Json(hand_result.0.map(impl_ => impl_.json_repr()))
+  let yacc_json = Json(yacc_result.0.map(impl_ => impl_.json_repr()))
   let (cst_impls, cst_reports) = cst_result.to_impls()
   if !cst_reports.is_empty() {
     let rendered = @basic.show_loc.protect(String, fn() {
-      cst_reports.to_json().stringify(indent=2)
+      Json(cst_reports).stringify(indent=2)
     })
     @fs.create_dir(debug_dir)
     @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
     @fs.write_string_to_file("\{debug_dir}/\{name}_cst_reports.json", rendered)
     fail("converting CST for \{name}.mbt produced diagnostics.")
   }
-  let cst_json = cst_impls.map(impl_ => impl_.json_repr()).to_json()
+  let cst_json = Json(cst_impls.map(impl_ => impl_.json_repr()))
   if hand_json != yacc_json || hand_json != cst_json {
     @fs.create_dir(debug_dir)
     @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
@@ -71,8 +71,8 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
   }
   let (hand_loc_json, cst_loc_json) = @basic.show_loc.protect(String, fn() {
     (
-      hand_result.0.map(impl_ => impl_.json_repr()).to_json(),
-      cst_impls.map(impl_ => impl_.json_repr()).to_json(),
+      Json(hand_result.0.map(impl_ => impl_.json_repr())),
+      Json(cst_impls.map(impl_ => impl_.json_repr())),
     )
   })
   if hand_loc_json != cst_loc_json {
@@ -118,18 +118,18 @@ fn lexer_test(t : @test.Test) -> Unit raise Error {
       (triple.0, triple.1, Show::to_string(triple.2))
     })
     fail(
-      "lexing \{name}.mbt failed due to errors: \{errors.to_json().stringify(indent=2)}",
+      "lexing \{name}.mbt failed due to errors: \{Json(errors).stringify(indent=2)}",
     )
   }
   let tokens : Array[Json] = lex_result.tokens.map(triple => {
     // These imported snapshots predate the separate STAR token.
     "token": match triple.0 {
-      @tokens.STAR => ["INFIX3", "*"]
+      STAR => ["INFIX3", "*"]
       token => ToJson::to_json(token)
     },
     "loc": ToJson::to_json(@basic.Location::{ start: triple.1, end: triple.2, }),
   })
-  t.write(tokens.to_json().stringify(indent=2))
+  t.write(Json(tokens).stringify(indent=2))
   t.snapshot(filename="\{name}.mbt.tokens.json")
 }
 

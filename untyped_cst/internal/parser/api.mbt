@@ -48,8 +48,8 @@ pub struct ParseOutput {
 ///|
 pub fn parse_structure(
   source : String,
-  name? : String = "",
-  enable_metavar? : Bool = false,
+  name~ : String = "",
+  enable_metavar~ : Bool = false,
 ) -> ParseOutput {
   parse_source(source, name, enable_metavar, parse_source_file)
 }
@@ -57,8 +57,8 @@ pub fn parse_structure(
 ///|
 pub fn parse_expression(
   source : String,
-  name? : String = "",
-  enable_metavar? : Bool = false,
+  name~ : String = "",
+  enable_metavar~ : Bool = false,
 ) -> ParseOutput {
   parse_source(source, name, enable_metavar, parse_expr_fragment)
 }

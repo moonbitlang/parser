@@ -140,7 +140,7 @@ fn ParserState::current_argument_starts_optional_forwarding(
 ///|
 fn parse_labelled_argument(
   state : ParserState,
-  complete_pun? : Bool = false,
+  complete_pun~ : Bool = false,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let invalid_tilde_label_start = match (state.peek(), state.peek(offset=1)) {
@@ -275,7 +275,7 @@ fn parse_labelled_argument(
         "pun",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_pun(value~, loc~, source_span~)
@@ -294,7 +294,7 @@ fn parse_labelled_argument(
 ///|
 fn parse_optional_forwarding_argument(
   state : ParserState,
-  complete_pun? : Bool = false,
+  complete_pun~ : Bool = false,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   match state.peek() {
@@ -342,7 +342,7 @@ fn parse_optional_forwarding_argument(
       expr?,
     )
   }
-  if state.current_is(TokenKind::TK_EQUAL) {
+  if state.current_is(TK_EQUAL) {
     is_pun = false
     argument_builder = fn(loc, source_span, children) {
       let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
@@ -416,7 +416,7 @@ fn parse_optional_forwarding_argument(
         "pun",
         fn(loc, source_span, children) {
           let value = match @construction.payload_from_children(children) {
-            Some(NodePayload::Bool(value)) => value
+            Some(Bool(value)) => value
             _ => false
           }
           @node.CstNode::flag_pun(value~, loc~, source_span~)

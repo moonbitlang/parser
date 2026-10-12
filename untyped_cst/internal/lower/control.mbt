@@ -136,7 +136,7 @@ fn lower_for_expr(node : CstNode) -> @syntax.Expr {
 ///|
 fn lower_foreach_patterns(node : CstNode) -> List[@syntax.Pattern] {
   guard node.first_child_with_label("pattern") is Some(pattern) else {
-    return @list.empty()
+    return List([])
   }
   if pattern.kind is List_TuplePatternList {
     let patterns : Array[@syntax.Pattern] = []
@@ -186,7 +186,7 @@ fn lower_apply_expr(node : CstNode) -> @syntax.Expr {
   let args = node
     .first_child_with_label("arg")
     .map(lower_arguments)
-    .unwrap_or(@list.empty())
+    .unwrap_or(List([]))
   Apply(func~, args~, loc=node.loc)
 }
 
@@ -203,11 +203,11 @@ fn lower_dot_apply_expr(node : CstNode) -> @syntax.Expr {
   let args = node
     .first_child_with_label("arg")
     .map(lower_arguments)
-    .unwrap_or(@list.empty())
+    .unwrap_or(List([]))
   let return_self = node
     .bool_marker_value(fn(kind) { kind is Flag_ReturnSelf })
     .unwrap_or(false)
-  @syntax.Expr::DotApply(
+  DotApply(
     self=self_expr,
     method_name=method_label,
     args~,

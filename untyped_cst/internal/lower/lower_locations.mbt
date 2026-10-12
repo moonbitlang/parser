@@ -47,7 +47,7 @@ fn lower_decl_loc_without_trailing_trivia(node : CstNode) -> Location {
     found = true
   }
   if found {
-    Location::{ start: node.loc.start, end, }
+    { start: node.loc.start, end, }
   } else {
     node.loc
   }
@@ -73,13 +73,13 @@ fn lower_function_header_loc(node : CstNode) -> Location {
     }
     end = child.loc.end
   }
-  Location::{ start: node.loc.start, end, }
+  { start: node.loc.start, end, }
 }
 
 ///|
 fn lower_local_function_loc(node : CstNode) -> Location {
   match node.first_child_with_label("kw") {
-    Some(keyword) => Location::{ start: keyword.loc.start, end: node.loc.end, }
+    Some(keyword) => { start: keyword.loc.start, end: node.loc.end, }
     None => node.loc
   }
 }

@@ -25,13 +25,13 @@ pub fn ParseResult::to_impls(
 ) -> (@syntax.Impls, Array[Report]) {
   let diagnostics = self.diagnostics_array()
   if diagnostics.length() > 0 {
-    return (@list.empty(), diagnostics)
+    return (List([]), diagnostics)
   }
   match self.root().kind {
     Impls => ()
     _ =>
       return (
-        @list.empty(),
+        List([]),
         [conversion_report(self.root(), "expected structure parse result")],
       )
   }

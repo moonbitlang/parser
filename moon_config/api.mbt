@@ -1,7 +1,7 @@
 ///|
 /// Parse `moon.pkg` source into the post-processed configuration AST.
 pub fn parse_moon_pkg(
-  name? : String = "moon.pkg",
+  name~ : String = "moon.pkg",
   source : String,
 ) -> (Ast, Array[Report]) {
   let (ast, diagnostics) = parse_string(source, name~)
@@ -11,7 +11,7 @@ pub fn parse_moon_pkg(
 ///|
 /// Parse `moon.mod` source into the post-processed configuration AST.
 pub fn parse_moon_mod(
-  name? : String = "moon.mod",
+  name~ : String = "moon.mod",
   source : String,
 ) -> (Ast, Array[Report]) {
   let (ast, diagnostics) = parse_string(source, name~)
@@ -21,7 +21,7 @@ pub fn parse_moon_mod(
 ///|
 /// Parse `moon.work` source into the configuration AST.
 pub fn parse_moon_work(
-  name? : String = "moon.work",
+  name~ : String = "moon.work",
   source : String,
 ) -> (Ast, Array[Report]) {
   let (ast, diagnostics) = parse_string(source, name~)

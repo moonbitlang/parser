@@ -12,8 +12,8 @@ fn[T] series(
   xs : List[T],
   sep : Doc,
   f : (T) -> Doc,
-  trailing? : TrailingSeparatorMode = PresentInNormalStyle,
-  separator? : () -> Doc = fn() { empty },
+  trailing~ : TrailingSeparatorMode = PresentInNormalStyle,
+  separator~ : () -> Doc = fn() { empty },
 ) -> Doc {
   let docs : Array[Doc] = []
   let length = xs.length()
@@ -42,8 +42,8 @@ fn[T] series(
 fn series1(
   xs : List[Doc],
   sep : Doc,
-  trailing? : TrailingSeparatorMode = PresentInNormalStyle,
-  separator? : () -> Doc = fn() { empty },
+  trailing~ : TrailingSeparatorMode = PresentInNormalStyle,
+  separator~ : () -> Doc = fn() { empty },
 ) -> Doc {
   series(xs, sep, x => x, trailing~, separator~)
 }
@@ -62,7 +62,7 @@ priv enum TrailingSeparatorMode {
 ///   x
 /// )
 /// ```
-fn parens(x : Doc, force_newline? : Bool = false) -> Doc {
+fn parens(x : Doc, force_newline~ : Bool = false) -> Doc {
   let l = if force_newline { hardline } else { softline }
   char('(') + nest(l + x) + l + char(')')
 }
@@ -74,7 +74,7 @@ fn parens(x : Doc, force_newline? : Bool = false) -> Doc {
 ///   x
 /// }
 /// ```
-fn braces(x : Doc, force_newline? : Bool = false) -> Doc {
+fn braces(x : Doc, force_newline~ : Bool = false) -> Doc {
   let l = if force_newline { hardline } else { line }
   char('{') + nest(l + x) + l + char('}')
 }

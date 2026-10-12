@@ -4,7 +4,7 @@ fn assert_missing_spans(
   source : String,
 ) -> Int raise {
   let mut count = 0
-  if node.kind is @untyped_cst.NodeKind::Missing {
+  if node.kind is Missing {
     @test.assert_eq(node.loc.start, node.loc.end)
     let (start, end) = node.source_span
     @test.assert_eq(start, end)
@@ -40,7 +40,7 @@ test "missing spread expressions use the end of the spread as fallback" {
         node.kind is Field_RecordSpread
       }).unwrap()
       let missing = spread.first_child_with_label("expr").unwrap()
-      @test.assert_eq(missing.kind is @untyped_cst.NodeKind::Missing, true)
+      @test.assert_eq(missing.kind is Missing, true)
       @test.assert_eq(missing.loc, @node.empty_loc(spread.loc.end))
       @test.assert_eq(
         missing.source_span,
@@ -65,7 +65,7 @@ test "missing range patterns use the end of the range as fallback" {
         node.kind is Pattern_Range
       }).unwrap()
       let missing = range.first_child_with_label("rhs").unwrap()
-      @test.assert_eq(missing.kind is @untyped_cst.NodeKind::Missing, true)
+      @test.assert_eq(missing.kind is Missing, true)
       @test.assert_eq(missing.loc, @node.empty_loc(range.loc.end))
       @test.assert_eq(
         missing.source_span,
@@ -108,7 +108,7 @@ test "missing call delimiter retains its precise UTF-16 recovery position" {
   let parsed = @untyped_cst.parse_expression(source)
   let args = api_find_node(parsed.root(), node => node.kind is List_ArgumentList).unwrap()
   let missing = args.first_child_with_label("close").unwrap()
-  @test.assert_eq(missing.kind is @untyped_cst.NodeKind::Missing, true)
+  @test.assert_eq(missing.kind is Missing, true)
   refactor_assert_source_range(
     missing,
     source,

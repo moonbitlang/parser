@@ -135,8 +135,8 @@ fn attach_docstrings(
 ///|
 pub fn parse_string(
   source : String,
-  name? : String = "",
-  parser? : Parser = Handrolled,
+  name~ : String = "",
+  parser~ : Parser = Handrolled,
 ) -> (@syntax.Impls, Array[Report]) {
   let { tokens, docstrings, errors, } = @lexer.tokens_from_string(
     source,
@@ -150,7 +150,7 @@ pub fn parse_string(
     (@yacc_parser.structure(tokens), []) catch {
       UnexpectedEndOfInput(pos, _) =>
         (
-          @list.empty(),
+          List([]),
           [
             Report::{
               loc: { start: pos, end: pos, },
@@ -160,7 +160,7 @@ pub fn parse_string(
         )
       UnexpectedToken(token, (start, end), _) =>
         (
-          @list.empty(),
+          List([]),
           [
             {
               loc: { start, end, },
@@ -190,7 +190,7 @@ pub fn parse_string(
 ///|
 pub fn parse_file(
   path : String,
-  parser? : Parser = Handrolled,
+  parser~ : Parser = Handrolled,
 ) -> (@syntax.Impls, Array[Report]) raise @fs.IOError {
   let source = @fs.read_file_to_string(path)
   parse_string(source, name=path, parser~)

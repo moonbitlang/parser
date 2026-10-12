@@ -48,10 +48,7 @@ fn assert_coloncolon_constructor_children(
     @test.assert_eq(child.loc, expected[i].1.loc)
     @test.assert_eq(child.source_span, expected[i].1.source_span)
     if label is Some("trivia") {
-      @test.assert_eq(
-        child.kind is @node.NodeKind::Syntax_Token(TK_COMMENT),
-        true,
-      )
+      @test.assert_eq(child.kind is Syntax_Token(TK_COMMENT), true)
       @test.assert_eq(
         source[child.source_span.0:child.source_span.1],
         "// keep"[:],
@@ -73,7 +70,7 @@ test "expr_method accepts repeated trivia and defaults to no trivia" {
     trivia~,
     field~,
   )
-  @test.assert_eq(with_trivia.kind is @node.NodeKind::Expr_Method, true)
+  @test.assert_eq(with_trivia.kind is Expr_Method, true)
   assert_coloncolon_constructor_children(with_trivia, [
     ("type", type_),
     ("op", op),
@@ -108,7 +105,7 @@ test "expr_record accepts repeated trivia and defaults to no trivia" {
     trivia~,
     body~,
   )
-  @test.assert_eq(with_trivia.kind is @node.NodeKind::Expr_Record, true)
+  @test.assert_eq(with_trivia.kind is Expr_Record, true)
   assert_coloncolon_constructor_children(with_trivia, [
     ("type", type_),
     ("op", op),
@@ -147,7 +144,7 @@ test "expr_record_update accepts repeated trivia and defaults to no trivia" {
     trivia~,
     body~,
   )
-  @test.assert_eq(with_trivia.kind is @node.NodeKind::Expr_RecordUpdate, true)
+  @test.assert_eq(with_trivia.kind is Expr_RecordUpdate, true)
   assert_coloncolon_constructor_children(with_trivia, [
     ("type", type_),
     ("op", op),
@@ -178,7 +175,7 @@ test "public missing constructor preserves explicitly supplied ranges" {
   let loc = @node.mk_loc(test_position(1), test_position(4))
   let source_span = (2, 6)
   let missing = @node.CstNode::missing(loc~, source_span~)
-  @test.assert_eq(missing.kind is @node.NodeKind::Missing, true)
+  @test.assert_eq(missing.kind is Missing, true)
   @test.assert_eq(missing.loc, loc)
   @test.assert_eq(missing.source_span, source_span)
 }

@@ -11,7 +11,7 @@ fn diagnostics_equiv_reports_from_view(
 
 ///|
 fn diagnostics_equiv_reports_json(reports : Array[@basic.Report]) -> Json {
-  @basic.show_loc.protect(Json, fn() { reports.to_json() })
+  @basic.show_loc.protect(Json, fn() { Json(reports) })
 }
 
 ///|

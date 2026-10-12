@@ -21,11 +21,11 @@ test "extend soft keyword in remaining lower identifier positions" {
   )
   if !hand_reports.is_empty() || !yacc_reports.is_empty() {
     fail(
-      "soft keyword extend should parse in all lowercase identifier positions; hand=\{hand_reports.to_json().stringify(indent=2)}, yacc=\{yacc_reports.to_json().stringify(indent=2)}",
+      "soft keyword extend should parse in all lowercase identifier positions; hand=\{Json(hand_reports).stringify(indent=2)}, yacc=\{Json(yacc_reports).stringify(indent=2)}",
     )
   }
-  let hand_json = hand_impls.map(impl_ => impl_.json_repr()).to_json()
-  let yacc_json = yacc_impls.map(impl_ => impl_.json_repr()).to_json()
+  let hand_json = Json(hand_impls.map(impl_ => impl_.json_repr()))
+  let yacc_json = Json(yacc_impls.map(impl_ => impl_.json_repr()))
   let cst_json = cst_impls_json(source, "extend_soft_keyword_regression.mbt")
   if hand_json != yacc_json || hand_json != cst_json {
     fail(
@@ -54,14 +54,14 @@ test "extend special constructor pattern location matches yacc" {
   )
   if !hand_reports.is_empty() || !yacc_reports.is_empty() {
     fail(
-      "extend special constructor pattern should parse; hand=\{hand_reports.to_json().stringify(indent=2)}, yacc=\{yacc_reports.to_json().stringify(indent=2)}",
+      "extend special constructor pattern should parse; hand=\{Json(hand_reports).stringify(indent=2)}, yacc=\{Json(yacc_reports).stringify(indent=2)}",
     )
   }
   let hand_json = @basic.show_loc.protect(String, fn() {
-    hand_impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(hand_impls.map(impl_ => impl_.json_repr()))
   })
   let yacc_json = @basic.show_loc.protect(String, fn() {
-    yacc_impls.map(impl_ => impl_.json_repr()).to_json()
+    Json(yacc_impls.map(impl_ => impl_.json_repr()))
   })
   let cst_json = @basic.show_loc.protect(String, () => {
     cst_impls_json(source, "extend_special_constructor_pattern_loc.mbt")
