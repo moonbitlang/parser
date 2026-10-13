@@ -129,10 +129,14 @@ test "corpus locations include signs in negative patterns" {
   assert_corpus_locations(prefix + "Number(-32601) => 0 } }", [
     ("pattern", prefix.length() + 7, prefix.length() + 13),
   ])
-  for operator in ["..=", "..<"] {
+  for operator in ["..=", "..<=", "..<"] {
     assert_corpus_locations(prefix + "-10 " + operator + " -2 => 0 } }", [
       ("pattern", prefix.length(), prefix.length() + 3),
-      ("pattern", prefix.length() + 8, prefix.length() + 10),
+      (
+        "pattern",
+        prefix.length() + 5 + operator.length(),
+        prefix.length() + 7 + operator.length(),
+      ),
     ])
   }
 }
