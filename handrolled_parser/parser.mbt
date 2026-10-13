@@ -1805,7 +1805,7 @@ fn State::parse_range_pattern(self : Self) -> @syntax.Pattern {
   let spos = self.peek_spos()
   let lhs = self.parse_simple_pattern()
   match self.peek_token() {
-    RANGE_INCLUSIVE => {
+    RANGE_INCLUSIVE | RANGE_LT_INCLUSIVE => {
       self.skip()
       let rhs = self.parse_simple_pattern()
       let loc = self.loc_start_with(spos)

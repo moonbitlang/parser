@@ -950,7 +950,9 @@ fn parse_pattern_range(
     allow_brace_pattern_start~,
   )
   match state.peek() {
-    Some((RANGE_EXCLUSIVE, _, _)) | Some((RANGE_INCLUSIVE, _, _)) => {
+    Some((RANGE_EXCLUSIVE, _, _))
+    | Some((RANGE_INCLUSIVE, _, _))
+    | Some((RANGE_LT_INCLUSIVE, _, _)) => {
       let range_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
           TK_RANGE_EXCLUSIVE,
         ) {
