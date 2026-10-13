@@ -19,7 +19,7 @@ fn parse_fixture(name : String) -> Mbti raise {
 }
 
 ///|
-fn sig_at(mbti : Mbti, index : Int) -> Sig raise {
+fn sig_at(mbti : Mbti, index : Int32) -> Sig raise {
   match mbti.sigs.nth(index) {
     Some((sig, _)) => sig
     None => fail("expected signature at index \{index}")
@@ -50,14 +50,14 @@ fn qname_to_string(name : QualifiedName) -> String {
 }
 
 ///|
-fn expect_sig_count(mbti : Mbti, count : Int) -> Unit raise {
+fn expect_sig_count(mbti : Mbti, count : Int32) -> Unit raise {
   if mbti.sigs.length() != count {
     fail("expected \{count} signatures, got \{mbti.sigs.length()}")
   }
 }
 
 ///|
-fn expect_sig_name(mbti : Mbti, index : Int, name : String) -> Unit raise {
+fn expect_sig_name(mbti : Mbti, index : Int32, name : String) -> Unit raise {
   inspect(sig_name(sig_at(mbti, index)), content=name)
 }
 
@@ -90,7 +90,7 @@ fn expect_one_attr(attrs : Attributes, raw : String) -> Unit raise {
 ///|
 fn expect_constructor_name(
   constrs : @list.List[@mbti_ast.ConstrDecl],
-  index : Int,
+  index : Int32,
   name : String,
 ) -> Unit raise {
   guard constrs.nth(index) is Some(constr) else {

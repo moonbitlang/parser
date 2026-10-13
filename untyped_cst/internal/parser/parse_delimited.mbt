@@ -121,7 +121,7 @@ fn parse_delimited(
   open_kind : TokenKind,
   close_kind : TokenKind,
   item_parser : (ParserState) -> CstNode,
-  list_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  list_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   sep_kind~ : TokenKind = TK_COMMA,
   follow_set~ : Array[TokenKind] = [],
   invalid_delims~ : Array[TokenKind] = [],

@@ -17,7 +17,7 @@ pub(all) enum CstTokenChild {
 fn token_children(
   entries : ArrayView[CstTokenChild],
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> Array[(String?, CstNode)] {
   let children : Array[(String?, CstNode)] = []
   for entry in entries {
@@ -41,7 +41,7 @@ fn token_children(
 pub fn CstNode::syntax_token(
   token_kind~ : TokenKind,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstTokenChild],
 ) -> CstNode {
   node(
@@ -56,7 +56,7 @@ pub fn CstNode::syntax_token(
 pub fn CstNode::syntax_unexpected(
   token_kind~ : TokenKind,
   loc~ : Location,
-  source_span~ : (Int, Int),
+  source_span~ : (Int32, Int32),
   entries~ : ArrayView[CstTokenChild],
 ) -> CstNode {
   node(

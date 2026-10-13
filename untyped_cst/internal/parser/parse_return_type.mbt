@@ -155,7 +155,7 @@ fn parse_func_return_type(state : ParserState) -> CstNode {
 ///|
 fn parse_error_annotation(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut error_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+  let mut error_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = fn(
     loc,
     source_span,
     children,

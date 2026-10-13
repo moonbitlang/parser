@@ -1,5 +1,5 @@
 ///|
-fn loc_span(state : ParserState, loc : Location) -> (Int, Int) {
+fn loc_span(state : ParserState, loc : Location) -> (Int32, Int32) {
   (state.offset_for_position(loc.start), state.offset_for_position(loc.end))
 }
 
@@ -15,7 +15,7 @@ fn parse_string_literal_node(state : ParserState) -> CstNode {
           is Some(constant) {
           push_child(children, Some("constant"), constant)
         }
-        let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = match
+        let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = match
           tok {
           INTERP(_) =>
             fn(loc, source_span, children) {

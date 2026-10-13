@@ -2,7 +2,7 @@
 pub struct CstNode {
   kind : NodeKind
   loc : Location
-  source_span : (Int, Int)
+  source_span : (Int32, Int32)
   children : ReadOnlyArray[(String?, CstNode)]
 } derive(@debug.Debug)
 
@@ -17,7 +17,7 @@ pub fn empty_loc(pos : Position) -> Location {
 }
 
 ///|
-pub fn empty_span(offset : Int) -> (Int, Int) {
+pub fn empty_span(offset : Int32) -> (Int32, Int32) {
   (offset, offset)
 }
 
@@ -25,7 +25,7 @@ pub fn empty_span(offset : Int) -> (Int, Int) {
 fn node(
   kind : NodeKind,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
   { kind, loc, source_span, children: ReadOnlyArray::from_array(children), }
@@ -35,7 +35,7 @@ fn node(
 fn leaf_node(
   payload : NodePayload,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   node(Leaf(payload), loc, source_span, [])
 }
@@ -45,7 +45,7 @@ fn push_payload_leaf(
   children : Array[(String?, CstNode)],
   payload : NodePayload,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> Unit {
   children.push((Some("payload"), leaf_node(payload, loc, source_span)))
 }
@@ -54,7 +54,7 @@ fn push_payload_leaf(
 fn node_with_payload(
   kind : NodeKind,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
   payload : NodePayload,
 ) -> CstNode {
@@ -67,7 +67,7 @@ fn token_node(
   token : Token,
   start : Position,
   end : Position,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> CstNode {
   token_node_with_children(token, start, end, source_span, [])
 }
@@ -77,7 +77,7 @@ fn token_node_with_children(
   token : Token,
   start : Position,
   end : Position,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
   let loc = mk_loc(start, end)
@@ -93,14 +93,14 @@ fn token_node_with_children(
 fn scalar_node(
   kind : NodeKind,
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   payload : NodePayload,
 ) -> CstNode {
   node_with_payload(kind, loc, source_span, [], payload)
 }
 
 ///|
-fn marker_node(kind : NodeKind, pos : Position, offset : Int) -> CstNode {
+fn marker_node(kind : NodeKind, pos : Position, offset : Int32) -> CstNode {
   node(kind, empty_loc(pos), empty_span(offset), [])
 }
 
@@ -108,14 +108,14 @@ fn marker_node(kind : NodeKind, pos : Position, offset : Int) -> CstNode {
 fn bool_marker_node(
   kind : NodeKind,
   pos : Position,
-  offset : Int,
+  offset : Int32,
   value : Bool,
 ) -> CstNode {
   scalar_node(kind, empty_loc(pos), empty_span(offset), Bool(value))
 }
 
 ///|
-fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
+fn missing_node(kind : TokenKind, pos : Position, offset : Int32) -> CstNode {
   let _ = kind
   node(Missing, empty_loc(pos), empty_span(offset), [])
 }
@@ -123,7 +123,7 @@ fn missing_node(kind : TokenKind, pos : Position, offset : Int) -> CstNode {
 ///|
 fn error_node(
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   children : Array[(String?, CstNode)],
 ) -> CstNode {
   let recovered_children : Array[(String?, CstNode)] = []

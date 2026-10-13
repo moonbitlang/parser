@@ -1,9 +1,9 @@
 ///|
 pub(all) struct Position {
   fname : String
-  lnum : Int
-  bol : Int
-  cnum : Int
+  lnum : Int32
+  bol : Int32
+  cnum : Int32
 } derive(Debug, Hash, ToJson)
 
 ///|
@@ -55,7 +55,7 @@ test "compre position" {
 }
 
 ///|
-pub fn Position::column(self : Position) -> Int {
+pub fn Position::column(self : Position) -> Int32 {
   self.cnum - self.bol + 1
 }
 
@@ -69,7 +69,7 @@ pub(all) struct Location {
 pub(all) struct BasePos {
   base_pkg : String
   base_fname : String
-  base_lnum : Int
+  base_lnum : Int32
 } derive(Eq, Compare, Hash, Debug)
 
 ///|

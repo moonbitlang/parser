@@ -295,7 +295,7 @@ fn parse_dotdot_pattern_rest_recording(
   rest_offenders : Array[(Token, Location)],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut binder_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+  let mut binder_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = fn(
     loc,
     source_span,
     children,
@@ -496,7 +496,7 @@ fn parse_brace_pattern_item(state : ParserState) -> CstNode {
 ///|
 fn parse_record_pattern_item(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut field_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+  let mut field_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = fn(
     loc,
     source_span,
     children,
@@ -951,7 +951,7 @@ fn parse_pattern_range(
   )
   match state.peek() {
     Some((RANGE_EXCLUSIVE, _, _)) | Some((RANGE_INCLUSIVE, _, _)) => {
-      let range_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
+      let range_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
           TK_RANGE_EXCLUSIVE,
         ) {
         fn(loc, source_span, children) {

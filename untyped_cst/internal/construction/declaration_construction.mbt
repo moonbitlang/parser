@@ -29,7 +29,7 @@ pub fn classify_top_item_construction(
   saw_body : Bool,
 ) -> (
   TopItemShape,
-  (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) {
   match parsed_kind {
     Invalid =>
@@ -222,7 +222,7 @@ pub fn classify_top_item_construction(
 ///|
 pub fn type_desc_builder_for_shape(
   kind : TopItemShape,
-) -> ((Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode)? {
+) -> ((Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode)? {
   match kind {
     TypeAbstract =>
       Some(fn(loc, source_span, children) {
@@ -277,7 +277,7 @@ pub fn type_desc_builder_for_shape(
 fn decl_body_builder(
   children : Array[(String?, CstNode)],
   is_declare : Bool,
-) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
+) -> (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode {
   if is_declare {
     return fn(loc, source_span, children) {
       let _ = children
@@ -364,7 +364,7 @@ fn first_decl_body_child(children : Array[(String?, CstNode)]) -> CstNode? {
 pub fn prepare_decl_body(
   children : Array[(String?, CstNode)],
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   is_declare : Bool,
 ) -> Array[(String?, CstNode)] {
   let body_builder = decl_body_builder(children, is_declare)

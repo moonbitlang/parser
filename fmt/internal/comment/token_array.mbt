@@ -11,7 +11,7 @@ pub fn NodeArray::empty() -> NodeArray {
 
 ///|
 #alias("_[_]")
-pub fn NodeArray::get(self : Self, idx : Int) -> Key? {
+pub fn NodeArray::get(self : Self, idx : Int32) -> Key? {
   self.0.get(idx).unwrap_or(None)
 }
 

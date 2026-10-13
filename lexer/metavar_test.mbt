@@ -2,7 +2,7 @@
 fn assert_single_metavar_result(
   result : @lexer.LexResult,
   source : String,
-  token_start : Int,
+  token_start : Int32,
 ) -> Unit raise {
   guard result.errors.length() == 0 else {
     fail("expected no lexical errors for \{source}")

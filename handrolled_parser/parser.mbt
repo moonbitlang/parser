@@ -2494,7 +2494,7 @@ fn is_binop(tok : Token) -> Bool {
 }
 
 ///|
-fn get_binop_prior_assoc(tok : Token) -> (Int, Assocativity) {
+fn get_binop_prior_assoc(tok : Token) -> (Int32, Assocativity) {
   match tok {
     IMPLIES => (0, Right)
     BARBAR => (1, Right)

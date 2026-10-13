@@ -22,7 +22,7 @@ fn parse_array_expr(state : ParserState) -> CstNode {
     },
     sep_kind=TK_COMMA,
   )
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if list_has_item_kind(
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if list_has_item_kind(
       list,
       fn(kind) { kind is ArrayElement_Spread },
     ) {
@@ -214,7 +214,7 @@ fn ParserState::current_starts_after_node_line(
 }
 
 ///|
-fn ParserState::current_token_line(self : ParserState) -> Int? {
+fn ParserState::current_token_line(self : ParserState) -> Int32? {
   match self.peek() {
     Some((_, start, _)) => Some(start.lnum)
     None => None
@@ -224,7 +224,7 @@ fn ParserState::current_token_line(self : ParserState) -> Int? {
 ///|
 fn ParserState::current_starts_after_line(
   self : ParserState,
-  line : Int,
+  line : Int32,
 ) -> Bool {
   if self.current_token_line() is Some(current_line) {
     current_line > line

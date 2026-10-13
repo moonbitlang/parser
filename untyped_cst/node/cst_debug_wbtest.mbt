@@ -4,7 +4,7 @@ fn loc_to_test_json(loc : Location) -> Json {
 }
 
 ///|
-fn span_to_test_json(span : (Int, Int)) -> Json {
+fn span_to_test_json(span : (Int32, Int32)) -> Json {
   { "start": span.0, "end": span.1 }
 }
 

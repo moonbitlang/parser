@@ -857,7 +857,7 @@ fn brace_starts_map_pattern(state : ParserState) -> Bool {
 ///|
 fn parse_single_token_pattern(
   state : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   if state.consume_any() is Some(token) {
     state.construct_from_children(builder, [(Some("name"), token)])
@@ -1112,11 +1112,11 @@ fn parse_labelled_pun_constructor_pattern_arg(state : ParserState) -> CstNode {
     ()
   }
   let mut is_pun = true
-  let mut argument_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
-    loc,
-    source_span,
-    children,
-  ) {
+  let mut argument_builder : (
+    Location,
+    (Int32, Int32),
+    Array[(String?, CstNode)],
+  ) -> CstNode = fn(loc, source_span, children) {
     let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
       missing_at_end(loc~, source_span~),
     )

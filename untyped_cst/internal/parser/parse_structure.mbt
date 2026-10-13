@@ -12,9 +12,9 @@ fn token_label(tok : Token) -> String? {
 // recovery behavior for invalid and missing `pub(...)` modifiers.
 fn top_item_lookahead_after_visibility(
   state : ParserState,
-  offset : Int,
+  offset : Int32,
   is_pub : Bool,
-) -> Int {
+) -> Int32 {
   let mut offset = offset + 1
   if !is_pub {
     return offset
@@ -108,7 +108,7 @@ fn peek_top_item_kind(state : ParserState) -> TopItemKind {
 fn ParserState::node_from_children(
   self : ParserState,
   children : Array[(String?, CstNode)],
-) -> (Location, (Int, Int)) {
+) -> (Location, (Int32, Int32)) {
   if children.length() == 0 {
     let pos = self.current_position()
     (empty_loc(pos), empty_span(self.offset_for_position(pos)))
@@ -122,7 +122,7 @@ fn ParserState::node_from_children(
 ///|
 fn ParserState::construct_from_children(
   self : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   children : Array[(String?, CstNode)],
 ) -> CstNode {
   // Fix the syntax range before the builder appends semantic children.

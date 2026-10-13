@@ -1,6 +1,6 @@
 ///|
 test "series" {
-  let integer = fn(x : Int) { text(x.to_string()) }
+  let integer = fn(x : Int32) { text(x.to_string()) }
   let r1 = series(List([1, 2, 3, 4]), comma, integer)
   inspect(
     r1,

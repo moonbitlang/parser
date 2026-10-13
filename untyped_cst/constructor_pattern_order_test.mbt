@@ -1,7 +1,7 @@
 ///|
 fn constructor_pattern_source(
   prefix : String,
-  pieces : ArrayView[(String, String, Int)],
+  pieces : ArrayView[(String, String, Int32)],
   suffix : String,
 ) -> String {
   let mut source = prefix
@@ -19,7 +19,7 @@ fn assert_constructor_pattern_children(
   node : @untyped_cst.CstNode,
   source : String,
   prefix : String,
-  pieces : ArrayView[(String, String, Int)],
+  pieces : ArrayView[(String, String, Int32)],
 ) -> Unit raise {
   let mut offset = prefix.length()
   let mut cnum = offset

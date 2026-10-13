@@ -7,7 +7,7 @@ fn parse_statement_item(state : ParserState) -> CstNode {
 ///|
 fn parse_let_statement(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let mut expr_builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+  let mut expr_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = fn(
     loc,
     source_span,
     children,
@@ -271,7 +271,7 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
 ///|
 fn parse_defer_statement(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
       TK_ERRDEFER,
     ) {
     fn(loc, source_span, children) {

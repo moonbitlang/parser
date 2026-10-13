@@ -6,11 +6,11 @@ priv struct MoonfmtOptions {
 
 ///|
 #cfg(target="native")
-extern "C" fn exit(code : Int) = "exit"
+extern "C" fn exit(code : Int32) = "exit"
 
 ///|
 #cfg(target="wasm")
-fn exit(code : UInt) = "wasi_snapshot_preview1" "proc_exit"
+fn exit(code : UInt32) = "wasi_snapshot_preview1" "proc_exit"
 
 ///|
 async fn[T] die(message : String) -> T {

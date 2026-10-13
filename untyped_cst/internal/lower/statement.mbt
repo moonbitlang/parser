@@ -1,7 +1,7 @@
 ///|
 fn lower_statement_sequence(
   items : Array[CstNode],
-  index : Int,
+  index : Int32,
   loc : Location,
 ) -> @syntax.Expr {
   if index >= items.length() {

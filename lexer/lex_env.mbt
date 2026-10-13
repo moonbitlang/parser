@@ -5,21 +5,21 @@ priv struct LexEnv {
   comment : Bool
   file : String
   tokens : Array[(Token, Position, Position)]
-  mut current_line : Int
-  mut current_bol : Int
-  last_unhandled_comment : Ref[(Comment, Int)?]
+  mut current_line : Int32
+  mut current_bol : Int32
+  last_unhandled_comment : Ref[(Comment, Int32)?]
   asi_context : ASIContext
-  start_cnum : Int
+  start_cnum : Int32
   is_interpolation : Bool
   enable_metavar : Bool
-  mut surrogate_pair_count : Int
+  mut surrogate_pair_count : Int32
 }
 
 ///|
 fn LexEnv::add_lexing_error(
   self : LexEnv,
-  start~ : Int,
-  end~ : Int,
+  start~ : Int32,
+  end~ : Int32,
   err : LexicalError,
 ) -> Unit {
   let loc_start = self.make_pos(start)
@@ -28,7 +28,7 @@ fn LexEnv::add_lexing_error(
 }
 
 ///|
-fn LexEnv::make_pos(self : LexEnv, cnum : Int) -> Position {
+fn LexEnv::make_pos(self : LexEnv, cnum : Int32) -> Position {
   {
     fname: self.file,
     lnum: self.current_line,
@@ -57,10 +57,10 @@ fn LexEnv::add_token(
       self.last_unhandled_comment.val = Some((c, tok_index))
     }
 
-    fn handle_comment(ci : (Comment, Int)) -> Unit {
+    fn handle_comment(ci : (Comment, Int32)) -> Unit {
       let (c, i) = ci
       let mut at_file_start = false
-      fn count_newlines(start_index : Int, direction : Int) -> Int {
+      fn count_newlines(start_index : Int32, direction : Int32) -> Int32 {
         let mut count = 0
         let mut index = start_index
         while true {
@@ -119,9 +119,9 @@ fn LexEnv::add_token(
 fn LexEnv::add_token_with_loc(
   self : LexEnv,
   tok : Token,
-  start~ : Int,
-  end~ : Int,
-  start_offset~ : Int = 0,
+  start~ : Int32,
+  end~ : Int32,
+  start_offset~ : Int32 = 0,
 ) -> Unit {
   let start = self.make_pos(start + start_offset)
   let end = self.make_pos(end)
@@ -129,7 +129,7 @@ fn LexEnv::add_token_with_loc(
 }
 
 ///|
-fn LexEnv::preserve_comment(self : LexEnv) -> (Comment, Int, Int) -> Unit {
+fn LexEnv::preserve_comment(self : LexEnv) -> (Comment, Int32, Int32) -> Unit {
   if self.comment {
     fn(comment, start, end) {
       let docstrings = self.docstrings
@@ -189,7 +189,7 @@ fn LexEnv::calc_offset(
   self : LexEnv,
   base~ : StringView,
   view : StringView,
-) -> Int {
+) -> Int32 {
   if use_utf16_location.val {
     view.start_offset() - base.start_offset()
   } else {

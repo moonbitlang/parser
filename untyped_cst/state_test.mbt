@@ -19,7 +19,7 @@ fn any_node(
 fn count_nodes(
   node : @untyped_cst.CstNode,
   pred : (@untyped_cst.NodeKind) -> Bool,
-) -> Int {
+) -> Int32 {
   let mut count = if pred(node.kind) { 1 } else { 0 }
   for i in 0..<node.children.length() {
     match node.children.get(i) {

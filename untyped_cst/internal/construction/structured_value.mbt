@@ -52,7 +52,7 @@ fn structured_long_ident_node(sources : Array[CstNode]) -> CstNode? {
 
 ///|
 fn structured_name_node(
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   sources : Array[CstNode],
 ) -> CstNode? {
   guard structured_long_ident_node(sources) is Some(long_ident) else {
@@ -86,7 +86,7 @@ pub fn push_structured_long_ident(
 pub fn push_structured_name(
   children : Array[(String?, CstNode)],
   label : String,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   source_labels : Array[String],
 ) -> Unit {
   let sources : Array[CstNode] = []
@@ -106,9 +106,9 @@ pub fn push_structured_name(
 pub fn push_constructor_extra_info(
   children : Array[(String?, CstNode)],
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
 ) -> Unit {
-  let builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = if top_item_children_have_label(
+  let builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if top_item_children_have_label(
       children, "type",
     ) &&
     top_item_children_have_label(children, "pkg") {
@@ -161,9 +161,9 @@ pub fn push_constructor_extra_info(
 pub fn push_bool_marker(
   children : Array[(String?, CstNode)],
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   label : String,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
   value : Bool,
 ) -> Unit {
   push_child(
@@ -278,8 +278,8 @@ pub fn list_has_item_kind(node : CstNode, pred : (NodeKind) -> Bool) -> Bool {
 ///|
 pub fn list_trailing_mark_kind(
   children : ArrayView[(String?, CstNode)],
-) -> (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode {
-  let mut trailing : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode = fn(
+) -> (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode {
+  let mut trailing : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = fn(
     loc,
     source_span,
     children,
@@ -348,9 +348,9 @@ pub fn list_trailing_mark_kind(
 pub fn push_marker_child(
   children : Array[(String?, CstNode)],
   loc : Location,
-  source_span : (Int, Int),
+  source_span : (Int32, Int32),
   label : String,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) -> Unit {
   push_child(
     children,

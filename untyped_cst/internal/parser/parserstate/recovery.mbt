@@ -76,7 +76,7 @@ pub fn ParserState::report_expected_tokens(
 pub fn ParserState::offset_for_position(
   self : ParserState,
   pos : Position,
-) -> Int {
+) -> Int32 {
   if self.peek() is None {
     self.source.length()
   } else {
@@ -128,7 +128,7 @@ pub fn ParserState::missing_token_node_silent(
 ///|
 fn ParserState::missing_syntax_node(
   self : ParserState,
-  builder : (Location, (Int, Int), Array[(String?, CstNode)]) -> CstNode,
+  builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode,
 ) -> CstNode {
   let pos = self.current_position()
   node(builder, empty_loc(pos), empty_span(self.offset_for_position(pos)), [])
@@ -162,7 +162,7 @@ fn ParserState::missing_pattern_node(self : ParserState) -> CstNode {
 pub fn ParserState::required_type_node(
   self : ParserState,
   parsed : CstNode,
-  reports_before : Int,
+  reports_before : Int32,
 ) -> CstNode {
   if !parsed.children.is_empty() {
     parsed
@@ -178,7 +178,7 @@ pub fn ParserState::required_type_node(
 pub fn ParserState::required_expr_node(
   self : ParserState,
   parsed : CstNode,
-  reports_before : Int,
+  reports_before : Int32,
 ) -> CstNode {
   if !parsed.children.is_empty() {
     parsed
@@ -219,7 +219,7 @@ pub fn required_pattern_start_tokens() -> Array[TokenKind] {
 pub fn ParserState::required_pattern_node(
   self : ParserState,
   parsed : CstNode,
-  reports_before : Int,
+  reports_before : Int32,
   expected~ : String = "",
 ) -> CstNode {
   if !parsed.children.is_empty() {
