@@ -1,4 +1,3 @@
-
 ///|
 pub suberror ParseError {
   UnexpectedToken(Token, (@basic.Position, @basic.Position), Array[TokenKind])
@@ -278,7 +277,9 @@ priv suberror YYObj__list_List_TypeParamNoConstraints_ {
 
 ///|
 priv suberror YYObj__list_List_TypeParamWithConstraints_ {
-  YYObj__list_List_TypeParamWithConstraints_(@list.List[TypeParamWithConstraints])
+  YYObj__list_List_TypeParamWithConstraints_(
+    @list.List[TypeParamWithConstraints]
+  )
 }
 
 ///|
@@ -303,7 +304,9 @@ priv suberror YYObj_Location_ {
 
 ///|
 priv suberror YYObj__Name___list_List_TypeParamNoConstraints__ {
-  YYObj__Name___list_List_TypeParamNoConstraints__((Name, @list.List[TypeParamNoConstraints]))
+  YYObj__Name___list_List_TypeParamNoConstraints__(
+    (Name, @list.List[TypeParamNoConstraints])
+  )
 }
 
 ///|
@@ -323,7 +326,9 @@ priv suberror YYObj__MethodSelfType___Name_ {
 
 ///|
 priv suberror YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_ {
-  YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_((Name, @list.List[TypeParamNoConstraints], QualifiedName))
+  YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    (Name, @list.List[TypeParamNoConstraints], QualifiedName)
+  )
 }
 
 ///|
@@ -337,9 +342,13 @@ priv suberror YYObj__String__Option_String___String_ {
 }
 
 ///|
-type YYState = (YYSymbol) -> YYDecision
+type YYState = ((YYSymbol) -> YYDecision)
+
 ///|
-type YYAction = (@basic.Position, ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj
+type YYAction = ((
+  @basic.Position, ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj)
+
 ///|
 priv enum YYDecision {
   Accept
@@ -564,6 +573,7 @@ priv enum YYSymbol {
   NT_separated_nonempty_list_COMMA_type_param_no_constraints_
   EOI
 }
+
 ///|
 // Workaround for EOI unused warning
 fn init {
@@ -576,161 +586,269 @@ fn init {
 ///|
 // file:///./mbti_parser.mbty
 // 151|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
-fn yy_action_0(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_1(_args[1].2, _args[2:2])
+fn yy_action_1(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_0(_args[1].2, _args[2:2])
   guard! _args[1].0 is YYObj_StringLiteral(_dollar2)
   guard! _args[2].0 is YYObj__list_List_PackageImport_(_dollar4)
   guard! _args[3].0 is YYObj__list_List__Sig__Location__(_dollar5)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj_Mbti({();  {package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} })
+  YYObj_Mbti(
+    ({();  {package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 9|    { None }
-fn yy_action_1(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Option_Bool_({();  None })
+fn yy_action_0(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Option_Bool_(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 151|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
-fn yy_action_2(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_3(_args[1].2, _args[2:3])
+fn yy_action_3(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_2(_args[1].2, _args[2:3])
   guard! _args[1].0 is YYObj_StringLiteral(_dollar2)
   guard! _args[3].0 is YYObj__list_List_PackageImport_(_dollar4)
   guard! _args[4].0 is YYObj__list_List__Sig__Location__(_dollar5)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj_Mbti({();  {package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} })
+  YYObj_Mbti(
+    ({();  {package_name: _dollar2, imports: _dollar4, sigs: _dollar5, loc : mk_loc((_symbol_start_pos, _end_pos)), base_pos: mk_base_pos((_start_pos_of_item0, _end_pos_of_item0).0)} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 10|    X { Some($1) }
-fn yy_action_3(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_2(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Bool(_dollar1)
-  YYObj_Option_Bool_({();  Some(_dollar1) })
+  YYObj_Option_Bool_(
+    ({();  Some(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 167|    sig_ ";" sigs { $3.prepend(($1, mk_loc($loc($1)))) }
-fn yy_action_4(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_4(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List__Sig__Location__(_dollar3)
   guard! _args[0].0 is YYObj_Sig(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj__list_List__Sig__Location__({();  _dollar3.prepend((_dollar1, mk_loc((_start_pos_of_item0, _end_pos_of_item0)))) })
+  YYObj__list_List__Sig__Location__(
+    ({();  _dollar3.prepend((_dollar1, mk_loc((_start_pos_of_item0, _end_pos_of_item0)))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 166|    sig_ { @list.singleton(($1, mk_loc($sloc))) }
-fn yy_action_5(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_5(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Sig(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj__list_List__Sig__Location__({();  @list.singleton((_dollar1, mk_loc((_symbol_start_pos, _end_pos)))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj__list_List__Sig__Location__(
+    ({();  @list.singleton((_dollar1, mk_loc((_symbol_start_pos, _end_pos)))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 171|    func_sig { Func($1) }
-fn yy_action_6(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_6(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_FuncSig(_dollar1)
-  YYObj_Sig({();  Func(_dollar1) })
+  YYObj_Sig(
+    ({();  Func(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 172|    type_sig { Type($1) }
-fn yy_action_7(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_7(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_TypeSig(_dollar1)
-  YYObj_Sig({();  Type(_dollar1) })
+  YYObj_Sig(
+    ({();  Type(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 173|    alias_sig { Alias($1) }
-fn yy_action_8(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_8(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_AliasSig(_dollar1)
-  YYObj_Sig({();  Alias(_dollar1) })
+  YYObj_Sig(
+    ({();  Alias(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 174|    trait_sig { Trait($1) }
-fn yy_action_9(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_9(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_TraitSig(_dollar1)
-  YYObj_Sig({();  Trait(_dollar1) })
+  YYObj_Sig(
+    ({();  Trait(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 175|    impl_sig { Impl($1) }
-fn yy_action_10(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_10(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ImplSig(_dollar1)
-  YYObj_Sig({();  Impl(_dollar1) })
+  YYObj_Sig(
+    ({();  Impl(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 176|    const_sig { Const($1) }
-fn yy_action_11(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_11(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ConstSig(_dollar1)
-  YYObj_Sig({();  Const(_dollar1) })
+  YYObj_Sig(
+    ({();  Const(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 177|    value_sig { Value($1) }
-fn yy_action_12(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_12(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ValueSig(_dollar1)
-  YYObj_Sig({();  Value(_dollar1) })
+  YYObj_Sig(
+    ({();  Value(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
-fn yy_action_13(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_15(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _args[1].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj_Type(_dollar6)
   guard! _args[5].0 is YYObj_Constant(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig(
+    ({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
-fn yy_action_16(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_17(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj_Type(_dollar6)
   guard! _args[6].0 is YYObj_Constant(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig(
+    ({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
-fn yy_action_18(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_18(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig(
+    ({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } 
+    })
+  )
 }
 
 ///|
@@ -739,21 +857,27 @@ fn yy_action_18(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_19(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
-  let _sub_action_2_result = yy_action_20(_args[0].2, _args[1:2])
-  let _sub_action_3_result = yy_action_21(_args[4].2, _args[5:8])
+fn yy_action_21(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
+  let _sub_action_2_result = yy_action_19(_args[0].2, _args[1:2])
+  let _sub_action_3_result = yy_action_20(_args[4].2, _args[5:8])
   guard! _args[4].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[3].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[9].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -762,21 +886,27 @@ fn yy_action_19(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_22(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
-  let _sub_action_2_result = yy_action_23(_args[0].2, _args[1:1])
-  let _sub_action_3_result = yy_action_21(_args[3].2, _args[4:7])
+fn yy_action_23(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
+  let _sub_action_2_result = yy_action_22(_args[0].2, _args[1:1])
+  let _sub_action_3_result = yy_action_20(_args[3].2, _args[4:7])
   guard! _args[3].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[8].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -784,16 +914,24 @@ fn yy_action_22(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 234|    attributes vis "type" type_decl_name_with_params optional_derive {
 // 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 236|  }
-fn yy_action_24(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_24(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -801,16 +939,24 @@ fn yy_action_24(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
 // 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 297|  }
-fn yy_action_25(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_25(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj_Type(_dollar6)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -818,16 +964,22 @@ fn yy_action_25(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 237|    attributes vis "suberror" uident optional_derive {
 // 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
-fn yy_action_26(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_26(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -835,17 +987,23 @@ fn yy_action_26(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
-fn yy_action_27(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_27(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -853,17 +1011,25 @@ fn yy_action_27(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
 // 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 245|  }
-fn yy_action_28(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_28(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj_TypeDefinition(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -871,17 +1037,25 @@ fn yy_action_28(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
 // 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 248|  }
-fn yy_action_29(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_29(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_Type_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -889,17 +1063,25 @@ fn yy_action_29(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 251|  }
-fn yy_action_30(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_30(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -907,16 +1089,24 @@ fn yy_action_30(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
 // 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
-fn yy_action_31(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_31(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -924,17 +1114,25 @@ fn yy_action_31(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 257|  }
-fn yy_action_32(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_32(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -943,18 +1141,26 @@ fn yy_action_32(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 259|    let (name, type_params, target) = $4
 // 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 261|  }
-fn yy_action_33(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(_dollar4)
+fn yy_action_33(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    _dollar4
+  )
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar7)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar9)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     let (name, type_params, target) = _dollar4
     {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -962,16 +1168,22 @@ fn yy_action_33(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
 // 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 272|  }
-fn yy_action_34(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_34(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
   guard! _args[3].0 is YYObj_QualifiedName(_dollar5)
   guard! _args[5].0 is YYObj_Type(_dollar7)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -979,15 +1191,21 @@ fn yy_action_34(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
 // 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
-fn yy_action_35(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_35(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_QualifiedName(_dollar4)
   guard! _args[4].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -995,17 +1213,23 @@ fn yy_action_35(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
 // 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 281|  }
-fn yy_action_36(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_36(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard! _args[4].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({(); 
+  YYObj_TraitSig(
+    ({(); 
     { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1014,19 +1238,25 @@ fn yy_action_36(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
 // 301|  }
-fn yy_action_37(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_37(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[2].1
   let _end_pos_of_item3 = _args[2].2
   guard! _args[5].0 is YYObj_Name(_dollar7)
   guard! _args[6].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Type, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1035,44 +1265,62 @@ fn yy_action_37(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
 // 305|  }
-fn yy_action_38(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_17(_last_pos, _args[0:1])
+fn yy_action_38(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_16(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[2].1
   let _end_pos_of_item3 = _args[2].2
   guard! _args[5].0 is YYObj_Name(_dollar7)
   guard! _args[6].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Trait, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
-fn yy_action_39(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_40(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj_Type(_dollar6)
   guard! _args[7].0 is YYObj_Constant(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig(
+    ({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
-fn yy_action_41(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_41(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig(
+    ({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } 
+    })
+  )
 }
 
 ///|
@@ -1081,21 +1329,27 @@ fn yy_action_41(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_42(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
-  let _sub_action_2_result = yy_action_20(_args[1].2, _args[2:3])
-  let _sub_action_3_result = yy_action_21(_args[5].2, _args[6:9])
+fn yy_action_42(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
+  let _sub_action_2_result = yy_action_19(_args[1].2, _args[2:3])
+  let _sub_action_3_result = yy_action_20(_args[5].2, _args[6:9])
   guard! _args[5].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[4].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[10].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1104,21 +1358,27 @@ fn yy_action_42(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_43(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
-  let _sub_action_2_result = yy_action_23(_args[1].2, _args[2:2])
-  let _sub_action_3_result = yy_action_21(_args[4].2, _args[5:8])
+fn yy_action_43(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
+  let _sub_action_2_result = yy_action_22(_args[1].2, _args[2:2])
+  let _sub_action_3_result = yy_action_20(_args[4].2, _args[5:8])
   guard! _args[4].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[3].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[9].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1126,16 +1386,24 @@ fn yy_action_43(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 234|    attributes vis "type" type_decl_name_with_params optional_derive {
 // 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 236|  }
-fn yy_action_44(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_44(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1143,16 +1411,24 @@ fn yy_action_44(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
 // 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 297|  }
-fn yy_action_45(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_45(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj_Type(_dollar6)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1160,16 +1436,22 @@ fn yy_action_45(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 237|    attributes vis "suberror" uident optional_derive {
 // 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
-fn yy_action_46(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_46(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1177,17 +1459,23 @@ fn yy_action_46(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
-fn yy_action_47(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_47(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1195,17 +1483,25 @@ fn yy_action_47(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
 // 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 245|  }
-fn yy_action_48(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_48(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj_TypeDefinition(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1213,17 +1509,25 @@ fn yy_action_48(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
 // 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 248|  }
-fn yy_action_49(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_49(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_Type_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1231,17 +1535,25 @@ fn yy_action_49(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 251|  }
-fn yy_action_50(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_50(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1249,16 +1561,24 @@ fn yy_action_50(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
 // 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
-fn yy_action_51(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_51(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1266,17 +1586,25 @@ fn yy_action_51(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 257|  }
-fn yy_action_52(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_52(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1285,18 +1613,26 @@ fn yy_action_52(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 259|    let (name, type_params, target) = $4
 // 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 261|  }
-fn yy_action_53(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(_dollar4)
+fn yy_action_53(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    _dollar4
+  )
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar7)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar9)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     let (name, type_params, target) = _dollar4
     {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1304,16 +1640,22 @@ fn yy_action_53(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
 // 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 272|  }
-fn yy_action_54(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_54(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _args[3].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
   guard! _args[4].0 is YYObj_QualifiedName(_dollar5)
   guard! _args[6].0 is YYObj_Type(_dollar7)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1321,15 +1663,21 @@ fn yy_action_54(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
 // 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
-fn yy_action_55(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_55(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _args[3].0 is YYObj_QualifiedName(_dollar4)
   guard! _args[5].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1337,17 +1685,23 @@ fn yy_action_55(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
 // 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 281|  }
-fn yy_action_56(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_56(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard! _args[5].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({(); 
+  YYObj_TraitSig(
+    ({(); 
     { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1356,19 +1710,25 @@ fn yy_action_56(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
 // 301|  }
-fn yy_action_57(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_57(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _args[3].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[3].1
   let _end_pos_of_item3 = _args[3].2
   guard! _args[6].0 is YYObj_Name(_dollar7)
   guard! _args[7].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Type, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1377,57 +1737,81 @@ fn yy_action_57(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
 // 305|  }
-fn yy_action_58(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_40(_last_pos, _args[0:2])
+fn yy_action_58(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_39(_last_pos, _args[0:2])
   guard! _args[3].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[3].1
   let _end_pos_of_item3 = _args[3].2
   guard! _args[6].0 is YYObj_Name(_dollar7)
   guard! _args[7].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Trait, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
-fn yy_action_59(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_60(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj_Type(_dollar6)
   guard! _args[6].0 is YYObj_Constant(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig(
+    ({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
-fn yy_action_61(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_61(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj_Type(_dollar6)
   guard! _args[7].0 is YYObj_Constant(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig(
+    ({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
-fn yy_action_62(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_62(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig(
+    ({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } 
+    })
+  )
 }
 
 ///|
@@ -1436,21 +1820,27 @@ fn yy_action_62(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_63(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
-  let _sub_action_2_result = yy_action_20(_args[1].2, _args[2:3])
-  let _sub_action_3_result = yy_action_21(_args[5].2, _args[6:9])
+fn yy_action_63(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
+  let _sub_action_2_result = yy_action_19(_args[1].2, _args[2:3])
+  let _sub_action_3_result = yy_action_20(_args[5].2, _args[6:9])
   guard! _args[5].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[4].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[10].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1459,21 +1849,27 @@ fn yy_action_63(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_64(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
-  let _sub_action_2_result = yy_action_23(_args[1].2, _args[2:2])
-  let _sub_action_3_result = yy_action_21(_args[4].2, _args[5:8])
+fn yy_action_64(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
+  let _sub_action_2_result = yy_action_22(_args[1].2, _args[2:2])
+  let _sub_action_3_result = yy_action_20(_args[4].2, _args[5:8])
   guard! _args[4].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[3].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[9].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1481,16 +1877,24 @@ fn yy_action_64(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 234|    attributes vis "type" type_decl_name_with_params optional_derive {
 // 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 236|  }
-fn yy_action_65(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_65(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1498,16 +1902,24 @@ fn yy_action_65(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
 // 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 297|  }
-fn yy_action_66(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_66(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj_Type(_dollar6)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1515,16 +1927,22 @@ fn yy_action_66(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 237|    attributes vis "suberror" uident optional_derive {
 // 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
-fn yy_action_67(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_67(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1532,17 +1950,23 @@ fn yy_action_67(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
-fn yy_action_68(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_68(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1550,17 +1974,25 @@ fn yy_action_68(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
 // 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 245|  }
-fn yy_action_69(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_69(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj_TypeDefinition(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1568,17 +2000,25 @@ fn yy_action_69(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
 // 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 248|  }
-fn yy_action_70(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_70(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_Type_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1586,17 +2026,25 @@ fn yy_action_70(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 251|  }
-fn yy_action_71(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_71(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1604,16 +2052,24 @@ fn yy_action_71(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
 // 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
-fn yy_action_72(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_72(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1621,17 +2077,25 @@ fn yy_action_72(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 257|  }
-fn yy_action_73(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_73(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1640,18 +2104,26 @@ fn yy_action_73(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 259|    let (name, type_params, target) = $4
 // 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 261|  }
-fn yy_action_74(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
-  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(_dollar4)
+fn yy_action_74(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
+  guard! _args[3].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    _dollar4
+  )
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar7)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar9)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     let (name, type_params, target) = _dollar4
     {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1659,16 +2131,22 @@ fn yy_action_74(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
 // 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 272|  }
-fn yy_action_75(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_75(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _args[3].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
   guard! _args[4].0 is YYObj_QualifiedName(_dollar5)
   guard! _args[6].0 is YYObj_Type(_dollar7)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1676,15 +2154,21 @@ fn yy_action_75(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
 // 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
-fn yy_action_76(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_76(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _args[3].0 is YYObj_QualifiedName(_dollar4)
   guard! _args[5].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1692,17 +2176,23 @@ fn yy_action_76(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
 // 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 281|  }
-fn yy_action_77(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_77(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[3].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard! _args[5].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({(); 
+  YYObj_TraitSig(
+    ({(); 
     { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1711,19 +2201,25 @@ fn yy_action_77(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
 // 301|  }
-fn yy_action_78(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_78(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _args[3].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[3].1
   let _end_pos_of_item3 = _args[3].2
   guard! _args[6].0 is YYObj_Name(_dollar7)
   guard! _args[7].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Type, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1732,147 +2228,247 @@ fn yy_action_78(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
 // 305|  }
-fn yy_action_79(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_17(_args[0].2, _args[1:2])
+fn yy_action_79(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_16(_args[0].2, _args[1:2])
   guard! _args[3].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[3].1
   let _end_pos_of_item3 = _args[3].2
   guard! _args[6].0 is YYObj_Name(_dollar7)
   guard! _args[7].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Trait, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 452|    "priv" { Priv(loc=mk_loc($sloc)) }
-fn yy_action_17(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_16(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Visibility({();  Priv(loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Visibility(
+    ({();  Priv(loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
-fn yy_action_80(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_80(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _args[4].0 is YYObj_Name(_dollar4)
   guard! _args[6].0 is YYObj_Type(_dollar6)
   guard! _args[8].0 is YYObj_Constant(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstSig({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} })
+  YYObj_ConstSig(
+    ({();  {name: _dollar4, type_: _dollar6, value: _dollar8, attrs: _dollar1} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 436|    TRUE { Bool(true) }
-fn yy_action_81(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Constant({();  Bool(true) })
+fn yy_action_81(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Constant(
+    ({();  Bool(true) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 437|    FALSE { Bool(false) }
-fn yy_action_82(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Constant({();  Bool(false) })
+fn yy_action_82(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Constant(
+    ({();  Bool(false) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 438|    BYTE { Byte($1) }
-fn yy_action_83(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_83(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_CharLiteral(_dollar1)
-  YYObj_Constant({();  Byte(_dollar1) })
+  YYObj_Constant(
+    ({();  Byte(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 439|    BYTES { Bytes($1) }
-fn yy_action_84(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_84(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
-  YYObj_Constant({();  Bytes(_dollar1) })
+  YYObj_Constant(
+    ({();  Bytes(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 440|    CHAR { Char($1) }
-fn yy_action_85(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_85(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_CharLiteral(_dollar1)
-  YYObj_Constant({();  Char(_dollar1) })
+  YYObj_Constant(
+    ({();  Char(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 441|    INT { make_int_literal($1) }
-fn yy_action_86(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_86(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
-  YYObj_Constant({();  make_int_literal(_dollar1) })
+  YYObj_Constant(
+    ({();  make_int_literal(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 442|    "-" INT { make_int_literal("-" + $2) }
-fn yy_action_87(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_87(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
-  YYObj_Constant({();  make_int_literal("-" + _dollar2) })
+  YYObj_Constant(
+    ({();  make_int_literal("-" + _dollar2) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 444|    "-" FLOAT { make_float_literal("-" + $2) }
-fn yy_action_88(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_88(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
-  YYObj_Constant({();  make_float_literal("-" + _dollar2) })
+  YYObj_Constant(
+    ({();  make_float_literal("-" + _dollar2) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 446|    "-" DOUBLE { Double("-" + $2) }
-fn yy_action_89(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_89(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
-  YYObj_Constant({();  Double("-" + _dollar2) })
+  YYObj_Constant(
+    ({();  Double("-" + _dollar2) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 443|    FLOAT { make_float_literal($1) }
-fn yy_action_90(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_90(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
-  YYObj_Constant({();  make_float_literal(_dollar1) })
+  YYObj_Constant(
+    ({();  make_float_literal(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 445|    DOUBLE { Double($1) }
-fn yy_action_91(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_91(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
-  YYObj_Constant({();  Double(_dollar1) })
+  YYObj_Constant(
+    ({();  Double(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 447|    STRING { String($1) }
-fn yy_action_92(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_92(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
-  YYObj_Constant({();  String(_dollar1) })
+  YYObj_Constant(
+    ({();  String(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
-fn yy_action_93(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_93(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _args[4].0 is YYObj_Name(_dollar4)
   guard! _args[6].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig(
+    ({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } 
+    })
+  )
 }
 
 ///|
@@ -1881,21 +2477,27 @@ fn yy_action_93(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_94(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
-  let _sub_action_2_result = yy_action_20(_args[2].2, _args[3:4])
-  let _sub_action_3_result = yy_action_21(_args[6].2, _args[7:10])
+fn yy_action_94(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
+  let _sub_action_2_result = yy_action_19(_args[2].2, _args[3:4])
+  let _sub_action_3_result = yy_action_20(_args[6].2, _args[7:10])
   guard! _args[6].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[5].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[11].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1904,21 +2506,27 @@ fn yy_action_94(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_95(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
-  let _sub_action_2_result = yy_action_23(_args[2].2, _args[3:3])
-  let _sub_action_3_result = yy_action_21(_args[5].2, _args[6:9])
+fn yy_action_95(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
+  let _sub_action_2_result = yy_action_22(_args[2].2, _args[3:3])
+  let _sub_action_3_result = yy_action_20(_args[5].2, _args[6:9])
   guard! _args[5].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[4].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[10].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1926,16 +2534,24 @@ fn yy_action_95(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 234|    attributes vis "type" type_decl_name_with_params optional_derive {
 // 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 236|  }
-fn yy_action_96(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_96(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1943,16 +2559,24 @@ fn yy_action_96(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
 // 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 297|  }
-fn yy_action_97(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_97(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[6].0 is YYObj_Type(_dollar6)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1960,16 +2584,22 @@ fn yy_action_97(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 237|    attributes vis "suberror" uident optional_derive {
 // 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
-fn yy_action_98(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_98(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[4].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1977,17 +2607,23 @@ fn yy_action_98(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
-fn yy_action_99(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_99(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[4].0 is YYObj_Name(_dollar4)
   guard! _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -1995,17 +2631,25 @@ fn yy_action_99(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
 // 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 245|  }
-fn yy_action_100(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_100(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[6].0 is YYObj_TypeDefinition(_dollar6)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2013,17 +2657,25 @@ fn yy_action_100(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
 // 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 248|  }
-fn yy_action_101(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_101(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[6].0 is YYObj__list_List_Type_(_dollar6)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2031,17 +2683,25 @@ fn yy_action_101(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 251|  }
-fn yy_action_102(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_102(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2049,16 +2709,24 @@ fn yy_action_102(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
 // 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
-fn yy_action_103(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_103(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2066,17 +2734,25 @@ fn yy_action_103(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 257|  }
-fn yy_action_104(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_104(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[6].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[8].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2085,18 +2761,26 @@ fn yy_action_104(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 259|    let (name, type_params, target) = $4
 // 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 261|  }
-fn yy_action_105(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
-  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(_dollar4)
+fn yy_action_105(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
+  guard! _args[4].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    _dollar4
+  )
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[7].0 is YYObj__list_List_ConstrDecl_(_dollar7)
   guard! _args[9].0 is YYObj__list_List_QualifiedName_(_dollar9)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     let (name, type_params, target) = _dollar4
     {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2104,16 +2788,22 @@ fn yy_action_105(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
 // 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 272|  }
-fn yy_action_106(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_106(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _args[4].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
   guard! _args[5].0 is YYObj_QualifiedName(_dollar5)
   guard! _args[7].0 is YYObj_Type(_dollar7)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2121,15 +2811,21 @@ fn yy_action_106(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
 // 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
-fn yy_action_107(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_107(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _args[4].0 is YYObj_QualifiedName(_dollar4)
   guard! _args[6].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2137,17 +2833,23 @@ fn yy_action_107(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
 // 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 281|  }
-fn yy_action_108(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_108(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[4].0 is YYObj_Name(_dollar4)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard! _args[6].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({(); 
+  YYObj_TraitSig(
+    ({(); 
     { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2156,19 +2858,25 @@ fn yy_action_108(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
 // 301|  }
-fn yy_action_109(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_109(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _args[4].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[4].1
   let _end_pos_of_item3 = _args[4].2
   guard! _args[7].0 is YYObj_Name(_dollar7)
   guard! _args[8].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Type, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2177,63 +2885,103 @@ fn yy_action_109(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
 // 305|  }
-fn yy_action_110(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_40(_args[0].2, _args[1:3])
+fn yy_action_110(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_39(_args[0].2, _args[1:3])
   guard! _args[4].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[4].1
   let _end_pos_of_item3 = _args[4].2
   guard! _args[7].0 is YYObj_Name(_dollar7)
   guard! _args[8].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Trait, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 453|    "pub" pub_attr { Pub(attr=$2, loc=mk_loc($sloc)) }
-fn yy_action_40(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_39(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_String_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Visibility({();  Pub(attr=_dollar2, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Visibility(
+    ({();  Pub(attr=_dollar2, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 458|    "(" "readonly" ")" { Some("readonly") }
-fn yy_action_111(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_String_({();  Some("readonly") })
+fn yy_action_111(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_String_(
+    ({();  Some("readonly") 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 459|    "(" lident ")" { Some($2.name) }
-fn yy_action_112(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_112(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_Name(_dollar2)
-  YYObj_String_({();  Some(_dollar2.name) })
+  YYObj_String_(
+    ({();  Some(_dollar2.name) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 457|    { None }
-fn yy_action_113(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_String_({();  None })
+fn yy_action_113(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_String_(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
-fn yy_action_114(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_114(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig(
+    ({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } 
+    })
+  )
 }
 
 ///|
@@ -2242,21 +2990,27 @@ fn yy_action_114(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_115(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
-  let _sub_action_2_result = yy_action_20(_args[0].2, _args[1:2])
-  let _sub_action_3_result = yy_action_21(_args[4].2, _args[5:8])
+fn yy_action_115(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
+  let _sub_action_2_result = yy_action_19(_args[0].2, _args[1:2])
+  let _sub_action_3_result = yy_action_20(_args[4].2, _args[5:8])
   guard! _args[4].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[3].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[9].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2265,21 +3019,27 @@ fn yy_action_115(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_116(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
-  let _sub_action_2_result = yy_action_23(_args[0].2, _args[1:1])
-  let _sub_action_3_result = yy_action_21(_args[3].2, _args[4:7])
+fn yy_action_116(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
+  let _sub_action_2_result = yy_action_22(_args[0].2, _args[1:1])
+  let _sub_action_3_result = yy_action_20(_args[3].2, _args[4:7])
   guard! _args[3].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[8].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2287,16 +3047,24 @@ fn yy_action_116(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 234|    attributes vis "type" type_decl_name_with_params optional_derive {
 // 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 236|  }
-fn yy_action_117(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_117(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2304,16 +3072,24 @@ fn yy_action_117(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
 // 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 297|  }
-fn yy_action_118(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_118(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj_Type(_dollar6)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2321,16 +3097,22 @@ fn yy_action_118(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 237|    attributes vis "suberror" uident optional_derive {
 // 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
-fn yy_action_119(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_119(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2338,17 +3120,23 @@ fn yy_action_119(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
-fn yy_action_120(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_120(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2356,17 +3144,25 @@ fn yy_action_120(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
 // 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 245|  }
-fn yy_action_121(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_121(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj_TypeDefinition(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2374,17 +3170,25 @@ fn yy_action_121(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
 // 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 248|  }
-fn yy_action_122(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_122(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_Type_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2392,17 +3196,25 @@ fn yy_action_122(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 251|  }
-fn yy_action_123(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_123(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2410,16 +3222,24 @@ fn yy_action_123(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
 // 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
-fn yy_action_124(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_124(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2427,17 +3247,25 @@ fn yy_action_124(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 257|  }
-fn yy_action_125(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_125(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2446,18 +3274,26 @@ fn yy_action_125(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 259|    let (name, type_params, target) = $4
 // 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 261|  }
-fn yy_action_126(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
-  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(_dollar4)
+fn yy_action_126(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
+  guard! _args[2].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    _dollar4
+  )
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[5].0 is YYObj__list_List_ConstrDecl_(_dollar7)
   guard! _args[7].0 is YYObj__list_List_QualifiedName_(_dollar9)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     let (name, type_params, target) = _dollar4
     {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2465,16 +3301,22 @@ fn yy_action_126(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
 // 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 272|  }
-fn yy_action_127(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_127(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
   guard! _args[3].0 is YYObj_QualifiedName(_dollar5)
   guard! _args[5].0 is YYObj_Type(_dollar7)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2482,15 +3324,21 @@ fn yy_action_127(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
 // 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
-fn yy_action_128(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_128(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _args[2].0 is YYObj_QualifiedName(_dollar4)
   guard! _args[4].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2498,17 +3346,23 @@ fn yy_action_128(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
 // 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 281|  }
-fn yy_action_129(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_129(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[2].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard! _args[4].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({(); 
+  YYObj_TraitSig(
+    ({(); 
     { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2517,19 +3371,25 @@ fn yy_action_129(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
 // 301|  }
-fn yy_action_130(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_130(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _args[2].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[2].1
   let _end_pos_of_item3 = _args[2].2
   guard! _args[5].0 is YYObj_Name(_dollar7)
   guard! _args[6].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Type, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2538,31 +3398,43 @@ fn yy_action_130(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
 // 305|  }
-fn yy_action_131(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_15(_args[0].2, _args[1:1])
+fn yy_action_131(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_14(_args[0].2, _args[1:1])
   guard! _args[2].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[2].1
   let _end_pos_of_item3 = _args[2].2
   guard! _args[5].0 is YYObj_Name(_dollar7)
   guard! _args[6].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Trait, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
-fn yy_action_132(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_132(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _args[1].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj_Type(_dollar6)
-  YYObj_ValueSig({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } })
+  YYObj_ValueSig(
+    ({();  { attrs: _dollar1, name: _dollar4, type_: _dollar6 } 
+    })
+  )
 }
 
 ///|
@@ -2571,21 +3443,27 @@ fn yy_action_132(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_133(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
-  let _sub_action_2_result = yy_action_20(_last_pos, _args[0:1])
-  let _sub_action_3_result = yy_action_21(_args[3].2, _args[4:7])
+fn yy_action_133(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
+  let _sub_action_2_result = yy_action_19(_last_pos, _args[0:1])
+  let _sub_action_3_result = yy_action_20(_args[3].2, _args[4:7])
   guard! _args[3].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[8].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2593,13 +3471,19 @@ fn yy_action_133(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 189|   UIDENT "::" {
 // 190|  { name : $1, is_object : false, loc : mk_loc($loc($1)) }
 // 191| }
-fn yy_action_134(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_134(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj_MethodSelfType({(); 
+  YYObj_MethodSelfType(
+    ({(); 
   { name : _dollar1, is_object : false, loc : mk_loc((_start_pos_of_item0, _end_pos_of_item0)) }
- })
+ 
+    })
+  )
 }
 
 ///|
@@ -2607,46 +3491,76 @@ fn yy_action_134(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 192|   "&" UIDENT "::" {
 // 193|  { name : $2, is_object : true, loc : mk_loc($loc($2)) }
 // 194| }
-fn yy_action_135(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_135(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
-  YYObj_MethodSelfType({(); 
+  YYObj_MethodSelfType(
+    ({(); 
   { name : _dollar2, is_object : true, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }
- })
+ 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 203|    luident { (None, $1) }
-fn yy_action_136(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_136(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
-  YYObj__MethodSelfType___Name_({();  (None, _dollar1) })
+  YYObj__MethodSelfType___Name_(
+    ({();  (None, _dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 198|    lident { $1 }
-fn yy_action_137(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_137(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_Name({();  _dollar1 })
+  YYObj_Name(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 199|    uident { $1 }
-fn yy_action_138(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_138(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_Name({();  _dollar1 })
+  YYObj_Name(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 204|    method_self_type_coloncolon luident { (Some($1), $2) }
-fn yy_action_139(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_139(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_MethodSelfType(_dollar1)
   guard! _args[1].0 is YYObj_Name(_dollar2)
-  YYObj__MethodSelfType___Name_({();  (Some(_dollar1), _dollar2) })
+  YYObj__MethodSelfType___Name_(
+    ({();  (Some(_dollar1), _dollar2) 
+    })
+  )
 }
 
 ///|
@@ -2655,21 +3569,27 @@ fn yy_action_139(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 215|    let (type_name, name) = $6
 // 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
 // 217|  }
-fn yy_action_140(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
-  let _sub_action_2_result = yy_action_23(_last_pos, _args[0:0])
-  let _sub_action_3_result = yy_action_21(_args[2].2, _args[3:6])
+fn yy_action_140(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
+  let _sub_action_2_result = yy_action_22(_last_pos, _args[0:0])
+  let _sub_action_3_result = yy_action_20(_args[2].2, _args[3:6])
   guard! _args[2].0 is YYObj__MethodSelfType___Name_(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_2_result is YYObj_Location_(_dollar3)
   guard! _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar5)
   guard! _sub_action_3_result is YYObj__list_List_Parameter_(_dollar7)
   guard! _args[7].0 is YYObj__Type__ErrorType__Location__(_dollar9)
-  YYObj_FuncSig({(); 
+  YYObj_FuncSig(
+    ({(); 
     let (type_name, name) = _dollar6
     { attrs: _dollar1, is_async : _dollar3, type_name, name, type_params: _dollar5, params: _dollar7, return_: (_dollar9.0, _dollar9.1), nocancel_: _dollar9.2}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2677,16 +3597,24 @@ fn yy_action_140(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 234|    attributes vis "type" type_decl_name_with_params optional_derive {
 // 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
 // 236|  }
-fn yy_action_141(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_141(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Abstract, derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2694,16 +3622,24 @@ fn yy_action_141(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
 // 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
 // 297|  }
-fn yy_action_142(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_142(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj_Type(_dollar6)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     TypeAlias(attrs = _dollar1, vis=_dollar2, name=_dollar4.0, type_params=_dollar4.1, type_=_dollar6)
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2711,16 +3647,22 @@ fn yy_action_142(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 237|    attributes vis "suberror" uident optional_derive {
 // 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
 // 239|  }
-fn yy_action_143(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_143(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[1].0 is YYObj_Name(_dollar4)
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(NoPayload), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2728,17 +3670,23 @@ fn yy_action_143(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
 // 242|  }
-fn yy_action_144(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_144(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[1].0 is YYObj_Name(_dollar4)
   guard! _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4, type_params: List([]), components: Error(EnumPayload(_dollar6)), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2746,17 +3694,25 @@ fn yy_action_144(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
 // 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
 // 245|  }
-fn yy_action_145(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_145(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj_TypeDefinition(_dollar6)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: _dollar6, derives: _dollar8 }
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2764,19 +3720,31 @@ fn yy_action_145(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 330|    separated_list(";", record_decl_field) {
 // 331|    Record(fields = $1)
 // 332|  }
-fn yy_action_146(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_146(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_FieldDecl_(_dollar1)
-  YYObj_TypeDefinition({(); 
+  YYObj_TypeDefinition(
+    ({(); 
     Record(fields = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 55|    separated_nonempty_list(SEP, X) { $1 }
-fn yy_action_147(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_147(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_FieldDecl_(_dollar1)
-  YYObj__list_List_FieldDecl_({();  _dollar1 })
+  YYObj__list_List_FieldDecl_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
@@ -2784,17 +3752,27 @@ fn yy_action_147(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 324|    attributes boption("mut") lident ":" type_ {
 // 325|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
 // 326|  }
-fn yy_action_148(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
+fn yy_action_148(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
   guard! _args[1].0 is YYObj_Name(_dollar3)
   guard! _args[0].0 is YYObj_Bool(_dollar2)
   guard! _args[3].0 is YYObj_Type(_dollar5)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_FieldDecl({(); 
+  YYObj_FieldDecl(
+    ({(); 
     { name: { label: _dollar3.name, loc : _dollar3.loc }, vis: Default, mut_: _dollar2, ty: _dollar5, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty() }
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2802,41 +3780,69 @@ fn yy_action_148(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 324|    attributes boption("mut") lident ":" type_ {
 // 325|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
 // 326|  }
-fn yy_action_149(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
+fn yy_action_149(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_Name(_dollar3)
   guard! _args[1].0 is YYObj_Bool(_dollar2)
   guard! _args[4].0 is YYObj_Type(_dollar5)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_FieldDecl({(); 
+  YYObj_FieldDecl(
+    ({(); 
     { name: { label: _dollar3.name, loc : _dollar3.loc }, vis: Default, mut_: _dollar2, ty: _dollar5, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty() }
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_150(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_150(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_FieldDecl_(_dollar3)
   guard! _args[0].0 is YYObj_FieldDecl(_dollar1)
-  YYObj__list_List_FieldDecl_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_FieldDecl_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_151(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_151(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_FieldDecl(_dollar1)
-  YYObj__list_List_FieldDecl_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_FieldDecl_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 54|    { @list.empty() }
-fn yy_action_152(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_FieldDecl_({();  @list.empty() })
+// 54|    { List([]) }
+fn yy_action_152(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_FieldDecl_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
@@ -2844,32 +3850,52 @@ fn yy_action_152(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
 // 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
 // 248|  }
-fn yy_action_153(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_153(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj__list_List_Type_(_dollar6)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: TupleStruct(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 55|    separated_nonempty_list(SEP, X) { $1 }
-fn yy_action_154(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_154(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_Type_(_dollar1)
-  YYObj__list_List_Type_({();  _dollar1 })
+  YYObj__list_List_Type_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 54|    { @list.empty() }
-fn yy_action_155(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_Type_({();  @list.empty() })
+// 54|    { List([]) }
+fn yy_action_155(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_Type_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
@@ -2877,17 +3903,25 @@ fn yy_action_155(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
 // 251|  }
-fn yy_action_156(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_156(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: Variant(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2895,16 +3929,24 @@ fn yy_action_156(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
 // 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
 // 254|  }
-fn yy_action_157(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_157(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs: _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(List([])), derives: _dollar5}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2912,17 +3954,25 @@ fn yy_action_157(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
 // 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
 // 257|  }
-fn yy_action_158(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_158(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(_dollar4)
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints__(
+    _dollar4
+  )
   guard! _args[3].0 is YYObj__list_List_ConstrDecl_(_dollar6)
   guard! _args[5].0 is YYObj__list_List_QualifiedName_(_dollar8)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     {attrs : _dollar1, vis: _dollar2, name: _dollar4.0, type_params: _dollar4.1, components: ExtensibleEnum(_dollar6), derives: _dollar8}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -2931,66 +3981,110 @@ fn yy_action_158(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 259|    let (name, type_params, target) = $4
 // 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
 // 261|  }
-fn yy_action_159(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
-  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(_dollar4)
+fn yy_action_159(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
+  guard! _args[1].0 is YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    _dollar4
+  )
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[4].0 is YYObj__list_List_ConstrDecl_(_dollar7)
   guard! _args[6].0 is YYObj__list_List_QualifiedName_(_dollar9)
-  YYObj_TypeSig({(); 
+  YYObj_TypeSig(
+    ({(); 
     let (name, type_params, target) = _dollar4
     {attrs : _dollar1, vis: _dollar2, name, type_params, components: ExtendEnum(target~, constructors = _dollar7), derives: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 266|    "derive" "(" non_empty_list_commas(qualified_uident) ")" { $3 }
-fn yy_action_160(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_160(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
-  YYObj__list_List_QualifiedName_({();  _dollar3 })
+  YYObj__list_List_QualifiedName_(
+    ({();  _dollar3 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 147|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
-fn yy_action_161(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_161(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_QualifiedName_(_dollar1)
-  YYObj__list_List_QualifiedName_({();  _dollar1.rev() })
+  YYObj__list_List_QualifiedName_(
+    ({();  _dollar1.rev() 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 143|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
-fn yy_action_162(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_162(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_QualifiedName_(_dollar1)
   guard! _args[2].0 is YYObj_QualifiedName(_dollar3)
-  YYObj__list_List_QualifiedName_({();  _dollar1.prepend(_dollar3) })
+  YYObj__list_List_QualifiedName_(
+    ({();  _dollar1.prepend(_dollar3) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 142|    X { @list.singleton($1) }
-fn yy_action_163(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_163(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_List_QualifiedName_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_QualifiedName_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 265|    { List([]) }
-fn yy_action_164(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_QualifiedName_({();  List([]) })
+fn yy_action_164(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_QualifiedName_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 55|    separated_nonempty_list(SEP, X) { $1 }
-fn yy_action_165(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_165(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_ConstrDecl_(_dollar1)
-  YYObj__list_List_ConstrDecl_({();  _dollar1 })
+  YYObj__list_List_ConstrDecl_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
@@ -2998,19 +4092,29 @@ fn yy_action_165(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 309|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
 // 310|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
 // 311|  }
-fn yy_action_166(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
+fn yy_action_166(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
   guard! _args[0].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[0].1
   let _end_pos_of_item1 = _args[0].2
   guard! _args[1].0 is YYObj_Option__list_List_ConstrParam__(_dollar3)
   guard! _args[2].0 is YYObj_Option__String__Location__(_dollar4)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstrDecl({(); 
+  YYObj_ConstrDecl(
+    ({(); 
     {name: { name : _dollar2, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }, args: _dollar3, tag: _dollar4, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty()}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3018,162 +4122,278 @@ fn yy_action_166(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 309|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
 // 310|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
 // 311|  }
-fn yy_action_167(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
+fn yy_action_167(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
   guard! _args[2].0 is YYObj_Option__list_List_ConstrParam__(_dollar3)
   guard! _args[3].0 is YYObj_Option__String__Location__(_dollar4)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ConstrDecl({(); 
+  YYObj_ConstrDecl(
+    ({(); 
     {name: { name : _dollar2, loc : mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }, args: _dollar3, tag: _dollar4, loc: mk_loc((_symbol_start_pos, _end_pos)), attrs: _dollar1, doc: DocString::empty()}
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 5|    X { Some($1) }
-fn yy_action_168(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_169(_last_pos, _args[0:2])
+fn yy_action_169(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_168(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__String__Location_(_dollar1)
-  YYObj_Option__String__Location__({();  Some(_dollar1) })
+  YYObj_Option__String__Location__(
+    ({();  Some(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 315|    "=" INT { ($2, mk_loc($loc($2))) }
-fn yy_action_169(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_168(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
-  YYObj__String__Location_({();  (_dollar2, mk_loc((_start_pos_of_item1, _end_pos_of_item1))) })
+  YYObj__String__Location_(
+    ({();  (_dollar2, mk_loc((_start_pos_of_item1, _end_pos_of_item1))) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 4|    { None }
-fn yy_action_170(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Option__String__Location__({();  None })
+fn yy_action_170(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Option__String__Location__(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 319|    boption("mut") type_ { {mut_: $1, ty: $2, label: None} }
-fn yy_action_171(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_171(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Bool(_dollar1)
   guard! _args[1].0 is YYObj_Type(_dollar2)
-  YYObj_ConstrParam({();  {mut_: _dollar1, ty: _dollar2, label: None} })
+  YYObj_ConstrParam(
+    ({();  {mut_: _dollar1, ty: _dollar2, label: None} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 320|    boption("mut") post_label ":" type_ { {mut_: $1, ty: $4, label: Some($2)} }
-fn yy_action_172(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_172(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Bool(_dollar1)
   guard! _args[3].0 is YYObj_Type(_dollar4)
   guard! _args[1].0 is YYObj_Label(_dollar2)
-  YYObj_ConstrParam({();  {mut_: _dollar1, ty: _dollar4, label: Some(_dollar2)} })
+  YYObj_ConstrParam(
+    ({();  {mut_: _dollar1, ty: _dollar4, label: Some(_dollar2)} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 491|    POST_LABEL { {name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
-fn yy_action_173(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_173(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Label({();  {name: _dollar1, loc: Location::trim_last_char(mk_loc((_symbol_start_pos, _end_pos)))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Label(
+    ({();  {name: _dollar1, loc: Location::trim_last_char(mk_loc((_symbol_start_pos, _end_pos)))} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_174(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_174(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_ConstrParam_(_dollar3)
   guard! _args[0].0 is YYObj_ConstrParam(_dollar1)
-  YYObj__list_List_ConstrParam_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_ConstrParam_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_175(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_175(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrParam(_dollar1)
-  YYObj__list_List_ConstrParam_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_ConstrParam_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 5|    X { Some($1) }
-fn yy_action_176(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_177(_last_pos, _args[0:3])
+fn yy_action_177(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_176(_last_pos, _args[0:3])
   guard! _sub_action_0_result is YYObj__list_List_ConstrParam_(_dollar1)
-  YYObj_Option__list_List_ConstrParam__({();  Some(_dollar1) })
+  YYObj_Option__list_List_ConstrParam__(
+    ({();  Some(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 40|    L X R { $2 }
-fn yy_action_177(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_176(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_ConstrParam_(_dollar2)
-  YYObj__list_List_ConstrParam_({();  _dollar2 })
+  YYObj__list_List_ConstrParam_(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 20|    X { true }
-fn yy_action_178(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Bool({();  true })
+fn yy_action_178(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Bool(
+    ({();  true 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 19|    { false }
-fn yy_action_179(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Bool({();  false })
+fn yy_action_179(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Bool(
+    ({();  false 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 4|    { None }
-fn yy_action_180(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Option__list_List_ConstrParam__({();  None })
+fn yy_action_180(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Option__list_List_ConstrParam__(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_181(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_181(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_ConstrDecl_(_dollar3)
   guard! _args[0].0 is YYObj_ConstrDecl(_dollar1)
-  YYObj__list_List_ConstrDecl_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_ConstrDecl_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_182(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_182(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrDecl(_dollar1)
-  YYObj__list_List_ConstrDecl_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_ConstrDecl_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 54|    { @list.empty() }
-fn yy_action_183(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_ConstrDecl_({();  @list.empty() })
+// 54|    { List([]) }
+fn yy_action_183(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_ConstrDecl_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 363|    uident optional_type_params_no_constraints { ($1, $2) }
-fn yy_action_184(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_184(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   guard! _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
-  YYObj__Name___list_List_TypeParamNoConstraints__({();  (_dollar1, _dollar2) })
+  YYObj__Name___list_List_TypeParamNoConstraints__(
+    ({();  (_dollar1, _dollar2) 
+    })
+  )
 }
 
 ///|
@@ -3182,78 +4402,136 @@ fn yy_action_184(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 368|    let target = QualifiedName::{ name: Ident(name = $1.name), loc: $1.loc }
 // 369|    ($1, $2, target)
 // 370|  }
-fn yy_action_185(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_185(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   guard! _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
-  YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_({(); 
+  YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    ({(); 
     let target = QualifiedName::{ name: Ident(name = _dollar1.name), loc: _dollar1.loc }
     (_dollar1, _dollar2, target)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 350|    "[" separated_list(",", type_param_no_constraints) "]" { $2 }
-fn yy_action_186(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_186(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
-  YYObj__list_List_TypeParamNoConstraints_({();  _dollar2 })
+  YYObj__list_List_TypeParamNoConstraints_(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 55|    separated_nonempty_list(SEP, X) { $1 }
-fn yy_action_187(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_187(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar1)
-  YYObj__list_List_TypeParamNoConstraints_({();  _dollar1 })
+  YYObj__list_List_TypeParamNoConstraints_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 345|    uident { Name($1) }
-fn yy_action_188(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_188(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_TypeParamNoConstraints({();  Name(_dollar1) })
+  YYObj_TypeParamNoConstraints(
+    ({();  Name(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 346|    "_" { Underscore(mk_loc($sloc)) }
-fn yy_action_189(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_189(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_TypeParamNoConstraints({();  Underscore(mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_TypeParamNoConstraints(
+    ({();  Underscore(mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_190(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_190(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar3)
   guard! _args[0].0 is YYObj_TypeParamNoConstraints(_dollar1)
-  YYObj__list_List_TypeParamNoConstraints_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_TypeParamNoConstraints_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_191(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_191(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_TypeParamNoConstraints(_dollar1)
-  YYObj__list_List_TypeParamNoConstraints_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_TypeParamNoConstraints_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 54|    { @list.empty() }
-fn yy_action_192(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TypeParamNoConstraints_({();  @list.empty() })
+// 54|    { List([]) }
+fn yy_action_192(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_TypeParamNoConstraints_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 355|    type_params_no_constraints { $1 }
-fn yy_action_193(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_193(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar1)
-  YYObj__list_List_TypeParamNoConstraints_({();  _dollar1 })
+  YYObj__list_List_TypeParamNoConstraints_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
@@ -3263,26 +4541,42 @@ fn yy_action_193(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 373|    let target = QualifiedName::{ name: Dot(pkg = $1, id = $2), loc: mk_loc($sloc) }
 // 374|    (name, $3, target)
 // 375|  }
-fn yy_action_194(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_194(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   guard! _args[2].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar3)
-  YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_({(); 
+  YYObj__Name___list_List_TypeParamNoConstraints___QualifiedName_(
+    ({(); 
     let name = Name::{ name: _dollar2, loc: mk_loc((_start_pos_of_item1, _end_pos_of_item1)) }
     let target = QualifiedName::{ name: Dot(pkg = _dollar1, id = _dollar2), loc: mk_loc((_symbol_start_pos, _end_pos)) }
     (name, _dollar3, target)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 354|    { List([]) }
-fn yy_action_195(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TypeParamNoConstraints_({();  List([]) })
+fn yy_action_195(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_TypeParamNoConstraints_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
@@ -3290,16 +4584,22 @@ fn yy_action_195(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
 // 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
 // 272|  }
-fn yy_action_196(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_196(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
   guard! _args[2].0 is YYObj_QualifiedName(_dollar5)
   guard! _args[4].0 is YYObj_Type(_dollar7)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : _dollar4, trait_name : _dollar5, type_ : _dollar7, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3307,15 +4607,21 @@ fn yy_action_196(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 273|    attributes vis "impl" qualified_uident "for" type_ {
 // 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
 // 275|  }
-fn yy_action_197(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_197(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _args[1].0 is YYObj_QualifiedName(_dollar4)
   guard! _args[3].0 is YYObj_Type(_dollar6)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_ImplSig({(); 
+  YYObj_ImplSig(
+    ({(); 
     {type_params : List([]), trait_name : _dollar4, type_ : _dollar6, attrs : _dollar1}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3323,33 +4629,51 @@ fn yy_action_197(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
 // 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
 // 281|  }
-fn yy_action_198(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_198(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Visibility(_dollar2)
   guard! _args[1].0 is YYObj_Name(_dollar4)
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar5)
   guard! _args[3].0 is YYObj__list_List_TraitMethodSig_(_dollar6)
-  YYObj_TraitSig({(); 
+  YYObj_TraitSig(
+    ({(); 
     { attrs : _dollar1, vis: _dollar2, name: _dollar4, super_traits: _dollar5, methods: _dollar6}
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 286|    "{" separated_list(";", trait_method_sig) "}" { $2 }
-fn yy_action_199(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_199(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_TraitMethodSig_(_dollar2)
-  YYObj__list_List_TraitMethodSig_({();  _dollar2 })
+  YYObj__list_List_TraitMethodSig_(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 55|    separated_nonempty_list(SEP, X) { $1 }
-fn yy_action_200(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_200(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_TraitMethodSig_(_dollar1)
-  YYObj__list_List_TraitMethodSig_({();  _dollar1 })
+  YYObj__list_List_TraitMethodSig_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
@@ -3357,10 +4681,13 @@ fn yy_action_200(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
 // 223|  }
-fn yy_action_201(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_20(_last_pos, _args[0:1])
-  let _sub_action_2_result = yy_action_21(_args[3].2, _args[4:7])
+fn yy_action_201(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_19(_last_pos, _args[0:1])
+  let _sub_action_2_result = yy_action_20(_args[3].2, _args[4:7])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
@@ -3368,9 +4695,12 @@ fn yy_action_201(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar6)
   guard! _args[8].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _args[9].0 is YYObj_Bool(_dollar9)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: (_dollar8.0, _dollar8.1), nocancel_: _dollar8.2, has_default: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3378,19 +4708,25 @@ fn yy_action_201(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
-fn yy_action_202(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_20(_last_pos, _args[0:1])
-  let _sub_action_2_result = yy_action_21(_args[1].2, _args[2:5])
+fn yy_action_202(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_19(_last_pos, _args[0:1])
+  let _sub_action_2_result = yy_action_20(_args[1].2, _args[2:5])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[1].0 is YYObj_Name(_dollar3)
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar4)
   guard! _args[6].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[7].0 is YYObj_Bool(_dollar7)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3398,10 +4734,13 @@ fn yy_action_202(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
 // 223|  }
-fn yy_action_203(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_23(_last_pos, _args[0:0])
-  let _sub_action_2_result = yy_action_21(_args[2].2, _args[3:6])
+fn yy_action_203(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_22(_last_pos, _args[0:0])
+  let _sub_action_2_result = yy_action_20(_args[2].2, _args[3:6])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
@@ -3409,9 +4748,12 @@ fn yy_action_203(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar6)
   guard! _args[7].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _args[8].0 is YYObj_Bool(_dollar9)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: (_dollar8.0, _dollar8.1), nocancel_: _dollar8.2, has_default: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3419,10 +4761,13 @@ fn yy_action_203(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
 // 223|  }
-fn yy_action_204(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_20(_args[0].2, _args[1:2])
-  let _sub_action_2_result = yy_action_21(_args[4].2, _args[5:8])
+fn yy_action_204(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_19(_args[0].2, _args[1:2])
+  let _sub_action_2_result = yy_action_20(_args[4].2, _args[5:8])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[3].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
@@ -3430,9 +4775,12 @@ fn yy_action_204(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar6)
   guard! _args[9].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _args[10].0 is YYObj_Bool(_dollar9)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: (_dollar8.0, _dollar8.1), nocancel_: _dollar8.2, has_default: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3440,19 +4788,25 @@ fn yy_action_204(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
-fn yy_action_205(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_20(_args[0].2, _args[1:2])
-  let _sub_action_2_result = yy_action_21(_args[2].2, _args[3:6])
+fn yy_action_205(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_19(_args[0].2, _args[1:2])
+  let _sub_action_2_result = yy_action_20(_args[2].2, _args[3:6])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[2].0 is YYObj_Name(_dollar3)
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar4)
   guard! _args[7].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[8].0 is YYObj_Bool(_dollar7)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
-  })
+  
+    })
+  )
 }
 
 ///|
@@ -3460,10 +4814,13 @@ fn yy_action_205(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
 // 223|  }
-fn yy_action_206(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_23(_args[0].2, _args[1:1])
-  let _sub_action_2_result = yy_action_21(_args[3].2, _args[4:7])
+fn yy_action_206(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_22(_args[0].2, _args[1:1])
+  let _sub_action_2_result = yy_action_20(_args[3].2, _args[4:7])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar4)
@@ -3471,106 +4828,181 @@ fn yy_action_206(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar6)
   guard! _args[8].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _args[9].0 is YYObj_Bool(_dollar9)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: _dollar4, name: _dollar5, params: _dollar6, return_: (_dollar8.0, _dollar8.1), nocancel_: _dollar8.2, has_default: _dollar9}
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 341|    "[" separated_list(",", type_param_with_constraints) "]" { $2 }
-fn yy_action_207(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_207(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar2)
-  YYObj__list_List_TypeParamWithConstraints_({();  _dollar2 })
+  YYObj__list_List_TypeParamWithConstraints_(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 55|    separated_nonempty_list(SEP, X) { $1 }
-fn yy_action_208(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_208(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar1)
-  YYObj__list_List_TypeParamWithConstraints_({();  _dollar1 })
+  YYObj__list_List_TypeParamWithConstraints_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 337|    uident ":" separated_nonempty_list("+", type_constraint) { {name: $1, constraints: $3} }
-fn yy_action_209(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_209(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
-  YYObj_TypeParamWithConstraints({();  {name: _dollar1, constraints: _dollar3} })
+  YYObj_TypeParamWithConstraints(
+    ({();  {name: _dollar1, constraints: _dollar3} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 359|    qualified_uident { $1 }
-fn yy_action_210(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_210(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj_QualifiedName({();  _dollar1 })
+  YYObj_QualifiedName(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_211(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_211(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_List_QualifiedName_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_QualifiedName_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_212(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_212(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_List_QualifiedName_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_QualifiedName_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 336|    uident { {name: $1, constraints: List([])} }
-fn yy_action_213(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_213(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_TypeParamWithConstraints({();  {name: _dollar1, constraints: List([])} })
+  YYObj_TypeParamWithConstraints(
+    ({();  {name: _dollar1, constraints: List([])} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_214(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_214(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar3)
   guard! _args[0].0 is YYObj_TypeParamWithConstraints(_dollar1)
-  YYObj__list_List_TypeParamWithConstraints_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_TypeParamWithConstraints_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_215(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_215(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_TypeParamWithConstraints(_dollar1)
-  YYObj__list_List_TypeParamWithConstraints_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_TypeParamWithConstraints_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 54|    { @list.empty() }
-fn yy_action_216(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TypeParamWithConstraints_({();  @list.empty() })
+// 54|    { List([]) }
+fn yy_action_216(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_TypeParamWithConstraints_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 15|    X { $1 }
-fn yy_action_217(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_217(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar1)
-  YYObj__list_List_TypeParamWithConstraints_({();  _dollar1 })
+  YYObj__list_List_TypeParamWithConstraints_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 14|    { @list.empty() }
-fn yy_action_218(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TypeParamWithConstraints_({();  @list.empty() })
+// 14|    { List([]) }
+fn yy_action_218(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_TypeParamWithConstraints_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
@@ -3578,27 +5010,39 @@ fn yy_action_218(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
-fn yy_action_219(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_60(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_23(_args[0].2, _args[1:1])
-  let _sub_action_2_result = yy_action_21(_args[1].2, _args[2:5])
+fn yy_action_219(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_59(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_22(_args[0].2, _args[1:1])
+  let _sub_action_2_result = yy_action_20(_args[1].2, _args[2:5])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[1].0 is YYObj_Name(_dollar3)
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar4)
   guard! _args[6].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[7].0 is YYObj_Bool(_dollar7)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 496|    nonempty_list(attribute) { $1 }
-fn yy_action_60(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_59(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_Attribute_(_dollar1)
-  YYObj__list_List_Attribute_({();  _dollar1 })
+  YYObj__list_List_Attribute_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
@@ -3606,288 +5050,500 @@ fn yy_action_60(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Po
 // 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
 // 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
 // 226|  }
-fn yy_action_220(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_23(_last_pos, _args[0:0])
-  let _sub_action_2_result = yy_action_21(_args[0].2, _args[1:4])
+fn yy_action_220(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_22(_last_pos, _args[0:0])
+  let _sub_action_2_result = yy_action_20(_args[0].2, _args[1:4])
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
   guard! _sub_action_1_result is YYObj_Location_(_dollar2)
   guard! _args[0].0 is YYObj_Name(_dollar3)
   guard! _sub_action_2_result is YYObj__list_List_Parameter_(_dollar4)
   guard! _args[5].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _args[6].0 is YYObj_Bool(_dollar7)
-  YYObj_TraitMethodSig({(); 
+  YYObj_TraitMethodSig(
+    ({(); 
     { attrs : _dollar1, is_async: _dollar2, type_params: List([]), name: _dollar3, params: _dollar4, return_: (_dollar6.0, _dollar6.1), nocancel_: _dollar6.2, has_default: _dollar7}
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 40|    L X R { $2 }
-fn yy_action_21(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_20(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_Parameter_(_dollar2)
-  YYObj__list_List_Parameter_({();  _dollar2 })
+  YYObj__list_List_Parameter_(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 20|    X { true }
-fn yy_action_221(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_222(_last_pos, _args[0:2])
-  YYObj_Bool({();  true })
+fn yy_action_222(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_221(_last_pos, _args[0:2])
+  YYObj_Bool(
+    ({();  true 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 230|    "=" "_" {}
-fn yy_action_222(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Unit({(); })
+fn yy_action_221(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Unit(
+    ({(); 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 19|    { false }
-fn yy_action_223(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Bool({();  false })
+fn yy_action_223(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Bool(
+    ({();  false 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 55|    separated_nonempty_list(SEP, X) { $1 }
-fn yy_action_224(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_224(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_Parameter_(_dollar1)
-  YYObj__list_List_Parameter_({();  _dollar1 })
+  YYObj__list_List_Parameter_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 430|    type_ { DiscardPositional(ty = Some($1), loc = @syntax.no_location) }
-fn yy_action_225(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_225(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
-  YYObj_Parameter({();  DiscardPositional(ty = Some(_dollar1), loc = @syntax.no_location) })
+  YYObj_Parameter(
+    ({();  DiscardPositional(ty = Some(_dollar1), loc = @syntax.no_location) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 431|    POST_LABEL ":" type_ { Labelled(binder = { name : $1, loc : mk_loc($loc($1)) }, ty = Some($3)) }
-fn yy_action_226(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_226(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
   guard! _args[2].0 is YYObj_Type(_dollar3)
-  YYObj_Parameter({();  Labelled(binder = { name : _dollar1, loc : mk_loc((_start_pos_of_item0, _end_pos_of_item0)) }, ty = Some(_dollar3)) })
+  YYObj_Parameter(
+    ({();  Labelled(binder = { name : _dollar1, loc : mk_loc((_start_pos_of_item0, _end_pos_of_item0)) }, ty = Some(_dollar3)) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_227(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_20(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_228(_args[3].2, _args[4:4])
+fn yy_action_228(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_19(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_227(_args[3].2, _args[4:4])
   guard! _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard! _args[2].0 is YYObj_Type(_dollar3)
   guard! _args[6].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_229(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_20(_last_pos, _args[0:1])
-  let _sub_action_1_result = yy_action_230(_args[3].2, _args[4:5])
+fn yy_action_230(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_19(_last_pos, _args[0:1])
+  let _sub_action_1_result = yy_action_229(_args[3].2, _args[4:5])
   guard! _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard! _args[2].0 is YYObj_Type(_dollar3)
   guard! _args[7].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 391|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_231(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_20(_last_pos, _args[0:1])
+fn yy_action_231(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_19(_last_pos, _args[0:1])
   guard! _args[2].0 is YYObj_Type(_dollar3)
   guard! _args[5].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=@list.singleton(_dollar3), res=_dollar6.0, err=_dollar6.1, nocancel_=_dollar6.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=@list.singleton(_dollar3), res=_dollar6.0, err=_dollar6.1, nocancel_=_dollar6.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 382|    qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
-fn yy_action_232(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_232(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrId(_dollar1)
   guard! _args[1].0 is YYObj__list_List_Type_(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Name(constr_id=_dollar1, tys=_dollar2, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Name(constr_id=_dollar1, tys=_dollar2, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 425|    delimited("[", separated_nonempty_list(",", type_), "]") { $1 }
-fn yy_action_233(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_234(_last_pos, _args[0:3])
+fn yy_action_234(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_233(_last_pos, _args[0:3])
   guard! _sub_action_0_result is YYObj__list_List_Type_(_dollar1)
-  YYObj__list_List_Type_({();  _dollar1 })
+  YYObj__list_List_Type_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 40|    L X R { $2 }
-fn yy_action_234(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_233(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_Type_(_dollar2)
-  YYObj__list_List_Type_({();  _dollar2 })
+  YYObj__list_List_Type_(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_235(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_23(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_230(_args[2].2, _args[3:4])
+fn yy_action_235(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_22(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_229(_args[2].2, _args[3:4])
   guard! _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard! _args[1].0 is YYObj_Type(_dollar3)
   guard! _args[6].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 10|    X { Some($1) }
-fn yy_action_230(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_229(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_Type_(_dollar1)
-  YYObj_Option__list_List_Type__({();  Some(_dollar1) })
+  YYObj_Option__list_List_Type__(
+    ({();  Some(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 380|    "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.prepend($2), loc=mk_loc($sloc)) }
-fn yy_action_236(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_236(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[3].0 is YYObj__list_List_Type_(_dollar4)
   guard! _args[1].0 is YYObj_Type(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Tuple(tys=_dollar4.prepend(_dollar2), loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Tuple(tys=_dollar4.prepend(_dollar2), loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_237(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_23(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_228(_args[2].2, _args[3:3])
+fn yy_action_237(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_22(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_227(_args[2].2, _args[3:3])
   guard! _sub_action_1_result is YYObj_Option__list_List_Type__(_dollar5)
   guard! _args[1].0 is YYObj_Type(_dollar3)
   guard! _args[5].0 is YYObj__Type__ErrorType__Location__(_dollar8)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=_dollar5.unwrap_or(List([])).prepend(_dollar3), res=_dollar8.0, err=_dollar8.1, nocancel_=_dollar8.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 9|    { None }
-fn yy_action_228(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Option__list_List_Type__({();  None })
+fn yy_action_227(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Option__list_List_Type__(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 391|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_238(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_23(_last_pos, _args[0:0])
+fn yy_action_238(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_22(_last_pos, _args[0:0])
   guard! _args[1].0 is YYObj_Type(_dollar3)
   guard! _args[4].0 is YYObj__Type__ErrorType__Location__(_dollar6)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=@list.singleton(_dollar3), res=_dollar6.0, err=_dollar6.1, nocancel_=_dollar6.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=@list.singleton(_dollar3), res=_dollar6.0, err=_dollar6.1, nocancel_=_dollar6.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 381|    "(" type_ ")" { $2 }
-fn yy_action_239(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_239(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_Type(_dollar2)
-  YYObj_Type({();  _dollar2 })
+  YYObj_Type(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 379|    simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
-fn yy_action_240(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_240(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   let _start_pos_of_item1 = _args[1].1
   let _end_pos_of_item1 = _args[1].2
-  YYObj_Type({();  Option(ty=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos)), question_loc=mk_loc((_start_pos_of_item1, _end_pos_of_item1))) })
+  YYObj_Type(
+    ({();  Option(ty=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos)), question_loc=mk_loc((_start_pos_of_item1, _end_pos_of_item1))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 396|    simple_type effect_annotation { ($1, $2.0, $2.1) }
-fn yy_action_241(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_241(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   guard! _args[1].0 is YYObj__ErrorType__Location__(_dollar2)
-  YYObj__Type__ErrorType__Location__({();  (_dollar1, _dollar2.0, _dollar2.1) })
+  YYObj__Type__ErrorType__Location__(
+    ({();  (_dollar1, _dollar2.0, _dollar2.1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 410|    "nocancel" { mk_loc($sloc) }
-fn yy_action_242(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_242(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Location({();  mk_loc((_symbol_start_pos, _end_pos)) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Location(
+    ({();  mk_loc((_symbol_start_pos, _end_pos)) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 414|    error_annotation "+" nocancel_annotation { ($1, Some($3)) }
-fn yy_action_243(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_243(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ErrorType(_dollar1)
   guard! _args[2].0 is YYObj_Location(_dollar3)
-  YYObj__ErrorType__Location__({();  (_dollar1, Some(_dollar3)) })
+  YYObj__ErrorType__Location__(
+    ({();  (_dollar1, Some(_dollar3)) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 416|    error_annotation { ($1, None) }
-fn yy_action_244(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_244(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ErrorType(_dollar1)
-  YYObj__ErrorType__Location__({();  (_dollar1, None) })
+  YYObj__ErrorType__Location__(
+    ({();  (_dollar1, None) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 400|    "noraise" { Noraise(loc=mk_loc($sloc)) }
-fn yy_action_245(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_245(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_ErrorType({();  Noraise(loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_ErrorType(
+    ({();  Noraise(loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 402|    "raise" error_type { ErrorType(ty = $2) }
-fn yy_action_246(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_246(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_Type(_dollar2)
-  YYObj_ErrorType({();  ErrorType(ty = _dollar2) })
+  YYObj_ErrorType(
+    ({();  ErrorType(ty = _dollar2) 
+    })
+  )
 }
 
 ///|
@@ -3896,318 +5552,574 @@ fn yy_action_246(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 404|    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=List([]), loc=@syntax.no_location)
 // 405|    MaybeError(ty=fake_error)
 // 406|  }
-fn yy_action_247(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_ErrorType({(); 
+fn yy_action_247(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_ErrorType(
+    ({(); 
     let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=List([]), loc=@syntax.no_location)
     MaybeError(ty=fake_error)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 421|    qualified_uident_ { Name(constr_id=$1, tys=List([]), loc=mk_loc($sloc)) }
-fn yy_action_248(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_248(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrId(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Name(constr_id=_dollar1, tys=List([]), loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Name(constr_id=_dollar1, tys=List([]), loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 401|    "raise" { DefaultErrorType(loc=mk_loc($loc($1))) }
-fn yy_action_249(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_249(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj_ErrorType({();  DefaultErrorType(loc=mk_loc((_start_pos_of_item0, _end_pos_of_item0))) })
+  YYObj_ErrorType(
+    ({();  DefaultErrorType(loc=mk_loc((_start_pos_of_item0, _end_pos_of_item0))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 415|    nocancel_annotation "+" error_annotation { ($3, Some($1)) }
-fn yy_action_250(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_250(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj_ErrorType(_dollar3)
   guard! _args[0].0 is YYObj_Location(_dollar1)
-  YYObj__ErrorType__Location__({();  (_dollar3, Some(_dollar1)) })
+  YYObj__ErrorType__Location__(
+    ({();  (_dollar3, Some(_dollar1)) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 417|    nocancel_annotation { (NoErrorType, Some($1)) }
-fn yy_action_251(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_251(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Location(_dollar1)
-  YYObj__ErrorType__Location__({();  (NoErrorType, Some(_dollar1)) })
+  YYObj__ErrorType__Location__(
+    ({();  (NoErrorType, Some(_dollar1)) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 388|    simple_type { $1 }
-fn yy_action_252(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_252(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
-  YYObj_Type({();  _dollar1 })
+  YYObj_Type(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 390|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_253(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_23(_last_pos, _args[0:0])
+fn yy_action_253(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_22(_last_pos, _args[0:0])
   guard! _args[3].0 is YYObj__Type__ErrorType__Location__(_dollar5)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=List([]), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=List([]), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 464|    { None }
-fn yy_action_23(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Location_({();  None })
+fn yy_action_22(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Location_(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_254(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_254(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_Type_(_dollar3)
   guard! _args[0].0 is YYObj_Type(_dollar1)
-  YYObj__list_List_Type_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_Type_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_255(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_255(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
-  YYObj__list_List_Type_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_Type_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 426|     { List([]) }
-fn yy_action_256(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_Type_({();  List([]) })
+fn yy_action_256(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_Type_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 383|    "&" qualified_uident_ { Object($2) }
-fn yy_action_257(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_257(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_ConstrId(_dollar2)
-  YYObj_Type({();  Object(_dollar2) })
+  YYObj_Type(
+    ({();  Object(_dollar2) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 384|    "_" { Any(loc=mk_loc($sloc)) }
-fn yy_action_258(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_258(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Any(loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Any(loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 390|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
-fn yy_action_259(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_20(_last_pos, _args[0:1])
+fn yy_action_259(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_19(_last_pos, _args[0:1])
   guard! _args[4].0 is YYObj__Type__ErrorType__Location__(_dollar5)
   guard! _sub_action_0_result is YYObj_Location_(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Type({();  Arrow(args=List([]), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Type(
+    ({();  Arrow(args=List([]), res=_dollar5.0, err=_dollar5.1, nocancel_=_dollar5.2, is_async=_dollar1, loc=mk_loc((_symbol_start_pos, _end_pos))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 463|    "async" { Some(mk_loc($loc($1))) }
-fn yy_action_20(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_19(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
-  YYObj_Location_({();  Some(mk_loc((_start_pos_of_item0, _end_pos_of_item0))) })
+  YYObj_Location_(
+    ({();  Some(mk_loc((_start_pos_of_item0, _end_pos_of_item0))) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 395|    type_ { ($1, NoErrorType, None) }
-fn yy_action_260(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_260(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
-  YYObj__Type__ErrorType__Location__({();  (_dollar1, NoErrorType, None) })
+  YYObj__Type__ErrorType__Location__(
+    ({();  (_dollar1, NoErrorType, None) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 432|    label "?" ":" type_ { QuestionOptional(binder = { name : $1.name, loc : $1.loc }, ty = Some($4)) }
-fn yy_action_261(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_261(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Label(_dollar1)
   guard! _args[3].0 is YYObj_Type(_dollar4)
-  YYObj_Parameter({();  QuestionOptional(binder = { name : _dollar1.name, loc : _dollar1.loc }, ty = Some(_dollar4)) })
+  YYObj_Parameter(
+    ({();  QuestionOptional(binder = { name : _dollar1.name, loc : _dollar1.loc }, ty = Some(_dollar4)) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 473|    UIDENT { { id: Ident(name=$1), loc: mk_loc($sloc)} }
-fn yy_action_262(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_262(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_ConstrId({();  { id: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_ConstrId(
+    ({();  { id: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 474|    PACKAGE_NAME DOT_UIDENT { { id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
-fn yy_action_263(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_263(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_ConstrId({();  { id: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_ConstrId(
+    ({();  { id: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 487|    lident { {name: $1.name, loc: $1.loc} }
-fn yy_action_264(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_264(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
-  YYObj_Label({();  {name: _dollar1.name, loc: _dollar1.loc} })
+  YYObj_Label(
+    ({();  {name: _dollar1.name, loc: _dollar1.loc} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_265(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_265(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_Parameter_(_dollar3)
   guard! _args[0].0 is YYObj_Parameter(_dollar1)
-  YYObj__list_List_Parameter_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_Parameter_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_266(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_266(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_Parameter(_dollar1)
-  YYObj__list_List_Parameter_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_Parameter_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 54|    { @list.empty() }
-fn yy_action_267(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_Parameter_({();  @list.empty() })
+// 54|    { List([]) }
+fn yy_action_267(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_Parameter_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 482|    LIDENT { {name: $1, loc: mk_loc($sloc)} }
-fn yy_action_268(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_268(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Name({();  {name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Name(
+    ({();  {name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 483|    "extend" { {name: "extend", loc: mk_loc($sloc)} }
-fn yy_action_269(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_269(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Name({();  {name: "extend", loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Name(
+    ({();  {name: "extend", loc: mk_loc((_symbol_start_pos, _end_pos))} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_270(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_270(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_TraitMethodSig_(_dollar3)
   guard! _args[0].0 is YYObj_TraitMethodSig(_dollar1)
-  YYObj__list_List_TraitMethodSig_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_TraitMethodSig_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_271(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_271(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_TraitMethodSig(_dollar1)
-  YYObj__list_List_TraitMethodSig_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_TraitMethodSig_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 54|    { @list.empty() }
-fn yy_action_272(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TraitMethodSig_({();  @list.empty() })
+// 54|    { List([]) }
+fn yy_action_272(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_TraitMethodSig_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 285|    { List([]) }
-fn yy_action_273(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_TraitMethodSig_({();  List([]) })
+fn yy_action_273(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_TraitMethodSig_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 468|    UIDENT { { name: Ident(name=$1), loc: mk_loc($sloc)} }
-fn yy_action_274(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_274(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_QualifiedName({();  { name: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_QualifiedName(
+    ({();  { name: Ident(name=_dollar1), loc: mk_loc((_symbol_start_pos, _end_pos))} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 469|    PACKAGE_NAME DOT_UIDENT { { name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
-fn yy_action_275(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_275(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_QualifiedName({();  { name: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_QualifiedName(
+    ({();  { name: Dot(pkg=_dollar1, id=_dollar2), loc: mk_loc((_symbol_start_pos, _end_pos))} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 60|    X SEP separated_nonempty_list(SEP, X) { $3.add($1) }
-fn yy_action_276(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+// 60|    X SEP separated_nonempty_list(SEP, X) { $3.prepend($1) }
+fn yy_action_276(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_List_QualifiedName_({();  _dollar3.add(_dollar1) })
+  YYObj__list_List_QualifiedName_(
+    ({();  _dollar3.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 59|    X { @list.singleton($1) }
-fn yy_action_277(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_277(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
-  YYObj__list_List_QualifiedName_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_QualifiedName_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 15|    X { $1 }
-fn yy_action_278(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_279(_last_pos, _args[0:2])
+fn yy_action_279(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_278(_last_pos, _args[0:2])
   guard! _sub_action_0_result is YYObj__list_List_QualifiedName_(_dollar1)
-  YYObj__list_List_QualifiedName_({();  _dollar1 })
+  YYObj__list_List_QualifiedName_(
+    ({();  _dollar1 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 32|    L X { $2 }
-fn yy_action_279(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_278(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_QualifiedName_(_dollar2)
-  YYObj__list_List_QualifiedName_({();  _dollar2 })
+  YYObj__list_List_QualifiedName_(
+    ({();  _dollar2 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 14|    { @list.empty() }
-fn yy_action_280(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_QualifiedName_({();  @list.empty() })
+// 14|    { List([]) }
+fn yy_action_280(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_QualifiedName_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
@@ -4216,27 +6128,39 @@ fn yy_action_280(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
 // 301|  }
-fn yy_action_281(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_281(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _args[1].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[1].1
   let _end_pos_of_item3 = _args[1].2
   guard! _args[4].0 is YYObj_Name(_dollar7)
   guard! _args[5].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Type, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 291|    "as" uident { Some($2) }
-fn yy_action_282(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_282(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[1].0 is YYObj_Name(_dollar2)
-  YYObj_Name_({();  Some(_dollar2) })
+  YYObj_Name_(
+    ({();  Some(_dollar2) 
+    })
+  )
 }
 
 ///|
@@ -4245,162 +6169,280 @@ fn yy_action_282(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.P
 // 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
 // 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
 // 305|  }
-fn yy_action_283(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_14(_last_pos, _args[0:0])
-  let _sub_action_1_result = yy_action_15(_last_pos, _args[0:0])
+fn yy_action_283(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_13(_last_pos, _args[0:0])
+  let _sub_action_1_result = yy_action_14(_last_pos, _args[0:0])
   guard! _args[1].0 is YYObj_String(_dollar4)
   let _start_pos_of_item3 = _args[1].1
   let _end_pos_of_item3 = _args[1].2
   guard! _args[4].0 is YYObj_Name(_dollar7)
   guard! _args[5].0 is YYObj_Name_(_dollar8)
   guard! _sub_action_0_result is YYObj__list_List_Attribute_(_dollar1)
-  YYObj_AliasSig({(); 
+  YYObj_AliasSig(
+    ({(); 
     let pkg = Name::{ name : _dollar4, loc : mk_loc((_start_pos_of_item3, _end_pos_of_item3)) }
     Using(pkg~, target = _dollar7, name = _dollar8, kind = Trait, attrs = _dollar1)
-  })
+  
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 451|    { Default }
-fn yy_action_15(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Visibility({();  Default })
+fn yy_action_14(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Visibility(
+    ({();  Default 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 495|     {  List([]) }
-fn yy_action_14(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_Attribute_({();   List([]) })
+fn yy_action_13(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_Attribute_(
+    ({();   List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 290|    { None }
-fn yy_action_284(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Name_({();  None })
+fn yy_action_284(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Name_(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 478|    UIDENT { {name: $1, loc: mk_loc($sloc)} }
-fn yy_action_285(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_285(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
-  YYObj_Name({();  {name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} })
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
+  YYObj_Name(
+    ({();  {name: _dollar1, loc: mk_loc((_symbol_start_pos, _end_pos))} 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
-// 50|    X nonempty_list(X) { $2.add($1) }
-fn yy_action_286(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_287(_last_pos, _args[0:1])
+// 50|    X nonempty_list(X) { $2.prepend($1) }
+fn yy_action_287(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_286(_last_pos, _args[0:1])
   guard! _args[1].0 is YYObj__list_List_Attribute_(_dollar2)
   guard! _sub_action_0_result is YYObj_Attribute(_dollar1)
-  YYObj__list_List_Attribute_({();  _dollar2.add(_dollar1) })
+  YYObj__list_List_Attribute_(
+    ({();  _dollar2.prepend(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 49|    X { @list.singleton($1) }
-fn yy_action_288(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  let _sub_action_0_result = yy_action_287(_last_pos, _args[0:1])
+fn yy_action_288(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  let _sub_action_0_result = yy_action_286(_last_pos, _args[0:1])
   guard! _sub_action_0_result is YYObj_Attribute(_dollar1)
-  YYObj__list_List_Attribute_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_Attribute_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 500|    ATTRIBUTE { Attribute::new(loc=mk_loc($sloc), $1) }
-fn yy_action_287(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_286(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _symbol_start_pos = _get_symbol_start_pos(_args, _last_pos)
-  let _end_pos = if _args.length() == 0 { _last_pos } else { _args[_args.length() - 1].2 }
+  let _end_pos = if _args.length() == 0 {
+    _last_pos
+  } else {
+    _args[_args.length() - 1].2
+  }
   guard! _args[0].0 is YYObj__String__Option_String___String_(_dollar1)
-  YYObj_Attribute({();  Attribute::new(loc=mk_loc((_symbol_start_pos, _end_pos)), _dollar1) })
+  YYObj_Attribute(
+    ({();  Attribute::new(loc=mk_loc((_symbol_start_pos, _end_pos)), _dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 165|     { List([]) }
-fn yy_action_289(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List__Sig__Location__({();  List([]) })
+fn yy_action_289(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List__Sig__Location__(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 156|    "import" "{" non_empty_list_commas(package_import) "}" ";" { $3 }
-fn yy_action_290(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_290(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_PackageImport_(_dollar3)
-  YYObj__list_List_PackageImport_({();  _dollar3 })
+  YYObj__list_List_PackageImport_(
+    ({();  _dollar3 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 147|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
-fn yy_action_291(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_291(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_PackageImport_(_dollar1)
-  YYObj__list_List_PackageImport_({();  _dollar1.rev() })
+  YYObj__list_List_PackageImport_(
+    ({();  _dollar1.rev() 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 161|    STRING "as" PACKAGE_NAME { {name: $1, alias_: Some($3)} }
-fn yy_action_292(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_292(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   guard! _args[2].0 is YYObj_String(_dollar3)
-  YYObj_PackageImport({();  {name: _dollar1, alias_: Some(_dollar3)} })
+  YYObj_PackageImport(
+    ({();  {name: _dollar1, alias_: Some(_dollar3)} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 160|    STRING { {name: $1, alias_: None} }
-fn yy_action_293(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_293(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
-  YYObj_PackageImport({();  {name: _dollar1, alias_: None} })
+  YYObj_PackageImport(
+    ({();  {name: _dollar1, alias_: None} 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 143|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
-fn yy_action_294(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_294(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_PackageImport_(_dollar1)
   guard! _args[2].0 is YYObj_PackageImport(_dollar3)
-  YYObj__list_List_PackageImport_({();  _dollar1.prepend(_dollar3) })
+  YYObj__list_List_PackageImport_(
+    ({();  _dollar1.prepend(_dollar3) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 5|    X { Some($1) }
-fn yy_action_295(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_295(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   let _dollar1 = ()
-  YYObj_Option_Unit_({();  Some(_dollar1) })
+  YYObj_Option_Unit_(
+    ({();  Some(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./stdlib.mbty
 // 4|    { None }
-fn yy_action_296(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj_Option_Unit_({();  None })
+fn yy_action_296(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj_Option_Unit_(
+    ({();  None 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 142|    X { @list.singleton($1) }
-fn yy_action_297(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
+fn yy_action_297(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
   guard! _args[0].0 is YYObj_PackageImport(_dollar1)
-  YYObj__list_List_PackageImport_({();  @list.singleton(_dollar1) })
+  YYObj__list_List_PackageImport_(
+    ({();  @list.singleton(_dollar1) 
+    })
+  )
 }
 
 ///|
 // file:///./mbti_parser.mbty
 // 155|     { List([]) }
-fn yy_action_298(_last_pos : @basic.Position, _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
-  YYObj__list_List_PackageImport_({();  List([]) })
+fn yy_action_298(
+  _last_pos : @basic.Position,
+  _args : ArrayView[(YYObj, @basic.Position, @basic.Position)]
+) -> YYObj {
+  YYObj__list_List_PackageImport_(
+    ({();  List([]) 
+    })
+  )
 }
 
 ///|
-fn yy_input(token : Token, _start_pos : @basic.Position, _end_pos : @basic.Position) -> (YYSymbol, YYObj) {
+fn yy_input(
+  token : Token, _start_pos : @basic.Position, _end_pos : @basic.Position
+) -> (YYSymbol, YYObj) {
   match token {
     CHAR(data) => (T_CHAR, YYObj_CharLiteral(data))
     INT(data) => (T_INT, YYObj_String(data))
@@ -4415,11 +6457,13 @@ fn yy_input(token : Token, _start_pos : @basic.Position, _end_pos : @basic.Posit
     BYTES_INTERP(data) => (T_BYTES_INTERP, YYObj_InterpLiteral(data))
     REGEX_LITERAL(data) => (T_REGEX_LITERAL, YYObj_String(data))
     REGEX_INTERP(data) => (T_REGEX_INTERP, YYObj_InterpLiteral(data))
-    ATTRIBUTE(data) => (T_ATTRIBUTE, YYObj__String__Option_String___String_(data))
+    ATTRIBUTE(data) =>
+      (T_ATTRIBUTE, YYObj__String__Option_String___String_(data))
     LIDENT(data) => (T_LIDENT, YYObj_String(data))
     UIDENT(data) => (T_UIDENT, YYObj_String(data))
     POST_LABEL(data) => (T_POST_LABEL, YYObj_String(data))
-    POST_LABEL_TRANSPARENT(data) => (T_POST_LABEL_TRANSPARENT, YYObj_String(data))
+    POST_LABEL_TRANSPARENT(data) =>
+      (T_POST_LABEL_TRANSPARENT, YYObj_String(data))
     COMMENT(data) => (T_COMMENT, YYObj_Comment(data))
     NEWLINE => (T_NEWLINE, YYObj_Void)
     INFIX1(data) => (T_INFIX1, YYObj_String(data))
@@ -4576,7 +6620,8 @@ fn yy_state_3(_lookahead : YYSymbol) -> YYDecision {
     T_IMPORT => Shift(yy_state_4)
     T_SEMI => Shift(yy_state_17)
     NT_imports => Shift(yy_state_862)
-    T_ATTRIBUTE | T_EOF | T_PUB | T_PRIV | T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM => Reduce(0, NT_imports, yy_action_298)
+    T_ATTRIBUTE | T_EOF | T_PUB | T_PRIV | T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM =>
+      Reduce(0, NT_imports, yy_action_298)
     _ => Error
   }
 }
@@ -4610,7 +6655,9 @@ fn yy_state_5(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [265, non_empty_list_commas_rev(package_import) → package_import •, COMMA / RBRACE]
 fn yy_state_6(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_non_empty_list_commas_rev_package_import_, yy_action_297)
+  ReduceNoLookahead(
+    1, NT_non_empty_list_commas_rev_package_import_, yy_action_297
+  )
 }
 
 ///|
@@ -4644,7 +6691,9 @@ fn yy_state_8(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [266, non_empty_list_commas_rev(package_import) → non_empty_list_commas_rev(package_import) COMMA package_import •, COMMA / RBRACE]
 fn yy_state_9(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_non_empty_list_commas_rev_package_import_, yy_action_294)
+  ReduceNoLookahead(
+    3, NT_non_empty_list_commas_rev_package_import_, yy_action_294
+  )
 }
 
 ///|
@@ -4711,7 +6760,8 @@ fn yy_state_17(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_IMPORT => Shift(yy_state_4)
     NT_imports => Shift(yy_state_18)
-    T_ATTRIBUTE | T_EOF | T_PUB | T_PRIV | T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM => Reduce(0, NT_imports, yy_action_298)
+    T_ATTRIBUTE | T_EOF | T_PUB | T_PRIV | T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM =>
+      Reduce(0, NT_imports, yy_action_298)
     _ => Error
   }
 }
@@ -4885,7 +6935,8 @@ fn yy_state_19(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_ATTRIBUTE => Shift(yy_state_19)
     NT_nonempty_list_attribute_ => Shift(yy_state_20)
-    T_LIDENT | T_UIDENT | T_PUB | T_PRIV | T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_MUTABLE | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM | T_EXTEND => Reduce(1, NT_nonempty_list_attribute_, yy_action_288)
+    T_LIDENT | T_UIDENT | T_PUB | T_PRIV | T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_MUTABLE | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM | T_EXTEND =>
+      Reduce(1, NT_nonempty_list_attribute_, yy_action_288)
     _ => Error
   }
 }
@@ -4893,7 +6944,7 @@ fn yy_state_19(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [264, nonempty_list(attribute) → ATTRIBUTE nonempty_list(attribute) •, LIDENT / UIDENT / PUB / PRIV / STRUCT / ENUM / TRAIT / IMPL / ASYNC / FN / LET / CONST / MUTABLE / TYPE / SUBERROR / USING / EXTENUM / EXTEND]
 fn yy_state_20(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_nonempty_list_attribute_, yy_action_286)
+  ReduceNoLookahead(2, NT_nonempty_list_attribute_, yy_action_287)
 }
 
 ///|
@@ -5046,8 +7097,14 @@ fn yy_state_35(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_36(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COLON => Shift(yy_state_37)
-    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ => Shift(yy_state_45)
-    T_EOF | T_SEMI | T_LBRACE => Reduce(0, NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___, yy_action_280)
+    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ =>
+      Shift(yy_state_45)
+    T_EOF | T_SEMI | T_LBRACE =>
+      Reduce(
+        0,
+        NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___,
+        yy_action_280
+      )
     _ => Error
   }
 }
@@ -5071,7 +7128,11 @@ fn yy_state_37(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [242, loption(preceded(COLON,separated_nonempty_list(PLUS,qualified_uident))) → COLON separated_nonempty_list(PLUS,qualified_uident) •, EOF / SEMI / LBRACE]
 fn yy_state_38(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___, yy_action_278)
+  ReduceNoLookahead(
+    2,
+    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___,
+    yy_action_279
+  )
 }
 
 ///|
@@ -5080,7 +7141,10 @@ fn yy_state_38(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_39(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_PLUS => Shift(yy_state_40)
-    T_EOF | T_SEMI | T_LBRACE => Reduce(1, NT_separated_nonempty_list_PLUS_qualified_uident_, yy_action_277)
+    T_EOF | T_SEMI | T_LBRACE =>
+      Reduce(
+        1, NT_separated_nonempty_list_PLUS_qualified_uident_, yy_action_277
+      )
     _ => Error
   }
 }
@@ -5104,7 +7168,9 @@ fn yy_state_40(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [240, separated_nonempty_list(PLUS,qualified_uident) → qualified_uident PLUS separated_nonempty_list(PLUS,qualified_uident) •, EOF / SEMI / LBRACE]
 fn yy_state_41(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_PLUS_qualified_uident_, yy_action_276)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_PLUS_qualified_uident_, yy_action_276
+  )
 }
 
 ///|
@@ -5171,7 +7237,8 @@ fn yy_state_46(_lookahead : YYSymbol) -> YYDecision {
     T_ASYNC => Shift(yy_state_196)
     NT_separated_nonempty_list_SEMI_trait_method_sig_ => Shift(yy_state_213)
     NT_separated_list_SEMI_trait_method_sig_ => Shift(yy_state_214)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_trait_method_sig_, yy_action_272)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_trait_method_sig_, yy_action_272)
     _ => Error
   }
 }
@@ -5182,7 +7249,10 @@ fn yy_state_46(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_47(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_SEMI => Shift(yy_state_48)
-    T_RBRACE => Reduce(1, NT_separated_nonempty_list_SEMI_trait_method_sig_, yy_action_271)
+    T_RBRACE =>
+      Reduce(
+        1, NT_separated_nonempty_list_SEMI_trait_method_sig_, yy_action_271
+      )
     _ => Error
   }
 }
@@ -5221,7 +7291,9 @@ fn yy_state_48(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [276, separated_nonempty_list(SEMI,trait_method_sig) → trait_method_sig SEMI separated_nonempty_list(SEMI,trait_method_sig) •, RBRACE]
 fn yy_state_49(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_SEMI_trait_method_sig_, yy_action_270)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_SEMI_trait_method_sig_, yy_action_270
+  )
 }
 
 ///|
@@ -5304,7 +7376,8 @@ fn yy_state_53(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_54(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COMMA => Shift(yy_state_55)
-    T_RPAREN => Reduce(1, NT_separated_nonempty_list_COMMA_parameter_, yy_action_266)
+    T_RPAREN =>
+      Reduce(1, NT_separated_nonempty_list_COMMA_parameter_, yy_action_266)
     _ => Error
   }
 }
@@ -5361,7 +7434,9 @@ fn yy_state_55(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [270, separated_nonempty_list(COMMA,parameter) → parameter COMMA separated_nonempty_list(COMMA,parameter) •, RPAREN]
 fn yy_state_56(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_COMMA_parameter_, yy_action_265)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_COMMA_parameter_, yy_action_265
+  )
 }
 
 ///|
@@ -5590,7 +7665,8 @@ fn yy_state_74(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LBRACKET => Shift(yy_state_75)
     NT_optional_type_arguments => Shift(yy_state_113)
-    T_EOF | T_RAISE | T_EQUAL | T_RPAREN | T_COMMA | T_QUESTION | T_SEMI | T_RBRACKET | T_RBRACE | T_NORAISE | T_NOCANCEL => Reduce(0, NT_optional_type_arguments, yy_action_256)
+    T_EOF | T_RAISE | T_EQUAL | T_RPAREN | T_COMMA | T_QUESTION | T_SEMI | T_RBRACKET | T_RBRACE | T_NORAISE | T_NOCANCEL =>
+      Reduce(0, NT_optional_type_arguments, yy_action_256)
     _ => Error
   }
 }
@@ -5638,7 +7714,8 @@ fn yy_state_75(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_76(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COMMA => Shift(yy_state_77)
-    T_RPAREN | T_RBRACKET => Reduce(1, NT_separated_nonempty_list_COMMA_type__, yy_action_255)
+    T_RPAREN | T_RBRACKET =>
+      Reduce(1, NT_separated_nonempty_list_COMMA_type__, yy_action_255)
     _ => Error
   }
 }
@@ -5800,7 +7877,8 @@ fn yy_state_83(_lookahead : YYSymbol) -> YYDecision {
     T_NOCANCEL => Shift(yy_state_95)
     NT_effect_annotation => Shift(yy_state_96)
     T_QUESTION => Shift(yy_state_97)
-    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE => Reduce(1, NT_type_, yy_action_252)
+    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE =>
+      Reduce(1, NT_type_, yy_action_252)
     _ => Error
   }
 }
@@ -5811,7 +7889,8 @@ fn yy_state_83(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_84(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_PLUS => Shift(yy_state_85)
-    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE => Reduce(1, NT_effect_annotation, yy_action_251)
+    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE =>
+      Reduce(1, NT_effect_annotation, yy_action_251)
     _ => Error
   }
 }
@@ -5851,7 +7930,8 @@ fn yy_state_87(_lookahead : YYSymbol) -> YYDecision {
     NT_qualified_uident_ => Shift(yy_state_88)
     T_QUESTION => Shift(yy_state_89)
     NT_error_type => Shift(yy_state_90)
-    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_PLUS | T_RBRACKET | T_RBRACE => Reduce(1, NT_error_annotation, yy_action_249)
+    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_PLUS | T_RBRACKET | T_RBRACE =>
+      Reduce(1, NT_error_annotation, yy_action_249)
     _ => Error
   }
 }
@@ -5886,7 +7966,8 @@ fn yy_state_91(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_92(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_PLUS => Shift(yy_state_93)
-    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE => Reduce(1, NT_effect_annotation, yy_action_244)
+    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE =>
+      Reduce(1, NT_effect_annotation, yy_action_244)
     _ => Error
   }
 }
@@ -5946,7 +8027,8 @@ fn yy_state_98(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_99(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_THIN_ARROW => Shift(yy_state_100)
-    T_EOF | T_RAISE | T_EQUAL | T_RPAREN | T_COMMA | T_QUESTION | T_SEMI | T_RBRACKET | T_RBRACE | T_NORAISE | T_NOCANCEL => Reduce(3, NT_simple_type, yy_action_239)
+    T_EOF | T_RAISE | T_EQUAL | T_RPAREN | T_COMMA | T_QUESTION | T_SEMI | T_RBRACKET | T_RBRACE | T_NORAISE | T_NOCANCEL =>
+      Reduce(3, NT_simple_type, yy_action_239)
     _ => Error
   }
 }
@@ -6102,7 +8184,8 @@ fn yy_state_106(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_107(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_THIN_ARROW => Shift(yy_state_108)
-    T_EOF | T_RAISE | T_EQUAL | T_RPAREN | T_COMMA | T_QUESTION | T_SEMI | T_RBRACKET | T_RBRACE | T_NORAISE | T_NOCANCEL => Reduce(5, NT_simple_type, yy_action_236)
+    T_EOF | T_RAISE | T_EQUAL | T_RPAREN | T_COMMA | T_QUESTION | T_SEMI | T_RBRACKET | T_RBRACE | T_NORAISE | T_NOCANCEL =>
+      Reduce(5, NT_simple_type, yy_action_236)
     _ => Error
   }
 }
@@ -6156,7 +8239,8 @@ fn yy_state_109(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_110(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_QUESTION => Shift(yy_state_97)
-    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE => Reduce(1, NT_type_, yy_action_252)
+    T_EOF | T_EQUAL | T_RPAREN | T_COMMA | T_SEMI | T_RBRACKET | T_RBRACE =>
+      Reduce(1, NT_type_, yy_action_252)
     _ => Error
   }
 }
@@ -6173,7 +8257,7 @@ fn yy_state_111(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [198, optional_type_arguments → LBRACKET separated_nonempty_list(COMMA,type_) RBRACKET •, EOF / RAISE / EQUAL / RPAREN / COMMA / QUESTION / SEMI / RBRACKET / RBRACE / NORAISE / NOCANCEL]
 fn yy_state_112(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_optional_type_arguments, yy_action_233)
+  ReduceNoLookahead(3, NT_optional_type_arguments, yy_action_234)
 }
 
 ///|
@@ -6343,7 +8427,7 @@ fn yy_state_121(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [179, type_ → ASYNC LPAREN type_ COMMA separated_nonempty_list(COMMA,type_) RPAREN THIN_ARROW return_type •, EOF / EQUAL / RPAREN / COMMA / SEMI / RBRACKET / RBRACE]
 fn yy_state_122(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(8, NT_type_, yy_action_229)
+  ReduceNoLookahead(8, NT_type_, yy_action_230)
 }
 
 ///|
@@ -6395,7 +8479,7 @@ fn yy_state_124(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [178, type_ → ASYNC LPAREN type_ COMMA RPAREN THIN_ARROW return_type •, EOF / EQUAL / RPAREN / COMMA / SEMI / RBRACKET / RBRACE]
 fn yy_state_125(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_type_, yy_action_227)
+  ReduceNoLookahead(7, NT_type_, yy_action_228)
 }
 
 ///|
@@ -6539,7 +8623,7 @@ fn yy_state_135(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [233, boption(eq_underscore) → EQUAL UNDERSCORE •, SEMI / RBRACE]
 fn yy_state_136(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_boption_eq_underscore_, yy_action_221)
+  ReduceNoLookahead(2, NT_boption_eq_underscore_, yy_action_222)
 }
 
 ///|
@@ -6712,7 +8796,8 @@ fn yy_state_146(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_162)
-    T_LIDENT | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -6737,9 +8822,13 @@ fn yy_state_148(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_25)
     NT_type_param_with_constraints => Shift(yy_state_149)
     NT_uident => Shift(yy_state_152)
-    NT_separated_nonempty_list_COMMA_type_param_with_constraints_ => Shift(yy_state_159)
+    NT_separated_nonempty_list_COMMA_type_param_with_constraints_ =>
+      Shift(yy_state_159)
     NT_separated_list_COMMA_type_param_with_constraints_ => Shift(yy_state_160)
-    T_RBRACKET => Reduce(0, NT_separated_list_COMMA_type_param_with_constraints_, yy_action_216)
+    T_RBRACKET =>
+      Reduce(
+        0, NT_separated_list_COMMA_type_param_with_constraints_, yy_action_216
+      )
     _ => Error
   }
 }
@@ -6750,7 +8839,11 @@ fn yy_state_148(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_149(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COMMA => Shift(yy_state_150)
-    T_RBRACKET => Reduce(1, NT_separated_nonempty_list_COMMA_type_param_with_constraints_, yy_action_215)
+    T_RBRACKET =>
+      Reduce(
+        1, NT_separated_nonempty_list_COMMA_type_param_with_constraints_,
+        yy_action_215
+      )
     _ => Error
   }
 }
@@ -6766,7 +8859,8 @@ fn yy_state_150(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_UIDENT => Shift(yy_state_25)
     NT_type_param_with_constraints => Shift(yy_state_149)
-    NT_separated_nonempty_list_COMMA_type_param_with_constraints_ => Shift(yy_state_151)
+    NT_separated_nonempty_list_COMMA_type_param_with_constraints_ =>
+      Shift(yy_state_151)
     NT_uident => Shift(yy_state_152)
     _ => Error
   }
@@ -6775,7 +8869,10 @@ fn yy_state_150(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [280, separated_nonempty_list(COMMA,type_param_with_constraints) → type_param_with_constraints COMMA separated_nonempty_list(COMMA,type_param_with_constraints) •, RBRACKET]
 fn yy_state_151(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_COMMA_type_param_with_constraints_, yy_action_214)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_COMMA_type_param_with_constraints_,
+    yy_action_214
+  )
 }
 
 ///|
@@ -6784,7 +8881,8 @@ fn yy_state_151(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_152(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COLON => Shift(yy_state_153)
-    T_COMMA | T_RBRACKET => Reduce(1, NT_type_param_with_constraints, yy_action_213)
+    T_COMMA | T_RBRACKET =>
+      Reduce(1, NT_type_param_with_constraints, yy_action_213)
     _ => Error
   }
 }
@@ -6813,7 +8911,8 @@ fn yy_state_153(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_154(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_PLUS => Shift(yy_state_155)
-    T_COMMA | T_RBRACKET => Reduce(1, NT_separated_nonempty_list_PLUS_type_constraint_, yy_action_212)
+    T_COMMA | T_RBRACKET =>
+      Reduce(1, NT_separated_nonempty_list_PLUS_type_constraint_, yy_action_212)
     _ => Error
   }
 }
@@ -6839,7 +8938,9 @@ fn yy_state_155(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [256, separated_nonempty_list(PLUS,type_constraint) → type_constraint PLUS separated_nonempty_list(PLUS,type_constraint) •, COMMA / RBRACKET]
 fn yy_state_156(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_PLUS_type_constraint_, yy_action_211)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_PLUS_type_constraint_, yy_action_211
+  )
 }
 
 ///|
@@ -6857,7 +8958,9 @@ fn yy_state_158(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [258, separated_list(COMMA,type_param_with_constraints) → separated_nonempty_list(COMMA,type_param_with_constraints) •, RBRACKET]
 fn yy_state_159(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_separated_list_COMMA_type_param_with_constraints_, yy_action_208)
+  ReduceNoLookahead(
+    1, NT_separated_list_COMMA_type_param_with_constraints_, yy_action_208
+  )
 }
 
 ///|
@@ -7185,7 +9288,8 @@ fn yy_state_178(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_179)
-    T_LIDENT | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -7349,7 +9453,8 @@ fn yy_state_187(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_188)
-    T_LIDENT | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -7664,7 +9769,8 @@ fn yy_state_204(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_205)
-    T_LIDENT | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -8011,7 +10117,8 @@ fn yy_state_227(_lookahead : YYSymbol) -> YYDecision {
     NT_optional_type_params_no_constraints => Shift(yy_state_228)
     NT_type_params_no_constraints => Shift(yy_state_229)
     T_LBRACKET => Shift(yy_state_230)
-    T_PLUS_EQUAL => Reduce(0, NT_optional_type_params_no_constraints, yy_action_195)
+    T_PLUS_EQUAL =>
+      Reduce(0, NT_optional_type_params_no_constraints, yy_action_195)
     _ => Error
   }
 }
@@ -8043,9 +10150,13 @@ fn yy_state_230(_lookahead : YYSymbol) -> YYDecision {
     NT_type_param_no_constraints => Shift(yy_state_231)
     T_UNDERSCORE => Shift(yy_state_234)
     NT_uident => Shift(yy_state_235)
-    NT_separated_nonempty_list_COMMA_type_param_no_constraints_ => Shift(yy_state_236)
+    NT_separated_nonempty_list_COMMA_type_param_no_constraints_ =>
+      Shift(yy_state_236)
     NT_separated_list_COMMA_type_param_no_constraints_ => Shift(yy_state_237)
-    T_RBRACKET => Reduce(0, NT_separated_list_COMMA_type_param_no_constraints_, yy_action_192)
+    T_RBRACKET =>
+      Reduce(
+        0, NT_separated_list_COMMA_type_param_no_constraints_, yy_action_192
+      )
     _ => Error
   }
 }
@@ -8056,7 +10167,11 @@ fn yy_state_230(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_231(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COMMA => Shift(yy_state_232)
-    T_RBRACKET => Reduce(1, NT_separated_nonempty_list_COMMA_type_param_no_constraints_, yy_action_191)
+    T_RBRACKET =>
+      Reduce(
+        1, NT_separated_nonempty_list_COMMA_type_param_no_constraints_,
+        yy_action_191
+      )
     _ => Error
   }
 }
@@ -8072,7 +10187,8 @@ fn yy_state_232(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_UIDENT => Shift(yy_state_25)
     NT_type_param_no_constraints => Shift(yy_state_231)
-    NT_separated_nonempty_list_COMMA_type_param_no_constraints_ => Shift(yy_state_233)
+    NT_separated_nonempty_list_COMMA_type_param_no_constraints_ =>
+      Shift(yy_state_233)
     T_UNDERSCORE => Shift(yy_state_234)
     NT_uident => Shift(yy_state_235)
     _ => Error
@@ -8082,7 +10198,10 @@ fn yy_state_232(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [282, separated_nonempty_list(COMMA,type_param_no_constraints) → type_param_no_constraints COMMA separated_nonempty_list(COMMA,type_param_no_constraints) •, RBRACKET]
 fn yy_state_233(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_COMMA_type_param_no_constraints_, yy_action_190)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_COMMA_type_param_no_constraints_,
+    yy_action_190
+  )
 }
 
 ///|
@@ -8100,7 +10219,9 @@ fn yy_state_235(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [260, separated_list(COMMA,type_param_no_constraints) → separated_nonempty_list(COMMA,type_param_no_constraints) •, RBRACKET]
 fn yy_state_236(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_separated_list_COMMA_type_param_no_constraints_, yy_action_187)
+  ReduceNoLookahead(
+    1, NT_separated_list_COMMA_type_param_no_constraints_, yy_action_187
+  )
 }
 
 ///|
@@ -8129,7 +10250,8 @@ fn yy_state_239(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_no_constraints => Shift(yy_state_229)
     T_LBRACKET => Shift(yy_state_230)
     NT_optional_type_params_no_constraints => Shift(yy_state_240)
-    T_PLUS_EQUAL | T_EOF | T_DERIVE | T_SEMI | T_LBRACE => Reduce(0, NT_optional_type_params_no_constraints, yy_action_195)
+    T_PLUS_EQUAL | T_EOF | T_DERIVE | T_SEMI | T_LBRACE =>
+      Reduce(0, NT_optional_type_params_no_constraints, yy_action_195)
     _ => Error
   }
 }
@@ -8139,8 +10261,10 @@ fn yy_state_239(_lookahead : YYSymbol) -> YYDecision {
 // [169, extensible_enum_extension_target → uident optional_type_params_no_constraints •, PLUS_EQUAL]
 fn yy_state_240(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
-    T_EOF | T_DERIVE | T_SEMI | T_LBRACE => Reduce(2, NT_type_decl_name_with_params, yy_action_184)
-    T_PLUS_EQUAL => Reduce(2, NT_extensible_enum_extension_target, yy_action_185)
+    T_EOF | T_DERIVE | T_SEMI | T_LBRACE =>
+      Reduce(2, NT_type_decl_name_with_params, yy_action_184)
+    T_PLUS_EQUAL =>
+      Reduce(2, NT_extensible_enum_extension_target, yy_action_185)
     _ => Error
   }
 }
@@ -8181,7 +10305,8 @@ fn yy_state_243(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_270)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -8192,7 +10317,10 @@ fn yy_state_243(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_244(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_SEMI => Shift(yy_state_245)
-    T_RBRACE => Reduce(1, NT_separated_nonempty_list_SEMI_enum_constructor_, yy_action_182)
+    T_RBRACE =>
+      Reduce(
+        1, NT_separated_nonempty_list_SEMI_enum_constructor_, yy_action_182
+      )
     _ => Error
   }
 }
@@ -8219,7 +10347,9 @@ fn yy_state_245(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [272, separated_nonempty_list(SEMI,enum_constructor) → enum_constructor SEMI separated_nonempty_list(SEMI,enum_constructor) •, RBRACE]
 fn yy_state_246(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_SEMI_enum_constructor_, yy_action_181)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_SEMI_enum_constructor_, yy_action_181
+  )
 }
 
 ///|
@@ -8238,8 +10368,14 @@ fn yy_state_247(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_248(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_249)
-    NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__ => Shift(yy_state_262)
-    T_EQUAL | T_SEMI | T_RBRACE => Reduce(0, NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__, yy_action_180)
+    NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__ =>
+      Shift(yy_state_262)
+    T_EQUAL | T_SEMI | T_RBRACE =>
+      Reduce(
+        0,
+        NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__,
+        yy_action_180
+      )
     _ => Error
   }
 }
@@ -8258,7 +10394,8 @@ fn yy_state_249(_lookahead : YYSymbol) -> YYDecision {
     NT_separated_nonempty_list_COMMA_constructor_param_ => Shift(yy_state_251)
     NT_constructor_param => Shift(yy_state_253)
     NT_boption_MUTABLE_ => Shift(yy_state_256)
-    T_UIDENT | T_POST_LABEL | T_ASYNC | T_LPAREN | T_UNDERSCORE | T_AMPER | T_PACKAGE_NAME => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
+    T_UIDENT | T_POST_LABEL | T_ASYNC | T_LPAREN | T_UNDERSCORE | T_AMPER | T_PACKAGE_NAME =>
+      Reduce(0, NT_boption_MUTABLE_, yy_action_179)
     _ => Error
   }
 }
@@ -8281,7 +10418,11 @@ fn yy_state_251(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [248, option(delimited(LPAREN,separated_nonempty_list(COMMA,constructor_param),RPAREN)) → LPAREN separated_nonempty_list(COMMA,constructor_param) RPAREN •, EQUAL / SEMI / RBRACE]
 fn yy_state_252(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__, yy_action_176)
+  ReduceNoLookahead(
+    3,
+    NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__,
+    yy_action_177
+  )
 }
 
 ///|
@@ -8290,7 +10431,10 @@ fn yy_state_252(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_253(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COMMA => Shift(yy_state_254)
-    T_RPAREN => Reduce(1, NT_separated_nonempty_list_COMMA_constructor_param_, yy_action_175)
+    T_RPAREN =>
+      Reduce(
+        1, NT_separated_nonempty_list_COMMA_constructor_param_, yy_action_175
+      )
     _ => Error
   }
 }
@@ -8309,7 +10453,8 @@ fn yy_state_254(_lookahead : YYSymbol) -> YYDecision {
     NT_constructor_param => Shift(yy_state_253)
     NT_separated_nonempty_list_COMMA_constructor_param_ => Shift(yy_state_255)
     NT_boption_MUTABLE_ => Shift(yy_state_256)
-    T_UIDENT | T_POST_LABEL | T_ASYNC | T_LPAREN | T_UNDERSCORE | T_AMPER | T_PACKAGE_NAME => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
+    T_UIDENT | T_POST_LABEL | T_ASYNC | T_LPAREN | T_UNDERSCORE | T_AMPER | T_PACKAGE_NAME =>
+      Reduce(0, NT_boption_MUTABLE_, yy_action_179)
     _ => Error
   }
 }
@@ -8317,7 +10462,9 @@ fn yy_state_254(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [246, separated_nonempty_list(COMMA,constructor_param) → constructor_param COMMA separated_nonempty_list(COMMA,constructor_param) •, RPAREN]
 fn yy_state_255(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_COMMA_constructor_param_, yy_action_174)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_COMMA_constructor_param_, yy_action_174
+  )
 }
 
 ///|
@@ -8444,7 +10591,7 @@ fn yy_state_263(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [250, option(eq_tag) → EQUAL INT •, SEMI / RBRACE]
 fn yy_state_264(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_option_eq_tag_, yy_action_168)
+  ReduceNoLookahead(2, NT_option_eq_tag_, yy_action_169)
 }
 
 ///|
@@ -8460,8 +10607,14 @@ fn yy_state_265(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_266(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_249)
-    NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__ => Shift(yy_state_267)
-    T_EQUAL | T_SEMI | T_RBRACE => Reduce(0, NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__, yy_action_180)
+    NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__ =>
+      Shift(yy_state_267)
+    T_EQUAL | T_SEMI | T_RBRACE =>
+      Reduce(
+        0,
+        NT_option_delimited_LPAREN_separated_nonempty_list_COMMA_constructor_param__RPAREN__,
+        yy_action_180
+      )
     _ => Error
   }
 }
@@ -8543,7 +10696,9 @@ fn yy_state_273(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [273, non_empty_list_commas_rev(qualified_uident) → qualified_uident •, RPAREN / COMMA]
 fn yy_state_274(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(1, NT_non_empty_list_commas_rev_qualified_uident_, yy_action_163)
+  ReduceNoLookahead(
+    1, NT_non_empty_list_commas_rev_qualified_uident_, yy_action_163
+  )
 }
 
 ///|
@@ -8578,13 +10733,17 @@ fn yy_state_276(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [274, non_empty_list_commas_rev(qualified_uident) → non_empty_list_commas_rev(qualified_uident) COMMA qualified_uident •, RPAREN / COMMA]
 fn yy_state_277(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_non_empty_list_commas_rev_qualified_uident_, yy_action_162)
+  ReduceNoLookahead(
+    3, NT_non_empty_list_commas_rev_qualified_uident_, yy_action_162
+  )
 }
 
 ///|
 // [238, non_empty_list_commas(qualified_uident) → non_empty_list_commas_rev(qualified_uident) option(COMMA) •, RPAREN]
 fn yy_state_278(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(2, NT_non_empty_list_commas_qualified_uident_, yy_action_161)
+  ReduceNoLookahead(
+    2, NT_non_empty_list_commas_qualified_uident_, yy_action_161
+  )
 }
 
 ///|
@@ -8641,7 +10800,8 @@ fn yy_state_283(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_284)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -8703,7 +10863,8 @@ fn yy_state_289(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_no_constraints => Shift(yy_state_229)
     T_LBRACKET => Shift(yy_state_230)
     NT_optional_type_params_no_constraints => Shift(yy_state_290)
-    T_EOF | T_DERIVE | T_EQUAL | T_LPAREN | T_SEMI | T_LBRACE => Reduce(0, NT_optional_type_params_no_constraints, yy_action_195)
+    T_EOF | T_DERIVE | T_EQUAL | T_LPAREN | T_SEMI | T_LBRACE =>
+      Reduce(0, NT_optional_type_params_no_constraints, yy_action_195)
     _ => Error
   }
 }
@@ -8741,7 +10902,8 @@ fn yy_state_292(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_293)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -8898,7 +11060,8 @@ fn yy_state_303(_lookahead : YYSymbol) -> YYDecision {
     NT_separated_list_SEMI_record_decl_field_ => Shift(yy_state_317)
     NT_record_decl_body => Shift(yy_state_318)
     T_LIDENT | T_EXTEND => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
     _ => Error
   }
 }
@@ -8909,7 +11072,10 @@ fn yy_state_303(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_304(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_SEMI => Shift(yy_state_305)
-    T_RBRACE => Reduce(1, NT_separated_nonempty_list_SEMI_record_decl_field_, yy_action_151)
+    T_RBRACE =>
+      Reduce(
+        1, NT_separated_nonempty_list_SEMI_record_decl_field_, yy_action_151
+      )
     _ => Error
   }
 }
@@ -8940,7 +11106,9 @@ fn yy_state_305(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [278, separated_nonempty_list(SEMI,record_decl_field) → record_decl_field SEMI separated_nonempty_list(SEMI,record_decl_field) •, RBRACE]
 fn yy_state_306(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(3, NT_separated_nonempty_list_SEMI_record_decl_field_, yy_action_150)
+  ReduceNoLookahead(
+    3, NT_separated_nonempty_list_SEMI_record_decl_field_, yy_action_150
+  )
 }
 
 ///|
@@ -9165,7 +11333,8 @@ fn yy_state_323(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_324)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -9289,7 +11458,8 @@ fn yy_state_333(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_334)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -9546,7 +11716,8 @@ fn yy_state_352(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_353)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -9967,8 +12138,14 @@ fn yy_state_376(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_377(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COLON => Shift(yy_state_37)
-    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ => Shift(yy_state_378)
-    T_EOF | T_SEMI | T_LBRACE => Reduce(0, NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___, yy_action_280)
+    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ =>
+      Shift(yy_state_378)
+    T_EOF | T_SEMI | T_LBRACE =>
+      Reduce(
+        0,
+        NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___,
+        yy_action_280
+      )
     _ => Error
   }
 }
@@ -10175,7 +12352,8 @@ fn yy_state_391(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_392)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -10241,7 +12419,8 @@ fn yy_state_396(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_397)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -10320,7 +12499,8 @@ fn yy_state_403(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_404)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -10471,7 +12651,8 @@ fn yy_state_413(_lookahead : YYSymbol) -> YYDecision {
     NT_separated_list_SEMI_record_decl_field_ => Shift(yy_state_317)
     NT_record_decl_body => Shift(yy_state_414)
     T_LIDENT | T_EXTEND => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
     _ => Error
   }
 }
@@ -10549,7 +12730,8 @@ fn yy_state_419(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_420)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -10673,7 +12855,8 @@ fn yy_state_429(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_430)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -10846,7 +13029,8 @@ fn yy_state_438(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_439)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -11089,7 +13273,8 @@ fn yy_state_450(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_451)
     NT_pub_attr => Shift(yy_state_456)
-    T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM => Reduce(0, NT_pub_attr, yy_action_113)
+    T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM =>
+      Reduce(0, NT_pub_attr, yy_action_113)
     _ => Error
   }
 }
@@ -11304,8 +13489,14 @@ fn yy_state_468(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_469(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COLON => Shift(yy_state_37)
-    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ => Shift(yy_state_470)
-    T_EOF | T_SEMI | T_LBRACE => Reduce(0, NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___, yy_action_280)
+    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ =>
+      Shift(yy_state_470)
+    T_EOF | T_SEMI | T_LBRACE =>
+      Reduce(
+        0,
+        NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___,
+        yy_action_280
+      )
     _ => Error
   }
 }
@@ -11512,7 +13703,8 @@ fn yy_state_483(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_484)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -11578,7 +13770,8 @@ fn yy_state_488(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_489)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -11657,7 +13850,8 @@ fn yy_state_495(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_496)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -11808,7 +14002,8 @@ fn yy_state_505(_lookahead : YYSymbol) -> YYDecision {
     NT_separated_list_SEMI_record_decl_field_ => Shift(yy_state_317)
     NT_record_decl_body => Shift(yy_state_506)
     T_LIDENT | T_EXTEND => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
     _ => Error
   }
 }
@@ -11886,7 +14081,8 @@ fn yy_state_511(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_512)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -12010,7 +14206,8 @@ fn yy_state_521(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_522)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -12183,7 +14380,8 @@ fn yy_state_530(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_531)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -12749,8 +14947,14 @@ fn yy_state_573(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_574(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COLON => Shift(yy_state_37)
-    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ => Shift(yy_state_575)
-    T_EOF | T_SEMI | T_LBRACE => Reduce(0, NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___, yy_action_280)
+    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ =>
+      Shift(yy_state_575)
+    T_EOF | T_SEMI | T_LBRACE =>
+      Reduce(
+        0,
+        NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___,
+        yy_action_280
+      )
     _ => Error
   }
 }
@@ -12957,7 +15161,8 @@ fn yy_state_588(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_589)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -13023,7 +15228,8 @@ fn yy_state_593(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_594)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -13102,7 +15308,8 @@ fn yy_state_600(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_601)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -13253,7 +15460,8 @@ fn yy_state_610(_lookahead : YYSymbol) -> YYDecision {
     NT_separated_list_SEMI_record_decl_field_ => Shift(yy_state_317)
     NT_record_decl_body => Shift(yy_state_611)
     T_LIDENT | T_EXTEND => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
     _ => Error
   }
 }
@@ -13331,7 +15539,8 @@ fn yy_state_616(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_617)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -13455,7 +15664,8 @@ fn yy_state_626(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_627)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -13628,7 +15838,8 @@ fn yy_state_635(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_636)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -14041,7 +16252,7 @@ fn yy_state_657(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [19, const_sig → nonempty_list(attribute) CONST uident COLON type_ EQUAL constant •, EOF / SEMI]
 fn yy_state_658(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_const_sig, yy_action_59)
+  ReduceNoLookahead(7, NT_const_sig, yy_action_60)
 }
 
 ///|
@@ -14071,7 +16282,8 @@ fn yy_state_659(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_LPAREN => Shift(yy_state_451)
     NT_pub_attr => Shift(yy_state_660)
-    T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM => Reduce(0, NT_pub_attr, yy_action_113)
+    T_STRUCT | T_ENUM | T_TRAIT | T_IMPL | T_ASYNC | T_FN | T_LET | T_CONST | T_TYPE | T_SUBERROR | T_USING | T_EXTENUM =>
+      Reduce(0, NT_pub_attr, yy_action_113)
     _ => Error
   }
 }
@@ -14241,8 +16453,14 @@ fn yy_state_672(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_673(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COLON => Shift(yy_state_37)
-    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ => Shift(yy_state_674)
-    T_EOF | T_SEMI | T_LBRACE => Reduce(0, NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___, yy_action_280)
+    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ =>
+      Shift(yy_state_674)
+    T_EOF | T_SEMI | T_LBRACE =>
+      Reduce(
+        0,
+        NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___,
+        yy_action_280
+      )
     _ => Error
   }
 }
@@ -14449,7 +16667,8 @@ fn yy_state_687(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_688)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -14515,7 +16734,8 @@ fn yy_state_692(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_693)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -14594,7 +16814,8 @@ fn yy_state_699(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_700)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -14745,7 +16966,8 @@ fn yy_state_709(_lookahead : YYSymbol) -> YYDecision {
     NT_separated_list_SEMI_record_decl_field_ => Shift(yy_state_317)
     NT_record_decl_body => Shift(yy_state_710)
     T_LIDENT | T_EXTEND => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
     _ => Error
   }
 }
@@ -14823,7 +17045,8 @@ fn yy_state_715(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_716)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -14947,7 +17170,8 @@ fn yy_state_725(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_726)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -15120,7 +17344,8 @@ fn yy_state_734(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_735)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -15433,7 +17658,7 @@ fn yy_state_750(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [18, const_sig → PUB pub_attr CONST uident COLON type_ EQUAL constant •, EOF / SEMI]
 fn yy_state_751(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(8, NT_const_sig, yy_action_39)
+  ReduceNoLookahead(8, NT_const_sig, yy_action_40)
 }
 
 ///|
@@ -15601,8 +17826,14 @@ fn yy_state_764(_lookahead : YYSymbol) -> YYDecision {
 fn yy_state_765(_lookahead : YYSymbol) -> YYDecision {
   match _lookahead {
     T_COLON => Shift(yy_state_37)
-    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ => Shift(yy_state_766)
-    T_EOF | T_SEMI | T_LBRACE => Reduce(0, NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___, yy_action_280)
+    NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___ =>
+      Shift(yy_state_766)
+    T_EOF | T_SEMI | T_LBRACE =>
+      Reduce(
+        0,
+        NT_loption_preceded_COLON_separated_nonempty_list_PLUS_qualified_uident___,
+        yy_action_280
+      )
     _ => Error
   }
 }
@@ -15809,7 +18040,8 @@ fn yy_state_779(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_780)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -15875,7 +18107,8 @@ fn yy_state_784(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_785)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -15954,7 +18187,8 @@ fn yy_state_791(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_792)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -16105,7 +18339,8 @@ fn yy_state_801(_lookahead : YYSymbol) -> YYDecision {
     NT_separated_list_SEMI_record_decl_field_ => Shift(yy_state_317)
     NT_record_decl_body => Shift(yy_state_802)
     T_LIDENT | T_EXTEND => Reduce(0, NT_boption_MUTABLE_, yy_action_179)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_record_decl_field_, yy_action_152)
     _ => Error
   }
 }
@@ -16183,7 +18418,8 @@ fn yy_state_807(_lookahead : YYSymbol) -> YYDecision {
     T_UIDENT => Shift(yy_state_266)
     NT_separated_nonempty_list_SEMI_enum_constructor_ => Shift(yy_state_269)
     NT_separated_list_SEMI_enum_constructor_ => Shift(yy_state_808)
-    T_RBRACE => Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
+    T_RBRACE =>
+      Reduce(0, NT_separated_list_SEMI_enum_constructor_, yy_action_183)
     _ => Error
   }
 }
@@ -16307,7 +18543,8 @@ fn yy_state_817(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_818)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -16458,7 +18695,7 @@ fn yy_state_823(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [39, func_sig → PRIV FN loption(type_params_with_constraints) func_name LPAREN separated_list(COMMA,parameter) RPAREN THIN_ARROW return_type •, EOF / SEMI]
 fn yy_state_824(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(9, NT_func_sig, yy_action_22)
+  ReduceNoLookahead(9, NT_func_sig, yy_action_23)
 }
 
 ///|
@@ -16480,7 +18717,8 @@ fn yy_state_826(_lookahead : YYSymbol) -> YYDecision {
     NT_type_params_with_constraints => Shift(yy_state_147)
     T_LBRACKET => Shift(yy_state_148)
     NT_loption_type_params_with_constraints_ => Shift(yy_state_827)
-    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND => Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
+    T_LIDENT | T_UIDENT | T_AMPER | T_EXTEND =>
+      Reduce(0, NT_loption_type_params_with_constraints_, yy_action_218)
     _ => Error
   }
 }
@@ -16631,7 +18869,7 @@ fn yy_state_832(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [38, func_sig → PRIV ASYNC FN loption(type_params_with_constraints) func_name LPAREN separated_list(COMMA,parameter) RPAREN THIN_ARROW return_type •, EOF / SEMI]
 fn yy_state_833(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(10, NT_func_sig, yy_action_19)
+  ReduceNoLookahead(10, NT_func_sig, yy_action_21)
 }
 
 ///|
@@ -16793,7 +19031,7 @@ fn yy_state_842(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [17, const_sig → PRIV CONST uident COLON type_ EQUAL constant •, EOF / SEMI]
 fn yy_state_843(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(7, NT_const_sig, yy_action_16)
+  ReduceNoLookahead(7, NT_const_sig, yy_action_17)
 }
 
 ///|
@@ -16893,7 +19131,7 @@ fn yy_state_848(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [16, const_sig → CONST uident COLON type_ EQUAL constant •, EOF / SEMI]
 fn yy_state_849(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(6, NT_const_sig, yy_action_13)
+  ReduceNoLookahead(6, NT_const_sig, yy_action_15)
 }
 
 ///|
@@ -17127,7 +19365,7 @@ fn yy_state_860(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [1, mbti → PACKAGE STRING SEMI imports sigs EOF •, $]
 fn yy_state_861(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(6, NT_mbti, yy_action_2)
+  ReduceNoLookahead(6, NT_mbti, yy_action_3)
 }
 
 ///|
@@ -17302,145 +19540,242 @@ fn yy_state_863(_lookahead : YYSymbol) -> YYDecision {
 ///|
 // [0, mbti → PACKAGE STRING imports sigs EOF •, $]
 fn yy_state_864(_lookahead : YYSymbol) -> YYDecision {
-  ReduceNoLookahead(5, NT_mbti, yy_action_0)
+  ReduceNoLookahead(5, NT_mbti, yy_action_1)
 }
 
 ///|
 fn[T] yy_parse(
-  tokens : Array[(Token, @basic.Position, @basic.Position)],
-  start : YYState,
-  return_ : (YYObj) -> T,
-  initial_pos? : @basic.Position,
+  tokens : Array[(Token, @basic.Position, @basic.Position)], start : YYState,
+  return_ : ((YYObj) -> T), initial_pos? : @basic.Position
 ) -> T raise ParseError {
   let mut cursor = 0
-  let mut state_stack : @list.List[YYState] = @list.cons(start, @list.empty())
+  let mut state_stack : @list.List[YYState] = @list.List([start])
   let data_stack : Array[(YYObj, @basic.Position, @basic.Position)] = []
-  let mut last_pos = initial_pos.unwrap_or_else(fn() { tokens[0].1 })
+  let mut last_pos = initial_pos.unwrap_or_else(() => tokens[0].1)
   let mut state = start
-  let mut lookahead : Option[(YYSymbol, (YYObj, @basic.Position, @basic.Position), Token?)] = None
+  let mut lookahead : (
+    YYSymbol, (YYObj, @basic.Position, @basic.Position), Token?
+  )? = None
   let mut last_shifted_state_stack = state_stack
   while true {
     let decision = match state(EOI) {
-      ReduceNoLookahead(_) | Accept as t => t
-      _ => {
+      (ReduceNoLookahead(_) | Accept) as t => t
+      _ =>
         match lookahead {
           Some(la) => state(la.0)
-          None => {
+          None =>
             if cursor < tokens.length() {
               let (token, start_pos, end_pos) = tokens[cursor]
               cursor += 1
               let (symbol, data) = yy_input(token, start_pos, end_pos)
-              lookahead = Some((symbol, (data, start_pos, end_pos), Some(token)))
+              lookahead = Some(
+                (symbol, (data, start_pos, end_pos), Some(token))
+              )
               state(symbol)
             } else {
               lookahead = Some((EOI, (YYObj_Void, last_pos, last_pos), None))
               state(EOI)
             }
-          }
         }
-      }
     }
     match decision {
-      Accept => return return_(data_stack.unsafe_pop().0)
-      Shift(next_state) => {
-        guard! lookahead is Some(la)
-        data_stack.push(la.1)
-        state_stack = @list.cons(next_state, state_stack)
-        last_shifted_state_stack = state_stack
-        state = next_state
-        last_pos = la.1.2
-        lookahead = None
-      }
-      Reduce(count, symbol, action)
-      | ReduceNoLookahead(count, symbol, action) => {
-        for count = count, symbol = symbol, action = action {
-          let args = data_stack[data_stack.length() - count:]
-          let data = action(last_pos, args)
-          let (start_pos, end_pos) = if args.length() == 0 {
-            (last_pos, last_pos)
-          } else {
-            (args[0].1, args[args.length() - 1].2)
-          }
-          for _ in 0..<count {
-            ignore(data_stack.unsafe_pop())
-            state_stack = state_stack.unsafe_tail()
-          }
-          state = state_stack.unsafe_head()
-          data_stack.push((data, start_pos, end_pos))
-          match state(symbol) {
-            Accept => return return_(data_stack.unsafe_pop().0)
-            Shift(next_state) => {
-              state_stack = @list.cons(next_state, state_stack)
-              state = next_state
-              break ()
+      Accept =>
+        ({
+          ()
+          return return_(data_stack.unsafe_pop().0)
+        })
+      Shift(next_state) =>
+        ({
+          ()
+          guard! lookahead is Some(la)
+          data_stack.push(la.1)
+          state_stack = @list.cons(next_state, state_stack)
+          last_shifted_state_stack = state_stack
+          state = next_state
+          last_pos = la.1.2
+          lookahead = None
+        })
+      Reduce(count, symbol, action) | ReduceNoLookahead(count, symbol, action) =>
+        ({
+          ()
+          for count = count, symbol = symbol, action = action {
+            let args = data_stack[data_stack.length() - count:]
+            let data = action(last_pos, args)
+            let (start_pos, end_pos) = if args.length() == 0 {
+              (last_pos, last_pos)
+            } else {
+              (args[0].1, args[args.length() - 1].2)
             }
-            Reduce(count, symbol, action)
-            | ReduceNoLookahead(count, symbol, action) => continue count, symbol, action
-            _ => panic()
+            for _ in 0..<count {
+              ignore(data_stack.unsafe_pop())
+              state_stack = state_stack.unsafe_tail()
+            }
+            state = state_stack.unsafe_head()
+            data_stack.push((data, start_pos, end_pos))
+            match state(symbol) {
+              Accept =>
+                ({
+                  ()
+                  return return_(data_stack.unsafe_pop().0)
+                })
+              Shift(next_state) =>
+                ({
+                  ()
+                  state_stack = @list.cons(next_state, state_stack)
+                  state = next_state
+                  break ()
+                })
+              Reduce(count, symbol, action) | ReduceNoLookahead(
+                count, symbol, action
+              ) =>
+                ({
+                  ()
+                  continue count, symbol, action
+                })
+              _ => panic()
+            }
           }
-        }
-      }
-      Error => {
-        let (_, (_, start_pos, end_pos), token) = lookahead.unwrap()
-        error(last_shifted_state_stack, token, (start_pos, end_pos))
-      }
+        })
+      Error =>
+        ({
+          ()
+          let (_, (_, start_pos, end_pos), token) = lookahead.unwrap()
+          error(last_shifted_state_stack, token, (start_pos, end_pos))
+        })
     }
   }
   panic()
 }
 
 ///|
-fn error(stack : @list.List[YYState], token : Token?, loc : (@basic.Position, @basic.Position)) -> Unit raise ParseError {
+fn error(
+  stack : @list.List[YYState], token : Token?,
+  loc : (@basic.Position, @basic.Position)
+) -> Unit raise ParseError {
   let expected = []
   fn try_add(symbol : YYSymbol, kind : TokenKind) {
     fn go(stack : @list.List[YYState]) {
       match stack {
         Empty => ()
-        More(state, ..) => {
+        More(state, ..) =>
           match state(symbol) {
             Accept | Shift(_) => expected.push(kind)
-            Reduce(count, symbol, _) | ReduceNoLookahead(count, symbol, _) => {
-              fn inner_go(stack : @list.List[YYState], count, symbol) {
-                let stack = stack.drop(count)
-                guard! stack is More(state, ..)
-                match state(symbol) {
-                  Shift(state) => go(@list.cons(state, stack))
-                  Reduce(count, symbol, _) | ReduceNoLookahead(count, symbol, _) => inner_go(stack, count, symbol)
-                  _ => panic()
+            Reduce(count, symbol, _) | ReduceNoLookahead(count, symbol, _) =>
+              ({
+                ()
+                fn inner_go(stack : @list.List[YYState], count, symbol) {
+                  let stack = stack.drop(count)
+                  guard! stack is More(state, ..)
+                  match state(symbol) {
+                    Shift(state) => go(@list.cons(state, stack))
+                    Reduce(count, symbol, _) | ReduceNoLookahead(
+                      count, symbol, _
+                    ) =>
+                      inner_go(stack, count, symbol)
+                    _ => panic()
+                  }
                 }
-              }
-              inner_go(stack, count, symbol)
-            }
+                inner_go(stack, count, symbol)
+              })
             Error => ()
           }
-        }
       }
     }
     go(stack)
   }
-  for term in ([(T_CHAR, TK_CHAR), (T_INT, TK_INT), (T_BYTE, TK_BYTE), (T_BYTES, TK_BYTES), (T_FLOAT, TK_FLOAT), (T_DOUBLE, TK_DOUBLE), (T_STRING, TK_STRING), (T_MULTILINE_STRING, TK_MULTILINE_STRING), (T_MULTILINE_INTERP, TK_MULTILINE_INTERP), (T_INTERP, TK_INTERP), (T_BYTES_INTERP, TK_BYTES_INTERP), (T_REGEX_LITERAL, TK_REGEX_LITERAL), (T_REGEX_INTERP, TK_REGEX_INTERP), (T_ATTRIBUTE, TK_ATTRIBUTE), (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT), (T_POST_LABEL, TK_POST_LABEL), (T_POST_LABEL_TRANSPARENT, TK_POST_LABEL_TRANSPARENT), (T_COMMENT, TK_COMMENT), (T_NEWLINE, TK_NEWLINE), (T_INFIX1, TK_INFIX1), (T_INFIX2, TK_INFIX2), (T_INFIX3, TK_INFIX3), (T_INFIX4, TK_INFIX4), (T_AUGMENTED_ASSIGNMENT, TK_AUGMENTED_ASSIGNMENT), (T_PLUS_EQUAL, TK_PLUS_EQUAL), (T_EOF, TK_EOF), (T_FALSE, TK_FALSE), (T_TRUE, TK_TRUE), (T_PUB, TK_PUB), (T_PRIV, TK_PRIV), (T_READONLY, TK_READONLY), (T_IMPORT, TK_IMPORT), (T_EXTERN, TK_EXTERN), (T_BREAK, TK_BREAK), (T_CONTINUE, TK_CONTINUE), (T_STRUCT, TK_STRUCT), (T_ENUM, TK_ENUM), (T_TRAIT, TK_TRAIT), (T_DERIVE, TK_DERIVE), (T_IMPL, TK_IMPL), (T_WITH, TK_WITH), (T_RAISE, TK_RAISE), (T_THROW, TK_THROW), (T_TRY, TK_TRY), (T_CATCH, TK_CATCH), (T_ASYNC, TK_ASYNC), (T_EQUAL, TK_EQUAL), (T_EQ_TILDE, TK_EQ_TILDE), (T_LPAREN, TK_LPAREN), (T_RPAREN, TK_RPAREN), (T_COMMA, TK_COMMA), (T_MINUS, TK_MINUS), (T_QUESTION, TK_QUESTION), (T_EXCLAMATION, TK_EXCLAMATION), (T_DOT_LIDENT, TK_DOT_LIDENT), (T_DOT_UIDENT, TK_DOT_UIDENT), (T_DOT_INT, TK_DOT_INT), (T_DOT_LPAREN, TK_DOT_LPAREN), (T_COLONCOLON, TK_COLONCOLON), (T_COLON, TK_COLON), (T_SEMI, TK_SEMI), (T_LBRACKET, TK_LBRACKET), (T_LBRACKET_BAR, TK_LBRACKET_BAR), (T_PLUS, TK_PLUS), (T_STAR, TK_STAR), (T_RBRACKET, TK_RBRACKET), (T_BAR_RBRACKET, TK_BAR_RBRACKET), (T_UNDERSCORE, TK_UNDERSCORE), (T_BAR, TK_BAR), (T_LBRACE, TK_LBRACE), (T_RBRACE, TK_RBRACE), (T_AMPERAMPER, TK_AMPERAMPER), (T_AMPER, TK_AMPER), (T_CARET, TK_CARET), (T_BARBAR, TK_BARBAR), (T_PACKAGE_NAME, TK_PACKAGE_NAME), (T_AS, TK_AS), (T_PIPE, TK_PIPE), (T_PIPE_LEFT, TK_PIPE_LEFT), (T_LT_PLUS, TK_LT_PLUS), (T_LT_QUESTION, TK_LT_QUESTION), (T_ELSE, TK_ELSE), (T_FN, TK_FN), (T_IF, TK_IF), (T_LET, TK_LET), (T_VAR, TK_VAR), (T_PROOF_ASSERT, TK_PROOF_ASSERT), (T_PROOF_LET, TK_PROOF_LET), (T_CONST, TK_CONST), (T_MATCH, TK_MATCH), (T_MUTABLE, TK_MUTABLE), (T_TYPE, TK_TYPE), (T_FAT_ARROW, TK_FAT_ARROW), (T_THIN_ARROW, TK_THIN_ARROW), (T_WHILE, TK_WHILE), (T_RETURN, TK_RETURN), (T_DOTDOT, TK_DOTDOT), (T_RANGE_INCLUSIVE, TK_RANGE_INCLUSIVE), (T_RANGE_LT_INCLUSIVE, TK_RANGE_LT_INCLUSIVE), (T_RANGE_EXCLUSIVE, TK_RANGE_EXCLUSIVE), (T_RANGE_INCLUSIVE_REV, TK_RANGE_INCLUSIVE_REV), (T_RANGE_EXCLUSIVE_REV, TK_RANGE_EXCLUSIVE_REV), (T_ELLIPSIS, TK_ELLIPSIS), (T_TEST, TK_TEST), (T_LOOP, TK_LOOP), (T_GUARD, TK_GUARD), (T_GUARD_EXCLAMATION, TK_GUARD_EXCLAMATION), (T_DEFER, TK_DEFER), (T_ERRDEFER, TK_ERRDEFER), (T_FOR, TK_FOR), (T_IN, TK_IN), (T_IS, TK_IS), (T_SUBERROR, TK_SUBERROR), (T_AND, TK_AND), (T_FORALL, TK_FORALL), (T_EXISTS, TK_EXISTS), (T_IMPLIES, TK_IMPLIES), (T_LETREC, TK_LETREC), (T_USING, TK_USING), (T_DECLARE, TK_DECLARE), (T_NORAISE, TK_NORAISE), (T_NOCANCEL, TK_NOCANCEL), (T_NOBREAK, TK_NOBREAK), (T_WHERE, TK_WHERE), (T_ENUMVIEW, TK_ENUMVIEW), (T_EXTENUM, TK_EXTENUM), (T_TRY_QUESTION, TK_TRY_QUESTION), (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION), (T_LEXMATCH, TK_LEXMATCH), (T_LEXSCAN, TK_LEXSCAN), (T_EXTEND, TK_EXTEND), (T_PACKAGE, TK_PACKAGE)] : Array[(YYSymbol, TokenKind)]) {
+  for term in ([
+    (T_CHAR, TK_CHAR), (T_INT, TK_INT), (T_BYTE, TK_BYTE), (T_BYTES, TK_BYTES),
+    (T_FLOAT, TK_FLOAT), (T_DOUBLE, TK_DOUBLE), (T_STRING, TK_STRING),
+    (T_MULTILINE_STRING, TK_MULTILINE_STRING),
+    (T_MULTILINE_INTERP, TK_MULTILINE_INTERP), (T_INTERP, TK_INTERP),
+    (T_BYTES_INTERP, TK_BYTES_INTERP), (T_REGEX_LITERAL, TK_REGEX_LITERAL),
+    (T_REGEX_INTERP, TK_REGEX_INTERP), (T_ATTRIBUTE, TK_ATTRIBUTE),
+    (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT), (T_POST_LABEL, TK_POST_LABEL),
+    (T_POST_LABEL_TRANSPARENT, TK_POST_LABEL_TRANSPARENT),
+    (T_COMMENT, TK_COMMENT), (T_NEWLINE, TK_NEWLINE), (T_INFIX1, TK_INFIX1),
+    (T_INFIX2, TK_INFIX2), (T_INFIX3, TK_INFIX3), (T_INFIX4, TK_INFIX4),
+    (T_AUGMENTED_ASSIGNMENT, TK_AUGMENTED_ASSIGNMENT),
+    (T_PLUS_EQUAL, TK_PLUS_EQUAL), (T_EOF, TK_EOF), (T_FALSE, TK_FALSE),
+    (T_TRUE, TK_TRUE), (T_PUB, TK_PUB), (T_PRIV, TK_PRIV),
+    (T_READONLY, TK_READONLY), (T_IMPORT, TK_IMPORT), (T_EXTERN, TK_EXTERN),
+    (T_BREAK, TK_BREAK), (T_CONTINUE, TK_CONTINUE), (T_STRUCT, TK_STRUCT),
+    (T_ENUM, TK_ENUM), (T_TRAIT, TK_TRAIT), (T_DERIVE, TK_DERIVE),
+    (T_IMPL, TK_IMPL), (T_WITH, TK_WITH), (T_RAISE, TK_RAISE),
+    (T_THROW, TK_THROW), (T_TRY, TK_TRY), (T_CATCH, TK_CATCH),
+    (T_ASYNC, TK_ASYNC), (T_EQUAL, TK_EQUAL), (T_EQ_TILDE, TK_EQ_TILDE),
+    (T_LPAREN, TK_LPAREN), (T_RPAREN, TK_RPAREN), (T_COMMA, TK_COMMA),
+    (T_MINUS, TK_MINUS), (T_QUESTION, TK_QUESTION),
+    (T_EXCLAMATION, TK_EXCLAMATION), (T_DOT_LIDENT, TK_DOT_LIDENT),
+    (T_DOT_UIDENT, TK_DOT_UIDENT), (T_DOT_INT, TK_DOT_INT),
+    (T_DOT_LPAREN, TK_DOT_LPAREN), (T_COLONCOLON, TK_COLONCOLON),
+    (T_COLON, TK_COLON), (T_SEMI, TK_SEMI), (T_LBRACKET, TK_LBRACKET),
+    (T_LBRACKET_BAR, TK_LBRACKET_BAR), (T_PLUS, TK_PLUS), (T_STAR, TK_STAR),
+    (T_RBRACKET, TK_RBRACKET), (T_BAR_RBRACKET, TK_BAR_RBRACKET),
+    (T_UNDERSCORE, TK_UNDERSCORE), (T_BAR, TK_BAR), (T_LBRACE, TK_LBRACE),
+    (T_RBRACE, TK_RBRACE), (T_AMPERAMPER, TK_AMPERAMPER), (T_AMPER, TK_AMPER),
+    (T_CARET, TK_CARET), (T_BARBAR, TK_BARBAR),
+    (T_PACKAGE_NAME, TK_PACKAGE_NAME), (T_AS, TK_AS), (T_PIPE, TK_PIPE),
+    (T_PIPE_LEFT, TK_PIPE_LEFT), (T_LT_PLUS, TK_LT_PLUS),
+    (T_LT_QUESTION, TK_LT_QUESTION), (T_ELSE, TK_ELSE), (T_FN, TK_FN),
+    (T_IF, TK_IF), (T_LET, TK_LET), (T_VAR, TK_VAR),
+    (T_PROOF_ASSERT, TK_PROOF_ASSERT), (T_PROOF_LET, TK_PROOF_LET),
+    (T_CONST, TK_CONST), (T_MATCH, TK_MATCH), (T_MUTABLE, TK_MUTABLE),
+    (T_TYPE, TK_TYPE), (T_FAT_ARROW, TK_FAT_ARROW),
+    (T_THIN_ARROW, TK_THIN_ARROW), (T_WHILE, TK_WHILE), (T_RETURN, TK_RETURN),
+    (T_DOTDOT, TK_DOTDOT), (T_RANGE_INCLUSIVE, TK_RANGE_INCLUSIVE),
+    (T_RANGE_LT_INCLUSIVE, TK_RANGE_LT_INCLUSIVE),
+    (T_RANGE_EXCLUSIVE, TK_RANGE_EXCLUSIVE),
+    (T_RANGE_INCLUSIVE_REV, TK_RANGE_INCLUSIVE_REV),
+    (T_RANGE_EXCLUSIVE_REV, TK_RANGE_EXCLUSIVE_REV), (T_ELLIPSIS, TK_ELLIPSIS),
+    (T_TEST, TK_TEST), (T_LOOP, TK_LOOP), (T_GUARD, TK_GUARD),
+    (T_GUARD_EXCLAMATION, TK_GUARD_EXCLAMATION), (T_DEFER, TK_DEFER),
+    (T_ERRDEFER, TK_ERRDEFER), (T_FOR, TK_FOR), (T_IN, TK_IN), (T_IS, TK_IS),
+    (T_SUBERROR, TK_SUBERROR), (T_AND, TK_AND), (T_FORALL, TK_FORALL),
+    (T_EXISTS, TK_EXISTS), (T_IMPLIES, TK_IMPLIES), (T_LETREC, TK_LETREC),
+    (T_USING, TK_USING), (T_DECLARE, TK_DECLARE), (T_NORAISE, TK_NORAISE),
+    (T_NOCANCEL, TK_NOCANCEL), (T_NOBREAK, TK_NOBREAK), (T_WHERE, TK_WHERE),
+    (T_ENUMVIEW, TK_ENUMVIEW), (T_EXTENUM, TK_EXTENUM),
+    (T_TRY_QUESTION, TK_TRY_QUESTION), (T_TRY_EXCLAMATION, TK_TRY_EXCLAMATION),
+    (T_LEXMATCH, TK_LEXMATCH), (T_LEXSCAN, TK_LEXSCAN), (T_EXTEND, TK_EXTEND),
+    (T_PACKAGE, TK_PACKAGE)
+  ] : Array[(YYSymbol, TokenKind)]) {
     try_add(term.0, term.1)
   }
   match token {
-    None => raise UnexpectedEndOfInput(loc.1, expected)
-    Some(token) => raise UnexpectedToken(token, loc, expected)
+    None =>
+      ({
+        ()
+        raise UnexpectedEndOfInput(loc.1, expected)
+      })
+    Some(token) =>
+      ({
+        ()
+        raise UnexpectedToken(token, loc, expected)
+      })
   }
 }
 
 ///|
-pub fn mbti(tokens : Array[(Token, @basic.Position, @basic.Position)], initial_pos? : @basic.Position) -> Mbti raise ParseError {
+pub fn mbti(
+  tokens : Array[(Token, @basic.Position, @basic.Position)],
+  initial_pos? : @basic.Position
+) -> Mbti raise ParseError {
   yy_parse(
-    tokens,
-    yy_state_0,
-    (it) => {
-      guard! it is YYObj_Mbti(result)
-      result
-    },
-    initial_pos?,
+    tokens, yy_state_0,
+    (it) =>
+      ({
+        ()
+        guard! it is YYObj_Mbti(result)
+        result
+      }), initial_pos?
   )
 }
+
 ///|
-fn _get_symbol_start_pos(args : ArrayView[(YYObj, @basic.Position, @basic.Position)], last_pos : @basic.Position) -> @basic.Position {
+fn _get_symbol_start_pos(
+  args : ArrayView[(YYObj, @basic.Position, @basic.Position)],
+  last_pos : @basic.Position
+) -> @basic.Position {
   if args.length() == 0 {
     last_pos
   } else {
