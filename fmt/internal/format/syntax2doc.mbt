@@ -1742,7 +1742,7 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
       let lhs = fmt.pattern(lhs)
       let op = text(
         match kind {
-          Inclusive | InclusiveMissingEqual => "..="
+          Inclusive | InclusiveMissingEqual => "..<="
           Exclusive => "..<"
         },
       )
