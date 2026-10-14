@@ -41,6 +41,52 @@ fn assert_modern_syntax_format_pipeline(source : String) -> String raise {
 }
 
 ///|
+test "inclusive range patterns normalize to ..<=" {
+  for op in ["..=", "..<="] {
+    let cases = [
+      ("0\{op}9", "0..<=9"),
+      ("-9\{op}-1", "-9..<=-1"),
+      ("-9\{op}9", "-9..<=9"),
+      ("'a'\{op}'z'", "'a'..<='z'"),
+      ("b'a'\{op}b'z'", "b'a'..<=b'z'"),
+      ("Some((0\{op}9, [-9\{op}-1]))", "Some((0..<=9, [-9..<=-1]))"),
+    ]
+    for case in cases {
+      let (pattern, expected) = case
+      for
+        source in [
+          "fn f(x){match x{\n\{pattern}=>true\n_=>false\n}}",
+          "fn f(x){x is \{pattern}}",
+        ] {
+        let formatted = assert_modern_syntax_format_pipeline(source)
+        if !formatted.contains(expected) || formatted.contains("..=") {
+          fail("inclusive range pattern was not normalized:\n\{formatted}")
+        }
+      }
+    }
+  }
+}
+
+///|
+test "exclusive range patterns retain ..<" {
+  for
+    pattern in [
+      "0..<9", "-9..<-1", "-9..<9", "'a'..<'z'", "b'a'..<b'z'", "Some((0..<9, [-9..<-1]))",
+    ] {
+    for
+      source in [
+        "fn f(x){match x{\n\{pattern}=>true\n_=>false\n}}",
+        "fn f(x){x is \{pattern}}",
+      ] {
+      let formatted = assert_modern_syntax_format_pipeline(source)
+      if !formatted.contains(pattern) || formatted.contains("..<=") {
+        fail("exclusive range pattern changed:\n\{formatted}")
+      }
+    }
+  }
+}
+
+///|
 test "record constructors format without losing semantics" {
   let simple = assert_modern_syntax_format_pipeline(
     "struct S{x:Int;fn new(x:Int)->S}",
