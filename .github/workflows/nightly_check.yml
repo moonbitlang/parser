@@ -2,6 +2,9 @@ name: nightly check
 
 on:
   workflow_dispatch:
+  schedule:
+    # Daily at 12:00 Asia/Shanghai (04:00 UTC).
+    - cron: '0 4 * * *'
   push:
     branches:
       - master
@@ -10,6 +13,7 @@ on:
 
 jobs:
   check:
+    if: github.event_name != 'schedule'
     strategy:
       fail-fast: false
     runs-on: ubuntu-latest
