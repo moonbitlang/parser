@@ -146,12 +146,10 @@ test "detached CST derives locations only from the owning syntax fields" {
 }
 
 ///|
-test "pipe discard keeps the parameter list span and the historical arrow override" {
-  // The existing underscore-pipe body grouping differs from the handrolled
-  // parser. This test isolates the location contract, without changing that AST.
+test "pipe discard keeps the underscore and parameter list spans" {
   for
     (source, expected_param, expected_params) in [
-      ("v |> _ => { 1 }", (7, 9), (5, 6)),
+      ("v |> _ => { 1 }", (5, 6), (5, 6)),
       ("v |> (_) => { 1 }", (6, 7), (5, 8)),
       ("v |> (_, _) => { 1 }", (6, 7), (5, 11)),
       ("_ => 1", (0, 1), (0, 1)),

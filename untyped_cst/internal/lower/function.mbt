@@ -33,26 +33,10 @@ fn lower_parameter(node : CstNode) -> @syntax.Parameter {
 fn lower_parameters_from_list(
   list : CstNode?,
 ) -> (List[@syntax.Parameter], Location) {
-  lower_parameters_from_list_with_discard_loc(list, None)
-}
-
-///|
-fn lower_parameters_from_list_with_discard_loc(
-  list : CstNode?,
-  first_discard_loc : Location?,
-) -> (List[@syntax.Parameter], Location) {
   if list is Some(list) {
     let params : Array[@syntax.Parameter] = []
-    let mut item_index = 0
     for item in lower_item_children(list) {
-      let parameter = lower_parameter(item)
-      let parameter = match (item_index, first_discard_loc, parameter) {
-        (0, Some(loc), DiscardPositional(ty~, loc=_)) =>
-          @syntax.Parameter::DiscardPositional(ty~, loc~)
-        (_, _, parameter) => parameter
-      }
-      params.push(parameter)
-      item_index += 1
+      params.push(lower_parameter(item))
     }
     (lower_array_to_list(params), list.loc)
   } else {
@@ -113,10 +97,7 @@ fn lower_return_type_from_clause(node : CstNode?) -> @syntax.Type? {
 ///|
 fn lower_function_expr_node(node : CstNode) -> @syntax.Expr {
   let params_node = node.first_child_with_label("params")
-  let (parameters, params_loc) = lower_parameters_from_list_with_discard_loc(
-    params_node,
-    lower_pipe_arrow_discard_loc(node, params_node),
-  )
+  let (parameters, params_loc) = lower_parameters_from_list(params_node)
   let body = if node.first_child_with_label("body") is Some(body_node) {
     if arrow_lambda_block_keeps_group(node, body_node) {
       lower_expr(body_node)

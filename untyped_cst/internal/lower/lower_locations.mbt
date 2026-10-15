@@ -128,22 +128,6 @@ fn lower_multiline_string_loc(node : CstNode) -> Location {
 }
 
 ///|
-fn lower_pipe_arrow_discard_loc(
-  node : CstNode,
-  params_node : CstNode?,
-) -> Location? {
-  if node.first_child_with_label("pipe") is Some(_) &&
-    params_node is Some(params) &&
-    params.children_with_label("item") is [item] &&
-    params.loc.start == item.loc.start &&
-    params.loc.end == item.loc.end {
-    lower_token_loc(node, "op", TK_FAT_ARROW)
-  } else {
-    None
-  }
-}
-
-///|
 fn lower_try_loc(node : CstNode) -> Location {
   for keyword in node.children_with_label("kw") {
     if keyword.kind.token_kind() is Some(TK_TRY | TK_TRY_EXCLAMATION | TK_CATCH) {

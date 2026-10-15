@@ -3655,8 +3655,9 @@ fn State::try_parse_arrow_fn_expr(
       let p : @syntax.ArrowFnParam = match self.peek_token() {
         LIDENT(_) | EXTEND => Named(self.parse_binder(context=""))
         UNDERSCORE => {
+          let loc = self.peek_location()
           self.expect_token(TK_UNDERSCORE)
-          Unnamed(self.peek_location())
+          Unnamed(loc)
         }
         _ => panic()
       }
