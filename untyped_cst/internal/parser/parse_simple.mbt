@@ -284,7 +284,8 @@ fn parse_expr_simple(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   match state.peek() {
-    Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) =>
+    Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) &&
+      !(tok is LBRACE && brace_starts_record_expr(state)) =>
       state.construct_from_children(
         fn(loc, source_span, children) {
           let entries = recovery_children(children)
