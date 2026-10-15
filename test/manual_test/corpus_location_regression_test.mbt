@@ -187,6 +187,17 @@ test "corpus reverse pipe discard parameters retain their underscore spans" {
 }
 
 ///|
+test "corpus infix operands can be record literals in control headers" {
+  for
+    source in [
+      "fn f(x) { if x == { value: 1, } { true } else { false } }", "fn f(x) { if x ==\n { value: { nested: 1, }, } { true } else { false } }",
+      "fn f(x) { while x == { value: 1, } { break } }",
+    ] {
+    assert_corpus_locations(source, [])
+  }
+}
+
+///|
 test "corpus locations start catch expressions at the pre-parsed body" {
   let prefix = "fn f() { "
   for
