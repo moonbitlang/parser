@@ -235,7 +235,7 @@ fn return_clause_error_belongs_to_type(clause : CstNode) -> Bool {
           clause.first_child_with_label("type"),
           clause.first_child_with_label("clause"),
         ) {
-        (Some(ty), Some(_)) => ty.kind is Type_Arrow
+        (Some(ty), Some(_)) => is_unparenthesized_arrow_type(ty)
         _ => false
       }
     _ => false
@@ -251,7 +251,7 @@ fn return_clause_nocancel_belongs_to_type(clause : CstNode) -> Bool {
           clause.first_child_with_label("type"),
           clause.first_child_with_label("nocancel"),
         ) {
-        (Some(ty), Some(_)) => ty.kind is Type_Arrow
+        (Some(ty), Some(_)) => is_unparenthesized_arrow_type(ty)
         _ => false
       }
     _ => false

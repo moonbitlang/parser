@@ -187,19 +187,18 @@ test "pattern trivia wrappers retain their original shape" {
   @test.assert_eq(refactor_labels(node), [Some("trivia"), Some("pattern")])
   refactor_assert_comment(node, source, prefix)
   @test.assert_eq(node.children[1].1.text(source), "x"[:])
-  // Keep the pre-refactor wrapper's lowering, including its unconstrained type.
+  // Trivia is transparent to lowering; the CST wrapper stays intact.
   let (expr, reports) = @untyped_cst.parse_expression(source).to_expr()
   @test.assert_eq(reports.length(), 0)
   guard expr is Some(Group(expr=Let(pattern~, ..), ..)) else {
     fail("expected grouped let expression")
   }
-  guard pattern is Constraint(pat=Var(binder), ty=Any(loc=type_loc), loc~) else {
-    fail("expected the pre-refactor pattern wrapper")
+  guard pattern is Var(binder) else {
+    fail("trivia must not introduce a type constraint")
   }
   @test.assert_eq(binder.name, "x")
   @test.assert_eq(binder.loc, node.children[1].1.loc)
-  @test.assert_eq(loc, node.loc)
-  @test.assert_eq(type_loc, node.loc)
+  assert_expr_ast_equiv(source)
 }
 
 ///|

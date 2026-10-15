@@ -5107,7 +5107,7 @@ fn State::parse_semi_trailing_record(self : Self) -> @syntax.Expr {
   self.expect_token(TK_SEMI)
   self.expect_token(TK_RBRACE)
   let loc = self.loc_start_with(spos)
-  Record(type_name=None, fields=List([field]), trailing=Semi, loc~)
+  Record(type_name=None, fields=List([{ ..field, loc, }]), trailing=Semi, loc~)
 }
 
 ///|
@@ -5152,6 +5152,12 @@ fn State::parse_record_expr(
       Comma
     } else {
       None
+    }
+    let fields = match fields {
+      @list.More(field, tail=@list.Empty) if type_name is None &&
+        !trailing_comma &&
+        field.is_pun => List([{ ..field, loc, }])
+      _ => fields
     }
     Record(type_name~, fields~, trailing~, loc~)
   }

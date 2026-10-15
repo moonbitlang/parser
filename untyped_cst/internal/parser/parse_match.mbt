@@ -1,7 +1,7 @@
 ///|
 fn parse_quantifier_expr(
   state : ParserState,
-  stop_kinds : Array[TokenKind],
+  boundary : ExprBoundary,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let quantifier_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
@@ -49,7 +49,7 @@ fn parse_quantifier_expr(
       ()
     }
   }
-  let body = parse_expr_until(state, stop_kinds)
+  let body = parse_expr_boundary(state, boundary)
   if !body.children.is_empty() {
     push_child(children, Some("body"), body)
   }
@@ -107,7 +107,9 @@ fn parse_lex_block_expr(
   } else {
     ()
   }
-  let expr = parse_expr_until(state, [TK_LBRACE, TK_WITH, TK_EOF])
+  let reports_before_expr = state.reports.length()
+  let expr = parse_expr_before_body(state, [TK_WITH, TK_SEMI, TK_RBRACE, TK_EOF])
+  let expr = state.required_expr_node(expr, reports_before_expr)
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -125,6 +127,8 @@ fn parse_lex_block_expr(
   }
   if state.current_is(TK_LBRACE) {
     push_child(children, Some("case"), parse_lexscan_case_block(state))
+  } else {
+    push_child(children, Some("case"), state.missing_token_node(TK_LBRACE))
   }
   state.construct_from_children(builder, children)
 }
@@ -270,6 +274,7 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
+  push_children(children, state.consume_trivia())
   push_child(children, Some("op"), state.expect_token(TK_FAT_ARROW))
   let body = parse_expr_with_context_restriction(
     state,
@@ -282,21 +287,11 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let pattern = @construction.first_child_with_label_from(
-        children, "pattern",
-      ).unwrap_or(missing_at_end(loc~, source_span~))
-      let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      @node.CstNode::case_lex_scan_case(
+      let entries = recovery_children(children)
+      @node.CstNode::case_lex_scan_case_from_entries(
         loc~,
         source_span~,
-        pattern~,
-        op~,
-        body~,
+        entries~,
       )
     },
     children,
@@ -492,6 +487,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
     }
   }
   push_child(children, Some("pattern"), pat)
+  push_children(children, state.consume_trivia())
   let mut saw_guard = false
   if state.current_is(TK_IF) {
     saw_guard = true
@@ -505,6 +501,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
       push_child(children, Some("cond"), guard_expr)
     }
   }
+  push_children(children, state.consume_trivia())
   let reports_before_body = reports_before_pattern
   let has_arrow = state.current_is(TK_FAT_ARROW)
   let arrow = if !has_arrow &&
@@ -534,26 +531,8 @@ fn parse_match_case(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let pattern = @construction.first_child_with_label_from(
-        children, "pattern",
-      ).unwrap_or(missing_at_end(loc~, source_span~))
-      let kw = @construction.first_child_with_label_from(children, "kw")
-      let cond = @construction.first_child_with_label_from(children, "cond")
-      let op = @construction.first_child_with_label_from(children, "op")
-      let error = @construction.children_with_label_from(children, "error")
-      let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      @node.CstNode::case_match_case(
-        loc~,
-        source_span~,
-        pattern~,
-        kw?,
-        cond?,
-        op?,
-        error~,
-        body~,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::case_match_case_from_entries(loc~, source_span~, entries~)
     },
     children,
   )
@@ -571,9 +550,10 @@ fn parse_match_expr(state : ParserState) -> CstNode {
   let reports_before_scrutinee = state.reports.length()
   let scrutinee = parse_expr_with_context_restriction(
     state,
-    body_delimited_condition_stops(state),
+    [TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    before_body=true,
   )
   push_child(
     children,

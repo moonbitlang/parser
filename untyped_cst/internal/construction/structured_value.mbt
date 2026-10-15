@@ -131,7 +131,19 @@ pub fn push_constructor_extra_info(
     }
   } else {
     let names = children_with_label_from(children, "name")
-    if names.length() == 2 &&
+    if names.length() >= 3 &&
+      names[names.length() - 2]
+      .lexical_name_value()
+      .map(fn(name) { name.kind is Name_Package })
+      .unwrap_or(false) {
+      fn(loc, source_span, children) {
+        let _ = children
+        @node.CstNode::constructor_extra_info_type_name_with_constr_package(
+          loc~,
+          source_span~,
+        )
+      }
+    } else if names.length() == 2 &&
       names[0]
       .lexical_name_value()
       .map(fn(name) { name.kind is Name_Package })

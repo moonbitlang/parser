@@ -9,9 +9,10 @@ fn parse_if_expr(state : ParserState) -> CstNode {
   let reports_before_cond = state.reports.length()
   let cond = parse_expr_with_context_restriction(
     state,
-    body_delimited_condition_stops(state),
+    [TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    before_body=true,
   )
   push_child(
     children,
@@ -200,9 +201,10 @@ fn parse_keyword_body_expr(
   let reports_before_cond = state.reports.length()
   let cond = parse_expr_with_context_restriction(
     state,
-    body_delimited_condition_stops(state),
+    [TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    before_body=true,
   )
   push_child(
     children,
@@ -378,6 +380,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
         }
       }
       Some(_) => {
+        let entry_pos = state.pos
         match state.peek() {
           Some((found, _, _)) if pattern_can_start(found) => ()
           Some((found, start, end)) =>
@@ -404,6 +407,17 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
             push_child(children, Some("sep"), sep)
           } else {
             ()
+          }
+        }
+        if state.pos == entry_pos {
+          // Recovery may stop at a delimiter owned by the enclosing parser.
+          // Leave it there instead of retrying the same missing pattern.
+          if state.recovery_stop_at([]) is Some(_) {
+            done = true
+          } else if state.consume_error_for_progress() is Some(error) {
+            push_child(children, Some("error"), error)
+          } else {
+            done = true
           }
         }
       }
@@ -458,33 +472,19 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
 
 ///|
 fn parse_foreach_iter_expr(state : ParserState) -> CstNode {
-  if state.current_is(TK_LBRACE) &&
-    !brace_starts_record_expr(state) &&
-    !brace_starts_map_expr(state) &&
-    !brace_expr_is_followed_by_range_operator(state) {
-    state.construct_from_children(
-      fn(loc, source_span, children) {
-        let entries = recovery_children(children)
-        @node.CstNode::expr_missing_expr_from_entries(
-          loc~,
-          source_span~,
-          entries~,
-        )
-      },
-      [],
-    )
-  } else {
-    parse_expr_until(state, foreach_iter_expr_stops())
-  }
+  let reports_before_expr = state.reports.length()
+  let expr = parse_expr_before_body(state, foreach_iter_expr_stops())
+  state.required_expr_node(expr, reports_before_expr)
 }
 
 ///|
 fn foreach_iter_expr_stops() -> Array[TokenKind] {
-  [TK_SEMI, TK_NOBREAK, TK_ELSE, TK_EOF]
+  [TK_SEMI, TK_NOBREAK, TK_ELSE, TK_RBRACE, TK_EOF]
 }
 
 ///|
 fn parse_foreach_expr(state : ParserState) -> CstNode {
+  let reports_before_header = state.reports.length()
   let children : Array[(String?, CstNode)] = []
   if state.consume_any() is Some(kw) {
     push_child(children, Some("kw"), kw)
@@ -520,6 +520,13 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
   if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   }
+  if !children.iter().any(entry => entry.0 is Some("body")) {
+    if state.reports.length() == reports_before_header {
+      state.report_expected_tokens([TK_LBRACE])
+    }
+    let _ = preserve_decl_after_missing_body(state)
+    push_child(children, Some("body"), state.missing_expr_node())
+  }
   if state.current_is(TK_NOBREAK) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
@@ -544,24 +551,7 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
 
 ///|
 fn for_clause_stops() -> Array[TokenKind] {
-  [TK_COMMA, TK_SEMI, TK_NEWLINE, TK_LBRACE, TK_EOF]
-}
-
-///|
-fn for_binding_expr_stops(state : ParserState) -> Array[TokenKind] {
-  let mut start_offset = 0
-  while state.peek(offset=start_offset) is Some((COMMENT(_) | NEWLINE, _, _)) {
-    start_offset += 1
-  }
-  if state.peek(offset=start_offset) is Some((LBRACE, _, _)) &&
-    (
-      brace_starts_record_expr(state, start_offset~) ||
-      brace_starts_map_expr(state, start_offset~)
-    ) {
-    [TK_COMMA, TK_SEMI, TK_NEWLINE, TK_EOF]
-  } else {
-    for_clause_stops()
-  }
+  [TK_COMMA, TK_SEMI, TK_NEWLINE, TK_RBRACE, TK_EOF]
 }
 
 ///|
@@ -761,6 +751,7 @@ fn parse_for_binding(state : ParserState) -> CstNode {
       children,
     )
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
@@ -769,7 +760,7 @@ fn parse_for_binding(state : ParserState) -> CstNode {
     }
   } else {
     state.report_expected_tokens([TK_EQUAL])
-    let scan = state.recover_until(for_clause_stops())
+    let scan = state.recover_until([TK_LBRACE, ..for_clause_stops()])
     push_recovered_errors(children, scan.skipped)
     return state.construct_from_children(
       fn(loc, source_span, children) {
@@ -807,7 +798,9 @@ fn parse_for_binding(state : ParserState) -> CstNode {
       children,
     )
   }
-  let expr = parse_expr_until(state, for_binding_expr_stops(state))
+  let reports_before_expr = state.reports.length()
+  let expr = parse_expr_before_body(state, for_clause_stops())
+  let expr = state.required_expr_node(expr, reports_before_expr)
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -825,24 +818,8 @@ fn parse_for_binding(state : ParserState) -> CstNode {
         ["name"],
       )
 
-      let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let error = @construction.children_with_label_from(children, "error")
-      let op = @construction.first_child_with_label_from(children, "op")
-      let expr = @construction.first_child_with_label_from(children, "expr")
-      let semantic_name = @construction.first_child_with_label_from(
-        children, "semantic_name",
-      )
-      @node.CstNode::binding_for(
-        loc~,
-        source_span~,
-        name~,
-        error~,
-        op?,
-        expr?,
-        semantic_name?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::binding_for_from_entries(loc~, source_span~, entries~)
     },
     children,
   )
@@ -969,7 +946,10 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
 ///|
 fn parse_for_condition(state : ParserState) -> CstNode {
   let first = state.peek().map(item => item.0)
-  let cond = parse_expr_infix(state, [TK_SEMI, TK_NEWLINE, TK_EOF])
+  let cond = parse_expr_infix(state, {
+    stop_kinds: [TK_SEMI, TK_NEWLINE, TK_RBRACE, TK_EOF],
+    before_body: true,
+  })
   match first {
     Some(tok) if token_disallowed_in_condition(tok) =>
       if unexpected_expr_or_statement_name(tok) is Some(actual) {
@@ -993,6 +973,7 @@ fn recover_for_missing_separator(
 
 ///|
 fn parse_c_style_for_expr(state : ParserState) -> CstNode {
+  let reports_before_header = state.reports.length()
   let children : Array[(String?, CstNode)] = []
   if state.consume_any() is Some(kw) {
     push_child(children, Some("kw"), kw)
@@ -1051,6 +1032,13 @@ fn parse_c_style_for_expr(state : ParserState) -> CstNode {
       }
     }
   }
+  if !children.iter().any(entry => entry.0 is Some("body")) {
+    if state.reports.length() == reports_before_header {
+      state.report_expected_tokens([TK_LBRACE])
+    }
+    let _ = preserve_decl_after_missing_body(state)
+    push_child(children, Some("body"), state.missing_expr_node())
+  }
   if state.current_is(TK_NOBREAK) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
@@ -1081,6 +1069,7 @@ fn parse_where_clause(state : ParserState) -> CstNode {
   } else {
     ()
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_LBRACE) {
     push_child(
       children,
@@ -1100,13 +1089,8 @@ fn parse_where_clause(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let kw = @construction.first_child_with_label_from(children, "kw").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      @node.CstNode::clause_where(loc~, source_span~, kw~, body~)
+      let entries = recovery_children(children)
+      @node.CstNode::clause_where_from_entries(loc~, source_span~, entries~)
     },
     children,
   )
@@ -1124,6 +1108,7 @@ fn parse_where_field_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
@@ -1149,26 +1134,8 @@ fn parse_where_field_item(state : ParserState) -> CstNode {
         ["name"],
       )
 
-      let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let expr = @construction.first_child_with_label_from(children, "expr").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let semantic_name = @construction.first_child_with_label_from(
-        children, "semantic_name",
-      )
-      @node.CstNode::field_where(
-        loc~,
-        source_span~,
-        name~,
-        op~,
-        expr~,
-        semantic_name?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::field_where_from_entries(loc~, source_span~, entries~)
     },
     children,
   )
