@@ -13,7 +13,11 @@ fn collect_mbt_files(dir : String, files : Array[String]) -> Unit raise Error {
     err => fail("failed to read directory \{dir}: \{Repr(err)}")
   }
   for entry in entries {
-    if entry != ".git" {
+    if entry != ".git" &&
+      entry != ".mooncakes" &&
+      entry != "_build" &&
+      entry != "target" &&
+      entry != "node_modules" {
       let path = join_path(dir, entry)
       if !@fs.path_exists(path) {
         if entry.has_suffix(".mbt") {
@@ -65,25 +69,26 @@ fn impls_json(impls : @syntax.Impls) -> Json {
 }
 
 ///|
-#skip("requires an external openseek checkout")
-test "all OpenSeek MoonBit sources parse to equivalent ASTs without diagnostics" {
-  let root = @env.get_env_var("OPENSEEK_ROOT").unwrap_or_else(() => {
-    fail("OPENSEEK_ROOT must point to an OpenSeek checkout")
+#skip("requires an external repository checkout")
+test "all repository MoonBit sources parse to equivalent ASTs without diagnostics" {
+  let root = @env.get_env_var("REPO_ROOT").unwrap_or_else(() => {
+    fail("REPO_ROOT must point to a repository checkout")
   })
   if root.is_empty() {
-    fail("OPENSEEK_ROOT must not be empty")
+    fail("REPO_ROOT must not be empty")
   }
+  let name = @env.get_env_var("REPO_NAME").unwrap_or(root)
   let root_is_dir = @fs.is_dir(root) catch {
-    err => fail("failed to inspect OPENSEEK_ROOT \{root}: \{Repr(err)}")
+    err => fail("failed to inspect REPO_ROOT \{root}: \{Repr(err)}")
   }
   if !root_is_dir {
-    fail("OPENSEEK_ROOT is not a directory: \{root}")
+    fail("REPO_ROOT is not a directory: \{root}")
   }
   let files : Array[String] = []
   collect_mbt_files(root, files)
   files.sort()
   if files.is_empty() {
-    fail("no .mbt files found under OPENSEEK_ROOT: \{root}")
+    fail("no .mbt files found under REPO_ROOT: \{root}")
   }
   let failures : Array[String] = []
   for path in files {
@@ -133,11 +138,11 @@ test "all OpenSeek MoonBit sources parse to equivalent ASTs without diagnostics"
   }
   if !failures.is_empty() {
     fail(
-      "OpenSeek corpus validation failed for \{failures.length()} checks:\n\n" +
+      "\{name} corpus validation failed for \{failures.length()} checks:\n\n" +
       failures.join("\n\n"),
     )
   }
   println(
-    "parsed \{files.length()} OpenSeek .mbt files with equivalent ASTs from all three parsers",
+    "parsed \{files.length()} \{name} .mbt files with equivalent ASTs from all three parsers",
   )
 }
