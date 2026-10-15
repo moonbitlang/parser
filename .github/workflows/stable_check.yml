@@ -50,20 +50,43 @@ jobs:
         run: |
           moon test --target all
 
-      - name: checkout openseek corpus
+  repo_test:
+    name: repo test (${{ matrix.repo }})
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: [openseek, core, x, typst.mbt, office.mbt, async, moonyacc]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: install
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+
+      - name: moon version
+        run: moon version --all
+
+      - name: moon update
+        run: moon update
+
+      - name: checkout repository corpus
         uses: actions/checkout@v4
         with:
-          repository: moonbitlang/openseek
-          ref: main
-          path: .openseek
+          repository: moonbitlang/${{ matrix.repo }}
+          path: .repo-test
           fetch-depth: 1
           submodules: recursive
           persist-credentials: false
 
-      - name: test openseek corpus
+      - name: test repository corpus
         env:
-          OPENSEEK_ROOT: ${{ github.workspace }}/.openseek
+          REPO_ROOT: ${{ github.workspace }}/.repo-test
+          REPO_NAME: moonbitlang/${{ matrix.repo }}
         run: |
-          echo "OpenSeek commit: $(git -C "$OPENSEEK_ROOT" rev-parse HEAD)"
-          git -C "$OPENSEEK_ROOT" submodule status --recursive
-          moon test test/openseek_test/openseek_test.mbt --target native --include-skipped
+          echo "$REPO_NAME commit: $(git -C "$REPO_ROOT" rev-parse HEAD)"
+          git -C "$REPO_ROOT" submodule status --recursive
+          moon test test/repo_test --target native --release --include-skipped
