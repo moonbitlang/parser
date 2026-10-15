@@ -177,6 +177,16 @@ test "corpus bytes literals can start optional expressions" {
 }
 
 ///|
+test "corpus reverse pipe discard parameters retain their underscore spans" {
+  for parameter in ["_", "(_)", "(_, _)"] {
+    assert_corpus_locations(
+      "fn f() { let callback = value <| " + parameter + " => { () } }",
+      [],
+    )
+  }
+}
+
+///|
 test "corpus locations start catch expressions at the pre-parsed body" {
   let prefix = "fn f() { "
   for
