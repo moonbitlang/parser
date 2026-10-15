@@ -1,4 +1,26 @@
 ///|
+/// Hard stops apply even when an operand is missing. A body brace only ends
+/// an expression after its operand has been parsed; it can itself be an operand.
+priv struct ExprBoundary {
+  stop_kinds : Array[TokenKind]
+  before_body : Bool
+}
+
+///|
+fn ExprBoundary::ends_expression(self : ExprBoundary, tok : Token) -> Bool {
+  kind_in(tok.kind(), self.stop_kinds) || (self.before_body && tok is LBRACE)
+}
+
+///|
+fn ExprBoundary::recovery_stops(self : ExprBoundary) -> Array[TokenKind] {
+  if self.before_body {
+    [TK_LBRACE, ..self.stop_kinds]
+  } else {
+    self.stop_kinds
+  }
+}
+
+///|
 fn statement_only_expression_token(tok : Token) -> Bool {
   match tok {
     RAISE
@@ -323,8 +345,9 @@ fn arrow_lhs_can_start_function(node : CstNode) -> Bool {
 ///|
 fn parse_arrow_fn_body_expr(
   state : ParserState,
-  stop_kinds : Array[TokenKind],
+  boundary : ExprBoundary,
 ) -> CstNode {
+  let stop_kinds = boundary.stop_kinds
   match state.peek_significant() {
     Some((LBRACE, _, _)) =>
       if brace_starts_record_expr(state) {
@@ -337,10 +360,10 @@ fn parse_arrow_fn_body_expr(
     Some((CONTINUE, _, _)) if state.peek_nth_significant(1).map(item => item.0)
       is Some(POST_LABEL(_)) &&
       state.peek_nth_significant(2).map(item => item.0) is Some(COLON) =>
-      parse_expr_until(state, stop_kinds)
+      parse_expr_boundary(state, boundary)
     Some((BREAK | CONTINUE | RETURN, _, _)) =>
       parse_invalid_simple_expr(state, stop_kinds)
-    _ => parse_expr_until(state, stop_kinds)
+    _ => parse_expr_boundary(state, boundary)
   }
 }
 
@@ -350,9 +373,10 @@ fn parse_expr_with_context_restriction(
   stop_kinds : Array[TokenKind],
   context : String,
   disallowed : (Token) -> Bool,
+  before_body~ : Bool = false,
 ) -> CstNode {
   let first = state.peek_significant().map(triple => triple.0)
-  let expr = parse_expr_until(state, stop_kinds)
+  let expr = parse_expr_boundary(state, { stop_kinds, before_body, })
   match first {
     Some(tok) if disallowed(tok) =>
       if unexpected_expr_or_statement_name(tok) is Some(actual) {
@@ -513,14 +537,27 @@ fn parse_expr_until(
   allow_argument_label_question~ : Bool = false,
 ) -> CstNode {
   let _ = allow_argument_label_question
+  parse_expr_boundary(state, { stop_kinds, before_body: false, })
+}
+
+///|
+fn parse_expr_before_body(
+  state : ParserState,
+  stop_kinds : Array[TokenKind],
+) -> CstNode {
+  parse_expr_boundary(state, { stop_kinds, before_body: true, })
+}
+
+///|
+fn parse_expr_boundary(state : ParserState, boundary : ExprBoundary) -> CstNode {
   discard_expr_trivia(state)
   match (state.peek(), state.peek(offset=1)) {
     (Some((POST_LABEL(_), _, _)), Some((COLON, _, _)))
     | (Some((POST_LABEL_TRANSPARENT(_), _, _)), Some((COLON, _, _))) =>
-      parse_labelled_loop_expr(state, stop_kinds)
+      parse_labelled_loop_expr(state, boundary.stop_kinds)
     _ => {
-      let lhs = parse_expr_pipe(state, stop_kinds)
-      parse_expr_catch_suffix(state, stop_kinds, lhs)
+      let lhs = parse_expr_pipe(state, boundary)
+      parse_expr_catch_suffix(state, boundary.stop_kinds, lhs)
     }
   }
 }
@@ -586,19 +623,16 @@ fn parse_expr_catch_suffix(
 }
 
 ///|
-fn parse_expr_pipe(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
+fn parse_expr_pipe(state : ParserState, boundary : ExprBoundary) -> CstNode {
   let reports_before_lhs = state.reports.length()
-  let mut lhs = parse_expr_infix(state, stop_kinds)
+  let mut lhs = parse_expr_infix(state, boundary)
   let mut pipe_mode = 0 // 0: none, 1: forward, 2: reverse
   let invalid_children : Array[(String?, CstNode)] = []
   let mut done = false
   while !done {
     discard_expr_trivia(state)
     match state.peek() {
-      Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) => done = true
+      Some((tok, _, _)) if boundary.ends_expression(tok) => done = true
       Some((COLON, _, _)) => done = true
       Some((EQUAL, _, _))
       | Some((PLUS_EQUAL, _, _))
@@ -619,7 +653,7 @@ fn parse_expr_pipe(
           ()
         }
         let reports_before_rhs = state.reports.length()
-        let rhs = parse_expr_until(state, stop_kinds)
+        let rhs = parse_expr_boundary(state, boundary)
         push_child(
           children,
           Some("rhs"),
@@ -684,7 +718,7 @@ fn parse_expr_pipe(
           ()
         }
         let reports_before_rhs = state.reports.length()
-        let rhs = parse_pipe_rhs(state, stop_kinds)
+        let rhs = parse_pipe_rhs(state, boundary)
         push_child(
           children,
           Some("rhs"),
@@ -749,7 +783,7 @@ fn parse_expr_pipe(
         } else {
           ()
         }
-        let body = parse_arrow_fn_body_expr(state, stop_kinds)
+        let body = parse_arrow_fn_body_expr(state, boundary)
         if !body.children.is_empty() {
           push_child(children, Some("body"), body)
         }
@@ -791,11 +825,9 @@ fn stop_kinds_with_pipe(stop_kinds : Array[TokenKind]) -> Array[TokenKind] {
 }
 
 ///|
-fn parse_pipe_rhs(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
-  let head = parse_expr_infix(state, stop_kinds)
+fn parse_pipe_rhs(state : ParserState, boundary : ExprBoundary) -> CstNode {
+  let stop_kinds = boundary.stop_kinds
+  let head = parse_expr_infix(state, boundary)
   discard_expr_trivia(state)
   match state.peek() {
     Some((FAT_ARROW, _, _)) => {
@@ -819,10 +851,10 @@ fn parse_pipe_rhs(
         None => state.report_expected_description("`{ ... }`")
       }
       let reports_before_body = state.reports.length()
-      let body = parse_arrow_fn_body_expr(
-        state,
-        stop_kinds_with_pipe(stop_kinds),
-      )
+      let body = parse_arrow_fn_body_expr(state, {
+        ..boundary,
+        stop_kinds: stop_kinds_with_pipe(stop_kinds),
+      })
       push_child(
         children,
         Some("body"),
@@ -1110,12 +1142,9 @@ fn parse_arrow_param_from_expr(expr : CstNode) -> CstNode {
 }
 
 ///|
-fn parse_expr_infix(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
+fn parse_expr_infix(state : ParserState, boundary : ExprBoundary) -> CstNode {
   state.abort_infix_chain = false
-  let expr = parse_expr_binary_prec(state, stop_kinds, 1)
+  let expr = parse_expr_binary_prec(state, boundary, 1)
   state.abort_infix_chain = false
   expr
 }
@@ -1226,15 +1255,15 @@ fn expr_stops_infix_chain(expr : CstNode) -> Bool {
 ///|
 fn parse_expr_binary_prec(
   state : ParserState,
-  stop_kinds : Array[TokenKind],
+  boundary : ExprBoundary,
   min_prec : Int32,
 ) -> CstNode {
-  let mut lhs = parse_expr_postfix(state, stop_kinds)
+  let mut lhs = parse_expr_postfix(state, boundary)
   let mut done = expr_stops_infix_chain(lhs)
   while !done {
     discard_expr_trivia(state)
     match state.peek() {
-      Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) => done = true
+      Some((tok, _, _)) if boundary.ends_expression(tok) => done = true
       Some((tok, _, _)) =>
         match infix_precedence(tok) {
           Some((prec, right_assoc)) if prec >= min_prec => {
@@ -1301,9 +1330,9 @@ fn parse_expr_binary_prec(
             let rhs = match state.peek_significant() {
               Some((next, _, _)) if token_invalid_as_infix_operand(next) => {
                 state.abort_infix_chain = true
-                parse_invalid_infix_operand(state, stop_kinds)
+                parse_invalid_infix_operand(state, boundary.recovery_stops())
               }
-              _ => parse_expr_binary_prec(state, stop_kinds, next_min)
+              _ => parse_expr_binary_prec(state, boundary, next_min)
             }
             push_child(
               children,

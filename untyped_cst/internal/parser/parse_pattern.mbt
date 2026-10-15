@@ -180,7 +180,10 @@ fn parse_with_pattern_binding(state : ParserState) -> CstNode {
   } else {
     state.report_expected_tokens([TK_EQUAL])
   }
-  let expr = parse_expr_prefix(state, [TK_COMMA, TK_RPAREN, TK_EOF])
+  let expr = parse_expr_prefix(state, {
+    stop_kinds: [TK_COMMA, TK_RPAREN, TK_EOF],
+    before_body: false,
+  })
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
