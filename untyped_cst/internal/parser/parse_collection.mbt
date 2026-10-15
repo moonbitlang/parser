@@ -88,38 +88,6 @@ fn brace_starts_map_expr(
 }
 
 ///|
-fn brace_expr_is_followed_by_range_operator(state : ParserState) -> Bool {
-  let mut offset = 0
-  let mut depth = 0
-  let mut done = false
-  while !done {
-    match state.peek(offset~) {
-      Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
-      Some((LBRACE, _, _)) => {
-        depth += 1
-        offset += 1
-      }
-      Some((RBRACE, _, _)) => {
-        depth -= 1
-        offset += 1
-        if depth == 0 {
-          while true {
-            match state.peek(offset~) {
-              Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
-              Some((tok, _, _)) => return range_operator(tok)
-              None => return false
-            }
-          }
-        }
-      }
-      Some((EOF, _, _)) | None => done = true
-      Some((_, _, _)) => offset += 1
-    }
-  }
-  false
-}
-
-///|
 fn parse_record_expr(state : ParserState) -> CstNode {
   let body = parse_record_field_list(state)
   state.construct_from_children(

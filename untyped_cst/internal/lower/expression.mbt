@@ -439,11 +439,26 @@ fn lower_record_expr_node(node : CstNode) -> @syntax.Expr {
   let mut trailing = @syntax.TrailingMark::None
   if node.first_child_with_label("body") is Some(body) {
     trailing = lower_record_trailing_mark(body)
-    for item in lower_item_children(body) {
+    let items = lower_item_children(body)
+    // Menhir gives a lone pun in a brace group the entire group's location.
+    let lone_pun_group = node.kind is Expr_Record &&
+      node.first_child_with_label("type") is None &&
+      items.length() == 1 &&
+      !body.children
+      .iter()
+      .any(entry => entry.1.kind.token_kind() == Some(TK_COMMA))
+    for item in items {
       if item.kind is Field_RecordSpread {
         record = item.first_child_with_label("expr").map(lower_expr)
       } else {
-        fields.push(lower_record_field_def(item))
+        let field = lower_record_field_def(item)
+        fields.push(
+          if lone_pun_group && field.is_pun {
+            { ..field, loc: node.loc, }
+          } else {
+            field
+          },
+        )
       }
     }
   } else {

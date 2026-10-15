@@ -11,13 +11,10 @@ fn range_operator(tok : Token) -> Bool {
 }
 
 ///|
-fn parse_expr_range(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
-  let mut lhs = parse_expr_prefix(state, stop_kinds)
+fn parse_expr_range(state : ParserState, boundary : ExprBoundary) -> CstNode {
+  let mut lhs = parse_expr_prefix(state, boundary)
   match state.peek() {
-    Some((tok, _, _)) if !kind_in(tok.kind(), stop_kinds) && range_operator(tok) => {
+    Some((tok, _, _)) if !boundary.ends_expression(tok) && range_operator(tok) => {
       let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
@@ -26,7 +23,7 @@ fn parse_expr_range(
         ()
       }
       let reports_before_rhs = state.reports.length()
-      let rhs = parse_expr_prefix(state, stop_kinds)
+      let rhs = parse_expr_prefix(state, boundary)
       push_child(
         children,
         Some("rhs"),
@@ -64,10 +61,7 @@ fn parse_expr_range(
 }
 
 ///|
-fn parse_expr_prefix(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
+fn parse_expr_prefix(state : ParserState, boundary : ExprBoundary) -> CstNode {
   discard_expr_trivia(state)
   match state.peek() {
     Some((operator, _, _)) if operator is (PLUS | MINUS | EXCLAMATION) => {
@@ -107,7 +101,7 @@ fn parse_expr_prefix(
       )
       let reports_before_expr = state.reports.length()
       let operand = state.required_expr_node(
-        parse_expr_prefix(state, stop_kinds),
+        parse_expr_prefix(state, boundary),
         reports_before_expr,
       )
       let constant = match operand.first_child_with_label("semantic_constant") {
@@ -153,7 +147,7 @@ fn parse_expr_prefix(
           )
       }
     }
-    _ => parse_expr_simple_postfix(state, stop_kinds)
+    _ => parse_expr_simple_postfix(state, boundary)
   }
 }
 
@@ -279,13 +273,10 @@ fn report_promoted_anonymous_function(state : ParserState) -> Unit {
 }
 
 ///|
-fn parse_expr_simple(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
+fn parse_expr_simple(state : ParserState, boundary : ExprBoundary) -> CstNode {
+  let stop_kinds = boundary.recovery_stops()
   match state.peek() {
-    Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) &&
-      !(tok is LBRACE && brace_starts_record_expr(state)) =>
+    Some((tok, _, _)) if kind_in(tok.kind(), boundary.stop_kinds) =>
       state.construct_from_children(
         fn(loc, source_span, children) {
           let entries = recovery_children(children)
@@ -302,7 +293,7 @@ fn parse_expr_simple(
     Some((IF, _, _)) => parse_if_expr(state)
     Some((MATCH, _, _)) => parse_match_expr(state)
     Some((FORALL, _, _)) | Some((EXISTS, _, _)) =>
-      parse_quantifier_expr(state, stop_kinds)
+      parse_quantifier_expr(state, boundary)
     Some((LET, _, _)) => parse_let_statement(state)
     Some((LETREC, _, _)) => parse_letrec_statement(state)
     Some((GUARD, _, _)) | Some((GUARD_EXCLAMATION, _, _)) =>

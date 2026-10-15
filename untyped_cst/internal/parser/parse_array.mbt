@@ -317,10 +317,10 @@ fn parse_list_comprehension_for_header(
       !state.current_is(TK_FAT_ARROW) &&
       !state.current_is(close_kind) &&
       !state.current_is(TK_EOF) {
-      let cond_expr = parse_expr_infix(
-        state,
-        list_comprehension_expr_stops(close_kind),
-      )
+      let cond_expr = parse_expr_infix(state, {
+        stop_kinds: list_comprehension_expr_stops(close_kind),
+        before_body: false,
+      })
       if !cond_expr.children.is_empty() {
         push_child(children, Some("cond"), cond_expr)
       }
@@ -549,14 +549,6 @@ fn parse_array_expr_item(state : ParserState) -> CstNode {
 }
 
 ///|
-fn body_delimited_condition_stops(state : ParserState) -> Array[TokenKind] {
-  match state.peek_significant() {
-    Some((LBRACE, _, _)) => [TK_EOF]
-    _ => [TK_LBRACE, TK_EOF]
-  }
-}
-
-///|
 fn recover_expr_until_statement_boundary(
   state : ParserState,
   children : Array[(String?, CstNode)],
@@ -567,12 +559,35 @@ fn recover_expr_until_statement_boundary(
 }
 
 ///|
+// A named declaration after a failed header belongs to the enclosing structure.
+// Leave its automatic separator as well, so enclosing blocks can unwind.
+fn preserve_decl_after_missing_body(state : ParserState) -> Bool {
+  let offset = match state.peek_significant() {
+    Some((SEMI(false), _, _)) => 1
+    _ => 0
+  }
+  let named_fn = match
+    (state.peek_nth_significant(offset), state.peek_nth_significant(offset + 1)) {
+    (Some((FN, _, _)), Some((LIDENT(_) | EXTEND, _, _))) => true
+    _ => false
+  }
+  if named_fn {
+    state.abort_current_decl = true
+  }
+  named_fn
+}
+
+///|
 fn recover_to_required_block(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> Bool {
+  if preserve_decl_after_missing_body(state) {
+    return false
+  }
   let scan = state.recover_until([TK_LBRACE, TK_SEMI, TK_RBRACE])
   push_recovered_errors(children, scan.skipped)
+  let _ = preserve_decl_after_missing_body(state)
   state.current_is(TK_LBRACE)
 }
 

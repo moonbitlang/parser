@@ -1,12 +1,10 @@
 ///|
-fn parse_expr_postfix(
-  state : ParserState,
-  stop_kinds : Array[TokenKind],
-) -> CstNode {
-  let lhs = parse_expr_range(state, stop_kinds)
+fn parse_expr_postfix(state : ParserState, boundary : ExprBoundary) -> CstNode {
+  let stop_kinds = boundary.stop_kinds
+  let lhs = parse_expr_range(state, boundary)
   discard_expr_trivia(state)
   match state.peek() {
-    Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) => lhs
+    Some((tok, _, _)) if boundary.ends_expression(tok) => lhs
     Some((AS, _, _)) => {
       let children : Array[(String?, CstNode)] = [(Some("expr"), lhs)]
       if state.consume_any() is Some(op) {
@@ -117,7 +115,10 @@ fn parse_expr_postfix(
       }
       report_invalid_template_literal_start(state)
       let reports_before_template = state.reports.length()
-      let template = parse_expr_until(state, template_operand_stops(stop_kinds))
+      let template = parse_expr_boundary(state, {
+        ..boundary,
+        stop_kinds: template_operand_stops(stop_kinds),
+      })
       push_child(
         children,
         Some("template"),
@@ -208,14 +209,14 @@ fn report_invalid_template_literal_start(state : ParserState) -> Unit {
 ///|
 fn parse_expr_simple_postfix(
   state : ParserState,
-  stop_kinds : Array[TokenKind],
+  boundary : ExprBoundary,
 ) -> CstNode {
-  let mut lhs = parse_expr_simple(state, stop_kinds)
+  let mut lhs = parse_expr_simple(state, boundary)
   let mut done = false
   while !done {
     discard_expr_trivia(state)
     match state.peek() {
-      Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) => done = true
+      Some((tok, _, _)) if boundary.ends_expression(tok) => done = true
       Some((_, _, _)) =>
         if parse_expr_postfix_suffix(state, lhs) is Some(next) {
           lhs = next

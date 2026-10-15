@@ -1,7 +1,7 @@
 ///|
 fn parse_quantifier_expr(
   state : ParserState,
-  stop_kinds : Array[TokenKind],
+  boundary : ExprBoundary,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let quantifier_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
@@ -49,7 +49,7 @@ fn parse_quantifier_expr(
       ()
     }
   }
-  let body = parse_expr_until(state, stop_kinds)
+  let body = parse_expr_boundary(state, boundary)
   if !body.children.is_empty() {
     push_child(children, Some("body"), body)
   }
@@ -107,7 +107,9 @@ fn parse_lex_block_expr(
   } else {
     ()
   }
-  let expr = parse_expr_until(state, [TK_LBRACE, TK_WITH, TK_EOF])
+  let reports_before_expr = state.reports.length()
+  let expr = parse_expr_before_body(state, [TK_WITH, TK_SEMI, TK_RBRACE, TK_EOF])
+  let expr = state.required_expr_node(expr, reports_before_expr)
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -125,6 +127,8 @@ fn parse_lex_block_expr(
   }
   if state.current_is(TK_LBRACE) {
     push_child(children, Some("case"), parse_lexscan_case_block(state))
+  } else {
+    push_child(children, Some("case"), state.missing_token_node(TK_LBRACE))
   }
   state.construct_from_children(builder, children)
 }
@@ -571,9 +575,10 @@ fn parse_match_expr(state : ParserState) -> CstNode {
   let reports_before_scrutinee = state.reports.length()
   let scrutinee = parse_expr_with_context_restriction(
     state,
-    body_delimited_condition_stops(state),
+    [TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    before_body=true,
   )
   push_child(
     children,
