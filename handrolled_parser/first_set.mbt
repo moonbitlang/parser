@@ -48,6 +48,7 @@ let first_simple_expr : Array[TokenKind] = [
   TK_MULTILINE_STRING,
   TK_MULTILINE_INTERP,
   TK_BYTE,
+  TK_BYTES,
   TK_BYTES_INTERP,
   TK_INTERP,
   TK_PACKAGE_NAME,

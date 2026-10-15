@@ -929,6 +929,7 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
     | MULTILINE_STRING(_)
     | MULTILINE_INTERP(_)
     | BYTE(_)
+    | BYTES(_)
     | BYTES_INTERP(_)
     | INTERP(_)
     | PACKAGE_NAME(_)
