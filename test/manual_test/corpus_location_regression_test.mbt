@@ -167,6 +167,16 @@ test "corpus locations separate optional object types from their names" {
 }
 
 ///|
+test "corpus bytes literals can start optional expressions" {
+  for
+    source in [
+      "fn f() { return b\"\" }", "fn f() { return b\"abc\" }", "fn f() { for ; b\"x\" == b\"x\"; { break } }",
+    ] {
+    assert_corpus_locations(source, [])
+  }
+}
+
+///|
 test "corpus locations start catch expressions at the pre-parsed body" {
   let prefix = "fn f() { "
   for
