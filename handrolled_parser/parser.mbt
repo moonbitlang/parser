@@ -1619,8 +1619,9 @@ fn State::parse_trait_method_params(
               }
             }
             tok if first_type_.contains(tok.kind()) => {
+              let spos = state.peek_spos()
               let typ = state.parse_type()
-              let loc = typ.loc()
+              let loc = state.loc_start_with(spos)
               DiscardPositional(ty=Some(typ), loc~)
             }
             other => {

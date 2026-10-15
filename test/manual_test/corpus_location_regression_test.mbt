@@ -1,6 +1,7 @@
 ///|
 priv struct CorpusLocationCollector {
   spans : Array[(String, Int32, Int32)]
+  parameter_spans : Array[(Int32, Int32)]
 }
 
 ///|
@@ -27,6 +28,17 @@ impl IterVisitor for CorpusLocationCollector with fn visit_Pattern(self, pat) {
     self.add("pattern", loc)
   }
   IterVisitor::visit_Pattern(self.base(), pat)
+}
+
+///|
+impl IterVisitor for CorpusLocationCollector with fn visit_Parameter(
+  self,
+  param,
+) {
+  if param is DiscardPositional(loc~, ..) {
+    self.parameter_spans.push((loc.start.cnum, loc.end.cnum))
+  }
+  IterVisitor::visit_Parameter(self.base(), param)
 }
 
 ///|
@@ -70,6 +82,7 @@ impl IterVisitor for CorpusLocationCollector with fn visit_TypeVarConstraint(
 fn assert_corpus_locations(
   source : String,
   expected : Array[(String, Int32, Int32)],
+  parameters? : Array[(Int32, Int32)],
 ) -> Unit raise Error {
   let name = "corpus_locations.mbt"
   let results : Array[(String, @syntax.Impls)] = []
@@ -91,9 +104,19 @@ fn assert_corpus_locations(
   results.push(("CST", impls))
   let mut reference : Json? = None
   for (parser, impls) in results {
-    let collector : CorpusLocationCollector = { spans: [], }
+    let collector : CorpusLocationCollector = {
+      spans: [],
+      parameter_spans: [],
+    }
     impls.each(impl_ => collector.visit_Impl(impl_))
     @test.assert_eq(collector.spans, expected, msg="\{parser}: \{source}")
+    if parameters is Some(expected_parameters) {
+      @test.assert_eq(
+        collector.parameter_spans,
+        expected_parameters,
+        msg="\{parser}: \{source}",
+      )
+    }
     let json = @basic.show_loc.protect(String, fn() {
       Json(impls.map(impl_ => impl_.json_repr()))
     })
@@ -162,6 +185,37 @@ test "corpus locations separate optional object types from their names" {
     assert_corpus_locations(prefix + "(&" + name + ")?) {}", [
       ("option", start, end + 3),
       ("object", start + 2, end + 1),
+    ])
+  }
+}
+
+///|
+test "corpus locations include object prefixes and groups in unnamed trait parameters" {
+  let prefix = "trait T { fn f("
+  for name in ["Trait", "@pkg.Trait"] {
+    for (open, close) in [("", ""), ("(", ")"), ("((", "))")] {
+      for trailing in ["", " // trailing\n"] {
+        let typ = open + "&" + name + close
+        let source = prefix + typ + trailing + ") -> Unit }"
+        let start = prefix.length() + open.length() + 1
+        assert_corpus_locations(
+          source,
+          [
+            ("trait", 0, source.length()),
+            ("object", start, start + name.length()),
+          ],
+          parameters=[(prefix.length(), prefix.length() + typ.length())],
+        )
+      }
+    }
+  }
+  for
+    typ in [
+      "Int", "(Int)", "((Int))", "(Int, Int)", "(Int) -> Unit", "async (Int) -> Unit",
+    ] {
+    let source = prefix + typ + ") -> Unit }"
+    assert_corpus_locations(source, [("trait", 0, source.length())], parameters=[
+      (prefix.length(), prefix.length() + typ.length()),
     ])
   }
 }

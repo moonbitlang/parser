@@ -789,7 +789,7 @@ fn lower_trait_method_parameter(node : CstNode) -> @syntax.Parameter {
       _ => Positional(binder~, ty~)
     }
   } else {
-    DiscardPositional(ty~, loc=ty.map(type_ => type_.loc()).unwrap_or(node.loc))
+    DiscardPositional(ty~, loc=node.loc)
   }
 }
 
