@@ -345,7 +345,7 @@ fn lex_tokens(
       }
 
       // Byte literals - ASCII character
-      (re"^(?:b'[\x00-\x7F]')" as raw, after=rest) => {
+      (re"^(?:b'[[:ascii:]]')" as raw, after=rest) => {
         let ascii_char = raw
           .exact_view(start=2, end=raw.length() - 1)
           .to_owned() // Remove b' and '
