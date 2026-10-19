@@ -19,7 +19,7 @@ pub let show_loc : @ref.Ref[LocStyle]
 pub(all) struct BasePos {
   base_pkg : String
   base_fname : String
-  base_lnum : Int
+  base_lnum : Int32
 } derive(Compare, Eq, Hash, @debug.Debug)
 pub fn BasePos::from_position(pkg~ : String, Position) -> Self
 pub fn BasePos::none() -> Self
@@ -42,11 +42,11 @@ pub impl ToJson for Location
 
 pub(all) struct Position {
   fname : String
-  lnum : Int
-  bol : Int
-  cnum : Int
+  lnum : Int32
+  bol : Int32
+  cnum : Int32
 } derive(Hash, ToJson, @debug.Debug)
-pub fn Position::column(Self) -> Int
+pub fn Position::column(Self) -> Int32
 pub impl Compare for Position
 pub impl Eq for Position
 pub impl Show for Position

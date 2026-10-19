@@ -85,7 +85,7 @@ pub let no_location : @basic.Location
 // Types and methods
 pub(all) enum Accessor {
   Label(Label)
-  Index(tuple_index~ : Int, loc~ : @basic.Location)
+  Index(tuple_index~ : Int32, loc~ : @basic.Location)
   Newtype(loc~ : @basic.Location)
 } derive(@debug.Debug)
 
@@ -707,7 +707,7 @@ pub(open) trait IterVisitor {
   fn visit_Constructor(Self, Constructor) -> Unit = _
   fn visit_Accessor(Self, Accessor) -> Unit = _
   fn visit_Accessor_Label(Self, Label) -> Unit = _
-  fn visit_Accessor_Index(Self, tuple_index~ : Int, loc~ : @basic.Location) -> Unit = _
+  fn visit_Accessor_Index(Self, tuple_index~ : Int32, loc~ : @basic.Location) -> Unit = _
   fn visit_Accessor_Newtype(Self, loc~ : @basic.Location) -> Unit = _
   fn visit_AliasTarget(Self, AliasTarget) -> Unit = _
   fn visit_Argument(Self, Argument) -> Unit = _
@@ -914,7 +914,7 @@ pub(open) trait MapVisitor {
   fn visit_Constructor(Self, Constructor) -> Constructor = _
   fn visit_Accessor(Self, Accessor) -> Accessor = _
   fn visit_Accessor_Label(Self, Label) -> Accessor = _
-  fn visit_Accessor_Index(Self, tuple_index~ : Int, loc~ : @basic.Location) -> Accessor = _
+  fn visit_Accessor_Index(Self, tuple_index~ : Int32, loc~ : @basic.Location) -> Accessor = _
   fn visit_Accessor_Newtype(Self, loc~ : @basic.Location) -> Accessor = _
   fn visit_AliasTarget(Self, AliasTarget) -> AliasTarget = _
   fn visit_Argument(Self, Argument) -> Argument = _
