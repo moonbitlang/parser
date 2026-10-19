@@ -17,21 +17,21 @@ import {
 // Types and methods
 pub struct CheckpointMapper {
   tokens : Array[(@tokens.Token, @basic.Position, @basic.Position)]
-  start : Int
-  limit : Int
+  start : Int32
+  limit : Int32
   slots : Array[CommentSlot]
   dangling : Array[@tokens.Comment]
   mut mode : CheckpointMode
-  mut cursor : Int
-  mut current_slot : Int?
-  mut pretty_slot : Int
+  mut cursor : Int32
+  mut current_slot : Int32?
+  mut pretty_slot : Int32
   mut failed : Bool
 }
 pub fn CheckpointMapper::begin_pretty(Self) -> Unit
 pub fn CheckpointMapper::checkpoint(Self, @basic.Position) -> Unit
 pub fn CheckpointMapper::eof(Self) -> Unit
 pub fn CheckpointMapper::is_complete(Self) -> Bool
-pub fn CheckpointMapper::new(Array[(@tokens.Token, @basic.Position, @basic.Position)], start? : Int, len? : Int) -> Self
+pub fn CheckpointMapper::new(Array[(@tokens.Token, @basic.Position, @basic.Position)], start? : Int32, len? : Int32) -> Self
 pub fn CheckpointMapper::placeholder(Self, ignore_blank? : Bool) -> @prettyprinter.Document
 pub fn CheckpointMapper::placeholder_or_space(Self, ignore_blank? : Bool) -> @prettyprinter.Document
 pub fn CheckpointMapper::token(Self, @tokens.TokenKind) -> Unit
@@ -81,7 +81,7 @@ pub fn Mapper::to_debug_info(Self) -> String
 type NodeArray
 pub fn NodeArray::empty() -> Self
 #alias("_[_]")
-pub fn NodeArray::get(Self, Int) -> Key?
+pub fn NodeArray::get(Self, Int32) -> Key?
 pub fn NodeArray::last(Self) -> Key?
 pub impl @prettyprinter.Pretty for NodeArray
 
@@ -97,7 +97,7 @@ pub impl @prettyprinter.Pretty for NodeTable
 type NodeTableArray
 pub fn NodeTableArray::empty() -> Self
 #alias("_[_]")
-pub fn NodeTableArray::get(Self, Int) -> NodeTable
+pub fn NodeTableArray::get(Self, Int32) -> NodeTable
 pub impl @prettyprinter.Pretty for NodeTableArray
 
 type TokenGroup
