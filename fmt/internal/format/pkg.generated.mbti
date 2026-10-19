@@ -23,7 +23,7 @@ pub fn format_moon_mod(String, add_dependencies? : ArrayView[String], remove_dep
 
 pub fn format_moon_pkg(String) -> String
 
-pub fn format_nth_impl_from_source(String, Int, is_markdown? : Bool) -> (Int, Int, String)?
+pub fn format_nth_impl_from_source(String, Int32, is_markdown? : Bool) -> (Int32, Int32, String)?
 
 pub fn impls_to_string(@list.List[@syntax.Impl]) -> String
 

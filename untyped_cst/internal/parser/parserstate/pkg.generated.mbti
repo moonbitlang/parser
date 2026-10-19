@@ -12,7 +12,7 @@ pub fn kind_in(@tokens.TokenKind, Array[@tokens.TokenKind]) -> Bool
 
 pub fn new_state(Array[(@tokens.Token, @basic.Position, @basic.Position)], String, Array[@basic.Report], Bool, (ParserState, @tokens.InterpElem) -> @node.CstNode) -> ParserState
 
-pub fn next_depth(Int, @tokens.Token) -> Int
+pub fn next_depth(Int32, @tokens.Token) -> Int32
 
 pub fn required_pattern_start_tokens() -> Array[@tokens.TokenKind]
 
@@ -21,8 +21,8 @@ pub fn required_pattern_start_tokens() -> Array[@tokens.TokenKind]
 // Types and methods
 pub(all) struct ParserState {
   tokens : Array[(@tokens.Token, @basic.Position, @basic.Position)]
-  mut pos : Int
-  mut delimiter_depth : Int
+  mut pos : Int32
+  mut delimiter_depth : Int32
   reports : Array[@basic.Report]
   enable_metavar : Bool
   mut abort_current_decl : Bool
@@ -30,9 +30,9 @@ pub(all) struct ParserState {
   mut report_next_top_level_start : Bool
   mut suppress_next_top_level_recovery_report : Bool
   recovery_scopes : Array[RecoveryScope]
-  mut next_recovery_scope_id : Int
+  mut next_recovery_scope_id : Int32
   source : String
-  cnum_to_source_offset : (Int) -> Int
+  cnum_to_source_offset : (Int32) -> Int32
   parse_interp_segment : (ParserState, @tokens.InterpElem) -> @node.CstNode
 }
 pub fn ParserState::consume_any(Self) -> @node.CstNode?
@@ -46,13 +46,13 @@ pub fn ParserState::missing_token_node(Self, @tokens.TokenKind) -> @node.CstNode
 pub fn ParserState::missing_token_node_silent(Self, @tokens.TokenKind) -> @node.CstNode
 pub fn ParserState::missing_token_node_with_expected(Self, @tokens.TokenKind, Array[@tokens.TokenKind]) -> @node.CstNode
 pub fn ParserState::missing_type_node(Self) -> @node.CstNode
-pub fn ParserState::offset_for_position(Self, @basic.Position) -> Int
-pub fn ParserState::peek(Self, offset? : Int) -> (@tokens.Token, @basic.Position, @basic.Position)?
-pub fn ParserState::peek_nth_significant(Self, Int) -> (@tokens.Token, @basic.Position, @basic.Position)?
+pub fn ParserState::offset_for_position(Self, @basic.Position) -> Int32
+pub fn ParserState::peek(Self, offset? : Int32) -> (@tokens.Token, @basic.Position, @basic.Position)?
+pub fn ParserState::peek_nth_significant(Self, Int32) -> (@tokens.Token, @basic.Position, @basic.Position)?
 pub fn ParserState::peek_significant(Self) -> (@tokens.Token, @basic.Position, @basic.Position)?
-pub fn ParserState::pop_recovery_scope(Self, Int) -> Unit
+pub fn ParserState::pop_recovery_scope(Self, Int32) -> Unit
 pub fn ParserState::previous_end(Self) -> @basic.Position
-pub fn ParserState::push_recovery_scope(Self, Array[@tokens.TokenKind], depth_sensitive? : Bool) -> Int
+pub fn ParserState::push_recovery_scope(Self, Array[@tokens.TokenKind], depth_sensitive? : Bool) -> Int32
 pub fn ParserState::recover_until(Self, Array[@tokens.TokenKind], balance_groups? : Bool) -> RecoveryScan
 pub fn ParserState::recovery_stop_at(Self, Array[@tokens.TokenKind]) -> RecoveryOwner?
 pub fn ParserState::report(Self, @basic.Location, String) -> Unit
@@ -60,15 +60,15 @@ pub fn ParserState::report_expected_description(Self, String) -> Unit
 pub fn ParserState::report_expected_description_at(Self, @tokens.Token, @basic.Location, String) -> Unit
 pub fn ParserState::report_expected_tokens(Self, Array[@tokens.TokenKind]) -> Unit
 pub fn ParserState::report_expected_tokens_at(Self, @tokens.Token, @basic.Location, Array[@tokens.TokenKind]) -> Unit
-pub fn ParserState::required_expr_node(Self, @node.CstNode, Int) -> @node.CstNode
-pub fn ParserState::required_pattern_node(Self, @node.CstNode, Int, expected? : String) -> @node.CstNode
-pub fn ParserState::required_type_node(Self, @node.CstNode, Int) -> @node.CstNode
+pub fn ParserState::required_expr_node(Self, @node.CstNode, Int32) -> @node.CstNode
+pub fn ParserState::required_pattern_node(Self, @node.CstNode, Int32, expected? : String) -> @node.CstNode
+pub fn ParserState::required_type_node(Self, @node.CstNode, Int32) -> @node.CstNode
 pub fn ParserState::root_loc(Self) -> @basic.Location
-pub fn ParserState::root_span(Self) -> (Int, Int)
+pub fn ParserState::root_span(Self) -> (Int32, Int32)
 
 pub(all) enum RecoveryOwner {
   RecoveryLocal
-  RecoveryScopeOwner(Int)
+  RecoveryScopeOwner(Int32)
   RecoveryEof
 }
 
@@ -79,9 +79,9 @@ pub(all) struct RecoveryScan {
 }
 
 pub(all) struct RecoveryScope {
-  id : Int
+  id : Int32
   stop_kinds : Array[@tokens.TokenKind]
-  depth : Int
+  depth : Int32
   depth_sensitive : Bool
 }
 

@@ -92,7 +92,7 @@ pub(all) enum Token {
   EXCLAMATION
   DOT_LIDENT(String)
   DOT_UIDENT(String)
-  DOT_INT(Int)
+  DOT_INT(Int32)
   DOT_LPAREN
   COLONCOLON
   COLON
