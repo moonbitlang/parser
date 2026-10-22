@@ -186,12 +186,3 @@ pub fn parse_string(
   reports.append(diagnostics)
   (impls, reports)
 }
-
-///|
-pub fn parse_file(
-  path : String,
-  parser~ : Parser = Handrolled,
-) -> (@syntax.Impls, Array[Report]) raise @fs.IOError {
-  let source = @fs.read_file_to_string(path)
-  parse_string(source, name=path, parser~)
-}
