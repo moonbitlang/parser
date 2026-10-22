@@ -3,7 +3,6 @@ import {
   "moonbitlang/parser/handrolled_parser",
   "moonbitlang/lexer",
   "moonbitlang/lexer/tokens",
-  "moonbitlang/x/fs",
   "moonbitlang/lexer/basic",
   "moonbitlang/parser/yacc_parser",
   "moonbitlang/core/list",
