@@ -1,7 +1,7 @@
 # mq
 
 `mq` parses MoonBit configuration DSL files. The package lives at
-`moonbitlang/parser/cmd/mq`, uses `moonbitlang/async`, and supports both the
+`moonbitlang/parser/cmd/mq`, uses `moonbitlang/core/async`, and supports both the
 native and WASI wasm backends.
 
 The `legacy` subcommand prints the post-processed JSON form that is compatible
