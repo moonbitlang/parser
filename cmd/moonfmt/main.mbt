@@ -14,7 +14,7 @@ fn exit(code : UInt32) = "wasi_snapshot_preview1" "proc_exit"
 
 ///|
 async fn[T] die(message : String) -> T {
-  @stdio.stderr.write("\{message}\n") catch {
+  @stdio.stderr.text.write("\{message}\n") catch {
     _ => ()
   }
   exit(1)
@@ -23,7 +23,7 @@ async fn[T] die(message : String) -> T {
 
 ///|
 async fn write_stdout(message : String) -> Unit {
-  @stdio.stdout.write(message) catch {
+  @stdio.stdout.text.write(message) catch {
     err => die("error: failed to write stdout: \{err}")
   }
 }
@@ -37,7 +37,7 @@ async fn overwrite_if_changed(
   if source == result {
     return false
   }
-  @fs.write_file(path, result, create_mode=CreateOrTruncate, sync=Full)
+  @fs.write_text(path, result, create_mode=CreateOrTruncate, sync=Full)
   true
 }
 
@@ -77,7 +77,7 @@ fn parse_moonfmt_args(args : ArrayView[String]) -> MoonfmtOptions raise {
 ///|
 async fn moonfmt(args : ArrayView[String]) -> Unit {
   let options = parse_moonfmt_args(args) catch { err => die("\{err}") }
-  let source = @fs.read_file(options.path).text() catch { err => die("\{err}") }
+  let source = @fs.read_text(options.path) catch { err => die("\{err}") }
   let result = @fmt.format(source)
   if options.overwrite {
     let second = @fmt.format(result)
