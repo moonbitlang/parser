@@ -1,6 +1,6 @@
 ///|
 fn register_temp_dir_cleanup(
-  group : @async.TaskGroup[Unit],
+  group : @async.TaskGroup,
   directory : String,
 ) -> Unit {
   group.add_defer() <| () => {
@@ -14,10 +14,10 @@ async test "unchanged overwrite leaves file unchanged" {
     let directory = @fs.tmpdir(prefix="moonfmt-unchanged")
     register_temp_dir_cleanup(group, directory)
     let target = directory + "/input.mbt"
-    @fs.write_file(target, "same", create_mode=CreateNew)
+    @fs.write_text(target, "same", create_mode=CreateNew)
     let changed = overwrite_if_changed(target, "same", "same")
     assert_false(changed)
-    inspect(@fs.read_file(target).text(), content="same")
+    inspect(@fs.read_text(target), content="same")
   }
 }
 
@@ -27,10 +27,10 @@ async test "changed overwrite writes new contents" {
     let directory = @fs.tmpdir(prefix="moonfmt-changed")
     register_temp_dir_cleanup(group, directory)
     let target = directory + "/input.mbt"
-    @fs.write_file(target, "old", create_mode=CreateNew)
+    @fs.write_text(target, "old", create_mode=CreateNew)
     let changed = overwrite_if_changed(target, "old", "new")
     assert_true(changed)
-    inspect(@fs.read_file(target).text(), content="new")
+    inspect(@fs.read_text(target), content="new")
   }
 }
 
@@ -41,13 +41,13 @@ async test "overwrite preserves executable permission" {
     let directory = @fs.tmpdir(prefix="moonfmt-permission")
     register_temp_dir_cleanup(group, directory)
     let target = directory + "/input.mbt"
-    @fs.write_file(target, "old", create_mode=CreateNew)
+    @fs.write_text(target, "old", create_mode=CreateNew)
     @fs.chmod(target, 0o755)
     assert_true(@fs.can_execute(target))
     let changed = overwrite_if_changed(target, "old", "new")
     assert_true(changed)
     assert_true(@fs.can_execute(target))
-    inspect(@fs.read_file(target).text(), content="new")
+    inspect(@fs.read_text(target), content="new")
   }
 }
 
@@ -59,11 +59,11 @@ async test "overwrite follows symbolic link without replacing it" {
     register_temp_dir_cleanup(group, directory)
     let target = directory + "/target.mbt"
     let link = directory + "/input.mbt"
-    @fs.write_file(target, "old", create_mode=CreateNew)
+    @fs.write_text(target, "old", create_mode=CreateNew)
     @fs.symlink(link, target~)
     let changed = overwrite_if_changed(link, "old", "new")
     assert_true(changed)
     assert_true(@fs.kind(link, follow_symlink=false) == SymLink)
-    inspect(@fs.read_file(target).text(), content="new")
+    inspect(@fs.read_text(target), content="new")
   }
 }
