@@ -8,7 +8,7 @@ fn exit(code : UInt32) = "wasi_snapshot_preview1" "proc_exit"
 
 ///|
 async fn[T] die(message : String) -> T {
-  @stdio.stderr.write("\{message}\n") catch {
+  @stdio.stderr.text.write("\{message}\n") catch {
     _ => ()
   }
   exit(1)
@@ -17,7 +17,7 @@ async fn[T] die(message : String) -> T {
 
 ///|
 async fn write_stdout(message : String) -> Unit {
-  try @stdio.stdout.write(message) catch {
+  try @stdio.stdout.text.write(message) catch {
     err => die("error: failed to write stdout: \{err}")
   } noraise {
     _ => ()
@@ -36,7 +36,7 @@ fn program_args() -> ArrayView[String] {
 
 ///|
 async fn read_file(path : String) -> String {
-  try @fs.read_file(path).text() catch {
+  try @fs.read_text(path) catch {
     err => {
       die("error: failed to read \{path}: \{err}")
       ""
@@ -48,7 +48,7 @@ async fn read_file(path : String) -> String {
 
 ///|
 async fn read_stdin() -> String {
-  try @stdio.stdin.read_all().text() catch {
+  try @stdio.stdin.text.read_all() catch {
     err => {
       die("error: failed to read stdin: \{err}")
       ""
@@ -63,7 +63,7 @@ async fn write_result(output : String?, content : String) -> Unit {
   let content = "\{content}\n"
   match output {
     Some(path) =>
-      try @fs.write_file(path, content, create_mode=CreateOrTruncate) catch {
+      try @fs.write_text(path, content, create_mode=CreateOrTruncate) catch {
         err => die("error: failed to write \{path}: \{err}")
       } noraise {
         _ => ()
