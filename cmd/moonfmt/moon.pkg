@@ -1,8 +1,8 @@
 import {
   "moonbitlang/core/argparse",
-  "moonbitlang/core/async",
-  "moonbitlang/core/async/fs",
-  "moonbitlang/core/async/stdio",
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/stdio",
   "moonbitlang/parser/fmt",
   "moonbitlang/core/env",
 }
