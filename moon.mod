@@ -1,11 +1,11 @@
 name = "moonbitlang/parser"
 
-version = "0.4.6"
+version = "0.4.7"
 
 import {
   "moonbitlang/x@0.5.1",
-  "moonbitlang/lexer@0.4.4",
-  "moonbitlang/moon_config@0.4.5",
+  "moonbitlang/lexer@0.4.5",
+  "moonbitlang/moon_config@0.4.6",
   "moonbit-community/prettyprinter@0.4.11",
 }
 
