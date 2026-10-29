@@ -3159,9 +3159,13 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       Collapsible(match_ + cond, cases)
     }
     LetMut(binder~, ty~, expr~, body~, loc=_) => {
-      let let_ = text("let")
+      let let_ = text("let") + space + text("mut")
       let binder = space + fmt.binder(binder)
-      let ty = if ty is Some(ty) { space + fmt.ty(ty) } else { empty }
+      let ty = if ty is Some(ty) {
+        space + colon + space + fmt.ty(ty)
+      } else {
+        empty
+      }
       let assign = space + equal
       // TODO: handle multiline string
       let expr = space + fmt.compose(expr, Expr) // TODO: compose_rhs

@@ -264,3 +264,29 @@ test "compound effect comments do not force formatter fallback" {
     }
   }
 }
+
+///|
+test "mutable let bindings keep mut and their type annotation" {
+  let formatted = assert_modern_syntax_format_pipeline(
+    (
+      #|fn f() -> Unit {
+      #|let mut x : Int = 1
+      #|      x = 2
+      #|}
+    ),
+  )
+  assert_true(formatted.contains("  let mut x : Int = 1\n  x = 2\n"))
+  let (impls, reports, _) = parse(
+    (
+      #|fn f() -> Unit {
+      #|  let mut x : Int = 1
+      #|  let mut y = 2
+      #|  x = y
+      #|}
+    ),
+  )
+  assert_true(reports.is_empty())
+  let printed = impls_to_string(impls)
+  assert_true(printed.contains("let mut x : Int = 1"))
+  assert_true(printed.contains("let mut y = 2"))
+}
