@@ -23,7 +23,7 @@ pub(all) struct ParserState {
 
 ///|
 fn default_location_mapper(source : String) -> (Int32) -> Int32 {
-  let view = source.view()
+  let view = source[:]
   let source_len = view.length()
   let table = Array::make(source_len + 1, source_len)
   let mut source_offset = 0
