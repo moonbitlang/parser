@@ -2,6 +2,8 @@ import {
   "moonbitlang/lexer/basic",
 }
 
+warnings = "-unused_constructor-deprecated_syntax"
+
 formatter(ignore: [ "tokens.mbt" ])
 
 rule(
