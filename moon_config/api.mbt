@@ -1,59 +1,85 @@
 ///|
-/// Parse `moon.pkg` source into the post-processed configuration AST.
+#derive(Debug)
+pub struct Diagnostics {
+  errors : Array[Report]
+  warnings : Array[Report]
+}
+
+///|
+#derive(Debug)
+pub struct ParseResult {
+  ast : Ast
+  tokens : Triples
+  diagnostics : Diagnostics
+}
+
+///|
+/// Parse configuration syntax and validate it without rewriting the tree.
 pub fn parse_moon_pkg(
   name~ : String = "moon.pkg",
+  keep_comments~ : Bool = false,
+  validate~ : Bool = true,
   source : String,
-) -> (Ast, Array[Report]) {
-  let (ast, diagnostics) = parse_string(source, name~)
-  (post_process_moon_pkg(ast, diagnostics), diagnostics)
+) -> ParseResult {
+  let result = parse_string(source, name~, keep_comments~, allow_reserved=true)
+  if validate {
+    validate_config(result.ast, Package, result.diagnostics)
+  }
+  result
 }
 
 ///|
-/// Parse `moon.mod` source into the post-processed configuration AST.
+/// Parse configuration syntax and validate it without rewriting the tree.
 pub fn parse_moon_mod(
   name~ : String = "moon.mod",
+  keep_comments~ : Bool = false,
+  validate~ : Bool = true,
   source : String,
-) -> (Ast, Array[Report]) {
-  let (ast, diagnostics) = parse_string(source, name~)
-  (post_process_moon_mod(ast, diagnostics), diagnostics)
+) -> ParseResult {
+  let result = parse_string(source, name~, keep_comments~)
+  if validate {
+    validate_config(result.ast, Module, result.diagnostics)
+  }
+  result
 }
 
 ///|
-/// Parse `moon.work` source into the configuration AST.
 pub fn parse_moon_work(
   name~ : String = "moon.work",
+  keep_comments~ : Bool = false,
+  validate~ : Bool = true,
   source : String,
-) -> (Ast, Array[Report]) {
-  let (ast, diagnostics) = parse_string(source, name~)
-  (post_process_moon_work(ast, diagnostics), diagnostics)
+) -> ParseResult {
+  let result = parse_string(source, name~, keep_comments~, allow_reserved=true)
+  if validate {
+    validate_config(result.ast, Workspace, result.diagnostics)
+  }
+  result
 }
 
 ///|
-/// Validate a post-processed `moon.mod` `Ast`.
-///
-/// Source-level checks that need raw keys, such as duplicate `options(...)`
-/// blocks, are handled by `parse_moon_mod`.
-pub fn validate_moon_mod(ast : Ast) -> Array[Report] {
-  let report = []
-  _validate_moon_mod(ast, report)
-  return report
+pub fn validate_moon_mod(ast : Ast) -> Diagnostics {
+  let diagnostics = Diagnostics::{ errors: [], warnings: [], }
+  validate_config(ast, Module, diagnostics)
+  diagnostics
 }
 
 ///|
-/// Validate a post-processed `moon.pkg` `Ast`.
-///
-/// Source-level checks that need raw keys, such as duplicate `options(...)`
-/// blocks, are handled by `parse_moon_pkg`.
-pub fn validate_moon_pkg(ast : Ast) -> Array[Report] {
-  let report = []
-  _validate_moon_pkg(ast, report)
-  return report
+pub fn validate_moon_pkg(ast : Ast) -> Diagnostics {
+  let diagnostics = Diagnostics::{ errors: [], warnings: [], }
+  validate_config(ast, Package, diagnostics)
+  diagnostics
 }
 
 ///|
-/// Validate a `moon.work` `Ast`.
-pub fn validate_moon_work(ast : Ast) -> Array[Report] {
-  let report = []
-  _validate_moon_work(ast, report)
-  return report
+pub fn validate_moon_work(ast : Ast) -> Diagnostics {
+  let diagnostics = Diagnostics::{ errors: [], warnings: [], }
+  validate_config(ast, Workspace, diagnostics)
+  diagnostics
 }
+
+///|
+pub extend Diagnostics with Debug::{to_repr}
+
+///|
+pub extend ParseResult with Debug::{to_repr}

@@ -47,8 +47,9 @@ test "moon.pkg keeps ordered fields, duplicate applies, and all imports" {
       #|
       #|rule(name: "r2", command: "two")
       #|
+      #|pkgtype(kind: "executable")
+      #|
       #|options(
-      #|  "is-main": true,
       #|  custom: [ 1, 2 ],
       #|)
     ),

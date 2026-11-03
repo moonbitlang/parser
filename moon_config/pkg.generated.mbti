@@ -6,35 +6,109 @@ import {
   "moonbitlang/core/immut/vector",
   "moonbitlang/core/json",
   "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
 }
 
 // Values
-pub fn parse_moon_mod(name? : String, String) -> (Ast, Array[@basic.Report])
+pub fn find_field(ArrayView[Field], String) -> Expr?
 
-pub fn parse_moon_pkg(name? : String, String) -> (Ast, Array[@basic.Report])
+pub fn find_field_in_options(Ast, String) -> Expr?
 
-pub fn parse_moon_work(name? : String, String) -> (Ast, Array[@basic.Report])
+pub fn find_statements(Ast, String) -> Ast
 
-pub fn validate_moon_mod(Ast) -> Array[@basic.Report]
+pub fn parse_moon_mod(name? : String, keep_comments? : Bool, validate? : Bool, String) -> ParseResult
 
-pub fn validate_moon_pkg(Ast) -> Array[@basic.Report]
+pub fn parse_moon_pkg(name? : String, keep_comments? : Bool, validate? : Bool, String) -> ParseResult
 
-pub fn validate_moon_work(Ast) -> Array[@basic.Report]
+pub fn parse_moon_work(name? : String, keep_comments? : Bool, validate? : Bool, String) -> ParseResult
+
+pub fn validate_moon_mod(Ast) -> Diagnostics
+
+pub fn validate_moon_pkg(Ast) -> Diagnostics
+
+pub fn validate_moon_work(Ast) -> Diagnostics
 
 // Errors
 
 // Types and methods
 #derive(Eq, @debug.Debug)
-pub(all) enum Ast {
-  Null(loc~ : @basic.Location)
-  Bool(Bool, loc~ : @basic.Location)
-  Str(String, loc~ : @basic.Location)
-  Float(String, loc~ : @basic.Location)
-  Arr(@vector.Vector[Ast], loc~ : @basic.Location)
-  Obj(@vector.Vector[(String, Ast)], loc~ : @basic.Location)
-}
-pub fn Ast::loc(Self) -> @basic.Location
+pub(all) struct Ast(@vector.Vector[Statement])
+pub fn Ast::equal(Self, Self) -> Bool
+pub fn Ast::not_equal(Self, Self) -> Bool
+pub fn Ast::to_json(Self) -> @json.Json
+pub fn Ast::to_repr(Self) -> @debug.Repr
 pub impl @json.ToJson for Ast
+
+#derive(@debug.Debug)
+pub struct Diagnostics {
+  errors : Array[@basic.Report]
+  warnings : Array[@basic.Report]
+}
+pub fn Diagnostics::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum Expr {
+  Bool(value~ : Bool, loc~ : @basic.Location)
+  Int(repr~ : String, loc~ : @basic.Location)
+  String(str~ : String, loc~ : @basic.Location)
+  Array(items~ : Array[Expr], loc~ : @basic.Location)
+  Map(fields~ : Array[Field], loc~ : @basic.Location)
+  Apply(name~ : String, name_loc~ : @basic.Location, args~ : Array[Field], args_loc~ : @basic.Location, loc~ : @basic.Location)
+  Hole(@basic.Location)
+}
+pub fn Expr::equal(Self, Self) -> Bool
+pub fn Expr::loc(Self) -> @basic.Location
+pub fn Expr::not_equal(Self, Self) -> Bool
+pub fn Expr::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct Field {
+  key : String
+  key_loc : @basic.Location
+  value : Expr
+}
+pub fn Field::equal(Self, Self) -> Bool
+pub fn Field::not_equal(Self, Self) -> Bool
+pub fn Field::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct ImportItem {
+  path : String
+  path_loc : @basic.Location
+  alias_ : (String, @basic.Location)?
+  loc : @basic.Location
+}
+pub fn ImportItem::equal(Self, Self) -> Bool
+pub fn ImportItem::not_equal(Self, Self) -> Bool
+pub fn ImportItem::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum ImportKind {
+  Normal
+  Test
+  Wbtest
+}
+pub fn ImportKind::equal(Self, Self) -> Bool
+pub fn ImportKind::not_equal(Self, Self) -> Bool
+pub fn ImportKind::to_repr(Self) -> @debug.Repr
+
+#derive(@debug.Debug)
+pub struct ParseResult {
+  ast : Ast
+  tokens : Array[(@tokens.Token, @basic.Position, @basic.Position)]
+  diagnostics : Diagnostics
+}
+pub fn ParseResult::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum Statement {
+  Import(items~ : Array[ImportItem], kind~ : ImportKind, keyword_loc~ : @basic.Location, list_loc~ : @basic.Location, loc~ : @basic.Location)
+  Assign(Field)
+  Expr(Expr)
+}
+pub fn Statement::equal(Self, Self) -> Bool
+pub fn Statement::not_equal(Self, Self) -> Bool
+pub fn Statement::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 
