@@ -86,8 +86,16 @@ async fn run_legacy(options : LegacyOptions) -> Unit {
     Stdin => read_stdin()
     Code(source) => source
   }
-  let ast = parse_config(kind, source)
-  write_result(options.output, ToJson::to_json(ast).stringify())
+  let result = parse_config(kind, source)
+  if !result.diagnostics.errors.is_empty() {
+    die(result.diagnostics.errors.map(report => report.msg).join("\n"))
+  }
+  for warning in result.diagnostics.warnings {
+    @stdio.stderr.write("warning: \{warning.msg}\n") catch {
+      err => die("error: failed to write diagnostics: \{err}")
+    }
+  }
+  write_result(options.output, result.ast.to_json().stringify())
 }
 
 ///|

@@ -4,8 +4,8 @@
 `moonbitlang/parser/cmd/mq`, uses `moonbitlang/async`, and supports both the
 native and WASI wasm backends.
 
-The `legacy` subcommand prints the post-processed JSON form that is compatible
-with the old JSON configuration format.
+The `legacy` subcommand validates configuration syntax, then serializes its AST as JSON.
+Parse errors stop the command; warnings are written to stderr.
 
 ## Native
 
