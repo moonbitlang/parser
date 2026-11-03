@@ -1,35 +1,41 @@
 ///|
+#derive(Debug, ToJson)
 pub(all) struct Name {
   name : String
   loc : Location
-} derive(Debug, ToJson)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct QualifiedName {
   name : QualifiedIdent
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct MethodSelfType {
   name : String
   is_object : Bool
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct FuncSig {
   attrs : Attributes
   type_name : MethodSelfType?
@@ -39,9 +45,10 @@ pub(all) struct FuncSig {
   nocancel_ : Location?
   type_params : @list.List[TypeParamWithConstraints]
   is_async : Location?
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum TypeDefinition {
   Abstract
   Newtype(Type)
@@ -52,9 +59,10 @@ pub(all) enum TypeDefinition {
   Variant(@list.List[ConstrDecl])
   Record(fields~ : @list.List[FieldDecl])
   Alias(Type)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TypeSig {
   name : Name
   type_params : @list.List[TypeParamNoConstraints]
@@ -62,9 +70,10 @@ pub(all) struct TypeSig {
   vis : Visibility
   attrs : Attributes
   derives : @list.List[QualifiedName]
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum AliasSig {
   TypeAlias(
     name~ : Name,
@@ -81,9 +90,10 @@ pub(all) enum AliasSig {
     attrs~ : Attributes
   )
   FuncAlias(name~ : Name, type_name~ : Name, attrs~ : Attributes)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TraitMethodSig {
   name : Name
   type_params : @list.List[TypeParamWithConstraints]
@@ -93,47 +103,53 @@ pub(all) struct TraitMethodSig {
   return_ : (Type, ErrorType)
   nocancel_ : Location?
   attrs : Attributes
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TraitSig {
   name : Name
   super_traits : @list.List[QualifiedName]
   methods : @list.List[TraitMethodSig]
   vis : Visibility
   attrs : Attributes
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ImplSig {
   type_params : @list.List[TypeParamWithConstraints]
   type_ : Type
   trait_name : QualifiedName
   attrs : Attributes
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ConstSig {
   name : Name
   type_ : Type
   value : Constant
   attrs : Attributes
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ValueSig {
   name : Name
   type_ : Type
   attrs : Attributes
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct PackageImport {
   name : String
   alias_ : String?
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Sig {
   Func(FuncSig)
   Type(TypeSig)
@@ -142,7 +158,7 @@ pub(all) enum Sig {
   Impl(ImplSig)
   Const(ConstSig)
   Value(ValueSig)
-} derive(Debug)
+}
 
 ///|
 pub fn Sig::attrs(self : Sig) -> Attributes {
@@ -160,13 +176,14 @@ pub fn Sig::attrs(self : Sig) -> Attributes {
 }
 
 ///|
+#derive(Debug)
 pub(all) struct Mbti {
   package_name : String
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, Location)]
   loc : Location
   base_pos : BasePos
-} derive(Debug)
+}
 
 ///|
 #deprecated

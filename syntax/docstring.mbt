@@ -1,10 +1,11 @@
 ///|
+#derive(Debug)
 pub(all) struct DocString {
   /// The docstring content.
   content : @list.List[String]
   /// The location of the docstring in the source code.
   loc : Location
-} derive(Debug)
+}
 
 ///|
 pub impl ToJson for DocString with fn to_json(self) {

@@ -19,26 +19,29 @@ pub impl Debug for Id with fn to_repr(self) {
 }
 
 ///|
+#derive(Debug)
 pub(all) enum Expr {
   Ident(Id)
   String(@tokens.StringLiteral)
   Apply(Id, List[Prop])
   Bool(Bool)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Prop {
   Labeled(String, Expr)
   Expr(Expr)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct Attribute {
   loc : Location
   raw : String
   parsed : Expr?
   //mut used : Bool
-} derive(Debug)
+}
 
 ///|
 pub fn Attribute::name(self : Self) -> String? {

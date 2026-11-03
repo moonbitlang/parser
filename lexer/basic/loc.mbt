@@ -1,10 +1,11 @@
 ///|
+#derive(Debug, Hash, ToJson)
 pub(all) struct Position {
   fname : String
   lnum : Int32
   bol : Int32
   cnum : Int32
-} derive(Debug, Hash, ToJson)
+}
 
 ///|
 pub impl Show for Position with fn output(self, logger) {
@@ -60,17 +61,19 @@ pub fn Position::column(self : Position) -> Int32 {
 }
 
 ///|
+#derive(Eq, Compare, Hash, Debug)
 pub(all) struct Location {
   start : Position
   end : Position
-} derive(Eq, Compare, Hash, Debug)
+}
 
 ///|
+#derive(Eq, Compare, Hash, Debug)
 pub(all) struct BasePos {
   base_pkg : String
   base_fname : String
   base_lnum : Int32
-} derive(Eq, Compare, Hash, Debug)
+}
 
 ///|
 pub fn BasePos::none() -> BasePos {

@@ -3,6 +3,7 @@ package "moonbitlang/lexer/tokens"
 
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
   "moonbitlang/lexer/basic",
 }
 
@@ -11,29 +12,34 @@ import {
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) struct Comment {
   content : String
   kind : CommentKind
   mut consumed_by_docstring : Bool
-} derive(Eq, @debug.Debug)
-pub impl ToJson for Comment
+}
+pub impl @json.ToJson for Comment
 
+#derive(Eq, @debug.Debug)
 pub(all) enum CommentKind {
   InlineTrailing
   Ownline(leading_blank_line~ : Bool, trailing_blank_line~ : Bool)
-} derive(Eq, @debug.Debug)
-pub impl ToJson for CommentKind
+}
+pub impl @json.ToJson for CommentKind
 
+#derive(Eq, @debug.Debug)
 pub(all) enum InterpElem {
   InterpLit(repr~ : String, loc~ : @basic.Location)
   InterpSource(InterpSource)
-} derive(Eq, @debug.Debug)
+}
 
+#derive(Eq, @debug.Debug, @json.ToJson)
 pub(all) struct InterpSource {
   source : String
   loc : @basic.Location
-} derive(Eq, ToJson, @debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) enum Token {
   CHAR(String)
   INT(String)
@@ -168,11 +174,12 @@ pub(all) enum Token {
   LEXSCAN
   EXTEND
   PACKAGE
-} derive(@debug.Debug)
+}
 pub fn Token::kind(Self) -> TokenKind
 pub fn Token::to_expect_string(Self) -> String
-pub impl ToJson for Token
+pub impl @json.ToJson for Token
 
+#derive(Compare, Eq, Hash)
 pub(all) enum TokenKind {
   TK_CHAR
   TK_INT
@@ -307,7 +314,7 @@ pub(all) enum TokenKind {
   TK_LEXSCAN
   TK_EXTEND
   TK_PACKAGE
-} derive(Compare, Eq, Hash)
+}
 pub fn TokenKind::to_expect_string(Self) -> String
 pub impl Show for TokenKind
 pub impl @debug.Debug for TokenKind

@@ -1,8 +1,9 @@
 ///|
+#derive(Eq)
 priv enum OperandPosition {
   LeftOperand
   RightOperand
-} derive(Eq)
+}
 
 ///|
 priv enum InfixCtx {
@@ -31,10 +32,11 @@ fn precedence_of_operator(op : String) -> Int32 {
 }
 
 ///|
+#derive(Eq)
 priv enum Assoc {
   Left
   Right
-} derive(Eq)
+}
 
 ///|
 fn assoc_of_operator(op : String) -> Assoc {

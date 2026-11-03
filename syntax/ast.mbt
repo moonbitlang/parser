@@ -1,18 +1,21 @@
 ///|
+#derive(Debug)
 pub(all) enum RangeKind {
   Inclusive
   Exclusive
   InclusiveMissingEqual
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Visibility {
   Default
   Pub(attr~ : String?, loc~ : Location)
   Priv(loc~ : Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Constant {
   Bool(Bool)
   Byte(ByteLiteral)
@@ -27,26 +30,29 @@ pub(all) enum Constant {
   String(StringLiteral)
   Regex(StringLiteral)
   BigInt(String)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct Label {
   name : String
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ConstrName {
   name : String
   loc : Location
-} derive(Debug)
+}
 
 ///|
 // checked!
+#derive(Debug)
 pub(all) enum LongIdent {
   Ident(name~ : String)
   Dot(pkg~ : String, id~ : String)
-} derive(Debug)
+}
 
 ///|
 /// The dummy LongIdent is used in typer to represent an parsing error.
@@ -55,19 +61,22 @@ pub fn LongIdent::dummy() -> LongIdent {
 }
 
 ///|
+#derive(Debug)
 pub(all) struct TypeName {
   name : LongIdent
   is_object : Bool
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ConstrId {
   id : LongIdent
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Type {
   Any(loc~ : Location)
   Arrow(
@@ -82,25 +91,28 @@ pub(all) enum Type {
   Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : Location)
   Option(ty~ : Type, loc~ : Location, question_loc~ : Location)
   Object(ConstrId)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum ErrorType {
   ErrorType(ty~ : Type)
   DefaultErrorType(loc~ : Location)
   NoErrorType
   Noraise(loc~ : Location)
   MaybeError(ty~ : Type)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ConstrParam {
   ty : Type
   mut_ : Bool
   label : Label?
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ConstrDecl {
   name : ConstrName
   args : @list.List[ConstrParam]?
@@ -108,21 +120,24 @@ pub(all) struct ConstrDecl {
   loc : Location
   attrs : @list.List[Attribute]
   mut doc : DocString
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum ExceptionDecl {
   NoPayload
   EnumPayload(@list.List[ConstrDecl])
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct FieldName {
   label : String
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct FieldDecl {
   name : FieldName
   ty : Type
@@ -131,9 +146,10 @@ pub(all) struct FieldDecl {
   loc : Location
   attrs : @list.List[Attribute]
   mut doc : DocString
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum TypeDesc {
   /// `type T`
   Abstract
@@ -150,48 +166,54 @@ pub(all) enum TypeDesc {
   /// `struct T (T1,T2)`
   TupleStruct(@list.List[Type])
   Alias(Type)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Hole {
   Synthesized
   Incomplete
   Todo
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum ArgumentKind {
   Positional
   Labelled(Label)
   LabelledPun(Label)
   LabelledOption(label~ : Label, question_loc~ : Location)
   LabelledOptionPun(label~ : Label, question_loc~ : Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum FnKind {
   Lambda
   Arrow
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Group {
   Brace
   Paren
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum TrailingMark {
   Comma
   Semi
   None
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TypeVarConstraint {
   trait_ : LongIdent
   loc : Location
-} derive(Debug)
+}
 
 ///|
 /// Represent type variable and optional constraints.
@@ -202,6 +224,7 @@ pub(all) struct TypeVarConstraint {
 /// fn [T : TraitA + TraitB] f() -> Unit {...}
 ///  // ^^^^^^^^^^^^^^^^^^^----- TypeVarBinder
 /// ```
+#derive(Debug)
 pub(all) struct TypeVarBinder {
   /// name of type variable
   name : String
@@ -209,61 +232,70 @@ pub(all) struct TypeVarBinder {
   name_loc : Location
   /// type constraints for type variable, e.g. `Show + Compare`
   constraints : @list.List[TypeVarConstraint]
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TypeDeclBinder {
   name : String?
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct Binder {
   name : String
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct Var {
   name : LongIdent
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum ConstructorExtraInfo {
   TypeName(TypeName)
   TypeNameWithConstrPackage(type_name~ : TypeName, pkg~ : String)
   Package(String)
   NoExtraInfo
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct Constructor {
   name : ConstrName
   extra_info : ConstructorExtraInfo
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Accessor {
   Label(Label)
   Index(tuple_index~ : Int32, loc~ : Location)
   Newtype(loc~ : Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct AliasTarget {
   binder : Binder
   target : Label?
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct Argument {
   value : Expr
   kind : ArgumentKind
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Parameter {
   /// `_ : Int`
   DiscardPositional(ty~ : Type?, loc~ : Location)
@@ -275,43 +307,48 @@ pub(all) enum Parameter {
   Optional(binder~ : Binder, default~ : Expr, ty~ : Type?)
   /// `label? : Int`
   QuestionOptional(binder~ : Binder, ty~ : Type?)
-} derive(Debug)
+}
 
 ///|
 pub type Parameters = @list.List[Parameter]
 
 ///|
+#derive(Debug)
 pub(all) struct Case {
   pattern : Pattern
   guard_ : Expr?
   body : Expr
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum SpreadableElem {
   /// `expr`
   Regular(Expr)
   /// `..expr`
   Spread(expr~ : Expr, loc~ : Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct MapExprElem {
   key : Constant
   expr : Expr
   key_loc : Location
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct StaticAssertion {
   ty : Type
   trait_ : LongIdent
   loc : Location
   msg : String
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct Func {
   parameters : Parameters
   params_loc : Location
@@ -322,60 +359,68 @@ pub(all) struct Func {
   is_async : Location?
   nocancel_ : Location?
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct FieldDef {
   label : Label
   expr : Expr
   is_pun : Bool
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum InterpElem {
   Literal(repr~ : StringLiteral, loc~ : Location)
   Expr(expr~ : Expr, loc~ : Location)
   Source(@tokens.InterpSource)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum MultilineStringElem {
   String(String)
   Interp(@list.List[InterpElem])
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct LexScanCase {
   pat : LexScanCasePattern
   bindings : @list.List[(Label, Binder?)]
   body : Expr
   arrow_loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum RegexPattern {
   Literal(lit~ : String, recovered_~ : Bool, loc~ : Location)
   Reference(lid~ : LongIdent, loc~ : Location)
   Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)
   Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)
   Alias(pat~ : RegexPattern, binder~ : Binder, loc~ : Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum LexScanCasePattern {
   Pattern(RegexPattern)
   Binder(Binder)
   Wildcard(loc~ : Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum PredicateQuantifierKind {
   Forall
   Exists
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum ListComprehensionKind {
   Foreach(
     patterns~ : @list.List[Pattern],
@@ -389,9 +434,10 @@ pub(all) enum ListComprehensionKind {
     continue_block~ : @list.List[(Binder, Expr)],
     for_loc~ : Location
   )
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Expr {
   /// f(args)
   Apply(func~ : Expr, args~ : @list.List[Argument], loc~ : Location)
@@ -647,65 +693,74 @@ pub(all) enum Expr {
   )
   /// generated by compiler
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum TryOperatorKind {
   Exclamation
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum DotDotBinder {
   Underscore
   NoBinder
   BinderAs(Binder)
   Binder(Binder)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum ArrayPattern {
   Pattern(Pattern)
   StringSpread(str~ : StringLiteral, loc~ : Location)
   BytesSpread(bytes~ : BytesLiteral, loc~ : Location)
   ConstSpread(binder~ : Binder, pkg~ : String?, loc~ : Location)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum ArrayPatterns {
   Closed(@list.List[ArrayPattern])
   Open(@list.List[ArrayPattern], @list.List[ArrayPattern], DotDotBinder)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct WhereClause {
   fields : @list.List[FieldDef]
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct FieldPat {
   label : Label
   pattern : Pattern
   is_pun : Bool
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ConstrPatArg {
   pat : Pattern
   kind : ArgumentKind
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct MapPatElem {
   key : Constant
   pat : Pattern
   match_absent : Bool
   key_loc : Location
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Pattern {
   /// `pattern as binder`
   Alias(pat~ : Pattern, alias_~ : Binder, loc~ : Location)
@@ -746,20 +801,22 @@ pub(all) enum Pattern {
     args~ : @list.List[ConstrPatArg],
     loc~ : Location
   )
-} derive(Debug)
+}
 
 ///|
 pub type TestName = (StringLiteral, Location)?
 
 ///|
 // checked!
+#derive(Debug)
 pub(all) struct DerivingDirective {
   type_name : TypeName
   args : @list.List[Argument]
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TypeDecl {
   tycon : String
   tycon_loc : Location
@@ -771,9 +828,10 @@ pub(all) struct TypeDecl {
   deriving : @list.List[DerivingDirective]
   loc : Location
   is_declare : Bool
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum FuncStubs {
   Import(
     module_name~ : StringLiteral,
@@ -781,22 +839,25 @@ pub(all) enum FuncStubs {
     language~ : StringLiteral?
   )
   Embedded(language~ : StringLiteral?, code~ : EmbeddedCode)
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum EmbeddedCode {
   CodeString(StringLiteral)
   CodeMultilineString(@list.List[String])
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum DeclBody {
   DeclBody(expr~ : Expr)
   DeclStubs(FuncStubs)
   DeclNone
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct FunDecl {
   type_name : TypeName?
   name : Binder
@@ -811,9 +872,10 @@ pub(all) struct FunDecl {
   attrs : @list.List[Attribute]
   mut doc : DocString
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TraitMethodDecl {
   name : Binder
   is_async : Location?
@@ -825,9 +887,10 @@ pub(all) struct TraitMethodDecl {
   has_default : Location?
   attrs : @list.List[Attribute]
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct TraitDecl {
   name : Binder
   supers : @list.List[TypeVarConstraint]
@@ -837,23 +900,26 @@ pub(all) struct TraitDecl {
   attrs : @list.List[Attribute]
   mut doc : DocString
   is_declare : Bool
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum UsingKind {
   Value
   Type
   Trait
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) struct ImportPackage {
   path : StringLiteral
   alias_ : String?
   loc : Location
-} derive(Debug)
+}
 
 ///|
+#derive(Debug)
 pub(all) enum Impl {
   TopExpr(expr~ : Expr, is_main~ : Bool, is_async~ : Location?, loc~ : Location)
   TopTest(
@@ -948,7 +1014,7 @@ pub(all) enum Impl {
     loc~ : Location,
     mut doc~ : DocString
   )
-} derive(Debug)
+}
 
 ///|
 pub type Impls = @list.List[Impl]

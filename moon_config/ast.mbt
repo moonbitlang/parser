@@ -1,4 +1,5 @@
 ///|
+#derive(Debug, Eq)
 pub(all) enum Ast {
   Null(loc~ : Location)
   Bool(Bool, loc~ : Location)
@@ -6,7 +7,7 @@ pub(all) enum Ast {
   Float(String, loc~ : Location)
   Arr(Vector[Ast], loc~ : Location)
   Obj(Vector[(String, Ast)], loc~ : Location)
-} derive(Debug, Eq)
+}
 
 ///|
 pub fn Ast::loc(self : Self) -> Location {
