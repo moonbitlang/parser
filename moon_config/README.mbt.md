@@ -1,21 +1,13 @@
-# moonbitlang/parser/moon_config
+# moonbitlang/moon_config
 
-`moonbitlang/parser/moon_config` parses MoonBit project configuration files
-into a small JSON-like AST plus diagnostics.
+`moonbitlang/moon_config` parses MoonBit project configuration files
+into a source-preserving syntax tree with locations, tokens and diagnostics.
 
 It provides `parse_moon_mod`, `parse_moon_pkg`, and `parse_moon_work` for
 `moon.mod`, `moon.pkg`, and `moon.work` content.
 
-The parse functions also run source-level configuration validation while
-post-processing the raw AST, so their diagnostics include duplicate and
-unexpected top-level keys. Use `validate_moon_mod`, `validate_moon_pkg`, or
-`validate_moon_work` only when validating an already post-processed `Ast`.
-
-`moon.mod` accepts an optional boolean `private` field. An absent field or
-`private = false` denotes public access; `private = true` denotes private access
-in a registry that supports it. Both a top-level assignment and
-`options(private: true)` are preserved in the JSON output. Non-boolean values
-and duplicate fields produce diagnostics.
+The parse functions validate without rewriting syntax. Errors and warnings are
+separate; use `validate=false` for syntax only. `Ast::to_json()` preserves syntax except that repeated `key(...)` calls become `key = [{...}, {...}]`.
 
 ## Examples
 
@@ -29,13 +21,9 @@ test "parse moon.mod" {
     #|version = "0.1.0"
     #|import { "moonbitlang/x@0.4.6" }
     #|
-  let (ast, reports) = @moon_config.parse_moon_mod(source)
-  assert_eq(reports.length(), 0) // no error
-  json_inspect(ToJson::to_json(ast), content={
-    "name": "example/app",
-    "version": "0.1.0",
-    "deps": { "moonbitlang/x": "0.4.6" },
-  })
+  let result = @moon_config.parse_moon_mod(source)
+  assert_eq(result.diagnostics.errors.length(), 0) // no error
+  assert_true(result.ast.to_json() is Array([_, _, _]))
 }
 ```
 
@@ -52,12 +40,9 @@ test "parse moon.pkg" {
     #|  "is-main": true,
     #|)
     #|
-  let (ast, reports) = @moon_config.parse_moon_pkg(source)
-  assert_eq(reports.length(), 0) // no error
-  json_inspect(ToJson::to_json(ast), content={
-    "import": [{ "path": "moonbitlang/core/json", "alias": "json" }],
-    "is-main": true,
-  })
+  let result = @moon_config.parse_moon_pkg(source)
+  assert_eq(result.diagnostics.errors.length(), 0) // no error
+  assert_eq(result.ast.0.length(), 2)
 }
 ```
 
@@ -70,11 +55,8 @@ test "parse moon.work" {
     #|members = ["./app", "./shared"]
     #|preferred_target = "native"
     #|
-  let (ast, reports) = @moon_config.parse_moon_work(source)
-  assert_eq(reports.length(), 0) // no error
-  json_inspect(ToJson::to_json(ast), content={
-    "members": ["./app", "./shared"],
-    "preferred_target": "native",
-  })
+  let result = @moon_config.parse_moon_work(source)
+  assert_eq(result.diagnostics.errors.length(), 0) // no error
+  assert_eq(result.ast.0.length(), 2)
 }
 ```

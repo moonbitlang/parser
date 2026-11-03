@@ -39,15 +39,14 @@ fn kind_name(kind : String) -> String {
 }
 
 ///|
-fn parse_config(kind : String, source : String) -> @config.Ast {
+fn parse_config(kind : String, source : String) -> @config.ParseResult {
   let name = kind_name(kind)
-  let (ast, _) = match kind {
+  match kind {
     "pkg" => @config.parse_moon_pkg(name~, source)
     "mod" => @config.parse_moon_mod(name~, source)
     "work" => @config.parse_moon_work(name~, source)
     _ => @config.parse_moon_pkg(name~, source)
   }
-  ast
 }
 
 ///|
@@ -79,7 +78,7 @@ fn root_usage() -> String {
     #|MoonBit config tool
     #|
     #|Commands:
-    #|  legacy  Convert Moon config DSL to legacy-compatible JSON output
+    #|  legacy  Validate Moon config DSL and serialize its AST as JSON
     #|  help    Print help for the subcommand.
     #|
     #|Options:
@@ -92,7 +91,7 @@ fn legacy_usage() -> String {
   (
     #|Usage: mq legacy [options] [input]
     #|
-    #|Convert Moon config DSL to legacy-compatible JSON output
+    #|Validate Moon config DSL and serialize its AST as JSON
     #|
     #|Arguments:
     #|  input  Path to moon.pkg/moon.mod/moon.work, or - for stdin

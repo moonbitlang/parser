@@ -25,9 +25,6 @@ using @tokens {type TokenKind}
 using @list {type List}
 
 ///|
-using @vector {type Vector}
-
-///|
 using @syntax {trait IterVisitor, trait MapVisitor}
 
 ///|

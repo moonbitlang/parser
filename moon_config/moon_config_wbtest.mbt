@@ -1,6 +1,7 @@
 ///|
 fn parse_pkg(source : String) -> (Ast, Array[@basic.Report]) {
-  parse_string(source, name="moon.pkg")
+  let result = parse_string(source, name="moon.pkg", allow_reserved=true)
+  (result.ast, result.diagnostics.errors)
 }
 
 ///|
@@ -8,92 +9,94 @@ struct AstNoLoc(Ast)
 
 ///|
 impl @debug.Debug for AstNoLoc with fn to_repr(self) {
-  fn go(ast : Ast) -> @debug.Repr {
-    match ast {
-      Null(_) => @debug.Repr::ctor("Null", [])
-      Bool(value, ..) => @debug.Repr::ctor("Bool", [(None, Repr(value))])
-      Str(str, ..) => @debug.Repr::ctor("Str", [(None, Repr(str))])
-      Float(float, ..) => @debug.Repr::ctor("Float", [(None, Repr(float))])
-      Arr(content, ..) =>
-        @debug.Repr::ctor("Arr", [
-          (None, @debug.Repr::array(content.to_array().map(item => go(item)))),
+  fn expr_repr(expr : Expr) -> @debug.Repr {
+    match expr {
+      Hole(_) => @debug.Repr::ctor("Hole", [])
+      Bool(value~, ..) => @debug.Repr::ctor("Bool", [(None, Repr(value))])
+      Int(repr~, ..) => @debug.Repr::ctor("Int", [(None, Repr(repr))])
+      String(str~, ..) => @debug.Repr::ctor("String", [(None, Repr(str))])
+      Array(items~, ..) =>
+        @debug.Repr::ctor("Array", [
+          (None, @debug.Repr::array(items.map(expr_repr))),
         ])
-      Obj(fields, ..) =>
-        @debug.Repr::ctor("Obj", [
+      Map(fields~, ..) =>
+        @debug.Repr::ctor("Map", [
           (
             None,
             @debug.Repr::array(
-              fields
-              .to_array()
-              .map(field => {
-                let (key, value) = field
-                @debug.Repr::tuple([Repr(key), go(value)])
+              fields.map(field => {
+                @debug.Repr::tuple([Repr(field.key), expr_repr(field.value)])
+              }),
+            ),
+          ),
+        ])
+      Apply(name~, args~, ..) =>
+        @debug.Repr::ctor("Apply", [
+          (None, Repr(name)),
+          (
+            None,
+            @debug.Repr::array(
+              args.map(field => {
+                @debug.Repr::tuple([Repr(field.key), expr_repr(field.value)])
               }),
             ),
           ),
         ])
     }
   }
-
-  match self {
-    AstNoLoc(ast) => go(ast)
+  fn field_repr(field : Field) -> @debug.Repr {
+    @debug.Repr::tuple([Repr(field.key), expr_repr(field.value)])
   }
+  @debug.Repr::array(
+    self.0.0
+    .to_array()
+    .map(statement => {
+      match statement {
+        Assign(field) =>
+          @debug.Repr::ctor("Assign", [(None, field_repr(field))])
+        Expr(expr) => expr_repr(expr)
+        Import(items~, kind~, ..) =>
+          @debug.Repr::ctor("Import", [
+            (None, Repr(kind)),
+            (
+              None,
+              @debug.Repr::array(
+                items.map(item => {
+                  @debug.Repr::tuple([
+                    Repr(item.path),
+                    Repr(item.alias_.map(pair => pair.0)),
+                  ])
+                }),
+              ),
+            ),
+          ])
+      }
+    }),
+  )
 }
 
 ///|
-test "Ast::to_json folds repeated top-level rule entries into arrays" {
-  fn loc() -> Location {
-    { start: dummy_pos, end: dummy_pos, }
-  }
-
-  let loc = loc()
-  let ast = Obj(
-    Vector([
+test "syntax preserves repeated top-level and nested entries" {
+  let ast = parse_string(
       (
-        "rule",
-        Obj(
-          Vector([
-            ("name", Str("rule1", loc~)),
-            ("command", Str("exe", loc~)),
-            (
-              "env",
-              Obj(
-                Vector([("k", Str("first", loc~)), ("k", Str("second", loc~))]),
-                loc~,
-              ),
-            ),
-          ]),
-          loc~,
-        ),
+        #|rule(name: "rule1", command: "exe", env: { "k": "first", "k": "second" })
+        #|rule(name: "rule2", command: "exe")
       ),
-      (
-        "rule",
-        Obj(
-          Vector([("name", Str("rule2", loc~)), ("command", Str("exe", loc~))]),
-          loc~,
-        ),
-      ),
-    ]),
-    loc~,
-  )
+    ).ast
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj(
-      #|  [
-      #|    (
-      #|      "rule",
-      #|      Obj(
-      #|        [
-      #|          ("name", Str("rule1")),
-      #|          ("command", Str("exe")),
-      #|          ("env", Obj([("k", Str("first")), ("k", Str("second"))])),
-      #|        ],
-      #|      ),
-      #|    ),
-      #|    ("rule", Obj([("name", Str("rule2")), ("command", Str("exe"))])),
-      #|  ],
-      #|)
+      #|[
+      #|  Apply(
+      #|    "rule",
+      #|    [
+      #|      ("name", String("rule1")),
+      #|      ("command", String("exe")),
+      #|      ("env", Map([("k", String("first")), ("k", String("second"))])),
+      #|    ],
+      #|  ),
+      #|  Apply("rule", [("name", String("rule2")), ("command", String("exe"))]),
+      #|]
     ),
   )
 }
@@ -115,26 +118,22 @@ test "moon_config parse nested options" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj(
-      #|  [
-      #|    (
-      #|      "options",
-      #|      Obj(
-      #|        [
-      #|          (
-      #|            "nested",
-      #|            Obj(
-      #|              [
-      #|                ("a", Arr([Str("x"), Str("y"), Float("123")])),
-      #|                ("b", Obj([("c", Bool(false))])),
-      #|              ],
-      #|            ),
-      #|          ),
-      #|        ],
+      #|[
+      #|  Apply(
+      #|    "options",
+      #|    [
+      #|      (
+      #|        "nested",
+      #|        Map(
+      #|          [
+      #|            ("a", Array([String("x"), String("y"), Int("123")])),
+      #|            ("b", Map([("c", Bool(false))])),
+      #|          ],
+      #|        ),
       #|      ),
-      #|    ),
-      #|  ],
-      #|)
+      #|    ],
+      #|  ),
+      #|]
     ),
   )
 }
@@ -154,7 +153,7 @@ test "moon_config parse import for wbtest" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("wbtest-import", Arr([Str("a/pkg"), Str("b/pkg")]))])
+      #|[Import(Wbtest, [("a/pkg", None), ("b/pkg", None)])]
     ),
   )
 }
@@ -182,7 +181,7 @@ test "moon_config rejects legacy import kind syntax" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("import", Arr([Str("path/to/pkg"), Str("p")]))])
+      #|[Import(Normal, [("path/to/pkg", None), ("p", None)])]
     ),
   )
 }
@@ -210,14 +209,7 @@ test "moon_config rejects legacy import alias syntax" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj(
-      #|  [
-      #|    (
-      #|      "import",
-      #|      Arr([Str("a"), Obj([("path", Str("b")), ("alias", Str("ok"))])]),
-      #|    ),
-      #|  ],
-      #|)
+      #|[Import(Normal, [("a", None), ("b", Some("ok"))])]
     ),
   )
 }
@@ -252,7 +244,7 @@ test "moon_config avoids cascading after invalid import kind" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("import", Arr([Str("a")]))])
+      #|[Import(Normal, [("a", None)])]
     ),
   )
 }
@@ -280,7 +272,7 @@ test "moon_config reports positional argument" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("apply", Obj([("", Str("positional"))]))])
+      #|[Apply("apply", [("", String("positional"))])]
     ),
   )
 }
@@ -301,7 +293,10 @@ test "moon_config parse assignments" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("warnings", Str("+w1-w1")), ("supported_targets", Str("+wasm"))])
+      #|[
+      #|  Assign(("warnings", String("+w1-w1"))),
+      #|  Assign(("supported_targets", String("+wasm"))),
+      #|]
     ),
   )
 }
@@ -329,7 +324,7 @@ test "moon_config requires statement separators" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("a", Str("x"))])
+      #|[Assign(("a", String("x")))]
     ),
   )
 }
@@ -358,7 +353,7 @@ test "moon_config keeps next statement after missing assignment value before sem
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("a", Null), ("b", Float("1"))])
+      #|[Assign(("a", Hole)), Assign(("b", Int("1")))]
     ),
   )
 }
@@ -387,7 +382,7 @@ test "moon_config keeps next statement after missing assignment value on next li
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("a", Null), ("b", Float("1"))])
+      #|[Assign(("a", Hole)), Assign(("b", Int("1")))]
     ),
   )
 }
@@ -423,7 +418,7 @@ test "moon_config rejects unsupported numeric literals" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("unsigned", Null), ("floaty", Null)])
+      #|[Assign(("unsigned", Hole)), Assign(("floaty", Hole))]
     ),
   )
 }
@@ -443,7 +438,7 @@ test "moon_config accepts bigint literal in pkg values" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("big", Float("1N"))])
+      #|[Assign(("big", Int("1N")))]
     ),
   )
 }
@@ -464,16 +459,11 @@ test "moon_config preserves duplicate object and statement entries" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj(
-      #|  [
-      #|    (
-      #|      "options",
-      #|      Obj([("dup", Obj([("a", Float("1")), ("a", Float("2"))]))]),
-      #|    ),
-      #|    ("rule", Obj([("name", Str("rule1")), ("command", Str("exe"))])),
-      #|    ("rule", Obj([("name", Str("rule2")), ("command", Str("exe"))])),
-      #|  ],
-      #|)
+      #|[
+      #|  Apply("options", [("dup", Map([("a", Int("1")), ("a", Int("2"))]))]),
+      #|  Apply("rule", [("name", String("rule1")), ("command", String("exe"))]),
+      #|  Apply("rule", [("name", String("rule2")), ("command", String("exe"))]),
+      #|]
     ),
   )
 }
@@ -501,7 +491,7 @@ test "moon_config recovers map value after missing colon" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("options", Obj([("nested", Obj([("a", Float("1"))]))]))])
+      #|[Apply("options", [("nested", Map([("a", Int("1"))]))])]
     ),
   )
 }
@@ -530,7 +520,7 @@ test "moon_config keeps next statement after missing array right bracket" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("a", Arr([Float("1")])), ("b", Float("2"))])
+      #|[Assign(("a", Array([Int("1")]))), Assign(("b", Int("2")))]
     ),
   )
 }
@@ -558,7 +548,7 @@ test "moon_config reports missing import right brace at eof" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("import", Arr([]))])
+      #|[Import(Normal, [])]
     ),
   )
 }
@@ -586,7 +576,7 @@ test "moon_config reports missing apply right paren at eof" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("options", Obj([]))])
+      #|[Apply("options", [])]
     ),
   )
 }
@@ -614,7 +604,7 @@ test "moon_config reports missing array right bracket at eof" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("a", Arr([]))])
+      #|[Assign(("a", Array([])))]
     ),
   )
 }
@@ -643,7 +633,7 @@ test "moon_config keeps next statement after missing apply left paren" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("options", Obj([])), ("next", Bool(false))])
+      #|[Apply("options", []), Assign(("next", Bool(false)))]
     ),
   )
 }
@@ -672,18 +662,17 @@ test "moon_config keeps next statement after missing import left brace" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([("import", Arr([])), ("next", Bool(false))])
+      #|[Import(Normal, []), Assign(("next", Bool(false)))]
     ),
   )
 }
 
 ///|
-test "moon_config root loc stays ordered for layout-only source" {
+test "moon_config layout-only source has no statements" {
   let source =
     #|
     #|
   let (ast, reports) = parse_pkg(source)
-  let loc = ast.loc()
   debug_inspect(
     reports,
     content=(
@@ -693,8 +682,8 @@ test "moon_config root loc stays ordered for layout-only source" {
   debug_inspect(
     AstNoLoc(ast),
     content=(
-      #|Obj([])
+      #|[]
     ),
   )
-  debug_inspect(Compare::compare(loc.start, loc.end) <= 0, content="true")
+  assert_true(ast.0.is_empty())
 }

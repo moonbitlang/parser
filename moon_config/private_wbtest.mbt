@@ -1,44 +1,78 @@
 ///|
 test "moon.mod private is optional and preserves boolean values" {
-  let (absent, absent_reports) = parse_moon_mod("name = \"user/mod\"")
+  let { ast: absent, diagnostics: { errors: absent_reports, .. }, .. } = parse_moon_mod(
+    "name = \"user/mod\"",
+  )
   assert_true(absent_reports.is_empty())
-  json_inspect(ToJson::to_json(absent), content={ "name": "user/mod" })
-  let (public_mod, public_reports) = parse_moon_mod("private = false")
+  assert_true(
+    absent.0[0]
+    is Assign({ key: "name", value: String(str="user/mod", ..), .. }),
+  )
+  let { ast: public_mod, diagnostics: { errors: public_reports, .. }, .. } = parse_moon_mod(
+    "private = false",
+  )
   assert_true(public_reports.is_empty())
-  json_inspect(ToJson::to_json(public_mod), content={ "private": false })
-  let (private_mod, private_reports) = parse_moon_mod("private = true")
+  assert_true(
+    public_mod.0[0]
+    is Assign({ key: "private", value: Bool(value=false, ..), .. }),
+  )
+  let { ast: private_mod, diagnostics: { errors: private_reports, .. }, .. } = parse_moon_mod(
+    "private = true",
+  )
   assert_true(private_reports.is_empty())
-  assert_true(validate_moon_mod(private_mod).is_empty())
-  json_inspect(ToJson::to_json(private_mod), content={ "private": true })
+  assert_true(validate_moon_mod(private_mod).errors.is_empty())
+  assert_true(
+    private_mod.0[0]
+    is Assign({ key: "private", value: Bool(value=true, ..), .. }),
+  )
 }
 
 ///|
 test "moon.mod options preserves private" {
-  let (ast, reports) = parse_moon_mod("options(private: true)")
+  let { ast, diagnostics: { errors: reports, .. }, .. } = parse_moon_mod(
+    "options(private: true)",
+  )
   assert_true(reports.is_empty())
-  json_inspect(ToJson::to_json(ast), content={ "private": true })
+  assert_true(
+    ast.0[0]
+    is Expr(
+      Apply(
+        name="options",
+        args=[{ key: "private", value: Bool(value=true, ..), .. }],
+        ..
+      )
+    ),
+  )
 }
 
 ///|
 test "moon.mod rejects non-boolean private" {
-  let (_, reports) = parse_moon_mod("private = \"true\"")
+  let { ast: _, diagnostics: { errors: reports, .. }, .. } = parse_moon_mod(
+    "private = \"true\"",
+  )
   assert_eq(reports.map(report => report.msg), [
-    "Invalid moon.mod config: `private` must be a boolean.",
+    "Invalid configuration `private` in moon.mod file.",
   ])
-  let (_, reports) = parse_moon_mod("options(private: 1)")
+  let { ast: _, diagnostics: { errors: reports, .. }, .. } = parse_moon_mod(
+    "options(private: 1)",
+  )
   assert_eq(reports.map(report => report.msg), [
-    "Invalid moon.mod config: `private` must be a boolean.",
+    "Invalid configuration `private` in moon.mod file.",
   ])
-  let (ast, _) = parse_moon_mod("private = []")
-  assert_eq(validate_moon_mod(ast).map(report => report.msg), [
-    "Invalid moon.mod config: `private` must be a boolean.",
+  let { ast, diagnostics: { errors: _, .. }, .. } = parse_moon_mod(
+    "private = []",
+  )
+  assert_eq(validate_moon_mod(ast).errors.map(report => report.msg), [
+    "Invalid configuration `private` in moon.mod file.",
   ])
 }
 
 ///|
 test "moon.mod rejects duplicate private across options" {
-  let (_, reports) = parse_moon_mod("private = true\noptions(private: false)")
+  let { ast: _, diagnostics: { errors: reports, .. }, .. } = parse_moon_mod(
+    "private = true\noptions(private: false)",
+  )
   assert_eq(reports.map(report => report.msg), [
-    "Duplicate key `private` found in moon.mod.",
+    "Invalid configuration `private` in moon.mod file.",
   ])
 }

@@ -290,9 +290,7 @@ test "format json moon.pkg migrates known keys and options" {
       #|
       #|supported_targets = "+wasm"
       #|
-      #|options(
-      #|  "is-main": true,
-      #|)
+      #|pkgtype(kind: "executable")
     ),
   )
 }
@@ -385,9 +383,7 @@ test "format current moon.pkg normalizes DSL config" {
       #|
       #|supported_targets = "+wasm"
       #|
-      #|options(
-      #|  "is-main": true,
-      #|)
+      #|pkgtype(kind: "executable")
     ),
   )
 }
