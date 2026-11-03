@@ -1,9 +1,10 @@
 ///|
+#derive(@debug.Debug)
 pub struct ParseResult {
   root : CstNode
   diagnostics : ReadOnlyArray[Report]
   docstrings : ReadOnlyArray[List[(Location, Comment)]]
-} derive(@debug.Debug)
+}
 
 ///|
 /// Returns the concrete syntax tree root produced by parsing.

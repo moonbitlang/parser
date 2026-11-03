@@ -1,11 +1,12 @@
 ///|
+#derive(@debug.Debug)
 pub(all) struct Comment {
   start : Position
   end : Position
   left : Triple?
   right : Triple?
   kind : CommentKind
-} derive(@debug.Debug)
+}
 
 ///|
 fn pretty_triple(x : Triple?) -> @pp.Document {
@@ -35,11 +36,12 @@ pub impl Pretty for Comment with fn pretty(self) {
 }
 
 ///|
+#derive(@debug.Debug)
 pub(all) enum CommentKind {
   Blank
   Block(String)
   Line(String)
-} derive(@debug.Debug)
+}
 
 ///|
 pub impl Pretty for CommentKind with fn pretty(x) {

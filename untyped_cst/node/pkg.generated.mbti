@@ -71,12 +71,13 @@ pub(all) enum CstMultilineChild {
   Trivia(CstNode)
 }
 
+#derive(@debug.Debug)
 pub struct CstNode {
   kind : NodeKind
   loc : @basic.Location
   source_span : (Int32, Int32)
   children : ReadOnlyArray[(String?, CstNode)]
-} derive(@debug.Debug)
+}
 pub fn CstNode::accessor_index(value~ : Int32, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::accessor_label(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::accessor_newtype(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
@@ -574,6 +575,7 @@ pub(all) enum CstTokenChild {
   Segment(CstNode)
 }
 
+#derive(Eq, @debug.Debug)
 pub enum NodeKind {
   Impls
   Expression
@@ -906,7 +908,7 @@ pub enum NodeKind {
   List_ForBindingList
   List_ForEachBindingList
   List_WithBindingList
-} derive(Eq, @debug.Debug)
+}
 pub fn NodeKind::is_accessor(Self) -> Bool
 pub fn NodeKind::is_argument(Self) -> Bool
 pub fn NodeKind::is_constant(Self) -> Bool
@@ -930,11 +932,12 @@ pub fn NodeKind::is_type(Self) -> Bool
 pub fn NodeKind::is_type_desc(Self) -> Bool
 pub fn NodeKind::token_kind(Self) -> @tokens.TokenKind?
 
+#derive(Eq, @debug.Debug)
 pub(all) enum NodePayload {
   String(String)
   Int(Int32)
   Bool(Bool)
-} derive(Eq, @debug.Debug)
+}
 
 // Type aliases
 pub using @tokens {type TokenKind}

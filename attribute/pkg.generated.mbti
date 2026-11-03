@@ -3,6 +3,7 @@ package "moonbitlang/parser/attribute"
 
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
   "moonbitlang/core/list",
   "moonbitlang/lexer/basic",
   "moonbitlang/lexer/tokens",
@@ -12,27 +13,30 @@ import {
 pub fn payloads(Array[(@tokens.Token, @basic.Position, @basic.Position)], initial_pos? : @basic.Position) -> @list.List[Prop] raise ParseError
 
 // Errors
+#derive(@debug.Debug)
 pub suberror ParseError {
   UnexpectedToken(@tokens.Token, (@basic.Position, @basic.Position), Array[@tokens.TokenKind])
   UnexpectedEndOfInput(@basic.Position, Array[@tokens.TokenKind])
-} derive(@debug.Debug)
+}
 
 // Types and methods
+#derive(@debug.Debug)
 pub(all) struct Attribute {
   loc : @basic.Location
   raw : String
   parsed : Expr?
-} derive(@debug.Debug)
+}
 pub fn Attribute::name(Self) -> String?
 pub fn Attribute::new(loc~ : @basic.Location, (String, String?, String)) -> Self
-pub impl ToJson for Attribute
+pub impl @json.ToJson for Attribute
 
+#derive(@debug.Debug)
 pub(all) enum Expr {
   Ident(Id)
   String(String)
   Apply(Id, @list.List[Prop])
   Bool(Bool)
-} derive(@debug.Debug)
+}
 
 pub(all) struct Id {
   qual : String?
@@ -41,10 +45,11 @@ pub(all) struct Id {
 pub impl Show for Id
 pub impl @debug.Debug for Id
 
+#derive(@debug.Debug)
 pub(all) enum Prop {
   Labeled(String, Expr)
   Expr(Expr)
-} derive(@debug.Debug)
+}
 
 // Type aliases
 

@@ -39,10 +39,11 @@ pub fn NodeTable::new(token_keys : Map[String, TokenGroup]) -> NodeTable {
 }
 
 ///|
+#derive(Eq, Hash, Compare)
 pub(all) enum Key {
   Token(Location)
   Node(Location)
-} derive(Eq, Hash, Compare)
+}
 
 ///|
 pub impl Pretty for Key with fn pretty(self) {

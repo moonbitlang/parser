@@ -18,11 +18,12 @@ pub fn parse_structure(String, name? : String, enable_metavar? : Bool) -> ParseR
 // Errors
 
 // Types and methods
+#derive(@debug.Debug)
 pub struct ParseResult {
   root : @node.CstNode
   diagnostics : ReadOnlyArray[@basic.Report]
   docstrings : ReadOnlyArray[@list.List[(@basic.Location, @tokens.Comment)]]
-} derive(@debug.Debug)
+}
 pub fn ParseResult::diagnostics_view(Self) -> ArrayView[@basic.Report]
 pub fn ParseResult::root(Self) -> @node.CstNode
 pub fn ParseResult::to_expr(Self) -> (@syntax.Expr?, Array[@basic.Report])

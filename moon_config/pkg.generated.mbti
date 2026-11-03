@@ -4,6 +4,7 @@ package "moonbitlang/moon_config"
 import {
   "moonbitlang/core/debug",
   "moonbitlang/core/immut/vector",
+  "moonbitlang/core/json",
   "moonbitlang/lexer/basic",
 }
 
@@ -23,6 +24,7 @@ pub fn validate_moon_work(Ast) -> Array[@basic.Report]
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) enum Ast {
   Null(loc~ : @basic.Location)
   Bool(Bool, loc~ : @basic.Location)
@@ -30,9 +32,9 @@ pub(all) enum Ast {
   Float(String, loc~ : @basic.Location)
   Arr(@vector.Vector[Ast], loc~ : @basic.Location)
   Obj(@vector.Vector[(String, Ast)], loc~ : @basic.Location)
-} derive(Eq, @debug.Debug)
+}
 pub fn Ast::loc(Self) -> @basic.Location
-pub impl ToJson for Ast
+pub impl @json.ToJson for Ast
 
 // Type aliases
 
