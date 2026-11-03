@@ -3,6 +3,7 @@
 /// contributes to the typed definitions in `@syntax`.
 ///
 /// AST locations are derived from token and syntax-node boundaries.
+#derive(@debug.Debug, Eq)
 pub enum NodeKind {
   /// Root node lowered to `@syntax.Impls`.
   Impls
@@ -710,7 +711,7 @@ pub enum NodeKind {
   List_ForEachBindingList
   /// CST container lowered to `Pattern::With::bindings`.
   List_WithBindingList
-} derive(@debug.Debug, Eq)
+}
 
 ///|
 /// Whether this node retains a lexical token, including recovered tokens.

@@ -1,10 +1,11 @@
 ///|
+#derive(@debug.Debug)
 pub struct CstNode {
   kind : NodeKind
   loc : Location
   source_span : (Int32, Int32)
   children : ReadOnlyArray[(String?, CstNode)]
-} derive(@debug.Debug)
+}
 
 ///|
 pub fn mk_loc(start : Position, end : Position) -> Location {

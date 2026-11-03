@@ -41,20 +41,22 @@ pub enum CheckpointMode {
   Pretty
 }
 
+#derive(@debug.Debug)
 pub(all) struct Comment {
   start : @basic.Position
   end : @basic.Position
   left : (@tokens.Token, @basic.Position, @basic.Position)?
   right : (@tokens.Token, @basic.Position, @basic.Position)?
   kind : CommentKind
-} derive(@debug.Debug)
+}
 pub impl @prettyprinter.Pretty for Comment
 
+#derive(@debug.Debug)
 pub(all) enum CommentKind {
   Blank
   Block(String)
   Line(String)
-} derive(@debug.Debug)
+}
 pub impl @prettyprinter.Pretty for CommentKind
 
 pub struct CommentSlot {
@@ -62,10 +64,11 @@ pub struct CommentSlot {
   ignore_blank : Bool
 }
 
+#derive(Compare, Eq, Hash)
 pub(all) enum Key {
   Token(@basic.Location)
   Node(@basic.Location)
-} derive(Compare, Eq, Hash)
+}
 pub fn Key::loc(Self) -> @basic.Location
 pub impl @prettyprinter.Pretty for Key
 

@@ -3,11 +3,12 @@
 ///
 /// Recursive syntax and non-scalar AST helper values are represented by
 /// explicitly-kinded child nodes instead of payload variants.
+#derive(@debug.Debug, Eq)
 pub(all) enum NodePayload {
   String(String)
   Int(Int32)
   Bool(Bool)
-} derive(@debug.Debug, Eq)
+}
 
 ///|
 pub fn CstNode::first_child_with_label(

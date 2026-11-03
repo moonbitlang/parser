@@ -3,6 +3,7 @@ package "moonbitlang/parser/mbti_ast"
 
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
   "moonbitlang/core/list",
   "moonbitlang/lexer/basic",
   "moonbitlang/parser/attribute",
@@ -14,19 +15,22 @@ import {
 // Errors
 
 // Types and methods
+#derive(@debug.Debug)
 pub(all) enum AliasSig {
   TypeAlias(name~ : Name, type_params~ : @list.List[TypeParamNoConstraints], type_~ : @syntax.Type, vis~ : @syntax.Visibility, attrs~ : @list.List[@attribute.Attribute])
   Using(pkg~ : Name, target~ : Name, name~ : Name?, kind~ : @syntax.UsingKind, attrs~ : @list.List[@attribute.Attribute])
   FuncAlias(name~ : Name, type_name~ : Name, attrs~ : @list.List[@attribute.Attribute])
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct ConstSig {
   name : Name
   type_ : @syntax.Type
   value : @syntax.Constant
   attrs : @list.List[@attribute.Attribute]
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct FuncSig {
   attrs : @list.List[@attribute.Attribute]
   type_name : MethodSelfType?
@@ -36,44 +40,51 @@ pub(all) struct FuncSig {
   nocancel_ : @basic.Location?
   type_params : @list.List[TypeParamWithConstraints]
   is_async : @basic.Location?
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct ImplSig {
   type_params : @list.List[TypeParamWithConstraints]
   type_ : @syntax.Type
   trait_name : QualifiedName
   attrs : @list.List[@attribute.Attribute]
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct Mbti {
   package_name : String
   imports : @list.List[PackageImport]
   sigs : @list.List[(Sig, @basic.Location)]
   loc : @basic.Location
   base_pos : @basic.BasePos
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct MethodSelfType {
   name : String
   is_object : Bool
   loc : @basic.Location
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug, @json.ToJson)
 pub(all) struct Name {
   name : String
   loc : @basic.Location
-} derive(ToJson, @debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct PackageImport {
   name : String
   alias_ : String?
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct QualifiedName {
   name : @syntax.LongIdent
   loc : @basic.Location
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) enum Sig {
   Func(FuncSig)
   Type(TypeSig)
@@ -82,9 +93,10 @@ pub(all) enum Sig {
   Impl(ImplSig)
   Const(ConstSig)
   Value(ValueSig)
-} derive(@debug.Debug)
+}
 pub fn Sig::attrs(Self) -> @list.List[@attribute.Attribute]
 
+#derive(@debug.Debug)
 pub(all) struct TraitMethodSig {
   name : Name
   type_params : @list.List[TypeParamWithConstraints]
@@ -94,16 +106,18 @@ pub(all) struct TraitMethodSig {
   return_ : (@syntax.Type, @syntax.ErrorType)
   nocancel_ : @basic.Location?
   attrs : @list.List[@attribute.Attribute]
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct TraitSig {
   name : Name
   super_traits : @list.List[QualifiedName]
   methods : @list.List[TraitMethodSig]
   vis : @syntax.Visibility
   attrs : @list.List[@attribute.Attribute]
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) enum TypeDefinition {
   Abstract
   Newtype(@syntax.Type)
@@ -114,18 +128,21 @@ pub(all) enum TypeDefinition {
   Variant(@list.List[@syntax.ConstrDecl])
   Record(fields~ : @list.List[@syntax.FieldDecl])
   Alias(@syntax.Type)
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) enum TypeParamNoConstraints {
   Name(Name)
   Underscore(@basic.Location)
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct TypeParamWithConstraints {
   name : Name
   constraints : @list.List[QualifiedName]
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct TypeSig {
   name : Name
   type_params : @list.List[TypeParamNoConstraints]
@@ -133,13 +150,14 @@ pub(all) struct TypeSig {
   vis : @syntax.Visibility
   attrs : @list.List[@attribute.Attribute]
   derives : @list.List[QualifiedName]
-} derive(@debug.Debug)
+}
 
+#derive(@debug.Debug)
 pub(all) struct ValueSig {
   name : Name
   type_ : @syntax.Type
   attrs : @list.List[@attribute.Attribute]
-} derive(@debug.Debug)
+}
 
 // Type aliases
 pub type Attributes = @list.List[@attribute.Attribute]

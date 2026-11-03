@@ -1,8 +1,9 @@
 ///|
+#derive(Debug)
 pub(all) struct Report {
   loc : Location
   msg : String
-} derive(Debug)
+}
 
 ///|
 pub impl Show for Report with fn output(self, logger) {
