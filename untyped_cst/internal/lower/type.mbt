@@ -84,7 +84,13 @@ fn lower_return_type_effects(
 ///|
 fn lower_name_type(node : CstNode, is_object~ : Bool) -> @syntax.Type {
   let names = node.children_with_label("name")
-  let constr_loc = if names.get(0) is Some(name) { name.loc } else { node.loc }
+  let constr_loc = if node.first_child_with_label("semantic_name") is Some(name) {
+    name.loc
+  } else if names.get(0) is Some(first) {
+    names.fold(init=first.loc, fn(loc, name) { loc.merge(name.loc) })
+  } else {
+    node.loc
+  }
   let constr_id = lower_constr_id_from_node(node, constr_loc)
   if is_object {
     Object(constr_id)

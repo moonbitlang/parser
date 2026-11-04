@@ -5833,8 +5833,8 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
   let spos = self.peek_spos()
   match self.peek_token() {
     PACKAGE_NAME(_) | LIDENT(_) | UIDENT(_) => {
-      let name_loc = self.peek_location()
       let name = self.parse_qual_type_ident(context="type name")
+      let name_loc = self.loc_start_with(spos)
       let args = self.optional([TK_LBRACKET], fn(self) {
         self.surround_series(
           left=TK_LBRACKET,

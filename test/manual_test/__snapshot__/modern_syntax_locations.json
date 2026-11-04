@@ -208,11 +208,11 @@
                     "children": {
                       "constr_id": {
                         "kind": "ConstrId",
-                        "loc": "6:34-6:41",
+                        "loc": "6:34-6:48",
                         "children": {
                           "id": {
                             "kind": "LongIdent::Dot",
-                            "loc": "6:34-6:41",
+                            "loc": "6:34-6:48",
                             "children": {
                               "pkg": "lexbuf",
                               "id": "Lexbuf"
