@@ -1,8 +1,9 @@
 ///|
+#derive(Debug)
 pub suberror ParseError {
   UnexpectedToken(Token, (Position, Position), Array[TokenKind])
   UnexpectedEndOfInput(Position, Array[TokenKind])
-} derive(Debug)
+}
 
 ///|
 #deprecated("Use Debug::to_repr instead")
@@ -74,7 +75,7 @@ priv suberror YYObj__String__String___String_ {
 type YYState = ((YYSymbol) -> YYDecision)
 
 ///|
-type YYAction = ((Position, ArrayView[(YYObj, Position, Position)]) -> YYObj)
+type YYAction = ((ArrayView[(YYObj, Position, Position)]) -> YYObj)
 
 ///|
 priv enum YYDecision {
@@ -241,9 +242,7 @@ fn init {
 ///|
 // file:///./parser.mbty
 // 175|    EOF { List([]) }
-fn yy_action_0(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_0(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_(
     ({();  List([]) 
     })
@@ -253,9 +252,7 @@ fn yy_action_0(
 ///|
 // file:///./parser.mbty
 // 176|    properties { $1 }
-fn yy_action_1(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_1(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_Prop_(_dollar1)
   YYObj_List_Prop_(
     ({();  _dollar1 
@@ -266,9 +263,7 @@ fn yy_action_1(
 ///|
 // file:///./parser.mbty
 // 193|    "(" ")"                      { List([]) }
-fn yy_action_2(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_2(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_(
     ({();  List([]) 
     })
@@ -278,9 +273,7 @@ fn yy_action_2(
 ///|
 // file:///./parser.mbty
 // 194|    "(" non_empty_properties ")" { $2 }
-fn yy_action_3(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_3(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List_Prop_(_dollar2)
   YYObj_List_Prop_(
     ({();  _dollar2 
@@ -291,9 +284,7 @@ fn yy_action_3(
 ///|
 // file:///./parser.mbty
 // 171|    LIDENT { $1 }
-fn yy_action_4(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_4(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_String(
     ({();  _dollar1 
@@ -304,9 +295,7 @@ fn yy_action_4(
 ///|
 // file:///./parser.mbty
 // 172|    "extend" { "extend" }
-fn yy_action_5(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_5(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_String(
     ({();  "extend" 
     })
@@ -316,9 +305,7 @@ fn yy_action_5(
 ///|
 // file:///./parser.mbty
 // 179|    name=lident_string "=" expr   { Labeled(name, $3) }
-fn yy_action_6(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_6(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
   YYObj_Prop(
@@ -330,9 +317,7 @@ fn yy_action_6(
 ///|
 // file:///./parser.mbty
 // 187|    qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
-fn yy_action_7(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_7(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(qual)
   guard! _args[1].0 is YYObj_String(name)
   guard! _args[2].0 is YYObj_List_Prop_(props)
@@ -345,9 +330,7 @@ fn yy_action_7(
 ///|
 // file:///./parser.mbty
 // 185|    qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
-fn yy_action_8(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_8(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(qual)
   guard! _args[1].0 is YYObj_String(name)
   YYObj_Expr(
@@ -359,9 +342,7 @@ fn yy_action_8(
 ///|
 // file:///./parser.mbty
 // 186|    name=lident_string props=properties                 { Apply({qual: None, name}, props) }
-fn yy_action_9(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_9(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   guard! _args[1].0 is YYObj_List_Prop_(props)
   YYObj_Expr(
@@ -373,9 +354,7 @@ fn yy_action_9(
 ///|
 // file:///./parser.mbty
 // 183|    name=lident_string                                  { Ident({qual: None, name}) }
-fn yy_action_10(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_10(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr(
     ({();  Ident({qual: None, name}) 
@@ -386,9 +365,7 @@ fn yy_action_10(
 ///|
 // file:///./parser.mbty
 // 180|    expr                   { Expr($1) }
-fn yy_action_11(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_11(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Prop(
     ({();  Expr(_dollar1) 
@@ -399,9 +376,7 @@ fn yy_action_11(
 ///|
 // file:///./parser.mbty
 // 184|    name=UIDENT                                         { Ident({qual: None, name}) }
-fn yy_action_12(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_12(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr(
     ({();  Ident({qual: None, name}) 
@@ -412,9 +387,7 @@ fn yy_action_12(
 ///|
 // file:///./parser.mbty
 // 188|    STRING                                              { String($1) }
-fn yy_action_13(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_13(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Expr(
     ({();  String(_dollar1) 
@@ -425,9 +398,7 @@ fn yy_action_13(
 ///|
 // file:///./parser.mbty
 // 189|    TRUE                                                { Bool(true) }
-fn yy_action_14(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_14(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr(
     ({();  Bool(true) 
     })
@@ -437,9 +408,7 @@ fn yy_action_14(
 ///|
 // file:///./parser.mbty
 // 190|    FALSE                                               { Bool(false) }
-fn yy_action_15(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_15(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr(
     ({();  Bool(false) 
     })
@@ -449,9 +418,7 @@ fn yy_action_15(
 ///|
 // file:///./parser.mbty
 // 198|    x=property "," xs=non_empty_properties{ xs.prepend(x) }
-fn yy_action_16(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_16(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Prop(x)
   guard! _args[2].0 is YYObj_List_Prop_(xs)
   YYObj_List_Prop_(
@@ -463,9 +430,7 @@ fn yy_action_16(
 ///|
 // file:///./parser.mbty
 // 197|    property { List([$1]) }
-fn yy_action_17(
-  _last_pos : Position, _args : ArrayView[(YYObj, Position, Position)]
-) -> YYObj {
+fn yy_action_17(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Prop(_dollar1)
   YYObj_List_Prop_(
     ({();  List([_dollar1]) 
@@ -895,12 +860,13 @@ fn[T] yy_parse(
   return_ : ((YYObj) -> T), initial_pos? : Position
 ) -> T raise ParseError {
   let mut cursor = 0
+  let initial_position = initial_pos.unwrap_or_else(() => tokens[0].1)
   let mut state_stack : @list.List[YYState] = @list.List([start])
   let data_stack : Array[(YYObj, Position, Position)] = []
-  let mut last_pos = initial_pos.unwrap_or_else(() => tokens[0].1)
   let mut state = start
   let mut lookahead : (YYSymbol, (YYObj, Position, Position), Token?)? = None
   let mut last_shifted_state_stack = state_stack
+  let mut last_pos = initial_position
   while true {
     let decision = match state(EOI) {
       (ReduceNoLookahead(_) | Accept) as t => t
@@ -943,13 +909,24 @@ fn[T] yy_parse(
         ({
           ()
           for count = count, symbol = symbol, action = action {
-            let args = data_stack[data_stack.length() - count:]
-            let data = action(last_pos, args)
-            let (start_pos, end_pos) = if args.length() == 0 {
-              (last_pos, last_pos)
+            let start_index = data_stack.length() - count
+            let args = data_stack[start_index:]
+            let previous_end = if start_index == 0 {
+              initial_position
             } else {
-              (args[0].1, args[args.length() - 1].2)
+              data_stack[start_index - 1].2
             }
+            let start_pos = if count == 0 {
+              previous_end
+            } else {
+              args[0].1
+            }
+            let end_pos = if count == 0 {
+              previous_end
+            } else {
+              args[count - 1].2
+            }
+            let data = action(args)
             for _ in 0..<count {
               ignore(data_stack.unsafe_pop())
               state_stack = state_stack.unsafe_tail()
@@ -983,8 +960,8 @@ fn[T] yy_parse(
       Error =>
         ({
           ()
-          let (_, (_, start_pos, end_pos), token) = lookahead.unwrap()
-          error(last_shifted_state_stack, token, (start_pos, end_pos))
+          let (_, _data, token) = lookahead.unwrap()
+          error(last_shifted_state_stack, token, (_data.1, _data.2))
         })
     }
   }
