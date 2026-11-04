@@ -62,22 +62,29 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
   let hand_json = Json(hand_result.0.map(impl_ => impl_.json_repr()))
   let yacc_json = Json(yacc_result.0.map(impl_ => impl_.json_repr()))
   if hand_json != yacc_json || hand_json != cst_json {
-    @fs.create_dir(debug_dir)
-    @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_hand.json",
-      hand_json.stringify(indent=2),
-    )
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_yacc.json",
-      yacc_json.stringify(indent=2),
-    )
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_cst.json",
-      cst_json.stringify(indent=2),
-    )
+    let debug_error = try {
+      if !@fs.path_exists(debug_dir) {
+        @fs.create_dir(debug_dir)
+      }
+      @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_hand.json",
+        hand_json.stringify(indent=2),
+      )
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_yacc.json",
+        yacc_json.stringify(indent=2),
+      )
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_cst.json",
+        cst_json.stringify(indent=2),
+      )
+      ""
+    } catch {
+      err => "\nAdditionally, writing debug files failed: \{Repr(err)}"
+    }
     fail(
-      "parsing \{name}.mbt produced different ASTs between moonyacc, handrolled, and CST parsers.",
+      "parsing \{name}.mbt produced different ASTs between moonyacc, handrolled, and CST parsers.\{debug_error}",
     )
   }
   let json : Json = hand_json
