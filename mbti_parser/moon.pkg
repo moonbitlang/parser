@@ -8,13 +8,13 @@ import {
   "moonbitlang/core/list",
 }
 
-warnings = "-unused_constructor-deprecated_syntax"
+warnings = "-unused_constructor"
 
 formatter(ignore: [ "mbti_parser.mbt" ])
 
 rule(
   name: "moonyacc",
-  command: "moonx moonbitlang/yacc@0.7.25 --input-mode array --external-tokens $input -o $output",
+  command: "moonx moonbitlang/yacc@0.7.26 --input-mode array --external-tokens $input -o $output",
 )
 
 dev_build(
