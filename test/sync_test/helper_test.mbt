@@ -44,29 +44,46 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
     let rendered = @basic.show_loc.protect(String, fn() {
       Json(cst_reports).stringify(indent=2)
     })
-    @fs.create_dir(debug_dir)
-    @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
-    @fs.write_string_to_file("\{debug_dir}/\{name}_cst_reports.json", rendered)
-    fail("converting CST for \{name}.mbt produced diagnostics.")
+    let debug_error = try {
+      if !@fs.path_exists(debug_dir) {
+        @fs.create_dir(debug_dir)
+      }
+      @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_cst_reports.json",
+        rendered,
+      )
+      ""
+    } catch {
+      err => "\nAdditionally, writing debug files failed: \{Repr(err)}"
+    }
+    fail("converting CST for \{name}.mbt produced diagnostics.\{debug_error}")
   }
   let cst_json = Json(cst_impls.map(impl_ => impl_.json_repr()))
   if hand_json != yacc_json || hand_json != cst_json {
-    @fs.create_dir(debug_dir)
-    @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_hand.json",
-      hand_json.stringify(indent=2),
-    )
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_yacc.json",
-      yacc_json.stringify(indent=2),
-    )
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_cst.json",
-      cst_json.stringify(indent=2),
-    )
+    let debug_error = try {
+      if !@fs.path_exists(debug_dir) {
+        @fs.create_dir(debug_dir)
+      }
+      @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_hand.json",
+        hand_json.stringify(indent=2),
+      )
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_yacc.json",
+        yacc_json.stringify(indent=2),
+      )
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_cst.json",
+        cst_json.stringify(indent=2),
+      )
+      ""
+    } catch {
+      err => "\nAdditionally, writing debug files failed: \{Repr(err)}"
+    }
     fail(
-      "parsing \{name}.mbt produced different ASTs between moonyacc, handrolled, and CST parsers.",
+      "parsing \{name}.mbt produced different ASTs between moonyacc, handrolled, and CST parsers.\{debug_error}",
     )
   }
   let (hand_loc_json, cst_loc_json) = @basic.show_loc.protect(String, fn() {
@@ -76,18 +93,25 @@ fn @test.Test::run(t : Self) -> Unit raise Error {
     )
   })
   if hand_loc_json != cst_loc_json {
-    @fs.create_dir(debug_dir)
-    @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_hand_loc.json",
-      hand_loc_json.stringify(indent=2),
-    )
-    @fs.write_string_to_file(
-      "\{debug_dir}/\{name}_cst_loc.json",
-      cst_loc_json.stringify(indent=2),
-    )
+    let debug_error = try {
+      if !@fs.path_exists(debug_dir) {
+        @fs.create_dir(debug_dir)
+      }
+      @fs.write_string_to_file("\{debug_dir}/\{name}.mbt", source)
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_hand_loc.json",
+        hand_loc_json.stringify(indent=2),
+      )
+      @fs.write_string_to_file(
+        "\{debug_dir}/\{name}_cst_loc.json",
+        cst_loc_json.stringify(indent=2),
+      )
+      ""
+    } catch {
+      err => "\nAdditionally, writing debug files failed: \{Repr(err)}"
+    }
     fail(
-      "parsing \{name}.mbt produced location-sensitive AST differences between handrolled and CST parsers.",
+      "parsing \{name}.mbt produced location-sensitive AST differences between handrolled and CST parsers.\{debug_error}",
     )
   }
   let json : Json = hand_json
