@@ -1,4 +1,5 @@
 ///|
+#derive(Debug)
 pub(all) enum Token {
   CHAR(CharLiteral)
   INT(String)
@@ -133,7 +134,7 @@ pub(all) enum Token {
   LEXSCAN
   EXTEND
   PACKAGE
-} derive(Debug)
+}
 
 ///|
 #deprecated("Use Debug::to_repr instead")
@@ -280,6 +281,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
 }
 
 ///|
+#derive(Eq, Hash, Compare)
 pub(all) enum TokenKind {
   TK_CHAR
   TK_INT
@@ -414,7 +416,7 @@ pub(all) enum TokenKind {
   TK_LEXSCAN
   TK_EXTEND
   TK_PACKAGE
-} derive(Eq, Hash, Compare)
+}
 
 ///|
 #deprecated("Use Eq::equal or Eq::not_equal instead")
