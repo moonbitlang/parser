@@ -105,6 +105,7 @@ fn collect_regex_literals(
 ) -> Unit {
   match pat {
     Literal(lit~, recovered_~, loc=_) => literals.push((lit, recovered_))
+    BytesLiteral(lit~, ..) => literals.push((lit, false))
     Reference(_) => ()
     Sequence(pat1~, pat2~, loc=_) | Alternation(pat1~, pat2~, loc=_) => {
       collect_regex_literals(pat1, literals)

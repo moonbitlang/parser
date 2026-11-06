@@ -5,6 +5,7 @@ fn collect_recovered_regex_literals(
 ) -> Unit {
   match pat {
     Literal(lit~, recovered_~, loc=_) => literals.push((lit, recovered_))
+    BytesLiteral(lit~, ..) => literals.push((lit, false))
     Reference(_) => ()
     Sequence(pat1~, pat2~, loc=_) | Alternation(pat1~, pat2~, loc=_) => {
       collect_recovered_regex_literals(pat1, literals)
@@ -12,6 +13,25 @@ fn collect_recovered_regex_literals(
     }
     Alias(pat~, binder=_, loc=_) =>
       collect_recovered_regex_literals(pat, literals)
+  }
+}
+
+///|
+test "regex interpolation rejection has consistent diagnostics" {
+  for prefix in ["re", "reb"] {
+    for
+      source in [
+        "fn main { let _ = \{prefix}\"a\\{x}b\" }",
+        "fn main {\n  let _ = \{prefix}\"a\\{x}b\"\n}",
+      ] {
+      let (_, reports) = @parser.parse_string(source, name="interp.mbt")
+      let cst = @untyped_cst.parse_structure(source, name="interp.mbt")
+      assert_true(!reports.is_empty())
+      assert_eq(
+        handrolled_cst_reports_json(reports_from_view(cst.diagnostics_view())),
+        handrolled_cst_reports_json(reports),
+      )
+    }
   }
 }
 

@@ -171,6 +171,19 @@ fn constant_node_from_syntax(
         source_span,
         value,
       )
+    BytesRegex(value) =>
+      constant_node(
+        fn(loc, source_span, children) {
+          let value = match payload_from_children(children) {
+            Some(String(value)) => value
+            _ => ""
+          }
+          @node.CstNode::constant_bytes_regex(value~, loc~, source_span~)
+        },
+        loc,
+        source_span,
+        value,
+      )
     BigInt(value) =>
       constant_node(
         fn(loc, source_span, children) {
@@ -314,6 +327,21 @@ pub fn constant_node_from_token(
               _ => ""
             }
             @node.CstNode::constant_regex(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          value,
+        ),
+      )
+    BYTES_REGEX_LITERAL(value) =>
+      Some(
+        constant_node(
+          fn(loc, source_span, children) {
+            let value = match payload_from_children(children) {
+              Some(String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::constant_bytes_regex(value~, loc~, source_span~)
           },
           loc,
           source_span,
@@ -770,6 +798,21 @@ pub fn lex_literal_node_from_token(
               _ => ""
             }
             @node.CstNode::lex_literal_regex(value~, loc~, source_span~)
+          },
+          loc,
+          source_span,
+          String(value),
+        ),
+      )
+    BYTES_REGEX_LITERAL(value) =>
+      Some(
+        scalar_node(
+          fn(loc, source_span, children) {
+            let value = match payload_from_children(children) {
+              Some(String(value)) => value
+              _ => ""
+            }
+            @node.CstNode::lex_literal_bytes_regex(value~, loc~, source_span~)
           },
           loc,
           source_span,

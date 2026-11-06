@@ -109,7 +109,7 @@ fn lex_tokens(
         let start_pos = env.calc_offset(input, base~)
         let end_pos = env.calc_offset(rest, base~)
         env.add_token_with_loc(NEWLINE, start=start_pos, end=end_pos)
-        env.current_bol = end_pos
+        env.current_bol = env.start_cnum + end_pos
         env.current_line += 1
         continue rest
       }
@@ -259,8 +259,8 @@ fn lex_tokens(
         continue rest
       }
 
-      // Regex literals - re"..."
-      (re"^(?:re\")", after=rest) => {
+      // Regex literals - re"..." / reb"..."
+      (re"^(?:reb?\")", after=rest) => {
         let start_pos = env.calc_offset(input, base~)
         let (rest, interps) = lex_string(
           rest,
@@ -271,7 +271,12 @@ fn lex_tokens(
           start_pos~,
         )
         let tok : @tokens.Token = match interps {
-          [InterpLit(repr~, ..)] => REGEX_LITERAL(repr)
+          [InterpLit(repr~, ..)] =>
+            if input.has_prefix("reb") {
+              BYTES_REGEX_LITERAL(repr)
+            } else {
+              REGEX_LITERAL(repr)
+            }
           interps => REGEX_INTERP(interps)
         }
         let end_pos = env.calc_offset(rest, base~)
@@ -1424,7 +1429,7 @@ fn scan_interpolation_source(
           escaped=false,
         )
       }
-      (re"^(?:re\")" as raw, after=rest) => {
+      (re"^(?:reb?\")" as raw, after=rest) => {
         interpolation_write_view(env, buf, raw)
         break scan_interpolation_string_atom(
           rest,

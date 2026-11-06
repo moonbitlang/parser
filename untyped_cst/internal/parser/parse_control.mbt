@@ -902,6 +902,7 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
     | DOUBLE(_)
     | CHAR(_)
     | STRING(_)
+    | BYTES_REGEX_LITERAL(_)
     | REGEX_LITERAL(_)
     | MULTILINE_STRING(_)
     | MULTILINE_INTERP(_)

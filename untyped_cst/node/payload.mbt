@@ -53,6 +53,7 @@ fn token_string_payload(token : Token) -> String? {
     | STRING(value)
     | MULTILINE_STRING(value)
     | REGEX_LITERAL(value)
+    | BYTES_REGEX_LITERAL(value)
     | LIDENT(value)
     | UIDENT(value)
     | PACKAGE_NAME(value)

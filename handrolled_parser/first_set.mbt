@@ -45,6 +45,7 @@ let first_simple_expr : Array[TokenKind] = [
   TK_CHAR,
   TK_STRING,
   TK_REGEX_LITERAL,
+  TK_BYTES_REGEX_LITERAL,
   TK_MULTILINE_STRING,
   TK_MULTILINE_INTERP,
   TK_BYTE,
@@ -104,6 +105,7 @@ let first_map_pattern_key : Array[TokenKind] = [
   TK_MINUS,
   TK_STRING,
   TK_REGEX_LITERAL,
+  TK_BYTES_REGEX_LITERAL,
 ]
 
 ///|
