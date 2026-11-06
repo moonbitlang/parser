@@ -25,6 +25,7 @@ pub(all) enum Expr {
   String(@tokens.StringLiteral)
   Apply(Id, List[Prop])
   Bool(Bool)
+  Array(List[Expr])
 }
 
 ///|
