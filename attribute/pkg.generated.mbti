@@ -36,6 +36,7 @@ pub(all) enum Expr {
   String(String)
   Apply(Id, @list.List[Prop])
   Bool(Bool)
+  Array(@list.List[Expr])
 }
 
 pub(all) struct Id {
