@@ -461,6 +461,11 @@ test "pipeline_test_tail_catch" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_bytes_regex_automaton" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_newtype_ind_rec" (t : @test.Test) {
   t.run()
 }
@@ -817,6 +822,11 @@ test "pipeline_test_int64_unsigned_op" (t : @test.Test) {
 
 ///|
 test "pipeline_test_funcref_in_global" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "format_test_pattern_guard_comment" (t : @test.Test) {
   t.run()
 }
 
@@ -1251,6 +1261,11 @@ test "pipeline_test_arrayview_conversion" (t : @test.Test) {
 }
 
 ///|
+test "format_test_enumview" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_wasm_gc_array_layout_int_then_bool" (t : @test.Test) {
   t.run()
 }
@@ -1442,6 +1457,11 @@ test "parse_test_attribute" (t : @test.Test) {
 
 ///|
 test "pipeline_test_003" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bytes_regex_match" (t : @test.Test) {
   t.run()
 }
 
@@ -1651,6 +1671,11 @@ test "pipeline_test_option_uint" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_bytes_regex_literal" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_init_return" (t : @test.Test) {
   t.run()
 }
@@ -1792,6 +1817,11 @@ test "pipeline_test_string_view_default_arg" (t : @test.Test) {
 
 ///|
 test "pipeline_test_match_2" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "parse_test_try_simple" (t : @test.Test) {
   t.run()
 }
 
@@ -2761,7 +2791,17 @@ test "pipeline_test_option5" (t : @test.Test) {
 }
 
 ///|
+test "format_test_block_line_doc" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_iter" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "pipeline_test_bytes_regex_value" (t : @test.Test) {
   t.run()
 }
 
@@ -3077,6 +3117,11 @@ test "pipeline_test_bytes_utils" (t : @test.Test) {
 
 ///|
 test "parse_test_map_literal_with_bytes" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "format_test_where_clause" (t : @test.Test) {
   t.run()
 }
 
@@ -3651,6 +3696,11 @@ test "pipeline_test_arith" (t : @test.Test) {
 }
 
 ///|
+test "format_test_attribute2" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_lexscan_block" (t : @test.Test) {
   t.run()
 }
@@ -4156,6 +4206,11 @@ test "pipeline_test_value_enum_cast2" (t : @test.Test) {
 }
 
 ///|
+test "format_test_or_alias_pattern" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_global_in_object" (t : @test.Test) {
   t.run()
 }
@@ -4352,6 +4407,11 @@ test "pipeline_test_rc_cycle" (t : @test.Test) {
 
 ///|
 test "pipeline_test_record_update_codegen" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "format_test_extend" (t : @test.Test) {
   t.run()
 }
 

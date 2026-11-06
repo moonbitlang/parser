@@ -31,3 +31,10 @@ fn init {
   x = foo(10)
 }
 
+fn ret_bytes() -> Bytes {
+  return b"abc"
+}
+
+fn ret_bytes_interp(x : Int) -> Bytes {
+  return b"a\{x}c"
+}

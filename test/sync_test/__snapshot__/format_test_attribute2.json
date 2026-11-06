@@ -1,0 +1,507 @@
+[
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "recognized_attributes"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": {
+            "kind": "FunDecl::ParameterList",
+            "loc": null,
+            "children": []
+          },
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": {
+            "kind": "Type::Name",
+            "loc": null,
+            "children": {
+              "constr_id": {
+                "kind": "ConstrId",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "Unit"
+                    }
+                  }
+                }
+              },
+              "tys": {
+                "kind": "Type::Name::TypeList",
+                "loc": null,
+                "children": []
+              }
+            }
+          },
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#alert(  category1,   \"reason\")"
+                }
+              },
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#intrinsic(\"%some.intrinsic\"  )"
+                }
+              },
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#coverage.skip"
+                }
+              },
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#gen_js(id1,id2(id3,id4),   key1=id5)"
+                }
+              }
+            ]
+          },
+          "doc": ""
+        }
+      },
+      "where_clause": null,
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "expr": {
+            "kind": "Expr::Unit",
+            "loc": null,
+            "children": {
+              "faked": true
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "unknown_attributes"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": {
+            "kind": "FunDecl::ParameterList",
+            "loc": null,
+            "children": []
+          },
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": {
+            "kind": "Type::Name",
+            "loc": null,
+            "children": {
+              "constr_id": {
+                "kind": "ConstrId",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "Unit"
+                    }
+                  }
+                }
+              },
+              "tys": {
+                "kind": "Type::Name::TypeList",
+                "loc": null,
+                "children": []
+              }
+            }
+          },
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#unknown1(id1,    \"reason\")"
+                }
+              },
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#unknown2(id1,    id2(id3,id4),   key1=id5,key2=id6)"
+                }
+              }
+            ]
+          },
+          "doc": ""
+        }
+      },
+      "where_clause": null,
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "expr": {
+            "kind": "Expr::Unit",
+            "loc": null,
+            "children": {
+              "faked": true
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "f"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": {
+            "kind": "FunDecl::ParameterList",
+            "loc": null,
+            "children": []
+          },
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": {
+            "kind": "Type::Name",
+            "loc": null,
+            "children": {
+              "constr_id": {
+                "kind": "ConstrId",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "Unit"
+                    }
+                  }
+                }
+              },
+              "tys": {
+                "kind": "Type::Name::TypeList",
+                "loc": null,
+                "children": []
+              }
+            }
+          },
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#custom1.name(\"abc\")"
+                }
+              },
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#custom2.name(@qual.name, key=@qual.name, \"abc\")"
+                }
+              }
+            ]
+          },
+          "doc": ""
+        }
+      },
+      "where_clause": null,
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "expr": {
+            "kind": "Expr::Unit",
+            "loc": null,
+            "children": {
+              "faked": true
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "package_qualified_type"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": {
+            "kind": "FunDecl::ParameterList",
+            "loc": null,
+            "children": []
+          },
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": {
+            "kind": "Type::Name",
+            "loc": null,
+            "children": {
+              "constr_id": {
+                "kind": "ConstrId",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "Unit"
+                    }
+                  }
+                }
+              },
+              "tys": {
+                "kind": "Type::Name::TypeList",
+                "loc": null,
+                "children": []
+              }
+            }
+          },
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#custom.name(@qual.Type)"
+                }
+              }
+            ]
+          },
+          "doc": ""
+        }
+      },
+      "where_clause": null,
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "expr": {
+            "kind": "Expr::Unit",
+            "loc": null,
+            "children": {
+              "faked": true
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "kind": "Impl::TopFuncDef",
+    "loc": null,
+    "children": {
+      "fun_decl": {
+        "kind": "FunDecl",
+        "loc": null,
+        "children": {
+          "type_name": null,
+          "name": {
+            "kind": "Binder",
+            "loc": null,
+            "children": {
+              "name": "array_argument"
+            }
+          },
+          "has_error": null,
+          "is_async": null,
+          "decl_params": {
+            "kind": "FunDecl::ParameterList",
+            "loc": null,
+            "children": []
+          },
+          "quantifiers": {
+            "kind": "FunDecl::QuantifierList",
+            "loc": null,
+            "children": []
+          },
+          "return_type": {
+            "kind": "Type::Name",
+            "loc": null,
+            "children": {
+              "constr_id": {
+                "kind": "ConstrId",
+                "loc": null,
+                "children": {
+                  "id": {
+                    "kind": "LongIdent::Ident",
+                    "loc": null,
+                    "children": {
+                      "value": "Unit"
+                    }
+                  }
+                }
+              },
+              "tys": {
+                "kind": "Type::Name::TypeList",
+                "loc": null,
+                "children": []
+              }
+            }
+          },
+          "error_type": {
+            "kind": "ErrorType::NoErrorType",
+            "loc": null,
+            "children": {}
+          },
+          "vis": {
+            "kind": "Visibility::Default",
+            "loc": null,
+            "children": {}
+          },
+          "attrs": {
+            "kind": "FunDecl::AttrList",
+            "loc": null,
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#custom.name([a,b,c])"
+                }
+              }
+            ]
+          },
+          "doc": ""
+        }
+      },
+      "where_clause": null,
+      "decl_body": {
+        "kind": "DeclBody::DeclBody",
+        "loc": null,
+        "children": {
+          "expr": {
+            "kind": "Expr::Unit",
+            "loc": null,
+            "children": {
+              "faked": true
+            }
+          }
+        }
+      }
+    }
+  }
+]

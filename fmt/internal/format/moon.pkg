@@ -16,4 +16,6 @@ import {
 
 import {
   "moonbitlang/core/list",
+  "moonbitlang/x/fs",
+  "moonbitlang/parser/frontmatter",
 } for "wbtest"

@@ -19,3 +19,15 @@ fn c(x : Char) -> Unit {
     _ => ()
   }
 }
+
+fn canonical(x : Int) -> Bool {
+  match x {
+    -3..<=0 | 1..<=1 => true
+    _..<=-4 => false
+    _ => false
+  }
+}
+
+fn descending(x : Int) -> Bool {
+  x is 3>..0 | 3>=..0
+}
