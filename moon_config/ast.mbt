@@ -52,6 +52,7 @@ pub(all) enum Statement {
   Import(
     items~ : Array[ImportItem],
     kind~ : ImportKind,
+    conditions~ : Array[ImportCondition],
     keyword_loc~ : Location,
     list_loc~ : Location,
     loc~ : Location
