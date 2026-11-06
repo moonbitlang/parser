@@ -33,6 +33,32 @@ This module defines the Abstract Syntax Tree (AST) and provides parsers for Moon
 - [Lexer](lexer/README.md)
 - [Moon Config](moon_config/README.md)
 
+## Parsing `.mbtx` files
+
+Use `parse_mbtx_string(source, name?, parser?)` for files with optional configuration
+frontmatter. It returns `(Mbtx, Array[@basic.Report])`. `Mbtx` contains `header`
+(a `moon_config.ParseResult?`) and `body` (the source AST); the reports combine
+header and body diagnostics. `None` distinguishes no header from an
+explicitly empty header. `parse_string` continues to parse ordinary source.
+
+A header begins with a first line of at least three dashes, optionally preceded
+by a BOM, and ends with a line of at least as many dashes. LF and CRLF are
+supported; an unclosed header extends to EOF. Header syntax is parsed without imposing `moon.pkg` field validation, so script
+settings such as `permissions(...)` are retained. Header and body diagnostics
+retain original file positions. Configuration conditions are preserved without backend
+selection; derive attributes are preserved without generating implementations.
+
+```mbt check
+///|
+test "parse mbtx frontmatter" {
+  let source = "---\nexperimental = true\n---\nlet value = reb\"[a-z]+\""
+  let (result, reports) = @parser.parse_mbtx_string(source, name="example.mbtx")
+  assert_true(result.header is Some(_))
+  assert_eq(reports.length(), 0)
+  assert_eq(result.body.length(), 1)
+}
+```
+
 ## Usage
 
 ```mbt check

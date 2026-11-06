@@ -6,6 +6,7 @@ import {
   "moonbitlang/core/list",
   "moonbitlang/lexer/basic",
   "moonbitlang/lexer/tokens",
+  "moonbitlang/moon_config",
   "moonbitlang/parser/syntax",
   "moonbitlang/parser/untyped_cst/node",
 }
@@ -13,11 +14,19 @@ import {
 // Values
 pub fn parse_expression(String, name? : String, enable_metavar? : Bool) -> ParseResult
 
+pub fn parse_mbtx(String, name? : String, enable_metavar? : Bool) -> MbtxParseResult
+
 pub fn parse_structure(String, name? : String, enable_metavar? : Bool) -> ParseResult
 
 // Errors
 
 // Types and methods
+pub struct MbtxParseResult {
+  header : @moon_config.ParseResult?
+  body : ParseResult
+  diagnostics : Array[@basic.Report]
+}
+
 #derive(@debug.Debug)
 pub struct ParseResult {
   root : @node.CstNode

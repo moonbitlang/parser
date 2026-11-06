@@ -17,6 +17,15 @@ Successful results can be lowered with `ParseResult::to_impls` and
 `ParseResult::to_expr`, respectively. Calling a lowering method for the other
 root kind returns a diagnostic.
 
+## Files with frontmatter
+
+`parse_mbtx(source, name?, enable_metavar?)` returns a separate `header`, a
+`body : ParseResult`, and combined `diagnostics`. Lower the body with
+`result.body.to_impls()`. Header and body locations refer to the original file;
+CST source spans use UTF-16 offsets into the complete input string. The body
+root spans the complete input, while its syntax children start after the header.
+The shared `frontmatter` package exposes the delimiter splitting operation.
+
 ## Node Model
 
 The source-independent node model lives in
