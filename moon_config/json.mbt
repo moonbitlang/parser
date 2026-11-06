@@ -78,7 +78,7 @@ fn statement_to_json(statement : Statement) -> Json {
   match statement {
     Assign(field) => { "$tag": "Assign", "0": field_to_json(field) }
     Expr(expr) => { "$tag": "Expr", "0": expr_to_json(expr) }
-    Import(items~, kind~, keyword_loc~, list_loc~, loc~) => {
+    Import(items~, kind~, conditions~, keyword_loc~, list_loc~, loc~) => {
       let kind = match kind {
         Normal => "Normal"
         Test => "Test"
@@ -88,6 +88,13 @@ fn statement_to_json(statement : Statement) -> Json {
         "$tag": "Import",
         "items": Json::array(items.map(import_item_to_json)),
         "kind": { "$tag": Json::string(kind) },
+        "conditions": Json::array(
+          conditions.map(condition => {
+            "raw": Json::string(condition.raw),
+            "parsed": ToJson::to_json(condition.parsed),
+            "loc": location_to_json(condition.loc),
+          }),
+        ),
         "keyword_loc": location_to_json(keyword_loc),
         "list_loc": location_to_json(list_loc),
         "loc": location_to_json(loc),

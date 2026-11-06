@@ -68,6 +68,32 @@ test "moon.pkg import all forms format as a fixed point" {
 }
 
 ///|
+test "conditional imports preserve conditions comments and repeated blocks" {
+  let source =
+    #|#cfg( target="js" ) // JavaScript implementation
+    #|import { "platform" @js_impl }
+    #|#cfg(all(target="native",not(target="llvm")))
+    #|#cfg(true)
+    #|import {"platform" @native_impl} for "test"
+    #|import {"unconditional"}
+    #|import {"another"}
+    #|experimental=true
+  let before = @moon_config.parse_moon_pkg(source)
+  assert_true(before.diagnostics.errors.is_empty())
+  let formatted = format_moon_pkg(source)
+  assert_true(formatted != source)
+  assert_true(formatted.contains("// JavaScript implementation"))
+  assert_true(formatted.contains("#cfg( target=\"js\" )"))
+  let after = @moon_config.parse_moon_pkg(formatted)
+  assert_true(after.diagnostics.errors.is_empty())
+  assert_eq(
+    config_without_locations(before.ast),
+    config_without_locations(after.ast),
+  )
+  assert_eq(format_moon_pkg(formatted), formatted)
+}
+
+///|
 test "moon.pkg omits default import aliases without losing import all" {
   let source =
     #|import {

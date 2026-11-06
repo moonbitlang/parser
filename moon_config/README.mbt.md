@@ -60,3 +60,26 @@ test "parse moon.work" {
   assert_eq(result.ast.0.length(), 2)
 }
 ```
+
+## Conditional imports
+
+`moon.pkg` accepts repeated import blocks, optionally preceded by one or more
+`#cfg(...)` attributes. Each import retains its `conditions`, including the raw
+attribute, parsed `Condition`, and source location. Conditions support booleans,
+`target = "wasm" | "wasm-gc" | "js" | "native" | "llvm"`, `all(...)`, `any(...)`,
+and single-argument `not(...)`. No target selection is performed. `moon.mod`
+rejects conditional imports. `experimental` accepts boolean values only.
+
+```mbt check
+///|
+test "conditional imports" {
+  let source = "#cfg(target = \"js\")\nimport { \"platform/js\" }\nexperimental = true"
+  let result = @moon_config.parse_moon_pkg(source)
+  assert_eq(result.diagnostics.errors.length(), 0)
+  guard result.ast.0[0] is Import(conditions~, ..) else {
+    fail("expected import")
+  }
+  assert_eq(conditions.length(), 1)
+  assert_eq(conditions[0].parsed, Some(@moon_config.Condition::Target("js")))
+}
+```
