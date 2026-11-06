@@ -143,10 +143,26 @@ pub fn parse_string(
   name~ : String = "",
   parser~ : Parser = Handrolled,
 ) -> (@syntax.Impls, Array[Report]) {
+  parse_string_at(source, name~, parser~, start_pos={
+    fname: name,
+    lnum: 1,
+    bol: 0,
+    cnum: 0,
+  })
+}
+
+///|
+fn parse_string_at(
+  source : String,
+  start_pos~ : Position,
+  name~ : String = "",
+  parser~ : Parser = Handrolled,
+) -> (@syntax.Impls, Array[Report]) {
   let { tokens, docstrings, errors, } = @lexer.tokens_from_string(
     source,
     comment=true,
     name~,
+    start_pos~,
   )
   fn parse_by_moonyacc(tokens : @tokens.Triples) {
     let tokens = tokens.filter(fn(triple) {

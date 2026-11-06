@@ -17,11 +17,18 @@ pub struct ParseResult {
 /// Parse configuration syntax and validate it without rewriting the tree.
 pub fn parse_moon_pkg(
   name~ : String = "moon.pkg",
+  start_pos~ : Position = { fname: "", lnum: 1, bol: 0, cnum: 0, },
   keep_comments~ : Bool = false,
   validate~ : Bool = true,
   source : String,
 ) -> ParseResult {
-  let result = parse_string(source, name~, keep_comments~, allow_reserved=true)
+  let result = parse_string(
+    source,
+    name~,
+    keep_comments~,
+    allow_reserved=true,
+    start_pos~,
+  )
   if validate {
     validate_config(result.ast, Package, result.diagnostics)
   }

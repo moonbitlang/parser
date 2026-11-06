@@ -1,4 +1,6 @@
 import {
+  "moonbitlang/parser/frontmatter",
+  "moonbitlang/moon_config",
   "moonbitlang/lexer/tokens",
   "moonbitlang/lexer/basic",
   "moonbitlang/parser/untyped_cst/node",
