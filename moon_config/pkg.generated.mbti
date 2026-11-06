@@ -39,6 +39,19 @@ pub fn Ast::to_json(Self) -> @json.Json
 pub fn Ast::to_repr(Self) -> @debug.Repr
 pub impl @json.ToJson for Ast
 
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) enum Condition {
+  Bool(Bool)
+  Target(String)
+  All(Array[Condition])
+  Any(Array[Condition])
+  Not(Condition)
+}
+pub fn Condition::equal(Self, Self) -> Bool
+pub fn Condition::not_equal(Self, Self) -> Bool
+pub fn Condition::to_json(Self) -> @json.Json
+pub fn Condition::to_repr(Self) -> @debug.Repr
+
 #derive(@debug.Debug)
 pub struct Diagnostics {
   errors : Array[@basic.Report]
@@ -72,6 +85,16 @@ pub fn Field::not_equal(Self, Self) -> Bool
 pub fn Field::to_repr(Self) -> @debug.Repr
 
 #derive(Eq, @debug.Debug)
+pub(all) struct ImportCondition {
+  raw : String
+  parsed : Condition?
+  loc : @basic.Location
+}
+pub fn ImportCondition::equal(Self, Self) -> Bool
+pub fn ImportCondition::not_equal(Self, Self) -> Bool
+pub fn ImportCondition::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
 pub(all) struct ImportItem {
   path : String
   path_loc : @basic.Location
@@ -102,7 +125,7 @@ pub fn ParseResult::to_repr(Self) -> @debug.Repr
 
 #derive(Eq, @debug.Debug)
 pub(all) enum Statement {
-  Import(items~ : Array[ImportItem], kind~ : ImportKind, keyword_loc~ : @basic.Location, list_loc~ : @basic.Location, loc~ : @basic.Location)
+  Import(items~ : Array[ImportItem], kind~ : ImportKind, conditions~ : Array[ImportCondition], keyword_loc~ : @basic.Location, list_loc~ : @basic.Location, loc~ : @basic.Location)
   Assign(Field)
   Expr(Expr)
 }

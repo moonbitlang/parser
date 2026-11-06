@@ -219,7 +219,7 @@ fn config_import(
   items : Array[@moon_config.ImportItem],
 ) -> @moon_config.Statement {
   let loc = config_dummy_location()
-  Import(kind~, items~, keyword_loc=loc, list_loc=loc, loc~)
+  Import(kind~, items~, conditions=[], keyword_loc=loc, list_loc=loc, loc~)
 }
 
 ///|

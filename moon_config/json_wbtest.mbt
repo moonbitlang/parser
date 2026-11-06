@@ -395,11 +395,13 @@ test "Ast JSON preserves package imports aliases and targets" {
         { "path": "moonbitlang/async", "alias_": null },
       ],
       "kind": { "$tag": "Normal" },
+      "conditions": [],
     },
     {
       "$tag": "Import",
       "items": [{ "path": "moonbitlang/core/test", "alias_": null }],
       "kind": { "$tag": "Test" },
+      "conditions": [],
     },
     {
       "$tag": "Assign",
@@ -564,6 +566,7 @@ test "Ast JSON preserves moon.mod output" {
         { "path": "dep/b", "alias_": null },
       ],
       "kind": { "$tag": "Normal" },
+      "conditions": [],
     },
     {
       "$tag": "Assign",
@@ -667,6 +670,7 @@ test "Ast JSON preserves moon.mod metadata options" {
         { "path": "../dep", "alias_": null },
       ],
       "kind": { "$tag": "Normal" },
+      "conditions": [],
     },
     {
       "$tag": "Expr",

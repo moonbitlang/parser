@@ -390,7 +390,17 @@ fn ConfigFmt::document(self : Self, ast : @moon_config.Ast) -> Doc {
         }
         self.value(value)
       }
-      Import(items~, kind~, ..) => self.import_block(kind, items)
+      Import(items~, kind~, conditions~, ..) => {
+        let attrs : Array[Doc] = []
+        for condition in conditions {
+          ignore(self.checkpoint(condition.loc.start))
+          ignore(self.token(TK_ATTRIBUTE))
+          let after = self.placeholder()
+          ignore(self.checkpoint(condition.loc.end))
+          attrs.push(text(condition.raw) + after + hardline)
+        }
+        attrs.fold(init=empty, Doc::add) + self.import_block(kind, items)
+      }
     }
     let after = self.placeholder()
     if loc.end.lnum >= 0 {
@@ -511,9 +521,10 @@ fn config_without_locations(ast : @moon_config.Ast) -> @moon_config.Ast {
       match statement {
         Assign(field) => Assign(config_field_without_locations(field))
         Expr(value) => Expr(config_value_without_locations(value))
-        Import(items~, kind~, ..) =>
+        Import(items~, kind~, conditions~, ..) =>
           Import(
             kind~,
+            conditions=conditions.map(condition => { ..condition, loc, }),
             keyword_loc=loc,
             list_loc=loc,
             loc~,
@@ -645,7 +656,7 @@ fn apply_dependency_edits_ordered(
   let mut found_deps = false
   for statement in ast.0 {
     match statement {
-      Import(items~, kind=Normal, keyword_loc~, list_loc~, loc~) => {
+      Import(items~, kind=Normal, conditions~, keyword_loc~, list_loc~, loc~) => {
         let edited = edit_dependency_items(
           items,
           if found_deps {
@@ -660,7 +671,14 @@ fn apply_dependency_edits_ordered(
         found_deps = true
         if !edited.is_empty() {
           result.push(
-            Import(items=edited, kind=Normal, keyword_loc~, list_loc~, loc~),
+            Import(
+              items=edited,
+              kind=Normal,
+              conditions~,
+              keyword_loc~,
+              list_loc~,
+              loc~,
+            ),
           )
         }
       }
@@ -677,7 +695,14 @@ fn apply_dependency_edits_ordered(
       surviving_locs,
     )
     result.push(
-      Import(items~, kind=Normal, keyword_loc=loc, list_loc=loc, loc~),
+      Import(
+        items~,
+        kind=Normal,
+        conditions=[],
+        keyword_loc=loc,
+        list_loc=loc,
+        loc~,
+      ),
     )
   }
   (@moon_config.Ast(@vector.Vector(result)), removed_locs, surviving_locs)
