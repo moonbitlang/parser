@@ -52,7 +52,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -64,83 +72,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -174,7 +106,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -186,83 +126,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -361,7 +225,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -373,83 +245,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -601,7 +397,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -613,83 +417,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -907,7 +635,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -919,83 +655,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -1128,7 +788,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -1140,83 +808,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -1349,7 +941,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -1361,83 +961,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -1570,7 +1094,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -1582,83 +1114,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -1714,7 +1170,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -1726,83 +1190,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -1927,7 +1315,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -1939,83 +1335,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -2092,7 +1412,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -2104,83 +1432,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -2363,7 +1615,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -2375,83 +1635,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -2788,7 +1972,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -2800,83 +1992,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -2968,7 +2084,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -2980,83 +2104,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -3692,7 +2740,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(ToJson, FromJson, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -3704,83 +2760,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -13289,7 +12269,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson, Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -13301,83 +12289,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -16737,7 +15649,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(fields(a(rename=\"b\"))), Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -16749,175 +15669,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Apply",
-                            "loc": null,
-                            "children": {
-                              "func": {
-                                "kind": "Expr::Ident",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "Var",
-                                    "loc": null,
-                                    "children": {
-                                      "name": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "fields"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "args": {
-                                "kind": "Expr::Apply::ArgumentList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "Argument",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "Expr::Apply",
-                                        "loc": null,
-                                        "children": {
-                                          "func": {
-                                            "kind": "Expr::Ident",
-                                            "loc": null,
-                                            "children": {
-                                              "id": {
-                                                "kind": "Var",
-                                                "loc": null,
-                                                "children": {
-                                                  "name": {
-                                                    "kind": "LongIdent::Ident",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "value": "a"
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          },
-                                          "args": {
-                                            "kind": "Expr::Apply::ArgumentList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "Argument",
-                                                "loc": null,
-                                                "children": {
-                                                  "value": {
-                                                    "kind": "Expr::Constant",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "constant": {
-                                                        "kind": "Constant::String",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "value": "b"
-                                                        }
-                                                      }
-                                                    }
-                                                  },
-                                                  "kind": {
-                                                    "kind": "ArgumentKind::Labelled",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "value": {
-                                                        "kind": "Label",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "name": "rename"
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            ]
-                                          }
-                                        }
-                                      },
-                                      "kind": {
-                                        "kind": "ArgumentKind::Positional",
-                                        "loc": null,
-                                        "children": {}
-                                      }
-                                    }
-                                  }
-                                ]
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Positional",
-                            "loc": null,
-                            "children": {}
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -17068,7 +15820,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(cases(RenameMeToD1(rename=\"D1\"))), Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -17080,180 +15840,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Apply",
-                            "loc": null,
-                            "children": {
-                              "func": {
-                                "kind": "Expr::Ident",
-                                "loc": null,
-                                "children": {
-                                  "id": {
-                                    "kind": "Var",
-                                    "loc": null,
-                                    "children": {
-                                      "name": {
-                                        "kind": "LongIdent::Ident",
-                                        "loc": null,
-                                        "children": {
-                                          "value": "cases"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "args": {
-                                "kind": "Expr::Apply::ArgumentList",
-                                "loc": null,
-                                "children": [
-                                  {
-                                    "kind": "Argument",
-                                    "loc": null,
-                                    "children": {
-                                      "value": {
-                                        "kind": "Expr::Apply",
-                                        "loc": null,
-                                        "children": {
-                                          "func": {
-                                            "kind": "Expr::Constr",
-                                            "loc": null,
-                                            "children": {
-                                              "constr": {
-                                                "kind": "Constructor",
-                                                "loc": null,
-                                                "children": {
-                                                  "name": {
-                                                    "kind": "ConstrName",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "name": "RenameMeToD1"
-                                                    }
-                                                  },
-                                                  "extra_info": {
-                                                    "kind": "ConstructorExtraInfo::NoExtraInfo",
-                                                    "loc": null,
-                                                    "children": {}
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          },
-                                          "args": {
-                                            "kind": "Expr::Apply::ArgumentList",
-                                            "loc": null,
-                                            "children": [
-                                              {
-                                                "kind": "Argument",
-                                                "loc": null,
-                                                "children": {
-                                                  "value": {
-                                                    "kind": "Expr::Constant",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "constant": {
-                                                        "kind": "Constant::String",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "value": "D1"
-                                                        }
-                                                      }
-                                                    }
-                                                  },
-                                                  "kind": {
-                                                    "kind": "ArgumentKind::Labelled",
-                                                    "loc": null,
-                                                    "children": {
-                                                      "value": {
-                                                        "kind": "Label",
-                                                        "loc": null,
-                                                        "children": {
-                                                          "name": "rename"
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            ]
-                                          }
-                                        }
-                                      },
-                                      "kind": {
-                                        "kind": "ArgumentKind::Positional",
-                                        "loc": null,
-                                        "children": {}
-                                      }
-                                    }
-                                  }
-                                ]
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Positional",
-                            "loc": null,
-                            "children": {}
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -17337,7 +15924,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(rename_fields=\"camelCase\"), Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -17349,91 +15944,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "camelCase"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "rename_fields"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -17517,7 +16028,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(rename_fields=\"SCREAMING_SNAKE_CASE\"), Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -17529,91 +16048,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "SCREAMING_SNAKE_CASE"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "rename_fields"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -17706,7 +16141,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(rename_cases=\"snake_case\"), Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -17718,91 +16161,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "snake_case"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "rename_cases"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -20040,7 +18399,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"legacy\"), Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -20052,91 +18419,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "legacy"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -20506,7 +18789,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"flat\"), Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -20518,91 +18809,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -23897,7 +22104,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson, ToJson, Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -23909,108 +22124,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -24044,7 +22158,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson, ToJson, Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -24056,108 +22178,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -24282,7 +22303,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"flat\"), ToJson(style=\"flat\"), Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -24294,174 +22323,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -24895,7 +22757,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"flat\"), ToJson(style=\"flat\"), Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -24907,174 +22777,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -25167,7 +22870,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"flat\"), ToJson(style=\"flat\"), Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -25179,174 +22890,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -25439,7 +22983,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"flat\"), ToJson(style=\"flat\"), Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -25451,174 +23003,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -25757,7 +23142,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson, ToJson, Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -25769,108 +23162,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -25963,7 +23255,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"flat\"), ToJson(style=\"flat\"), Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -25975,174 +23275,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -26345,7 +23478,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson, ToJson, Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -26357,108 +23498,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }
@@ -26649,7 +23689,15 @@
           "attrs": {
             "kind": "TypeDecl::AttrList",
             "loc": null,
-            "children": []
+            "children": [
+              {
+                "kind": "Attribute",
+                "loc": null,
+                "children": {
+                  "raw": "#derive(FromJson(style=\"flat\"), ToJson(style=\"flat\"), Eq, Debug)"
+                }
+              }
+            ]
           },
           "doc": "",
           "type_vis": {
@@ -26661,174 +23709,7 @@
           "deriving": {
             "kind": "TypeDecl::DerivingList",
             "loc": null,
-            "children": [
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "FromJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "ToJson"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": [
-                      {
-                        "kind": "Argument",
-                        "loc": null,
-                        "children": {
-                          "value": {
-                            "kind": "Expr::Constant",
-                            "loc": null,
-                            "children": {
-                              "constant": {
-                                "kind": "Constant::String",
-                                "loc": null,
-                                "children": {
-                                  "value": "flat"
-                                }
-                              }
-                            }
-                          },
-                          "kind": {
-                            "kind": "ArgumentKind::Labelled",
-                            "loc": null,
-                            "children": {
-                              "value": {
-                                "kind": "Label",
-                                "loc": null,
-                                "children": {
-                                  "name": "style"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Eq"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              },
-              {
-                "kind": "DerivingDirective",
-                "loc": null,
-                "children": {
-                  "type_name": {
-                    "kind": "TypeName",
-                    "loc": null,
-                    "children": {
-                      "name": {
-                        "kind": "LongIdent::Ident",
-                        "loc": null,
-                        "children": {
-                          "value": "Debug"
-                        }
-                      },
-                      "is_object": false
-                    }
-                  },
-                  "args": {
-                    "kind": "DerivingDirective::ArgList",
-                    "loc": null,
-                    "children": []
-                  }
-                }
-              }
-            ]
+            "children": []
           }
         }
       }

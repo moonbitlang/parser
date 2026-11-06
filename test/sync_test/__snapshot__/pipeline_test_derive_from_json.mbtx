@@ -1,68 +1,84 @@
+----
+import { "moonbitlang/core/json" }
+----
 ///|
-struct A(Int) derive( ToJson, FromJson, Debug)
+#derive(ToJson, FromJson, Debug)
+struct A(Int)
 
 ///|
-suberror E derive( ToJson, FromJson, Debug)
+#derive(ToJson, FromJson, Debug)
+suberror E
 
 ///|
+#derive(ToJson, FromJson, Debug)
 suberror EI {
   EI(Int)
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 suberror ConnectionError {
   BrokenPipe(Int, String)
   ConnectionReset
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 struct S {
   x : Int
   y : (Int, Bool)
   z : String
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 struct Nested1 {
   x : Int
   y : Int
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 struct Nested2 {
   x : Nested1
   y : Int
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 struct Nested3 {
   x : Nested2
   y : Int
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 enum ESmall {
   C1
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 enum ESmall2 {
   C1(Int, Bool)
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 enum EE {
   C1
   C2
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 enum EEE {
   C1(Int, Bool)
   C2(S)
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
+#derive(ToJson, FromJson, Debug)
 struct T1[X] {
   x : Nested3
   y : EEE
@@ -70,12 +86,14 @@ struct T1[X] {
   w : X
   q : E
   c : ConnectionError
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
-struct NT[X](Array[X]) derive( ToJson, FromJson, Debug)
+#derive(ToJson, FromJson, Debug)
+struct NT[X](Array[X])
 
 ///|
+#derive(ToJson, FromJson, Debug)
 enum E0 {
   C0
   C1(S)
@@ -83,7 +101,7 @@ enum E0 {
   C4(a~ : Bool, (Double, String))
   C3((Int, Int))
   C5(((Int, Int), Int), Int)
-} derive( ToJson, FromJson, Debug)
+}
 
 ///|
 fn testErrEnum(j : Json) -> Result[ConnectionError, @json.JsonDecodeError] {
@@ -185,6 +203,7 @@ fn init {
 }
 
 ///|
+#derive(FromJson, Eq, Debug)
 struct StructWithOptionalFields {
   number : Int
   string : String
@@ -193,7 +212,7 @@ struct StructWithOptionalFields {
   optional_string : String?
   nested_optional_string : String??
   number2 : Int
-} derive(FromJson, Eq, Debug)
+}
 
 ///|
 fn init {
@@ -261,30 +280,35 @@ fn init {
 // Field and variant renames
 
 ///|
+#derive(FromJson(fields(a(rename="b"))), Debug)
 struct FieldRename {
   a : Int
-} derive(FromJson(fields(a(rename="b"))), Debug)
+}
 
 ///|
+#derive(FromJson(cases(RenameMeToD1(rename="D1"))), Debug)
 enum VariantRename {
   RenameMeToD1(Int)
   C2(String)
-} derive(FromJson(cases(RenameMeToD1(rename="D1"))), Debug)
+}
 
 ///|
+#derive(FromJson(rename_fields="camelCase"), Debug)
 struct FieldRenameAllCamel {
   my_field : Int
-} derive(FromJson(rename_fields="camelCase"), Debug)
+}
 
 ///|
+#derive(FromJson(rename_fields="SCREAMING_SNAKE_CASE"), Debug)
 struct FieldRenameAllScreamingSnake {
   my_field : Int
-} derive(FromJson(rename_fields="SCREAMING_SNAKE_CASE"), Debug)
+}
 
 ///|
+#derive(FromJson(rename_cases="snake_case"), Debug)
 enum VariantRenameAllSnake {
   MyVariant(Int)
-} derive(FromJson(rename_cases="snake_case"), Debug)
+}
 
 ///|
 fn init {
@@ -310,19 +334,21 @@ fn init {
 // ==== The new enum styling options ====
 
 ///|
+#derive(FromJson(style="legacy"), Debug)
 enum NewStyleLegacy {
   C1
   C2(String)
   C3(Int, Bool)
-} derive(FromJson(style="legacy"), Debug)
+}
 
 ///|
+#derive(FromJson(style="flat"), Debug)
 enum NewStyleFlat {
   C1
   C2(String)
   C3(Int, Bool)
   C4(Int, x~ : Bool, Int, y~ : String)
-} derive(FromJson(style="flat"), Debug)
+}
 
 ///|
 fn init {
@@ -367,58 +393,68 @@ enum Shadow_Builtin {
 // ==== Additional comprehensive tests ====
 
 ///|
-struct TupleStruct(Int,String,Bool) derive(FromJson, ToJson, Eq, Debug)
+#derive(FromJson, ToJson, Eq, Debug)
+struct TupleStruct(Int,String,Bool)
 
 ///|
-struct EmptyStruct {} derive(FromJson, ToJson, Eq, Debug)
+#derive(FromJson, ToJson, Eq, Debug)
+struct EmptyStruct {}
 
 ///|
+#derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
 enum SingleVariantEnum {
   OnlyVariant(Int, String)
-} derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
 enum MixedEnum {
   NoArgs
   OneArg(Int)
   TwoArgs(String, Bool)
   NamedArgs(x~ : Int, y~ : String)
   MixedArgs(Int, y~ : String, Bool)
-} derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
 enum DeepNestedEnum {
   Level1(Level2)
-} derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
 enum Level2 {
   Level2Variant(Level3)
-} derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(FromJson, ToJson, Eq, Debug)
 struct Level3 {
   value : Int
   nested : Level4?
-} derive(FromJson, ToJson, Eq, Debug)
+}
 
 ///|
+#derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
 enum Level4 {
   FinalLevel(String)
-} derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(FromJson, ToJson, Eq, Debug)
 struct GenericStruct[T, U] {
   first : T
   second : U
   optional : T?
-} derive(FromJson, ToJson, Eq, Debug)
+}
 
 ///|
+#derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
 enum GenericEnum[T] {
   Value(T)
   Pair(T, T)
-} derive(FromJson(style="flat"), ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
 fn init {
