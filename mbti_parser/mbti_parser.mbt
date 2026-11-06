@@ -1781,6 +1781,7 @@ priv enum YYSymbol {
   T_MULTILINE_INTERP
   T_INTERP
   T_BYTES_INTERP
+  T_BYTES_REGEX_LITERAL
   T_REGEX_LITERAL
   T_REGEX_INTERP
   T_ATTRIBUTE
@@ -1995,7 +1996,7 @@ fn init {
 
 ///|
 // file:///./mbti_parser.mbty
-// 151|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
+// 152|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
 fn yy_action_0(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_281(_args[2:2])
   guard! _args[1].0 is YYObj_StringLiteral(_dollar2)
@@ -2043,7 +2044,7 @@ fn yy_action_281(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 151|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
+// 152|    PACKAGE STRING ioption(";") imports sigs EOF { {package_name: $2, imports: $4, sigs: $5, loc : mk_loc($sloc), base_pos: mk_base_pos($loc($1).0)} }
 fn yy_action_1(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_282(_args[2:3])
   guard! _args[1].0 is YYObj_StringLiteral(_dollar2)
@@ -2096,7 +2097,7 @@ fn yy_action_282(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 167|    sig_ ";" sigs { $3.prepend(($1, mk_loc($loc($1)))) }
+// 168|    sig_ ";" sigs { $3.prepend(($1, mk_loc($loc($1)))) }
 fn yy_action_2(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__list_List__Sig__Location__(_dollar3)
   guard! _args[0].0 is YYObj_Sig(_dollar1)
@@ -2110,7 +2111,7 @@ fn yy_action_2(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 166|    sig_ { @list.singleton(($1, mk_loc($sloc))) }
+// 167|    sig_ { @list.singleton(($1, mk_loc($sloc))) }
 fn yy_action_3(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Sig(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -2127,7 +2128,7 @@ fn yy_action_3(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 171|    func_sig { Func($1) }
+// 172|    func_sig { Func($1) }
 fn yy_action_4(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_FuncSig(_dollar1)
   YYObj_Sig(
@@ -2138,7 +2139,7 @@ fn yy_action_4(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 172|    type_sig { Type($1) }
+// 173|    type_sig { Type($1) }
 fn yy_action_5(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_TypeSig(_dollar1)
   YYObj_Sig(
@@ -2149,7 +2150,7 @@ fn yy_action_5(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 173|    alias_sig { Alias($1) }
+// 174|    alias_sig { Alias($1) }
 fn yy_action_6(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_AliasSig(_dollar1)
   YYObj_Sig(
@@ -2160,7 +2161,7 @@ fn yy_action_6(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 174|    trait_sig { Trait($1) }
+// 175|    trait_sig { Trait($1) }
 fn yy_action_7(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_TraitSig(_dollar1)
   YYObj_Sig(
@@ -2171,7 +2172,7 @@ fn yy_action_7(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 175|    impl_sig { Impl($1) }
+// 176|    impl_sig { Impl($1) }
 fn yy_action_8(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ImplSig(_dollar1)
   YYObj_Sig(
@@ -2182,7 +2183,7 @@ fn yy_action_8(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 176|    const_sig { Const($1) }
+// 177|    const_sig { Const($1) }
 fn yy_action_9(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ConstSig(_dollar1)
   YYObj_Sig(
@@ -2193,7 +2194,7 @@ fn yy_action_9(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> 
 
 ///|
 // file:///./mbti_parser.mbty
-// 177|    value_sig { Value($1) }
+// 178|    value_sig { Value($1) }
 fn yy_action_10(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ValueSig(_dollar1)
   YYObj_Sig(
@@ -2204,7 +2205,7 @@ fn yy_action_10(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
+// 182|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_11(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -2220,7 +2221,7 @@ fn yy_action_11(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
+// 182|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_12(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2236,7 +2237,7 @@ fn yy_action_12(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
+// 186|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_13(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2251,10 +2252,10 @@ fn yy_action_13(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_14(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2277,10 +2278,10 @@ fn yy_action_14(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_15(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2303,9 +2304,9 @@ fn yy_action_15(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 234|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
-// 236|  }
+// 235|    attributes vis "type" type_decl_name_with_params optional_derive {
+// 236|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
+// 237|  }
 fn yy_action_16(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2325,9 +2326,9 @@ fn yy_action_16(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
-// 297|  }
+// 296|    attributes vis "type"  type_decl_name_with_params "=" type_ {
+// 297|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
+// 298|  }
 fn yy_action_17(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2347,9 +2348,9 @@ fn yy_action_17(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
-// 239|  }
+// 238|    attributes vis "suberror" uident optional_derive {
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
+// 240|  }
 fn yy_action_18(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2367,9 +2368,9 @@ fn yy_action_18(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
-// 242|  }
+// 241|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 242|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
+// 243|  }
 fn yy_action_19(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2388,9 +2389,9 @@ fn yy_action_19(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
-// 245|  }
+// 244|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 246|  }
 fn yy_action_20(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2411,9 +2412,9 @@ fn yy_action_20(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
-// 248|  }
+// 247|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 249|  }
 fn yy_action_21(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2434,9 +2435,9 @@ fn yy_action_21(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
-// 251|  }
+// 250|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 252|  }
 fn yy_action_22(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2457,9 +2458,9 @@ fn yy_action_22(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
-// 254|  }
+// 253|    attributes vis "extenum" type_decl_name_with_params optional_derive {
+// 254|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
+// 255|  }
 fn yy_action_23(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2479,9 +2480,9 @@ fn yy_action_23(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
-// 257|  }
+// 256|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 257|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 258|  }
 fn yy_action_24(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2502,10 +2503,10 @@ fn yy_action_24(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 258|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 259|    let (name, type_params, target) = $4
-// 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
-// 261|  }
+// 259|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 260|    let (name, type_params, target) = $4
+// 261|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 262|  }
 fn yy_action_25(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2527,9 +2528,9 @@ fn yy_action_25(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
-// 272|  }
+// 271|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
+// 272|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 273|  }
 fn yy_action_26(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2547,9 +2548,9 @@ fn yy_action_26(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
-// 275|  }
+// 274|    attributes vis "impl" qualified_uident "for" type_ {
+// 275|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
+// 276|  }
 fn yy_action_27(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2566,9 +2567,9 @@ fn yy_action_27(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
-// 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
-// 281|  }
+// 280|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 281|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
+// 282|  }
 fn yy_action_28(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2587,10 +2588,10 @@ fn yy_action_28(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 298|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
-// 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
-// 301|  }
+// 299|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
+// 300|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 301|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
+// 302|  }
 fn yy_action_29(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2611,10 +2612,10 @@ fn yy_action_29(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 302|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
-// 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
-// 305|  }
+// 303|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
+// 304|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 305|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
+// 306|  }
 fn yy_action_30(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_285(_args[0:1])
@@ -2635,7 +2636,7 @@ fn yy_action_30(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
+// 182|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_31(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2651,7 +2652,7 @@ fn yy_action_31(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
+// 186|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_32(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2666,10 +2667,10 @@ fn yy_action_32(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_33(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2692,10 +2693,10 @@ fn yy_action_33(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_34(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2718,9 +2719,9 @@ fn yy_action_34(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 234|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
-// 236|  }
+// 235|    attributes vis "type" type_decl_name_with_params optional_derive {
+// 236|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
+// 237|  }
 fn yy_action_35(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2740,9 +2741,9 @@ fn yy_action_35(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
-// 297|  }
+// 296|    attributes vis "type"  type_decl_name_with_params "=" type_ {
+// 297|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
+// 298|  }
 fn yy_action_36(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2762,9 +2763,9 @@ fn yy_action_36(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
-// 239|  }
+// 238|    attributes vis "suberror" uident optional_derive {
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
+// 240|  }
 fn yy_action_37(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2782,9 +2783,9 @@ fn yy_action_37(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
-// 242|  }
+// 241|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 242|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
+// 243|  }
 fn yy_action_38(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2803,9 +2804,9 @@ fn yy_action_38(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
-// 245|  }
+// 244|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 246|  }
 fn yy_action_39(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2826,9 +2827,9 @@ fn yy_action_39(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
-// 248|  }
+// 247|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 249|  }
 fn yy_action_40(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2849,9 +2850,9 @@ fn yy_action_40(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
-// 251|  }
+// 250|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 252|  }
 fn yy_action_41(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2872,9 +2873,9 @@ fn yy_action_41(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
-// 254|  }
+// 253|    attributes vis "extenum" type_decl_name_with_params optional_derive {
+// 254|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
+// 255|  }
 fn yy_action_42(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2894,9 +2895,9 @@ fn yy_action_42(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
-// 257|  }
+// 256|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 257|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 258|  }
 fn yy_action_43(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2917,10 +2918,10 @@ fn yy_action_43(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 258|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 259|    let (name, type_params, target) = $4
-// 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
-// 261|  }
+// 259|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 260|    let (name, type_params, target) = $4
+// 261|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 262|  }
 fn yy_action_44(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2942,9 +2943,9 @@ fn yy_action_44(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
-// 272|  }
+// 271|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
+// 272|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 273|  }
 fn yy_action_45(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2962,9 +2963,9 @@ fn yy_action_45(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
-// 275|  }
+// 274|    attributes vis "impl" qualified_uident "for" type_ {
+// 275|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
+// 276|  }
 fn yy_action_46(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -2981,9 +2982,9 @@ fn yy_action_46(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
-// 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
-// 281|  }
+// 280|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 281|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
+// 282|  }
 fn yy_action_47(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -3002,10 +3003,10 @@ fn yy_action_47(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 298|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
-// 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
-// 301|  }
+// 299|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
+// 300|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 301|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
+// 302|  }
 fn yy_action_48(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -3026,10 +3027,10 @@ fn yy_action_48(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 302|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
-// 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
-// 305|  }
+// 303|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
+// 304|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 305|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
+// 306|  }
 fn yy_action_49(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_289(_args[0:2])
@@ -3050,7 +3051,7 @@ fn yy_action_49(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
+// 182|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_50(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -3066,7 +3067,7 @@ fn yy_action_50(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
+// 182|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_51(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3082,7 +3083,7 @@ fn yy_action_51(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
+// 186|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_52(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3097,10 +3098,10 @@ fn yy_action_52(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_53(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3123,10 +3124,10 @@ fn yy_action_53(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_54(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3149,9 +3150,9 @@ fn yy_action_54(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 234|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
-// 236|  }
+// 235|    attributes vis "type" type_decl_name_with_params optional_derive {
+// 236|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
+// 237|  }
 fn yy_action_55(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3171,9 +3172,9 @@ fn yy_action_55(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
-// 297|  }
+// 296|    attributes vis "type"  type_decl_name_with_params "=" type_ {
+// 297|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
+// 298|  }
 fn yy_action_56(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3193,9 +3194,9 @@ fn yy_action_56(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
-// 239|  }
+// 238|    attributes vis "suberror" uident optional_derive {
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
+// 240|  }
 fn yy_action_57(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3213,9 +3214,9 @@ fn yy_action_57(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
-// 242|  }
+// 241|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 242|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
+// 243|  }
 fn yy_action_58(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3234,9 +3235,9 @@ fn yy_action_58(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
-// 245|  }
+// 244|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 246|  }
 fn yy_action_59(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3257,9 +3258,9 @@ fn yy_action_59(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
-// 248|  }
+// 247|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 249|  }
 fn yy_action_60(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3280,9 +3281,9 @@ fn yy_action_60(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
-// 251|  }
+// 250|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 252|  }
 fn yy_action_61(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3303,9 +3304,9 @@ fn yy_action_61(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
-// 254|  }
+// 253|    attributes vis "extenum" type_decl_name_with_params optional_derive {
+// 254|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
+// 255|  }
 fn yy_action_62(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3325,9 +3326,9 @@ fn yy_action_62(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
-// 257|  }
+// 256|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 257|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 258|  }
 fn yy_action_63(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3348,10 +3349,10 @@ fn yy_action_63(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 258|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 259|    let (name, type_params, target) = $4
-// 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
-// 261|  }
+// 259|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 260|    let (name, type_params, target) = $4
+// 261|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 262|  }
 fn yy_action_64(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3373,9 +3374,9 @@ fn yy_action_64(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
-// 272|  }
+// 271|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
+// 272|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 273|  }
 fn yy_action_65(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3393,9 +3394,9 @@ fn yy_action_65(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
-// 275|  }
+// 274|    attributes vis "impl" qualified_uident "for" type_ {
+// 275|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
+// 276|  }
 fn yy_action_66(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3412,9 +3413,9 @@ fn yy_action_66(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
-// 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
-// 281|  }
+// 280|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 281|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
+// 282|  }
 fn yy_action_67(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3433,10 +3434,10 @@ fn yy_action_67(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 298|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
-// 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
-// 301|  }
+// 299|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
+// 300|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 301|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
+// 302|  }
 fn yy_action_68(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3457,10 +3458,10 @@ fn yy_action_68(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 302|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
-// 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
-// 305|  }
+// 303|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
+// 304|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 305|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
+// 306|  }
 fn yy_action_69(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_285(_args[1:2])
@@ -3481,7 +3482,7 @@ fn yy_action_69(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 452|    "priv" { Priv(loc=mk_loc($sloc)) }
+// 453|    "priv" { Priv(loc=mk_loc($sloc)) }
 fn yy_action_285(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
     _args[0].1
@@ -3497,7 +3498,7 @@ fn yy_action_285(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 181|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
+// 182|    attributes vis "const" uident ":" type_ "=" constant { {name: $4, type_: $6, value: $8, attrs: $1} }
 fn yy_action_70(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3513,7 +3514,7 @@ fn yy_action_70(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 436|    TRUE { Bool(true) }
+// 437|    TRUE { Bool(true) }
 fn yy_action_71(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_Constant(
     ({();  Bool(true) 
@@ -3523,7 +3524,7 @@ fn yy_action_71(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 437|    FALSE { Bool(false) }
+// 438|    FALSE { Bool(false) }
 fn yy_action_72(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_Constant(
     ({();  Bool(false) 
@@ -3533,7 +3534,7 @@ fn yy_action_72(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 438|    BYTE { Byte($1) }
+// 439|    BYTE { Byte($1) }
 fn yy_action_73(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_CharLiteral(_dollar1)
   YYObj_Constant(
@@ -3544,7 +3545,7 @@ fn yy_action_73(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 439|    BYTES { Bytes($1) }
+// 440|    BYTES { Bytes($1) }
 fn yy_action_74(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Constant(
@@ -3555,7 +3556,7 @@ fn yy_action_74(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 440|    CHAR { Char($1) }
+// 441|    CHAR { Char($1) }
 fn yy_action_75(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_CharLiteral(_dollar1)
   YYObj_Constant(
@@ -3566,7 +3567,7 @@ fn yy_action_75(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 441|    INT { make_int_literal($1) }
+// 442|    INT { make_int_literal($1) }
 fn yy_action_76(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_Constant(
@@ -3577,7 +3578,7 @@ fn yy_action_76(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 442|    "-" INT { make_int_literal("-" + $2) }
+// 443|    "-" INT { make_int_literal("-" + $2) }
 fn yy_action_77(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   YYObj_Constant(
@@ -3588,7 +3589,7 @@ fn yy_action_77(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 444|    "-" FLOAT { make_float_literal("-" + $2) }
+// 445|    "-" FLOAT { make_float_literal("-" + $2) }
 fn yy_action_78(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   YYObj_Constant(
@@ -3599,7 +3600,7 @@ fn yy_action_78(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 446|    "-" DOUBLE { Double("-" + $2) }
+// 447|    "-" DOUBLE { Double("-" + $2) }
 fn yy_action_79(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   YYObj_Constant(
@@ -3610,7 +3611,7 @@ fn yy_action_79(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 443|    FLOAT { make_float_literal($1) }
+// 444|    FLOAT { make_float_literal($1) }
 fn yy_action_80(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_Constant(
@@ -3621,7 +3622,7 @@ fn yy_action_80(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 445|    DOUBLE { Double($1) }
+// 446|    DOUBLE { Double($1) }
 fn yy_action_81(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_Constant(
@@ -3632,7 +3633,7 @@ fn yy_action_81(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 447|    STRING { String($1) }
+// 448|    STRING { String($1) }
 fn yy_action_82(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Constant(
@@ -3643,7 +3644,7 @@ fn yy_action_82(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
+// 186|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_83(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3658,10 +3659,10 @@ fn yy_action_83(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_84(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3684,10 +3685,10 @@ fn yy_action_84(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_85(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3710,9 +3711,9 @@ fn yy_action_85(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 234|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
-// 236|  }
+// 235|    attributes vis "type" type_decl_name_with_params optional_derive {
+// 236|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
+// 237|  }
 fn yy_action_86(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3732,9 +3733,9 @@ fn yy_action_86(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
-// 297|  }
+// 296|    attributes vis "type"  type_decl_name_with_params "=" type_ {
+// 297|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
+// 298|  }
 fn yy_action_87(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3754,9 +3755,9 @@ fn yy_action_87(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
-// 239|  }
+// 238|    attributes vis "suberror" uident optional_derive {
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
+// 240|  }
 fn yy_action_88(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3774,9 +3775,9 @@ fn yy_action_88(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
-// 242|  }
+// 241|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 242|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
+// 243|  }
 fn yy_action_89(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3795,9 +3796,9 @@ fn yy_action_89(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
-// 245|  }
+// 244|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 246|  }
 fn yy_action_90(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3818,9 +3819,9 @@ fn yy_action_90(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
-// 248|  }
+// 247|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 249|  }
 fn yy_action_91(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3841,9 +3842,9 @@ fn yy_action_91(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
-// 251|  }
+// 250|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 252|  }
 fn yy_action_92(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3864,9 +3865,9 @@ fn yy_action_92(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
-// 254|  }
+// 253|    attributes vis "extenum" type_decl_name_with_params optional_derive {
+// 254|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
+// 255|  }
 fn yy_action_93(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3886,9 +3887,9 @@ fn yy_action_93(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
-// 257|  }
+// 256|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 257|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 258|  }
 fn yy_action_94(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3909,10 +3910,10 @@ fn yy_action_94(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 258|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 259|    let (name, type_params, target) = $4
-// 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
-// 261|  }
+// 259|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 260|    let (name, type_params, target) = $4
+// 261|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 262|  }
 fn yy_action_95(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3934,9 +3935,9 @@ fn yy_action_95(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
-// 272|  }
+// 271|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
+// 272|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 273|  }
 fn yy_action_96(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3954,9 +3955,9 @@ fn yy_action_96(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
-// 275|  }
+// 274|    attributes vis "impl" qualified_uident "for" type_ {
+// 275|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
+// 276|  }
 fn yy_action_97(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3973,9 +3974,9 @@ fn yy_action_97(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
-// 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
-// 281|  }
+// 280|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 281|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
+// 282|  }
 fn yy_action_98(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -3994,10 +3995,10 @@ fn yy_action_98(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 298|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
-// 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
-// 301|  }
+// 299|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
+// 300|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 301|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
+// 302|  }
 fn yy_action_99(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -4018,10 +4019,10 @@ fn yy_action_99(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) ->
 
 ///|
 // file:///./mbti_parser.mbty
-// 302|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
-// 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
-// 305|  }
+// 303|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
+// 304|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 305|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
+// 306|  }
 fn yy_action_100(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_289(_args[1:3])
@@ -4042,7 +4043,7 @@ fn yy_action_100(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 453|    "pub" pub_attr { Pub(attr=$2, loc=mk_loc($sloc)) }
+// 454|    "pub" pub_attr { Pub(attr=$2, loc=mk_loc($sloc)) }
 fn yy_action_289(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String_(_dollar2)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -4063,7 +4064,7 @@ fn yy_action_289(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 458|    "(" "readonly" ")" { Some("readonly") }
+// 459|    "(" "readonly" ")" { Some("readonly") }
 fn yy_action_101(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_String_(
     ({();  Some("readonly") 
@@ -4073,7 +4074,7 @@ fn yy_action_101(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 459|    "(" lident ")" { Some($2.name) }
+// 460|    "(" lident ")" { Some($2.name) }
 fn yy_action_102(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Name(_dollar2)
   YYObj_String_(
@@ -4084,7 +4085,7 @@ fn yy_action_102(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 457|    { None }
+// 458|    { None }
 fn yy_action_103(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_String_(
     ({();  None 
@@ -4094,7 +4095,7 @@ fn yy_action_103(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
+// 186|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_104(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4109,10 +4110,10 @@ fn yy_action_104(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_105(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4135,10 +4136,10 @@ fn yy_action_105(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_106(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4161,9 +4162,9 @@ fn yy_action_106(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 234|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
-// 236|  }
+// 235|    attributes vis "type" type_decl_name_with_params optional_derive {
+// 236|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
+// 237|  }
 fn yy_action_107(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4183,9 +4184,9 @@ fn yy_action_107(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
-// 297|  }
+// 296|    attributes vis "type"  type_decl_name_with_params "=" type_ {
+// 297|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
+// 298|  }
 fn yy_action_108(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4205,9 +4206,9 @@ fn yy_action_108(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
-// 239|  }
+// 238|    attributes vis "suberror" uident optional_derive {
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
+// 240|  }
 fn yy_action_109(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4225,9 +4226,9 @@ fn yy_action_109(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
-// 242|  }
+// 241|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 242|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
+// 243|  }
 fn yy_action_110(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4246,9 +4247,9 @@ fn yy_action_110(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
-// 245|  }
+// 244|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 246|  }
 fn yy_action_111(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4269,9 +4270,9 @@ fn yy_action_111(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
-// 248|  }
+// 247|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 249|  }
 fn yy_action_112(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4292,9 +4293,9 @@ fn yy_action_112(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
-// 251|  }
+// 250|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 252|  }
 fn yy_action_113(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4315,9 +4316,9 @@ fn yy_action_113(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
-// 254|  }
+// 253|    attributes vis "extenum" type_decl_name_with_params optional_derive {
+// 254|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
+// 255|  }
 fn yy_action_114(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4337,9 +4338,9 @@ fn yy_action_114(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
-// 257|  }
+// 256|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 257|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 258|  }
 fn yy_action_115(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4360,10 +4361,10 @@ fn yy_action_115(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 258|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 259|    let (name, type_params, target) = $4
-// 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
-// 261|  }
+// 259|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 260|    let (name, type_params, target) = $4
+// 261|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 262|  }
 fn yy_action_116(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4385,9 +4386,9 @@ fn yy_action_116(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
-// 272|  }
+// 271|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
+// 272|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 273|  }
 fn yy_action_117(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4405,9 +4406,9 @@ fn yy_action_117(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
-// 275|  }
+// 274|    attributes vis "impl" qualified_uident "for" type_ {
+// 275|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
+// 276|  }
 fn yy_action_118(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4424,9 +4425,9 @@ fn yy_action_118(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
-// 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
-// 281|  }
+// 280|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 281|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
+// 282|  }
 fn yy_action_119(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4445,10 +4446,10 @@ fn yy_action_119(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 298|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
-// 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
-// 301|  }
+// 299|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
+// 300|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 301|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
+// 302|  }
 fn yy_action_120(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4469,10 +4470,10 @@ fn yy_action_120(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 302|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
-// 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
-// 305|  }
+// 303|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
+// 304|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 305|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
+// 306|  }
 fn yy_action_121(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_284(_args[1:1])
@@ -4493,7 +4494,7 @@ fn yy_action_121(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 185|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
+// 186|    attributes vis "let" lident ":" type_ { { attrs: $1, name: $4, type_: $6 } }
 fn yy_action_122(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4508,10 +4509,10 @@ fn yy_action_122(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_123(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4534,9 +4535,9 @@ fn yy_action_123(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 189|   UIDENT "::" {
-// 190|  { name : $1, is_object : false, loc : mk_loc($loc($1)) }
-// 191| }
+// 190|   UIDENT "::" {
+// 191|  { name : $1, is_object : false, loc : mk_loc($loc($1)) }
+// 192| }
 fn yy_action_124(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -4551,9 +4552,9 @@ fn yy_action_124(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 192|   "&" UIDENT "::" {
-// 193|  { name : $2, is_object : true, loc : mk_loc($loc($2)) }
-// 194| }
+// 193|   "&" UIDENT "::" {
+// 194|  { name : $2, is_object : true, loc : mk_loc($loc($2)) }
+// 195| }
 fn yy_action_125(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -4568,7 +4569,7 @@ fn yy_action_125(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 203|    luident { (None, $1) }
+// 204|    luident { (None, $1) }
 fn yy_action_126(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   YYObj__MethodSelfType___Name_(
@@ -4579,7 +4580,7 @@ fn yy_action_126(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 198|    lident { $1 }
+// 199|    lident { $1 }
 fn yy_action_127(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   YYObj_Name(
@@ -4590,7 +4591,7 @@ fn yy_action_127(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 199|    uident { $1 }
+// 200|    uident { $1 }
 fn yy_action_128(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   YYObj_Name(
@@ -4601,7 +4602,7 @@ fn yy_action_128(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 204|    method_self_type_coloncolon luident { (Some($1), $2) }
+// 205|    method_self_type_coloncolon luident { (Some($1), $2) }
 fn yy_action_129(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_MethodSelfType(_dollar1)
   guard! _args[1].0 is YYObj_Name(_dollar2)
@@ -4613,10 +4614,10 @@ fn yy_action_129(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 214|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
-// 215|    let (type_name, name) = $6
-// 216|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
-// 217|  }
+// 215|    attributes vis is_async FN loption(type_params_with_constraints) func_name delimited("(", separated_list(",", parameter), ")") "->" return_type {
+// 216|    let (type_name, name) = $6
+// 217|    { attrs: $1, is_async : $3, type_name, name, type_params: $5, params: $7, return_: ($9.0, $9.1), nocancel_: $9.2}
+// 218|  }
 fn yy_action_130(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4639,9 +4640,9 @@ fn yy_action_130(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 234|    attributes vis "type" type_decl_name_with_params optional_derive {
-// 235|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
-// 236|  }
+// 235|    attributes vis "type" type_decl_name_with_params optional_derive {
+// 236|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Abstract, derives: $5}
+// 237|  }
 fn yy_action_131(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4661,9 +4662,9 @@ fn yy_action_131(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 295|    attributes vis "type"  type_decl_name_with_params "=" type_ {
-// 296|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
-// 297|  }
+// 296|    attributes vis "type"  type_decl_name_with_params "=" type_ {
+// 297|    TypeAlias(attrs = $1, vis=$2, name=$4.0, type_params=$4.1, type_=$6)
+// 298|  }
 fn yy_action_132(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4683,9 +4684,9 @@ fn yy_action_132(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 237|    attributes vis "suberror" uident optional_derive {
-// 238|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
-// 239|  }
+// 238|    attributes vis "suberror" uident optional_derive {
+// 239|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(NoPayload), derives: $5}
+// 240|  }
 fn yy_action_133(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4703,9 +4704,9 @@ fn yy_action_133(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 240|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 241|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
-// 242|  }
+// 241|    attributes vis "suberror" uident "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 242|    {attrs : $1, vis: $2, name: $4, type_params: List([]), components: Error(EnumPayload($6)), derives: $8}
+// 243|  }
 fn yy_action_134(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4724,9 +4725,9 @@ fn yy_action_134(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 243|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
-// 244|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
-// 245|  }
+// 244|    attributes vis "struct" type_decl_name_with_params "{" record_decl_body "}" optional_derive {
+// 245|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: $6, derives: $8 }
+// 246|  }
 fn yy_action_135(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4747,9 +4748,9 @@ fn yy_action_135(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 330|    separated_list(";", record_decl_field) {
-// 331|    Record(fields = $1)
-// 332|  }
+// 331|    separated_list(";", record_decl_field) {
+// 332|    Record(fields = $1)
+// 333|  }
 fn yy_action_136(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_FieldDecl_(_dollar1)
   YYObj_TypeDefinition(
@@ -4773,9 +4774,9 @@ fn yy_action_137(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 324|    attributes boption("mut") lident ":" type_ {
-// 325|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
-// 326|  }
+// 325|    attributes boption("mut") lident ":" type_ {
+// 326|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
+// 327|  }
 fn yy_action_138(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   guard! _args[1].0 is YYObj_Name(_dollar3)
@@ -4810,9 +4811,9 @@ fn yy_action_138(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 324|    attributes boption("mut") lident ":" type_ {
-// 325|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
-// 326|  }
+// 325|    attributes boption("mut") lident ":" type_ {
+// 326|    { name: { label: $3.name, loc : $3.loc }, vis: Default, mut_: $2, ty: $5, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty() }
+// 327|  }
 fn yy_action_139(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   guard! _args[2].0 is YYObj_Name(_dollar3)
@@ -4884,9 +4885,9 @@ fn yy_action_142(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 246|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
-// 247|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
-// 248|  }
+// 247|    attributes vis "struct" type_decl_name_with_params "(" separated_list(",", type_) ")" optional_derive {
+// 248|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: TupleStruct($6), derives: $8}
+// 249|  }
 fn yy_action_143(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4928,9 +4929,9 @@ fn yy_action_145(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 249|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 250|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
-// 251|  }
+// 250|    attributes vis "enum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 251|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: Variant($6), derives: $8}
+// 252|  }
 fn yy_action_146(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4951,9 +4952,9 @@ fn yy_action_146(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 252|    attributes vis "extenum" type_decl_name_with_params optional_derive {
-// 253|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
-// 254|  }
+// 253|    attributes vis "extenum" type_decl_name_with_params optional_derive {
+// 254|    {attrs: $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum(List([])), derives: $5}
+// 255|  }
 fn yy_action_147(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4973,9 +4974,9 @@ fn yy_action_147(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 255|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 256|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
-// 257|  }
+// 256|    attributes vis "extenum" type_decl_name_with_params "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 257|    {attrs : $1, vis: $2, name: $4.0, type_params: $4.1, components: ExtensibleEnum($6), derives: $8}
+// 258|  }
 fn yy_action_148(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -4996,10 +4997,10 @@ fn yy_action_148(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 258|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
-// 259|    let (name, type_params, target) = $4
-// 260|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
-// 261|  }
+// 259|    attributes vis "extenum" extensible_enum_extension_target "+=" "{" separated_list(";", enum_constructor) "}" optional_derive {
+// 260|    let (name, type_params, target) = $4
+// 261|    {attrs : $1, vis: $2, name, type_params, components: ExtendEnum(target~, constructors = $7), derives: $9}
+// 262|  }
 fn yy_action_149(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -5021,7 +5022,7 @@ fn yy_action_149(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 266|    "derive" "(" non_empty_list_commas(qualified_uident) ")" { $3 }
+// 267|    "derive" "(" non_empty_list_commas(qualified_uident) ")" { $3 }
 fn yy_action_150(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
   YYObj__list_List_QualifiedName_(
@@ -5032,7 +5033,7 @@ fn yy_action_150(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 147|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 148|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 fn yy_action_151(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_QualifiedName_(_dollar1)
   YYObj__list_List_QualifiedName_(
@@ -5043,7 +5044,7 @@ fn yy_action_151(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 143|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
+// 144|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
 fn yy_action_152(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_QualifiedName_(_dollar1)
   guard! _args[2].0 is YYObj_QualifiedName(_dollar3)
@@ -5055,7 +5056,7 @@ fn yy_action_152(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 142|    X { @list.singleton($1) }
+// 143|    X { @list.singleton($1) }
 fn yy_action_153(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
   YYObj__list_List_QualifiedName_(
@@ -5066,7 +5067,7 @@ fn yy_action_153(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 265|    { List([]) }
+// 266|    { List([]) }
 fn yy_action_154(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj__list_List_QualifiedName_(
     ({();  List([]) 
@@ -5087,9 +5088,9 @@ fn yy_action_155(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 309|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
-// 310|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
-// 311|  }
+// 310|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
+// 311|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
+// 312|  }
 fn yy_action_156(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   guard! _args[0].0 is YYObj_String(_dollar2)
@@ -5122,9 +5123,9 @@ fn yy_action_156(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 309|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
-// 310|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
-// 311|  }
+// 310|    attributes UIDENT option(delimited("(", separated_nonempty_list(",", constructor_param), ")")) option(eq_tag) {
+// 311|    {name: { name : $2, loc : mk_loc($loc($2)) }, args: $3, tag: $4, loc: mk_loc($sloc), attrs: $1, doc: DocString::empty()}
+// 312|  }
 fn yy_action_157(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   guard! _args[1].0 is YYObj_String(_dollar2)
@@ -5173,7 +5174,7 @@ fn yy_action_158(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 315|    "=" INT { ($2, mk_loc($loc($2))) }
+// 316|    "=" INT { ($2, mk_loc($loc($2))) }
 fn yy_action_291(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -5196,7 +5197,7 @@ fn yy_action_159(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 319|    boption("mut") type_ { {mut_: $1, ty: $2, label: None} }
+// 320|    boption("mut") type_ { {mut_: $1, ty: $2, label: None} }
 fn yy_action_160(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Bool(_dollar1)
   guard! _args[1].0 is YYObj_Type(_dollar2)
@@ -5208,7 +5209,7 @@ fn yy_action_160(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 320|    boption("mut") post_label ":" type_ { {mut_: $1, ty: $4, label: Some($2)} }
+// 321|    boption("mut") post_label ":" type_ { {mut_: $1, ty: $4, label: Some($2)} }
 fn yy_action_161(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Bool(_dollar1)
   guard! _args[3].0 is YYObj_Type(_dollar4)
@@ -5221,7 +5222,7 @@ fn yy_action_161(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 491|    POST_LABEL { {name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
+// 492|    POST_LABEL { {name: $1, loc: Location::trim_last_char(mk_loc($sloc))} }
 fn yy_action_162(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -5347,7 +5348,7 @@ fn yy_action_171(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 363|    uident optional_type_params_no_constraints { ($1, $2) }
+// 364|    uident optional_type_params_no_constraints { ($1, $2) }
 fn yy_action_172(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   guard! _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
@@ -5359,10 +5360,10 @@ fn yy_action_172(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 367|    uident optional_type_params_no_constraints {
-// 368|    let target = QualifiedName::{ name: Ident(name = $1.name), loc: $1.loc }
-// 369|    ($1, $2, target)
-// 370|  }
+// 368|    uident optional_type_params_no_constraints {
+// 369|    let target = QualifiedName::{ name: Ident(name = $1.name), loc: $1.loc }
+// 370|    ($1, $2, target)
+// 371|  }
 fn yy_action_173(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   guard! _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
@@ -5377,7 +5378,7 @@ fn yy_action_173(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 350|    "[" separated_list(",", type_param_no_constraints) "]" { $2 }
+// 351|    "[" separated_list(",", type_param_no_constraints) "]" { $2 }
 fn yy_action_174(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar2)
   YYObj__list_List_TypeParamNoConstraints_(
@@ -5399,7 +5400,7 @@ fn yy_action_175(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 345|    uident { Name($1) }
+// 346|    uident { Name($1) }
 fn yy_action_176(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   YYObj_TypeParamNoConstraints(
@@ -5410,7 +5411,7 @@ fn yy_action_176(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 346|    "_" { Underscore(mk_loc($sloc)) }
+// 347|    "_" { Underscore(mk_loc($sloc)) }
 fn yy_action_177(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
     _args[0].1
@@ -5459,7 +5460,7 @@ fn yy_action_180(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 355|    type_params_no_constraints { $1 }
+// 356|    type_params_no_constraints { $1 }
 fn yy_action_181(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_TypeParamNoConstraints_(_dollar1)
   YYObj__list_List_TypeParamNoConstraints_(
@@ -5470,11 +5471,11 @@ fn yy_action_181(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 371|    PACKAGE_NAME DOT_UIDENT optional_type_params_no_constraints {
-// 372|    let name = Name::{ name: $2, loc: mk_loc($loc($2)) }
-// 373|    let target = QualifiedName::{ name: Dot(pkg = $1, id = $2), loc: mk_loc($sloc) }
-// 374|    (name, $3, target)
-// 375|  }
+// 372|    PACKAGE_NAME DOT_UIDENT optional_type_params_no_constraints {
+// 373|    let name = Name::{ name: $2, loc: mk_loc($loc($2)) }
+// 374|    let target = QualifiedName::{ name: Dot(pkg = $1, id = $2), loc: mk_loc($sloc) }
+// 375|    (name, $3, target)
+// 376|  }
 fn yy_action_182(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   let _start_pos_of_item1 = _args[1].1
@@ -5507,7 +5508,7 @@ fn yy_action_182(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 354|    { List([]) }
+// 355|    { List([]) }
 fn yy_action_183(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj__list_List_TypeParamNoConstraints_(
     ({();  List([]) 
@@ -5517,9 +5518,9 @@ fn yy_action_183(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 270|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
-// 271|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
-// 272|  }
+// 271|    attributes vis "impl" type_params_with_constraints qualified_uident "for" type_ {
+// 272|    {type_params : $4, trait_name : $5, type_ : $7, attrs : $1}
+// 273|  }
 fn yy_action_184(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -5537,9 +5538,9 @@ fn yy_action_184(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 273|    attributes vis "impl" qualified_uident "for" type_ {
-// 274|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
-// 275|  }
+// 274|    attributes vis "impl" qualified_uident "for" type_ {
+// 275|    {type_params : List([]), trait_name : $4, type_ : $6, attrs : $1}
+// 276|  }
 fn yy_action_185(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -5556,9 +5557,9 @@ fn yy_action_185(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 279|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
-// 280|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
-// 281|  }
+// 280|    attributes vis "trait" uident loption(preceded(":", separated_nonempty_list("+", qualified_uident))) trait_body {
+// 281|    { attrs : $1, vis: $2, name: $4, super_traits: $5, methods: $6}
+// 282|  }
 fn yy_action_186(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -5577,7 +5578,7 @@ fn yy_action_186(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 286|    "{" separated_list(";", trait_method_sig) "}" { $2 }
+// 287|    "{" separated_list(";", trait_method_sig) "}" { $2 }
 fn yy_action_187(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_TraitMethodSig_(_dollar2)
   YYObj__list_List_TraitMethodSig_(
@@ -5599,9 +5600,9 @@ fn yy_action_188(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
-// 223|  }
+// 222|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 223|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
+// 224|  }
 fn yy_action_189(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_286(_args[0:1])
@@ -5623,9 +5624,9 @@ fn yy_action_189(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
-// 226|  }
+// 225|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 226|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 227|  }
 fn yy_action_190(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_286(_args[0:1])
@@ -5646,9 +5647,9 @@ fn yy_action_190(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
-// 223|  }
+// 222|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 223|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
+// 224|  }
 fn yy_action_191(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_288(_args[0:0])
@@ -5670,9 +5671,9 @@ fn yy_action_191(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
-// 223|  }
+// 222|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 223|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
+// 224|  }
 fn yy_action_192(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_286(_args[1:2])
@@ -5694,9 +5695,9 @@ fn yy_action_192(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
-// 226|  }
+// 225|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 226|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 227|  }
 fn yy_action_193(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_286(_args[1:2])
@@ -5717,9 +5718,9 @@ fn yy_action_193(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 221|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 222|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
-// 223|  }
+// 222|    attributes is_async "fn" loption(type_params_with_constraints) lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 223|    { attrs : $1, is_async: $2, type_params: $4, name: $5, params: $6, return_: ($8.0, $8.1), nocancel_: $8.2, has_default: $9}
+// 224|  }
 fn yy_action_194(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_288(_args[1:1])
@@ -5741,7 +5742,7 @@ fn yy_action_194(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 341|    "[" separated_list(",", type_param_with_constraints) "]" { $2 }
+// 342|    "[" separated_list(",", type_param_with_constraints) "]" { $2 }
 fn yy_action_195(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj__list_List_TypeParamWithConstraints_(_dollar2)
   YYObj__list_List_TypeParamWithConstraints_(
@@ -5763,7 +5764,7 @@ fn yy_action_196(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 337|    uident ":" separated_nonempty_list("+", type_constraint) { {name: $1, constraints: $3} }
+// 338|    uident ":" separated_nonempty_list("+", type_constraint) { {name: $1, constraints: $3} }
 fn yy_action_197(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   guard! _args[2].0 is YYObj__list_List_QualifiedName_(_dollar3)
@@ -5775,7 +5776,7 @@ fn yy_action_197(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 359|    qualified_uident { $1 }
+// 360|    qualified_uident { $1 }
 fn yy_action_198(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_QualifiedName(_dollar1)
   YYObj_QualifiedName(
@@ -5809,7 +5810,7 @@ fn yy_action_200(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 336|    uident { {name: $1, constraints: List([])} }
+// 337|    uident { {name: $1, constraints: List([])} }
 fn yy_action_201(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   YYObj_TypeParamWithConstraints(
@@ -5874,9 +5875,9 @@ fn yy_action_206(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
-// 226|  }
+// 225|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 226|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 227|  }
 fn yy_action_207(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_290(_args[0:1])
   let _sub_action_1_result = yy_action_288(_args[1:1])
@@ -5897,7 +5898,7 @@ fn yy_action_207(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 496|    nonempty_list(attribute) { $1 }
+// 497|    nonempty_list(attribute) { $1 }
 fn yy_action_290(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_Attribute_(_dollar1)
   YYObj__list_List_Attribute_(
@@ -5908,9 +5909,9 @@ fn yy_action_290(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 224|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
-// 225|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
-// 226|  }
+// 225|    attributes is_async lident delimited("(", separated_list(",", parameter), ")") "->" return_type boption(eq_underscore) {
+// 226|    { attrs : $1, is_async: $2, type_params: List([]), name: $3, params: $4, return_: ($6.0, $6.1), nocancel_: $6.2, has_default: $7}
+// 227|  }
 fn yy_action_208(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_288(_args[0:0])
@@ -5953,7 +5954,7 @@ fn yy_action_209(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 230|    "=" "_" {}
+// 231|    "=" "_" {}
 fn yy_action_293(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_Unit(
     ({(); 
@@ -5984,7 +5985,7 @@ fn yy_action_211(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 430|    type_ { DiscardPositional(ty = Some($1), loc = @syntax.no_location) }
+// 431|    type_ { DiscardPositional(ty = Some($1), loc = @syntax.no_location) }
 fn yy_action_212(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   YYObj_Parameter(
@@ -5995,7 +5996,7 @@ fn yy_action_212(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 431|    POST_LABEL ":" type_ { Labelled(binder = { name : $1, loc : mk_loc($loc($1)) }, ty = Some($3)) }
+// 432|    POST_LABEL ":" type_ { Labelled(binder = { name : $1, loc : mk_loc($loc($1)) }, ty = Some($3)) }
 fn yy_action_213(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _start_pos_of_item0 = _args[0].1
@@ -6009,7 +6010,7 @@ fn yy_action_213(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 390|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_214(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_286(_args[0:1])
   let _sub_action_1_result = yy_action_294(_args[4:4])
@@ -6055,7 +6056,7 @@ fn yy_action_214(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 390|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_215(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_286(_args[0:1])
   let _sub_action_1_result = yy_action_295(_args[4:5])
@@ -6105,7 +6106,7 @@ fn yy_action_215(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 391|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
+// 392|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_216(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_286(_args[0:1])
   guard! _args[2].0 is YYObj_Type(_dollar3)
@@ -6145,7 +6146,7 @@ fn yy_action_216(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 382|    qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
+// 383|    qualified_uident_ optional_type_arguments { Name(constr_id=$1, tys=$2, loc=mk_loc($sloc)) }
 fn yy_action_217(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrId(_dollar1)
   guard! _args[1].0 is YYObj__list_List_Type_(_dollar2)
@@ -6167,7 +6168,7 @@ fn yy_action_217(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 425|    delimited("[", separated_nonempty_list(",", type_), "]") { $1 }
+// 426|    delimited("[", separated_nonempty_list(",", type_), "]") { $1 }
 fn yy_action_218(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_296(_args[0:3])
   guard! _sub_action_0_result is YYObj__list_List_Type_(_dollar1)
@@ -6190,7 +6191,7 @@ fn yy_action_296(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 390|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_219(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_288(_args[0:0])
   let _sub_action_1_result = yy_action_295(_args[3:4])
@@ -6247,7 +6248,7 @@ fn yy_action_295(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 380|    "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.prepend($2), loc=mk_loc($sloc)) }
+// 381|    "(" type_ "," separated_nonempty_list(",", type_) ")" { Tuple(tys=$4.prepend($2), loc=mk_loc($sloc)) }
 fn yy_action_220(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[3].0 is YYObj__list_List_Type_(_dollar4)
   guard! _args[1].0 is YYObj_Type(_dollar2)
@@ -6281,7 +6282,7 @@ fn yy_action_220(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 389|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
+// 390|    is_async "(" type_ "," ioption(separated_nonempty_list(",", type_)) ")" "->" return_type { Arrow(args=$5.unwrap_or(List([])).prepend($3), res=$8.0, err=$8.1, nocancel_=$8.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_221(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_288(_args[0:0])
   let _sub_action_1_result = yy_action_294(_args[3:3])
@@ -6333,7 +6334,7 @@ fn yy_action_294(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 391|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
+// 392|    is_async "(" type_ ")" "->" return_type { Arrow(args=@list.singleton($3), res=$6.0, err=$6.1, nocancel_=$6.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_222(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_288(_args[0:0])
   guard! _args[1].0 is YYObj_Type(_dollar3)
@@ -6369,7 +6370,7 @@ fn yy_action_222(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 381|    "(" type_ ")" { $2 }
+// 382|    "(" type_ ")" { $2 }
 fn yy_action_223(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Type(_dollar2)
   YYObj_Type(
@@ -6380,7 +6381,7 @@ fn yy_action_223(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 379|    simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
+// 380|    simple_type "?" { Option(ty=$1, loc=mk_loc($sloc), question_loc=mk_loc($loc($2))) }
 fn yy_action_224(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -6403,7 +6404,7 @@ fn yy_action_224(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 396|    simple_type effect_annotation { ($1, $2.0, $2.1) }
+// 397|    simple_type effect_annotation { ($1, $2.0, $2.1) }
 fn yy_action_225(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   guard! _args[1].0 is YYObj__ErrorType__Location__(_dollar2)
@@ -6415,7 +6416,7 @@ fn yy_action_225(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 410|    "nocancel" { mk_loc($sloc) }
+// 411|    "nocancel" { mk_loc($sloc) }
 fn yy_action_226(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
     _args[0].1
@@ -6431,7 +6432,7 @@ fn yy_action_226(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 414|    error_annotation "+" nocancel_annotation { ($1, Some($3)) }
+// 415|    error_annotation "+" nocancel_annotation { ($1, Some($3)) }
 fn yy_action_227(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ErrorType(_dollar1)
   guard! _args[2].0 is YYObj_Location(_dollar3)
@@ -6443,7 +6444,7 @@ fn yy_action_227(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 416|    error_annotation { ($1, None) }
+// 417|    error_annotation { ($1, None) }
 fn yy_action_228(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ErrorType(_dollar1)
   YYObj__ErrorType__Location__(
@@ -6454,7 +6455,7 @@ fn yy_action_228(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 400|    "noraise" { Noraise(loc=mk_loc($sloc)) }
+// 401|    "noraise" { Noraise(loc=mk_loc($sloc)) }
 fn yy_action_229(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
     _args[0].1
@@ -6470,7 +6471,7 @@ fn yy_action_229(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 402|    "raise" error_type { ErrorType(ty = $2) }
+// 403|    "raise" error_type { ErrorType(ty = $2) }
 fn yy_action_230(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Type(_dollar2)
   YYObj_ErrorType(
@@ -6481,10 +6482,10 @@ fn yy_action_230(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 403|    "raise" "?" {
-// 404|    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=List([]), loc=@syntax.no_location)
-// 405|    MaybeError(ty=fake_error)
-// 406|  }
+// 404|    "raise" "?" {
+// 405|    let fake_error : Type = Name(constr_id={ id : Ident(name="Error"), loc :@syntax.no_location }, tys=List([]), loc=@syntax.no_location)
+// 406|    MaybeError(ty=fake_error)
+// 407|  }
 fn yy_action_231(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_ErrorType(
     ({(); 
@@ -6497,7 +6498,7 @@ fn yy_action_231(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 421|    qualified_uident_ { Name(constr_id=$1, tys=List([]), loc=mk_loc($sloc)) }
+// 422|    qualified_uident_ { Name(constr_id=$1, tys=List([]), loc=mk_loc($sloc)) }
 fn yy_action_232(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_ConstrId(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -6514,7 +6515,7 @@ fn yy_action_232(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 401|    "raise" { DefaultErrorType(loc=mk_loc($loc($1))) }
+// 402|    "raise" { DefaultErrorType(loc=mk_loc($loc($1))) }
 fn yy_action_233(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
@@ -6526,7 +6527,7 @@ fn yy_action_233(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 415|    nocancel_annotation "+" error_annotation { ($3, Some($1)) }
+// 416|    nocancel_annotation "+" error_annotation { ($3, Some($1)) }
 fn yy_action_234(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[2].0 is YYObj_ErrorType(_dollar3)
   guard! _args[0].0 is YYObj_Location(_dollar1)
@@ -6538,7 +6539,7 @@ fn yy_action_234(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 417|    nocancel_annotation { (NoErrorType, Some($1)) }
+// 418|    nocancel_annotation { (NoErrorType, Some($1)) }
 fn yy_action_235(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Location(_dollar1)
   YYObj__ErrorType__Location__(
@@ -6549,7 +6550,7 @@ fn yy_action_235(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 388|    simple_type { $1 }
+// 389|    simple_type { $1 }
 fn yy_action_236(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   YYObj_Type(
@@ -6560,7 +6561,7 @@ fn yy_action_236(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 390|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
+// 391|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_237(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_288(_args[0:0])
   guard! _args[3].0 is YYObj__Type__ErrorType__Location__(_dollar5)
@@ -6591,7 +6592,7 @@ fn yy_action_237(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 464|    { None }
+// 465|    { None }
 fn yy_action_288(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_Location_(
     ({();  None 
@@ -6624,7 +6625,7 @@ fn yy_action_239(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 426|     { List([]) }
+// 427|     { List([]) }
 fn yy_action_240(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj__list_List_Type_(
     ({();  List([]) 
@@ -6634,7 +6635,7 @@ fn yy_action_240(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 383|    "&" qualified_uident_ { Object($2) }
+// 384|    "&" qualified_uident_ { Object($2) }
 fn yy_action_241(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_ConstrId(_dollar2)
   YYObj_Type(
@@ -6645,7 +6646,7 @@ fn yy_action_241(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 384|    "_" { Any(loc=mk_loc($sloc)) }
+// 385|    "_" { Any(loc=mk_loc($sloc)) }
 fn yy_action_242(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
     _args[0].1
@@ -6661,7 +6662,7 @@ fn yy_action_242(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 390|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
+// 391|    is_async "(" ")" "->" return_type { Arrow(args=List([]), res=$5.0, err=$5.1, nocancel_=$5.2, is_async=$1, loc=mk_loc($sloc)) }
 fn yy_action_243(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_286(_args[0:1])
   guard! _args[4].0 is YYObj__Type__ErrorType__Location__(_dollar5)
@@ -6696,7 +6697,7 @@ fn yy_action_243(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 463|    "async" { Some(mk_loc($loc($1))) }
+// 464|    "async" { Some(mk_loc($loc($1))) }
 fn yy_action_286(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _start_pos_of_item0 = _args[0].1
   let _end_pos_of_item0 = _args[0].2
@@ -6708,7 +6709,7 @@ fn yy_action_286(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 395|    type_ { ($1, NoErrorType, None) }
+// 396|    type_ { ($1, NoErrorType, None) }
 fn yy_action_244(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Type(_dollar1)
   YYObj__Type__ErrorType__Location__(
@@ -6719,7 +6720,7 @@ fn yy_action_244(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 432|    label "?" ":" type_ { QuestionOptional(binder = { name : $1.name, loc : $1.loc }, ty = Some($4)) }
+// 433|    label "?" ":" type_ { QuestionOptional(binder = { name : $1.name, loc : $1.loc }, ty = Some($4)) }
 fn yy_action_245(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Label(_dollar1)
   guard! _args[3].0 is YYObj_Type(_dollar4)
@@ -6731,7 +6732,7 @@ fn yy_action_245(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 473|    UIDENT { { id: Ident(name=$1), loc: mk_loc($sloc)} }
+// 474|    UIDENT { { id: Ident(name=$1), loc: mk_loc($sloc)} }
 fn yy_action_246(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -6748,7 +6749,7 @@ fn yy_action_246(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 474|    PACKAGE_NAME DOT_UIDENT { { id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+// 475|    PACKAGE_NAME DOT_UIDENT { { id: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
 fn yy_action_247(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   guard! _args[1].0 is YYObj_String(_dollar2)
@@ -6770,7 +6771,7 @@ fn yy_action_247(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 487|    lident { {name: $1.name, loc: $1.loc} }
+// 488|    lident { {name: $1.name, loc: $1.loc} }
 fn yy_action_248(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Name(_dollar1)
   YYObj_Label(
@@ -6814,7 +6815,7 @@ fn yy_action_251(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 482|    LIDENT { {name: $1, loc: mk_loc($sloc)} }
+// 483|    LIDENT { {name: $1, loc: mk_loc($sloc)} }
 fn yy_action_252(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -6831,7 +6832,7 @@ fn yy_action_252(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 483|    "extend" { {name: "extend", loc: mk_loc($sloc)} }
+// 484|    "extend" { {name: "extend", loc: mk_loc($sloc)} }
 fn yy_action_253(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
     _args[0].1
@@ -6880,7 +6881,7 @@ fn yy_action_256(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 285|    { List([]) }
+// 286|    { List([]) }
 fn yy_action_257(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj__list_List_TraitMethodSig_(
     ({();  List([]) 
@@ -6890,7 +6891,7 @@ fn yy_action_257(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 468|    UIDENT { { name: Ident(name=$1), loc: mk_loc($sloc)} }
+// 469|    UIDENT { { name: Ident(name=$1), loc: mk_loc($sloc)} }
 fn yy_action_258(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -6907,7 +6908,7 @@ fn yy_action_258(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 469|    PACKAGE_NAME DOT_UIDENT { { name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
+// 470|    PACKAGE_NAME DOT_UIDENT { { name: Dot(pkg=$1, id=$2), loc: mk_loc($sloc)} }
 fn yy_action_259(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   guard! _args[1].0 is YYObj_String(_dollar2)
@@ -6985,10 +6986,10 @@ fn yy_action_263(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 298|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
-// 299|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 300|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
-// 301|  }
+// 299|    attributes vis "using" PACKAGE_NAME "{" "type" uident using_binder "}" {
+// 300|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 301|    Using(pkg~, target = $7, name = $8, kind = Type, attrs = $1)
+// 302|  }
 fn yy_action_264(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -7009,7 +7010,7 @@ fn yy_action_264(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 291|    "as" uident { Some($2) }
+// 292|    "as" uident { Some($2) }
 fn yy_action_265(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_Name(_dollar2)
   YYObj_Name_(
@@ -7020,10 +7021,10 @@ fn yy_action_265(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 302|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
-// 303|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
-// 304|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
-// 305|  }
+// 303|    attributes vis "using" PACKAGE_NAME "{" "trait" uident using_binder "}" {
+// 304|    let pkg = Name::{ name : $4, loc : mk_loc($loc($4)) }
+// 305|    Using(pkg~, target = $7, name = $8, kind = Trait, attrs = $1)
+// 306|  }
 fn yy_action_266(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _sub_action_0_result = yy_action_283(_args[0:0])
   let _sub_action_1_result = yy_action_284(_args[0:0])
@@ -7044,7 +7045,7 @@ fn yy_action_266(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 451|    { Default }
+// 452|    { Default }
 fn yy_action_284(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_Visibility(
     ({();  Default 
@@ -7054,7 +7055,7 @@ fn yy_action_284(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 495|     {  List([]) }
+// 496|     {  List([]) }
 fn yy_action_283(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj__list_List_Attribute_(
     ({();   List([]) 
@@ -7064,7 +7065,7 @@ fn yy_action_283(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 290|    { None }
+// 291|    { None }
 fn yy_action_267(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj_Name_(
     ({();  None 
@@ -7074,7 +7075,7 @@ fn yy_action_267(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 478|    UIDENT { {name: $1, loc: mk_loc($sloc)} }
+// 479|    UIDENT { {name: $1, loc: mk_loc($sloc)} }
 fn yy_action_268(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
@@ -7116,7 +7117,7 @@ fn yy_action_270(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 500|    ATTRIBUTE { Attribute::new(loc=mk_loc($sloc), $1) }
+// 501|    ATTRIBUTE { Attribute::new(loc=mk_loc($sloc), $1) }
 fn yy_action_298(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   let _symbol_start_pos = if _args[0].1 != _args[0].2 {
     _args[0].1
@@ -7133,7 +7134,7 @@ fn yy_action_298(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 165|     { List([]) }
+// 166|     { List([]) }
 fn yy_action_271(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj__list_List__Sig__Location__(
     ({();  List([]) 
@@ -7143,7 +7144,7 @@ fn yy_action_271(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 156|    "import" "{" non_empty_list_commas(package_import) "}" ";" { $3 }
+// 157|    "import" "{" non_empty_list_commas(package_import) "}" ";" { $3 }
 fn yy_action_272(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[2].0 is YYObj__list_List_PackageImport_(_dollar3)
   YYObj__list_List_PackageImport_(
@@ -7154,7 +7155,7 @@ fn yy_action_272(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 147|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
+// 148|    non_empty_list_commas_rev(X) option(",") { $1.rev() }
 fn yy_action_273(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_PackageImport_(_dollar1)
   YYObj__list_List_PackageImport_(
@@ -7165,7 +7166,7 @@ fn yy_action_273(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 161|    STRING "as" PACKAGE_NAME { {name: $1, alias_: Some($3)} }
+// 162|    STRING "as" PACKAGE_NAME { {name: $1, alias_: Some($3)} }
 fn yy_action_274(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   guard! _args[2].0 is YYObj_String(_dollar3)
@@ -7177,7 +7178,7 @@ fn yy_action_274(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 160|    STRING { {name: $1, alias_: None} }
+// 161|    STRING { {name: $1, alias_: None} }
 fn yy_action_275(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_PackageImport(
@@ -7188,7 +7189,7 @@ fn yy_action_275(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 143|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
+// 144|    non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
 fn yy_action_276(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj__list_List_PackageImport_(_dollar1)
   guard! _args[2].0 is YYObj_PackageImport(_dollar3)
@@ -7221,7 +7222,7 @@ fn yy_action_278(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 142|    X { @list.singleton($1) }
+// 143|    X { @list.singleton($1) }
 fn yy_action_279(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_PackageImport(_dollar1)
   YYObj__list_List_PackageImport_(
@@ -7232,7 +7233,7 @@ fn yy_action_279(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -
 
 ///|
 // file:///./mbti_parser.mbty
-// 155|     { List([]) }
+// 156|     { List([]) }
 fn yy_action_280(_args : ArrayView[(YYObj, @basic.Position, @basic.Position)]) -> YYObj {
   YYObj__list_List_PackageImport_(
     ({();  List([]) 
@@ -7256,6 +7257,7 @@ fn yy_input(
     MULTILINE_INTERP(data) => (T_MULTILINE_INTERP, YYObj_InterpLiteral(data))
     INTERP(data) => (T_INTERP, YYObj_InterpLiteral(data))
     BYTES_INTERP(data) => (T_BYTES_INTERP, YYObj_InterpLiteral(data))
+    BYTES_REGEX_LITERAL(data) => (T_BYTES_REGEX_LITERAL, YYObj_String(data))
     REGEX_LITERAL(data) => (T_REGEX_LITERAL, YYObj_String(data))
     REGEX_INTERP(data) => (T_REGEX_INTERP, YYObj_InterpLiteral(data))
     ATTRIBUTE(data) =>
@@ -20516,9 +20518,11 @@ fn error(
     (T_FLOAT, TK_FLOAT), (T_DOUBLE, TK_DOUBLE), (T_STRING, TK_STRING),
     (T_MULTILINE_STRING, TK_MULTILINE_STRING),
     (T_MULTILINE_INTERP, TK_MULTILINE_INTERP), (T_INTERP, TK_INTERP),
-    (T_BYTES_INTERP, TK_BYTES_INTERP), (T_REGEX_LITERAL, TK_REGEX_LITERAL),
-    (T_REGEX_INTERP, TK_REGEX_INTERP), (T_ATTRIBUTE, TK_ATTRIBUTE),
-    (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT), (T_POST_LABEL, TK_POST_LABEL),
+    (T_BYTES_INTERP, TK_BYTES_INTERP),
+    (T_BYTES_REGEX_LITERAL, TK_BYTES_REGEX_LITERAL),
+    (T_REGEX_LITERAL, TK_REGEX_LITERAL), (T_REGEX_INTERP, TK_REGEX_INTERP),
+    (T_ATTRIBUTE, TK_ATTRIBUTE), (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT),
+    (T_POST_LABEL, TK_POST_LABEL),
     (T_POST_LABEL_TRANSPARENT, TK_POST_LABEL_TRANSPARENT),
     (T_COMMENT, TK_COMMENT), (T_NEWLINE, TK_NEWLINE), (T_INFIX1, TK_INFIX1),
     (T_INFIX2, TK_INFIX2), (T_INFIX3, TK_INFIX3), (T_INFIX4, TK_INFIX4),

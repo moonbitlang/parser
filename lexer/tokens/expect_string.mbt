@@ -126,6 +126,7 @@ pub fn TokenKind::to_expect_string(self : Self) -> String {
     TK_LEXMATCH => "lexmatch"
     TK_LEXSCAN => "`lexscan`"
     TK_EXTEND => "`extend`"
+    TK_BYTES_REGEX_LITERAL => "bytes regex"
     TK_REGEX_LITERAL => "regex"
     TK_REGEX_INTERP => "regex interp"
     TK_DECLARE => "declare"

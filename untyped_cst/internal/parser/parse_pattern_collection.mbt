@@ -185,6 +185,7 @@ fn map_pattern_key_tokens() -> Array[TokenKind] {
     TK_MINUS,
     TK_STRING,
     TK_REGEX_LITERAL,
+    TK_BYTES_REGEX_LITERAL,
   ]
 }
 
@@ -474,6 +475,7 @@ fn token_starts_map_pattern_item(token : Token) -> Bool {
   is (MINUS
   | STRING(_)
   | BYTES(_)
+  | BYTES_REGEX_LITERAL(_)
   | REGEX_LITERAL(_)
   | INT(_)
   | BYTE(_)
@@ -653,23 +655,6 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
   let mut constant : CstNode? = None
   let mut negative = false
   match state.peek() {
-    Some((found, start, end)) if found is REGEX_LITERAL(_) =>
-      state.report_expected_tokens_at(found, mk_loc(start, end), [
-        TK_LIDENT,
-        TK_EXTEND,
-        TK_TRUE,
-        TK_FALSE,
-        TK_CHAR,
-        TK_INT,
-        TK_FLOAT,
-        TK_DOUBLE,
-        TK_MINUS,
-        TK_STRING,
-        TK_REGEX_LITERAL,
-      ])
-    _ => ()
-  }
-  match state.peek() {
     Some((DOTDOT, _, _)) => {
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
@@ -786,6 +771,7 @@ fn parse_map_pattern_item(state : ParserState) -> CstNode {
     Some((raw, _, _)) if raw
       is (STRING(_)
       | BYTES(_)
+      | BYTES_REGEX_LITERAL(_)
       | REGEX_LITERAL(_)
       | INT(_)
       | BYTE(_)
@@ -952,19 +938,27 @@ fn parse_pattern_range(
   match state.peek() {
     Some((RANGE_EXCLUSIVE, _, _))
     | Some((RANGE_INCLUSIVE, _, _))
-    | Some((RANGE_LT_INCLUSIVE, _, _)) => {
-      let range_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = if state.current_is(
-          TK_RANGE_EXCLUSIVE,
-        ) {
-        fn(loc, source_span, children) {
-          let _ = children
-          @node.CstNode::range_kind_exclusive(loc~, source_span~)
-        }
-      } else {
-        fn(loc, source_span, children) {
-          let _ = children
-          @node.CstNode::range_kind_inclusive(loc~, source_span~)
-        }
+    | Some((RANGE_LT_INCLUSIVE, _, _))
+    | Some((RANGE_INCLUSIVE_REV, _, _))
+    | Some((RANGE_EXCLUSIVE_REV, _, _)) => {
+      let range_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = match
+        state.peek() {
+        Some((RANGE_EXCLUSIVE, _, _)) =>
+          fn(loc, source_span, _) {
+            @node.CstNode::range_kind_exclusive(loc~, source_span~)
+          }
+        Some((RANGE_INCLUSIVE_REV, _, _)) =>
+          fn(loc, source_span, _) {
+            @node.CstNode::range_kind_inclusive_reverse(loc~, source_span~)
+          }
+        Some((RANGE_EXCLUSIVE_REV, _, _)) =>
+          fn(loc, source_span, _) {
+            @node.CstNode::range_kind_exclusive_reverse(loc~, source_span~)
+          }
+        _ =>
+          fn(loc, source_span, _) {
+            @node.CstNode::range_kind_inclusive(loc~, source_span~)
+          }
       }
       let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
       if state.consume_any() is Some(op) {

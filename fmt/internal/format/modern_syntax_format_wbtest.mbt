@@ -41,6 +41,19 @@ fn assert_modern_syntax_format_pipeline(source : String) -> String raise {
 }
 
 ///|
+test "byte regex and descending ranges format and reparse as a fixed point" {
+  let source =
+    #|const B=reb"\xff"
+    #|fn f(data,x){let r=reb"[a-z]+";let _=data =~ ((B+reb" ") as word,after=rest)
+    #|lexscan data{reb"[a-z]+"=>();_=>()}
+    #|match x{9>=..1=>1;9>..1=>2;_=>0}}
+  let result = assert_modern_syntax_format_pipeline(source)
+  assert_true(result.contains("reb\"\\xff\""))
+  assert_true(result.contains("9>=..1"))
+  assert_true(result.contains("9>..1"))
+}
+
+///|
 test "inclusive range patterns normalize to ..<=" {
   for op in ["..=", "..<="] {
     let cases = [

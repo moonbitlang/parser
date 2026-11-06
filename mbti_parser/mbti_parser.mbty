@@ -13,6 +13,7 @@
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
 %token<InterpLiteral> BYTES_INTERP
+%token<String> BYTES_REGEX_LITERAL
 %token<String> REGEX_LITERAL
 %token<InterpLiteral> REGEX_INTERP
 %token<(String, Option[String], String)> ATTRIBUTE

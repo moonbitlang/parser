@@ -19,6 +19,7 @@
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
 %token<InterpLiteral> BYTES_INTERP
+%token<String> BYTES_REGEX_LITERAL
 %token<String> REGEX_LITERAL
 %token<InterpLiteral> REGEX_INTERP
 %token<(String, String?, String)> ATTRIBUTE
@@ -1813,6 +1814,7 @@ regex_atom_pattern -> RegexPattern
   : REGEX_LITERAL {
     Literal(lit = $1, recovered_ = false, loc = mk_loc($loc($1)))
   }
+  | BYTES_REGEX_LITERAL { BytesLiteral(lit=$1, loc=mk_loc($loc($1))) }
   | qual_uident {
     Reference(lid = $1, loc = mk_loc($sloc))
   }
@@ -2184,6 +2186,7 @@ simple_constant -> Constant
   | FLOAT { make_float($1) }
   | STRING { String($1) }
   | REGEX_LITERAL { Regex($1) }
+  | BYTES_REGEX_LITERAL { BytesRegex($1) }
   ;
 
 map_syntax_key -> Constant
@@ -2279,6 +2282,8 @@ range_pattern -> Pattern
   : simple_pattern "..<" simple_pattern { Range(lhs = $1, rhs = $3, kind=Exclusive, loc = mk_loc($sloc)) }
   | simple_pattern "..=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
   | simple_pattern "..<=" simple_pattern { Range(lhs = $1, rhs = $3, kind=Inclusive, loc = mk_loc($sloc)) }
+  | simple_pattern ">=.." simple_pattern { Range(lhs=$1, rhs=$3, kind=InclusiveReverse, loc=mk_loc($sloc)) }
+  | simple_pattern ">.." simple_pattern { Range(lhs=$1, rhs=$3, kind=ExclusiveReverse, loc=mk_loc($sloc)) }
   | simple_pattern { $1 }
   ;
 

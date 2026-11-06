@@ -130,10 +130,16 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
 fn lower_pattern_range_kind(node : CstNode) -> @syntax.RangeKind {
   match
     node.first_child_of_kind(fn(kind) {
-      kind is (RangeKind_Inclusive | RangeKind_Exclusive)
+      kind
+      is (RangeKind_Inclusive
+      | RangeKind_Exclusive
+      | RangeKind_InclusiveReverse
+      | RangeKind_ExclusiveReverse)
     }) {
     Some(kind_node) =>
       return match kind_node.kind {
+        RangeKind_InclusiveReverse => InclusiveReverse
+        RangeKind_ExclusiveReverse => ExclusiveReverse
         RangeKind_Exclusive => Exclusive
         RangeKind_Inclusive => Inclusive
         _ => InclusiveMissingEqual
