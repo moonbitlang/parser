@@ -67,7 +67,7 @@ fn validate_config(
       ) => ()
       (Package, "warnings" | "supported_targets" | "regex_backend", String(_)) =>
         ()
-      (Package, "proof_enabled", Bool(_)) => ()
+      (Package, "proof_enabled" | "experimental", Bool(_)) => ()
       (Package, "max_concurrent_tests", Int(_)) => ()
       (Package, "pkgtype", value) => {
         let valid = match value {
@@ -132,9 +132,22 @@ fn validate_config(
   }
   for statement in ast.0 {
     match statement {
-      Import(kind=import_kind, loc~, ..) => {
+      Import(kind=import_kind, conditions~, loc~, ..) => {
         let key = import_kind_to_key(import_kind)
-        unique(key, loc)
+        if !(kind is Package) {
+          unique(key, loc)
+        }
+        for condition in conditions {
+          if !(kind is Package) {
+            invalid("#cfg", condition.loc)
+          } else if condition.parsed is None ||
+            !condition.parsed.unwrap().is_valid() {
+            diagnostics.errors.push({
+              loc: condition.loc,
+              msg: "Invalid `#cfg` in moon.pkg file. Expected one target condition, boolean, all(...), any(...), or not(...).",
+            })
+          }
+        }
         if kind is Workspace || (kind is Module && !(import_kind is Normal)) {
           invalid(key, loc)
         }
