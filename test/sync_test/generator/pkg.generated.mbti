@@ -6,8 +6,6 @@ pub fn gen_test_for_lexer(String) -> String
 
 pub fn gen_test_for_parser(String) -> String
 
-pub fn normalize(String) -> String
-
 // Errors
 
 // Types and methods
