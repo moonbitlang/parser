@@ -99,6 +99,7 @@ priv enum YYSymbol {
   T_MULTILINE_INTERP
   T_INTERP
   T_BYTES_INTERP
+  T_BYTES_REGEX_LITERAL
   T_REGEX_LITERAL
   T_REGEX_INTERP
   T_ATTRIBUTE
@@ -241,7 +242,7 @@ fn init {
 
 ///|
 // file:///./parser.mbty
-// 175|    EOF { List([]) }
+// 176|    EOF { List([]) }
 fn yy_action_0(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_(
     ({();  List([]) 
@@ -251,7 +252,7 @@ fn yy_action_0(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 176|    properties { $1 }
+// 177|    properties { $1 }
 fn yy_action_1(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_List_Prop_(_dollar1)
   YYObj_List_Prop_(
@@ -262,7 +263,7 @@ fn yy_action_1(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 193|    "(" ")"                      { List([]) }
+// 194|    "(" ")"                      { List([]) }
 fn yy_action_2(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_List_Prop_(
     ({();  List([]) 
@@ -272,7 +273,7 @@ fn yy_action_2(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 194|    "(" non_empty_properties ")" { $2 }
+// 195|    "(" non_empty_properties ")" { $2 }
 fn yy_action_3(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[1].0 is YYObj_List_Prop_(_dollar2)
   YYObj_List_Prop_(
@@ -283,7 +284,7 @@ fn yy_action_3(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 171|    LIDENT { $1 }
+// 172|    LIDENT { $1 }
 fn yy_action_4(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(_dollar1)
   YYObj_String(
@@ -294,7 +295,7 @@ fn yy_action_4(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 172|    "extend" { "extend" }
+// 173|    "extend" { "extend" }
 fn yy_action_5(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_String(
     ({();  "extend" 
@@ -304,7 +305,7 @@ fn yy_action_5(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 179|    name=lident_string "=" expr   { Labeled(name, $3) }
+// 180|    name=lident_string "=" expr   { Labeled(name, $3) }
 fn yy_action_6(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   guard! _args[2].0 is YYObj_Expr(_dollar3)
@@ -316,7 +317,7 @@ fn yy_action_6(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 187|    qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
+// 188|    qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
 fn yy_action_7(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(qual)
   guard! _args[1].0 is YYObj_String(name)
@@ -329,7 +330,7 @@ fn yy_action_7(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 185|    qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
+// 186|    qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
 fn yy_action_8(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(qual)
   guard! _args[1].0 is YYObj_String(name)
@@ -341,7 +342,7 @@ fn yy_action_8(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 186|    name=lident_string props=properties                 { Apply({qual: None, name}, props) }
+// 187|    name=lident_string props=properties                 { Apply({qual: None, name}, props) }
 fn yy_action_9(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   guard! _args[1].0 is YYObj_List_Prop_(props)
@@ -353,7 +354,7 @@ fn yy_action_9(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 183|    name=lident_string                                  { Ident({qual: None, name}) }
+// 184|    name=lident_string                                  { Ident({qual: None, name}) }
 fn yy_action_10(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr(
@@ -364,7 +365,7 @@ fn yy_action_10(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 180|    expr                   { Expr($1) }
+// 181|    expr                   { Expr($1) }
 fn yy_action_11(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Expr(_dollar1)
   YYObj_Prop(
@@ -375,7 +376,7 @@ fn yy_action_11(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 184|    name=UIDENT                                         { Ident({qual: None, name}) }
+// 185|    name=UIDENT                                         { Ident({qual: None, name}) }
 fn yy_action_12(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_String(name)
   YYObj_Expr(
@@ -386,7 +387,7 @@ fn yy_action_12(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 188|    STRING                                              { String($1) }
+// 189|    STRING                                              { String($1) }
 fn yy_action_13(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_StringLiteral(_dollar1)
   YYObj_Expr(
@@ -397,7 +398,7 @@ fn yy_action_13(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 189|    TRUE                                                { Bool(true) }
+// 190|    TRUE                                                { Bool(true) }
 fn yy_action_14(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr(
     ({();  Bool(true) 
@@ -407,7 +408,7 @@ fn yy_action_14(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 190|    FALSE                                               { Bool(false) }
+// 191|    FALSE                                               { Bool(false) }
 fn yy_action_15(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   YYObj_Expr(
     ({();  Bool(false) 
@@ -417,7 +418,7 @@ fn yy_action_15(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 198|    x=property "," xs=non_empty_properties{ xs.prepend(x) }
+// 199|    x=property "," xs=non_empty_properties{ xs.prepend(x) }
 fn yy_action_16(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Prop(x)
   guard! _args[2].0 is YYObj_List_Prop_(xs)
@@ -429,7 +430,7 @@ fn yy_action_16(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
 
 ///|
 // file:///./parser.mbty
-// 197|    property { List([$1]) }
+// 198|    property { List([$1]) }
 fn yy_action_17(_args : ArrayView[(YYObj, Position, Position)]) -> YYObj {
   guard! _args[0].0 is YYObj_Prop(_dollar1)
   YYObj_List_Prop_(
@@ -454,6 +455,7 @@ fn yy_input(token : Token, _start_pos : Position, _end_pos : Position) -> (
     MULTILINE_INTERP(data) => (T_MULTILINE_INTERP, YYObj_InterpLiteral(data))
     INTERP(data) => (T_INTERP, YYObj_InterpLiteral(data))
     BYTES_INTERP(data) => (T_BYTES_INTERP, YYObj_InterpLiteral(data))
+    BYTES_REGEX_LITERAL(data) => (T_BYTES_REGEX_LITERAL, YYObj_String(data))
     REGEX_LITERAL(data) => (T_REGEX_LITERAL, YYObj_String(data))
     REGEX_INTERP(data) => (T_REGEX_INTERP, YYObj_InterpLiteral(data))
     ATTRIBUTE(data) => (T_ATTRIBUTE, YYObj__String__String___String_(data))
@@ -1008,9 +1010,11 @@ fn error(
     (T_FLOAT, TK_FLOAT), (T_DOUBLE, TK_DOUBLE), (T_STRING, TK_STRING),
     (T_MULTILINE_STRING, TK_MULTILINE_STRING),
     (T_MULTILINE_INTERP, TK_MULTILINE_INTERP), (T_INTERP, TK_INTERP),
-    (T_BYTES_INTERP, TK_BYTES_INTERP), (T_REGEX_LITERAL, TK_REGEX_LITERAL),
-    (T_REGEX_INTERP, TK_REGEX_INTERP), (T_ATTRIBUTE, TK_ATTRIBUTE),
-    (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT), (T_POST_LABEL, TK_POST_LABEL),
+    (T_BYTES_INTERP, TK_BYTES_INTERP),
+    (T_BYTES_REGEX_LITERAL, TK_BYTES_REGEX_LITERAL),
+    (T_REGEX_LITERAL, TK_REGEX_LITERAL), (T_REGEX_INTERP, TK_REGEX_INTERP),
+    (T_ATTRIBUTE, TK_ATTRIBUTE), (T_LIDENT, TK_LIDENT), (T_UIDENT, TK_UIDENT),
+    (T_POST_LABEL, TK_POST_LABEL),
     (T_POST_LABEL_TRANSPARENT, TK_POST_LABEL_TRANSPARENT),
     (T_COMMENT, TK_COMMENT), (T_NEWLINE, TK_NEWLINE), (T_INFIX1, TK_INFIX1),
     (T_INFIX2, TK_INFIX2), (T_INFIX3, TK_INFIX3), (T_INFIX4, TK_INFIX4),

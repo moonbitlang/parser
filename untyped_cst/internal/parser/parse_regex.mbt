@@ -284,7 +284,7 @@ fn parse_regex_atom_pattern(
         children,
       )
     }
-    Some((raw, _, _)) if raw is REGEX_LITERAL(_) =>
+    Some((raw, _, _)) if raw is (REGEX_LITERAL(_) | BYTES_REGEX_LITERAL(_)) =>
       if state.consume_any() is Some(token) {
         let children : Array[(String?, CstNode)] = [(Some("token"), token)]
         if lex_literal_node_from_token(raw, token.loc, token.source_span)

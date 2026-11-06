@@ -52,6 +52,7 @@ pub(all) enum Token {
   MULTILINE_INTERP(Array[InterpElem])
   INTERP(Array[InterpElem])
   BYTES_INTERP(Array[InterpElem])
+  BYTES_REGEX_LITERAL(String)
   REGEX_LITERAL(String)
   REGEX_INTERP(Array[InterpElem])
   ATTRIBUTE((String, String?, String))
@@ -192,6 +193,7 @@ pub(all) enum TokenKind {
   TK_MULTILINE_INTERP
   TK_INTERP
   TK_BYTES_INTERP
+  TK_BYTES_REGEX_LITERAL
   TK_REGEX_LITERAL
   TK_REGEX_INTERP
   TK_ATTRIBUTE

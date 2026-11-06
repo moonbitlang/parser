@@ -1818,6 +1818,18 @@ fn State::parse_range_pattern(self : Self) -> @syntax.Pattern {
       let loc = self.loc_start_with(spos)
       Range(lhs~, rhs~, kind=Exclusive, loc~)
     }
+    RANGE_INCLUSIVE_REV => {
+      self.skip()
+      let rhs = self.parse_simple_pattern()
+      let loc = self.loc_start_with(spos)
+      Range(lhs~, rhs~, kind=InclusiveReverse, loc~)
+    }
+    RANGE_EXCLUSIVE_REV => {
+      self.skip()
+      let rhs = self.parse_simple_pattern()
+      let loc = self.loc_start_with(spos)
+      Range(lhs~, rhs~, kind=ExclusiveReverse, loc~)
+    }
     _ => lhs
   }
 }
@@ -2243,6 +2255,8 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             }
             BYTES(x) => parse_map_elem_pat(Bytes(x))
             STRING(x) => parse_map_elem_pat(String(x))
+            REGEX_LITERAL(x) => parse_map_elem_pat(Regex(x))
+            BYTES_REGEX_LITERAL(x) => parse_map_elem_pat(BytesRegex(x))
             LIDENT(_) | EXTEND => {
               if kind is Unknown {
                 kind = Record
@@ -3914,6 +3928,11 @@ fn State::parse_regex_atom_pattern(self : Self) -> @syntax.RegexPattern {
       self.skip()
       Literal(lit~, recovered_=false, loc~)
     }
+    BYTES_REGEX_LITERAL(lit) => {
+      let loc = self.peek_location()
+      self.skip()
+      BytesLiteral(lit~, loc~)
+    }
     STRING(lit) => {
       let loc = self.peek_location()
       self.report_unexpected(self.peek_token(), [TK_REGEX_LITERAL], loc)
@@ -4669,6 +4688,11 @@ fn State::parse_simple_expr(
       self.expect_token(TK_REGEX_LITERAL)
       Constant(c=Regex(x), loc~)
     }
+    BYTES_REGEX_LITERAL(x) => {
+      let loc = self.peek_location()
+      self.expect_token(TK_BYTES_REGEX_LITERAL)
+      Constant(c=BytesRegex(x), loc~)
+    }
     BYTES(x) => {
       let loc = self.peek_location()
       self.expect_token(TK_BYTES)
@@ -4793,7 +4817,8 @@ fn State::parse_simple_expr(
         | MINUS
         | BYTES(_)
         | STRING(_)
-        | REGEX_LITERAL(_) if self.peek_token(nth=2) is COLON =>
+        | REGEX_LITERAL(_)
+        | BYTES_REGEX_LITERAL(_) if self.peek_token(nth=2) is COLON =>
           self.parse_map_expr()
         _ => {
           let expr = self.parse_block_expr()
@@ -5206,6 +5231,7 @@ fn State::parse_map_expr(self : Self) -> @syntax.Expr {
       BYTES(x) => parse_map_expr_elem(Bytes(x))
       STRING(x) => parse_map_expr_elem(String(x))
       REGEX_LITERAL(x) => parse_map_expr_elem(Regex(x))
+      BYTES_REGEX_LITERAL(x) => parse_map_expr_elem(BytesRegex(x))
       other => {
         let other_loc = state.peek_location()
         state.report_unexpected(other, first_map_pattern_key, other_loc)

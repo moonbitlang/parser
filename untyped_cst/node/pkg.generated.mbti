@@ -128,6 +128,7 @@ pub fn CstNode::constant_big_int(value~ : String, loc~ : @basic.Location, source
 pub fn CstNode::constant_bool(value~ : Bool, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::constant_byte(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::constant_bytes(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
+pub fn CstNode::constant_bytes_regex(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::constant_char(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::constant_double(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::constant_float(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
@@ -279,6 +280,7 @@ pub fn CstNode::interp_segment_source(loc~ : @basic.Location, source_span~ : (In
 pub fn CstNode::language_value(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::leaf(payload~ : NodePayload, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::leaf_payload(Self) -> NodePayload?
+pub fn CstNode::lex_literal_bytes_regex(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::lex_literal_regex(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::lex_literal_string(value~ : String, loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::lex_pattern_regex_interp(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
@@ -377,7 +379,9 @@ pub fn CstNode::pattern_with(loc~ : @basic.Location, source_span~ : (Int32, Int3
 pub fn CstNode::quantifier_kind_exists(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::quantifier_kind_forall(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::range_kind_exclusive(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
+pub fn CstNode::range_kind_exclusive_reverse(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::range_kind_inclusive(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
+pub fn CstNode::range_kind_inclusive_reverse(loc~ : @basic.Location, source_span~ : (Int32, Int32)) -> Self
 pub fn CstNode::regex_pattern_alias(loc~ : @basic.Location, source_span~ : (Int32, Int32), pattern~ : Self, kw~ : Self, name~ : Self, lex_scan_case_pattern? : Self) -> Self
 pub fn CstNode::regex_pattern_alternation(loc~ : @basic.Location, source_span~ : (Int32, Int32), lhs~ : Self, op~ : Self, rhs~ : Self) -> Self
 pub fn CstNode::regex_pattern_literal(loc~ : @basic.Location, source_span~ : (Int32, Int32), error? : Self, token? : Self, lex_literal? : Self, lex_scan_case_pattern? : Self) -> Self
@@ -783,6 +787,7 @@ pub enum NodeKind {
   Constant_Double
   Constant_String
   Constant_Regex
+  Constant_BytesRegex
   Constant_BigInt
   Operator_Infix
   Operator_Augmented
@@ -803,6 +808,7 @@ pub enum NodeKind {
   MultilineStringElement_Interp
   LexLiteral_String
   LexLiteral_Regex
+  LexLiteral_BytesRegex
   LexScanCasePattern_Pattern
   LexScanCasePattern_Binder
   LexScanCasePattern_Wildcard
@@ -820,7 +826,9 @@ pub enum NodeKind {
   Visibility_Pub
   Visibility_Priv
   RangeKind_Inclusive
+  RangeKind_InclusiveReverse
   RangeKind_Exclusive
+  RangeKind_ExclusiveReverse
   HoleKind_Incomplete
   HoleKind_Todo
   FnKind_Lambda

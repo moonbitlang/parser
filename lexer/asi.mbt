@@ -21,6 +21,7 @@ fn can_occur_before_semicolon(token : Token) -> Bool {
     | INTERP(_)
     | CHAR(_)
     | REGEX_LITERAL(_)
+    | BYTES_REGEX_LITERAL(_)
     | REGEX_INTERP(_)
     | RBRACE
     | RPAREN
@@ -158,6 +159,7 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
     | INTERP(_)
     | CHAR(_)
     | REGEX_LITERAL(_)
+    | BYTES_REGEX_LITERAL(_)
     | REGEX_INTERP(_)
     | LBRACE
     | LPAREN

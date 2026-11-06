@@ -19,6 +19,8 @@ fn lower_constant_from_node(node : CstNode) -> @syntax.Constant? {
     Constant_Double => Some(Double(constant.string_payload().unwrap_or("")))
     Constant_String => Some(String(constant.string_payload().unwrap_or("")))
     Constant_Regex => Some(Regex(constant.string_payload().unwrap_or("")))
+    Constant_BytesRegex =>
+      Some(BytesRegex(constant.string_payload().unwrap_or("")))
     Constant_BigInt => Some(BigInt(constant.string_payload().unwrap_or("")))
     _ => None
   }
