@@ -9,6 +9,8 @@ import {
 // Values
 pub fn format(String, block_line? : Bool) -> String
 
+pub fn format_mbtx(String, block_line? : Bool) -> String
+
 pub fn impls_to_string(@list.List[@syntax.Impl]) -> String
 
 // Errors

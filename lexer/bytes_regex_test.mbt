@@ -31,3 +31,23 @@ test "unterminated byte regex reports once and lexing continues" {
     result.tokens.any(triple => triple.0 is INT("1") && triple.1.lnum == 4),
   )
 }
+
+///|
+test "lexing from a nonzero position preserves subsequent line columns" {
+  for newline in ["\n", "\r\n"] {
+    let result = @lexer.tokens_from_string(
+      "let first = \"😀\"" + newline + "let second = 1",
+      name="offset.mbtx",
+      start_pos={ fname: "offset.mbtx", lnum: 7, bol: 40, cnum: 40, },
+      comment=false,
+    )
+    assert_eq(result.errors.length(), 0)
+    guard result.tokens.filter(triple => triple.0 is LIDENT("second")).get(0)
+      is Some((_, start, _)) else {
+      fail("missing second declaration")
+    }
+    assert_eq(start.lnum, 8)
+    assert_eq(start.column(), 5)
+    assert_eq(start.cnum, 40 + 15 + newline.length() + 4)
+  }
+}

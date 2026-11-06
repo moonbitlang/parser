@@ -608,8 +608,14 @@ fn parse_string(
   name~ : String = "",
   keep_comments~ : Bool = false,
   allow_reserved~ : Bool = false,
+  start_pos~ : Position = { fname: "", lnum: 1, bol: 0, cnum: 0, },
 ) -> ParseResult {
-  let lexed = @lexer.tokens_from_string(source, comment=keep_comments, name~)
+  let lexed = @lexer.tokens_from_string(
+    source,
+    comment=keep_comments,
+    name~,
+    start_pos~,
+  )
   let (ast, errors) = moon_pkg_of_tokens(lexed.tokens)
   let diagnostics = Diagnostics::{ errors: [], warnings: [], }
   for (start, end, error) in lexed.errors {

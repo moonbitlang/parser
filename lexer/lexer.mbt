@@ -109,7 +109,7 @@ fn lex_tokens(
         let start_pos = env.calc_offset(input, base~)
         let end_pos = env.calc_offset(rest, base~)
         env.add_token_with_loc(NEWLINE, start=start_pos, end=end_pos)
-        env.current_bol = end_pos
+        env.current_bol = env.start_cnum + end_pos
         env.current_line += 1
         continue rest
       }
