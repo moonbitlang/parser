@@ -181,14 +181,27 @@ property -> Prop:
   | expr                   { Expr($1) }
 
 expr -> Expr:
-  | name=lident_string                                  { Ident({qual: None, name}) }
-  | name=UIDENT                                         { Ident({qual: None, name}) }
-  | qual=lident_string name=DOT_LIDENT                  { Ident({qual: Some(qual), name}) }
-  | name=lident_string props=properties                 { Apply({qual: None, name}, props) }
-  | qual=lident_string name=DOT_LIDENT props=properties { Apply({qual: Some(qual), name}, props) }
-  | STRING                                              { String($1) }
-  | TRUE                                                { Bool(true) }
-  | FALSE                                               { Bool(false) }
+  | id=payload_id { Ident(id) }
+  | id=payload_id props=properties { Apply(id, props) }
+  | "[" elems=array_elements "]" { Array(elems) }
+  | STRING { String($1) }
+  | TRUE { Bool(true) }
+  | FALSE { Bool(false) }
+
+payload_id -> Id:
+  | name=lident_string { {qual: None, name} }
+  | name=UIDENT { {qual: None, name} }
+  | qual=lident_string name=DOT_LIDENT { {qual: Some(qual), name} }
+  | qual=PACKAGE_NAME name=DOT_LIDENT { {qual: Some(qual), name} }
+  | qual=PACKAGE_NAME name=DOT_UIDENT { {qual: Some(qual), name} }
+
+array_elements -> List[Expr]:
+  | { List([]) }
+  | elems=non_empty_array_elements { elems }
+
+non_empty_array_elements -> List[Expr]:
+  | expr { List([$1]) }
+  | x=expr "," xs=non_empty_array_elements { xs.prepend(x) }
 
 properties -> List[Prop]:
   | "(" ")"                      { List([]) }

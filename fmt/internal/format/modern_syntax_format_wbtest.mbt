@@ -54,6 +54,24 @@ test "byte regex and descending ranges format and reparse as a fixed point" {
 }
 
 ///|
+test "attribute names and qualified payload arrays format distinctly" {
+  let source =
+    #|#custom.name(@pkg.Type, Upper([[],[@pkg.name]]))
+    #|#derive(@debug.Debug(ignore=[T,@pkg.U]))
+    #|struct Box[T]{value:T}
+  let result = assert_modern_syntax_format_pipeline(source)
+  assert_true(result.contains("#custom.name(@pkg.Type"))
+  assert_true(result.contains("Upper([[], [@pkg.name]])"))
+  assert_true(result.contains("#derive(@debug.Debug(ignore=[T, @pkg.U]))"))
+  let (impls, reports, _) = parse(result)
+  assert_eq(reports.length(), 0)
+  guard impls.head() is Some(TopTypeDef({ attrs, .. })) else {
+    fail("missing attributed type")
+  }
+  assert_true(attrs.all(attr => attr.parsed is Some(_)))
+}
+
+///|
 test "inclusive range patterns normalize to ..<=" {
   for op in ["..=", "..<="] {
     let cases = [
