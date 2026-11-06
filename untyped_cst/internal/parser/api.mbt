@@ -55,6 +55,32 @@ pub fn parse_structure(
 }
 
 ///|
+/// Parse a body slice while using the original file for CST source spans.
+pub fn parse_structure_at(
+  source : String,
+  start_offset~ : Int32,
+  start_pos~ : @basic.Position,
+  name~ : String = "",
+  enable_metavar~ : Bool = false,
+) -> ParseOutput {
+  let lex = @lexer.tokens_from_string(
+    source[start_offset:],
+    name~,
+    start_pos~,
+    enable_metavar~,
+    comment=true,
+  )
+  parse_with_state(
+    lex.tokens,
+    source,
+    reports_from_lex_errors(lex.errors),
+    lex.docstrings,
+    enable_metavar,
+    parse_source_file,
+  )
+}
+
+///|
 pub fn parse_expression(
   source : String,
   name~ : String = "",

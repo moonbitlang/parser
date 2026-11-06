@@ -13,6 +13,8 @@ pub fn parse_expression(String, name? : String, enable_metavar? : Bool) -> Parse
 
 pub fn parse_structure(String, name? : String, enable_metavar? : Bool) -> ParseOutput
 
+pub fn parse_structure_at(String, start_offset~ : Int32, start_pos~ : @basic.Position, name? : String, enable_metavar? : Bool) -> ParseOutput
+
 // Errors
 
 // Types and methods

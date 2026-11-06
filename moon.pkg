@@ -1,4 +1,6 @@
 import {
+  "moonbitlang/parser/frontmatter",
+  "moonbitlang/moon_config",
   "moonbitlang/parser/syntax",
   "moonbitlang/parser/handrolled_parser",
   "moonbitlang/lexer",

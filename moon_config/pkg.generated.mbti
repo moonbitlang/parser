@@ -18,7 +18,7 @@ pub fn find_statements(Ast, String) -> Ast
 
 pub fn parse_moon_mod(name? : String, keep_comments? : Bool, validate? : Bool, String) -> ParseResult
 
-pub fn parse_moon_pkg(name? : String, keep_comments? : Bool, validate? : Bool, String) -> ParseResult
+pub fn parse_moon_pkg(name? : String, start_pos? : @basic.Position, keep_comments? : Bool, validate? : Bool, String) -> ParseResult
 
 pub fn parse_moon_work(name? : String, keep_comments? : Bool, validate? : Bool, String) -> ParseResult
 
