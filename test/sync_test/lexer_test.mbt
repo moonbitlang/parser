@@ -486,6 +486,11 @@ test "lexing parse_test_gitlab_issue_1612" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_derive_to_json" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_coroutine_cancel" (t : @test.Test) {
   lexer_test(t)
 }
@@ -612,6 +617,11 @@ test "lexing pipeline_test_arrow_fn" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_js_break_mismatch" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_bytes_regex_value" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -938,11 +948,6 @@ test "lexing parse_test_error_recovery_record_creation" (t : @test.Test) {
 }
 
 ///|
-test "lexing pipeline_test_derive_to_json" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
 test "lexing pipeline_test_generator" (t : @test.Test) {
   lexer_test(t)
 }
@@ -1224,11 +1229,6 @@ test "lexing pipeline_test_label" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_match_case_action_unexpected_start" (t : @test.Test) {
-  lexer_test(t)
-}
-
-///|
-test "lexing pipeline_test_derive_from_json" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -3207,6 +3207,11 @@ test "lexing pipeline_test_newtype_circle_alias" (t : @test.Test) {
 }
 
 ///|
+test "lexing parse_test_bytes_regex_literal_interp" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing parse_test_pattern_guard" (t : @test.Test) {
   lexer_test(t)
 }
@@ -3618,6 +3623,11 @@ test "lexing pipeline_test_extenum" (t : @test.Test) {
 
 ///|
 test "lexing pipeline_test_test_lift_data" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing parse_test_bytes_regex_literal" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -4297,6 +4307,11 @@ test "lexing pipeline_test_valtype_string_option_plus_uint64" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_bytes_regex_automaton" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_capture_mutual_recursion" (t : @test.Test) {
   lexer_test(t)
 }
@@ -4308,6 +4323,11 @@ test "lexing pipeline_test_match_bytesview2" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_invalid_expr_in_condition" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing format_test_attribute2" (t : @test.Test) {
   lexer_test(t)
 }
 
@@ -5067,6 +5087,11 @@ test "lexing parse_test_impl" (t : @test.Test) {
 }
 
 ///|
+test "lexing pipeline_test_bytes_regex_match" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
 test "lexing pipeline_test_else2" (t : @test.Test) {
   lexer_test(t)
 }
@@ -5188,6 +5213,11 @@ test "lexing pipeline_test_switch_wrap_ok" (t : @test.Test) {
 
 ///|
 test "lexing parse_test_type_decl_underscore_param" (t : @test.Test) {
+  lexer_test(t)
+}
+
+///|
+test "lexing pipeline_test_derive_from_json" (t : @test.Test) {
   lexer_test(t)
 }
 

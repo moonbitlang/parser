@@ -2,6 +2,62 @@
 using @mbti_ast {type Mbti, type Sig}
 
 ///|
+test "qualified method receivers retain name object flag and location" {
+  let source =
+    #|package "compiler/mbti_parsing_test/methods"
+    #|pub using @builtin {type Json}
+    #|pub fn @builtin.Json::as_array(Self) -> Array[Self]?
+    #|pub fn[T] @foreign.Box::identity(Self[T]) -> Self[T]
+    #|pub fn &@foreign.Show::render(Self) -> String
+    #|pub fn @moonbitlang/core/builtin.Json::as_bool(Self) -> Bool?
+    #|pub fn Json::as_array(Self) -> Array[Self]?
+    #|pub fn &Show::render(Self) -> String
+  let mbti = parse_ok("receivers.mbti", source)
+  let receivers = mbti.sigs
+    .to_array()
+    .filter_map(fn(sig) {
+      match sig.0 {
+        Func({ type_name: Some(receiver), .. }) => Some(receiver)
+        _ => None
+      }
+    })
+  assert_eq(receivers.length(), 6)
+  for
+    i, (pkg, name, object_, line, start, end) in [
+      (Some("builtin"), "Json", false, 3, 8, 21),
+      (Some("foreign"), "Box", false, 4, 11, 23),
+      (Some("foreign"), "Show", true, 5, 9, 22),
+      (Some("moonbitlang/core/builtin"), "Json", false, 6, 8, 38),
+      (None, "Json", false, 7, 8, 12),
+      (None, "Show", true, 8, 9, 13),
+    ] {
+    let receiver = receivers[i]
+    let (actual_pkg, actual_name) = match receiver.name {
+      Ident(name~) => (None, name)
+      Dot(pkg~, id~) => (Some(pkg), id)
+    }
+    assert_eq(actual_pkg, pkg)
+    assert_eq(actual_name, name)
+    assert_eq(receiver.is_object, object_)
+    assert_eq(receiver.loc.start.lnum, line)
+    assert_eq(receiver.loc.start.column(), start)
+    assert_eq(receiver.loc.end.column(), end)
+  }
+}
+
+///|
+test "mbti accepts text and byte regex constants" {
+  guard first_sig("regex.mbti", "pub const R : Regex = re\"[a-z]+\"")
+    is Const({ value: Regex("[a-z]+"), .. }) else {
+    fail("text regex missing")
+  }
+  guard first_sig("bytes_regex.mbti", "pub const R : BytesRegex = reb\"\\xff\"")
+    is Const({ value: BytesRegex("\\xff"), .. }) else {
+    fail("byte regex missing")
+  }
+}
+
+///|
 let regression_sample_header =
   #|package "sample";
   #|

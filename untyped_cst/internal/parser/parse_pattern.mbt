@@ -786,7 +786,8 @@ fn parse_pattern_atom(
       )
       pat
     }
-    Some((found, start, end)) if found is REGEX_LITERAL(_) => {
+    Some((found, start, end)) if found
+      is (REGEX_LITERAL(_) | BYTES_REGEX_LITERAL(_)) => {
       let pat = parse_literal_pattern(state, stop_kinds)
       state.report_expected_tokens_at(
         found,
@@ -842,6 +843,7 @@ fn brace_starts_map_pattern(state : ParserState) -> Bool {
       Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
       Some((STRING(_), _, _))
       | Some((BYTES(_), _, _))
+      | Some((BYTES_REGEX_LITERAL(_), _, _))
       | Some((REGEX_LITERAL(_), _, _))
       | Some((INT(_), _, _))
       | Some((BYTE(_), _, _))

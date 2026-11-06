@@ -1,15 +1,4 @@
 ///|
-pub fn normalize(json : String) -> String {
-  let json = @json.parse(json) catch {
-    err => {
-      println(err)
-      abort(err.to_string())
-    }
-  }
-  json.stringify(indent=2).trim_end(char_set=" ").to_owned()
-}
-
-///|
 pub fn gen_test_for_parser(name : String) -> String {
   (
     $|///|
@@ -57,13 +46,17 @@ fn generate(mode~ : Mode) -> Unit {
         })
       Lexer =>
         @fs.read_dir(snapshot_path).filter(name => {
-          name.has_suffix(".tokens.json")
+          name.has_suffix(".mbt.tokens.json") ||
+          name.has_suffix(".mbtx.tokens.json")
         })
     }
     tests.each(name => {
-      let target = snapshot_path + "/" + name
-      let content = @fs.read_file_to_string(target) |> normalize
-      @fs.write_string_to_file(target, content)
+      let stem = name.split(".").head().unwrap().to_owned()
+      let mbt = @fs.path_exists(snapshot_path + "/" + stem + ".mbt")
+      let mbtx = @fs.path_exists(snapshot_path + "/" + stem + ".mbtx")
+      if mbt == mbtx {
+        abort("expected exactly one .mbt or .mbtx source for " + stem)
+      }
     })
     let buf = StringBuilder()
     buf.write_string(

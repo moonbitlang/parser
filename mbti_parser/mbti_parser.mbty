@@ -13,6 +13,7 @@
 %token<InterpLiteral> MULTILINE_INTERP
 %token<InterpLiteral> INTERP
 %token<InterpLiteral> BYTES_INTERP
+%token<String> BYTES_REGEX_LITERAL
 %token<String> REGEX_LITERAL
 %token<InterpLiteral> REGEX_INTERP
 %token<(String, Option[String], String)> ATTRIBUTE
@@ -186,11 +187,11 @@ value_sig -> ValueSig
   ;
 
 method_self_type_coloncolon -> MethodSelfType
- : UIDENT "::" {
-  { name : $1, is_object : false, loc : mk_loc($loc($1)) }
+ : qualified_uident "::" {
+  { name : $1.name, is_object : false, loc : $1.loc }
  }
- | "&" UIDENT "::" {
-  { name : $2, is_object : true, loc : mk_loc($loc($2)) }
+ | "&" qualified_uident "::" {
+  { name : $2.name, is_object : true, loc : $2.loc }
  }
  ;
 
@@ -445,6 +446,8 @@ constant -> Constant
   | DOUBLE { Double($1) }
   | "-" DOUBLE { Double("-" + $2) }
   | STRING { String($1) }
+  | REGEX_LITERAL { Regex($1) }
+  | BYTES_REGEX_LITERAL { BytesRegex($1) }
   ;
 
 %inline vis -> Visibility

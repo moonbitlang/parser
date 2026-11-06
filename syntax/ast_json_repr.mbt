@@ -1224,6 +1224,8 @@ fn Constant::json_repr(self : Constant, loc : Location) -> Json {
       tagged_node1("Constant::String", loc, string_literal_json_repr(s))
     Regex(s) =>
       tagged_node1("Constant::Regex", loc, string_literal_json_repr(s))
+    BytesRegex(s) =>
+      tagged_node1("Constant::BytesRegex", loc, string_literal_json_repr(s))
     BigInt(s) => tagged_node1("Constant::BigInt", loc, Json::string(s))
   }
 }
@@ -1490,6 +1492,8 @@ fn RangeKind::json_repr(self : RangeKind, loc : Location) -> Json {
     Inclusive | InclusiveMissingEqual =>
       tagged_node0("RangeKind::Inclusive", loc)
     Exclusive => tagged_node0("RangeKind::Exclusive", loc)
+    InclusiveReverse => tagged_node0("RangeKind::InclusiveReverse", loc)
+    ExclusiveReverse => tagged_node0("RangeKind::ExclusiveReverse", loc)
   }
 }
 
@@ -1638,6 +1642,10 @@ fn RegexPattern::json_repr(self : RegexPattern) -> Json {
   match self {
     Literal(lit~, recovered_=_, loc~) =>
       tagged_node("RegexPattern::Literal", loc, { "lit": Json::string(lit) })
+    BytesLiteral(lit~, loc~) =>
+      tagged_node("RegexPattern::BytesLiteral", loc, {
+        "lit": Json::string(lit),
+      })
     Reference(lid~, loc~) =>
       tagged_node("RegexPattern::Reference", loc, { "lid": lid.json_repr(loc) })
     Sequence(pat1~, pat2~, loc~) =>

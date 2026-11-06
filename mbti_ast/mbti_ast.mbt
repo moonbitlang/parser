@@ -29,7 +29,7 @@ pub(all) enum TypeParamNoConstraints {
 ///|
 #derive(Debug)
 pub(all) struct MethodSelfType {
-  name : String
+  name : QualifiedIdent
   is_object : Bool
   loc : Location
 }

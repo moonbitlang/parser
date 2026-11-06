@@ -4649,6 +4649,10 @@ fn[T : IterVisitor] iter_regex_pattern(
   pat : RegexPattern,
 ) -> Unit {
   match pat {
+    BytesLiteral(lit~, loc~) => {
+      ignore(lit)
+      ignore(loc)
+    }
     Literal(lit~, recovered_~, loc~) => {
       ignore(lit)
       ignore(recovered_)

@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/frontmatter"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/moon_config",
+}
+
+// Values
+pub fn split(String, name? : String) -> Split
+
+// Errors
+
+// Types and methods
+#derive(@debug.Debug)
+pub struct Split {
+  header : (Int32, Int32)?
+  header_start : @basic.Position
+  body_offset : Int32
+  body_start : @basic.Position
+}
+pub fn Split::parse_header(Self, String) -> @moon_config.ParseResult?
+
+// Type aliases
+
+// Traits

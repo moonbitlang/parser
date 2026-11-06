@@ -1,4 +1,5 @@
 import {
+  "moonbitlang/parser/frontmatter",
   "moonbitlang/parser",
   "moonbitlang/lexer/basic",
   "moonbitlang/lexer",

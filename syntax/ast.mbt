@@ -3,6 +3,8 @@
 pub(all) enum RangeKind {
   Inclusive
   Exclusive
+  InclusiveReverse
+  ExclusiveReverse
   InclusiveMissingEqual
 }
 
@@ -29,6 +31,7 @@ pub(all) enum Constant {
   Double(String)
   String(StringLiteral)
   Regex(StringLiteral)
+  BytesRegex(StringLiteral)
   BigInt(String)
 }
 
@@ -398,6 +401,7 @@ pub(all) struct LexScanCase {
 #derive(Debug)
 pub(all) enum RegexPattern {
   Literal(lit~ : String, recovered_~ : Bool, loc~ : Location)
+  BytesLiteral(lit~ : String, loc~ : Location)
   Reference(lid~ : LongIdent, loc~ : Location)
   Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)
   Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : Location)

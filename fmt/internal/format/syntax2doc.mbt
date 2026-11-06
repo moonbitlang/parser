@@ -1429,6 +1429,7 @@ fn Fmt::constant(fmt : Fmt, constant : @syntax.Constant) -> Doc {
     Bool(b) => @pp.pretty(b)
     BigInt(s) => text(s) + char('N')
     Regex(s) => text("re") + double_quoted(text(s))
+    BytesRegex(s) => text("reb") + double_quoted(text(s))
     UInt64(s) => text(s) + char('U') + char('L')
     UInt(s) => text(s) + char('U')
     Int64(s) => text(s) + char('L')
@@ -1744,6 +1745,8 @@ fn Fmt::pattern(fmt : Self, pat : @syntax.Pattern) -> Doc {
         match kind {
           Inclusive | InclusiveMissingEqual => "..<="
           Exclusive => "..<"
+          InclusiveReverse => ">=.."
+          ExclusiveReverse => ">.."
         },
       )
       let rhs = fmt.pattern(rhs)
@@ -2257,14 +2260,14 @@ fn Fmt::loop_label(
 fn Fmt::regex_pattern(fmt : Self, pat : @syntax.RegexPattern) -> Doc {
   fn need_parens_in_alias(pat : @syntax.RegexPattern) -> Bool {
     match pat {
-      Literal(_) | Reference(_) => false
+      Literal(_) | BytesLiteral(_) | Reference(_) => false
       Sequence(_) | Alternation(_) | Alias(_) => true
     }
   }
 
   fn need_parens_in_sequence(pat : @syntax.RegexPattern) -> Bool {
     match pat {
-      Literal(_) | Reference(_) | Sequence(_) => false
+      Literal(_) | BytesLiteral(_) | Reference(_) | Sequence(_) => false
       Alternation(_) | Alias(_) => true
     }
   }
@@ -2272,7 +2275,11 @@ fn Fmt::regex_pattern(fmt : Self, pat : @syntax.RegexPattern) -> Doc {
   fn need_parens_in_alternation(pat : @syntax.RegexPattern) -> Bool {
     match pat {
       Alias(_) => true
-      Literal(_) | Reference(_) | Sequence(_) | Alternation(_) => false
+      Literal(_)
+      | BytesLiteral(_)
+      | Reference(_)
+      | Sequence(_)
+      | Alternation(_) => false
     }
   }
 
@@ -2290,6 +2297,7 @@ fn Fmt::regex_pattern(fmt : Self, pat : @syntax.RegexPattern) -> Doc {
 
   match pat {
     Literal(lit~, recovered_=_, loc=_) => text("re") + double_quoted(text(lit))
+    BytesLiteral(lit~, loc=_) => text("reb") + double_quoted(text(lit))
     Reference(lid~, loc=_) => longident(lid)
     Sequence(pat1~, pat2~, loc=_) =>
       inner(pat1, need_parens_in_sequence) +
@@ -2948,7 +2956,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let pat_doc = fmt.regex_pattern(pat)
       let pat = if bindings.is_empty() {
         match pat {
-          Literal(_) | Reference(_) => pat_doc
+          Literal(_) | BytesLiteral(_) | Reference(_) => pat_doc
           Sequence(_) | Alternation(_) | Alias(_) =>
             group(fmt.commented_parens(fn() { fmt.regex_pattern(pat) }))
         }
@@ -2979,8 +2987,8 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let doc = errdefer_ + expr + body
       Normal(doc)
     }
-    LetFn(name=_, func~, body~, loc=_) => { //TODO: fixme
-      let func = fmt.func(func).to_doc()
+    LetFn(name~, func~, body~, loc=_) => {
+      let func = fmt.func(func, binder=name).to_doc()
       let body = hardline + fmt.compose(body, Stmt)
       Normal(func + body)
     }
@@ -3401,15 +3409,15 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       body~,
       catch_=catch_cases,
       try_else~,
-      has_try=_,
+      has_try~,
       try_loc=_,
       catch_loc=_,
       else_loc=_,
       loc=_
     ) => {
-      let try_ = text("try")
-      let body = space + fmt.expr_block(body)
-      let catch_ = space + text("catch") + fmt.case_block(catch_cases)
+      let try_ = if has_try { text("try") + space } else { empty }
+      let body = fmt.compose(body, Pipeline)
+      let catch_ = space + text("catch") + space + fmt.case_block(catch_cases)
       let noraise_ = if try_else is Some(cases) {
         space + text("noraise") + space + fmt.case_block(cases)
       } else {

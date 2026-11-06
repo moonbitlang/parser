@@ -335,7 +335,7 @@ fn parse_apply(state : State) -> Expr {
 ///|
 fn is_statement_start_token(token : Token) -> Bool {
   match token {
-    IMPORT | LIDENT(_) => true
+    IMPORT | LIDENT(_) | ATTRIBUTE(_) => true
     _ => false
   }
 }
@@ -441,7 +441,10 @@ fn parse_import_kind_string(state : State) -> ImportKind {
 }
 
 ///|
-fn parse_import_statement(state : State) -> Statement {
+fn parse_import_statement(
+  state : State,
+  conditions : Array[ImportCondition],
+) -> Statement {
   let keyword_loc = state.peek_location()
   ignore(state.consume_if(TK_IMPORT))
   if state.peek_token() is STRING(_) {
@@ -469,9 +472,16 @@ fn parse_import_statement(state : State) -> Statement {
   Import(
     items~,
     kind~,
+    conditions~,
     keyword_loc~,
     list_loc~,
-    loc=state.loc_start_with(keyword_loc.start),
+    loc=state.loc_start_with(
+      if conditions.get(0) is Some(condition) {
+        condition.loc.start
+      } else {
+        keyword_loc.start
+      },
+    ),
   )
 }
 
@@ -515,8 +525,24 @@ fn parse_expr(state : State) -> Expr {
 
 ///|
 fn parse_statement(state : State) -> Statement {
+  let conditions : Array[ImportCondition] = []
+  while state.peek_token() is ATTRIBUTE(("cfg", None, payload)) {
+    let loc = state.peek_location()
+    conditions.push({
+      raw: "#cfg" + payload,
+      parsed: parse_condition_payload(payload),
+      loc,
+    })
+    state.skip()
+  }
+  if !conditions.is_empty() && !(state.peek_token() is IMPORT) {
+    state.diagnostics.push({
+      loc: conditions[0].loc,
+      msg: "#cfg is currently only supported on imports.",
+    })
+  }
   match state.peek_token() {
-    IMPORT => parse_import_statement(state)
+    IMPORT => parse_import_statement(state, conditions)
     LIDENT(_) if state.peek_kind(nth=1) == TK_EQUAL =>
       Assign(parse_assign(state))
     LIDENT(_) => Expr(parse_apply(state))
@@ -582,8 +608,14 @@ fn parse_string(
   name~ : String = "",
   keep_comments~ : Bool = false,
   allow_reserved~ : Bool = false,
+  start_pos~ : Position = { fname: "", lnum: 1, bol: 0, cnum: 0, },
 ) -> ParseResult {
-  let lexed = @lexer.tokens_from_string(source, comment=keep_comments, name~)
+  let lexed = @lexer.tokens_from_string(
+    source,
+    comment=keep_comments,
+    name~,
+    start_pos~,
+  )
   let (ast, errors) = moon_pkg_of_tokens(lexed.tokens)
   let diagnostics = Diagnostics::{ errors: [], warnings: [], }
   for (start, end, error) in lexed.errors {

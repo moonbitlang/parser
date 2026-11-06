@@ -65,7 +65,7 @@ pub suberror MyErr2 {
  }
 
 #coverage.skip("string")
-#custom1.name(custom1.name, key=custom1.name2, "reason")
+#custom1.name(@custom1.name, key=@custom1.name2, "reason")
  pub impl MyTrait for MyStruct with f1(x) {
    ...
  }

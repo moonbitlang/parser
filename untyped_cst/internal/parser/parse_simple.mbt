@@ -430,12 +430,12 @@ fn parse_expr_simple(state : ParserState, boundary : ExprBoundary) -> CstNode {
       }
     Some((STRING(_), _, _))
     | Some((BYTES(_), _, _))
+    | Some((BYTES_REGEX_LITERAL(_), _, _))
     | Some((REGEX_LITERAL(_), _, _))
     | Some((INTERP(_), _, _))
     | Some((BYTES_INTERP(_), _, _))
     | Some((MULTILINE_STRING(_), _, _))
     | Some((MULTILINE_INTERP(_), _, _)) => parse_string_literal_node(state)
-    Some((REGEX_INTERP(_), _, _)) => parse_regex_interp_lex_pattern_node(state)
     Some((TRUE, _, _))
     | Some((FALSE, _, _))
     | Some((CHAR(_), _, _))

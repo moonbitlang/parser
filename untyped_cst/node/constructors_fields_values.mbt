@@ -599,6 +599,15 @@ pub fn CstNode::constant_regex(
 }
 
 ///|
+pub fn CstNode::constant_bytes_regex(
+  value~ : String,
+  loc~ : Location,
+  source_span~ : (Int32, Int32),
+) -> CstNode {
+  node_with_payload(Constant_BytesRegex, loc, source_span, [], String(value))
+}
+
+///|
 pub fn CstNode::constant_big_int(
   value~ : String,
   loc~ : Location,
@@ -794,6 +803,15 @@ pub fn CstNode::lex_literal_regex(
 }
 
 ///|
+pub fn CstNode::lex_literal_bytes_regex(
+  value~ : String,
+  loc~ : Location,
+  source_span~ : (Int32, Int32),
+) -> CstNode {
+  node_with_payload(LexLiteral_BytesRegex, loc, source_span, [], String(value))
+}
+
+///|
 pub fn CstNode::lex_scan_case_pattern_pattern(
   loc~ : Location,
   source_span~ : (Int32, Int32),
@@ -949,12 +967,30 @@ pub fn CstNode::range_kind_inclusive(
 }
 
 ///|
+pub fn CstNode::range_kind_inclusive_reverse(
+  loc~ : Location,
+  source_span~ : (Int32, Int32),
+) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  node(RangeKind_InclusiveReverse, loc, source_span, children)
+}
+
+///|
 pub fn CstNode::range_kind_exclusive(
   loc~ : Location,
   source_span~ : (Int32, Int32),
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   node(RangeKind_Exclusive, loc, source_span, children)
+}
+
+///|
+pub fn CstNode::range_kind_exclusive_reverse(
+  loc~ : Location,
+  source_span~ : (Int32, Int32),
+) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  node(RangeKind_ExclusiveReverse, loc, source_span, children)
 }
 
 ///|
