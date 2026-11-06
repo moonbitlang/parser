@@ -61,7 +61,7 @@ pub(all) struct Mbti {
 
 #derive(@debug.Debug)
 pub(all) struct MethodSelfType {
-  name : String
+  name : @syntax.LongIdent
   is_object : Bool
   loc : @basic.Location
 }

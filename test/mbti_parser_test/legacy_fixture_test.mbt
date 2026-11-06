@@ -132,7 +132,7 @@ test "parse legacy mbti simple fixture" {
   guard sig_at(mbti, 4) is Func({ type_name: Some(type_name), type_params, .. }) else {
     fail("expected T::f to be a method")
   }
-  inspect(type_name.name, content="T")
+  debug_inspect(type_name.name, content="Ident(name=\"T\")")
   assert_eq(type_name.is_object, false)
   inspect(type_params.head().unwrap().name.name, content="A")
   guard sig_at(mbti, 5) is Func({ is_async: Some(_), .. }) else {
