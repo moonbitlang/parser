@@ -12,6 +12,7 @@ pub(all) enum Token {
   MULTILINE_INTERP(InterpLiteral)
   INTERP(InterpLiteral)
   BYTES_INTERP(InterpLiteral)
+  BYTES_REGEX_LITERAL(String)
   REGEX_LITERAL(String)
   REGEX_INTERP(InterpLiteral)
   ATTRIBUTE((String, String?, String))
@@ -155,6 +156,7 @@ pub fn Token::kind(self : Token) -> TokenKind {
     MULTILINE_INTERP(_) => TK_MULTILINE_INTERP
     INTERP(_) => TK_INTERP
     BYTES_INTERP(_) => TK_BYTES_INTERP
+    BYTES_REGEX_LITERAL(_) => TK_BYTES_REGEX_LITERAL
     REGEX_LITERAL(_) => TK_REGEX_LITERAL
     REGEX_INTERP(_) => TK_REGEX_INTERP
     ATTRIBUTE(_) => TK_ATTRIBUTE
@@ -294,6 +296,7 @@ pub(all) enum TokenKind {
   TK_MULTILINE_INTERP
   TK_INTERP
   TK_BYTES_INTERP
+  TK_BYTES_REGEX_LITERAL
   TK_REGEX_LITERAL
   TK_REGEX_INTERP
   TK_ATTRIBUTE
@@ -454,6 +457,7 @@ pub impl Show for TokenKind with fn output(self, logger) {
       TK_MULTILINE_INTERP => "MULTILINE_INTERP"
       TK_INTERP => "INTERP"
       TK_BYTES_INTERP => "BYTES_INTERP"
+      TK_BYTES_REGEX_LITERAL => "BYTES_REGEX_LITERAL"
       TK_REGEX_LITERAL => "REGEX_LITERAL"
       TK_REGEX_INTERP => "REGEX_INTERP"
       TK_ATTRIBUTE => "ATTRIBUTE"
@@ -599,6 +603,7 @@ pub impl Debug for TokenKind with fn to_repr(self) {
     TK_MULTILINE_INTERP => Repr("MULTILINE_INTERP")
     TK_INTERP => Repr("INTERP")
     TK_BYTES_INTERP => Repr("BYTES_INTERP")
+    TK_BYTES_REGEX_LITERAL => Repr("BYTES_REGEX_LITERAL")
     TK_REGEX_LITERAL => Repr("REGEX_LITERAL")
     TK_REGEX_INTERP => Repr("REGEX_INTERP")
     TK_ATTRIBUTE => Repr("ATTRIBUTE")

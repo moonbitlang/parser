@@ -337,6 +337,10 @@ fn constructor_kind_index(kind : @node.NodeKind) -> Int32 {
     Pattern_ConstrUnknown => 328
     StructConstructor_Declaration => 329
     Expr_PipeRecovery => 330
+    Constant_BytesRegex => 331
+    LexLiteral_BytesRegex => 332
+    RangeKind_InclusiveReverse => 333
+    RangeKind_ExclusiveReverse => 334
   }
 }
 
@@ -1068,7 +1072,19 @@ test "every NodeKind has one typed CstNode constructor" {
     @node.CstNode::struct_constructor_declaration(loc~, source_span=span, entries=[]),
     @node.CstNode::expr_pipe_recovery(loc~, source_span=span, entries=[]),
   ]
-  @test.assert_eq(nodes.length(), 331)
+  nodes.push(
+    @node.CstNode::constant_bytes_regex(value="x", loc~, source_span=span),
+  )
+  nodes.push(
+    @node.CstNode::lex_literal_bytes_regex(value="x", loc~, source_span=span),
+  )
+  nodes.push(
+    @node.CstNode::range_kind_inclusive_reverse(loc~, source_span=span),
+  )
+  nodes.push(
+    @node.CstNode::range_kind_exclusive_reverse(loc~, source_span=span),
+  )
+  @test.assert_eq(nodes.length(), 335)
   for i, node in nodes {
     @test.assert_eq(constructor_kind_index(node.kind), i)
   }

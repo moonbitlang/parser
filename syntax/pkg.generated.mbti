@@ -160,6 +160,7 @@ pub(all) enum Constant {
   Double(String)
   String(String)
   Regex(String)
+  BytesRegex(String)
   BigInt(String)
 }
 
@@ -558,12 +559,15 @@ pub(all) enum PredicateQuantifierKind {
 pub(all) enum RangeKind {
   Inclusive
   Exclusive
+  InclusiveReverse
+  ExclusiveReverse
   InclusiveMissingEqual
 }
 
 #derive(@debug.Debug)
 pub(all) enum RegexPattern {
   Literal(lit~ : String, recovered_~ : Bool, loc~ : @basic.Location)
+  BytesLiteral(lit~ : String, loc~ : @basic.Location)
   Reference(lid~ : LongIdent, loc~ : @basic.Location)
   Sequence(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)
   Alternation(pat1~ : RegexPattern, pat2~ : RegexPattern, loc~ : @basic.Location)

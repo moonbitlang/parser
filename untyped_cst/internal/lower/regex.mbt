@@ -156,6 +156,8 @@ fn lower_regex_literal_pattern(node : CstNode) -> @syntax.RegexPattern {
         recovered_=true,
         loc=node.loc,
       )
+    (Some(literal), _) if literal.kind is LexLiteral_BytesRegex =>
+      BytesLiteral(lit=literal.string_payload().unwrap_or(""), loc=node.loc)
     (Some(literal), _) =>
       Literal(
         lit=literal.string_payload().unwrap_or(""),
@@ -168,6 +170,8 @@ fn lower_regex_literal_pattern(node : CstNode) -> @syntax.RegexPattern {
         recovered_=true,
         loc=node.loc,
       )
+    (_, Some(constant)) if constant.kind is Constant_BytesRegex =>
+      BytesLiteral(lit=constant.string_payload().unwrap_or(""), loc=node.loc)
     (_, Some(constant)) if constant.kind is Constant_Regex =>
       Literal(
         lit=constant.string_payload().unwrap_or(""),

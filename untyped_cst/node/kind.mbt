@@ -447,6 +447,7 @@ pub enum NodeKind {
   Constant_String
   /// Corresponds to `@syntax.Constant::Regex`.
   Constant_Regex
+  Constant_BytesRegex
   /// Corresponds to `@syntax.Constant::BigInt`.
   Constant_BigInt
 
@@ -491,6 +492,7 @@ pub enum NodeKind {
   LexLiteral_String
   /// Regex payload lowered to `@syntax.RegexPattern::Literal`.
   LexLiteral_Regex
+  LexLiteral_BytesRegex
   /// Corresponds to `@syntax.LexScanCasePattern::Pattern`.
   LexScanCasePattern_Pattern
   /// Corresponds to `@syntax.LexScanCasePattern::Binder`.
@@ -529,8 +531,10 @@ pub enum NodeKind {
   Visibility_Priv
   /// Corresponds to `@syntax.RangeKind::Inclusive`.
   RangeKind_Inclusive
+  RangeKind_InclusiveReverse
   /// Corresponds to `@syntax.RangeKind::Exclusive`.
   RangeKind_Exclusive
+  RangeKind_ExclusiveReverse
   /// Corresponds to `@syntax.Hole::Incomplete`.
   HoleKind_Incomplete
   /// Corresponds to `@syntax.Hole::Todo`.
@@ -947,6 +951,7 @@ pub fn NodeKind::is_constant(self : NodeKind) -> Bool {
     | Constant_Double
     | Constant_String
     | Constant_Regex
+    | Constant_BytesRegex
     | Constant_BigInt => true
     _ => false
   }
@@ -989,7 +994,7 @@ pub fn NodeKind::is_constructor_extra_info(self : NodeKind) -> Bool {
 ///|
 pub fn NodeKind::is_lex_literal(self : NodeKind) -> Bool {
   match self {
-    LexLiteral_String | LexLiteral_Regex => true
+    LexLiteral_String | LexLiteral_Regex | LexLiteral_BytesRegex => true
     _ => false
   }
 }
@@ -1047,7 +1052,9 @@ pub fn NodeKind::is_syntax_flag(self : NodeKind) -> Bool {
     | Visibility_Pub
     | Visibility_Priv
     | RangeKind_Inclusive
+    | RangeKind_InclusiveReverse
     | RangeKind_Exclusive
+    | RangeKind_ExclusiveReverse
     | HoleKind_Incomplete
     | HoleKind_Todo
     | FnKind_Lambda

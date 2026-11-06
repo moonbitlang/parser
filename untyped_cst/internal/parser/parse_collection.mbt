@@ -62,6 +62,7 @@ fn brace_starts_map_expr(
       }
       Some((STRING(_), _, _))
       | Some((BYTES(_), _, _))
+      | Some((BYTES_REGEX_LITERAL(_), _, _))
       | Some((REGEX_LITERAL(_), _, _))
       | Some((CHAR(_), _, _))
       | Some((INT(_), _, _))
@@ -273,6 +274,7 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
     Some((raw, _, _)) if raw
       is (STRING(_)
       | BYTES(_)
+      | BYTES_REGEX_LITERAL(_)
       | REGEX_LITERAL(_)
       | CHAR(_)
       | INT(_)
@@ -298,6 +300,7 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
         TK_MINUS,
         TK_STRING,
         TK_REGEX_LITERAL,
+        TK_BYTES_REGEX_LITERAL,
       ])
       if state.consume_any() is Some(bad) {
         push_child(

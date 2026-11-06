@@ -367,7 +367,6 @@ test "acceptance equivalence: declaration constraints" {
 test "acceptance equivalence: expressions patterns and types" {
   let invalid_exprs = [
     ("regex pattern", "match x { re\"a\" => 0 }"),
-    ("regex map pattern key", "match x { {re\"a\" : y} => y }"),
     ("top-level typed pattern", "match x { y : Int => y }"),
     ("ellipsis array elements", "[...a, ...b]"),
     ("dotdot range", "1 .. 2"),
@@ -399,6 +398,8 @@ test "acceptance equivalence: expressions patterns and types" {
     assert_structure_acceptance(label, source, false)
   }
   let valid_exprs = [
+    ("regex map pattern key", "match x { {re\"a\" : y} => y }"),
+    ("bytes regex map pattern key", "match x { {reb\"a\" : y} => y }"),
     ("parenthesized foreach pattern", "for (x) in xs {}"),
     ("lex regex pattern", "lexmatch s { re\"a\" => 0 }"),
     ("parenthesized typed pattern", "match x { (y : Int) => y }"),

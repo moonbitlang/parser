@@ -149,6 +149,7 @@ pub impl ToJson for Token with fn to_json(self) {
     LEXMATCH => "LEXMATCH"
     LEXSCAN => "LEXSCAN"
     EXTEND => "EXTEND"
+    BYTES_REGEX_LITERAL(str) => ["BYTES_REGEX_LITERAL", str]
     REGEX_LITERAL(str) => ["REGEX_LITERAL", str]
     REGEX_INTERP(interp) => ["REGEX_INTERP", interp.to_string_repr()]
     DECLARE => "DECLARE"
