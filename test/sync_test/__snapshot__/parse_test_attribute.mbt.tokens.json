@@ -1288,14 +1288,14 @@
       {
         "id": "custom1",
         "dot_id": "name",
-        "raw_payload": "(custom1.name, key=custom1.name2, \"reason\")"
+        "raw_payload": "(@custom1.name, key=@custom1.name2, \"reason\")"
       }
     ],
-    "loc": "68:1-68:57"
+    "loc": "68:1-68:59"
   },
   {
     "token": "NEWLINE",
-    "loc": "68:57-68:58"
+    "loc": "68:59-68:60"
   },
   {
     "token": "PUB",

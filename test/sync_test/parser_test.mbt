@@ -461,6 +461,11 @@ test "pipeline_test_tail_catch" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_bytes_regex_automaton" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_newtype_ind_rec" (t : @test.Test) {
   t.run()
 }
@@ -1446,6 +1451,11 @@ test "pipeline_test_003" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_bytes_regex_match" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_option_func2" (t : @test.Test) {
   t.run()
 }
@@ -1651,6 +1661,11 @@ test "pipeline_test_option_uint" (t : @test.Test) {
 }
 
 ///|
+test "parse_test_bytes_regex_literal" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_init_return" (t : @test.Test) {
   t.run()
 }
@@ -1792,6 +1807,11 @@ test "pipeline_test_string_view_default_arg" (t : @test.Test) {
 
 ///|
 test "pipeline_test_match_2" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "parse_test_try_simple" (t : @test.Test) {
   t.run()
 }
 
@@ -2766,6 +2786,11 @@ test "pipeline_test_iter" (t : @test.Test) {
 }
 
 ///|
+test "pipeline_test_bytes_regex_value" (t : @test.Test) {
+  t.run()
+}
+
+///|
 test "pipeline_test_int_of_error_test2" (t : @test.Test) {
   t.run()
 }
@@ -3647,6 +3672,11 @@ test "pipeline_test_uninit_array" (t : @test.Test) {
 
 ///|
 test "pipeline_test_arith" (t : @test.Test) {
+  t.run()
+}
+
+///|
+test "format_test_attribute2" (t : @test.Test) {
   t.run()
 }
 

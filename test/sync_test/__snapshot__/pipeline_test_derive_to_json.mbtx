@@ -1,28 +1,36 @@
+----
+import { "moonbitlang/core/json" }
+----
 ///|
+#derive(ToJson, Debug)
 struct T1[X] {
   x : Int
   y : String
   z : Bool
   w : X
   m : (Int, Int)
-} derive(ToJson, Debug)
+}
 
 ///|
-struct NT[X](Array[X]) derive(ToJson, Debug)
+#derive(ToJson, Debug)
+struct NT[X](Array[X])
 
 ///|
+#derive(ToJson, Debug)
 enum E1[X, Y] {
   C1
   C2(x~ : T1[X], (Double, NT[Y]))
-} derive(ToJson, Debug)
+}
 
 ///|
-suberror ErrNoPayload derive(ToJson, Debug)
+#derive(ToJson, Debug)
+suberror ErrNoPayload
 
 ///|
+#derive(ToJson, Debug)
 suberror ErrNewType {
   ErrNewType(Int)
-} derive(ToJson, Debug)
+}
 
 ///|
 fn init {
@@ -36,6 +44,7 @@ fn init {
 }
 
 ///|
+#derive(ToJson)
 struct StructWithOptionalFields {
   number : Int
   string : String
@@ -44,7 +53,7 @@ struct StructWithOptionalFields {
   optional_string : String?
   nested_optional_string : String??
   number2 : Int
-} derive(ToJson)
+}
 
 ///|
 fn init {
@@ -107,30 +116,35 @@ fn init {
 // Field and variant renames
 
 ///|
+#derive(ToJson(fields(a(rename="b"))))
 struct FieldRename {
   a : Int
-} derive(ToJson(fields(a(rename="b"))))
+}
 
 ///|
+#derive(ToJson(cases(RenameMeToD1(rename="D1"))))
 enum VariantRename {
   RenameMeToD1(Int)
   C2(String)
-} derive(ToJson(cases(RenameMeToD1(rename="D1"))))
+}
 
 ///|
+#derive(ToJson(rename_fields="camelCase"))
 struct FieldRenameAllCamel {
   my_field : Int
-} derive(ToJson(rename_fields="camelCase"))
+}
 
 ///|
+#derive(ToJson(rename_fields="SCREAMING_SNAKE_CASE"))
 struct FieldRenameAllScreamingSnake {
   my_field : Int
-} derive(ToJson(rename_fields="SCREAMING_SNAKE_CASE"))
+}
 
 ///|
+#derive(ToJson(rename_cases="snake_case"))
 enum VariantRenameAllSnake {
   MyVariant(Int)
-} derive(ToJson(rename_cases="snake_case"))
+}
 
 ///|
 fn init {
@@ -151,18 +165,20 @@ fn init {
 // ==== New enum styling options ====
 
 ///|
+#derive(ToJson(style="legacy"))
 enum NewStyleLegacy {
   C1
   C2(String)
   C3(Int, Bool)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
+#derive(ToJson(style="flat"))
 enum NewStyleFlat {
   C1
   C2(String)
   C3(Int, Bool)
-} derive(ToJson(style="flat"))
+}
 
 ///|
 fn init {
@@ -189,67 +205,78 @@ fn init {
 // ==== Additional comprehensive tests ====
 
 ///|
-struct TupleStruct(Int,String,Bool) derive(ToJson, Eq, Debug)
+#derive(ToJson, Eq, Debug)
+struct TupleStruct(Int,String,Bool)
 
 ///|
-struct EmptyStruct {} derive(ToJson, Eq, Debug)
+#derive(ToJson, Eq, Debug)
+struct EmptyStruct {}
 
 ///|
+#derive(ToJson(style="flat"), Eq, Debug)
 enum SingleVariantEnum {
   OnlyVariant(Int, String)
-} derive(ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(ToJson(style="flat"), Eq, Debug)
 enum MixedEnum {
   NoArgs
   OneArg(Int)
   TwoArgs(String, Bool)
   NamedArgs(x~ : Int, y~ : String)
   MixedArgs(Int, y~ : String, Bool)
-} derive(ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(ToJson(style="flat"), Eq, Debug)
 enum DeepNestedEnum {
   Level1(Level2)
-} derive(ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(ToJson(style="flat"), Eq, Debug)
 enum Level2 {
   Level2Variant(Level3)
-} derive(ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(ToJson, Eq, Debug)
 struct Level3 {
   value : Int
   nested : Level4?
-} derive(ToJson, Eq, Debug)
+}
 
 ///|
+#derive(ToJson(style="flat"), Eq, Debug)
 enum Level4 {
   FinalLevel(String)
-} derive(ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(ToJson, Eq, Debug)
 struct GenericStruct[T, U] {
   first : T
   second : U
   optional : T?
-} derive(ToJson, Eq, Debug)
+}
 
 ///|
+#derive(ToJson(style="flat"), Eq, Debug)
 enum GenericEnum[T] {
   Value(T)
   Pair(T, T)
-} derive(ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
+#derive(ToJson(style="flat"), Eq, Debug)
 enum EdgeCaseEnum {
   ZeroFields
   OneField(Int)
   MultipleFields(String, Bool, Double)
   NamedField(name~ : String)
   MixedFields(Int, named~ : String, Bool)
-} derive(ToJson(style="flat"), Eq, Debug)
+}
 
 ///|
 fn init {
@@ -368,16 +395,18 @@ fn init {
 // so we'll define equivalent enums for comparison
 
 ///|
+#derive(ToJson(style="legacy"))
 enum LegacyStyle {
   NoArgs
   WithArgs(Int, String)
-} derive(ToJson(style="legacy"))
+}
 
 ///|
+#derive(ToJson(style="flat"))
 enum FlatStyle {
   NoArgs
   WithArgs(Int, String)
-} derive(ToJson(style="flat"))
+}
 
 ///|
 fn init {

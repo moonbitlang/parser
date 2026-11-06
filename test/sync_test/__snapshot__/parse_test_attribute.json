@@ -1493,7 +1493,7 @@
             "kind": "Attribute",
             "loc": null,
             "children": {
-              "raw": "#custom1.name(custom1.name, key=custom1.name2, \"reason\")"
+              "raw": "#custom1.name(@custom1.name, key=@custom1.name2, \"reason\")"
             }
           }
         ]
