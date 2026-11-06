@@ -2987,8 +2987,8 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       let doc = errdefer_ + expr + body
       Normal(doc)
     }
-    LetFn(name=_, func~, body~, loc=_) => { //TODO: fixme
-      let func = fmt.func(func).to_doc()
+    LetFn(name~, func~, body~, loc=_) => {
+      let func = fmt.func(func, binder=name).to_doc()
       let body = hardline + fmt.compose(body, Stmt)
       Normal(func + body)
     }
@@ -3409,15 +3409,15 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       body~,
       catch_=catch_cases,
       try_else~,
-      has_try=_,
+      has_try~,
       try_loc=_,
       catch_loc=_,
       else_loc=_,
       loc=_
     ) => {
-      let try_ = text("try")
-      let body = space + fmt.expr_block(body)
-      let catch_ = space + text("catch") + fmt.case_block(catch_cases)
+      let try_ = if has_try { text("try") + space } else { empty }
+      let body = fmt.compose(body, Pipeline)
+      let catch_ = space + text("catch") + space + fmt.case_block(catch_cases)
       let noraise_ = if try_else is Some(cases) {
         space + text("noraise") + space + fmt.case_block(cases)
       } else {
