@@ -1,0 +1,20 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/parser/internal/docstring"
+
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/lexer/basic",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/parser/syntax",
+}
+
+// Values
+pub fn attach_docstrings_to_impls(ArrayView[@list.List[(@basic.Location, @tokens.Comment)]], @list.List[@syntax.Impl]) -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

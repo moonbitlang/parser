@@ -1,4 +1,5 @@
 import {
+  "moonbitlang/parser/internal/docstring",
   "moonbitlang/parser/frontmatter",
   "moonbitlang/moon_config",
   "moonbitlang/parser/syntax",
@@ -7,6 +8,5 @@ import {
   "moonbitlang/lexer/tokens",
   "moonbitlang/lexer/basic",
   "moonbitlang/parser/yacc_parser",
-  "moonbitlang/core/list",
   "moonbitlang/core/debug",
 }
