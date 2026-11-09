@@ -88,14 +88,15 @@ fn parse_regex_as_pattern(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let pat = parse_regex_atom_pattern(state, stop_kinds)
-  let _ = state.consume_trivia()
-  if state.current_is(TK_AS) {
+  if state.peek_significant().map(item => item.0) is Some(AS) {
     let children : Array[(String?, CstNode)] = [(Some("pattern"), pat)]
+    push_children(children, state.consume_trivia())
     if state.consume_any() is Some(as_token) {
       push_child(children, Some("kw"), as_token)
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     match state.peek() {
       Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
         if state.consume_any() is Some(name) {
@@ -125,25 +126,11 @@ fn parse_regex_as_pattern(
     }
     state.construct_from_children(
       fn(loc, source_span, children) {
-        let pattern = @construction.first_child_with_label_from(
-          children, "pattern",
-        ).unwrap_or(missing_at_end(loc~, source_span~))
-        let kw = @construction.first_child_with_label_from(children, "kw").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let lex_scan_case_pattern = @construction.first_child_with_label_from(
-          children, "lex_scan_case_pattern",
-        )
-        @node.CstNode::regex_pattern_alias(
+        let entries = recovery_children(children)
+        @node.CstNode::regex_pattern_alias_from_entries(
           loc~,
           source_span~,
-          pattern~,
-          kw~,
-          name~,
-          lex_scan_case_pattern?,
+          entries~,
         )
       },
       children,
@@ -161,9 +148,9 @@ fn parse_regex_or_pattern_tail(
   first : CstNode,
 ) -> CstNode {
   let mut lhs = first
-  let _ = state.consume_trivia()
-  while state.current_is(TK_BAR) {
+  while state.peek_significant().map(item => item.0) is Some(BAR) {
     let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
+    push_children(children, state.consume_trivia())
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
     } else {
@@ -177,26 +164,15 @@ fn parse_regex_or_pattern_tail(
     push_child(children, Some("rhs"), rhs)
     lhs = state.construct_from_children(
       fn(loc, source_span, children) {
-        let lhs = @construction.first_child_with_label_from(children, "lhs").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let rhs = @construction.first_child_with_label_from(children, "rhs").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        @node.CstNode::regex_pattern_alternation(
+        let entries = recovery_children(children)
+        @node.CstNode::regex_pattern_alternation_from_entries(
           loc~,
           source_span~,
-          lhs~,
-          op~,
-          rhs~,
+          entries~,
         )
       },
       children,
     )
-    let _ = state.consume_trivia()
   }
   lhs
 }
@@ -218,9 +194,9 @@ fn parse_regex_sequence_pattern_tail(
   first : CstNode,
 ) -> CstNode {
   let mut lhs = first
-  let _ = state.consume_trivia()
-  while state.current_is(TK_PLUS) {
+  while state.peek_significant().map(item => item.0) is Some(PLUS) {
     let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
+    push_children(children, state.consume_trivia())
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
     } else {
@@ -233,26 +209,15 @@ fn parse_regex_sequence_pattern_tail(
     )
     lhs = state.construct_from_children(
       fn(loc, source_span, children) {
-        let lhs = @construction.first_child_with_label_from(children, "lhs").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let rhs = @construction.first_child_with_label_from(children, "rhs").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        @node.CstNode::regex_pattern_sequence(
+        let entries = recovery_children(children)
+        @node.CstNode::regex_pattern_sequence_from_entries(
           loc~,
           source_span~,
-          lhs~,
-          op~,
-          rhs~,
+          entries~,
         )
       },
       children,
     )
-    let _ = state.consume_trivia()
   }
   lhs
 }

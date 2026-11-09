@@ -174,7 +174,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
   let mut parameter_is_positional = false
   match state.peek() {
     Some((tok, _, _)) if tok is (LIDENT(_) | POST_LABEL(_) | EXTEND) =>
-      match state.peek(offset=1) {
+      match state.peek_nth_significant(1) {
         Some((QUESTION, _, _)) | Some((COLON, _, _)) =>
           if state.consume_any() is Some(name) {
             push_child(children, Some("pattern"), name)
@@ -202,6 +202,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_QUESTION) {
     if parameter_is_positional {
       parameter_builder = fn(loc, source_span, children) {
@@ -216,6 +217,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
       ()
     }
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
@@ -223,6 +225,7 @@ fn parse_trait_method_param_item(state : ParserState) -> CstNode {
       ()
     }
   }
+  push_children(children, state.consume_trivia())
   let reports_before_type = state.reports.length()
   let ty = match state.peek() {
     Some((POST_LABEL(_), _, _))
@@ -405,7 +408,8 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
       ()
     }
   }
-  match (state.peek(), state.peek(offset=1)) {
+  push_children(children, state.consume_trivia())
+  match (state.peek(), state.peek_nth_significant(1)) {
     (Some((LIDENT(name), start, end)), Some((COLON, _, _))) => {
       state.report(
         mk_loc(start, end),
@@ -433,21 +437,11 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
             children.iter().any(fn(entry) { entry.0 is Some("mut") }),
           )
 
-          let mut_ = @construction.first_child_with_label_from(children, "mut")
-          let op = @construction.first_child_with_label_from(children, "op")
-          let type_ = @construction.first_child_with_label_from(
-            children, "type",
-          ).unwrap_or(missing_at_end(loc~, source_span~))
-          let mutable = @construction.first_child_with_label_from(
-            children, "mutable",
-          )
-          @node.CstNode::parameter_constructor_positional(
+          let entries = recovery_children(children)
+          @node.CstNode::parameter_constructor_positional_from_entries(
             loc~,
             source_span~,
-            mut_?,
-            op?,
-            type_~,
-            mutable?,
+            entries~,
           )
         },
         children,
@@ -459,7 +453,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
     Some((POST_LABEL(_), _, _))
     | Some((LIDENT(_), _, _))
     | Some((EXTEND, _, _)) =>
-      match state.peek(offset=1) {
+      match state.peek_nth_significant(1) {
         Some((COLON, _, _)) =>
           if state.consume_any() is Some(name) {
             push_child(children, Some("name"), name)
@@ -470,6 +464,7 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
@@ -502,46 +497,20 @@ fn parse_constructor_param_item(state : ParserState) -> CstNode {
       )
       (if children.iter().any(fn(entry) { entry.0 is Some("name") }) {
         fn(loc, source_span, children) {
-          let mut_ = @construction.first_child_with_label_from(children, "mut")
-          let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
-            missing_at_end(loc~, source_span~),
-          )
-          let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-            missing_at_end(loc~, source_span~),
-          )
-          let type_ = @construction.first_child_with_label_from(
-            children, "type",
-          ).unwrap_or(missing_at_end(loc~, source_span~))
-          let mutable = @construction.first_child_with_label_from(
-            children, "mutable",
-          )
-          @node.CstNode::parameter_constructor_labelled(
+          let entries = recovery_children(children)
+          @node.CstNode::parameter_constructor_labelled_from_entries(
             loc~,
             source_span~,
-            mut_?,
-            name~,
-            op~,
-            type_~,
-            mutable?,
+            entries~,
           )
         }
       } else {
         fn(loc, source_span, children) {
-          let mut_ = @construction.first_child_with_label_from(children, "mut")
-          let op = @construction.first_child_with_label_from(children, "op")
-          let type_ = @construction.first_child_with_label_from(
-            children, "type",
-          ).unwrap_or(missing_at_end(loc~, source_span~))
-          let mutable = @construction.first_child_with_label_from(
-            children, "mutable",
-          )
-          @node.CstNode::parameter_constructor_positional(
+          let entries = recovery_children(children)
+          @node.CstNode::parameter_constructor_positional_from_entries(
             loc~,
             source_span~,
-            mut_?,
-            op?,
-            type_~,
-            mutable?,
+            entries~,
           )
         }
       })(loc, source_span, children)
@@ -624,14 +593,16 @@ fn parse_struct_field_item(state : ParserState) -> CstNode {
         state.missing_token_node_with_expected(TK_LIDENT, [TK_LIDENT, TK_EXTEND]),
       )
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     let reports_before_type = state.reports.length()
-    let ty = parse_type_arrow(state, [TK_NEWLINE, TK_SEMI, TK_RBRACE, TK_EOF])
+    let ty = parse_type_arrow(state, [TK_SEMI, TK_RBRACE, TK_EOF])
     push_child(
       children,
       Some("type"),
@@ -810,6 +781,7 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     if state.current_is(TK_LBRACKET) {
       push_child(
         children,
@@ -818,6 +790,7 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
       )
     }
   }
+  push_children(children, state.consume_trivia())
   match state.peek() {
     Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
       if state.consume_any() is Some(name) {

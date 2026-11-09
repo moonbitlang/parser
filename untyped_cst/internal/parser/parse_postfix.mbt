@@ -12,22 +12,15 @@ fn parse_expr_postfix(state : ParserState, boundary : ExprBoundary) -> CstNode {
       } else {
         ()
       }
+      push_children(children, state.consume_trivia())
       let ty = parse_type_name_node(state)
       if !ty.children.is_empty() {
         push_child(children, Some("type"), ty)
       }
       state.construct_from_children(
         fn(loc, source_span, children) {
-          let expr = @construction.first_child_with_label_from(children, "expr").unwrap_or(
-            missing_at_end(loc~, source_span~),
-          )
-          let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-            missing_at_end(loc~, source_span~),
-          )
-          let type_ = @construction.first_child_with_label_from(
-            children, "type",
-          ).unwrap_or(missing_at_end(loc~, source_span~))
-          @node.CstNode::expr_as(loc~, source_span~, expr~, op~, type_~)
+          let entries = recovery_children(children)
+          @node.CstNode::expr_as_from_entries(loc~, source_span~, entries~)
         },
         children,
       )
@@ -113,12 +106,8 @@ fn parse_expr_postfix(state : ParserState, boundary : ExprBoundary) -> CstNode {
       } else {
         ()
       }
-      report_invalid_template_literal_start(state)
       let reports_before_template = state.reports.length()
-      let template = parse_expr_boundary(state, {
-        ..boundary,
-        stop_kinds: template_operand_stops(stop_kinds),
-      })
+      let template = parse_template_literal(state, boundary)
       push_child(
         children,
         Some("template"),
@@ -175,15 +164,44 @@ fn parse_expr_postfix(state : ParserState, boundary : ExprBoundary) -> CstNode {
 }
 
 ///|
-fn report_invalid_template_literal_start(state : ParserState) -> Unit {
-  match state.peek_significant() {
-    Some((LBRACE, _, _)) =>
-      match state.peek_nth_significant(1) {
-        Some((RBRACE, _, _)) | None => ()
-        Some((STRING(_), _, _)) => ()
-        Some((found, start, end)) =>
-          state.report_expected_tokens_at(found, mk_loc(start, end), [TK_STRING])
-      }
+fn parse_template_literal(
+  state : ParserState,
+  boundary : ExprBoundary,
+) -> CstNode {
+  discard_expr_trivia(state)
+  match state.peek() {
+    Some((LBRACE, _, _)) => {
+      let body = parse_delimited(
+        state,
+        TK_LBRACE,
+        TK_RBRACE,
+        parse_template_field,
+        fn(loc, source_span, children) {
+          push_marker_child(
+            children,
+            loc,
+            source_span,
+            "trailing",
+            list_trailing_mark_kind(children),
+          )
+          @node.CstNode::list_map_field_list(
+            loc~,
+            source_span~,
+            entries=list_children(children),
+          )
+        },
+        sep_kind=TK_COMMA,
+      )
+      state.construct_from_children(
+        fn(loc, source_span, children) {
+          let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
+            missing_at_end(loc~, source_span~),
+          )
+          @node.CstNode::expr_map(loc~, source_span~, body~)
+        },
+        [(Some("body"), body)],
+      )
+    }
     Some(
       (
         STRING(_)
@@ -195,15 +213,61 @@ fn report_invalid_template_literal_start(state : ParserState) -> Unit {
         _,
         _,
       )
-    ) => ()
-    Some((found, start, end)) =>
-      state.report_expected_description_at(
-        found,
-        mk_loc(start, end),
-        "template string",
+    ) => parse_string_literal_node(state)
+    _ => {
+      state.report_expected_description("template string")
+      let children : Array[(String?, CstNode)] = []
+      let scan = state.recover_until(
+        boundary.recovery_stops(),
+        balance_groups=true,
       )
-    None => ()
+      push_recovered_errors(children, scan.skipped)
+      state.construct_from_children(
+        fn(loc, source_span, children) {
+          @node.CstNode::expr_missing_expr_from_entries(
+            loc~,
+            source_span~,
+            entries=recovery_children(children),
+          )
+        },
+        children,
+      )
+    }
   }
+}
+
+///|
+fn parse_template_field(state : ParserState) -> CstNode {
+  let children : Array[(String?, CstNode)] = []
+  let reports_before_key = state.reports.length()
+  push_child(children, Some("key"), state.expect_token(TK_STRING))
+  push_children(children, state.consume_trivia())
+  if state.reports.length() == reports_before_key {
+    push_child(children, Some("op"), state.expect_token(TK_COLON))
+  }
+  if state.reports.length() == reports_before_key {
+    let reports_before_value = state.reports.length()
+    let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
+    push_child(
+      children,
+      Some("expr"),
+      state.required_expr_node(expr, reports_before_value),
+    )
+  } else {
+    let scan = state.recover_until([TK_COMMA, TK_RBRACE], balance_groups=true)
+    push_recovered_errors(children, scan.skipped)
+  }
+  state.construct_from_children(
+    fn(loc, source_span, children) {
+      push_direct_semantic_constant(children)
+      @node.CstNode::field_map_expression(
+        loc~,
+        source_span~,
+        entries=recovery_children(children),
+      )
+    },
+    children,
+  )
 }
 
 ///|
@@ -227,25 +291,6 @@ fn parse_expr_simple_postfix(
     }
   }
   lhs
-}
-
-///|
-fn template_operand_stops(stop_kinds : Array[TokenKind]) -> Array[TokenKind] {
-  let stops = stop_kinds.copy()
-  stops.push(TK_IMPLIES)
-  stops.push(TK_BARBAR)
-  stops.push(TK_AMPERAMPER)
-  stops.push(TK_BAR)
-  stops.push(TK_CARET)
-  stops.push(TK_AMPER)
-  stops.push(TK_INFIX1)
-  stops.push(TK_INFIX2)
-  stops.push(TK_PLUS)
-  stops.push(TK_MINUS)
-  stops.push(TK_INFIX3)
-  stops.push(TK_STAR)
-  stops.push(TK_INFIX4)
-  stops
 }
 
 ///|

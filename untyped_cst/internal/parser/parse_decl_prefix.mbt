@@ -476,6 +476,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_QUESTION) {
     has_question = true
     if state.consume_any() is Some(question) {
@@ -484,6 +485,7 @@ fn parse_parameter_item(state : ParserState) -> CstNode {
       ()
     }
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
@@ -761,6 +763,7 @@ fn parse_type_parameter_item(
       }
     _ => push_child(children, Some("name"), state.missing_token_node(TK_UIDENT))
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_COLON) {
     if !allow_constraints {
       state.report_expected_tokens([TK_COMMA, TK_RBRACKET])

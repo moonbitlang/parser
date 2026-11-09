@@ -88,6 +88,12 @@ fn lower_pattern(node : CstNode) -> @syntax.Pattern {
       Alias(pat~, alias_=binder, loc=node.loc)
     }
     Pattern_Constraint => {
+      // Leading trivia uses this CST wrapper without a type annotation.
+      if !node.has_child_label("op") &&
+        !node.has_child_label("type") &&
+        node.first_child_with_label("pattern") is Some(pattern) {
+        return lower_pattern(pattern)
+      }
       let pat = node
         .first_child_with_label("pattern")
         .map(lower_pattern)
@@ -390,19 +396,34 @@ fn lower_constructor_from_names(
       @syntax.ConstructorExtraInfo::Package(
         lower_semantic_string(names[0]).unwrap_or(""),
       )
-    Some(ConstructorExtraInfo_TypeName) if names.length() >= 2 => {
+    Some(
+      ConstructorExtraInfo_TypeName
+      | ConstructorExtraInfo_TypeNameWithConstrPackage
+    ) if names.length() >= 2 => {
+      let has_constr_package = extra_info_kind
+        is Some(ConstructorExtraInfo_TypeNameWithConstrPackage) &&
+        names.length() >= 3
+      let type_end = names.length() - (if has_constr_package { 2 } else { 1 })
       let type_nodes : Array[CstNode] = []
-      for i in 0..<(names.length() - 1) {
+      for i in 0..<type_end {
         type_nodes.push(names[i])
       }
       let type_loc = type_nodes[0].loc.merge(
         type_nodes[type_nodes.length() - 1].loc,
       )
-      TypeName({
+      let type_name : @syntax.TypeName = {
         name: recover_long_ident_from_name_nodes(type_nodes),
         is_object: false,
         loc: type_loc,
-      })
+      }
+      if has_constr_package {
+        TypeNameWithConstrPackage(
+          type_name~,
+          pkg=lower_semantic_string(names[type_end]).unwrap_or(""),
+        )
+      } else {
+        TypeName(type_name)
+      }
     }
     _ => NoExtraInfo
   }

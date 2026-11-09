@@ -25,6 +25,63 @@ fn lower_type(node : CstNode) -> @syntax.Type {
 }
 
 ///|
+fn is_unparenthesized_arrow_type(node : CstNode) -> Bool {
+  type_without_trivia(node).kind is Type_Arrow
+}
+
+///|
+fn type_without_trivia(node : CstNode) -> CstNode {
+  // Trivia groups have a `type` child; explicit parentheses have a `body`.
+  if node.kind is Type_Group && node.first_child_with_label("type") is Some(ty) {
+    type_without_trivia(ty)
+  } else {
+    node
+  }
+}
+
+///|
+fn lower_return_type_effects(
+  node : CstNode,
+  ty : @syntax.Type,
+  error_clause : CstNode?,
+  nocancel_anchor : CstNode?,
+) -> @syntax.Type {
+  guard is_unparenthesized_arrow_type(node) else { return ty }
+  // Both async and trivia wrappers are transparent to effect binding.
+  if node.first_child_with_label("type") is Some(inner) {
+    return lower_return_type_effects(inner, ty, error_clause, nocancel_anchor)
+  }
+  guard ty is Arrow(args~, res~, err~, is_async~, nocancel_~, loc~) else {
+    return ty
+  }
+  let loc = error_clause.map(clause => loc.merge(clause.loc)).unwrap_or(loc)
+  let loc = nocancel_anchor.map(anchor => loc.merge(anchor.loc)).unwrap_or(loc)
+  if node.first_child_with_label("result") is Some(result) &&
+    is_unparenthesized_arrow_type(result) {
+    Arrow(
+      args~,
+      res=lower_return_type_effects(result, res, error_clause, nocancel_anchor),
+      err~,
+      is_async~,
+      nocancel_~,
+      loc~,
+    )
+  } else {
+    Arrow(
+      args~,
+      res~,
+      err=error_clause.map(lower_error_annotation).unwrap_or(err),
+      is_async~,
+      nocancel_=match nocancel_anchor {
+        Some(anchor) => Some(anchor.loc)
+        None => nocancel_
+      },
+      loc~,
+    )
+  }
+}
+
+///|
 fn lower_name_type(node : CstNode, is_object~ : Bool) -> @syntax.Type {
   let names = node.children_with_label("name")
   let constr_loc = if node.first_child_with_label("semantic_name") is Some(name) {
@@ -143,7 +200,8 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
       other => other
     }
   } else {
-    let args = if node.first_child_with_label("param") is Some(param) {
+    let param = node.first_child_with_label("param").map(type_without_trivia)
+    let args = if param is Some(param) {
       lower_type_arrow_args(param)
     } else {
       List([])
@@ -161,7 +219,10 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
       nocancel_=node
         .first_child_with_label("nocancel")
         .map(fn(anchor) { anchor.loc }),
-      loc=node.loc,
+      loc=match param {
+        Some(param) => { start: param.loc.start, end: node.loc.end, }
+        None => node.loc
+      },
     )
   }
 }

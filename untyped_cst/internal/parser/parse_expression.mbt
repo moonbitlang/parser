@@ -349,14 +349,6 @@ fn parse_arrow_fn_body_expr(
 ) -> CstNode {
   let stop_kinds = boundary.stop_kinds
   match state.peek_significant() {
-    Some((LBRACE, _, _)) =>
-      if brace_starts_record_expr(state) {
-        parse_record_expr(state)
-      } else if brace_starts_map_expr(state) {
-        parse_map_expr(state)
-      } else {
-        parse_block_expr(state)
-      }
     Some((CONTINUE, _, _)) if state.peek_nth_significant(1).map(item => item.0)
       is Some(POST_LABEL(_)) &&
       state.peek_nth_significant(2).map(item => item.0) is Some(COLON) =>
@@ -816,17 +808,7 @@ fn parse_expr_pipe(state : ParserState, boundary : ExprBoundary) -> CstNode {
 }
 
 ///|
-fn stop_kinds_with_pipe(stop_kinds : Array[TokenKind]) -> Array[TokenKind] {
-  let stops : Array[TokenKind] = [TK_PIPE, TK_PIPE_LEFT]
-  for kind in stop_kinds {
-    stops.push(kind)
-  }
-  stops
-}
-
-///|
 fn parse_pipe_rhs(state : ParserState, boundary : ExprBoundary) -> CstNode {
-  let stop_kinds = boundary.stop_kinds
   let head = parse_expr_infix(state, boundary)
   discard_expr_trivia(state)
   match state.peek() {
@@ -851,10 +833,13 @@ fn parse_pipe_rhs(state : ParserState, boundary : ExprBoundary) -> CstNode {
         None => state.report_expected_description("`{ ... }`")
       }
       let reports_before_body = state.reports.length()
-      let body = parse_arrow_fn_body_expr(state, {
-        ..boundary,
-        stop_kinds: stop_kinds_with_pipe(stop_kinds),
-      })
+      // Pipe arrows require a block, even when `{ x }` would be a record
+      // in an ordinary expression. Leave following pipes and catch outside.
+      let body = if state.peek_significant().map(item => item.0) is Some(LBRACE) {
+        parse_block_expr(state)
+      } else {
+        parse_expr_infix(state, boundary)
+      }
       push_child(
         children,
         Some("body"),

@@ -322,11 +322,17 @@ fn can_occur_after_semicolon(token : Token) -> Bool {
 ///|
 priv struct ASIContext {
   mut last_unhandled_newline : Int32
+  mut delimiter_depth : Int32
+  mut last_is_extend_decl : Bool
 }
 
 ///|
 fn ASIContext::new() -> ASIContext {
-  { last_unhandled_newline: -1, }
+  {
+    last_unhandled_newline: -1,
+    delimiter_depth: 0,
+    last_is_extend_decl: false,
+  }
 }
 
 //  [add_token] informs the presence of a new token,
@@ -359,7 +365,8 @@ fn[C] ASIContext::add_token(
               (COMMENT(_), _, _) => continue top - 1
               (last_token, _, endp) => {
                 if can_occur_before_semicolon(last_token) &&
-                  can_occur_after_semicolon(next_token) {
+                  can_occur_after_semicolon(next_token) &&
+                  !self.last_is_extend_decl {
                   match (last_token, next_token) {
                     (
                       MULTILINE_STRING(_)
@@ -387,4 +394,62 @@ fn[C] ASIContext::add_token(
     }
     _ => ()
   }
+  match next_token {
+    COMMENT(_) | NEWLINE => ()
+    _ => {
+      // EXTEND is also an identifier. Only a declaration keyword suppresses ASI.
+      self.last_is_extend_decl = next_token is EXTEND &&
+        self.delimiter_depth == 0 &&
+        extend_declaration_prefix(tokens)
+      match next_token {
+        LPAREN | DOT_LPAREN | LBRACKET | LBRACKET_BAR | LBRACE =>
+          self.delimiter_depth += 1
+        RPAREN | RBRACKET | BAR_RBRACKET | RBRACE =>
+          self.delimiter_depth = @cmp.maximum(0, self.delimiter_depth - 1)
+        _ => ()
+      }
+    }
+  }
+}
+
+///|
+fn previous_significant_token(
+  tokens : @tokens.Triples,
+  before : Int32,
+) -> Int32 {
+  let mut i = before - 1
+  while i >= 0 {
+    match tokens[i].0 {
+      COMMENT(_) | NEWLINE => i -= 1
+      _ => return i
+    }
+  }
+  -1
+}
+
+///|
+fn extend_declaration_prefix(tokens : @tokens.Triples) -> Bool {
+  let mut i = previous_significant_token(tokens, tokens.length())
+  // Visibility may have a parenthesized modifier. Do not cross a semicolon.
+  if i >= 0 && tokens[i].0 is RPAREN {
+    i = previous_significant_token(tokens, i)
+    if i < 0 || !(tokens[i].0 is (LIDENT(_) | READONLY | EXTEND)) {
+      return false
+    }
+    i = previous_significant_token(tokens, i)
+    if i < 0 || !(tokens[i].0 is LPAREN) {
+      return false
+    }
+    i = previous_significant_token(tokens, i)
+    if i < 0 || !(tokens[i].0 is PUB) {
+      return false
+    }
+    i = previous_significant_token(tokens, i)
+  } else if i >= 0 && tokens[i].0 is (PUB | PRIV) {
+    i = previous_significant_token(tokens, i)
+  }
+  while i >= 0 && tokens[i].0 is ATTRIBUTE(_) {
+    i = previous_significant_token(tokens, i)
+  }
+  i < 0 || tokens[i].0 is (SEMI(_) | RBRACE)
 }

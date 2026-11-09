@@ -141,25 +141,11 @@ pub fn finish_lexscan_case_pattern(source : CstNode) -> CstNode {
       )
     }
     RegexPattern_Alias => {
-      let pattern = first_child_with_label_from(children, "pattern").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let kw = first_child_with_label_from(children, "kw").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let name = first_child_with_label_from(children, "name").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let lex_scan_case_pattern = first_child_with_label_from(
-        children, "lex_scan_case_pattern",
-      )
-      @node.CstNode::regex_pattern_alias(
+      let entries = recovery_children(children)
+      @node.CstNode::regex_pattern_alias_from_entries(
         loc~,
         source_span~,
-        pattern~,
-        kw~,
-        name~,
-        lex_scan_case_pattern?,
+        entries~,
       )
     }
     _ => abort("unexpected lexscan case pattern")

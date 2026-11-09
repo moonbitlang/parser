@@ -914,6 +914,10 @@ fn parse_pattern_or(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let mut lhs = parse_pattern_range(state, stop_kinds)
+  // These tokens belong to the enclosing alias or match case, including trivia.
+  if state.peek_significant().map(item => item.0) is Some(AS | IF | FAT_ARROW) {
+    return lhs
+  }
   let trivia = state.consume_trivia()
   if state.current_is(TK_BAR) {
     let children : Array[(String?, CstNode)] = [(Some("lhs"), lhs)]
@@ -1021,30 +1025,30 @@ fn parse_pattern_alias(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let mut lhs = parse_pattern_or(state, stop_kinds)
-  while state.current_is(TK_AS) {
+  while state.peek_significant().map(item => item.0) is Some(AS) {
     let children : Array[(String?, CstNode)] = [(Some("pattern"), lhs)]
+    push_children(children, state.consume_trivia())
     if state.consume_any() is Some(op) {
       push_child(children, Some("op"), op)
     } else {
       ()
     }
-    if state.consume_any() is Some(name) {
-      push_child(children, Some("name"), name)
+    push_children(children, state.consume_trivia())
+    if state.current_in([TK_LIDENT, TK_EXTEND]) {
+      if state.consume_any() is Some(name) {
+        push_child(children, Some("name"), name)
+      }
     } else {
-      ()
+      push_child(
+        children,
+        Some("name"),
+        state.missing_token_node_with_expected(TK_LIDENT, [TK_LIDENT, TK_EXTEND]),
+      )
     }
     lhs = state.construct_from_children(
       fn(loc, source_span, children) {
-        let pattern = @construction.first_child_with_label_from(
-          children, "pattern",
-        ).unwrap_or(missing_at_end(loc~, source_span~))
-        let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
-          missing_at_end(loc~, source_span~),
-        )
-        @node.CstNode::pattern_alias(loc~, source_span~, pattern~, op~, name~)
+        let entries = recovery_children(children)
+        @node.CstNode::pattern_alias_from_entries(loc~, source_span~, entries~)
       },
       children,
     )

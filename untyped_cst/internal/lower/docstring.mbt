@@ -29,7 +29,12 @@ pub fn attach_docstrings_to_impls(
       content: comments.map(p => {
         match p.1.content {
           [.. "///|", .. remain] =>
-            if remain.is_blank() {
+            if remain.is_blank() ||
+              (
+                p.0 == comments.head().unwrap().0 &&
+                remain.trim().has_prefix("UUID(") &&
+                remain.trim().has_suffix(")")
+              ) {
               ""
             } else {
               remain.to_owned()

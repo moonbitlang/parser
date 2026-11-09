@@ -380,6 +380,7 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
         }
       }
       Some(_) => {
+        let entry_pos = state.pos
         match state.peek() {
           Some((found, _, _)) if pattern_can_start(found) => ()
           Some((found, start, end)) =>
@@ -406,6 +407,17 @@ fn parse_foreach_pattern(state : ParserState) -> CstNode {
             push_child(children, Some("sep"), sep)
           } else {
             ()
+          }
+        }
+        if state.pos == entry_pos {
+          // Recovery may stop at a delimiter owned by the enclosing parser.
+          // Leave it there instead of retrying the same missing pattern.
+          if state.recovery_stop_at([]) is Some(_) {
+            done = true
+          } else if state.consume_error_for_progress() is Some(error) {
+            push_child(children, Some("error"), error)
+          } else {
+            done = true
           }
         }
       }
@@ -739,6 +751,7 @@ fn parse_for_binding(state : ParserState) -> CstNode {
       children,
     )
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_EQUAL) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
@@ -805,24 +818,8 @@ fn parse_for_binding(state : ParserState) -> CstNode {
         ["name"],
       )
 
-      let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let error = @construction.children_with_label_from(children, "error")
-      let op = @construction.first_child_with_label_from(children, "op")
-      let expr = @construction.first_child_with_label_from(children, "expr")
-      let semantic_name = @construction.first_child_with_label_from(
-        children, "semantic_name",
-      )
-      @node.CstNode::binding_for(
-        loc~,
-        source_span~,
-        name~,
-        error~,
-        op?,
-        expr?,
-        semantic_name?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::binding_for_from_entries(loc~, source_span~, entries~)
     },
     children,
   )
@@ -1072,6 +1069,7 @@ fn parse_where_clause(state : ParserState) -> CstNode {
   } else {
     ()
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_LBRACE) {
     push_child(
       children,
@@ -1091,13 +1089,8 @@ fn parse_where_clause(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let kw = @construction.first_child_with_label_from(children, "kw").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      @node.CstNode::clause_where(loc~, source_span~, kw~, body~)
+      let entries = recovery_children(children)
+      @node.CstNode::clause_where_from_entries(loc~, source_span~, entries~)
     },
     children,
   )
@@ -1115,6 +1108,7 @@ fn parse_where_field_item(state : ParserState) -> CstNode {
       }
     _ => ()
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_COLON) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
@@ -1140,26 +1134,8 @@ fn parse_where_field_item(state : ParserState) -> CstNode {
         ["name"],
       )
 
-      let name = @construction.first_child_with_label_from(children, "name").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let expr = @construction.first_child_with_label_from(children, "expr").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let semantic_name = @construction.first_child_with_label_from(
-        children, "semantic_name",
-      )
-      @node.CstNode::field_where(
-        loc~,
-        source_span~,
-        name~,
-        op~,
-        expr~,
-        semantic_name?,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::field_where_from_entries(loc~, source_span~, entries~)
     },
     children,
   )
