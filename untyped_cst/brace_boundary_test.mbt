@@ -14,6 +14,119 @@ fn brace_boundary_sources(expr : String) -> Array[String] {
 }
 
 ///|
+fn qualified_name_blocks(name : String) -> Array[String] {
+  [
+    "{ \{name} }",
+    "{ \{name}; }",
+    "{\n \{name}\n }",
+    "{\n // before 🐇\n \{name} // after\n }",
+    "{\n // before 🐇\n \{name}; // after\n }",
+  ]
+}
+
+///|
+test "package qualified names in blocks match across all parsers" {
+  for name in ["@cmd.none", "@html.nothing"] {
+    for block in qualified_name_blocks(name) {
+      for
+        source in [
+          "fn f() { let value = \{block}; value }",
+          "fn f() { let arrow = () => \{block}; arrow }",
+          "fn f() \{block}",
+          "fn f() { if true \{block} else \{block} }",
+          "fn f() { while true \{block} }",
+          "fn f() { for x in values \{block} }",
+          "fn f() { for i = 0; i < 1; i = i + 1 \{block} }",
+          "fn f() { match value { _ => \{block} } }",
+          "fn f() { lexmatch s { _ => \{block} } }",
+          "fn f() { lexscan s { _ => \{block} } }",
+        ] {
+        assert_ast_equiv(source, label=source)
+      }
+    }
+  }
+}
+
+///|
+test "package qualified block expressions retain both name tokens" {
+  for (pkg_text, ident) in [("@cmd", "none"), ("@html", "nothing")] {
+    for source in qualified_name_blocks(pkg_text + "." + ident) {
+      let parsed = @untyped_cst.parse_expression(source)
+      @test.assert_eq(parsed.diagnostics_view().length(), 0)
+      let block = parsed.root().first_child_with_label("expr").unwrap()
+      @test.assert_eq(block.kind is Expr_Block, true)
+      @test.assert_eq(block.text(source), source[:])
+      @test.assert_eq(block.source_span, (0, source.length()))
+      let body = block.first_child_with_label("body").unwrap()
+      guard body.children_with_label("item") is [item] else {
+        fail("expected a single block item: \{source}")
+      }
+      @test.assert_eq(item.kind is Expr_Ident, true)
+      guard item.children_with_label("name") is [pkg, id_token] else {
+        fail("expected both qualified name tokens: \{source}")
+      }
+      @test.assert_eq(pkg.kind is Syntax_Token(TK_PACKAGE_NAME), true)
+      @test.assert_eq(id_token.kind is Syntax_Token(TK_DOT_LIDENT), true)
+      @test.assert_eq(pkg.text(source), pkg_text[:])
+      @test.assert_eq(id_token.text(source), ident[:])
+      @test.assert_eq(item.text(source), (pkg_text + "." + ident)[:])
+      @test.assert_eq(
+        item.source_span,
+        (pkg.source_span.0, id_token.source_span.1),
+      )
+      // DOT_LIDENT locations begin after the dot, matching the lexer.
+      @test.assert_eq(pkg.source_span.1 + 1, id_token.source_span.0)
+      @test.assert_eq(item.loc.start, pkg.loc.start)
+      @test.assert_eq(item.loc.end, id_token.loc.end)
+      if source.contains("// before") {
+        for comment in ["// before 🐇", "// after"] {
+          @test.assert_eq(
+            api_find_node(block, n => {
+              n.kind is Syntax_Token(TK_COMMENT) && n.text(source) == comment[:]
+            })
+            is Some(_),
+            true,
+          )
+        }
+      }
+      assert_handrolled_cst_node_source_invariants(
+        "qualified block",
+        "root",
+        parsed.root(),
+        source,
+        "",
+      )
+    }
+  }
+}
+
+///|
+test "single unqualified names remain record puns" {
+  for name in ["x", "extend"] {
+    for source in ["{ \{name} }", "{ \{name}; }"] {
+      let parsed = @untyped_cst.parse_expression(source)
+      @test.assert_eq(parsed.diagnostics_view().length(), 0)
+      let record = parsed.root().first_child_with_label("expr").unwrap()
+      @test.assert_eq(record.kind is Expr_Record, true)
+      let body = record.first_child_with_label("body").unwrap()
+      guard body.children_with_label("item") is [field] else {
+        fail("expected a single record field: \{source}")
+      }
+      @test.assert_eq(field.kind is Field_Definition, true)
+      @test.assert_eq(
+        field.first_child_with_label("name").unwrap().text(source),
+        name[:],
+      )
+      @test.assert_eq(
+        field.first_child_with_label("pun").unwrap().bool_payload(),
+        Some(true),
+      )
+      assert_ast_equiv("fn f() { let value = \{source}; value }", label=source)
+    }
+  }
+}
+
+///|
 test "brace operands and body boundaries across control flow headers" {
   let operands = [
     "{ \"key\": value }", "{}", "{ field: value }", "{ field }", "{ ..base, field: value }",

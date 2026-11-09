@@ -12,6 +12,7 @@ fn parse_if_expr(state : ParserState) -> CstNode {
     [TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    level=Infix,
     before_body=true,
   )
   push_child(
@@ -206,6 +207,7 @@ fn parse_keyword_body_expr(
     [TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    level=Infix,
     before_body=true,
   )
   push_child(
@@ -944,6 +946,7 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
     | WHILE
     | FOR
     | POST_LABEL(_)
+    | POST_LABEL_TRANSPARENT(_)
     | GUARD
     | GUARD_EXCLAMATION
     | TRY
@@ -952,7 +955,8 @@ fn token_can_start_for_condition(tok : Token) -> Bool {
     | TRY_EXCLAMATION
     | FORALL
     | EXISTS
-    | LEXSCAN => true
+    | LEXSCAN
+    | LEXMATCH => true
     _ => false
   }
 }
@@ -1023,6 +1027,7 @@ fn parse_c_style_for_expr(state : ParserState) -> CstNode {
       if !cond.children.is_empty() {
         push_child(children, Some("cond"), cond)
       }
+      push_children(children, state.consume_trivia())
     }
     if init_had_error && state.current_is(TK_SEMI) {
       state.report_expected_description("simple expression")

@@ -335,7 +335,7 @@ None Expression loc={ fname: "", lnum: 1, bol: 0, cnum: 0 },{ fname: "", lnum: 1
   Some("expr") Expr_Map loc={ fname: "", lnum: 1, bol: 0, cnum: 0 },{ fname: "", lnum: 1, bol: 0, cnum: 8 } span=(0, 8)
     Some("body") List_MapFieldList loc={ fname: "", lnum: 1, bol: 0, cnum: 0 },{ fname: "", lnum: 1, bol: 0, cnum: 8 } span=(0, 8)
       Some("open") Syntax_Token("{") loc={ fname: "", lnum: 1, bol: 0, cnum: 0 },{ fname: "", lnum: 1, bol: 0, cnum: 1 } span=(0, 1)
-      Some("item") Field_MapExpression loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 6 } span=(2, 6)
+      Some("item") Field_MapExpression loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 7 } span=(2, 7)
         Some("key") Syntax_Token("STRING") loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 5 } span=(2, 5)
           Some("constant") Constant_String loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 5 } span=(2, 5)
             Some("payload") Leaf(String("k")) loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 5 } span=(2, 5)
@@ -343,9 +343,10 @@ None Expression loc={ fname: "", lnum: 1, bol: 0, cnum: 0 },{ fname: "", lnum: 1
         Some("constant") Constant_String loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 5 } span=(2, 5)
           Some("payload") Leaf(String("k")) loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 5 } span=(2, 5)
         Some("op") Syntax_Token(":") loc={ fname: "", lnum: 1, bol: 0, cnum: 5 },{ fname: "", lnum: 1, bol: 0, cnum: 6 } span=(5, 6)
+        Some("expr") Expr_MissingExpr loc={ fname: "", lnum: 1, bol: 0, cnum: 7 },{ fname: "", lnum: 1, bol: 0, cnum: 7 } span=(7, 7)
         Some("semantic_constant") Constant_String loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 5 } span=(2, 5)
           Some("payload") Leaf(String("k")) loc={ fname: "", lnum: 1, bol: 0, cnum: 2 },{ fname: "", lnum: 1, bol: 0, cnum: 5 } span=(2, 5)
       Some("close") Syntax_Token("}") loc={ fname: "", lnum: 1, bol: 0, cnum: 7 },{ fname: "", lnum: 1, bol: 0, cnum: 8 } span=(7, 8)
       Some("trailing") TrailingMark_None loc={ fname: "", lnum: 1, bol: 0, cnum: 8 },{ fname: "", lnum: 1, bol: 0, cnum: 8 } span=(8, 8)
   Some("eof") Syntax_Token("EOF") loc={ fname: "", lnum: 1, bol: 0, cnum: 8 },{ fname: "", lnum: 1, bol: 0, cnum: 8 } span=(8, 8)
-[]
+[{"type":"Error","loc":{"file":"","start":{"line":1,"column":8},"end":{"line":1,"column":9}},"msg":"Unexpected token `}`, you may expect simple expression."}]

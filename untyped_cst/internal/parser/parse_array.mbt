@@ -108,10 +108,7 @@ fn parse_list_comprehension_expr(
   } else {
     parse_list_comprehension_for_header(state, children, close_kind, for_loc)
   }
-  if state.abort_current_decl ||
-    state.current_in([TK_RPAREN, TK_RBRACE, TK_RBRACKET, TK_BAR_RBRACKET]) {
-    push_child(children, Some("body"), state.missing_expr_node())
-  } else if invalid_trailing_body {
+  if invalid_trailing_body && !state.abort_current_decl {
     let body = parse_invalid_list_comprehension_body(state, close_kind)
     if !body.children.is_empty() {
       push_child(children, Some("body"), body)
@@ -120,29 +117,33 @@ fn parse_list_comprehension_expr(
     if state.current_is(TK_IF) {
       if state.consume_any() is Some(kw) {
         push_child(children, Some("kw"), kw)
-      } else {
-        ()
       }
-      let guard_expr = parse_expr_until(state, [
-        TK_FAT_ARROW,
+      push_children(children, state.consume_trivia())
+      push_child(
+        children,
+        Some("guard"),
+        parse_required_expr_until(
+          state,
+          list_comprehension_expr_stops(close_kind),
+          infix_only=true,
+        ),
+      )
+    }
+    push_children(children, state.consume_trivia())
+    push_child(children, Some("op"), state.expect_token(TK_FAT_ARROW))
+    push_children(children, state.consume_trivia())
+    push_child(
+      children,
+      Some("body"),
+      parse_required_expr_until(state, [
         close_kind,
+        TK_RPAREN,
+        TK_RBRACE,
+        TK_RBRACKET,
+        TK_BAR_RBRACKET,
         TK_EOF,
-      ])
-      if !guard_expr.children.is_empty() {
-        push_child(children, Some("guard"), guard_expr)
-      }
-    }
-    if state.current_is(TK_FAT_ARROW) {
-      if state.consume_any() is Some(op) {
-        push_child(children, Some("op"), op)
-      } else {
-        ()
-      }
-    }
-    let body = parse_expr_until(state, [close_kind, TK_EOF])
-    if !body.children.is_empty() {
-      push_child(children, Some("body"), body)
-    }
+      ]),
+    )
   }
   push_children(children, state.consume_trivia())
   push_child(children, Some("close"), state.expect_token(close_kind))
@@ -278,10 +279,13 @@ fn parse_list_comprehension_foreach_header(
       ()
     }
   }
-  let expr = parse_expr_until(state, list_comprehension_expr_stops(close_kind))
-  if !expr.children.is_empty() {
-    push_child(children, Some("expr"), expr)
-  }
+  push_children(children, state.consume_trivia())
+  let expr = parse_required_expr_until(
+    state,
+    list_comprehension_expr_stops(close_kind),
+    infix_only=true,
+  )
+  push_child(children, Some("expr"), expr)
   if !list_comprehension_header_ends(state) {
     if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
       consume_for_header_separator(state, children)
@@ -444,7 +448,11 @@ fn parse_list_comprehension_binding(
   let expr = if preserve_decl_after_missing_body(state) {
     state.missing_expr_node()
   } else {
-    parse_expr_until(state, list_comprehension_binding_stops(close_kind))
+    parse_required_expr_until(
+      state,
+      list_comprehension_binding_stops(close_kind),
+      infix_only=true,
+    )
   }
   push_child(
     children,

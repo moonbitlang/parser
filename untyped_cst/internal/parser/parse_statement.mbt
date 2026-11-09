@@ -124,7 +124,7 @@ fn parse_statement(state : ParserState) -> CstNode {
       state.abort_current_decl = true
       parse_invalid_local_decl(state)
     }
-    _ => parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
+    _ => parse_expr_statement_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
   }
 }
 
@@ -230,6 +230,7 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
     [TK_ELSE, TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    level=Infix,
   )
   push_child(
     children,
@@ -323,7 +324,11 @@ fn parse_proof_assert_statement(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  let expr = parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
+  let expr = parse_required_expr_until(
+    state,
+    [TK_SEMI, TK_RBRACE, TK_EOF],
+    infix_only=true,
+  )
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
@@ -774,7 +779,8 @@ fn parse_block_expr(
   let list = parse_statement_list(state)
   let items = list.children_with_label("item")
   if classify_record_pun && items.length() == 1 && items[0].kind is Expr_Ident {
-    if items[0].first_child_with_label("name") is Some(name) {
+    if items[0].children_with_label("name")
+      is [{ kind: Syntax_Token(TK_LIDENT | TK_EXTEND), .. } as name] {
       let field = state.construct_from_children(
         fn(loc, source_span, children) {
           push_structured_name(

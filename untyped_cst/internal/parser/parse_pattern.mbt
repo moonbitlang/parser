@@ -679,6 +679,13 @@ fn parse_pattern_atom(
         parse_parenthesized_with_pattern(state)
       } else {
         let list = parse_constructor_pattern_args(state, tuple_pattern=true)
+        if list.children_with_label("item").length() == 1 &&
+          list.first_child_with_label("sep") is Some(comma) {
+          state.report(
+            comma.loc,
+            "A grouped pattern cannot have a trailing comma.",
+          )
+        }
         state.construct_from_children(
           fn(loc, source_span, children) {
             if list.children_with_label("item").length() == 1 {

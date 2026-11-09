@@ -91,6 +91,7 @@ let first_expr : Array[TokenKind] = [
   TK_LIDENT,
   TK_EXTEND,
   TK_LEXSCAN,
+  TK_LEXMATCH,
   TK_EXCLAMATION,
 ]
 

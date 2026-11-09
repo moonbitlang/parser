@@ -16,10 +16,24 @@ fn ParserState::consume_trivia_before(
 }
 
 ///|
-// Leave branch-boundary trivia for the enclosing control-flow parser.
+// Leave trivia at branch and closing boundaries for the enclosing parser.
 fn discard_expr_suffix_trivia(state : ParserState) -> Unit {
   match state.peek_significant() {
-    Some((CATCH | ELSE | NORAISE, _, _)) => ()
+    Some(
+      (
+        CATCH
+        | ELSE
+        | NORAISE
+        | SEMI(_)
+        | RPAREN
+        | RBRACKET
+        | BAR_RBRACKET
+        | RBRACE
+        | EOF,
+        _,
+        _,
+      )
+    ) => ()
     _ => discard_expr_trivia(state)
   }
 }

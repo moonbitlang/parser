@@ -1,4 +1,11 @@
 ///|
+priv enum ExprLevel {
+  Infix
+  Expression
+  Statement
+}
+
+///|
 /// Hard stops apply even when an operand is missing. A body brace only ends
 /// an expression after its operand has been parsed; it can itself be an operand.
 priv struct ExprBoundary {
@@ -322,8 +329,19 @@ fn hole_node_from_children(
 ///|
 fn invalid_arrow_parameter_expr(node : CstNode) -> CstNode? {
   match node.kind {
-    Expr_Ident | Expr_Hole | Expr_MissingExpr => None
-    kind if kind.is_argument() => None
+    Expr_Ident =>
+      match node.children_with_label("name") {
+        [{ kind: Syntax_Token(TK_LIDENT | TK_EXTEND), .. }] => None
+        _ => Some(node)
+      }
+    Expr_Hole =>
+      if node.first_child_with_label("token")
+        is Some({ kind: Syntax_Token(TK_UNDERSCORE), .. }) {
+        None
+      } else {
+        Some(node)
+      }
+    Expr_MissingExpr => None
     Expr_Constraint =>
       if node.first_child_with_label("expr") is Some(inner) {
         invalid_arrow_parameter_expr(inner)
@@ -352,10 +370,10 @@ fn parse_arrow_fn_body_expr(
     Some((CONTINUE, _, _)) if state.peek_nth_significant(1).map(item => item.0)
       is Some(POST_LABEL(_)) &&
       state.peek_nth_significant(2).map(item => item.0) is Some(COLON) =>
-      parse_expr_boundary(state, boundary)
+      parse_expr_statement_boundary(state, boundary)
     Some((BREAK | CONTINUE | RETURN, _, _)) =>
       parse_invalid_simple_expr(state, stop_kinds)
-    _ => parse_expr_boundary(state, boundary)
+    _ => parse_expr_statement_boundary(state, boundary)
   }
 }
 
@@ -366,9 +384,15 @@ fn parse_expr_with_context_restriction(
   context : String,
   disallowed : (Token) -> Bool,
   before_body~ : Bool = false,
+  level~ : ExprLevel = Expression,
 ) -> CstNode {
   let first = state.peek_significant().map(triple => triple.0)
-  let expr = parse_expr_boundary(state, { stop_kinds, before_body, })
+  let boundary = { stop_kinds, before_body, }
+  let expr = match level {
+    Infix => parse_expr_infix(state, boundary)
+    Expression => parse_expr_boundary(state, boundary)
+    Statement => parse_expr_statement_boundary(state, boundary)
+  }
   match first {
     Some(tok) if disallowed(tok) =>
       if unexpected_expr_or_statement_name(tok) is Some(actual) {
@@ -392,7 +416,11 @@ fn parse_pattern_guard_expr(
       parse_invalid_simple_expr(state, stop_kinds)
     _ =>
       parse_expr_with_context_restriction(
-        state, stop_kinds, "pattern guard", token_disallowed_in_pattern_guard,
+        state,
+        stop_kinds,
+        "pattern guard",
+        token_disallowed_in_pattern_guard,
+        level=Infix,
       )
   }
 }
@@ -518,7 +546,7 @@ fn parse_expr_fragment_item(state : ParserState) -> CstNode {
     discard_expr_trivia(state)
     parse_local_function_statement(state, [TK_SEMI, TK_EOF])
   } else {
-    parse_expr_until(state, [TK_EOF])
+    parse_expr_statement_until(state, [TK_EOF])
   }
 }
 
@@ -530,6 +558,25 @@ fn parse_expr_until(
 ) -> CstNode {
   let _ = allow_argument_label_question
   parse_expr_boundary(state, { stop_kinds, before_body: false, })
+}
+
+///|
+fn parse_required_expr_until(
+  state : ParserState,
+  stop_kinds : Array[TokenKind],
+  infix_only~ : Bool = false,
+) -> CstNode {
+  discard_expr_trivia(state)
+  let reports_before = state.reports.length()
+  let expr = if state.abort_current_decl ||
+    preserve_decl_after_missing_body(state) {
+    state.missing_expr_node()
+  } else if infix_only {
+    parse_expr_infix(state, { stop_kinds, before_body: false, })
+  } else {
+    parse_expr_until(state, stop_kinds)
+  }
+  state.required_expr_node(expr, reports_before)
 }
 
 ///|
@@ -610,64 +657,82 @@ fn parse_expr_catch_suffix(
 }
 
 ///|
-fn parse_expr_pipe(state : ParserState, boundary : ExprBoundary) -> CstNode {
+fn parse_expr_statement_boundary(
+  state : ParserState,
+  boundary : ExprBoundary,
+) -> CstNode {
   let reports_before_lhs = state.reports.length()
+  let lhs = parse_expr_boundary(state, boundary)
+  discard_expr_suffix_trivia(state)
+  match state.peek() {
+    Some((tok, _, _)) if boundary.ends_expression(tok) => lhs
+    Some((EQUAL | PLUS_EQUAL | AUGMENTED_ASSIGNMENT(_), _, _)) => {
+      let normalize_lhs = state.reports.length() == reports_before_lhs &&
+        assignment_lhs_is_valid(lhs)
+      if state.reports.length() == reports_before_lhs && !normalize_lhs {
+        state.report(lhs.loc, "Invalid left value in assignment")
+      }
+      let is_augmented = !state.current_is(TK_EQUAL)
+      let assignment_builder = assignment_node_builder(lhs, is_augmented)
+      let children : Array[(String?, CstNode)] = []
+      push_assignment_lhs_children(children, lhs, normalize_lhs)
+      if state.consume_any() is Some(op) {
+        push_child(children, Some("op"), op)
+        push_direct_operator(children, op)
+      } else {
+        ()
+      }
+      let reports_before_rhs = state.reports.length()
+      let rhs = parse_expr_boundary(state, boundary)
+      push_child(
+        children,
+        Some("rhs"),
+        state.required_expr_node(rhs, reports_before_rhs),
+      )
+      state.construct_from_children(
+        fn(loc, source_span, children) {
+          push_bool_marker(
+            children,
+            loc,
+            source_span,
+            "augmented",
+            fn(loc, source_span, children) {
+              let value = match @construction.payload_from_children(children) {
+                Some(Bool(value)) => value
+                _ => false
+              }
+              @node.CstNode::flag_augmented(value~, loc~, source_span~)
+            },
+            is_augmented,
+          )
+          assignment_builder(loc, source_span, children)
+        },
+        children,
+      )
+    }
+    _ => lhs
+  }
+}
+
+///|
+fn parse_expr_statement_until(
+  state : ParserState,
+  stop_kinds : Array[TokenKind],
+) -> CstNode {
+  parse_expr_statement_boundary(state, { stop_kinds, before_body: false, })
+}
+
+///|
+fn parse_expr_pipe(state : ParserState, boundary : ExprBoundary) -> CstNode {
   let mut lhs = parse_expr_infix(state, boundary)
   let mut pipe_mode = 0 // 0: none, 1: forward, 2: reverse
   let invalid_children : Array[(String?, CstNode)] = []
-  let mut done = false
+  let mut done = expr_stops_infix_chain(lhs)
   while !done {
     discard_expr_suffix_trivia(state)
     match state.peek() {
       Some((tok, _, _)) if boundary.ends_expression(tok) => done = true
       Some((COLON, _, _)) => done = true
-      Some((EQUAL, _, _))
-      | Some((PLUS_EQUAL, _, _))
-      | Some((AUGMENTED_ASSIGNMENT(_), _, _)) => {
-        let normalize_lhs = state.reports.length() == reports_before_lhs &&
-          assignment_lhs_is_valid(lhs)
-        if state.reports.length() == reports_before_lhs && !normalize_lhs {
-          state.report(lhs.loc, "Invalid left value in assignment")
-        }
-        let is_augmented = !state.current_is(TK_EQUAL)
-        let assignment_builder = assignment_node_builder(lhs, is_augmented)
-        let children : Array[(String?, CstNode)] = []
-        push_assignment_lhs_children(children, lhs, normalize_lhs)
-        if state.consume_any() is Some(op) {
-          push_child(children, Some("op"), op)
-          push_direct_operator(children, op)
-        } else {
-          ()
-        }
-        let reports_before_rhs = state.reports.length()
-        let rhs = parse_expr_boundary(state, boundary)
-        push_child(
-          children,
-          Some("rhs"),
-          state.required_expr_node(rhs, reports_before_rhs),
-        )
-        lhs = state.construct_from_children(
-          fn(loc, source_span, children) {
-            push_bool_marker(
-              children,
-              loc,
-              source_span,
-              "augmented",
-              fn(loc, source_span, children) {
-                let value = match
-                  @construction.payload_from_children(children) {
-                  Some(Bool(value)) => value
-                  _ => false
-                }
-                @node.CstNode::flag_augmented(value~, loc~, source_span~)
-              },
-              is_augmented,
-            )
-            assignment_builder(loc, source_span, children)
-          },
-          children,
-        )
-      }
       Some((PIPE, _, _)) | Some((PIPE_LEFT, _, _)) => {
         let pipe_kind = if state.current_is(TK_PIPE_LEFT) {
           TokenKind::TK_PIPE_LEFT
@@ -807,7 +872,7 @@ fn parse_pipe_rhs(state : ParserState, boundary : ExprBoundary) -> CstNode {
   let head = parse_expr_infix(state, boundary)
   discard_expr_suffix_trivia(state)
   match state.peek() {
-    Some((FAT_ARROW, _, _)) => {
+    Some((FAT_ARROW, _, _)) if arrow_lhs_can_start_function(head) => {
       let children : Array[(String?, CstNode)] = [
         (Some("params"), parse_arrow_params_from_expr(head)),
       ]
@@ -1078,6 +1143,21 @@ fn append_arrow_argument_syntax(
 
 ///|
 fn parse_arrow_param_from_expr(expr : CstNode) -> CstNode {
+  if invalid_arrow_parameter_expr(expr) is Some(_) {
+    return node(
+      fn(loc, source_span, children) {
+        @node.CstNode::parameter_positional(
+          loc~,
+          source_span~,
+          entries=recovery_children(children),
+        )
+      },
+      expr.loc,
+      expr.source_span,
+      [(Some("error"), expr)],
+    )
+  }
+
   let source = if expr.kind is Expr_Constraint {
     expr
     .first_child_with_label("expr")
@@ -1227,6 +1307,8 @@ fn expr_stops_infix_chain(expr : CstNode) -> Bool {
     | Expr_Defer
     | Expr_ErrDefer
     | Expr_Guard
+    | Expr_ProofAssert
+    | Expr_ProofLet
     | Expr_Quantifier => true
     _ => false
   }

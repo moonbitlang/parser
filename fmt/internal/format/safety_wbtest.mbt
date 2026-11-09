@@ -153,6 +153,35 @@ test "invalid or recovered input is returned byte-for-byte" {
 }
 
 ///|
+test "parser consistency errors are returned byte-for-byte" {
+  for newline in ["\n", "\r\n"] {
+    for
+      expr in [
+        "if (x = 1) {}", "if ((x = 1)) {}", "{x:}", "{\"x\":}", "{..}", "[for x in xs]",
+        "[for x in xs =>]", "[|for x in => x|]", "[|for x in xs if => x|]", "let y = x = 1",
+        "g(x += 1)", "x = y = 1", "if x |> pred {}", "while x |> pred {}", "match x |> pred { _ => () }",
+        "(x~) => x", "(x?) => x", "(x=1) => x", "let (x,) = y",
+      ] {
+      let source = "// keep 🐇" +
+        newline +
+        "fn  f() { " +
+        expr +
+        " }" +
+        newline +
+        "fn after(){}"
+      assert_eq(format(source, block_line=false), source)
+    }
+    for
+      source in [
+        "type T = (Int,)", "fn f() { if (x =", "fn f() { [for x in xs if",
+      ] {
+      let source = source + " // EOF 🦀" + newline
+      assert_eq(format(source, block_line=false), source)
+    }
+  }
+}
+
+///|
 test "checkpoint mapper preserves the ordinary comment matrix" {
   let source =
     #|// file header

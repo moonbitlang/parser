@@ -322,6 +322,11 @@ fn parse_paren_type(
       @node.CstNode::type_tuple(loc~, source_span~, body~)
     }
   }
+  if item_count == 1 &&
+    !(state.peek_significant().map(item => item.0) is Some(THIN_ARROW)) &&
+    list.first_child_with_label("sep") is Some(comma) {
+    state.report(comma.loc, "A grouped type cannot have a trailing comma.")
+  }
   if item_count == 0 &&
     !(state.peek_significant().map(item => item.0) is Some(THIN_ARROW)) {
     state.report_expected_tokens([TK_THIN_ARROW])
