@@ -1,0 +1,29 @@
+/// old
+///|
+///|UUID(x)
+//// top 🐇
+///// detail
+let value = 1
+
+/// first
+  ///| indented
+/// last
+let indented = 2
+
+///|
+///|
+struct S {
+/// old field
+  ///|UUID(field)
+//// field
+x: Int
+}
+
+////| first
+////| second
+enum E {
+/// discarded
+  ///| selected
+//// constructor
+C
+}
