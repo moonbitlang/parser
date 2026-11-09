@@ -340,7 +340,9 @@ fn pattern_starts_constr_any(state : ParserState) -> Bool {
 fn parse_constr_any_pattern(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("type"), parse_type_name_node(state))
+  push_children(children, state.consume_trivia())
   push_child(children, Some("op"), state.expect_token(TK_COLONCOLON))
+  push_children(children, state.consume_trivia())
   let is_unknown = state.current_is(TK_DOTDOT)
   push_child(
     children,
@@ -385,7 +387,7 @@ fn finish_constructor_pattern(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> CstNode {
-  if state.current_is(TK_LPAREN) {
+  if state.consume_trivia_before(children, [TK_LPAREN]) {
     push_child(children, Some("params"), parse_constructor_pattern_args(state))
   }
   state.construct_from_children(
@@ -437,7 +439,9 @@ fn finish_constructor_pattern(
 fn parse_object_constructor_pattern(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   push_child(children, Some("type"), parse_type_name_node(state))
+  push_children(children, state.consume_trivia())
   push_child(children, Some("op"), state.expect_token(TK_COLONCOLON))
+  push_children(children, state.consume_trivia())
   match state.peek() {
     Some((UIDENT(_), _, _)) =>
       if state.consume_any() is Some(name) {
@@ -462,6 +466,10 @@ fn parse_object_constructor_pattern(state : ParserState) -> CstNode {
       } else {
         ()
       }
+      let _ = state.consume_trivia_before(children, [
+        TK_DOT_UIDENT,
+        TK_DOT_LIDENT,
+      ])
       match state.peek() {
         Some((DOT_UIDENT(_), _, _)) =>
           if state.consume_any() is Some(name) {
@@ -611,6 +619,10 @@ fn parse_pattern_atom(
       } else {
         ()
       }
+      let _ = state.consume_trivia_before(children, [
+        TK_DOT_UIDENT,
+        TK_DOT_LIDENT,
+      ])
       match state.peek() {
         Some((DOT_UIDENT(_), _, _)) | Some((DOT_LIDENT(_), _, _)) =>
           if state.consume_any() is Some(name) {
@@ -620,12 +632,13 @@ fn parse_pattern_atom(
           }
         _ => ()
       }
-      if state.current_is(TK_COLONCOLON) {
+      if state.consume_trivia_before(children, [TK_COLONCOLON]) {
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
         } else {
           ()
         }
+        push_children(children, state.consume_trivia())
         match state.peek() {
           Some((LIDENT(name), start, end)) => {
             state.report(
@@ -645,6 +658,10 @@ fn parse_pattern_atom(
               ()
             }
         }
+        let _ = state.consume_trivia_before(children, [
+          TK_DOT_UIDENT,
+          TK_DOT_LIDENT,
+        ])
         match state.peek() {
           Some((DOT_UIDENT(_), _, _)) | Some((DOT_LIDENT(_), _, _)) =>
             if state.consume_any() is Some(name) {

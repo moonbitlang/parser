@@ -1,4 +1,53 @@
 ///|
+// Typed constructors omit trivia fields. Retain the parser's direct comments
+// without changing their public signatures or duplicating entry-based trivia.
+#internal(internal, "For untyped_cst parser implementation only")
+#doc(hidden)
+pub fn CstNode::preserve_trivia(
+  self : CstNode,
+  entries : ArrayView[(String?, CstNode)],
+) -> CstNode {
+  let missing : Array[(String?, CstNode)] = []
+  let mut seen = 0
+  // Direct comments in both sequences are in source order. Scan once even for
+  // large declaration/statement lists whose constructors already retain them.
+  for entry in entries {
+    if entry.0 != Some("trivia") {
+      continue
+    }
+    while seen < self.children.length() &&
+          (
+            self.children[seen].0 != Some("trivia") ||
+            self.children[seen].1.source_span.0 < entry.1.source_span.0
+          ) {
+      seen += 1
+    }
+    if seen == self.children.length() ||
+      self.children[seen].1.source_span != entry.1.source_span {
+      missing.push(entry)
+    }
+  }
+  if missing.is_empty() {
+    return self
+  }
+  let children : Array[(String?, CstNode)] = []
+  let mut i = 0
+  for entry in self.children {
+    while i < missing.length() &&
+          missing[i].1.source_span.0 < entry.1.source_span.0 {
+      children.push(missing[i])
+      i += 1
+    }
+    children.push(entry)
+  }
+  while i < missing.length() {
+    children.push(missing[i])
+    i += 1
+  }
+  node(self.kind, self.loc, self.source_span, children)
+}
+
+///|
 // Preserve syntax order and comments at this grammar boundary.
 #internal(internal, "For untyped_cst parser implementation only")
 #doc(hidden)

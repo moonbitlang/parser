@@ -2,6 +2,102 @@
 // Each pair isolates one grammar boundary. Gaps never contain semicolons.
 fn trivia_boundaries() -> Array[(String, String)] {
   [
+    ("fn f() { try g()", "catch { _ => () } }"),
+    ("fn f() { try g() catch", "{ _ => () } }"),
+    ("fn f() { try g() catch { _ => () }", "noraise { x => x } }"),
+    ("fn f() { g()", "catch { _ => () } }"),
+    ("fn f() { g() catch", "{ _ => () } }"),
+    ("fn f() { g() catch { _ => () }", "noraise { x => x } }"),
+    ("fn f() { if true {} else", "{} }"),
+    ("fn f() { if true {} else", "if false {} else {} }"),
+    ("fn f() { guard true", "else {} }"),
+    ("fn f() { guard true else", "{} }"),
+    ("fn f() { guard! true else", "{} }"),
+    ("let f = fn", "(x) { x }"),
+    ("let f = async", "fn(x) { x }"),
+    ("let f = fn(x)", "-> Int { x }"),
+    ("fn f() { let", "mut x = 1; x }"),
+    ("fn f() { let mut", "x = 1; x }"),
+    ("fn f() { let x: Int", "= 1; x }"),
+    ("fn f() { let mut x: Int", "= 1; x }"),
+    ("fn f() { proof_let", "x = 1; x }"),
+    ("fn f() { proof_let x", "= 1; x }"),
+    ("fn f() { proof_let x =", "1; x }"),
+    ("fn f() { proof_let", "extend = 1; extend }"),
+    ("fn f() { label~", ": {} }"),
+    ("fn f() { label~~", ": {} }"),
+    ("fn f() { label~", ": while true {} }"),
+    ("fn f() { label~", ": for ;; {} }"),
+    ("fn f() { continue label~", ": for ;; {} }"),
+    ("fn f() { continue label~~", ": {} }"),
+    ("fn f() { proof_assert ∀", "x: Int, x == x }"),
+    ("fn f() { proof_assert ∀ x", ": Int, x == x }"),
+    ("fn f() { proof_assert ∀ x:", "Int, x == x }"),
+    ("fn f() { proof_assert ∀ x: Int", ", x == x }"),
+    ("fn f() { proof_assert ∀ x: Int,", "x == x }"),
+    ("fn f() { proof_assert ∀ extend: Int,", "∀ y: Int, extend == y }"),
+    ("fn f() { proof_assert ∃", "x: Int, x == x }"),
+    ("fn f() { proof_assert ∃ x", ": Int, x == x }"),
+    ("fn f() { proof_assert ∃ x:", "Int, x == x }"),
+    ("fn f() { proof_assert ∃ x: Int", ", x == x }"),
+    ("fn f() { proof_assert ∃ x: Int,", "x == x }"),
+    ("fn f() { proof_assert ∃ extend: Int,", "∀ y: Int, extend == y }"),
+    ("let xs = [for", "i = 0; i < 2; i = i + 1 => i]"),
+    ("let xs = [for i", "= 0; i < 2; i = i + 1 => i]"),
+    ("let xs = [for i =", "0; i < 2; i = i + 1 => i]"),
+    ("let xs = [for i = 0; i < 2; i", "= i + 1 => i]"),
+    ("let xs = [for x in xs; extend", "= 0; extend = extend + 1 => x]"),
+    ("let xs = [for x in xs; extend = 0; extend", "= extend + 1 => x]"),
+    ("let xs = [|for", "i = 0; i < 2; i = i + 1 => i|]"),
+    ("let xs = [|for i", "= 0; i < 2; i = i + 1 => i|]"),
+    ("let xs = [|for i =", "0; i < 2; i = i + 1 => i|]"),
+    ("let xs = [|for i = 0; i < 2; i", "= i + 1 => i|]"),
+    ("let xs = [|for x in xs; extend", "= 0; extend = extend + 1 => x|]"),
+    ("let xs = [|for x in xs; extend = 0; extend", "= extend + 1 => x|]"),
+    ("fn f() { g(x", "= 1) }"),
+    ("fn f() { g(x", "?= value) }"),
+    ("fn f() { g(x?", "= value) }"),
+    ("fn f() { g(x~", ", y=2) }"),
+    ("fn f() { letrec", "f = x => x; f(1) }"),
+    ("fn f() { letrec f", ": (Int) -> Int = x => x; f(1) }"),
+    ("fn f() { letrec f", "= x => x; f(1) }"),
+    ("fn f() { letrec f = x => x and", "g = x => x; g(1) }"),
+    ("fn f() { while true {}", "nobreak {} }"),
+    ("fn f() { while true {} nobreak", "{} }"),
+    ("fn f() { for i = 0; i < 2; i = i + 1 {}", "nobreak {} }"),
+    ("fn f() { for x in xs {}", "where { invariant: true } }"),
+    ("fn f() { for x in xs {} nobreak", "{} }"),
+    (
+      "fn f() { for i = 0; i < 2; i = i + 1 {} nobreak {}", "where { invariant: true } }",
+    ),
+    ("fn f(x: Int", "?) {}"),
+    ("fn f(x: (Int)", "?) {}"),
+    ("type F = ()", "-> Int"),
+    ("type F = (Int)", "-> Int"),
+    ("fn f() -> Int raise E +", "nocancel {}"),
+    ("fn f(x: &", "T) {}"),
+    ("fn f(x:", "Array[Int]) {}"),
+    ("fn f(x:", "Int?) {}"),
+    ("fn f(x:", "(Int)?) {}"),
+    ("fn f() { match x { T", "::C => () } }"),
+    ("fn f() { match x { T::", "C => () } }"),
+    ("fn f() { match x { @p", " .T::C => () } }"),
+    ("fn f() { match x { T", "::_ => () } }"),
+    ("fn f() { match x { T::", ".. => () } }"),
+    ("fn T::", "f(self: T) {}"),
+    ("let r = {x", ": 1}"),
+    ("using @p { type", "T }"),
+    ("using @p { f", "as g }"),
+    ("using @p { f as", "g }"),
+    ("impl T for S with", "fn f(self: S) {}"),
+    ("impl T for S with fn f(self: S)", "-> Int { 0 }"),
+    ("struct S { fn new(x: Int)", "-> S }"),
+    ("let r = &", "T::f"),
+    ("using", "@p { f }"),
+    ("fn f() { for i = 0;", "i < 2; i = i + 1 {} }"),
+    ("fn f() { for i = 0; i < 2;", "i = i + 1 {} }"),
+    ("fn f() { for x in xs;", "i = 0 { x } }"),
+    ("let xs = [for i = 0;", "i < 2; i = i + 1 => i]"),
     ("fn f(x", ": Int) {}"),
     ("fn f(x~", ": Int) {}"),
     ("fn f(x", "?: Int) {}"),
@@ -76,6 +172,7 @@ fn assert_boundary_comments(
   gap : String,
 ) -> Unit raise {
   let parsed = @untyped_cst.parse_structure(source)
+  boundary_assert_source(parsed.root(), source)
   let comments = []
   boundary_comments(parsed.root(), comments)
   let expected = if gap.contains("// two") {
@@ -106,5 +203,61 @@ fn assert_boundary_comments(
     offset += text.length() + newline.length() + 1
     cnum += width + newline.length() + 1
     bol = cnum - 1
+  }
+}
+
+///|
+test "trivia cannot hide separators or missing required syntax" {
+  for newline in ["\n", "\r\n"] {
+    for
+      broken in [
+        "fn f() { try g() catch {} noraise // keep" + newline + "{} }",
+        "fn f() { g() catch {} noraise // keep" + newline + "{} }",
+        "let f = fn(x) // keep" + newline + "{ x }",
+        "let f = fn(x) -> Int // keep" + newline + "{ x }",
+        "fn f() { g(); catch {} }",
+        "fn f() { try g() catch {}; noraise {} }",
+        "fn f() { if true {} else; {} }",
+        "fn f() { guard true else; {} }",
+        "let f = fn; (x) { x }",
+        "fn f() { let; mut x = 1 }",
+        "fn f() { let x: Int; = 1 }",
+        "let xs = [for i; = 0 => i]",
+        "fn f() { proof_assert ∀ x;: Int, true }",
+        "fn f() { proof_let x; = 1 }",
+        "fn f() { label~;: {} }",
+        "fn f() { label~~: while true {} }",
+        "fn f() { label~~: for ;; {} }",
+        "let r = f(x; = 1)",
+        "let r = f(x?; = 1)",
+        "fn f() { letrec // keep" + newline + " = x => x }",
+        "fn f() { letrec f = x => x and // keep" + newline + " = x => x }",
+        "using // keep" + newline + "; @p { f }",
+        "using @p { f as // keep" + newline + "}",
+        "using @p { type T as // keep" + newline + "}",
+        "fn f() { while true {} nobreak // keep" + newline + "; }",
+        "fn f() { for x in xs {} nobreak // keep" + newline + "; }",
+        "fn f() { for i = 0 {} nobreak // keep" + newline + "; }",
+        "fn T:: // keep" + newline + "() {}",
+        "type T = () // keep" + newline,
+        "type T = & // keep" + newline + ";",
+        "type T = (Int) -> Int // keep" + newline + "raise E",
+        "type T = (Int) -> Int raise // keep" + newline + "E",
+        "fn f() { while true {}; nobreak {} }",
+        "fn f() { for x in xs {}; where { invariant: true } }",
+        "fn f(x: // keep" + newline + "Int -> Int) {}",
+      ] {
+      let source = broken + newline + "fn later() {}"
+      assert_all_parsers_reject(source)
+      let parsed = @untyped_cst.parse_structure(source)
+      boundary_assert_source(parsed.root(), source)
+      guard api_find_node(parsed.root(), node => {
+          node.kind.is_impl() && node.text(source) == "fn later() {}"[:]
+        })
+        is Some(_) else {
+        fail("recovery lost the following declaration: " + source)
+      }
+    }
+    assert_ast_equiv("fn f() { first() // keep" + newline + "second() }")
   }
 }

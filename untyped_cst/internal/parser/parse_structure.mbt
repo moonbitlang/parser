@@ -127,7 +127,7 @@ fn ParserState::construct_from_children(
 ) -> CstNode {
   // Fix the syntax range before the builder appends semantic children.
   let (loc, source_span) = self.node_from_children(children)
-  node(builder, loc, source_span, children)
+  node(builder, loc, source_span, children).preserve_trivia(children)
 }
 
 ///|

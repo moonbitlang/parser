@@ -22,37 +22,46 @@ fn parse_quantifier_expr(
   } else {
     ()
   }
-  match state.peek() {
-    Some((LIDENT(_), _, _)) | Some((UIDENT(_), _, _)) =>
-      if state.consume_any() is Some(name) {
-        push_child(children, Some("name"), name)
-      } else {
-        ()
-      }
-    _ => ()
+  parse_required_binder(state, children)
+  push_children(children, state.consume_trivia())
+  push_child(children, Some("op"), state.expect_token(TK_COLON))
+  push_children(children, state.consume_trivia())
+  let boundary : ExprBoundary = {
+    stop_kinds: [
+      TK_RPAREN,
+      TK_RBRACKET,
+      TK_BAR_RBRACKET,
+      TK_RBRACE,
+      ..boundary.stop_kinds,
+    ],
+    before_body: boundary.before_body,
   }
-  if state.current_is(TK_COLON) {
-    if state.consume_any() is Some(colon) {
-      push_child(children, Some("op"), colon)
-    } else {
-      ()
-    }
-    let ty = parse_type_arrow(state, [TK_COMMA, TK_EOF])
-    if !ty.children.is_empty() {
-      push_child(children, Some("type"), ty)
-    }
+  let type_stops : Array[TokenKind] = [TK_COMMA, ..boundary.stop_kinds]
+  let reports_before_type = state.reports.length()
+  let ty = if preserve_decl_after_missing_body(state) {
+    state.missing_type_node()
+  } else {
+    parse_type_arrow(state, type_stops)
   }
-  if state.current_is(TK_COMMA) {
-    if state.consume_any() is Some(sep) {
-      push_child(children, Some("sep"), sep)
-    } else {
-      ()
-    }
+  push_child(
+    children,
+    Some("type"),
+    state.required_type_node(ty, reports_before_type),
+  )
+  push_children(children, state.consume_trivia())
+  push_child(children, Some("sep"), state.expect_token(TK_COMMA))
+  push_children(children, state.consume_trivia())
+  let reports_before_body = state.reports.length()
+  let body = if preserve_decl_after_missing_body(state) {
+    state.missing_expr_node()
+  } else {
+    parse_expr_boundary(state, boundary)
   }
-  let body = parse_expr_boundary(state, boundary)
-  if !body.children.is_empty() {
-    push_child(children, Some("body"), body)
-  }
+  push_child(
+    children,
+    Some("body"),
+    state.required_expr_node(body, reports_before_body),
+  )
   state.construct_from_children(
     fn(loc, source_span, children) {
       push_marker_child(
@@ -311,6 +320,7 @@ fn parse_function_expr(
       ()
     }
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_FN) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
@@ -318,6 +328,7 @@ fn parse_function_expr(
       ()
     }
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_EXCLAMATION) {
     if state.consume_error_for_progress() is Some(error) {
       push_child(children, Some("error"), error)
@@ -348,12 +359,15 @@ fn parse_function_expr(
   if state.current_is(TK_LPAREN) {
     push_child(children, Some("params"), parse_parameter_list(state))
   }
-  if state.current_is(TK_THIN_ARROW) ||
-    state.current_is(TK_RAISE) ||
-    state.current_is(TK_NORAISE) ||
-    state.current_is(TK_NOCANCEL) {
+  if state.consume_trivia_before(children, [
+      TK_THIN_ARROW,
+      TK_RAISE,
+      TK_NORAISE,
+      TK_NOCANCEL,
+    ]) {
     push_child(children, Some("type"), parse_func_return_type(state))
   }
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
   } else {
@@ -368,6 +382,21 @@ fn parse_function_expr(
     let _ = children
     @node.CstNode::fn_kind_lambda(loc~, source_span~)
   })
+}
+
+///|
+fn parse_required_case_block(
+  state : ParserState,
+  children : Array[(String?, CstNode)],
+) -> CstNode {
+  push_children(children, state.consume_trivia())
+  if state.current_is(TK_LBRACE) {
+    parse_case_block(state)
+  } else {
+    let missing = state.missing_token_node(TK_LBRACE)
+    let _ = preserve_decl_after_missing_body(state)
+    missing
+  }
 }
 
 ///|

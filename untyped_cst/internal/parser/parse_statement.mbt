@@ -24,6 +24,7 @@ fn parse_let_statement(state : ParserState) -> CstNode {
       }
     _ => ()
   }
+  let _ = state.consume_trivia_before(children, [TK_MUTABLE])
   match state.peek() {
     Some((MUTABLE, _, _)) =>
       if state.consume_any() is Some(mut_token) {
@@ -64,6 +65,7 @@ fn parse_let_statement(state : ParserState) -> CstNode {
       state.required_type_node(ty, reports_before_type),
     )
   }
+  push_children(children, state.consume_trivia())
   let reports_before_value = state.reports.length()
   let has_equal = state.current_is(TK_EQUAL)
   push_child(children, Some("op"), state.expect_token(TK_EQUAL))
@@ -234,14 +236,18 @@ fn parse_guard_statement(state : ParserState) -> CstNode {
     Some("cond"),
     state.required_expr_node(cond, reports_before_cond),
   )
-  if state.current_is(TK_ELSE) {
+  if state.consume_trivia_before(children, [TK_ELSE]) {
     if state.consume_any() is Some(else_kw) {
       push_child(children, Some("kw"), else_kw)
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
+    } else {
+      push_child(children, Some("else"), state.missing_token_node(TK_LBRACE))
+      let _ = preserve_decl_after_missing_body(state)
     }
   }
   state.construct_from_children(
@@ -343,26 +349,28 @@ fn parse_proof_let_statement(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  match state.peek() {
-    Some((LIDENT(_), _, _)) | Some((UIDENT(_), _, _)) =>
-      if state.consume_any() is Some(name) {
-        push_child(children, Some("name"), name)
-      } else {
-        ()
-      }
-    _ => ()
+  parse_required_binder(state, children)
+  push_children(children, state.consume_trivia())
+  push_child(children, Some("op"), state.expect_token(TK_EQUAL))
+  push_children(children, state.consume_trivia())
+  let reports_before_expr = state.reports.length()
+  let expr = if preserve_decl_after_missing_body(state) {
+    state.missing_expr_node()
+  } else {
+    parse_expr_until(state, [
+      TK_SEMI,
+      TK_RPAREN,
+      TK_RBRACKET,
+      TK_BAR_RBRACKET,
+      TK_RBRACE,
+      TK_EOF,
+    ])
   }
-  if state.current_is(TK_EQUAL) {
-    if state.consume_any() is Some(equal) {
-      push_child(children, Some("op"), equal)
-    } else {
-      ()
-    }
-    let expr = parse_expr_until(state, [TK_SEMI, TK_RBRACE, TK_EOF])
-    if !expr.children.is_empty() {
-      push_child(children, Some("expr"), expr)
-    }
-  }
+  push_child(
+    children,
+    Some("expr"),
+    state.required_expr_node(expr, reports_before_expr),
+  )
   state.construct_from_children(
     fn(loc, source_span, children) {
       push_structured_name(
@@ -417,9 +425,9 @@ fn parse_letrec_statement(state : ParserState) -> CstNode {
   push_child(children, Some("binding"), parse_letrec_binding(state))
   let mut done = false
   while !done {
-    push_children(children, state.consume_trivia())
-    match state.peek() {
+    match state.peek_significant() {
       Some((AND, _, _)) => {
+        push_children(children, state.consume_trivia())
         if state.consume_any() is Some(and_kw) {
           push_child(children, Some("kw"), and_kw)
         } else {
@@ -441,7 +449,7 @@ fn parse_letrec_statement(state : ParserState) -> CstNode {
 
 ///|
 fn parse_letrec_binding(state : ParserState) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
+  let children = state.consume_trivia()
   match state.peek() {
     Some((LIDENT(_), _, _)) | Some((UIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
       if state.consume_any() is Some(name) {
@@ -449,9 +457,14 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
       } else {
         ()
       }
-    _ => ()
+    _ =>
+      push_child(
+        children,
+        Some("name"),
+        state.missing_token_node_with_expected(TK_LIDENT, [TK_LIDENT, TK_EXTEND]),
+      )
   }
-  if state.current_is(TK_COLON) {
+  if state.consume_trivia_before(children, [TK_COLON]) {
     if state.consume_any() is Some(colon) {
       push_child(children, Some("op"), colon)
     } else {
@@ -462,6 +475,7 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
       push_child(children, Some("binding_type"), ty)
     }
   }
+  push_children(children, state.consume_trivia())
   let has_equal = state.current_is(TK_EQUAL)
   if has_equal {
     if state.consume_any() is Some(equal) {
@@ -512,14 +526,14 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
     )
   }
   let mut saw_fn = false
-  if state.current_is(TK_ASYNC) {
+  if state.consume_trivia_before(children, [TK_ASYNC]) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
   }
-  if state.current_is(TK_FN) {
+  if state.consume_trivia_before(children, [TK_FN]) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
       saw_fn = true
@@ -528,16 +542,18 @@ fn parse_letrec_binding(state : ParserState) -> CstNode {
     }
   }
   if saw_fn {
-    if state.current_is(TK_LPAREN) {
+    if state.consume_trivia_before(children, [TK_LPAREN]) {
       push_child(children, Some("params"), parse_parameter_list(state))
     }
-    if state.current_is(TK_THIN_ARROW) ||
-      state.current_is(TK_RAISE) ||
-      state.current_is(TK_NORAISE) ||
-      state.current_is(TK_NOCANCEL) {
+    if state.consume_trivia_before(children, [
+        TK_THIN_ARROW,
+        TK_RAISE,
+        TK_NORAISE,
+        TK_NOCANCEL,
+      ]) {
       push_child(children, Some("type"), parse_func_return_type(state))
     }
-    if state.current_is(TK_LBRACE) {
+    if state.consume_trivia_before(children, [TK_LBRACE]) {
       push_child(children, Some("body"), parse_block_expr(state))
     }
   } else if !state.current_in([TK_AND, TK_SEMI, TK_RBRACE, TK_EOF]) {
@@ -592,7 +608,7 @@ fn parse_local_function_statement(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  if state.current_is(TK_ASYNC) {
+  if state.consume_trivia_before(children, [TK_ASYNC]) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -600,7 +616,7 @@ fn parse_local_function_statement(
     }
     push_children(children, state.consume_trivia())
   }
-  if state.current_is(TK_FN) {
+  if state.consume_trivia_before(children, [TK_FN]) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
@@ -656,16 +672,18 @@ fn parse_local_function_statement(
     _ => ()
   }
   let reports_before_signature = state.reports.length()
-  if state.current_is(TK_LPAREN) {
+  if state.consume_trivia_before(children, [TK_LPAREN]) {
     push_child(children, Some("params"), parse_parameter_list(state))
   }
-  if state.current_is(TK_THIN_ARROW) ||
-    state.current_is(TK_RAISE) ||
-    state.current_is(TK_NORAISE) ||
-    state.current_is(TK_NOCANCEL) {
+  if state.consume_trivia_before(children, [
+      TK_THIN_ARROW,
+      TK_RAISE,
+      TK_NORAISE,
+      TK_NOCANCEL,
+    ]) {
     push_child(children, Some("type"), parse_func_return_type(state))
   }
-  if state.current_is(TK_LBRACE) {
+  if state.consume_trivia_before(children, [TK_LBRACE]) {
     push_child(children, Some("body"), parse_block_expr(state))
   } else {
     let body = if state.reports.length() > reports_before_signature {

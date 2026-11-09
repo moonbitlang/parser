@@ -54,6 +54,7 @@ fn parse_if_expr(state : ParserState) -> CstNode {
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     let reports_before_else = state.reports.length()
     let else_body = match state.peek() {
       Some((IF, _, _)) => parse_if_expr(state)
@@ -129,29 +130,30 @@ fn parse_try_expr(state : ParserState) -> CstNode {
   let body = state.required_expr_node(body, reports_before_body)
   push_child(children, Some("body"), body)
   let mut saw_catch = false
-  if state.current_is(TK_CATCH) {
+  if state.consume_trivia_before(children, [TK_CATCH]) {
     saw_catch = true
     if state.consume_any() is Some(catch_kw) {
       push_child(children, Some("kw"), catch_kw)
     } else {
       ()
     }
-    if state.current_is(TK_LBRACE) {
-      push_child(children, Some("case"), parse_case_block(state))
-    } else {
-      state.report_expected_tokens([TK_LBRACE])
-      push_child(children, Some("case"), state.missing_expr_node())
-    }
+    push_child(
+      children,
+      Some("case"),
+      parse_required_case_block(state, children),
+    )
   }
-  if state.current_is(TK_NORAISE) {
+  if state.consume_trivia_before(children, [TK_NORAISE]) {
     if state.consume_any() is Some(else_kw) {
       push_child(children, Some("else_kw"), else_kw)
     } else {
       ()
     }
-    if state.current_is(TK_LBRACE) {
-      push_child(children, Some("else"), parse_case_block(state))
-    }
+    push_child(
+      children,
+      Some("else"),
+      parse_required_case_block(state, children),
+    )
   }
   if !is_try_operator &&
     !saw_catch &&
@@ -232,14 +234,18 @@ fn parse_keyword_body_expr(
     }
     report_next_statement_after_separator(state)
   }
-  if state.current_is(TK_NOBREAK) {
+  if state.consume_trivia_before(children, [TK_NOBREAK]) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
+    } else {
+      state.report_expected_tokens([TK_LBRACE])
+      push_child(children, Some("else"), state.missing_expr_node())
     }
   }
   state.construct_from_children(builder, children)
@@ -507,10 +513,10 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
     }
   }
   if state.current_is(TK_SEMI) {
-    consume_for_header_separator(state)
+    consume_for_header_separator(state, children)
     push_child(children, Some("init"), parse_for_binding_list(state))
     if state.current_is(TK_SEMI) {
-      consume_for_header_separator(state)
+      consume_for_header_separator(state, children)
       push_child(children, Some("continue"), parse_for_binding_list(state))
       if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
         state.report_expected_tokens([TK_COMMA, TK_LBRACE])
@@ -527,17 +533,21 @@ fn parse_foreach_expr(state : ParserState) -> CstNode {
     let _ = preserve_decl_after_missing_body(state)
     push_child(children, Some("body"), state.missing_expr_node())
   }
-  if state.current_is(TK_NOBREAK) {
+  if state.consume_trivia_before(children, [TK_NOBREAK]) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
+    } else {
+      state.report_expected_tokens([TK_LBRACE])
+      push_child(children, Some("else"), state.missing_expr_node())
     }
   }
-  if state.current_is(TK_WHERE) {
+  if state.consume_trivia_before(children, [TK_WHERE]) {
     push_child(children, Some("where"), parse_where_clause(state))
   }
   state.construct_from_children(
@@ -879,15 +889,18 @@ fn parse_for_binding_list(state : ParserState) -> CstNode {
 }
 
 ///|
-fn consume_for_header_separator(state : ParserState) -> Unit {
+fn consume_for_header_separator(
+  state : ParserState,
+  children : Array[(String?, CstNode)],
+) -> Unit {
   match state.peek() {
     Some((SEMI(_), _, _)) => {
-      let _ = state.consume_any()
-      let _ = state.consume_trivia()
+      if state.consume_any() is Some(sep) {
+        push_child(children, Some("sep"), sep)
+      }
+      push_children(children, state.consume_trivia())
     }
-    Some((NEWLINE, _, _)) => {
-      let _ = state.consume_trivia()
-    }
+    Some((NEWLINE, _, _)) => push_children(children, state.consume_trivia())
     _ => ()
   }
 }
@@ -999,7 +1012,7 @@ fn parse_c_style_for_expr(state : ParserState) -> CstNode {
   } else {
     let had_first_separator = state.current_is(TK_SEMI) ||
       state.current_is(TK_NEWLINE)
-    consume_for_header_separator(state)
+    consume_for_header_separator(state, children)
     let has_condition = had_first_separator &&
       (match state.peek() {
         Some((tok, _, _)) => token_can_start_for_condition(tok)
@@ -1017,7 +1030,7 @@ fn parse_c_style_for_expr(state : ParserState) -> CstNode {
     if has_condition && state.current_is(TK_LBRACE) {
       push_child(children, Some("body"), parse_block_expr(state))
     } else if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
-      consume_for_header_separator(state)
+      consume_for_header_separator(state, children)
       push_child(children, Some("continue"), parse_for_binding_list(state))
       if state.current_is(TK_SEMI) {
         state.report_expected_tokens([TK_COMMA, TK_LBRACE])
@@ -1040,17 +1053,21 @@ fn parse_c_style_for_expr(state : ParserState) -> CstNode {
     let _ = preserve_decl_after_missing_body(state)
     push_child(children, Some("body"), state.missing_expr_node())
   }
-  if state.current_is(TK_NOBREAK) {
+  if state.consume_trivia_before(children, [TK_NOBREAK]) {
     if state.consume_any() is Some(kw) {
       push_child(children, Some("kw"), kw)
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     if state.current_is(TK_LBRACE) {
       push_child(children, Some("else"), parse_block_expr(state))
+    } else {
+      state.report_expected_tokens([TK_LBRACE])
+      push_child(children, Some("else"), state.missing_expr_node())
     }
   }
-  if state.current_is(TK_WHERE) {
+  if state.consume_trivia_before(children, [TK_WHERE]) {
     push_child(children, Some("where"), parse_where_clause(state))
   }
   state.construct_from_children(

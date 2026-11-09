@@ -145,7 +145,7 @@ fn parse_delimited(
   let mut suppress_missing_close = false
   while !done {
     push_children(children, state.consume_trivia())
-    if is_block_statement_list && state.abort_current_decl {
+    if state.abort_current_decl {
       if state.current_is(close_kind) {
         push_child(children, Some("close"), state.expect_token(close_kind))
       } else {
@@ -244,6 +244,7 @@ fn parse_delimited(
           false
         }
         if state.reports.length() > reports_before_item &&
+          !state.abort_current_decl &&
           (!is_block_statement_list || latest_report_is_at_current) &&
           !state.current_is(sep_kind) &&
           !state.current_is(close_kind) &&

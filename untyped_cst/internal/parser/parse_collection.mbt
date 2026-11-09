@@ -420,7 +420,7 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
         }
       _ => ()
     }
-    if state.current_is(TK_COLON) {
+    if state.consume_trivia_before(children, [TK_COLON]) {
       if state.consume_any() is Some(colon) {
         push_child(children, Some("op"), colon)
       } else {
