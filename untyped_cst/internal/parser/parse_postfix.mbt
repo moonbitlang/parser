@@ -2,7 +2,7 @@
 fn parse_expr_postfix(state : ParserState, boundary : ExprBoundary) -> CstNode {
   let stop_kinds = boundary.stop_kinds
   let lhs = parse_expr_range(state, boundary)
-  discard_expr_trivia(state)
+  discard_expr_suffix_trivia(state)
   match state.peek() {
     Some((tok, _, _)) if boundary.ends_expression(tok) => lhs
     Some((AS, _, _)) => {
@@ -278,7 +278,7 @@ fn parse_expr_simple_postfix(
   let mut lhs = parse_expr_simple(state, boundary)
   let mut done = false
   while !done {
-    discard_expr_trivia(state)
+    discard_expr_suffix_trivia(state)
     match state.peek() {
       Some((tok, _, _)) if boundary.ends_expression(tok) => done = true
       Some((_, _, _)) =>

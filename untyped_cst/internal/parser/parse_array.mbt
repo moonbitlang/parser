@@ -108,7 +108,10 @@ fn parse_list_comprehension_expr(
   } else {
     parse_list_comprehension_for_header(state, children, close_kind, for_loc)
   }
-  if invalid_trailing_body {
+  if state.abort_current_decl ||
+    state.current_in([TK_RPAREN, TK_RBRACE, TK_RBRACKET, TK_BAR_RBRACKET]) {
+    push_child(children, Some("body"), state.missing_expr_node())
+  } else if invalid_trailing_body {
     let body = parse_invalid_list_comprehension_body(state, close_kind)
     if !body.children.is_empty() {
       push_child(children, Some("body"), body)
@@ -194,12 +197,37 @@ fn list_comprehension_is_foreach(state : ParserState) -> Bool {
 
 ///|
 fn list_comprehension_expr_stops(close_kind : TokenKind) -> Array[TokenKind] {
-  [TK_SEMI, TK_NEWLINE, TK_IF, TK_FAT_ARROW, close_kind, TK_EOF]
+  [
+    TK_SEMI,
+    TK_NEWLINE,
+    TK_IF,
+    TK_FAT_ARROW,
+    close_kind,
+    TK_RPAREN,
+    TK_RBRACE,
+    TK_RBRACKET,
+    TK_BAR_RBRACKET,
+    TK_EOF,
+  ]
 }
 
 ///|
 fn list_comprehension_binding_stops(close_kind : TokenKind) -> Array[TokenKind] {
-  [TK_COMMA, TK_SEMI, TK_NEWLINE, TK_IF, TK_FAT_ARROW, close_kind, TK_EOF]
+  [TK_COMMA, ..list_comprehension_expr_stops(close_kind)]
+}
+
+///|
+fn list_comprehension_header_ends(state : ParserState) -> Bool {
+  state.abort_current_decl ||
+  state.current_in([
+    TK_IF,
+    TK_FAT_ARROW,
+    TK_RPAREN,
+    TK_RBRACE,
+    TK_RBRACKET,
+    TK_BAR_RBRACKET,
+    TK_EOF,
+  ])
 }
 
 ///|
@@ -254,24 +282,18 @@ fn parse_list_comprehension_foreach_header(
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
   }
-  if !state.current_is(TK_IF) &&
-    !state.current_is(TK_FAT_ARROW) &&
-    !state.current_is(close_kind) &&
-    !state.current_is(TK_EOF) {
+  if !list_comprehension_header_ends(state) {
     if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
-      consume_for_header_separator(state)
+      consume_for_header_separator(state, children)
     }
     push_child(
       children,
       Some("init"),
       parse_list_comprehension_binding_list(state, close_kind),
     )
-    if !state.current_is(TK_IF) &&
-      !state.current_is(TK_FAT_ARROW) &&
-      !state.current_is(close_kind) &&
-      !state.current_is(TK_EOF) {
+    if !list_comprehension_header_ends(state) {
       if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
-        consume_for_header_separator(state)
+        consume_for_header_separator(state, children)
       }
       push_child(
         children,
@@ -284,7 +306,7 @@ fn parse_list_comprehension_foreach_header(
     state.current_is(TK_NEWLINE)
   if invalid_trailing_body {
     state.report_expected_tokens([TK_COMMA, TK_IF, TK_FAT_ARROW])
-    consume_for_header_separator(state)
+    consume_for_header_separator(state, children)
   }
   invalid_trailing_body
 }
@@ -304,19 +326,13 @@ fn parse_list_comprehension_for_header(
       for_loc, "A list-comprehension `for` header cannot be empty; use `for ;;` for an infinite header.",
     )
   }
-  if !state.current_is(TK_IF) &&
-    !state.current_is(TK_FAT_ARROW) &&
-    !state.current_is(close_kind) &&
-    !state.current_is(TK_EOF) {
+  if !list_comprehension_header_ends(state) {
     if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
-      consume_for_header_separator(state)
+      consume_for_header_separator(state, children)
     }
     if !state.current_is(TK_SEMI) &&
       !state.current_is(TK_NEWLINE) &&
-      !state.current_is(TK_IF) &&
-      !state.current_is(TK_FAT_ARROW) &&
-      !state.current_is(close_kind) &&
-      !state.current_is(TK_EOF) {
+      !list_comprehension_header_ends(state) {
       let cond_expr = parse_expr_infix(state, {
         stop_kinds: list_comprehension_expr_stops(close_kind),
         before_body: false,
@@ -325,12 +341,9 @@ fn parse_list_comprehension_for_header(
         push_child(children, Some("cond"), cond_expr)
       }
     }
-    if !state.current_is(TK_IF) &&
-      !state.current_is(TK_FAT_ARROW) &&
-      !state.current_is(close_kind) &&
-      !state.current_is(TK_EOF) {
+    if !list_comprehension_header_ends(state) {
       if state.current_is(TK_SEMI) || state.current_is(TK_NEWLINE) {
-        consume_for_header_separator(state)
+        consume_for_header_separator(state, children)
       }
       push_child(
         children,
@@ -343,7 +356,7 @@ fn parse_list_comprehension_for_header(
     state.current_is(TK_NEWLINE)
   if invalid_trailing_body {
     state.report_expected_tokens([TK_COMMA, TK_IF, TK_FAT_ARROW])
-    consume_for_header_separator(state)
+    consume_for_header_separator(state, children)
   }
   invalid_trailing_body
 }
@@ -388,20 +401,9 @@ fn parse_list_comprehension_binding_list(
   while !done {
     push_children(children, state.consume_trivia())
     match state.peek() {
-      Some((tok, _, _)) if kind_in(tok.kind(), [
-          TK_SEMI,
-          TK_NEWLINE,
-          TK_IF,
-          TK_FAT_ARROW,
-          close_kind,
-          TK_EOF,
-        ]) => done = true
-      Some((COMMA, _, _)) =>
-        if state.consume_any() is Some(sep) {
-          push_child(children, Some("sep"), sep)
-        } else {
-          done = true
-        }
+      Some((tok, _, _)) if state.abort_current_decl ||
+        kind_in(tok.kind(), list_comprehension_expr_stops(close_kind)) =>
+        done = true
       Some(_) => {
         let item = parse_list_comprehension_binding(state, close_kind)
         push_child(children, Some("item"), item)
@@ -434,29 +436,21 @@ fn parse_list_comprehension_binding(
   close_kind : TokenKind,
 ) -> CstNode {
   let children : Array[(String?, CstNode)] = []
-  match state.peek() {
-    Some((LIDENT(_), _, _)) | Some((UIDENT(_), _, _)) =>
-      if state.consume_any() is Some(name) {
-        push_child(children, Some("name"), name)
-      } else {
-        ()
-      }
-    _ => push_child(children, Some("name"), state.missing_token_node(TK_LIDENT))
+  parse_required_binder(state, children)
+  push_children(children, state.consume_trivia())
+  push_child(children, Some("op"), state.expect_token(TK_EQUAL))
+  push_children(children, state.consume_trivia())
+  let reports_before_expr = state.reports.length()
+  let expr = if preserve_decl_after_missing_body(state) {
+    state.missing_expr_node()
+  } else {
+    parse_expr_until(state, list_comprehension_binding_stops(close_kind))
   }
-  if state.current_is(TK_EQUAL) {
-    if state.consume_any() is Some(equal) {
-      push_child(children, Some("op"), equal)
-    } else {
-      ()
-    }
-  }
-  let expr = parse_expr_until(
-    state,
-    list_comprehension_binding_stops(close_kind),
+  push_child(
+    children,
+    Some("expr"),
+    state.required_expr_node(expr, reports_before_expr),
   )
-  if !expr.children.is_empty() {
-    push_child(children, Some("expr"), expr)
-  }
   state.construct_from_children(
     fn(loc, source_span, children) {
       push_structured_name(

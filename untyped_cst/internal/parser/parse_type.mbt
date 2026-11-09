@@ -105,13 +105,15 @@ fn parse_type_name_atom(state : ParserState) -> CstNode {
   } else {
     ()
   }
-  match state.peek() {
-    Some((DOT_LIDENT(_), _, _)) | Some((DOT_UIDENT(_), _, _)) =>
+  match state.peek_significant() {
+    Some((DOT_LIDENT(_), _, _)) | Some((DOT_UIDENT(_), _, _)) => {
+      push_children(children, state.consume_trivia())
       if state.consume_any() is Some(name) {
         push_child(children, Some("name"), name)
       } else {
         ()
       }
+    }
     _ => ()
   }
   state.construct_from_children(
@@ -161,6 +163,7 @@ fn parse_object_type_atom(state : ParserState) -> CstNode {
   } else {
     ()
   }
+  push_children(children, state.consume_trivia())
   match state.peek() {
     Some((UIDENT(_), _, _)) | Some((PACKAGE_NAME(_), _, _)) => {
       let name = parse_type_name_atom(state)
@@ -319,7 +322,8 @@ fn parse_paren_type(
       @node.CstNode::type_tuple(loc~, source_span~, body~)
     }
   }
-  if item_count == 0 && !state.current_is(TK_THIN_ARROW) {
+  if item_count == 0 &&
+    !(state.peek_significant().map(item => item.0) is Some(THIN_ARROW)) {
     state.report_expected_tokens([TK_THIN_ARROW])
   }
   state.construct_from_children(builder, [(Some("body"), list)])
@@ -503,10 +507,11 @@ fn parse_type_postfix(
   let mut ty = parse_simple_type(state, stop_kinds)
   let mut done = false
   while !done {
-    match state.peek() {
+    match state.peek_significant() {
       Some((tok, _, _)) if kind_in(tok.kind(), stop_kinds) => done = true
       Some((LBRACKET, _, _)) => {
         let children : Array[(String?, CstNode)] = [(Some("func"), ty)]
+        push_children(children, state.consume_trivia())
         push_child(children, Some("arg"), parse_type_argument_list(state))
         ty = state.construct_from_children(
           fn(loc, source_span, children) {
@@ -516,10 +521,7 @@ fn parse_type_postfix(
           children,
         )
       }
-      Some((QUESTION | COMMENT(_) | NEWLINE, _, _)) if !kind_in(
-          TK_QUESTION,
-          stop_kinds,
-        ) &&
+      Some((QUESTION, _, _)) if !kind_in(TK_QUESTION, stop_kinds) &&
         optional_type_suffix_follows(state) => {
         // Only take trivia after confirming that it belongs to this suffix.
         // A transparent group retains comments without changing the option API.
@@ -565,7 +567,7 @@ fn parse_type_postfix(
       _ => done = true
     }
   }
-  match state.peek() {
+  match state.peek_significant() {
     Some((tok, _, _)) if !kind_in(tok.kind(), stop_kinds) =>
       match tok {
         DOT_UIDENT(_) | DOT_LIDENT(_) | COLONCOLON =>
@@ -582,14 +584,12 @@ fn parse_type_arrow(
   stop_kinds : Array[TokenKind],
 ) -> CstNode {
   let lhs = parse_type_postfix(state, stop_kinds)
-  match state.peek() {
+  match state.peek_significant() {
     Some((THIN_ARROW, start, end)) if !kind_in(TK_THIN_ARROW, stop_kinds) => {
-      let invalid_unparenthesized = match lhs.kind {
-        Type_Group | Type_Tuple => false
-        _ => true
-      }
+      let invalid_unparenthesized = !type_has_parameter_parens(lhs)
       let _ = (start, end)
       let children : Array[(String?, CstNode)] = [(Some("param"), lhs)]
+      push_children(children, state.consume_trivia())
       if state.consume_any() is Some(op) {
         push_child(children, Some("op"), op)
       } else {
@@ -599,7 +599,7 @@ fn parse_type_arrow(
       if !rhs.children.is_empty() {
         push_child(children, Some("result"), rhs)
       }
-      match state.peek() {
+      match state.peek_significant() {
         Some((RAISE, _, _)) if !kind_in(TK_RAISE, stop_kinds) =>
           parse_effect_annotation_into(state, children)
         Some((NORAISE, _, _)) if !kind_in(TK_NORAISE, stop_kinds) =>
@@ -623,5 +623,18 @@ fn parse_type_arrow(
       )
     }
     _ => lhs
+  }
+}
+
+///|
+fn type_has_parameter_parens(ty : CstNode) -> Bool {
+  match ty.kind {
+    Type_Group =>
+      match ty.first_child_with_label("type") {
+        Some(inner) => type_has_parameter_parens(inner)
+        None => ty.first_child_with_label("body") is Some(_)
+      }
+    Type_Tuple => true
+    _ => false
   }
 }

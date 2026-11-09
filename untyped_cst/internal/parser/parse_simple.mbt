@@ -366,7 +366,7 @@ fn parse_expr_simple(state : ParserState, boundary : ExprBoundary) -> CstNode {
     Some((LBRACKET, _, _)) | Some((LBRACKET_BAR, _, _)) =>
       parse_array_expr(state)
     Some((AMPER, _, _)) =>
-      match state.peek(offset=1) {
+      match state.peek_nth_significant(1) {
         Some((UIDENT(_), _, _)) | Some((PACKAGE_NAME(_), _, _)) =>
           parse_type_name_node(state)
         _ =>
@@ -578,7 +578,9 @@ fn parse_continue_expr(
     ()
   }
   match state.peek() {
-    Some((POST_LABEL(_), _, _)) if !(state.peek(offset=1).map(item => item.0)
+    Some((POST_LABEL(_), _, _)) if !(state
+      .peek_nth_significant(1)
+      .map(item => item.0)
       is Some(COLON)) =>
       if state.consume_any() is Some(label) {
         anchor = Some(label)
@@ -587,7 +589,7 @@ fn parse_continue_expr(
         ()
       }
     Some((POST_LABEL_TRANSPARENT(name), _, _)) if !(state
-      .peek(offset=1)
+      .peek_nth_significant(1)
       .map(item => item.0)
       is Some(COLON)) =>
       if state.consume_any() is Some(label) {
@@ -628,20 +630,22 @@ fn parse_continue_expr(
 
 ///|
 fn labelled_loop_prefix_starts(state : ParserState) -> Bool {
-  match (state.peek(), state.peek(offset=1)) {
-    (Some((POST_LABEL(_), _, _)), Some((COLON, _, _))) => {
-      let mut offset = 2
-      let mut done = false
-      while !done {
-        match state.peek(offset~) {
-          Some((COMMENT(_), _, _)) | Some((NEWLINE, _, _)) => offset += 1
-          Some((LBRACE, _, _)) | Some((FOR, _, _)) | Some((WHILE, _, _)) =>
-            return true
-          _ => done = true
-        }
-      }
-      false
-    }
+  match
+    (
+      state.peek_significant(),
+      state.peek_nth_significant(1),
+      state.peek_nth_significant(2),
+    ) {
+    (
+      Some((POST_LABEL(_), _, _)),
+      Some((COLON, _, _)),
+      Some((LBRACE | FOR | WHILE, _, _)),
+    ) => true
+    (
+      Some((POST_LABEL_TRANSPARENT(_), _, _)),
+      Some((COLON, _, _)),
+      Some((LBRACE, _, _)),
+    ) => true
     _ => false
   }
 }
@@ -726,11 +730,8 @@ fn parse_labelled_loop_expr(
   } else {
     ()
   }
-  if state.consume_any() is Some(op) {
-    push_child(children, Some("op"), op)
-  } else {
-    ()
-  }
+  push_children(children, state.consume_trivia())
+  push_child(children, Some("op"), state.expect_token(TK_COLON))
   push_children(children, state.consume_trivia())
   if state.current_is(TK_LBRACE) {
     push_child(children, Some("body"), parse_block_expr(state))
@@ -1061,6 +1062,7 @@ fn parse_type_name_node(state : ParserState) -> CstNode {
       ()
     }
   }
+  push_children(children, state.consume_trivia())
   match state.peek() {
     Some((UIDENT(_), _, _)) =>
       if state.consume_any() is Some(name) {
@@ -1089,6 +1091,7 @@ fn parse_type_name_node(state : ParserState) -> CstNode {
       } else {
         ()
       }
+      push_children(children, state.consume_trivia())
       match state.peek() {
         Some((DOT_LIDENT(_), _, _)) | Some((DOT_UIDENT(_), _, _)) =>
           if state.consume_any() is Some(name) {

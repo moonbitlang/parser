@@ -111,7 +111,7 @@ fn parse_argument_item(state : ParserState) -> CstNode {
 
 ///|
 fn ParserState::current_argument_starts_labelled(self : ParserState) -> Bool {
-  match (self.peek(), self.peek(offset=1)) {
+  match (self.peek_significant(), self.peek_nth_significant(1)) {
     (Some((LIDENT(_), _, _)), Some((EQUAL, _, _)))
     | (Some((EXTEND, _, _)), Some((EQUAL, _, _)))
     | (Some((UIDENT(_), _, _)), Some((EQUAL, _, _)))
@@ -129,7 +129,7 @@ fn ParserState::current_argument_starts_labelled(self : ParserState) -> Bool {
 fn ParserState::current_argument_starts_optional_forwarding(
   self : ParserState,
 ) -> Bool {
-  match (self.peek(), self.peek(offset=1)) {
+  match (self.peek_significant(), self.peek_nth_significant(1)) {
     (Some((LIDENT(_), _, _)), Some((QUESTION, _, _)))
     | (Some((EXTEND, _, _)), Some((QUESTION, _, _)))
     | (Some((UIDENT(_), _, _)), Some((QUESTION, _, _))) => true
@@ -142,8 +142,9 @@ fn parse_labelled_argument(
   state : ParserState,
   complete_pun~ : Bool = false,
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
-  let invalid_tilde_label_start = match (state.peek(), state.peek(offset=1)) {
+  let children = state.consume_trivia()
+  let invalid_tilde_label_start = match
+    (state.peek_significant(), state.peek_nth_significant(1)) {
     (Some((POST_LABEL(_), start, _)), Some((EQUAL, _, _))) => Some(start)
     _ => None
   }
@@ -160,6 +161,7 @@ fn parse_labelled_argument(
   } else {
     ()
   }
+  push_children(children, state.consume_trivia())
   let mut is_pun = false
   let mut argument_builder : (
     Location,
@@ -296,7 +298,7 @@ fn parse_optional_forwarding_argument(
   state : ParserState,
   complete_pun~ : Bool = false,
 ) -> CstNode {
-  let children : Array[(String?, CstNode)] = []
+  let children = state.consume_trivia()
   match state.peek() {
     Some((UIDENT(name), start, end)) =>
       state.report(
@@ -310,6 +312,7 @@ fn parse_optional_forwarding_argument(
   } else {
     ()
   }
+  push_children(children, state.consume_trivia())
   if state.consume_any() is Some(question) {
     push_child(children, Some("op"), question)
   } else {
@@ -342,7 +345,7 @@ fn parse_optional_forwarding_argument(
       expr?,
     )
   }
-  if state.current_is(TK_EQUAL) {
+  if state.consume_trivia_before(children, [TK_EQUAL]) {
     is_pun = false
     argument_builder = fn(loc, source_span, children) {
       let name = @construction.first_child_with_label_from(children, "name").unwrap_or(

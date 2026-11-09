@@ -543,7 +543,7 @@ fn parse_expr_before_body(
 ///|
 fn parse_expr_boundary(state : ParserState, boundary : ExprBoundary) -> CstNode {
   discard_expr_trivia(state)
-  match (state.peek(), state.peek(offset=1)) {
+  match (state.peek_significant(), state.peek_nth_significant(1)) {
     (Some((POST_LABEL(_), _, _)), Some((COLON, _, _)))
     | (Some((POST_LABEL_TRANSPARENT(_), _, _)), Some((COLON, _, _))) =>
       parse_labelled_loop_expr(state, boundary.stop_kinds)
@@ -562,33 +562,28 @@ fn parse_expr_catch_suffix(
 ) -> CstNode {
   if kind_in(TK_CATCH, stop_kinds) ||
     lhs.kind is Expr_Try ||
-    !state.current_is(TK_CATCH) {
+    !(state.peek_significant() is Some((CATCH, _, _))) {
     return lhs
   }
   let children : Array[(String?, CstNode)] = [(Some("body"), lhs)]
+  push_children(children, state.consume_trivia())
   if state.consume_any() is Some(catch_kw) {
     push_child(children, Some("kw"), catch_kw)
   } else {
     ()
   }
-  if state.current_is(TK_LBRACE) {
-    push_child(children, Some("case"), parse_case_block(state))
-  } else {
-    push_child(
-      children,
-      Some("case"),
-      state.missing_token_node_with_expected(TK_LBRACE, [TK_LBRACE]),
-    )
-  }
-  if state.current_is(TK_NORAISE) {
+  push_child(children, Some("case"), parse_required_case_block(state, children))
+  if state.consume_trivia_before(children, [TK_NORAISE]) {
     if state.consume_any() is Some(else_kw) {
       push_child(children, Some("else_kw"), else_kw)
     } else {
       ()
     }
-    if state.current_is(TK_LBRACE) {
-      push_child(children, Some("else"), parse_case_block(state))
-    }
+    push_child(
+      children,
+      Some("else"),
+      parse_required_case_block(state, children),
+    )
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
@@ -622,7 +617,7 @@ fn parse_expr_pipe(state : ParserState, boundary : ExprBoundary) -> CstNode {
   let invalid_children : Array[(String?, CstNode)] = []
   let mut done = false
   while !done {
-    discard_expr_trivia(state)
+    discard_expr_suffix_trivia(state)
     match state.peek() {
       Some((tok, _, _)) if boundary.ends_expression(tok) => done = true
       Some((COLON, _, _)) => done = true
@@ -810,7 +805,7 @@ fn parse_expr_pipe(state : ParserState, boundary : ExprBoundary) -> CstNode {
 ///|
 fn parse_pipe_rhs(state : ParserState, boundary : ExprBoundary) -> CstNode {
   let head = parse_expr_infix(state, boundary)
-  discard_expr_trivia(state)
+  discard_expr_suffix_trivia(state)
   match state.peek() {
     Some((FAT_ARROW, _, _)) => {
       let children : Array[(String?, CstNode)] = [
@@ -1246,7 +1241,7 @@ fn parse_expr_binary_prec(
   let mut lhs = parse_expr_postfix(state, boundary)
   let mut done = expr_stops_infix_chain(lhs)
   while !done {
-    discard_expr_trivia(state)
+    discard_expr_suffix_trivia(state)
     match state.peek() {
       Some((tok, _, _)) if boundary.ends_expression(tok) => done = true
       Some((tok, _, _)) =>

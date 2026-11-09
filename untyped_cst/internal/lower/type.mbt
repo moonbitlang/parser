@@ -40,6 +40,65 @@ fn type_without_trivia(node : CstNode) -> CstNode {
 }
 
 ///|
+// Type syntax excludes transparent trivia wrappers but retains real parentheses.
+// In particular, the start of `(T)?` cannot be recovered from the lowered `T`.
+fn type_syntax_loc(node : CstNode) -> Location {
+  let node = type_without_trivia(node)
+  let first = match node.kind {
+    Type_Application =>
+      match node.first_child_with_label("func") {
+        Some(head) => Some(head)
+        None => node.first_child_with_label("head")
+      }
+    Type_Option => node.first_child_with_label("type")
+    Type_Arrow => node.first_child_with_label("param")
+    _ => None
+  }
+  let start = first
+    .map(ty => type_syntax_loc(ty).start)
+    .unwrap_or(node.loc.start)
+  let end = match node.kind {
+    Type_Application =>
+      match node.first_child_with_label("arg") {
+        Some(args) =>
+          args
+          .first_child_with_label("close")
+          .map(close => close.loc.end)
+          .unwrap_or(args.loc.end)
+        None => node.loc.end
+      }
+    Type_Option =>
+      node
+      .first_child_with_label("op")
+      .map(question => question.loc.end)
+      .unwrap_or(node.loc.end)
+    Type_Arrow => {
+      let last = match
+        (
+          node.first_child_with_label("nocancel"),
+          node.first_child_with_label("clause"),
+        ) {
+        (Some(a), Some(b)) => Some(a.loc.merge(b.loc))
+        (Some(a), None) | (None, Some(a)) => Some(a.loc)
+        _ => None
+      }
+      match last {
+        Some(last) => last.end
+        None => {
+          let result = match node.first_child_with_label("result") {
+            Some(result) => Some(result)
+            None => node.first_child_with_label("type")
+          }
+          result.map(ty => type_syntax_loc(ty).end).unwrap_or(node.loc.end)
+        }
+      }
+    }
+    _ => node.loc.end
+  }
+  { start, end, }
+}
+
+///|
 fn lower_return_type_effects(
   node : CstNode,
   ty : @syntax.Type,
@@ -129,7 +188,11 @@ fn lower_application_type(node : CstNode) -> @syntax.Type {
   if head is Some(head_node) {
     match lower_type(head_node) {
       Name(constr_id~, loc=_, tys=_) =>
-        Name(constr_id~, tys=lower_array_to_list(args), loc=node.loc)
+        Name(
+          constr_id~,
+          tys=lower_array_to_list(args),
+          loc=type_syntax_loc(node),
+        )
       other => other
     }
   } else {
@@ -149,7 +212,7 @@ fn lower_option_type(node : CstNode) -> @syntax.Type {
     .first_child_of_kind(NodeKind::is_operator)
     .map(fn(operator) { operator.loc })
     .unwrap_or(node.loc)
-  Option(ty=inner, loc=node.loc, question_loc~)
+  Option(ty=inner, loc=type_syntax_loc(node), question_loc~)
 }
 
 ///|
@@ -195,7 +258,7 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
           err~,
           is_async=lower_async_loc(node),
           nocancel_~,
-          loc=node.loc,
+          loc=type_syntax_loc(node),
         )
       other => other
     }
@@ -219,10 +282,7 @@ fn lower_function_type(node : CstNode) -> @syntax.Type {
       nocancel_=node
         .first_child_with_label("nocancel")
         .map(fn(anchor) { anchor.loc }),
-      loc=match param {
-        Some(param) => { start: param.loc.start, end: node.loc.end, }
-        None => node.loc
-      },
+      loc=type_syntax_loc(node),
     )
   }
 }

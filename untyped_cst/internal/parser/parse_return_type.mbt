@@ -78,12 +78,12 @@ fn parse_effect_annotation_into(
   state : ParserState,
   children : Array[(String?, CstNode)],
 ) -> Unit {
+  push_children(children, state.consume_trivia())
   if state.current_is(TK_NOCANCEL) {
     if state.consume_any() is Some(nocancel_anchor) {
       push_child(children, Some("nocancel"), nocancel_anchor)
     }
-    push_children(children, state.consume_trivia())
-    if state.current_is(TK_PLUS) {
+    if state.consume_trivia_before(children, [TK_PLUS]) {
       if state.consume_any() is Some(op) {
         push_child(children, Some("effect_op"), op)
       }
@@ -96,8 +96,7 @@ fn parse_effect_annotation_into(
     }
   } else {
     push_child(children, Some("clause"), parse_error_annotation(state))
-    push_children(children, state.consume_trivia())
-    if state.current_is(TK_PLUS) {
+    if state.consume_trivia_before(children, [TK_PLUS]) {
       if state.consume_any() is Some(op) {
         push_child(children, Some("effect_op"), op)
       }
@@ -117,14 +116,16 @@ fn parse_effect_annotation_into(
 fn parse_func_return_type(state : ParserState) -> CstNode {
   let children : Array[(String?, CstNode)] = []
   let mut has_arrow = false
-  match state.peek() {
-    Some((THIN_ARROW, _, _)) =>
+  match state.peek_significant() {
+    Some((THIN_ARROW, _, _)) => {
+      push_children(children, state.consume_trivia())
       if state.consume_any() is Some(arrow) {
         has_arrow = true
         push_child(children, Some("op"), arrow)
       } else {
         ()
       }
+    }
     _ => ()
   }
   if children.length() > 0 {
@@ -138,7 +139,7 @@ fn parse_func_return_type(state : ParserState) -> CstNode {
       push_child(children, Some("type"), ty)
     }
   }
-  match state.peek() {
+  match state.peek_significant() {
     Some((RAISE, _, _)) | Some((NORAISE, _, _)) | Some((NOCANCEL, _, _)) =>
       parse_effect_annotation_into(state, children)
     _ => ()
@@ -187,7 +188,15 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
     }
     _ => ()
   }
-  match (state.peek(), state.peek(offset=1)) {
+  let _ = state.consume_trivia_before(children, [
+    TK_UIDENT,
+    TK_PACKAGE_NAME,
+    TK_UNDERSCORE,
+    TK_QUESTION,
+    TK_LIDENT,
+    TK_AMPER,
+  ])
+  match (state.peek_significant(), state.peek_nth_significant(1)) {
     (Some((UIDENT(_), _, _)), Some((QUESTION, _, _))) => {
       let type_children : Array[(String?, CstNode)] = []
       if state.consume_any() is Some(name) {
@@ -195,6 +204,7 @@ fn parse_error_annotation(state : ParserState) -> CstNode {
       } else {
         ()
       }
+      push_children(type_children, state.consume_trivia())
       if state.consume_any() is Some(question) {
         push_child(type_children, Some("question"), question)
       } else {

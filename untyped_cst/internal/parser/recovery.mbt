@@ -36,6 +36,28 @@ fn ParserState::expect_token(self : ParserState, kind : TokenKind) -> CstNode {
 }
 
 ///|
+fn parse_required_binder(
+  state : ParserState,
+  children : Array[(String?, CstNode)],
+) -> Unit {
+  push_children(children, state.consume_trivia())
+  let name = match state.peek() {
+    Some((LIDENT(_), _, _)) => state.expect_token(TK_LIDENT)
+    Some((EXTEND, _, _)) => state.expect_token(TK_EXTEND)
+    Some((UIDENT(name), start, end)) => {
+      state.report(
+        mk_loc(start, end),
+        "Unexpected uppercase identifier \{name}, expected lowercase identifier.",
+      )
+      state.expect_token(TK_UIDENT)
+    }
+    _ =>
+      state.missing_token_node_with_expected(TK_LIDENT, [TK_LIDENT, TK_EXTEND])
+  }
+  push_child(children, Some("name"), name)
+}
+
+///|
 fn push_recovered_errors(
   children : Array[(String?, CstNode)],
   skipped : Array[CstNode],

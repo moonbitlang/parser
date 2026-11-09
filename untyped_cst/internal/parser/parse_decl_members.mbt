@@ -25,6 +25,7 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     if state.current_is(TK_LBRACKET) {
       push_child(
         children,
@@ -61,28 +62,26 @@ fn parse_trait_member_item(state : ParserState) -> CstNode {
       )
     }
   }
-  if state.reports.length() == diagnostics_before && state.current_is(TK_LPAREN) {
+  if state.reports.length() == diagnostics_before &&
+    state.consume_trivia_before(children, [TK_LPAREN]) {
     push_child(children, Some("params"), parse_trait_method_param_list(state))
     saw_params = true
   }
   if state.reports.length() == diagnostics_before &&
-    state.current_is(TK_THIN_ARROW) {
+    state.consume_trivia_before(children, [TK_THIN_ARROW]) {
     let reports_before_return = state.reports.length()
     push_child(children, Some("clause"), parse_func_return_type(state))
     if state.reports.length() > reports_before_return &&
-      state.current_is(TK_LPAREN) {
+      state.consume_trivia_before(children, [TK_LPAREN]) {
       state.report_expected_tokens([TK_SEMI, TK_RBRACE])
     }
   }
   if state.reports.length() == diagnostics_before &&
-    (
-      state.current_is(TK_RAISE) ||
-      state.current_is(TK_NORAISE) ||
-      state.current_is(TK_NOCANCEL)
-    ) {
+    state.consume_trivia_before(children, [TK_RAISE, TK_NORAISE, TK_NOCANCEL]) {
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
-  if state.reports.length() == diagnostics_before && state.current_is(TK_EQUAL) {
+  if state.reports.length() == diagnostics_before &&
+    state.consume_trivia_before(children, [TK_EQUAL]) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
@@ -316,10 +315,10 @@ fn parse_enum_constructor_item(state : ParserState) -> CstNode {
     None =>
       push_child(children, Some("name"), state.missing_token_node(TK_LIDENT))
   }
-  if state.current_is(TK_LPAREN) {
+  if state.consume_trivia_before(children, [TK_LPAREN]) {
     push_child(children, Some("params"), parse_constructor_param_list(state))
   }
-  if state.current_is(TK_EQUAL) {
+  if state.consume_trivia_before(children, [TK_EQUAL]) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
@@ -708,7 +707,7 @@ fn parse_struct_constructor(
       )
     }
   }
-  if state.current_is(TK_LPAREN) {
+  if state.consume_trivia_before(children, [TK_LPAREN]) {
     push_child(children, Some("params"), parse_trait_method_param_list(state))
   } else {
     state.report_expected_tokens([TK_LPAREN])
@@ -718,10 +717,12 @@ fn parse_struct_constructor(
       state.missing_token_node_silent(TK_LPAREN),
     )
   }
-  if state.current_is(TK_THIN_ARROW) ||
-    state.current_is(TK_RAISE) ||
-    state.current_is(TK_NORAISE) ||
-    state.current_is(TK_NOCANCEL) {
+  if state.consume_trivia_before(children, [
+      TK_THIN_ARROW,
+      TK_RAISE,
+      TK_NORAISE,
+      TK_NOCANCEL,
+    ]) {
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
   state.construct_from_children(
@@ -770,7 +771,7 @@ fn parse_struct_constructor(
 ///|
 fn parse_impl_method_item(state : ParserState) -> CstNode {
   let diagnostics_before = state.reports.length()
-  let children : Array[(String?, CstNode)] = []
+  let children = state.consume_trivia()
   let mut saw_params = false
   let mut saw_body = false
   let mut saw_stub = false
@@ -818,26 +819,28 @@ fn parse_impl_method_item(state : ParserState) -> CstNode {
       )
     }
   }
-  if state.reports.length() == diagnostics_before && state.current_is(TK_LPAREN) {
+  if state.reports.length() == diagnostics_before &&
+    state.consume_trivia_before(children, [TK_LPAREN]) {
     push_child(children, Some("params"), parse_parameter_list(state))
     saw_params = true
   }
   if state.reports.length() == diagnostics_before &&
-    (
-      state.current_is(TK_THIN_ARROW) ||
-      state.current_is(TK_RAISE) ||
-      state.current_is(TK_NORAISE) ||
-      state.current_is(TK_NOCANCEL)
-    ) {
+    state.consume_trivia_before(children, [
+      TK_THIN_ARROW,
+      TK_RAISE,
+      TK_NORAISE,
+      TK_NOCANCEL,
+    ]) {
     parsed_return_clause = true
     push_child(children, Some("clause"), parse_func_return_type(state))
   }
   if (state.reports.length() == diagnostics_before || parsed_return_clause) &&
-    state.current_is(TK_LBRACE) {
+    state.consume_trivia_before(children, [TK_LBRACE]) {
     push_child(children, Some("body"), parse_block_expr(state))
     saw_body = true
   }
-  if state.reports.length() == diagnostics_before && state.current_is(TK_EQUAL) {
+  if state.reports.length() == diagnostics_before &&
+    state.consume_trivia_before(children, [TK_EQUAL]) {
     if state.consume_any() is Some(equal) {
       push_child(children, Some("op"), equal)
     } else {
@@ -956,6 +959,7 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
     }
     _ => ()
   }
+  push_children(children, state.consume_trivia())
   match state.peek() {
     Some((UIDENT(_), _, _)) => {
       if name_kind == 0 {
@@ -986,12 +990,13 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
         ]),
       )
   }
-  if state.current_is(TK_AS) {
+  if state.consume_trivia_before(children, [TK_AS]) {
     if state.consume_any() is Some(as_token) {
       push_child(children, Some("kw"), as_token)
     } else {
       ()
     }
+    push_children(children, state.consume_trivia())
     match state.peek() {
       Some((UIDENT(name), start, end)) => {
         if name_kind == 0 {
@@ -1030,7 +1035,18 @@ fn parse_using_name_item(state : ParserState) -> CstNode {
         } else {
           ()
         }
-      _ => ()
+      _ => {
+        let expected : Array[TokenKind] = if name_kind == 0 {
+          [TK_LIDENT, TK_EXTEND]
+        } else {
+          [TK_UIDENT]
+        }
+        push_child(
+          children,
+          Some("name"),
+          state.missing_token_node_with_expected(expected[0], expected),
+        )
+      }
     }
   }
   let using_builder : (Location, (Int32, Int32), Array[(String?, CstNode)]) -> CstNode = match
@@ -1136,7 +1152,7 @@ fn parse_deriving_item(state : ParserState) -> CstNode {
       }
     _ => push_child(children, Some("name"), state.missing_token_node(TK_UIDENT))
   }
-  if state.current_is(TK_LPAREN) {
+  if state.consume_trivia_before(children, [TK_LPAREN]) {
     push_child(children, Some("arg"), parse_argument_list(state))
   }
   state.construct_from_children(
