@@ -11,6 +11,32 @@ fn recovery_test_state(source : String) -> ParserState {
 }
 
 ///|
+test "foreach pattern recovery leaves the outer boundary unconsumed" {
+  let cases : Array[(String, TokenKind)] = [
+    ("S::{}", TK_RBRACE),
+    ("S::{)", TK_RPAREN),
+    ("S::{ fn later() {}", TK_FN),
+    ("S::{", TK_EOF),
+  ]
+  for (source, boundary) in cases {
+    let state = recovery_test_state(source)
+    let scope = state.push_recovery_scope([boundary])
+    let _ = parse_foreach_pattern(state)
+    @test.assert_eq(state.current_is(boundary), true)
+    state.pop_recovery_scope(scope)
+  }
+}
+
+///|
+test "optional suffix lookahead leaves unrelated trivia for the caller" {
+  let state = recovery_test_state("Int // belongs to caller\n }")
+  let ty = parse_type_until(state, [TK_RBRACE, TK_EOF])
+  @test.assert_eq(ty.kind is Type_Name, true)
+  @test.assert_eq(state.current_is(TK_COMMENT), true)
+  @test.assert_eq(state.reports.is_empty(), true)
+}
+
+///|
 test "local recovery stop takes priority over nested scopes" {
   let state = recovery_test_state("bad)")
   let outer = state.push_recovery_scope([TK_RPAREN])

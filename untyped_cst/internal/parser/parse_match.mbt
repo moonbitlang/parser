@@ -274,6 +274,7 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   if !pat.children.is_empty() {
     push_child(children, Some("pattern"), pat)
   }
+  push_children(children, state.consume_trivia())
   push_child(children, Some("op"), state.expect_token(TK_FAT_ARROW))
   let body = parse_expr_with_context_restriction(
     state,
@@ -286,21 +287,11 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let pattern = @construction.first_child_with_label_from(
-        children, "pattern",
-      ).unwrap_or(missing_at_end(loc~, source_span~))
-      let op = @construction.first_child_with_label_from(children, "op").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      @node.CstNode::case_lex_scan_case(
+      let entries = recovery_children(children)
+      @node.CstNode::case_lex_scan_case_from_entries(
         loc~,
         source_span~,
-        pattern~,
-        op~,
-        body~,
+        entries~,
       )
     },
     children,
@@ -496,6 +487,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
     }
   }
   push_child(children, Some("pattern"), pat)
+  push_children(children, state.consume_trivia())
   let mut saw_guard = false
   if state.current_is(TK_IF) {
     saw_guard = true
@@ -509,6 +501,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
       push_child(children, Some("cond"), guard_expr)
     }
   }
+  push_children(children, state.consume_trivia())
   let reports_before_body = reports_before_pattern
   let has_arrow = state.current_is(TK_FAT_ARROW)
   let arrow = if !has_arrow &&
@@ -538,26 +531,8 @@ fn parse_match_case(state : ParserState) -> CstNode {
   }
   state.construct_from_children(
     fn(loc, source_span, children) {
-      let pattern = @construction.first_child_with_label_from(
-        children, "pattern",
-      ).unwrap_or(missing_at_end(loc~, source_span~))
-      let kw = @construction.first_child_with_label_from(children, "kw")
-      let cond = @construction.first_child_with_label_from(children, "cond")
-      let op = @construction.first_child_with_label_from(children, "op")
-      let error = @construction.children_with_label_from(children, "error")
-      let body = @construction.first_child_with_label_from(children, "body").unwrap_or(
-        missing_at_end(loc~, source_span~),
-      )
-      @node.CstNode::case_match_case(
-        loc~,
-        source_span~,
-        pattern~,
-        kw?,
-        cond?,
-        op?,
-        error~,
-        body~,
-      )
+      let entries = recovery_children(children)
+      @node.CstNode::case_match_case_from_entries(loc~, source_span~, entries~)
     },
     children,
   )

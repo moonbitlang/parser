@@ -63,28 +63,12 @@ fn lower_return_type_from_clause(node : CstNode?) -> @syntax.Type? {
       let ty = lower_type(ty_node)
       let outer_error = clause.first_child_with_label("clause")
       let outer_nocancel = clause.first_child_with_label("nocancel")
-      match ty {
-        Arrow(args~, res~, err~, is_async~, nocancel_~, loc~) if ty_node.kind
-          is Type_Arrow &&
-          (outer_error is Some(_) || outer_nocancel is Some(_)) => {
-          let err = match outer_error {
-            Some(error_clause) => lower_error_annotation(error_clause)
-            None => err
-          }
-          let nocancel_ = match outer_nocancel {
-            Some(anchor) => Some(anchor.loc)
-            None => nocancel_
-          }
-          let loc = match (outer_error, outer_nocancel) {
-            (Some(error_clause), Some(anchor)) =>
-              loc.merge(error_clause.loc).merge(anchor.loc)
-            (Some(error_clause), None) => loc.merge(error_clause.loc)
-            (None, Some(anchor)) => loc.merge(anchor.loc)
-            (None, None) => loc
-          }
-          Some(Arrow(args~, res~, err~, is_async~, nocancel_~, loc~))
-        }
-        _ => Some(ty)
+      if outer_error is Some(_) || outer_nocancel is Some(_) {
+        Some(
+          lower_return_type_effects(ty_node, ty, outer_error, outer_nocancel),
+        )
+      } else {
+        Some(ty)
       }
     } else {
       None

@@ -651,6 +651,7 @@ fn parse_balanced_decl_body(state : ParserState, kind : TopItemKind) -> CstNode 
         } else {
           ()
         }
+        push_children(children, state.consume_trivia())
         match state.peek() {
           Some((LIDENT(_), _, _)) | Some((EXTEND, _, _)) =>
             if state.consume_any() is Some(name) {

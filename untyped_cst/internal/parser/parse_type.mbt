@@ -481,6 +481,21 @@ fn parse_simple_type(
 }
 
 ///|
+fn optional_type_suffix_follows(state : ParserState) -> Bool {
+  guard state.peek_significant().map(item => item.0) is Some(QUESTION) else {
+    return false
+  }
+  // Keep removed `Int ? Error` annotations on the existing error-recovery path,
+  // matching the handrolled parser's type lookahead.
+  match state.peek_nth_significant(1) {
+    Some(
+      (PACKAGE_NAME(_) | UIDENT(_) | LPAREN | UNDERSCORE | AMPER | ASYNC, _, _)
+    ) => false
+    _ => true
+  }
+}
+
+///|
 fn parse_type_postfix(
   state : ParserState,
   stop_kinds : Array[TokenKind],
@@ -501,7 +516,23 @@ fn parse_type_postfix(
           children,
         )
       }
-      Some((QUESTION, start, _)) if ty.loc.end.cnum == start.cnum => {
+      Some((QUESTION | COMMENT(_) | NEWLINE, _, _)) if !kind_in(
+          TK_QUESTION,
+          stop_kinds,
+        ) &&
+        optional_type_suffix_follows(state) => {
+        // Only take trivia after confirming that it belongs to this suffix.
+        // A transparent group retains comments without changing the option API.
+        let trivia = state.consume_trivia()
+        if !trivia.is_empty() {
+          ty = state.construct_from_children(
+            fn(loc, source_span, children) {
+              let entries = recovery_children(children)
+              @node.CstNode::type_group(loc~, source_span~, entries~)
+            },
+            [(Some("type"), ty), ..trivia],
+          )
+        }
         let children : Array[(String?, CstNode)] = [(Some("type"), ty)]
         if state.consume_any() is Some(op) {
           push_child(children, Some("op"), op)
