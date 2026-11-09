@@ -321,17 +321,14 @@ fn parse_map_field_item(state : ParserState) -> CstNode {
       signed_constant_node(value, negative),
     )
   }
-  if state.current_is(TK_COLON) {
-    if state.consume_any() is Some(colon) {
-      push_child(children, Some("op"), colon)
-    } else {
-      ()
-    }
-  }
-  let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
-  if !expr.children.is_empty() {
-    push_child(children, Some("expr"), expr)
-  }
+  push_children(children, state.consume_trivia())
+  push_child(children, Some("op"), state.expect_token(TK_COLON))
+  push_children(children, state.consume_trivia())
+  push_child(
+    children,
+    Some("expr"),
+    parse_required_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF]),
+  )
   state.construct_from_children(
     fn(loc, source_span, children) {
       push_direct_semantic_constant(children)
@@ -351,7 +348,7 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
     source_span,
     children,
   ) {
-    let is_pun = children.iter().all(fn(entry) { !(entry.0 is Some("expr")) })
+    let is_pun = children.iter().all(fn(entry) { !(entry.0 is Some("op")) })
     {
       push_structured_name(
         children,
@@ -403,10 +400,9 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
     } else {
       ()
     }
-    let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
-    if !expr.children.is_empty() {
-      push_child(children, Some("expr"), expr)
-    }
+    push_children(children, state.consume_trivia())
+    let expr = parse_required_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
+    push_child(children, Some("expr"), expr)
   } else {
     match state.peek() {
       Some((LIDENT(_), _, _))
@@ -426,15 +422,12 @@ fn parse_record_field_item(state : ParserState) -> CstNode {
       } else {
         ()
       }
-      let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
-      if !expr.children.is_empty() {
-        push_child(children, Some("expr"), expr)
-      }
+      push_children(children, state.consume_trivia())
+      let expr = parse_required_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
+      push_child(children, Some("expr"), expr)
     } else if children.length() == 0 {
-      let expr = parse_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
-      if !expr.children.is_empty() {
-        push_child(children, Some("expr"), expr)
-      }
+      let expr = parse_required_expr_until(state, [TK_COMMA, TK_RBRACE, TK_EOF])
+      push_child(children, Some("expr"), expr)
     }
   }
   state.construct_from_children(field_builder, children)

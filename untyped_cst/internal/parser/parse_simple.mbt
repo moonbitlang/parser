@@ -528,13 +528,19 @@ fn parse_break_expr(
     ()
   }
   match state.peek() {
-    Some((POST_LABEL(_), _, _)) =>
+    Some((POST_LABEL(_), _, _)) if !(state
+      .peek_nth_significant(1)
+      .map(item => item.0)
+      is Some(COLON)) =>
       if state.consume_any() is Some(label) {
         push_child(children, Some("label"), label)
       } else {
         ()
       }
-    Some((POST_LABEL_TRANSPARENT(name), _, _)) =>
+    Some((POST_LABEL_TRANSPARENT(name), _, _)) if !(state
+      .peek_nth_significant(1)
+      .map(item => item.0)
+      is Some(COLON)) =>
       if state.consume_any() is Some(label) {
         push_child(children, Some("label"), transparent_label_node(label, name))
       } else {
@@ -1224,6 +1230,15 @@ fn parse_paren_expr(
             ()
           }
         _ => ()
+      }
+    }
+  } else {
+    for item in list.children_with_label("item") {
+      if item.kind.is_argument() {
+        state.report(
+          item.loc,
+          "A call argument is not allowed in a grouped expression.",
+        )
       }
     }
   }

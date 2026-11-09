@@ -2068,6 +2068,7 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
             fn(loc) { With(pat=first, bindings=List(bindings), loc~) }
           }
           COMMA => {
+            let comma_loc = state.peek_location()
             state.skip()
             let (pats, _) = state.series_with_follow(
               delim=TK_COMMA,
@@ -2075,6 +2076,10 @@ fn State::parse_simple_pattern(self : Self) -> @syntax.Pattern {
               State::parse_pattern,
             )
             if pats is [] {
+              state.report_error({
+                loc: comma_loc,
+                msg: "A grouped pattern cannot have a trailing comma.",
+              })
               fn(_loc) { first }
             } else {
               fn(loc) { Tuple(pats=List([first, ..pats]), loc~) }
@@ -3248,51 +3253,37 @@ fn State::parse_tuple_or_constraint(self : Self) -> @syntax.Expr {
     return Hole(loc~, kind=Synthesized)
   }
   let spos = self.peek_spos()
-  self.expect_token(TK_LPAREN)
-  self.push_sync(TK_RPAREN)
-  let state = self
-  let first = state.optional(first_expr, State::parse_expr)
-  if first is Some(first) {
-    match state.peek_token() {
-      COLON => {
-        state.expect_token(TK_COLON)
-        let ty = state.parse_type()
-        self.expect_token(TK_RPAREN)
-        self.pop_sync(TK_RPAREN)
-        let loc = state.loc_start_with(spos)
-        Constraint(expr=first, ty~, loc~)
-      }
-      COMMA => {
-        state.expect_token(TK_COMMA)
-        let (rest, _) = state.series_with_follow(
-          delim=TK_COMMA,
-          follow_set=[TK_RPAREN],
-          State::parse_expr,
-        )
-        self.expect_token(TK_RPAREN)
-        self.pop_sync(TK_RPAREN)
-        let loc = state.loc_start_with(spos)
-        if rest.length() == 0 {
-          Group(expr=first, group=Paren, loc~)
-        } else {
-          let rest = @list.List(rest)
-          Tuple(exprs=rest.prepend(first), loc~)
+  let make_expr = self.surround(left=TK_LPAREN, right=TK_RPAREN, fn(
+    state,
+  ) -> (Location) -> @syntax.Expr {
+    let first = state.optional(first_expr, State::parse_expr)
+    if first is Some(first) {
+      match state.peek_token() {
+        COLON => {
+          state.expect_token(TK_COLON)
+          let ty = state.parse_type()
+          fn(loc) { Constraint(expr=first, ty~, loc~) }
         }
+        COMMA => {
+          state.expect_token(TK_COMMA)
+          let (rest, _) = state.series_with_follow(
+            delim=TK_COMMA,
+            follow_set=[TK_RPAREN],
+            State::parse_expr,
+          )
+          if rest.is_empty() {
+            fn(loc) { Group(expr=first, group=Paren, loc~) }
+          } else {
+            fn(loc) { Tuple(exprs=List(rest).prepend(first), loc~) }
+          }
+        }
+        _ => fn(loc) { Group(expr=first, group=Paren, loc~) }
       }
-      RPAREN => {
-        self.expect_token(TK_RPAREN)
-        self.pop_sync(TK_RPAREN)
-        let loc = state.loc_start_with(spos)
-        Group(expr=first, group=Paren, loc~)
-      }
-      _ => first //TODO: error recovery and add group node
+    } else {
+      fn(loc) { Unit(loc~, faked=false) }
     }
-  } else {
-    self.expect_token(TK_RPAREN)
-    self.pop_sync(TK_RPAREN)
-    let loc = state.loc_start_with(spos)
-    Unit(loc~, faked=false)
-  }
+  })
+  make_expr(self.loc_start_with(spos))
 }
 
 ///|
@@ -5449,7 +5440,7 @@ fn State::parse_stmt(self : Self) -> Statement {
     PROOF_ASSERT => {
       let spos = self.peek_spos()
       self.skip()
-      let expr = self.parse_expr()
+      let expr = self.try_parse_condition_expr()
       let loc = self.loc_start_with(spos)
       StmtExpr(ProofAssert(expr~, loc~))
     }
@@ -5614,12 +5605,12 @@ fn State::parse_expr_stmt(self : Self) -> @syntax.Expr {
       let spos = self.peek_spos()
       self.expect_token(TK_BREAK)
       let label = match self.peek_token() {
-        POST_LABEL(label_name) => {
+        POST_LABEL(label_name) if !(self.peek_token(nth=1) is COLON) => {
           let loc = self.peek_location()
           self.skip()
           Some(@syntax.Label::{ name: label_name, loc, })
         }
-        POST_LABEL_TRANSPARENT(label_name) => {
+        POST_LABEL_TRANSPARENT(label_name) if !(self.peek_token(nth=1) is COLON) => {
           let loc = self.peek_location()
           self.skip()
           Some({ name: "\{label_name}~", loc, })
@@ -5897,13 +5888,19 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
       )
     }
     LPAREN => {
-      let tys = self.surround_series(
-          left=TK_LPAREN,
-          right=TK_RPAREN,
-          delim=TK_COMMA,
-          State::parse_type,
-        )
-        |> @list.List
+      let (types, has_trailing) = self.surround(
+        left=TK_LPAREN,
+        right=TK_RPAREN,
+        fn(state) {
+          state.series_with_follow(
+            delim=TK_COMMA,
+            follow_set=[TK_RPAREN],
+            State::parse_type,
+          )
+        },
+      )
+      let group_loc = self.loc_start_with(spos)
+      let tys = @list.List(types)
       if tys is Empty {
         self.expect_token(TK_THIN_ARROW)
         let (ty_res, ty_err, nocancel_) = self.parse_return_type()
@@ -5941,7 +5938,15 @@ fn State::parse_type_aux(self : Self) -> (Bool, @syntax.Type) {
             let tys_array = tys.to_array()
             match tys_array {
               [] => panic()
-              [ty] => parse_question_mark(spos, ty)
+              [ty] => {
+                if has_trailing {
+                  self.report_error({
+                    loc: group_loc,
+                    msg: "A grouped type cannot have a trailing comma.",
+                  })
+                }
+                parse_question_mark(spos, ty)
+              }
               _ => {
                 let loc = self.loc_start_with(spos)
                 let ty : @syntax.Type = Tuple(tys~, loc~)

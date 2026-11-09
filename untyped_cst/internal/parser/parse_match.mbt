@@ -55,7 +55,7 @@ fn parse_quantifier_expr(
   let body = if preserve_decl_after_missing_body(state) {
     state.missing_expr_node()
   } else {
-    parse_expr_boundary(state, boundary)
+    parse_expr_infix(state, boundary)
   }
   push_child(
     children,
@@ -117,7 +117,10 @@ fn parse_lex_block_expr(
     ()
   }
   let reports_before_expr = state.reports.length()
-  let expr = parse_expr_before_body(state, [TK_WITH, TK_SEMI, TK_RBRACE, TK_EOF])
+  let expr = parse_expr_infix(state, {
+    stop_kinds: [TK_WITH, TK_SEMI, TK_RBRACE, TK_EOF],
+    before_body: true,
+  })
   let expr = state.required_expr_node(expr, reports_before_expr)
   if !expr.children.is_empty() {
     push_child(children, Some("expr"), expr)
@@ -290,6 +293,7 @@ fn parse_lexscan_case(state : ParserState) -> CstNode {
     [TK_SEMI, TK_RBRACE, TK_EOF],
     "the action part of a matching case",
     token_disallowed_in_match_action,
+    level=Statement,
   )
   if !body.children.is_empty() {
     push_child(children, Some("body"), body)
@@ -548,6 +552,7 @@ fn parse_match_case(state : ParserState) -> CstNode {
       [TK_SEMI, TK_RBRACE, TK_EOF],
       "the action part of a matching case",
       token_disallowed_in_match_action,
+      level=Statement,
     )
     push_child(
       children,
@@ -582,6 +587,7 @@ fn parse_match_expr(state : ParserState) -> CstNode {
     [TK_SEMI, TK_RBRACE, TK_EOF],
     "condition",
     token_disallowed_in_condition,
+    level=Infix,
     before_body=true,
   )
   push_child(

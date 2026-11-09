@@ -351,13 +351,13 @@ test "question-suffixed error type matches handrolled AST" {
 }
 
 ///|
-test "single-element tuple pattern trailing comma matches handrolled AST" {
-  assert_expr_ast_equiv("match x { (y,) => y }")
+test "single-element tuple pattern trailing comma is rejected by all parsers" {
+  assert_all_parsers_reject("fn f() { match x { (y,) => y } }")
 }
 
 ///|
-test "single-element tuple type trailing comma matches handrolled AST" {
-  assert_handrolled_cst_ast_equiv("fn f(x : (Int,)) {}")
+test "single-element tuple type trailing comma is rejected by all parsers" {
+  assert_all_parsers_reject("fn f(x : (Int,)) {}")
 }
 
 ///|

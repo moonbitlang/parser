@@ -4,7 +4,11 @@ fn assert_missing_spans(
   source : String,
 ) -> Int32 raise {
   let mut count = 0
-  if node.kind is Missing {
+  if node.kind is Missing ||
+    (
+      node.kind is (Expr_MissingExpr | Type_MissingType) &&
+      node.children.is_empty()
+    ) {
     @test.assert_eq(node.loc.start, node.loc.end)
     let (start, end) = node.source_span
     @test.assert_eq(start, end)
@@ -20,27 +24,22 @@ fn assert_missing_spans(
 }
 
 ///|
-test "missing spread expressions use the end of the spread as fallback" {
+test "missing spread expressions report errors and retain zero width anchors" {
   for prefix in ["", "// 🐇\n", "{ \"🐇\"; "] {
     for record in ["{ .. }", "{ x: y, z, .. }"] {
       let suffix = if prefix == "{ \"🐇\"; " { " }" } else { "" }
       let source = prefix + record + suffix
       let parsed = @untyped_cst.parse_expression(source)
-      // Preserve the existing diagnostics, including the silent missing value.
-      @test.assert_eq(
-        parsed.diagnostics_view().length(),
-        if record == "{ .. }" {
-          0
-        } else {
-          1
-        },
-      )
+      @test.assert_eq(parsed.diagnostics_view().is_empty(), false)
+      let (expr, reports) = parsed.to_expr()
+      @test.assert_eq(expr is None, true)
+      @test.assert_eq(reports.is_empty(), false)
       @test.assert_eq(assert_missing_spans(parsed.root(), source) > 0, true)
       let spread = api_find_node(parsed.root(), node => {
         node.kind is Field_RecordSpread
       }).unwrap()
       let missing = spread.first_child_with_label("expr").unwrap()
-      @test.assert_eq(missing.kind is Missing, true)
+      @test.assert_eq(missing.kind is Expr_MissingExpr, true)
       @test.assert_eq(missing.loc, @node.empty_loc(spread.loc.end))
       @test.assert_eq(
         missing.source_span,
