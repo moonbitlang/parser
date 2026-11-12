@@ -32,7 +32,7 @@ pub(all) enum Statement {
     otherwise~ : Expr?,
     exclamation~ : Bool,
     guard_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   /// let mut statement
   ///

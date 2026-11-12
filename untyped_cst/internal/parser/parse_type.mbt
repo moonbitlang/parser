@@ -498,7 +498,7 @@ fn optional_type_suffix_follows(state : ParserState) -> Bool {
   // matching the handrolled parser's type lookahead.
   match state.peek_nth_significant(1) {
     Some(
-      (PACKAGE_NAME(_) | UIDENT(_) | LPAREN | UNDERSCORE | AMPER | ASYNC, _, _)
+      (PACKAGE_NAME(_) | UIDENT(_) | LPAREN | UNDERSCORE | AMPER | ASYNC, _, _),
     ) => false
     _ => true
   }
