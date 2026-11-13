@@ -2215,7 +2215,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       vis~,
       attrs~,
       loc~,
-      doc~
+      doc~,
     ) =>
       env.0.visit_Impl_TopView(
         quantifiers~,
@@ -2246,7 +2246,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       vis~,
       loc~,
       attrs~,
-      doc~
+      doc~,
     ) =>
       env.0.visit_Impl_TopImpl(
         self_ty~,
@@ -2274,7 +2274,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       loc~,
       attrs~,
       doc~,
-      is_declare~
+      is_declare~,
     ) =>
       env.0.visit_Impl_TopLetDef(
         binder~,
@@ -2310,7 +2310,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Impl(
       attrs~,
       loc~,
       doc~,
-      is_declare~
+      is_declare~,
     ) =>
       env.0.visit_Impl_TopImplRelation(
         self_ty~,
@@ -4861,7 +4861,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       for_else~,
       label~,
       loc~,
-      where_clause~
+      where_clause~,
     ) =>
       env.0.visit_Expr_For(
         binders~,
@@ -4882,7 +4882,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       else_block~,
       where_clause~,
       label~,
-      loc~
+      loc~,
     ) =>
       env.0.visit_Expr_ForEach(
         patterns~,
@@ -4903,7 +4903,7 @@ pub impl[T : IterVisitor] IterVisitor for IterVisitorBase[T] with fn visit_Expr(
       try_loc~,
       catch_loc~,
       else_loc~,
-      loc~
+      loc~,
     ) =>
       env.0.visit_Expr_Try(
         body~,

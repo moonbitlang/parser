@@ -16,7 +16,7 @@ pub(all) enum Expr {
     name_loc~ : Location,
     args~ : Array[Field],
     args_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   Hole(Location)
 }
@@ -55,7 +55,7 @@ pub(all) enum Statement {
     conditions~ : Array[ImportCondition],
     keyword_loc~ : Location,
     list_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   Assign(Field)
   Expr(Expr)

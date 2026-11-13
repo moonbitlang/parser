@@ -80,14 +80,14 @@ pub(all) enum AliasSig {
     type_params~ : @list.List[TypeParamNoConstraints],
     type_~ : Type,
     vis~ : Visibility,
-    attrs~ : Attributes
+    attrs~ : Attributes,
   )
   Using(
     pkg~ : Name,
     target~ : Name,
     name~ : Name?,
     kind~ : @syntax.UsingKind,
-    attrs~ : Attributes
+    attrs~ : Attributes,
   )
   FuncAlias(name~ : Name, type_name~ : Name, attrs~ : Attributes)
 }

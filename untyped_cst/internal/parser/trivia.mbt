@@ -32,7 +32,7 @@ fn discard_expr_suffix_trivia(state : ParserState) -> Unit {
         | EOF,
         _,
         _,
-      )
+      ),
     ) => ()
     _ => discard_expr_trivia(state)
   }

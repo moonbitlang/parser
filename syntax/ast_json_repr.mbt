@@ -734,7 +734,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       for_else~,
       label~,
       loc~,
-      where_clause~
+      where_clause~,
     ) =>
       tagged_node("Expr::For", loc, {
         "binders": list_json_repr("Expr::For::BindingList", loc, binders, fn(
@@ -773,7 +773,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       else_block~,
       where_clause~,
       label~,
-      loc~
+      loc~,
     ) => {
       let children : Map[String, Json] = {
         "patterns": list_json_repr(
@@ -817,7 +817,7 @@ pub fn Expr::json_repr(self : Expr) -> Json {
       try_loc~,
       catch_loc~,
       else_loc~,
-      loc~
+      loc~,
     ) => {
       ignore(try_loc)
       ignore(catch_loc)
@@ -1823,7 +1823,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       loc~,
       attrs~,
       doc~,
-      is_declare~
+      is_declare~,
     ) =>
       tagged_node("Impl::TopLetDef", loc, {
         "binder": binder.json_repr(),
@@ -1856,7 +1856,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       vis~,
       loc~,
       attrs~,
-      doc~
+      doc~,
     ) => {
       ignore(nocancel_)
       tagged_node("Impl::TopImpl", loc, {
@@ -1908,7 +1908,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       view_func_name~,
       view_type_loc~,
       params_loc~,
-      doc~
+      doc~,
     ) => {
       ignore(view_type_loc)
       tagged_node("Impl::TopView", loc, {
@@ -1952,7 +1952,7 @@ pub fn Impl::json_repr(self : Impl) -> Json {
       attrs~,
       doc~,
       loc~,
-      is_declare~
+      is_declare~,
     ) =>
       tagged_node("Impl::TopImplRelation", loc, {
         "self_ty": self_ty.json_repr(),

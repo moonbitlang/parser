@@ -269,7 +269,7 @@ test "parse legacy mbti extensible enum inline case" {
         type_params,
         components: ExtensibleEnum(constructors),
         ..
-      }
+      },
     ) else {
     fail("expected base extensible enum")
   }
@@ -287,7 +287,7 @@ test "parse legacy mbti extensible enum inline case" {
         type_params,
         components: ExtendEnum(target~, constructors~),
         ..
-      }
+      },
     ) else {
     fail("expected extensible enum extension")
   }

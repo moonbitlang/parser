@@ -88,7 +88,7 @@ pub(all) enum Type {
     err~ : ErrorType,
     is_async~ : Location?,
     nocancel_~ : Location?,
-    loc~ : Location
+    loc~ : Location,
   )
   Tuple(tys~ : @list.List[Type], loc~ : Location)
   Name(constr_id~ : ConstrId, tys~ : @list.List[Type], loc~ : Location)
@@ -430,13 +430,13 @@ pub(all) enum ListComprehensionKind {
     patterns~ : @list.List[Pattern],
     expr~ : Expr,
     init~ : @list.List[(Binder, Expr)],
-    continue_block~ : @list.List[(Binder, Expr)]
+    continue_block~ : @list.List[(Binder, Expr)],
   )
   For(
     binders~ : @list.List[(Binder, Expr)],
     condition~ : Expr?,
     continue_block~ : @list.List[(Binder, Expr)],
-    for_loc~ : Location
+    for_loc~ : Location,
   )
 }
 
@@ -455,7 +455,7 @@ pub(all) enum Expr {
   ArraySpread(
     elems~ : @list.List[SpreadableElem],
     is_iter~ : Bool,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `[for x in xs if guard => body]`
   ListComprehension(
@@ -463,7 +463,7 @@ pub(all) enum Expr {
     guard_~ : Expr?,
     body~ : Expr,
     is_iter~ : Bool,
-    loc~ : Location
+    loc~ : Location,
   )
   /// e1[e2]
   ArrayGet(array~ : Expr, index~ : Expr, loc~ : Location)
@@ -473,7 +473,7 @@ pub(all) enum Expr {
     start_index~ : Expr?,
     end_index~ : Expr?,
     index_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   /// e1[i] = e2
   ArraySet(array~ : Expr, index~ : Expr, value~ : Expr, loc~ : Location)
@@ -483,7 +483,7 @@ pub(all) enum Expr {
     array~ : Expr,
     index~ : Expr,
     value~ : Expr,
-    loc~ : Location
+    loc~ : Location,
   )
   Constant(c~ : Constant, loc~ : Location)
   /// ```skip
@@ -507,7 +507,7 @@ pub(all) enum Expr {
     loop_body~ : Expr,
     while_else~ : Expr?,
     label~ : Label?,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `fn(args){ expr }` or `(args) => expr`
   Function(func~ : Func, loc~ : Location)
@@ -522,7 +522,7 @@ pub(all) enum Expr {
     body~ : Expr,
     exclamation~ : Bool,
     guard_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `expr is pattern`
   Is(expr~ : Expr, pat~ : Pattern, loc~ : Location)
@@ -530,7 +530,7 @@ pub(all) enum Expr {
     expr~ : Expr,
     pat~ : RegexPattern,
     bindings~ : @list.List[(Label, Binder?)],
-    loc~ : Location
+    loc~ : Location,
   )
   /// `defer e1; e2`
   Defer(expr~ : Expr, body~ : Expr, loc~ : Location)
@@ -541,7 +541,7 @@ pub(all) enum Expr {
   LetAnd(
     bindings~ : @list.List[(Binder, Type?, Func)],
     body~ : Expr,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `let pattern = e1; e2`
   Let(pattern~ : Pattern, expr~ : Expr, body~ : Expr, loc~ : Location)
@@ -556,14 +556,14 @@ pub(all) enum Expr {
     type_name~ : TypeName?,
     fields~ : @list.List[FieldDef],
     trailing~ : TrailingMark,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `{ ..record, field1: expr, field2: expr }`
   RecordUpdate(
     type_name~ : TypeName?,
     record~ : Expr,
     fields~ : @list.List[FieldDef],
-    loc~ : Location
+    loc~ : Location,
   )
   /// `record.field`
   Field(record~ : Expr, accessor~ : Accessor, loc~ : Location)
@@ -575,7 +575,7 @@ pub(all) enum Expr {
     method_name~ : Label,
     args~ : @list.List[Argument],
     return_self~ : Bool,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `expr as Trait`
   As(expr~ : Expr, trait_~ : TypeName, loc~ : Location)
@@ -585,14 +585,14 @@ pub(all) enum Expr {
     accessor~ : Accessor,
     field~ : Expr,
     augmented_by~ : Var?,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `match e0 { p1 => e1; p2 => e2 }`
   Match(
     expr~ : Expr,
     cases~ : @list.List[Case],
     match_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `lexmatch expr { c1 => e1; c2 => e2 }` when `streaming` is false,
   /// or `lexscan expr { c1 => e1; c2 => e2 }` when it is true.
@@ -602,7 +602,7 @@ pub(all) enum Expr {
     expr~ : Expr,
     match_loc~ : Location,
     cases~ : @list.List[LexScanCase],
-    loc~ : Location
+    loc~ : Location,
   )
   /// `let mut binder : Type = expr`
   LetMut(
@@ -610,7 +610,7 @@ pub(all) enum Expr {
     ty~ : Type?,
     expr~ : Expr,
     body~ : Expr,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `lhs |> rhs`
   /// The rhs is restricted to `f`, `f(args)`, `_.method(args)`, `Constructor`, or `Constructor(args)`.
@@ -631,7 +631,7 @@ pub(all) enum Expr {
     binder~ : Binder,
     binder_ty~ : Type,
     body~ : Expr,
-    loc~ : Location
+    loc~ : Location,
   )
   Implies(lhs~ : Expr, rhs~ : Expr, loc~ : Location)
   ProofAssert(expr~ : Expr, loc~ : Location)
@@ -652,7 +652,7 @@ pub(all) enum Expr {
     for_else~ : Expr?,
     where_clause~ : WhereClause?,
     label~ : Label?,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `for p1, p2 in e1; init; continue_block { e2 }`
   ForEach(
@@ -664,7 +664,7 @@ pub(all) enum Expr {
     else_block~ : Expr?,
     where_clause~ : WhereClause?,
     label~ : Label?,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `try e0 catch { p1 => e1 } noraise { p2 => e2 }` or `e0 catch { p1 => e1 }`
   Try(
@@ -675,14 +675,14 @@ pub(all) enum Expr {
     try_loc~ : Location,
     catch_loc~ : Location,
     else_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `try! expr`
   TryOperator(
     body~ : Expr,
     kind~ : TryOperatorKind,
     try_loc~ : Location,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `{ k1: e1, k2: e2 }`
   Map(elems~ : @list.List[MapExprElem], loc~ : Location)
@@ -693,7 +693,7 @@ pub(all) enum Expr {
     expr~ : Expr,
     template~ : Expr,
     is_conditional~ : Bool,
-    loc~ : Location
+    loc~ : Location,
   )
   /// generated by compiler
   StaticAssert(asserts~ : @list.List[StaticAssertion], body~ : Expr)
@@ -780,7 +780,7 @@ pub(all) enum Pattern {
     constr~ : Constructor,
     args~ : @list.List[ConstrPatArg]?,
     is_open~ : Bool,
-    loc~ : Location
+    loc~ : Location,
   )
   /// `T::_`
   ConstrAny(type_name~ : TypeName, loc~ : Location)
@@ -803,7 +803,7 @@ pub(all) enum Pattern {
   SpecialConstr(
     binder~ : Binder,
     args~ : @list.List[ConstrPatArg],
-    loc~ : Location
+    loc~ : Location,
   )
 }
 
@@ -840,7 +840,7 @@ pub(all) enum FuncStubs {
   Import(
     module_name~ : StringLiteral,
     func_name~ : StringLiteral,
-    language~ : StringLiteral?
+    language~ : StringLiteral?,
   )
   Embedded(language~ : StringLiteral?, code~ : EmbeddedCode)
 }
@@ -933,14 +933,14 @@ pub(all) enum Impl {
     is_async~ : Location?,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
-    mut doc~ : DocString
+    mut doc~ : DocString,
   )
   TopTypeDef(TypeDecl)
   TopFuncDef(
     fun_decl~ : FunDecl,
     decl_body~ : DeclBody,
     where_clause~ : WhereClause?,
-    loc~ : Location
+    loc~ : Location,
   )
   TopLetDef(
     binder~ : Binder,
@@ -951,7 +951,7 @@ pub(all) enum Impl {
     loc~ : Location,
     attrs~ : @list.List[Attribute],
     mut doc~ : DocString,
-    is_declare~ : Bool
+    is_declare~ : Bool,
   )
   TopTrait(TraitDecl)
   TopImpl(
@@ -968,7 +968,7 @@ pub(all) enum Impl {
     vis~ : Visibility,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
-    mut doc~ : DocString
+    mut doc~ : DocString,
   )
   TopView(
     quantifiers~ : @list.List[TypeVarBinder],
@@ -983,7 +983,7 @@ pub(all) enum Impl {
     vis~ : Visibility,
     loc~ : Location,
     attrs~ : @list.List[Attribute],
-    mut doc~ : DocString
+    mut doc~ : DocString,
   )
   TopImplRelation(
     self_ty~ : Type,
@@ -993,7 +993,7 @@ pub(all) enum Impl {
     attrs~ : @list.List[Attribute],
     loc~ : Location,
     mut doc~ : DocString,
-    is_declare~ : Bool
+    is_declare~ : Bool,
   )
   TopUsing(
     pkg~ : Label,
@@ -1001,7 +1001,7 @@ pub(all) enum Impl {
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
     loc~ : Location,
-    mut doc~ : DocString
+    mut doc~ : DocString,
   )
   TopExtend(
     type_name~ : TypeName,
@@ -1010,13 +1010,13 @@ pub(all) enum Impl {
     vis~ : Visibility,
     attrs~ : @list.List[Attribute],
     loc~ : Location,
-    mut doc~ : DocString
+    mut doc~ : DocString,
   )
   TopImport(
     kind~ : StringLiteral?,
     packages~ : @list.List[ImportPackage],
     loc~ : Location,
-    mut doc~ : DocString
+    mut doc~ : DocString,
   )
 }
 
