@@ -26,7 +26,7 @@ test "descending ranges preserve endpoint order and original locations" {
         TopFuncDef(
           decl_body=DeclBody(expr=Is(pat=Range(lhs~, rhs~, kind~, loc~), ..)),
           ..
-        )
+        ),
       ) else {
       fail("expected a range pattern in a function body")
     }
