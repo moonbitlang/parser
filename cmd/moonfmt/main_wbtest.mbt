@@ -1,6 +1,6 @@
 ///|
 fn register_temp_dir_cleanup(
-  group : @async.TaskGroup[Unit],
+  group : @async.TaskGroup,
   directory : String,
 ) -> Unit {
   group.add_defer() <| () => {

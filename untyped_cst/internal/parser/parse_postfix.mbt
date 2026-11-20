@@ -212,7 +212,7 @@ fn parse_template_literal(
         | MULTILINE_INTERP(_),
         _,
         _,
-      )
+      ),
     ) => parse_string_literal_node(state)
     _ => {
       state.report_expected_description("template string")
