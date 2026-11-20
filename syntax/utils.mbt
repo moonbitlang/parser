@@ -525,7 +525,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       for_else=_,
       label=_,
       loc~,
-      where_clause=_
+      where_clause=_,
     ) => loc
     ForEach(
       patterns=_,
@@ -536,7 +536,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       else_block=_,
       where_clause=_,
       label=_,
-      loc~
+      loc~,
     ) => loc
     Try(
       body=_,
@@ -546,7 +546,7 @@ pub fn loc_of_expression(expr : Expr) -> Location {
       try_loc=_,
       catch_loc=_,
       else_loc=_,
-      loc~
+      loc~,
     ) => loc
     TryOperator(loc~, ..) => loc
     Map(elems=_, loc~) => loc

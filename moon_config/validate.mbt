@@ -74,7 +74,7 @@ fn validate_config(
           Map(fields~, ..) | Apply(args=fields, ..) =>
             find_field(fields, "kind")
             is Some(
-              String(str="library" | "executable" | "foreign_library", ..)
+              String(str="library" | "executable" | "foreign_library", ..),
             )
           _ => false
         }
