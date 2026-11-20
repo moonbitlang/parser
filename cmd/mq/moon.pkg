@@ -1,6 +1,5 @@
 import {
   "moonbitlang/moon_config" @config,
-  "moonbitlang/async",
   "moonbitlang/async/fs",
   "moonbitlang/async/stdio",
   "moonbitlang/core/env",

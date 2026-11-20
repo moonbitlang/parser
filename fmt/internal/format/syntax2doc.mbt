@@ -307,7 +307,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       vis~,
       loc=_,
       attrs~,
-      doc~
+      doc~,
     ) => {
       let doc = fmt.docstring(doc, is_toplevel=true)
       let attrs = fmt.attributes(attrs)
@@ -373,7 +373,7 @@ fn Fmt::impl_(fmt : Self, toplevel : @syntax.Impl) -> Doc {
       vis~,
       attrs~,
       doc~,
-      loc=_
+      loc=_,
     ) => {
       let doc = fmt.docstring(doc, is_toplevel=true)
       let attrs = fmt.attributes(attrs)
@@ -1526,7 +1526,7 @@ fn Fmt::arguments(fmt : Fmt, args : List[@syntax.Argument]) -> Doc {
         | RecordUpdate(_)
         | Function(_),
         kind: Positional,
-      }
+      },
     ) => true
     _ => false
   }
@@ -3362,7 +3362,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       else_block~,
       where_clause~,
       label~,
-      loc=_
+      loc=_,
     ) => {
       let label = fmt.loop_label(label, trailing_colon=true)
       let for_ = text("for")
@@ -3413,7 +3413,7 @@ fn Fmt::expr(fmt : Self, expr : @syntax.Expr) -> RawExprDoc {
       try_loc=_,
       catch_loc=_,
       else_loc=_,
-      loc=_
+      loc=_,
     ) => {
       let try_ = if has_try { text("try") + space } else { empty }
       let body = fmt.compose(body, Pipeline)

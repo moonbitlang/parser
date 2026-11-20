@@ -404,7 +404,7 @@ fn lower_constructor_from_names(
       )
     Some(
       ConstructorExtraInfo_TypeName
-      | ConstructorExtraInfo_TypeNameWithConstrPackage
+      | ConstructorExtraInfo_TypeNameWithConstrPackage,
     ) if names.length() >= 2 => {
       let has_constr_package = extra_info_kind
         is Some(ConstructorExtraInfo_TypeNameWithConstrPackage) &&

@@ -249,8 +249,8 @@ test "parser path: optional suffixes retain both question locations" {
       Option(
         ty=Option(ty=Name(constr_id~, ..), loc=inner_loc, question_loc=first),
         loc=outer_loc,
-        question_loc=second
-      )
+        question_loc=second,
+      ),
     ) else {
     fail("expected two optional suffixes")
   }

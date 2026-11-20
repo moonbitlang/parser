@@ -88,7 +88,7 @@ fn report_next_top_level_recovery_point(state : ParserState) -> Bool {
           | GUARD_EXCLAMATION,
           _,
           _,
-        )
+        ),
       ) if depth == 0 && saw_statement_boundary => done = true
       Some(_) => offset += 1
     }

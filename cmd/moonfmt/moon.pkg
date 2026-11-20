@@ -1,11 +1,14 @@
 import {
   "moonbitlang/core/argparse",
-  "moonbitlang/async",
   "moonbitlang/async/fs",
   "moonbitlang/async/stdio",
   "moonbitlang/parser/fmt",
   "moonbitlang/core/env",
 }
+
+import {
+  "moonbitlang/core/async",
+} for "wbtest"
 
 supported_targets = "+native+wasm"
 

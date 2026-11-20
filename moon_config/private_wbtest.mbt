@@ -40,7 +40,7 @@ test "moon.mod options preserves private" {
         name="options",
         args=[{ key: "private", value: Bool(value=true, ..), .. }],
         ..
-      )
+      ),
     ),
   )
 }
