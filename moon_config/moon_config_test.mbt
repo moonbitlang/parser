@@ -337,6 +337,25 @@ test "parse_moon_pkg reports duplicate raw key names" {
 }
 
 ///|
+test "moon.pkg checks original and normalized option keys" {
+  for
+    (source, key) in [
+      ("options(\"is-main\": true, \"is-main\": false)", "is-main"),
+      ("options(\"is-main\": false, \"is-main\": true)", "is-main"),
+      ("options(\"is-main\": true)\npkgtype(kind: \"library\")", "pkgtype"),
+      ("pkgtype(kind: \"library\")\noptions(\"is-main\": true)", "pkgtype"),
+    ] {
+    let { ast, diagnostics, .. } = @moon_config.parse_moon_pkg(source)
+    let expected = ["Invalid configuration `\{key}` in moon.pkg file."]
+    assert_eq(diagnostics.errors.map(report => report.msg), expected)
+    assert_eq(
+      @moon_config.validate_moon_pkg(ast).errors.map(report => report.msg),
+      expected,
+    )
+  }
+}
+
+///|
 test "parse_moon_pkg preserves options and repeatable fields" {
   let source =
     #|warnings = "+w1"
