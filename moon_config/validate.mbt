@@ -20,8 +20,8 @@ fn validate_config(
   kind : ConfigKind,
   diagnostics : Diagnostics,
 ) -> Unit {
-  let seen : Map[String, Bool] = Map([])
-  let seen_option_keys : Map[String, Bool] = Map([])
+  let seen : @hashset.HashSet[String] = HashSet([])
+  let seen_option_keys : @hashset.HashSet[String] = HashSet([])
   let filename = config_name(kind)
   fn invalid(key : String, loc : Location) -> Unit {
     diagnostics.errors.push({
@@ -32,10 +32,9 @@ fn validate_config(
   fn unique(key : String, loc : Location) -> Unit {
     let repeatable = (key == "rule" && !(kind is Workspace)) ||
       (key == "dev_build" && kind is Package)
-    if seen.contains(key) && !repeatable {
+    if !seen.add_and_check(key) && !repeatable {
       invalid(key, loc)
     }
-    seen[key] = true
   }
   fn validate_value(key : String, value : Expr, loc : Location) -> Unit {
     unique(key, loc)
@@ -106,8 +105,7 @@ fn validate_config(
       (Module | Package, "options", Apply(args~, ..)) =>
         for field in args {
           let field_loc = field.value.loc()
-          let duplicate_option = seen_option_keys.contains(field.key)
-          seen_option_keys[field.key] = true
+          let duplicate_option = !seen_option_keys.add_and_check(field.key)
           let field_key = if kind is Package {
             match (field.key, field.value) {
               ("is-main" | "is_main" | "link", Bool(value=true, ..)) =>
