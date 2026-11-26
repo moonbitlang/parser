@@ -32,7 +32,7 @@ fn validate_config(
   fn unique(key : String, loc : Location) -> Unit {
     let repeatable = (key == "rule" && !(kind is Workspace)) ||
       (key == "dev_build" && kind is Package)
-    if !seen.add_and_check(key) && !repeatable {
+    if !seen.insert_and_check(key) && !repeatable {
       invalid(key, loc)
     }
   }
@@ -105,7 +105,7 @@ fn validate_config(
       (Module | Package, "options", Apply(args~, ..)) =>
         for field in args {
           let field_loc = field.value.loc()
-          let duplicate_option = !seen_option_keys.add_and_check(field.key)
+          let duplicate_option = !seen_option_keys.insert_and_check(field.key)
           let field_key = if kind is Package {
             match (field.key, field.value) {
               ("is-main" | "is_main" | "link", Bool(value=true, ..)) =>
